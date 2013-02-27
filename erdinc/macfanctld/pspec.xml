@@ -26,9 +26,12 @@
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="config">/etc/macfanctl.conf</Path>
-	    <Path fileType="man">/usr/share/man/man1</Path>
+        <Path fileType="man">/usr/share/man/man1</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
+        <Provides>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
     </Package>
 
     <History>
