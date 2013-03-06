@@ -1,0 +1,11 @@
+--- /home/richard/Downloads/dum/gdal-1.9.1/GNUmakefile_org	2012-05-24 14:00:58.000000000 +0200
++++ /home/richard/Downloads/dum/gdal-1.9.1/GNUmakefile	2012-05-24 14:10:52.342992933 +0200
+@@ -177,7 +177,7 @@
+ 	(cd swig; $(MAKE) install)
+ endif
+ 	for f in LICENSE.TXT data/*.* ; do $(INSTALL_DATA) $$f $(DESTDIR)$(INST_DATA) ; done
+-	$(LIBTOOL_FINISH) $(INST_LIB)
++	$(LIBTOOL_FINISH) $(DESTDIR)$(INST_LIB)
+ 
+ 
+ ifeq ($(HAVE_LIBTOOL),yes)

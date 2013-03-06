@@ -1,0 +1,15 @@
+--- swig/python/Makefile.in.orig	2010-06-23 11:42:52.317894087 +0300
++++ swig/python/Makefile.in	2010-06-23 11:43:01.848121356 +0300
+@@ -477,11 +477,7 @@
+ 	while read files; do \
+ 	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(pkgpythondir)'"; \
+ 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(pkgpythondir)" || exit $$?; \
+-	done || exit $$?; \
+-	if test -n "$$dlist"; then \
+-	  $(am__py_compile) --destdir "$(DESTDIR)" \
+-	                    --basedir "$(pkgpythondir)" $$dlist; \
+-	else :; fi
++	done || exit $$?; \	
+ 
+ uninstall-pkgpythonPYTHON:
+ 	@$(NORMAL_UNINSTALL)
