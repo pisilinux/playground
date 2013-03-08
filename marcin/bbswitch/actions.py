@@ -18,11 +18,6 @@ def build():
     autotools.make("KDIR=/lib/modules/%s/build" % KDIR)
 
 def install():
-#    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-     pisitools.insinto("/lib/modules/3.2.5/kernel/drivers/acpi", "bbswitch.ko")
+    pisitools.insinto("/lib/modules/%s/extra/bbswitch" % KDIR, "bbswitch.ko")
 
-# Take a look at the source folder for these file as documentation.
-#    pisitools.dodoc("AUTHORS", "BUGS", "ChangeLog", "COPYING", "README")
-# If there is no install rule for a runnable binary, you can 
-# install it to binary directory.
-#    pisitools.dobin("bbswitch")
+    pisitools.dodoc("NEWS", "README*")
