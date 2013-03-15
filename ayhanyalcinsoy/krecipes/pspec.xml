@@ -14,14 +14,20 @@
 Developed and tested on Debian GNU/Linux sid (KDE 4.4.5 and Qt 4.6.3).</Description>
         <Archive sha1sum="fc232c9125e555d8c1cbbbf5020311ed6f278b39" type="targz">http://garr.dl.sourceforge.net/project/krecipes/krecipes/2.0-beta2/krecipes-2.0-beta2.tar.gz</Archive>
     </Source>
+    <Patches>
+      <Patch level="1">turkish.patch</Patch>
+    </Patches>
     <Package>
         <Name>krecipes</Name>
         <Files>
             <Path fileType="all">/</Path>
         </Files>
-    </Package>
+	 <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/krecipes.desktop">krecipes.desktop</AdditionalFile>
+        </AdditionalFiles>
+        </Package>
     <History>
-        <Update release="1">
+         <Update release="1">
             <Date>2013-03-03</Date>
             <Version>2.0</Version>
             <Comment>firs pisi</Comment>
