@@ -20,9 +20,9 @@
             <Dependency>plotutils-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">pspp-0001-stdio-don-t-assume-gets-any-more.patch</Patch>
-	    <Patch level="0">turkish.patch</Patch>
-	    <Patch level="0">automake-tr.patch</Patch>
+	  <Patch level="0">automake-tr.patch</Patch>
+	  <Patch level="1">pspp-0001-stdio-don-t-assume-gets-any-more.patch</Patch>
+	  <Patch level="0">turkish.patch</Patch>
         </Patches>
         </Source>
     <Package>
@@ -43,10 +43,10 @@
             <Path fileType="data">/usr/share/applications</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
         </Files>
-   <AdditionalFiles>
+	<AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/psppire.desktop">psppire.desktop</AdditionalFile>
         </AdditionalFiles>
-   </Package>
+      </Package>
    <Package>
         <Name>pspp-docs</Name>
         <IsA>data:doc</IsA>
@@ -61,7 +61,7 @@
     </Package>
 	<History>
         <Update release="1">
-            <Date>2013-01-21</Date>
+            <Date>2013-03-16</Date>
             <Version>0.7.9</Version>
             <Comment>update</Comment>
             <Name>Ayhan YALÇINSOY</Name>
