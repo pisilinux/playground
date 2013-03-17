@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>google-chrome</Name> 
+        <Homepage>http://chrome.google.com/</Homepage> 
+        <Packager>
+            <Name>Gürkan ZEGNIN</Name> 
+            <Email>gurkan@pardususer.de</Email> 
+        </Packager>
+        <License>EULA</License> 
+        <Icon>google-chrome</Icon>
+        <PartOf>network.web</PartOf>
+        <IsA>app:gui</IsA> 
+        <Summary>Google Chrome for Linux</Summary>
+        <Description>Google Chrome is another web browser which runs web pages and applications with lightning speed due to its superior JavaScript rendering engine.</Description>
+	<Archive sha1sum="992d3f7b5f1366e6ec6692b4a4aa17275aa923e4" type="binary">https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm</Archive>
+        <BuildDependencies>
+            <Dependency>rpm2targz</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>google-chrome</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libXrender</Dependency>
+            <Dependency>icon-theme-hicolor</Dependency>
+            <Dependency>gconf</Dependency>
+            <Dependency>libevent</Dependency>
+            <Dependency>libXi</Dependency>
+            <Dependency>libXdamage</Dependency>
+            <Dependency>libXfixes</Dependency>
+            <Dependency>libXtst</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>minizip</Dependency>
+            <Dependency>nspr</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>libXScrnSaver</Dependency>
+            <Dependency>icu4c</Dependency>
+            <Dependency>nss</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>libgcrypt</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libvpx</Dependency>
+            <Dependency>flac</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>bzip2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/</Path>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="data">/opt/google/</Path>
+            <Path fileType="data">/usr/share/pixmaps/</Path>
+            <Path fileType="data">/usr/share/applications/</Path>
+        </Files>
+    </Package>
+
+    <History>
+         <Update release="20" type="security">
+            <Date>2013-03-14</Date>
+            <Version>25.0.1364.172</Version>
+            <Comment>Version update</Comment>
+            <Name>Yoyo Fernández</Name>
+            <Email>parduslife@gmail.com</Email>
+        </Update>
+         <Update release="19" type="security">
+            <Date>2013-02-28</Date>
+            <Version>25.0.1364.97</Version>
+            <Comment>Version update</Comment>
+            <Name>Yoyo Fernández</Name>
+            <Email>parduslife@gmail.com</Email>
+        </Update>
+         <Update release="18" type="security">
+            <Date>2013-02-15</Date>
+            <Version>24.0.1312.70</Version>
+            <Comment>Version update</Comment>
+            <Name>Yoyo Fernández</Name>
+            <Email>parduslife@gmail.com</Email>
+        </Update>
+         <Update release="17" type="security">
+            <Date>2013-02-07</Date>
+            <Version>24.0.1312.69</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+         <Update release="16" type="security">
+            <Date>2013-01-20</Date>
+            <Version>24.0.1312.56</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="15" type="security">
+            <Date>2012-09-13</Date>
+            <Version>21.0.1180.89</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="14" type="security">
+            <Date>2012-08-09</Date>
+            <Version>21.0.1180.75</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="13" type="security">
+            <Date>2012-07-22</Date>
+            <Version>20.0.1132.57</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="12" type="security">
+            <Date>2012-05-17</Date>
+            <Version>19.0.1084.46</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="11">
+            <Date>2012-04-14</Date>
+            <Version>18.0.1025.162</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="10" type="security">
+            <Date>2012-03-29</Date>
+            <Version>18.0.1025.142</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="9" type="security">
+            <Date>2012-03-12</Date>
+            <Version>17.0.963.79</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="8" type="security">
+            <Date>2012-02-20</Date>
+            <Version>17.0.963.56</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="7">
+            <Date>2012-02-09</Date>
+            <Version>17.0.963.46</Version>
+            <Comment>Version update and make releasenumber equal to i686</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="5">
+            <Date>2011-12-02</Date>
+            <Version>15.0.874.121</Version>
+            <Comment>Version update and move runtimedep libpng12 to libpng12-pardususerde</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="4">
+            <Date>2011-11-13</Date>
+            <Version>15.0.874.120</Version>
+            <Comment>Version update and wrong package name in translations.xml (there was "picasa" - instead of "google-chrome")</Comment>
+            <Name>Gürkan ZENGIN</Name>
+            <Email>gurkan@pardususer.de</Email>
+        </Update>
+        <Update release="3">
+            <Date>2011-09-20</Date>
+            <Version>14.0.835.163</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2011-08-20</Date>
+            <Version>13.0.782.112</Version>
+            <Comment>Version update</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-05-13</Date>
+            <Version>11.0.696.68</Version>
+            <Comment>First release.</Comment>
+            <Name>Gürkan ZENGIN</Name>
+            <Email>gurkan@pardususer.de</Email>
+        </Update>
+    </History>
+</PISI>
