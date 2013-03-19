@@ -1,0 +1,45 @@
+<PISI>
+    <Source>
+        <Name>gcstar</Name>
+        <Homepage>www.gcstar.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>GCstar is a free open source application for managing your collections.</Summary>
+        <Description>GCstar is a free open source application for managing your collections. Detailed information on each item can be automatically retrieved from the internet and you can store additional data, such as the location or who you've lent it to. You may also search and filter your collection by many criteria.</Description>
+        <Archive sha1sum="8ab3d685471ae262df0a4172d33ad7f5beccc3b3" type="targz">http://download.gna.org/gcstar/gcstar-1.7.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>gcstar</Name>
+        <RuntimeDependencies>
+            <Dependency>Gtk2</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-gtk2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+             <Files>
+           <Path fileType="config">/etc/gcstar</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/gcstar</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-03-19</Date>
+            <Version>1.7.0.1</Version>
+            <Comment>First release</Comment>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
