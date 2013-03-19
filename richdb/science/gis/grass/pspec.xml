@@ -1,0 +1,151 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>grass</Name>
+        <Homepage>http://grass.itc.it</Homepage>
+        <Packager>
+            <Name>İşbaran Akçayır</Name>
+            <Email>isbaran@comu.edu.tr</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <IsA>app:gui</IsA>
+        <PartOf>science.gis</PartOf>
+        <Summary>A free GIS software</Summary>
+        <Description>Grass is free Geographic Information System (GIS) software used for geospatial data management and analysis, image processing, graphics/maps production, spatial modeling, and visualization.</Description>
+        <Archive sha1sum="74481611573677d90ae0cd446c04a3895e232004" type="targz">http://grass.itc.it/grass64/source/grass-6.4.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>proj-devel</Dependency>
+            <Dependency>jpeg-devel</Dependency>
+            <Dependency>gdal-devel</Dependency>
+            <Dependency>tiff-devel</Dependency>
+            <Dependency>ffmpeg-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>tcl-devel</Dependency>
+            <Dependency>tcltk-devel</Dependency>
+            <Dependency>unixODBC-devel</Dependency>
+            <Dependency>fftw3-devel</Dependency>
+            <Dependency>openmotif-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>wxGTK-devel</Dependency>
+            <Dependency>wxPython-devel</Dependency>
+            <Dependency>doxygen</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>instdir.patch</Patch>
+            <Patch>grass-pkgconf.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>grass</Name>
+        <RuntimeDependencies>
+            <Dependency>wxPython</Dependency>
+            <Dependency>tcltk</Dependency>
+            <Dependency>tcl</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>fftw3</Dependency>
+            <Dependency>unixODBC</Dependency>
+            <Dependency>openmotif</Dependency>
+            <Dependency>ffmpeg</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>gdal</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>openmotif</Dependency>
+            <Dependency>libXt</Dependency>
+            <Dependency>libXmu</Dependency>
+            <Dependency>proj</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>mysql-lib</Dependency>
+            <Dependency>postgresql-lib</Dependency>
+            <!--Dependency>R</Dependency>
+            <Dependency>cairomm</Dependency>
+            <Dependency>e00compr</Dependency>
+            <Dependency>avce00</Dependency>
+            <Dependency>blas</Dependency>
+            <Dependency>lapack</Dependency>
+            <Dependency>python-numpy</Dependency-->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/grass.desktop">grass.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/grass.png">grass.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>grass-doc</Name>
+        <Summary>Documents for grass</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">grass</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc/grass/html</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>grass-devel</Name>
+        <Summary>Development files for grass</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">grass</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/grass</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="6">
+            <Date>2012-01-04</Date>
+            <Version>6.4.2</Version>
+            <Comment>Version update.</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="5">
+            <Date>2012-01-04</Date>
+            <Version>6.4.1</Version>
+            <Comment>desktop file enabled and changed menu caterory</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="4">
+            <Date>2012-01-02</Date>
+            <Version>6.4.1</Version>
+            <Comment>add ffmpeg support</Comment>
+            <Name>marcin bojara</Name>
+            <Email>marcin.bojara@gmail.com</Email>
+        </Update>
+        <Update release="3">
+            <Date>2011-12-30</Date>
+            <Version>6.4.1</Version>
+            <Comment>Version update.</Comment>
+            <Name>Antoon Tolboom</Name>
+            <Email>atolboo@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2010-11-26</Date>
+            <Version>6.4.0</Version>
+            <Comment>Split devel package.</Comment>
+            <Name>İşbaran Akçayır</Name>
+            <Email>isbaran@comu.edu.r</Email>
+        </Update>
+        <Update release="1">
+            <Date>2009-06-30</Date>
+            <Version>6.4</Version>
+            <Comment>First release.</Comment>
+            <Name>İşbaran Akçayır</Name>
+            <Email>isbaran@comu.edu.tr</Email>
+        </Update>
+    </History>
+</PISI>
+

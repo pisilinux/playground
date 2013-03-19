@@ -1,0 +1,15 @@
+--- /home/richard/Downloads/dum/geos-3.3.3/swig/python/Makefile.in_org	2012-04-01 22:43:08.000000000 +0200
++++ /home/richard/Downloads/dum/geos-3.3.3/swig/python/Makefile.in	2012-05-25 10:20:47.798264045 +0200
+@@ -477,11 +477,7 @@
+ 	while read files; do \
+ 	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(pkgpythondir)'"; \
+ 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(pkgpythondir)" || exit $$?; \
+-	done || exit $$?; \
+-	if test -n "$$dlist"; then \
+-	  $(am__py_compile) --destdir "$(DESTDIR)" \
+-	                    --basedir "$(pkgpythondir)" $$dlist; \
+-	else :; fi
++	done || exit $$?; \	
+ 
+ uninstall-pkgpythonPYTHON:
+ 	@$(NORMAL_UNINSTALL)

@@ -1,0 +1,20 @@
+--- configure.orig	2011-01-28 15:27:41.522000144 +0200
++++ configure	2011-02-11 17:11:08.468000061 +0200
+@@ -16298,7 +16298,7 @@
+ #define HAVE_LIBRT 1
+ _ACEOF
+ 
+-  LIBS="-lrt $LIBS"
++  LIBS="$LIBS"
+ 
+ fi
+ 
+@@ -22827,7 +22827,7 @@
+ 
+ MYSQL_INC=$MYSQL_INC
+ 
+-MYSQL_LIB=$MYSQL_LIB
++MYSQL_LIB="-L/usr/lib/mysql -lmysqlclient"
+ 
+ 
+ 
