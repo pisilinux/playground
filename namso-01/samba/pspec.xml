@@ -40,9 +40,16 @@
             <Patch level="1">fedora/samba-3.2.0pre1-grouppwd.patch</Patch>
             <Patch level="1">fedora/samba-3.2.5-inotify.patch</Patch>
             <Patch level="1">samba-3.5.8-fix-netapi-examples-linking.patch</Patch>
-
+	    
+            <!-- Mageia patches -->
+	    <Patch level="1">mageia/samba-3.5-check-undefined-before-zdefs.patch</Patch>
+ 
             <!-- Replace -lthread with -lpthread -->
-            <!--<Patch level="1">pisilinux/samba-pthread.patch</Patch>-->
+            <Patch level="1">pisilinux/samba-pthread.patch</Patch>
+            <Patch level="1">pisilinux/test.patch</Patch>
+            <Patch level="1">pisilinux/test1.patch</Patch>
+            <Patch level="1">pisilinux/test2.patch</Patch>
+
 
             <!-- Add pisilinux vendor suffix -->
             <Patch level="1">pisilinux/add_vendor_suffix.patch</Patch>

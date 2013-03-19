@@ -23,45 +23,40 @@ def setup():
     # Build VERSION
     shelltools.system("script/mkversion.sh")
     shelltools.system("./autogen.sh")
-    autotools.configure("--with-dnsupdate \
-                         --with-ads \
-                         --with-acl-support \
-                         --with-automount \
-                         --with-pam \
-                         --with-pam_smbpass \
-                         --with-quotas \
-                         --with-sys-quotas \
-                         --with-sendfile-support \
-                         --with-syslog \
-                         --with-utmp \
-                         --with-fhs \
-                         --with-winbind \
-                         --with-cluster-support=auto \
-                         --with-libtalloc=no \
-                         --with-libtdb=no \
-                         --sysconfdir=/etc/samba \
-                         --localstatedir=/var \
-                         --libdir=/usr/lib \
-                         --with-configdir=/etc/samba \
-                         --with-piddir=/run/samba \
-                         --with-lockdir=/var/lib/samba \
-                         --with-logfilebase=/var/log/samba \
-                         --with-pammodulesdir=/lib/security \
-                         --with-privatedir=/var/lib/samba/private \
-                         --with-swatdir=/usr/share/swat \
-                         --with-readline \
-                         --with-ldap \
-                         --with-cifsmount \
-                         --with-cifsumount \
-                         --with-cifsupcall \
-                         --enable-external-libtalloc=yes \
-                         --enable-external-libtdb=yes \
-                         --enable-shared=yes \
-                         --enable-static=no \
-                         --enable-cups \
-                         --enable-swat \
-                         --disable-smbtorture4 \
-                         --with-shared-modules=idmap_rid,idmap_ad,idmap_adex,idmap_hash,idmap_tdb2")
+    autotools.configure("    --with-dnsupdate \
+			     --with-ads \
+			     --with-acl-support \
+ 			     --with-automount \
+ 			     --with-dnsupdate \
+			     --with-libsmbclient \
+			     --with-libsmbsharemodes \
+  			     --with-mmap \
+ 			     --with-pam \
+  			     --with-pam_smbpass \
+  			     --with-quotas \
+  			     --with-sendfile-support \
+  			     --with-syslog \
+  			     --with-utmp \
+  			     --with-vfs \
+  			     --with-winbind \
+  			     --without-smbwrapper \
+  			     --with-lockdir=/var/lib/samba \
+    			     --with-piddir=/run \
+   			     --with-mandir=%{_mandir} \
+    			     --with-privatedir=/var/lib/samba/private \
+    			     --with-logfilebase=/var/log/samba \
+    			     --with-libdir=%{_libdir} \
+    			     --with-modulesdir=%{_libdir}/samba \
+   			     --with-configdir=%{_sysconfdir}/samba \
+    			     --with-pammodulesdir=%{_lib}/security \
+   			     --with-swatdir=%{_datadir}/swat \
+   			     --with-shared-modules=idmap_ad,idmap_rid,idmap_adex,idmap_hash,idmap_tdb2 \
+    			     --with-cluster-support=auto \
+    			     --with-libtalloc=no \
+   			     --enable-external-libtalloc=yes \
+   			     --with-libtdb=no \
+   			     --with-nmbdsocketdir=/run/nmbd \
+   			     --disable-smbtorture4")
 
 def build():
     shelltools.cd(SAMBA_SOURCE)
@@ -130,4 +125,3 @@ def install():
 
     # Remove conflicting man pages
     pisitools.remove("/usr/share/man/man8/tdb*")
-
