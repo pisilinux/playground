@@ -20,7 +20,7 @@
             <Dependency>plotutils-devel</Dependency>
         </BuildDependencies>
         <Patches>
-	  <Patch level="0">automake-tr.patch</Patch>
+	  <Patch level="0">makefile.patch</Patch>
 	  <Patch level="1">pspp-0001-stdio-don-t-assume-gets-any-more.patch</Patch>
 	  <Patch level="0">turkish.patch</Patch>
         </Patches>
@@ -44,7 +44,7 @@
             <Path fileType="localedata">/usr/share/locale</Path>
         </Files>
 	<AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/psppire.desktop">psppire.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/psppire.desktop">pspp.desktop</AdditionalFile>
         </AdditionalFiles>
       </Package>
    <Package>
