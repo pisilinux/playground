@@ -91,13 +91,13 @@ def install():
     # Move mount helpers to /sbin
     pisitools.dodir("/sbin")
 
-    for f in ("mount.cifs", "umount.cifs"):
-        pisitools.domove("/usr/bin/%s" % f, "/sbin")
+#    for f in ("mount.cifs", "umount.cifs"):
+#        pisitools.domove("/usr/bin/%s" % f, "/sbin")
 
-    pisitools.domove("/usr/sbin/cifs.upcall", "/sbin")
+#    pisitools.domove("/usr/sbin/cifs.upcall", "/sbin")
 
     # Set SUID bit for mount helpers
-    shelltools.chmod("%s/sbin/*mount.cifs" % get.installDIR(), mode=04755)
+#    shelltools.chmod("%s/sbin/*mount.cifs" % get.installDIR(), mode=04755)
 
     # cups support
     pisitools.dodir("/usr/lib/cups/backend")
