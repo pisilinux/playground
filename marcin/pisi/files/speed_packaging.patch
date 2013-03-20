@@ -1,5 +1,5 @@
 --- pisi/operations/build.py~	2013-03-12 21:29:07.000000000 +0100
-+++ pisi/operations/build.py	2013-03-20 09:06:35.156555795 +0100
++++ pisi/operations/build.py	2013-03-20 11:38:33.065222645 +0100
 @@ -19,6 +19,7 @@
  import pwd
  import grp
@@ -16,7 +16,7 @@
  
          for package in self.spec.packages:
              for path in package.files:
-@@ -568,11 +570,13 @@
+@@ -568,9 +570,10 @@
  
          def is_included(path1, path2):
              "Return True if path2 includes path1"
@@ -27,11 +27,8 @@
 +                    or additional_check
  
          for root, dirs, files in os.walk(install_dir):
-+            if ctx.config.get_option("verbose"): print root
              if not dirs and not files:
-                 for _path in all_paths_in_packages:
-                     if is_included(root, _path):
-@@ -580,12 +584,26 @@
+@@ -580,12 +583,24 @@
                  else:
                      abandoned_files.append(root)
  
@@ -48,8 +45,6 @@
 +
              for file_ in files:
                  fpath = util.join_path(root, file_)
-+                if ctx.config.get_option("verbose"): print " -%d:%d-\t%s" % (len(all_paths_in_packages), len(skip_paths), fpath)
-+                
                  for _path in all_paths_in_packages:
                      if is_included(fpath, _path):
 +                        if os.path.isfile(_path):
@@ -59,44 +54,3 @@
                  else:
                      abandoned_files.append(fpath)
  
-@@ -1004,10 +1022,23 @@
- 
-         ms.close()
- 
-+    cpoint = 0
-+    timeList = []
-+
-+    def timer(self, ai = ''):
-+        print "--- %d --- %s" % (self.cpoint, ai)
-+        self.timeList.append(time.time())
-+        if len(self.timeList)%2 == 0:
-+            print 'Time elapsed: ' + str(round(self.timeList[-1] - self.timeList[-2],4)) + ' seconds.'
-+            self.timeList[0] = self.timeList.pop()
-+        self.cpoint += 1
-+
-     def build_packages(self):
-         """Build each package defined in PSPEC file. After this process there
-         will be .pisi files hanging around, AS INTENDED ;)"""
- 
-+        if ctx.config.get_option("verbose"): self.timer("start build_packages")
-+
-         doc_ptrn = re.compile(ctx.const.doc_package_end)
- 
-         self.fetch_component()  # bug 856
-@@ -1072,6 +1103,7 @@
-                 ctx.ui.info("    - %s" % f)
- 
-             raise AbandonedFilesException
-+        if ctx.config.get_option("verbose"): print "no abandoned files"
- 
-         for package in self.spec.packages:
-             # removing "farce" in specfile.py:SpecFile.override_tags
-@@ -1184,6 +1216,8 @@
-         os.environ.clear()
-         os.environ.update(ctx.config.environ)
- 
-+        if ctx.config.get_option("verbose"): self.timer("stop build_packages")
-+
-     def search_old_packages_for_delta(self, release=None, max_count=0,
-                                       search_paths=None):
-         if search_paths is None:
