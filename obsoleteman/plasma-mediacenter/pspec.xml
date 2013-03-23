@@ -11,13 +11,14 @@
         <License>LGPLv2</License>
         <IsA>library</IsA>
         <Summary>KDE Plasma Media Center</Summary>
-        <Description>KDE Plasma Media Center.</Description>
+        <Description>A Media Center for the KDE Software Compilation based on plasma technology.</Description>
         <Archive sha1sum="275c561f714647f4c1fd78debb66afa24822a4af" type="targz">http://ftp.heanet.ie/mirrors/ftp.kde.org/stable/plasma-mediacenter/1.0.0/src/plasma-mediacenter-1.0.0-1.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>qt</Dependency>
-            <Dependency versionFrom="4.10.1">kdelibs-devel</Dependency>
-            <Dependency>nepomuk-core-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
             <Dependency>taglib-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+            <Dependency>qt-mobility-devel</Dependency>
+            <Dependency>nepomuk-core-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -25,10 +26,11 @@
         <Name>plasma-mediacenter</Name>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
-            <Dependency versionFrom="4.10.1">kdelibs</Dependency>
-            <Dependency>nepomuk-core</Dependency>
             <Dependency>taglib</Dependency>
 	    <Dependency>libgcc</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>qt-mobility</Dependency>
+            <Dependency>nepomuk-core</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>  
@@ -40,14 +42,9 @@
 
     <Package>
         <Name>plasma-mediacenter-devel</Name>
-        <Summary>Development package KDE Plasma Media Center</Summary>
-        <Description>Contains development tools and header files for KDE Plasma Media Center.</Description>
+        <Summary>plasma-mediacenter için geliştirme dosyaları.</Summary>
         <RuntimeDependencies>
             <Dependency release="current">plasma-mediacenter</Dependency>
-            <Dependency versionFrom="4.10.1">kdelibs-devel</Dependency>
-            <Dependency>qt-devel</Dependency>
-            <Dependency>nepomuk-core-devel</Dependency>
-            <Dependency>taglib-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>

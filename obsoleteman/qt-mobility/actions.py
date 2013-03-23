@@ -18,6 +18,5 @@ def setup():
 def build():
     qt4.make()
 
-def install():
-    
+def install():    
     qt4.install()
