@@ -1,0 +1,72 @@
+http://github.com/gentoo/eudev/commit/bfc850a01b7ba1d961e2f32550c6871ddef909d9
+
+--- src/udev/udev-ctrl.c
++++ src/udev/udev-ctrl.c
+@@ -10,6 +10,7 @@
+  */
+ 
+ #include <errno.h>
++#include <fcntl.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <stddef.h>
+@@ -19,6 +20,7 @@
+ #include <sys/poll.h>
+ #include <sys/socket.h>
+ #include <sys/un.h>
++#include <unistd.h>
+ 
+ #include "udev.h"
+ 
+@@ -188,7 +190,28 @@
+         conn->refcount = 1;
+         conn->uctrl = uctrl;
+ 
++#if HAVE_DECL_ACCEPT4
+         conn->sock = accept4(uctrl->sock, NULL, NULL, SOCK_CLOEXEC|SOCK_NONBLOCK);
++
++	/* Fallback path when accept4() is unavailable */
++	if ( conn->sock < 0 && (errno == ENOSYS || errno == ENOTSUP) )
++	{
++		conn->sock = accept(uctrl->sock, NULL, NULL);
++
++		if (conn->sock >= 0) {
++			fcntl(conn->sock, F_SETFL, O_NONBLOCK);
++			fcntl(conn->sock, F_SETFD, FD_CLOEXEC);
++		}
++	}
++#else
++	conn->sock = accept(uctrl->sock, NULL, NULL);
++
++	if (conn->sock >= 0) {
++		fcntl(conn->sock, F_SETFL, O_NONBLOCK);
++		fcntl(conn->sock, F_SETFD, FD_CLOEXEC);
++	}
++#endif
++
+         if (conn->sock < 0) {
+                 if (errno != EINTR)
+                         log_error("unable to receive ctrl connection: %m\n");
+--- configure
++++ configure
+@@ -15392,6 +15392,20 @@
+ OUR_LDFLAGS=$with_ldflags
+ 
+ 
++ac_fn_c_check_decl "$LINENO" "accept4" "ac_cv_have_decl_accept4" "#include <sys/types.h>
++#include <sys/socket.h>
++"
++if test "x$ac_cv_have_decl_accept4" = xyes; then :
++  ac_have_decl=1
++else
++  ac_have_decl=0
++fi
++
++cat >>confdefs.h <<_ACEOF
++#define HAVE_DECL_ACCEPT4 $ac_have_decl
++_ACEOF
++
++
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing mq_open" >&5
+ $as_echo_n "checking for library containing mq_open... " >&6; }
+ if ${ac_cv_search_mq_open+:} false; then :
