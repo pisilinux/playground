@@ -11,15 +11,16 @@ from pisi.actionsapi import pisitools
 # if pisi can't find source directory, see /var/pisi/gcstar/work/ and:
 WorkDir="./gcstar"
 
-def install():
-    pisitools.dobin("/bin/gcstar", "/bin/")
-    pisitools.dolib("/lib/gcstar", "/usr/lib/")
-    pisitools.doman("/man/gcstar.1")
-    pisitools.domove("/share/applications/ ","/share/applications")
-    pisitools.domove("/share/gcstar/","/share/")
+def setup():
+    autotools.install("./install")
+#     pisitools.dobin("./bin/gcstar", "/bin")
+#     pisitools.dolib("/lib/gcstar", "usr/lib/")
+#     pisitools.doman("./man/gcstar.1")
+#     pisitools.domove("./share/applications ","usr/share/applications")
+#     pisitools.domove("./share/gcstar","usr/share")
     
-# def build():
-#      autotools.make()
+def build():
+      autotools.make("./install")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
