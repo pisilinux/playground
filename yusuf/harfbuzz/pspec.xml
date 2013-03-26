@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>harfbuzz</Name>
+        <Homepage>http://www.freedesktop.org/software/harfbuzz</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>OpenType text shaping engine.</Summary>
+        <Description>The Harfbuzz package contains an OpenType text shaping engine.</Description>
+        <Archive sha1sum="e12eb5a494453909deb7ec57700fa667c02332da" type="tarbz2">http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-0.9.14.tar.bz2</Archive>
+        <AdditionalFiles>
+            <AdditionalFile permission="0644" target="../../work-emul32/remove-graphite.patch">remove-graphite.patch</AdditionalFile>
+        </AdditionalFiles>
+        <BuildDependencies>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>icu4c-devel</Dependency>
+            <Dependency>freetype-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>harfbuzz</Name>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>icu4c</Dependency>
+            <Dependency>freetype</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin/</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>harfbuzz-devel</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">harfbuzz</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/harfbuzz</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>harfbuzz-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for harfbuzz</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>cairo-32bit</Dependency>
+            <Dependency>freetype-32bit</Dependency>
+            <Dependency>fontconfig-32bit</Dependency>
+            <Dependency>icu4c-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">harfbuzz</Dependency>
+            <Dependency>cairo-32bit</Dependency>
+            <Dependency>freetype-32bit</Dependency>
+            <Dependency>fontconfig-32bit</Dependency>
+            <Dependency>icu4c-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2013-03-25</Date>
+            <Version>0.9.14</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>      
+        <Update release="2">
+            <Date>2013-01-22</Date>
+            <Version>0.9.9</Version>
+            <Comment>Add emul32</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-12-24</Date>
+            <Version>0.9.9</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
