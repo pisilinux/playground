@@ -15,6 +15,7 @@
         <Archive sha1sum="d399e7207d30132b361d685eb169cf8f8fa380ff" type="targz">http://www.cpan.org/authors/id/B/BD/BDFOY/Test-Output-1.01.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>perl</Dependency>
+	    <Dependency>perl-Test-Tester</Dependency>
 	</BuildDependencies>
     </Source>
 
@@ -22,6 +23,7 @@
         <Name>perl-Test-Output</Name>
         <RuntimeDependencies>
             <Dependency>perl</Dependency>
+	    <Dependency>perl-Test-Tester</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,7 +37,7 @@
     <History>
         <Update release="1">
             <Date>2013-03-21</Date>
-            <Version>1.7</Version>
+            <Version>1.01</Version>
             <Comment>First release</Comment>
             <Name>Ayhan YALÇINSOY</Name>
             <Email>ayhanyalcinsoy@gmail.com</Email>

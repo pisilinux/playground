@@ -15,6 +15,8 @@
         <Archive sha1sum="84617e7a91541fc3f56438bd4d0eaca61fe37acb" type="targz">http://www.cpan.org/authors/id/T/TM/TMTM/CDDB-File-1.05.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>perl</Dependency>
+	    <Dependency>perl-Params-Validate</Dependency>
+	    <Dependency>perl-DateTime-Locale</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -22,8 +24,8 @@
         <Name>perl-CDDB-File</Name>
         <RuntimeDependencies>
             <Dependency>perl</Dependency>
-	    <Dependency>Params-Validate</Dependency>
-	    <Dependency>DateTime-Locale</Dependency>
+	    <Dependency>perl-Params-Validate</Dependency>
+	    <Dependency>perl-DateTime-Locale</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -37,7 +39,7 @@
     <History>
         <Update release="1">
             <Date>2013-03-21</Date>
-            <Version>1.7</Version>
+            <Version>1.05</Version>
             <Comment>First release</Comment>
             <Name>Ayhan YALÇINSOY</Name>
             <Email>ayhanyalcinsoy@gmail.com</Email>

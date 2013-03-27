@@ -15,6 +15,7 @@
         <Archive sha1sum="89eaca559f8c12d1492be6bb36767dd9b4c9d54c" type="targz">http://www.cpan.org/authors/id/R/RO/ROAM/Net-FreeDB-0.08.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>perl</Dependency>
+	    <Dependency>perl-CDDB-File</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -22,6 +23,7 @@
         <Name>perl-Net-FreeDB</Name>
         <RuntimeDependencies>
             <Dependency>perl</Dependency>
+	    <Dependency>perl-CDDB-File</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,7 +37,7 @@
     <History>
         <Update release="1">
             <Date>2013-03-21</Date>
-            <Version>1.7</Version>
+            <Version>0.08</Version>
             <Comment>First release</Comment>
             <Name>Ayhan YALÇINSOY</Name>
             <Email>ayhanyalcinsoy@gmail.com</Email>
