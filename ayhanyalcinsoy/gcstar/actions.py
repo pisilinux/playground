@@ -10,17 +10,18 @@ from pisi.actionsapi import shelltools
 
 def setup():
     shelltools.system("./install")
-    #autotools.configure()
-#     pisitools.dobin("./bin/gcstar", "/bin")
-#     pisitools.dolib("/lib/gcstar", "usr/lib/")
-#     pisitools.doman("./man/gcstar.1")
-#     pisitools.domove("./share/applications ","usr/share/applications")
-#     pisitools.domove("./share/gcstar","usr/share")
     
 def build():
-    shelltools.system("./install text")
+    shelltools.system("./install --text \
+				 --noclean \
+				 --nomenu \
+				 --prefix=/usr")
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-#    pisitools.dodoc("AUTHORS", "BUGS", "ChangeLog", "COPYING", "README")
-
+    pisitools.insinto("/usr/", "bin")
+    pisitools.insinto("/usr/", "lib")    
+    pisitools.insinto("/usr/share/", "man")
+    pisitools.insinto("/usr/share", "share/applications")
+    pisitools.insinto("/usr/share", "share/gcstar")
+    
+    pisitools.dodoc("CHANGELOG", "LICENSE", "README", "README.fr")

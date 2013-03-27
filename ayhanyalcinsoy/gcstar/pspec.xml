@@ -31,7 +31,7 @@
 	    <Dependency>perl-Module-Implementation</Dependency>
 	    <Dependency>perl-Module-Runtime</Dependency>
 	    <Dependency>perl-Test-Output</Dependency>
-	    <Dependency>perl-Try-Tny</Dependency>
+	    <Dependency>perl-Try-Tiny</Dependency>
 	    <Dependency>perl-Data-OptList</Dependency>
 	    <Dependency>perl-Date-Calc</Dependency>
 	    <Dependency>perl-DateTime</Dependency>
@@ -41,12 +41,13 @@
 	    <Dependency>perl-GD-Graph</Dependency>
 	    <Dependency>perl-Package-DeprecationManager</Dependency>
 	    <Dependency>perl-Package-Stash</Dependency>
-	    <Dependency>perl-Param-Validate</Dependency>
+	    <Dependency>perl-Params-Validate</Dependency>
 	    <Dependency>perl-Sub-Install</Dependency>
 	    <Dependency>perl-Sub-Exporter</Dependency>
 	    <Dependency>perl-Test-Fatal</Dependency>
 	</BuildDependencies>
     </Source>
+    
     <Package>
         <Name>gcstar</Name>
         <RuntimeDependencies>
@@ -69,7 +70,7 @@
 	    <Dependency>perl-Module-Implementation</Dependency>
 	    <Dependency>perl-Module-Runtime</Dependency>
 	    <Dependency>perl-Test-Output</Dependency>
-	    <Dependency>perl-Try-Tny</Dependency>
+	    <Dependency>perl-Try-Tiny</Dependency>
 	    <Dependency>perl-Data-OptList</Dependency>
 	    <Dependency>perl-Date-Calc</Dependency>
 	    <Dependency>perl-DateTime</Dependency>
@@ -79,25 +80,22 @@
 	    <Dependency>perl-GD-Graph</Dependency>
 	    <Dependency>perl-Package-DeprecationManager</Dependency>
 	    <Dependency>perl-Package-Stash</Dependency>
-	    <Dependency>perl-Param-Validate</Dependency>
+	    <Dependency>perl-Params-Validate</Dependency>
 	    <Dependency>perl-Sub-Install</Dependency>
 	    <Dependency>perl-Sub-Exporter</Dependency>
-	    <Dependency>perl-Test-Fatal</Dependency>
-	    
+	    <Dependency>perl-Test-Fatal</Dependency>	    
         </RuntimeDependencies>
         <Files>
-             <Files>
-           <Path fileType="config">/etc/gcstar</Path>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="library">/usr/lib/gcstar</Path>
             <Path fileType="data">/usr/share/gcstar</Path>
             <Path fileType="data">/usr/share/icons</Path>
-            <Path fileType="data">/usr/share/man</Path>
+            <Path fileType="man">/usr/share/man</Path>
+	    <Path fileType="data">/usr/share/doc</Path>
             <Path fileType="data">/usr/share/applications</Path>
-            <Path fileType="localedata">/usr/share/locale</Path>
-        </Files>
         </Files>
     </Package>
+    
     <History>
         <Update release="1">
             <Date>2013-03-19</Date>
