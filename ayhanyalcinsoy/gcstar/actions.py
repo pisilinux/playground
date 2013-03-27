@@ -12,7 +12,7 @@ from pisi.actionsapi import pisitools
 WorkDir="./gcstar"
 
 def setup():
-    autotools.install("./install")
+    autotools.configure()
 #     pisitools.dobin("./bin/gcstar", "/bin")
 #     pisitools.dolib("/lib/gcstar", "usr/lib/")
 #     pisitools.doman("./man/gcstar.1")
