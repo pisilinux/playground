@@ -1,0 +1,95 @@
+diff -Nuar webmin-1.550.org//os_list.txt webmin-1.550/os_list.txt
+--- webmin-1.550.org//os_list.txt	2011-04-27 01:18:38.000000000 +0300
++++ webmin-1.550/os_list.txt	2011-05-12 12:42:23.124000004 +0300
+@@ -1,16 +1,16 @@
+ #Pardus
+-Pardus			        1.0	                pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+1.0\s+/i
+-Pardus			       2007	                pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2007\s+/i
+-Pardus			       2007.1 Felis chaus	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2007.1\s+/i
+-Pardus			       2007.2 Caracac caracal	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2007.2\s+/i
+-Pardus			       2007.3 Lynx lynx	        pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2007.3\s+/i
+-Pardus			       2008	                pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2008\s+/i
+-Pardus			       2008.1 Hyaena hyaena               pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2008.1\s+/i
+-Pardus			       2008.2 Canis aureus	          pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2008.2\s+/i
+-Pardus			       2009	                pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2009\s+/i
+-Pardus			       2009.1 Anthropoides virgo	                pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2009.1\s+/i
++Pardus			        1.0                     	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+1.0\s+/i
++Pardus			       2007                     	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2007\s+/i
++Pardus			       2007.1 Felis chaus       	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2007.1\s+/i
++Pardus			       2007.2 Caracac caracal   	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2007.2\s+/i
++Pardus			       2007.3 Lynx lynx         	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2007.3\s+/i
++Pardus			       2008                     	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2008\s+/i
++Pardus			       2008.1 Hyaena hyaena     	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2008.1\s+/i
++Pardus			       2008.2 Canis aureus      	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2008.2\s+/i
++Pardus			       2009                     	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2009\s+/i
++Pardus			       2009.1 Anthropoides virgo	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2009.1\s+/i
+ Pardus			       2009.2 Geronticus eremita	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2009.2\s+/i
+-Pardus			       2011	                pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2011\s+/i
++Pardus			       2011                     	pardus-linux	$1	`cat /etc/pardus-release 2>/dev/null` =~ /Pardus\s+2011\s+/i
+ 
+ # Sun Solaris
+ Sun Solaris			2.5.1	solaris		2.5.1	$uname =~ /SunOS.*\s5\.5\.1\s/i
+diff -Nuar webmin-1.550.org//phpini/config-pardus-linux webmin-1.550/phpini/config-pardus-linux
+--- webmin-1.550.org//phpini/config-pardus-linux	2011-04-27 01:19:05.000000000 +0300
++++ webmin-1.550/phpini/config-pardus-linux	2011-05-12 12:26:05.502999982 +0300
+@@ -1 +1 @@
+-php_ini=/etc/php/php.ini
++php_ini=/etc/php/apache2/php.ini
+diff -Nuar webmin-1.550.org//useradmin/config-pardus-linux webmin-1.550/useradmin/config-pardus-linux
+--- webmin-1.550.org//useradmin/config-pardus-linux	1970-01-01 02:00:00.000000000 +0200
++++ webmin-1.550/useradmin/config-pardus-linux	2011-05-12 12:26:05.503999991 +0300
+@@ -0,0 +1,42 @@
++homedir_perms=0755
++display_max=400
++user_files=/etc/skel
++passwd_file=/etc/passwd
++group_file=/etc/group
++shadow_file=/etc/shadow
++gshadow_file=/etc/gshadow
++base_uid=1000
++base_gid=1000
++lock_string=*
++empty_mode=0
++sort_mode=0
++new_user_group=0
++skip_md5=0
++display_mode=1
++passwd_stars=0
++delete_only=0
++from_files=0
++alias_check=0
++home_style=0
++random_password=0
++extra_real=0
++passwd_dict=0
++passwd_same=0
++email_type=0
++home_base=/home
++new_user_gid=0
++delete_root=0
++md5=1
++default_group=users
++uid_mode=1
++gid_mode=1
++gid_calc=0
++uid_calc=0
++default_other=1
++shells=fixed,passwd,shells
++secmode=0
++last_show=0
++config-aix
++passwd_progmode=0
++membox=0
++selinux_con=user_u:object_r:user_home_dir_t
+diff -Nuar webmin-1.550.org//useradmin/module.info webmin-1.550/useradmin/module.info
+--- webmin-1.550.org//useradmin/module.info	2011-04-27 01:19:08.000000000 +0300
++++ webmin-1.550/useradmin/module.info	2011-05-12 12:26:05.505000003 +0300
+@@ -11,7 +11,7 @@
+ name=User Manager
+ desc_tr=Kullan˝c˝ ve Gruplar
+ desc_de=Benutzer und Gruppen
+-os_support=slackware-linux redhat-linux mandrake-linux solaris debian-linux suse-linux united-linux hpux freebsd osf1 open-linux unixware turbo-linux openbsd corel-linux cobalt-linux irix aix netbsd msc-linux openserver generic-linux macos gentoo-linux trustix-linux sol-linux coherent-linux openmamba-linux
++os_support=slackware-linux redhat-linux mandrake-linux solaris debian-linux suse-linux united-linux hpux freebsd osf1 open-linux unixware turbo-linux openbsd corel-linux cobalt-linux irix aix netbsd msc-linux openserver generic-linux macos gentoo-linux trustix-linux sol-linux coherent-linux openmamba-linux pardus-linux
+ desc_zh_CN=”√ªß”Î»∫◊È
+ risk=low medium high
+ desc_ja_JP.UTF-8=„É¶„Éº„Ç∂„Åä„Çà„Å≥„Ç∞„É´„Éº„Éó

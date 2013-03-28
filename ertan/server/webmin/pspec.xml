@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>webmin</Name>
+        <Homepage>http://www.webmin.com</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>As-Is</License>
+        <IsA>app:gui</IsA>
+        <Summary>Webmin is a web-based interface for system administration for Unix</Summary>
+        <Description>Using any browser that supports tables and forms, you can setup user
+        accounts, Apache, internet services, DNS, file sharing and so on.</Description>
+    <Archive sha1sum="37be26a52bc6d252fef8d319eadba49ad2d5c567" type="targz">http://prdownloads.sourceforge.net/webadmin/webmin-1.620.tar.gz</Archive>
+    <Patches>
+        <Patch level="1">webmin-1.170-setup-nocheck.patch</Patch>
+        <Patch level="1">webmin-1.610-postgresql-fix-installing-missing-packages.patch</Patch>
+        <Patch level="1">webmin-fix-bandwith.diff</Patch>
+    </Patches>
+    </Source>
+
+    <Package>
+        <Name>webmin</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/var/log</Path>
+            <Path fileType="data">/tmp</Path>
+        </Files>
+        <Provides>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-03-28</Date>
+            <Version>1.620</Version>
+            <Comment>First release.</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertan@pisilinux.org</Email>
+        </Update>      
+    </History>
+</PISI>
+
