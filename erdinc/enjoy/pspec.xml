@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>enjoy</Name>
+        <Homepage>http://trac.enlightenment.org/e/wiki/Enjoy</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:gui</IsA>
+        <IsA>library</IsA>
+        <PartOf>desktop.enlightenment.addon</PartOf>
+        <Summary>A music player written using Enlightenment Foundation Libraries</Summary>
+        <Description>Enjoy is a music player written using Enlightenment Foundation Libraries (EFL) with focus on speed and mobile usability, yet should be usable on desktops as well.</Description>
+        <Archive sha1sum="4970e8758a5f7919f2796da3c98e5326caaf802b" type="tarxz">file:///home/erdinc/PisiLinux/desktop/enlightenment/addon/enjoy/enjoy.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>git</Dependency>
+            <Dependency>lightmediascanner-devel</Dependency>
+            <Dependency>eina-devel</Dependency>
+            <Dependency>ecore-devel</Dependency>
+            <Dependency>e_dbus-devel</Dependency>
+            <Dependency>edje-devel</Dependency>
+            <Dependency>efreet-devel</Dependency>
+            <Dependency>evas-devel</Dependency>
+            <Dependency>elementary-devel</Dependency>
+            <Dependency>emotion-devel</Dependency>
+            <Dependency>enlightenment-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>enjoy</Name>
+        <RuntimeDependencies>
+            <Dependency>lightmediascanner</Dependency>
+            <Dependency>eina</Dependency>
+            <Dependency>ecore</Dependency>
+            <Dependency>e_dbus</Dependency>
+            <Dependency>edje</Dependency>
+            <Dependency>efreet</Dependency>
+            <Dependency>evas</Dependency>
+            <Dependency>elementary</Dependency>
+            <Dependency>emotion</Dependency>
+            <Dependency>enlightenment</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/enjoy</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2012-08-08</Date>
+            <Version>1.0</Version>
+            <Comment>First release</Comment>
+            <Name>Erdinç gültekin</Name>
+            <Email>erdincgultekin@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
