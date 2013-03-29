@@ -12,11 +12,19 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("sh ./INSTALL.sh")
+    shelltools.system("./INSTALL.sh")
 
 def build():
-    autotools.make()
+    autotools.system("./INSTALL.sh")
 
 def install():
     autotools.install()
-    pisitools.dodoc("AUTHORS", "COPYING", "README")
+    pisitools.dodir("/usr/share/sofastats")
+    pisitools.insinto("/usr/share/sofastats")
+    pisitools.doins("sofa_main/*")
+    pisitools.exeinto("/usr/share/sofastats")
+    pisitools.doexe("sofa_main/*.py*")
+    pisitools.doexe("sofa_main/*/*.py*")
+    pisitools.dosym("/usr/share/sofastats/start.py /usr/bin/sofastats")
+#    make_desktop_entry sofastats ${PN} /usr/share/sofastats/images/sofa_32x32.ico "Science;"
+#    pisitools.dodoc("AUTHORS", "COPYING", "README")

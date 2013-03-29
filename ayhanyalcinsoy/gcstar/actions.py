@@ -8,11 +8,13 @@ from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
+WorkDir= "./gcstar"
+
 def setup():
     shelltools.system("./install")
     
 def build():
-    shelltools.system("./install --text \
+    shelltools.system("./install --text\
 				 --noclean \
 				 --nomenu \
 				 --prefix=/usr")
