@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Linux dynamic and persistent device naming support</Summary>
         <Description>udev allows Linux users to have a dynamic /dev directory and it provides the ability to have persistent device names.</Description>
-        <Archive sha1sum="b9fc6e562f26d38742f3cce84d7bdf9c2f9aba9a" type="tarlzma">http://www.freedesktop.org/software/systemd/systemd-198.tar.xz</Archive>
+        <Archive sha1sum="114f6dcc5405a2706fe82d55aba46d57467ebd46" type="tarlzma">http://www.freedesktop.org/software/systemd/systemd-200.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gperf</Dependency>
             <Dependency>glib2</Dependency>
@@ -23,7 +23,6 @@
         </BuildDependencies>
         <Patches>
             <Patch level="0">accept4.patch</Patch>
-            <Patch level="0">move_builtin_section.patch</Patch>
         </Patches>
     </Source>
 
@@ -177,8 +176,8 @@
 
     <History>
         <Update release="3">
-            <Date>2013-03-24</Date>
-            <Version>198</Version>
+            <Date>2013-03-30</Date>
+            <Version>200</Version>
             <Comment>Version bump.</Comment>
             <Name>Marcin Bojara</Name>
             <Email>marcin@pisilinux.org</Email>
