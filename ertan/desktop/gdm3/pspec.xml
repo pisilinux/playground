@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gdm3</Name>
+        <Homepage>https://live.gnome.org/GDM</Homepage>
+        <Packager>
+            <Name>Ertan Güven</Name>
+            <Email>ertangvn@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>GNOME display manager</Summary>
+        <Description>GDM provides log into different sessions on local or remote machines.</Description>
+        <Archive sha1sum="fc0b8cafd55db4b9931714f239451d08c6887f66" type="tarxz">mirrors://gnome/gdm/3.1/gdm-3.1.2.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency versionFrom="0.6.12">accountsservice-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>gconf-devel</Dependency>
+            <Dependency>upower-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gdm3</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libXrandr</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency versionFrom="0.6.12">accountsservice</Dependency>
+            <Dependency>libcanberra-gtk3</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>gconf</Dependency>
+            <Dependency>upower</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/dbus-1</Path>
+            <Path fileType="config">/etc/gconf</Path>
+            <Path fileType="config">/etc/dconf</Path>
+            <Path fileType="config">/etc/X11/gdm</Path>
+            <Path fileType="config">/etc/pam.d</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/display-managers</Path>
+            <Path fileType="data">/usr/share/gdm</Path>
+            <Path fileType="data">/usr/share/gnome</Path>
+            <Path fileType="data">/usr/share/gnome-session</Path>
+            <Path fileType="data">/usr/share/gnome-2.0</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/omf</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/polkit-1</Path>
+            <Path fileType="data">/usr/share/xsessions</Path>
+            <Path fileType="data">/var/lib</Path>
+            <Path fileType="data">/var/log</Path>
+            <Path fileType="data">/var/cache/gdm</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/display-managers/gdm.desktop">gdm.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/gdm/BuiltInSessions/default.desktop">default.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/gdm/BuiltInSessions/custom.desktop">custom.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>gdm3-devel</Name>
+        <Summary>Development headers for gdm3</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">gdm3</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-01-28</Date>
+            <Version>3.1.2</Version>
+            <Comment>First release.</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertangvn@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

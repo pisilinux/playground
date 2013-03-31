@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>lightdm-kde</Name>
+        <Homepage>http://www.sharpley.org.uk</Homepage>
+        <Packager>
+            <Name>Ertan Güven</Name>
+            <Email>ertangvn@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Login screen using the LightDM framework.</Summary>
+        <Description>Login screen using the LightDM framework.</Description>
+        <Archive sha1sum="5192c57603f3dcb244f729739c7459d15c3fb8a8" type="tarbz2">http://download.kde.org/unstable/lightdm-kde/src/lightdm-kde-0.3.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+            <Dependency>lightdm-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>lightdm-kde</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>lightdm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="library">/usr/lib/kde4</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/kde4</Path>
+            <Path fileType="doc">/usr/share/polkit-1</Path>
+            <Path fileType="doc">/usr/share/xgreeters/</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-02-03</Date>
+            <Version>0.3.1</Version>
+            <Comment>First release</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertangvn@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
