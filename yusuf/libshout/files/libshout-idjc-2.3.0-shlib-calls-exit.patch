@@ -1,0 +1,75 @@
+--- libshout-idjc-2.3.0/src/avl/avl.c.orig	2012-12-02 19:34:43.216933065 +0200
++++ libshout-idjc-2.3.0/src/avl/avl.c	2012-12-02 19:36:00.365562220 +0200
+@@ -991,72 +991,6 @@
+ 
+ #define AVL_MAX(X, Y)  ((X) > (Y) ? (X) : (Y))
+ 
+-static long
+-avl_verify_balance (avl_node * node)
+-{
+-  if (!node) {
+-    return 0;
+-  } else {
+-    long lh = avl_verify_balance (node->left);
+-    long rh = avl_verify_balance (node->right);
+-    if ((rh - lh) != AVL_GET_BALANCE(node)) {
+-      return 0;
+-    }
+-    if (((lh - rh) > 1) || ((lh - rh) < -1)) {
+-      return 0;
+-    }
+-    return (1 + AVL_MAX (lh, rh));
+-  }
+-}
+-    
+-static void
+-avl_verify_parent (avl_node * node, avl_node * parent)
+-{
+-  if (node->parent != parent) {
+-    return;
+-  }
+-  if (node->left) {
+-    avl_verify_parent (node->left, node);
+-  }
+-  if (node->right) {
+-    avl_verify_parent (node->right, node);
+-  }
+-}
+-
+-static long
+-avl_verify_rank (avl_node * node)
+-{
+-  if (!node) {
+-    return 0;
+-  } else {
+-    unsigned long num_left=0, num_right=0;
+-    if (node->left) {
+-      num_left = avl_verify_rank (node->left);
+-    }
+-    if (node->right) {
+-      num_right = avl_verify_rank (node->right);
+-    }
+-    if (AVL_GET_RANK (node) != num_left + 1) {
+-      fprintf (stderr, "invalid rank at node %ld\n", (long) node->key);
+-      exit (1);
+-    }
+-    return (num_left + num_right + 1);
+-  }
+-}
+-
+-/* sanity-check the tree */
+-
+-int
+-avl_verify (avl_tree * tree)
+-{
+-  if (tree->length) {
+-    avl_verify_balance (tree->root->right);
+-    avl_verify_parent  (tree->root->right, tree->root);
+-    avl_verify_rank    (tree->root->right);
+-  }
+-  return (0);
+-}
+-
+ /*
+  * These structures are accumulated on the stack during print_tree
+  * and are used to keep track of the width and direction of each

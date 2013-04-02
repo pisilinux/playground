@@ -1,0 +1,11 @@
+--- idjc-0.8.7/python/maingui.py.orig	2012-06-02 12:26:03.272717831 +0300
++++ idjc-0.8.7/python/maingui.py	2012-06-02 12:26:33.481586765 +0300
+@@ -2218,7 +2218,7 @@
+             if not line.count("="):
+                print line
+                continue
+-            key, value = line.split("=")
++            key, value = line.split("=", 1)
+ 
+             if key == "midi":
+                midis= value

@@ -1,0 +1,40 @@
+Index: idjc-0.8.5/idjcpython/Makefile.in
+===================================================================
+--- idjc-0.8.5.orig/idjcpython/Makefile.in
++++ idjc-0.8.5/idjcpython/Makefile.in
+@@ -66,7 +66,6 @@ am__base_list = \
+   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
+   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
+ am__installdirs = "$(DESTDIR)$(pkgpythondir)" "$(DESTDIR)$(pythondir)"
+-py_compile = $(top_srcdir)/py-compile
+ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+ ACLOCAL = @ACLOCAL@
+ AMTAR = @AMTAR@
+@@ -257,13 +256,6 @@ install-pkgpythonPYTHON: $(pkgpython_PYT
+ 	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(pkgpythondir)'"; \
+ 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(pkgpythondir)" || exit $$?; \
+ 	done || exit $$?; \
+-	if test -n "$$dlist"; then \
+-	  if test -z "$(DESTDIR)"; then \
+-	    PYTHON=$(PYTHON) $(py_compile) --basedir "$(pkgpythondir)" $$dlist; \
+-	  else \
+-	    PYTHON=$(PYTHON) $(py_compile) --destdir "$(DESTDIR)" --basedir "$(pkgpythondir)" $$dlist; \
+-	  fi; \
+-	else :; fi
+ 
+ uninstall-pkgpythonPYTHON:
+ 	@$(NORMAL_UNINSTALL)
+@@ -295,13 +287,6 @@ install-pythonPYTHON: $(python_PYTHON)
+ 	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(pythondir)'"; \
+ 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(pythondir)" || exit $$?; \
+ 	done || exit $$?; \
+-	if test -n "$$dlist"; then \
+-	  if test -z "$(DESTDIR)"; then \
+-	    PYTHON=$(PYTHON) $(py_compile) --basedir "$(pythondir)" $$dlist; \
+-	  else \
+-	    PYTHON=$(PYTHON) $(py_compile) --destdir "$(DESTDIR)" --basedir "$(pythondir)" $$dlist; \
+-	  fi; \
+-	else :; fi
+ 
+ uninstall-pythonPYTHON:
+ 	@$(NORMAL_UNINSTALL)
