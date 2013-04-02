@@ -12,7 +12,7 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("./INSTALL.sh")
+    shelltools.system("sh ./INSTALL.sh")
 
 def build():
     autotools.system("./INSTALL.sh")
