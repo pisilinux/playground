@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pardus-default-settings-xfce</Name>
+        <Homepage>http://comakp.blogspot.com</Homepage>
+        <Packager>
+            <Name>Engin Manap</Name>
+            <Email>engin@comu.edu.tr</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>data</IsA>
+        <Summary>Pardus default settings for xfce</Summary>
+        <Description>This package contains the xfce default settings for Pardus.</Description>
+        <Archive sha1sum="5b1078b866ef666379f796142623cbf37009d4f6" type="targz">http://comak.comu.edu.tr/source/pardus-default-settings-xfce-0.0.1.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>pardus-default-settings-xfce</Name>
+        <RuntimeDependencies>
+            <Dependency>dejavu-fonts</Dependency>
+            <Dependency>cursor-theme-oxygen-white</Dependency>
+            <Dependency versionFrom="1.0.0">gtk-style-oxygen</Dependency>
+            <Dependency>icon-theme-oxygen-png</Dependency>
+            <Dependency>xdg-user-dirs</Dependency>
+            <Dependency>gdm</Dependency>
+        </RuntimeDependencies>
+        <Conflicts>
+            <Package>pardus-default-settings-lxde</Package>
+            <Package>pardus-default-settings-enlightenment</Package>
+            <Package>pardus-default-settings-fluxbox</Package>
+        </Conflicts>
+        <Files>
+            <Path fileType="config">/etc/default</Path>
+            <Path fileType="config">/etc/xdg</Path>
+            <Path fileType="data">/usr/share/xfce4/backdrops</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/xdg/autostart/cnazar.desktop">cnazar.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/xdg/autostart/polkit-gnome.desktop">polkit-gnome.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/xfce4/backdrops/pardus-2011_background.png">pardus-2011_background.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml">xfce4-desktop.xml</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2011-03-16</Date>
+            <Version>0.0.1</Version>
+            <Comment>First release</Comment>
+            <Name>Engin Manap</Name>
+            <Email>engin@comu.edu.tr</Email>
+        </Update>
+    </History>
+</PISI>
