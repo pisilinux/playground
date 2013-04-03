@@ -31,6 +31,7 @@ def install():
      
     # Create directory for grub.cfg file
     pisitools.dodir("/boot/grub2")
+    pisitools.insinto("/boot/grub2", "unicode.pf2")
     
     # Insall our theme
     pisitools.insinto("/usr/share/grub/themes/","themes/pisilinux")
