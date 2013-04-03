@@ -1,58 +1,44 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
-        <Name>pardus-default-settings-xfce</Name>
-        <Homepage>http://comakp.blogspot.com</Homepage>
+        <Name>pisilinux-default-settings-xfce</Name>
+        <Homepage>http://pisilinux.org</Homepage>
         <Packager>
-            <Name>Engin Manap</Name>
-            <Email>engin@comu.edu.tr</Email>
+            <Name>Ertan Güven</Name>
+            <Email>ertan@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
         <IsA>data</IsA>
-        <Summary>Pardus default settings for xfce</Summary>
-        <Description>This package contains the xfce default settings for Pardus.</Description>
-        <Archive sha1sum="5b1078b866ef666379f796142623cbf37009d4f6" type="targz">http://comak.comu.edu.tr/source/pardus-default-settings-xfce-0.0.1.tar.gz</Archive>
+        <Summary>Pisi Linux default settings for xfce</Summary>
+        <Description>This package contains the xfce default settings for Pisi Linux.</Description>
+        <Archive sha1sum="def9ed72d193c3cb1a676c980bfbfad069f4dd63" type="targz">http://www.pisilinux.org/pisilinux/source/1.0/pisilinux-default-settings-xfce.tar.gz</Archive>
+        <Patches/>
     </Source>
-
     <Package>
-        <Name>pardus-default-settings-xfce</Name>
-        <RuntimeDependencies>
-            <Dependency>dejavu-fonts</Dependency>
-            <Dependency>cursor-theme-oxygen-white</Dependency>
-            <Dependency versionFrom="1.0.0">gtk-style-oxygen</Dependency>
-            <Dependency>icon-theme-oxygen-png</Dependency>
-            <Dependency>xdg-user-dirs</Dependency>
-            <Dependency>gdm</Dependency>
-        </RuntimeDependencies>
-        <Conflicts>
-            <Package>pardus-default-settings-lxde</Package>
-            <Package>pardus-default-settings-enlightenment</Package>
-            <Package>pardus-default-settings-fluxbox</Package>
-        </Conflicts>
+        <Name>pisilinux-default-settings-xfce</Name>
         <Files>
-            <Path fileType="config">/etc/default</Path>
-            <Path fileType="config">/etc/xdg</Path>
-            <Path fileType="data">/usr/share/xfce4/backdrops</Path>
+            <Path fileType="all" permanent="0">/</Path>
+            <Path fileType="all" permanent="0">/etc/xdg/xfce4/xfconf/*</Path>
+            <Path fileType="all" permanent="0">/usr/share/backgrounds/xfce/*</Path>
+            <Path fileType="all" permanent="0">/usr/share/doc/pisilinux-default-settings-xfce/*</Path>
+            <Path fileType="all" permanent="0">/usr/share/pixmaps/*</Path>
         </Files>
-        <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/etc/xdg/autostart/cnazar.desktop">cnazar.desktop</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/etc/xdg/autostart/polkit-gnome.desktop">polkit-gnome.desktop</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/xfce4/backdrops/pardus-2011_background.png">pardus-2011_background.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml">xfce4-desktop.xml</AdditionalFile>
-        </AdditionalFiles>
+        <RuntimeDependencies>
+            <Dependency>polkit-gnome</Dependency>
+            <Dependency>xfce4-screenshooter</Dependency>
+        </RuntimeDependencies>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
         </Provides>
     </Package>
-
     <History>
         <Update release="1">
-            <Date>2011-03-16</Date>
-            <Version>0.0.1</Version>
-            <Comment>First release</Comment>
-            <Name>Engin Manap</Name>
-            <Email>engin@comu.edu.tr</Email>
+            <Date>2013-04-02</Date>
+            <Version>1.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>
