@@ -12,11 +12,16 @@
         <IsA>data</IsA>
         <Summary>Pisi Linux default settings for xfce</Summary>
         <Description>This package contains the xfce default settings for Pisi Linux.</Description>
-        <Archive sha1sum="def9ed72d193c3cb1a676c980bfbfad069f4dd63" type="targz">http://www.pisilinux.org/pisilinux/source/1.0/pisilinux-default-settings-xfce.tar.gz</Archive>
+        <Archive sha1sum="1a7f5152ca3fc2b819e9f25b9a7190fa0691c4da" type="targz">pisilinux-default-settings-xfce.tar.gz</Archive>
         <Patches/>
     </Source>
     <Package>
         <Name>pisilinux-default-settings-xfce</Name>
+        <RuntimeDependencies>
+            <Dependency>dejavu-fonts</Dependency>
+            <Dependency>gtk-style-oxygen</Dependency>
+            <Dependency>icon-theme-kfaenza</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="all" permanent="0">/</Path>
             <Path fileType="all" permanent="0">/etc/xdg/xfce4/xfconf/*</Path>
@@ -24,10 +29,6 @@
             <Path fileType="all" permanent="0">/usr/share/doc/pisilinux-default-settings-xfce/*</Path>
             <Path fileType="all" permanent="0">/usr/share/pixmaps/*</Path>
         </Files>
-        <RuntimeDependencies>
-            <Dependency>polkit-gnome</Dependency>
-            <Dependency>xfce4-screenshooter</Dependency>
-        </RuntimeDependencies>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
         </Provides>
