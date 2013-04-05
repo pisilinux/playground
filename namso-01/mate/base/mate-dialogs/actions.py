@@ -12,7 +12,6 @@ from pisi.actionsapi import get
 
 def setup():
     shelltools.system("./autogen.sh --disable-static \
-				    --enable-libmatenotify \
 				    --prefix=/usr")
 
 def build():
