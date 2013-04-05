@@ -15,7 +15,6 @@
         <Description>The mate-keyring session daemon manages passwords and other types of secrets for the user, storing them encrypted with a main password. Applications can use the mate-keyring library to integrate with the keyring.</Description>
 	<Archive sha1sum="18b5a517b49f1df1d321bf684674af18e8f2d8df" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-keyring-1.6.0.tar.xz</Archive>
         <BuildDependencies>
-	    <Dependency>libmatekeyring-devel</Dependency>
             <Dependency>gtk2-devel</Dependency>
 	    <Dependency>libtasn1-devel</Dependency>
 	    <Dependency>pam-devel</Dependency>
@@ -25,16 +24,13 @@
 	    <Dependency>atk-devel</Dependency>
 	    <Dependency>cairo-devel</Dependency>
 	    <Dependency>pango-devel</Dependency>
-	    <Dependency>freetype-devel</Dependency>
 	    <Dependency>fontconfig-devel</Dependency>
 	    <Dependency>gdk-pixbuf-devel</Dependency>
-	    <Dependency>glib2-devel</Dependency>
 	 </BuildDependencies>
     </Source>
     <Package>
         <Name>mate-keyring</Name>
 	 <RuntimeDependencies>
-	    <Dependency>libmatekeyring</Dependency>
             <Dependency>gtk2</Dependency>
 	    <Dependency>libtasn1</Dependency>
 	    <Dependency>pam</Dependency>
@@ -44,10 +40,8 @@
 	    <Dependency>atk</Dependency>
 	    <Dependency>cairo</Dependency>
 	    <Dependency>pango</Dependency>
-	    <Dependency>freetype</Dependency>
 	    <Dependency>fontconfig</Dependency>
 	    <Dependency>gdk-pixbuf</Dependency>
-	    <Dependency>glib2</Dependency>
 	 </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>

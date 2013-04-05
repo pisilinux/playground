@@ -10,7 +10,6 @@
         </Packager>
         <License>GPLv3.0</License>
         <Icon>python-caja</Icon>
-        <PartOf>desktop.mate.extras</PartOf>
         <IsA>library</IsA>
         <Summary>Python binding for Mate CAJA</Summary>
         <Description>These are unstable bindings for the caja extension library.</Description>
@@ -18,7 +17,13 @@
 	<BuildDependencies>
 	    <Dependency>python-pygobject-devel</Dependency>
             <Dependency>mate-desktop-devel</Dependency>
-            <Dependency>python-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>mate-file-manager-devel</Dependency>
 	</BuildDependencies>
     </Source>
 
@@ -27,7 +32,13 @@
 	<RuntimeDependencies>
             <Dependency>python-pygobject</Dependency>
             <Dependency>mate-desktop</Dependency>
-            <Dependency>python</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>mate-file-manager</Dependency>
 	</RuntimeDependencies>
         <Files>
 	    <Path fileType="data">/usr/share/</Path>

@@ -15,6 +15,11 @@
         <Description>libmatewnck is Window Navigator Construction Kit, i.e. a library to use for writing pagers and taskslists and stuff.</Description>
 	<Archive sha1sum="8b963254fa8149e774880586b96c09b02fbd010a" type="tarxz">http://pub.mate-desktop.org/releases/1.6/libmatewnck-1.6.0.tar.xz</Archive>
         <BuildDependencies>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
 	    <Dependency>cairo-devel</Dependency>
 	    <Dependency>gobject-introspection-devel</Dependency>
 	    <Dependency>gtk-doc</Dependency>
@@ -29,14 +34,19 @@
     <Package>
         <Name>libmatewnck</Name>
         <RuntimeDependencies>
-	    <Dependency>cairo</Dependency>
-	    <Dependency>gobject-introspection</Dependency>
-	    <Dependency>gtk-doc</Dependency>
-	    <Dependency>gtk2</Dependency>
-	    <Dependency>libX11</Dependency>
-	    <Dependency>libXres</Dependency>
-	    <Dependency>mate-common</Dependency>
-	    <Dependency>startup-notification</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>gtk-doc</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libXres</Dependency>
+            <Dependency>mate-common</Dependency>
+            <Dependency>startup-notification</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>

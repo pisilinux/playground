@@ -16,18 +16,30 @@
         <Description>Engrampa is an archive manager for the MATE environment.  This means that you can create and modify archives; view the content of an archive; view and modify a file contained in the archive; extract files from the archive.</Description>
         <Archive sha1sum="c7df115b532a14fb7be193113da32cda4a2218e8" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-file-archiver-1.6.0.tar.xz</Archive>
 	<BuildDependencies>
-	    <Dependency>glib2-devel</Dependency>
 	    <Dependency>mate-common</Dependency>
             <Dependency>mate-doc-utils</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>mate-file-manager-devel</Dependency>
 	</BuildDependencies>
     </Source>
 
     <Package>
         <Name>mate-file-archiver</Name>
 	<RuntimeDependencies>
-	    <Dependency>glib2</Dependency>
 	    <Dependency>mate-common</Dependency>
             <Dependency>mate-doc-utils</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>mate-file-manager</Dependency>
 	</RuntimeDependencies>
         <Files>
 	    <Path fileType="data">/usr/share/</Path>

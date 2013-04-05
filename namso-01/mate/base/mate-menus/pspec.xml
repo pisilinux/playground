@@ -15,7 +15,6 @@
         <Description>mate-menus has got desktop-directories, Mate menus library and its python bindings.</Description>
 	<Archive sha1sum="798e1e96e8dea48d93f1db90b6fbe69d0a3f3ea5" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-menus-1.6.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>dbus-glib-devel</Dependency>
 	    <Dependency>gobject-introspection-devel</Dependency>
             <Dependency>gtk2-devel</Dependency>
             <Dependency>libsoup-devel</Dependency>
@@ -23,14 +22,12 @@
 	    <Dependency>mate-doc-utils</Dependency>
 	    <Dependency>python-gudev</Dependency>
 	    <Dependency>python-gtk-devel</Dependency>
-	    <Dependency>glib2-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>mate-menus</Name>
         <RuntimeDependencies>
-            <Dependency>dbus-glib</Dependency>
 	    <Dependency>gobject-introspection</Dependency>
             <Dependency>gtk2</Dependency>
             <Dependency>libsoup</Dependency>
@@ -38,7 +35,6 @@
 	    <Dependency>mate-doc-utils</Dependency>
 	    <Dependency>python-gudev</Dependency>
 	    <Dependency>python-gtk</Dependency>
-	    <Dependency>glib2</Dependency>
         </RuntimeDependencies>
         <Files>
 	  <Path fileType="library">/usr/lib</Path>

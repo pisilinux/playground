@@ -10,7 +10,6 @@
         </Packager>
         <License>GPLv3.0</License>
         <Icon>mate-file-manager-image-converter</Icon>
-        <PartOf>desktop.mate.extras</PartOf>
         <IsA>app:gui</IsA>
         <Summary>Caja-Image-Converter is a fork of Nautilus-Image-Converter.</Summary>
         <Description>The Caja-Image-Converter extension allows you to resize/rotate images from Caja.</Description>
@@ -18,6 +17,13 @@
 	<BuildDependencies>
             <Dependency>mate-common</Dependency>
             <Dependency>mate-doc-utils</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>mate-file-manager-devel</Dependency>
 	</BuildDependencies>
     </Source>
 
@@ -26,6 +32,13 @@
 	<RuntimeDependencies>
             <Dependency>mate-common</Dependency>
             <Dependency>mate-doc-utils</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>mate-file-manager</Dependency>
 	</RuntimeDependencies>
         <Files>
 	    <Path fileType="data">/usr/share/</Path>

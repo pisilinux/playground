@@ -10,7 +10,6 @@
         </Packager>
         <License>GPLv3.0</License>
         <Icon>mate-utils</Icon>
-        <PartOf>desktop.mate.extras</PartOf>
         <IsA>library</IsA>
         <Summary>MATE utility programs</Summary>
         <Description>The mate-utils package contains a set of small "desk accessory" utility applications for MATE, such as a dictionary, a disk usage analyzer, a screenshot tool and others.</Description>
@@ -19,10 +18,19 @@
 	    <Dependency>desktop-file-utils</Dependency>
             <Dependency>mate-common</Dependency>
 	    <Dependency>gtk2-devel</Dependency>
-	    <Dependency>glib2-devel</Dependency>
 	    <Dependency>libcanberra-devel</Dependency>
             <Dependency>mate-desktop-devel</Dependency>
 	    <Dependency>mate-panel-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>libSM-devel</Dependency>
+            <Dependency>libICE-devel</Dependency>
+            <Dependency>libgtop-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libcanberra-gtk</Dependency>
 	</BuildDependencies>
     </Source>
 
@@ -32,10 +40,19 @@
 	    <Dependency>desktop-file-utils</Dependency>
             <Dependency>mate-common</Dependency>
 	    <Dependency>gtk2</Dependency>
-	    <Dependency>glib2</Dependency>
 	    <Dependency>libcanberra</Dependency>
             <Dependency>mate-desktop</Dependency>
 	    <Dependency>mate-panel</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libSM</Dependency>
+            <Dependency>libICE</Dependency>
+            <Dependency>libgtop</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libcanberra-gtk</Dependency>
 	</RuntimeDependencies>
         <Files>
 	    <Path fileType="data">/usr/share/</Path>

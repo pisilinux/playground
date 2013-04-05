@@ -10,7 +10,6 @@
         </Packager>
         <License>GPLv3.0</License>
         <Icon>mate-screensaver</Icon>
-        <PartOf>desktop.mate.extras</PartOf>
         <IsA>app:gui</IsA>
         <Summary>Replaces xscreensaver, integrating with the MATE desktop.</Summary>
         <Description>mate-screensaver, Mate masaüstü için ekrankoruyucu uygulamasıdır.</Description>
@@ -19,12 +18,17 @@
             <Dependency>gtk2-devel</Dependency>
 	    <Dependency>mate-desktop-devel</Dependency>
 	    <Dependency>libmatekbd-devel</Dependency>
-	    <Dependency>dbus-glib-devel</Dependency>
 	    <Dependency>libX11-devel</Dependency>
 	    <Dependency>libXext-devel</Dependency>
 	    <Dependency>libXrandr-devel</Dependency>
 	    <Dependency>libXxf86misc-devel</Dependency>
 	    <Dependency>libXxf86vm-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>mate-menus-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libxklavier-devel</Dependency>
 	</BuildDependencies>
         <Patches>
             <!--<Patch level="1">mate-screensaver-1.5.1-only_allow_one_instance.patch</Patch>-->
@@ -37,12 +41,17 @@
             <Dependency>gtk2</Dependency>
 	    <Dependency>mate-desktop</Dependency>
 	    <Dependency>libmatekbd</Dependency>
-	    <Dependency>dbus-glib</Dependency>
 	    <Dependency>libX11</Dependency>
 	    <Dependency>libXext</Dependency>
 	    <Dependency>libXrandr</Dependency>
 	    <Dependency>libXxf86misc</Dependency>
 	    <Dependency>libXxf86vm</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>mate-menus</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libxklavier</Dependency>
 	</RuntimeDependencies>
         <Files>
 	    <Path fileType="data">/usr/share/</Path>

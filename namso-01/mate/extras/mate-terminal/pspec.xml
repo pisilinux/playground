@@ -10,14 +10,16 @@
         </Packager>
         <License>GPLv3.0</License>
         <Icon>mate-terminal</Icon>
-        <PartOf>desktop.mate.extras</PartOf>
         <IsA>app:gui</IsA>
         <Summary>MATE terminal emulator application</Summary>
         <Description>mate-terminal, masaüstü için terminal uygulaması.</Description>
         <Archive sha1sum="42ad6eb55dab6f301ad0c696c209f8cb0a8d4814" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-terminal-1.6.0.tar.xz</Archive>
 	<BuildDependencies>
-	    <Dependency>glib2-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
 	    <Dependency>gtk2-devel</Dependency>
+            <Dependency>dconf-devel</Dependency>
+            <Dependency>libICE-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
 	    <Dependency>libglade-devel</Dependency>
 	    <Dependency>vte-devel</Dependency>
 	    <Dependency>desktop-file-utils</Dependency>
@@ -31,8 +33,11 @@
     <Package>
         <Name>mate-terminal</Name>
 	<RuntimeDependencies>
-	    <Dependency>glib2</Dependency>
-	    <Dependency>gtk2</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>dconf</Dependency>
+            <Dependency>libICE</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
 	    <Dependency>libglade</Dependency>
 	    <Dependency>vte</Dependency>
 	    <Dependency>desktop-file-utils</Dependency>

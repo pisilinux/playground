@@ -16,30 +16,37 @@
         <Description>mate-image-viewer, resim görüntüleyicisidir.</Description>
         <Archive sha1sum="3c47ddcb0bf623878ae025286ab4597c266a1b2d" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-image-viewer-1.6.0.tar.xz</Archive>
 	<BuildDependencies>
-	    <Dependency>dbus-glib-devel</Dependency>
-            <Dependency>glib2-devel</Dependency>
 	    <Dependency>gtk2-devel</Dependency>
-	    <Dependency>libglade-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>jpeg-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>exempi-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>mate-desktop-devel</Dependency>
 	    <Dependency>libexif-devel</Dependency>
             <Dependency>libart_lgpl-devel</Dependency>
-	    <Dependency>libxml2-devel</Dependency>
 	    <Dependency>librsvg-devel</Dependency>
-	    <Dependency>mate-doc-utils</Dependency>
 	    <Dependency>lcms2-devel</Dependency>
-	    <Dependency>gsettings-desktop-schemas</Dependency>
 	</BuildDependencies>
     </Source>
 
     <Package>
         <Name>mate-image-viewer</Name>
 	<RuntimeDependencies>
-	    <Dependency>dbus-glib</Dependency>
-            <Dependency>glib2</Dependency>
 	    <Dependency>gtk2</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>jpeg</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>exempi</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>mate-desktop</Dependency>
 	    <Dependency>libglade</Dependency>
 	    <Dependency>libexif</Dependency>
             <Dependency>libart_lgpl</Dependency>
-	    <Dependency>libxml2</Dependency>
 	    <Dependency>librsvg</Dependency>
 	    <Dependency>mate-doc-utils</Dependency>
 	    <Dependency>lcms2</Dependency>

@@ -17,6 +17,9 @@
         <Archive sha1sum="b28675ec6e6ef7caf2d6cde3e90c16d59764ecaa" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-indicator-applet-1.6.0.tar.xz</Archive>
 	<BuildDependencies>
 	    <Dependency>gconf-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>mate-panel-devel</Dependency>
 	    <Dependency>libindicator-devel</Dependency>
 	</BuildDependencies>
 	<Patches>
@@ -28,6 +31,9 @@
         <Name>mate-indicator-applet</Name>
 	<RuntimeDependencies>
 	    <Dependency>gconf</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>mate-panel</Dependency>
 	    <Dependency>libindicator</Dependency>
 	</RuntimeDependencies>
         <Files>

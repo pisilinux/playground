@@ -15,12 +15,10 @@
         <Description>mate-calc, Mate masaüstü için hesap makinesi.</Description>
         <Archive sha1sum="c793118595cd370ccca9875880e0e6760f6c5a08" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-calc-1.6.0.tar.xz</Archive>
 	<BuildDependencies>
-	    <Dependency>glib2-devel</Dependency>
 	    <Dependency>gtk2-devel</Dependency>
-	    <Dependency>freetype-devel</Dependency>
-	    <Dependency>libpng-devel</Dependency>
             <Dependency>gdk-pixbuf-devel</Dependency>
 	    <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
 	    <Dependency>atk-devel</Dependency>
 	</BuildDependencies>
     </Source>
@@ -28,12 +26,10 @@
     <Package>
         <Name>mate-calc</Name>
 	<RuntimeDependencies>
-	    <Dependency>glib2</Dependency>
 	    <Dependency>gtk2</Dependency>
-	    <Dependency>freetype</Dependency>
-	    <Dependency>libpng</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
 	    <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
 	    <Dependency>atk</Dependency>
 	</RuntimeDependencies>
         <Files>

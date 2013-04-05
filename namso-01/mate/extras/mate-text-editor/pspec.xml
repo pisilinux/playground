@@ -10,15 +10,18 @@
         </Packager>
         <License>GPLv2</License>
         <Icon>mate-conf-editor</Icon>
-        <PartOf>desktop.mate.extras</PartOf>
         <IsA>app:gui</IsA>
         <Summary>Mate metin editörü</Summary>
         <Description>mate masaüstü için metin editörü.</Description>
         <Archive sha1sum="47d6ff5655c92baac70719247d22e7aabce56f4f" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-text-editor-1.6.0.tar.xz</Archive>
 	<BuildDependencies>
 	    <Dependency>mate-common</Dependency>
-	    <Dependency>glib2-devel</Dependency>
 	    <Dependency>pango-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>libICE-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
 	    <Dependency>gtk2-devel</Dependency>
 	    <Dependency>libSM-devel</Dependency>
 	    <Dependency>desktop-file-utils</Dependency>
@@ -36,9 +39,13 @@
         <Name>mate-text-editor</Name>
 	<RuntimeDependencies>
 	    <Dependency>mate-common</Dependency>
-	    <Dependency>glib2</Dependency>
 	    <Dependency>pango</Dependency>
 	    <Dependency>gtk2</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>libICE</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
 	    <Dependency>libSM</Dependency>
 	    <Dependency>desktop-file-utils</Dependency>
 	    <Dependency>enchant</Dependency>

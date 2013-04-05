@@ -10,20 +10,31 @@
         </Packager>
         <License>GPLv3.0</License>
         <Icon>mate-file-manager-sendto</Icon>
-        <PartOf>desktop.mate.extras</PartOf>
         <IsA>app:gui</IsA>
         <Summary>caja-sendto is a fork of nautilus-sendto</Summary>
         <Description>mate-file-manager-sendto, Caja extension for sending files to locations.</Description>
         <Archive sha1sum="cf81a12d6d5d90f431d96fd67eed893f472b36f0" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-file-manager-sendto-1.6.0.tar.xz</Archive>
 	<BuildDependencies>
-	    <Dependency>mate-file-manager-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>mate-file-manager-devel</Dependency>
 	</BuildDependencies>
     </Source>
 
     <Package>
         <Name>mate-file-manager-sendto</Name>
 	<RuntimeDependencies>
-	    <Dependency>mate-file-manager</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>mate-file-manager</Dependency>
 	</RuntimeDependencies>
         <Files>
 	    <Path fileType="data">/usr/share/</Path>

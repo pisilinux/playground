@@ -17,6 +17,12 @@
         <Archive sha1sum="e378e26ebe493d3f849771d10930504b8980448e" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-character-map-1.6.0.tar.xz</Archive>
 	<BuildDependencies>
 	    <Dependency>icon-theme-hicolor</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
 	</BuildDependencies>
     </Source>
 
@@ -24,6 +30,12 @@
         <Name>mate-character-map</Name>
 	<RuntimeDependencies>
 	    <Dependency>icon-theme-hicolor</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
 	</RuntimeDependencies>
         <Files>
 	    <Path fileType="data">/usr/share/</Path>

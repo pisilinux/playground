@@ -15,11 +15,7 @@
         <Archive sha1sum="67e2e0e16b179e7737732ca4c4bd524e1f107cd0" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-applets-1.6.0.tar.xz</Archive>
 	<BuildDependencies>
 	    <Dependency>gtk2-devel</Dependency>
-	    <Dependency>glib2-devel</Dependency>
 	    <Dependency>libxklavier-devel</Dependency>
-	    <Dependency>dbus-devel</Dependency>
-	    <Dependency>dbus-glib-devel</Dependency>
-	    <Dependency>libxml2-devel</Dependency>
 	    <Dependency>mate-icon-theme</Dependency>
             <Dependency>libmateweather-devel</Dependency>
 	    <Dependency>libX11-devel</Dependency>
@@ -28,12 +24,14 @@
 	    <Dependency>gstreamer-devel</Dependency>
 	    <Dependency>gst-plugins-base-devel</Dependency>
 	    <Dependency>NetworkManager-devel</Dependency>
-	    <Dependency>polkit-devel</Dependency>
 	    <Dependency>atk-devel</Dependency>
 	    <Dependency>pango-devel</Dependency>
 	    <Dependency>upower-devel</Dependency>
 	    <Dependency>gdk-pixbuf-devel</Dependency>
 	    <Dependency>libmatewnck-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>mate-panel-devel</Dependency>
+            <Dependency>mate-character-map-devel</Dependency>
 	</BuildDependencies>
 	<Patches>
 	    <!--<Patch level="1">e373c2400657386cc9f70bedb76900d45123f855.patch</Patch>
@@ -45,11 +43,7 @@
         <Name>mate-applets</Name>
 	<RuntimeDependencies>
 	    <Dependency>gtk2</Dependency>
-	    <Dependency>glib2</Dependency>
 	    <Dependency>libxklavier</Dependency>
-	    <Dependency>dbus</Dependency>
-	    <Dependency>dbus-glib</Dependency>
-	    <Dependency>libxml2</Dependency>
 	    <Dependency>mate-icon-theme</Dependency>
             <Dependency>libmateweather</Dependency>
 	    <Dependency>libX11</Dependency>
@@ -58,12 +52,14 @@
 	    <Dependency>gstreamer</Dependency>
 	    <Dependency>gst-plugins-base</Dependency>
 	    <Dependency>NetworkManager</Dependency>
-	    <Dependency>polkit</Dependency>
 	    <Dependency>atk</Dependency>
 	    <Dependency>pango</Dependency>
 	    <Dependency>upower</Dependency>
 	    <Dependency>gdk-pixbuf</Dependency>
 	    <Dependency>libmatewnck</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>mate-panel</Dependency>
+            <Dependency>mate-character-map</Dependency>
 	</RuntimeDependencies>
         <Files>
 	    <Path fileType="data">/usr/share/</Path>

@@ -14,7 +14,6 @@
         <Description>mate-notification-daemon is the server implementation of the Mate desktop notification specification.</Description>
 	<Archive sha1sum="9988ac0d63ee8d2b7abd2ab47a8f57ad3d5c4c80" type="tarxz">http://pub.mate-desktop.org/releases/1.6/mate-notification-daemon-1.6.0.tar.xz</Archive>
         <BuildDependencies>
-	    <Dependency>dbus-glib-devel</Dependency>
 	    <Dependency>mate-desktop-devel</Dependency>
 	    <Dependency>libcanberra-devel</Dependency>
 	    <Dependency>desktop-file-utils</Dependency>
@@ -25,8 +24,9 @@
             <Dependency>atk-devel</Dependency>
             <Dependency>gtk2-devel</Dependency>
             <Dependency>pango-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
             <Dependency>libcanberra-gtk</Dependency>
-            <Dependency>freetype-devel</Dependency>
             <Dependency>fontconfig-devel</Dependency>
             <Dependency>gdk-pixbuf-devel</Dependency>
 	 </BuildDependencies>
@@ -35,7 +35,6 @@
     <Package>
         <Name>mate-notification-daemon</Name>
 	 <RuntimeDependencies>
-	    <Dependency>dbus-glib</Dependency>
 	    <Dependency>mate-desktop</Dependency>
 	    <Dependency>libcanberra</Dependency>
 	    <Dependency>desktop-file-utils</Dependency>
@@ -46,6 +45,8 @@
             <Dependency>atk</Dependency>
             <Dependency>gtk2</Dependency>
             <Dependency>pango</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>libnotify</Dependency>
             <Dependency>libcanberra-gtk</Dependency>
             <Dependency>freetype</Dependency>
             <Dependency>fontconfig</Dependency>
