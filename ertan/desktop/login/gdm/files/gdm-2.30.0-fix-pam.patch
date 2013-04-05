@@ -1,0 +1,54 @@
+From 7e829407ca860a0af1eef9934d06d91c67f3d356 Mon Sep 17 00:00:00 2001
+From: Frederic Crozat <fcrozat@mandriva.com>
+Date: Tue, 27 Apr 2010 13:46:36 +0200
+Subject: [PATCH] fix modules called in pam files
+
+---
+ data/gdm           |    9 +++++----
+ data/gdm-autologin |    5 ++++-
+ 2 files changed, 9 insertions(+), 5 deletions(-)
+
+diff --git a/data/gdm b/data/gdm
+index 58c397d..4b33894 100644
+--- a/data/gdm
++++ b/data/gdm
+@@ -1,12 +1,13 @@
+ #%PAM-1.0
+ auth       required    pam_env.so
+-auth       required    pam_succeed_if.so user != root quiet
+-auth       sufficient  pam_succeed_if.so user ingroup nopasswdlogin
+-auth       include     system-auth
++auth       substack    system-auth
++auth       optional    pam_gnome_keyring.so
+ account    required    pam_nologin.so
+ account    include     system-auth
+ password   include     system-auth
+ session    optional    pam_keyinit.so force revoke
+-session    include     system-auth
++session    required    pam_namespace.so
++session    optional    pam_gnome_keyring.so auto_start
+ session    required    pam_loginuid.so
+ session    optional    pam_console.so
++session    include     system-auth
+diff --git a/data/gdm-autologin b/data/gdm-autologin
+index c4e598a..f842963 100644
+--- a/data/gdm-autologin
++++ b/data/gdm-autologin
+@@ -1,10 +1,13 @@
+ #%PAM-1.0
+ auth       required    pam_env.so
+ auth       required    pam_permit.so
++auth       optional    pam_gnome_keyring.so
+ account    required    pam_nologin.so
+ account    include     system-auth
+ password   include     system-auth
+ session    optional    pam_keyinit.so force revoke
+-session    include     system-auth
++session    required    pam_namespace.so
++session    optional    pam_gnome_keyring.so auto_start
+ session    required    pam_loginuid.so
+ session    optional    pam_console.so
++session    include     system-auth
+-- 
+1.7.1
+

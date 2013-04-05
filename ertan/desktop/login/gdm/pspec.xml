@@ -1,51 +1,64 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
-        <Name>gdm3</Name>
-        <Homepage>https://live.gnome.org/GDM</Homepage>
+        <Name>gdm</Name>
+        <Homepage>http://projects.gnome.org/gdm/</Homepage>
         <Packager>
             <Name>Ertan Güven</Name>
-            <Email>ertangvn@gmail.com</Email>
+            <Email>ertan@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
         <IsA>app:gui</IsA>
         <Summary>GNOME display manager</Summary>
         <Description>GDM provides log into different sessions on local or remote machines.</Description>
-        <Archive sha1sum="fc0b8cafd55db4b9931714f239451d08c6887f66" type="tarxz">mirrors://gnome/gdm/3.1/gdm-3.1.2.tar.xz</Archive>
+        <Archive sha1sum="75017d6acfc8e158e0df848629431021b25998a5" type="tarbz2">mirrors://gnome/gdm/2.32/gdm-2.32.1.tar.bz2</Archive>
         <BuildDependencies>
-            <Dependency>gtk3-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>libbonoboui-devel</Dependency>
+            <Dependency>upower-devel</Dependency>
+            <Dependency>gconf-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>gnome-panel-devel</Dependency> <!-- for libpanelapplet -->
+            <Dependency>docbook-xml</Dependency>
             <Dependency>cairo-devel</Dependency>
             <Dependency>pango-devel</Dependency>
-            <Dependency>libXrandr-devel</Dependency>
-            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libbonobo-devel</Dependency>
             <Dependency>fontconfig-devel</Dependency>
-            <Dependency versionFrom="0.6.12">accountsservice-devel</Dependency>
-            <Dependency>libcanberra-devel</Dependency>
-            <Dependency>gconf-devel</Dependency>
-            <Dependency>upower-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libxklavier-devel</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">force-vt7.patch</Patch>
+            <Patch level="1">gdm-2.30.0-fix-pam.patch</Patch>
+            <Patch level="1">gdm-2.31.1-use-polkit-for-settings.patch</Patch>
+            <Patch level="1">gdmsetup.patch</Patch>
+            <Patch level="1">pisilinux-xsession.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
-        <Name>gdm3</Name>
+        <Name>gdm</Name>
         <RuntimeDependencies>
-            <Dependency>gtk3</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libbonoboui</Dependency>
+            <Dependency>upower</Dependency>
+            <Dependency>gconf</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>libcanberra-gtk</Dependency>
+            <Dependency>gnome-panel</Dependency> <!-- for libpanelapplet -->
+            <Dependency>gnome-settings-daemon</Dependency>
+            <Dependency>gnome-session</Dependency>
             <Dependency>cairo</Dependency>
             <Dependency>pango</Dependency>
-            <Dependency>libXrandr</Dependency>
-            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libbonobo</Dependency>
             <Dependency>fontconfig</Dependency>
-            <Dependency versionFrom="0.6.12">accountsservice</Dependency>
-            <Dependency>libcanberra-gtk3</Dependency>
-            <Dependency>libcanberra</Dependency>
-            <Dependency>gconf</Dependency>
-            <Dependency>upower</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libxklavier</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc/dbus-1</Path>
             <Path fileType="config">/etc/gconf</Path>
-            <Path fileType="config">/etc/dconf</Path>
             <Path fileType="config">/etc/X11/gdm</Path>
             <Path fileType="config">/etc/pam.d</Path>
             <Path fileType="executable">/usr/bin</Path>
@@ -59,7 +72,6 @@
             <Path fileType="data">/usr/share/display-managers</Path>
             <Path fileType="data">/usr/share/gdm</Path>
             <Path fileType="data">/usr/share/gnome</Path>
-            <Path fileType="data">/usr/share/gnome-session</Path>
             <Path fileType="data">/usr/share/gnome-2.0</Path>
             <Path fileType="data">/usr/share/icons</Path>
             <Path fileType="data">/usr/share/omf</Path>
@@ -75,26 +87,19 @@
             <AdditionalFile owner="root" permission="0644" target="/usr/share/gdm/BuiltInSessions/default.desktop">default.desktop</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/gdm/BuiltInSessions/custom.desktop">custom.desktop</AdditionalFile>
         </AdditionalFiles>
-    </Package>
-
-    <Package>
-        <Name>gdm3-devel</Name>
-        <Summary>Development headers for gdm3</Summary>
-        <RuntimeDependencies>
-            <Dependency release="current">gdm3</Dependency>
-        </RuntimeDependencies>
-        <Files>
-            <Path fileType="header">/usr/include</Path>
-        </Files>
+        <!-- FIXME: remove comar script -->
+        <Provides>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
     </Package>
 
     <History>
         <Update release="1">
-            <Date>2013-01-28</Date>
-            <Version>3.1.2</Version>
-            <Comment>First release.</Comment>
+            <Date>2013-04-05</Date>
+            <Version>2.32.1</Version>
+            <Comment>Version bump</Comment>
             <Name>Ertan Güven</Name>
-            <Email>ertangvn@gmail.com</Email>
+            <Email>ertan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

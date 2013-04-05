@@ -6,11 +6,9 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.export("LDFLAGS", "%s -lfontconfig" % get.LDFLAGS())
     autotools.autoreconf("-fiv")
     autotools.configure("--disable-static \
                          --enable-authentication-scheme=pam \
@@ -22,12 +20,12 @@ def setup():
                          --with-screenshot-dir=/var/lib/gdm \
                          --with-xevie")
 
-def build(): 
+def build():
     autotools.make()
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    
+
     pisitools.chown("%s/var/lib/gdm" % get.installDIR(), "gdm", "gdm")
 
     for d in ["/var/gdm", "/var/lib/gdm/.gconf*"]:

@@ -1,0 +1,328 @@
+diff -p -up gdm-2.31.1/common/gdm-settings.c.polkit-for-settings gdm-2.31.1/common/gdm-settings.c
+--- gdm-2.31.1/common/gdm-settings.c.polkit-for-settings	2010-05-24 23:58:38.000000000 +0200
++++ gdm-2.31.1/common/gdm-settings.c	2010-05-25 14:09:28.000000000 +0200
+@@ -36,6 +36,7 @@
+ #define DBUS_API_SUBJECT_TO_CHANGE
+ #include <dbus/dbus-glib.h>
+ #include <dbus/dbus-glib-lowlevel.h>
++#include <polkit/polkit.h>
+ 
+ #include "gdm-settings.h"
+ #include "gdm-settings-glue.h"
+@@ -110,6 +111,90 @@ gdm_settings_get_value (GdmSettings *set
+         return res;
+ }
+ 
++static void
++unlock_auth_cb (PolkitAuthority *authority,
++                GAsyncResult *result,
++                DBusGMethodInvocation *context)
++{
++        PolkitAuthorizationResult *auth_result;
++        GError  *error = NULL;
++
++        auth_result = polkit_authority_check_authorization_finish (authority, result, &error);
++
++        if (!auth_result)
++                dbus_g_method_return_error (context, error);
++        else {
++                dbus_g_method_return (context,
++                                      polkit_authorization_result_get_is_authorized (auth_result));
++        }
++    
++        if (auth_result)
++                g_object_unref (auth_result);
++        if (error)
++                g_error_free (error);
++}
++
++gboolean
++gdm_settings_unlock (GdmSettings *settings,
++                     DBusGMethodInvocation *context)
++{
++        polkit_authority_check_authorization (polkit_authority_get (),
++                                              polkit_system_bus_name_new (dbus_g_method_get_sender (context)),
++                                              "org.gnome.displaymanager.settings.write",
++                                              NULL,
++                                              POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION,
++                                              NULL,
++                                              (GAsyncReadyCallback) unlock_auth_cb,
++                                              context);
++}
++
++typedef struct
++{
++        GdmSettings *settings;
++        DBusGMethodInvocation *context;
++        gchar *key, *value;
++} SetValueData;
++
++static void
++set_value_auth_cb (PolkitAuthority *authority,
++                   GAsyncResult *result,
++                   SetValueData *data)
++{
++        PolkitAuthorizationResult *auth_result;
++        GError  *error = NULL;
++
++        auth_result = polkit_authority_check_authorization_finish (authority, result, &error);
++
++        if (!auth_result)
++                dbus_g_method_return_error (data->context, error);
++        else {
++                if (polkit_authorization_result_get_is_authorized (auth_result)) {
++                        gboolean result;
++                    
++                        result = gdm_settings_backend_set_value (data->settings->priv->backend,
++                                                                 data->key,
++                                                                 data->value,
++                                                                 &error);
++                        if (result)
++                                dbus_g_method_return (data->context);
++                        else
++                                dbus_g_method_return_error (data->context, error);
++                }
++                else {
++                        error = g_error_new (DBUS_GERROR_REMOTE_EXCEPTION, 0, "Not authorized");
++                        dbus_g_method_return_error (data->context, error);
++                }
++        }
++    
++        if (auth_result)
++                g_object_unref (auth_result);
++        if (error)
++                g_error_free (error);
++        g_free (data->key);
++        g_free (data->value);
++        g_free (data);
++}
++
+ /*
+ dbus-send --system --print-reply --dest=org.gnome.DisplayManager /org/gnome/DisplayManager/Settings org.gnome.DisplayManager.Settings.SetValue string:"xdmcp/Enable" string:"false"
+ */
+@@ -118,26 +203,30 @@ gboolean
+ gdm_settings_set_value (GdmSettings *settings,
+                         const char  *key,
+                         const char  *value,
+-                        GError     **error)
++                        DBusGMethodInvocation *context)
+ {
+-        GError  *local_error;
+-        gboolean res;
+-
++        SetValueData *data;
++    
+         g_return_val_if_fail (GDM_IS_SETTINGS (settings), FALSE);
+         g_return_val_if_fail (key != NULL, FALSE);
+ 
+         g_debug ("Setting value %s", key);
+-
+-        local_error = NULL;
+-        res = gdm_settings_backend_set_value (settings->priv->backend,
+-                                              key,
+-                                              value,
+-                                              &local_error);
+-        if (! res) {
+-                g_propagate_error (error, local_error);
+-        }
+-
+-        return res;
++    
++        /* Authorize with PolicyKit */
++        data = g_malloc (sizeof(SetValueData));
++        data->settings = settings;
++        data->context = context;
++        data->key = g_strdup(key);
++        data->value = g_strdup(value);    
++        polkit_authority_check_authorization (polkit_authority_get (),
++                                              polkit_system_bus_name_new (dbus_g_method_get_sender (context)),
++                                              "org.gnome.displaymanager.settings.write",
++                                              NULL,
++                                              POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION,
++                                              NULL,
++                                              (GAsyncReadyCallback) set_value_auth_cb,
++                                              data);
++        return TRUE;
+ }
+ 
+ static gboolean
+diff -p -up gdm-2.31.1/common/gdm-settings.h.polkit-for-settings gdm-2.31.1/common/gdm-settings.h
+--- gdm-2.31.1/common/gdm-settings.h.polkit-for-settings	2010-05-24 23:58:38.000000000 +0200
++++ gdm-2.31.1/common/gdm-settings.h	2010-05-25 14:09:28.000000000 +0200
+@@ -23,6 +23,7 @@
+ #define __GDM_SETTINGS_H
+ 
+ #include <glib-object.h>
++#include <dbus/dbus-glib.h>
+ 
+ G_BEGIN_DECLS
+ 
+@@ -70,10 +71,12 @@ gboolean            gdm_settings_get_val
+                                                                  const char  *key,
+                                                                  char       **value,
+                                                                  GError     **error);
++gboolean            gdm_settings_unlock                         (GdmSettings *settings,
++                                                                 DBusGMethodInvocation *context);
+ gboolean            gdm_settings_set_value                      (GdmSettings *settings,
+                                                                  const char  *key,
+                                                                  const char  *value,
+-                                                                 GError     **error);
++                                                                 DBusGMethodInvocation *context);
+ 
+ G_END_DECLS
+ 
+diff -p -up gdm-2.31.1/common/gdm-settings.xml.polkit-for-settings gdm-2.31.1/common/gdm-settings.xml
+--- gdm-2.31.1/common/gdm-settings.xml.polkit-for-settings	2010-05-24 23:58:38.000000000 +0200
++++ gdm-2.31.1/common/gdm-settings.xml	2010-05-25 14:09:28.000000000 +0200
+@@ -5,7 +5,12 @@
+       <arg name="key" direction="in" type="s"/>
+       <arg name="value" direction="out" type="s"/>
+     </method>
++    <method name="Unlock">
++      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
++      <arg name="is_unlocked" direction="out" type="b"/>
++    </method>
+     <method name="SetValue">
++      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
+       <arg name="key" direction="in" type="s"/>
+       <arg name="value" direction="in" type="s"/>
+     </method>
+diff -p -up gdm-2.31.1/configure.ac.polkit-for-settings gdm-2.31.1/configure.ac
+--- gdm-2.31.1/configure.ac.polkit-for-settings	2010-05-25 14:09:28.000000000 +0200
++++ gdm-2.31.1/configure.ac	2010-05-25 14:13:37.000000000 +0200
+@@ -40,6 +40,7 @@ dnl - Dependencies
+ dnl ---------------------------------------------------------------------------
+ 
+ DBUS_GLIB_REQUIRED_VERSION=0.74
++POLKIT_GOBJECT_REQUIRED_VERSION=0.92
+ GLIB_REQUIRED_VERSION=2.22.0
+ GTK_REQUIRED_VERSION=2.20.0
+ PANGO_REQUIRED_VERSION=1.3.0
+@@ -60,6 +61,7 @@ AC_SUBST(GTHREAD_LIBS)
+ 
+ PKG_CHECK_MODULES(COMMON,
+         dbus-glib-1 >= $DBUS_GLIB_REQUIRED_VERSION
++        polkit-gobject-1 >= $POLKIT_GOBJECT_REQUIRED_VERSION
+         gobject-2.0 >= $GLIB_REQUIRED_VERSION
+         gio-2.0 >= $GLIB_REQUIRED_VERSION
+ )
+@@ -68,6 +70,7 @@ AC_SUBST(COMMON_LIBS)
+ 
+ PKG_CHECK_MODULES(DAEMON,
+         dbus-glib-1 >= $DBUS_GLIB_REQUIRED_VERSION
++        polkit-gobject-1 >= $POLKIT_GOBJECT_REQUIRED_VERSION
+         gobject-2.0 >= $GLIB_REQUIRED_VERSION
+         gio-2.0 >= $GLIB_REQUIRED_VERSION
+ )
+diff -p -up gdm-2.31.1/daemon/Makefile.am.polkit-for-settings gdm-2.31.1/daemon/Makefile.am
+--- gdm-2.31.1/daemon/Makefile.am.polkit-for-settings	2010-05-25 14:09:28.000000000 +0200
++++ gdm-2.31.1/daemon/Makefile.am	2010-05-25 14:09:28.000000000 +0200
+@@ -229,10 +229,10 @@ gdm_xdmcp_chooser_slave_SOURCES = 		\
+ 	$(NULL)
+ 
+ gdm_xdmcp_chooser_slave_LDADD = 		\
++	$(top_builddir)/common/libgdmcommon.la	\
+ 	$(XLIB_LIBS)				\
+ 	$(DAEMON_LIBS)				\
+ 	$(EXTRA_DAEMON_LIBS)                    \
+-	$(top_builddir)/common/libgdmcommon.la	\
+ 	$(NULL)
+ 
+ gdm_session_worker_SOURCES = 			\
+diff -p -up gdm-2.31.1/data/gdm.conf.in.polkit-for-settings gdm-2.31.1/data/gdm.conf.in
+--- gdm-2.31.1/data/gdm.conf.in.polkit-for-settings	2010-05-24 23:58:38.000000000 +0200
++++ gdm-2.31.1/data/gdm.conf.in	2010-05-25 14:09:28.000000000 +0200
+@@ -34,8 +34,6 @@
+     <deny send_destination="org.gnome.DisplayManager"
+           send_interface="org.gnome.DisplayManager.LocalDisplayFactory"/>
+     <deny send_destination="org.gnome.DisplayManager"
+-          send_interface="org.gnome.DisplayManager.Settings"/>
+-    <deny send_destination="org.gnome.DisplayManager"
+           send_interface="org.gnome.DisplayManager.Slave"/>
+     <deny send_destination="org.gnome.DisplayManager"
+           send_interface="org.gnome.DisplayManager.Session"/>
+@@ -44,6 +42,10 @@
+     <allow send_destination="org.gnome.DisplayManager"
+            send_interface="org.freedesktop.DBus.Introspectable"/>
+ 
++    <!-- Controlled by PolicyKit -->
++    <allow send_destination="org.gnome.DisplayManager"
++           send_interface="org.gnome.DisplayManager.Settings"/>
++
+     <allow send_destination="org.gnome.DisplayManager"
+            send_interface="org.gnome.DisplayManager.Display"
+            send_member="GetId"/>
+diff -p -up gdm-2.31.1/data/gdm.policy.in.polkit-for-settings gdm-2.31.1/data/gdm.policy.in
+--- gdm-2.31.1/data/gdm.policy.in.polkit-for-settings	2010-05-25 14:09:28.000000000 +0200
++++ gdm-2.31.1/data/gdm.policy.in	2010-05-25 14:09:28.000000000 +0200
+@@ -0,0 +1,18 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE policyconfig PUBLIC
++ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
++ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
++<policyconfig>
++  <vendor>The GNOME Project</vendor>
++  <vendor_url>http://www.gnome.org/</vendor_url>
++  <icon_name>gdm</icon_name>
++
++  <action id="org.gnome.displaymanager.settings.write">
++    <_description>Change login screen configuration</_description>
++    <_message>Privileges are required to change the login screen configuration.</_message>
++    <defaults>
++      <allow_inactive>no</allow_inactive>
++      <allow_active>auth_admin_keep</allow_active>
++    </defaults>
++  </action>
++</policyconfig>
+diff -p -up gdm-2.31.1/data/Makefile.am.polkit-for-settings gdm-2.31.1/data/Makefile.am
+--- gdm-2.31.1/data/Makefile.am.polkit-for-settings	2010-05-25 14:09:28.000000000 +0200
++++ gdm-2.31.1/data/Makefile.am	2010-05-25 14:09:28.000000000 +0200
+@@ -47,6 +47,8 @@ schemasdir = $(gdmconfdir)
+ schemas_in_files = gdm.schemas.in
+ schemas_DATA = $(schemas_in_files:.schemas.in=.schemas)
+ 
++@INTLTOOL_POLICY_RULE@
++
+ gdm.schemas.in: $(srcdir)/gdm.schemas.in.in
+ 	sed	-e 's,[@]GDMPREFETCHCMD[@],$(GDMPREFETCHCMD),g' \
+ 		-e 's,[@]GDM_CUSTOM_CONF[@],$(GDM_CUSTOM_CONF),g' \
+@@ -79,11 +81,18 @@ gdm.schemas.in: $(srcdir)/gdm.schemas.in
+ localealiasdir = $(datadir)/gdm
+ localealias_DATA = locale.alias
+ 
++polkitdir = $(datadir)/polkit-1/actions
++polkit_in_files = gdm.policy.in
++polkit_DATA = $(polkit_in_files:.policy.in=.policy)
++check:
++	$(POLKIT_POLICY_FILE_VALIDATE) $(polkit_DATA)
++
+ EXTRA_DIST =			\
+ 	$(schemas_in_files)	\
+ 	$(schemas_DATA)		\
+ 	$(dbusconf_in_files)	\
+ 	$(localealias_DATA)	\
++	$(polkit_in_files)	\
+ 	gdm.schemas.in.in	\
+ 	gdm.conf-custom.in 	\
+ 	Xsession.in 		\
+@@ -106,7 +115,8 @@ CLEANFILES = 				\
+ 	$(NULL)
+ 
+ DISTCLEANFILES =			\
+-	$(dbusconf_DATA)			\
++	$(dbusconf_DATA)		\
++	$(polkit_DATA)	 		\
+ 	gdm.schemas			\
+ 	$(NULL)
+ 
+diff -p -up gdm-2.31.1/po/POTFILES.in.polkit-for-settings gdm-2.31.1/po/POTFILES.in
+--- gdm-2.31.1/po/POTFILES.in.polkit-for-settings	2010-05-24 23:58:38.000000000 +0200
++++ gdm-2.31.1/po/POTFILES.in	2010-05-25 14:09:28.000000000 +0200
+@@ -49,6 +49,7 @@ daemon/session-worker-main.c
+ daemon/simple-slave-main.c
+ daemon/test-session.c
+ daemon/xdmcp-chooser-slave-main.c
++data/gdm.policy.in
+ data/gdm.schemas.in.in
+ data/greeter-autostart/at-spi-registryd-wrapper.desktop.in.in
+ data/greeter-autostart/gdm-simple-greeter.desktop.in.in

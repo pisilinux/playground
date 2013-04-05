@@ -1,0 +1,27 @@
+diff -ur gdm-2.32.0.orig//data/Xsession.in gdm-2.32.0/data/Xsession.in
+--- gdm-2.32.0.orig//data/Xsession.in	2010-08-28 00:45:29.000000000 +0300
++++ gdm-2.32.0/data/Xsession.in	2010-10-20 01:12:04.896000007 +0300
+@@ -89,8 +89,8 @@
+ sysmodmap=/etc/X11/Xmodmap 
+ sysxkbmap=/etc/X11/Xkbmap
+ 
+-rh6sysresources=/etc/X11/xinit/Xresources 
+-rh6sysmodmap=/etc/X11/xinit/Xmodmap 
++rh6sysresources=/etc/X11/Xresources 
++rh6sysmodmap=/etc/X11/Xmodmap 
+ 
+ # merge in defaults
+ if [ -f "$rh6sysresources" ]; then
+@@ -154,9 +154,9 @@
+ fi
+ 
+ # run all system xinitrc shell scripts.
+-if [ -d /etc/X11/xinit/xinitrc.d ]; then
+-    for i in /etc/X11/xinit/xinitrc.d/* ; do
+-        if [ -x "$i" -a ! -d "$i" ]; then
++if [ -d /etc/X11/Xsession.d ]; then
++    for i in /etc/X11/Xsession.d/* ; do
++        if [ ! -d "$i" ]; then
+ 	    . "$i"
+         fi
+     done
