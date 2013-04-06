@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>prelink</Name>
+        <Homepage>http://people.redhat.com/jakub/prelink</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <IsA>app:console</IsA>
+        <Summary>An ELF Prelinking Utility</Summary>
+        <Description>Prelink is intended to speed up a system by reducing the time a program needs to begin.</Description>
+        <Archive sha1sum="cbc25991fffe7c3d8c824ad033369a455aadda90" type="tarbz2">http://svn.mandriva.com/svn/packages/cooker/prelink/current/SOURCES/prelink-20120628.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>elfutils</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">shared.patch</Patch>
+            <Patch level="1">prelink-arm-fix.patch</Patch>
+            <Patch level="1">prelink-0.4.6-init.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>prelink</Name>
+        <RuntimeDependencies>
+            <Dependency>elfutils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/etc/cron.daily</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/var/lib</Path>
+            <Path fileType="data">/var/log</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/prelink.conf">prelink.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/prelink">prelink.confd</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/cron.daily/prelink.cron">prelink.cron</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2011-02-09</Date>
+            <Version>0.0_20120628</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
