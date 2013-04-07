@@ -1,0 +1,13 @@
+Index: anjuta-3.6.1/configure.ac
+===================================================================
+--- anjuta-3.6.1.orig/configure.ac
++++ anjuta-3.6.1/configure.ac
+@@ -80,7 +80,7 @@ fi
+ AC_LANG([C])
+ AC_LANG([C++])
+ AC_PROG_CXX
+-if test "x$ac_ct_CXX" = "x"
++if test "x$CXX" = "x"
+ then
+   AC_MSG_ERROR([C++ Compiler required to compile Anjuta])
+ fi
