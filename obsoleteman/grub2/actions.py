@@ -46,7 +46,7 @@ def install():
     shelltools.copy("ascii.pf2","%s/usr/share/grub/themes/pisilinux" % get.installDIR())
 
     # Do not install auto generated dejavu* fonts
-    fonts=["DejaVuSans-10.pf2" , "DejaVuSans-12.pf2" , "DejaVuSans-14.pf2" , "DejaVuSans-16.pf2" , "DejaVuSans-Bold-14.pf2"]
+    fonts=["DejaVuSans-10.pf2" , "DejaVuSans-12.pf2" , "DejaVuSans-14.pf2" , "DejaVuSans-16.pf2" , "DejaVuSans-Mono-14.pf2", "DejaVuSans-Bold-14.pf2"]
     for font in fonts:
         shelltools.copy(font,"%s/usr/share/grub/themes/pisilinux" % get.installDIR())
 
