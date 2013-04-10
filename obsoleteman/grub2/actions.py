@@ -21,10 +21,10 @@ def setup():
                          --htmldir='/usr/share/doc/${PF}/html' ")
 
 def build():
+    #make-dist for creating all updated translation files
     autotools.make("dist")
     autotools.make()
     
-
 def install():
     # Install unicode.pf2 using downloaded font source. 
     shelltools.system("./grub-mkfont -o unicode.pf2 unifont.pcf.gz")
@@ -36,18 +36,20 @@ def install():
     # Insall our theme
     pisitools.insinto("/usr/share/grub/themes/","themes/pisilinux")
     
-    shelltools.system("./grub-mkfont -o %s/usr/share/grub/themes/pisilinux/DejaVuSans-10.pf2  -s 10 /usr/share/fonts/dejavu/DejaVuSans.ttf" % get.installDIR()) 
-    shelltools.system("./grub-mkfont -o %s/usr/share/grub/themes/pisilinux/DejaVuSans-12.pf2  -s 12 /usr/share/fonts/dejavu/DejaVuSans.ttf" % get.installDIR()) 
-    shelltools.system("./grub-mkfont -o %s/usr/share/grub/themes/pisilinux/DejaVuSans-14.pf2  -s 14 /usr/share/fonts/dejavu/DejaVuSans.ttf" % get.installDIR())
-    shelltools.system("./grub-mkfont -o %s/usr/share/grub/themes/pisilinux/DejaVuSans-16.pf2  -s 16 /usr/share/fonts/dejavu/DejaVuSans.ttf" % get.installDIR()) 
-    shelltools.system("./grub-mkfont -o %s/usr/share/grub/themes/pisilinux/DejaVuSans-Bold-14.pf2   -s 14 /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf" % get.installDIR()) 
+    #remove -r 0x0-0x7F entries to fix ugly fonts or find a suitable range parameter -r ***
+    shelltools.system("./grub-mkfont -o DejaVuSans-10.pf2 -r 0x0-0x7F -s 10 /usr/share/fonts/dejavu/DejaVuSans.ttf")
+    shelltools.system("./grub-mkfont -o DejaVuSans-12.pf2 -r 0x0-0x7F -s 12 /usr/share/fonts/dejavu/DejaVuSans.ttf")
+    shelltools.system("./grub-mkfont -o DejaVuSans-14.pf2 -r 0x0-0x7F -s 14 /usr/share/fonts/dejavu/DejaVuSans.ttf")
+    shelltools.system("./grub-mkfont -o DejaVuSans-16.pf2 -r 0x0-0x7F -s 16 /usr/share/fonts/dejavu/DejaVuSans.ttf")
+    shelltools.system("./grub-mkfont -o DejaVuSans-Bold-14.pf2 -r 0x0-0x7F -s 14 /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf")
+    shelltools.system("./grub-mkfont -o DejaVuSans-Mono-14.pf2 -r 0x0-0x7F -s 14 /usr/share/fonts/dejavu/DejaVuSansMono.ttf")
     shelltools.copy("ascii.pf2","%s/usr/share/grub/themes/pisilinux" % get.installDIR())
 
-    #TODO
-    # Try to install Dejavu fonts also into /usr/share/grub/fonts to use in another themes
     # Do not install auto generated dejavu* fonts
-    #fonts=["DejaVuSans-10.pf2" , "DejaVuSans-12.pf2" , "DejaVuSans-14.pf2" , "DejaVuSans-16.pf2" , "DejaVuSans-Bold-14.pf2"]
-    
+    fonts=["DejaVuSans-10.pf2" , "DejaVuSans-12.pf2" , "DejaVuSans-14.pf2" , "DejaVuSans-16.pf2" , "DejaVuSans-Bold-14.pf2"]
+    for font in fonts:
+        shelltools.copy(font,"%s/usr/share/grub/themes/pisilinux" % get.installDIR())
+
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
     
     #Remove default starfiled theme.
