@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>lightdm</Name>
         <Homepage>https://launchpad.net/lightdm</Homepage>
         <Packager>
             <Name>Ertan Güven</Name>
-            <Email>guven.ertan@gmail.com</Email>
+            <Email>ertan@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
         <IsA>app:gui</IsA>
@@ -54,6 +54,10 @@
             <Path fileType="data">/usr/share/gir-1.0</Path>
             <Path fileType="data">/usr/share/lightdm-example-gtk-greeter</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm">lightdm.pam</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/lightdm/xsession">xsession</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <Package>
@@ -91,14 +95,14 @@
             <Version>1.5.0</Version>
             <Comment>First release.</Comment>
             <Name>Ertan Güven</Name>
-            <Email>guven.ertan@gmail.com</Email>
+            <Email>ertan@pisilinux.org</Email>
         </Update>
         <Update release="1">
             <Date>2013-01-28</Date>
             <Version>1.2.0</Version>
             <Comment>First release.</Comment>
             <Name>Ertan Güven</Name>
-            <Email>guven.ertan@gmail.com</Email>
+            <Email>ertan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

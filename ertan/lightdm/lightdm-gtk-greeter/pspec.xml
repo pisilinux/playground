@@ -1,18 +1,18 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
-        <Name>lightdm-kde</Name>
+        <Name>lightdm-gtk-greeter</Name>
         <Homepage>http://www.sharpley.org.uk</Homepage>
         <Packager>
             <Name>Ertan Güven</Name>
-            <Email>ertangvn@gmail.com</Email>
+            <Email>ertan@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
         <IsA>app:gui</IsA>
         <Summary>Login screen using the LightDM framework.</Summary>
         <Description>Login screen using the LightDM framework.</Description>
-        <Archive sha1sum="5192c57603f3dcb244f729739c7459d15c3fb8a8" type="tarbz2">http://download.kde.org/unstable/lightdm-kde/src/lightdm-kde-0.3.1.tar.bz2</Archive>
+        <Archive sha1sum="ce52ca00d996a12c465ae52b8a56cb05a1a397af" type="targz">https://launchpad.net/lightdm-gtk-greeter/1.6/1.5.1/+download/lightdm-gtk-greeter-1.5.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>qt-devel</Dependency>
             <Dependency>kdelibs-devel</Dependency>
@@ -21,31 +21,27 @@
     </Source>
 
     <Package>
-        <Name>lightdm-kde</Name>
+        <Name>lightdm-gtk-greeter</Name>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
             <Dependency>kdelibs</Dependency>
             <Dependency>lightdm</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="config">/etc</Path>
-            <Path fileType="executable">/usr/sbin</Path>
-            <Path fileType="library">/usr/lib/kde4</Path>
-            <Path fileType="localedata">/usr/share/locale</Path>
-            <Path fileType="man">/usr/share/kde4</Path>
-            <Path fileType="doc">/usr/share/polkit-1</Path>
-            <Path fileType="doc">/usr/share/xgreeters/</Path>
-            <Path fileType="data">/usr/share/dbus-1</Path>
+			<Path fileType="executable">/usr/sbin/lightdm-gtk-greeter</Path>
+			<Path fileType="localedata">/usr/share/locale</Path>
+			<Path fileType="config">/etc</Path>
+			<Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
 
     <History>
         <Update release="1">
             <Date>2013-02-03</Date>
-            <Version>0.3.1</Version>
+            <Version>1.5.1</Version>
             <Comment>First release</Comment>
             <Name>Ertan Güven</Name>
-            <Email>ertangvn@gmail.com</Email>
+            <Email>ertan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>
