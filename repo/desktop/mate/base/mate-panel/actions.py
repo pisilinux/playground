@@ -19,7 +19,7 @@ def setup():
                          --libexecdir=/usr/lib/mate-panel \
                          --enable-introspection  \
                          --enable-network-manager  \
-                         --disable-deprecation-flags \
+                         --disable-schemas-compile \
                          --disable-scrollkeeper")
 
 def build():

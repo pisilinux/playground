@@ -10,14 +10,13 @@ from pisi.actionsapi import shelltools
 
 WorkDir= "./gcstar"
 
-def setup():
-    shelltools.system("./install")
-    
-def build():
-    shelltools.system("./install --text\
-				 --noclean \
-				 --nomenu \
-				 --prefix=/usr")
+def fixPermissions():
+    import os
+    for root, dirs, files in os.walk("%s/opt" % get.installDIR()):
+        for d in dirs:
+            shelltools.system("/bin/chmod 0755 %s/%s" % (root, d))
+        for f in files:
+            shelltools.system("/bin/chmod 0644 %s/%s" % (root, f))
 
 def install():
     pisitools.insinto("/usr/", "bin")

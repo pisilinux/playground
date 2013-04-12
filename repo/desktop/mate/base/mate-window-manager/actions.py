@@ -15,9 +15,10 @@ def setup():
 				    --sysconfdir=/etc \
 				    --localstatedir=/var \
 				    --disable-static \
-				    --disable-schemas-install \
-				    --with-mateconf-source='xml::/etc/mateconf/mateconf.xml.defaults' \
-				    --enable-sm")
+				    --disable-schemas-compile \
+				    --disable-scrollkeeper \
+				    --with-x \
+				    --with-gtk=2.0")
 
 def build():
     autotools.make()
