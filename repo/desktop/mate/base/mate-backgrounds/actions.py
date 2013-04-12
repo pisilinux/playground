@@ -14,7 +14,6 @@ def setup():
     shelltools.system("./autogen.sh --prefix=/usr \
 				    --sysconfdir=/etc \
 				    --localstatedir=/var")
-    autotools.configure()
 
 def build():
     autotools.make()
@@ -22,6 +21,4 @@ def build():
 def install():
     autotools.install()
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "NEWS", "README")
-    
-    pisitools.removeDir("/usr/share/backgrounds/mate/desktop")
 
