@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>alsa-firmware</Name>
+        <Homepage>http://www.alsa-project.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>GPLv2+</License>
+        <License>LGPLv2+</License>
+        <License>BSD</License>
+        <IsA>data</IsA>
+        <Summary>Firmware for several ALSA-supported sound cards</Summary>
+        <Description>alsa-firmware contains the firmware binaries for a number of sound cards supported by the ALSA project.</Description>
+        <Archive sha1sum="91782f07e492f58ce4746a76a66914497fc654fe" type="tarbz2">ftp://ftp.alsa-project.org/pub/firmware/alsa-firmware-1.0.27.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>alsa-firmware</Name>
+        <Files>
+            <Path fileType="data">/usr/share/alsa/firmware</Path>
+            <Path fileType="data">/lib/firmware</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2013-04-13</Date>
+            <Version>1.0.27</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>      
+        <Update release="1">
+            <Date>2012-10-29</Date>
+            <Version>1.0.25.20121013</Version>
+            <Comment>First release</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
