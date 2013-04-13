@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>alsa-lib</Name>
+        <Homepage>http://www.alsa-project.org/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <IsA>app:console</IsA>
+        <Summary>The Advanced Linux Sound Architecture (ALSA) library</Summary>
+        <Description>alsa-lib provides ALSA runtime libraries to simplify application programming and provide higher level functionality as well as support for the older OSS API, providing binary compatibility for most OSS programs.</Description>
+        <Archive sha1sum="a110aa9230fc93c4bef776d255df2fac9ffd9e7a" type="tarbz2">ftp://ftp.alsa-project.org/pub/lib/alsa-lib-1.0.27.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>alsa-lib</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/alsa</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>alsa-lib-devel</Name>
+        <Summary>Development files for alsa-lib</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">alsa-lib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/pkgconfig</Path>
+            <Path fileType="header">/usr/include/sys</Path>
+            <Path fileType="header">/usr/include/alsa</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="man">/usr/share/man/man3</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>alsa-lib-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for alsa-lib</Summary>
+        <BuildType>emul32</BuildType>
+        <RuntimeDependencies>
+            <Dependency release="current">alsa-lib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2013-04-13</Date>
+            <Version>1.0.27</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>      
+        <Update release="1">
+            <Date>2012-10-13</Date>
+            <Version>1.0.26.20121013</Version>
+            <Comment>First release</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

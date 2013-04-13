@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>alsa-utils</Name>
+        <Homepage>http://www.alsa-project.org/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Advanced Linux Sound Architecture (ALSA) utilities</Summary>
+        <Description>alsa-utils contains command line utilities for the Advanced Linux Sound Architecture (ALSA).</Description>
+        <Archive sha1sum="574774475b1e6e4fbd0cf4a91b7905d9dec45d0a" type="tarbz2">ftp://ftp.alsa-project.org/pub/utils/alsa-utils-1.0.27.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xmlto</Dependency>
+            <Dependency>libsamplerate-devel</Dependency>
+            <Dependency>alsa-lib-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>alsa-utils</Name>
+        <RuntimeDependencies>
+            <Dependency>dialog</Dependency>
+            <Dependency>libsamplerate</Dependency>
+            <Dependency>alsa-lib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/alsa</Path>
+            <Path fileType="data">/lib/udev/rules.d</Path>
+            <Path fileType="data">/lib/systemd/system</Path>
+            <Path fileType="data">/usr/share/sounds</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/var/lib/alsa</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/alsa/alsactl.conf">alsactl.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/alsa/01beep.conf">01beep.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/alsaunmute">alsaunmute</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man1/alsaunmute.1">alsaunmute.1</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="service.py" name="alsactl">System.Service</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2013-04-13</Date>
+            <Version>1.0.27</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>       
+        <Update release="1">
+            <Date>2012-10-13</Date>
+            <Version>1.0.26.20121013</Version>
+            <Comment>First release</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
