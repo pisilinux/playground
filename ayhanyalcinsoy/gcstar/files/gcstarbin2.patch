@@ -1,0 +1,17 @@
+diff -u gcstar/bin/gcstar gcstar.new/bin/gcstar
+--- gcstar/bin/gcstar	2009-11-11 22:36:46.000000000 +0100
++++ gcstar.new/bin/gcstar	2009-11-11 22:47:19.000000000 +0100
+@@ -44,9 +44,9 @@
+ use POSIX qw(locale_h);
+ 
+ $ENV{GCS_BIN_DIR} = $RealBin;
+-($ENV{GCS_LIB_DIR} = $ENV{GCS_BIN_DIR}) =~ s/bin\/?$/lib\/gcstar/;
++($ENV{GCS_LIB_DIR} = $ENV{GCS_BIN_DIR}) =~ s/bin\/?$/share\/gcstar\/lib/;
+ ($ENV{GCS_SHARE_DIR} = $ENV{GCS_BIN_DIR}) =~ s/bin\/?$/share\/gcstar/;
+-use lib File::Spec->canonpath("$RealBin/../lib/gcstar");
++use lib File::Spec->canonpath("$RealBin/../share/gcstar/lib");
+ if (exists $ENV{PAR_TEMP})
+ {
+     unshift @INC, "$RealBin/../lib/gcstar";
+Seulement dans gcstar.new/bin: .gcstar.swp
+Seulement dans gcstar/bin: .svn 

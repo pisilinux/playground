@@ -46,13 +46,19 @@
 	    <Dependency>perl-Sub-Exporter</Dependency>
 	    <Dependency>perl-Test-Fatal</Dependency>
 	</BuildDependencies>
+        <Patches>
+            <Patch level="1">gcstarbin1.patch</Patch>
+            <Patch level="1">desktop.patch</Patch>
+			<Patch level="1">5.patch</Patch>
+			<Patch level="1">share.patch</Patch>
+        </Patches>
     </Source>
     
     <Package>
         <Name>gcstar</Name>
         <RuntimeDependencies>
             <Dependency>perl</Dependency>
-            <Dependency>perl-gtk2</Dependency>
+            <Dependency>perl-Gtk2</Dependency>
 	    <Dependency>perl-Date-Calc</Dependency>
 	    <Dependency>perl-HTTP-Cookies</Dependency>
 	    <Dependency>perl-DateTime-Format-Strptime</Dependency>
@@ -87,13 +93,39 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-	    <Path fileType="library">/usr/lib/gcstar</Path>
+			<Path fileType="library">/usr/lib/gcstar</Path>
             <Path fileType="data">/usr/share/gcstar</Path>
             <Path fileType="data">/usr/share/icons</Path>
             <Path fileType="man">/usr/share/man</Path>
-	    <Path fileType="data">/usr/share/doc</Path>
+			<Path fileType="data">/usr/share/doc</Path>
+			<Path fileType="library">/usr/lib/lib</Path>
             <Path fileType="data">/usr/share/applications</Path>
-        </Files>
+			<Path fileType="data">/usr/lib/GCBookmarks.pm</Path>
+			<Path fileType="data">/usr/lib/GCBorrowings.pm</Path>
+			<Path fileType="data">/usr/lib/GCCommandLine.pm</Path>
+			<Path fileType="data">/usr/lib/GCData.pm</Path>
+			<Path fileType="data">/usr/lib/GCDialogs.pm</Path>
+			<Path fileType="data">/usr/lib/GCDisplay.pm</Path>
+			<Path fileType="data">/usr/lib/GCExport.pm</Path>
+			<Path fileType="data">/usr/lib/GCExportImport.pm</Path>
+			<Path fileType="data">/usr/lib/GCExtract.pm</Path>
+			<Path fileType="data">/usr/lib/GCGenres.pm</Path>
+			<Path fileType="data">/usr/lib/GCImport.pm</Path>
+			<Path fileType="data">/usr/lib/GCLang.pm</Path>
+			<Path fileType="data">/usr/lib/GCMail.pm</Path>
+			<Path fileType="data">/usr/lib/GCMainWindow.pm</Path>
+			<Path fileType="data">/usr/lib/GCMenu.pm</Path>
+			<Path fileType="data">/usr/lib/GCModel.pm</Path>
+			<Path fileType="data">/usr/lib/GCOptions.pm</Path>
+			<Path fileType="data">/usr/lib/GCPanel.pm</Path>
+			<Path fileType="data">/usr/lib/GCPlugins.pm</Path>
+			<Path fileType="data">/usr/lib/GCSplash.pm</Path>
+			<Path fileType="data">/usr/lib/GCStats.pm</Path>
+			<Path fileType="data">/usr/lib/GCStyle.pm</Path>
+			<Path fileType="data">/usr/lib/GCUpdater.pm</Path>
+			<Path fileType="data">/usr/lib/GCUtils.pm</Path>
+			<Path fileType="data">/usr/lib/GCWidgets.pm</Path>
+	    </Files>
     </Package>
     
     <History>
@@ -101,9 +133,8 @@
             <Date>2013-03-19</Date>
             <Version>1.7.0.1</Version>
             <Comment>First release</Comment>
-            <Name>Ayhan YALÇINSOY</Name>
+            <Name>Ayhan YALÃ‡INSOY</Name>
             <Email>ayhanyalcinsoy@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>
-
