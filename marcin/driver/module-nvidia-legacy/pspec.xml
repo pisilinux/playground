@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>module-nvidia-legacy</Name>
+        <Homepage>http://www.nvidia.com</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>NVIDIA</License>
+        <IsA>driver</IsA>
+        <Summary>NVIDIA drivers, legacy branch</Summary>
+        <Description>NVIDIA graphics drivers provide optimized 2D/3D performance.</Description>
+        <Archive sha1sum="94104b3ce0d537667a551bd1d41c8990404693fb" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86/304.88/NVIDIA-Linux-x86-304.88.run</Archive>
+        <Archive sha1sum="98c84dab0cfcf7c86c93e0c30c9900b360caaddb" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86_64/304.88/NVIDIA-Linux-x86_64-304.88.run</Archive>
+        <BuildDependencies>
+            <Dependency>kernel-module-headers</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>module-nvidia-legacy</Name>
+        <Summary>Kernel module for NVIDIA driver 304.xx releases</Summary>
+        <RuntimeDependencies>
+            <Dependency>kernel</Dependency>
+            <Dependency version="current">module-nvidia-legacy-userspace</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>module-nvidia-legacy-userspace</Name>
+        <Summary>Userspace documentation, tools, udev and modprobe rules for the kernel driver nvidia-legacy</Summary>
+        <Files>
+            <Path fileType="data">/etc/modprobe.d</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modprobe.d/nvidia-legacy.conf">modprobe.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+
+    <Package>
+        <Name>xorg-video-nvidia-legacy</Name>
+        <PartOf>x11.driver</PartOf>
+        <RuntimeDependencies>
+            <Dependency version="current">module-nvidia-legacy</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>xorg-server</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-04-20</Date>
+            <Version>304.88</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
