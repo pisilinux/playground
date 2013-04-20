@@ -1,0 +1,8 @@
+--- run.sh.orig	2011-10-19 14:08:39.000000000 +0300
++++ run.sh	2011-10-19 15:05:38.193000018 +0300
+@@ -7,4 +7,4 @@
+   configDir=$XDG_CONFIG_HOME
+ fi
+ 
+-java -DconfigDir=$configDir -Djava.util.prefs.userRoot=$configDir/android-notifier-desktop -Djava.net.preferIPv4Stack=true -client -Xms8m -Xmx32m -jar android-notifier-desktop.jar $1
++java -DconfigDir=$configDir -Djava.util.prefs.userRoot=$configDir/android-notifier-desktop -Djava.net.preferIPv4Stack=true -client -Xms8m -Xmx32m -jar /opt/android-notifier-desktop/android-notifier-desktop.jar $1
