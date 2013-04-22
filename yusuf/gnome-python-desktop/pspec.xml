@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gnome-python-desktop</Name>
+        <Homepage>http://www.gnome.org</Homepage>
+        <Packager>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>LGPLv2.1</License>
+        <Summary>Python bindings for the GNOME desktop environment</Summary>
+        <Description>Python bindings for the GNOME desktop environment</Description>
+        <Archive sha1sum="dae15fe9fea61ecbde5af513c94de2ff1a66369c" type="tarbz2">http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.32/gnome-python-desktop-2.32.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>pygtk</Dependency>
+            <Dependency>libgnome-keyring</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>python-gnome-keyring</Name>
+        <RuntimeDependencies>
+            <Dependency>libgnome-keyring</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/python2.6/site-packages/gtk-2.0/gnomekeyring.so</Path>
+            <Path fileType="data">/usr/lib/pkgconfig/gnome-python-desktop-2.0.pc</Path>
+            <Path fileType="data">/usr/share/pygtk/2.0/defs/gnomekeyring.defs</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2013-04-22</Date>
+            <Version>2.32.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
