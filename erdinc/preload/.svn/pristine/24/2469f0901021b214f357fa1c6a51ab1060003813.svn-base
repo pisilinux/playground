@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>preload</Name>
+        <Homepage>http://cekirdek.pardus.org.tr/~caglar</Homepage>
+        <Packager>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@pardus.org.tr</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>app:console</IsA>
+        <Summary>Preload for faster startup times, based on Novell's work</Summary>
+        <Summary xml:lang="tr">Başlangıç süresini hızlandırmak amacıyla program önyükleme</Summary>
+        <Description>Preload for faster startup times, based on Novell's work</Description>
+        <Description xml:lang="tr">Programların başlamalarını hızlandırmak amacıyla, henüz göreve çağrılmamışken; programın belleğe önceden yüklenerek göreve hazır halde tutulması,-Novell'in çalışmaları temelinde geliştirilmiştir.  </Description>
+        <Archive sha1sum="a6eccff1869b9e11449227b53ec1d975d521053e" type="targz">http://cekirdek.pardus.org.tr/~caglar/preload/preload-0.2.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>preload</Name>
+        <RuntimeDependency>
+            <Dependency>schedutils</Dependency>
+        </RuntimeDependency>
+        <Files>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="data">/usr/share/autostart</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2005-10-01</Date>
+            <Version>0.2</Version>
+            <Comment>Version bump with minor bugfix</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@pardus.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2005-10-31</Date>
+            <Version>0.1</Version>
+            <Comment>First release</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@pardus.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

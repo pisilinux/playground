@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>preload</Name>
+        <Homepage>http://pkgs.fedoraproject.org/repo/pkgs/preload/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Preload for faster startup times, based on Novell's work</Summary>
+        <Description>Preload for faster startup times, based on Novell's work</Description>
+        <Archive sha1sum="2313a7f9c8713fbc0efaf649b29dbe36ed0b3945" type="targz">http://pkgs.fedoraproject.org/repo/pkgs/preload/preload-0.6.4.tar.gz/10786287b55afd3a2b433b4f898809f4/preload-0.6.4.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">preload-0.6.3-prcsys.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>preload</Name>
+        <RuntimeDependency>
+            <Dependency>schedutils</Dependency>
+        </RuntimeDependency>
+        <Files>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="config">/etc/logrotate.d/preload</Path>
+            <Path fileType="config">/etc/preload.conf</Path>
+            <Path fileType="config">/etc/sysconfig/preload</Path>
+            <Path fileType="config">/etc/rc.d/init.d/preload</Path>
+            <Path fileType="var">/var/lib/preload/preload.state</Path>
+            <Path fileType="var">/var/log</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-04-22</Date>
+            <Version>0.6.4</Version>
+            <Comment>First release</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
