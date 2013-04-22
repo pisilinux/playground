@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pychess</Name>
+        <Homepage>http://code.google.com/p/pychess</Homepage>
+        <Packager>
+            <Name>Sezai Yeniay</Name>
+            <Email>sezaiyeniay@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <Icon>pychess</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>GTK chess client</Summary>
+        <Description>PyChess is a GTK chess client.</Description>
+        <Archive sha1sum="9b338467b2b18ed5bdf856d14ef981a03fb179a0" type="targz">https://pychess.googlecode.com/files/pychess-0.12beta1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python-pygobject-devel</Dependency>
+            <Dependency>pysqlite</Dependency>
+            <Dependency>python-cairo-devel</Dependency>
+            <Dependency>gnome-python</Dependency>
+            <Dependency>gst-python-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pychess</Name>
+        <RuntimeDependencies>
+            <Dependency>python-pygobject</Dependency>
+            <Dependency>pysqlite</Dependency>
+            <Dependency>python-cairo</Dependency>
+            <Dependency>gnome-python</Dependency>
+            <Dependency>gst-python</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/gtksourceview-1.0</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/pychess</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-04-21</Date>
+            <Version>0.12.1</Version>
+            <Comment>First release</Comment>
+            <Name>Sezai Yeniay</Name>
+            <Email>sezaiyeniay@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
