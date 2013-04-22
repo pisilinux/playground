@@ -14,7 +14,6 @@
         <Description>Python bindings for the GNOME desktop environment</Description>
         <Archive sha1sum="dae15fe9fea61ecbde5af513c94de2ff1a66369c" type="tarbz2">http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.32/gnome-python-desktop-2.32.0.tar.bz2</Archive>
         <BuildDependencies>
-            <Dependency>pygtk</Dependency>
             <Dependency>libgnome-keyring</Dependency>
         </BuildDependencies>
     </Source>
@@ -25,9 +24,8 @@
             <Dependency>libgnome-keyring</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/python2.6/site-packages/gtk-2.0/gnomekeyring.so</Path>
-            <Path fileType="data">/usr/lib/pkgconfig/gnome-python-desktop-2.0.pc</Path>
-            <Path fileType="data">/usr/share/pygtk/2.0/defs/gnomekeyring.defs</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     
