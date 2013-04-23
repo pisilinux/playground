@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>anthy</Name>
+        <Homepage>http://sourceforge.jp/projects/anthy/</Homepage>
+        <Packager>
+            <Name>Sezai Yeniay</Name>
+            <Email>sezaiyeniay@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app</IsA>
+        <Summary>Japanese text input support</Summary>
+        <Description>Hiragana text to Kana Kanji mixed text Japanese input method.</Description>
+        <Archive sha1sum="dab83374da9e954b3f15ce4035c45e83fe922674" type="targz">http://iij.dl.sourceforge.jp/anthy/1248/anthy-3200d.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>anthy</Name>
+        <Files>
+        <Path fileType="config">/etc</Path>
+        <Path fileType="executable">/usr/bin</Path>
+        <Path fileType="library">/usr/lib</Path>
+        <Path fileType="data">/usr/share</Path>
+        <Path fileType="data">/usr/include</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
+        <Path fileType="doc">/usr/share/anthy</Path>
+</Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2012-07-29</Date>
+            <Version>3200</Version>
+            <Comment>First release</Comment>
+            <Name>Sezai Yeniay</Name>
+            <Email>sezaiyeniay@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
