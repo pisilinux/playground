@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sagasu</Name>
+        <Homepage>http://perso.b2b2c.ca/sarrazip/dev/sagasu.html</Homepage>
+        <Packager>
+            <Name>Sezai Yeniay</Name>
+            <Email>sezaiyeniay@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>sagasu</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Search word</Summary>
+        <Description>GNOME tool to find strings in a set of files</Description>
+        <Archive sha1sum="756f1cfff199a3f830712db315fb8c08e5b7b9f0" type="targz">http://perso.b2b2c.ca/sarrazip/dev/sagasu-2.0.10.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libgnomeui</Dependency>
+            <Dependency>libgnomeui-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">desktop.patch</Patch>
+            <Patch level="1">terminal.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>sagasu</Name>
+        <RuntimeDependencies>
+            <Dependency>libgnomeui</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/gnome</Path>
+            <Path fileType="data">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/sagasu</Path>
+            <Path fileType="data">/usr/share/sounds</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-04-23</Date>
+            <Version>2.0.10</Version>
+            <Comment>First release.</Comment>
+            <Name>Sezai Yeniay</Name>
+            <Email>sezaiyeniay@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

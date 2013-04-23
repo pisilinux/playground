@@ -1,0 +1,19 @@
+diff -Naur sagasu-2.0.10.orig/src/sagasu.desktop.in sagasu-2.0.10/src/sagasu.desktop.in
+--- sagasu-2.0.10.orig/src/sagasu.desktop.in	2010-06-15 05:21:15.000000000 +0300
++++ sagasu-2.0.10/src/sagasu.desktop.in	2011-02-16 22:54:08.996000002 +0200
+@@ -2,11 +2,14 @@
+ Name=@PACKAGE_FULL_NAME_EN@
+ Name[fr]=@PACKAGE_FULL_NAME_FR@
+ Name[cs]=Sagasu
++Name[tr]=sagasu
++GenericName[tr]=Sözcük arama
+ Categories=X-Red-Hat-Base;@PACKAGE_CATEGORIES@
+ Comment=@PACKAGE_DESC_EN@
+ Comment[fr]=@PACKAGE_DESC_FR@
++Comment[tr]=Dosya grupları içerisinde sözcük araması yapmayı sağlayan bir GNOME uygulaması
+ Comment[cs]=Nástroj GNOME pro hledání řetězců v souborech
+ Exec=@PACKAGE@
+-Icon=@PACKAGE@.png
++Icon=sagasu
+ Terminal=0
+ Type=Application

@@ -1,0 +1,12 @@
+diff -Naur sagasu-2.0.10.orig/src/SagasuApp.cpp sagasu-2.0.10/src/SagasuApp.cpp
+--- sagasu-2.0.10.orig/src/SagasuApp.cpp	2010-05-31 03:11:49.000000000 +0300
++++ sagasu-2.0.10/src/SagasuApp.cpp	2011-04-22 11:17:55.907000036 +0300
+@@ -400,7 +400,7 @@
+     result_notebook(NULL),
+     next_notebook_page_num(1),
+     default_file_patterns("*.c *.cc *.C *.cpp *.cxx *.h"),
+-    default_editor_command("gnome-terminal -e \"vi +%n '%f'\""),
++    default_editor_command("xdg-terminal -e \"vi +%n '%f'\""),
+     input_channel(NULL),
+     input_fd(-1),
+     search_pid(0),
