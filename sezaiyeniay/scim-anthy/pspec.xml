@@ -12,7 +12,7 @@
         <IsA>app</IsA>
         <Summary>Japanese for SCIM</Summary>
         <Description>Japanese input method module for SCIM.</Description>
-        <Archive sha1sum="1429cf202f5cdcfc4733220acbe27dd9edb75db8" type="targz">http://sourceforge.jp/projects/scim-imengine/downloads/37309/scim-anthy-1.2.7.tar.gz</Archive>
+        <Archive sha1sum="1429cf202f5cdcfc4733220acbe27dd9edb75db8" type="targz">http://pkgs.fedoraproject.org/repo/pkgs/scim-anthy/scim-anthy-1.2.7.tar.gz/8d06bfd46839c771401b9f176be8818f/scim-anthy-1.2.7.tar.gz</Archive>
         <BuildDependencies>
           <Dependency>anthy</Dependency>
           <Dependency>scim-core</Dependency>
@@ -20,15 +20,20 @@
     </Source>
 
     <Package>
-        <Name>anthy</Name>
+        <Name>scim-anthy</Name>
         <Files>
-        <Path fileType="all">/</Path>
+        <Path fileType="library">/usr/lib</Path>
+        <Path fileType="data">/usr/share</Path>
+        <Path fileType="data">/usr/include</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
+        <Path fileType="doc">/usr/share/locale</Path>
+        <Path fileType="doc">/usr/share/scim</Path>
         </Files>
     </Package>
 
     <History>
         <Update release="1">
-            <Date>2012-07-29</Date>
+            <Date>2013-04-25</Date>
             <Version>1.2.7</Version>
             <Comment>First release</Comment>
             <Name>Sezai Yeniay</Name>
