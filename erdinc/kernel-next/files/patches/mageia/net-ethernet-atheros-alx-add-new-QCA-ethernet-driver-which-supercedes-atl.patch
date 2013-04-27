@@ -97,17 +97,10 @@ Signed-off-by: Luis R. Rodriguez <mcgrof@frijolero.org>
  ATM
  M:	Chas Williams <chas@cmf.nrl.navy.mil>
  L:	linux-atm-general@lists.sourceforge.net (moderated for non-subscribers)
---- a/drivers/net/ethernet/atheros/Kconfig
-+++ b/drivers/net/ethernet/atheros/Kconfig
-@@ -56,15 +56,55 @@ config ATL1E
- 	  will be called atl1e.
- 
- config ATL1C
--	tristate "Atheros L1C Gigabit Ethernet support (EXPERIMENTAL)"
-+	tristate "Atheros L1C Gigabit Ethernet support (DEPRECATED)"
- 	depends on PCI && EXPERIMENTAL
- 	select CRC32
- 	select NET_CORE
+diff -Nurp a/drivers/net/ethernet/atheros/Kconfig b/drivers/net/ethernet/atheros/Kconfig
+--- a/drivers/net/ethernet/atheros/Kconfig	2013-04-22 00:38:45.000000000 +0300
++++ b/drivers/net/ethernet/atheros/Kconfig	2013-04-26 15:42:42.212764288 +0300
+@@ -63,8 +63,48 @@ config ATL1C
  	select MII
  	---help---
  	  This driver supports the Atheros L1C gigabit ethernet adapter.
@@ -156,8 +149,9 @@ Signed-off-by: Luis R. Rodriguez <mcgrof@frijolero.org>
 +	  will be called alx.
 +
  endif # NET_VENDOR_ATHEROS
---- a/drivers/net/ethernet/atheros/Makefile
-+++ b/drivers/net/ethernet/atheros/Makefile
+diff -Nurp a/drivers/net/ethernet/atheros/Makefile b/drivers/net/ethernet/atheros/Makefile
+--- a/drivers/net/ethernet/atheros/Makefile	2013-04-22 00:38:45.000000000 +0300
++++ b/drivers/net/ethernet/atheros/Makefile	2013-04-26 15:43:42.612762197 +0300
 @@ -6,3 +6,4 @@ obj-$(CONFIG_ATL1) += atlx/
  obj-$(CONFIG_ATL2) += atlx/
  obj-$(CONFIG_ATL1E) += atl1e/
