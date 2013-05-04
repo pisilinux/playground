@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gtksourceviewmm</Name>
+        <Homepage>http://ftp.gnome.org/pub/GNOME/sources/gtksourceviewmm/</Homepage>
+        <Packager>
+	    <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <Summary>A C++ wrapper for gtksourceview3</Summary>
+        <Description>gtksourceviewmm is a C++ wrapper for the gtksourceview widget library.</Description>
+        <Archive sha1sum="17d5daf33d2b6bc21c48c5c730abaae70e027566" type="tarxz">http://ftp.gnome.org/pub/GNOME/sources/gtksourceviewmm/2.10/gtksourceviewmm-2.10.3.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>atkmm-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>glibmm-devel</Dependency>
+	    <Dependency>gobject-introspection-devel</Dependency>
+	    <Dependency>goocanvas-devel</Dependency>
+	    <Dependency>gdk-pixbuf-devel</Dependency>
+	    <Dependency>gtksourceview-devel</Dependency>
+	    <Dependency>pango-devel</Dependency>
+	    <Dependency>pangomm-devel</Dependency>	    
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gtksourceviewmm</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>atkmm</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>glibmm</Dependency>
+	    <Dependency>gobject-introspection</Dependency>
+	    <Dependency>goocanvas</Dependency>
+	    <Dependency>gdk-pixbuf</Dependency>
+	    <Dependency>gtksourceview</Dependency>
+	    <Dependency>pango</Dependency>
+	    <Dependency>pangomm</Dependency>
+        </RuntimeDependencies>
+        <Files>            
+	    <Path fileType="library">/usr/lib/libgtksourceviewmm-2.0.so*</Path>	    
+	    <Path fileType="header">/usr/lib/gtksourceviewmm-2.0</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>gtksourceviewmm-devel</Name>
+	<Summary>gtksourceviewmm devel files</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">gtksourceviewmm</Dependency>            
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+	    <Path fileType="library">/usr/lib/pkgconfig/gtksourceviewmm-2.0.pc</Path>	    	    
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>gtksourceviewmm-doc</Name>
+	<Summary>gtksourceviewmm API documentation</Summary>
+	<IsA>data:doc</IsA>
+        <RuntimeDependencies>
+            <Dependency release="current">gtksourceviewmm</Dependency>            
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="doc">/usr/share/devhelp</Path>	    
+        </Files>
+    </Package>
+
+
+    <History>        
+        <Update release="1">
+            <Date>2013-05-04</Date>
+            <Version>2.10.3</Version>
+            <Comment>First release</Comment>
+	    <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
