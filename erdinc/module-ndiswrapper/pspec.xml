@@ -17,9 +17,9 @@
         <BuildDependencies>
             <Dependency>kernel-module-headers</Dependency>
         </BuildDependencies>
-        <!--<Patches>
-            <Patch>makefile.patch</Patch>
-        </Patches>-->
+        <Patches>
+            <Patch level="1">ndiswrapper-1.58-add_taint.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -46,6 +46,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2013-05-07</Date>
+            <Version>1.58</Version>
+            <Comment>build for 3.9 kernel</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>  
         <Update release="2">
             <Date>2013-03-30</Date>
             <Version>1.58</Version>
