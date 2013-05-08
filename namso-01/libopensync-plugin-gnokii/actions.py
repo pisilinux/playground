@@ -10,14 +10,17 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-	shelltools.makedirs("build")
-	shelltools.cd("build")
-	cmaketools.make("..")
+    shelltools.makedirs("build")
+    shelltools.cd("build")
+    cmaketools.configure(sourceDir="..")
+
 
 def build():
+    shelltools.cd("build")
     cmaketools.make()
 
 def install():
+    shelltools.cd("build")
     cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.dodoc("COPYING")
+    #pisitools.dodoc("COPYING")
