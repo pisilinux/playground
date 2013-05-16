@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cnijfilter-mp520</Name>
+        <Homepage>http://software.canon-europe.com</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <!--License>Canon-EULA</License-->
+        <IsA>driver</IsA>
+        <Summary>Canon IJ printer driver for PIXMA MP520 printer</Summary>
+        <Description>This driver supports Canon PIXMA MP520 printers.</Description>
+        <Archive sha1sum="c162d5958f8e71d51e9beb6fa727d34f2401d48f" type="binary">http://files.canon-europe.com/files/soft28477/software/28477.tgz</Archive>
+        <BuildDependencies>
+            <Dependency>rpm2targz</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cnijfilter-mp520</Name>
+        <BuildType>32bit</BuildType>
+        <RuntimeDependencies>
+            <Dependency>cnijfilter</Dependency>
+            <Dependency>libpng</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/cups</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-05-16</Date>
+            <Version>2.80</Version>
+            <Comment>First release.</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

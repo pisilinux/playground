@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cnijfilter-ip1800</Name>
+        <Homepage>http://software.canon-europe.com</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <!--License>Canon-EULA</License-->
+        <IsA>driver</IsA>
+        <Summary>Canon IJ printer driver for PIXMA IP1800 printer</Summary>
+        <Description>This driver supports Canon PIXMA IP1800 printers.</Description>
+        <Archive sha1sum="45402e0d3c808e30083f6b417a16c32d3e6f5290" type="binary">http://files.canon-europe.com/files/soft27213/software/27213.tgz</Archive>
+        <BuildDependencies>
+            <Dependency>rpm2targz</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cnijfilter-ip1800</Name>
+        <BuildType>32bit</BuildType>
+        <RuntimeDependencies>
+            <Dependency>cnijfilter</Dependency>
+            <Dependency>libpng</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/cups</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-05-16</Date>
+            <Version>2.70</Version>
+            <Comment>First release.</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
