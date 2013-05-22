@@ -10,6 +10,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
+    pisitools.dosed("linux/Makefile.top", r"run/ppp", "run")
     # Fix pppoe and pppol2tp build problems
     shelltools.unlink("include/linux/if_pppol2tp.h")
 
@@ -32,9 +33,9 @@ def install():
     pisitools.removeDir("/var/log")
 
     # Create peers directory
-#    pisitools.dodir("/run/ppp")
     pisitools.dodir("/etc/ppp/peers")
 
     pisitools.dodoc("Changes*", "README*", "FAQ")
 
     pisitools.removeDir("var")
+    pisitools.removeDir("run")
