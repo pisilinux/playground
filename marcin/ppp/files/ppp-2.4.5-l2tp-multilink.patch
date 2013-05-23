@@ -1,0 +1,10 @@
+diff -up ppp-2.4.5/pppd/plugins/pppol2tp/Makefile.linux.l2tp-multilink ppp-2.4.5/pppd/plugins/pppol2tp/Makefile.linux
+--- ppp-2.4.5/pppd/plugins/pppol2tp/Makefile.linux.l2tp-multilink	2012-05-19 22:27:43.554642987 +0200
++++ ppp-2.4.5/pppd/plugins/pppol2tp/Makefile.linux	2012-05-19 22:28:08.807407341 +0200
+@@ -1,5 +1,5 @@
+ #CC	= gcc
+-COPTS	= -O2 -g
++COPTS	= -DHAVE_MULTILINK -O2 -g
+ CFLAGS	= $(COPTS) -I. -I../.. -I../../../include -fPIC
+ LDFLAGS	= -shared
+ INSTALL	= install

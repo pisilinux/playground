@@ -1,0 +1,124 @@
+diff -up ppp-2.4.5/pppd/ether.c.inc.eth ppp-2.4.5/pppd/ether.c.inc
+--- ppp-2.4.5/pppd/ether.c.inc.eth	2011-06-01 10:28:35.356139063 +0200
++++ ppp-2.4.5/pppd/ether.c.inc	2011-06-01 11:20:37.876897352 +0200
+@@ -0,0 +1,46 @@
++#define PREF_ETH   "eth"
++#define PREF_EM    "em"
++
++static char *dev_file = "/proc/self/net/dev";
++
++/*
++ * get_first_ethernet - return the name of the first ethernet-style
++ * interface on this system.
++ */
++char *
++get_first_ethernet()
++{
++  FILE *f;
++  char buf[255], *dv, *smc;
++  char pci[16];
++
++  memset(pci, 0, sizeof(pci));
++  if ((f = fopen(dev_file, "r")) != NULL)
++  {
++    // go through network dev file
++    while (fgets (buf, sizeof(buf), f) != NULL)
++    {
++      // the line describes interface
++      if ((smc = strchr(buf, ':')) != NULL)
++      {
++        // trim white characters
++        for (dv=buf, *smc=0; *dv <= ' '; dv++) ;
++        // is "eth" (originial ethernet name) or "em" (ethernet on board)
++        if (!strncmp(dv, PREF_ETH, strlen(PREF_ETH)) ||
++            !strncmp(dv, PREF_EM, strlen(PREF_EM)))
++        {
++          return strdup(dv);
++        }
++        // remember the first pci NIC-card
++        if (strlen(pci) == 0 && dv[0] == 'p' && isdigit(dv[1]))
++        {
++          strcpy(pci, dv);
++        }
++      }
++    }
++    fclose(f);
++  }
++  // return pci NIC-card or nil if no if name
++  return strlen(pci) > 0 ? strdup(pci) : 0L;
++}
++
+diff -up ppp-2.4.5/pppd/plugins/rp-pppoe/pppoe-discovery.c.eth ppp-2.4.5/pppd/plugins/rp-pppoe/pppoe-discovery.c
+--- ppp-2.4.5/pppd/plugins/rp-pppoe/pppoe-discovery.c.eth	2011-06-01 09:39:13.099343548 +0200
++++ ppp-2.4.5/pppd/plugins/rp-pppoe/pppoe-discovery.c	2011-06-01 11:41:02.188252304 +0200
+@@ -47,6 +47,8 @@
+ #include <net/if_arp.h>
+ #endif
+ 
++#include "../../ether.c.inc"
++
+ char *xstrdup(const char *s);
+ void usage(void);
+ 
+@@ -686,7 +688,7 @@ int main(int argc, char *argv[])
+ 
+     /* default interface name */
+     if (!conn->ifName)
+-	conn->ifName = strdup("eth0");
++	conn->ifName = get_first_ethernet();
+ 
+     conn->discoverySocket = -1;
+     conn->sessionSocket = -1;
+diff -up ppp-2.4.5/pppd/sys-linux.c.eth ppp-2.4.5/pppd/sys-linux.c
+--- ppp-2.4.5/pppd/sys-linux.c.eth	2011-06-01 09:39:13.074343397 +0200
++++ ppp-2.4.5/pppd/sys-linux.c	2011-06-01 11:50:13.736565685 +0200
+@@ -144,6 +144,8 @@
+ #include <sys/locks.h>
+ #endif
+ 
++#include "ether.c.inc"
++
+ #ifdef INET6
+ #ifndef _LINUX_IN6_H
+ /*
+@@ -1869,16 +1871,6 @@ get_if_hwaddr(u_char *addr, char *name)
+ 	return ret;
+ }
+ 
+-/*
+- * get_first_ethernet - return the name of the first ethernet-style
+- * interface on this system.
+- */
+-char *
+-get_first_ethernet()
+-{
+-	return "eth0";
+-}
+-
+ /********************************************************************
+  *
+  * Return user specified netmask, modified by any mask we might determine
+@@ -2783,6 +2775,7 @@ ether_to_eui64(eui64_t *p_eui64)
+     struct ifreq ifr;
+     int skfd;
+     const unsigned char *ptr;
++    char warn_msg[80];
+ 
+     skfd = socket_fd(PF_INET6, SOCK_DGRAM, 0);
+     if(skfd == -1)
+@@ -2791,11 +2784,13 @@ ether_to_eui64(eui64_t *p_eui64)
+         return 0;
+     }
+ 
+-    strcpy(ifr.ifr_name, "eth0");
++    strcpy(ifr.ifr_name, get_first_ethernet());
+     if(ioctl(skfd, SIOCGIFHWADDR, &ifr) < 0)
+     {
+         close(skfd);
+-        warn("could not obtain hardware address for eth0");
++        snprintf(warn_msg, sizeof(warn_msg),
++          "could not obtain hardware address for %s", ifr.ifr_name);
++        warn(warn_msg);
+         return 0;
+     }
+     close(skfd);

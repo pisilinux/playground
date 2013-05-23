@@ -1,0 +1,12 @@
+diff -up ppp-2.4.5/pppd/utils.c.lock ppp-2.4.5/pppd/utils.c
+--- ppp-2.4.5/pppd/utils.c.lock	2011-05-30 15:30:36.432371849 +0200
++++ ppp-2.4.5/pppd/utils.c	2011-05-30 15:30:48.575495854 +0200
+@@ -859,7 +859,7 @@ complete_read(int fd, void *buf, size_t 
+ /* Procedures for locking the serial device using a lock file. */
+ #ifndef LOCK_DIR
+ #ifdef __linux__
+-#define LOCK_DIR	"/var/lock"
++#define LOCK_DIR	"/var/lock/ppp"
+ #else
+ #ifdef SVR4
+ #define LOCK_DIR	"/var/spool/locks"
