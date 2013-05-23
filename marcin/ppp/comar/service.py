@@ -16,7 +16,7 @@ MSG_BACKEND_WARNING = _({
 @synchronized
 def start():
     if not os.path.isdir("/run/ppp"): os.makedirs("/run/ppp")
-    if not.os.path.isfile("/run/ppp/resolv.conf"): shutil.copy2("/etc/resolv.conf", "/run/ppp")
+    if not os.path.isfile("/run/ppp/resolv.conf"): shutil.copy2("/etc/resolv.conf", "/run/ppp")
 
 @synchronized
 def stop():
