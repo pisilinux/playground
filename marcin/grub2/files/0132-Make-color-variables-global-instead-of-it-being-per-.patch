@@ -1,0 +1,547 @@
+From 6f069a71e2664086c5c4d662014d5c43e484da97 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 21 Jan 2013 17:53:41 +0100
+Subject: [PATCH 132/364] 	Make color variables global instead of it
+ being per-terminal.
+
+---
+ ChangeLog                         |  6 +++---
+ docs/grub.texi                    | 33 +++++++++++++++++++++++++++++++++
+ grub-core/kern/term.c             |  4 ++++
+ grub-core/normal/color.c          |  9 ++-------
+ grub-core/normal/menu_text.c      | 24 +++++++++++++++---------
+ grub-core/term/arc/console.c      |  2 --
+ grub-core/term/efi/console.c      |  9 ++++-----
+ grub-core/term/emu/console.c      |  4 ++--
+ grub-core/term/gfxterm.c          |  8 +++-----
+ grub-core/term/i386/pc/console.c  |  9 ++++-----
+ grub-core/term/i386/pc/vga_text.c | 10 ++++------
+ grub-core/term/ieee1275/console.c |  2 --
+ grub-core/term/morse.c            |  2 --
+ grub-core/term/serial.c           |  2 --
+ grub-core/term/spkmodem.c         |  2 --
+ grub-core/term/terminfo.c         |  8 ++++----
+ include/grub/term.h               | 26 ++++----------------------
+ 17 files changed, 82 insertions(+), 78 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 35267f5..32b891a 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,11 +1,11 @@
+ 2013-01-21  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+-	* grub-core/commands/ls.c (grub_ls_print_devices): Add missing
+-	asterisk.
++	Make color variables global instead of it being per-terminal.
+ 
+ 2013-01-21  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+-	Make color variables global instead of it being per-terminal.
++	* grub-core/commands/ls.c (grub_ls_print_devices): Add missing
++	asterisk.
+ 
+ 2013-01-21  Colin Watson  <cjwatson@ubuntu.com>
+ 
+diff --git a/docs/grub.texi b/docs/grub.texi
+index b177111..9941b47 100644
+--- a/docs/grub.texi
++++ b/docs/grub.texi
+@@ -2776,6 +2776,33 @@ those colors.  Each color must be a name from the following list:
+ 
+ The default is @samp{white/black}.
+ 
++The color support support varies from terminal to terminal.
++
++@samp{morse} has no color support at all.
++
++@samp{mda_text} color support is limited to highlighting by
++black/white reversal.
++
++@samp{console} on ARC and IEEE1275, @samp{serial_*} and
++@samp{spkmodem} are governed by terminfo and support
++only 8 colors if in modes @samp{vt100-color}, @samp{arc}
++(default for console on ARC), @samp{ieee1275} (default
++for console on IEEE1275). When in mode @samp{vt100}
++then the color support is limited to highlighting by black/white
++reversal. When in mode @samp{dumb} there is no color support.
++
++@samp{console} on EMU supports 8 colors.
++
++When console supports no colors this setting is ignored.
++When console supports 8 colors, then the colors from the
++second half of the previous list are mapped to the
++matching colors of first half.
++
++@samp{console} on EFI and BIOS and @samp{vga_text} support all 16 colors.
++
++@samp{gfxterm} supports all 16 colors and would be theoretically extendable
++to support whole rgb24 palette but currently there is no compelling reason
++to go beyond the current 16 colors.
+ 
+ @node debug
+ @subsection debug
+@@ -4355,6 +4382,8 @@ AT keyboard support allows keyboard layout remapping and support for keys not
+ available through firmware. It isn't needed for normal operation except
+ baremetal ports.
+ 
++Speaker allows morse and spkmodem communication.
++
+ USB support provides benefits similar to ATA (for USB disks) or AT (for USB
+ keyboards). In addition it allows USBserial.
+ 
+@@ -4376,6 +4405,7 @@ and mips-qemu_mips can use only memory up to first hole.
+ @item network            @tab yes (*) @tab no       @tab no           @tab no
+ @item ATA/AHCI           @tab yes     @tab yes      @tab yes          @tab yes
+ @item AT keyboard        @tab yes     @tab yes      @tab yes          @tab yes
++@item Speaker            @tab yes     @tab yes      @tab yes          @tab yes
+ @item USB                @tab yes     @tab yes      @tab yes          @tab yes
+ @item chainloader        @tab local   @tab yes      @tab yes          @tab no
+ @item cpuid              @tab partial @tab partial  @tab partial      @tab partial
+@@ -4393,6 +4423,7 @@ and mips-qemu_mips can use only memory up to first hole.
+ @item network            @tab yes         @tab yes       @tab yes           @tab yes
+ @item ATA/AHCI           @tab yes         @tab yes       @tab yes           @tab no
+ @item AT keyboard        @tab yes         @tab yes       @tab yes           @tab no
++@item Speaker            @tab yes         @tab yes       @tab yes           @tab no
+ @item USB                @tab yes         @tab yes       @tab yes           @tab no
+ @item chainloader        @tab local       @tab local     @tab no            @tab local
+ @item cpuid              @tab partial     @tab partial   @tab partial       @tab no
+@@ -4410,6 +4441,7 @@ and mips-qemu_mips can use only memory up to first hole.
+ @item network            @tab no          @tab yes (*) @tab yes     @tab no
+ @item ATA/AHCI           @tab yes         @tab no      @tab no      @tab no
+ @item AT keyboard        @tab yes         @tab no      @tab no      @tab no
++@item Speaker            @tab no          @tab no      @tab no      @tab no
+ @item USB                @tab yes         @tab no      @tab no      @tab no
+ @item chainloader        @tab yes         @tab no      @tab no      @tab no
+ @item cpuid              @tab no          @tab no      @tab no      @tab no
+@@ -4427,6 +4459,7 @@ and mips-qemu_mips can use only memory up to first hole.
+ @item network            @tab no        @tab yes
+ @item ATA/AHCI           @tab yes       @tab no
+ @item AT keyboard        @tab yes       @tab no
++@item Speaker            @tab no        @tab no
+ @item USB                @tab N/A       @tab yes
+ @item chainloader        @tab yes       @tab no
+ @item cpuid              @tab no        @tab no
+diff --git a/grub-core/kern/term.c b/grub-core/kern/term.c
+index 5014caf..34096bc 100644
+--- a/grub-core/kern/term.c
++++ b/grub-core/kern/term.c
+@@ -28,6 +28,10 @@ struct grub_term_input *grub_term_inputs_disabled;
+ struct grub_term_output *grub_term_outputs;
+ struct grub_term_input *grub_term_inputs;
+ 
++/* Current color state.  */
++grub_uint8_t grub_term_normal_color;
++grub_uint8_t grub_term_highlight_color;
++
+ void (*grub_term_poll_usb) (void) = NULL;
+ void (*grub_net_poll_cards_idle) (void) = NULL;
+ 
+diff --git a/grub-core/normal/color.c b/grub-core/normal/color.c
+index 06f1a87..c265423 100644
+--- a/grub-core/normal/color.c
++++ b/grub-core/normal/color.c
+@@ -106,8 +106,6 @@ free_and_return:
+   return result;
+ }
+ 
+-static grub_uint8_t color_normal, color_highlight;
+-
+ static void
+ set_colors (void)
+ {
+@@ -115,9 +113,6 @@ set_colors (void)
+ 
+   FOR_ACTIVE_TERM_OUTPUTS(term)
+   {
+-    /* Reloads terminal `normal' and `highlight' colors.  */
+-    grub_term_setcolor (term, color_normal, color_highlight);
+-
+     /* Propagates `normal' color to terminal current color.  */
+     grub_term_setcolorstate (term, GRUB_TERM_COLOR_NORMAL);
+   }
+@@ -128,7 +123,7 @@ char *
+ grub_env_write_color_normal (struct grub_env_var *var __attribute__ ((unused)),
+ 			     const char *val)
+ {
+-  if (grub_parse_color_name_pair (&color_normal, val))
++  if (grub_parse_color_name_pair (&grub_term_normal_color, val))
+     return NULL;
+ 
+   set_colors ();
+@@ -141,7 +136,7 @@ char *
+ grub_env_write_color_highlight (struct grub_env_var *var __attribute__ ((unused)),
+ 				const char *val)
+ {
+-  if (grub_parse_color_name_pair (&color_highlight, val))
++  if (grub_parse_color_name_pair (&grub_term_highlight_color, val))
+     return NULL;
+ 
+   set_colors ();
+diff --git a/grub-core/normal/menu_text.c b/grub-core/normal/menu_text.c
+index 1687c28..80a7cd9 100644
+--- a/grub-core/normal/menu_text.c
++++ b/grub-core/normal/menu_text.c
+@@ -225,8 +225,10 @@ print_entry (int y, int highlight, grub_menu_entry_t entry,
+       return;
+     }
+ 
+-  grub_term_getcolor (term, &old_color_normal, &old_color_highlight);
+-  grub_term_setcolor (term, grub_color_menu_normal, grub_color_menu_highlight);
++  old_color_normal = grub_term_normal_color;
++  old_color_highlight = grub_term_highlight_color;
++  grub_term_normal_color = grub_color_menu_normal;
++  grub_term_highlight_color = grub_color_menu_highlight;
+   grub_term_setcolorstate (term, highlight
+ 			   ? GRUB_TERM_COLOR_HIGHLIGHT
+ 			   : GRUB_TERM_COLOR_NORMAL);
+@@ -293,7 +295,9 @@ print_entry (int y, int highlight, grub_menu_entry_t entry,
+ 
+   grub_term_gotoxy (term, grub_term_cursor_x (term), y);
+ 
+-  grub_term_setcolor (term, old_color_normal, old_color_highlight);
++  grub_term_normal_color = old_color_normal;
++  grub_term_highlight_color = old_color_highlight;
++
+   grub_term_setcolorstate (term, GRUB_TERM_COLOR_NORMAL);
+   grub_free (unicode_title);
+ }
+@@ -349,11 +353,11 @@ grub_menu_init_page (int nested, int edit, int *num_entries,
+   *num_entries = grub_term_height (term) - GRUB_TERM_TOP_BORDER_Y
+     - (print_message (nested, edit, term, 1) + 3) - 2;
+ 
+-  grub_term_getcolor (term, &old_color_normal, &old_color_highlight);
+-
+   /* By default, use the same colors for the menu.  */
+-  grub_color_menu_normal = old_color_normal;
+-  grub_color_menu_highlight = old_color_highlight;
++  old_color_normal = grub_term_normal_color;
++  old_color_highlight = grub_term_highlight_color;
++  grub_color_menu_normal = grub_term_normal_color;
++  grub_color_menu_highlight = grub_color_menu_highlight;
+ 
+   /* Then give user a chance to replace them.  */
+   grub_parse_color_name_pair (&grub_color_menu_normal,
+@@ -362,9 +366,11 @@ grub_menu_init_page (int nested, int edit, int *num_entries,
+ 			      grub_env_get ("menu_color_highlight"));
+ 
+   grub_normal_init_page (term);
+-  grub_term_setcolor (term, grub_color_menu_normal, grub_color_menu_highlight);
++  grub_term_normal_color = grub_color_menu_normal;
++  grub_term_highlight_color = grub_color_menu_highlight;
+   draw_border (term, *num_entries);
+-  grub_term_setcolor (term, old_color_normal, old_color_highlight);
++  grub_term_normal_color = old_color_normal;
++  grub_term_highlight_color = old_color_highlight;
+   print_message (nested, edit, term, 0);
+ }
+ 
+diff --git a/grub-core/term/arc/console.c b/grub-core/term/arc/console.c
+index 45ff267..0ccaebe 100644
+--- a/grub-core/term/arc/console.c
++++ b/grub-core/term/arc/console.c
+@@ -102,8 +102,6 @@ static struct grub_term_output grub_console_term_output =
+     .setcursor = grub_terminfo_setcursor,
+     .flags = GRUB_TERM_CODE_TYPE_ASCII,
+     .data = &grub_console_terminfo_output,
+-    .normal_color = GRUB_TERM_DEFAULT_NORMAL_COLOR,
+-    .highlight_color = GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR,
+   };
+ 
+ void
+diff --git a/grub-core/term/efi/console.c b/grub-core/term/efi/console.c
+index e57a815..2d6c6f9 100644
+--- a/grub-core/term/efi/console.c
++++ b/grub-core/term/efi/console.c
+@@ -192,7 +192,8 @@ grub_console_cls (struct grub_term_output *term __attribute__ ((unused)))
+ }
+ 
+ static void
+-grub_console_setcolorstate (struct grub_term_output *term,
++grub_console_setcolorstate (struct grub_term_output *term
++			    __attribute__ ((unused)),
+ 			    grub_term_color_state state)
+ {
+   grub_efi_simple_text_output_interface_t *o;
+@@ -208,10 +209,10 @@ grub_console_setcolorstate (struct grub_term_output *term,
+ 		  & 0x7f);
+       break;
+     case GRUB_TERM_COLOR_NORMAL:
+-      efi_call_2 (o->set_attributes, o, term->normal_color & 0x7f);
++      efi_call_2 (o->set_attributes, o, grub_term_normal_color & 0x7f);
+       break;
+     case GRUB_TERM_COLOR_HIGHLIGHT:
+-      efi_call_2 (o->set_attributes, o, term->highlight_color & 0x7f);
++      efi_call_2 (o->set_attributes, o, grub_term_highlight_color & 0x7f);
+       break;
+     default:
+       break;
+@@ -265,8 +266,6 @@ static struct grub_term_output grub_console_term_output =
+     .cls = grub_console_cls,
+     .setcolorstate = grub_console_setcolorstate,
+     .setcursor = grub_console_setcursor,
+-    .normal_color = GRUB_TERM_DEFAULT_NORMAL_COLOR,
+-    .highlight_color = GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR,
+     .flags = GRUB_TERM_CODE_TYPE_VISUAL_GLYPHS
+   };
+ 
+diff --git a/grub-core/term/emu/console.c b/grub-core/term/emu/console.c
+index 55e3a6b..5bd5db1 100644
+--- a/grub-core/term/emu/console.c
++++ b/grub-core/term/emu/console.c
+@@ -82,11 +82,11 @@ grub_ncurses_setcolorstate (struct grub_term_output *term,
+       grub_console_attr = A_NORMAL;
+       break;
+     case GRUB_TERM_COLOR_NORMAL:
+-      grub_console_cur_color = term->normal_color;
++      grub_console_cur_color = grub_term_normal_color;
+       grub_console_attr = A_NORMAL;
+       break;
+     case GRUB_TERM_COLOR_HIGHLIGHT:
+-      grub_console_cur_color = term->highlight_color;
++      grub_console_cur_color = grub_term_highlight_color;
+       grub_console_attr = A_STANDOUT;
+       break;
+     default:
+diff --git a/grub-core/term/gfxterm.c b/grub-core/term/gfxterm.c
+index 12567d1..a168e01 100644
+--- a/grub-core/term/gfxterm.c
++++ b/grub-core/term/gfxterm.c
+@@ -1036,7 +1036,7 @@ grub_gfxterm_cls (struct grub_term_output *term)
+ }
+ 
+ static void
+-grub_virtual_screen_setcolorstate (struct grub_term_output *term,
++grub_virtual_screen_setcolorstate (struct grub_term_output *term __attribute__ ((unused)),
+ 				   grub_term_color_state state)
+ {
+   switch (state)
+@@ -1046,11 +1046,11 @@ grub_virtual_screen_setcolorstate (struct grub_term_output *term,
+       break;
+ 
+     case GRUB_TERM_COLOR_NORMAL:
+-      virtual_screen.term_color = term->normal_color;
++      virtual_screen.term_color = grub_term_normal_color;
+       break;
+ 
+     case GRUB_TERM_COLOR_HIGHLIGHT:
+-      virtual_screen.term_color = term->highlight_color;
++      virtual_screen.term_color = grub_term_highlight_color;
+       break;
+ 
+     default:
+@@ -1246,8 +1246,6 @@ static struct grub_term_output grub_video_term =
+     .refresh = grub_gfxterm_refresh,
+     .fullscreen = grub_gfxterm_fullscreen,
+     .flags = GRUB_TERM_CODE_TYPE_VISUAL_GLYPHS,
+-    .normal_color = GRUB_TERM_DEFAULT_NORMAL_COLOR,
+-    .highlight_color = GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR,
+     .next = 0
+   };
+ 
+diff --git a/grub-core/term/i386/pc/console.c b/grub-core/term/i386/pc/console.c
+index a681435..2aa1943 100644
+--- a/grub-core/term/i386/pc/console.c
++++ b/grub-core/term/i386/pc/console.c
+@@ -259,7 +259,8 @@ grub_console_getwh (struct grub_term_output *term __attribute__ ((unused)))
+ }
+ 
+ static void
+-grub_console_setcolorstate (struct grub_term_output *term,
++grub_console_setcolorstate (struct grub_term_output *term
++			    __attribute__ ((unused)),
+ 			    grub_term_color_state state)
+ {
+   switch (state) {
+@@ -267,10 +268,10 @@ grub_console_setcolorstate (struct grub_term_output *term,
+       grub_console_cur_color = GRUB_TERM_DEFAULT_STANDARD_COLOR & 0x7f;
+       break;
+     case GRUB_TERM_COLOR_NORMAL:
+-      grub_console_cur_color = term->normal_color & 0x7f;
++      grub_console_cur_color = grub_term_normal_color & 0x7f;
+       break;
+     case GRUB_TERM_COLOR_HIGHLIGHT:
+-      grub_console_cur_color = term->highlight_color & 0x7f;
++      grub_console_cur_color = grub_term_highlight_color & 0x7f;
+       break;
+     default:
+       break;
+@@ -295,8 +296,6 @@ static struct grub_term_output grub_console_term_output =
+     .setcolorstate = grub_console_setcolorstate,
+     .setcursor = grub_console_setcursor,
+     .flags = GRUB_TERM_CODE_TYPE_CP437,
+-    .normal_color = GRUB_TERM_DEFAULT_NORMAL_COLOR,
+-    .highlight_color = GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR,
+   };
+ 
+ void
+diff --git a/grub-core/term/i386/pc/vga_text.c b/grub-core/term/i386/pc/vga_text.c
+index 74c155c..e976aec 100644
+--- a/grub-core/term/i386/pc/vga_text.c
++++ b/grub-core/term/i386/pc/vga_text.c
+@@ -209,18 +209,18 @@ grub_vga_text_getwh (struct grub_term_output *term __attribute__ ((unused)))
+ #ifndef MODE_MDA
+ 
+ static void
+-grub_vga_text_setcolorstate (struct grub_term_output *term,
+-			    grub_term_color_state state)
++grub_vga_text_setcolorstate (struct grub_term_output *term __attribute__ ((unused)),
++			     grub_term_color_state state)
+ {
+   switch (state) {
+     case GRUB_TERM_COLOR_STANDARD:
+       cur_color = GRUB_TERM_DEFAULT_STANDARD_COLOR & 0x7f;
+       break;
+     case GRUB_TERM_COLOR_NORMAL:
+-      cur_color = term->normal_color & 0x7f;
++      cur_color = grub_term_normal_color & 0x7f;
+       break;
+     case GRUB_TERM_COLOR_HIGHLIGHT:
+-      cur_color = term->highlight_color & 0x7f;
++      cur_color = grub_term_highlight_color & 0x7f;
+       break;
+     default:
+       break;
+@@ -265,8 +265,6 @@ static struct grub_term_output grub_vga_text_term =
+     .setcolorstate = grub_vga_text_setcolorstate,
+     .setcursor = grub_vga_text_setcursor,
+     .flags = GRUB_TERM_CODE_TYPE_CP437,
+-    .normal_color = GRUB_TERM_DEFAULT_NORMAL_COLOR,
+-    .highlight_color = GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR,
+   };
+ 
+ #ifdef MODE_MDA
+diff --git a/grub-core/term/ieee1275/console.c b/grub-core/term/ieee1275/console.c
+index 93b81f4..3a80864 100644
+--- a/grub-core/term/ieee1275/console.c
++++ b/grub-core/term/ieee1275/console.c
+@@ -229,8 +229,6 @@ static struct grub_term_output grub_console_term_output =
+     .setcursor = grub_console_setcursor,
+     .flags = GRUB_TERM_CODE_TYPE_ASCII,
+     .data = &grub_console_terminfo_output,
+-    .normal_color = GRUB_TERM_DEFAULT_NORMAL_COLOR,
+-    .highlight_color = GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR,
+   };
+ 
+ void
+diff --git a/grub-core/term/morse.c b/grub-core/term/morse.c
+index 3d6c650..0fdc3b4 100644
+--- a/grub-core/term/morse.c
++++ b/grub-core/term/morse.c
+@@ -115,8 +115,6 @@ static struct grub_term_output grub_audio_term_output =
+    .cls = (void *) dummy,
+    .setcolorstate = (void *) dummy,
+    .setcursor = (void *) dummy,
+-   .normal_color = GRUB_TERM_DEFAULT_NORMAL_COLOR,
+-   .highlight_color = GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR,
+    .flags = GRUB_TERM_CODE_TYPE_ASCII | GRUB_TERM_DUMB
+   };
+ 
+diff --git a/grub-core/term/serial.c b/grub-core/term/serial.c
+index e1469e5..cfcfe84 100644
+--- a/grub-core/term/serial.c
++++ b/grub-core/term/serial.c
+@@ -121,8 +121,6 @@ static struct grub_term_output grub_serial_term_output =
+   .setcursor = grub_terminfo_setcursor,
+   .flags = GRUB_TERM_CODE_TYPE_ASCII,
+   .data = &grub_serial_terminfo_output,
+-  .normal_color = GRUB_TERM_DEFAULT_NORMAL_COLOR,
+-  .highlight_color = GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR,
+ };
+ 
+ 
+diff --git a/grub-core/term/spkmodem.c b/grub-core/term/spkmodem.c
+index b6e7a04..5bff429 100644
+--- a/grub-core/term/spkmodem.c
++++ b/grub-core/term/spkmodem.c
+@@ -127,8 +127,6 @@ static struct grub_term_output grub_spkmodem_term_output =
+     .setcursor = grub_terminfo_setcursor,
+     .flags = GRUB_TERM_CODE_TYPE_ASCII,
+     .data = &grub_spkmodem_terminfo_output,
+-    .normal_color = GRUB_TERM_DEFAULT_NORMAL_COLOR,
+-    .highlight_color = GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR,
+   };
+ 
+ GRUB_MOD_INIT (spkmodem)
+diff --git a/grub-core/term/terminfo.c b/grub-core/term/terminfo.c
+index a0f8d18..eb0ef00 100644
+--- a/grub-core/term/terminfo.c
++++ b/grub-core/term/terminfo.c
+@@ -303,12 +303,12 @@ grub_terminfo_setcolorstate (struct grub_term_output *term,
+ 	{
+ 	case GRUB_TERM_COLOR_STANDARD:
+ 	case GRUB_TERM_COLOR_NORMAL:
+-	  fg = term->normal_color & 0x0f;
+-	  bg = term->normal_color >> 4;
++	  fg = grub_term_normal_color & 0x0f;
++	  bg = grub_term_normal_color >> 4;
+ 	  break;
+ 	case GRUB_TERM_COLOR_HIGHLIGHT:
+-	  fg = term->highlight_color & 0x0f;
+-	  bg = term->highlight_color >> 4;
++	  fg = grub_term_highlight_color & 0x0f;
++	  bg = grub_term_highlight_color >> 4;
+ 	  break;
+ 	default:
+ 	  return;
+diff --git a/include/grub/term.h b/include/grub/term.h
+index 39c3d5a..84f5766 100644
+--- a/include/grub/term.h
++++ b/include/grub/term.h
+@@ -221,10 +221,6 @@ struct grub_term_output
+   /* The feature flags defined above.  */
+   grub_uint32_t flags;
+ 
+-  /* Current color state.  */
+-  grub_uint8_t normal_color;
+-  grub_uint8_t highlight_color;
+-
+   void *data;
+ };
+ typedef struct grub_term_output *grub_term_output_t;
+@@ -233,6 +229,10 @@ typedef struct grub_term_output *grub_term_output_t;
+ #define GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR 0x70
+ #define GRUB_TERM_DEFAULT_STANDARD_COLOR 0x07
+ 
++/* Current color state.  */
++extern grub_uint8_t EXPORT_VAR(grub_term_normal_color);
++extern grub_uint8_t EXPORT_VAR(grub_term_highlight_color);
++
+ extern struct grub_term_output *EXPORT_VAR(grub_term_outputs_disabled);
+ extern struct grub_term_input *EXPORT_VAR(grub_term_inputs_disabled);
+ extern struct grub_term_output *EXPORT_VAR(grub_term_outputs);
+@@ -391,16 +391,6 @@ grub_setcolorstate (grub_term_color_state state)
+     grub_term_setcolorstate (term, state);
+ }
+ 
+-/* Set the normal color and the highlight color. The format of each
+-   color is VGA's.  */
+-static inline void 
+-grub_term_setcolor (struct grub_term_output *term,
+-		    grub_uint8_t normal_color, grub_uint8_t highlight_color)
+-{
+-  term->normal_color = normal_color;
+-  term->highlight_color = highlight_color;
+-}
+-
+ /* Turn on/off the cursor.  */
+ static inline void 
+ grub_term_setcursor (struct grub_term_output *term, int on)
+@@ -460,14 +450,6 @@ grub_term_getcharwidth (struct grub_term_output *term,
+     return 1;
+ }
+ 
+-static inline void 
+-grub_term_getcolor (struct grub_term_output *term, 
+-		    grub_uint8_t *normal_color, grub_uint8_t *highlight_color)
+-{
+-  *normal_color = term->normal_color;
+-  *highlight_color = term->highlight_color;
+-}
+-
+ struct grub_term_autoload
+ {
+   struct grub_term_autoload *next;
+-- 
+1.8.1.4
+

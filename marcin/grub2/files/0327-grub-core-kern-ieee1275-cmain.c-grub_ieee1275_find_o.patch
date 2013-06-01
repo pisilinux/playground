@@ -1,0 +1,43 @@
+From 75986a1d11394947d19381a7d8a7ff677caccbbe Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 19 Apr 2013 15:14:28 +0200
+Subject: [PATCH 327/364] 	* grub-core/kern/ieee1275/cmain.c
+ (grub_ieee1275_find_options): 	Look for /boot-rom as well as /rom/boot-rom.
+
+---
+ ChangeLog                       | 5 +++++
+ grub-core/kern/ieee1275/cmain.c | 3 ++-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 3d4b23d..488be60 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-04-19  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/kern/ieee1275/cmain.c (grub_ieee1275_find_options):
++	Look for /boot-rom as well as /rom/boot-rom.
++
++2013-04-19  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/commands/videotest.c (grub_cmd_videotest): Fix error
+ 	handling when creating text_layer failed.
+ 	* grub-core/video/video.c (grub_video_create_render_target):
+diff --git a/grub-core/kern/ieee1275/cmain.c b/grub-core/kern/ieee1275/cmain.c
+index 5f6a6da..abd1ca9 100644
+--- a/grub-core/kern/ieee1275/cmain.c
++++ b/grub-core/kern/ieee1275/cmain.c
+@@ -186,7 +186,8 @@ grub_ieee1275_find_options (void)
+       grub_ieee1275_set_flag (GRUB_IEEE1275_FLAG_HAS_CURSORONOFF);
+     }
+ 
+-  if (! grub_ieee1275_finddevice ("/rom/boot-rom", &bootrom))
++  if (! grub_ieee1275_finddevice ("/rom/boot-rom", &bootrom)
++      || ! grub_ieee1275_finddevice ("/boot-rom", &bootrom))
+     {
+       rc = grub_ieee1275_get_property (bootrom, "model", tmp, sizeof (tmp), 0);
+       if (rc >= 0 && !grub_strncmp (tmp, "PPC Open Hack'Ware",
+-- 
+1.8.1.4
+

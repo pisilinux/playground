@@ -1,0 +1,43 @@
+From c7cfeef7d608f88328e7ab8dc004a2333d93da40 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 14 Apr 2013 19:57:15 +0200
+Subject: [PATCH 311/364] 	* grub-core/lib/posix_wrap/sys/types.h: Make
+ WORDS_BIGENDIAN definition 	match config-util.h to avoid warnings and
+ increase compatibility.
+
+---
+ ChangeLog                            | 6 ++++++
+ grub-core/lib/posix_wrap/sys/types.h | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 8cbf241..a4d9555 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,4 +1,10 @@
++2013-04-14  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/lib/posix_wrap/sys/types.h: Make WORDS_BIGENDIAN definition
++	match config-util.h to avoid warnings and increase compatibility.
++
+ 2013-04-14  Szymon Janc <szymon@janc.net.pl>
++2013-04-14  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	Add option to compress files on install/image creation.
+ 
+diff --git a/grub-core/lib/posix_wrap/sys/types.h b/grub-core/lib/posix_wrap/sys/types.h
+index c88a96e..6485a9a 100644
+--- a/grub-core/lib/posix_wrap/sys/types.h
++++ b/grub-core/lib/posix_wrap/sys/types.h
+@@ -60,7 +60,7 @@ typedef grub_addr_t uintptr_t;
+ #define SIZEOF_UINT64_T 8
+ 
+ #ifdef GRUB_CPU_WORDS_BIGENDIAN
+-#define WORDS_BIGENDIAN
++#define WORDS_BIGENDIAN 1
+ #else
+ #undef WORDS_BIGENDIAN
+ #endif
+-- 
+1.8.1.4
+

@@ -1,0 +1,42 @@
+From 71b0dcebbd780be081b55821e3b3f83badb387a1 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 24 Mar 2013 14:01:51 +0100
+Subject: [PATCH 229/364] 	* grub-core/Makefile.core.def (vga): Disable
+ on coreboot and multiboot 	platforms.
+
+---
+ ChangeLog                   | 5 +++++
+ grub-core/Makefile.core.def | 2 --
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 4df000e..43dcf93 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-03-24  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/Makefile.core.def (vga): Disable on coreboot and multiboot
++	platforms.
++
++2013-03-24  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* util/grub-mkconfig_lib.in (prepare_grub_to_access_device): Fix
+ 	handling of multi-device filesystems.
+ 
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 4f705b9..911754d 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -1656,8 +1656,6 @@ module = {
+   name = vga;
+   common = video/i386/pc/vga.c;
+   enable = i386_pc;
+-  enable = i386_coreboot;
+-  enable = i386_multiboot;
+ };
+ 
+ module = {
+-- 
+1.8.1.4
+

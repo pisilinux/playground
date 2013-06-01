@@ -1,0 +1,419 @@
+From fae25d35c12764fae63a85df467470d6a1120bd5 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 3 Mar 2013 01:34:27 +0100
+Subject: [PATCH 190/364] 	* grub-core/kern/env.c, include/grub/env.h:
+ Change iterator through 	all vars to a macro. All users updated.
+
+---
+ ChangeLog                   |  5 ++++
+ grub-core/efiemu/pnvram.c   | 64 ++++++++++++++++++++-------------------------
+ grub-core/kern/corecmd.c    | 12 +++------
+ grub-core/kern/env.c        | 39 +++++++--------------------
+ grub-core/loader/i386/bsd.c | 46 ++++++++++++--------------------
+ grub-core/loader/xnu.c      | 16 +++++-------
+ include/grub/env.h          |  6 ++++-
+ 7 files changed, 74 insertions(+), 114 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index f117127..5f9cde5 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-03-03  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/kern/env.c, include/grub/env.h: Change iterator through
++	all vars to a macro. All users updated.
++
++2013-03-03  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/disk/ieee1275/nand.c: Fix compilation on
+ 	i386-ieee1275.
+ 
+diff --git a/grub-core/efiemu/pnvram.c b/grub-core/efiemu/pnvram.c
+index 28d0050..c5c3d4b 100644
+--- a/grub-core/efiemu/pnvram.c
++++ b/grub-core/efiemu/pnvram.c
+@@ -102,9 +102,23 @@ nvram_set (void * data __attribute__ ((unused)))
+   grub_uint32_t *accuracy
+     = grub_efiemu_mm_obtain_request (accuracy_handle);
+   char *nvramptr;
++  struct grub_env_var *var;
+ 
+-  auto int iterate_env (struct grub_env_var *var);
+-  int iterate_env (struct grub_env_var *var)
++  /* Copy to definitive loaction */
++  grub_dprintf ("efiemu", "preparing pnvram\n");
++
++  env = grub_env_get ("EfiEmu.pnvram.high_monotonic_count");
++  *high_monotonic_count = env ? grub_strtoul (env, 0, 0) : 1;
++  env = grub_env_get ("EfiEmu.pnvram.timezone");
++  *timezone = env ? grub_strtosl (env, 0, 0) : GRUB_EFI_UNSPECIFIED_TIMEZONE;
++  env = grub_env_get ("EfiEmu.pnvram.accuracy");
++  *accuracy = env ? grub_strtoul (env, 0, 0) : 50000000;
++  env = grub_env_get ("EfiEmu.pnvram.daylight");
++  *daylight = env ? grub_strtoul (env, 0, 0) : 0;
++
++  nvramptr = nvram;
++  grub_memset (nvram, 0, nvramsize);
++  FOR_SORTED_ENV (var)
+   {
+     char *guid, *attr, *name, *varname;
+     struct efi_variable *efivar;
+@@ -114,44 +128,41 @@ nvram_set (void * data __attribute__ ((unused)))
+ 
+     if (grub_memcmp (var->name, "EfiEmu.pnvram.",
+ 		     sizeof ("EfiEmu.pnvram.") - 1) != 0)
+-      return 0;
++      continue;
+ 
+     guid = var->name + sizeof ("EfiEmu.pnvram.") - 1;
+ 
+     attr = grub_strchr (guid, '.');
+     if (!attr)
+-      return 0;
++      continue;
+     attr++;
+ 
+     name = grub_strchr (attr, '.');
+     if (!name)
+-      return 0;
++      continue;
+     name++;
+ 
+     efivar = (struct efi_variable *) nvramptr;
+     if (nvramptr - nvram + sizeof (struct efi_variable) > nvramsize)
+-      {
+-	grub_error (GRUB_ERR_OUT_OF_MEMORY,
+-		    "too many NVRAM variables for reserved variable space."
+-		    " Try increasing EfiEmu.pnvram.size");
+-	return 1;
+-      }
++      return grub_error (GRUB_ERR_OUT_OF_MEMORY,
++			 "too many NVRAM variables for reserved variable space."
++			 " Try increasing EfiEmu.pnvram.size");
+ 
+     nvramptr += sizeof (struct efi_variable);
+ 
+     efivar->guid.data1 = grub_cpu_to_le32 (grub_strtoul (guid, &guid, 16));
+     if (*guid != '-')
+-      return 0;
++      continue;
+     guid++;
+ 
+     efivar->guid.data2 = grub_cpu_to_le16 (grub_strtoul (guid, &guid, 16));
+     if (*guid != '-')
+-      return 0;
++      continue;
+     guid++;
+ 
+     efivar->guid.data3 = grub_cpu_to_le16 (grub_strtoul (guid, &guid, 16));
+     if (*guid != '-')
+-      return 0;
++      continue;
+     guid++;
+ 
+     guidcomp = grub_strtoull (guid, 0, 16);
+@@ -162,10 +173,10 @@ nvram_set (void * data __attribute__ ((unused)))
+ 
+     varname = grub_malloc (grub_strlen (name) + 1);
+     if (! varname)
+-      return 1;
++      return grub_errno;
+ 
+     if (unescape (name, varname, varname + grub_strlen (name) + 1, &len))
+-      return 1;
++      break;
+ 
+     len = grub_utf8_to_utf16 ((grub_uint16_t *) nvramptr,
+ 			      (nvramsize - (nvramptr - nvram)) / 2,
+@@ -179,33 +190,16 @@ nvram_set (void * data __attribute__ ((unused)))
+     if (unescape (var->value, nvramptr, nvram + nvramsize, &len))
+       {
+ 	efivar->namelen = 0;
+-	return 1;
++	break;
+       }
+ 
+     nvramptr += len;
+ 
+     efivar->size = len;
+-
+-    return 0;
+   }
+-
+-  /* Copy to definitive loaction */
+-  grub_dprintf ("efiemu", "preparing pnvram\n");
+-
+-  env = grub_env_get ("EfiEmu.pnvram.high_monotonic_count");
+-  *high_monotonic_count = env ? grub_strtoul (env, 0, 0) : 1;
+-  env = grub_env_get ("EfiEmu.pnvram.timezone");
+-  *timezone = env ? grub_strtosl (env, 0, 0) : GRUB_EFI_UNSPECIFIED_TIMEZONE;
+-  env = grub_env_get ("EfiEmu.pnvram.accuracy");
+-  *accuracy = env ? grub_strtoul (env, 0, 0) : 50000000;
+-  env = grub_env_get ("EfiEmu.pnvram.daylight");
+-  *daylight = env ? grub_strtoul (env, 0, 0) : 0;
+-
+-  nvramptr = nvram;
+-  grub_memset (nvram, 0, nvramsize);
+-  grub_env_iterate (iterate_env);
+   if (grub_errno)
+     return grub_errno;
++
+   *nvramsize_def = nvramsize;
+ 
+   /* Register symbols */
+diff --git a/grub-core/kern/corecmd.c b/grub-core/kern/corecmd.c
+index 0dc4d00..cfab676 100644
+--- a/grub-core/kern/corecmd.c
++++ b/grub-core/kern/corecmd.c
+@@ -28,14 +28,6 @@
+ #include <grub/command.h>
+ #include <grub/i18n.h>
+ 
+-/* Helper for grub_core_cmd_set.  */
+-static int
+-print_env (struct grub_env_var *env)
+-{
+-  grub_printf ("%s=%s\n", env->name, env->value);
+-  return 0;
+-}
+-
+ /* set ENVVAR=VALUE */
+ static grub_err_t
+ grub_core_cmd_set (struct grub_command *cmd __attribute__ ((unused)),
+@@ -46,7 +38,9 @@ grub_core_cmd_set (struct grub_command *cmd __attribute__ ((unused)),
+ 
+   if (argc < 1)
+     {
+-      grub_env_iterate (print_env);
++      struct grub_env_var *env;
++      FOR_SORTED_ENV (env)
++	grub_printf ("%s=%s\n", env->name, env->value);
+       return 0;
+     }
+ 
+diff --git a/grub-core/kern/env.c b/grub-core/kern/env.c
+index 7bfa238..c408626 100644
+--- a/grub-core/kern/env.c
++++ b/grub-core/kern/env.c
+@@ -166,11 +166,10 @@ grub_env_unset (const char *name)
+   grub_free (var);
+ }
+ 
+-void
+-grub_env_iterate (int (*func) (struct grub_env_var *var))
++struct grub_env_var *
++grub_env_update_get_sorted (void)
+ {
+-  struct grub_env_sorted_var *sorted_list = 0;
+-  struct grub_env_sorted_var *sorted_var;
++  struct grub_env_var *sorted_list = 0;
+   int i;
+ 
+   /* Add variables associated with this context into a sorted list.  */
+@@ -180,40 +179,20 @@ grub_env_iterate (int (*func) (struct grub_env_var *var))
+ 
+       for (var = grub_current_context->vars[i]; var; var = var->next)
+ 	{
+-	  struct grub_env_sorted_var *p, **q;
+-
+-	  sorted_var = grub_malloc (sizeof (*sorted_var));
+-	  if (! sorted_var)
+-	    goto fail;
+-
+-	  sorted_var->var = var;
++	  struct grub_env_var *p, **q;
+ 
+-	  for (q = &sorted_list, p = *q; p; q = &((*q)->next), p = *q)
++	  for (q = &sorted_list, p = *q; p; q = &((*q)->sorted_next), p = *q)
+ 	    {
+-	      if (grub_strcmp (p->var->name, var->name) > 0)
++	      if (grub_strcmp (p->name, var->name) > 0)
+ 		break;
+ 	    }
+ 
+-	  sorted_var->next = *q;
+-	  *q = sorted_var;
++	  var->sorted_next = *q;
++	  *q = var;
+ 	}
+     }
+ 
+-  /* Iterate FUNC on the sorted list.  */
+-  for (sorted_var = sorted_list; sorted_var; sorted_var = sorted_var->next)
+-    if (func (sorted_var->var))
+-      break;
+-
+- fail:
+-
+-  /* Free the sorted list.  */
+-  for (sorted_var = sorted_list; sorted_var; )
+-    {
+-      struct grub_env_sorted_var *tmp = sorted_var->next;
+-
+-      grub_free (sorted_var);
+-      sorted_var = tmp;
+-    }
++  return sorted_list;
+ }
+ 
+ grub_err_t
+diff --git a/grub-core/loader/i386/bsd.c b/grub-core/loader/i386/bsd.c
+index 6199609..e89ec26 100644
+--- a/grub-core/loader/i386/bsd.c
++++ b/grub-core/loader/i386/bsd.c
+@@ -589,33 +589,7 @@ grub_freebsd_boot (void)
+   grub_err_t err;
+   grub_size_t tag_buf_len = 0;
+ 
+-  auto int iterate_env (struct grub_env_var *var);
+-  int iterate_env (struct grub_env_var *var)
+-  {
+-    if ((!grub_memcmp (var->name, "kFreeBSD.", sizeof("kFreeBSD.") - 1)) && (var->name[sizeof("kFreeBSD.") - 1]))
+-      {
+-	grub_strcpy ((char *) p, &var->name[sizeof("kFreeBSD.") - 1]);
+-	p += grub_strlen ((char *) p);
+-	*(p++) = '=';
+-	grub_strcpy ((char *) p, var->value);
+-	p += grub_strlen ((char *) p) + 1;
+-      }
+-
+-    return 0;
+-  }
+-
+-  auto int iterate_env_count (struct grub_env_var *var);
+-  int iterate_env_count (struct grub_env_var *var)
+-  {
+-    if ((!grub_memcmp (var->name, "kFreeBSD.", sizeof("kFreeBSD.") - 1)) && (var->name[sizeof("kFreeBSD.") - 1]))
+-      {
+-	p_size += grub_strlen (&var->name[sizeof("kFreeBSD.") - 1]);
+-	p_size++;
+-	p_size += grub_strlen (var->value) + 1;
+-      }
+-
+-    return 0;
+-  }
++  struct grub_env_var *var;
+ 
+   grub_memset (&bi, 0, sizeof (bi));
+   bi.version = FREEBSD_BOOTINFO_VERSION;
+@@ -624,7 +598,13 @@ grub_freebsd_boot (void)
+   bi.boot_device = freebsd_biosdev;
+ 
+   p_size = 0;
+-  grub_env_iterate (iterate_env_count);
++  FOR_SORTED_ENV (var)
++    if ((grub_memcmp (var->name, "kFreeBSD.", sizeof("kFreeBSD.") - 1) == 0) && (var->name[sizeof("kFreeBSD.") - 1]))
++      {
++	p_size += grub_strlen (&var->name[sizeof("kFreeBSD.") - 1]);
++	p_size++;
++	p_size += grub_strlen (var->value) + 1;
++      }
+ 
+   if (p_size)
+     p_size = ALIGN_PAGE (kern_end + p_size + 1) - kern_end;
+@@ -664,7 +644,15 @@ grub_freebsd_boot (void)
+   p0 = p;
+   kern_end += p_size;
+ 
+-  grub_env_iterate (iterate_env);
++  FOR_SORTED_ENV (var)
++    if ((grub_memcmp (var->name, "kFreeBSD.", sizeof("kFreeBSD.") - 1) == 0) && (var->name[sizeof("kFreeBSD.") - 1]))
++      {
++	grub_strcpy ((char *) p, &var->name[sizeof("kFreeBSD.") - 1]);
++	p += grub_strlen ((char *) p);
++	*(p++) = '=';
++	grub_strcpy ((char *) p, var->value);
++	p += grub_strlen ((char *) p) + 1;
++      }
+ 
+   if (p != p0)
+     {
+diff --git a/grub-core/loader/xnu.c b/grub-core/loader/xnu.c
+index 8c522f5..cdd9715 100644
+--- a/grub-core/loader/xnu.c
++++ b/grub-core/loader/xnu.c
+@@ -1332,8 +1332,8 @@ unescape (char *name, char *curdot, char *nextdot, int *len)
+ grub_err_t
+ grub_xnu_fill_devicetree (void)
+ {
+-  auto int iterate_env (struct grub_env_var *var);
+-  int iterate_env (struct grub_env_var *var)
++  struct grub_env_var *var;
++  FOR_SORTED_ENV (var)
+   {
+     char *nextdot = 0, *curdot;
+     struct grub_xnu_devtree_key **curkey = &grub_xnu_devtree_root;
+@@ -1343,7 +1343,7 @@ grub_xnu_fill_devicetree (void)
+ 
+     if (grub_memcmp (var->name, "XNU.DeviceTree.",
+ 		     sizeof ("XNU.DeviceTree.") - 1) != 0)
+-      return 0;
++      continue;
+ 
+     curdot = var->name + sizeof ("XNU.DeviceTree.") - 1;
+     nextdot = grub_strchr (curdot, '.');
+@@ -1354,7 +1354,7 @@ grub_xnu_fill_devicetree (void)
+ 	name = grub_realloc (name, nextdot - curdot + 1);
+ 
+ 	if (!name)
+-	  return 1;
++	  return grub_errno;
+ 
+ 	unescape (name, curdot, nextdot, &len);
+ 	name[len - 1] = 0;
+@@ -1372,7 +1372,7 @@ grub_xnu_fill_devicetree (void)
+     name = grub_realloc (name, nextdot - curdot + 1);
+    
+     if (!name)
+-      return 1;
++      return grub_errno;
+    
+     unescape (name, curdot, nextdot, &len);
+     name[len] = 0;
+@@ -1382,18 +1382,14 @@ grub_xnu_fill_devicetree (void)
+    
+     data = grub_malloc (grub_strlen (var->value) + 1);
+     if (!data)
+-      return 1;
++      return grub_errno;
+    
+     unescape (data, var->value, var->value + grub_strlen (var->value),
+ 	      &len);
+     curvalue->datasize = len;
+     curvalue->data = data;
+-
+-    return 0;
+   }
+ 
+-  grub_env_iterate (iterate_env);
+-
+   return grub_errno;
+ }
+ 
+diff --git a/include/grub/env.h b/include/grub/env.h
+index ef42582..76f832e 100644
+--- a/include/grub/env.h
++++ b/include/grub/env.h
+@@ -39,13 +39,17 @@ struct grub_env_var
+   grub_env_write_hook_t write_hook;
+   struct grub_env_var *next;
+   struct grub_env_var **prevp;
++  struct grub_env_var *sorted_next;
+   int global;
+ };
+ 
+ grub_err_t EXPORT_FUNC(grub_env_set) (const char *name, const char *val);
+ const char *EXPORT_FUNC(grub_env_get) (const char *name);
+ void EXPORT_FUNC(grub_env_unset) (const char *name);
+-void EXPORT_FUNC(grub_env_iterate) (int (*func) (struct grub_env_var *var));
++struct grub_env_var *EXPORT_FUNC(grub_env_update_get_sorted) (void);
++
++#define FOR_SORTED_ENV(var) for (var = grub_env_update_get_sorted (); var; var = var->sorted_next)
++
+ grub_err_t EXPORT_FUNC(grub_register_variable_hook) (const char *name,
+ 						     grub_env_read_hook_t read_hook,
+ 						     grub_env_write_hook_t write_hook);
+-- 
+1.8.1.4
+

@@ -1,0 +1,114 @@
+From 0535e4875ec962879b74f69e472615245f7ff987 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Thu, 4 Apr 2013 09:55:44 +0200
+Subject: [PATCH 252/364] 	Use TSC as a possible time source on
+ i386-ieee1275.
+
+---
+ ChangeLog                      |  4 ++++
+ grub-core/Makefile.core.def    |  8 ++------
+ grub-core/kern/ieee1275/init.c | 15 ++++++++++-----
+ 3 files changed, 16 insertions(+), 11 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 7bbcffa..bd9e903 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-04  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	Use TSC as a possible time source on i386-ieee1275.
++
++2013-04-04  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/bus/usb/usbtrans.c (grub_usb_bulk_readwrite_packetize):
+ 	Init err.
+ 
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 911754d..4b4c024 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -128,11 +128,11 @@ kernel = {
+   efi = kern/efi/mm.c;
+   efi = term/efi/console.c;
+ 
+-  i386_efi = kern/i386/tsc.c;
++  x86 = kern/i386/tsc.c;
++
+   i386_efi = kern/i386/efi/init.c;
+   i386_efi = bus/pci.c;
+ 
+-  x86_64_efi = kern/i386/tsc.c;
+   x86_64_efi = kern/x86_64/dl.c;
+   x86_64_efi = kern/x86_64/efi/callwrap.S;
+   x86_64_efi = kern/i386/efi/init.c;
+@@ -145,19 +145,15 @@ kernel = {
+ 
+   i386_pc = kern/i386/pc/init.c;
+   i386_pc = kern/i386/pc/mmap.c;
+-  i386_pc = kern/i386/tsc.c;
+   i386_pc = term/i386/pc/console.c;
+ 
+   i386_qemu = bus/pci.c;
+   i386_qemu = kern/vga_init.c;
+   i386_qemu = kern/i386/qemu/mmap.c;
+-  i386_qemu = kern/i386/tsc.c;
+ 
+   i386_coreboot = kern/i386/coreboot/mmap.c;
+-  i386_coreboot = kern/i386/tsc.c;
+ 
+   i386_multiboot = kern/i386/multiboot_mmap.c;
+-  i386_multiboot = kern/i386/tsc.c;
+ 
+   mips = kern/mips/cache.S;
+   mips = kern/mips/dl.c;
+diff --git a/grub-core/kern/ieee1275/init.c b/grub-core/kern/ieee1275/init.c
+index 0894cb6..391a734 100644
+--- a/grub-core/kern/ieee1275/init.c
++++ b/grub-core/kern/ieee1275/init.c
+@@ -34,6 +34,9 @@
+ #include <grub/net.h>
+ #include <grub/offsets.h>
+ #include <grub/memory.h>
++#ifdef __i386__
++#include <grub/cpu/tsc.h>
++#endif
+ #ifdef __sparc__
+ #include <grub/machine/kernel.h>
+ #endif
+@@ -269,8 +272,6 @@ grub_parse_cmdline (void)
+     }
+ }
+ 
+-static grub_uint64_t ieee1275_get_time_ms (void);
+-
+ grub_addr_t grub_modbase;
+ 
+ void
+@@ -288,7 +289,11 @@ grub_machine_init (void)
+ 
+   grub_parse_cmdline ();
+ 
+-  grub_install_get_time_ms (ieee1275_get_time_ms);
++#ifdef __i386__
++  grub_tsc_init ();
++#else
++  grub_install_get_time_ms (grub_rtc_get_time_ms);
++#endif
+ }
+ 
+ void
+@@ -298,8 +303,8 @@ grub_machine_fini (void)
+   grub_console_fini ();
+ }
+ 
+-static grub_uint64_t
+-ieee1275_get_time_ms (void)
++grub_uint64_t
++grub_rtc_get_time_ms (void)
+ {
+   grub_uint32_t msecs = 0;
+ 
+-- 
+1.8.1.4
+

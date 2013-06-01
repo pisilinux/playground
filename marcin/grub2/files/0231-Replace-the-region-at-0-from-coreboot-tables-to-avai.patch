@@ -1,0 +1,127 @@
+From ba34f38a269b2cb0deb9a6c0574d1d192e99f2aa Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 25 Mar 2013 10:23:04 +0100
+Subject: [PATCH 231/364] 	Replace the region at 0 from coreboot tables
+ to available in BSD 	memory map.
+
+---
+ ChangeLog                           |  5 +++++
+ grub-core/commands/lsmmap.c         |  1 +
+ grub-core/kern/i386/coreboot/mmap.c |  6 +++++-
+ grub-core/loader/i386/bsd.c         | 13 +++++++++++--
+ grub-core/mmap/mmap.c               |  1 +
+ include/grub/memory.h               |  1 +
+ 6 files changed, 24 insertions(+), 3 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 981991b..8425aff 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-03-25  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	Replace the region at 0 from coreboot tables to available in BSD
++	memory map.
++
+ 2013-03-24  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* util/grub.d/20_linux_xen.in: Automatically add no-real-mode edd=off on
+diff --git a/grub-core/commands/lsmmap.c b/grub-core/commands/lsmmap.c
+index c1a05d8..0d29855 100644
+--- a/grub-core/commands/lsmmap.c
++++ b/grub-core/commands/lsmmap.c
+@@ -37,6 +37,7 @@ static const char *names[] =
+        is required to save accross hibernations.  */
+     [GRUB_MEMORY_NVS] = N_("ACPI non-volatile storage RAM"),
+     [GRUB_MEMORY_BADRAM] = N_("faulty RAM (BadRAM)"),
++    [GRUB_MEMORY_COREBOOT_TABLES] = N_("RAM holding coreboot tables"),
+     [GRUB_MEMORY_CODE] = N_("RAM holding firmware code"),
+     [GRUB_MEMORY_HOLE] = N_("Address range not associated with RAM")
+   };
+diff --git a/grub-core/kern/i386/coreboot/mmap.c b/grub-core/kern/i386/coreboot/mmap.c
+index 6a14d29..0aade62 100644
+--- a/grub-core/kern/i386/coreboot/mmap.c
++++ b/grub-core/kern/i386/coreboot/mmap.c
+@@ -86,6 +86,8 @@ struct grub_machine_mmap_iterate_ctx
+   void *hook_data;
+ };
+ 
++#define GRUB_MACHINE_MEMORY_BADRAM 	5
++
+ /* Helper for grub_machine_mmap_iterate.  */
+ static int
+ iterate_linuxbios_table (grub_linuxbios_table_item_t table_item, void *data)
+@@ -105,7 +107,9 @@ iterate_linuxbios_table (grub_linuxbios_table_item_t table_item, void *data)
+ 		     /* Multiboot mmaps match with the coreboot mmap
+ 		        definition.  Therefore, we can just pass type
+ 		        through.  */
+-		     mem_region->type, ctx->hook_data))
++		     (((mem_region->type <= GRUB_MACHINE_MEMORY_BADRAM) && (mem_region->type >= GRUB_MACHINE_MEMORY_AVAILABLE))
++		      || mem_region->type == GRUB_MEMORY_COREBOOT_TABLES) ? mem_region->type : GRUB_MEMORY_RESERVED,
++		     ctx->hook_data))
+ 	return 1;
+ 
+       mem_region++;
+diff --git a/grub-core/loader/i386/bsd.c b/grub-core/loader/i386/bsd.c
+index e89ec26..5fe586f 100644
+--- a/grub-core/loader/i386/bsd.c
++++ b/grub-core/loader/i386/bsd.c
+@@ -268,6 +268,7 @@ struct grub_e820_mmap
+ #define GRUB_E820_ACPI       3
+ #define GRUB_E820_NVS        4
+ #define GRUB_E820_BADRAM     5
++#define GRUB_E820_COREBOOT_TABLES 0x10
+ 
+ /* Context for generate_e820_mmap.  */
+ struct generate_e820_mmap_ctx
+@@ -299,13 +300,21 @@ generate_e820_mmap_iter (grub_uint64_t addr, grub_uint64_t size,
+     case GRUB_MEMORY_NVS:
+       ctx->cur.type = GRUB_E820_NVS;
+       break;
+-
++    case GRUB_MEMORY_COREBOOT_TABLES:
++      /* Nowadays the tables at 0 don't contain anything important but
++       *BSD needs the memory at 0 for own needs.
++       */
++      if (addr == 0)
++	ctx->cur.type = GRUB_E820_RAM;
++      else
++	ctx->cur.type = GRUB_E820_COREBOOT_TABLES;
++      break;
+     default:
+     case GRUB_MEMORY_CODE:
+     case GRUB_MEMORY_RESERVED:
+       ctx->cur.type = GRUB_E820_RESERVED;
+       break;
+-    }
++    }  
+ 
+   /* Merge regions if possible. */
+   if (ctx->count && ctx->cur.type == ctx->prev.type
+diff --git a/grub-core/mmap/mmap.c b/grub-core/mmap/mmap.c
+index 40ffb2e..d8bd8d2 100644
+--- a/grub-core/mmap/mmap.c
++++ b/grub-core/mmap/mmap.c
+@@ -47,6 +47,7 @@ static const int priority[] =
+   [GRUB_MEMORY_AVAILABLE] = 1,
+   [GRUB_MEMORY_RESERVED] = 3,
+   [GRUB_MEMORY_ACPI] = 2,
++  [GRUB_MEMORY_COREBOOT_TABLES] = 2,
+   [GRUB_MEMORY_CODE] = 3,
+   [GRUB_MEMORY_NVS] = 3,
+   [GRUB_MEMORY_HOLE] = 4,
+diff --git a/include/grub/memory.h b/include/grub/memory.h
+index 3311fcb..0df8074 100644
+--- a/include/grub/memory.h
++++ b/include/grub/memory.h
+@@ -30,6 +30,7 @@ typedef enum grub_memory_type
+     GRUB_MEMORY_ACPI = 3,
+     GRUB_MEMORY_NVS = 4,
+     GRUB_MEMORY_BADRAM = 5,
++    GRUB_MEMORY_COREBOOT_TABLES = 16,
+     GRUB_MEMORY_CODE = 20,
+     /* This one is special: it's used internally but is never reported
+        by firmware. */
+-- 
+1.8.1.4
+

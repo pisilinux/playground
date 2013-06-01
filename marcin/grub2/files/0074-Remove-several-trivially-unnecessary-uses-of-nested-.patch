@@ -1,0 +1,817 @@
+From a3564dd3f793d2677584a93284966b6b9f14ebdb Mon Sep 17 00:00:00 2001
+From: Colin Watson <cjwatson@ubuntu.com>
+Date: Mon, 31 Dec 2012 17:31:38 +0000
+Subject: [PATCH 074/364] Remove several trivially-unnecessary uses of nested
+ functions.
+
+* grub-core/commands/i386/pc/sendkey.c
+(grub_cmd_sendkey: find_key_code, find_ascii_code): Make static
+instead of nested.
+* grub-core/commands/legacycfg.c (legacy_file: getline): Likewise.
+Rename to ...
+(legacy_file_getline): ... this.
+* grub-core/commands/loadenv.c (grub_cmd_load_env: set_var):
+Likewise.
+* grub-core/kern/corecmd.c (grub_core_cmd_set: print_env): Likewise.
+* grub-core/kern/fs.c (grub_fs_probe: dummy_func): Likewise.  Rename
+to ...
+(probe_dummy_iter): ... this.
+* grub-core/kern/i386/coreboot/mmap.c
+(grub_linuxbios_table_iterate: check_signature): Likewise.
+* grub-core/kern/parser.c (grub_parser_split_cmdline:
+check_varstate): Likewise.  Mark inline.
+* grub-core/lib/arg.c (find_short: fnd_short): Likewise.  Pass
+an additional parameter.
+(find_long: fnd_long): Likewise.  Pass two additional parameters.
+* grub-core/lib/crc.c (init_crc32c_table: reflect): Likewise.
+* grub-core/lib/crc64.c (init_crc64_table: reflect): Likewise.
+* grub-core/lib/ieee1275/cmos.c (grub_cmos_find_port: hook):
+Likewise.  Rename to ...
+(grub_cmos_find_port_iter): ... this.
+* grub-core/lib/ieee1275/datetime.c (find_rtc: hook): Likewise.
+Rename to ...
+(find_rtc_iter): ... this.
+
+* grub-core/normal/menu_entry.c (run): Fold nested editor_getsource
+function directly into the function body, since it is only called
+once.
+---
+ ChangeLog                            | 36 ++++++++++++++++
+ grub-core/commands/i386/pc/sendkey.c | 65 ++++++++++++++--------------
+ grub-core/commands/legacycfg.c       | 20 ++++-----
+ grub-core/commands/loadenv.c         | 15 ++++---
+ grub-core/kern/corecmd.c             | 16 +++----
+ grub-core/kern/fs.c                  | 20 ++++-----
+ grub-core/kern/i386/coreboot/mmap.c  | 19 +++++----
+ grub-core/kern/parser.c              | 20 ++++-----
+ grub-core/lib/arg.c                  | 58 +++++++++++++------------
+ grub-core/lib/crc.c                  | 31 +++++++-------
+ grub-core/lib/crc64.c                | 31 +++++++-------
+ grub-core/lib/ieee1275/cmos.c        | 82 ++++++++++++++++++------------------
+ grub-core/lib/ieee1275/datetime.c    | 27 ++++++------
+ grub-core/normal/menu_entry.c        | 50 +++++++++-------------
+ 14 files changed, 264 insertions(+), 226 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 36f1bff..8723bfa 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,39 @@
++2012-12-31  Colin Watson  <cjwatson@ubuntu.com>
++
++	Remove several trivially-unnecessary uses of nested functions.
++
++	* grub-core/commands/i386/pc/sendkey.c
++	(grub_cmd_sendkey: find_key_code, find_ascii_code): Make static
++	instead of nested.
++	* grub-core/commands/legacycfg.c (legacy_file: getline): Likewise.
++	Rename to ...
++	(legacy_file_getline): ... this.
++	* grub-core/commands/loadenv.c (grub_cmd_load_env: set_var):
++	Likewise.
++	* grub-core/kern/corecmd.c (grub_core_cmd_set: print_env): Likewise.
++	* grub-core/kern/fs.c (grub_fs_probe: dummy_func): Likewise.  Rename
++	to ...
++	(probe_dummy_iter): ... this.
++	* grub-core/kern/i386/coreboot/mmap.c
++	(grub_linuxbios_table_iterate: check_signature): Likewise.
++	* grub-core/kern/parser.c (grub_parser_split_cmdline:
++	check_varstate): Likewise.  Mark inline.
++	* grub-core/lib/arg.c (find_short: fnd_short): Likewise.  Pass
++	an additional parameter.
++	(find_long: fnd_long): Likewise.  Pass two additional parameters.
++	* grub-core/lib/crc.c (init_crc32c_table: reflect): Likewise.
++	* grub-core/lib/crc64.c (init_crc64_table: reflect): Likewise.
++	* grub-core/lib/ieee1275/cmos.c (grub_cmos_find_port: hook):
++	Likewise.  Rename to ...
++	(grub_cmos_find_port_iter): ... this.
++	* grub-core/lib/ieee1275/datetime.c (find_rtc: hook): Likewise.
++	Rename to ...
++	(find_rtc_iter): ... this.
++
++	* grub-core/normal/menu_entry.c (run): Fold nested editor_getsource
++	function directly into the function body, since it is only called
++	once.
++
+ 2012-12-30  Colin Watson  <cjwatson@ubuntu.com>
+ 
+ 	* grub-core/bus/usb/ehci.c (grub_ehci_pci_iter): Remove incorrect
+diff --git a/grub-core/commands/i386/pc/sendkey.c b/grub-core/commands/i386/pc/sendkey.c
+index 17f648d..d985cb3 100644
+--- a/grub-core/commands/i386/pc/sendkey.c
++++ b/grub-core/commands/i386/pc/sendkey.c
+@@ -286,47 +286,48 @@ grub_sendkey_preboot (int noret __attribute__ ((unused)))
+   return GRUB_ERR_NONE;
+ }
+ 
+-static grub_err_t
+-grub_cmd_sendkey (grub_extcmd_context_t ctxt, int argc, char **args)
++/* Helper for grub_cmd_sendkey.  */
++static int
++find_key_code (char *key)
+ {
+-  struct grub_arg_list *state = ctxt->state;
+-
+-  auto int find_key_code (char *key); 
+-  auto int find_ascii_code (char *key);
++  unsigned i;
+ 
+-  int find_key_code (char *key)
++  for (i = 0; i < sizeof (keysym_table) / sizeof (keysym_table[0]); i++)
+     {
+-      unsigned i;
++      if (keysym_table[i].unshifted_name 
++	  && grub_strcmp (key, keysym_table[i].unshifted_name) == 0)
++	return keysym_table[i].keycode;
++      else if (keysym_table[i].shifted_name 
++	       && grub_strcmp (key, keysym_table[i].shifted_name) == 0)
++	return keysym_table[i].keycode;
++    }
+ 
+-      for (i = 0; i < sizeof (keysym_table) / sizeof (keysym_table[0]); i++)
+-	{
+-	  if (keysym_table[i].unshifted_name 
+-	      && grub_strcmp (key, keysym_table[i].unshifted_name) == 0)
+-	    return keysym_table[i].keycode;
+-	  else if (keysym_table[i].shifted_name 
+-		   && grub_strcmp (key, keysym_table[i].shifted_name) == 0)
+-	    return keysym_table[i].keycode;
+-	}
++  return 0;
++}
+ 
+-      return 0;
+-    }
++/* Helper for grub_cmd_sendkey.  */
++static int
++find_ascii_code (char *key)
++{
++  unsigned i;
+ 
+-  int find_ascii_code (char *key)
++  for (i = 0; i < sizeof (keysym_table) / sizeof (keysym_table[0]); i++)
+     {
+-      unsigned i;
++      if (keysym_table[i].unshifted_name 
++	  && grub_strcmp (key, keysym_table[i].unshifted_name) == 0)
++	return keysym_table[i].unshifted_ascii;
++      else if (keysym_table[i].shifted_name 
++	       && grub_strcmp (key, keysym_table[i].shifted_name) == 0)
++	return keysym_table[i].shifted_ascii;
++    }
+ 
+-      for (i = 0; i < sizeof (keysym_table) / sizeof (keysym_table[0]); i++)
+-	{
+-	  if (keysym_table[i].unshifted_name 
+-	      && grub_strcmp (key, keysym_table[i].unshifted_name) == 0)
+-	    return keysym_table[i].unshifted_ascii;
+-	  else if (keysym_table[i].shifted_name 
+-		   && grub_strcmp (key, keysym_table[i].shifted_name) == 0)
+-	    return keysym_table[i].shifted_ascii;
+-	}
++  return 0;
++}
+ 
+-      return 0;
+-    }
++static grub_err_t
++grub_cmd_sendkey (grub_extcmd_context_t ctxt, int argc, char **args)
++{
++  struct grub_arg_list *state = ctxt->state;
+ 
+   andmask = 0xffffffff;
+   ormask = 0;
+diff --git a/grub-core/commands/legacycfg.c b/grub-core/commands/legacycfg.c
+index 5293acc..e34eed4 100644
+--- a/grub-core/commands/legacycfg.c
++++ b/grub-core/commands/legacycfg.c
+@@ -35,6 +35,14 @@
+ 
+ GRUB_MOD_LICENSE ("GPLv3+");
+ 
++/* Helper for legacy_file.  */
++static grub_err_t
++legacy_file_getline (char **line, int cont __attribute__ ((unused)))
++{
++  *line = 0;
++  return GRUB_ERR_NONE;
++}
++
+ static grub_err_t
+ legacy_file (const char *filename)
+ {
+@@ -43,14 +51,6 @@ legacy_file (const char *filename)
+   grub_menu_t menu;
+   char *suffix = grub_strdup ("");
+ 
+-  auto grub_err_t getline (char **line, int cont);
+-  grub_err_t getline (char **line, 
+-		      int cont __attribute__ ((unused)))
+-  {
+-    *line = 0;
+-    return GRUB_ERR_NONE;
+-  }
+-
+   if (!suffix)
+     return grub_errno;
+ 
+@@ -134,7 +134,7 @@ legacy_file (const char *filename)
+ 
+       if (parsed && !entryname)
+ 	{
+-	  grub_normal_parse_line (parsed, getline);
++	  grub_normal_parse_line (parsed, legacy_file_getline);
+ 	  grub_print_error ();
+ 	  grub_free (parsed);
+ 	  parsed = NULL;
+@@ -180,7 +180,7 @@ legacy_file (const char *filename)
+       grub_free (args);
+     }
+ 
+-  grub_normal_parse_line (suffix, getline);
++  grub_normal_parse_line (suffix, legacy_file_getline);
+   grub_print_error ();
+   grub_free (suffix);
+   grub_free (entrysrc);
+diff --git a/grub-core/commands/loadenv.c b/grub-core/commands/loadenv.c
+index 18ebb7e..9a35550 100644
+--- a/grub-core/commands/loadenv.c
++++ b/grub-core/commands/loadenv.c
+@@ -114,6 +114,14 @@ read_envblk_file (grub_file_t file)
+   return envblk;
+ }
+ 
++/* Helper for grub_cmd_load_env.  */
++static int
++set_var (const char *name, const char *value)
++{
++  grub_env_set (name, value);
++  return 0;
++}
++
+ static grub_err_t
+ grub_cmd_load_env (grub_extcmd_context_t ctxt,
+ 		   int argc __attribute__ ((unused)),
+@@ -123,13 +131,6 @@ grub_cmd_load_env (grub_extcmd_context_t ctxt,
+   grub_file_t file;
+   grub_envblk_t envblk;
+ 
+-  auto int set_var (const char *name, const char *value);
+-  int set_var (const char *name, const char *value)
+-  {
+-    grub_env_set (name, value);
+-    return 0;
+-  }
+-
+   file = open_envblk_file ((state[0].set) ? state[0].arg : 0);
+   if (! file)
+     return grub_errno;
+diff --git a/grub-core/kern/corecmd.c b/grub-core/kern/corecmd.c
+index eec575c..43240e9 100644
+--- a/grub-core/kern/corecmd.c
++++ b/grub-core/kern/corecmd.c
+@@ -28,6 +28,14 @@
+ #include <grub/command.h>
+ #include <grub/i18n.h>
+ 
++/* Helper for grub_core_cmd_set.  */
++static int
++print_env (struct grub_env_var *env)
++{
++  grub_printf ("%s=%s\n", env->name, env->value);
++  return 0;
++}
++
+ /* set ENVVAR=VALUE */
+ static grub_err_t
+ grub_core_cmd_set (struct grub_command *cmd __attribute__ ((unused)),
+@@ -36,14 +44,6 @@ grub_core_cmd_set (struct grub_command *cmd __attribute__ ((unused)),
+   char *var;
+   char *val;
+ 
+-  auto int print_env (struct grub_env_var *env);
+-
+-  int print_env (struct grub_env_var *env)
+-    {
+-      grub_printf ("%s=%s\n", env->name, env->value);
+-      return 0;
+-    }
+-
+   if (argc < 1)
+     {
+       grub_env_iterate (print_env);
+diff --git a/grub-core/kern/fs.c b/grub-core/kern/fs.c
+index 51d89d1..7e150f2 100644
+--- a/grub-core/kern/fs.c
++++ b/grub-core/kern/fs.c
+@@ -32,18 +32,18 @@ grub_fs_t grub_fs_list = 0;
+ 
+ grub_fs_autoload_hook_t grub_fs_autoload_hook = 0;
+ 
++/* Helper for grub_fs_probe.  */
++static int
++probe_dummy_iter (const char *filename __attribute__ ((unused)),
++		  const struct grub_dirhook_info *info __attribute__ ((unused)))
++  {
++    return 1;
++  }
++
+ grub_fs_t
+ grub_fs_probe (grub_device_t device)
+ {
+   grub_fs_t p;
+-  auto int dummy_func (const char *filename,
+-		       const struct grub_dirhook_info *info);
+-
+-  int dummy_func (const char *filename __attribute__ ((unused)),
+-		  const struct grub_dirhook_info *info  __attribute__ ((unused)))
+-    {
+-      return 1;
+-    }
+ 
+   if (device->disk)
+     {
+@@ -69,7 +69,7 @@ grub_fs_probe (grub_device_t device)
+ 	    }
+ 	  else
+ #endif
+-	    (p->dir) (device, "/", dummy_func);
++	    (p->dir) (device, "/", probe_dummy_iter);
+ 	  if (grub_errno == GRUB_ERR_NONE)
+ 	    return p;
+ 
+@@ -93,7 +93,7 @@ grub_fs_probe (grub_device_t device)
+ 	    {
+ 	      p = grub_fs_list;
+ 
+-	      (p->dir) (device, "/", dummy_func);
++	      (p->dir) (device, "/", probe_dummy_iter);
+ 	      if (grub_errno == GRUB_ERR_NONE)
+ 		{
+ 		  count--;
+diff --git a/grub-core/kern/i386/coreboot/mmap.c b/grub-core/kern/i386/coreboot/mmap.c
+index 8b0b202..8e15683 100644
+--- a/grub-core/kern/i386/coreboot/mmap.c
++++ b/grub-core/kern/i386/coreboot/mmap.c
+@@ -22,21 +22,22 @@
+ #include <grub/err.h>
+ #include <grub/misc.h>
+ 
++/* Helper for grub_linuxbios_table_iterate.  */
++static int
++check_signature (grub_linuxbios_table_header_t tbl_header)
++{
++  if (! grub_memcmp (tbl_header->signature, "LBIO", 4))
++    return 1;
++
++  return 0;
++}
++
+ static grub_err_t
+ grub_linuxbios_table_iterate (int (*hook) (grub_linuxbios_table_item_t))
+ {
+   grub_linuxbios_table_header_t table_header;
+   grub_linuxbios_table_item_t table_item;
+ 
+-  auto int check_signature (grub_linuxbios_table_header_t);
+-  int check_signature (grub_linuxbios_table_header_t tbl_header)
+-  {
+-    if (! grub_memcmp (tbl_header->signature, "LBIO", 4))
+-      return 1;
+-
+-    return 0;
+-  }
+-
+   /* Assuming table_header is aligned to its size (8 bytes).  */
+ 
+   for (table_header = (grub_linuxbios_table_header_t) 0x500;
+diff --git a/grub-core/kern/parser.c b/grub-core/kern/parser.c
+index 9213caa..d1be53e 100644
+--- a/grub-core/kern/parser.c
++++ b/grub-core/kern/parser.c
+@@ -96,6 +96,16 @@ grub_parser_cmdline_state (grub_parser_state_t state, char c, char *result)
+ }
+ 
+ 
++/* Helper for grub_parser_split_cmdline.  */
++static inline int
++check_varstate (grub_parser_state_t s)
++{
++  return (s == GRUB_PARSER_STATE_VARNAME
++	  || s == GRUB_PARSER_STATE_VARNAME2
++	  || s == GRUB_PARSER_STATE_QVARNAME
++	  || s == GRUB_PARSER_STATE_QVARNAME2);
++}
++
+ grub_err_t
+ grub_parser_split_cmdline (const char *cmdline, grub_reader_getline_t getline,
+ 			   int *argc, char ***argv)
+@@ -111,16 +121,6 @@ grub_parser_split_cmdline (const char *cmdline, grub_reader_getline_t getline,
+   char *args;
+   int i;
+ 
+-  auto int check_varstate (grub_parser_state_t s);
+-
+-  int check_varstate (grub_parser_state_t s)
+-  {
+-    return (s == GRUB_PARSER_STATE_VARNAME
+-	    || s == GRUB_PARSER_STATE_VARNAME2
+-	    || s == GRUB_PARSER_STATE_QVARNAME
+-	    || s == GRUB_PARSER_STATE_QVARNAME2);
+-  }
+-
+   auto void add_var (grub_parser_state_t newstate);
+ 
+   void add_var (grub_parser_state_t newstate)
+diff --git a/grub-core/lib/arg.c b/grub-core/lib/arg.c
+index b341885..a2d9416 100644
+--- a/grub-core/lib/arg.c
++++ b/grub-core/lib/arg.c
+@@ -34,25 +34,26 @@ static const struct grub_arg_option help_options[] =
+     {0, 0, 0, 0, 0, 0}
+   };
+ 
++/* Helper for find_short.  */
+ static struct grub_arg_option *
+-find_short (const struct grub_arg_option *options, char c)
++fnd_short (const struct grub_arg_option *opt, char c)
+ {
+-  struct grub_arg_option *found = 0;
+-  auto struct grub_arg_option *fnd_short (const struct grub_arg_option *opt);
+-
+-  struct grub_arg_option *fnd_short (const struct grub_arg_option *opt)
++  while (opt->doc)
+     {
+-      while (opt->doc)
+-	{
+-	  if (opt->shortarg == c)
+-	    return (struct grub_arg_option *) opt;
+-	  opt++;
+-	}
+-      return 0;
++      if (opt->shortarg == c)
++	return (struct grub_arg_option *) opt;
++      opt++;
+     }
++  return 0;
++}
++
++static struct grub_arg_option *
++find_short (const struct grub_arg_option *options, char c)
++{
++  struct grub_arg_option *found = 0;
+ 
+   if (options)
+-    found = fnd_short (options);
++    found = fnd_short (options, c);
+ 
+   if (! found)
+     {
+@@ -74,29 +75,30 @@ find_short (const struct grub_arg_option *options, char c)
+   return found;
+ }
+ 
++/* Helper for find_long.  */
+ static struct grub_arg_option *
+-find_long (const struct grub_arg_option *options, const char *s, int len)
++fnd_long (const struct grub_arg_option *opt, const char *s, int len)
+ {
+-  struct grub_arg_option *found = 0;
+-  auto struct grub_arg_option *fnd_long (const struct grub_arg_option *opt);
+-
+-  struct grub_arg_option *fnd_long (const struct grub_arg_option *opt)
++  while (opt->doc)
+     {
+-      while (opt->doc)
+-	{
+-	  if (opt->longarg && ! grub_strncmp (opt->longarg, s, len) &&
+-	      opt->longarg[len] == '\0')
+-	    return (struct grub_arg_option *) opt;
+-	  opt++;
+-	}
+-      return 0;
++      if (opt->longarg && ! grub_strncmp (opt->longarg, s, len) &&
++	  opt->longarg[len] == '\0')
++	return (struct grub_arg_option *) opt;
++      opt++;
+     }
++  return 0;
++}
++
++static struct grub_arg_option *
++find_long (const struct grub_arg_option *options, const char *s, int len)
++{
++  struct grub_arg_option *found = 0;
+ 
+   if (options)
+-    found = fnd_long (options);
++    found = fnd_long (options, s, len);
+ 
+   if (! found)
+-    found = fnd_long (help_options);
++    found = fnd_long (help_options, s, len);
+ 
+   return found;
+ }
+diff --git a/grub-core/lib/crc.c b/grub-core/lib/crc.c
+index ffc3ef3..bf97cc6 100644
+--- a/grub-core/lib/crc.c
++++ b/grub-core/lib/crc.c
+@@ -22,25 +22,26 @@
+ 
+ static grub_uint32_t crc32c_table [256];
+ 
+-static void
+-init_crc32c_table (void)
++/* Helper for init_crc32c_table.  */
++static grub_uint32_t
++reflect (grub_uint32_t ref, int len)
+ {
+-  auto grub_uint32_t reflect (grub_uint32_t ref, int len);
+-  grub_uint32_t reflect (grub_uint32_t ref, int len)
+-    {
+-      grub_uint32_t result = 0;
+-      int i;
+-
+-      for (i = 1; i <= len; i++)
+-        {
+-          if (ref & 1)
+-            result |= 1 << (len - i);
+-          ref >>= 1;
+-        }
++  grub_uint32_t result = 0;
++  int i;
+ 
+-      return result;
++  for (i = 1; i <= len; i++)
++    {
++      if (ref & 1)
++	result |= 1 << (len - i);
++      ref >>= 1;
+     }
+ 
++  return result;
++}
++
++static void
++init_crc32c_table (void)
++{
+   grub_uint32_t polynomial = 0x1edc6f41;
+   int i, j;
+ 
+diff --git a/grub-core/lib/crc64.c b/grub-core/lib/crc64.c
+index 4b1c92c..4960f3f 100644
+--- a/grub-core/lib/crc64.c
++++ b/grub-core/lib/crc64.c
+@@ -25,25 +25,26 @@ GRUB_MOD_LICENSE ("GPLv3+");
+ 
+ static grub_uint64_t crc64_table [256];
+ 
+-static void
+-init_crc64_table (void)
++/* Helper for init_crc64_table.  */
++static grub_uint64_t
++reflect (grub_uint64_t ref, int len)
+ {
+-  auto grub_uint64_t reflect (grub_uint64_t ref, int len);
+-  grub_uint64_t reflect (grub_uint64_t ref, int len)
+-    {
+-      grub_uint64_t result = 0;
+-      int i;
++  grub_uint64_t result = 0;
++  int i;
+ 
+-      for (i = 1; i <= len; i++)
+-        {
+-          if (ref & 1)
+-            result |= 1ULL << (len - i);
+-          ref >>= 1;
+-        }
+-
+-      return result;
++  for (i = 1; i <= len; i++)
++    {
++      if (ref & 1)
++	result |= 1ULL << (len - i);
++      ref >>= 1;
+     }
+ 
++  return result;
++}
++
++static void
++init_crc64_table (void)
++{
+   grub_uint64_t polynomial = 0x42f0e1eba9ea3693ULL;
+   int i, j;
+ 
+diff --git a/grub-core/lib/ieee1275/cmos.c b/grub-core/lib/ieee1275/cmos.c
+index fa57db9..328d70a 100644
+--- a/grub-core/lib/ieee1275/cmos.c
++++ b/grub-core/lib/ieee1275/cmos.c
+@@ -23,51 +23,53 @@
+ #include <grub/misc.h>
+ 
+ volatile grub_uint8_t *grub_cmos_port = 0;
+-grub_err_t
+-grub_cmos_find_port (void)
++
++/* Helper for grub_cmos_find_port.  */
++static int
++grub_cmos_find_port_iter (struct grub_ieee1275_devalias *alias)
+ {
+-  auto int hook (struct grub_ieee1275_devalias *alias);
+-  int hook (struct grub_ieee1275_devalias *alias)
+-  {
+-    grub_ieee1275_phandle_t dev;
+-    grub_uint32_t addr[2];
+-    grub_ssize_t actual;
+-    /* Enough to check if it's "m5819" */
+-    char compat[100];
+-    if (grub_ieee1275_finddevice (alias->path, &dev))
+-      return 0;
+-    if (grub_ieee1275_get_property (dev, "compatible", compat, sizeof (compat),
+-				    0))
+-      return 0;
+-    if (grub_strcmp (compat, "m5819") != 0)
+-      return 0;
+-    if (grub_ieee1275_get_integer_property (dev, "address",
+-					    addr, sizeof (addr), &actual))
+-      return 0;
+-    if (actual == 4)
+-      {
+-	grub_cmos_port = (volatile grub_uint8_t *) (grub_addr_t) addr[0];
+-	return 1;
+-      }
++  grub_ieee1275_phandle_t dev;
++  grub_uint32_t addr[2];
++  grub_ssize_t actual;
++  /* Enough to check if it's "m5819" */
++  char compat[100];
++  if (grub_ieee1275_finddevice (alias->path, &dev))
++    return 0;
++  if (grub_ieee1275_get_property (dev, "compatible", compat, sizeof (compat),
++				  0))
++    return 0;
++  if (grub_strcmp (compat, "m5819") != 0)
++    return 0;
++  if (grub_ieee1275_get_integer_property (dev, "address",
++					  addr, sizeof (addr), &actual))
++    return 0;
++  if (actual == 4)
++    {
++      grub_cmos_port = (volatile grub_uint8_t *) (grub_addr_t) addr[0];
++      return 1;
++    }
+ 
+ #if GRUB_CPU_SIZEOF_VOID_P == 8
+-    if (actual == 8)
+-      {
+-	grub_cmos_port = (volatile grub_uint8_t *) 
+-	  ((((grub_addr_t) addr[0]) << 32) | addr[1]);
+-	return 1;
+-      }
++  if (actual == 8)
++    {
++      grub_cmos_port = (volatile grub_uint8_t *) 
++	((((grub_addr_t) addr[0]) << 32) | addr[1]);
++      return 1;
++    }
+ #else
+-    if (actual == 8 && addr[0] == 0)
+-      {
+-	grub_cmos_port = (volatile grub_uint8_t *) addr[1];
+-	return 1;
+-      }
++  if (actual == 8 && addr[0] == 0)
++    {
++      grub_cmos_port = (volatile grub_uint8_t *) addr[1];
++      return 1;
++    }
+ #endif
+-    return 0;
+-  }
+-  
+-  grub_ieee1275_devices_iterate (hook);
++  return 0;
++}
++
++grub_err_t
++grub_cmos_find_port (void)
++{
++  grub_ieee1275_devices_iterate (grub_cmos_find_port_iter);
+   if (!grub_cmos_port)
+     return grub_error (GRUB_ERR_IO, "no cmos found");
+   
+diff --git a/grub-core/lib/ieee1275/datetime.c b/grub-core/lib/ieee1275/datetime.c
+index 8792429..74578f1 100644
+--- a/grub-core/lib/ieee1275/datetime.c
++++ b/grub-core/lib/ieee1275/datetime.c
+@@ -30,22 +30,23 @@ GRUB_MOD_LICENSE ("GPLv3+");
+ static char *rtc = 0;
+ static int no_ieee1275_rtc = 0;
+ 
++/* Helper for find_rtc.  */
++static int
++find_rtc_iter (struct grub_ieee1275_devalias *alias)
++{
++  if (grub_strcmp (alias->type, "rtc") == 0)
++    {
++      grub_dprintf ("datetime", "Found RTC %s\n", alias->path);
++      rtc = grub_strdup (alias->path);
++      return 1;
++    }
++  return 0;
++}
++
+ static void
+ find_rtc (void)
+ {
+-  auto int hook (struct grub_ieee1275_devalias *alias);
+-  int hook (struct grub_ieee1275_devalias *alias)
+-  {
+-    if (grub_strcmp (alias->type, "rtc") == 0)
+-      {
+-	grub_dprintf ("datetime", "Found RTC %s\n", alias->path);
+-	rtc = grub_strdup (alias->path);
+-	return 1;
+-      }
+-    return 0;
+-  }
+-  
+-  grub_ieee1275_devices_iterate (hook);
++  grub_ieee1275_devices_iterate (find_rtc_iter);
+   if (!rtc)
+     no_ieee1275_rtc = 1;
+ }
+diff --git a/grub-core/normal/menu_entry.c b/grub-core/normal/menu_entry.c
+index 8e2b4da..33b644b 100644
+--- a/grub-core/normal/menu_entry.c
++++ b/grub-core/normal/menu_entry.c
+@@ -1205,32 +1205,6 @@ run (struct screen *screen)
+   grub_menu_t menu = NULL;
+   char *dummy[1] = { NULL };
+ 
+-  auto char * editor_getsource (void);
+-  char * editor_getsource (void)
+-  {
+-    int i;
+-    grub_size_t size = 0, tot_size = 0;
+-    char *source;
+-
+-    for (i = 0; i < screen->num_lines; i++)
+-      tot_size += grub_get_num_of_utf8_bytes (screen->lines[i].buf,
+-					      screen->lines[i].len) + 1;
+-
+-    source = grub_malloc (tot_size + 1);
+-    if (! source)
+-      return NULL;
+-
+-    for (i = 0; i < screen->num_lines; i++)
+-      {
+-	size += grub_ucs4_to_utf8 (screen->lines[i].buf, screen->lines[i].len,
+-				   (grub_uint8_t *) source + size,
+-				   tot_size - size);
+-	source[size++] = '\n';
+-      }
+-    source[size] = '\0';
+-    return source;
+-  }
+-
+   grub_cls ();
+   grub_printf ("  ");
+   grub_printf_ (N_("Booting a command list"));
+@@ -1248,9 +1222,27 @@ run (struct screen *screen)
+     }
+ 
+   /* Execute the script, line for line.  */
+-  script = editor_getsource ();
+-  if (! script)
+-    return 0;
++  {
++    int i;
++    grub_size_t size = 0, tot_size = 0;
++
++    for (i = 0; i < screen->num_lines; i++)
++      tot_size += grub_get_num_of_utf8_bytes (screen->lines[i].buf,
++					      screen->lines[i].len) + 1;
++
++    script = grub_malloc (tot_size + 1);
++    if (! script)
++      return 0;
++
++    for (i = 0; i < screen->num_lines; i++)
++      {
++	size += grub_ucs4_to_utf8 (screen->lines[i].buf, screen->lines[i].len,
++				   (grub_uint8_t *) script + size,
++				   tot_size - size);
++	script[size++] = '\n';
++      }
++    script[size] = '\0';
++  }
+   grub_script_execute_sourcecode (script, 0, dummy);
+   grub_free (script);
+ 
+-- 
+1.8.1.4
+

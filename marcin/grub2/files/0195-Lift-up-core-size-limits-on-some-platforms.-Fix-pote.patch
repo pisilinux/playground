@@ -1,0 +1,462 @@
+From 68cd2e93537bee644f0595cb0b734fe53cfa0637 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Thu, 7 Mar 2013 08:17:24 +0100
+Subject: [PATCH 195/364] 	Lift up core size limits on some platforms.
+ Fix potential memory 	corruption with big core on small memory systems.
+ Document remaining 	limits.
+
+---
+ ChangeLog                           |  6 ++++
+ docs/grub.texi                      | 38 +++++++++++++++++++++++++
+ grub-core/kern/i386/coreboot/init.c | 38 ++++++++++++++-----------
+ grub-core/kern/i386/pc/init.c       | 12 +++++++-
+ grub-core/kern/main.c               | 56 ++++++++++++++++++++++++++++++++-----
+ grub-core/kern/mm.c                 | 21 ++++++++++++++
+ include/grub/kernel.h               | 25 +++++++++++++++++
+ include/grub/offsets.h              |  1 +
+ util/grub-mkimage.c                 | 47 +++++++++++++++++++++++++------
+ 9 files changed, 211 insertions(+), 33 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index f1ab52a..96527dd 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,9 @@
++2013-03-07  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	Lift up core size limits on some platforms. Fix potential memory
++	corruption with big core on small memory systems. Document remaining
++	limits.
++
+ 2013-03-05  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/term/terminfo.c (grub_terminfo_cls): Issue an explicit
+diff --git a/docs/grub.texi b/docs/grub.texi
+index 9941b47..0b66827 100644
+--- a/docs/grub.texi
++++ b/docs/grub.texi
+@@ -89,6 +89,7 @@ This edition documents version @value{VERSION}.
+ * Serial terminal::             Using GRUB via a serial line
+ * Vendor power-on keys::        Changing GRUB behaviour on vendor power-on keys
+ * Images::                      GRUB image files
++* Core image size limitation::  GRUB image files size limitations
+ * Filesystem::                  Filesystem syntax and semantics
+ * Interface::                   The menu and the command-line
+ * Environment::                 GRUB environment variables
+@@ -2390,6 +2391,43 @@ In GRUB 2, images for PXE network booting are now constructed using
+ contains the @samp{pxe} and @samp{pxecmd} modules.  @xref{Network}.
+ @end table
+ 
++@node Core image size limitation
++@chapter Core image size limitation
++
++Heavily limited platforms:
++@itemize
++@item i386-pc (normal and PXE): the core image size (compressed) is limited by 458240 bytes.
++ kernel.img (.text + .data + .bss, uncompressed) is limited by 392704 bytes.
++ module size (uncompressed) + kernel.img (.text + .data, uncompressed) is limited by the size of contiguous chunk at 1M address.
++@item sparc64-ieee1275: kernel.img (.text + .data + .bss) + modules + 256K (stack) + 2M (heap) is limited by space available at 0x4400. On most platforms it's just 3 or 4M since ieee1275 maps only so much.
++@item i386-ieee1275: kernel.img  (.text + .data + .bss) + modules is limited by memory available at 0x10000, at most 596K
++@end itemize
++
++Lightly limited platforms:
++
++@itemize
++@item i386-qemu: kernel.img (.text + .data + .bss) is limited by 392704 bytes.
++                 (core.img would be limited by ROM size but it's unlimited on qemu
++@item All EFI platforms: limited by contiguous RAM size and possibly firmware bugs
++@item Coreboot and multiboot. kernel.img (.text + .data + .bss) is limited by 392704 bytes.
++      module size is limited by the size of contiguous chunk at 1M address.
++@item mipsel-loongson (ELF), mips(el)-qemu_mips (ELF): if uncompressed:
++                kernel.img (.text + .data) + modules is limited by the space from 80200000 forward
++                if compressed:
++                kernel.img (.text + .data, uncompressed) + modules (uncompressed)
++                + (modules + kernel.img (.text + .data)) (compressed)
++                + decompressor is limited by the space from 80200000 forward
++@item mipsel-loongson (Flash), mips(el)-qemu_mips (Flash): kernel.img (.text + .data) + modules is limited by the space from 80200000 forward
++                               core.img (final) is limited by flash size (512K on yeeloong and fulooong)
++@item mips-arc: if uncompressed:
++                kernel.img (.text + .data) is limited by the space from 8bd00000 forward
++                modules + dummy decompressor  is limited by the space from 8bd00000 backward
++                if compressed:
++                kernel.img (.text + .data, uncompressed) is limited by the space from 8bd00000 forward
++                modules (uncompressed) + (modules + kernel.img (.text + .data)) (compressed, aligned to 1M)
++                + 1M (decompressor + scratch space) is limited by the space from 8bd00000 backward
++@item powerpc-ieee1275: kernel.img (.text + .data + .bss) + modules is limited by space available at 0x200000
++@end itemize
+ 
+ @node Filesystem
+ @chapter Filesystem syntax and semantics
+diff --git a/grub-core/kern/i386/coreboot/init.c b/grub-core/kern/i386/coreboot/init.c
+index 48fd1a6..bfc8f3f 100644
+--- a/grub-core/kern/i386/coreboot/init.c
++++ b/grub-core/kern/i386/coreboot/init.c
+@@ -54,7 +54,8 @@ grub_exit (void)
+ #ifdef GRUB_MACHINE_QEMU
+ grub_addr_t grub_modbase;
+ #else
+-grub_addr_t grub_modbase = ALIGN_UP((grub_addr_t) _end, GRUB_KERNEL_MACHINE_MOD_ALIGN);
++grub_addr_t grub_modbase = GRUB_KERNEL_I386_COREBOOT_MODULES_ADDR;
++static grub_uint64_t modend;
+ #endif
+ 
+ /* Helper for grub_machine_init.  */
+@@ -62,30 +63,32 @@ static int
+ heap_init (grub_uint64_t addr, grub_uint64_t size, grub_memory_type_t type,
+ 	   void *data __attribute__ ((unused)))
+ {
++  grub_uint64_t begin = addr, end = addr + size;
++
+ #if GRUB_CPU_SIZEOF_VOID_P == 4
+   /* Restrict ourselves to 32-bit memory space.  */
+-  if (addr > GRUB_ULONG_MAX)
++  if (begin > GRUB_ULONG_MAX)
+     return 0;
+-  if (addr + size > GRUB_ULONG_MAX)
+-    size = GRUB_ULONG_MAX - addr;
++  if (end > GRUB_ULONG_MAX)
++    end = GRUB_ULONG_MAX;
+ #endif
+ 
+   if (type != GRUB_MEMORY_AVAILABLE)
+     return 0;
+ 
+   /* Avoid the lower memory.  */
+-  if (addr < GRUB_MEMORY_MACHINE_LOWER_SIZE)
+-    {
+-      if (addr + size <= GRUB_MEMORY_MACHINE_LOWER_SIZE)
+-	return 0;
+-      else
+-	{
+-	  size -= GRUB_MEMORY_MACHINE_LOWER_SIZE - addr;
+-	  addr = GRUB_MEMORY_MACHINE_LOWER_SIZE;
+-	}
+-    }
+-
+-  grub_mm_init_region ((void *) (grub_addr_t) addr, (grub_size_t) size);
++  if (begin < GRUB_MEMORY_MACHINE_LOWER_SIZE)
++    begin = GRUB_MEMORY_MACHINE_LOWER_SIZE;
++
++#ifndef GRUB_MACHINE_QEMU
++  if (modend && begin < modend)
++    begin = modend;
++#endif
++  
++  if (end <= begin)
++    return 0;
++
++  grub_mm_init_region ((void *) (grub_addr_t) begin, (grub_size_t) (end - begin));
+ 
+   return 0;
+ }
+@@ -98,6 +101,9 @@ grub_machine_init (void)
+ 
+   grub_qemu_init_cirrus ();
+ #endif
++#ifndef GRUB_MACHINE_QEMU
++  modend = grub_modules_get_end ();
++#endif
+   /* Initialize the console as early as possible.  */
+   grub_vga_text_init ();
+ 
+diff --git a/grub-core/kern/i386/pc/init.c b/grub-core/kern/i386/pc/init.c
+index 7d8b12c..730e04a 100644
+--- a/grub-core/kern/i386/pc/init.c
++++ b/grub-core/kern/i386/pc/init.c
+@@ -191,6 +191,7 @@ grub_machine_init (void)
+ #if 0
+   int grub_lower_mem;
+ #endif
++  grub_addr_t modend;
+ 
+   grub_modbase = GRUB_MEMORY_MACHINE_DECOMPRESSION_ADDR + (_edata - _start);
+ 
+@@ -222,8 +223,17 @@ grub_machine_init (void)
+ 
+   compact_mem_regions ();
+ 
++  modend = grub_modules_get_end ();
+   for (i = 0; i < num_regions; i++)
+-      grub_mm_init_region ((void *) mem_regions[i].addr, mem_regions[i].size);
++    {
++      grub_addr_t beg = mem_regions[i].addr;
++      grub_addr_t fin = mem_regions[i].addr + mem_regions[i].size;
++      if (modend && beg < modend)
++	beg = modend;
++      if (beg >= fin)
++	continue;
++      grub_mm_init_region ((void *) beg, fin - beg);
++    }
+ 
+   grub_tsc_init ();
+ }
+diff --git a/grub-core/kern/main.c b/grub-core/kern/main.c
+index c43ac6b..e1a2001 100644
+--- a/grub-core/kern/main.c
++++ b/grub-core/kern/main.c
+@@ -30,8 +30,10 @@
+ #include <grub/reader.h>
+ #include <grub/parser.h>
+ 
+-/* This is actualy platform-independant but used only on loongson and sparc.  */
+-#if defined (GRUB_MACHINE_MIPS_LOONGSON) || defined (GRUB_MACHINE_MIPS_QEMU_MIPS) || defined (GRUB_MACHINE_SPARC64)
++#ifdef GRUB_MACHINE_PCBIOS
++#include <grub/machine/memory.h>
++#endif
++
+ grub_addr_t
+ grub_modules_get_end (void)
+ {
+@@ -45,7 +47,6 @@ grub_modules_get_end (void)
+ 
+   return grub_modbase + modinfo->size;
+ }
+-#endif
+ 
+ /* Load all modules in core.  */
+ static void
+@@ -67,6 +68,8 @@ grub_load_modules (void)
+   }
+ }
+ 
++static char *load_config;
++
+ static void
+ grub_load_config (void)
+ {
+@@ -76,9 +79,17 @@ grub_load_config (void)
+     /* Not an embedded config, skip.  */
+     if (header->type != OBJ_TYPE_CONFIG)
+       continue;
+-    
+-    grub_parser_execute ((char *) header +
+-			 sizeof (struct grub_module_header));
++
++    load_config = grub_malloc (header->size - sizeof (struct grub_module_header) + 1);
++    if (!load_config)
++      {
++	grub_print_error ();
++	break;
++      }
++    grub_memcpy (load_config, (char *) header +
++		 sizeof (struct grub_module_header),
++		 header->size - sizeof (struct grub_module_header));
++    load_config[header->size - sizeof (struct grub_module_header)] = 0;
+     break;
+   }
+ }
+@@ -212,6 +223,30 @@ grub_load_normal_mode (void)
+   grub_command_execute ("normal", 0, 0);
+ }
+ 
++static void
++reclaim_module_space (void)
++{
++  grub_addr_t modstart, modend;
++
++  if (!grub_modbase)
++    return;
++
++#ifdef GRUB_MACHINE_PCBIOS
++  modstart = GRUB_MEMORY_MACHINE_DECOMPRESSION_ADDR;
++#else
++  modstart = grub_modbase;
++#endif
++  modend = grub_modules_get_end ();
++  grub_modbase = 0;
++
++#if GRUB_KERNEL_PRELOAD_SPACE_REUSABLE
++  grub_mm_init_region ((void *) modstart, modend - modstart);
++#else
++  (void) modstart;
++  (void) modend;
++#endif
++}
++
+ /* The main routine.  */
+ void __attribute__ ((noreturn))
+ grub_main (void)
+@@ -224,6 +259,8 @@ grub_main (void)
+   grub_printf ("Welcome to GRUB!\n\n");
+   grub_setcolorstate (GRUB_TERM_COLOR_STANDARD);
+ 
++  grub_load_config ();
++
+   /* Load pre-loaded modules and free the space.  */
+   grub_register_exported_symbols ();
+ #ifdef GRUB_LINKER_HAVE_INIT
+@@ -237,9 +274,14 @@ grub_main (void)
+   grub_env_export ("root");
+   grub_env_export ("prefix");
+ 
++  /* Reclaim space used for modules.  */
++  reclaim_module_space ();
++
+   grub_register_core_commands ();
+ 
+-  grub_load_config ();
++  if (load_config)
++    grub_parser_execute (load_config);
++
+   grub_load_normal_mode ();
+   grub_rescue_run ();
+ }
+diff --git a/grub-core/kern/mm.c b/grub-core/kern/mm.c
+index 9f08e05..d869091 100644
+--- a/grub-core/kern/mm.c
++++ b/grub-core/kern/mm.c
+@@ -117,6 +117,27 @@ grub_mm_init_region (void *addr, grub_size_t size)
+   grub_printf ("Using memory for heap: start=%p, end=%p\n", addr, addr + (unsigned int) size);
+ #endif
+ 
++  for (p = &grub_mm_base, q = *p; q; p = &(q->next), q = *p)
++    if ((grub_uint8_t *) addr + size + q->pre_size == (grub_uint8_t *) q)
++      {
++	r = (grub_mm_region_t) ALIGN_UP ((grub_addr_t) addr, GRUB_MM_ALIGN);
++	*r = *q;
++	r->pre_size += size;
++	
++	if (r->pre_size >> GRUB_MM_ALIGN_LOG2)
++	  {
++	    h = (grub_mm_header_t) (r + 1);
++	    h->size = (r->pre_size >> GRUB_MM_ALIGN_LOG2);
++	    h->magic = GRUB_MM_ALLOC_MAGIC;
++	    r->size += h->size << GRUB_MM_ALIGN_LOG2;
++	    r->pre_size &= (GRUB_MM_ALIGN - 1);
++	    *p = r;
++	    grub_free (h + 1);
++	  }
++	*p = r;
++	return;
++      }
++
+   /* Allocate a region from the head.  */
+   r = (grub_mm_region_t) ALIGN_UP ((grub_addr_t) addr, GRUB_MM_ALIGN);
+   size -= (char *) r - (char *) addr + sizeof (*r);
+diff --git a/include/grub/kernel.h b/include/grub/kernel.h
+index 23e4f02..73ea416 100644
+--- a/include/grub/kernel.h
++++ b/include/grub/kernel.h
+@@ -64,6 +64,29 @@ struct grub_module_info64
+   grub_uint64_t size;
+ };
+ 
++#ifndef GRUB_UTIL
++/* Space isn't reusable on some platforms.  */
++/* On Qemu the preload space is readonly.  */
++/* On emu there is no preload space.  */
++/* On ieee1275 our code assumes that heap is p=v which isn't guaranteed for module space.  */
++#if defined (GRUB_MACHINE_QEMU) || defined (GRUB_MACHINE_EMU) \
++  || defined (GRUB_MACHINE_EFI) \
++  || (defined (GRUB_MACHINE_IEEE1275) && !defined (__sparc__))
++#define GRUB_KERNEL_PRELOAD_SPACE_REUSABLE 0
++#endif
++
++#if defined (GRUB_MACHINE_PCBIOS) || defined (GRUB_MACHINE_COREBOOT) \
++  || defined (GRUB_MACHINE_MULTIBOOT) || defined (GRUB_MACHINE_MIPS_QEMU_MIPS) \
++  || defined (GRUB_MACHINE_MIPS_LOONGSON) || defined (GRUB_MACHINE_ARC) \
++  || defined (__sparc__)
++/* FIXME: stack is between 2 heap regions. Move it.  */
++#define GRUB_KERNEL_PRELOAD_SPACE_REUSABLE 1
++#endif
++
++#ifndef GRUB_KERNEL_PRELOAD_SPACE_REUSABLE
++#error "Please check if preload space is reusable on this platform!"
++#endif
++
+ #if GRUB_TARGET_SIZEOF_VOID_P == 8
+ #define grub_module_info grub_module_info64
+ #else
+@@ -82,6 +105,8 @@ extern grub_addr_t EXPORT_VAR (grub_modbase);
+ 
+ grub_addr_t grub_modules_get_end (void);
+ 
++#endif
++
+ /* The start point of the C code.  */
+ void grub_main (void) __attribute__ ((noreturn));
+ 
+diff --git a/include/grub/offsets.h b/include/grub/offsets.h
+index d55e308..bce755d 100644
+--- a/include/grub/offsets.h
++++ b/include/grub/offsets.h
+@@ -91,6 +91,7 @@
+ #define GRUB_KERNEL_MIPS_ARC_TOTAL_MODULE_SIZE	0x08
+ 
+ #define GRUB_KERNEL_I386_COREBOOT_LINK_ADDR	0x8200
++#define GRUB_KERNEL_I386_COREBOOT_MODULES_ADDR  0x100000
+ 
+ #define GRUB_KERNEL_I386_IEEE1275_LINK_ADDR	0x10000
+ 
+diff --git a/util/grub-mkimage.c b/util/grub-mkimage.c
+index 29bda17..845abed 100644
+--- a/util/grub-mkimage.c
++++ b/util/grub-mkimage.c
+@@ -995,16 +995,42 @@ generate_image (const char *dir, const char *prefix,
+     {
+     case IMAGE_I386_PC:
+     case IMAGE_I386_PC_PXE:
+-      {
+-	unsigned num;
+-	char *boot_path, *boot_img;
+-	size_t boot_size;
+-
+ 	if (GRUB_KERNEL_I386_PC_LINK_ADDR + core_size > 0x78000
+-	    || (core_size > (0xffff << GRUB_DISK_SECTOR_BITS)))
++	    || (core_size > (0xffff << GRUB_DISK_SECTOR_BITS))
++	    || (kernel_size + bss_size + GRUB_KERNEL_I386_PC_LINK_ADDR > 0x68000))
+ 	  grub_util_error (_("core image is too big (0x%x > 0x%x)"),
+ 			   GRUB_KERNEL_I386_PC_LINK_ADDR + core_size,
+ 			   0x78000);
++	/* fallthrough */
++    case IMAGE_COREBOOT:
++    case IMAGE_QEMU:
++	if (kernel_size + bss_size + GRUB_KERNEL_I386_PC_LINK_ADDR > 0x68000)
++	  grub_util_error (_("kernel image is too big (0x%x > 0x%x)"),
++			   kernel_size + bss_size + GRUB_KERNEL_I386_PC_LINK_ADDR,
++			   0x68000);
++	break;
++    case IMAGE_LOONGSON_ELF:
++    case IMAGE_YEELOONG_FLASH:
++    case IMAGE_FULOONG2F_FLASH:
++    case IMAGE_EFI:
++    case IMAGE_MIPS_ARC:
++    case IMAGE_QEMU_MIPS_FLASH:
++      break;
++    case IMAGE_SPARC64_AOUT:
++    case IMAGE_SPARC64_RAW:
++    case IMAGE_I386_IEEE1275:
++    case IMAGE_PPC:
++      break;
++    }
++
++  switch (image_target->id)
++    {
++    case IMAGE_I386_PC:
++    case IMAGE_I386_PC_PXE:
++      {
++	unsigned num;
++	char *boot_path, *boot_img;
++	size_t boot_size;
+ 
+ 	num = ((core_size + GRUB_DISK_SECTOR_SIZE - 1) >> GRUB_DISK_SECTOR_BITS);
+ 	if (image_target->id == IMAGE_I386_PC_PXE)
+@@ -1615,9 +1641,12 @@ generate_image (const char *dir, const char *prefix,
+ 	    phdr->p_filesz = phdr->p_memsz
+ 	      = grub_host_to_target32 (core_size - kernel_size);
+ 
+-	    target_addr_mods = ALIGN_UP (target_addr + kernel_size + bss_size
+-					 + image_target->mod_gap,
+-					 image_target->mod_align);
++	    if (image_target->id == IMAGE_COREBOOT)
++	      target_addr_mods = GRUB_KERNEL_I386_COREBOOT_MODULES_ADDR;
++	    else
++	      target_addr_mods = ALIGN_UP (target_addr + kernel_size + bss_size
++					   + image_target->mod_gap,
++					   image_target->mod_align);
+ 	    phdr->p_vaddr = grub_host_to_target32 (target_addr_mods);
+ 	    phdr->p_paddr = grub_host_to_target32 (target_addr_mods);
+ 	    phdr->p_align = grub_host_to_target32 (image_target->link_align);
+-- 
+1.8.1.4
+

@@ -1,0 +1,49 @@
+From a2102b2ce0666edcfef953fac2215221ba1a35bd Mon Sep 17 00:00:00 2001
+From: Colin Watson <cjwatson@ubuntu.com>
+Date: Mon, 21 Jan 2013 11:10:25 +0000
+Subject: [PATCH 126/364] * grub-core/partmap/msdos.c (embed_signatures): Add
+ the signature of an Acer registration utility with several sightings in the
+ wild. Reported by: Rickard Westman.  Fixes Ubuntu bug #987022.
+
+---
+ ChangeLog                 | 6 ++++++
+ grub-core/partmap/msdos.c | 7 +++++++
+ 2 files changed, 13 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index c975de1..ff29177 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,11 @@
+ 2013-01-21  Colin Watson  <cjwatson@ubuntu.com>
+ 
++	* grub-core/partmap/msdos.c (embed_signatures): Add the signature of
++	an Acer registration utility with several sightings in the wild.
++	Reported by: Rickard Westman.  Fixes Ubuntu bug #987022.
++
++2013-01-21  Colin Watson  <cjwatson@ubuntu.com>
++
+ 	Remove nested functions from filesystem directory iterators.
+ 
+ 	* include/grub/fs.h (grub_fs_dir_hook_t): New type.
+diff --git a/grub-core/partmap/msdos.c b/grub-core/partmap/msdos.c
+index 47527c3..b0e11c4 100644
+--- a/grub-core/partmap/msdos.c
++++ b/grub-core/partmap/msdos.c
+@@ -94,6 +94,13 @@ struct embed_signature embed_signatures[] =
+       .signature = "ycgl",
+       .signature_len = 4,
+       .type = TYPE_RAID
++    },
++    {
++      /* https://bugs.launchpad.net/bugs/987022 */
++      .name = "Acer registration utility (?)",
++      .signature = "GREGRegDone.Tag\x00",
++      .signature_len = 16,
++      .type = TYPE_SOFTWARE
+     }
+   };
+ #endif
+-- 
+1.8.1.4
+

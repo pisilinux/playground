@@ -1,0 +1,57 @@
+From d3b49c377da018a3a0064e2f53d8f35d2e678041 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 15 Apr 2013 00:40:19 +0200
+Subject: [PATCH 313/364] 	* grub-core/kern/ieee1275/openfw.c
+ (grub_ieee1275_devalias_next): Make 	source and destination differ.
+
+---
+ ChangeLog                        | 5 +++++
+ grub-core/kern/ieee1275/openfw.c | 6 +++++-
+ 2 files changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index b372668..7469030 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-04-15  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/kern/ieee1275/openfw.c (grub_ieee1275_devalias_next): Make
++	source and destination differ.
++
++2013-04-15  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/disk/ieee1275/ofdisk.c: Fix CD-ROM and boot device
+ 	detection.
+ 
+diff --git a/grub-core/kern/ieee1275/openfw.c b/grub-core/kern/ieee1275/openfw.c
+index 90c092c..07c90f7 100644
+--- a/grub-core/kern/ieee1275/openfw.c
++++ b/grub-core/kern/ieee1275/openfw.c
+@@ -193,18 +193,22 @@ grub_ieee1275_devalias_next (struct grub_ieee1275_devalias *alias)
+     {
+       grub_ssize_t pathlen;
+       grub_ssize_t actual;
++      char *tmp;
+ 
+       if (alias->path)
+ 	{
+ 	  grub_free (alias->path);
+ 	  alias->path = 0;
+ 	}
+-      if (grub_ieee1275_next_property (alias->parent_dev, alias->name,
++      tmp = grub_strdup (alias->name);
++      if (grub_ieee1275_next_property (alias->parent_dev, tmp,
+ 				       alias->name) <= 0)
+ 	{
++	  grub_free (tmp);
+ 	  grub_ieee1275_devalias_free (alias);
+ 	  return 0;
+ 	}
++      grub_free (tmp);
+ 
+       grub_dprintf ("devalias", "devalias name = %s\n", alias->name);
+ 
+-- 
+1.8.1.4
+

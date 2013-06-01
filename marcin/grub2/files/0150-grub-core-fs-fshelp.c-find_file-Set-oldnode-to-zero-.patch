@@ -1,0 +1,67 @@
+From 6b0ffea6b4093185ae5eedc1ce115c4b1a51e65d Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 1 Feb 2013 21:51:09 +0100
+Subject: [PATCH 150/364] 	* grub-core/fs/fshelp.c (find_file): Set
+ oldnode to zero after 	freeing it.
+
+---
+ ChangeLog             | 5 +++++
+ grub-core/fs/fshelp.c | 8 +++++++-
+ 2 files changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 2e681c1..f5396fe 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-02-01  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/fs/fshelp.c (find_file): Set oldnode to zero after
++	freeing it.
++
++2013-02-01  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	Implement USBDebug (full USB stack variant).
+ 
+ 2013-02-01  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/fs/fshelp.c b/grub-core/fs/fshelp.c
+index 7e557c3..11a1259 100644
+--- a/grub-core/fs/fshelp.c
++++ b/grub-core/fs/fshelp.c
+@@ -147,6 +147,7 @@ find_file (const char *currpath, grub_fshelp_node_t currroot,
+ 	      free_node (ctx->currnode, ctx);
+ 	      free_node (ctx->oldnode, ctx);
+ 	      ctx->currnode = 0;
++	      ctx->oldnode = 0;
+ 	      return grub_error (GRUB_ERR_SYMLINK_LOOP,
+ 				 N_("too deep nesting of symlinks"));
+ 	    }
+@@ -158,6 +159,7 @@ find_file (const char *currpath, grub_fshelp_node_t currroot,
+ 	  if (!symlink)
+ 	    {
+ 	      free_node (ctx->oldnode, ctx);
++	      ctx->oldnode = 0;
+ 	      return grub_errno;
+ 	    }
+ 
+@@ -177,12 +179,16 @@ find_file (const char *currpath, grub_fshelp_node_t currroot,
+ 	  if (grub_errno)
+ 	    {
+ 	      free_node (ctx->oldnode, ctx);
++	      ctx->oldnode = 0;
+ 	      return grub_errno;
+ 	    }
+ 	}
+ 
+       if (ctx->oldnode != ctx->currnode)
+-	free_node (ctx->oldnode, ctx);
++	{
++	  free_node (ctx->oldnode, ctx);
++	  ctx->oldnode = 0;
++	}
+ 
+       /* Found the node!  */
+       if (! next || *next == '\0')
+-- 
+1.8.1.4
+

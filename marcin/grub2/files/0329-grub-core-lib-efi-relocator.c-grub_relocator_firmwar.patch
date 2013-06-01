@@ -1,0 +1,63 @@
+From 341b25a836be3f65230eb4077a202c66e9160b29 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sat, 20 Apr 2013 13:39:04 +0200
+Subject: [PATCH 329/364] 	* grub-core/lib/efi/relocator.c
+ (grub_relocator_firmware_alloc_region): 	Remove dprintf. 	*
+ grub-core/lib/relocator.c (malloc_in_range): Likewise.
+
+---
+ ChangeLog                     | 6 ++++++
+ grub-core/lib/efi/relocator.c | 4 ++--
+ grub-core/lib/relocator.c     | 2 ++
+ 3 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 3e606cb..6ca70a6 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,9 @@
++2013-04-20  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/lib/efi/relocator.c (grub_relocator_firmware_alloc_region):
++	Remove dprintf.
++	* grub-core/lib/relocator.c (malloc_in_range): Likewise.
++
+ 2013-04-19  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/kern/ieee1275/init.c (grub_claim_heap): Improve handling
+diff --git a/grub-core/lib/efi/relocator.c b/grub-core/lib/efi/relocator.c
+index 0d346be..319b69e 100644
+--- a/grub-core/lib/efi/relocator.c
++++ b/grub-core/lib/efi/relocator.c
+@@ -96,10 +96,10 @@ grub_relocator_firmware_alloc_region (grub_addr_t start, grub_size_t size)
+ 
+   if (grub_efi_is_finished)
+     return 1;
+-
++#ifdef DEBUG_RELOCATOR_NOMEM_DPRINTF
+   grub_dprintf ("relocator", "EFI alloc: %llx, %llx\n",
+ 		(unsigned long long) start, (unsigned long long) size);
+-
++#endif
+   b = grub_efi_system_table->boot_services;
+   status = efi_call_4 (b->allocate_pages, GRUB_EFI_ALLOCATE_ADDRESS,
+ 		       GRUB_EFI_LOADER_DATA, size >> 12, &address);
+diff --git a/grub-core/lib/relocator.c b/grub-core/lib/relocator.c
+index 350066d..e085514 100644
+--- a/grub-core/lib/relocator.c
++++ b/grub-core/lib/relocator.c
+@@ -984,9 +984,11 @@ malloc_in_range (struct grub_relocator *rel,
+ 	    alloc_end = min (events[j].pos, target + size);
+ 	    if (alloc_end > alloc_start)
+ 	      {
++#ifdef DEBUG_RELOCATOR_NOMEM_DPRINTF
+ 		grub_dprintf ("relocator", "subchunk 0x%lx-0x%lx, %d\n",
+ 			      (unsigned long) alloc_start,
+ 			      (unsigned long) alloc_end, typepre);
++#endif
+ 		curschu->type = typepre;
+ 		curschu->start = alloc_start;
+ 		curschu->size = alloc_end - alloc_start;
+-- 
+1.8.1.4
+

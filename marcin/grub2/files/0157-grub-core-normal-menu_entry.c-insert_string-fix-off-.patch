@@ -1,0 +1,51 @@
+From c6faf0e2eb58a0f9d31c6b110cd58b4956b13465 Mon Sep 17 00:00:00 2001
+From: Andrey Borzenkov <arvidjaar@gmail.com>
+Date: Mon, 25 Feb 2013 22:42:25 +0100
+Subject: [PATCH 157/364] 	* grub-core/normal/menu_entry.c
+ (insert_string): fix off by one 	access to unallocated memory.
+
+---
+ ChangeLog                     |  5 +++++
+ grub-core/normal/menu_entry.c | 11 ++++++-----
+ 2 files changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 107c049..cc5d5e3 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-02-25  Andrey Borzenkov <arvidjaar@gmail.com>
+ 
++	* grub-core/normal/menu_entry.c (insert_string): fix off by one
++	access to unallocated memory.
++
++2013-02-25  Andrey Borzenkov <arvidjaar@gmail.com>
++
+ 	* Makefile.util.def: Add partmap/msdos.c to common library.
+ 	* include/grub/msdos_partition.h: Add GRUB_PC_PARTITION_TYPE_LDM
+ 	* grub-core/disk/ldm.c: Check for existence of
+diff --git a/grub-core/normal/menu_entry.c b/grub-core/normal/menu_entry.c
+index 7cd67f3..85f97da 100644
+--- a/grub-core/normal/menu_entry.c
++++ b/grub-core/normal/menu_entry.c
+@@ -393,11 +393,12 @@ insert_string (struct screen *screen, const char *s, int update)
+ 	  if (! screen->lines)
+ 	    return 0;
+ 
+-	  /* Scroll down. */
+-	  grub_memmove (screen->lines + screen->line + 2,
+-			screen->lines + screen->line + 1,
+-			((screen->num_lines - screen->line - 2)
+-			 * sizeof (struct line)));
++	  /* Shift down if not appending after the last line. */
++	  if (screen->line < screen->num_lines - 2)
++	    grub_memmove (screen->lines + screen->line + 2,
++			  screen->lines + screen->line + 1,
++			  ((screen->num_lines - screen->line - 2)
++			   * sizeof (struct line)));
+ 
+ 	  if (! init_line (screen, screen->lines + screen->line + 1))
+ 	    return 0;
+-- 
+1.8.1.4
+

@@ -1,0 +1,64 @@
+From 68cae0b32cf36c7a8ccd0b2344afdb8ad5f9c473 Mon Sep 17 00:00:00 2001
+From: Fedora Ninjas <grub2-owner@fedoraproject.org>
+Date: Fri, 14 Dec 2012 20:10:21 -0200
+Subject: [PATCH 360/364] Add bootpath device to the list
+
+When scanning the devices, always check (and add) the bootpath device if it
+isn't in the device list.
+---
+ grub-core/disk/ieee1275/ofdisk.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+
+diff --git a/grub-core/disk/ieee1275/ofdisk.c b/grub-core/disk/ieee1275/ofdisk.c
+index ec92c4d..f056466 100644
+--- a/grub-core/disk/ieee1275/ofdisk.c
++++ b/grub-core/disk/ieee1275/ofdisk.c
+@@ -229,6 +229,10 @@ dev_iterate (const struct grub_ieee1275_devalias *alias)
+ static void
+ scan (void)
+ {
++  char *bootpath;
++  int bootpath_size;
++  char *type;
++
+   struct grub_ieee1275_devalias alias;
+   FOR_IEEE1275_DEVALIASES(alias)
+     {
+@@ -239,6 +243,34 @@ scan (void)
+ 
+   FOR_IEEE1275_DEVCHILDREN("/", alias)
+     dev_iterate (&alias);
++
++  if (grub_ieee1275_get_property_length (grub_ieee1275_chosen, "bootpath",
++					 &bootpath_size)
++      || bootpath_size <= 0)
++    {
++      /* Should never happen.  */
++      grub_printf ("/chosen/bootpath property missing!\n");
++      return;
++    }
++
++  bootpath = (char *) grub_malloc ((grub_size_t) bootpath_size + 64);
++  if (! bootpath)
++    {
++      grub_print_error ();
++      return;
++    }
++  grub_ieee1275_get_property (grub_ieee1275_chosen, "bootpath", bootpath,
++                              (grub_size_t) bootpath_size + 1, 0);
++  bootpath[bootpath_size] = '\0';
++
++  type = grub_ieee1275_get_device_type (bootpath);
++  if (type && grub_strcmp (type, "block") == 0)
++      dev_iterate_real (bootpath, bootpath);
++
++  grub_free (bootpath);
++
++  grub_devalias_iterate (dev_iterate_alias);
++  grub_children_iterate ("/", dev_iterate);
+ }
+ 
+ static int
+-- 
+1.8.1.4
+

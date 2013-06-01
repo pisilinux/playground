@@ -1,0 +1,42 @@
+From b7ae222dae310111f17da6e1fc072237977ac417 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Wed, 5 Sep 2012 08:51:31 +0200
+Subject: [PATCH 028/364] 	* grub-core/script/yylex.l: Ignore
+ unused-function and sign-compare 	warnings.
+
+---
+ ChangeLog                | 5 +++++
+ grub-core/script/yylex.l | 2 ++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 70f0c86..66a0245 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2012-09-05  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/script/yylex.l: Ignore unused-function and sign-compare
++	warnings.
++
++2012-09-05  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/partmap/dvh.c (grub_dvh_is_valid): Add missing byteswap.
+ 
+ 2012-09-05  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/script/yylex.l b/grub-core/script/yylex.l
+index f6a39c5..8fdcfef 100644
+--- a/grub-core/script/yylex.l
++++ b/grub-core/script/yylex.l
+@@ -29,6 +29,8 @@
+ #pragma GCC diagnostic ignored "-Wmissing-prototypes"
+ #pragma GCC diagnostic ignored "-Wmissing-declarations"
+ #pragma GCC diagnostic ignored "-Wunsafe-loop-optimizations"
++#pragma GCC diagnostic ignored "-Wunused-function"
++#pragma GCC diagnostic ignored "-Wsign-compare"
+ 
+ #define yyfree    grub_lexer_yyfree
+ #define yyalloc   grub_lexer_yyalloc
+-- 
+1.8.1.4
+

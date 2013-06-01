@@ -1,0 +1,160 @@
+From 13d76e946f149e21c67938e7dadcbb3db9019b17 Mon Sep 17 00:00:00 2001
+From: Andrey Borzenkov <arvidjaar@gmail.com>
+Date: Mon, 25 Feb 2013 22:11:06 +0100
+Subject: [PATCH 156/364] 	* Makefile.util.def: Add partmap/msdos.c to
+ common library. 	* include/grub/msdos_partition.h: Add
+ GRUB_PC_PARTITION_TYPE_LDM 	* grub-core/disk/ldm.c: Check for existence of
+ 	GRUB_PC_PARTITION_TYPE_LDM.
+
+---
+ ChangeLog                      |  7 +++++++
+ Makefile.util.def              |  2 +-
+ grub-core/disk/ldm.c           | 42 ++++++++++++++++++++++++++++++++++++++++--
+ include/grub/msdos_partition.h |  1 +
+ 4 files changed, 49 insertions(+), 3 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index ff5a558..107c049 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,10 @@
++2013-02-25  Andrey Borzenkov <arvidjaar@gmail.com>
++
++	* Makefile.util.def: Add partmap/msdos.c to common library.
++	* include/grub/msdos_partition.h: Add GRUB_PC_PARTITION_TYPE_LDM
++	* grub-core/disk/ldm.c: Check for existence of
++	GRUB_PC_PARTITION_TYPE_LDM.
++
+ 2013-02-25  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/normal/misc.c (grub_normal_print_device_info): Use KiB to display
+diff --git a/Makefile.util.def b/Makefile.util.def
+index 3ee5e4e..1ccf390 100644
+--- a/Makefile.util.def
++++ b/Makefile.util.def
+@@ -32,6 +32,7 @@ library = {
+   common = grub-core/disk/ldm.c;
+   common = grub-core/disk/diskfilter.c;
+   common = grub-core/partmap/gpt.c;
++  common = grub-core/partmap/msdos.c;
+ };
+ 
+ library = {
+@@ -110,7 +111,6 @@ library = {
+   common = grub-core/partmap/acorn.c;
+   common = grub-core/partmap/amiga.c;
+   common = grub-core/partmap/apple.c;
+-  common = grub-core/partmap/msdos.c;
+   common = grub-core/partmap/sun.c;
+   common = grub-core/partmap/plan.c;
+   common = grub-core/partmap/dvh.c;
+diff --git a/grub-core/disk/ldm.c b/grub-core/disk/ldm.c
+index b92433d..a2e26b2 100644
+--- a/grub-core/disk/ldm.c
++++ b/grub-core/disk/ldm.c
+@@ -22,6 +22,7 @@
+ #include <grub/err.h>
+ #include <grub/misc.h>
+ #include <grub/diskfilter.h>
++#include <grub/msdos_partition.h>
+ #include <grub/gpt_partition.h>
+ #include <grub/i18n.h>
+ 
+@@ -103,6 +104,37 @@ read_int (grub_uint8_t *in, grub_size_t s)
+   return ret;
+ }
+ 
++static int
++check_ldm_partition (grub_disk_t disk __attribute__ ((unused)), const grub_partition_t p, void *data)
++{
++  int *has_ldm = data;
++
++  if (p->number >= 4)
++    return 1;
++  if (p->msdostype == GRUB_PC_PARTITION_TYPE_LDM)
++    {
++      *has_ldm = 1;
++      return 1;
++    }
++  return 0;
++}
++
++static int
++msdos_has_ldm_partition (grub_disk_t dsk)
++{
++  grub_err_t err;
++  int has_ldm = 0;
++
++  err = grub_partition_msdos_iterate (dsk, check_ldm_partition, &has_ldm);
++  if (err)
++    {
++      grub_errno = GRUB_ERR_NONE;
++      return 0;
++    }
++
++  return has_ldm;
++}
++
+ static const grub_gpt_part_type_t ldm_type = GRUB_GPT_PARTITION_TYPE_LDM;
+ 
+ /* Helper for gpt_ldm_sector.  */
+@@ -760,17 +792,20 @@ grub_ldm_detect (grub_disk_t disk,
+ 
+   {
+     int i;
++    int has_ldm = msdos_has_ldm_partition (disk);
+     for (i = 0; i < 3; i++)
+       {
+ 	grub_disk_addr_t sector = LDM_LABEL_SECTOR;
+ 	switch (i)
+ 	  {
+ 	  case 0:
++	    if (!has_ldm)
++	      continue;
+ 	    sector = LDM_LABEL_SECTOR;
+ 	    break;
+ 	  case 1:
+ 	    /* LDM is never inside a partition.  */
+-	    if (disk->partition)
++	    if (!has_ldm || disk->partition)
+ 	      continue;
+ 	    sector = grub_disk_get_size (disk);
+ 	    if (sector == GRUB_DISK_SIZE_UNKNOWN)
+@@ -871,6 +906,7 @@ int
+ grub_util_is_ldm (grub_disk_t disk)
+ {
+   int i;
++  int has_ldm = msdos_has_ldm_partition (disk);
+   for (i = 0; i < 3; i++)
+     {
+       grub_disk_addr_t sector = LDM_LABEL_SECTOR;
+@@ -880,11 +916,13 @@ grub_util_is_ldm (grub_disk_t disk)
+       switch (i)
+ 	{
+ 	case 0:
++	  if (!has_ldm)
++	    continue;
+ 	  sector = LDM_LABEL_SECTOR;
+ 	  break;
+ 	case 1:
+ 	  /* LDM is never inside a partition.  */
+-	  if (disk->partition)
++	  if (!has_ldm || disk->partition)
+ 	    continue;
+ 	  sector = grub_disk_get_size (disk);
+ 	  if (sector == GRUB_DISK_SIZE_UNKNOWN)
+diff --git a/include/grub/msdos_partition.h b/include/grub/msdos_partition.h
+index 1e9b65e..92f8539 100644
+--- a/include/grub/msdos_partition.h
++++ b/include/grub/msdos_partition.h
+@@ -43,6 +43,7 @@
+ #define GRUB_PC_PARTITION_TYPE_FAT16_LBA	0xe
+ #define GRUB_PC_PARTITION_TYPE_WIN95_EXTENDED	0xf
+ #define GRUB_PC_PARTITION_TYPE_PLAN9            0x39
++#define GRUB_PC_PARTITION_TYPE_LDM		0x42
+ #define GRUB_PC_PARTITION_TYPE_EZD		0x55
+ #define GRUB_PC_PARTITION_TYPE_MINIX		0x80
+ #define GRUB_PC_PARTITION_TYPE_LINUX_MINIX	0x81
+-- 
+1.8.1.4
+

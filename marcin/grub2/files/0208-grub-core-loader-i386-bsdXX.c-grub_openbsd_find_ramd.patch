@@ -1,0 +1,42 @@
+From a3b87da49162a9c439bf464d0f45a0f48912bff9 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 10 Mar 2013 20:37:41 +0100
+Subject: [PATCH 208/364] 	* grub-core/loader/i386/bsdXX.c
+ (grub_openbsd_find_ramdisk): Use 	multiplication rather than division.
+
+---
+ ChangeLog                     | 5 +++++
+ grub-core/loader/i386/bsdXX.c | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 8f8de8b..4f5a281 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-03-10  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/loader/i386/bsdXX.c (grub_openbsd_find_ramdisk): Use
++	multiplication rather than division.
++
++2013-03-10  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/lib/arg.c (grub_arg_list_alloc): Use shifts rather
+ 	than divisions.
+ 
+diff --git a/grub-core/loader/i386/bsdXX.c b/grub-core/loader/i386/bsdXX.c
+index 3f9f093..9e36cd4 100644
+--- a/grub-core/loader/i386/bsdXX.c
++++ b/grub-core/loader/i386/bsdXX.c
+@@ -594,7 +594,7 @@ SUFFIX(grub_openbsd_find_ramdisk) (grub_file_t file,
+ 	return grub_errno;
+       }
+ 
+-    for (i = 0, sym = syms; i < symsize / symentsize;
++    for (i = 0, sym = syms; i * symentsize < symsize;
+        i++, sym = (Elf_Sym *) ((char *) sym + symentsize))
+       {
+ 	if (ELF_ST_TYPE (sym->st_info) != STT_OBJECT)
+-- 
+1.8.1.4
+

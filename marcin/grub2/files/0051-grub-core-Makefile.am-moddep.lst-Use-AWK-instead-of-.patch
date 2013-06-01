@@ -1,0 +1,26 @@
+From 331fdad4315282f8e367e291131e048593a3a068 Mon Sep 17 00:00:00 2001
+From: Christoph Junghans <ottxor@gentoo.org>
+Date: Fri, 12 Oct 2012 15:04:02 +0200
+Subject: [PATCH 051/364]   * grub-core/Makefile.am (moddep.lst): Use $(AWK)
+ instead of awk
+
+---
+ grub-core/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
+index cc4fb68..9cb14e2 100644
+--- a/grub-core/Makefile.am
++++ b/grub-core/Makefile.am
+@@ -349,7 +349,7 @@ syminfo.lst: gensyminfo.sh kernel_syms.lst $(MODULE_FILES)
+ 
+ # generate global module dependencies list
+ moddep.lst: syminfo.lst genmoddep.awk video.lst
+-	cat $< | sort | awk -f $(srcdir)/genmoddep.awk > $@ || (rm -f $@; exit 1)
++	cat $< | sort | $(AWK) -f $(srcdir)/genmoddep.awk > $@ || (rm -f $@; exit 1)
+ platform_DATA += moddep.lst
+ CLEANFILES += config.log syminfo.lst moddep.lst
+ 
+-- 
+1.8.1.4
+

@@ -1,0 +1,239 @@
+From 031f4b44a6488a0bd7fe79657480484ac981ce9e Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 1 Mar 2013 11:11:36 +0100
+Subject: [PATCH 174/364] 	Remove nested functions from videoinfo
+ iterators.
+
+---
+ ChangeLog                      |  4 ++++
+ grub-core/commands/videoinfo.c | 34 ++++++++++++++++++++--------------
+ grub-core/video/efi_gop.c      | 23 ++++++++++++-----------
+ grub-core/video/i386/pc/vbe.c  |  4 ++--
+ include/grub/video.h           |  2 +-
+ 5 files changed, 39 insertions(+), 28 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 3ca1fed..7f5bcfa 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-03-01  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	Remove nested functions from videoinfo iterators.
++
++2013-03-01  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/loader/i386/pc/linux.c (grub_cmd_linux): Fix compilation
+ 	for 64-bit platforms.
+ 
+diff --git a/grub-core/commands/videoinfo.c b/grub-core/commands/videoinfo.c
+index 4a11576..7a75c9d 100644
+--- a/grub-core/commands/videoinfo.c
++++ b/grub-core/commands/videoinfo.c
+@@ -27,23 +27,28 @@
+ 
+ GRUB_MOD_LICENSE ("GPLv3+");
+ 
+-static unsigned height, width, depth; 
+-static struct grub_video_mode_info *current_mode;
++struct hook_ctx
++{
++  unsigned height, width, depth; 
++  struct grub_video_mode_info *current_mode;
++};
+ 
+ static int
+-hook (const struct grub_video_mode_info *info)
++hook (const struct grub_video_mode_info *info, void *hook_arg)
+ {
+-  if (height && width && (info->width != width || info->height != height))
++  struct hook_ctx *ctx = hook_arg;
++
++  if (ctx->height && ctx->width && (info->width != ctx->width || info->height != ctx->height))
+     return 0;
+ 
+-  if (depth && info->bpp != depth)
++  if (ctx->depth && info->bpp != ctx->depth)
+     return 0;
+ 
+   if (info->mode_number == GRUB_VIDEO_MODE_NUMBER_INVALID)
+     grub_printf ("        ");
+   else
+     {
+-      if (current_mode && info->mode_number == current_mode->mode_number)
++      if (ctx->current_mode && info->mode_number == ctx->current_mode->mode_number)
+ 	grub_printf ("*");
+       else
+ 	grub_printf (" ");
+@@ -126,13 +131,14 @@ grub_cmd_videoinfo (grub_command_t cmd __attribute__ ((unused)),
+ {
+   grub_video_adapter_t adapter;
+   grub_video_driver_id_t id;
++  struct hook_ctx ctx;
+ 
+-  height = width = depth = 0;
++  ctx.height = ctx.width = ctx.depth = 0;
+   if (argc)
+     {
+       char *ptr;
+       ptr = args[0];
+-      width = grub_strtoul (ptr, &ptr, 0);
++      ctx.width = grub_strtoul (ptr, &ptr, 0);
+       if (grub_errno)
+ 	return grub_errno;
+       if (*ptr != 'x')
+@@ -140,13 +146,13 @@ grub_cmd_videoinfo (grub_command_t cmd __attribute__ ((unused)),
+ 			   N_("invalid video mode specification `%s'"),
+ 			   args[0]);
+       ptr++;
+-      height = grub_strtoul (ptr, &ptr, 0);
++      ctx.height = grub_strtoul (ptr, &ptr, 0);
+       if (grub_errno)
+ 	return grub_errno;
+       if (*ptr == 'x')
+ 	{
+ 	  ptr++;
+-	  depth = grub_strtoul (ptr, &ptr, 0);
++	  ctx.depth = grub_strtoul (ptr, &ptr, 0);
+ 	  if (grub_errno)
+ 	    return grub_errno;
+ 	}
+@@ -175,12 +181,12 @@ grub_cmd_videoinfo (grub_command_t cmd __attribute__ ((unused)),
+ 	continue;
+       }
+ 
+-    current_mode = NULL;
++    ctx.current_mode = NULL;
+ 
+     if (adapter->id == id)
+       {
+ 	if (grub_video_get_info (&info) == GRUB_ERR_NONE)
+-	  current_mode = &info;
++	  ctx.current_mode = &info;
+ 	else
+ 	  /* Don't worry about errors.  */
+ 	  grub_errno = GRUB_ERR_NONE;
+@@ -198,14 +204,14 @@ grub_cmd_videoinfo (grub_command_t cmd __attribute__ ((unused)),
+     if (adapter->print_adapter_specific_info)
+       adapter->print_adapter_specific_info ();
+ 
+-    adapter->iterate (hook);
++    adapter->iterate (hook, &ctx);
+ 
+     if (adapter->get_edid && adapter->get_edid (&edid_info) == GRUB_ERR_NONE)
+       print_edid (&edid_info);
+     else
+       grub_errno = GRUB_ERR_NONE;
+ 
+-    current_mode = NULL;
++    ctx.current_mode = NULL;
+ 
+     if (adapter->id != id)
+       {
+diff --git a/grub-core/video/efi_gop.c b/grub-core/video/efi_gop.c
+index 37a0015..f73a278 100644
+--- a/grub-core/video/efi_gop.c
++++ b/grub-core/video/efi_gop.c
+@@ -42,7 +42,7 @@ static int restore_needed;
+ static grub_efi_handle_t gop_handle;
+ 
+ static int
+-grub_video_gop_iterate (int (*hook) (const struct grub_video_mode_info *info));
++grub_video_gop_iterate (int (*hook) (const struct grub_video_mode_info *info, void *hook_arg), void *hook_arg);
+ 
+ static struct
+ {
+@@ -52,6 +52,14 @@ static struct
+   grub_uint8_t *offscreen;
+ } framebuffer;
+ 
++static int
++check_protocol_hook (const struct grub_video_mode_info *info __attribute__ ((unused)), void *hook_arg)
++{
++  int *have_usable_mode = hook_arg;
++  *have_usable_mode = 1;
++  return 1;
++}
++
+ 
+ static int
+ check_protocol (void)
+@@ -60,13 +68,6 @@ check_protocol (void)
+   grub_efi_uintn_t num_handles, i;
+   int have_usable_mode = 0;
+ 
+-  auto int hook (const struct grub_video_mode_info *info);
+-  int hook (const struct grub_video_mode_info *info __attribute__ ((unused)))
+-  {
+-    have_usable_mode = 1;
+-    return 1;
+-  }
+-
+   handles = grub_efi_locate_handle (GRUB_EFI_BY_PROTOCOL,
+ 				    &graphics_output_guid, NULL, &num_handles);
+   if (!handles || num_handles == 0)
+@@ -77,7 +78,7 @@ check_protocol (void)
+       gop_handle = handles[i];
+       gop = grub_efi_open_protocol (gop_handle, &graphics_output_guid,
+ 				    GRUB_EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+-      grub_video_gop_iterate (hook);
++      grub_video_gop_iterate (check_protocol_hook, &have_usable_mode);
+       if (have_usable_mode)
+ 	{
+ 	  grub_free (handles);
+@@ -256,7 +257,7 @@ grub_video_gop_fill_mode_info (unsigned mode,
+ }
+ 
+ static int
+-grub_video_gop_iterate (int (*hook) (const struct grub_video_mode_info *info))
++grub_video_gop_iterate (int (*hook) (const struct grub_video_mode_info *info, void *hook_arg), void *hook_arg)
+ {
+   unsigned mode;
+ 
+@@ -282,7 +283,7 @@ grub_video_gop_iterate (int (*hook) (const struct grub_video_mode_info *info))
+ 	  grub_errno = GRUB_ERR_NONE;
+ 	  continue;
+ 	}
+-      if (hook (&mode_info))
++      if (hook (&mode_info, hook_arg))
+ 	return 1;
+     }
+   return 0;
+diff --git a/grub-core/video/i386/pc/vbe.c b/grub-core/video/i386/pc/vbe.c
+index 81e5a8e..e8a8c7a 100644
+--- a/grub-core/video/i386/pc/vbe.c
++++ b/grub-core/video/i386/pc/vbe.c
+@@ -952,7 +952,7 @@ vbe2videoinfo (grub_uint32_t mode,
+ }
+ 
+ static int
+-grub_video_vbe_iterate (int (*hook) (const struct grub_video_mode_info *info))
++grub_video_vbe_iterate (int (*hook) (const struct grub_video_mode_info *info, void *hook_arg), void *hook_arg)
+ {
+   grub_uint16_t *p;
+   struct grub_vbe_mode_info_block vbe_mode_info;
+@@ -969,7 +969,7 @@ grub_video_vbe_iterate (int (*hook) (const struct grub_video_mode_info *info))
+         }
+ 
+       vbe2videoinfo (*p, &vbe_mode_info, &mode_info);
+-      if (hook (&mode_info))
++      if (hook (&mode_info, hook_arg))
+ 	return 1;
+     }
+   return 0;
+diff --git a/include/grub/video.h b/include/grub/video.h
+index 08f7300..9fe4783 100644
+--- a/include/grub/video.h
++++ b/include/grub/video.h
+@@ -372,7 +372,7 @@ struct grub_video_adapter
+ 
+   grub_err_t (*get_active_render_target) (struct grub_video_render_target **target);
+ 
+-  int (*iterate) (int (*hook) (const struct grub_video_mode_info *info));
++  int (*iterate) (int (*hook) (const struct grub_video_mode_info *info, void *hook_arg), void *hook_arg);
+ 
+   grub_err_t (*get_edid) (struct grub_video_edid_info *edid_info);
+ 
+-- 
+1.8.1.4
+

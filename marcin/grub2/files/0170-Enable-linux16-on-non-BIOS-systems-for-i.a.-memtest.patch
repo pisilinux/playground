@@ -1,0 +1,138 @@
+From 6002efaf14b06075755a6c552989a463c4bd8e4f Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Thu, 28 Feb 2013 22:48:41 +0100
+Subject: [PATCH 170/364] 	Enable linux16 on non-BIOS systems for i.a.
+ memtest.
+
+	* grub-core/loader/i386/pc/linux.c (grub_cmd_linux): Handle hole at 0
+	correctly.
+	* grub-core/Makefile.core.def (linux16): Enable on all x86 flavours.
+---
+ ChangeLog                        |  8 ++++++
+ grub-core/Makefile.core.def      |  6 ++--
+ grub-core/loader/i386/pc/linux.c | 60 ++++++++++++++++++++++++++++------------
+ 3 files changed, 54 insertions(+), 20 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 0eb0516..135586c 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,13 @@
+ 2013-02-28  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	Enable linux16 on non-BIOS systems for i.a. memtest.
++
++	* grub-core/loader/i386/pc/linux.c (grub_cmd_linux): Handle hole at 0
++	correctly.
++	* grub-core/Makefile.core.def (linux16): Enable on all x86 flavours.
++
++2013-02-28  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/kern/i386/coreboot/mmap.c (grub_linuxbios_table_iterate):
+ 	Fix end of table condition.
+ 
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 4b0e6e6..93ff2a8 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -1390,9 +1390,9 @@ module = {
+ 
+ module = {
+   name = linux16;
+-  i386_pc = loader/i386/pc/linux.c;
+-  i386_pc = lib/cmdline.c;
+-  enable = i386_pc;
++  common = loader/i386/pc/linux.c;
++  common = lib/cmdline.c;
++  enable = x86;
+ };
+ 
+ module = {
+diff --git a/grub-core/loader/i386/pc/linux.c b/grub-core/loader/i386/pc/linux.c
+index 4eeb1b6..39206c8 100644
+--- a/grub-core/loader/i386/pc/linux.c
++++ b/grub-core/loader/i386/pc/linux.c
+@@ -79,6 +79,42 @@ grub_linux_unload (void)
+   return GRUB_ERR_NONE;
+ }
+ 
++static int
++target_hook (grub_uint64_t addr, grub_uint64_t size, grub_memory_type_t type,
++	    void *data)
++{
++  grub_uint64_t *result = data;
++  grub_uint64_t candidate;
++
++  if (type != GRUB_MEMORY_AVAILABLE)
++    return 0;
++  if (addr >= 0xa0000)
++    return 0;
++  if (addr + size >= 0xa0000)
++    size = 0xa0000 - addr;
++
++  /* Put the real mode part at as a high location as possible.  */
++  candidate = addr + size - (GRUB_LINUX_CL_OFFSET + maximal_cmdline_size);
++  /* But it must not exceed the traditional area.  */
++  if (candidate > GRUB_LINUX_OLD_REAL_MODE_ADDR)
++    candidate = GRUB_LINUX_OLD_REAL_MODE_ADDR;
++  if (candidate < addr)
++    return 0;
++
++  if (candidate > *result || *result == (grub_uint64_t) -1)
++    *result = candidate;
++  return 0;
++}
++
++static grub_addr_t
++grub_find_real_target (void)
++{
++  grub_uint64_t result = (grub_uint64_t) -1;
++
++  grub_mmap_iterate (target_hook, &result);
++  return result;
++}
++
+ static grub_err_t
+ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+ 		int argc, char *argv[])
+@@ -141,12 +177,13 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+       if (grub_le_to_cpu16 (lh.version) >= 0x0206)
+ 	maximal_cmdline_size = grub_le_to_cpu32 (lh.cmdline_size) + 1;
+ 
+-      /* Put the real mode part at as a high location as possible.  */
+-      grub_linux_real_target = grub_mmap_get_lower () 
+-	- (GRUB_LINUX_CL_OFFSET + maximal_cmdline_size);
+-      /* But it must not exceed the traditional area.  */
+-      if (grub_linux_real_target > GRUB_LINUX_OLD_REAL_MODE_ADDR)
+-	grub_linux_real_target = GRUB_LINUX_OLD_REAL_MODE_ADDR;
++      grub_linux_real_target = grub_find_real_target ();
++      if (grub_linux_real_target == (grub_addr_t)-1)
++	{
++	  grub_error (GRUB_ERR_OUT_OF_RANGE,
++		      "no appropriate low memory found");
++	  goto fail;
++	}
+ 
+       if (grub_le_to_cpu16 (lh.version) >= 0x0201)
+ 	{
+@@ -193,17 +230,6 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+       goto fail;
+     }
+ 
+-  if (grub_linux_real_target + GRUB_LINUX_CL_OFFSET + maximal_cmdline_size
+-      > grub_mmap_get_lower ())
+-    {
+-      grub_error (GRUB_ERR_OUT_OF_RANGE,
+-		 "too small lower memory (0x%x > 0x%x)",
+-		  grub_linux_real_target + GRUB_LINUX_CL_OFFSET
+-		  + maximal_cmdline_size,
+-		  (int) grub_mmap_get_lower ());
+-      goto fail;
+-    }
+-
+   grub_dprintf ("linux", "[Linux-%s, setup=0x%x, size=0x%x]\n",
+ 		grub_linux_is_bzimage ? "bzImage" : "zImage", real_size,
+ 		grub_linux16_prot_size);
+-- 
+1.8.1.4
+

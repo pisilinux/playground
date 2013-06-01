@@ -1,0 +1,132 @@
+From 8c38cb1283a0cf1c8eae465bff26e0ca966ac43a Mon Sep 17 00:00:00 2001
+From: Colin Watson <cjwatson@ubuntu.com>
+Date: Fri, 5 Oct 2012 13:09:19 +0100
+Subject: [PATCH 050/364] * grub-core/loader/i386/linux.c (allocate_pages): Fix
+ spelling of preferred_address. (grub_cmd_linux): Likewise. *
+ grub-core/net/icmp6.c (struct prefix_option): Fix spelling of
+ preferred_lifetime.  Update all users.
+
+---
+ ChangeLog                     |  8 ++++++++
+ grub-core/loader/i386/linux.c | 18 +++++++++---------
+ grub-core/net/icmp6.c         |  6 +++---
+ 3 files changed, 20 insertions(+), 12 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 2658573..d0aeab6 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,11 @@
++2012-10-05  Colin Watson  <cjwatson@debian.org>
++
++	* grub-core/loader/i386/linux.c (allocate_pages): Fix spelling of
++	preferred_address.
++	(grub_cmd_linux): Likewise.
++	* grub-core/net/icmp6.c (struct prefix_option): Fix spelling of
++	preferred_lifetime.  Update all users.
++
+ 2012-09-26  Colin Watson  <cjwatson@ubuntu.com>
+ 
+ 	* Makefile.util.def (grub-mknetdir): Move to $prefix/bin.
+diff --git a/grub-core/loader/i386/linux.c b/grub-core/loader/i386/linux.c
+index bcb037c..fc0ebe7 100644
+--- a/grub-core/loader/i386/linux.c
++++ b/grub-core/loader/i386/linux.c
+@@ -191,7 +191,7 @@ free_pages (void)
+ static grub_err_t
+ allocate_pages (grub_size_t prot_size, grub_size_t *align,
+ 		grub_size_t min_align, int relocatable,
+-		grub_uint64_t prefered_address)
++		grub_uint64_t preferred_address)
+ {
+   grub_err_t err;
+ 
+@@ -215,8 +215,8 @@ allocate_pages (grub_size_t prot_size, grub_size_t *align,
+     if (relocatable)
+       {
+ 	err = grub_relocator_alloc_chunk_align (relocator, &ch,
+-						prefered_address,
+-						prefered_address,
++						preferred_address,
++						preferred_address,
+ 						prot_size, 1,
+ 						GRUB_RELOCATOR_PREFERENCE_LOW,
+ 						1);
+@@ -235,7 +235,7 @@ allocate_pages (grub_size_t prot_size, grub_size_t *align,
+       }
+     else
+       err = grub_relocator_alloc_chunk_addr (relocator, &ch,
+-					     prefered_address,
++					     preferred_address,
+ 					     prot_size);
+     if (err)
+       goto fail;
+@@ -680,7 +680,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+   int i;
+   grub_size_t align, min_align;
+   int relocatable;
+-  grub_uint64_t preffered_address = GRUB_LINUX_BZIMAGE_ADDR;
++  grub_uint64_t preferred_address = GRUB_LINUX_BZIMAGE_ADDR;
+ 
+   grub_dl_ref (my_mod);
+ 
+@@ -775,22 +775,22 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+       prot_size = grub_le_to_cpu32 (lh.init_size);
+       prot_init_space = page_align (prot_size);
+       if (relocatable)
+-	preffered_address = grub_le_to_cpu64 (lh.pref_address);
++	preferred_address = grub_le_to_cpu64 (lh.pref_address);
+       else
+-	preffered_address = GRUB_LINUX_BZIMAGE_ADDR;
++	preferred_address = GRUB_LINUX_BZIMAGE_ADDR;
+     }
+   else
+     {
+       min_align = align;
+       prot_size = prot_file_size;
+-      preffered_address = GRUB_LINUX_BZIMAGE_ADDR;
++      preferred_address = GRUB_LINUX_BZIMAGE_ADDR;
+       /* Usually, the compression ratio is about 50%.  */
+       prot_init_space = page_align (prot_size) * 3;
+     }
+ 
+   if (allocate_pages (prot_size, &align,
+ 		      min_align, relocatable,
+-		      preffered_address))
++		      preferred_address))
+     goto fail;
+ 
+   params = (struct linux_kernel_params *) &linux_params;
+diff --git a/grub-core/net/icmp6.c b/grub-core/net/icmp6.c
+index 4fc343d..9ded94b 100644
+--- a/grub-core/net/icmp6.c
++++ b/grub-core/net/icmp6.c
+@@ -55,7 +55,7 @@ struct prefix_option
+   grub_uint8_t prefixlen;
+   grub_uint8_t flags;
+   grub_uint32_t valid_lifetime;
+-  grub_uint32_t prefered_lifetime;
++  grub_uint32_t preferred_lifetime;
+   grub_uint32_t reserved;
+   grub_uint64_t prefix[2];
+ } __attribute__ ((packed));
+@@ -370,14 +370,14 @@ grub_net_recv_icmp6_packet (struct grub_net_buff *nb,
+ 		struct grub_net_slaac_mac_list *slaac;
+ 		if (!(opt->flags & FLAG_SLAAC)
+ 		    || (grub_be_to_cpu64 (opt->prefix[0]) >> 48) == 0xfe80
+-		    || (grub_be_to_cpu32 (opt->prefered_lifetime)
++		    || (grub_be_to_cpu32 (opt->preferred_lifetime)
+ 			> grub_be_to_cpu32 (opt->valid_lifetime))
+ 		    || opt->prefixlen != 64)
+ 		  {
+ 		    grub_dprintf ("net", "discarded prefix: %d, %d, %d, %d\n",
+ 				  !(opt->flags & FLAG_SLAAC),
+ 				  (grub_be_to_cpu64 (opt->prefix[0]) >> 48) == 0xfe80,
+-				  (grub_be_to_cpu32 (opt->prefered_lifetime)
++				  (grub_be_to_cpu32 (opt->preferred_lifetime)
+ 				   > grub_be_to_cpu32 (opt->valid_lifetime)),
+ 				  opt->prefixlen != 64);
+ 		    continue;
+-- 
+1.8.1.4
+

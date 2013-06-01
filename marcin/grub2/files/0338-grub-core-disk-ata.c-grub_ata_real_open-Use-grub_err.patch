@@ -1,0 +1,41 @@
+From 2e6bc59b479c674f58216d153a6bdd92bcb5d1c7 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Wed, 24 Apr 2013 14:47:14 +0200
+Subject: [PATCH 338/364] 	* grub-core/disk/ata.c (grub_ata_real_open):
+ Use grub_error properly.
+
+---
+ ChangeLog            | 4 ++++
+ grub-core/disk/ata.c | 2 ++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index d863bb3..6d9ffdc 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-24  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/disk/ata.c (grub_ata_real_open): Use grub_error properly.
++
++2013-04-24  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	Add missing video ids to coreboot and ieee1275 video.
+ 
+ 2013-04-24  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/disk/ata.c b/grub-core/disk/ata.c
+index c84d316..dada56d 100644
+--- a/grub-core/disk/ata.c
++++ b/grub-core/disk/ata.c
+@@ -382,6 +382,8 @@ grub_ata_real_open (int id, int bus)
+       err = grub_ata_identify (ata);
+       if (err)
+ 	{
++	  if (!grub_errno)
++	    grub_error (GRUB_ERR_UNKNOWN_DEVICE, "no such ATA device");
+ 	  grub_free (ata);
+ 	  return NULL;
+ 	}
+-- 
+1.8.1.4
+

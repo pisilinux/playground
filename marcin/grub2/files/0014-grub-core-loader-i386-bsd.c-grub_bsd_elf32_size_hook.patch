@@ -1,0 +1,83 @@
+From 6a6140eac9a2d0889dcf6d118979d4af242b8060 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 22 Jul 2012 16:30:48 +0200
+Subject: [PATCH 014/364] 	* grub-core/loader/i386/bsd.c
+ (grub_bsd_elf32_size_hook): Fix mask. 	(grub_bsd_elf32_hook): Likewise. 
+ (grub_bsd_elf64_size_hook): Likewise. 	(grub_bsd_elf64_hook): Likewise. 
+ (grub_bsd_load_elf): Likewise.
+
+---
+ ChangeLog                   |  8 ++++++++
+ grub-core/loader/i386/bsd.c | 10 +++++-----
+ 2 files changed, 13 insertions(+), 5 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 892d31b..f514465 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,13 @@
+ 2012-07-22  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/loader/i386/bsd.c (grub_bsd_elf32_size_hook): Fix mask.
++	(grub_bsd_elf32_hook): Likewise.
++	(grub_bsd_elf64_size_hook): Likewise.
++	(grub_bsd_elf64_hook): Likewise.
++	(grub_bsd_load_elf): Likewise.
++
++2012-07-22  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/lib/xzembed/xz_dec_stream.c (hash_validate): Fix behaviour
+ 	if hash function is unavailable.
+ 	(dec_stream_header): Likewise.
+diff --git a/grub-core/loader/i386/bsd.c b/grub-core/loader/i386/bsd.c
+index 0fd4df0..6e024e4 100644
+--- a/grub-core/loader/i386/bsd.c
++++ b/grub-core/loader/i386/bsd.c
+@@ -1309,7 +1309,7 @@ grub_bsd_elf32_size_hook (grub_elf_t elf __attribute__ ((unused)),
+       && phdr->p_type != PT_DYNAMIC)
+       return 0;
+ 
+-  paddr = phdr->p_paddr & 0xFFFFFF;
++  paddr = phdr->p_paddr & 0xFFFFFFF;
+ 
+   if (paddr < kern_start)
+     kern_start = paddr;
+@@ -1333,7 +1333,7 @@ grub_bsd_elf32_hook (Elf32_Phdr * phdr, grub_addr_t * addr, int *do_load)
+     }
+ 
+   *do_load = 1;
+-  phdr->p_paddr &= 0xFFFFFF;
++  phdr->p_paddr &= 0xFFFFFFF;
+   paddr = phdr->p_paddr;
+ 
+   *addr = (grub_addr_t) (paddr - kern_start + (grub_uint8_t *) kern_chunk_src);
+@@ -1351,7 +1351,7 @@ grub_bsd_elf64_size_hook (grub_elf_t elf __attribute__ ((unused)),
+       && phdr->p_type != PT_DYNAMIC)
+     return 0;
+ 
+-  paddr = phdr->p_paddr & 0xffffff;
++  paddr = phdr->p_paddr & 0xfffffff;
+ 
+   if (paddr < kern_start)
+     kern_start = paddr;
+@@ -1375,7 +1375,7 @@ grub_bsd_elf64_hook (Elf64_Phdr * phdr, grub_addr_t * addr, int *do_load)
+     }
+ 
+   *do_load = 1;
+-  paddr = phdr->p_paddr & 0xffffff;
++  paddr = phdr->p_paddr & 0xfffffff;
+ 
+   *addr = (grub_addr_t) (paddr - kern_start + (grub_uint8_t *) kern_chunk_src);
+ 
+@@ -1394,7 +1394,7 @@ grub_bsd_load_elf (grub_elf_t elf, const char *filename)
+     {
+       grub_relocator_chunk_t ch;
+ 
+-      entry = elf->ehdr.ehdr32.e_entry & 0xFFFFFF;
++      entry = elf->ehdr.ehdr32.e_entry & 0xFFFFFFF;
+       err = grub_elf32_phdr_iterate (elf, filename,
+ 				     grub_bsd_elf32_size_hook, NULL);
+       if (err)
+-- 
+1.8.1.4
+

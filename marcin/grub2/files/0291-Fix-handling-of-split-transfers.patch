@@ -1,0 +1,203 @@
+From a79437c27655683e0d1bff3224c63839ae00455c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ale=C5=A1=20Nesrsta?=  <starous@volny.cz>
+Date: Fri, 12 Apr 2013 20:42:46 +0200
+Subject: [PATCH 291/364] 	Fix handling of split transfers.
+
+---
+ ChangeLog                  |  4 ++++
+ grub-core/bus/usb/ehci.c   | 25 ++++++++++-------------
+ grub-core/bus/usb/usbhub.c | 50 +++++++++++++++++++++++++++++++++++++++-------
+ include/grub/usb.h         |  4 ++--
+ 4 files changed, 59 insertions(+), 24 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 79563b8..e8e4569 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,7 @@
++2013-04-12  Aleš Nesrsta  <starous@volny.cz>
++
++	Fix handling of split transfers.
++
+ 2013-04-12  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/net/http.c: Fix bad free.
+diff --git a/grub-core/bus/usb/ehci.c b/grub-core/bus/usb/ehci.c
+index e902fcd..18b12b2 100644
+--- a/grub-core/bus/usb/ehci.c
++++ b/grub-core/bus/usb/ehci.c
+@@ -798,7 +798,7 @@ grub_ehci_pci_iter (grub_pci_device_t dev, grub_pci_id_t pciid,
+   /* Set ownership of root hub ports to EHCI */
+   grub_ehci_oper_write32 (e, GRUB_EHCI_CONFIG_FLAG, GRUB_EHCI_CF_EHCI_OWNER);
+ 
+-  /* Enable asynchronous list */
++  /* Enable both lists */
+   grub_ehci_oper_write32 (e, GRUB_EHCI_COMMAND,
+ 			  GRUB_EHCI_CMD_AS_ENABL
+ 			  | GRUB_EHCI_CMD_PS_ENABL
+@@ -942,9 +942,9 @@ grub_ehci_setup_qh (grub_ehci_qh_t qh, grub_usb_transfer_t transfer)
+    * SplitCompletionMask - AFAIK it is ignored in asynchronous list,
+    * InterruptScheduleMask - AFAIK it should be zero in async. list */
+   ep_cap |= GRUB_EHCI_MULT_THREE;
+-  ep_cap |= (transfer->dev->port << GRUB_EHCI_DEVPORT_OFF)
++  ep_cap |= (transfer->dev->split_hubport << GRUB_EHCI_DEVPORT_OFF)
+     & GRUB_EHCI_DEVPORT_MASK;
+-  ep_cap |= (transfer->dev->hubaddr << GRUB_EHCI_HUBADDR_OFF)
++  ep_cap |= (transfer->dev->split_hubaddr << GRUB_EHCI_HUBADDR_OFF)
+     & GRUB_EHCI_HUBADDR_MASK;
+   if (transfer->dev->speed == GRUB_USB_SPEED_LOW
+       && transfer->type != GRUB_USB_TRANSACTION_TYPE_CONTROL)
+@@ -1261,16 +1261,6 @@ grub_ehci_setup_transfer (grub_usb_controller_t dev,
+     /* XXX: Fix it: Currently we don't do anything to restart EHCI */
+     return GRUB_USB_ERR_INTERNAL;
+ 
+-  /* Check if transfer is not high speed and connected to root hub.
+-   * It should not happened but... */
+-  if ((transfer->dev->speed != GRUB_USB_SPEED_HIGH)
+-      && !transfer->dev->hubaddr)
+-    {
+-      grub_error (GRUB_USB_ERR_BADDEVICE,
+-		  "FULL/LOW speed device on EHCI port!?!");
+-      return GRUB_USB_ERR_BADDEVICE;
+-    }
+-
+   /* Allocate memory for controller transfer data.  */
+   cdata = grub_malloc (sizeof (*cdata));
+   if (!cdata)
+@@ -1887,13 +1877,18 @@ grub_ehci_fini_hw (int noreturn __attribute__ ((unused)))
+   /* We should disable all EHCI HW to prevent any DMA access etc. */
+   for (e = ehci; e; e = e->next)
+     {
++      /* Disable both lists */
++      grub_ehci_oper_write32 (e, GRUB_EHCI_COMMAND,
++        ~(GRUB_EHCI_CMD_AS_ENABL | GRUB_EHCI_CMD_PS_ENABL)
++        & grub_ehci_oper_read32 (e, GRUB_EHCI_COMMAND));
++
+       /* Check if EHCI is halted and halt it if not */
+       if (grub_ehci_halt (e) != GRUB_USB_ERR_NONE)
+-	grub_error (GRUB_ERR_TIMEOUT, "restore_hw: EHCI halt timeout");
++	grub_error (GRUB_ERR_TIMEOUT, "fini_hw: EHCI halt timeout");
+ 
+       /* Reset EHCI */
+       if (grub_ehci_reset (e) != GRUB_USB_ERR_NONE)
+-	grub_error (GRUB_ERR_TIMEOUT, "restore_hw: EHCI reset timeout");
++	grub_error (GRUB_ERR_TIMEOUT, "fini_hw: EHCI reset timeout");
+     }
+ 
+   return GRUB_USB_ERR_NONE;
+diff --git a/grub-core/bus/usb/usbhub.c b/grub-core/bus/usb/usbhub.c
+index 6fc9d02..e3b7d40 100644
+--- a/grub-core/bus/usb/usbhub.c
++++ b/grub-core/bus/usb/usbhub.c
+@@ -49,7 +49,7 @@ static grub_usb_controller_dev_t grub_usb_list;
+ static grub_usb_device_t
+ grub_usb_hub_add_dev (grub_usb_controller_t controller,
+                       grub_usb_speed_t speed,
+-                      int port, int hubaddr)
++                      int split_hubport, int split_hubaddr)
+ {
+   grub_usb_device_t dev;
+   int i;
+@@ -63,8 +63,8 @@ grub_usb_hub_add_dev (grub_usb_controller_t controller,
+ 
+   dev->controller = *controller;
+   dev->speed = speed;
+-  dev->port = port;
+-  dev->hubaddr = hubaddr;
++  dev->split_hubport = split_hubport;
++  dev->split_hubaddr = split_hubaddr;
+ 
+   err = grub_usb_device_initialize (dev);
+   if (err)
+@@ -108,8 +108,8 @@ grub_usb_hub_add_dev (grub_usb_controller_t controller,
+ 
+   grub_dprintf ("usb", "Added new usb device: %p, addr=%d\n",
+ 		dev, i);
+-  grub_dprintf ("usb", "speed=%d, port=%d, hubaddr=%d\n",
+-		speed, port, hubaddr);
++  grub_dprintf ("usb", "speed=%d, split_hubport=%d, split_hubaddr=%d\n",
++		speed, split_hubport, split_hubaddr);
+ 
+   /* Wait "recovery interval", spec. says 2ms */
+   grub_millisleep (2);
+@@ -219,7 +219,12 @@ attach_root_port (struct grub_usb_hub *hub, int portno,
+   grub_boot_time ("Port enabled");
+ 
+   /* Enable the port and create a device.  */
+-  dev = grub_usb_hub_add_dev (hub->controller, speed, portno, 0);
++  /* High speed device needs not transaction translation
++     and full/low speed device cannot be connected to EHCI root hub
++     and full/low speed device connected to OHCI/UHCI needs not
++     transaction translation - e.g. hubport and hubaddr should be
++     always none (zero) for any device connected to any root hub. */
++  dev = grub_usb_hub_add_dev (hub->controller, speed, 0, 0);
+   hub->controller->dev->pending_reset = 0;
+   npending--;
+   if (! dev)
+@@ -593,6 +598,8 @@ poll_nonroot_hub (grub_usb_device_t dev)
+ 	    {
+ 	      grub_usb_speed_t speed;
+ 	      grub_usb_device_t next_dev;
++	      int split_hubport = 0;
++	      int split_hubaddr = 0;
+ 
+ 	      /* Determine the device speed.  */
+ 	      if (status & GRUB_USB_HUB_STATUS_PORT_LOWSPEED)
+@@ -608,8 +615,37 @@ poll_nonroot_hub (grub_usb_device_t dev)
+ 	      /* Wait a recovery time after reset, spec. says 10ms */
+ 	      grub_millisleep (10);
+ 
++              /* Find correct values for SPLIT hubport and hubaddr */
++	      if (speed == GRUB_USB_SPEED_HIGH)
++	        {
++		  /* HIGH speed device needs not transaction translation */
++		  split_hubport = 0;
++		  split_hubaddr = 0;
++		}
++	      else
++	        /* FULL/LOW device needs hub port and hub address
++		   for transaction translation (if connected to EHCI) */
++	        if (dev->speed == GRUB_USB_SPEED_HIGH)
++	          {
++		    /* This port is the first FULL/LOW speed port
++		       in the chain from root hub. Attached device
++		       should use its port number and hub address */
++		    split_hubport = i;
++		    split_hubaddr = dev->addr;
++		  }
++	        else
++	          {
++		    /* This port is NOT the first FULL/LOW speed port
++		       in the chain from root hub. Attached device
++		       should use values inherited from some parent
++		       HIGH speed hub - if any. */
++		    split_hubport = dev->split_hubport;
++		    split_hubaddr = dev->split_hubaddr;
++		  }
++		
+ 	      /* Add the device and assign a device address to it.  */
+-	      next_dev = grub_usb_hub_add_dev (&dev->controller, speed, i, dev->addr);
++	      next_dev = grub_usb_hub_add_dev (&dev->controller, speed,
++					       split_hubport, split_hubaddr);
+ 	      if (dev->controller.dev->pending_reset)
+ 		{
+ 		  dev->controller.dev->pending_reset = 0;
+diff --git a/include/grub/usb.h b/include/grub/usb.h
+index 9e2c221..1cc9942 100644
+--- a/include/grub/usb.h
++++ b/include/grub/usb.h
+@@ -225,9 +225,9 @@ struct grub_usb_device
+   struct grub_usb_desc_endp *hub_endpoint;
+ 
+   /* EHCI Split Transfer information */
+-  int port;
++  int split_hubport;
+ 
+-  int hubaddr;
++  int split_hubaddr;
+ };
+ 
+ 
+-- 
+1.8.1.4
+

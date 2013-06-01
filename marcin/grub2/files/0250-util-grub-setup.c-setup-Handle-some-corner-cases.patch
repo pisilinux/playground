@@ -1,0 +1,68 @@
+From 14cd2eb249c43b97193fc8456e0ffa073537bdbd Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Thu, 4 Apr 2013 08:55:06 +0200
+Subject: [PATCH 250/364] 	* util/grub-setup.c (setup): Handle some
+ corner cases.
+
+---
+ ChangeLog         | 4 ++++
+ util/grub-setup.c | 8 ++++++--
+ 2 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 467a621..8a3fd45 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-04  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* util/grub-setup.c (setup): Handle some corner cases.
++
++2013-04-04  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/lib/posix_wrap/locale.h [GRUB_UTIL]: Include host locale.h.
+ 
+ 2013-04-03  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/util/grub-setup.c b/util/grub-setup.c
+index 5a7a857..27a815f 100644
+--- a/util/grub-setup.c
++++ b/util/grub-setup.c
+@@ -256,7 +256,7 @@ setup (const char *dir,
+   grub_device_t root_dev = 0, dest_dev, core_dev;
+   struct blocklists bl;
+   char *tmp_img;
+-  grub_disk_addr_t first_sector;
++  grub_disk_addr_t first_sector = (grub_disk_addr_t)-1;
+   FILE *fp;
+ 
+ #ifdef GRUB_SETUP_BIOS
+@@ -756,6 +756,8 @@ unable_to_embed:
+ 	  grub_util_error ("%s", _("blocksize is not divisible by 512"));
+ 	mul = bsize >> GRUB_DISK_SECTOR_BITS;
+ 	nblocks = (core_size + bsize - 1) / bsize;
++	if (mul == 0 || nblocks == 0)
++	  grub_util_error ("%s", _("can't retrieve blocklists"));
+ 	for (i = 0; i < nblocks; i++)
+ 	  {
+ 	    unsigned blk = i;
+@@ -808,7 +810,7 @@ unable_to_embed:
+ 			      - j * GRUB_DISK_SECTOR_SIZE);
+ 		if (len > GRUB_DISK_SECTOR_SIZE)
+ 		  len = GRUB_DISK_SECTOR_SIZE;
+-		if (i == 0 && j == 0)
++		if (first_sector == (grub_disk_addr_t)-1)
+ 		  save_first_sector ((fie2->fm_extents[i].fe_physical
+ 				      >> GRUB_DISK_SECTOR_BITS)
+ 				     + j + container_start,
+@@ -825,6 +827,8 @@ unable_to_embed:
+ 
+ 	      }
+ 	  }
++	if (first_sector == (grub_disk_addr_t)-1)
++	  grub_util_error ("%s", _("can't retrieve blocklists"));
+       }
+     fclose (fp);
+   }
+-- 
+1.8.1.4
+

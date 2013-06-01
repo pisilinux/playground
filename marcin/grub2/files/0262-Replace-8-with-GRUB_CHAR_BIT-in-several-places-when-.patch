@@ -1,0 +1,69 @@
+From 28faaaf7c2a7b639839dcb027275f0f8631ed837 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 5 Apr 2013 10:59:26 +0200
+Subject: [PATCH 262/364] 	Replace 8 with GRUB_CHAR_BIT in several places
+ when appropriate.
+
+---
+ ChangeLog                    | 4 ++++
+ grub-core/disk/cryptodisk.c  | 2 +-
+ grub-core/disk/efi/efidisk.c | 2 +-
+ grub-core/disk/geli.c        | 2 +-
+ 4 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 3431895..7e2a62f 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	Replace 8 with GRUB_CHAR_BIT in several places when appropriate.
++
++2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	Add new defines GRUB_RSDP_SIGNATURE_SIZE and GRUB_RSDP_SIGNATURE.
+ 
+ 2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/disk/cryptodisk.c b/grub-core/disk/cryptodisk.c
+index 374edd1..5b12a23 100644
+--- a/grub-core/disk/cryptodisk.c
++++ b/grub-core/disk/cryptodisk.c
+@@ -103,7 +103,7 @@ gf_mul_be (grub_uint8_t *o, const grub_uint8_t *a, const grub_uint8_t *b)
+   grub_memcpy (t, b, GRUB_CRYPTODISK_GF_BYTES);
+   for (i = 0; i < GRUB_CRYPTODISK_GF_SIZE; i++)
+     {
+-      if (((a[GRUB_CRYPTODISK_GF_BYTES - i / 8 - 1] >> (i % 8))) & 1)
++      if (((a[GRUB_CRYPTODISK_GF_BYTES - i / GRUB_CHAR_BIT - 1] >> (i % GRUB_CHAR_BIT))) & 1)
+ 	grub_crypto_xor (o, o, t, GRUB_CRYPTODISK_GF_BYTES);
+       gf_mul_x_be (t);
+     }
+diff --git a/grub-core/disk/efi/efidisk.c b/grub-core/disk/efi/efidisk.c
+index 0a364f1..28b9fa1 100644
+--- a/grub-core/disk/efi/efidisk.c
++++ b/grub-core/disk/efi/efidisk.c
+@@ -501,7 +501,7 @@ grub_efidisk_open (const char *name, struct grub_disk *disk)
+   if (! d)
+     return grub_error (GRUB_ERR_UNKNOWN_DEVICE, "no such device");
+ 
+-  disk->id = ((num << 8) | name[0]);
++  disk->id = ((num << GRUB_CHAR_BIT) | name[0]);
+   m = d->block_io->media;
+   /* FIXME: Probably it is better to store the block size in the disk,
+      and total sectors should be replaced with total blocks.  */
+diff --git a/grub-core/disk/geli.c b/grub-core/disk/geli.c
+index 0b94414..55aa5b9 100644
+--- a/grub-core/disk/geli.c
++++ b/grub-core/disk/geli.c
+@@ -414,7 +414,7 @@ recover_key (grub_disk_t source, grub_cryptodisk_t dev)
+   if (err)
+     return err;
+ 
+-  keysize = grub_le_to_cpu16 (header.keylen) / 8;
++  keysize = grub_le_to_cpu16 (header.keylen) / GRUB_CHAR_BIT;
+   grub_memset (zero, 0, sizeof (zero));
+ 
+   grub_puts_ (N_("Attempting to decrypt master key..."));
+-- 
+1.8.1.4
+

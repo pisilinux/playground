@@ -1,0 +1,121 @@
+From 731ae0c1c7c0458a257e75c55b7739881dc2d5ed Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Tue, 18 Sep 2012 11:52:19 +0200
+Subject: [PATCH 041/364] 	* grub-core/kern/ieee1275/cmain.c
+ (grub_ieee1275_find_options): Set 
+ GRUB_IEEE1275_FLAG_CURSORONOFF_ANSI_BROKEN on mac. 	*
+ grub-core/term/ieee1275/console.c (grub_console_init_lately): Use 
+ ieee1275-nocursor if GRUB_IEEE1275_FLAG_CURSORONOFF_ANSI_BROKEN is set. 
+ * grub-core/term/terminfo.c (grub_terminfo_set_current): Add new type 
+ ieee1275-nocursor. 	* include/grub/ieee1275/ieee1275.h
+ (grub_ieee1275_flag): New value 
+ GRUB_IEEE1275_FLAG_CURSORONOFF_ANSI_BROKEN.
+
+---
+ ChangeLog                         | 11 +++++++++++
+ grub-core/kern/ieee1275/cmain.c   |  1 +
+ grub-core/term/ieee1275/console.c |  3 ++-
+ grub-core/term/terminfo.c         | 15 ++++++++++++---
+ include/grub/ieee1275/ieee1275.h  |  4 +++-
+ 5 files changed, 29 insertions(+), 5 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index b524cf6..3752a79 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,16 @@
+ 2012-09-18  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/kern/ieee1275/cmain.c (grub_ieee1275_find_options): Set
++	GRUB_IEEE1275_FLAG_CURSORONOFF_ANSI_BROKEN on mac.
++	* grub-core/term/ieee1275/console.c (grub_console_init_lately): Use
++	ieee1275-nocursor if GRUB_IEEE1275_FLAG_CURSORONOFF_ANSI_BROKEN is set.
++	* grub-core/term/terminfo.c (grub_terminfo_set_current): Add new type
++	ieee1275-nocursor.
++	* include/grub/ieee1275/ieee1275.h (grub_ieee1275_flag): New value
++	GRUB_IEEE1275_FLAG_CURSORONOFF_ANSI_BROKEN.
++
++2012-09-18  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/loader/i386/linux.c (grub_cmd_linux): Fix incorrect
+ 	le-conversion.
+ 	Reported by: BURETTE, Bernard.
+diff --git a/grub-core/kern/ieee1275/cmain.c b/grub-core/kern/ieee1275/cmain.c
+index dd04d39..789669a 100644
+--- a/grub-core/kern/ieee1275/cmain.c
++++ b/grub-core/kern/ieee1275/cmain.c
+@@ -117,6 +117,7 @@ grub_ieee1275_find_options (void)
+ 	      grub_ieee1275_set_flag (GRUB_IEEE1275_FLAG_BROKEN_ADDRESS_CELLS);
+ 	      grub_ieee1275_set_flag (GRUB_IEEE1275_FLAG_NO_OFNET_SUFFIX);
+ 	      grub_ieee1275_set_flag (GRUB_IEEE1275_FLAG_VIRT_TO_REAL_BROKEN);
++	      grub_ieee1275_set_flag (GRUB_IEEE1275_FLAG_CURSORONOFF_ANSI_BROKEN);
+ 	      break;
+ 	    }
+ 	}
+diff --git a/grub-core/term/ieee1275/console.c b/grub-core/term/ieee1275/console.c
+index a8dfcff..93b81f4 100644
+--- a/grub-core/term/ieee1275/console.c
++++ b/grub-core/term/ieee1275/console.c
+@@ -247,9 +247,10 @@ grub_console_init_lately (void)
+ 
+   if (grub_ieee1275_test_flag (GRUB_IEEE1275_FLAG_NO_ANSI))
+     type = "dumb";
++  else if (grub_ieee1275_test_flag (GRUB_IEEE1275_FLAG_CURSORONOFF_ANSI_BROKEN))
++    type = "ieee1275-nocursor";
+   else
+     type = "ieee1275";
+-
+   grub_terminfo_init ();
+   grub_terminfo_output_register (&grub_console_term_output, type);
+ }
+diff --git a/grub-core/term/terminfo.c b/grub-core/term/terminfo.c
+index d421e4e..a0f8d18 100644
+--- a/grub-core/term/terminfo.c
++++ b/grub-core/term/terminfo.c
+@@ -143,7 +143,8 @@ grub_terminfo_set_current (struct grub_term_output *term,
+       return grub_errno;
+     }
+ 
+-  if (grub_strcmp ("ieee1275", str) == 0)
++  if (grub_strcmp ("ieee1275", str) == 0
++      || grub_strcmp ("ieee1275-nocursor", str) == 0)
+     {
+       data->name              = grub_strdup ("ieee1275");
+       data->gotoxy            = grub_strdup ("\e[%i%p1%d;%p2%dH");
+@@ -153,8 +154,16 @@ grub_terminfo_set_current (struct grub_term_output *term,
+       data->cls               = grub_strdup ("\e[2J");
+       data->reverse_video_on  = grub_strdup ("\e[7m");
+       data->reverse_video_off = grub_strdup ("\e[m");
+-      data->cursor_on         = grub_strdup ("\e[?25h");
+-      data->cursor_off        = grub_strdup ("\e[?25l");
++      if (grub_strcmp ("ieee1275", str) == 0)
++	{
++	  data->cursor_on         = grub_strdup ("\e[?25h");
++	  data->cursor_off        = grub_strdup ("\e[?25l");
++	}
++      else
++	{
++	  data->cursor_on         = 0;
++	  data->cursor_off        = 0;
++	}
+       data->setcolor          = grub_strdup ("\e[3%p1%dm\e[4%p2%dm");
+       return grub_errno;
+     }
+diff --git a/include/grub/ieee1275/ieee1275.h b/include/grub/ieee1275/ieee1275.h
+index 38a75fd..ee9b707 100644
+--- a/include/grub/ieee1275/ieee1275.h
++++ b/include/grub/ieee1275/ieee1275.h
+@@ -123,7 +123,9 @@ enum grub_ieee1275_flag
+ 
+   GRUB_IEEE1275_FLAG_VIRT_TO_REAL_BROKEN,
+ 
+-  GRUB_IEEE1275_FLAG_BROKEN_REPEAT
++  GRUB_IEEE1275_FLAG_BROKEN_REPEAT,
++
++  GRUB_IEEE1275_FLAG_CURSORONOFF_ANSI_BROKEN,
+ };
+ 
+ extern int EXPORT_FUNC(grub_ieee1275_test_flag) (enum grub_ieee1275_flag flag);
+-- 
+1.8.1.4
+

@@ -1,0 +1,70 @@
+From bd0f06eea6be3f3e2efb07069f853741867a320f Mon Sep 17 00:00:00 2001
+From: Colin Watson <cjwatson@ubuntu.com>
+Date: Wed, 2 Jan 2013 12:48:31 +0000
+Subject: [PATCH 076/364] Fix failing printf test.
+
+* grub-core/kern/misc.c (grub_vsnprintf_real): Parse '-', '.', and
+'$' in the correct order when collecting type information.
+---
+ ChangeLog             |  7 +++++++
+ grub-core/kern/misc.c | 17 ++++++++++-------
+ 2 files changed, 17 insertions(+), 7 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 68920bf..bb263f2 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,12 @@
+ 2013-01-02  Colin Watson  <cjwatson@ubuntu.com>
+ 
++	Fix failing printf test.
++
++	* grub-core/kern/misc.c (grub_vsnprintf_real): Parse '-', '.', and
++	'$' in the correct order when collecting type information.
++
++2013-01-02  Colin Watson  <cjwatson@ubuntu.com>
++
+ 	* docs/grub.texi (configfile): Explain environment variable
+ 	handling.
+ 	(source): New section.
+diff --git a/grub-core/kern/misc.c b/grub-core/kern/misc.c
+index 95d4624..c3203a0 100644
+--- a/grub-core/kern/misc.c
++++ b/grub-core/kern/misc.c
+@@ -741,23 +741,26 @@ grub_vsnprintf_real (char *str, grub_size_t max_len, const char *fmt0, va_list a
+       if (*fmt && *fmt =='-')
+ 	fmt++;
+ 
+-      while (*fmt && grub_isdigit (*fmt))
+-	fmt++;
+-
+-      if (*fmt && *fmt =='.')
+-	fmt++;
++      p = fmt;
+ 
+       while (*fmt && grub_isdigit (*fmt))
+ 	fmt++;
+ 
+-      p = fmt;
+-
+       if (*fmt && *fmt == '$')
+ 	{
+ 	  curn = grub_strtoull (p, 0, 10) - 1;
+ 	  fmt++;
+ 	}
+ 
++      if (*fmt && *fmt =='-')
++	fmt++;
++
++      while (*fmt && grub_isdigit (*fmt))
++	fmt++;
++
++      if (*fmt && *fmt =='.')
++	fmt++;
++
+       while (*fmt && grub_isdigit (*fmt))
+ 	fmt++;
+ 
+-- 
+1.8.1.4
+

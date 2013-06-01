@@ -1,0 +1,40 @@
+From 78ba098e4146119aab14f66f13ad4d8e20962342 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 3 Mar 2013 01:30:55 +0100
+Subject: [PATCH 189/364] 	* grub-core/disk/ieee1275/nand.c: Fix
+ compilation on 	i386-ieee1275.
+
+---
+ ChangeLog                      | 5 +++++
+ grub-core/disk/ieee1275/nand.c | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index ea87229..f117127 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-03-03  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/disk/ieee1275/nand.c: Fix compilation on
++	i386-ieee1275.
++
+ 2013-03-02  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* include/grub/cmos.h: Handle high CMOS addresses on sparc64.
+diff --git a/grub-core/disk/ieee1275/nand.c b/grub-core/disk/ieee1275/nand.c
+index 30ea0f2..576e9cc 100644
+--- a/grub-core/disk/ieee1275/nand.c
++++ b/grub-core/disk/ieee1275/nand.c
+@@ -47,7 +47,7 @@ grub_nand_iterate (grub_disk_dev_iterate_hook_t hook, void *hook_data,
+ 
+       have_nand = 0;
+       FOR_IEEE1275_DEVALIASES(alias)
+-	if (grub_strcmp (alias->name, "nand") == 0)
++	if (grub_strcmp (alias.name, "nand") == 0)
+ 	  {
+ 	    have_nand = 1;
+ 	    break;
+-- 
+1.8.1.4
+

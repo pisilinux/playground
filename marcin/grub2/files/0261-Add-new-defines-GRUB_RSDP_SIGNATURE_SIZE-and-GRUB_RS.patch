@@ -1,0 +1,137 @@
+From ef226c0cc274e70d8a2be3798a1c7ae3e96dbdce Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 5 Apr 2013 10:56:43 +0200
+Subject: [PATCH 261/364] 	Add new defines GRUB_RSDP_SIGNATURE_SIZE and
+ GRUB_RSDP_SIGNATURE.
+
+---
+ ChangeLog                         |  4 ++++
+ grub-core/commands/acpi.c         | 10 +++++-----
+ grub-core/commands/i386/pc/acpi.c |  8 ++++----
+ include/grub/acpi.h               |  5 ++++-
+ 4 files changed, 17 insertions(+), 10 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index e52e7ee..3431895 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	Add new defines GRUB_RSDP_SIGNATURE_SIZE and GRUB_RSDP_SIGNATURE.
++
++2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/commands/verify.c: Use GRUB_CHAR_BIT.
+ 
+ 2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/commands/acpi.c b/grub-core/commands/acpi.c
+index 8000873..4ca8cf7 100644
+--- a/grub-core/commands/acpi.c
++++ b/grub-core/commands/acpi.c
+@@ -217,7 +217,7 @@ grub_acpi_create_ebda (void)
+     {
+       grub_dprintf ("acpi", "Scanning EBDA for old rsdpv2\n");
+       for (; target < targetebda + 0x400 - v2->length; target += 0x10)
+-	if (grub_memcmp (target, "RSD PTR ", 8) == 0
++	if (grub_memcmp (target, GRUB_RSDP_SIGNATURE, GRUB_RSDP_SIGNATURE_SIZE) == 0
+ 	    && grub_byte_checksum (target,
+ 				   sizeof (struct grub_acpi_rsdp_v10)) == 0
+ 	    && ((struct grub_acpi_rsdp_v10 *) target)->revision != 0
+@@ -238,7 +238,7 @@ grub_acpi_create_ebda (void)
+       grub_dprintf ("acpi", "Scanning EBDA for old rsdpv1\n");
+       for (; target < targetebda + 0x400 - sizeof (struct grub_acpi_rsdp_v10);
+ 	   target += 0x10)
+-	if (grub_memcmp (target, "RSD PTR ", 8) == 0
++	if (grub_memcmp (target, GRUB_RSDP_SIGNATURE, GRUB_RSDP_SIGNATURE_SIZE) == 0
+ 	    && grub_byte_checksum (target,
+ 				   sizeof (struct grub_acpi_rsdp_v10)) == 0)
+ 	  {
+@@ -299,7 +299,7 @@ grub_acpi_create_ebda (void)
+   for (target = targetebda;
+        target < targetebda + 0x400 - sizeof (struct grub_acpi_rsdp_v10);
+        target += 0x10)
+-    if (grub_memcmp (target, "RSD PTR ", 8) == 0
++    if (grub_memcmp (target, GRUB_RSDP_SIGNATURE, GRUB_RSDP_SIGNATURE_SIZE) == 0
+ 	&& grub_byte_checksum (target,
+ 			       sizeof (struct grub_acpi_rsdp_v10)) == 0
+ 	&& target != v1inebda && target != v2inebda)
+@@ -394,7 +394,7 @@ setv1table (void)
+   /* Create RSDP. */
+   rsdpv1_new = (struct grub_acpi_rsdp_v10 *) playground_ptr;
+   playground_ptr += sizeof (struct grub_acpi_rsdp_v10);
+-  grub_memcpy (&(rsdpv1_new->signature), "RSD PTR ",
++  grub_memcpy (&(rsdpv1_new->signature), GRUB_RSDP_SIGNATURE,
+ 	       sizeof (rsdpv1_new->signature));
+   grub_memcpy (&(rsdpv1_new->oemid), root_oemid, sizeof  (rsdpv1_new->oemid));
+   rsdpv1_new->revision = 0;
+@@ -438,7 +438,7 @@ setv2table (void)
+   /* Create RSDPv2. */
+   rsdpv2_new = (struct grub_acpi_rsdp_v20 *) playground_ptr;
+   playground_ptr += sizeof (struct grub_acpi_rsdp_v20);
+-  grub_memcpy (&(rsdpv2_new->rsdpv1.signature), "RSD PTR ",
++  grub_memcpy (&(rsdpv2_new->rsdpv1.signature), GRUB_RSDP_SIGNATURE,
+ 	       sizeof (rsdpv2_new->rsdpv1.signature));
+   grub_memcpy (&(rsdpv2_new->rsdpv1.oemid), root_oemid,
+ 	       sizeof (rsdpv2_new->rsdpv1.oemid));
+diff --git a/grub-core/commands/i386/pc/acpi.c b/grub-core/commands/i386/pc/acpi.c
+index 88e4f55..d415d23 100644
+--- a/grub-core/commands/i386/pc/acpi.c
++++ b/grub-core/commands/i386/pc/acpi.c
+@@ -32,7 +32,7 @@ grub_machine_acpi_get_rsdpv1 (void)
+   if (! ebda_len)
+     return 0;
+   for (ptr = ebda; ptr < ebda + 0x400; ptr += 16)
+-    if (grub_memcmp (ptr, "RSD PTR ", 8) == 0
++    if (grub_memcmp (ptr, GRUB_RSDP_SIGNATURE, GRUB_RSDP_SIGNATURE_SIZE) == 0
+ 	&& grub_byte_checksum (ptr, sizeof (struct grub_acpi_rsdp_v10)) == 0
+ 	&& ((struct grub_acpi_rsdp_v10 *) ptr)->revision == 0)
+       return (struct grub_acpi_rsdp_v10 *) ptr;
+@@ -40,7 +40,7 @@ grub_machine_acpi_get_rsdpv1 (void)
+   grub_dprintf ("acpi", "Looking for RSDP. Scanning BIOS\n");
+   for (ptr = (grub_uint8_t *) 0xe0000; ptr < (grub_uint8_t *) 0x100000;
+        ptr += 16)
+-    if (grub_memcmp (ptr, "RSD PTR ", 8) == 0
++    if (grub_memcmp (ptr, GRUB_RSDP_SIGNATURE, GRUB_RSDP_SIGNATURE_SIZE) == 0
+ 	&& grub_byte_checksum (ptr, sizeof (struct grub_acpi_rsdp_v10)) == 0
+ 	&& ((struct grub_acpi_rsdp_v10 *) ptr)->revision == 0)
+       return (struct grub_acpi_rsdp_v10 *) ptr;
+@@ -59,7 +59,7 @@ grub_machine_acpi_get_rsdpv2 (void)
+   if (! ebda_len)
+     return 0;
+   for (ptr = ebda; ptr < ebda + 0x400; ptr += 16)
+-    if (grub_memcmp (ptr, "RSD PTR ", 8) == 0
++    if (grub_memcmp (ptr, GRUB_RSDP_SIGNATURE, GRUB_RSDP_SIGNATURE_SIZE) == 0
+ 	&& grub_byte_checksum (ptr, sizeof (struct grub_acpi_rsdp_v10)) == 0
+ 	&& ((struct grub_acpi_rsdp_v10 *) ptr)->revision != 0
+ 	&& ((struct grub_acpi_rsdp_v20 *) ptr)->length < 1024
+@@ -70,7 +70,7 @@ grub_machine_acpi_get_rsdpv2 (void)
+   grub_dprintf ("acpi", "Looking for RSDP. Scanning BIOS\n");
+   for (ptr = (grub_uint8_t *) 0xe0000; ptr < (grub_uint8_t *) 0x100000;
+        ptr += 16)
+-    if (grub_memcmp (ptr, "RSD PTR ", 8) == 0
++    if (grub_memcmp (ptr, GRUB_RSDP_SIGNATURE, GRUB_RSDP_SIGNATURE_SIZE) == 0
+ 	&& grub_byte_checksum (ptr, sizeof (struct grub_acpi_rsdp_v10)) == 0
+ 	&& ((struct grub_acpi_rsdp_v10 *) ptr)->revision != 0
+ 	&& ((struct grub_acpi_rsdp_v20 *) ptr)->length < 1024
+diff --git a/include/grub/acpi.h b/include/grub/acpi.h
+index 8fa957d..32bb95c 100644
+--- a/include/grub/acpi.h
++++ b/include/grub/acpi.h
+@@ -24,9 +24,12 @@
+ #include <grub/err.h>
+ #endif
+ 
++#define GRUB_RSDP_SIGNATURE "RSD PTR "
++#define GRUB_RSDP_SIGNATURE_SIZE 8
++
+ struct grub_acpi_rsdp_v10
+ {
+-  grub_uint8_t signature[8];
++  grub_uint8_t signature[GRUB_RSDP_SIGNATURE_SIZE];
+   grub_uint8_t checksum;
+   grub_uint8_t oemid[6];
+   grub_uint8_t revision;
+-- 
+1.8.1.4
+

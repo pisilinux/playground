@@ -1,0 +1,34 @@
+From fc4e8f971c20e45d49c3a252c119d1b27802f79f Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Thu, 4 Apr 2013 08:54:02 +0200
+Subject: [PATCH 249/364] 	* grub-core/lib/posix_wrap/locale.h
+ [GRUB_UTIL]: Include host locale.h.
+
+---
+ ChangeLog                         | 4 ++++
+ grub-core/lib/posix_wrap/locale.h | 3 +++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 6dc95ba..467a621 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,7 @@
++2013-04-04  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/lib/posix_wrap/locale.h [GRUB_UTIL]: Include host locale.h.
++
+ 2013-04-03  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/commands/verify.c: Save verified file to avoid it being
+diff --git a/grub-core/lib/posix_wrap/locale.h b/grub-core/lib/posix_wrap/locale.h
+index e69de29..569a765 100644
+--- a/grub-core/lib/posix_wrap/locale.h
++++ b/grub-core/lib/posix_wrap/locale.h
+@@ -0,0 +1,3 @@
++#ifdef GRUB_UTIL
++#include_next <locale.h>
++#endif
+-- 
+1.8.1.4
+

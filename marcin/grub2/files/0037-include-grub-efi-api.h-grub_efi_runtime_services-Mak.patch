@@ -1,0 +1,90 @@
+From 085ef74104c8f1a5d2cc68a0d1a2e0569827d6f4 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Wed, 12 Sep 2012 08:31:05 +0200
+Subject: [PATCH 037/364] 	* include/grub/efi/api.h
+ (grub_efi_runtime_services): Make vendor_guid 	a const pointer. 	*
+ grub-core/efiemu/runtime/efiemu.c (efiemu_memcpy): Make from a 	const
+ pointer. 	(efiemu_set_variable): Make vendor_guid a const pointer.
+
+---
+ ChangeLog                         |  8 ++++++++
+ grub-core/efiemu/runtime/efiemu.c | 14 +++++++-------
+ include/grub/efi/api.h            |  2 +-
+ 3 files changed, 16 insertions(+), 8 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 8576923..527e9d1 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,13 @@
+ 2012-09-12  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* include/grub/efi/api.h (grub_efi_runtime_services): Make vendor_guid
++	a const pointer.
++	* grub-core/efiemu/runtime/efiemu.c (efiemu_memcpy): Make from a
++	const pointer.
++	(efiemu_set_variable): Make vendor_guid a const pointer.
++
++2012-09-12  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	Don't require grub-mkconfig_lib to generate manpages for programs.
+ 
+ 	* gentpl.py (manpage): Additional argument adddeps. Add adddeps to
+diff --git a/grub-core/efiemu/runtime/efiemu.c b/grub-core/efiemu/runtime/efiemu.c
+index 84b02cb..d923e40 100644
+--- a/grub-core/efiemu/runtime/efiemu.c
++++ b/grub-core/efiemu/runtime/efiemu.c
+@@ -78,7 +78,7 @@ efiemu_get_next_variable_name (grub_efi_uintn_t *variable_name_size,
+ 
+ grub_efi_status_t
+ efiemu_set_variable (grub_efi_char16_t *variable_name,
+-		     grub_efi_guid_t *vendor_guid,
++		     const grub_efi_guid_t *vendor_guid,
+ 		     grub_efi_uint32_t attributes,
+ 		     grub_efi_uintn_t data_size,
+ 		     void *data);
+@@ -131,11 +131,11 @@ extern grub_uint32_t efiemu_time_accuracy;
+ 
+ /* Some standard functions because we need to be standalone */
+ static void
+-efiemu_memcpy (void *to, void *from, int count)
++efiemu_memcpy (void *to, const void *from, int count)
+ {
+   int i;
+   for (i = 0; i < count; i++)
+-    ((grub_uint8_t *) to)[i] = ((grub_uint8_t *) from)[i];
++    ((grub_uint8_t *) to)[i] = ((const grub_uint8_t *) from)[i];
+ }
+ 
+ static int
+@@ -503,10 +503,10 @@ grub_efi_status_t EFI_FUNC
+ 
+ grub_efi_status_t
+ EFI_FUNC (efiemu_set_variable) (grub_efi_char16_t *variable_name,
+-				   grub_efi_guid_t *vendor_guid,
+-				   grub_efi_uint32_t attributes,
+-				   grub_efi_uintn_t data_size,
+-				   void *data)
++				const grub_efi_guid_t *vendor_guid,
++				grub_efi_uint32_t attributes,
++				grub_efi_uintn_t data_size,
++				void *data)
+ {
+   struct efi_variable *efivar;
+   grub_uint8_t *ptr;
+diff --git a/include/grub/efi/api.h b/include/grub/efi/api.h
+index ae61730..2917d14 100644
+--- a/include/grub/efi/api.h
++++ b/include/grub/efi/api.h
+@@ -1208,7 +1208,7 @@ struct grub_efi_runtime_services
+ 
+   grub_efi_status_t
+   (*set_variable) (grub_efi_char16_t *variable_name,
+-		   grub_efi_guid_t *vendor_guid,
++		   const grub_efi_guid_t *vendor_guid,
+ 		   grub_efi_uint32_t attributes,
+ 		   grub_efi_uintn_t data_size,
+ 		   void *data);
+-- 
+1.8.1.4
+

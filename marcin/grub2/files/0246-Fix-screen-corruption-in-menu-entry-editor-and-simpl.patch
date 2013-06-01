@@ -1,0 +1,134 @@
+From 04ff4b20743dbb42ec7a61de0682574f694b10ea Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Wed, 3 Apr 2013 15:19:34 +0200
+Subject: [PATCH 246/364] 	Fix screen corruption in menu entry editor and
+ simplify the code 	flow while on it.
+
+---
+ ChangeLog                     |  5 +++++
+ grub-core/normal/menu_entry.c | 35 +++++------------------------------
+ grub-core/normal/term.c       | 15 ++++++++++++++-
+ 3 files changed, 24 insertions(+), 31 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 7cda161..0592cac 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-04-03  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	Fix screen corruption in menu entry editor and simplify the code
++	flow while on it.
++
+ 2013-04-03  Andrey Borzenkov <arvidjaar@gmail.com>
+ 
+ 	* util/grub-mount.c (fuse_init): Return error if fuse_main
+diff --git a/grub-core/normal/menu_entry.c b/grub-core/normal/menu_entry.c
+index f4c8afd..80f9464 100644
+--- a/grub-core/normal/menu_entry.c
++++ b/grub-core/normal/menu_entry.c
+@@ -253,49 +253,24 @@ update_screen (struct screen *screen, struct per_term_screen *term_screen,
+ 	  if (!*pos)
+ 	    *pos = grub_zalloc ((linep->len + 1) * sizeof (**pos));
+ 
+-	  if (i == region_start || linep == screen->lines + screen->line)
++	  if (i == region_start || linep == screen->lines + screen->line
++	      || (i > region_start && mode == ALL_LINES))
+ 	    {
+-	      int sp;
+-	      grub_term_gotoxy (term_screen->term, GRUB_TERM_LEFT_BORDER_X
+-				+ GRUB_TERM_MARGIN + 1, (y < 0 ? 0 : y)
+-				+ GRUB_TERM_FIRST_ENTRY_Y);
+-	      grub_print_ucs4_menu (linep->buf,
+-				    linep->buf + linep->len,
+-				    GRUB_TERM_LEFT_BORDER_X + GRUB_TERM_MARGIN
+-				    + 1,
+-				    GRUB_TERM_MARGIN
+-				    + GRUB_TERM_SCROLL_WIDTH + 2,
+-				    term_screen->term,
+-				    (y < 0) ? -y : 0,
+-				    term_screen->num_entries
+-				    - ((y > 0) ? y : 0), '\\',
+-				    *pos);
+-	      sp = grub_term_entry_width (term_screen->term)
+-		 - (*pos)[linep->len].x;
+-	      if (sp > 0)
+-		grub_print_spaces (term_screen->term, sp);
+- 	    }
+-	  else if (i > region_start && mode == ALL_LINES)
+-	    {
+-	      int sp;
+ 	      grub_term_gotoxy (term_screen->term, GRUB_TERM_LEFT_BORDER_X
+ 				+ GRUB_TERM_MARGIN + 1, (y < 0 ? 0 : y)
+ 				+ GRUB_TERM_FIRST_ENTRY_Y);
++
+ 	      grub_print_ucs4_menu (linep->buf,
+ 				    linep->buf + linep->len,
+ 				    GRUB_TERM_LEFT_BORDER_X
+-			    + GRUB_TERM_MARGIN + 1,
++				    + GRUB_TERM_MARGIN + 1,
+ 				    GRUB_TERM_MARGIN
+-				    + GRUB_TERM_SCROLL_WIDTH + 2,
++				    + GRUB_TERM_SCROLL_WIDTH,
+ 				    term_screen->term,
+ 				    (y < 0) ? -y : 0,
+ 				    term_screen->num_entries
+ 				    - ((y > 0) ? y : 0), '\\',
+ 				    *pos);
+-	      sp = grub_term_entry_width (term_screen->term)
+-		- (*pos)[linep->len].x;
+-	      if (sp > 0)
+-		grub_print_spaces (term_screen->term, sp);
+ 	    }
+ 	  y += get_logical_num_lines (linep, term_screen);
+ 	  if (y >= term_screen->num_entries)
+diff --git a/grub-core/normal/term.c b/grub-core/normal/term.c
+index 32deba3..f05184b 100644
+--- a/grub-core/normal/term.c
++++ b/grub-core/normal/term.c
+@@ -690,6 +690,13 @@ print_ucs4_terminal (const grub_uint32_t * str,
+ 	  line_width -= lastspacewidth;
+ 	  if (ptr == last_space || *ptr == '\n')
+ 	    ptr++;
++	  else if (pos)
++	      {
++		pos[ptr - str].x = line_width - last_width;
++		pos[ptr - str].y = lines;
++		pos[ptr - str].valid = 1;
++	      }
++
+ 	  line_start = ptr;
+ 
+ 	  if (skip_lines)
+@@ -726,6 +733,8 @@ print_ucs4_terminal (const grub_uint32_t * str,
+   if (!dry_run && !skip_lines && max_lines)
+     {
+       const grub_uint32_t *ptr2;
++      int sp;
++
+       for (ptr2 = line_start; ptr2 < last_position; ptr2++)
+ 	{
+ 	  /* Skip combining characters on non-UTF8 terminals.  */
+@@ -736,6 +745,10 @@ print_ucs4_terminal (const grub_uint32_t * str,
+ 	    continue;
+ 	  putcode_real (*ptr2, term, fixed_tab);
+ 	}
++
++      sp = max_width - pos[last_position - str].x + 1;
++      if (sp > 0)
++	grub_print_spaces (term, sp);
+     }
+   return dry_run ? lines : 0;
+ }
+@@ -908,7 +921,7 @@ print_ucs4_real (const grub_uint32_t * str,
+ 	{
+ 	  for (vptr = visual_show;
+ 	       max_lines && vptr < visual + visual_len; vptr++)
+-	    if (visual_show->base == '\n')
++	    if (vptr->base == '\n')
+ 	      max_lines--;
+ 
+ 	  visual_len_show = vptr - visual_show;	  
+-- 
+1.8.1.4
+

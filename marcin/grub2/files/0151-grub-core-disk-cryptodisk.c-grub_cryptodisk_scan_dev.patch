@@ -1,0 +1,43 @@
+From e24e009bf730aaeef10783fca8ec04221a115713 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 4 Feb 2013 15:36:03 +0100
+Subject: [PATCH 151/364] 	* grub-core/disk/cryptodisk.c
+ (grub_cryptodisk_scan_device): Don't stop 	on first error.
+
+---
+ ChangeLog                   | 5 +++++
+ grub-core/disk/cryptodisk.c | 5 ++++-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index f5396fe..0994ee7 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-02-04  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/disk/cryptodisk.c (grub_cryptodisk_scan_device): Don't stop
++	on first error.
++
+ 2013-02-01  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/fs/fshelp.c (find_file): Set oldnode to zero after
+diff --git a/grub-core/disk/cryptodisk.c b/grub-core/disk/cryptodisk.c
+index ce755c3..f39c1ab 100644
+--- a/grub-core/disk/cryptodisk.c
++++ b/grub-core/disk/cryptodisk.c
+@@ -875,7 +875,10 @@ grub_cryptodisk_scan_device (const char *name,
+   /* Try to open disk.  */
+   source = grub_disk_open (name);
+   if (!source)
+-    return grub_errno;
++    {
++      grub_print_error ();
++      return 0;
++    }
+ 
+   err = grub_cryptodisk_scan_device_real (name, source);
+ 
+-- 
+1.8.1.4
+

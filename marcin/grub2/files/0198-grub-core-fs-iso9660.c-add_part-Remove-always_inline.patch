@@ -1,0 +1,40 @@
+From 169e65c4e6af3ed59e0854bd41531989a3b34ff5 Mon Sep 17 00:00:00 2001
+From: Andrey Borzenkov <arvidjaar@gmail.com>
+Date: Thu, 7 Mar 2013 09:11:36 +0100
+Subject: [PATCH 198/364] 	* grub-core/fs/iso9660.c (add_part): Remove
+ always_inline attribute 	causing gcc error with gcc 4.7.1.
+
+---
+ ChangeLog              | 5 +++++
+ grub-core/fs/iso9660.c | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 5fb9b77..3b4b3b4 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-03-07  Andrey Borzenkov <arvidjaar@gmail.com>
++
++	* grub-core/fs/iso9660.c (add_part): Remove always_inline attribute
++	causing gcc error with gcc 4.7.1.
++
+ 2013-03-07  Nickolai Zeldovich <nickolai@csail.mit.edu>
+ 
+ 	* grub-core/commands/acpi.c (grub_acpi_create_ebda): Don't
+diff --git a/grub-core/fs/iso9660.c b/grub-core/fs/iso9660.c
+index 01a07b8..cdbd6dc 100644
+--- a/grub-core/fs/iso9660.c
++++ b/grub-core/fs/iso9660.c
+@@ -524,7 +524,7 @@ struct iterate_dir_ctx
+ };
+ 
+   /* Extend the symlink.  */
+-static void  __attribute__ ((always_inline))
++static void
+ add_part (struct iterate_dir_ctx *ctx,
+ 	  const char *part,
+ 	  int len2)
+-- 
+1.8.1.4
+

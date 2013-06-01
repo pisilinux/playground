@@ -1,0 +1,48 @@
+From 2cce795e46cef6c5f057d46bae9a845621ca4a95 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 2 Jul 2012 11:30:04 +0200
+Subject: [PATCH 008/364] 	* grub-core/term/efi/serial.c: Support 1.5
+ stop bits.
+
+---
+ ChangeLog                   | 4 ++++
+ grub-core/term/efi/serial.c | 2 ++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 93ad0ac..5f73c88 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2012-07-02  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/term/efi/serial.c: Support 1.5 stop bits.
++
++2012-07-02  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/fs/ext2.c: Experimental support for 64-bit.
+ 
+ 2012-07-02  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/term/efi/serial.c b/grub-core/term/efi/serial.c
+index da8c3ce..dc5f33b 100644
+--- a/grub-core/term/efi/serial.c
++++ b/grub-core/term/efi/serial.c
+@@ -44,6 +44,7 @@ do_real_config (struct grub_serial_port *port)
+   };
+   const grub_efi_stop_bits_t stop_bits[] = {
+     [GRUB_SERIAL_STOP_BITS_1] = GRUB_EFI_SERIAL_1_STOP_BIT,
++    [GRUB_SERIAL_STOP_BITS_1_5] = GRUB_EFI_SERIAL_1_5_STOP_BITS,
+     [GRUB_SERIAL_STOP_BITS_2] = GRUB_EFI_SERIAL_2_STOP_BITS,
+   };
+ 
+@@ -111,6 +112,7 @@ serial_hw_configure (struct grub_serial_port *port,
+ 		       N_("unsupported serial port parity"));
+ 
+   if (config->stop_bits != GRUB_SERIAL_STOP_BITS_1
++      && config->stop_bits != GRUB_SERIAL_STOP_BITS_1_5
+       && config->stop_bits != GRUB_SERIAL_STOP_BITS_2)
+     return grub_error (GRUB_ERR_BAD_ARGUMENT,
+ 		       N_("unsupported serial port stop bits number"));
+-- 
+1.8.1.4
+

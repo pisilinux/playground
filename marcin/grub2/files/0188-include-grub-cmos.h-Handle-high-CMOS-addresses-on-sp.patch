@@ -1,0 +1,54 @@
+From b2f7a41fb3505137cd02a22913787ec45512aaad Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sat, 2 Mar 2013 23:59:05 +0100
+Subject: [PATCH 188/364] 	* include/grub/cmos.h: Handle high CMOS
+ addresses on sparc64.
+
+---
+ ChangeLog           | 4 ++++
+ include/grub/cmos.h | 8 ++++----
+ 2 files changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 93a8a93..ea87229 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-03-02  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* include/grub/cmos.h: Handle high CMOS addresses on sparc64.
++
++2013-03-02  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* include/grub/mips/loongson/cmos.h: Fix high CMOS addresses.
+ 
+ 2013-03-02  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/include/grub/cmos.h b/include/grub/cmos.h
+index aa2b233..56ccc71 100644
+--- a/include/grub/cmos.h
++++ b/include/grub/cmos.h
+@@ -103,8 +103,8 @@ grub_cmos_read (grub_uint8_t index, grub_uint8_t *val)
+       if (err)
+ 	return err;
+     }
+-  grub_cmos_port[0] = index;
+-  *val = grub_cmos_port[1];
++  grub_cmos_port[((index & 0x80) >> 6) | 0] = index & 0x7f;
++  *val = grub_cmos_port[((index & 0x80) >> 6) | 1];
+   return GRUB_ERR_NONE;
+ }
+ 
+@@ -118,8 +118,8 @@ grub_cmos_write (grub_uint8_t index, grub_uint8_t val)
+       if (err)
+ 	return err;
+     }
+-  grub_cmos_port[0] = index;
+-  grub_cmos_port[1] = val;
++  grub_cmos_port[((index & 0x80) >> 6) | 0] = index;
++  grub_cmos_port[((index & 0x80) >> 6) | 1] = val;
+   return GRUB_ERR_NONE;
+ }
+ 
+-- 
+1.8.1.4
+

@@ -1,0 +1,37 @@
+From 1a0d5df4f75260dd999aef39a79532a7adb24bb1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Rados=C5=82aw=20Szymczyszyn?= <lavrin@gmail.com>
+Date: Mon, 1 Apr 2013 02:55:10 +0200
+Subject: [PATCH 238/364] 	* INSTALL: Mention xorriso requirement.
+
+---
+ ChangeLog | 4 ++++
+ INSTALL   | 1 +
+ 2 files changed, 5 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 672aa74..18c871f 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,7 @@
++2013-04-01  Radosław Szymczyszyn <lavrin@gmail.com>
++
++	* INSTALL: Mention xorriso requirement.
++
+ 2013-03-31  Andrey Borzenkov <arvidjaar@gmail.com>
+ 
+ 	* grub-core/commands/verify.c: Fix hash algorithms values for
+diff --git a/INSTALL b/INSTALL
+index e325fa2..128bf47 100644
+--- a/INSTALL
++++ b/INSTALL
+@@ -45,6 +45,7 @@ need the following.
+ Prerequisites for make-check:
+ 
+ * qemu, specifically the binary 'qemu-system-i386'
++* xorriso, for grub-mkrescue and grub-shell
+ 
+ Configuring the GRUB
+ ====================
+-- 
+1.8.1.4
+

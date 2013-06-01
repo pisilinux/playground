@@ -1,0 +1,47 @@
+From 7fa632d01cbce0bbbcceeb9823593a61f1e86820 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 12 Apr 2013 20:51:11 +0200
+Subject: [PATCH 292/364] 	* grub-core/bus/usb/ehci.c
+ (grub_ehci_fini_hw): Ignore errors, not 	much we can do about it
+ anyway.
+
+---
+ ChangeLog                | 5 +++++
+ grub-core/bus/usb/ehci.c | 6 ++----
+ 2 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index e8e4569..0d5c836 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-04-12  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/bus/usb/ehci.c (grub_ehci_fini_hw): Ignore errors, not
++	much we can do about it anyway.
++
+ 2013-04-12  Aleš Nesrsta  <starous@volny.cz>
+ 
+ 	Fix handling of split transfers.
+diff --git a/grub-core/bus/usb/ehci.c b/grub-core/bus/usb/ehci.c
+index 18b12b2..d18a87f 100644
+--- a/grub-core/bus/usb/ehci.c
++++ b/grub-core/bus/usb/ehci.c
+@@ -1883,12 +1883,10 @@ grub_ehci_fini_hw (int noreturn __attribute__ ((unused)))
+         & grub_ehci_oper_read32 (e, GRUB_EHCI_COMMAND));
+ 
+       /* Check if EHCI is halted and halt it if not */
+-      if (grub_ehci_halt (e) != GRUB_USB_ERR_NONE)
+-	grub_error (GRUB_ERR_TIMEOUT, "fini_hw: EHCI halt timeout");
++      grub_ehci_halt (e);
+ 
+       /* Reset EHCI */
+-      if (grub_ehci_reset (e) != GRUB_USB_ERR_NONE)
+-	grub_error (GRUB_ERR_TIMEOUT, "fini_hw: EHCI reset timeout");
++      grub_ehci_reset (e);
+     }
+ 
+   return GRUB_USB_ERR_NONE;
+-- 
+1.8.1.4
+

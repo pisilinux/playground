@@ -1,0 +1,4777 @@
+From 2bef9aff563a9d988b8203e53d715890c7ca9095 Mon Sep 17 00:00:00 2001
+From: Colin Watson <cjwatson@ubuntu.com>
+Date: Mon, 21 Jan 2013 01:33:46 +0000
+Subject: [PATCH 125/364] Remove nested functions from filesystem directory
+ iterators.
+
+* include/grub/fs.h (grub_fs_dir_hook_t): New type.
+(struct grub_fs.dir): Add hook_data argument.
+
+Update all implementations and callers.
+---
+ ChangeLog                     |   9 +
+ grub-core/commands/ls.c       | 204 +++++++++++----------
+ grub-core/commands/test.c     | 305 ++++++++++++++++---------------
+ grub-core/commands/wildcard.c | 158 +++++++++-------
+ grub-core/fs/affs.c           | 201 ++++++++++----------
+ grub-core/fs/bfs.c            |  95 ++++++----
+ grub-core/fs/btrfs.c          |   5 +-
+ grub-core/fs/cpio.c           |   5 +-
+ grub-core/fs/ext2.c           |  91 ++++-----
+ grub-core/fs/fat.c            |  16 +-
+ grub-core/fs/fshelp.c         | 307 ++++++++++++++++---------------
+ grub-core/fs/hfs.c            |   9 +-
+ grub-core/fs/hfsplus.c        |  60 +++---
+ grub-core/fs/iso9660.c        |  54 +++---
+ grub-core/fs/jfs.c            |   5 +-
+ grub-core/fs/minix.c          |   5 +-
+ grub-core/fs/nilfs2.c         |  90 ++++-----
+ grub-core/fs/ntfs.c           |  67 +++----
+ grub-core/fs/reiserfs.c       |  54 +++---
+ grub-core/fs/romfs.c          |  51 +++---
+ grub-core/fs/sfs.c            | 137 +++++++-------
+ grub-core/fs/squash4.c        |  57 +++---
+ grub-core/fs/udf.c            | 109 +++++------
+ grub-core/fs/ufs.c            |   5 +-
+ grub-core/fs/xfs.c            | 140 +++++++-------
+ grub-core/fs/zfs/zfs.c        | 416 +++++++++++++++++++++++-------------------
+ grub-core/kern/corecmd.c      |   5 +-
+ grub-core/kern/emu/hostfs.c   |   5 +-
+ grub-core/kern/fs.c           |  13 +-
+ grub-core/loader/xnu.c        | 205 ++++++++++++---------
+ grub-core/net/net.c           |   4 +-
+ grub-core/normal/completion.c |   5 +-
+ include/grub/fs.h             |   7 +-
+ include/grub/fshelp.h         |  15 +-
+ util/grub-mount.c             | 142 ++++++++------
+ 35 files changed, 1664 insertions(+), 1392 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index afc2d38..c975de1 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,14 @@
+ 2013-01-21  Colin Watson  <cjwatson@ubuntu.com>
+ 
++	Remove nested functions from filesystem directory iterators.
++
++	* include/grub/fs.h (grub_fs_dir_hook_t): New type.
++	(struct grub_fs.dir): Add hook_data argument.
++
++	Update all implementations and callers.
++
++2013-01-21  Colin Watson  <cjwatson@ubuntu.com>
++
+ 	* docs/grub.texi (Multi-boot manual config): Fix typo for
+ 	"recommended".
+ 
+diff --git a/grub-core/commands/ls.c b/grub-core/commands/ls.c
+index 7929747..0b86619 100644
+--- a/grub-core/commands/ls.c
++++ b/grub-core/commands/ls.c
+@@ -85,114 +85,126 @@ grub_ls_list_devices (int longlist)
+   return 0;
+ }
+ 
+-static grub_err_t
+-grub_ls_list_files (char *dirname, int longlist, int all, int human)
++/* Context for grub_ls_list_files.  */
++struct grub_ls_list_files_ctx
+ {
+-  char *device_name;
+-  grub_fs_t fs;
+-  const char *path;
+-  grub_device_t dev;
++  char *dirname;
++  int all;
++  int human;
++};
++
++/* Helper for grub_ls_list_files.  */
++static int
++print_files (const char *filename, const struct grub_dirhook_info *info,
++	     void *data)
++{
++  struct grub_ls_list_files_ctx *ctx = data;
+ 
+-  auto int print_files (const char *filename,
+-			const struct grub_dirhook_info *info);
+-  auto int print_files_long (const char *filename,
+-			     const struct grub_dirhook_info *info);
++  if (ctx->all || filename[0] != '.')
++    grub_printf ("%s%s ", filename, info->dir ? "/" : "");
+ 
+-  int print_files (const char *filename, const struct grub_dirhook_info *info)
+-    {
+-      if (all || filename[0] != '.')
+-	grub_printf ("%s%s ", filename, info->dir ? "/" : "");
++  return 0;
++}
+ 
+-      return 0;
+-    }
++/* Helper for grub_ls_list_files.  */
++static int
++print_files_long (const char *filename, const struct grub_dirhook_info *info,
++		  void *data)
++{
++  struct grub_ls_list_files_ctx *ctx = data;
++
++  if ((! ctx->all) && (filename[0] == '.'))
++    return 0;
+ 
+-  int print_files_long (const char *filename,
+-			const struct grub_dirhook_info *info)
++  if (! info->dir)
+     {
+-      if ((! all) && (filename[0] == '.'))
+-	return 0;
++      grub_file_t file;
++      char *pathname;
+ 
+-      if (! info->dir)
+-	{
+-	  grub_file_t file;
+-	  char *pathname;
++      if (ctx->dirname[grub_strlen (ctx->dirname) - 1] == '/')
++	pathname = grub_xasprintf ("%s%s", ctx->dirname, filename);
++      else
++	pathname = grub_xasprintf ("%s/%s", ctx->dirname, filename);
+ 
+-	  if (dirname[grub_strlen (dirname) - 1] == '/')
+-	    pathname = grub_xasprintf ("%s%s", dirname, filename);
+-	  else
+-	    pathname = grub_xasprintf ("%s/%s", dirname, filename);
++      if (!pathname)
++	return 1;
+ 
+-	  if (!pathname)
+-	    return 1;
++      /* XXX: For ext2fs symlinks are detected as files while they
++	 should be reported as directories.  */
++      grub_file_filter_disable_compression ();
++      file = grub_file_open (pathname);
++      if (! file)
++	{
++	  grub_errno = 0;
++	  grub_free (pathname);
++	  return 0;
++	}
+ 
+-	  /* XXX: For ext2fs symlinks are detected as files while they
+-	     should be reported as directories.  */
+-	  grub_file_filter_disable_compression ();
+-	  file = grub_file_open (pathname);
+-	  if (! file)
++      if (! ctx->human)
++	grub_printf ("%-12llu", (unsigned long long) file->size);
++      else
++	{
++	  grub_uint64_t fsize = file->size * 100ULL;
++	  grub_uint64_t fsz = file->size;
++	  int units = 0;
++	  char buf[20];
++
++	  while (fsz / 1024)
+ 	    {
+-	      grub_errno = 0;
+-	      grub_free (pathname);
+-	      return 0;
++	      fsize = (fsize + 512) / 1024;
++	      fsz /= 1024;
++	      units++;
+ 	    }
+ 
+-	  if (! human)
+-	    grub_printf ("%-12llu", (unsigned long long) file->size);
+-	  else
++	  if (units)
+ 	    {
+-	      grub_uint64_t fsize = file->size * 100ULL;
+-	      grub_uint64_t fsz = file->size;
+-	      int units = 0;
+-	      char buf[20];
+-
+-	      while (fsz / 1024)
+-		{
+-		  fsize = (fsize + 512) / 1024;
+-		  fsz /= 1024;
+-		  units++;
+-		}
+-
+-	      if (units)
+-		{
+-		  grub_uint64_t whole, fraction;
+-
+-		  whole = grub_divmod64 (fsize, 100, &fraction);
+-		  grub_snprintf (buf, sizeof (buf),
+-				 "%" PRIuGRUB_UINT64_T
+-				 ".%02" PRIuGRUB_UINT64_T "%c", whole, fraction,
+-				 grub_human_sizes[units]);
+-		  grub_printf ("%-12s", buf);
+-		}
+-	      else
+-		grub_printf ("%-12llu", (unsigned long long) file->size);
+-
++	      grub_uint64_t whole, fraction;
++
++	      whole = grub_divmod64 (fsize, 100, &fraction);
++	      grub_snprintf (buf, sizeof (buf),
++			     "%" PRIuGRUB_UINT64_T
++			     ".%02" PRIuGRUB_UINT64_T "%c", whole, fraction,
++			     grub_human_sizes[units]);
++	      grub_printf ("%-12s", buf);
+ 	    }
+-	  grub_file_close (file);
+-	  grub_free (pathname);
+-	}
+-      else
+-	grub_printf ("%-12s", _("DIR"));
+-
+-      if (info->mtimeset)
+-	{
+-	  struct grub_datetime datetime;
+-	  grub_unixtime2datetime (info->mtime, &datetime);
+-	  if (human)
+-	    grub_printf (" %d-%02d-%02d %02d:%02d:%02d %-11s ",
+-			 datetime.year, datetime.month, datetime.day,
+-			 datetime.hour, datetime.minute,
+-			 datetime.second,
+-			 grub_get_weekday_name (&datetime));
+ 	  else
+-	    grub_printf (" %04d%02d%02d%02d%02d%02d ",
+-			 datetime.year, datetime.month,
+-			 datetime.day, datetime.hour,
+-			 datetime.minute, datetime.second);
++	    grub_printf ("%-12llu", (unsigned long long) file->size);
++
+ 	}
+-      grub_printf ("%s%s\n", filename, info->dir ? "/" : "");
++      grub_file_close (file);
++      grub_free (pathname);
++    }
++  else
++    grub_printf ("%-12s", _("DIR"));
+ 
+-      return 0;
++  if (info->mtimeset)
++    {
++      struct grub_datetime datetime;
++      grub_unixtime2datetime (info->mtime, &datetime);
++      if (ctx->human)
++	grub_printf (" %d-%02d-%02d %02d:%02d:%02d %-11s ",
++		     datetime.year, datetime.month, datetime.day,
++		     datetime.hour, datetime.minute,
++		     datetime.second,
++		     grub_get_weekday_name (&datetime));
++      else
++	grub_printf (" %04d%02d%02d%02d%02d%02d ",
++		     datetime.year, datetime.month,
++		     datetime.day, datetime.hour,
++		     datetime.minute, datetime.second);
+     }
++  grub_printf ("%s%s\n", filename, info->dir ? "/" : "");
++
++  return 0;
++}
++
++static grub_err_t
++grub_ls_list_files (char *dirname, int longlist, int all, int human)
++{
++  char *device_name;
++  grub_fs_t fs;
++  const char *path;
++  grub_device_t dev;
+ 
+   device_name = grub_file_get_device_name (dirname);
+   dev = grub_device_open (device_name);
+@@ -221,10 +233,16 @@ grub_ls_list_files (char *dirname, int longlist, int all, int human)
+     }
+   else if (fs)
+     {
++      struct grub_ls_list_files_ctx ctx = {
++	.dirname = dirname,
++	.all = all,
++	.human = human
++      };
++
+       if (longlist)
+-	(fs->dir) (dev, path, print_files_long);
++	(fs->dir) (dev, path, print_files_long, &ctx);
+       else
+-	(fs->dir) (dev, path, print_files);
++	(fs->dir) (dev, path, print_files, &ctx);
+ 
+       if (grub_errno == GRUB_ERR_BAD_FILE_TYPE
+ 	  && path[grub_strlen (path) - 1] != '/')
+@@ -250,9 +268,9 @@ grub_ls_list_files (char *dirname, int longlist, int all, int human)
+ 	  all = 1;
+ 	  grub_memset (&info, 0, sizeof (info));
+ 	  if (longlist)
+-	    print_files_long (p, &info);
++	    print_files_long (p, &info, &ctx);
+ 	  else
+-	    print_files (p, &info);
++	    print_files (p, &info, &ctx);
+ 
+ 	  grub_free (dirname);
+ 	}
+diff --git a/grub-core/commands/test.c b/grub-core/commands/test.c
+index 3a0e0e0..e3347ee 100644
+--- a/grub-core/commands/test.c
++++ b/grub-core/commands/test.c
+@@ -38,114 +38,125 @@ grub_strtosl (char *arg, char **end, int base)
+   return grub_strtoul (arg, end, base);
+ }
+ 
+-/* Parse a test expression starting from *argn. */
+-static int
+-test_parse (char **args, int *argn, int argc)
++/* Context for test_parse.  */
++struct test_parse_ctx
+ {
+-  int ret = 0, discard = 0, invert = 0;
++  int ret, discard, invert;
+   int file_exists;
+   struct grub_dirhook_info file_info;
++  char *filename;
++};
++
++/* Take care of discarding and inverting. */
++static void
++update_val (int val, struct test_parse_ctx *ctx)
++{
++  if (! ctx->discard)
++    ctx->ret = ctx->invert ? ! val : val;
++  ctx->invert = ctx->discard = 0;
++}
++
++/* A hook for iterating directories. */
++static int
++find_file (const char *cur_filename, const struct grub_dirhook_info *info,
++	   void *data)
++{
++  struct test_parse_ctx *ctx = data;
++
++  if ((info->case_insensitive ? grub_strcasecmp (cur_filename, ctx->filename)
++       : grub_strcmp (cur_filename, ctx->filename)) == 0)
++    {
++      ctx->file_info = *info;
++      ctx->file_exists = 1;
++      return 1;
++    }
++  return 0;
++}
++
++/* Check if file exists and fetch its information. */
++static void
++get_fileinfo (char *path, struct test_parse_ctx *ctx)
++{
++  char *pathname;
++  char *device_name;
++  grub_fs_t fs;
++  grub_device_t dev;
++
++  ctx->file_exists = 0;
++  device_name = grub_file_get_device_name (path);
++  dev = grub_device_open (device_name);
++  if (! dev)
++    {
++      grub_free (device_name);
++      return;
++    }
+ 
+-  auto void update_val (int val);
+-  auto void get_fileinfo (char *pathname);
+-
+-  /* Take care of discarding and inverting. */
+-  void update_val (int val)
+-  {
+-    if (! discard)
+-      ret = invert ? ! val : val;
+-    invert = discard = 0;
+-  }
+-
+-  /* Check if file exists and fetch its information. */
+-  void get_fileinfo (char *path)
+-  {
+-    char *filename, *pathname;
+-    char *device_name;
+-    grub_fs_t fs;
+-    grub_device_t dev;
+-
+-    /* A hook for iterating directories. */
+-    auto int find_file (const char *cur_filename,
+-			const struct grub_dirhook_info *info);
+-    int find_file (const char *cur_filename,
+-		   const struct grub_dirhook_info *info)
++  fs = grub_fs_probe (dev);
++  if (! fs)
+     {
+-      if ((info->case_insensitive ? grub_strcasecmp (cur_filename, filename)
+-	   : grub_strcmp (cur_filename, filename)) == 0)
++      grub_free (device_name);
++      grub_device_close (dev);
++      return;
++    }
++
++  pathname = grub_strchr (path, ')');
++  if (! pathname)
++    pathname = path;
++  else
++    pathname++;
++
++  /* Remove trailing '/'. */
++  while (*pathname && pathname[grub_strlen (pathname) - 1] == '/')
++    pathname[grub_strlen (pathname) - 1] = 0;
++
++  /* Split into path and filename. */
++  ctx->filename = grub_strrchr (pathname, '/');
++  if (! ctx->filename)
++    {
++      path = grub_strdup ("/");
++      ctx->filename = pathname;
++    }
++  else
++    {
++      ctx->filename++;
++      path = grub_strdup (pathname);
++      path[ctx->filename - pathname] = 0;
++    }
++
++  /* It's the whole device. */
++  if (! *pathname)
++    {
++      ctx->file_exists = 1;
++      grub_memset (&ctx->file_info, 0, sizeof (ctx->file_info));
++      /* Root is always a directory. */
++      ctx->file_info.dir = 1;
++
++      /* Fetch writing time. */
++      ctx->file_info.mtimeset = 0;
++      if (fs->mtime)
+ 	{
+-	  file_info = *info;
+-	  file_exists = 1;
+-	  return 1;
++	  if (! fs->mtime (dev, &ctx->file_info.mtime))
++	    ctx->file_info.mtimeset = 1;
++	  grub_errno = GRUB_ERR_NONE;
+ 	}
+-      return 0;
+     }
++  else
++    (fs->dir) (dev, path, find_file, ctx);
++
++  grub_device_close (dev);
++  grub_free (path);
++  grub_free (device_name);
++}
+ 
+-    file_exists = 0;
+-    device_name = grub_file_get_device_name (path);
+-    dev = grub_device_open (device_name);
+-    if (! dev)
+-      {
+-	grub_free (device_name);
+-	return;
+-      }
+-
+-    fs = grub_fs_probe (dev);
+-    if (! fs)
+-      {
+-	grub_free (device_name);
+-	grub_device_close (dev);
+-	return;
+-      }
+-
+-    pathname = grub_strchr (path, ')');
+-    if (! pathname)
+-      pathname = path;
+-    else
+-      pathname++;
+-
+-    /* Remove trailing '/'. */
+-    while (*pathname && pathname[grub_strlen (pathname) - 1] == '/')
+-      pathname[grub_strlen (pathname) - 1] = 0;
+-
+-    /* Split into path and filename. */
+-    filename = grub_strrchr (pathname, '/');
+-    if (! filename)
+-      {
+-	path = grub_strdup ("/");
+-	filename = pathname;
+-      }
+-    else
+-      {
+-	filename++;
+-	path = grub_strdup (pathname);
+-	path[filename - pathname] = 0;
+-      }
+-
+-    /* It's the whole device. */
+-    if (! *pathname)
+-      {
+-	file_exists = 1;
+-	grub_memset (&file_info, 0, sizeof (file_info));
+-	/* Root is always a directory. */
+-	file_info.dir = 1;
+-
+-	/* Fetch writing time. */
+-	file_info.mtimeset = 0;
+-	if (fs->mtime)
+-	  {
+-	    if (! fs->mtime (dev, &file_info.mtime))
+-	      file_info.mtimeset = 1;
+-	    grub_errno = GRUB_ERR_NONE;
+-	  }
+-      }
+-    else
+-      (fs->dir) (dev, path, find_file);
+-
+-    grub_device_close (dev);
+-    grub_free (path);
+-    grub_free (device_name);
+-  }
++/* Parse a test expression starting from *argn. */
++static int
++test_parse (char **args, int *argn, int argc)
++{
++  struct test_parse_ctx ctx = {
++    .ret = 0,
++    .discard = 0,
++    .invert = 0
++  };
+ 
+   /* Here we have the real parsing. */
+   while (*argn < argc)
+@@ -157,14 +168,16 @@ test_parse (char **args, int *argn, int argc)
+ 	  if (grub_strcmp (args[*argn + 1], "=") == 0
+ 	      || grub_strcmp (args[*argn + 1], "==") == 0)
+ 	    {
+-	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) == 0);
++	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) == 0,
++			  &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+ 
+ 	  if (grub_strcmp (args[*argn + 1], "!=") == 0)
+ 	    {
+-	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) != 0);
++	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) != 0,
++			  &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+@@ -172,28 +185,32 @@ test_parse (char **args, int *argn, int argc)
+ 	  /* GRUB extension: lexicographical sorting. */
+ 	  if (grub_strcmp (args[*argn + 1], "<") == 0)
+ 	    {
+-	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) < 0);
++	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) < 0,
++			  &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+ 
+ 	  if (grub_strcmp (args[*argn + 1], "<=") == 0)
+ 	    {
+-	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) <= 0);
++	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) <= 0,
++			  &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+ 
+ 	  if (grub_strcmp (args[*argn + 1], ">") == 0)
+ 	    {
+-	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) > 0);
++	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) > 0,
++			  &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+ 
+ 	  if (grub_strcmp (args[*argn + 1], ">=") == 0)
+ 	    {
+-	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) >= 0);
++	      update_val (grub_strcmp (args[*argn], args[*argn + 2]) >= 0,
++			  &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+@@ -202,7 +219,7 @@ test_parse (char **args, int *argn, int argc)
+ 	  if (grub_strcmp (args[*argn + 1], "-eq") == 0)
+ 	    {
+ 	      update_val (grub_strtosl (args[*argn], 0, 0)
+-			  == grub_strtosl (args[*argn + 2], 0, 0));
++			  == grub_strtosl (args[*argn + 2], 0, 0), &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+@@ -210,7 +227,7 @@ test_parse (char **args, int *argn, int argc)
+ 	  if (grub_strcmp (args[*argn + 1], "-ge") == 0)
+ 	    {
+ 	      update_val (grub_strtosl (args[*argn], 0, 0)
+-			  >= grub_strtosl (args[*argn + 2], 0, 0));
++			  >= grub_strtosl (args[*argn + 2], 0, 0), &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+@@ -218,7 +235,7 @@ test_parse (char **args, int *argn, int argc)
+ 	  if (grub_strcmp (args[*argn + 1], "-gt") == 0)
+ 	    {
+ 	      update_val (grub_strtosl (args[*argn], 0, 0)
+-			  > grub_strtosl (args[*argn + 2], 0, 0));
++			  > grub_strtosl (args[*argn + 2], 0, 0), &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+@@ -226,7 +243,7 @@ test_parse (char **args, int *argn, int argc)
+ 	  if (grub_strcmp (args[*argn + 1], "-le") == 0)
+ 	    {
+ 	      update_val (grub_strtosl (args[*argn], 0, 0)
+-		      <= grub_strtosl (args[*argn + 2], 0, 0));
++		      <= grub_strtosl (args[*argn + 2], 0, 0), &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+@@ -234,7 +251,7 @@ test_parse (char **args, int *argn, int argc)
+ 	  if (grub_strcmp (args[*argn + 1], "-lt") == 0)
+ 	    {
+ 	      update_val (grub_strtosl (args[*argn], 0, 0)
+-			  < grub_strtosl (args[*argn + 2], 0, 0));
++			  < grub_strtosl (args[*argn + 2], 0, 0), &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+@@ -242,7 +259,7 @@ test_parse (char **args, int *argn, int argc)
+ 	  if (grub_strcmp (args[*argn + 1], "-ne") == 0)
+ 	    {
+ 	      update_val (grub_strtosl (args[*argn], 0, 0)
+-			  != grub_strtosl (args[*argn + 2], 0, 0));
++			  != grub_strtosl (args[*argn + 2], 0, 0), &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+@@ -265,10 +282,10 @@ test_parse (char **args, int *argn, int argc)
+ 
+ 	      if (grub_strcmp (args[*argn + 1], "-pgt") == 0)
+ 		update_val (grub_strtoul (args[*argn] + i, 0, 0)
+-			    > grub_strtoul (args[*argn + 2] + i, 0, 0));
++			    > grub_strtoul (args[*argn + 2] + i, 0, 0), &ctx);
+ 	      else
+ 		update_val (grub_strtoul (args[*argn] + i, 0, 0)
+-			    < grub_strtoul (args[*argn + 2] + i, 0, 0));
++			    < grub_strtoul (args[*argn + 2] + i, 0, 0), &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+@@ -283,22 +300,24 @@ test_parse (char **args, int *argn, int argc)
+ 	      int bias = 0;
+ 
+ 	      /* Fetch fileinfo. */
+-	      get_fileinfo (args[*argn]);
+-	      file1 = file_info;
+-	      file1exists = file_exists;
+-	      get_fileinfo (args[*argn + 2]);
++	      get_fileinfo (args[*argn], &ctx);
++	      file1 = ctx.file_info;
++	      file1exists = ctx.file_exists;
++	      get_fileinfo (args[*argn + 2], &ctx);
+ 
+ 	      if (args[*argn + 1][3])
+ 		bias = grub_strtosl (args[*argn + 1] + 3, 0, 0);
+ 
+ 	      if (grub_memcmp (args[*argn + 1], "-nt", 3) == 0)
+-		update_val ((file1exists && ! file_exists)
+-			    || (file1.mtimeset && file_info.mtimeset
+-				&& file1.mtime + bias > file_info.mtime));
++		update_val ((file1exists && ! ctx.file_exists)
++			    || (file1.mtimeset && ctx.file_info.mtimeset
++				&& file1.mtime + bias > ctx.file_info.mtime),
++			    &ctx);
+ 	      else
+-		update_val ((! file1exists && file_exists)
+-			    || (file1.mtimeset && file_info.mtimeset
+-				&& file1.mtime + bias < file_info.mtime));
++		update_val ((! file1exists && ctx.file_exists)
++			    || (file1.mtimeset && ctx.file_info.mtimeset
++				&& file1.mtime + bias < ctx.file_info.mtime),
++			    &ctx);
+ 	      (*argn) += 3;
+ 	      continue;
+ 	    }
+@@ -310,27 +329,27 @@ test_parse (char **args, int *argn, int argc)
+ 	  /* File tests. */
+ 	  if (grub_strcmp (args[*argn], "-d") == 0)
+ 	    {
+-	      get_fileinfo (args[*argn + 1]);
+-	      update_val (file_exists && file_info.dir);
++	      get_fileinfo (args[*argn + 1], &ctx);
++	      update_val (ctx.file_exists && ctx.file_info.dir, &ctx);
+ 	      (*argn) += 2;
+-	      return ret;
++	      return ctx.ret;
+ 	    }
+ 
+ 	  if (grub_strcmp (args[*argn], "-e") == 0)
+ 	    {
+-	      get_fileinfo (args[*argn + 1]);
+-	      update_val (file_exists);
++	      get_fileinfo (args[*argn + 1], &ctx);
++	      update_val (ctx.file_exists, &ctx);
+ 	      (*argn) += 2;
+-	      return ret;
++	      return ctx.ret;
+ 	    }
+ 
+ 	  if (grub_strcmp (args[*argn], "-f") == 0)
+ 	    {
+-	      get_fileinfo (args[*argn + 1]);
++	      get_fileinfo (args[*argn + 1], &ctx);
+ 	      /* FIXME: check for other types. */
+-	      update_val (file_exists && ! file_info.dir);
++	      update_val (ctx.file_exists && ! ctx.file_info.dir, &ctx);
+ 	      (*argn) += 2;
+-	      return ret;
++	      return ctx.ret;
+ 	    }
+ 
+ 	  if (grub_strcmp (args[*argn], "-s") == 0)
+@@ -338,25 +357,25 @@ test_parse (char **args, int *argn, int argc)
+ 	      grub_file_t file;
+ 	      grub_file_filter_disable_compression ();
+ 	      file = grub_file_open (args[*argn + 1]);
+-	      update_val (file && (grub_file_size (file) != 0));
++	      update_val (file && (grub_file_size (file) != 0), &ctx);
+ 	      if (file)
+ 		grub_file_close (file);
+ 	      grub_errno = GRUB_ERR_NONE;
+ 	      (*argn) += 2;
+-	      return ret;
++	      return ctx.ret;
+ 	    }
+ 
+ 	  /* String tests. */
+ 	  if (grub_strcmp (args[*argn], "-n") == 0)
+ 	    {
+-	      update_val (args[*argn + 1][0]);
++	      update_val (args[*argn + 1][0], &ctx);
+ 
+ 	      (*argn) += 2;
+ 	      continue;
+ 	    }
+ 	  if (grub_strcmp (args[*argn], "-z") == 0)
+ 	    {
+-	      update_val (! args[*argn + 1][0]);
++	      update_val (! args[*argn + 1][0], &ctx);
+ 	      (*argn) += 2;
+ 	      continue;
+ 	    }
+@@ -368,42 +387,42 @@ test_parse (char **args, int *argn, int argc)
+       if (grub_strcmp (args[*argn], ")") == 0)
+ 	{
+ 	  (*argn)++;
+-	  return ret;
++	  return ctx.ret;
+ 	}
+       /* Recursively invoke if parenthesis. */
+       if (grub_strcmp (args[*argn], "(") == 0)
+ 	{
+ 	  (*argn)++;
+-	  update_val (test_parse (args, argn, argc));
++	  update_val (test_parse (args, argn, argc), &ctx);
+ 	  continue;
+ 	}
+ 
+       if (grub_strcmp (args[*argn], "!") == 0)
+ 	{
+-	  invert = ! invert;
++	  ctx.invert = ! ctx.invert;
+ 	  (*argn)++;
+ 	  continue;
+ 	}
+       if (grub_strcmp (args[*argn], "-a") == 0)
+ 	{
+ 	  /* If current value is 0 second value is to be discarded. */
+-	  discard = ! ret;
++	  ctx.discard = ! ctx.ret;
+ 	  (*argn)++;
+ 	  continue;
+ 	}
+       if (grub_strcmp (args[*argn], "-o") == 0)
+ 	{
+ 	  /* If current value is 1 second value is to be discarded. */
+-	  discard = ret;
++	  ctx.discard = ctx.ret;
+ 	  (*argn)++;
+ 	  continue;
+ 	}
+ 
+       /* No test found. Interpret if as just a string. */
+-      update_val (args[*argn][0]);
++      update_val (args[*argn][0], &ctx);
+       (*argn)++;
+     }
+-  return ret;
++  return ctx.ret;
+ }
+ 
+ static grub_err_t
+diff --git a/grub-core/commands/wildcard.c b/grub-core/commands/wildcard.c
+index 633de51..2807f80 100644
+--- a/grub-core/commands/wildcard.c
++++ b/grub-core/commands/wildcard.c
+@@ -279,63 +279,75 @@ match_devices (const regex_t *regexp, int noparts)
+   return 0;
+ }
+ 
+-static char **
+-match_files (const char *prefix, const char *suffix, const char *end,
+-	     const regex_t *regexp)
++/* Context for match_files.  */
++struct match_files_ctx
+ {
+-  int i;
++  const regex_t *regexp;
+   char **files;
+   unsigned nfile;
+   char *dir;
+-  const char *path;
+-  char *device_name;
+-  grub_fs_t fs;
+-  grub_device_t dev;
++};
+ 
+-  auto int match (const char *name, const struct grub_dirhook_info *info);
+-  int match (const char *name, const struct grub_dirhook_info *info)
+-  {
+-    char **t;
+-    char *buffer;
++/* Helper for match_files.  */
++static int
++match_files_iter (const char *name, const struct grub_dirhook_info *info,
++		  void *data)
++{
++  struct match_files_ctx *ctx = data;
++  char **t;
++  char *buffer;
+ 
+-    /* skip . and .. names */
+-    if (grub_strcmp(".", name) == 0 || grub_strcmp("..", name) == 0)
+-      return 0;
++  /* skip . and .. names */
++  if (grub_strcmp(".", name) == 0 || grub_strcmp("..", name) == 0)
++    return 0;
+ 
+-    grub_dprintf ("expand", "matching: %s in %s\n", name, dir);
+-    if (regexec (regexp, name, 0, 0, 0))
+-      return 0;
++  grub_dprintf ("expand", "matching: %s in %s\n", name, ctx->dir);
++  if (regexec (ctx->regexp, name, 0, 0, 0))
++    return 0;
+ 
+-    grub_dprintf ("expand", "matched\n");
++  grub_dprintf ("expand", "matched\n");
+ 
+-    buffer = grub_xasprintf ("%s%s", dir, name);
+-    if (! buffer)
++  buffer = grub_xasprintf ("%s%s", ctx->dir, name);
++  if (! buffer)
++    return 1;
++
++  t = grub_realloc (ctx->files, sizeof (char*) * (ctx->nfile + 2));
++  if (! t)
++    {
++      grub_free (buffer);
+       return 1;
++    }
+ 
+-    t = grub_realloc (files, sizeof (char*) * (nfile + 2));
+-    if (! t)
+-      {
+-	grub_free (buffer);
+-	return 1;
+-      }
++  ctx->files = t;
++  ctx->files[ctx->nfile++] = buffer;
++  ctx->files[ctx->nfile] = 0;
++  return 0;
++}
+ 
+-    files = t;
+-    files[nfile++] = buffer;
+-    files[nfile] = 0;
+-    return 0;
+-  }
++static char **
++match_files (const char *prefix, const char *suffix, const char *end,
++	     const regex_t *regexp)
++{
++  struct match_files_ctx ctx = {
++    .regexp = regexp,
++    .nfile = 0,
++    .files = 0
++  };
++  int i;
++  const char *path;
++  char *device_name;
++  grub_fs_t fs;
++  grub_device_t dev;
+ 
+-  nfile = 0;
+-  files = 0;
+   dev = 0;
+   device_name = 0;
+   grub_error_push ();
+ 
+-  dir = make_dir (prefix, suffix, end);
+-  if (! dir)
++  ctx.dir = make_dir (prefix, suffix, end);
++  if (! ctx.dir)
+     goto fail;
+ 
+-  device_name = grub_file_get_device_name (dir);
++  device_name = grub_file_get_device_name (ctx.dir);
+   dev = grub_device_open (device_name);
+   if (! dev)
+     goto fail;
+@@ -344,33 +356,33 @@ match_files (const char *prefix, const char *suffix, const char *end,
+   if (! fs)
+     goto fail;
+ 
+-  if (dir[0] == '(')
++  if (ctx.dir[0] == '(')
+     {
+-      path = grub_strchr (dir, ')');
++      path = grub_strchr (ctx.dir, ')');
+       if (!path)
+ 	goto fail;
+       path++;
+     }
+   else
+-    path = dir;
++    path = ctx.dir;
+ 
+-  if (fs->dir (dev, path, match))
++  if (fs->dir (dev, path, match_files_iter, &ctx))
+     goto fail;
+ 
+-  grub_free (dir);
++  grub_free (ctx.dir);
+   grub_device_close (dev);
+   grub_free (device_name);
+   grub_error_pop ();
+-  return files;
++  return ctx.files;
+ 
+  fail:
+ 
+-  grub_free (dir);
++  grub_free (ctx.dir);
+ 
+-  for (i = 0; files && files[i]; i++)
+-    grub_free (files[i]);
++  for (i = 0; ctx.files && ctx.files[i]; i++)
++    grub_free (ctx.files[i]);
+ 
+-  grub_free (files);
++  grub_free (ctx.files);
+ 
+   if (dev)
+     grub_device_close (dev);
+@@ -381,28 +393,42 @@ match_files (const char *prefix, const char *suffix, const char *end,
+   return 0;
+ }
+ 
++/* Context for check_file.  */
++struct check_file_ctx
++{
++  const char *basename;
++  int found;
++};
++
++/* Helper for check_file.  */
++static int
++check_file_iter (const char *name, const struct grub_dirhook_info *info,
++		 void *data)
++{
++  struct check_file_ctx *ctx = data;
++
++  if (ctx->basename[0] == 0
++      || (info->case_insensitive ? grub_strcasecmp (name, ctx->basename) == 0
++	  : grub_strcmp (name, ctx->basename) == 0))
++    {
++      ctx->found = 1;
++      return 1;
++    }
++  
++  return 0;
++}
++
+ static int
+ check_file (const char *dir, const char *basename)
+ {
++  struct check_file_ctx ctx = {
++    .basename = basename,
++    .found = 0
++  };
+   grub_fs_t fs;
+   grub_device_t dev;
+-  int found = 0;
+   const char *device_name, *path;
+ 
+-  auto int match (const char *name, const struct grub_dirhook_info *info);
+-  int match (const char *name, const struct grub_dirhook_info *info)
+-  {
+-    if (basename[0] == 0
+-	|| (info->case_insensitive ? grub_strcasecmp (name, basename) == 0
+-	    : grub_strcmp (name, basename) == 0))
+-      {
+-	found = 1;
+-	return 1;
+-      }
+-    
+-    return 0;
+-  }
+-
+   device_name = grub_file_get_device_name (dir);
+   dev = grub_device_open (device_name);
+   if (! dev)
+@@ -422,14 +448,14 @@ check_file (const char *dir, const char *basename)
+   else
+     path = dir;
+ 
+-  fs->dir (dev, path[0] ? path : "/", match);
++  fs->dir (dev, path[0] ? path : "/", check_file_iter, &ctx);
+   if (grub_errno == 0 && basename[0] == 0)
+-    found = 1;
++    ctx.found = 1;
+ 
+  fail:
+   grub_errno = 0;
+ 
+-  return found;
++  return ctx.found;
+ }
+ 
+ static void
+diff --git a/grub-core/fs/affs.c b/grub-core/fs/affs.c
+index 848a455..6c49e5d 100644
+--- a/grub-core/fs/affs.c
++++ b/grub-core/fs/affs.c
+@@ -316,93 +316,93 @@ grub_affs_read_symlink (grub_fshelp_node_t node)
+ }
+ 
+ 
++/* Helper for grub_affs_iterate_dir.  */
+ static int
+-grub_affs_iterate_dir (grub_fshelp_node_t dir,
+-		       int NESTED_FUNC_ATTR
+-		       (*hook) (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node))
++grub_affs_create_node (grub_fshelp_node_t dir,
++		       grub_fshelp_iterate_dir_hook_t hook, void *hook_data,
++		       struct grub_fshelp_node **node,
++		       grub_uint32_t **hashtable,
++		       grub_uint32_t block, const struct grub_affs_file *fil)
+ {
+-  unsigned int i;
+-  struct grub_affs_file file;
+-  struct grub_fshelp_node *node = 0;
+   struct grub_affs_data *data = dir->data;
+-  grub_uint32_t *hashtable;
+-
+-  auto int NESTED_FUNC_ATTR grub_affs_create_node (grub_uint32_t block,
+-						   const struct grub_affs_file *fil);
++  int type;
++  grub_uint8_t name_u8[sizeof (fil->name) * GRUB_MAX_UTF8_PER_LATIN1 + 1];
++  grub_size_t len;
++  unsigned int nest;
+ 
+-  int NESTED_FUNC_ATTR grub_affs_create_node (grub_uint32_t block,
+-					      const struct grub_affs_file *fil)
++  *node = grub_zalloc (sizeof (**node));
++  if (!*node)
+     {
+-      int type;
+-      grub_uint8_t name_u8[sizeof (fil->name) * GRUB_MAX_UTF8_PER_LATIN1 + 1];
+-      grub_size_t len;
+-      unsigned int nest;
+-
+-      node = grub_zalloc (sizeof (*node));
+-      if (!node)
+-	{
+-	  grub_free (hashtable);
+-	  return 1;
+-	}
++      grub_free (*hashtable);
++      return 1;
++    }
+ 
+-      node->data = data;
+-      node->block = block;
+-      node->parent = dir;
+-
+-      len = fil->namelen;
+-      if (len > sizeof (fil->name))
+-	len = sizeof (fil->name);
+-      *grub_latin1_to_utf8 (name_u8, fil->name, len) = '\0';
+-      
+-      node->di = *fil;
+-      for (nest = 0; nest < 8; nest++)
++  (*node)->data = data;
++  (*node)->block = block;
++  (*node)->parent = dir;
++
++  len = fil->namelen;
++  if (len > sizeof (fil->name))
++    len = sizeof (fil->name);
++  *grub_latin1_to_utf8 (name_u8, fil->name, len) = '\0';
++  
++  (*node)->di = *fil;
++  for (nest = 0; nest < 8; nest++)
++    {
++      switch ((*node)->di.type)
+ 	{
+-	  switch (node->di.type)
+-	    {
+-	    case grub_cpu_to_be32_compile_time (GRUB_AFFS_FILETYPE_REG):
+-	      type = GRUB_FSHELP_REG;
+-	      break;
+-	    case grub_cpu_to_be32_compile_time (GRUB_AFFS_FILETYPE_DIR):
+-	      type = GRUB_FSHELP_DIR;
+-	      break;
+-	    case grub_cpu_to_be32_compile_time (GRUB_AFFS_FILETYPE_SYMLINK):
+-	      type = GRUB_FSHELP_SYMLINK;
+-	      break;
+-	    case grub_cpu_to_be32_compile_time (GRUB_AFFS_FILETYPE_HARDLINK):
+-	      {
+-		grub_err_t err;
+-		node->block = grub_be_to_cpu32 (node->di.hardlink);
+-		err = grub_disk_read (data->disk,
+-				      (((grub_uint64_t) node->block + 1) << data->log_blocksize)
+-				      - 1,
+-				      GRUB_DISK_SECTOR_SIZE - GRUB_AFFS_FILE_LOCATION,
+-				      sizeof (node->di), (char *) &node->di);
+-		if (err)
+-		  return 1;
+-		continue;
+-	      }
+-	    default:
+-	      return 0;
+-	    }
++	case grub_cpu_to_be32_compile_time (GRUB_AFFS_FILETYPE_REG):
++	  type = GRUB_FSHELP_REG;
++	  break;
++	case grub_cpu_to_be32_compile_time (GRUB_AFFS_FILETYPE_DIR):
++	  type = GRUB_FSHELP_DIR;
++	  break;
++	case grub_cpu_to_be32_compile_time (GRUB_AFFS_FILETYPE_SYMLINK):
++	  type = GRUB_FSHELP_SYMLINK;
+ 	  break;
++	case grub_cpu_to_be32_compile_time (GRUB_AFFS_FILETYPE_HARDLINK):
++	  {
++	    grub_err_t err;
++	    (*node)->block = grub_be_to_cpu32 ((*node)->di.hardlink);
++	    err = grub_disk_read (data->disk,
++				  (((grub_uint64_t) (*node)->block + 1) << data->log_blocksize)
++				  - 1,
++				  GRUB_DISK_SECTOR_SIZE - GRUB_AFFS_FILE_LOCATION,
++				  sizeof ((*node)->di), (char *) &(*node)->di);
++	    if (err)
++	      return 1;
++	    continue;
++	  }
++	default:
++	  return 0;
+ 	}
++      break;
++    }
+ 
+-      if (nest == 8)
+-	return 0;
++  if (nest == 8)
++    return 0;
+ 
+-      type |= GRUB_FSHELP_CASE_INSENSITIVE;
++  type |= GRUB_FSHELP_CASE_INSENSITIVE;
+ 
+-      if (hook ((char *) name_u8, type, node))
+-	{
+-	  grub_free (hashtable);
+-	  node = 0;
+-	  return 1;
+-	}
+-      node = 0;
+-      return 0;
++  if (hook ((char *) name_u8, type, *node, hook_data))
++    {
++      grub_free (*hashtable);
++      *node = 0;
++      return 1;
+     }
++  *node = 0;
++  return 0;
++}
++
++static int
++grub_affs_iterate_dir (grub_fshelp_node_t dir,
++		       grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
++{
++  unsigned int i;
++  struct grub_affs_file file;
++  struct grub_fshelp_node *node = 0;
++  struct grub_affs_data *data = dir->data;
++  grub_uint32_t *hashtable;
+ 
+   /* Create the directory entries for `.' and `..'.  */
+   node = grub_zalloc (sizeof (*node));
+@@ -410,7 +410,7 @@ grub_affs_iterate_dir (grub_fshelp_node_t dir,
+     return 1;
+     
+   *node = *dir;
+-  if (hook (".", GRUB_FSHELP_DIR, node))
++  if (hook (".", GRUB_FSHELP_DIR, node, hook_data))
+     return 1;
+   if (dir->parent)
+     {
+@@ -418,7 +418,7 @@ grub_affs_iterate_dir (grub_fshelp_node_t dir,
+       if (!node)
+ 	return 1;
+       *node = *dir->parent;
+-      if (hook ("..", GRUB_FSHELP_DIR, node))
++      if (hook ("..", GRUB_FSHELP_DIR, node, hook_data))
+ 	return 1;
+     }
+ 
+@@ -454,7 +454,8 @@ grub_affs_iterate_dir (grub_fshelp_node_t dir,
+ 	  if (grub_errno)
+ 	    goto fail;
+ 
+-	  if (grub_affs_create_node (next, &file))
++	  if (grub_affs_create_node (dir, hook, hook_data, &node, &hashtable,
++				     next, &file))
+ 	    return 1;
+ 
+ 	  next = grub_be_to_cpu32 (file.next);
+@@ -545,31 +546,37 @@ aftime2ctime (const struct grub_affs_time *t)
+     + 8 * 365 * 86400 + 86400 * 2;
+ }
+ 
++/* Context for grub_affs_dir.  */
++struct grub_affs_dir_ctx
++{
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++};
++
++/* Helper for grub_affs_dir.  */
++static int
++grub_affs_dir_iter (const char *filename, enum grub_fshelp_filetype filetype,
++		    grub_fshelp_node_t node, void *data)
++{
++  struct grub_affs_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
++
++  grub_memset (&info, 0, sizeof (info));
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  info.mtimeset = 1;
++  info.mtime = aftime2ctime (&node->di.mtime);
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
+ static grub_err_t
+ grub_affs_dir (grub_device_t device, const char *path,
+-	       int (*hook) (const char *filename,
+-			    const struct grub_dirhook_info *info))
++	       grub_fs_dir_hook_t hook, void *hook_data)
+ {
++  struct grub_affs_dir_ctx ctx = { hook, hook_data };
+   struct grub_affs_data *data = 0;
+   struct grub_fshelp_node *fdiro = 0;
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
+-
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
+-    {
+-      struct grub_dirhook_info info;
+-      grub_memset (&info, 0, sizeof (info));
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      info.mtimeset = 1;
+-      info.mtime = aftime2ctime (&node->di.mtime);
+-      grub_free (node);
+-      return hook (filename, &info);
+-    }
+-
+   grub_dl_ref (my_mod);
+ 
+   data = grub_affs_mount (device->disk);
+@@ -581,7 +588,7 @@ grub_affs_dir (grub_device_t device, const char *path,
+   if (grub_errno)
+     goto fail;
+ 
+-  grub_affs_iterate_dir (fdiro, iterate);
++  grub_affs_iterate_dir (fdiro, grub_affs_dir_iter, &ctx);
+ 
+  fail:
+   if (data && fdiro != &data->diropen)
+diff --git a/grub-core/fs/bfs.c b/grub-core/fs/bfs.c
+index 318dc3e..fa2fc3f 100644
+--- a/grub-core/fs/bfs.c
++++ b/grub-core/fs/bfs.c
+@@ -173,6 +173,15 @@ struct grub_bfs_data
+   struct grub_bfs_inode ino[0];
+ };
+ 
++/* Context for grub_bfs_dir.  */
++struct grub_bfs_dir_ctx
++{
++  grub_device_t device;
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++  struct grub_bfs_superblock sb;
++};
++
+ static grub_err_t
+ read_extent (grub_disk_t disk,
+ 	     const struct grub_bfs_superblock *sb,
+@@ -413,7 +422,9 @@ static int
+ iterate_in_b_tree (grub_disk_t disk,
+ 		   const struct grub_bfs_superblock *sb,
+ 		   const struct grub_bfs_inode *ino,
+-		   int NESTED_FUNC_ATTR (*hook) (const char *name, grub_uint64_t value))
++		   int (*hook) (const char *name, grub_uint64_t value,
++				struct grub_bfs_dir_ctx *ctx),
++		   struct grub_bfs_dir_ctx *ctx)
+ {
+   struct grub_bfs_btree_header head;
+   grub_err_t err;
+@@ -496,7 +507,8 @@ iterate_in_b_tree (grub_disk_t disk,
+ 	      end = grub_bfs_to_cpu_treehead (node.total_key_len);
+ 	    c = key_data[end];
+ 	    key_data[end] = 0;
+-	    if (hook (key_data + start, grub_bfs_to_cpu64 (key_values[i])))
++	    if (hook (key_data + start, grub_bfs_to_cpu64 (key_values[i]),
++		      ctx))
+ 	      return 1;
+ 	    key_data[end] = c;
+ 	  }
+@@ -844,46 +856,52 @@ mount (grub_disk_t disk, struct grub_bfs_superblock *sb)
+   return GRUB_ERR_NONE;
+ }
+ 
+-static grub_err_t
+-grub_bfs_dir (grub_device_t device, const char *path,
+-	      int (*hook_in) (const char *filename,
+-			      const struct grub_dirhook_info * info))
++/* Helper for grub_bfs_dir.  */
++static int
++grub_bfs_dir_iter (const char *name, grub_uint64_t value,
++		   struct grub_bfs_dir_ctx *ctx)
+ {
+-  struct grub_bfs_superblock sb;
+-  grub_err_t err;
+-  auto int NESTED_FUNC_ATTR hook (const char *name, grub_uint64_t value);
+-
+-  int NESTED_FUNC_ATTR hook (const char *name, grub_uint64_t value)
++  grub_err_t err2;
++  union
+   {
+-    grub_err_t err2;
+-    union
+-    {
+-      struct grub_bfs_inode ino;
+-      grub_uint8_t raw[grub_bfs_to_cpu32 (sb.bsize)];
+-    } ino;
+-    struct grub_dirhook_info info;
++    struct grub_bfs_inode ino;
++    grub_uint8_t raw[grub_bfs_to_cpu32 (ctx->sb.bsize)];
++  } ino;
++  struct grub_dirhook_info info;
+ 
+-    err2 = grub_disk_read (device->disk, value
+-			   << (grub_bfs_to_cpu32 (sb.log2_bsize)
+-			       - GRUB_DISK_SECTOR_BITS), 0,
+-			   grub_bfs_to_cpu32 (sb.bsize), (char *) ino.raw);
+-    if (err2)
+-      {
+-	grub_print_error ();
+-	return 0;
+-      }
++  err2 = grub_disk_read (ctx->device->disk, value
++			 << (grub_bfs_to_cpu32 (ctx->sb.log2_bsize)
++			     - GRUB_DISK_SECTOR_BITS), 0,
++			 grub_bfs_to_cpu32 (ctx->sb.bsize), (char *) ino.raw);
++  if (err2)
++    {
++      grub_print_error ();
++      return 0;
++    }
+ 
+-    info.mtimeset = 1;
++  info.mtimeset = 1;
+ #ifdef MODE_AFS
+-    info.mtime =
+-      grub_divmod64 (grub_bfs_to_cpu64 (ino.ino.mtime), 1000000, 0);
++  info.mtime =
++    grub_divmod64 (grub_bfs_to_cpu64 (ino.ino.mtime), 1000000, 0);
+ #else
+-    info.mtime = grub_bfs_to_cpu64 (ino.ino.mtime) >> 16;
++  info.mtime = grub_bfs_to_cpu64 (ino.ino.mtime) >> 16;
+ #endif
+-    info.dir = ((grub_bfs_to_cpu32 (ino.ino.mode) & ATTR_TYPE) == ATTR_DIR);
+-    return hook_in (name, &info);
+-  }
+-  err = mount (device->disk, &sb);
++  info.dir = ((grub_bfs_to_cpu32 (ino.ino.mode) & ATTR_TYPE) == ATTR_DIR);
++  return ctx->hook (name, &info, ctx->hook_data);
++}
++
++static grub_err_t
++grub_bfs_dir (grub_device_t device, const char *path,
++	      grub_fs_dir_hook_t hook, void *hook_data)
++{
++  struct grub_bfs_dir_ctx ctx = {
++    .device = device,
++    .hook = hook,
++    .hook_data = hook_data
++  };
++  grub_err_t err;
++
++  err = mount (device->disk, &ctx.sb);
+   if (err)
+     return err;
+ 
+@@ -891,14 +909,15 @@ grub_bfs_dir (grub_device_t device, const char *path,
+     union
+     {
+       struct grub_bfs_inode ino;
+-      grub_uint8_t raw[grub_bfs_to_cpu32 (sb.bsize)];
++      grub_uint8_t raw[grub_bfs_to_cpu32 (ctx.sb.bsize)];
+     } ino;
+-    err = find_file (path, device->disk, &sb, &ino.ino);
++    err = find_file (path, device->disk, &ctx.sb, &ino.ino);
+     if (err)
+       return err;
+     if (((grub_bfs_to_cpu32 (ino.ino.mode) & ATTR_TYPE) != ATTR_DIR))
+       return grub_error (GRUB_ERR_BAD_FILE_TYPE, N_("not a directory"));
+-    iterate_in_b_tree (device->disk, &sb, &ino.ino, hook);
++    iterate_in_b_tree (device->disk, &ctx.sb, &ino.ino, grub_bfs_dir_iter,
++		       &ctx);
+   }
+ 
+   return grub_errno;
+diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
+index bcc75ba..196f301 100644
+--- a/grub-core/fs/btrfs.c
++++ b/grub-core/fs/btrfs.c
+@@ -1491,8 +1491,7 @@ find_path (struct grub_btrfs_data *data,
+ 
+ static grub_err_t
+ grub_btrfs_dir (grub_device_t device, const char *path,
+-		int (*hook) (const char *filename,
+-			     const struct grub_dirhook_info *info))
++		grub_fs_dir_hook_t hook, void *hook_data)
+ {
+   struct grub_btrfs_data *data = grub_btrfs_mount (device);
+   struct grub_btrfs_key key_in, key_out;
+@@ -1586,7 +1585,7 @@ grub_btrfs_dir (grub_device_t device, const char *path,
+ 	  c = cdirel->name[grub_le_to_cpu16 (cdirel->n)];
+ 	  cdirel->name[grub_le_to_cpu16 (cdirel->n)] = 0;
+ 	  info.dir = (cdirel->type == GRUB_BTRFS_DIR_ITEM_TYPE_DIRECTORY);
+-	  if (hook (cdirel->name, &info))
++	  if (hook (cdirel->name, &info, hook_data))
+ 	    goto out;
+ 	  cdirel->name[grub_le_to_cpu16 (cdirel->n)] = c;
+ 	}
+diff --git a/grub-core/fs/cpio.c b/grub-core/fs/cpio.c
+index e9236cd..71d7fa4 100644
+--- a/grub-core/fs/cpio.c
++++ b/grub-core/fs/cpio.c
+@@ -513,8 +513,7 @@ handle_symlink (struct grub_cpio_data *data,
+ 
+ static grub_err_t
+ grub_cpio_dir (grub_device_t device, const char *path_in,
+-	       int (*hook) (const char *filename,
+-			    const struct grub_dirhook_info *info))
++	       grub_fs_dir_hook_t hook, void *hook_data)
+ {
+   struct grub_cpio_data *data;
+   grub_disk_addr_t ofs;
+@@ -575,7 +574,7 @@ grub_cpio_dir (grub_device_t device, const char *path_in,
+ 	      info.mtime = mtime;
+ 	      info.mtimeset = 1;
+ 
+-	      if (hook (n, &info))
++	      if (hook (n, &info, hook_data))
+ 		{
+ 		  grub_free (name);
+ 		  goto fail;
+diff --git a/grub-core/fs/ext2.c b/grub-core/fs/ext2.c
+index cf2e2f4..0ebde35 100644
+--- a/grub-core/fs/ext2.c
++++ b/grub-core/fs/ext2.c
+@@ -692,10 +692,7 @@ grub_ext2_read_symlink (grub_fshelp_node_t node)
+ 
+ static int
+ grub_ext2_iterate_dir (grub_fshelp_node_t dir,
+-		       int NESTED_FUNC_ATTR
+-		       (*hook) (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node))
++		       grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
+ {
+   unsigned int fpos = 0;
+   struct grub_fshelp_node *diro = (struct grub_fshelp_node *) dir;
+@@ -777,7 +774,7 @@ grub_ext2_iterate_dir (grub_fshelp_node_t dir,
+ 		type = GRUB_FSHELP_REG;
+ 	    }
+ 
+-	  if (hook (filename, type, fdiro))
++	  if (hook (filename, type, fdiro, hook_data))
+ 	    return 1;
+ 	}
+ 
+@@ -858,59 +855,69 @@ grub_ext2_read (grub_file_t file, char *buf, grub_size_t len)
+ }
+ 
+ 
+-static grub_err_t
+-grub_ext2_dir (grub_device_t device, const char *path,
+-	       int (*hook) (const char *filename,
+-			    const struct grub_dirhook_info *info))
++/* Context for grub_ext2_dir.  */
++struct grub_ext2_dir_ctx
+ {
+-  struct grub_ext2_data *data = 0;
+-  struct grub_fshelp_node *fdiro = 0;
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++  struct grub_ext2_data *data;
++};
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
++/* Helper for grub_ext2_dir.  */
++static int
++grub_ext2_dir_iter (const char *filename, enum grub_fshelp_filetype filetype,
++		    grub_fshelp_node_t node, void *data)
++{
++  struct grub_ext2_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
+ 
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
++  grub_memset (&info, 0, sizeof (info));
++  if (! node->inode_read)
+     {
+-      struct grub_dirhook_info info;
+-      grub_memset (&info, 0, sizeof (info));
+-      if (! node->inode_read)
+-	{
+-	  grub_ext2_read_inode (data, node->ino, &node->inode);
+-	  if (!grub_errno)
+-	    node->inode_read = 1;
+-	  grub_errno = GRUB_ERR_NONE;
+-	}
+-      if (node->inode_read)
+-	{
+-	  info.mtimeset = 1;
+-	  info.mtime = grub_le_to_cpu32 (node->inode.mtime);
+-	}
+-
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      grub_free (node);
+-      return hook (filename, &info);
++      grub_ext2_read_inode (ctx->data, node->ino, &node->inode);
++      if (!grub_errno)
++	node->inode_read = 1;
++      grub_errno = GRUB_ERR_NONE;
+     }
++  if (node->inode_read)
++    {
++      info.mtimeset = 1;
++      info.mtime = grub_le_to_cpu32 (node->inode.mtime);
++    }
++
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
++static grub_err_t
++grub_ext2_dir (grub_device_t device, const char *path, grub_fs_dir_hook_t hook,
++	       void *hook_data)
++{
++  struct grub_ext2_dir_ctx ctx = {
++    .hook = hook,
++    .hook_data = hook_data
++  };
++  struct grub_fshelp_node *fdiro = 0;
+ 
+   grub_dl_ref (my_mod);
+ 
+-  data = grub_ext2_mount (device->disk);
+-  if (! data)
++  ctx.data = grub_ext2_mount (device->disk);
++  if (! ctx.data)
+     goto fail;
+ 
+-  grub_fshelp_find_file (path, &data->diropen, &fdiro, grub_ext2_iterate_dir,
+-			 grub_ext2_read_symlink, GRUB_FSHELP_DIR);
++  grub_fshelp_find_file (path, &ctx.data->diropen, &fdiro,
++			 grub_ext2_iterate_dir, grub_ext2_read_symlink,
++			 GRUB_FSHELP_DIR);
+   if (grub_errno)
+     goto fail;
+ 
+-  grub_ext2_iterate_dir (fdiro, iterate);
++  grub_ext2_iterate_dir (fdiro, grub_ext2_dir_iter, &ctx);
+ 
+  fail:
+-  if (fdiro != &data->diropen)
++  if (fdiro != &ctx.data->diropen)
+     grub_free (fdiro);
+-  grub_free (data);
++  grub_free (ctx.data);
+ 
+   grub_dl_unref (my_mod);
+ 
+diff --git a/grub-core/fs/fat.c b/grub-core/fs/fat.c
+index 119fc94..7664153 100644
+--- a/grub-core/fs/fat.c
++++ b/grub-core/fs/fat.c
+@@ -844,8 +844,7 @@ grub_fat_iterate_dir_next (grub_disk_t disk, struct grub_fat_data *data,
+ static char *
+ grub_fat_find_dir (grub_disk_t disk, struct grub_fat_data *data,
+ 		   const char *path, const char *origpath,
+-		   int (*hook) (const char *filename,
+-				const struct grub_dirhook_info *info))
++		   grub_fs_dir_hook_t hook, void *hook_data)
+ {
+   char *dirname, *dirp;
+   int call_hook;
+@@ -905,7 +904,7 @@ grub_fat_find_dir (grub_disk_t disk, struct grub_fat_data *data,
+ #endif
+       if (*dirname == '\0' && call_hook)
+ 	{
+-	  if (hook (ctxt.filename, &info))
++	  if (hook (ctxt.filename, &info, hook_data))
+ 	    break;
+ 	  else
+ 	    continue;
+@@ -926,7 +925,7 @@ grub_fat_find_dir (grub_disk_t disk, struct grub_fat_data *data,
+ 	  data->cur_cluster_num = ~0U;
+ 
+ 	  if (call_hook)
+-	    hook (ctxt.filename, &info);
++	    hook (ctxt.filename, &info, hook_data);
+ 
+ 	  break;
+ 	}
+@@ -946,9 +945,8 @@ grub_fat_find_dir (grub_disk_t disk, struct grub_fat_data *data,
+ }
+ 
+ static grub_err_t
+-grub_fat_dir (grub_device_t device, const char *path,
+-	      int (*hook) (const char *filename,
+-			   const struct grub_dirhook_info *info))
++grub_fat_dir (grub_device_t device, const char *path, grub_fs_dir_hook_t hook,
++	      void *hook_data)
+ {
+   struct grub_fat_data *data = 0;
+   grub_disk_t disk = device->disk;
+@@ -976,7 +974,7 @@ grub_fat_dir (grub_device_t device, const char *path,
+ 
+   do
+     {
+-      p = grub_fat_find_dir (disk, data, p, path, hook);
++      p = grub_fat_find_dir (disk, data, p, path, hook, hook_data);
+     }
+   while (p && grub_errno == GRUB_ERR_NONE);
+ 
+@@ -1004,7 +1002,7 @@ grub_fat_open (grub_file_t file, const char *name)
+ 
+   do
+     {
+-      p = grub_fat_find_dir (file->device->disk, data, p, name, 0);
++      p = grub_fat_find_dir (file->device->disk, data, p, name, 0, 0);
+       if (grub_errno != GRUB_ERR_NONE)
+ 	goto fail;
+     }
+diff --git a/grub-core/fs/fshelp.c b/grub-core/fs/fshelp.c
+index 21a72de..7e557c3 100644
+--- a/grub-core/fs/fshelp.c
++++ b/grub-core/fs/fshelp.c
+@@ -27,199 +27,214 @@
+ 
+ GRUB_MOD_LICENSE ("GPLv3+");
+ 
+-/* Lookup the node PATH.  The node ROOTNODE describes the root of the
+-   directory tree.  The node found is returned in FOUNDNODE, which is
+-   either a ROOTNODE or a new malloc'ed node.  ITERATE_DIR is used to
+-   iterate over all directory entries in the current node.
+-   READ_SYMLINK is used to read the symlink if a node is a symlink.
+-   EXPECTTYPE is the type node that is expected by the called, an
+-   error is generated if the node is not of the expected type.  Make
+-   sure you use the NESTED_FUNC_ATTR macro for HOOK, this is required
+-   because GCC has a nasty bug when using regparm=3.  */
+-grub_err_t
+-grub_fshelp_find_file (const char *path, grub_fshelp_node_t rootnode,
+-		       grub_fshelp_node_t *foundnode,
+-		       int (*iterate_dir) (grub_fshelp_node_t dir,
+-					   int NESTED_FUNC_ATTR (*hook)
+-					   (const char *filename,
+-					    enum grub_fshelp_filetype filetype,
+-					    grub_fshelp_node_t node)),
+-		       char *(*read_symlink) (grub_fshelp_node_t node),
+-		       enum grub_fshelp_filetype expecttype)
++typedef int (*iterate_dir_func) (grub_fshelp_node_t dir,
++				 grub_fshelp_iterate_dir_hook_t hook,
++				 void *data);
++typedef char *(*read_symlink_func) (grub_fshelp_node_t node);
++
++/* Context for grub_fshelp_find_file.  */
++struct grub_fshelp_find_file_ctx
+ {
+-  grub_err_t err;
+-  enum grub_fshelp_filetype foundtype = GRUB_FSHELP_DIR;
+-  int symlinknest = 0;
++  const char *path;
++  grub_fshelp_node_t rootnode, currroot, currnode, oldnode;
++  enum grub_fshelp_filetype foundtype;
++  int symlinknest;
++  char *name;
++  enum grub_fshelp_filetype type;
++};
++
++/* Helper for find_file_iter.  */
++static void
++free_node (grub_fshelp_node_t node, struct grub_fshelp_find_file_ctx *ctx)
++{
++  if (node != ctx->rootnode && node != ctx->currroot)
++    grub_free (node);
++}
+ 
+-  auto grub_err_t NESTED_FUNC_ATTR find_file (const char *currpath,
+-					      grub_fshelp_node_t currroot,
+-					      grub_fshelp_node_t *currfound);
++/* Helper for grub_fshelp_find_file.  */
++static int
++find_file_iter (const char *filename, enum grub_fshelp_filetype filetype,
++		grub_fshelp_node_t node, void *data)
++{
++  struct grub_fshelp_find_file_ctx *ctx = data;
+ 
+-  grub_err_t NESTED_FUNC_ATTR find_file (const char *currpath,
+-					 grub_fshelp_node_t currroot,
+-					 grub_fshelp_node_t *currfound)
++  if (filetype == GRUB_FSHELP_UNKNOWN ||
++      (grub_strcmp (ctx->name, filename) &&
++       (! (filetype & GRUB_FSHELP_CASE_INSENSITIVE) ||
++	grub_strcasecmp (ctx->name, filename))))
+     {
+-      char fpath[grub_strlen (currpath) + 1];
+-      char *name = fpath;
+-      char *next;
+-      enum grub_fshelp_filetype type = GRUB_FSHELP_DIR;
+-      grub_fshelp_node_t currnode = currroot;
+-      grub_fshelp_node_t oldnode = currroot;
++      grub_free (node);
++      return 0;
++    }
+ 
+-      auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-					 enum grub_fshelp_filetype filetype,
+-					 grub_fshelp_node_t node);
++  /* The node is found, stop iterating over the nodes.  */
++  ctx->type = filetype & ~GRUB_FSHELP_CASE_INSENSITIVE;
++  ctx->oldnode = ctx->currnode;
++  ctx->currnode = node;
+ 
+-      auto void free_node (grub_fshelp_node_t node);
++  return 1;
++}
+ 
+-      void free_node (grub_fshelp_node_t node)
+-	{
+-          if (node != rootnode && node != currroot)
+-	    grub_free (node);
+-	}
++static grub_err_t
++find_file (const char *currpath, grub_fshelp_node_t currroot,
++	   grub_fshelp_node_t *currfound,
++	   iterate_dir_func iterate_dir, read_symlink_func read_symlink,
++	   struct grub_fshelp_find_file_ctx *ctx)
++{
++  char fpath[grub_strlen (currpath) + 1];
++  char *next;
+ 
+-      int NESTED_FUNC_ATTR iterate (const char *filename,
+-				    enum grub_fshelp_filetype filetype,
+-				    grub_fshelp_node_t node)
+-	{
+-	  if (filetype == GRUB_FSHELP_UNKNOWN ||
+-              (grub_strcmp (name, filename) &&
+-               (! (filetype & GRUB_FSHELP_CASE_INSENSITIVE) ||
+-                grub_strcasecmp (name, filename))))
+-	    {
+-	      grub_free (node);
+-	      return 0;
+-	    }
++  ctx->currroot = currroot;
++  ctx->name = fpath;
++  ctx->type = GRUB_FSHELP_DIR;
++  ctx->currnode = currroot;
++  ctx->oldnode = currroot;
+ 
+-	  /* The node is found, stop iterating over the nodes.  */
+-	  type = filetype & ~GRUB_FSHELP_CASE_INSENSITIVE;
+-	  oldnode = currnode;
+-	  currnode = node;
++  grub_strncpy (fpath, currpath, grub_strlen (currpath) + 1);
+ 
+-	  return 1;
+-	}
++  /* Remove all leading slashes.  */
++  while (*ctx->name == '/')
++    ctx->name++;
+ 
+-      grub_strncpy (fpath, currpath, grub_strlen (currpath) + 1);
++  if (! *ctx->name)
++    {
++      *currfound = ctx->currnode;
++      return 0;
++    }
+ 
+-      /* Remove all leading slashes.  */
+-      while (*name == '/')
+-	name++;
++  for (;;)
++    {
++      int found;
+ 
+-      if (! *name)
++      /* Extract the actual part from the pathname.  */
++      next = grub_strchr (ctx->name, '/');
++      if (next)
+ 	{
+-	  *currfound = currnode;
+-	  return 0;
++	  /* Remove all leading slashes.  */
++	  while (*next == '/')
++	    *(next++) = '\0';
+ 	}
+ 
+-      for (;;)
++      /* At this point it is expected that the current node is a
++	 directory, check if this is true.  */
++      if (ctx->type != GRUB_FSHELP_DIR)
+ 	{
+-	  int found;
++	  free_node (ctx->currnode, ctx);
++	  ctx->currnode = 0;
++	  return grub_error (GRUB_ERR_BAD_FILE_TYPE, N_("not a directory"));
++	}
+ 
+-	  /* Extract the actual part from the pathname.  */
+-	  next = grub_strchr (name, '/');
+-	  if (next)
+-	    {
+-	      /* Remove all leading slashes.  */
+-	      while (*next == '/')
+-		*(next++) = '\0';
+-	    }
++      /* Iterate over the directory.  */
++      found = iterate_dir (ctx->currnode, find_file_iter, ctx);
++      if (! found)
++	{
++	  free_node (ctx->currnode, ctx);
++	  ctx->currnode = 0;
++	  if (grub_errno)
++	    return grub_errno;
++
++	  break;
++	}
++
++      /* Read in the symlink and follow it.  */
++      if (ctx->type == GRUB_FSHELP_SYMLINK)
++	{
++	  char *symlink;
+ 
+-	  /* At this point it is expected that the current node is a
+-	     directory, check if this is true.  */
+-	  if (type != GRUB_FSHELP_DIR)
++	  /* Test if the symlink does not loop.  */
++	  if (++ctx->symlinknest == 8)
+ 	    {
+-	      free_node (currnode);
+-	      currnode = 0;
+-	      return grub_error (GRUB_ERR_BAD_FILE_TYPE, N_("not a directory"));
++	      free_node (ctx->currnode, ctx);
++	      free_node (ctx->oldnode, ctx);
++	      ctx->currnode = 0;
++	      return grub_error (GRUB_ERR_SYMLINK_LOOP,
++				 N_("too deep nesting of symlinks"));
+ 	    }
+ 
+-	  /* Iterate over the directory.  */
+-	  found = iterate_dir (currnode, iterate);
+-	  if (! found)
+-	    {
+-	      free_node (currnode);
+-	      currnode = 0;
+-	      if (grub_errno)
+-		return grub_errno;
++	  symlink = read_symlink (ctx->currnode);
++	  free_node (ctx->currnode, ctx);
++	  ctx->currnode = 0;
+ 
+-	      break;
++	  if (!symlink)
++	    {
++	      free_node (ctx->oldnode, ctx);
++	      return grub_errno;
+ 	    }
+ 
+-	  /* Read in the symlink and follow it.  */
+-	  if (type == GRUB_FSHELP_SYMLINK)
++	  /* The symlink is an absolute path, go back to the root inode.  */
++	  if (symlink[0] == '/')
+ 	    {
+-	      char *symlink;
+-
+-	      /* Test if the symlink does not loop.  */
+-	      if (++symlinknest == 8)
+-		{
+-		  free_node (currnode);
+-		  free_node (oldnode);
+-		  currnode = 0;
+-		  return grub_error (GRUB_ERR_SYMLINK_LOOP,
+-                                     N_("too deep nesting of symlinks"));
+-		}
+-
+-	      symlink = read_symlink (currnode);
+-	      free_node (currnode);
+-	      currnode = 0;
+-
+-	      if (!symlink)
+-		{
+-		  free_node (oldnode);
+-		  return grub_errno;
+-		}
+-
+-	      /* The symlink is an absolute path, go back to the root inode.  */
+-	      if (symlink[0] == '/')
+-		{
+-		  free_node (oldnode);
+-		  oldnode = rootnode;
+-		}
+-
+-	      /* Lookup the node the symlink points to.  */
+-	      find_file (symlink, oldnode, &currnode);
+-	      type = foundtype;
+-	      grub_free (symlink);
+-
+-	      if (grub_errno)
+-		{
+-		  free_node (oldnode);
+-		  return grub_errno;
+-		}
++	      free_node (ctx->oldnode, ctx);
++	      ctx->oldnode = ctx->rootnode;
+ 	    }
+ 
+-	  if (oldnode != currnode)
+-	    free_node (oldnode);
++	  /* Lookup the node the symlink points to.  */
++	  find_file (symlink, ctx->oldnode, &ctx->currnode,
++		     iterate_dir, read_symlink, ctx);
++	  ctx->type = ctx->foundtype;
++	  grub_free (symlink);
+ 
+-	  /* Found the node!  */
+-	  if (! next || *next == '\0')
++	  if (grub_errno)
+ 	    {
+-	      *currfound = currnode;
+-	      foundtype = type;
+-	      return 0;
++	      free_node (ctx->oldnode, ctx);
++	      return grub_errno;
+ 	    }
++	}
++
++      if (ctx->oldnode != ctx->currnode)
++	free_node (ctx->oldnode, ctx);
+ 
+-	  name = next;
++      /* Found the node!  */
++      if (! next || *next == '\0')
++	{
++	  *currfound = ctx->currnode;
++	  ctx->foundtype = ctx->type;
++	  return 0;
+ 	}
+ 
+-      return grub_error (GRUB_ERR_FILE_NOT_FOUND, N_("file `%s' not found"), path);
++      ctx->name = next;
+     }
+ 
++  return grub_error (GRUB_ERR_FILE_NOT_FOUND, N_("file `%s' not found"),
++		     ctx->path);
++}
++
++/* Lookup the node PATH.  The node ROOTNODE describes the root of the
++   directory tree.  The node found is returned in FOUNDNODE, which is
++   either a ROOTNODE or a new malloc'ed node.  ITERATE_DIR is used to
++   iterate over all directory entries in the current node.
++   READ_SYMLINK is used to read the symlink if a node is a symlink.
++   EXPECTTYPE is the type node that is expected by the called, an
++   error is generated if the node is not of the expected type.  */
++grub_err_t
++grub_fshelp_find_file (const char *path, grub_fshelp_node_t rootnode,
++		       grub_fshelp_node_t *foundnode,
++		       iterate_dir_func iterate_dir,
++		       read_symlink_func read_symlink,
++		       enum grub_fshelp_filetype expecttype)
++{
++  struct grub_fshelp_find_file_ctx ctx = {
++    .path = path,
++    .rootnode = rootnode,
++    .foundtype = GRUB_FSHELP_DIR,
++    .symlinknest = 0
++  };
++  grub_err_t err;
++
+   if (!path || path[0] != '/')
+     {
+       grub_error (GRUB_ERR_BAD_FILENAME, N_("invalid file name `%s'"), path);
+       return grub_errno;
+     }
+ 
+-  err = find_file (path, rootnode, foundnode);
++  err = find_file (path, rootnode, foundnode, iterate_dir, read_symlink, &ctx);
+   if (err)
+     return err;
+ 
+   /* Check if the node that was found was of the expected type.  */
+-  if (expecttype == GRUB_FSHELP_REG && foundtype != expecttype)
++  if (expecttype == GRUB_FSHELP_REG && ctx.foundtype != expecttype)
+     return grub_error (GRUB_ERR_BAD_FILE_TYPE, N_("not a regular file"));
+-  else if (expecttype == GRUB_FSHELP_DIR && foundtype != expecttype)
++  else if (expecttype == GRUB_FSHELP_DIR && ctx.foundtype != expecttype)
+     return grub_error (GRUB_ERR_BAD_FILE_TYPE, N_("not a directory"));
+ 
+   return 0;
+diff --git a/grub-core/fs/hfs.c b/grub-core/fs/hfs.c
+index 0a249cc..9ed3330 100644
+--- a/grub-core/fs/hfs.c
++++ b/grub-core/fs/hfs.c
+@@ -1151,9 +1151,8 @@ grub_hfs_find_dir (struct grub_hfs_data *data, const char *path,
+ 
+ 
+ static grub_err_t
+-grub_hfs_dir (grub_device_t device, const char *path,
+-		  int (*hook) (const char *filename,
+-			       const struct grub_dirhook_info *info))
++grub_hfs_dir (grub_device_t device, const char *path, grub_fs_dir_hook_t hook,
++	      void *hook_data)
+ {
+   int inode;
+ 
+@@ -1184,14 +1183,14 @@ grub_hfs_dir (grub_device_t device, const char *path,
+ 	  info.dir = 1;
+ 	  info.mtimeset = 1;
+ 	  info.mtime = grub_be_to_cpu32 (drec->mtime) - 2082844800;
+-	  return hook (fname, &info);
++	  return hook (fname, &info, hook_data);
+ 	}
+       if (frec->type == GRUB_HFS_FILETYPE_FILE)
+ 	{
+ 	  info.dir = 0;
+ 	  info.mtimeset = 1;
+ 	  info.mtime = grub_be_to_cpu32 (frec->mtime) - 2082844800;
+-	  return hook (fname, &info);
++	  return hook (fname, &info, hook_data);
+ 	}
+ 
+       return 0;
+diff --git a/grub-core/fs/hfsplus.c b/grub-core/fs/hfsplus.c
+index 9812464..dcca581 100644
+--- a/grub-core/fs/hfsplus.c
++++ b/grub-core/fs/hfsplus.c
+@@ -766,10 +766,7 @@ grub_hfsplus_btree_search (struct grub_hfsplus_btree *btree,
+ 
+ static int
+ grub_hfsplus_iterate_dir (grub_fshelp_node_t dir,
+-			  int NESTED_FUNC_ATTR
+-			  (*hook) (const char *filename,
+-				   enum grub_fshelp_filetype filetype,
+-				   grub_fshelp_node_t node))
++			  grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
+ {
+   int ret = 0;
+ 
+@@ -825,7 +822,7 @@ grub_hfsplus_iterate_dir (grub_fshelp_node_t dir,
+ 	  node->size = 0;
+ 	  node->fileid = grub_be_to_cpu32 (fileinfo->parentid);
+ 
+-	  ret = hook ("..", GRUB_FSHELP_DIR, node);
++	  ret = hook ("..", GRUB_FSHELP_DIR, node, hook_data);
+ 	  return ret;
+ 	}
+ 
+@@ -878,7 +875,7 @@ grub_hfsplus_iterate_dir (grub_fshelp_node_t dir,
+       node->size = grub_be_to_cpu64 (fileinfo->data.size);
+       node->fileid = grub_be_to_cpu32 (fileinfo->fileid);
+ 
+-      ret = hook (filename, type, node);
++      ret = hook (filename, type, node, hook_data);
+ 
+       grub_free (filename);
+ 
+@@ -895,7 +892,7 @@ grub_hfsplus_iterate_dir (grub_fshelp_node_t dir,
+     if (!fsnode)
+       return 1;
+     *fsnode = *dir;
+-    if (hook (".", GRUB_FSHELP_DIR, fsnode))
++    if (hook (".", GRUB_FSHELP_DIR, fsnode, hook_data))
+       return 1;
+   }
+ 
+@@ -978,32 +975,39 @@ grub_hfsplus_read (grub_file_t file, char *buf, grub_size_t len)
+ 				     file->offset, len, buf);
+ }
+ 
++/* Context for grub_hfsplus_dir.  */
++struct grub_hfsplus_dir_ctx
++{
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++};
++
++/* Helper for grub_hfsplus_dir.  */
++static int
++grub_hfsplus_dir_iter (const char *filename,
++		       enum grub_fshelp_filetype filetype,
++		       grub_fshelp_node_t node, void *data)
++{
++  struct grub_hfsplus_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
++
++  grub_memset (&info, 0, sizeof (info));
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  info.mtimeset = 1;
++  info.mtime = node->mtime;
++  info.case_insensitive = !! (filetype & GRUB_FSHELP_CASE_INSENSITIVE);
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
+ static grub_err_t
+ grub_hfsplus_dir (grub_device_t device, const char *path,
+-		  int (*hook) (const char *filename,
+-			       const struct grub_dirhook_info *info))
++		  grub_fs_dir_hook_t hook, void *hook_data)
+ {
++  struct grub_hfsplus_dir_ctx ctx = { hook, hook_data };
+   struct grub_hfsplus_data *data = 0;
+   struct grub_fshelp_node *fdiro = 0;
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
+-
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
+-    {
+-      struct grub_dirhook_info info;
+-      grub_memset (&info, 0, sizeof (info));
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      info.mtimeset = 1;
+-      info.mtime = node->mtime;
+-      info.case_insensitive = !! (filetype & GRUB_FSHELP_CASE_INSENSITIVE);
+-      grub_free (node);
+-      return hook (filename, &info);
+-    }
+-
+   grub_dl_ref (my_mod);
+ 
+   data = grub_hfsplus_mount (device->disk);
+@@ -1018,7 +1022,7 @@ grub_hfsplus_dir (grub_device_t device, const char *path,
+     goto fail;
+ 
+   /* Iterate over all entries in this directory.  */
+-  grub_hfsplus_iterate_dir (fdiro, iterate);
++  grub_hfsplus_iterate_dir (fdiro, grub_hfsplus_dir_iter, &ctx);
+ 
+  fail:
+   if (data && fdiro != &data->dirroot)
+diff --git a/grub-core/fs/iso9660.c b/grub-core/fs/iso9660.c
+index 547e156..e37553d 100644
+--- a/grub-core/fs/iso9660.c
++++ b/grub-core/fs/iso9660.c
+@@ -521,10 +521,7 @@ get_node_size (grub_fshelp_node_t node)
+ 
+ static int
+ grub_iso9660_iterate_dir (grub_fshelp_node_t dir,
+-			  int NESTED_FUNC_ATTR
+-			  (*hook) (const char *filename,
+-				   enum grub_fshelp_filetype filetype,
+-				   grub_fshelp_node_t node))
++			  grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
+ {
+   struct grub_iso9660_dir dirent;
+   grub_off_t offset = 0;
+@@ -828,7 +825,7 @@ grub_iso9660_iterate_dir (grub_fshelp_node_t dir,
+ 	    symlink = 0;
+ 	    was_continue = 0;
+ 	  }
+-	if (hook (filename, type, node))
++	if (hook (filename, type, node, hook_data))
+ 	  {
+ 	    if (filename_alloc)
+ 	      grub_free (filename);
+@@ -844,32 +841,39 @@ grub_iso9660_iterate_dir (grub_fshelp_node_t dir,
+ 
+ 
+ 
++/* Context for grub_iso9660_dir.  */
++struct grub_iso9660_dir_ctx
++{
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++};
++
++/* Helper for grub_iso9660_dir.  */
++static int
++grub_iso9660_dir_iter (const char *filename,
++		       enum grub_fshelp_filetype filetype,
++		       grub_fshelp_node_t node, void *data)
++{
++  struct grub_iso9660_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
++
++  grub_memset (&info, 0, sizeof (info));
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  info.mtimeset = !!iso9660_to_unixtime2 (&node->dirents[0].mtime, &info.mtime);
++
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
+ static grub_err_t
+ grub_iso9660_dir (grub_device_t device, const char *path,
+-		  int (*hook) (const char *filename,
+-			       const struct grub_dirhook_info *info))
++		  grub_fs_dir_hook_t hook, void *hook_data)
+ {
++  struct grub_iso9660_dir_ctx ctx = { hook, hook_data };
+   struct grub_iso9660_data *data = 0;
+   struct grub_fshelp_node rootnode;
+   struct grub_fshelp_node *foundnode;
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
+-
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
+-    {
+-      struct grub_dirhook_info info;
+-      grub_memset (&info, 0, sizeof (info));
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      info.mtimeset = !!iso9660_to_unixtime2 (&node->dirents[0].mtime, &info.mtime);
+-
+-      grub_free (node);
+-      return hook (filename, &info);
+-    }
+-
+   grub_dl_ref (my_mod);
+ 
+   data = grub_iso9660_mount (device->disk);
+@@ -891,7 +895,7 @@ grub_iso9660_dir (grub_device_t device, const char *path,
+     goto fail;
+ 
+   /* List the files in the directory.  */
+-  grub_iso9660_iterate_dir (foundnode, iterate);
++  grub_iso9660_iterate_dir (foundnode, grub_iso9660_dir_iter, &ctx);
+ 
+   if (foundnode != &rootnode)
+     grub_free (foundnode);
+diff --git a/grub-core/fs/jfs.c b/grub-core/fs/jfs.c
+index b98a5a3..7c17192 100644
+--- a/grub-core/fs/jfs.c
++++ b/grub-core/fs/jfs.c
+@@ -799,8 +799,7 @@ grub_jfs_lookup_symlink (struct grub_jfs_data *data, grub_uint32_t ino)
+ 
+ static grub_err_t
+ grub_jfs_dir (grub_device_t device, const char *path,
+-	      int (*hook) (const char *filename,
+-			   const struct grub_dirhook_info *info))
++	      grub_fs_dir_hook_t hook, void *hook_data)
+ {
+   struct grub_jfs_data *data = 0;
+   struct grub_jfs_diropen *diro = 0;
+@@ -832,7 +831,7 @@ grub_jfs_dir (grub_device_t device, const char *path,
+ 		  & GRUB_JFS_FILETYPE_MASK) == GRUB_JFS_FILETYPE_DIR;
+       info.mtimeset = 1;
+       info.mtime = grub_le_to_cpu32 (inode.mtime.sec);
+-      if (hook (diro->name, &info))
++      if (hook (diro->name, &info, hook_data))
+ 	goto fail;
+     }
+ 
+diff --git a/grub-core/fs/minix.c b/grub-core/fs/minix.c
+index a622533..9655211 100644
+--- a/grub-core/fs/minix.c
++++ b/grub-core/fs/minix.c
+@@ -536,8 +536,7 @@ grub_minix_mount (grub_disk_t disk)
+ 
+ static grub_err_t
+ grub_minix_dir (grub_device_t device, const char *path,
+-		  int (*hook) (const char *filename,
+-			       const struct grub_dirhook_info *info))
++		grub_fs_dir_hook_t hook, void *hook_data)
+ {
+   struct grub_minix_data *data = 0;
+   unsigned int pos = 0;
+@@ -590,7 +589,7 @@ grub_minix_dir (grub_device_t device, const char *path,
+       info.mtimeset = 1;
+       info.mtime = grub_minix_to_cpu32 (data->inode.mtime);
+ 
+-      if (hook (filename, &info) ? 1 : 0)
++      if (hook (filename, &info, hook_data) ? 1 : 0)
+ 	break;
+ 
+       /* Load the old inode back in.  */
+diff --git a/grub-core/fs/nilfs2.c b/grub-core/fs/nilfs2.c
+index 5b34486..9bd4444 100644
+--- a/grub-core/fs/nilfs2.c
++++ b/grub-core/fs/nilfs2.c
+@@ -870,10 +870,7 @@ grub_nilfs2_read_symlink (grub_fshelp_node_t node)
+ 
+ static int
+ grub_nilfs2_iterate_dir (grub_fshelp_node_t dir,
+-			 int NESTED_FUNC_ATTR
+-			 (*hook) (const char *filename,
+-				  enum grub_fshelp_filetype filetype,
+-				  grub_fshelp_node_t node))
++			 grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
+ {
+   grub_off_t fpos = 0;
+   struct grub_fshelp_node *diro = (struct grub_fshelp_node *) dir;
+@@ -957,7 +954,7 @@ grub_nilfs2_iterate_dir (grub_fshelp_node_t dir,
+ 		type = GRUB_FSHELP_REG;
+ 	    }
+ 
+-	  if (hook (filename, type, fdiro))
++	  if (hook (filename, type, fdiro, hook_data))
+ 	    return 1;
+ 	}
+ 
+@@ -1032,60 +1029,69 @@ grub_nilfs2_read (grub_file_t file, char *buf, grub_size_t len)
+ 				file->offset, len, buf);
+ }
+ 
++/* Context for grub_nilfs2_dir.  */
++struct grub_nilfs2_dir_ctx
++{
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++  struct grub_nilfs2_data *data;
++};
++
++/* Helper for grub_nilfs2_dir.  */
++static int
++grub_nilfs2_dir_iter (const char *filename, enum grub_fshelp_filetype filetype,
++		      grub_fshelp_node_t node, void *data)
++{
++  struct grub_nilfs2_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
++
++  grub_memset (&info, 0, sizeof (info));
++  if (!node->inode_read)
++    {
++      grub_nilfs2_read_inode (ctx->data, node->ino, &node->inode);
++      if (!grub_errno)
++	node->inode_read = 1;
++      grub_errno = GRUB_ERR_NONE;
++    }
++  if (node->inode_read)
++    {
++      info.mtimeset = 1;
++      info.mtime = grub_le_to_cpu64 (node->inode.i_mtime);
++    }
++
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
+ static grub_err_t
+ grub_nilfs2_dir (grub_device_t device, const char *path,
+-		 int (*hook) (const char *filename,
+-			      const struct grub_dirhook_info * info))
++		 grub_fs_dir_hook_t hook, void *hook_data)
+ {
+-  struct grub_nilfs2_data *data = 0;
++  struct grub_nilfs2_dir_ctx ctx = {
++    .hook = hook,
++    .hook_data = hook_data
++  };
+   struct grub_fshelp_node *fdiro = 0;
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
+-
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
+-  {
+-    struct grub_dirhook_info info;
+-    grub_memset (&info, 0, sizeof (info));
+-    if (!node->inode_read)
+-      {
+-	grub_nilfs2_read_inode (data, node->ino, &node->inode);
+-	if (!grub_errno)
+-	  node->inode_read = 1;
+-	grub_errno = GRUB_ERR_NONE;
+-      }
+-    if (node->inode_read)
+-      {
+-	info.mtimeset = 1;
+-	info.mtime = grub_le_to_cpu64 (node->inode.i_mtime);
+-      }
+-
+-    info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-    grub_free (node);
+-    return hook (filename, &info);
+-  }
+-
+   grub_dl_ref (my_mod);
+ 
+-  data = grub_nilfs2_mount (device->disk);
+-  if (!data)
++  ctx.data = grub_nilfs2_mount (device->disk);
++  if (!ctx.data)
+     goto fail;
+ 
+-  grub_fshelp_find_file (path, &data->diropen, &fdiro,
++  grub_fshelp_find_file (path, &ctx.data->diropen, &fdiro,
+ 			 grub_nilfs2_iterate_dir, grub_nilfs2_read_symlink,
+ 			 GRUB_FSHELP_DIR);
+   if (grub_errno)
+     goto fail;
+ 
+-  grub_nilfs2_iterate_dir (fdiro, iterate);
++  grub_nilfs2_iterate_dir (fdiro, grub_nilfs2_dir_iter, &ctx);
+ 
+ fail:
+-  if (fdiro != &data->diropen)
++  if (fdiro != &ctx.data->diropen)
+     grub_free (fdiro);
+-  grub_free (data);
++  grub_free (ctx.data);
+ 
+   grub_dl_unref (my_mod);
+ 
+diff --git a/grub-core/fs/ntfs.c b/grub-core/fs/ntfs.c
+index e7861d8..7ac46f9 100644
+--- a/grub-core/fs/ntfs.c
++++ b/grub-core/fs/ntfs.c
+@@ -600,10 +600,7 @@ free_file (struct grub_ntfs_file *mft)
+ 
+ static int
+ list_file (struct grub_ntfs_file *diro, grub_uint8_t *pos,
+-	   int NESTED_FUNC_ATTR
+-	   (*hook) (const char *filename,
+-		    enum grub_fshelp_filetype filetype,
+-		    grub_fshelp_node_t node))
++	   grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
+ {
+   grub_uint8_t *np;
+   int ns;
+@@ -667,7 +664,7 @@ list_file (struct grub_ntfs_file *diro, grub_uint8_t *pos,
+           if (namespace)
+             type |= GRUB_FSHELP_CASE_INSENSITIVE;
+ 
+-	  if (hook (ustr, type, fdiro))
++	  if (hook (ustr, type, fdiro, hook_data))
+ 	    {
+ 	      grub_free (ustr);
+ 	      return 1;
+@@ -778,10 +775,7 @@ grub_ntfs_read_symlink (grub_fshelp_node_t node)
+ 
+ static int
+ grub_ntfs_iterate_dir (grub_fshelp_node_t dir,
+-		       int NESTED_FUNC_ATTR
+-		       (*hook) (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node))
++		       grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
+ {
+   grub_uint8_t *bitmap;
+   struct grub_ntfs_attr attr, *at;
+@@ -824,7 +818,7 @@ grub_ntfs_iterate_dir (grub_fshelp_node_t dir,
+     }
+ 
+   cur_pos += 0x10;		/* Skip index root */
+-  ret = list_file (mft, cur_pos + u16at (cur_pos, 0), hook);
++  ret = list_file (mft, cur_pos + u16at (cur_pos, 0), hook, hook_data);
+   if (ret)
+     goto done;
+ 
+@@ -909,7 +903,8 @@ grub_ntfs_iterate_dir (grub_fshelp_node_t dir,
+ 		  || (fixup (indx, mft->data->idx_size,
+ 			     (const grub_uint8_t *) "INDX")))
+ 		goto done;
+-	      ret = list_file (mft, &indx[0x18 + u16at (indx, 0x18)], hook);
++	      ret = list_file (mft, &indx[0x18 + u16at (indx, 0x18)],
++			       hook, hook_data);
+ 	      if (ret)
+ 		goto done;
+ 	    }
+@@ -1017,33 +1012,39 @@ fail:
+   return 0;
+ }
+ 
++/* Context for grub_ntfs_dir.  */
++struct grub_ntfs_dir_ctx
++{
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++};
++
++/* Helper for grub_ntfs_dir.  */
++static int
++grub_ntfs_dir_iter (const char *filename, enum grub_fshelp_filetype filetype,
++		    grub_fshelp_node_t node, void *data)
++{
++  struct grub_ntfs_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
++
++  grub_memset (&info, 0, sizeof (info));
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  info.mtimeset = 1;
++  info.mtime = grub_divmod64 (node->mtime, 10000000, 0) 
++    - 86400ULL * 365 * (1970 - 1601)
++    - 86400ULL * ((1970 - 1601) / 4) + 86400ULL * ((1970 - 1601) / 100);
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
+ static grub_err_t
+ grub_ntfs_dir (grub_device_t device, const char *path,
+-	       int (*hook) (const char *filename,
+-			    const struct grub_dirhook_info *info))
++	       grub_fs_dir_hook_t hook, void *hook_data)
+ {
++  struct grub_ntfs_dir_ctx ctx = { hook, hook_data };
+   struct grub_ntfs_data *data = 0;
+   struct grub_fshelp_node *fdiro = 0;
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
+-
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
+-  {
+-      struct grub_dirhook_info info;
+-      grub_memset (&info, 0, sizeof (info));
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      info.mtimeset = 1;
+-      info.mtime = grub_divmod64 (node->mtime, 10000000, 0) 
+-	- 86400ULL * 365 * (1970 - 1601)
+-	- 86400ULL * ((1970 - 1601) / 4) + 86400ULL * ((1970 - 1601) / 100);
+-      grub_free (node);
+-      return hook (filename, &info);
+-  }
+-
+   grub_dl_ref (my_mod);
+ 
+   data = grub_ntfs_mount (device->disk);
+@@ -1056,7 +1057,7 @@ grub_ntfs_dir (grub_device_t device, const char *path,
+   if (grub_errno)
+     goto fail;
+ 
+-  grub_ntfs_iterate_dir (fdiro, iterate);
++  grub_ntfs_iterate_dir (fdiro, grub_ntfs_dir_iter, &ctx);
+ 
+ fail:
+   if ((fdiro) && (fdiro != &data->cmft))
+diff --git a/grub-core/fs/reiserfs.c b/grub-core/fs/reiserfs.c
+index 26adf23..686e4da 100644
+--- a/grub-core/fs/reiserfs.c
++++ b/grub-core/fs/reiserfs.c
+@@ -718,10 +718,8 @@ grub_reiserfs_mount (grub_disk_t disk)
+ /* Call HOOK for each file in directory ITEM.  */
+ static int
+ grub_reiserfs_iterate_dir (grub_fshelp_node_t item,
+-                           int NESTED_FUNC_ATTR
+-                           (*hook) (const char *filename,
+-                                    enum grub_fshelp_filetype filetype,
+-                                    grub_fshelp_node_t node))
++                           grub_fshelp_iterate_dir_hook_t hook,
++			   void *hook_data)
+ {
+   struct grub_reiserfs_data *data = item->data;
+   struct grub_reiserfs_block_header *block_header = 0;
+@@ -946,7 +944,7 @@ grub_reiserfs_iterate_dir (grub_fshelp_node_t item,
+ 		  goto next;
+ 		}
+ 	    }
+-	  if (hook (entry_name, entry_type, entry_item))
++	  if (hook (entry_name, entry_type, entry_item, hook_data))
+ 	    {
+ 	      grub_dprintf ("reiserfs", "Found : %s, type=%d\n",
+ 			    entry_name, entry_type);
+@@ -1254,32 +1252,40 @@ grub_reiserfs_close (grub_file_t file)
+   return GRUB_ERR_NONE;
+ }
+ 
++/* Context for grub_reiserfs_dir.  */
++struct grub_reiserfs_dir_ctx
++{
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++};
++
++/* Helper for grub_reiserfs_dir.  */
++static int
++grub_reiserfs_dir_iter (const char *filename,
++			enum grub_fshelp_filetype filetype,
++			grub_fshelp_node_t node, void *data)
++{
++  struct grub_reiserfs_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
++
++  grub_memset (&info, 0, sizeof (info));
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  info.mtimeset = 1;
++  info.mtime = node->mtime;
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
+ /* Call HOOK with each file under DIR.  */
+ static grub_err_t
+ grub_reiserfs_dir (grub_device_t device, const char *path,
+-                   int (*hook) (const char *filename,
+-				const struct grub_dirhook_info *info))
++                   grub_fs_dir_hook_t hook, void *hook_data)
+ {
++  struct grub_reiserfs_dir_ctx ctx = { hook, hook_data };
+   struct grub_reiserfs_data *data = 0;
+   struct grub_fshelp_node root, *found;
+   struct grub_reiserfs_key root_key;
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-                                     enum grub_fshelp_filetype filetype,
+-                                     grub_fshelp_node_t node);
+-
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-                                enum grub_fshelp_filetype filetype,
+-                                grub_fshelp_node_t node)
+-    {
+-      struct grub_dirhook_info info;
+-      grub_memset (&info, 0, sizeof (info));
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      info.mtimeset = 1;
+-      info.mtime = node->mtime;
+-      grub_free (node);
+-      return hook (filename, &info);
+-    }
+   grub_dl_ref (my_mod);
+   data = grub_reiserfs_mount (device->disk);
+   if (! data)
+@@ -1300,7 +1306,7 @@ grub_reiserfs_dir (grub_device_t device, const char *path,
+                          grub_reiserfs_read_symlink, GRUB_FSHELP_DIR);
+   if (grub_errno)
+     goto fail;
+-  grub_reiserfs_iterate_dir (found, iterate);
++  grub_reiserfs_iterate_dir (found, grub_reiserfs_dir_iter, &ctx);
+   grub_free (data);
+   grub_dl_unref (my_mod);
+   return GRUB_ERR_NONE;
+diff --git a/grub-core/fs/romfs.c b/grub-core/fs/romfs.c
+index b30caef..b79b1e1 100644
+--- a/grub-core/fs/romfs.c
++++ b/grub-core/fs/romfs.c
+@@ -171,10 +171,7 @@ grub_romfs_read_symlink (grub_fshelp_node_t node)
+ 
+ static int
+ grub_romfs_iterate_dir (grub_fshelp_node_t dir,
+-			int NESTED_FUNC_ATTR
+-			(*hook) (const char *filename,
+-				 enum grub_fshelp_filetype filetype,
+-				 grub_fshelp_node_t node))
++			grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
+ {
+   grub_disk_addr_t caddr;
+   struct grub_romfs_file_header hdr;
+@@ -306,7 +303,7 @@ grub_romfs_iterate_dir (grub_fshelp_node_t dir,
+ 	  }
+ 	}
+ 
+-      if (hook ((char *) name, filetype, node))
++      if (hook ((char *) name, filetype, node, hook_data))
+ 	{
+ 	  grub_free (name);
+ 	  return 1;
+@@ -316,30 +313,36 @@ grub_romfs_iterate_dir (grub_fshelp_node_t dir,
+   return 0;
+ }
+ 
++/* Context for grub_romfs_dir.  */
++struct grub_romfs_dir_ctx
++{
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++};
++
++/* Helper for grub_romfs_dir.  */
++static int
++grub_romfs_dir_iter (const char *filename, enum grub_fshelp_filetype filetype,
++		     grub_fshelp_node_t node, void *data)
++{
++  struct grub_romfs_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
++
++  grub_memset (&info, 0, sizeof (info));
++
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
+ static grub_err_t
+ grub_romfs_dir (grub_device_t device, const char *path,
+-		int (*hook) (const char *filename,
+-			     const struct grub_dirhook_info *info))
++		grub_fs_dir_hook_t hook, void *hook_data)
+ {
++  struct grub_romfs_dir_ctx ctx = { hook, hook_data };
+   struct grub_romfs_data *data = 0;
+   struct grub_fshelp_node *fdiro = 0, start;
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
+-
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
+-    {
+-      struct grub_dirhook_info info;
+-      grub_memset (&info, 0, sizeof (info));
+-
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      grub_free (node);
+-      return hook (filename, &info);
+-    }
+-
+   data = grub_romfs_mount (device);
+   if (! data)
+     goto fail;
+@@ -352,7 +355,7 @@ grub_romfs_dir (grub_device_t device, const char *path,
+   if (grub_errno)
+     goto fail;
+ 
+-  grub_romfs_iterate_dir (fdiro, iterate);
++  grub_romfs_iterate_dir (fdiro, grub_romfs_dir_iter, &ctx);
+ 
+  fail:
+   grub_free (data);
+diff --git a/grub-core/fs/sfs.c b/grub-core/fs/sfs.c
+index f7cdb08..fed17d3 100644
+--- a/grub-core/fs/sfs.c
++++ b/grub-core/fs/sfs.c
+@@ -460,12 +460,48 @@ grub_sfs_read_symlink (grub_fshelp_node_t node)
+   return symlink;
+ }
+ 
++/* Helper for grub_sfs_iterate_dir.  */
++static int
++grub_sfs_create_node (struct grub_fshelp_node **node,
++		      struct grub_sfs_data *data,
++		      const char *name,
++		      grub_uint32_t block, grub_uint32_t size, int type,
++		      grub_uint32_t mtime,
++		      grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
++{
++  grub_size_t len = grub_strlen (name);
++  grub_uint8_t *name_u8;
++  int ret;
++  *node = grub_malloc (sizeof (**node));
++  if (!*node)
++    return 1;
++  name_u8 = grub_malloc (len * GRUB_MAX_UTF8_PER_LATIN1 + 1);
++  if (!name_u8)
++    {
++      grub_free (*node);
++      return 1;
++    }
++
++  (*node)->data = data;
++  (*node)->size = size;
++  (*node)->block = block;
++  (*node)->mtime = mtime;
++  (*node)->cache = 0;
++  (*node)->cache_off = 0;
++  (*node)->next_extent = block;
++  (*node)->cache_size = 0;
++  (*node)->cache_allocated = 0;
++
++  *grub_latin1_to_utf8 (name_u8, (const grub_uint8_t *) name, len) = '\0';
++
++  ret = hook ((char *) name_u8, type | data->fshelp_flags, *node, hook_data);
++  grub_free (name_u8);
++  return ret;
++}
++
+ static int
+ grub_sfs_iterate_dir (grub_fshelp_node_t dir,
+-		       int NESTED_FUNC_ATTR
+-		       (*hook) (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node))
++		      grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
+ {
+   struct grub_fshelp_node *node = 0;
+   struct grub_sfs_data *data = dir->data;
+@@ -474,46 +510,6 @@ grub_sfs_iterate_dir (grub_fshelp_node_t dir,
+   unsigned int next = dir->block;
+   grub_uint32_t pos;
+ 
+-  auto int NESTED_FUNC_ATTR grub_sfs_create_node (const char *name,
+-						  grub_uint32_t block,
+-						  grub_uint32_t size, int type,
+-						  grub_uint32_t mtime);
+-
+-  int NESTED_FUNC_ATTR grub_sfs_create_node (const char *name,
+-					     grub_uint32_t block,
+-					     grub_uint32_t size, int type,
+-					     grub_uint32_t mtime)
+-    {
+-      grub_size_t len = grub_strlen (name);
+-      grub_uint8_t *name_u8;
+-      int ret;
+-      node = grub_malloc (sizeof (*node));
+-      if (!node)
+-	return 1;
+-      name_u8 = grub_malloc (len * GRUB_MAX_UTF8_PER_LATIN1 + 1);
+-      if (!name_u8)
+-	{
+-	  grub_free (node);
+-	  return 1;
+-	}
+-
+-      node->data = data;
+-      node->size = size;
+-      node->block = block;
+-      node->mtime = mtime;
+-      node->cache = 0;
+-      node->cache_off = 0;
+-      node->next_extent = block;
+-      node->cache_size = 0;
+-      node->cache_allocated = 0;
+-
+-      *grub_latin1_to_utf8 (name_u8, (const grub_uint8_t *) name, len) = '\0';
+-
+-      ret = hook ((char *) name_u8, type | data->fshelp_flags, node);
+-      grub_free (name_u8);
+-      return ret;
+-    }
+-
+   objc_data = grub_malloc (GRUB_DISK_SECTOR_SIZE << data->log_blocksize);
+   if (!objc_data)
+     goto fail;
+@@ -570,9 +566,10 @@ grub_sfs_iterate_dir (grub_fshelp_node_t dir,
+ 	  else
+ 	    block = grub_be_to_cpu32 (obj->file_dir.file.first_block);
+ 
+-	  if (grub_sfs_create_node (filename, block,
++	  if (grub_sfs_create_node (&node, data, filename, block,
+ 				    grub_be_to_cpu32 (obj->file_dir.file.size),
+-				    type, grub_be_to_cpu32 (obj->mtime)))
++				    type, grub_be_to_cpu32 (obj->mtime),
++				    hook, hook_data))
+ 	    {
+ 	      grub_free (objc_data);
+ 	      return 1;
+@@ -654,32 +651,38 @@ grub_sfs_read (grub_file_t file, char *buf, grub_size_t len)
+ }
+ 
+ 
++/* Context for grub_sfs_dir.  */
++struct grub_sfs_dir_ctx
++{
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++};
++
++/* Helper for grub_sfs_dir.  */
++static int
++grub_sfs_dir_iter (const char *filename, enum grub_fshelp_filetype filetype,
++		   grub_fshelp_node_t node, void *data)
++{
++  struct grub_sfs_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
++
++  grub_memset (&info, 0, sizeof (info));
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  info.mtime = node->mtime + 8 * 365 * 86400 + 86400 * 2;
++  info.mtimeset = 1;
++  grub_free (node->cache);
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
+ static grub_err_t
+ grub_sfs_dir (grub_device_t device, const char *path,
+-	       int (*hook) (const char *filename,
+-			    const struct grub_dirhook_info *info))
++	      grub_fs_dir_hook_t hook, void *hook_data)
+ {
++  struct grub_sfs_dir_ctx ctx = { hook, hook_data };
+   struct grub_sfs_data *data = 0;
+   struct grub_fshelp_node *fdiro = 0;
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
+-
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
+-    {
+-      struct grub_dirhook_info info;
+-      grub_memset (&info, 0, sizeof (info));
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      info.mtime = node->mtime + 8 * 365 * 86400 + 86400 * 2;
+-      info.mtimeset = 1;
+-      grub_free (node->cache);
+-      grub_free (node);
+-      return hook (filename, &info);
+-    }
+-
+   grub_dl_ref (my_mod);
+ 
+   data = grub_sfs_mount (device->disk);
+@@ -691,7 +694,7 @@ grub_sfs_dir (grub_device_t device, const char *path,
+   if (grub_errno)
+     goto fail;
+ 
+-  grub_sfs_iterate_dir (fdiro, iterate);
++  grub_sfs_iterate_dir (fdiro, grub_sfs_dir_iter, &ctx);
+ 
+  fail:
+   if (data && fdiro != &data->diropen)
+diff --git a/grub-core/fs/squash4.c b/grub-core/fs/squash4.c
+index 44af0f8..cb3cc3a 100644
+--- a/grub-core/fs/squash4.c
++++ b/grub-core/fs/squash4.c
+@@ -478,10 +478,7 @@ grub_squash_read_symlink (grub_fshelp_node_t node)
+ 
+ static int
+ grub_squash_iterate_dir (grub_fshelp_node_t dir,
+-			 int NESTED_FUNC_ATTR
+-			 (*hook) (const char *filename,
+-				  enum grub_fshelp_filetype filetype,
+-				  grub_fshelp_node_t node))
++			 grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
+ {
+   grub_uint32_t off;
+   grub_uint32_t endoff;
+@@ -514,7 +511,7 @@ grub_squash_iterate_dir (grub_fshelp_node_t dir,
+       return 0;
+     grub_memcpy (node, dir,
+ 		 sizeof (*node) + dir->stsize * sizeof (dir->stack[0]));
+-    if (hook (".", GRUB_FSHELP_DIR, node))
++    if (hook (".", GRUB_FSHELP_DIR, node, hook_data))
+       return 1;
+ 
+     if (dir->stsize != 1)
+@@ -536,7 +533,7 @@ grub_squash_iterate_dir (grub_fshelp_node_t dir,
+ 	if (err)
+ 	  return 0;
+ 
+-	if (hook ("..", GRUB_FSHELP_DIR, node))
++	if (hook ("..", GRUB_FSHELP_DIR, node, hook_data))
+ 	  return 1;
+       }
+   }
+@@ -604,7 +601,7 @@ grub_squash_iterate_dir (grub_fshelp_node_t dir,
+ 	  node->stack[node->stsize].ino_chunk = grub_le_to_cpu32 (dh.ino_chunk);
+ 	  node->stack[node->stsize].ino_offset = grub_le_to_cpu16 (di.ino_offset);
+ 	  node->stsize++;
+-	  r = hook (buf, filetype, node);
++	  r = hook (buf, filetype, node, hook_data);
+ 
+ 	  grub_free (buf);
+ 	  if (r)
+@@ -640,28 +637,34 @@ squash_unmount (struct grub_squash_data *data)
+ }
+ 
+ 
+-static grub_err_t
+-grub_squash_dir (grub_device_t device, const char *path,
+-	       int (*hook) (const char *filename,
+-			    const struct grub_dirhook_info *info))
++/* Context for grub_squash_dir.  */
++struct grub_squash_dir_ctx
+ {
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++};
+ 
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
+-    {
+-      struct grub_dirhook_info info;
+-      grub_memset (&info, 0, sizeof (info));
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      info.mtimeset = 1;
+-      info.mtime = grub_le_to_cpu32 (node->ino.mtime);
+-      grub_free (node);
+-      return hook (filename, &info);
+-    }
++/* Helper for grub_squash_dir.  */
++static int
++grub_squash_dir_iter (const char *filename, enum grub_fshelp_filetype filetype,
++		      grub_fshelp_node_t node, void *data)
++{
++  struct grub_squash_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
++
++  grub_memset (&info, 0, sizeof (info));
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  info.mtimeset = 1;
++  info.mtime = grub_le_to_cpu32 (node->ino.mtime);
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
+ 
++static grub_err_t
++grub_squash_dir (grub_device_t device, const char *path,
++		 grub_fs_dir_hook_t hook, void *hook_data)
++{
++  struct grub_squash_dir_ctx ctx = { hook, hook_data };
+   struct grub_squash_data *data = 0;
+   struct grub_fshelp_node *fdiro = 0;
+   struct grub_fshelp_node root;
+@@ -678,7 +681,7 @@ grub_squash_dir (grub_device_t device, const char *path,
+   grub_fshelp_find_file (path, &root, &fdiro, grub_squash_iterate_dir,
+ 			 grub_squash_read_symlink, GRUB_FSHELP_DIR);
+   if (!grub_errno)
+-    grub_squash_iterate_dir (fdiro, iterate);
++    grub_squash_iterate_dir (fdiro, grub_squash_dir_iter, &ctx);
+ 
+   squash_unmount (data);
+ 
+diff --git a/grub-core/fs/udf.c b/grub-core/fs/udf.c
+index 8e28d41..b7f3afb 100644
+--- a/grub-core/fs/udf.c
++++ b/grub-core/fs/udf.c
+@@ -843,10 +843,7 @@ read_string (const grub_uint8_t *raw, grub_size_t sz, char *outbuf)
+ 
+ static int
+ grub_udf_iterate_dir (grub_fshelp_node_t dir,
+-		      int NESTED_FUNC_ATTR
+-		      (*hook) (const char *filename,
+-			       enum grub_fshelp_filetype filetype,
+-			       grub_fshelp_node_t node))
++		      grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
+ {
+   grub_fshelp_node_t child;
+   struct grub_udf_file_ident dirent;
+@@ -859,7 +856,7 @@ grub_udf_iterate_dir (grub_fshelp_node_t dir,
+   /* The current directory is not stored.  */
+   grub_memcpy (child, dir, get_fshelp_size (dir->data));
+ 
+-  if (hook (".", GRUB_FSHELP_DIR, child))
++  if (hook (".", GRUB_FSHELP_DIR, child, hook_data))
+     return 1;
+ 
+   while (offset < U64 (dir->block.fe.file_size))
+@@ -887,7 +884,7 @@ grub_udf_iterate_dir (grub_fshelp_node_t dir,
+           if (dirent.characteristics & GRUB_UDF_FID_CHAR_PARENT)
+ 	    {
+ 	      /* This is the parent directory.  */
+-	      if (hook ("..", GRUB_FSHELP_DIR, child))
++	      if (hook ("..", GRUB_FSHELP_DIR, child, hook_data))
+ 	        return 1;
+ 	    }
+           else
+@@ -911,7 +908,7 @@ grub_udf_iterate_dir (grub_fshelp_node_t dir,
+ 	      if (!filename)
+ 		grub_print_error ();
+ 
+-	      if (filename && hook (filename, type, child))
++	      if (filename && hook (filename, type, child, hook_data))
+ 		{
+ 		  grub_free (filename);
+ 		  return 1;
+@@ -1012,58 +1009,64 @@ grub_udf_read_symlink (grub_fshelp_node_t node)
+   return NULL;
+ }
+ 
++/* Context for grub_udf_dir.  */
++struct grub_udf_dir_ctx
++{
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++};
++
++/* Helper for grub_udf_dir.  */
++static int
++grub_udf_dir_iter (const char *filename, enum grub_fshelp_filetype filetype,
++		   grub_fshelp_node_t node, void *data)
++{
++  struct grub_udf_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
++  const struct grub_udf_timestamp *tstamp = NULL;
++
++  grub_memset (&info, 0, sizeof (info));
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  if (U16 (node->block.fe.tag.tag_ident) == GRUB_UDF_TAG_IDENT_FE)
++    tstamp = &node->block.fe.modification_time;
++  else if (U16 (node->block.fe.tag.tag_ident) == GRUB_UDF_TAG_IDENT_EFE)
++    tstamp = &node->block.efe.modification_time;
++
++  if (tstamp && (U16 (tstamp->type_and_timezone) & 0xf000) == 0x1000)
++    {
++      grub_int16_t tz;
++      struct grub_datetime datetime;
++
++      datetime.year = U16 (tstamp->year);
++      datetime.month = tstamp->month;
++      datetime.day = tstamp->day;
++      datetime.hour = tstamp->hour;
++      datetime.minute = tstamp->minute;
++      datetime.second = tstamp->second;
++
++      tz = U16 (tstamp->type_and_timezone) & 0xfff;
++      if (tz & 0x800)
++	tz |= 0xf000;
++      if (tz == -2047)
++	tz = 0;
++
++      info.mtimeset = !!grub_datetime2unixtime (&datetime, &info.mtime);
++
++      info.mtime -= 60 * tz;
++    }
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
+ static grub_err_t
+ grub_udf_dir (grub_device_t device, const char *path,
+-	      int (*hook) (const char *filename,
+-			   const struct grub_dirhook_info *info))
++	      grub_fs_dir_hook_t hook, void *hook_data)
+ {
++  struct grub_udf_dir_ctx ctx = { hook, hook_data };
+   struct grub_udf_data *data = 0;
+   struct grub_fshelp_node *rootnode = 0;
+   struct grub_fshelp_node *foundnode = 0;
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
+-
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
+-  {
+-      struct grub_dirhook_info info;
+-      const struct grub_udf_timestamp *tstamp = NULL;
+-      grub_memset (&info, 0, sizeof (info));
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      if (U16 (node->block.fe.tag.tag_ident) == GRUB_UDF_TAG_IDENT_FE)
+-	tstamp = &node->block.fe.modification_time;
+-      else if (U16 (node->block.fe.tag.tag_ident) == GRUB_UDF_TAG_IDENT_EFE)
+-	tstamp = &node->block.efe.modification_time;
+-
+-      if (tstamp && (U16 (tstamp->type_and_timezone) & 0xf000) == 0x1000)
+-	{
+-	  grub_int16_t tz;
+-	  struct grub_datetime datetime;
+-
+-	  datetime.year = U16 (tstamp->year);
+-	  datetime.month = tstamp->month;
+-	  datetime.day = tstamp->day;
+-	  datetime.hour = tstamp->hour;
+-	  datetime.minute = tstamp->minute;
+-	  datetime.second = tstamp->second;
+-
+-	  tz = U16 (tstamp->type_and_timezone) & 0xfff;
+-	  if (tz & 0x800)
+-	    tz |= 0xf000;
+-	  if (tz == -2047)
+-	    tz = 0;
+-
+-	  info.mtimeset = !!grub_datetime2unixtime (&datetime, &info.mtime);
+-  
+-	  info.mtime -= 60 * tz;
+-	}
+-      grub_free (node);
+-      return hook (filename, &info);
+-  }
+-
+   grub_dl_ref (my_mod);
+ 
+   data = grub_udf_mount (device->disk);
+@@ -1083,7 +1086,7 @@ grub_udf_dir (grub_device_t device, const char *path,
+ 			     GRUB_FSHELP_DIR))
+     goto fail;
+ 
+-  grub_udf_iterate_dir (foundnode, iterate);
++  grub_udf_iterate_dir (foundnode, grub_udf_dir_iter, &ctx);
+ 
+   if (foundnode != rootnode)
+     grub_free (foundnode);
+diff --git a/grub-core/fs/ufs.c b/grub-core/fs/ufs.c
+index 74a4a40..089a5c6 100644
+--- a/grub-core/fs/ufs.c
++++ b/grub-core/fs/ufs.c
+@@ -625,8 +625,7 @@ grub_ufs_mount (grub_disk_t disk)
+ 
+ static grub_err_t
+ grub_ufs_dir (grub_device_t device, const char *path,
+-	       int (*hook) (const char *filename,
+-			    const struct grub_dirhook_info *info))
++	      grub_fs_dir_hook_t hook, void *hook_data)
+ {
+   struct grub_ufs_data *data;
+   unsigned int pos = 0;
+@@ -697,7 +696,7 @@ grub_ufs_dir (grub_device_t device, const char *path,
+ #endif
+ 	info.mtimeset = 1;
+ 
+-	if (hook (filename, &info))
++	if (hook (filename, &info, hook_data))
+ 	  break;
+       }
+ 
+diff --git a/grub-core/fs/xfs.c b/grub-core/fs/xfs.c
+index 1ed048f..49d2a89 100644
+--- a/grub-core/fs/xfs.c
++++ b/grub-core/fs/xfs.c
+@@ -443,47 +443,57 @@ grub_xfs_mode_to_filetype (grub_uint16_t mode)
+ }
+ 
+ 
+-static int
+-grub_xfs_iterate_dir (grub_fshelp_node_t dir,
+-		       int NESTED_FUNC_ATTR
+-		       (*hook) (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node))
++/* Context for grub_xfs_iterate_dir.  */
++struct grub_xfs_iterate_dir_ctx
+ {
+-  struct grub_fshelp_node *diro = (struct grub_fshelp_node *) dir;
+-  auto int NESTED_FUNC_ATTR call_hook (grub_uint64_t ino, const char *filename);
++  grub_fshelp_iterate_dir_hook_t hook;
++  void *hook_data;
++  struct grub_fshelp_node *diro;
++};
+ 
+-  int NESTED_FUNC_ATTR call_hook (grub_uint64_t ino, const char *filename)
+-    {
+-      struct grub_fshelp_node *fdiro;
+-      grub_err_t err;
+-
+-      fdiro = grub_malloc (sizeof (struct grub_fshelp_node)
+-			   - sizeof (struct grub_xfs_inode)
+-			   + (1 << diro->data->sblock.log2_inode));
+-      if (!fdiro)
+-	{
+-	  grub_print_error ();
+-	  return 0;
+-	}
++/* Helper for grub_xfs_iterate_dir.  */
++static int iterate_dir_call_hook (grub_uint64_t ino, const char *filename,
++				  struct grub_xfs_iterate_dir_ctx *ctx)
++{
++  struct grub_fshelp_node *fdiro;
++  grub_err_t err;
+ 
+-      /* The inode should be read, otherwise the filetype can
+-	 not be determined.  */
+-      fdiro->ino = ino;
+-      fdiro->inode_read = 1;
+-      fdiro->data = diro->data;
+-      err = grub_xfs_read_inode (diro->data, ino, &fdiro->inode);
+-      if (err)
+-	{
+-	  grub_print_error ();
+-	  return 0;
+-	}
++  fdiro = grub_malloc (sizeof (struct grub_fshelp_node)
++		       - sizeof (struct grub_xfs_inode)
++		       + (1 << ctx->diro->data->sblock.log2_inode));
++  if (!fdiro)
++    {
++      grub_print_error ();
++      return 0;
++    }
+ 
+-      return hook (filename,
+-		   grub_xfs_mode_to_filetype (fdiro->inode.mode),
+-		   fdiro);
++  /* The inode should be read, otherwise the filetype can
++     not be determined.  */
++  fdiro->ino = ino;
++  fdiro->inode_read = 1;
++  fdiro->data = ctx->diro->data;
++  err = grub_xfs_read_inode (ctx->diro->data, ino, &fdiro->inode);
++  if (err)
++    {
++      grub_print_error ();
++      return 0;
+     }
+ 
++  return ctx->hook (filename, grub_xfs_mode_to_filetype (fdiro->inode.mode),
++		    fdiro, ctx->hook_data);
++}
++
++static int
++grub_xfs_iterate_dir (grub_fshelp_node_t dir,
++		      grub_fshelp_iterate_dir_hook_t hook, void *hook_data)
++{
++  struct grub_fshelp_node *diro = (struct grub_fshelp_node *) dir;
++  struct grub_xfs_iterate_dir_ctx ctx = {
++    .hook = hook,
++    .hook_data = hook_data,
++    .diro = diro
++  };
++
+   switch (diro->inode.format)
+     {
+     case XFS_INODE_FORMAT_INO:
+@@ -508,10 +518,10 @@ grub_xfs_iterate_dir (grub_fshelp_node_t dir,
+ 	  }
+ 
+ 	/* Synthesize the direntries for `.' and `..'.  */
+-	if (call_hook (diro->ino, "."))
++	if (iterate_dir_call_hook (diro->ino, ".", &ctx))
+ 	  return 1;
+ 
+-	if (call_hook (parent, ".."))
++	if (iterate_dir_call_hook (parent, "..", &ctx))
+ 	  return 1;
+ 
+ 	for (i = 0; i < diro->inode.data.dir.dirhead.count; i++)
+@@ -541,7 +551,7 @@ grub_xfs_iterate_dir (grub_fshelp_node_t dir,
+ 
+ 	    grub_memcpy (name, de->name, de->len);
+ 	    name[de->len] = '\0';
+-	    if (call_hook (ino, name))
++	    if (iterate_dir_call_hook (ino, name, &ctx))
+ 	      return 1;
+ 
+ 	    de = ((struct grub_xfs_dir_entry *)
+@@ -619,7 +629,7 @@ grub_xfs_iterate_dir (grub_fshelp_node_t dir,
+ 		   is not used by GRUB.  So it can be overwritten.  */
+ 		filename[direntry->len] = '\0';
+ 
+-		if (call_hook (direntry->inode, filename))
++		if (iterate_dir_call_hook (direntry->inode, filename, &ctx))
+ 		  {
+ 		    grub_free (dirblock);
+ 		    return 1;
+@@ -703,33 +713,39 @@ grub_xfs_mount (grub_disk_t disk)
+ }
+ 
+ 
+-static grub_err_t
+-grub_xfs_dir (grub_device_t device, const char *path,
+-	      int (*hook) (const char *filename,
+-			   const struct grub_dirhook_info *info))
++/* Context for grub_xfs_dir.  */
++struct grub_xfs_dir_ctx
+ {
+-  struct grub_xfs_data *data = 0;
+-  struct grub_fshelp_node *fdiro = 0;
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++};
+ 
+-  auto int NESTED_FUNC_ATTR iterate (const char *filename,
+-				     enum grub_fshelp_filetype filetype,
+-				     grub_fshelp_node_t node);
++/* Helper for grub_xfs_dir.  */
++static int
++grub_xfs_dir_iter (const char *filename, enum grub_fshelp_filetype filetype,
++		   grub_fshelp_node_t node, void *data)
++{
++  struct grub_xfs_dir_ctx *ctx = data;
++  struct grub_dirhook_info info;
+ 
+-  int NESTED_FUNC_ATTR iterate (const char *filename,
+-				enum grub_fshelp_filetype filetype,
+-				grub_fshelp_node_t node)
++  grub_memset (&info, 0, sizeof (info));
++  if (node->inode_read)
+     {
+-      struct grub_dirhook_info info;
+-      grub_memset (&info, 0, sizeof (info));
+-      if (node->inode_read)
+-	{
+-	  info.mtimeset = 1;
+-	  info.mtime = grub_be_to_cpu32 (node->inode.mtime.sec);
+-	}
+-      info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
+-      grub_free (node);
+-      return hook (filename, &info);
++      info.mtimeset = 1;
++      info.mtime = grub_be_to_cpu32 (node->inode.mtime.sec);
+     }
++  info.dir = ((filetype & GRUB_FSHELP_TYPE_MASK) == GRUB_FSHELP_DIR);
++  grub_free (node);
++  return ctx->hook (filename, &info, ctx->hook_data);
++}
++
++static grub_err_t
++grub_xfs_dir (grub_device_t device, const char *path,
++	      grub_fs_dir_hook_t hook, void *hook_data)
++{
++  struct grub_xfs_dir_ctx ctx = { hook, hook_data };
++  struct grub_xfs_data *data = 0;
++  struct grub_fshelp_node *fdiro = 0;
+ 
+   grub_dl_ref (my_mod);
+ 
+@@ -742,7 +758,7 @@ grub_xfs_dir (grub_device_t device, const char *path,
+   if (grub_errno)
+     goto fail;
+ 
+-  grub_xfs_iterate_dir (fdiro, iterate);
++  grub_xfs_iterate_dir (fdiro, grub_xfs_dir_iter, &ctx);
+ 
+  fail:
+   if (fdiro != &data->diropen)
+diff --git a/grub-core/fs/zfs/zfs.c b/grub-core/fs/zfs/zfs.c
+index 6ef6db3..822d65b 100644
+--- a/grub-core/fs/zfs/zfs.c
++++ b/grub-core/fs/zfs/zfs.c
+@@ -253,6 +253,14 @@ struct grub_zfs_data
+   grub_uint64_t guid;
+ };
+ 
++/* Context for grub_zfs_dir.  */
++struct grub_zfs_dir_ctx
++{
++  grub_fs_dir_hook_t hook;
++  void *hook_data;
++  struct grub_zfs_data *data;
++};
++
+ grub_err_t (*grub_zfs_decrypt) (grub_crypto_cipher_handle_t cipher,
+ 				grub_uint64_t algo,
+ 				void *nonce,
+@@ -1790,8 +1798,9 @@ mzap_lookup (mzap_phys_t * zapobj, grub_zfs_endian_t endian,
+ 
+ static int
+ mzap_iterate (mzap_phys_t * zapobj, grub_zfs_endian_t endian, int objsize, 
+-	      int NESTED_FUNC_ATTR (*hook) (const char *name, 
+-					    grub_uint64_t val))
++	      int (*hook) (const char *name, grub_uint64_t val,
++			   struct grub_zfs_dir_ctx *ctx),
++	      struct grub_zfs_dir_ctx *ctx)
+ {
+   int i, chunks;
+   mzap_ent_phys_t *mzap_ent = zapobj->mz_chunk;
+@@ -1803,7 +1812,7 @@ mzap_iterate (mzap_phys_t * zapobj, grub_zfs_endian_t endian, int objsize,
+ 		    mzap_ent[i].mze_name, (long long)mzap_ent[i].mze_value,
+ 		    (int)mzap_ent[i].mze_cd);
+       if (hook (mzap_ent[i].mze_name, 
+-		grub_zfs_to_cpu64 (mzap_ent[i].mze_value, endian)))
++		grub_zfs_to_cpu64 (mzap_ent[i].mze_value, endian), ctx))
+ 	return 1;
+     }
+ 
+@@ -2054,12 +2063,11 @@ fzap_lookup (dnode_end_t * zap_dnode, zap_phys_t * zap,
+ static int
+ fzap_iterate (dnode_end_t * zap_dnode, zap_phys_t * zap,
+ 	      grub_size_t name_elem_length,
+-	      int NESTED_FUNC_ATTR (*hook) (const void *name,
+-					    grub_size_t name_length,
+-					    const void *val_in,
+-					    grub_size_t nelem,
+-					    grub_size_t elemsize), 
+-	      struct grub_zfs_data *data)
++	      int (*hook) (const void *name, grub_size_t name_length,
++			   const void *val_in,
++			   grub_size_t nelem, grub_size_t elemsize,
++			   void *data),
++	      void *hook_data, struct grub_zfs_data *data)
+ {
+   zap_leaf_phys_t *l;
+   void *l_in;
+@@ -2158,7 +2166,7 @@ fzap_iterate (dnode_end_t * zap_dnode, zap_phys_t * zap,
+ 	      }
+ 
+ 	    if (hook (buf, le->le_name_length,
+-		      val, le->le_value_length, le->le_int_size))
++		      val, le->le_value_length, le->le_int_size, hook_data))
+ 	      {
+ 		grub_free (l);
+ 		return 1;
+@@ -2221,11 +2229,35 @@ zap_lookup (dnode_end_t * zap_dnode, const char *name, grub_uint64_t *val,
+   return grub_error (GRUB_ERR_BAD_FS, "unknown ZAP type");
+ }
+ 
++/* Context for zap_iterate_u64.  */
++struct zap_iterate_u64_ctx
++{
++  int (*hook) (const char *, grub_uint64_t, struct grub_zfs_dir_ctx *);
++  struct grub_zfs_dir_ctx *dir_ctx;
++};
++
++/* Helper for zap_iterate_u64.  */
++static int
++zap_iterate_u64_transform (const void *name,
++			   grub_size_t namelen __attribute__ ((unused)),
++			   const void *val_in,
++			   grub_size_t nelem,
++			   grub_size_t elemsize,
++			   void *data)
++{
++  struct zap_iterate_u64_ctx *ctx = data;
++
++  if (elemsize != sizeof (grub_uint64_t) || nelem != 1)
++    return 0;
++  return ctx->hook (name, grub_be_to_cpu64 (*(const grub_uint64_t *) val_in),
++		    ctx->dir_ctx);
++}
++
+ static int
+ zap_iterate_u64 (dnode_end_t * zap_dnode, 
+-		 int NESTED_FUNC_ATTR (*hook) (const char *name,
+-					       grub_uint64_t val),
+-		 struct grub_zfs_data *data)
++		 int (*hook) (const char *name, grub_uint64_t val,
++			      struct grub_zfs_dir_ctx *ctx),
++		 struct grub_zfs_data *data, struct grub_zfs_dir_ctx *ctx)
+ {
+   grub_uint64_t block_type;
+   int size;
+@@ -2234,23 +2266,6 @@ zap_iterate_u64 (dnode_end_t * zap_dnode,
+   int ret;
+   grub_zfs_endian_t endian;
+ 
+-  auto int NESTED_FUNC_ATTR transform (const void *name,
+-				       grub_size_t namelen,
+-				       const void *val_in,
+-				       grub_size_t nelem,
+-				       grub_size_t elemsize);
+-
+-  int NESTED_FUNC_ATTR transform (const void *name,
+-				  grub_size_t namelen __attribute__ ((unused)),
+-				  const void *val_in,
+-				  grub_size_t nelem,
+-				  grub_size_t elemsize)
+-  {
+-    if (elemsize != sizeof (grub_uint64_t) || nelem != 1)
+-      return 0;
+-    return hook (name, grub_be_to_cpu64 (*(const grub_uint64_t *) val_in));
+-  }
+-
+   /* Read in the first block of the zap object data. */
+   size = grub_zfs_to_cpu16 (zap_dnode->dn.dn_datablkszsec, zap_dnode->endian) << SPA_MINBLOCKSHIFT;
+   err = dmu_read (zap_dnode, 0, &zapbuf, &endian, data);
+@@ -2263,15 +2278,21 @@ zap_iterate_u64 (dnode_end_t * zap_dnode,
+   if (block_type == ZBT_MICRO)
+     {
+       grub_dprintf ("zfs", "micro zap\n");
+-      ret = mzap_iterate (zapbuf, endian, size, hook);
++      ret = mzap_iterate (zapbuf, endian, size, hook, ctx);
+       grub_free (zapbuf);
+       return ret;
+     }
+   else if (block_type == ZBT_HEADER)
+     {
++      struct zap_iterate_u64_ctx transform_ctx = {
++	.hook = hook,
++	.dir_ctx = ctx
++      };
++
+       grub_dprintf ("zfs", "fat zap\n");
+       /* this is a fat zap */
+-      ret = fzap_iterate (zap_dnode, zapbuf, 1, transform, data);
++      ret = fzap_iterate (zap_dnode, zapbuf, 1,
++			  zap_iterate_u64_transform, &transform_ctx, data);
+       grub_free (zapbuf);
+       return ret;
+     }
+@@ -2282,12 +2303,11 @@ zap_iterate_u64 (dnode_end_t * zap_dnode,
+ static int
+ zap_iterate (dnode_end_t * zap_dnode, 
+ 	     grub_size_t nameelemlen,
+-	     int NESTED_FUNC_ATTR (*hook) (const void *name,
+-					   grub_size_t namelen,
+-					   const void *val_in,
+-					   grub_size_t nelem,
+-					   grub_size_t elemsize),
+-	     struct grub_zfs_data *data)
++	     int (*hook) (const void *name, grub_size_t namelen,
++			  const void *val_in,
++			  grub_size_t nelem, grub_size_t elemsize,
++			  void *data),
++	     void *hook_data, struct grub_zfs_data *data)
+ {
+   grub_uint64_t block_type;
+   void *zapbuf;
+@@ -2312,7 +2332,8 @@ zap_iterate (dnode_end_t * zap_dnode,
+     {
+       grub_dprintf ("zfs", "fat zap\n");
+       /* this is a fat zap */
+-      ret = fzap_iterate (zap_dnode, zapbuf, nameelemlen, hook, data);
++      ret = fzap_iterate (zap_dnode, zapbuf, nameelemlen, hook, hook_data,
++			  data);
+       grub_free (zapbuf);
+       return ret;
+     }
+@@ -2826,6 +2847,61 @@ make_mdn (dnode_end_t * mdn, struct grub_zfs_data *data)
+   return GRUB_ERR_NONE;
+ }
+ 
++/* Context for dnode_get_fullpath.  */
++struct dnode_get_fullpath_ctx
++{
++  struct subvolume *subvol;
++  grub_uint64_t salt;
++  int keyn;
++};
++
++/* Helper for dnode_get_fullpath.  */
++static int
++count_zap_keys (const void *name __attribute__ ((unused)),
++		grub_size_t namelen __attribute__ ((unused)),
++		const void *val_in __attribute__ ((unused)),
++		grub_size_t nelem __attribute__ ((unused)),
++		grub_size_t elemsize __attribute__ ((unused)),
++		void *data)
++{
++  struct dnode_get_fullpath_ctx *ctx = data;
++
++  ctx->subvol->nkeys++;
++  return 0;
++}
++
++/* Helper for dnode_get_fullpath.  */
++static int
++load_zap_key (const void *name, grub_size_t namelen, const void *val_in,
++	      grub_size_t nelem, grub_size_t elemsize, void *data)
++{
++  struct dnode_get_fullpath_ctx *ctx = data;
++
++  if (namelen != 1)
++    {
++      grub_dprintf ("zfs", "Unexpected key index size %" PRIuGRUB_SIZE "\n",
++		    namelen);
++      return 0;
++    }
++
++  if (elemsize != 1)
++    {
++      grub_dprintf ("zfs", "Unexpected key element size %" PRIuGRUB_SIZE "\n",
++		    elemsize);
++      return 0;
++    }
++
++  ctx->subvol->keyring[ctx->keyn].txg =
++    grub_be_to_cpu64 (*(grub_uint64_t *) name);
++  ctx->subvol->keyring[ctx->keyn].algo =
++    grub_le_to_cpu64 (*(grub_uint64_t *) val_in);
++  ctx->subvol->keyring[ctx->keyn].cipher =
++    grub_zfs_load_key (val_in, nelem, ctx->salt,
++		       ctx->subvol->keyring[ctx->keyn].algo);
++  ctx->keyn++;
++  return 0;
++}
++
+ static grub_err_t
+ dnode_get_fullpath (const char *fullpath, struct subvolume *subvol,
+ 		    dnode_end_t * dn, int *isfs,
+@@ -2835,57 +2911,7 @@ dnode_get_fullpath (const char *fullpath, struct subvolume *subvol,
+   const char *ptr_at, *filename;
+   grub_uint64_t headobj;
+   grub_uint64_t keychainobj;
+-  grub_uint64_t salt;
+   grub_err_t err;
+-  int keyn = 0;
+-
+-  auto int NESTED_FUNC_ATTR count_zap_keys (const void *name,
+-					  grub_size_t namelen,
+-					  const void *val_in,
+-					  grub_size_t nelem,
+-					  grub_size_t elemsize);
+-  int NESTED_FUNC_ATTR count_zap_keys (const void *name __attribute__ ((unused)),
+-				       grub_size_t namelen __attribute__ ((unused)),
+-				       const void *val_in __attribute__ ((unused)),
+-				       grub_size_t nelem __attribute__ ((unused)),
+-				       grub_size_t elemsize __attribute__ ((unused)))
+-  {
+-    subvol->nkeys++;
+-    return 0;
+-  }
+-
+-  auto int NESTED_FUNC_ATTR load_zap_key (const void *name,
+-					  grub_size_t namelen,
+-					  const void *val_in,
+-					  grub_size_t nelem,
+-					  grub_size_t elemsize);
+-  int NESTED_FUNC_ATTR load_zap_key (const void *name,
+-				     grub_size_t namelen,
+-				     const void *val_in,
+-				     grub_size_t nelem,
+-				     grub_size_t elemsize)
+-  {
+-    if (namelen != 1)
+-      {
+-	grub_dprintf ("zfs", "Unexpected key index size %" PRIuGRUB_SIZE "\n",
+-		      namelen);
+-	return 0;
+-      }
+-
+-    if (elemsize != 1)
+-      {
+-	grub_dprintf ("zfs", "Unexpected key element size %" PRIuGRUB_SIZE "\n",
+-		      elemsize);
+-	return 0;
+-      }
+-
+-    subvol->keyring[keyn].txg = grub_be_to_cpu64 (*(grub_uint64_t *) name);
+-    subvol->keyring[keyn].algo = grub_le_to_cpu64 (*(grub_uint64_t *) val_in);
+-    subvol->keyring[keyn].cipher = grub_zfs_load_key (val_in, nelem, salt,
+-						      subvol->keyring[keyn].algo);
+-    keyn++;
+-    return 0;
+-  }
+ 
+   ptr_at = grub_strchr (fullpath, '@');
+   if (! ptr_at)
+@@ -2953,6 +2979,10 @@ dnode_get_fullpath (const char *fullpath, struct subvolume *subvol,
+   keychainobj = grub_zfs_to_cpu64 (((dsl_dir_phys_t *) DN_BONUS (&dn->dn))->keychain, dn->endian);
+   if (grub_zfs_load_key && keychainobj)
+     {
++      struct dnode_get_fullpath_ctx ctx = {
++	.subvol = subvol,
++	.keyn = 0
++      };
+       dnode_end_t keychain_dn, props_dn;
+       grub_uint64_t propsobj;
+       propsobj = grub_zfs_to_cpu64 (((dsl_dir_phys_t *) DN_BONUS (&dn->dn))->dd_props_zapobj, dn->endian);
+@@ -2966,12 +2996,12 @@ dnode_get_fullpath (const char *fullpath, struct subvolume *subvol,
+ 	  return err;
+ 	}
+ 
+-      err = zap_lookup (&props_dn, "salt", &salt, data, 0);
++      err = zap_lookup (&props_dn, "salt", &ctx.salt, data, 0);
+       if (err == GRUB_ERR_FILE_NOT_FOUND)
+ 	{
+ 	  err = 0;
+ 	  grub_errno = 0;
+-	  salt = 0;
++	  ctx.salt = 0;
+ 	}
+       if (err)
+ 	{
+@@ -2988,7 +3018,7 @@ dnode_get_fullpath (const char *fullpath, struct subvolume *subvol,
+ 	  return err;
+ 	}
+       subvol->nkeys = 0;
+-      zap_iterate (&keychain_dn, 8, count_zap_keys, data);
++      zap_iterate (&keychain_dn, 8, count_zap_keys, &ctx, data);
+       subvol->keyring = grub_zalloc (subvol->nkeys * sizeof (subvol->keyring[0]));
+       if (!subvol->keyring)
+ 	{
+@@ -2996,7 +3026,7 @@ dnode_get_fullpath (const char *fullpath, struct subvolume *subvol,
+ 	  grub_free (snapname);
+ 	  return err;
+ 	}
+-      zap_iterate (&keychain_dn, 8, load_zap_key, data);
++      zap_iterate (&keychain_dn, 8, load_zap_key, &ctx, data);
+     }
+ 
+   if (snapname)
+@@ -3748,108 +3778,122 @@ fill_fs_info (struct grub_dirhook_info *info,
+   return;
+ }
+ 
+-static grub_err_t
+-grub_zfs_dir (grub_device_t device, const char *path,
+-	      int (*hook) (const char *, const struct grub_dirhook_info *))
++/* Helper for grub_zfs_dir.  */
++static int
++iterate_zap (const char *name, grub_uint64_t val, struct grub_zfs_dir_ctx *ctx)
+ {
+-  struct grub_zfs_data *data;
+   grub_err_t err;
+-  int isfs;
+-  auto int NESTED_FUNC_ATTR iterate_zap (const char *name, grub_uint64_t val);
+-  auto int NESTED_FUNC_ATTR iterate_zap_fs (const char *name, 
+-					    grub_uint64_t val);
+-  auto int NESTED_FUNC_ATTR iterate_zap_snap (const char *name, 
+-					      grub_uint64_t val);
++  struct grub_dirhook_info info;
+ 
+-  int NESTED_FUNC_ATTR iterate_zap (const char *name, grub_uint64_t val)
+-  {
+-    struct grub_dirhook_info info;
+-    dnode_end_t dn;
+-    grub_memset (&info, 0, sizeof (info));
++  dnode_end_t dn;
++  grub_memset (&info, 0, sizeof (info));
+ 
+-    dnode_get (&(data->subvol.mdn), val, 0, &dn, data);
++  dnode_get (&(ctx->data->subvol.mdn), val, 0, &dn, ctx->data);
+ 
+-    if (dn.dn.dn_bonustype == DMU_OT_SA)
+-      {
+-	void *sahdrp;
+-	int hdrsize;
++  if (dn.dn.dn_bonustype == DMU_OT_SA)
++    {
++      void *sahdrp;
++      int hdrsize;
+ 
+-	if (dn.dn.dn_bonuslen != 0)
+-	  {
+-	    sahdrp = (sa_hdr_phys_t *) DN_BONUS (&data->dnode.dn);
+-	  }
+-	else if (dn.dn.dn_flags & DNODE_FLAG_SPILL_BLKPTR)
+-	  {
+-	    blkptr_t *bp = &dn.dn.dn_spill;
++      if (dn.dn.dn_bonuslen != 0)
++	{
++	  sahdrp = (sa_hdr_phys_t *) DN_BONUS (&ctx->data->dnode.dn);
++	}
++      else if (dn.dn.dn_flags & DNODE_FLAG_SPILL_BLKPTR)
++	{
++	  blkptr_t *bp = &dn.dn.dn_spill;
+ 
+-	    err = zio_read (bp, dn.endian, &sahdrp, NULL, data);
+-	    if (err)
+-	      {
+-		grub_print_error ();
+-		return 0;
+-	      }
+-	  }
+-	else
+-	  {
+-	    grub_error (GRUB_ERR_BAD_FS, "filesystem is corrupt");
+-	    grub_print_error ();
+-	    return 0;
+-	  }
++	  err = zio_read (bp, dn.endian, &sahdrp, NULL, ctx->data);
++	  if (err)
++	    {
++	      grub_print_error ();
++	      return 0;
++	    }
++	}
++      else
++	{
++	  grub_error (GRUB_ERR_BAD_FS, "filesystem is corrupt");
++	  grub_print_error ();
++	  return 0;
++	}
+ 
+-	hdrsize = SA_HDR_SIZE (((sa_hdr_phys_t *) sahdrp));
+-	info.mtimeset = 1;
+-	info.mtime = grub_zfs_to_cpu64 (grub_get_unaligned64 ((char *) sahdrp + hdrsize + SA_MTIME_OFFSET), dn.endian);
+-	info.case_insensitive = data->subvol.case_insensitive;
+-      }
+-    
+-    if (dn.dn.dn_bonustype == DMU_OT_ZNODE)
+-      {	
+-	info.mtimeset = 1;
+-	info.mtime = grub_zfs_to_cpu64 (((znode_phys_t *) DN_BONUS (&dn.dn))->zp_mtime[0],
+-					dn.endian);
+-      }
+-	info.dir = (dn.dn.dn_type == DMU_OT_DIRECTORY_CONTENTS);
+-	grub_dprintf ("zfs", "type=%d, name=%s\n", 
+-		  (int)dn.dn.dn_type, (char *)name);
+-    return hook (name, &info);
+-  }
++      hdrsize = SA_HDR_SIZE (((sa_hdr_phys_t *) sahdrp));
++      info.mtimeset = 1;
++      info.mtime = grub_zfs_to_cpu64 (grub_get_unaligned64 ((char *) sahdrp + hdrsize + SA_MTIME_OFFSET), dn.endian);
++      info.case_insensitive = ctx->data->subvol.case_insensitive;
++    }
++  
++  if (dn.dn.dn_bonustype == DMU_OT_ZNODE)
++    {	
++      info.mtimeset = 1;
++      info.mtime = grub_zfs_to_cpu64 (((znode_phys_t *) DN_BONUS (&dn.dn))->zp_mtime[0],
++				      dn.endian);
++    }
++      info.dir = (dn.dn.dn_type == DMU_OT_DIRECTORY_CONTENTS);
++      grub_dprintf ("zfs", "type=%d, name=%s\n", 
++		(int)dn.dn.dn_type, (char *)name);
++  return ctx->hook (name, &info, ctx->hook_data);
++}
+ 
+-  int NESTED_FUNC_ATTR iterate_zap_fs (const char *name, grub_uint64_t val)
+-  {
+-    struct grub_dirhook_info info;
+-    dnode_end_t mdn;
+-    err = dnode_get (&(data->mos), val, 0, &mdn, data);
+-    if (err)
+-      return 0;
+-    if (mdn.dn.dn_type != DMU_OT_DSL_DIR)
+-      return 0;
++/* Helper for grub_zfs_dir.  */
++static int
++iterate_zap_fs (const char *name, grub_uint64_t val,
++		struct grub_zfs_dir_ctx *ctx)
++{
++  grub_err_t err;
++  struct grub_dirhook_info info;
+ 
+-    fill_fs_info (&info, mdn, data);
+-    return hook (name, &info);
+-  }
+-  int NESTED_FUNC_ATTR iterate_zap_snap (const char *name, grub_uint64_t val)
+-  {
+-    struct grub_dirhook_info info;
+-    char *name2;
+-    int ret;
+-    dnode_end_t mdn;
++  dnode_end_t mdn;
++  err = dnode_get (&(ctx->data->mos), val, 0, &mdn, ctx->data);
++  if (err)
++    return 0;
++  if (mdn.dn.dn_type != DMU_OT_DSL_DIR)
++    return 0;
+ 
+-    err = dnode_get (&(data->mos), val, 0, &mdn, data);
+-    if (err)
+-      return 0;
++  fill_fs_info (&info, mdn, ctx->data);
++  return ctx->hook (name, &info, ctx->hook_data);
++}
+ 
+-    if (mdn.dn.dn_type != DMU_OT_DSL_DATASET)
+-      return 0;
++/* Helper for grub_zfs_dir.  */
++static int
++iterate_zap_snap (const char *name, grub_uint64_t val,
++		  struct grub_zfs_dir_ctx *ctx)
++{
++  grub_err_t err;
++  struct grub_dirhook_info info;
++  char *name2;
++  int ret;
++
++  dnode_end_t mdn;
+ 
+-    fill_fs_info (&info, mdn, data);
++  err = dnode_get (&(ctx->data->mos), val, 0, &mdn, ctx->data);
++  if (err)
++    return 0;
+ 
+-    name2 = grub_malloc (grub_strlen (name) + 2);
+-    name2[0] = '@';
+-    grub_memcpy (name2 + 1, name, grub_strlen (name) + 1);
+-    ret = hook (name2, &info);
+-    grub_free (name2);
+-    return ret;
+-  }
++  if (mdn.dn.dn_type != DMU_OT_DSL_DATASET)
++    return 0;
++
++  fill_fs_info (&info, mdn, ctx->data);
++
++  name2 = grub_malloc (grub_strlen (name) + 2);
++  name2[0] = '@';
++  grub_memcpy (name2 + 1, name, grub_strlen (name) + 1);
++  ret = ctx->hook (name2, &info, ctx->hook_data);
++  grub_free (name2);
++  return ret;
++}
++
++static grub_err_t
++grub_zfs_dir (grub_device_t device, const char *path,
++	      grub_fs_dir_hook_t hook, void *hook_data)
++{
++  struct grub_zfs_dir_ctx ctx = {
++    .hook = hook,
++    .hook_data = hook_data
++  };
++  struct grub_zfs_data *data;
++  grub_err_t err;
++  int isfs;
+ 
+   data = zfs_mount (device);
+   if (! data)
+@@ -3860,6 +3904,8 @@ grub_zfs_dir (grub_device_t device, const char *path,
+       zfs_unmount (data);
+       return err;
+     }
++  ctx.data = data;
++
+   if (isfs)
+     {
+       grub_uint64_t childobj, headobj; 
+@@ -3868,7 +3914,7 @@ grub_zfs_dir (grub_device_t device, const char *path,
+       struct grub_dirhook_info info;
+ 
+       fill_fs_info (&info, data->dnode, data);
+-      hook ("@", &info);
++      hook ("@", &info, hook_data);
+       
+       childobj = grub_zfs_to_cpu64 (((dsl_dir_phys_t *) DN_BONUS (&data->dnode.dn))->dd_child_dir_zapobj, data->dnode.endian);
+       headobj = grub_zfs_to_cpu64 (((dsl_dir_phys_t *) DN_BONUS (&data->dnode.dn))->dd_head_dataset_obj, data->dnode.endian);
+@@ -3880,7 +3926,7 @@ grub_zfs_dir (grub_device_t device, const char *path,
+ 	  return err;
+ 	}
+ 
+-      zap_iterate_u64 (&dn, iterate_zap_fs, data);
++      zap_iterate_u64 (&dn, iterate_zap_fs, data, &ctx);
+       
+       err = dnode_get (&(data->mos), headobj, DMU_OT_DSL_DATASET, &dn, data);
+       if (err)
+@@ -3899,7 +3945,7 @@ grub_zfs_dir (grub_device_t device, const char *path,
+ 	  return err;
+ 	}
+ 
+-      zap_iterate_u64 (&dn, iterate_zap_snap, data);
++      zap_iterate_u64 (&dn, iterate_zap_snap, data, &ctx);
+     }
+   else
+     {
+@@ -3908,7 +3954,7 @@ grub_zfs_dir (grub_device_t device, const char *path,
+ 	  zfs_unmount (data);
+ 	  return grub_error (GRUB_ERR_BAD_FILE_TYPE, N_("not a directory"));
+ 	}
+-      zap_iterate_u64 (&(data->dnode), iterate_zap, data);
++      zap_iterate_u64 (&(data->dnode), iterate_zap, data, &ctx);
+     }
+   zfs_unmount (data);
+   return grub_errno;
+diff --git a/grub-core/kern/corecmd.c b/grub-core/kern/corecmd.c
+index 3441ccb..0dc4d00 100644
+--- a/grub-core/kern/corecmd.c
++++ b/grub-core/kern/corecmd.c
+@@ -105,7 +105,8 @@ grub_mini_print_devices (const char *name, void *data __attribute__ ((unused)))
+ 
+ static int
+ grub_mini_print_files (const char *filename,
+-		       const struct grub_dirhook_info *info)
++		       const struct grub_dirhook_info *info,
++		       void *data __attribute__ ((unused)))
+ {
+   grub_printf ("%s%s ", filename, info->dir ? "/" : "");
+ 
+@@ -160,7 +161,7 @@ grub_core_cmd_ls (struct grub_command *cmd __attribute__ ((unused)),
+ 	}
+       else if (fs)
+ 	{
+-	  (fs->dir) (dev, path, grub_mini_print_files);
++	  (fs->dir) (dev, path, grub_mini_print_files, NULL);
+ 	  grub_xputs ("\n");
+ 	  grub_refresh ();
+ 	}
+diff --git a/grub-core/kern/emu/hostfs.c b/grub-core/kern/emu/hostfs.c
+index 3cb089c..46bf5e8 100644
+--- a/grub-core/kern/emu/hostfs.c
++++ b/grub-core/kern/emu/hostfs.c
+@@ -65,8 +65,7 @@ struct grub_hostfs_data
+ 
+ static grub_err_t
+ grub_hostfs_dir (grub_device_t device, const char *path,
+-		 int (*hook) (const char *filename,
+-			      const struct grub_dirhook_info *info))
++		 grub_fs_dir_hook_t hook, void *hook_data)
+ {
+   DIR *dir;
+ 
+@@ -91,7 +90,7 @@ grub_hostfs_dir (grub_device_t device, const char *path,
+ 	break;
+ 
+       info.dir = !! is_dir (path, de->d_name);
+-      hook (de->d_name, &info);
++      hook (de->d_name, &info, hook_data);
+ 
+     }
+ 
+diff --git a/grub-core/kern/fs.c b/grub-core/kern/fs.c
+index 7e150f2..9085895 100644
+--- a/grub-core/kern/fs.c
++++ b/grub-core/kern/fs.c
+@@ -35,10 +35,11 @@ grub_fs_autoload_hook_t grub_fs_autoload_hook = 0;
+ /* Helper for grub_fs_probe.  */
+ static int
+ probe_dummy_iter (const char *filename __attribute__ ((unused)),
+-		  const struct grub_dirhook_info *info __attribute__ ((unused)))
+-  {
+-    return 1;
+-  }
++		  const struct grub_dirhook_info *info __attribute__ ((unused)),
++		  void *data __attribute__ ((unused)))
++{
++  return 1;
++}
+ 
+ grub_fs_t
+ grub_fs_probe (grub_device_t device)
+@@ -69,7 +70,7 @@ grub_fs_probe (grub_device_t device)
+ 	    }
+ 	  else
+ #endif
+-	    (p->dir) (device, "/", probe_dummy_iter);
++	    (p->dir) (device, "/", probe_dummy_iter, NULL);
+ 	  if (grub_errno == GRUB_ERR_NONE)
+ 	    return p;
+ 
+@@ -93,7 +94,7 @@ grub_fs_probe (grub_device_t device)
+ 	    {
+ 	      p = grub_fs_list;
+ 
+-	      (p->dir) (device, "/", probe_dummy_iter);
++	      (p->dir) (device, "/", probe_dummy_iter, NULL);
+ 	      if (grub_errno == GRUB_ERR_NONE)
+ 		{
+ 		  count--;
+diff --git a/grub-core/loader/xnu.c b/grub-core/loader/xnu.c
+index ed3fc72..8c522f5 100644
+--- a/grub-core/loader/xnu.c
++++ b/grub-core/loader/xnu.c
+@@ -1017,49 +1017,66 @@ grub_xnu_check_os_bundle_required (char *plistname,
+   return ret;
+ }
+ 
++/* Context for grub_xnu_scan_dir_for_kexts.  */
++struct grub_xnu_scan_dir_for_kexts_ctx
++{
++  char *dirname;
++  const char *osbundlerequired;
++  int maxrecursion;
++};
++
++/* Helper for grub_xnu_scan_dir_for_kexts.  */
++static int
++grub_xnu_scan_dir_for_kexts_load (const char *filename,
++				  const struct grub_dirhook_info *info,
++				  void *data)
++{
++  struct grub_xnu_scan_dir_for_kexts_ctx *ctx = data;
++  char *newdirname;
++
++  if (! info->dir)
++    return 0;
++  if (filename[0] == '.')
++    return 0;
++
++  if (grub_strlen (filename) < 5 ||
++      grub_memcmp (filename + grub_strlen (filename) - 5, ".kext", 5) != 0)
++    return 0;
++
++  newdirname
++    = grub_malloc (grub_strlen (ctx->dirname) + grub_strlen (filename) + 2);
++
++  /* It's a .kext. Try to load it. */
++  if (newdirname)
++    {
++      grub_strcpy (newdirname, ctx->dirname);
++      newdirname[grub_strlen (newdirname) + 1] = 0;
++      newdirname[grub_strlen (newdirname)] = '/';
++      grub_strcpy (newdirname + grub_strlen (newdirname), filename);
++      grub_xnu_load_kext_from_dir (newdirname, ctx->osbundlerequired,
++				   ctx->maxrecursion);
++      if (grub_errno == GRUB_ERR_BAD_OS)
++	grub_errno = GRUB_ERR_NONE;
++      grub_free (newdirname);
++    }
++  return 0;
++}
++
+ /* Load all loadable kexts placed under DIRNAME and matching OSBUNDLEREQUIRED */
+ grub_err_t
+ grub_xnu_scan_dir_for_kexts (char *dirname, const char *osbundlerequired,
+ 			     int maxrecursion)
+ {
++  struct grub_xnu_scan_dir_for_kexts_ctx ctx = {
++    .dirname = dirname,
++    .osbundlerequired = osbundlerequired,
++    .maxrecursion = maxrecursion
++  };
+   grub_device_t dev;
+   char *device_name;
+   grub_fs_t fs;
+   const char *path;
+ 
+-  auto int load_hook (const char *filename,
+-		      const struct grub_dirhook_info *info);
+-  int load_hook (const char *filename, const struct grub_dirhook_info *info)
+-  {
+-    char *newdirname;
+-    if (! info->dir)
+-      return 0;
+-    if (filename[0] == '.')
+-      return 0;
+-
+-    if (grub_strlen (filename) < 5 ||
+-	grub_memcmp (filename + grub_strlen (filename) - 5, ".kext", 5) != 0)
+-      return 0;
+-
+-    newdirname
+-      = grub_malloc (grub_strlen (dirname) + grub_strlen (filename) + 2);
+-
+-    /* It's a .kext. Try to load it. */
+-    if (newdirname)
+-      {
+-	grub_strcpy (newdirname, dirname);
+-	newdirname[grub_strlen (newdirname) + 1] = 0;
+-	newdirname[grub_strlen (newdirname)] = '/';
+-	grub_strcpy (newdirname + grub_strlen (newdirname), filename);
+-	grub_xnu_load_kext_from_dir (newdirname, osbundlerequired,
+-				     maxrecursion);
+-	if (grub_errno == GRUB_ERR_BAD_OS)
+-	  grub_errno = GRUB_ERR_NONE;
+-	grub_free (newdirname);
+-      }
+-    return 0;
+-  }
+-
+   if (! grub_xnu_heap_size)
+     return grub_error (GRUB_ERR_BAD_OS, N_("you need to load the kernel first"));
+ 
+@@ -1075,7 +1092,7 @@ grub_xnu_scan_dir_for_kexts (char *dirname, const char *osbundlerequired,
+ 	path++;
+ 
+       if (fs)
+-	(fs->dir) (dev, path, load_hook);
++	(fs->dir) (dev, path, grub_xnu_scan_dir_for_kexts_load, &ctx);
+       grub_device_close (dev);
+     }
+   grub_free (device_name);
+@@ -1083,60 +1100,78 @@ grub_xnu_scan_dir_for_kexts (char *dirname, const char *osbundlerequired,
+   return GRUB_ERR_NONE;
+ }
+ 
++/* Context for grub_xnu_load_kext_from_dir.  */
++struct grub_xnu_load_kext_from_dir_ctx
++{
++  char *dirname;
++  const char *osbundlerequired;
++  int maxrecursion;
++  char *plistname;
++  char *newdirname;
++  int usemacos;
++};
++
++/* Helper for grub_xnu_load_kext_from_dir.  */
++static int
++grub_xnu_load_kext_from_dir_load (const char *filename,
++				  const struct grub_dirhook_info *info,
++				  void *data)
++{
++  struct grub_xnu_load_kext_from_dir_ctx *ctx = data;
++
++  if (grub_strlen (filename) > 15)
++    return 0;
++  grub_strcpy (ctx->newdirname + grub_strlen (ctx->dirname) + 1, filename);
++
++  /* If the kext contains directory "Contents" all real stuff is in
++     this directory. */
++  if (info->dir && grub_strcasecmp (filename, "Contents") == 0)
++    grub_xnu_load_kext_from_dir (ctx->newdirname, ctx->osbundlerequired,
++				 ctx->maxrecursion - 1);
++
++  /* Directory "Plugins" contains nested kexts. */
++  if (info->dir && grub_strcasecmp (filename, "Plugins") == 0)
++    grub_xnu_scan_dir_for_kexts (ctx->newdirname, ctx->osbundlerequired,
++				 ctx->maxrecursion - 1);
++
++  /* Directory "MacOS" contains executable, otherwise executable is
++     on the top. */
++  if (info->dir && grub_strcasecmp (filename, "MacOS") == 0)
++    ctx->usemacos = 1;
++
++  /* Info.plist is the file which governs our future actions. */
++  if (! info->dir && grub_strcasecmp (filename, "Info.plist") == 0
++      && ! ctx->plistname)
++    ctx->plistname = grub_strdup (ctx->newdirname);
++  return 0;
++}
++
+ /* Load extension DIRNAME. (extensions are directories in xnu) */
+ grub_err_t
+ grub_xnu_load_kext_from_dir (char *dirname, const char *osbundlerequired,
+ 			     int maxrecursion)
+ {
++  struct grub_xnu_load_kext_from_dir_ctx ctx = {
++    .dirname = dirname,
++    .osbundlerequired = osbundlerequired,
++    .maxrecursion = maxrecursion,
++    .plistname = 0,
++    .usemacos = 0
++  };
+   grub_device_t dev;
+-  char *plistname = 0;
+-  char *newdirname;
+   char *newpath;
+   char *device_name;
+   grub_fs_t fs;
+   const char *path;
+   char *binsuffix;
+-  int usemacos = 0;
+   grub_file_t binfile;
+ 
+-  auto int load_hook (const char *filename,
+-		      const struct grub_dirhook_info *info);
+-
+-  int load_hook (const char *filename, const struct grub_dirhook_info *info)
+-  {
+-    if (grub_strlen (filename) > 15)
+-      return 0;
+-    grub_strcpy (newdirname + grub_strlen (dirname) + 1, filename);
+-
+-    /* If the kext contains directory "Contents" all real stuff is in
+-       this directory. */
+-    if (info->dir && grub_strcasecmp (filename, "Contents") == 0)
+-      grub_xnu_load_kext_from_dir (newdirname, osbundlerequired,
+-				   maxrecursion - 1);
+-
+-    /* Directory "Plugins" contains nested kexts. */
+-    if (info->dir && grub_strcasecmp (filename, "Plugins") == 0)
+-      grub_xnu_scan_dir_for_kexts (newdirname, osbundlerequired,
+-				   maxrecursion - 1);
+-
+-    /* Directory "MacOS" contains executable, otherwise executable is
+-       on the top. */
+-    if (info->dir && grub_strcasecmp (filename, "MacOS") == 0)
+-      usemacos = 1;
+-
+-    /* Info.plist is the file which governs our future actions. */
+-    if (! info->dir && grub_strcasecmp (filename, "Info.plist") == 0
+-	&& ! plistname)
+-      plistname = grub_strdup (newdirname);
+-    return 0;
+-  }
+-
+-  newdirname = grub_malloc (grub_strlen (dirname) + 20);
+-  if (! newdirname)
++  ctx.newdirname = grub_malloc (grub_strlen (dirname) + 20);
++  if (! ctx.newdirname)
+     return grub_errno;
+-  grub_strcpy (newdirname, dirname);
+-  newdirname[grub_strlen (dirname)] = '/';
+-  newdirname[grub_strlen (dirname) + 1] = 0;
++  grub_strcpy (ctx.newdirname, dirname);
++  ctx.newdirname[grub_strlen (dirname)] = '/';
++  ctx.newdirname[grub_strlen (dirname) + 1] = 0;
+   device_name = grub_file_get_device_name (dirname);
+   dev = grub_device_open (device_name);
+   if (dev)
+@@ -1148,18 +1183,18 @@ grub_xnu_load_kext_from_dir (char *dirname, const char *osbundlerequired,
+       else
+ 	path++;
+ 
+-      newpath = grub_strchr (newdirname, ')');
++      newpath = grub_strchr (ctx.newdirname, ')');
+       if (! newpath)
+-	newpath = newdirname;
++	newpath = ctx.newdirname;
+       else
+ 	newpath++;
+ 
+       /* Look at the directory. */
+       if (fs)
+-	(fs->dir) (dev, path, load_hook);
++	(fs->dir) (dev, path, grub_xnu_load_kext_from_dir_load, &ctx);
+ 
+-      if (plistname && grub_xnu_check_os_bundle_required
+-	  (plistname, osbundlerequired, &binsuffix))
++      if (ctx.plistname && grub_xnu_check_os_bundle_required
++	  (ctx.plistname, osbundlerequired, &binsuffix))
+ 	{
+ 	  if (binsuffix)
+ 	    {
+@@ -1168,29 +1203,29 @@ grub_xnu_load_kext_from_dir (char *dirname, const char *osbundlerequired,
+ 					   + grub_strlen (binsuffix)
+ 					   + sizeof ("/MacOS/"));
+ 	      grub_strcpy (binname, dirname);
+-	      if (usemacos)
++	      if (ctx.usemacos)
+ 		grub_strcpy (binname + grub_strlen (binname), "/MacOS/");
+ 	      else
+ 		grub_strcpy (binname + grub_strlen (binname), "/");
+ 	      grub_strcpy (binname + grub_strlen (binname), binsuffix);
+-	      grub_dprintf ("xnu", "%s:%s\n", plistname, binname);
++	      grub_dprintf ("xnu", "%s:%s\n", ctx.plistname, binname);
+ 	      binfile = grub_file_open (binname);
+ 	      if (! binfile)
+ 		grub_errno = GRUB_ERR_NONE;
+ 
+ 	      /* Load the extension. */
+-	      grub_xnu_load_driver (plistname, binfile,
++	      grub_xnu_load_driver (ctx.plistname, binfile,
+ 				    binname);
+ 	      grub_free (binname);
+ 	      grub_free (binsuffix);
+ 	    }
+ 	  else
+ 	    {
+-	      grub_dprintf ("xnu", "%s:0\n", plistname);
+-	      grub_xnu_load_driver (plistname, 0, 0);
++	      grub_dprintf ("xnu", "%s:0\n", ctx.plistname);
++	      grub_xnu_load_driver (ctx.plistname, 0, 0);
+ 	    }
+ 	}
+-      grub_free (plistname);
++      grub_free (ctx.plistname);
+       grub_device_close (dev);
+     }
+   grub_free (device_name);
+diff --git a/grub-core/net/net.c b/grub-core/net/net.c
+index 01c5d32..aebbe4b 100644
+--- a/grub-core/net/net.c
++++ b/grub-core/net/net.c
+@@ -1253,8 +1253,8 @@ grub_net_open_real (const char *name)
+ 
+ static grub_err_t
+ grub_net_fs_dir (grub_device_t device, const char *path __attribute__ ((unused)),
+-	       int (*hook) (const char *filename,
+-			    const struct grub_dirhook_info *info) __attribute__ ((unused)))
++		 grub_fs_dir_hook_t hook __attribute__ ((unused)),
++		 void *hook_data __attribute__ ((unused)))
+ {
+   if (!device->net)
+     return grub_error (GRUB_ERR_BUG, "invalid net device");
+diff --git a/grub-core/normal/completion.c b/grub-core/normal/completion.c
+index 367a2b7..71c083c 100644
+--- a/grub-core/normal/completion.c
++++ b/grub-core/normal/completion.c
+@@ -123,7 +123,8 @@ iterate_partition (grub_disk_t disk, const grub_partition_t p,
+ }
+ 
+ static int
+-iterate_dir (const char *filename, const struct grub_dirhook_info *info)
++iterate_dir (const char *filename, const struct grub_dirhook_info *info,
++	     void *data __attribute__ ((unused)))
+ {
+   if (! info->dir)
+     {
+@@ -295,7 +296,7 @@ complete_file (void)
+       dirfile[1] = '\0';
+ 
+       /* Iterate the directory.  */
+-      (fs->dir) (dev, dir, iterate_dir);
++      (fs->dir) (dev, dir, iterate_dir, NULL);
+ 
+       grub_free (dir);
+ 
+diff --git a/include/grub/fs.h b/include/grub/fs.h
+index 503d1a9..e451797 100644
+--- a/include/grub/fs.h
++++ b/include/grub/fs.h
+@@ -41,6 +41,10 @@ struct grub_dirhook_info
+   grub_int32_t mtime;
+ };
+ 
++typedef int (*grub_fs_dir_hook_t) (const char *filename,
++				   const struct grub_dirhook_info *info,
++				   void *data);
++
+ /* Filesystem descriptor.  */
+ struct grub_fs
+ {
+@@ -53,8 +57,7 @@ struct grub_fs
+ 
+   /* Call HOOK with each file under DIR.  */
+   grub_err_t (*dir) (grub_device_t device, const char *path,
+-		     int (*hook) (const char *filename,
+-				  const struct grub_dirhook_info *info));
++		     grub_fs_dir_hook_t hook, void *hook_data);
+ 
+   /* Open a file named NAME and initialize FILE.  */
+   grub_err_t (*open) (struct grub_file *file, const char *name);
+diff --git a/include/grub/fshelp.h b/include/grub/fshelp.h
+index 4838fca..e437d4c 100644
+--- a/include/grub/fshelp.h
++++ b/include/grub/fshelp.h
+@@ -38,24 +38,25 @@ enum grub_fshelp_filetype
+     GRUB_FSHELP_SYMLINK
+   };
+ 
++typedef int (*grub_fshelp_iterate_dir_hook_t) (const char *filename,
++					       enum grub_fshelp_filetype filetype,
++					       grub_fshelp_node_t node,
++					       void *data);
++
+ /* Lookup the node PATH.  The node ROOTNODE describes the root of the
+    directory tree.  The node found is returned in FOUNDNODE, which is
+    either a ROOTNODE or a new malloc'ed node.  ITERATE_DIR is used to
+    iterate over all directory entries in the current node.
+    READ_SYMLINK is used to read the symlink if a node is a symlink.
+    EXPECTTYPE is the type node that is expected by the called, an
+-   error is generated if the node is not of the expected type.  Make
+-   sure you use the NESTED_FUNC_ATTR macro for HOOK, this is required
+-   because GCC has a nasty bug when using regparm=3.  */
++   error is generated if the node is not of the expected type.  */
+ grub_err_t
+ EXPORT_FUNC(grub_fshelp_find_file) (const char *path,
+ 				    grub_fshelp_node_t rootnode,
+ 				    grub_fshelp_node_t *foundnode,
+ 				    int (*iterate_dir) (grub_fshelp_node_t dir,
+-							int NESTED_FUNC_ATTR
+-							(*hook) (const char *filename,
+-								 enum grub_fshelp_filetype filetype,
+-								 grub_fshelp_node_t node)),
++							grub_fshelp_iterate_dir_hook_t hook,
++							void *hook_data),
+ 				    char *(*read_symlink) (grub_fshelp_node_t node),
+ 				    enum grub_fshelp_filetype expect);
+ 
+diff --git a/util/grub-mount.c b/util/grub-mount.c
+index e3eb1d7..d0ab6a2 100644
+--- a/util/grub-mount.c
++++ b/util/grub-mount.c
+@@ -116,30 +116,38 @@ translate_error (void)
+   return ret;
+ }
+ 
++/* Context for fuse_getattr.  */
++struct fuse_getattr_ctx
++{
++  char *filename;
++  struct grub_dirhook_info file_info;
++  int file_exists;
++};
++
++/* A hook for iterating directories. */
++static int
++fuse_getattr_find_file (const char *cur_filename,
++			const struct grub_dirhook_info *info, void *data)
++{
++  struct fuse_getattr_ctx *ctx = data;
++
++  if ((info->case_insensitive ? grub_strcasecmp (cur_filename, ctx->filename)
++       : grub_strcmp (cur_filename, ctx->filename)) == 0)
++    {
++      ctx->file_info = *info;
++      ctx->file_exists = 1;
++      return 1;
++    }
++  return 0;
++}
++
+ static int
+ fuse_getattr (const char *path, struct stat *st)
+ {
+-  char *filename, *pathname, *path2;
++  struct fuse_getattr_ctx ctx;
++  char *pathname, *path2;
+   const char *pathname_t;
+-  struct grub_dirhook_info file_info;
+-  int file_exists = 0;
+   
+-  /* A hook for iterating directories. */
+-  auto int find_file (const char *cur_filename,
+-		      const struct grub_dirhook_info *info);
+-  int find_file (const char *cur_filename,
+-		 const struct grub_dirhook_info *info)
+-  {
+-    if ((info->case_insensitive ? grub_strcasecmp (cur_filename, filename)
+-	 : grub_strcmp (cur_filename, filename)) == 0)
+-      {
+-	file_info = *info;
+-	file_exists = 1;
+-	return 1;
+-      }
+-    return 0;
+-  }
+-
+   if (path[0] == '/' && path[1] == 0)
+     {
+       st->st_dev = 0;
+@@ -155,7 +163,7 @@ fuse_getattr (const char *path, struct stat *st)
+       return 0;
+     }
+ 
+-  file_exists = 0;
++  ctx.file_exists = 0;
+ 
+   pathname_t = grub_strchr (path, ')');
+   if (! pathname_t)
+@@ -169,35 +177,35 @@ fuse_getattr (const char *path, struct stat *st)
+     pathname[grub_strlen (pathname) - 1] = 0;
+ 
+   /* Split into path and filename. */
+-  filename = grub_strrchr (pathname, '/');
+-  if (! filename)
++  ctx.filename = grub_strrchr (pathname, '/');
++  if (! ctx.filename)
+     {
+       path2 = grub_strdup ("/");
+-      filename = pathname;
++      ctx.filename = pathname;
+     }
+   else
+     {
+-      filename++;
++      ctx.filename++;
+       path2 = grub_strdup (pathname);
+-      path2[filename - pathname] = 0;
++      path2[ctx.filename - pathname] = 0;
+     }
+ 
+   /* It's the whole device. */
+-  (fs->dir) (dev, path2, find_file);
++  (fs->dir) (dev, path2, fuse_getattr_find_file, &ctx);
+ 
+   grub_free (path2);
+-  if (!file_exists)
++  if (!ctx.file_exists)
+     {
+       grub_errno = GRUB_ERR_NONE;
+       return -ENOENT;
+     }
+   st->st_dev = 0;
+   st->st_ino = 0;
+-  st->st_mode = file_info.dir ? (0555 | S_IFDIR) : (0444 | S_IFREG);
++  st->st_mode = ctx.file_info.dir ? (0555 | S_IFDIR) : (0444 | S_IFREG);
+   st->st_uid = 0;
+   st->st_gid = 0;
+   st->st_rdev = 0;
+-  if (!file_info.dir)
++  if (!ctx.file_info.dir)
+     {
+       grub_file_t file;
+       file = grub_file_open (path);
+@@ -210,8 +218,8 @@ fuse_getattr (const char *path, struct stat *st)
+     st->st_size = 0;
+   st->st_blksize = 512;
+   st->st_blocks = (st->st_size + 511) >> 9;
+-  st->st_atime = st->st_mtime = st->st_ctime = file_info.mtimeset
+-    ? file_info.mtime : 0;
++  st->st_atime = st->st_mtime = st->st_ctime = ctx.file_info.mtimeset
++    ? ctx.file_info.mtime : 0;
+   grub_errno = GRUB_ERR_NONE;
+   return 0;
+ }
+@@ -271,39 +279,55 @@ fuse_release (const char *path, struct fuse_file_info *fi)
+   return 0;
+ }
+ 
++/* Context for fuse_readdir.  */
++struct fuse_readdir_ctx
++{
++  const char *path;
++  void *buf;
++  fuse_fill_dir_t fill;
++};
++
++/* Helper for fuse_readdir.  */
++static int
++fuse_readdir_call_fill (const char *filename,
++			const struct grub_dirhook_info *info, void *data)
++{
++  struct fuse_readdir_ctx *ctx = data;
++  struct stat st;
++
++  grub_memset (&st, 0, sizeof (st));
++  st.st_mode = info->dir ? (0555 | S_IFDIR) : (0444 | S_IFREG);
++  if (!info->dir)
++    {
++      grub_file_t file;
++      char *tmp;
++      tmp = xasprintf ("%s/%s", ctx->path, filename);
++      file = grub_file_open (tmp);
++      free (tmp);
++      if (! file)
++	return translate_error ();
++      st.st_size = file->size;
++      grub_file_close (file);
++    }
++  st.st_blksize = 512;
++  st.st_blocks = (st.st_size + 511) >> 9;
++  st.st_atime = st.st_mtime = st.st_ctime
++    = info->mtimeset ? info->mtime : 0;
++  ctx->fill (ctx->buf, filename, &st, 0);
++  return 0;
++}
++
+ static int 
+ fuse_readdir (const char *path, void *buf,
+ 	      fuse_fill_dir_t fill, off_t off, struct fuse_file_info *fi)
+ {
++  struct fuse_readdir_ctx ctx = {
++    .path = path,
++    .buf = buf,
++    .fill = fill
++  };
+   char *pathname;
+ 
+-  auto int call_fill (const char *filename,
+-		      const struct grub_dirhook_info *info);
+-  int call_fill (const char *filename, const struct grub_dirhook_info *info)
+-  {
+-    struct stat st;
+-    grub_memset (&st, 0, sizeof (st));
+-    st.st_mode = info->dir ? (0555 | S_IFDIR) : (0444 | S_IFREG);
+-    if (!info->dir)
+-      {
+-	grub_file_t file;
+-	char *tmp;
+-	tmp = xasprintf ("%s/%s", path, filename);
+-	file = grub_file_open (tmp);
+-	free (tmp);
+-	if (! file)
+-	  return translate_error ();
+-	st.st_size = file->size;
+-	grub_file_close (file);
+-      }
+-    st.st_blksize = 512;
+-    st.st_blocks = (st.st_size + 511) >> 9;
+-    st.st_atime = st.st_mtime = st.st_ctime
+-      = info->mtimeset ? info->mtime : 0;
+-    fill (buf, filename, &st, 0);
+-    return 0;
+-  }
+-
+   pathname = xstrdup (path);
+   
+   /* Remove trailing '/'. */
+@@ -311,7 +335,7 @@ fuse_readdir (const char *path, void *buf,
+ 	 && pathname[grub_strlen (pathname) - 1] == '/')
+     pathname[grub_strlen (pathname) - 1] = 0;
+ 
+-  (fs->dir) (dev, pathname, call_fill);
++  (fs->dir) (dev, pathname, fuse_readdir_call_fill, &ctx);
+   free (pathname);
+   grub_errno = GRUB_ERR_NONE;
+   return 0;
+-- 
+1.8.1.4
+

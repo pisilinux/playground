@@ -1,0 +1,43 @@
+From 41554b3b4fc818587dc532bfe045c282185903be Mon Sep 17 00:00:00 2001
+From: Andrey Borzenkov <arvidjaar@gmail.com>
+Date: Mon, 1 Apr 2013 01:43:04 +0200
+Subject: [PATCH 237/364] 	* grub-core/commands/verify.c: Fix hash
+ algorithms values for 	the first three hashes - they start with 1, not with
+ 0.
+
+---
+ ChangeLog                   | 5 +++++
+ grub-core/commands/verify.c | 4 +++-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 58c2242..672aa74 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-03-31  Andrey Borzenkov <arvidjaar@gmail.com>
++
++	* grub-core/commands/verify.c: Fix hash algorithms values for
++	the first three hashes - they start with 1, not with 0.
++
+ 2013-03-26  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/kern/efi/mm.c (grub_efi_finish_boot_services):
+diff --git a/grub-core/commands/verify.c b/grub-core/commands/verify.c
+index 6c0b580..b4d5e7b 100644
+--- a/grub-core/commands/verify.c
++++ b/grub-core/commands/verify.c
+@@ -123,7 +123,9 @@ struct signature_v4_header
+ } __attribute__ ((packed));
+ 
+ const char *hashes[] = {
+-  "md5", "sha1", "ripemd160",
++  [0x01] = "md5",
++  [0x02] = "sha1",
++  [0x03] = "ripemd160",
+   [0x08] = "sha256",
+   [0x09] = "sha384",
+   [0x0a] = "sha512",
+-- 
+1.8.1.4
+

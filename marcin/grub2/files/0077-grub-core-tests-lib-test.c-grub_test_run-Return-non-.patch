@@ -1,0 +1,55 @@
+From 1fb2a38cdc4278a0c65e9b0cbca6fdaae3343564 Mon Sep 17 00:00:00 2001
+From: Colin Watson <cjwatson@ubuntu.com>
+Date: Wed, 2 Jan 2013 16:42:48 +0000
+Subject: [PATCH 077/364] * grub-core/tests/lib/test.c (grub_test_run): Return
+ non-zero on test failures, so that a failing unit test correctly causes 'make
+ check' to fail.
+
+---
+ ChangeLog                  |  6 ++++++
+ grub-core/tests/lib/test.c | 14 +++++++++-----
+ 2 files changed, 15 insertions(+), 5 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index bb263f2..0585437 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,11 @@
+ 2013-01-02  Colin Watson  <cjwatson@ubuntu.com>
+ 
++	* grub-core/tests/lib/test.c (grub_test_run): Return non-zero on
++	test failures, so that a failing unit test correctly causes 'make
++	check' to fail.
++
++2013-01-02  Colin Watson  <cjwatson@ubuntu.com>
++
+ 	Fix failing printf test.
+ 
+ 	* grub-core/kern/misc.c (grub_vsnprintf_real): Parse '-', '.', and
+diff --git a/grub-core/tests/lib/test.c b/grub-core/tests/lib/test.c
+index aac77e9..1d2cb8c 100644
+--- a/grub-core/tests/lib/test.c
++++ b/grub-core/tests/lib/test.c
+@@ -225,10 +225,14 @@ grub_test_run (grub_test_t test)
+ 		 failure->line, (failure->message ? : "<no message>"));
+ 
+   if (!failure_list)
+-    grub_printf ("%s: PASS\n", test->name);
++    {
++      grub_printf ("%s: PASS\n", test->name);
++      return GRUB_ERR_NONE;
++    }
+   else
+-    grub_printf ("%s: FAIL\n", test->name);
+-
+-  free_failures ();
+-  return GRUB_ERR_NONE;
++    {
++      grub_printf ("%s: FAIL\n", test->name);
++      free_failures ();
++      return GRUB_ERR_TEST_FAILURE;
++    }
+ }
+-- 
+1.8.1.4
+

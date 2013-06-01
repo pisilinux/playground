@@ -1,0 +1,48 @@
+From e07d75a6383eee9001fe03500dea921ca257bbf7 Mon Sep 17 00:00:00 2001
+From: Andrey Borzenkov <arvidjaar@gmail.com>
+Date: Sun, 20 Jan 2013 23:44:42 +0100
+Subject: [PATCH 121/364] 	* conf/Makefile.common: Fix autogen rules to
+ pass definition 	files on stdin; Makefile.util.am needs
+ Makefile.utilgcry.def
+
+---
+ ChangeLog            | 5 +++++
+ conf/Makefile.common | 6 +++---
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index e82ee8d..4c21ea0 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-01-20  Andrey Borzenkov <arvidjaar@gmail.com>
++
++	* conf/Makefile.common: Fix autogen rules to pass definition
++	files on stdin; Makefile.util.am needs Makefile.utilgcry.def
++
+ 2013-01-20  Leif Lindholm  <leif.lindholm@arm.com>
+ 
+ 	* include/grub/elf.h: Update ARM definitions based on binutils.
+diff --git a/conf/Makefile.common b/conf/Makefile.common
+index 5b9cd92..75c0a5e 100644
+--- a/conf/Makefile.common
++++ b/conf/Makefile.common
+@@ -169,12 +169,12 @@ $(top_srcdir)/Makefile.tpl: $(top_srcdir)/gentpl.py
+ 	mv $@.new $@
+ 
+ .PRECIOUS: $(top_srcdir)/Makefile.util.am
+-$(top_srcdir)/Makefile.util.am: $(top_srcdir)/Makefile.util.def $(top_srcdir)/Makefile.tpl
+-	autogen -T $(top_srcdir)/Makefile.tpl $< | sed -e '/^$$/{N;/^\\n$$/D;}' > $@.new || (rm -f $@.new; exit 1)
++$(top_srcdir)/Makefile.util.am: $(top_srcdir)/Makefile.util.def $(top_srcdir)/Makefile.utilgcry.def $(top_srcdir)/Makefile.tpl
++	cat $(top_srcdir)/Makefile.util.def $(top_srcdir)/Makefile.utilgcry.def | autogen -T $(top_srcdir)/Makefile.tpl | sed -e '/^$$/{N;/^\\n$$/D;}' > $@.new || (rm -f $@.new; exit 1)
+ 	mv $@.new $@
+ 
+ .PRECIOUS: $(top_srcdir)/grub-core/Makefile.core.am
+ $(top_srcdir)/grub-core/Makefile.core.am: $(top_srcdir)/grub-core/Makefile.core.def $(top_srcdir)/grub-core/Makefile.gcry.def $(top_srcdir)/Makefile.tpl
+ 	if [ "x$$GRUB_CONTRIB" != x ]; then echo "You need to run ./autogen.sh manually." >&2; exit 1; fi
+-	autogen -T $(top_srcdir)/Makefile.tpl $(top_srcdir)/grub-core/Makefile.core.def $(top_srcdir)/grub-core/Makefile.gcry.def | sed -e '/^$$/{N;/^\\n$$/D;}' > $@.new || (rm -f $@.new; exit 1)
++	cat $(top_srcdir)/grub-core/Makefile.core.def $(top_srcdir)/grub-core/Makefile.gcry.def | autogen -T $(top_srcdir)/Makefile.tpl | sed -e '/^$$/{N;/^\\n$$/D;}' > $@.new || (rm -f $@.new; exit 1)
+ 	mv $@.new $@
+-- 
+1.8.1.4
+

@@ -1,0 +1,41 @@
+From 33437c4676de37bf30679b5874813af38e5c00c2 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Wed, 5 Sep 2012 08:47:39 +0200
+Subject: [PATCH 027/364] 	* grub-core/partmap/dvh.c (grub_dvh_is_valid):
+ Add missing byteswap.
+
+---
+ ChangeLog               | 4 ++++
+ grub-core/partmap/dvh.c | 2 +-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 0cf6bea..70f0c86 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2012-09-05  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/partmap/dvh.c (grub_dvh_is_valid): Add missing byteswap.
++
++2012-09-05  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/fs/xfs.c (grub_xfs_read_block): Make keys a const pointer.
+ 
+ 2012-09-04  Colin Watson  <cjwatson@ubuntu.com>
+diff --git a/grub-core/partmap/dvh.c b/grub-core/partmap/dvh.c
+index c8f467e..79ec01b 100644
+--- a/grub-core/partmap/dvh.c
++++ b/grub-core/partmap/dvh.c
+@@ -57,7 +57,7 @@ grub_dvh_is_valid (grub_uint32_t *label)
+   for (pos = label;
+        pos < (label + sizeof (struct grub_dvh_block) / 4);
+        pos++)
+-    sum += *pos;
++    sum += grub_be_to_cpu32 (*pos);
+ 
+   return ! sum;
+ }
+-- 
+1.8.1.4
+

@@ -1,0 +1,451 @@
+From 3f4af0c00ca064488a7186696fecf27a55a2165f Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Thu, 11 Apr 2013 21:09:43 +0200
+Subject: [PATCH 278/364] 	Use ACPI shutdown intests as traditional port
+ was removed.
+
+---
+ ChangeLog                                   |  4 +++
+ grub-core/tests/boot/kbsd.init-i386.S       | 20 +------------
+ grub-core/tests/boot/kbsd.init-x86_64.S     | 19 +-----------
+ grub-core/tests/boot/kernel-8086.S          | 21 +-------------
+ grub-core/tests/boot/kernel-i386.S          | 21 ++------------
+ grub-core/tests/boot/kfreebsd.init-i386.S   | 45 +++++++++++++----------------
+ grub-core/tests/boot/kfreebsd.init-x86_64.S | 40 ++++++++++---------------
+ grub-core/tests/boot/linux.init-i386.S      | 20 +------------
+ grub-core/tests/boot/linux.init-x86_64.S    | 20 +------------
+ grub-core/tests/boot/qemu-shutdown-x86.S    |  9 ++++++
+ 10 files changed, 56 insertions(+), 163 deletions(-)
+ create mode 100644 grub-core/tests/boot/qemu-shutdown-x86.S
+
+diff --git a/ChangeLog b/ChangeLog
+index bb6d97b..614748a 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,7 @@
++2013-04-11  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	Use ACPI shutdown intests as traditional port was removed.
++
+ 2013-04-11  Andrey Borzenkov <arvidjaar@gmail.com>
+ 
+ 	* util/grub.d/30_os-prober.in: Add onstr to entries for visual
+diff --git a/grub-core/tests/boot/kbsd.init-i386.S b/grub-core/tests/boot/kbsd.init-i386.S
+index 7011c79..72ddb7c 100644
+--- a/grub-core/tests/boot/kbsd.init-i386.S
++++ b/grub-core/tests/boot/kbsd.init-i386.S
+@@ -37,8 +37,6 @@
+ #define RESET_HALT 0x8
+ #define RESET_POWEROFF 0x800
+ 
+-#define SHUTDOWN_PORT 0x8900
+-
+ 	.section ".init", "ax"
+ 	.global start,_start
+ start:
+@@ -72,23 +70,7 @@ _start:
+ 	int $SYSCALL_INT
+ 	addl $12, %esp
+ 
+-	movw $SHUTDOWN_PORT, %dx
+-	movb $'S', %al
+-	outb %al, %dx
+-	movb $'h', %al
+-	outb %al, %dx
+-	movb $'u', %al
+-	outb %al, %dx
+-	movb $'t', %al
+-	outb %al, %dx
+-	movb $'d', %al
+-	outb %al, %dx
+-	movb $'o', %al
+-	outb %al, %dx
+-	movb $'w', %al
+-	outb %al, %dx
+-	movb $'n', %al
+-	outb %al, %dx
++#include "qemu-shutdown-x86.S"
+ 
+ 	/* shutdown.  */
+ 	movl $SYSCALL_RESET, %eax
+diff --git a/grub-core/tests/boot/kbsd.init-x86_64.S b/grub-core/tests/boot/kbsd.init-x86_64.S
+index 81f810e..7486bc3 100644
+--- a/grub-core/tests/boot/kbsd.init-x86_64.S
++++ b/grub-core/tests/boot/kbsd.init-x86_64.S
+@@ -35,7 +35,6 @@
+ #define RESET_NOSYNC 0x4
+ #define RESET_HALT 0x8
+ #define RESET_POWEROFF 0x800
+-#define SHUTDOWN_PORT 0x8900
+ 
+ 	.section ".init", "ax"
+ 	.global start,_start
+@@ -61,23 +60,7 @@ _start:
+ 	leaq iopl_arg, %rsi
+ 	syscall
+ 
+-	movw $SHUTDOWN_PORT, %dx
+-	movb $'S', %al
+-	outb %al, %dx
+-	movb $'h', %al
+-	outb %al, %dx
+-	movb $'u', %al
+-	outb %al, %dx
+-	movb $'t', %al
+-	outb %al, %dx
+-	movb $'d', %al
+-	outb %al, %dx
+-	movb $'o', %al
+-	outb %al, %dx
+-	movb $'w', %al
+-	outb %al, %dx
+-	movb $'n', %al
+-	outb %al, %dx
++#include "qemu-shutdown-x86.S"
+ 
+ 	/* shutdown.  */
+ 	movq $SYSCALL_RESET, %rax
+diff --git a/grub-core/tests/boot/kernel-8086.S b/grub-core/tests/boot/kernel-8086.S
+index 20040da..510897c 100644
+--- a/grub-core/tests/boot/kernel-8086.S
++++ b/grub-core/tests/boot/kernel-8086.S
+@@ -1,6 +1,4 @@
+ 
+-#define SHUTDOWN_PORT 0x8900
+-
+ 	.text
+ 	.globl _start
+ _start:
+@@ -8,18 +6,6 @@ base:
+ 	.code16
+ 	jmp cont
+ 
+-portmsg:
+-	xorw %ax, %ax
+-1:	
+-	movb 0(%si), %al
+-	test %ax, %ax
+-	jz 1f
+-	outb %al, %dx
+-	incw %si
+-	jmp 1b
+-1:
+-	ret
+-
+ serialmsg:	
+ 1:	
+ 	movb 0(%si), %bl
+@@ -50,17 +36,12 @@ cont:
+ 	movw %ax, %ds
+ 	lea message, %si
+ 	call serialmsg
+-	lea shutdown, %si
+-	movw $SHUTDOWN_PORT, %dx
+-	call portmsg
++#include "qemu-shutdown-x86.S"
+ 
+ 1:
+ 	hlt
+ 	jmp 1b
+ 
+-shutdown:
+-	.ascii "Shutdown"
+-	.byte 0
+ message:
+ 	.ascii "Boot Test Passed Successfully\n" SUCCESSFUL_BOOT_STRING "\n"
+ 	.byte 0
+diff --git a/grub-core/tests/boot/kernel-i386.S b/grub-core/tests/boot/kernel-i386.S
+index 904b0d4..2154d3b 100644
+--- a/grub-core/tests/boot/kernel-i386.S
++++ b/grub-core/tests/boot/kernel-i386.S
+@@ -5,8 +5,6 @@
+ #include <multiboot.h>
+ #endif
+ 
+-#define SHUTDOWN_PORT 0x8900
+-
+ 	.text
+ 	/* Align 32 bits boundary.  */
+ 	.align	8
+@@ -38,17 +36,6 @@ multiboot_header:
+ #endif
+ 	
+ 	.global start
+-portmsg:
+-	xorl %eax, %eax
+-1:	
+-	movb 0(%esi), %al
+-	test %eax, %eax
+-	jz 1f
+-	outb %al, %dx
+-	incl %esi
+-	jmp 1b
+-1:
+-	ret
+ 
+ serialmsg:	
+ 1:	
+@@ -73,17 +60,13 @@ serialmsg:
+ _start:
+ 	lea message, %esi
+ 	call serialmsg
+-	lea shutdown, %esi
+-	movw $SHUTDOWN_PORT, %dx
+-	call portmsg
++
++#include "qemu-shutdown-x86.S"
+ 
+ 1:
+ 	hlt
+ 	jmp 1b
+ 
+-shutdown:
+-	.ascii "Shutdown"
+-	.byte 0
+ message:
+ 	.ascii "Boot Test Passed Successfully\n" SUCCESSFUL_BOOT_STRING "\n"
+ 	.byte 0
+diff --git a/grub-core/tests/boot/kfreebsd.init-i386.S b/grub-core/tests/boot/kfreebsd.init-i386.S
+index 12c94a0..a448152 100644
+--- a/grub-core/tests/boot/kfreebsd.init-i386.S
++++ b/grub-core/tests/boot/kfreebsd.init-i386.S
+@@ -24,13 +24,12 @@
+ #define SYSCALL_FSYNC 95
+ #define SYSCALL_ARCH 165
+ #define SYSCALL_EXIT 1
+-#define SYSCALL_ARCH_IOPL	4
++#define SYSCALL_ARCH_IOPERM	4
+ #define SYSCALL_INT 0x80
+ 
+ #define RESET_NOSYNC 0x4
+ #define RESET_HALT 0x8
+ #define RESET_POWEROFF 0x4000
+-#define SHUTDOWN_PORT 0x8900
+ 
+ 	.section ".init", "ax"
+ 	.global start,_start
+@@ -64,31 +63,23 @@ _start:
+ 	int $SYSCALL_INT
+ 	addl $8, %esp
+ 
+-	/* IOPL.  */
++	/* IOPERM.  */
+ 	movl $SYSCALL_ARCH, %eax
+-	pushl $iopl_arg
+-	pushl $SYSCALL_ARCH_IOPL
++	pushl $iopl_arg1
++	pushl $SYSCALL_ARCH_IOPERM
+ 	pushl $0
+ 	int $SYSCALL_INT
+ 	addl $12, %esp
+-	
+-	movw $SHUTDOWN_PORT, %dx
+-	movb $'S', %al
+-	outb %al, %dx
+-	movb $'h', %al
+-	outb %al, %dx
+-	movb $'u', %al
+-	outb %al, %dx
+-	movb $'t', %al
+-	outb %al, %dx
+-	movb $'d', %al
+-	outb %al, %dx
+-	movb $'o', %al
+-	outb %al, %dx
+-	movb $'w', %al
+-	outb %al, %dx
+-	movb $'n', %al
+-	outb %al, %dx
++
++	/* IOPERM.  */
++	movl $SYSCALL_ARCH, %eax
++	pushl $iopl_arg2
++	pushl $SYSCALL_ARCH_IOPERM
++	pushl $0
++	int $SYSCALL_INT
++	addl $12, %esp
++
++#include "qemu-shutdown-x86.S"
+ 	
+ 	/* shutdown.  */
+ 	movl $SYSCALL_RESET, %eax
+@@ -108,7 +99,11 @@ device:
+ message:
+ 	.ascii "Boot Test Passed Successfully\n" SUCCESSFUL_BOOT_STRING "\n"
+ messageend:
+-iopl_arg:
+-	.long SHUTDOWN_PORT
++ioperm_arg1:
++	.long 0xcf8
++	.long 8
+ 	.long 1
++ioperm_arg2:
++	.long 0x1000
++	.long 8
+ 	.long 1
+diff --git a/grub-core/tests/boot/kfreebsd.init-x86_64.S b/grub-core/tests/boot/kfreebsd.init-x86_64.S
+index 0a9ff51..de7bab6 100644
+--- a/grub-core/tests/boot/kfreebsd.init-x86_64.S
++++ b/grub-core/tests/boot/kfreebsd.init-x86_64.S
+@@ -23,13 +23,12 @@
+ #define SYSCALL_WRITE 4
+ #define SYSCALL_RESET 55
+ #define SYSCALL_EXIT 1
+-#define SYSCALL_ARCH_IOPL	4
++#define SYSCALL_ARCH_IOPERM	4
+ #define SYSCALL_FSYNC 95
+ 
+ #define RESET_NOSYNC 0x4
+ #define RESET_HALT 0x8
+ #define RESET_POWEROFF 0x4000
+-#define SHUTDOWN_PORT 0x8900
+ 
+ 	.section ".init", "ax"
+ 	.global start,_start
+@@ -53,29 +52,18 @@ _start:
+ 	movq $SYSCALL_FSYNC, %rax
+ 	syscall
+ 
+-	/* IOPL.  */
++	/* IOPERM.  */
+ 	movq $SYSCALL_ARCH, %rax
+-	movq $SYSCALL_ARCH_IOPL, %rdi
+-	leaq iopl_arg, %rsi
++	movq $SYSCALL_ARCH_IOPERM, %rdi
++	leaq ioperm_arg1, %rsi
+ 	syscall
+ 
+-	movw $SHUTDOWN_PORT, %dx
+-	movb $'S', %al
+-	outb %al, %dx
+-	movb $'h', %al
+-	outb %al, %dx
+-	movb $'u', %al
+-	outb %al, %dx
+-	movb $'t', %al
+-	outb %al, %dx
+-	movb $'d', %al
+-	outb %al, %dx
+-	movb $'o', %al
+-	outb %al, %dx
+-	movb $'w', %al
+-	outb %al, %dx
+-	movb $'n', %al
+-	outb %al, %dx
++	movq $SYSCALL_ARCH, %rax
++	movq $SYSCALL_ARCH_IOPERM, %rdi
++	leaq ioperm_arg2, %rsi
++	syscall
++
++#include "qemu-shutdown-x86.S"
+ 	
+ 	/* shutdown.  */
+ 	movq $SYSCALL_RESET, %rax
+@@ -92,7 +80,11 @@ device:
+ message:
+ 	.ascii "Boot Test Passed Successfully\n" SUCCESSFUL_BOOT_STRING "\n"
+ messageend:
+-iopl_arg:
+-	.long SHUTDOWN_PORT
++ioperm_arg1:
++	.long 0xcf8
++	.long 8
+ 	.long 1
++ioperm_arg2:
++	.long 0x1000
++	.long 8
+ 	.long 1
+diff --git a/grub-core/tests/boot/linux.init-i386.S b/grub-core/tests/boot/linux.init-i386.S
+index 5b0088e..c0983ac 100644
+--- a/grub-core/tests/boot/linux.init-i386.S
++++ b/grub-core/tests/boot/linux.init-i386.S
+@@ -27,8 +27,6 @@
+ #define SHUTDOWN_MAGIC2 0x28121969
+ #define SHUTDOWN_MAGIC3 0x4321fedc
+ 
+-#define SHUTDOWN_PORT 0x8900
+-
+ 	.text
+ 	.global start, _start
+ _start:
+@@ -44,23 +42,7 @@ start:
+ 	movl $3, %ebx
+ 	int $SYSCALL_INT
+ 
+-	movw $SHUTDOWN_PORT, %dx
+-	movb $'S', %al
+-	outb %al, %dx
+-	movb $'h', %al
+-	outb %al, %dx
+-	movb $'u', %al
+-	outb %al, %dx
+-	movb $'t', %al
+-	outb %al, %dx
+-	movb $'d', %al
+-	outb %al, %dx
+-	movb $'o', %al
+-	outb %al, %dx
+-	movb $'w', %al
+-	outb %al, %dx
+-	movb $'n', %al
+-	outb %al, %dx
++#include "qemu-shutdown-x86.S"
+ 	
+ 	/* shutdown.  */
+ 	movl $SYSCALL_RESET, %eax
+diff --git a/grub-core/tests/boot/linux.init-x86_64.S b/grub-core/tests/boot/linux.init-x86_64.S
+index fc32dfd..90bdcc3 100644
+--- a/grub-core/tests/boot/linux.init-x86_64.S
++++ b/grub-core/tests/boot/linux.init-x86_64.S
+@@ -26,8 +26,6 @@
+ #define SHUTDOWN_MAGIC2 0x28121969
+ #define SHUTDOWN_MAGIC3 0x4321fedc
+ 
+-#define SHUTDOWN_PORT 0x8900
+-
+ 	.text
+ 	.global start, _start
+ _start:
+@@ -43,23 +41,7 @@ start:
+ 	movq $3, %rdi
+ 	syscall
+ 
+-	movw $SHUTDOWN_PORT, %dx
+-	movb $'S', %al
+-	outb %al, %dx
+-	movb $'h', %al
+-	outb %al, %dx
+-	movb $'u', %al
+-	outb %al, %dx
+-	movb $'t', %al
+-	outb %al, %dx
+-	movb $'d', %al
+-	outb %al, %dx
+-	movb $'o', %al
+-	outb %al, %dx
+-	movb $'w', %al
+-	outb %al, %dx
+-	movb $'n', %al
+-	outb %al, %dx
++#include "qemu-shutdown-x86.S"
+ 	
+ 	/* shutdown.  */
+ 	movq $SYSCALL_RESET, %rax
+diff --git a/grub-core/tests/boot/qemu-shutdown-x86.S b/grub-core/tests/boot/qemu-shutdown-x86.S
+new file mode 100644
+index 0000000..8f794fc
+--- /dev/null
++++ b/grub-core/tests/boot/qemu-shutdown-x86.S
+@@ -0,0 +1,9 @@
++	movl $0x80000b40, %eax
++	movw $0xcf8, %dx
++	outl  %eax, %dx
++	movl $0x1001, %eax
++	movw $0xcfc, %dx
++	outl  %eax, %dx
++	movw $0x2000, %ax
++	movw $0x1004, %dx	
++	outw  %ax, %dx
+-- 
+1.8.1.4
+

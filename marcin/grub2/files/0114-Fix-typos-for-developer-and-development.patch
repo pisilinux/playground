@@ -1,0 +1,61 @@
+From 3597696bb12a2de057ab658596eb5c6d1b2aab66 Mon Sep 17 00:00:00 2001
+From: Colin Watson <cjwatson@ubuntu.com>
+Date: Sun, 20 Jan 2013 13:24:47 +0000
+Subject: [PATCH 114/364] Fix typos for "developer" and "development".
+
+---
+ ChangeLog             | 4 ++++
+ docs/grub.texi        | 4 ++--
+ grub-core/net/bootp.c | 2 +-
+ 3 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index df311cf..1c816d6 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,7 @@
++2013-01-20  Colin Watson  <cjwatson@ubuntu.com>
++
++	Fix typos for "developer" and "development".
++
+ 2013-01-18  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	Add license header to spkmodem-recv.c.
+diff --git a/docs/grub.texi b/docs/grub.texi
+index efedd27..2dc0cbe 100644
+--- a/docs/grub.texi
++++ b/docs/grub.texi
+@@ -1250,7 +1250,7 @@ beeper) or @samp{spkmodem} (simple data protocol using system speaker).
+ 
+ @samp{spkmodem} is useful when no serial port is available. Connect the output
+ of sending system (where GRUB is running) to line-in of receiving system
+-(usually developper machine).
++(usually developer machine).
+ On receiving system compile @samp{spkmodem-recv} from
+ @samp{util/spkmodem-recv.c} and run:
+ 
+@@ -4204,7 +4204,7 @@ and tonal writing (2e5-2e9). GRUB also ignores deprecated (as specified
+ in Unicode) characters (e.g. tags). GRUB also doesn't handle so called
+ ``annotation characters'' If you can complete either of
+ two lists or, better, propose a patch to improve rendering, please contact
+-developper team.
++developer team.
+ 
+ @chapter Input terminal
+ Firmware console on BIOS, IEEE1275 and ARC doesn't allow you to enter non-ASCII
+diff --git a/grub-core/net/bootp.c b/grub-core/net/bootp.c
+index f36d4cd..33f860a 100644
+--- a/grub-core/net/bootp.c
++++ b/grub-core/net/bootp.c
+@@ -140,7 +140,7 @@ parse_dhcp_vendor (const char *name, void *vend, int limit, int *mask)
+ 	  break;
+ 
+ 	  /* If you need any other options please contact GRUB
+-	     developpement team.  */
++	     development team.  */
+ 	}
+ 
+       ptr += taglength;
+-- 
+1.8.1.4
+

@@ -1,0 +1,514 @@
+From a613c3ea1106ce4dc1e44f88665d14259b659da8 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 24 Mar 2013 13:05:59 +0100
+Subject: [PATCH 226/364] 	Add new 'proc' filesystem framework and put
+ luks_script into it.
+
+---
+ ChangeLog                   |   4 ++
+ Makefile.util.def           |   1 +
+ grub-core/Makefile.core.def |   5 ++
+ grub-core/disk/cryptodisk.c | 113 +++++++++++++++++++++++++++++
+ grub-core/disk/geli.c       |   2 -
+ grub-core/disk/luks.c       |   2 -
+ grub-core/fs/proc.c         | 172 ++++++++++++++++++++++++++++++++++++++++++++
+ include/grub/cryptodisk.h   |   5 +-
+ include/grub/disk.h         |   1 +
+ include/grub/procfs.h       |  50 +++++++++++++
+ 10 files changed, 350 insertions(+), 5 deletions(-)
+ create mode 100644 grub-core/fs/proc.c
+ create mode 100644 include/grub/procfs.h
+
+diff --git a/ChangeLog b/ChangeLog
+index 9841659..8f3878d 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,7 @@
++2013-03-24  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	Add new 'proc' filesystem framework and put luks_script into it.
++
+ 2013-03-23  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/term/at_keyboard.c: Increase robustness on coreboot
+diff --git a/Makefile.util.def b/Makefile.util.def
+index 1ccf390..62bcf2d 100644
+--- a/Makefile.util.def
++++ b/Makefile.util.def
+@@ -33,6 +33,7 @@ library = {
+   common = grub-core/disk/diskfilter.c;
+   common = grub-core/partmap/gpt.c;
+   common = grub-core/partmap/msdos.c;
++  common = grub-core/fs/proc.c;
+ };
+ 
+ library = {
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index a614b22..b1c1ab9 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -1068,6 +1068,11 @@ module = {
+ };
+ 
+ module = {
++  name = procfs;
++  common = fs/proc.c;
++};
++
++module = {
+   name = affs;
+   common = fs/affs.c;
+ };
+diff --git a/grub-core/disk/cryptodisk.c b/grub-core/disk/cryptodisk.c
+index f39c1ab..374edd1 100644
+--- a/grub-core/disk/cryptodisk.c
++++ b/grub-core/disk/cryptodisk.c
+@@ -22,6 +22,9 @@
+ #include <grub/dl.h>
+ #include <grub/extcmd.h>
+ #include <grub/i18n.h>
++#include <grub/fs.h>
++#include <grub/file.h>
++#include <grub/procfs.h>
+ 
+ #ifdef GRUB_UTIL
+ #include <errno.h>
+@@ -403,6 +406,8 @@ grub_cryptodisk_setkey (grub_cryptodisk_t dev, grub_uint8_t *key, grub_size_t ke
+   err = grub_crypto_cipher_set_key (dev->cipher, key, real_keysize);
+   if (err)
+     return err;
++  grub_memcpy (dev->key, key, keysize);
++  dev->keysize = keysize;
+ 
+   /* Configure ESSIV if necessary.  */
+   if (dev->mode_iv == GRUB_CRYPTODISK_MODE_IV_ESSIV)
+@@ -979,6 +984,112 @@ static struct grub_disk_dev grub_cryptodisk_dev = {
+   .next = 0
+ };
+ 
++static char
++hex (grub_uint8_t val)
++{
++  if (val < 10)
++    return '0' + val;
++  return 'a' + val - 10;
++}
++
++/* Open a file named NAME and initialize FILE.  */
++static char *
++luks_script_get (void)
++{
++  grub_cryptodisk_t i;
++  grub_size_t size = 0;
++  char *ptr, *ret;
++
++  for (i = cryptodisk_list; i != NULL; i = i->next)
++    if (grub_strcmp (i->modname, "luks") == 0)
++      {
++	size += sizeof ("luks_mount ");
++	size += grub_strlen (i->uuid);
++	size += grub_strlen (i->cipher->cipher->name);
++	size += 54;
++	if (i->essiv_hash)
++	  size += grub_strlen (i->essiv_hash->name);
++	size += i->keysize * 2;
++      }
++
++  ret = grub_malloc (size + 1);
++  if (!ret)
++    return 0;
++
++  ptr = ret;
++
++  for (i = cryptodisk_list; i != NULL; i = i->next)
++    if (grub_strcmp (i->modname, "luks") == 0)
++      {
++	unsigned j;
++	const char *iptr;
++	ptr = grub_stpcpy (ptr, "luks_mount ");
++	ptr = grub_stpcpy (ptr, i->uuid);
++	*ptr++ = ' ';
++	grub_snprintf (ptr, 21, "%" PRIuGRUB_UINT64_T " ", i->offset);
++	while (*ptr)
++	  ptr++;
++	for (iptr = i->cipher->cipher->name; *iptr; iptr++)
++	  *ptr++ = grub_tolower (*iptr);
++	switch (i->mode)
++	  {
++	  case GRUB_CRYPTODISK_MODE_ECB:
++	    ptr = grub_stpcpy (ptr, "-ecb"); 
++	    break;
++	  case GRUB_CRYPTODISK_MODE_CBC:
++	    ptr = grub_stpcpy (ptr, "-cbc");
++	    break;
++	  case GRUB_CRYPTODISK_MODE_PCBC:
++	    ptr = grub_stpcpy (ptr, "-pcbc");
++	    break;
++	  case GRUB_CRYPTODISK_MODE_XTS:
++	    ptr = grub_stpcpy (ptr, "-xts");
++	    break;
++	  case GRUB_CRYPTODISK_MODE_LRW:
++	    ptr = grub_stpcpy (ptr, "-lrw");
++	    break;
++	  }
++
++	switch (i->mode_iv)
++	  {
++	  case GRUB_CRYPTODISK_MODE_IV_NULL:
++	    ptr = grub_stpcpy (ptr, "-null"); 
++	    break;
++	  case GRUB_CRYPTODISK_MODE_IV_PLAIN:
++	    ptr = grub_stpcpy (ptr, "-plain"); 
++	    break;
++	  case GRUB_CRYPTODISK_MODE_IV_PLAIN64:
++	    ptr = grub_stpcpy (ptr, "-plain64"); 
++	    break;
++	  case GRUB_CRYPTODISK_MODE_IV_BENBI:
++	    ptr = grub_stpcpy (ptr, "-benbi"); 
++	    break;
++	  case GRUB_CRYPTODISK_MODE_IV_ESSIV:
++	    ptr = grub_stpcpy (ptr, "-essiv:"); 
++	    ptr = grub_stpcpy (ptr, i->essiv_hash->name);
++	    break;
++	  case GRUB_CRYPTODISK_MODE_IV_BYTECOUNT64:
++	  case GRUB_CRYPTODISK_MODE_IV_BYTECOUNT64_HASH:
++	    break;
++	  }
++	*ptr++ = ' ';
++	for (j = 0; j < i->keysize; j++)
++	  {
++	    *ptr++ = hex (i->key[j] >> 4);
++	    *ptr++ = hex (i->key[j] & 0xf);
++	  }
++	*ptr++ = '\n';
++      }
++  *ptr = '\0';
++  return ret;
++}
++
++struct grub_procfs_entry luks_script =
++{
++  .name = "luks_script",
++  .get_contents = luks_script_get
++};
++
+ static grub_extcmd_t cmd;
+ 
+ GRUB_MOD_INIT (cryptodisk)
+@@ -987,10 +1098,12 @@ GRUB_MOD_INIT (cryptodisk)
+   cmd = grub_register_extcmd ("cryptomount", grub_cmd_cryptomount, 0,
+ 			      N_("SOURCE|-u UUID|-a|-b"),
+ 			      N_("Mount a crypto device."), options);
++  grub_procfs_register ("luks_script", &luks_script);
+ }
+ 
+ GRUB_MOD_FINI (cryptodisk)
+ {
+   grub_disk_dev_unregister (&grub_cryptodisk_dev);
+   cryptodisk_cleanup ();
++  grub_procfs_unregister (&luks_script);
+ }
+diff --git a/grub-core/disk/geli.c b/grub-core/disk/geli.c
+index f9315df..0b94414 100644
+--- a/grub-core/disk/geli.c
++++ b/grub-core/disk/geli.c
+@@ -381,9 +381,7 @@ configure_ciphers (grub_disk_t disk, const char *check_uuid,
+       newdev->rekey_shift = 20;
+     }
+ 
+-#ifdef GRUB_UTIL
+   newdev->modname = "geli";
+-#endif
+ 
+   newdev->total_length = grub_disk_get_size (disk) - 1;
+   grub_memcpy (newdev->uuid, uuid, sizeof (newdev->uuid));
+diff --git a/grub-core/disk/luks.c b/grub-core/disk/luks.c
+index 44f3cac..afcb7e4 100644
+--- a/grub-core/disk/luks.c
++++ b/grub-core/disk/luks.c
+@@ -290,9 +290,7 @@ configure_ciphers (grub_disk_t disk, const char *check_uuid,
+   newdev->log_sector_size = 9;
+   newdev->total_length = grub_disk_get_size (disk) - newdev->offset;
+   grub_memcpy (newdev->uuid, uuid, sizeof (newdev->uuid));
+-#ifdef GRUB_UTIL
+   newdev->modname = "luks";
+-#endif
+   COMPILE_TIME_ASSERT (sizeof (newdev->uuid) >= sizeof (uuid));
+   return newdev;
+ }
+diff --git a/grub-core/fs/proc.c b/grub-core/fs/proc.c
+new file mode 100644
+index 0000000..8f27682
+--- /dev/null
++++ b/grub-core/fs/proc.c
+@@ -0,0 +1,172 @@
++/*
++ *  GRUB  --  GRand Unified Bootloader
++ *  Copyright (C) 2013  Free Software Foundation, Inc.
++ *
++ *  GRUB is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation, either version 3 of the License, or
++ *  (at your option) any later version.
++ *
++ *  GRUB is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <grub/procfs.h>
++#include <grub/disk.h>
++#include <grub/fs.h>
++#include <grub/file.h>
++#include <grub/mm.h>
++#include <grub/dl.h>
++
++GRUB_MOD_LICENSE ("GPLv3+");
++
++struct grub_procfs_entry *grub_procfs_entries;
++
++static int
++grub_procdev_iterate (grub_disk_dev_iterate_hook_t hook, void *hook_data,
++			 grub_disk_pull_t pull)
++{
++  if (pull != GRUB_DISK_PULL_NONE)
++    return 0;
++
++  return hook ("proc", hook_data);
++}
++
++static grub_err_t
++grub_procdev_open (const char *name, grub_disk_t disk)
++{
++  if (grub_strcmp (name, "proc"))
++      return grub_error (GRUB_ERR_UNKNOWN_DEVICE, "not a procfs disk");
++
++  disk->total_sectors = 0;
++  disk->id = (unsigned long) "proc";
++
++  disk->data = 0;
++
++  return GRUB_ERR_NONE;
++}
++
++static void
++grub_procdev_close (grub_disk_t disk __attribute((unused)))
++{
++}
++
++static grub_err_t
++grub_procdev_read (grub_disk_t disk __attribute((unused)),
++		grub_disk_addr_t sector __attribute((unused)),
++		grub_size_t size __attribute((unused)),
++		char *buf __attribute((unused)))
++{
++  return GRUB_ERR_OUT_OF_RANGE;
++}
++
++static grub_err_t
++grub_procdev_write (grub_disk_t disk __attribute ((unused)),
++		       grub_disk_addr_t sector __attribute ((unused)),
++		       grub_size_t size __attribute ((unused)),
++		       const char *buf __attribute ((unused)))
++{
++  return GRUB_ERR_OUT_OF_RANGE;
++}
++
++static grub_ssize_t
++grub_procfs_read (grub_file_t file, char *buf, grub_size_t len)
++{
++  char *data = file->data;
++
++  grub_memcpy (buf, data + file->offset, len);
++
++  return len;
++}
++
++static grub_err_t
++grub_procfs_close (grub_file_t file)
++{
++  char *data;
++
++  data = file->data;
++  grub_free (data);
++
++  return GRUB_ERR_NONE;
++}
++
++static grub_err_t
++grub_procfs_dir (grub_device_t device, const char *path,
++		 grub_fs_dir_hook_t hook, void *hook_data)
++{
++  const char *ptr;
++  struct grub_dirhook_info info;
++  struct grub_procfs_entry *entry;
++
++  grub_memset (&info, 0, sizeof (info));
++
++  /* Check if the disk is our dummy disk.  */
++  if (grub_strcmp (device->disk->name, "proc"))
++    return grub_error (GRUB_ERR_BAD_FS, "not a procfs");
++  for (ptr = path; *ptr == '/'; ptr++);
++  if (*ptr)
++    return 0;
++  FOR_LIST_ELEMENTS((entry), (grub_procfs_entries))
++    if (hook (entry->name, &info, hook_data))
++      return 0;
++  return 0;
++}
++
++static grub_err_t
++grub_procfs_open (struct grub_file *file, const char *path)
++{
++  const char *pathptr;
++  struct grub_procfs_entry *entry;
++
++  for (pathptr = path; *pathptr == '/'; pathptr++);
++
++  FOR_LIST_ELEMENTS((entry), (grub_procfs_entries))
++    if (grub_strcmp (pathptr, entry->name) == 0)
++    {
++      file->data = entry->get_contents ();
++      if (!file->data)
++	return grub_errno;
++      file->size = grub_strlen (file->data);
++      return GRUB_ERR_NONE;
++    }
++
++  return grub_error (GRUB_ERR_FILE_NOT_FOUND, N_("file `%s' not found"), path);
++}
++
++static struct grub_disk_dev grub_procfs_dev = {
++  .name = "proc",
++  .id = GRUB_DISK_DEVICE_PROCFS_ID,
++  .iterate = grub_procdev_iterate,
++  .open = grub_procdev_open,
++  .close = grub_procdev_close,
++  .read = grub_procdev_read,
++  .write = grub_procdev_write,
++  .next = 0
++};
++
++static struct grub_fs grub_procfs_fs =
++  {
++    .name = "procfs",
++    .dir = grub_procfs_dir,
++    .open = grub_procfs_open,
++    .read = grub_procfs_read,
++    .close = grub_procfs_close,
++    .next = 0
++  };
++
++GRUB_MOD_INIT (procfs)
++{
++  grub_disk_dev_register (&grub_procfs_dev);
++  grub_fs_register (&grub_procfs_fs);
++}
++
++GRUB_MOD_FINI (procfs)
++{
++  grub_disk_dev_unregister (&grub_procfs_dev);
++  grub_fs_unregister (&grub_procfs_fs);
++}
+diff --git a/include/grub/cryptodisk.h b/include/grub/cryptodisk.h
+index 0bb5d44..c3ee820 100644
+--- a/include/grub/cryptodisk.h
++++ b/include/grub/cryptodisk.h
+@@ -49,6 +49,7 @@ typedef enum
+ #define GRUB_CRYPTODISK_GF_SIZE (1U << GRUB_CRYPTODISK_GF_LOG_SIZE)
+ #define GRUB_CRYPTODISK_GF_LOG_BYTES (GRUB_CRYPTODISK_GF_LOG_SIZE - 3)
+ #define GRUB_CRYPTODISK_GF_BYTES (1U << GRUB_CRYPTODISK_GF_LOG_BYTES)
++#define GRUB_CRYPTODISK_MAX_KEYLEN 128
+ 
+ struct grub_cryptodisk;
+ 
+@@ -80,11 +81,13 @@ struct grub_cryptodisk
+   grub_uint8_t *lrw_precalc;
+   grub_uint8_t iv_prefix[64];
+   grub_size_t iv_prefix_len;
++  grub_uint8_t key[GRUB_CRYPTODISK_MAX_KEYLEN];
++  grub_size_t keysize;
+ #ifdef GRUB_UTIL
+   char *cheat;
+-  const char *modname;
+   int cheat_fd;
+ #endif
++  const char *modname;
+   int log_sector_size;
+   grub_cryptodisk_rekey_func_t rekey;
+   int rekey_shift;
+diff --git a/include/grub/disk.h b/include/grub/disk.h
+index f0e3df3..d19b1ac 100644
+--- a/include/grub/disk.h
++++ b/include/grub/disk.h
+@@ -43,6 +43,7 @@ enum grub_disk_dev_id
+     GRUB_DISK_DEVICE_CRYPTODISK_ID,
+     GRUB_DISK_DEVICE_ARCDISK_ID,
+     GRUB_DISK_DEVICE_HOSTDISK_ID,
++    GRUB_DISK_DEVICE_PROCFS_ID,
+   };
+ 
+ struct grub_disk;
+diff --git a/include/grub/procfs.h b/include/grub/procfs.h
+new file mode 100644
+index 0000000..55cbb21
+--- /dev/null
++++ b/include/grub/procfs.h
+@@ -0,0 +1,50 @@
++/*
++ *  GRUB  --  GRand Unified Bootloader
++ *  Copyright (C) 2013  Free Software Foundation, Inc.
++ *
++ *  GRUB is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation, either version 3 of the License, or
++ *  (at your option) any later version.
++ *
++ *  GRUB is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef GRUB_PROCFS_HEADER
++#define GRUB_PROCFS_HEADER	1
++
++#include <grub/list.h>
++
++struct grub_procfs_entry
++{
++  struct grub_procfs_entry *next;
++  struct grub_procfs_entry **prev;
++
++  const char *name;
++  char * (*get_contents) (void);
++};
++
++extern struct grub_procfs_entry *grub_procfs_entries;
++
++static inline void
++grub_procfs_register (const char *name __attribute__ ((unused)),
++		      struct grub_procfs_entry *entry)
++{
++  grub_list_push (GRUB_AS_LIST_P (&grub_procfs_entries),
++		  GRUB_AS_LIST (entry));
++}
++
++static inline void
++grub_procfs_unregister (struct grub_procfs_entry *entry)
++{
++  grub_list_remove (GRUB_AS_LIST (entry));
++}
++
++
++#endif
+-- 
+1.8.1.4
+

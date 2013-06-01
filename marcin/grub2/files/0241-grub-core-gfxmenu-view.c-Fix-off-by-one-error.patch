@@ -1,0 +1,41 @@
+From 7be9ea372ccf543e52f5a3d047d3e2023cd9e6b7 Mon Sep 17 00:00:00 2001
+From: Vladimir Testov <vladimir.testov@rosalab.ru>
+Date: Wed, 3 Apr 2013 08:53:58 +0200
+Subject: [PATCH 241/364] 	* grub-core/gfxmenu/view.c: Fix off-by-one
+ error.
+
+---
+ ChangeLog                | 4 ++++
+ grub-core/gfxmenu/view.c | 2 +-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index ebc71eb..8bdb17a 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-03  Vladimir Testov <vladimir.testov@rosalab.ru>
+ 
++	* grub-core/gfxmenu/view.c: Fix off-by-one error.
++
++2013-04-03  Vladimir Testov <vladimir.testov@rosalab.ru>
++
+ 	* grub-core/gfxmenu/gui_circular_progress.c: Fix off-by-one error.
+ 
+ 2013-04-01  Radosław Szymczyszyn <lavrin@gmail.com>
+diff --git a/grub-core/gfxmenu/view.c b/grub-core/gfxmenu/view.c
+index 1918ea4..6de96ca 100644
+--- a/grub-core/gfxmenu/view.c
++++ b/grub-core/gfxmenu/view.c
+@@ -195,7 +195,7 @@ grub_gfxmenu_print_timeout (int timeout, void *data)
+   if (view->first_timeout == -1)
+     view->first_timeout = timeout;
+ 
+-  update_timeouts (1, -(view->first_timeout + 1), -timeout, 0);
++  update_timeouts (1, -view->first_timeout, -timeout, 0);
+   redraw_timeouts (view);
+   grub_video_swap_buffers ();
+   if (view->double_repaint)
+-- 
+1.8.1.4
+

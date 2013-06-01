@@ -1,0 +1,78 @@
+From a275d1fc56fb118a9ebdd48c8680d0b47e3c3c59 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 5 Apr 2013 11:01:19 +0200
+Subject: [PATCH 263/364] 	* grub-core/commands/acpi.c: Use sizeof rather
+ than hardcoding the size.
+
+---
+ ChangeLog                 |  4 ++++
+ grub-core/commands/acpi.c | 12 ++++++------
+ 2 files changed, 10 insertions(+), 6 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 7e2a62f..f90fab4 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/commands/acpi.c: Use sizeof rather than hardcoding the size.
++
++2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	Replace 8 with GRUB_CHAR_BIT in several places when appropriate.
+ 
+ 2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/commands/acpi.c b/grub-core/commands/acpi.c
+index 4ca8cf7..14f639c 100644
+--- a/grub-core/commands/acpi.c
++++ b/grub-core/commands/acpi.c
+@@ -365,13 +365,13 @@ setup_common_tables (void)
+     numoftables++;
+ 
+   rsdt_addr = rsdt = (struct grub_acpi_table_header *) playground_ptr;
+-  playground_ptr += sizeof (struct grub_acpi_table_header) + 4 * numoftables;
++  playground_ptr += sizeof (struct grub_acpi_table_header) + sizeof (grub_uint32_t) * numoftables;
+ 
+   rsdt_entry = (grub_uint32_t *) (rsdt + 1);
+ 
+   /* Fill RSDT header. */
+   grub_memcpy (&(rsdt->signature), "RSDT", 4);
+-  rsdt->length = sizeof (struct grub_acpi_table_header) + 4 * numoftables;
++  rsdt->length = sizeof (struct grub_acpi_table_header) + sizeof (grub_uint32_t) * numoftables;
+   rsdt->revision = 1;
+   grub_memcpy (&(rsdt->oemid), root_oemid, sizeof (rsdt->oemid));
+   grub_memcpy (&(rsdt->oemtable), root_oemtable, sizeof (rsdt->oemtable));
+@@ -419,13 +419,13 @@ setv2table (void)
+ 
+   /* Create XSDT. */
+   xsdt = (struct grub_acpi_table_header *) playground_ptr;
+-  playground_ptr += sizeof (struct grub_acpi_table_header) + 8 * numoftables;
++  playground_ptr += sizeof (struct grub_acpi_table_header) + sizeof (grub_uint64_t) * numoftables;
+ 
+   xsdt_entry = (grub_uint64_t *)(xsdt + 1);
+   for (cur = acpi_tables; cur; cur = cur->next)
+     *(xsdt_entry++) = (grub_addr_t) cur->addr;
+   grub_memcpy (&(xsdt->signature), "XSDT", 4);
+-  xsdt->length = sizeof (struct grub_acpi_table_header) + 8 * numoftables;
++  xsdt->length = sizeof (struct grub_acpi_table_header) + sizeof (grub_uint64_t) * numoftables;
+   xsdt->revision = 1;
+   grub_memcpy (&(xsdt->oemid), root_oemid, sizeof (xsdt->oemid));
+   grub_memcpy (&(xsdt->oemtable), root_oemtable, sizeof (xsdt->oemtable));
+@@ -708,11 +708,11 @@ grub_cmd_acpi (struct grub_extcmd_context *ctxt, int argc, char **args)
+   /* DSDT. */
+   playground_size += dsdt_size;
+   /* RSDT. */
+-  playground_size += sizeof (struct grub_acpi_table_header) + 4 * numoftables;
++  playground_size += sizeof (struct grub_acpi_table_header) + sizeof (grub_uint32_t) * numoftables;
+   /* RSDPv1. */
+   playground_size += sizeof (struct grub_acpi_rsdp_v10);
+   /* XSDT. */
+-  playground_size += sizeof (struct grub_acpi_table_header) + 8 * numoftables;
++  playground_size += sizeof (struct grub_acpi_table_header) + sizeof (grub_uint64_t) * numoftables;
+   /* RSDPv2. */
+   playground_size += sizeof (struct grub_acpi_rsdp_v20);
+ 
+-- 
+1.8.1.4
+

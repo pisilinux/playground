@@ -1,0 +1,49 @@
+From 761e63a2a5f38419acd0e54d6b54845e65a152dc Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sat, 20 Apr 2013 17:39:49 +0200
+Subject: [PATCH 331/364] 	* grub-core/kern/mm.c (grub_mm_init_region):
+ Fix condition for 	detecting too small regions.
+
+---
+ ChangeLog           | 5 +++++
+ grub-core/kern/mm.c | 5 +++--
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index b2e3ccc..2a4264c 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-04-20  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/kern/mm.c (grub_mm_init_region): Fix condition for
++	detecting too small regions.
++
++2013-04-20  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/Makefile.core.def (legacycfg): Enable on EFI.
+ 
+ 2013-04-20  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/kern/mm.c b/grub-core/kern/mm.c
+index d869091..959c3ba 100644
+--- a/grub-core/kern/mm.c
++++ b/grub-core/kern/mm.c
+@@ -140,12 +140,13 @@ grub_mm_init_region (void *addr, grub_size_t size)
+ 
+   /* Allocate a region from the head.  */
+   r = (grub_mm_region_t) ALIGN_UP ((grub_addr_t) addr, GRUB_MM_ALIGN);
+-  size -= (char *) r - (char *) addr + sizeof (*r);
+ 
+   /* If this region is too small, ignore it.  */
+-  if (size < GRUB_MM_ALIGN)
++  if (size < GRUB_MM_ALIGN + (char *) r - (char *) addr + sizeof (*r))
+     return;
+ 
++  size -= (char *) r - (char *) addr + sizeof (*r);
++
+   h = (grub_mm_header_t) (r + 1);
+   h->next = h;
+   h->magic = GRUB_MM_FREE_MAGIC;
+-- 
+1.8.1.4
+

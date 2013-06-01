@@ -1,0 +1,816 @@
+From 14b058a0b48a201ce5d139e36b64ee6590075845 Mon Sep 17 00:00:00 2001
+From: Colin Watson <cjwatson@ubuntu.com>
+Date: Tue, 15 Jan 2013 12:03:25 +0000
+Subject: [PATCH 107/364] Remove nested functions from script reading and
+ parsing.
+
+* grub-core/kern/parser.c (grub_parser_split_cmdline): Add
+getline_data argument, passed to getline.
+* grub-core/kern/rescue_parser.c (grub_rescue_parse_line): Add
+getline_data argument, passed to grub_parser_split_cmdline.
+* grub-core/script/lexer.c (grub_script_lexer_yywrap): Pass
+lexerstate->getline_data to lexerstate->getline.
+(grub_script_lexer_init): Add getline_data argument, saved in
+lexerstate->getline_data.
+* grub-core/script/main.c (grub_normal_parse_line): Add getline_data
+argument, passed to grub_script_parse.
+* grub-core/script/script.c (grub_script_parse): Add getline_data
+argument, passed to grub_script_lexer_init.
+* include/grub/parser.h (grub_parser_split_cmdline): Update
+prototype.  Update all callers to pass appropriate getline data.
+(struct grub_parser.parse_line): Likewise.
+(grub_rescue_parse_line): Likewise.
+* include/grub/reader.h (grub_reader_getline_t): Add void *
+argument.
+* include/grub/script_sh.h (struct grub_lexer_param): Add
+getline_data member.
+(grub_script_parse): Update prototype.  Update all callers to pass
+appropriate getline data.
+(grub_script_lexer_init): Likewise.
+(grub_normal_parse_line): Likewise.
+
+* grub-core/commands/legacycfg.c (legacy_file_getline): Add unused
+data argument.
+* grub-core/kern/parser.c (grub_parser_execute: getline): Make
+static instead of nested.  Rename to ...
+(grub_parser_execute_getline): ... this.
+* grub-core/kern/rescue_reader.c (grub_rescue_read_line): Add unused
+data argument.
+* grub-core/normal/main.c (read_config_file: getline): Make static
+instead of nested.  Rename to ...
+(read_config_file_getline): ... this.
+(grub_normal_read_line): Add unused data argument.
+* grub-core/script/execute.c (grub_script_execute_sourcecode:
+getline): Make static instead of nested.  Rename to ...
+(grub_script_execute_sourcecode_getline): ... this.
+* util/grub-script-check.c (main: get_config_line): Make static
+instead of nested.
+---
+ ChangeLog                      |  46 ++++++++++++++++
+ grub-core/commands/legacycfg.c |   7 +--
+ grub-core/kern/parser.c        |  54 ++++++++++---------
+ grub-core/kern/rescue_parser.c |   6 ++-
+ grub-core/kern/rescue_reader.c |   7 +--
+ grub-core/normal/completion.c  |   2 +-
+ grub-core/normal/main.c        |  53 +++++++++---------
+ grub-core/script/execute.c     |  51 ++++++++++--------
+ grub-core/script/lexer.c       |   9 ++--
+ grub-core/script/main.c        |   5 +-
+ grub-core/script/script.c      |   6 ++-
+ include/grub/parser.h          |   7 ++-
+ include/grub/reader.h          |   2 +-
+ include/grub/script_sh.h       |  12 +++--
+ util/grub-script-check.c       | 119 ++++++++++++++++++++++-------------------
+ 15 files changed, 238 insertions(+), 148 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index d07f235..d02749b 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,51 @@
+ 2013-01-15  Colin Watson  <cjwatson@ubuntu.com>
+ 
++	Remove nested functions from script reading and parsing.
++
++	* grub-core/kern/parser.c (grub_parser_split_cmdline): Add
++	getline_data argument, passed to getline.
++	* grub-core/kern/rescue_parser.c (grub_rescue_parse_line): Add
++	getline_data argument, passed to grub_parser_split_cmdline.
++	* grub-core/script/lexer.c (grub_script_lexer_yywrap): Pass
++	lexerstate->getline_data to lexerstate->getline.
++	(grub_script_lexer_init): Add getline_data argument, saved in
++	lexerstate->getline_data.
++	* grub-core/script/main.c (grub_normal_parse_line): Add getline_data
++	argument, passed to grub_script_parse.
++	* grub-core/script/script.c (grub_script_parse): Add getline_data
++	argument, passed to grub_script_lexer_init.
++	* include/grub/parser.h (grub_parser_split_cmdline): Update
++	prototype.  Update all callers to pass appropriate getline data.
++	(struct grub_parser.parse_line): Likewise.
++	(grub_rescue_parse_line): Likewise.
++	* include/grub/reader.h (grub_reader_getline_t): Add void *
++	argument.
++	* include/grub/script_sh.h (struct grub_lexer_param): Add
++	getline_data member.
++	(grub_script_parse): Update prototype.  Update all callers to pass
++	appropriate getline data.
++	(grub_script_lexer_init): Likewise.
++	(grub_normal_parse_line): Likewise.
++
++	* grub-core/commands/legacycfg.c (legacy_file_getline): Add unused
++	data argument.
++	* grub-core/kern/parser.c (grub_parser_execute: getline): Make
++	static instead of nested.  Rename to ...
++	(grub_parser_execute_getline): ... this.
++	* grub-core/kern/rescue_reader.c (grub_rescue_read_line): Add unused
++	data argument.
++	* grub-core/normal/main.c (read_config_file: getline): Make static
++	instead of nested.  Rename to ...
++	(read_config_file_getline): ... this.
++	(grub_normal_read_line): Add unused data argument.
++	* grub-core/script/execute.c (grub_script_execute_sourcecode:
++	getline): Make static instead of nested.  Rename to ...
++	(grub_script_execute_sourcecode_getline): ... this.
++	* util/grub-script-check.c (main: get_config_line): Make static
++	instead of nested.
++
++2013-01-15  Colin Watson  <cjwatson@ubuntu.com>
++
+ 	Remove nested functions from memory map iterators.
+ 
+ 	* grub-core/efiemu/mm.c (grub_efiemu_mmap_iterate): Add hook_data
+diff --git a/grub-core/commands/legacycfg.c b/grub-core/commands/legacycfg.c
+index e34eed4..a3ad5c6 100644
+--- a/grub-core/commands/legacycfg.c
++++ b/grub-core/commands/legacycfg.c
+@@ -37,7 +37,8 @@ GRUB_MOD_LICENSE ("GPLv3+");
+ 
+ /* Helper for legacy_file.  */
+ static grub_err_t
+-legacy_file_getline (char **line, int cont __attribute__ ((unused)))
++legacy_file_getline (char **line, int cont __attribute__ ((unused)),
++		     void *data __attribute__ ((unused)))
+ {
+   *line = 0;
+   return GRUB_ERR_NONE;
+@@ -134,7 +135,7 @@ legacy_file (const char *filename)
+ 
+       if (parsed && !entryname)
+ 	{
+-	  grub_normal_parse_line (parsed, legacy_file_getline);
++	  grub_normal_parse_line (parsed, legacy_file_getline, NULL);
+ 	  grub_print_error ();
+ 	  grub_free (parsed);
+ 	  parsed = NULL;
+@@ -180,7 +181,7 @@ legacy_file (const char *filename)
+       grub_free (args);
+     }
+ 
+-  grub_normal_parse_line (suffix, legacy_file_getline);
++  grub_normal_parse_line (suffix, legacy_file_getline, NULL);
+   grub_print_error ();
+   grub_free (suffix);
+   grub_free (entrysrc);
+diff --git a/grub-core/kern/parser.c b/grub-core/kern/parser.c
+index d1be53e..b261fa0 100644
+--- a/grub-core/kern/parser.c
++++ b/grub-core/kern/parser.c
+@@ -107,7 +107,8 @@ check_varstate (grub_parser_state_t s)
+ }
+ 
+ grub_err_t
+-grub_parser_split_cmdline (const char *cmdline, grub_reader_getline_t getline,
++grub_parser_split_cmdline (const char *cmdline,
++			   grub_reader_getline_t getline, void *getline_data,
+ 			   int *argc, char ***argv)
+ {
+   grub_parser_state_t state = GRUB_PARSER_STATE_TEXT;
+@@ -149,7 +150,7 @@ grub_parser_split_cmdline (const char *cmdline, grub_reader_getline_t getline,
+       if (!rd || !*rd)
+ 	{
+ 	  if (getline)
+-	    getline (&rd, 1);
++	    getline (&rd, 1, getline_data);
+ 	  else
+ 	    break;
+ 	}
+@@ -232,36 +233,39 @@ grub_parser_split_cmdline (const char *cmdline, grub_reader_getline_t getline,
+   return 0;
+ }
+ 
++/* Helper for grub_parser_execute.  */
++static grub_err_t
++grub_parser_execute_getline (char **line, int cont __attribute__ ((unused)),
++			     void *data)
++{
++  char **source = data;
++  char *p;
++
++  if (!*source)
++    {
++      *line = 0;
++      return 0;
++    }
++
++  p = grub_strchr (*source, '\n');
++
++  if (p)
++    *line = grub_strndup (*source, p - *source);
++  else
++    *line = grub_strdup (*source);
++  *source = p ? p + 1 : 0;
++  return 0;
++}
++
+ grub_err_t
+ grub_parser_execute (char *source)
+ {
+-  auto grub_err_t getline (char **line, int cont);
+-  grub_err_t getline (char **line, int cont __attribute__ ((unused)))
+-  {
+-    char *p;
+-
+-    if (!source)
+-      {
+-	*line = 0;
+-	return 0;
+-      }
+-
+-    p = grub_strchr (source, '\n');
+-
+-    if (p)
+-      *line = grub_strndup (source, p - source);
+-    else
+-      *line = grub_strdup (source);
+-    source = p ? p + 1 : 0;
+-    return 0;
+-  }
+-
+   while (source)
+     {
+       char *line;
+ 
+-      getline (&line, 0);
+-      grub_rescue_parse_line (line, getline);
++      grub_parser_execute_getline (&line, 0, &source);
++      grub_rescue_parse_line (line, grub_parser_execute_getline, &source);
+       grub_free (line);
+     }
+ 
+diff --git a/grub-core/kern/rescue_parser.c b/grub-core/kern/rescue_parser.c
+index 656342d..ab3d041 100644
+--- a/grub-core/kern/rescue_parser.c
++++ b/grub-core/kern/rescue_parser.c
+@@ -26,14 +26,16 @@
+ #include <grub/i18n.h>
+ 
+ grub_err_t
+-grub_rescue_parse_line (char *line, grub_reader_getline_t getline)
++grub_rescue_parse_line (char *line,
++			grub_reader_getline_t getline, void *getline_data)
+ {
+   char *name;
+   int n;
+   grub_command_t cmd;
+   char **args;
+ 
+-  if (grub_parser_split_cmdline (line, getline, &n, &args) || n < 0)
++  if (grub_parser_split_cmdline (line, getline, getline_data, &n, &args)
++      || n < 0)
+     return grub_errno;
+ 
+   if (n == 0)
+diff --git a/grub-core/kern/rescue_reader.c b/grub-core/kern/rescue_reader.c
+index 4587b94..dcd7d44 100644
+--- a/grub-core/kern/rescue_reader.c
++++ b/grub-core/kern/rescue_reader.c
+@@ -30,7 +30,8 @@ static char linebuf[GRUB_RESCUE_BUF_SIZE];
+ 
+ /* Prompt to input a command and read the line.  */
+ static grub_err_t
+-grub_rescue_read_line (char **line, int cont)
++grub_rescue_read_line (char **line, int cont,
++		       void *data __attribute__ ((unused)))
+ {
+   int c;
+   int pos = 0;
+@@ -87,11 +88,11 @@ grub_rescue_run (void)
+       grub_print_error ();
+       grub_errno = GRUB_ERR_NONE;
+ 
+-      grub_rescue_read_line (&line, 0);
++      grub_rescue_read_line (&line, 0, NULL);
+       if (! line || line[0] == '\0')
+ 	continue;
+ 
+-      grub_rescue_parse_line (line, grub_rescue_read_line);
++      grub_rescue_parse_line (line, grub_rescue_read_line, NULL);
+       grub_free (line);
+     }
+ }
+diff --git a/grub-core/normal/completion.c b/grub-core/normal/completion.c
+index cae78f1..805f002 100644
+--- a/grub-core/normal/completion.c
++++ b/grub-core/normal/completion.c
+@@ -418,7 +418,7 @@ grub_normal_do_completion (char *buf, int *restore,
+ 
+   *restore = 1;
+ 
+-  if (grub_parser_split_cmdline (buf, 0, &argc, &argv))
++  if (grub_parser_split_cmdline (buf, 0, 0, &argc, &argv))
+     return 0;
+ 
+   if (argc == 0)
+diff --git a/grub-core/normal/main.c b/grub-core/normal/main.c
+index 13473ec..07f337d 100644
+--- a/grub-core/normal/main.c
++++ b/grub-core/normal/main.c
+@@ -134,33 +134,37 @@ grub_normal_free_menu (grub_menu_t menu)
+   grub_env_unset_menu ();
+ }
+ 
+-static grub_menu_t
+-read_config_file (const char *config)
++/* Helper for read_config_file.  */
++static grub_err_t
++read_config_file_getline (char **line, int cont __attribute__ ((unused)),
++			  void *data)
+ {
+-  grub_file_t file;
+-  const char *old_file, *old_dir;
+-  char *config_dir, *ptr = 0;
++  grub_file_t file = data;
+ 
+-  auto grub_err_t getline (char **line, int cont);
+-  grub_err_t getline (char **line, int cont __attribute__ ((unused)))
++  while (1)
+     {
+-      while (1)
+-	{
+-	  char *buf;
++      char *buf;
+ 
+-	  *line = buf = grub_file_getline (file);
+-	  if (! buf)
+-	    return grub_errno;
++      *line = buf = grub_file_getline (file);
++      if (! buf)
++	return grub_errno;
+ 
+-	  if (buf[0] == '#')
+-	    grub_free (*line);
+-	  else
+-	    break;
+-	}
+-
+-      return GRUB_ERR_NONE;
++      if (buf[0] == '#')
++	grub_free (*line);
++      else
++	break;
+     }
+ 
++  return GRUB_ERR_NONE;
++}
++
++static grub_menu_t
++read_config_file (const char *config)
++{
++  grub_file_t file;
++  const char *old_file, *old_dir;
++  char *config_dir, *ptr = 0;
++
+   grub_menu_t newmenu;
+ 
+   newmenu = grub_env_get_menu ();
+@@ -199,10 +203,10 @@ read_config_file (const char *config)
+       grub_print_error ();
+       grub_errno = GRUB_ERR_NONE;
+ 
+-      if ((getline (&line, 0)) || (! line))
++      if ((read_config_file_getline (&line, 0, file)) || (! line))
+ 	break;
+ 
+-      grub_normal_parse_line (line, getline);
++      grub_normal_parse_line (line, read_config_file_getline, file);
+       grub_free (line);
+     }
+ 
+@@ -427,7 +431,8 @@ grub_normal_read_line_real (char **line, int cont, int nested)
+ }
+ 
+ static grub_err_t
+-grub_normal_read_line (char **line, int cont)
++grub_normal_read_line (char **line, int cont,
++		       void *data __attribute__ ((unused)))
+ {
+   return grub_normal_read_line_real (line, cont, 0);
+ }
+@@ -463,7 +468,7 @@ grub_cmdline_run (int nested)
+       if (! line)
+ 	break;
+ 
+-      grub_normal_parse_line (line, grub_normal_read_line);
++      grub_normal_parse_line (line, grub_normal_read_line, NULL);
+       grub_free (line);
+     }
+ }
+diff --git a/grub-core/script/execute.c b/grub-core/script/execute.c
+index b5e6eb0..6619c2e 100644
+--- a/grub-core/script/execute.c
++++ b/grub-core/script/execute.c
+@@ -783,6 +783,31 @@ grub_script_function_call (grub_script_function_t func, int argc, char **args)
+   return ret;
+ }
+ 
++/* Helper for grub_script_execute_sourcecode.  */
++static grub_err_t
++grub_script_execute_sourcecode_getline (char **line,
++					int cont __attribute__ ((unused)),
++					void *data)
++{
++  const char **source = data;
++  const char *p;
++
++  if (! *source)
++    {
++      *line = 0;
++      return 0;
++    }
++
++  p = grub_strchr (*source, '\n');
++
++  if (p)
++    *line = grub_strndup (*source, p - *source);
++  else
++    *line = grub_strdup (*source);
++  *source = p ? p + 1 : 0;
++  return 0;
++}
++
+ /* Execute a source script.  */
+ grub_err_t
+ grub_script_execute_sourcecode (const char *source, int argc, char **args)
+@@ -792,27 +817,6 @@ grub_script_execute_sourcecode (const char *source, int argc, char **args)
+   struct grub_script_scope new_scope;
+   struct grub_script_scope *old_scope;
+ 
+-  auto grub_err_t getline (char **line, int cont);
+-  grub_err_t getline (char **line, int cont __attribute__ ((unused)))
+-  {
+-    const char *p;
+-
+-    if (! source)
+-      {
+-	*line = 0;
+-	return 0;
+-      }
+-
+-    p = grub_strchr (source, '\n');
+-
+-    if (p)
+-      *line = grub_strndup (source, p - source);
+-    else
+-      *line = grub_strdup (source);
+-    source = p ? p + 1 : 0;
+-    return 0;
+-  }
+-
+   new_scope.argv.argc = argc;
+   new_scope.argv.args = args;
+   new_scope.flags = 0;
+@@ -824,8 +828,9 @@ grub_script_execute_sourcecode (const char *source, int argc, char **args)
+     {
+       char *line;
+ 
+-      getline (&line, 0);
+-      parsed_script = grub_script_parse (line, getline);
++      grub_script_execute_sourcecode_getline (&line, 0, &source);
++      parsed_script = grub_script_parse
++	(line, grub_script_execute_sourcecode_getline, &source);
+       if (! parsed_script)
+ 	{
+ 	  ret = grub_errno;
+diff --git a/grub-core/script/lexer.c b/grub-core/script/lexer.c
+index 396d512..cb9d6b0 100644
+--- a/grub-core/script/lexer.c
++++ b/grub-core/script/lexer.c
+@@ -147,7 +147,7 @@ grub_script_lexer_yywrap (struct grub_parser_param *parserstate,
+ 
+   line = 0;
+   if (! input)
+-    lexerstate->getline (&line, 1);
++    lexerstate->getline (&line, 1, lexerstate->getline_data);
+   else
+     line = grub_strdup (input);
+ 
+@@ -216,7 +216,7 @@ grub_script_lexer_yywrap (struct grub_parser_param *parserstate,
+ 
+ struct grub_lexer_param *
+ grub_script_lexer_init (struct grub_parser_param *parser, char *script,
+-			grub_reader_getline_t arg_getline)
++			grub_reader_getline_t getline, void *getline_data)
+ {
+   struct grub_lexer_param *lexerstate;
+ 
+@@ -232,7 +232,10 @@ grub_script_lexer_init (struct grub_parser_param *parser, char *script,
+       return 0;
+     }
+ 
+-  lexerstate->getline = arg_getline;	/* rest are all zeros already */
++  lexerstate->getline = getline;
++  lexerstate->getline_data = getline_data;
++  /* The other elements of lexerstate are all zeros already.  */
++
+   if (yylex_init (&lexerstate->yyscanner))
+     {
+       grub_free (lexerstate->text);
+diff --git a/grub-core/script/main.c b/grub-core/script/main.c
+index aa24d16..854a25a 100644
+--- a/grub-core/script/main.c
++++ b/grub-core/script/main.c
+@@ -22,12 +22,13 @@
+ #include <grub/script_sh.h>
+ 
+ grub_err_t
+-grub_normal_parse_line (char *line, grub_reader_getline_t getline)
++grub_normal_parse_line (char *line,
++			grub_reader_getline_t getline, void *getline_data)
+ {
+   struct grub_script *parsed_script;
+ 
+   /* Parse the script.  */
+-  parsed_script = grub_script_parse (line, getline);
++  parsed_script = grub_script_parse (line, getline, getline_data);
+ 
+   if (parsed_script)
+     {
+diff --git a/grub-core/script/script.c b/grub-core/script/script.c
+index ad30183..ec4d433 100644
+--- a/grub-core/script/script.c
++++ b/grub-core/script/script.c
+@@ -340,7 +340,8 @@ grub_script_create (struct grub_script_cmd *cmd, struct grub_script_mem *mem)
+ /* Parse the script passed in SCRIPT and return the parsed
+    datastructure that is ready to be interpreted.  */
+ struct grub_script *
+-grub_script_parse (char *script, grub_reader_getline_t getline)
++grub_script_parse (char *script,
++		   grub_reader_getline_t getline, void *getline_data)
+ {
+   struct grub_script *parsed;
+   struct grub_script_mem *membackup;
+@@ -359,7 +360,8 @@ grub_script_parse (char *script, grub_reader_getline_t getline)
+     }
+ 
+   /* Initialize the lexer.  */
+-  lexstate = grub_script_lexer_init (parsestate, script, getline);
++  lexstate = grub_script_lexer_init (parsestate, script,
++				     getline, getline_data);
+   if (!lexstate)
+     {
+       grub_free (parsed);
+diff --git a/include/grub/parser.h b/include/grub/parser.h
+index de4da05..bf9c7c6 100644
+--- a/include/grub/parser.h
++++ b/include/grub/parser.h
+@@ -63,6 +63,7 @@ EXPORT_FUNC (grub_parser_cmdline_state) (grub_parser_state_t state,
+ grub_err_t
+ EXPORT_FUNC (grub_parser_split_cmdline) (const char *cmdline,
+ 					 grub_reader_getline_t getline,
++					 void *getline_data,
+ 					 int *argc, char ***argv);
+ 
+ struct grub_parser
+@@ -79,13 +80,15 @@ struct grub_parser
+   /* Clean up the parser.  */
+   grub_err_t (*fini) (void);
+ 
+-  grub_err_t (*parse_line) (char *line, grub_reader_getline_t getline);
++  grub_err_t (*parse_line) (char *line,
++			    grub_reader_getline_t getline, void *getline_data);
+ };
+ typedef struct grub_parser *grub_parser_t;
+ 
+ grub_err_t grub_parser_execute (char *source);
+ 
+ grub_err_t
+-grub_rescue_parse_line (char *line, grub_reader_getline_t getline);
++grub_rescue_parse_line (char *line,
++			grub_reader_getline_t getline, void *getline_data);
+ 
+ #endif /* ! GRUB_PARSER_HEADER */
+diff --git a/include/grub/reader.h b/include/grub/reader.h
+index cd92df8..fd86b20 100644
+--- a/include/grub/reader.h
++++ b/include/grub/reader.h
+@@ -22,7 +22,7 @@
+ 
+ #include <grub/err.h>
+ 
+-typedef grub_err_t (*grub_reader_getline_t) (char **, int);
++typedef grub_err_t (*grub_reader_getline_t) (char **, int, void *);
+ 
+ void grub_rescue_run (void) __attribute__ ((noreturn));
+ 
+diff --git a/include/grub/script_sh.h b/include/grub/script_sh.h
+index d99cbf7..78602e4 100644
+--- a/include/grub/script_sh.h
++++ b/include/grub/script_sh.h
+@@ -161,6 +161,9 @@ struct grub_lexer_param
+      expected, but not available.  */
+   grub_reader_getline_t getline;
+ 
++  /* Caller-supplied data passed to `getline'.  */
++  void *getline_data;
++
+   /* A reference counter.  If this is >0 it means that the parser
+      expects more tokens and `getline' should be called to fetch more.
+      Otherwise the lexer can stop processing if the current buffer is
+@@ -287,14 +290,16 @@ grub_script_arg_add (struct grub_parser_param *state,
+ 		     grub_script_arg_type_t type, char *str);
+ 
+ struct grub_script *grub_script_parse (char *script,
+-				       grub_reader_getline_t getline);
++				       grub_reader_getline_t getline,
++				       void *getline_data);
+ void grub_script_free (struct grub_script *script);
+ struct grub_script *grub_script_create (struct grub_script_cmd *cmd,
+ 					struct grub_script_mem *mem);
+ 
+ struct grub_lexer_param *grub_script_lexer_init (struct grub_parser_param *parser,
+ 						 char *script,
+-						 grub_reader_getline_t getline);
++						 grub_reader_getline_t getline,
++						 void *getline_data);
+ void grub_script_lexer_fini (struct grub_lexer_param *);
+ void grub_script_lexer_ref (struct grub_lexer_param *);
+ void grub_script_lexer_deref (struct grub_lexer_param *);
+@@ -380,7 +385,8 @@ char **
+ grub_script_execute_arglist_to_argv (struct grub_script_arglist *arglist, int *count);
+ 
+ grub_err_t
+-grub_normal_parse_line (char *line, grub_reader_getline_t getline);
++grub_normal_parse_line (char *line,
++			grub_reader_getline_t getline, void *getline_data);
+ 
+ static inline struct grub_script *
+ grub_script_ref (struct grub_script *script)
+diff --git a/util/grub-script-check.c b/util/grub-script-check.c
+index 73d51f0..203a3ff 100644
+--- a/util/grub-script-check.c
++++ b/util/grub-script-check.c
+@@ -85,81 +85,92 @@ static struct argp argp = {
+   NULL, NULL, NULL
+ };
+ 
++/* Context for main.  */
++struct main_ctx
++{
++  int lineno;
++  FILE *file;
++  struct arguments arguments;
++};
++
++/* Helper for main.  */
++static grub_err_t
++get_config_line (char **line, int cont __attribute__ ((unused)), void *data)
++{
++  struct main_ctx *ctx = data;
++  int i;
++  char *cmdline = 0;
++  size_t len = 0;
++  ssize_t curread;
++
++  curread = getline (&cmdline, &len, (ctx->file ?: stdin));
++  if (curread == -1)
++    {
++      *line = 0;
++      grub_errno = GRUB_ERR_READ_ERROR;
++
++      if (cmdline)
++	free (cmdline);
++      return grub_errno;
++    }
++
++  if (ctx->arguments.verbose)
++    grub_printf ("%s", cmdline);
++
++  for (i = 0; cmdline[i] != '\0'; i++)
++    {
++      /* Replace tabs and carriage returns with spaces.  */
++      if (cmdline[i] == '\t' || cmdline[i] == '\r')
++	cmdline[i] = ' ';
++
++      /* Replace '\n' with '\0'.  */
++      if (cmdline[i] == '\n')
++	cmdline[i] = '\0';
++    }
++
++  ctx->lineno++;
++  *line = grub_strdup (cmdline);
++
++  free (cmdline);
++  return 0;
++}
++
+ int
+ main (int argc, char *argv[])
+ {
++  struct main_ctx ctx = {
++    .lineno = 0,
++    .file = 0
++  };
+   char *input;
+-  int lineno = 0;
+-  FILE *file = 0;
+-  struct arguments arguments;
+   int found_input = 0;
+   struct grub_script *script = NULL;
+ 
+-  auto grub_err_t get_config_line (char **line, int cont);
+-  grub_err_t get_config_line (char **line, int cont __attribute__ ((unused)))
+-  {
+-    int i;
+-    char *cmdline = 0;
+-    size_t len = 0;
+-    ssize_t curread;
+-
+-    curread = getline(&cmdline, &len, (file ?: stdin));
+-    if (curread == -1)
+-      {
+-	*line = 0;
+-	grub_errno = GRUB_ERR_READ_ERROR;
+-
+-	if (cmdline)
+-	  free (cmdline);
+-	return grub_errno;
+-      }
+-
+-    if (arguments.verbose)
+-      grub_printf("%s", cmdline);
+-
+-    for (i = 0; cmdline[i] != '\0'; i++)
+-      {
+-	/* Replace tabs and carriage returns with spaces.  */
+-	if (cmdline[i] == '\t' || cmdline[i] == '\r')
+-	  cmdline[i] = ' ';
+-
+-	/* Replace '\n' with '\0'.  */
+-	if (cmdline[i] == '\n')
+-	  cmdline[i] = '\0';
+-      }
+-
+-    lineno++;
+-    *line = grub_strdup (cmdline);
+-
+-    free (cmdline);
+-    return 0;
+-  }
+-
+   set_program_name (argv[0]);
+   grub_util_init_nls ();
+ 
+-  memset (&arguments, 0, sizeof (struct arguments));
++  memset (&ctx.arguments, 0, sizeof (struct arguments));
+ 
+   /* Check for options.  */
+-  if (argp_parse (&argp, argc, argv, 0, 0, &arguments) != 0)
++  if (argp_parse (&argp, argc, argv, 0, 0, &ctx.arguments) != 0)
+     {
+       fprintf (stderr, "%s", _("Error in parsing command line arguments\n"));
+       exit(1);
+     }
+ 
+   /* Obtain ARGUMENT.  */
+-  if (!arguments.filename)
++  if (!ctx.arguments.filename)
+     {
+-      file = 0; /* read from stdin */
++      ctx.file = 0; /* read from stdin */
+     }
+   else
+     {
+-      file = fopen (arguments.filename, "r");
+-      if (! file)
++      ctx.file = fopen (ctx.arguments.filename, "r");
++      if (! ctx.file)
+ 	{
+           char *program = xstrdup(program_name);
+ 	  fprintf (stderr, "%s: %s: %s\n", program_name, 
+-		   arguments.filename, strerror(errno));
++		   ctx.arguments.filename, strerror (errno));
+           argp_help (&argp, stderr, ARGP_HELP_STD_USAGE, program);
+           free(program);
+           exit(1);
+@@ -169,12 +180,12 @@ main (int argc, char *argv[])
+   do
+     {
+       input = 0;
+-      get_config_line(&input, 0);
++      get_config_line (&input, 0, &ctx);
+       if (! input) 
+ 	break;
+       found_input = 1;
+ 
+-      script = grub_script_parse (input, get_config_line);
++      script = grub_script_parse (input, get_config_line, &ctx);
+       if (script)
+ 	{
+ 	  grub_script_execute (script);
+@@ -184,11 +195,11 @@ main (int argc, char *argv[])
+       grub_free (input);
+     } while (script != 0);
+ 
+-  if (file) fclose (file);
++  if (ctx.file) fclose (ctx.file);
+ 
+   if (found_input && script == 0)
+     {
+-      fprintf (stderr, _("Syntax error at line %u\n"), lineno);
++      fprintf (stderr, _("Syntax error at line %u\n"), ctx.lineno);
+       return 1;
+     }
+ 
+-- 
+1.8.1.4
+

@@ -1,0 +1,39 @@
+From ae12080106554c5dd5e2d19799f08a0aa72c9be9 Mon Sep 17 00:00:00 2001
+From: Paulo Flabiano Smorigo  <pfsmorigo@br.ibm.com>
+Date: Wed, 28 Nov 2012 14:14:20 +0100
+Subject: [PATCH 054/364] 	* grub-core/net/bootp.c (parse_dhcp_vendor):
+ Fix double increment.
+
+---
+ ChangeLog             | 4 ++++
+ grub-core/net/bootp.c | 2 +-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index caea96d..1759da4 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,7 @@
++2012-11-28  Paulo Flabiano Smorigo  <pfsmorigo@br.ibm.com>
++
++	* grub-core/net/bootp.c (parse_dhcp_vendor): Fix double increment.
++
+ 2012-10-28  Grégoire Sutre  <gregoire.sutre@gmail.com>
+ 
+ 	* util/grub.d/10_netbsd.in: Fix tab indentation and make sure
+diff --git a/grub-core/net/bootp.c b/grub-core/net/bootp.c
+index bc07d53..f36d4cd 100644
+--- a/grub-core/net/bootp.c
++++ b/grub-core/net/bootp.c
+@@ -122,7 +122,7 @@ parse_dhcp_vendor (const char *name, void *vend, int limit, int *mask)
+ 		ptr += 4;
+ 	      }
+ 	  }
+-	  break;
++	  continue;
+ 	case GRUB_NET_BOOTP_HOSTNAME:
+ 	  set_env_limn_ro (name, "hostname", (char *) ptr, taglength);
+ 	  break;
+-- 
+1.8.1.4
+

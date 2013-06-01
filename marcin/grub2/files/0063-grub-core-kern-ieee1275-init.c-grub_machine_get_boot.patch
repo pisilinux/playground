@@ -1,0 +1,75 @@
+From acfa4335f7ed7310e7ee2da1f68443785f7f7913 Mon Sep 17 00:00:00 2001
+From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
+Date: Mon, 10 Dec 2012 16:23:16 +0100
+Subject: [PATCH 063/364] 	* grub-core/kern/ieee1275/init.c
+ (grub_machine_get_bootlocation): Use 	dynamic allocation for the bootpath
+ buffer.
+
+---
+ ChangeLog                      |  5 +++++
+ grub-core/kern/ieee1275/init.c | 21 +++++++++++++++++----
+ 2 files changed, 22 insertions(+), 4 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index ce822ee..8bd581e 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2012-12-10  Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
++
++	* grub-core/kern/ieee1275/init.c (grub_machine_get_bootlocation): Use
++	dynamic allocation for the bootpath buffer.
++
+ 2012-12-10  Dr. Tilmann Bubeck <t.bubeck@reinform.de>
+ 
+ 	* grub-core/gfxmenu/view.c (init_terminal): Avoid making terminal
+diff --git a/grub-core/kern/ieee1275/init.c b/grub-core/kern/ieee1275/init.c
+index 7d03a8a..14dcdf0 100644
+--- a/grub-core/kern/ieee1275/init.c
++++ b/grub-core/kern/ieee1275/init.c
+@@ -82,18 +82,30 @@ void (*grub_ieee1275_net_config) (const char *dev,
+ void
+ grub_machine_get_bootlocation (char **device, char **path)
+ {
+-  char bootpath[64]; /* XXX check length */
++  char *bootpath;
++  grub_ssize_t bootpath_size;
+   char *filename;
+   char *type;
+-   
+-  if (grub_ieee1275_get_property (grub_ieee1275_chosen, "bootpath", &bootpath,
+-				  sizeof (bootpath), 0))
++
++  if (grub_ieee1275_get_property_length (grub_ieee1275_chosen, "bootpath",
++					 &bootpath_size)
++      || bootpath_size <= 0)
+     {
+       /* Should never happen.  */
+       grub_printf ("/chosen/bootpath property missing!\n");
+       return;
+     }
+ 
++  bootpath = (char *) grub_malloc ((grub_size_t) bootpath_size + 64);
++  if (! bootpath)
++    {
++      grub_print_error ();
++      return;
++    }
++  grub_ieee1275_get_property (grub_ieee1275_chosen, "bootpath", bootpath,
++                              (grub_size_t) bootpath_size + 1, 0);
++  bootpath[bootpath_size] = '\0';
++
+   /* Transform an OF device path to a GRUB path.  */
+ 
+   type = grub_ieee1275_get_device_type (bootpath);
+@@ -132,6 +144,7 @@ grub_machine_get_bootlocation (char **device, char **path)
+ 	  *path = filename;
+ 	}
+     }
++  grub_free (bootpath);
+ }
+ 
+ /* Claim some available memory in the first /memory node. */
+-- 
+1.8.1.4
+

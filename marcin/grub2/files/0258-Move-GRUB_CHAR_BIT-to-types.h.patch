@@ -1,0 +1,48 @@
+From 1c71a6e0aa77b119cb196b296aff5393246c541d Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 5 Apr 2013 10:31:12 +0200
+Subject: [PATCH 258/364] 	Move GRUB_CHAR_BIT to types.h.
+
+---
+ ChangeLog            | 4 ++++
+ include/grub/misc.h  | 2 --
+ include/grub/types.h | 2 ++
+ 3 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index d63c0e5..3008ff0 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,7 @@
++2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	Move GRUB_CHAR_BIT to types.h.
++
+ 2013-04-04  Andrey Borzenkov <arvidjaar@gmail.com>
+ 
+ 	* docs/grub.texi: Document more user commands.
+diff --git a/include/grub/misc.h b/include/grub/misc.h
+index 0ea5114..c953a00 100644
+--- a/include/grub/misc.h
++++ b/include/grub/misc.h
+@@ -481,6 +481,4 @@ void EXPORT_FUNC(grub_real_boot_time) (const char *file,
+ #define grub_max(a, b) (((a) > (b)) ? (a) : (b))
+ #define grub_min(a, b) (((a) < (b)) ? (a) : (b))
+ 
+-#define GRUB_CHAR_BIT 8
+-
+ #endif /* ! GRUB_MISC_HEADER */
+diff --git a/include/grub/types.h b/include/grub/types.h
+index 22d1be7..7c56f40 100644
+--- a/include/grub/types.h
++++ b/include/grub/types.h
+@@ -300,4 +300,6 @@ static inline void grub_set_unaligned64 (void *ptr, grub_uint64_t val)
+   dd->d = val;
+ }
+ 
++#define GRUB_CHAR_BIT 8
++
+ #endif /* ! GRUB_TYPES_HEADER */
+-- 
+1.8.1.4
+

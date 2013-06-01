@@ -1,0 +1,89 @@
+From 319cf38364d89bba622424313e0da676c83b9a07 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 12 Apr 2013 22:37:59 +0200
+Subject: [PATCH 295/364] 	Replace stpcpy with grub_stpcpy in tools.
+
+---
+ ChangeLog          | 4 ++++
+ util/getroot.c     | 4 ++--
+ util/grub-fstest.c | 4 ++--
+ util/grub-probe.c  | 4 ++--
+ 4 files changed, 10 insertions(+), 6 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 7054441..f9d5dca 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-12  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	Replace stpcpy with grub_stpcpy in tools.
++
++2013-04-12  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	Handle Japanese special keys.
+ 	Reported by: Hiroyuki YAMAMORI.
+ 	Codes supplied by: Hiroyuki YAMAMORI.
+diff --git a/util/getroot.c b/util/getroot.c
+index f65fd1e..4ea8e65 100644
+--- a/util/getroot.c
++++ b/util/getroot.c
+@@ -667,14 +667,14 @@ grub_find_root_devices_from_mountinfo (const char *dir, char **relroot)
+ 	      char *ptr;
+ 	      *relroot = xmalloc (strlen (entries[i].enc_root) +
+ 				  2 + strlen (dir));
+-	      ptr = stpcpy (*relroot, entries[i].enc_root);
++	      ptr = grub_stpcpy (*relroot, entries[i].enc_root);
+ 	      if (strlen (dir) > strlen (entries[i].enc_path))
+ 		{
+ 		  while (ptr > *relroot && *(ptr - 1) == '/')
+ 		    ptr--;
+ 		  if (dir[strlen (entries[i].enc_path)] != '/')
+ 		    *ptr++ = '/';
+-		  ptr = stpcpy (ptr, dir + strlen (entries[i].enc_path));
++		  ptr = grub_stpcpy (ptr, dir + strlen (entries[i].enc_path));
+ 		}
+ 	      *ptr = 0;
+ 	    }
+diff --git a/util/grub-fstest.c b/util/grub-fstest.c
+index 253dee8..aa2ef7a 100644
+--- a/util/grub-fstest.c
++++ b/util/grub-fstest.c
+@@ -289,10 +289,10 @@ cmd_cmp (char *src, char *dest)
+ 			    + strlen (entry->d_name));
+ 	  destnew = xmalloc (strlen (dest) + sizeof ("/")
+ 			    + strlen (entry->d_name));
+-	  ptr = stpcpy (srcnew, src);
++	  ptr = grub_stpcpy (srcnew, src);
+ 	  *ptr++ = '/';
+ 	  strcpy (ptr, entry->d_name);
+-	  ptr = stpcpy (destnew, dest);
++	  ptr = grub_stpcpy (destnew, dest);
+ 	  *ptr++ = '/';
+ 	  strcpy (ptr, entry->d_name);
+ 
+diff --git a/util/grub-probe.c b/util/grub-probe.c
+index b66cbea..a46f0b1 100644
+--- a/util/grub-probe.c
++++ b/util/grub-probe.c
+@@ -499,7 +499,7 @@ probe (const char *path, char **device_names, char delim)
+ 	    {
+ 	      char *tmp = xmalloc (strlen (ofpath) + sizeof ("ieee1275/"));
+ 	      char *p;
+-	      p = stpcpy (tmp, "ieee1275/");
++	      p = grub_stpcpy (tmp, "ieee1275/");
+ 	      strcpy (p, ofpath);
+ 	      printf ("--hint-ieee1275='");
+ 	      print_full_name (tmp, dev);
+@@ -616,7 +616,7 @@ probe (const char *path, char **device_names, char delim)
+ 	    {
+ 	      char *tmp = xmalloc (strlen (ofpath) + sizeof ("ieee1275/"));
+ 	      char *p;
+-	      p = stpcpy (tmp, "ieee1275/");
++	      p = grub_stpcpy (tmp, "ieee1275/");
+ 	      strcpy (p, ofpath);
+ 	      print_full_name (tmp, dev);
+ 	      free (tmp);
+-- 
+1.8.1.4
+

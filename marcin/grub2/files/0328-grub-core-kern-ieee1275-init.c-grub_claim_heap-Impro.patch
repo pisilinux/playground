@@ -1,0 +1,118 @@
+From 00c99f9ffcadba94105b7871744f2a3760b7dd35 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 19 Apr 2013 15:27:09 +0200
+Subject: [PATCH 328/364] 	* grub-core/kern/ieee1275/init.c
+ (grub_claim_heap): Improve handling 	of GRUB_IEEE1275_FLAG_FORCE_CLAIM. 
+ * grub-core/loader/powerpc/ieee1275/linux.c 	(grub_linux_claimmap_iterate):
+ Handle GRUB_IEEE1275_FLAG_FORCE_CLAIM.
+
+---
+ ChangeLog                                 |  7 +++++++
+ grub-core/kern/ieee1275/init.c            |  5 +++--
+ grub-core/lib/ieee1275/relocator.c        |  4 ++--
+ grub-core/loader/powerpc/ieee1275/linux.c | 14 ++++++++++++++
+ include/grub/ieee1275/ieee1275.h          |  8 ++++++++
+ 5 files changed, 34 insertions(+), 4 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 488be60..3e606cb 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,12 @@
+ 2013-04-19  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/kern/ieee1275/init.c (grub_claim_heap): Improve handling
++	of GRUB_IEEE1275_FLAG_FORCE_CLAIM.
++	* grub-core/loader/powerpc/ieee1275/linux.c
++	(grub_linux_claimmap_iterate): Handle GRUB_IEEE1275_FLAG_FORCE_CLAIM.
++
++2013-04-19  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/kern/ieee1275/cmain.c (grub_ieee1275_find_options):
+ 	Look for /boot-rom as well as /rom/boot-rom.
+ 
+diff --git a/grub-core/kern/ieee1275/init.c b/grub-core/kern/ieee1275/init.c
+index 391a734..ce8eadb 100644
+--- a/grub-core/kern/ieee1275/init.c
++++ b/grub-core/kern/ieee1275/init.c
+@@ -225,8 +225,9 @@ grub_claim_heap (void)
+ {
+   unsigned long total = 0;
+ 
+-  if (grub_ieee1275_test_flag (GRUB_IEEE1275_FLAG_CANNOT_INTERPRET))
+-    heap_init (HEAP_MAX_ADDR - HEAP_MIN_SIZE, HEAP_MIN_SIZE, 1, &total);
++  if (grub_ieee1275_test_flag (GRUB_IEEE1275_FLAG_FORCE_CLAIM))
++    heap_init (GRUB_IEEE1275_STATIC_HEAP_START, GRUB_IEEE1275_STATIC_HEAP_LEN,
++	       1, &total);
+   else
+     grub_machine_mmap_iterate (heap_init, &total);
+ }
+diff --git a/grub-core/lib/ieee1275/relocator.c b/grub-core/lib/ieee1275/relocator.c
+index f6ecadd..c6dd8fa 100644
+--- a/grub-core/lib/ieee1275/relocator.c
++++ b/grub-core/lib/ieee1275/relocator.c
+@@ -38,7 +38,7 @@ grub_relocator_firmware_get_max_events (void)
+ {
+   int counter = 0;
+ 
+-  if (grub_ieee1275_test_flag (GRUB_IEEE1275_FLAG_CANNOT_INTERPRET))
++  if (grub_ieee1275_test_flag (GRUB_IEEE1275_FLAG_FORCE_CLAIM))
+     return 0;
+   grub_machine_mmap_iterate (count, &counter);
+   return 2 * counter;
+@@ -92,7 +92,7 @@ grub_relocator_firmware_fill_events (struct grub_relocator_mmap_event *events)
+     .counter = 0
+   };
+ 
+-  if (grub_ieee1275_test_flag (GRUB_IEEE1275_FLAG_CANNOT_INTERPRET))
++  if (grub_ieee1275_test_flag (GRUB_IEEE1275_FLAG_FORCE_CLAIM))
+     return 0;
+   grub_machine_mmap_iterate (grub_relocator_firmware_fill_events_iter, &ctx);
+   return ctx.counter;
+diff --git a/grub-core/loader/powerpc/ieee1275/linux.c b/grub-core/loader/powerpc/ieee1275/linux.c
+index 3356d51..4a14f66 100644
+--- a/grub-core/loader/powerpc/ieee1275/linux.c
++++ b/grub-core/loader/powerpc/ieee1275/linux.c
+@@ -111,6 +111,20 @@ grub_linux_claimmap_iterate (grub_addr_t target, grub_size_t size,
+     .found_addr = (grub_addr_t) -1
+   };
+ 
++  if (grub_ieee1275_test_flag (GRUB_IEEE1275_FLAG_FORCE_CLAIM))
++    {
++      grub_uint64_t addr = target;
++      if (addr < GRUB_IEEE1275_STATIC_HEAP_START
++	  + GRUB_IEEE1275_STATIC_HEAP_LEN)
++	addr = GRUB_IEEE1275_STATIC_HEAP_START
++	  + GRUB_IEEE1275_STATIC_HEAP_LEN;
++      addr = ALIGN_UP (addr, align);
++      if (grub_claimmap (addr, size) == GRUB_ERR_NONE)
++	return addr;
++      return (grub_addr_t) -1;
++    }
++	
++
+   grub_machine_mmap_iterate (alloc_mem, &ctx);
+ 
+   return ctx.found_addr;
+diff --git a/include/grub/ieee1275/ieee1275.h b/include/grub/ieee1275/ieee1275.h
+index 1e8ba6f..1b240d3 100644
+--- a/include/grub/ieee1275/ieee1275.h
++++ b/include/grub/ieee1275/ieee1275.h
+@@ -78,6 +78,14 @@ extern grub_ieee1275_phandle_t EXPORT_VAR(grub_ieee1275_chosen);
+ extern grub_ieee1275_ihandle_t EXPORT_VAR(grub_ieee1275_mmu);
+ extern int (* EXPORT_VAR(grub_ieee1275_entry_fn)) (void *);
+ 
++/* Static heap, used only if FORCE_CLAIM is set,
++   happens on Open Hack'Ware. Should be in platform-specific
++   header but is used only on PPC anyway.
++*/
++#define GRUB_IEEE1275_STATIC_HEAP_START 0x1000000
++#define GRUB_IEEE1275_STATIC_HEAP_LEN   0x1000000
++
++
+ enum grub_ieee1275_flag
+ {
+   /* Old World Macintosh firmware fails seek when "dev:0" is opened.  */
+-- 
+1.8.1.4
+

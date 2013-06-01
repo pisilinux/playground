@@ -1,0 +1,49 @@
+From 5c5e65464abe032b3838359d35fdbd0c15fe6454 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 15 Apr 2013 08:37:13 +0200
+Subject: [PATCH 316/364] 	Fix DMRAID partition handling.
+
+---
+ ChangeLog      | 4 ++++
+ util/getroot.c | 4 ++++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index db6076c..2dcf1f5 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-15  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	Fix DMRAID partition handling.
++
++2013-04-15  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* tests/grub_cmd_date.in: Skip on sparc64.
+ 
+ 2013-04-15  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/util/getroot.c b/util/getroot.c
+index 4ea8e65..ecf7ce1 100644
+--- a/util/getroot.c
++++ b/util/getroot.c
+@@ -1956,6 +1956,7 @@ convert_system_partition_to_system_disk (const char *os_dev, struct stat *st,
+ 	      grub_util_info ("dm_tree_find_node failed");
+ 	      goto devmapper_out;
+ 	    }
++	reiterate:
+ 	  node_uuid = dm_tree_node_get_uuid (node);
+ 	  if (! node_uuid)
+ 	    {
+@@ -2030,6 +2031,9 @@ convert_system_partition_to_system_disk (const char *os_dev, struct stat *st,
+ 	      goto devmapper_out;
+ 	    }
+ 	  mapper_name = child_name;
++	  *is_part = 1;
++	  node = child;
++	  goto reiterate;
+ 
+ devmapper_out:
+ 	  if (! mapper_name && node)
+-- 
+1.8.1.4
+

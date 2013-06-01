@@ -1,0 +1,70 @@
+From d99417e57a1c5fb1628cc7010a9deabf41786a18 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 10 Mar 2013 14:27:04 +0100
+Subject: [PATCH 199/364] 	* grub-core/fs/fshelp.c
+ (grub_fshelp_log2blksize): Remove now unused 	function.
+
+---
+ ChangeLog             |  5 +++++
+ grub-core/fs/fshelp.c | 21 ---------------------
+ include/grub/fshelp.h |  4 ----
+ 3 files changed, 5 insertions(+), 25 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 3b4b3b4..c604d8d 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-03-10  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/fs/fshelp.c (grub_fshelp_log2blksize): Remove now unused
++	function.
++
+ 2013-03-07  Andrey Borzenkov <arvidjaar@gmail.com>
+ 
+ 	* grub-core/fs/iso9660.c (add_part): Remove always_inline attribute
+diff --git a/grub-core/fs/fshelp.c b/grub-core/fs/fshelp.c
+index d56e63f..6d6e71e 100644
+--- a/grub-core/fs/fshelp.c
++++ b/grub-core/fs/fshelp.c
+@@ -322,24 +322,3 @@ grub_fshelp_read_file (grub_disk_t disk, grub_fshelp_node_t node,
+ 
+   return len;
+ }
+-
+-unsigned int
+-grub_fshelp_log2blksize (unsigned int blksize, unsigned int *pow)
+-{
+-  int mod;
+-
+-  *pow = 0;
+-  while (blksize > 1)
+-    {
+-      mod = blksize - ((blksize >> 1) << 1);
+-      blksize >>= 1;
+-
+-      /* Check if it really is a power of two.  */
+-      if (mod)
+-	return grub_error (GRUB_ERR_BAD_NUMBER,
+-			   "the blocksize is not a power of two");
+-      (*pow)++;
+-    }
+-
+-  return GRUB_ERR_NONE;
+-}
+diff --git a/include/grub/fshelp.h b/include/grub/fshelp.h
+index 5c57236..3892304 100644
+--- a/include/grub/fshelp.h
++++ b/include/grub/fshelp.h
+@@ -77,8 +77,4 @@ EXPORT_FUNC(grub_fshelp_read_file) (grub_disk_t disk, grub_fshelp_node_t node,
+ 				    grub_off_t filesize, int log2blocksize,
+ 				    grub_disk_addr_t blocks_start);
+ 
+-unsigned int
+-EXPORT_FUNC(grub_fshelp_log2blksize) (unsigned int blksize,
+-				      unsigned int *pow);
+-
+ #endif /* ! GRUB_FSHELP_HEADER */
+-- 
+1.8.1.4
+

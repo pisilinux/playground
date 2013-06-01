@@ -1,0 +1,106 @@
+From 56348e90bcc1076de7b2aba73b52fa1bafee4478 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Tue, 11 Sep 2012 07:53:26 +0200
+Subject: [PATCH 035/364] 	* grub-core/disk/diskfilter.c (free_array)
+ [GRUB_UTIL]: Fix memory leak. 	* util/getroot.c (grub_find_device): Likewise.
+ 	(get_mdadm_uuid): Likewise. 	(grub_util_is_imsm): Likewise. 
+ (grub_util_pull_device): Likewise. 	* util/grub-probe.c (probe): Likewise.
+
+---
+ ChangeLog                   |  9 +++++++++
+ grub-core/disk/diskfilter.c |  3 +++
+ util/getroot.c              | 13 +++++++++++--
+ util/grub-probe.c           |  1 +
+ 4 files changed, 24 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 6886bcc..c697e17 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,12 @@
++2012-09-11  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/disk/diskfilter.c (free_array) [GRUB_UTIL]: Fix memory leak.
++	* util/getroot.c (grub_find_device): Likewise.
++	(get_mdadm_uuid): Likewise.
++	(grub_util_is_imsm): Likewise.
++	(grub_util_pull_device): Likewise.
++	* util/grub-probe.c (probe): Likewise.
++
+ 2012-09-10  Benoit Gschwind <gschwind>
+ 
+ 	* grub-core/loader/efi/appleloader.c (devpath_8): New var.
+diff --git a/grub-core/disk/diskfilter.c b/grub-core/disk/diskfilter.c
+index 6e9745e..ce4c706 100644
+--- a/grub-core/disk/diskfilter.c
++++ b/grub-core/disk/diskfilter.c
+@@ -1130,6 +1130,9 @@ free_array (void)
+ 	    grub_disk_close (pv->disk);
+ 	  if (pv->id.uuidlen)
+ 	    grub_free (pv->id.uuid);
++#ifdef GRUB_UTIL
++	  grub_free (pv->partmaps);
++#endif
+ 	  grub_free (pv->internal_id);
+ 	  grub_free (pv);
+ 	}
+diff --git a/util/getroot.c b/util/getroot.c
+index e103fb6..b97bea6 100644
+--- a/util/getroot.c
++++ b/util/getroot.c
+@@ -918,7 +918,10 @@ grub_find_device (const char *dir, dev_t dev)
+ 	     grub files */
+ 
+ 	  if (strcmp(res, "/dev/root") == 0)
+-		continue;
++	    {
++	      free (res);
++	      continue;
++	    }
+ 
+ 	  if (chdir (saved_cwd) < 0)
+ 	    grub_util_error ("%s", _("cannot restore the original directory"));
+@@ -1363,6 +1366,7 @@ get_mdadm_uuid (const char *os_dev)
+ out:
+   close (fd);
+   waitpid (pid, NULL, 0);
++  free (buf);
+ 
+   return name;
+ }
+@@ -1437,6 +1441,8 @@ grub_util_is_imsm (const char *os_dev)
+ 	    }
+ 	}
+ 
++      free (buf);
++
+       return 0;
+ 
+     out:
+@@ -1577,7 +1583,10 @@ grub_util_pull_device (const char *os_dev)
+ 	char **devicelist = grub_util_raid_getmembers (os_dev, 0);
+ 	int i;
+ 	for (i = 0; devicelist[i];i++)
+-	  grub_util_pull_device (devicelist[i]);
++	  {
++	    grub_util_pull_device (devicelist[i]);
++	    free (devicelist[i]);
++	  }
+ 	free (devicelist);
+       }
+ #endif
+diff --git a/util/grub-probe.c b/util/grub-probe.c
+index 6dd1073..c2a0f62 100644
+--- a/util/grub-probe.c
++++ b/util/grub-probe.c
+@@ -474,6 +474,7 @@ probe (const char *path, char **device_names, char delim)
+ 	  printf ("%s", label);
+ 	  putchar (delim);
+ 	}
++      grub_device_close (dev);
+       goto end;
+     }
+ 
+-- 
+1.8.1.4
+

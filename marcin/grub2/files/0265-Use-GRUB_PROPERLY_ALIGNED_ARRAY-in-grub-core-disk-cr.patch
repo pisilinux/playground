@@ -1,0 +1,56 @@
+From e16d5721a09be08276d8b0555a69f798dcf12550 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 5 Apr 2013 13:26:10 +0200
+Subject: [PATCH 265/364] 	Use GRUB_PROPERLY_ALIGNED_ARRAY in
+ grub-core/disk/cryptodisk.c and 	grub-core/disk/geli.c.
+
+---
+ ChangeLog                   | 5 +++++
+ grub-core/disk/cryptodisk.c | 2 +-
+ grub-core/disk/geli.c       | 2 +-
+ 3 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 41370a1..2f2f7a3 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	Use GRUB_PROPERLY_ALIGNED_ARRAY in grub-core/disk/cryptodisk.c and
++	grub-core/disk/geli.c.
++
++2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* util/grub-mkfont.c: Prefer enum to #define.
+ 
+ 2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/disk/cryptodisk.c b/grub-core/disk/cryptodisk.c
+index 5b12a23..6fbfc4a 100644
+--- a/grub-core/disk/cryptodisk.c
++++ b/grub-core/disk/cryptodisk.c
+@@ -256,7 +256,7 @@ grub_cryptodisk_endecrypt (struct grub_cryptodisk *dev,
+ 	case GRUB_CRYPTODISK_MODE_IV_BYTECOUNT64_HASH:
+ 	  {
+ 	    grub_uint64_t tmp;
+-	    grub_uint64_t ctx[(dev->iv_hash->contextsize + 7) / 8];
++	    GRUB_PROPERLY_ALIGNED_ARRAY (ctx, dev->iv_hash->contextsize);
+ 
+ 	    grub_memset (ctx, 0, sizeof (ctx));
+ 
+diff --git a/grub-core/disk/geli.c b/grub-core/disk/geli.c
+index 55aa5b9..2aa1ae0 100644
+--- a/grub-core/disk/geli.c
++++ b/grub-core/disk/geli.c
+@@ -146,7 +146,7 @@ geli_rekey (struct grub_cryptodisk *dev, grub_uint64_t zoneno)
+     grub_uint64_t zone;
+   } __attribute__ ((packed)) tohash
+       = { {'e', 'k', 'e', 'y'}, grub_cpu_to_le64 (zoneno) };
+-  grub_uint64_t key[(dev->hash->mdlen + 7) / 8];
++  GRUB_PROPERLY_ALIGNED_ARRAY (key, dev->hash->mdlen);
+ 
+   grub_dprintf ("geli", "rekeying %" PRIuGRUB_UINT64_T " keysize=%d\n",
+ 		zoneno, dev->rekey_derived_size);
+-- 
+1.8.1.4
+

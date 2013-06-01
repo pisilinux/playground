@@ -1,0 +1,47 @@
+From 5e6e83436dcaf78f4be5fad2d27c0a5df8fa57e0 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Thu, 11 Apr 2013 21:46:21 +0200
+Subject: [PATCH 280/364] 	* docs/grub.texi: Fix description of
+ GRUB_CMDLINE_XEN and 	GRUB_CMDLINE_XEN_DEFAULT. 	Reported by: 	Marc
+ Warne (GigaTux) <gigatux>
+
+---
+ ChangeLog      | 6 ++++++
+ docs/grub.texi | 5 ++---
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 90aacbe..70f0074 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,11 @@
+ 2013-04-11  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* docs/grub.texi: Fix description of GRUB_CMDLINE_XEN and
++	GRUB_CMDLINE_XEN_DEFAULT.
++	Reported by: 	Marc Warne (GigaTux) <gigatux>
++
++2013-04-11  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	Import new gnulib.
+ 
+ 2013-04-11  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/docs/grub.texi b/docs/grub.texi
+index bd366a6..f6f9506 100644
+--- a/docs/grub.texi
++++ b/docs/grub.texi
+@@ -1290,9 +1290,8 @@ As @samp{GRUB_CMDLINE_LINUX}, but for GNU Mach.
+ 
+ @item GRUB_CMDLINE_XEN
+ @itemx GRUB_CMDLINE_XEN_DEFAULT
+-The values of these options are appended to the values of
+-@samp{GRUB_CMDLINE_LINUX} and @samp{GRUB_CMDLINE_LINUX_DEFAULT} for Linux
+-and Xen menu entries.
++The values of these options are passed to Xen hypervisor Xen menu entries,
++for all respectively normal entries.
+ 
+ @item GRUB_CMDLINE_LINUX_XEN_REPLACE
+ @item GRUB_CMDLINE_LINUX_XEN_REPLACE_DEFAULT
+-- 
+1.8.1.4
+

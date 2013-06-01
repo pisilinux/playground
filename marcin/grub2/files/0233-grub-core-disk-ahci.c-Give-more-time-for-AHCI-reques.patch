@@ -1,0 +1,41 @@
+From e8d8a43fd12c2a407358bed74697c168578ca1e5 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 25 Mar 2013 10:32:56 +0100
+Subject: [PATCH 233/364] 	* grub-core/disk/ahci.c: Give more time for
+ AHCI request.
+
+---
+ ChangeLog             | 4 ++++
+ grub-core/disk/ahci.c | 2 +-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 5ca62d0..615c9a1 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-03-25  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/disk/ahci.c: Give more time for AHCI request.
++
++2013-03-25  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/normal/menu.c: Wait if there were errors shown at "boot"
+ 	command.
+ 
+diff --git a/grub-core/disk/ahci.c b/grub-core/disk/ahci.c
+index f9258fd..143ab97 100644
+--- a/grub-core/disk/ahci.c
++++ b/grub-core/disk/ahci.c
+@@ -619,7 +619,7 @@ grub_ahci_readwrite_real (struct grub_ahci_device *dev,
+   grub_dprintf ("ahci", "AHCI tfd = %x\n",
+ 		dev->hba->ports[dev->port].task_file_data);
+ 
+-  endtime = grub_get_time_ms () + (spinup ? 10000 : 1000);
++  endtime = grub_get_time_ms () + (spinup ? 10000 : 5000);
+   while ((dev->hba->ports[dev->port].command_issue & 1))
+     if (grub_get_time_ms () > endtime)
+       {
+-- 
+1.8.1.4
+

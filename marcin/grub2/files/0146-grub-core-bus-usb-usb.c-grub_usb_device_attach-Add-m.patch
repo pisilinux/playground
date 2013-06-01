@@ -1,0 +1,52 @@
+From b7ad8ce9acca6630b6e822f0f4c4e0fa28291860 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 1 Feb 2013 21:43:49 +0100
+Subject: [PATCH 146/364] 	* grub-core/bus/usb/usb.c
+ (grub_usb_device_attach): Add missing 	grub_print_error.
+
+---
+ ChangeLog               | 5 +++++
+ grub-core/bus/usb/usb.c | 4 ++++
+ 2 files changed, 9 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 7bae470..26702c7 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-02-01  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/bus/usb/usb.c (grub_usb_device_attach): Add missing
++	grub_print_error.
++
++2013-02-01  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/bus/usb/serial/common.c (grub_usbserial_attach): Fix missing
+ 	zero-out of port structure.
+ 
+diff --git a/grub-core/bus/usb/usb.c b/grub-core/bus/usb/usb.c
+index 6fbf134..5df08e9 100644
+--- a/grub-core/bus/usb/usb.c
++++ b/grub-core/bus/usb/usb.c
+@@ -297,14 +297,18 @@ void grub_usb_device_attach (grub_usb_device_t dev)
+ 	{
+ 	case GRUB_USB_CLASS_MASS_STORAGE:
+ 	  grub_dl_load ("usbms");
++	  grub_print_error ();
+ 	  break;
+ 	case GRUB_USB_CLASS_HID:
+ 	  grub_dl_load ("usb_keyboard");
++	  grub_print_error ();
+ 	  break;
+ 	case 0xff:
+ 	  /* FIXME: don't load useless modules.  */
+ 	  grub_dl_load ("usbserial_ftdi");
++	  grub_print_error ();
+ 	  grub_dl_load ("usbserial_pl2303");
++	  grub_print_error ();
+ 	  break;
+ 	}
+     }
+-- 
+1.8.1.4
+

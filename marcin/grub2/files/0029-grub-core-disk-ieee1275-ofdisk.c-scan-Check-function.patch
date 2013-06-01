@@ -1,0 +1,67 @@
+From 41596a656df83fe0bd72944b711c127c68d28a94 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Wed, 5 Sep 2012 08:56:08 +0200
+Subject: [PATCH 029/364] 	* grub-core/disk/ieee1275/ofdisk.c (scan):
+ Check function return value. 	* grub-core/lib/ieee1275/datetime.c
+ (grub_get_datetime): Likewise. 	(grub_set_datetime): Likewise.
+
+---
+ ChangeLog                         | 6 ++++++
+ grub-core/disk/ieee1275/ofdisk.c  | 2 +-
+ grub-core/lib/ieee1275/datetime.c | 4 ++--
+ 3 files changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 66a0245..ff982b3 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,11 @@
+ 2012-09-05  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/disk/ieee1275/ofdisk.c (scan): Check function return value.
++	* grub-core/lib/ieee1275/datetime.c (grub_get_datetime): Likewise.
++	(grub_set_datetime): Likewise.
++
++2012-09-05  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/script/yylex.l: Ignore unused-function and sign-compare
+ 	warnings.
+ 
+diff --git a/grub-core/disk/ieee1275/ofdisk.c b/grub-core/disk/ieee1275/ofdisk.c
+index b0aa7ec..c9535a0 100644
+--- a/grub-core/disk/ieee1275/ofdisk.c
++++ b/grub-core/disk/ieee1275/ofdisk.c
+@@ -178,7 +178,7 @@ scan (void)
+ 	args.table = 0;
+ 	args.nentries = 0;
+ 
+-	if (IEEE1275_CALL_ENTRY_FN (&args) == -1)
++	if (IEEE1275_CALL_ENTRY_FN (&args) == -1 || args.catch_result)
+ 	  {
+ 	    grub_ieee1275_close (ihandle);
+ 	    return 0;
+diff --git a/grub-core/lib/ieee1275/datetime.c b/grub-core/lib/ieee1275/datetime.c
+index 1947135..8792429 100644
+--- a/grub-core/lib/ieee1275/datetime.c
++++ b/grub-core/lib/ieee1275/datetime.c
+@@ -89,7 +89,7 @@ grub_get_datetime (struct grub_datetime *datetime)
+ 
+   grub_ieee1275_close (ihandle);
+ 
+-  if (status == -1)
++  if (status == -1 || args.catch_result)
+     return grub_error (GRUB_ERR_IO, "get-time failed");
+ 
+   datetime->year = args.year;
+@@ -148,7 +148,7 @@ grub_set_datetime (struct grub_datetime *datetime)
+ 
+   grub_ieee1275_close (ihandle);
+ 
+-  if (status == -1)
++  if (status == -1 || args.catch_result)
+     return grub_error (GRUB_ERR_IO, "set-time failed");
+ 
+   return GRUB_ERR_NONE;
+-- 
+1.8.1.4
+

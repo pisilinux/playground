@@ -1,0 +1,70 @@
+From 99462758030178ce8e28fc59e9275824e1e0fd1b Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sat, 23 Mar 2013 16:54:36 +0100
+Subject: [PATCH 225/364] 	* grub-core/term/at_keyboard.c: Increase
+ robustness on coreboot 	and qemu.
+
+---
+ ChangeLog                    |  5 +++++
+ grub-core/term/at_keyboard.c | 16 +++++++++++++---
+ 2 files changed, 18 insertions(+), 3 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 8175269..9841659 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-03-23  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/term/at_keyboard.c: Increase robustness on coreboot
++	and qemu.
++
+ 2013-03-22  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/fs/zfs/zfs.c: Fix incorrect handling of special volumes.
+diff --git a/grub-core/term/at_keyboard.c b/grub-core/term/at_keyboard.c
+index 2afcceb..b2f328f 100644
+--- a/grub-core/term/at_keyboard.c
++++ b/grub-core/term/at_keyboard.c
+@@ -259,7 +259,13 @@ grub_keyboard_controller_write (grub_uint8_t c)
+   grub_outb (c, KEYBOARD_REG_DATA);
+ }
+ 
+-#if !defined (GRUB_MACHINE_MIPS_LOONGSON) && !defined (GRUB_MACHINE_QEMU) && !defined (GRUB_MACHINE_MIPS_QEMU_MIPS)
++#if defined (GRUB_MACHINE_MIPS_LOONGSON) || defined (GRUB_MACHINE_QEMU) || defined (GRUB_MACHINE_COREBOOT) || defined (GRUB_MACHINE_MIPS_QEMU_MIPS)
++#define USE_SCANCODE_SET 1
++#else
++#define USE_SCANCODE_SET 0
++#endif
++
++#if !USE_SCANCODE_SET
+ 
+ static grub_uint8_t
+ grub_keyboard_controller_read (void)
+@@ -332,7 +338,7 @@ set_scancodes (void)
+       return;
+     }
+ 
+-#if !(defined (GRUB_MACHINE_MIPS_LOONGSON) || defined (GRUB_MACHINE_QEMU) || defined (GRUB_MACHINE_MIPS_QEMU_MIPS))
++#if !USE_SCANCODE_SET
+   current_set = 1;
+   return;
+ #else
+@@ -570,9 +576,13 @@ grub_keyboard_controller_init (struct grub_term_input *term __attribute__ ((unus
+       keyboard_controller_wait_until_ready ();
+       grub_inb (KEYBOARD_REG_DATA);
+     }
+-#if defined (GRUB_MACHINE_MIPS_LOONGSON) || defined (GRUB_MACHINE_QEMU) || defined (GRUB_MACHINE_MIPS_QEMU_MIPS)
++#if defined (GRUB_MACHINE_MIPS_LOONGSON) || defined (GRUB_MACHINE_MIPS_QEMU_MIPS)
+   grub_keyboard_controller_orig = 0;
+   grub_keyboard_orig_set = 2;
++#elif defined (GRUB_MACHINE_QEMU) || defined (GRUB_MACHINE_COREBOOT)
++  /* *BSD relies on those settings.  */
++  grub_keyboard_controller_orig = KEYBOARD_AT_TRANSLATE;
++  grub_keyboard_orig_set = 2;
+ #else
+   grub_keyboard_controller_orig = grub_keyboard_controller_read ();
+   grub_keyboard_orig_set = query_mode ();
+-- 
+1.8.1.4
+

@@ -1,0 +1,208 @@
+From 6ac2ef1dc40513b7c2eb2e0d3026e6d6d86cae1d Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 13 Jan 2013 21:06:25 +0100
+Subject: [PATCH 104/364] 	Fix compilation with older compilers.
+
+	* grub-core/Makefile.core.def (mpi): Add mpi-inline.c.
+	* grub-core/lib/libgcrypt_wrap/cipher_wrap.h: Remove redundant
+	declarations.
+	* grub-core/lib/posix_wrap/string.h: Include sys/types.h.
+	* grub-core/lib/posix_wrap/sys/types.h: Add common types.
+	* grub-core/lib/xzembed/xz_dec_lzma2.c (dict_put): Replace byte
+	identifier with b.
+	* grub-core/lib/xzembed/xz_dec_stream.c (dec_vli): Likewise.
+	* include/grub/crypto.h: Add type defines.
+	* util/import_gcrypth.sed: Remove duplicate type defines.
+---
+ ChangeLog                                  | 15 +++++++++++++++
+ grub-core/Makefile.core.def                |  1 +
+ grub-core/lib/libgcrypt_wrap/cipher_wrap.h |  6 ------
+ grub-core/lib/posix_wrap/string.h          |  3 ++-
+ grub-core/lib/posix_wrap/sys/types.h       |  6 ++++++
+ grub-core/lib/xzembed/xz_dec_lzma2.c       |  4 ++--
+ grub-core/lib/xzembed/xz_dec_stream.c      | 10 +++++-----
+ include/grub/crypto.h                      |  8 +++++---
+ util/import_gcrypth.sed                    |  3 +++
+ 9 files changed, 39 insertions(+), 17 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 6bb855b..ea90383 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,20 @@
+ 2013-01-13  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	Fix compilation with older compilers.
++
++	* grub-core/Makefile.core.def (mpi): Add mpi-inline.c.
++	* grub-core/lib/libgcrypt_wrap/cipher_wrap.h: Remove redundant
++	declarations.
++	* grub-core/lib/posix_wrap/string.h: Include sys/types.h.
++	* grub-core/lib/posix_wrap/sys/types.h: Add common types.
++	* grub-core/lib/xzembed/xz_dec_lzma2.c (dict_put): Replace byte
++	identifier with b.
++	* grub-core/lib/xzembed/xz_dec_stream.c (dec_vli): Likewise.
++	* include/grub/crypto.h: Add type defines.
++	* util/import_gcrypth.sed: Remove duplicate type defines.
++
++2013-01-13  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	New command list_trusted.
+ 
+ 	* grub-core/commands/verify.c (grub_cmd_list): New function.
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 588e4cd..f4dd645 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -1874,6 +1874,7 @@ module = {
+   common = lib/libgcrypt-grub/mpi/mpih-div.c;
+   common = lib/libgcrypt-grub/mpi/mpicoder.c;
+   common = lib/libgcrypt-grub/mpi/mpih-rshift.c;
++  common = lib/libgcrypt-grub/mpi/mpi-inline.c;
+   common = lib/libgcrypt_wrap/mem.c;
+ 
+   cflags = '$(CFLAGS_GCRY) -Wno-redundant-decls -Wno-sign-compare';
+diff --git a/grub-core/lib/libgcrypt_wrap/cipher_wrap.h b/grub-core/lib/libgcrypt_wrap/cipher_wrap.h
+index d7ae274..118b2f1 100644
+--- a/grub-core/lib/libgcrypt_wrap/cipher_wrap.h
++++ b/grub-core/lib/libgcrypt_wrap/cipher_wrap.h
+@@ -34,12 +34,6 @@
+ #undef __GNU_LIBRARY__
+ #define __GNU_LIBRARY__ 1
+ 
+-typedef grub_uint64_t u64;
+-typedef grub_uint32_t u32;
+-typedef grub_uint16_t u16;
+-typedef grub_uint8_t byte;
+-typedef grub_size_t size_t;
+-
+ #define U64_C(c) (c ## ULL)
+ 
+ #define PUBKEY_FLAG_NO_BLINDING    (1 << 0)
+diff --git a/grub-core/lib/posix_wrap/string.h b/grub-core/lib/posix_wrap/string.h
+index 885845b..53ef0a9 100644
+--- a/grub-core/lib/posix_wrap/string.h
++++ b/grub-core/lib/posix_wrap/string.h
+@@ -20,6 +20,7 @@
+ #define GRUB_POSIX_STRING_H	1
+ 
+ #include <grub/misc.h>
++#include <sys/types.h>
+ 
+ #define HAVE_STRCASECMP 1
+ 
+@@ -49,7 +50,7 @@ memcpy (void *dest, const void *src, grub_size_t n)
+ }
+ 
+ static inline int
+-memcmp (const void *s1, const void *s2, size_t n)
++memcmp (const void *s1, const void *s2, grub_size_t n)
+ {
+   return grub_memcmp (s1, s2, n);
+ }
+diff --git a/grub-core/lib/posix_wrap/sys/types.h b/grub-core/lib/posix_wrap/sys/types.h
+index fe75d8d..62a2672 100644
+--- a/grub-core/lib/posix_wrap/sys/types.h
++++ b/grub-core/lib/posix_wrap/sys/types.h
+@@ -44,6 +44,12 @@ typedef grub_int64_t int64_t;
+ 
+ #define HAVE_U64_TYPEDEF 1
+ typedef grub_uint64_t u64;
++#define HAVE_U32_TYPEDEF 1
++typedef grub_uint32_t u32;
++#define HAVE_U16_TYPEDEF 1
++typedef grub_uint16_t u16;
++#define HAVE_BYTE_TYPEDEF 1
++typedef grub_uint8_t byte;
+ 
+ #define SIZEOF_UNSIGNED_LONG GRUB_CPU_SIZEOF_LONG
+ #define SIZEOF_UNSIGNED_INT 4
+diff --git a/grub-core/lib/xzembed/xz_dec_lzma2.c b/grub-core/lib/xzembed/xz_dec_lzma2.c
+index 7899e9e..4f4fb85 100644
+--- a/grub-core/lib/xzembed/xz_dec_lzma2.c
++++ b/grub-core/lib/xzembed/xz_dec_lzma2.c
+@@ -327,9 +327,9 @@ static inline uint32_t dict_get(
+ /*
+  * Put one byte into the dictionary. It is assumed that there is space for it.
+  */
+-static inline void dict_put(struct dictionary *dict, uint8_t byte)
++static inline void dict_put(struct dictionary *dict, uint8_t b)
+ {
+-	dict->buf[dict->pos++] = byte;
++	dict->buf[dict->pos++] = b;
+ 
+ 	if (dict->full < dict->pos)
+ 		dict->full = dict->pos;
+diff --git a/grub-core/lib/xzembed/xz_dec_stream.c b/grub-core/lib/xzembed/xz_dec_stream.c
+index 6170b0c..f5a86eb 100644
+--- a/grub-core/lib/xzembed/xz_dec_stream.c
++++ b/grub-core/lib/xzembed/xz_dec_stream.c
+@@ -197,20 +197,20 @@ static bool fill_temp(struct xz_dec *s, struct xz_buf *b)
+ static enum xz_ret dec_vli(struct xz_dec *s,
+ 		const uint8_t *in, size_t *in_pos, size_t in_size)
+ {
+-	uint8_t byte;
++	uint8_t b;
+ 
+ 	if (s->pos == 0)
+ 		s->vli = 0;
+ 
+ 	while (*in_pos < in_size) {
+-		byte = in[*in_pos];
++		b = in[*in_pos];
+ 		++*in_pos;
+ 
+-		s->vli |= (vli_type)(byte & 0x7F) << s->pos;
++		s->vli |= (vli_type)(b & 0x7F) << s->pos;
+ 
+-		if ((byte & 0x80) == 0) {
++		if ((b & 0x80) == 0) {
+ 			/* Don't allow non-minimal encodings. */
+-			if (byte == 0 && s->pos != 0)
++			if (b == 0 && s->pos != 0)
+ 				return XZ_DATA_ERROR;
+ 
+ 			s->pos = 0;
+diff --git a/include/grub/crypto.h b/include/grub/crypto.h
+index 557b944..ea2f13e 100644
+--- a/include/grub/crypto.h
++++ b/include/grub/crypto.h
+@@ -66,9 +66,10 @@ typedef enum
+     GPG_ERR_WRONG_PUBKEY_ALGO,
+     GPG_ERR_OUT_OF_MEMORY,
+     GPG_ERR_TOO_LARGE
+-  } gcry_err_code_t;
+-#define gpg_err_code_t gcry_err_code_t
+-#define gpg_error_t gcry_err_code_t
++  } gpg_err_code_t;
++typedef gpg_err_code_t gpg_error_t;
++typedef gpg_error_t gcry_error_t;
++typedef gpg_err_code_t gcry_err_code_t;
+ #define gcry_error_t gcry_err_code_t
+ #if 0
+ enum gcry_cipher_modes 
+@@ -174,6 +175,7 @@ typedef struct gcry_md_spec
+   struct gcry_md_spec *next;
+ } gcry_md_spec_t;
+ 
++struct gcry_mpi;
+ typedef struct gcry_mpi *gcry_mpi_t;
+ 
+ /* Type for the pk_generate function.  */
+diff --git a/util/import_gcrypth.sed b/util/import_gcrypth.sed
+index dead8e6..6cb53cf 100644
+--- a/util/import_gcrypth.sed
++++ b/util/import_gcrypth.sed
+@@ -8,5 +8,8 @@
+ /^# *include <sys\/socket\.h>/ d
+ /^# *include <sys\/time\.h>/ d
+ /^# *include <gpg-error\.h>/ s,#include <gpg-error.h>,#include <grub/gcrypt/gpg-error.h>,
++/^typedef gpg_error_t gcry_error_t;/ d
++/^typedef gpg_err_code_t gcry_err_code_t;/ d
++/^typedef struct gcry_mpi \*gcry_mpi_t;/ d
+ s,_gcry_mpi_invm,gcry_mpi_invm,g
+ p
+\ No newline at end of file
+-- 
+1.8.1.4
+

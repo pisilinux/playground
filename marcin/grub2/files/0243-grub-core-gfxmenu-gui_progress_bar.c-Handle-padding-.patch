@@ -1,0 +1,53 @@
+From 911b53873d4c24656d2587650103ca3af081fa61 Mon Sep 17 00:00:00 2001
+From: Vladimir Testov <vladimir.testov@rosalab.ru>
+Date: Wed, 3 Apr 2013 09:34:08 +0200
+Subject: [PATCH 243/364] 	* grub-core/gfxmenu/gui_progress_bar.c: Handle
+ padding sizes.
+
+---
+ ChangeLog                            | 4 ++++
+ grub-core/gfxmenu/gui_progress_bar.c | 8 +++++++-
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 92e8dad..5e516dc 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,4 +1,8 @@
+ 2013-04-03  Vladimir Testov <vladimir.testov@rosalab.ru>
++
++	* grub-core/gfxmenu/gui_progress_bar.c: Handle padding sizes.
++
++2013-04-03  Vladimir Testov <vladimir.testov@rosalab.ru>
+ 2013-04-03  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/gfxmenu/gui_circular_progress.c: Take both width and height
+diff --git a/grub-core/gfxmenu/gui_progress_bar.c b/grub-core/gfxmenu/gui_progress_bar.c
+index 7b005f4..965c6b3 100644
+--- a/grub-core/gfxmenu/gui_progress_bar.c
++++ b/grub-core/gfxmenu/gui_progress_bar.c
+@@ -139,6 +139,12 @@ draw_pixmap_bar (grub_gui_progress_bar_t self)
+   int bar_b_pad = bar->get_bottom_pad (bar);
+   int bar_h_pad = bar_l_pad + bar_r_pad;
+   int bar_v_pad = bar_t_pad + bar_b_pad;
++  int hl_l_pad = hl->get_left_pad (hl);
++  int hl_r_pad = hl->get_right_pad (hl);
++  int hl_t_pad = hl->get_top_pad (hl);
++  int hl_b_pad = hl->get_bottom_pad (hl);
++  int hl_h_pad = hl_l_pad + hl_r_pad;
++  int hl_v_pad = hl_t_pad + hl_b_pad;
+   int tracklen = w - bar_h_pad;
+   int trackheight = h - bar_v_pad;
+   int barwidth;
+@@ -148,7 +154,7 @@ draw_pixmap_bar (grub_gui_progress_bar_t self)
+   barwidth = (tracklen * (self->value - self->start) 
+ 	      / (self->end - self->start));
+ 
+-  hl->set_content_size (hl, barwidth, h - bar_v_pad);
++  hl->set_content_size (hl, barwidth - hl_h_pad, h - bar_v_pad - hl_v_pad);
+ 
+   bar->draw (bar, 0, 0);
+   hl->draw (hl, bar_l_pad, bar_t_pad);
+-- 
+1.8.1.4
+

@@ -1,0 +1,52 @@
+From d2634650c732823bd304e0413f84d383c2689117 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 10 Dec 2012 11:12:38 +0100
+Subject: [PATCH 059/364] 	* util/getroot.c
+ (convert_system_partition_to_system_disk): Support 	nbd disks.
+
+---
+ ChangeLog      |  5 +++++
+ util/getroot.c | 12 ++++++++++++
+ 2 files changed, 17 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 0b1596a..547f739 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2012-12-10  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* util/getroot.c (convert_system_partition_to_system_disk): Support
++	nbd disks.
++
++2012-12-10  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/fs/ufs.c (grub_ufs_dir): Stop if direntlen is 0 to avoid
+ 	infinite loop on corrupted FS.
+ 
+diff --git a/util/getroot.c b/util/getroot.c
+index c2a25c9..24ce6aa 100644
+--- a/util/getroot.c
++++ b/util/getroot.c
+@@ -1796,6 +1796,18 @@ convert_system_partition_to_system_disk (const char *os_dev, struct stat *st,
+ 	  return path;
+ 	}
+ 
++      if (strncmp ("nbd", p, 3) == 0
++	  && p[3] >= '0' && p[3] <= '9')
++	{
++	  char *ptr = p + 3;
++	  while (*ptr >= '0' && *ptr <= '9')
++	    ptr++;
++	  if (*ptr)
++	    *is_part = 1;
++	  *ptr = 0;
++	  return path;
++	}
++
+       /* If this is an IDE, SCSI or Virtio disk.  */
+       if (strncmp ("vdisk", p, 5) == 0
+ 	  && p[5] >= 'a' && p[5] <= 'z')
+-- 
+1.8.1.4
+

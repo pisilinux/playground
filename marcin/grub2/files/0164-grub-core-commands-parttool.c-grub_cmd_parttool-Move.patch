@@ -1,0 +1,147 @@
+From c902417ff9033152f80cfddd55140bb4b216cfa5 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Thu, 28 Feb 2013 09:43:25 +0100
+Subject: [PATCH 164/364] 	* grub-core/commands/parttool.c
+ (grub_cmd_parttool): Move show_help out 	of parent function.
+
+---
+ ChangeLog                     |  5 +++
+ grub-core/commands/parttool.c | 90 ++++++++++++++++++++++---------------------
+ 2 files changed, 51 insertions(+), 44 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 06123b6..df5f45b 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-02-28  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/commands/parttool.c (grub_cmd_parttool): Move show_help out
++	of parent function.
++
++2013-02-28  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* util/grub-fstest.c: Remove nested functions.
+ 
+ 2013-02-27  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/commands/parttool.c b/grub-core/commands/parttool.c
+index fadf873..0f9b651 100644
+--- a/grub-core/commands/parttool.c
++++ b/grub-core/commands/parttool.c
+@@ -95,6 +95,50 @@ grub_parttool_unregister (int handle)
+ }
+ 
+ static grub_err_t
++show_help (grub_device_t dev)
++{
++  int found = 0;
++  struct grub_parttool *cur;
++
++  for (cur = parts; cur; cur = cur->next)
++    if (grub_strcmp (dev->disk->partition->partmap->name, cur->name) == 0)
++      {
++	struct grub_parttool_argdesc *curarg;
++	found = 1;
++	for (curarg = cur->args; curarg->name; curarg++)
++	  {
++	    int spacing = 20;
++
++	    spacing -= grub_strlen (curarg->name);
++	    grub_printf ("%s", curarg->name);
++
++	    switch (curarg->type)
++	      {
++	      case GRUB_PARTTOOL_ARG_BOOL:
++		grub_printf ("+/-");
++		spacing -= 3;
++		break;
++
++	      case GRUB_PARTTOOL_ARG_VAL:
++		grub_xputs (_("=VAL"));
++		spacing -= 4;
++		break;
++
++	      case GRUB_PARTTOOL_ARG_END:
++		break;
++	      }
++	    while (spacing-- > 0)
++	      grub_printf (" ");
++	    grub_puts_ (curarg->desc);
++	  }
++      }
++  if (! found)
++    grub_printf_ (N_("Sorry no parttool is available for %s\n"),
++		  dev->disk->partition->partmap->name);
++  return GRUB_ERR_NONE;
++}
++
++static grub_err_t
+ grub_cmd_parttool (grub_command_t cmd __attribute__ ((unused)),
+ 		   int argc, char **args)
+ {
+@@ -104,48 +148,6 @@ grub_cmd_parttool (grub_command_t cmd __attribute__ ((unused)),
+   int i, j;
+   grub_err_t err = GRUB_ERR_NONE;
+ 
+-  auto grub_err_t show_help (void);
+-  grub_err_t show_help (void)
+-  {
+-    int found = 0;
+-    for (cur = parts; cur; cur = cur->next)
+-      if (grub_strcmp (dev->disk->partition->partmap->name, cur->name) == 0)
+-	{
+-	  struct grub_parttool_argdesc *curarg;
+-	  found = 1;
+-	  for (curarg = cur->args; curarg->name; curarg++)
+-	    {
+-	      int spacing = 20;
+-
+-	      spacing -= grub_strlen (curarg->name);
+-	      grub_printf ("%s", curarg->name);
+-
+-	      switch (curarg->type)
+-		{
+-		case GRUB_PARTTOOL_ARG_BOOL:
+-		  grub_printf ("+/-");
+-		  spacing -= 3;
+-		  break;
+-
+-		case GRUB_PARTTOOL_ARG_VAL:
+-		  grub_xputs (_("=VAL"));
+-		  spacing -= 4;
+-		  break;
+-
+-		    case GRUB_PARTTOOL_ARG_END:
+-		      break;
+-		}
+-	      while (spacing-- > 0)
+-		grub_printf (" ");
+-	      grub_puts_ (curarg->desc);
+-	    }
+-	}
+-    if (! found)
+-      grub_printf_ (N_("Sorry no parttool is available for %s\n"),
+-		   dev->disk->partition->partmap->name);
+-    return GRUB_ERR_NONE;
+-  }
+-
+   if (argc < 1)
+     {
+       grub_puts_ (helpmsg);
+@@ -241,11 +243,11 @@ grub_cmd_parttool (grub_command_t cmd __attribute__ ((unused)),
+   }
+ 
+   if (argc == 1)
+-    return show_help ();
++    return show_help (dev);
+ 
+   for (i = 1; i < argc; i++)
+     if (grub_strcmp (args[i], "help") == 0)
+-      return show_help ();
++      return show_help (dev);
+ 
+   parsed = (int *) grub_zalloc (argc * sizeof (int));
+ 
+-- 
+1.8.1.4
+

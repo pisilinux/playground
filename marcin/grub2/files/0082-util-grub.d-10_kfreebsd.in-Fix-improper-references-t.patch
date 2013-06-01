@@ -1,0 +1,58 @@
+From 98701532f45165422f45b8cdf405a7f0abf03fba Mon Sep 17 00:00:00 2001
+From: Yuta Satoh  <nigoro>
+Date: Thu, 3 Jan 2013 23:06:07 +0100
+Subject: [PATCH 082/364] 	* util/grub.d/10_kfreebsd.in: Fix improper
+ references to grub-probe by 	${grub_probe}
+
+---
+ ChangeLog                  | 5 +++++
+ util/grub.d/10_kfreebsd.in | 6 +++---
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 087b5c3..936af2f 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-01-03  Yuta Satoh  <nigoro>
++
++	* util/grub.d/10_kfreebsd.in: Fix improper references to grub-probe by
++	${grub_probe}
++
+ 2013-01-03  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* configure.ac: Extend -Wno-trampolines to host.
+diff --git a/util/grub.d/10_kfreebsd.in b/util/grub.d/10_kfreebsd.in
+index 260dda8..2a48b52 100644
+--- a/util/grub.d/10_kfreebsd.in
++++ b/util/grub.d/10_kfreebsd.in
+@@ -54,7 +54,7 @@ load_kfreebsd_module ()
+   fi
+ 
+   if [ -z "${prepare_module_dir_cache}" ]; then
+-    prepare_module_dir_cache="$(prepare_grub_to_access_device $(grub-probe -t device "${module_dir}") | grub_add_tab)"
++    prepare_module_dir_cache="$(prepare_grub_to_access_device $(${grub_probe} -t device "${module_dir}") | grub_add_tab)"
+   fi
+ 
+   printf '%s\n' "${prepare_module_dir_cache}"
+@@ -112,7 +112,7 @@ EOF
+ 
+   load_kfreebsd_module acpi true
+ 
+-  for abstraction in dummy $(grub-probe -t abstraction --device ${GRUB_DEVICE}) ; do
++  for abstraction in dummy $(${grub_probe} -t abstraction --device ${GRUB_DEVICE}) ; do
+     case $abstraction in
+       lvm) load_kfreebsd_module geom_linux_lvm false ;;
+     esac
+@@ -179,7 +179,7 @@ while [ "x$list" != "x" ] ; do
+   case ${GRUB_FS} in
+     zfs)
+ 			# zpool name
+-			kfreebsd_device=$(grub-probe -t fs_label --device ${GRUB_DEVICE})
++			kfreebsd_device=$(${grub_probe} -t fs_label --device ${GRUB_DEVICE})
+ 			# filesystem name (empty string for the main filesystem)
+ 			kfreebsd_device="${kfreebsd_device}$(${grub_mkrelpath} / | sed -e "s,/*@$,,")"
+     ;;
+-- 
+1.8.1.4
+

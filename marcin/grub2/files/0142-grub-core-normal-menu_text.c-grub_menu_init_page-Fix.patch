@@ -1,0 +1,40 @@
+From d663de5bc403d819059ec5b8faeade326311644b Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 27 Jan 2013 16:12:05 +0100
+Subject: [PATCH 142/364] 	* grub-core/normal/menu_text.c
+ (grub_menu_init_page): Fix behaviour 	when menu highlight color isn't set.
+
+---
+ ChangeLog                    | 5 +++++
+ grub-core/normal/menu_text.c | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index f5cb7dc..2ad83f5 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-01-27  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/normal/menu_text.c (grub_menu_init_page): Fix behaviour
++	when menu highlight color isn't set.
++
+ 2013-01-27  C. Masloch  <pushbx@38.de>
+ 
+ 	Improve FreeDOS direct loading support compatibility.
+diff --git a/grub-core/normal/menu_text.c b/grub-core/normal/menu_text.c
+index 80a7cd9..0031b0c 100644
+--- a/grub-core/normal/menu_text.c
++++ b/grub-core/normal/menu_text.c
+@@ -357,7 +357,7 @@ grub_menu_init_page (int nested, int edit, int *num_entries,
+   old_color_normal = grub_term_normal_color;
+   old_color_highlight = grub_term_highlight_color;
+   grub_color_menu_normal = grub_term_normal_color;
+-  grub_color_menu_highlight = grub_color_menu_highlight;
++  grub_color_menu_highlight = grub_term_highlight_color;
+ 
+   /* Then give user a chance to replace them.  */
+   grub_parse_color_name_pair (&grub_color_menu_normal,
+-- 
+1.8.1.4
+

@@ -1,0 +1,65 @@
+From 369b824667cc2a140e0efaccf480d43e07199d8d Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 12 Apr 2013 01:47:38 +0200
+Subject: [PATCH 284/364] 	* tests/grub_cmd_date.in: New test for
+ datetime.
+
+---
+ ChangeLog              |  4 ++++
+ Makefile.util.def      |  6 ++++++
+ tests/grub_cmd_date.in | 12 ++++++++++++
+ 3 files changed, 22 insertions(+)
+ create mode 100644 tests/grub_cmd_date.in
+
+diff --git a/ChangeLog b/ChangeLog
+index 0668a0f..a2f1d5a 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-12  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* tests/grub_cmd_date.in: New test for datetime.
++
++2013-04-12  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* tests/partmap_test.in: Fix missing qemudisk setting.
+ 
+ 2013-04-11  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/Makefile.util.def b/Makefile.util.def
+index 373c25b..a231b40 100644
+--- a/Makefile.util.def
++++ b/Makefile.util.def
+@@ -676,6 +676,12 @@ script = {
+ 
+ script = {
+   testcase;
++  name = grub_cmd_date;
++  common = tests/grub_cmd_date.in;
++};
++
++script = {
++  testcase;
+   name = grub_script_expansion;
+   common = tests/grub_script_expansion.in;
+ };
+diff --git a/tests/grub_cmd_date.in b/tests/grub_cmd_date.in
+new file mode 100644
+index 0000000..1c8e7e6
+--- /dev/null
++++ b/tests/grub_cmd_date.in
+@@ -0,0 +1,12 @@
++#! /bin/bash
++set -e
++
++pdt="$(date -u +%s)"
++dt=`echo date | @builddir@/grub-shell`
++dtg="$(date -u -d "$dt" +%s)"
++ndt="$(date -u +%s)"
++
++if [ $pdt -le $dtg ] && [ $dtg -le $ndt ]; then
++    exit 0;
++fi
++echo "Date not in range: $pdt <= $dtg <= $ndt"
+-- 
+1.8.1.4
+

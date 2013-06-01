@@ -1,0 +1,40 @@
+From 860427424f29d2e1e799509aea585cf928982bba Mon Sep 17 00:00:00 2001
+From: Andrey Borzenkov <arvidjaar@gmail.com>
+Date: Sun, 27 Jan 2013 16:17:21 +0100
+Subject: [PATCH 143/364] 	* util/grub-install.in: change misleading
+ comment about 	device.map creation
+
+---
+ ChangeLog            | 5 +++++
+ util/grub-install.in | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 2ad83f5..74ef434 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-01-27  Andrey Borzenkov <arvidjaar@gmail.com>
++
++	* util/grub-install.in: change misleading comment about
++	device.map creation
++
+ 2013-01-27  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/normal/menu_text.c (grub_menu_init_page): Fix behaviour
+diff --git a/util/grub-install.in b/util/grub-install.in
+index aac27c7..9e63cf5 100644
+--- a/util/grub-install.in
++++ b/util/grub-install.in
+@@ -505,7 +505,7 @@ if test $recheck = yes; then
+     rm -f "$device_map"
+ fi
+ 
+-# Create the device map file if it is not present.
++# Device map file is optional
+ if test -f "$device_map"; then
+     # Make sure that there is no duplicated entry.
+     tmp=`sed -n '/^([fh]d[0-9]*)/s/\(^(.*)\).*/\1/p' "$device_map" \
+-- 
+1.8.1.4
+

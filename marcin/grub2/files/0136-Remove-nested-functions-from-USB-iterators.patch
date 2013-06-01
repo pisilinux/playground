@@ -1,0 +1,391 @@
+From 68a73af56d5070833b4a4785647e539a0a3da063 Mon Sep 17 00:00:00 2001
+From: Colin Watson <cjwatson@ubuntu.com>
+Date: Mon, 21 Jan 2013 21:02:24 +0000
+Subject: [PATCH 136/364] Remove nested functions from USB iterators.
+
+* include/grub/usb.h (grub_usb_iterate_hook_t): New type.
+(grub_usb_controller_iterate_hook_t): Likewise.
+(grub_usb_iterate): Add hook_data argument.
+(grub_usb_controller_iterate): Likewise.
+(struct grub_usb_controller_dev.iterate): Likewise.
+
+Update all implementations and callers.
+---
+ ChangeLog                    |  12 +++++
+ grub-core/bus/usb/ehci.c     |   4 +-
+ grub-core/bus/usb/emu/usb.c  |   4 +-
+ grub-core/bus/usb/ohci.c     |   4 +-
+ grub-core/bus/usb/uhci.c     |   4 +-
+ grub-core/bus/usb/usb.c      | 120 ++++++++++++++++++++++++-------------------
+ grub-core/bus/usb/usbhub.c   |   4 +-
+ grub-core/commands/usbtest.c |   4 +-
+ include/grub/usb.h           |  11 ++--
+ 9 files changed, 100 insertions(+), 67 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index cf7a777..08c2c9f 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,15 @@
++2013-01-21  Colin Watson  <cjwatson@ubuntu.com>
++
++	Remove nested functions from USB iterators.
++
++	* include/grub/usb.h (grub_usb_iterate_hook_t): New type.
++	(grub_usb_controller_iterate_hook_t): Likewise.
++	(grub_usb_iterate): Add hook_data argument.
++	(grub_usb_controller_iterate): Likewise.
++	(struct grub_usb_controller_dev.iterate): Likewise.
++
++	Update all implementations and callers.
++
+ 2013-01-21  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/normal/term.c (print_ucs4_terminal): Don't output right
+diff --git a/grub-core/bus/usb/ehci.c b/grub-core/bus/usb/ehci.c
+index b9872b6..9215866 100644
+--- a/grub-core/bus/usb/ehci.c
++++ b/grub-core/bus/usb/ehci.c
+@@ -870,7 +870,7 @@ fail:
+ }
+ 
+ static int
+-grub_ehci_iterate (int (*hook) (grub_usb_controller_t dev))
++grub_ehci_iterate (grub_usb_controller_iterate_hook_t hook, void *hook_data)
+ {
+   struct grub_ehci *e;
+   struct grub_usb_controller dev;
+@@ -878,7 +878,7 @@ grub_ehci_iterate (int (*hook) (grub_usb_controller_t dev))
+   for (e = ehci; e; e = e->next)
+     {
+       dev.data = e;
+-      if (hook (&dev))
++      if (hook (&dev, hook_data))
+ 	return 1;
+     }
+ 
+diff --git a/grub-core/bus/usb/emu/usb.c b/grub-core/bus/usb/emu/usb.c
+index 38c5f01..3ad2fc3 100644
+--- a/grub-core/bus/usb/emu/usb.c
++++ b/grub-core/bus/usb/emu/usb.c
+@@ -88,7 +88,7 @@ grub_usb_poll_devices (void)
+ 
+ 
+ int
+-grub_usb_iterate (int (*hook) (grub_usb_device_t dev))
++grub_usb_iterate (grub_usb_iterate_hook_t hook, void *hook_data)
+ {
+   int i;
+ 
+@@ -96,7 +96,7 @@ grub_usb_iterate (int (*hook) (grub_usb_device_t dev))
+     {
+       if (grub_usb_devs[i])
+ 	{
+-	  if (hook (grub_usb_devs[i]))
++	  if (hook (grub_usb_devs[i], hook_data))
+ 	      return 1;
+ 	}
+     }
+diff --git a/grub-core/bus/usb/ohci.c b/grub-core/bus/usb/ohci.c
+index b10a9a3..835bb15 100644
+--- a/grub-core/bus/usb/ohci.c
++++ b/grub-core/bus/usb/ohci.c
+@@ -483,7 +483,7 @@ grub_ohci_inithw (void)
+ 
+ 
+ static int
+-grub_ohci_iterate (int (*hook) (grub_usb_controller_t dev))
++grub_ohci_iterate (grub_usb_controller_iterate_hook_t hook, void *hook_data)
+ {
+   struct grub_ohci *o;
+   struct grub_usb_controller dev;
+@@ -491,7 +491,7 @@ grub_ohci_iterate (int (*hook) (grub_usb_controller_t dev))
+   for (o = ohci; o; o = o->next)
+     {
+       dev.data = o;
+-      if (hook (&dev))
++      if (hook (&dev, hook_data))
+ 	return 1;
+     }
+ 
+diff --git a/grub-core/bus/usb/uhci.c b/grub-core/bus/usb/uhci.c
+index e405b33..74de392 100644
+--- a/grub-core/bus/usb/uhci.c
++++ b/grub-core/bus/usb/uhci.c
+@@ -672,7 +672,7 @@ grub_uhci_cancel_transfer (grub_usb_controller_t dev,
+ }
+ 
+ static int
+-grub_uhci_iterate (int (*hook) (grub_usb_controller_t dev))
++grub_uhci_iterate (grub_usb_controller_iterate_hook_t hook, void *hook_data)
+ {
+   struct grub_uhci *u;
+   struct grub_usb_controller dev;
+@@ -680,7 +680,7 @@ grub_uhci_iterate (int (*hook) (grub_usb_controller_t dev))
+   for (u = uhci; u; u = u->next)
+     {
+       dev.data = u;
+-      if (hook (&dev))
++      if (hook (&dev, hook_data))
+ 	return 1;
+     }
+ 
+diff --git a/grub-core/bus/usb/usb.c b/grub-core/bus/usb/usb.c
+index fb04e65..6fbf134 100644
+--- a/grub-core/bus/usb/usb.c
++++ b/grub-core/bus/usb/usb.c
+@@ -29,27 +29,28 @@ GRUB_MOD_LICENSE ("GPLv3+");
+ static grub_usb_controller_dev_t grub_usb_list;
+ static struct grub_usb_attach_desc *attach_hooks;
+ 
+-void
+-grub_usb_controller_dev_register (grub_usb_controller_dev_t usb)
++/* Iterate over all controllers found by the driver.  */
++static int
++grub_usb_controller_dev_register_iter (grub_usb_controller_t dev, void *data)
+ {
+-  auto int iterate_hook (grub_usb_controller_t dev);
++  grub_usb_controller_dev_t usb = data;
+ 
+-  /* Iterate over all controllers found by the driver.  */
+-  int iterate_hook (grub_usb_controller_t dev)
+-    {
+-      dev->dev = usb;
++  dev->dev = usb;
+ 
+-      /* Enable the ports of the USB Root Hub.  */
+-      grub_usb_root_hub (dev);
++  /* Enable the ports of the USB Root Hub.  */
++  grub_usb_root_hub (dev);
+ 
+-      return 0;
+-    }
++  return 0;
++}
+ 
++void
++grub_usb_controller_dev_register (grub_usb_controller_dev_t usb)
++{
+   usb->next = grub_usb_list;
+   grub_usb_list = usb;
+ 
+   if (usb->iterate)
+-    usb->iterate (iterate_hook);
++    usb->iterate (grub_usb_controller_dev_register_iter, usb);
+ }
+ 
+ void
+@@ -66,27 +67,41 @@ grub_usb_controller_dev_unregister (grub_usb_controller_dev_t usb)
+ }
+ 
+ #if 0
+-int
+-grub_usb_controller_iterate (int (*hook) (grub_usb_controller_t dev))
++/* Context for grub_usb_controller_iterate.  */
++struct grub_usb_controller_iterate_ctx
+ {
++  grub_usb_controller_iterate_hook_t hook;
++  void *hook_data;
+   grub_usb_controller_dev_t p;
++};
+ 
+-  auto int iterate_hook (grub_usb_controller_t dev);
++/* Helper for grub_usb_controller_iterate.  */
++static int
++grub_usb_controller_iterate_iter (grub_usb_controller_t dev, void *data)
++{
++  struct grub_usb_controller_iterate_ctx *ctx = data;
+ 
+-  int iterate_hook (grub_usb_controller_t dev)
+-    {
+-      dev->dev = p;
+-      if (hook (dev))
+-	return 1;
+-      return 0;
+-    }
++  dev->dev = ctx->p;
++  if (ctx->hook (dev, ctx->hook_data))
++    return 1;
++  return 0;
++}
++
++int
++grub_usb_controller_iterate (grub_usb_controller_iterate_hook_t hook,
++			     void *hook_data)
++{
++  struct grub_usb_controller_iterate_ctx ctx = {
++    .hook = hook,
++    .hook_data = hook_data
++  };
+ 
+   /* Iterate over all controller drivers.  */
+-  for (p = grub_usb_list; p; p = p->next)
++  for (ctx.p = grub_usb_list; ctx.p; ctx.p = ctx.p->next)
+     {
+       /* Iterate over the busses of the controllers.  XXX: Actually, a
+ 	 hub driver should do this.  */
+-      if (p->iterate (iterate_hook))
++      if (ctx.p->iterate (grub_usb_controller_iterate_iter, &ctx))
+ 	return 1;
+     }
+ 
+@@ -295,46 +310,47 @@ void grub_usb_device_attach (grub_usb_device_t dev)
+     }
+ }
+ 
+-void
+-grub_usb_register_attach_hook_class (struct grub_usb_attach_desc *desc)
++/* Helper for grub_usb_register_attach_hook_class.  */
++static int
++grub_usb_register_attach_hook_class_iter (grub_usb_device_t usbdev, void *data)
+ {
+-  auto int usb_iterate (grub_usb_device_t dev);
+-
+-  int usb_iterate (grub_usb_device_t usbdev)
+-    {
+-      struct grub_usb_desc_device *descdev = &usbdev->descdev;
+-      int i;
+-
+-      if (descdev->class != 0 || descdev->subclass || descdev->protocol != 0
+-	  || descdev->configcnt == 0)
+-	return 0;
++  struct grub_usb_attach_desc *desc = data;
++  struct grub_usb_desc_device *descdev = &usbdev->descdev;
++  int i;
+ 
+-      /* XXX: Just check configuration 0 for now.  */
+-      for (i = 0; i < usbdev->config[0].descconf->numif; i++)
+-	{
+-	  struct grub_usb_desc_if *interf;
++  if (descdev->class != 0 || descdev->subclass || descdev->protocol != 0
++      || descdev->configcnt == 0)
++    return 0;
+ 
+-	  interf = usbdev->config[0].interf[i].descif;
++  /* XXX: Just check configuration 0 for now.  */
++  for (i = 0; i < usbdev->config[0].descconf->numif; i++)
++    {
++      struct grub_usb_desc_if *interf;
+ 
+-	  grub_dprintf ("usb", "iterate: interf=%d, class=%d, subclass=%d, protocol=%d\n",
+-	                i, interf->class, interf->subclass, interf->protocol);
++      interf = usbdev->config[0].interf[i].descif;
+ 
+-	  if (usbdev->config[0].interf[i].attached)
+-	    continue;
++      grub_dprintf ("usb", "iterate: interf=%d, class=%d, subclass=%d, protocol=%d\n",
++		    i, interf->class, interf->subclass, interf->protocol);
+ 
+-	  if (interf->class != desc->class)
+-	    continue;
+-	  if (desc->hook (usbdev, 0, i))
+-	    usbdev->config[0].interf[i].attached = 1;
+-	}
++      if (usbdev->config[0].interf[i].attached)
++	continue;
+ 
+-      return 0;
++      if (interf->class != desc->class)
++	continue;
++      if (desc->hook (usbdev, 0, i))
++	usbdev->config[0].interf[i].attached = 1;
+     }
+ 
++  return 0;
++}
++
++void
++grub_usb_register_attach_hook_class (struct grub_usb_attach_desc *desc)
++{
+   desc->next = attach_hooks;
+   attach_hooks = desc;
+ 
+-  grub_usb_iterate (usb_iterate);
++  grub_usb_iterate (grub_usb_register_attach_hook_class_iter, desc);
+ }
+ 
+ void
+diff --git a/grub-core/bus/usb/usbhub.c b/grub-core/bus/usb/usbhub.c
+index 5fc5eba..3927f51 100644
+--- a/grub-core/bus/usb/usbhub.c
++++ b/grub-core/bus/usb/usbhub.c
+@@ -556,7 +556,7 @@ grub_usb_poll_devices (void)
+ }
+ 
+ int
+-grub_usb_iterate (int (*hook) (grub_usb_device_t dev))
++grub_usb_iterate (grub_usb_iterate_hook_t hook, void *hook_data)
+ {
+   int i;
+ 
+@@ -564,7 +564,7 @@ grub_usb_iterate (int (*hook) (grub_usb_device_t dev))
+     {
+       if (grub_usb_devs[i])
+ 	{
+-	  if (hook (grub_usb_devs[i]))
++	  if (hook (grub_usb_devs[i], hook_data))
+ 	      return 1;
+ 	}
+     }
+diff --git a/grub-core/commands/usbtest.c b/grub-core/commands/usbtest.c
+index 7247590..af35b8c 100644
+--- a/grub-core/commands/usbtest.c
++++ b/grub-core/commands/usbtest.c
+@@ -129,7 +129,7 @@ usb_print_str (const char *description, grub_usb_device_t dev, int idx)
+ }
+ 
+ static int
+-usb_iterate (grub_usb_device_t dev)
++usb_iterate (grub_usb_device_t dev, void *data __attribute__ ((unused)))
+ {
+   struct grub_usb_desc_device *descdev;
+   int i;
+@@ -199,7 +199,7 @@ grub_cmd_usbtest (grub_command_t cmd __attribute__ ((unused)),
+   grub_usb_poll_devices ();
+ 
+   grub_printf ("USB devices:\n\n");
+-  grub_usb_iterate (usb_iterate);
++  grub_usb_iterate (usb_iterate, NULL);
+ 
+   return 0;
+ }
+diff --git a/include/grub/usb.h b/include/grub/usb.h
+index 08d57b2..cefa8b6 100644
+--- a/include/grub/usb.h
++++ b/include/grub/usb.h
+@@ -50,8 +50,12 @@ typedef enum
+     GRUB_USB_SPEED_HIGH
+   } grub_usb_speed_t;
+ 
++typedef int (*grub_usb_iterate_hook_t) (grub_usb_device_t dev, void *data);
++typedef int (*grub_usb_controller_iterate_hook_t) (grub_usb_controller_t dev,
++						   void *data);
++
+ /* Call HOOK with each device, until HOOK returns non-zero.  */
+-int grub_usb_iterate (int (*hook) (grub_usb_device_t dev));
++int grub_usb_iterate (grub_usb_iterate_hook_t hook, void *hook_data);
+ 
+ grub_usb_err_t grub_usb_device_initialize (grub_usb_device_t dev);
+ 
+@@ -72,7 +76,8 @@ void grub_usb_controller_dev_register (grub_usb_controller_dev_t usb);
+ 
+ void grub_usb_controller_dev_unregister (grub_usb_controller_dev_t usb);
+ 
+-int grub_usb_controller_iterate (int (*hook) (grub_usb_controller_t dev));
++int grub_usb_controller_iterate (grub_usb_controller_iterate_hook_t hook,
++				 void *hook_data);
+ 
+ 
+ grub_usb_err_t grub_usb_control_msg (grub_usb_device_t dev, grub_uint8_t reqtype,
+@@ -98,7 +103,7 @@ struct grub_usb_controller_dev
+   /* The device name.  */
+   const char *name;
+ 
+-  int (*iterate) (int (*hook) (grub_usb_controller_t dev));
++  int (*iterate) (grub_usb_controller_iterate_hook_t hook, void *hook_data);
+ 
+   grub_usb_err_t (*setup_transfer) (grub_usb_controller_t dev,
+ 				    grub_usb_transfer_t transfer);
+-- 
+1.8.1.4
+

@@ -1,0 +1,54 @@
+From 464ba9e859f993a3c5fe9dc3036f4acc51c94f84 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 25 Feb 2013 10:45:19 +0100
+Subject: [PATCH 155/364] 	* grub-core/normal/misc.c
+ (grub_normal_print_device_info): Use KiB to display 	sizes and display
+ sector size.
+
+---
+ ChangeLog               |  5 +++++
+ grub-core/normal/misc.c | 12 ++++++++----
+ 2 files changed, 13 insertions(+), 4 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 2faef5b..ff5a558 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-02-25  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/normal/misc.c (grub_normal_print_device_info): Use KiB to display
++	sizes and display sector size.
++
+ 2013-02-24  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	Implement new command cmosdump.
+diff --git a/grub-core/normal/misc.c b/grub-core/normal/misc.c
+index e1e47b5..d23de62 100644
+--- a/grub-core/normal/misc.c
++++ b/grub-core/normal/misc.c
+@@ -117,13 +117,17 @@ grub_normal_print_device_info (const char *name)
+ 	grub_printf ("%s", _("No known filesystem detected"));
+ 
+       if (dev->disk->partition)
+-	grub_printf (_(" - Partition start at %llu"),
+-		     (unsigned long long) grub_partition_get_start (dev->disk->partition));
++	grub_printf (_(" - Partition start at %llu%sKiB"),
++		     (unsigned long long) (grub_partition_get_start (dev->disk->partition) >> 1),
++		     (grub_partition_get_start (dev->disk->partition) & 1) ? ".5" : "" );
++      else
++	grub_printf_ (N_(" - Sector size %uB"), 1 << dev->disk->log_sector_size);
+       if (grub_disk_get_size (dev->disk) == GRUB_DISK_SIZE_UNKNOWN)
+ 	grub_puts_ (N_(" - Total size unknown"));
+       else
+-	grub_printf (_(" - Total size %llu sectors"),
+-		     (unsigned long long) grub_disk_get_size (dev->disk));
++	grub_printf (_(" - Total size %llu%sKiB"),
++		     (unsigned long long) (grub_disk_get_size (dev->disk) >> 1),
++		     (grub_disk_get_size (dev->disk) & 1) ? ".5" : "");
+ 
+       grub_device_close (dev);
+     }
+-- 
+1.8.1.4
+

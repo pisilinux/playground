@@ -1,0 +1,53 @@
+From 4c929bc63d926b9726b8e9a494c520432c051bc0 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sat, 13 Apr 2013 20:12:11 +0200
+Subject: [PATCH 299/364] 	Fix memory leaks in ofnet. 	Reported by:
+ Francesco Lavra.
+
+---
+ ChangeLog                              | 5 +++++
+ grub-core/net/drivers/ieee1275/ofnet.c | 8 ++++----
+ 2 files changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index a965117..0514e73 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-04-13  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	Fix memory leaks in ofnet.
++	Reported by: Francesco Lavra.
++
+ 2013-04-12  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* docs/man/grub-glue-efi.h2m: Add missing file.
+diff --git a/grub-core/net/drivers/ieee1275/ofnet.c b/grub-core/net/drivers/ieee1275/ofnet.c
+index cd9b159..21b6214 100644
+--- a/grub-core/net/drivers/ieee1275/ofnet.c
++++ b/grub-core/net/drivers/ieee1275/ofnet.c
+@@ -97,10 +97,7 @@ get_card_packet (struct grub_net_card *dev)
+ 
+   nb = grub_netbuff_alloc (dev->mtu + 64 + 2);
+   if (!nb)
+-    {
+-      grub_netbuff_free (nb);
+-      return NULL;
+-    }
++    return NULL;
+   /* Reserve 2 bytes so that 2 + 14/18 bytes of ethernet header is divisible
+      by 4. So that IP header is aligned on 4 bytes. */
+   grub_netbuff_reserve (nb, 2);
+@@ -281,6 +278,9 @@ search_net_devices (struct grub_ieee1275_devalias *alias)
+     card->txbuf = grub_zalloc (card->txbufsize);
+   if (!card->txbuf)
+     {
++      grub_free (ofdata->path);
++      grub_free (ofdata);
++      grub_free (card);
+       grub_print_error ();
+       return 0;
+     }
+-- 
+1.8.1.4
+

@@ -1,0 +1,43 @@
+From e187799c01b0eea975059eaa28356d0909e43a19 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 12 Apr 2013 21:08:53 +0200
+Subject: [PATCH 293/364] 	* util/grub-mkimage.c: Document memdisk
+ implying --prefix.
+
+---
+ ChangeLog           | 4 ++++
+ util/grub-mkimage.c | 4 +++-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 0d5c836..92cb29d 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-12  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* util/grub-mkimage.c: Document memdisk implying --prefix.
++
++2013-04-12  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* grub-core/bus/usb/ehci.c (grub_ehci_fini_hw): Ignore errors, not
+ 	much we can do about it anyway.
+ 
+diff --git a/util/grub-mkimage.c b/util/grub-mkimage.c
+index dce2c29..80e7d81 100644
+--- a/util/grub-mkimage.c
++++ b/util/grub-mkimage.c
+@@ -1710,7 +1710,9 @@ static struct argp_option options[] = {
+   {"memdisk",  'm', N_("FILE"), 0,
+    /* TRANSLATORS: "memdisk" here isn't an identifier, it can be translated.
+     "embed" is a verb (command description).  "*/
+-   N_("embed FILE as a memdisk image"), 0},
++   N_("embed FILE as a memdisk image\n"
++      "Implies `-p (memdisk)/boot/grub' but prefix can be overridden by "
++      "later options"), 0},
+    /* TRANSLATORS: "embed" is a verb (command description).  "*/
+   {"config",   'c', N_("FILE"), 0, N_("embed FILE as an early config"), 0},
+    /* TRANSLATORS: "embed" is a verb (command description).  "*/
+-- 
+1.8.1.4
+

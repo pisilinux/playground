@@ -1,0 +1,68 @@
+From 8b2ef54da3e28cf66637a09c2a2afad9ee56a535 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Gr=C3=A9goire=20Sutre?= <gregoire.sutre@gmail.com>
+Date: Wed, 1 Aug 2012 01:06:53 +0200
+Subject: [PATCH 019/364] Regenerate po/POTFILES.in with the following commmand
+ in a clean tree:
+
+export LC_ALL=en_US.UTF-8
+find . -iname '*.[ch]' | sort > po/POTFILES.in
+---
+ ChangeLog      | 4 ++++
+ po/POTFILES.in | 5 +++--
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index b246d4e..dd1fda8 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2012-07-31  Grégoire Sutre  <gregoire.sutre@gmail.com>
+ 
++	* po/POTFILES.in: Regenerated.
++
++2012-07-31  Grégoire Sutre  <gregoire.sutre@gmail.com>
++
+ 	* docs/grub.texi: Note that NetBSD/i386 is Multiboot-compliant.
+ 	(NetBSD): New subsection.
+ 
+diff --git a/po/POTFILES.in b/po/POTFILES.in
+index 987b37a..01cc53c 100644
+--- a/po/POTFILES.in
++++ b/po/POTFILES.in
+@@ -32,6 +32,7 @@
+ ./grub-core/commands/efi/acpi.c
+ ./grub-core/commands/efi/fixvideo.c
+ ./grub-core/commands/efi/loadbios.c
++./grub-core/commands/efi/lsefi.c
+ ./grub-core/commands/efi/lsefimmap.c
+ ./grub-core/commands/efi/lsefisystab.c
+ ./grub-core/commands/efi/lssal.c
+@@ -558,8 +559,8 @@
+ ./grub-core/term/emu/console.c
+ ./grub-core/term/gfxterm.c
+ ./grub-core/term/i386/pc/console.c
++./grub-core/term/i386/pc/mda_text.c
+ ./grub-core/term/i386/pc/vga_text.c
+-./grub-core/term/i386/vga_common.c
+ ./grub-core/term/ieee1275/console.c
+ ./grub-core/term/ieee1275/escc.c
+ ./grub-core/term/ieee1275/serial.c
+@@ -730,7 +731,6 @@
+ ./include/grub/i386/time.h
+ ./include/grub/i386/tsc.h
+ ./include/grub/i386/types.h
+-./include/grub/i386/vga_common.h
+ ./include/grub/i386/xnu.h
+ ./include/grub/ia64/efi/memory.h
+ ./include/grub/ia64/efi/time.h
+@@ -867,6 +867,7 @@
+ ./include/grub/util/ofpath.h
+ ./include/grub/util/resolve.h
+ ./include/grub/vga.h
++./include/grub/vgaregs.h
+ ./include/grub/video_fb.h
+ ./include/grub/video.h
+ ./include/grub/x86_64/at_keyboard.h
+-- 
+1.8.1.4
+

@@ -1,0 +1,40 @@
+From aa3830c409ca40e6f0b71279ddb3409262a7bd96 Mon Sep 17 00:00:00 2001
+From: Leif Lindholm  <leif.lindholm@arm.com>
+Date: Wed, 28 Nov 2012 14:18:45 +0100
+Subject: [PATCH 055/364]         * include/grub/types.h: Fix functionality
+ unaffecting typo in         GRUB_TARGET_WORDSIZE conditional macro.
+
+---
+ ChangeLog            | 5 +++++
+ include/grub/types.h | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 1759da4..b26bfcb 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2012-11-28  Leif Lindholm  <leif.lindholm@arm.com>
++
++        * include/grub/types.h: Fix functionality unaffecting typo in
++        GRUB_TARGET_WORDSIZE conditional macro.
++
+ 2012-11-28  Paulo Flabiano Smorigo  <pfsmorigo@br.ibm.com>
+ 
+ 	* grub-core/net/bootp.c (parse_dhcp_vendor): Fix double increment.
+diff --git a/include/grub/types.h b/include/grub/types.h
+index 3e677c6..22d1be7 100644
+--- a/include/grub/types.h
++++ b/include/grub/types.h
+@@ -50,7 +50,7 @@
+ # error "This architecture is not supported because sizeof(void *) != 4 and sizeof(void *) != 8"
+ #endif
+ 
+-#if !defined (GRUB_UTIL) & !defined (GRUB_TARGET_WORDSIZE)
++#if !defined (GRUB_UTIL) && !defined (GRUB_TARGET_WORDSIZE)
+ # if GRUB_TARGET_SIZEOF_VOID_P == 4
+ #  define GRUB_TARGET_WORDSIZE 32
+ # elif GRUB_TARGET_SIZEOF_VOID_P == 8
+-- 
+1.8.1.4
+

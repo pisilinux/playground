@@ -1,0 +1,41 @@
+From 5361431d3faa4ddbbd5d5c6a1fa10e0cebc60623 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 10 Dec 2012 09:22:40 +0100
+Subject: [PATCH 058/364] 	* grub-core/fs/ufs.c (grub_ufs_dir): Stop if
+ direntlen is 0 to avoid 	infinite loop on corrupted FS.
+
+---
+ ChangeLog          | 5 +++++
+ grub-core/fs/ufs.c | 3 +++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 9c6dde5..0b1596a 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2012-12-10  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/fs/ufs.c (grub_ufs_dir): Stop if direntlen is 0 to avoid
++	infinite loop on corrupted FS.
++
+ 2012-12-08  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	Fix big-endian mtime.
+diff --git a/grub-core/fs/ufs.c b/grub-core/fs/ufs.c
+index c862336..74a4a40 100644
+--- a/grub-core/fs/ufs.c
++++ b/grub-core/fs/ufs.c
+@@ -664,6 +664,9 @@ grub_ufs_dir (grub_device_t device, const char *path,
+ 			      (char *) &dirent) < 0)
+ 	break;
+ 
++      if (dirent.direntlen == 0)
++	break;
++
+ #ifdef MODE_UFS2
+       namelen = dirent.namelen_bsd;
+ #else
+-- 
+1.8.1.4
+

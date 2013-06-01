@@ -1,0 +1,1937 @@
+From 616e091047d45c0fb5908323a456096fc57824b7 Mon Sep 17 00:00:00 2001
+From: Colin Watson  <cjwatson@ubuntu.com>
+Date: Wed, 27 Feb 2013 17:19:15 +0100
+Subject: [PATCH 161/364] 	Remove nested functions from disk and file
+ read hooks.
+
+	* include/grub/disk.h (grub_disk_read_hook_t): New type.
+	(struct grub_disk): Add read_hook_data member.
+	* include/grub/file.h (struct grub_file): Likewise.
+	* include/grub/fshelp.h (grub_fshelp_read_file): Add read_hook_data
+	argument.
+
+	Update all callers.
+---
+ ChangeLog                      |  12 +++
+ config.h.in                    |   6 +-
+ grub-core/commands/blocklist.c | 106 ++++++++++++---------
+ grub-core/commands/loadenv.c   |  80 +++++++++-------
+ grub-core/commands/testload.c  |  22 +++--
+ grub-core/fs/affs.c            |   2 +-
+ grub-core/fs/bfs.c             |  41 ++++----
+ grub-core/fs/ext2.c            |  15 +--
+ grub-core/fs/fat.c             |  15 +--
+ grub-core/fs/fshelp.c          |  10 +-
+ grub-core/fs/hfs.c             |   7 +-
+ grub-core/fs/hfsplus.c         |  23 ++---
+ grub-core/fs/iso9660.c         |   1 +
+ grub-core/fs/jfs.c             |   9 +-
+ grub-core/fs/minix.c           |  17 ++--
+ grub-core/fs/nilfs2.c          |  17 ++--
+ grub-core/fs/ntfs.c            |  48 ++++------
+ grub-core/fs/ntfscomp.c        |   1 +
+ grub-core/fs/reiserfs.c        |  15 ++-
+ grub-core/fs/romfs.c           |   1 +
+ grub-core/fs/sfs.c             |   9 +-
+ grub-core/fs/udf.c             |  22 ++---
+ grub-core/fs/ufs.c             |  17 ++--
+ grub-core/fs/xfs.c             |  15 +--
+ grub-core/kern/disk.c          |   2 +-
+ include/grub/disk.h            |  12 ++-
+ include/grub/file.h            |   7 +-
+ include/grub/fshelp.h          |   6 +-
+ util/grub-setup.c              | 210 +++++++++++++++++++++--------------------
+ 29 files changed, 406 insertions(+), 342 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index c77a6a6..dbecfef 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,15 @@
++2013-02-27  Colin Watson  <cjwatson@ubuntu.com>
++
++	Remove nested functions from disk and file read hooks.
++
++	* include/grub/disk.h (grub_disk_read_hook_t): New type.
++	(struct grub_disk): Add read_hook_data member.
++	* include/grub/file.h (struct grub_file): Likewise.
++	* include/grub/fshelp.h (grub_fshelp_read_file): Add read_hook_data
++	argument.
++
++	Update all callers.
++
+ 2012-02-27  Andrey Borzenkov <arvidjaar@gmail.com>
+ 
+ 	* grub-core/partmap/msdos.c (grub_partition_msdos_iterate):
+diff --git a/config.h.in b/config.h.in
+index a7eaf19..91afd98 100644
+--- a/config.h.in
++++ b/config.h.in
+@@ -5,6 +5,10 @@
+ #if defined(__PPC__) && !defined(__powerpc__)
+ #define __powerpc__ 1
+ #endif
++
++/* Define to 1 to enable disk cache statistics.  */
++#define DISK_CACHE_STATS @DISK_CACHE_STATS@
++
+ #if defined (GRUB_UTIL) || !defined (GRUB_MACHINE)
+ #include <config-util.h>
+ #define NESTED_FUNC_ATTR
+@@ -39,8 +43,6 @@
+ #define NEED_ENABLE_EXECUTE_STACK @NEED_ENABLE_EXECUTE_STACK@
+ /* Define to 1 if GCC generates calls to __register_frame_info().  */
+ #define NEED_REGISTER_FRAME_INFO @NEED_REGISTER_FRAME_INFO@
+-/* Define to 1 to enable disk cache statistics.  */
+-#define DISK_CACHE_STATS @DISK_CACHE_STATS@
+ 
+ #define GRUB_TARGET_CPU "@GRUB_TARGET_CPU@"
+ #define GRUB_PLATFORM "@GRUB_PLATFORM@"
+diff --git a/grub-core/commands/blocklist.c b/grub-core/commands/blocklist.c
+index 164a6fe..c531e44 100644
+--- a/grub-core/commands/blocklist.c
++++ b/grub-core/commands/blocklist.c
+@@ -28,58 +28,71 @@
+ 
+ GRUB_MOD_LICENSE ("GPLv3+");
+ 
+-static grub_err_t
+-grub_cmd_blocklist (grub_command_t cmd __attribute__ ((unused)),
+-		    int argc, char **args)
++/* Context for grub_cmd_blocklist.  */
++struct blocklist_ctx
+ {
+-  grub_file_t file;
+-  char buf[GRUB_DISK_SECTOR_SIZE];
+-  unsigned long start_sector = 0;
+-  unsigned num_sectors = 0;
+-  int num_entries = 0;
+-  grub_disk_addr_t part_start = 0;
+-  auto void NESTED_FUNC_ATTR read_blocklist (grub_disk_addr_t sector, unsigned offset,
+-			    unsigned length);
+-  auto void NESTED_FUNC_ATTR print_blocklist (grub_disk_addr_t sector, unsigned num,
+-			     unsigned offset, unsigned length);
+-
+-  void NESTED_FUNC_ATTR read_blocklist (grub_disk_addr_t sector, unsigned offset,
+-		       unsigned length)
++  unsigned long start_sector;
++  unsigned num_sectors;
++  int num_entries;
++  grub_disk_addr_t part_start;
++};
++
++/* Helper for grub_cmd_blocklist.  */
++static void
++print_blocklist (grub_disk_addr_t sector, unsigned num,
++		 unsigned offset, unsigned length, struct blocklist_ctx *ctx)
++{
++  if (ctx->num_entries++)
++    grub_printf (",");
++
++  grub_printf ("%llu", (unsigned long long) (sector - ctx->part_start));
++  if (num > 0)
++    grub_printf ("+%u", num);
++  if (offset != 0 || length != 0)
++    grub_printf ("[%u-%u]", offset, offset + length);
++}
++
++/* Helper for grub_cmd_blocklist.  */
++static void
++read_blocklist (grub_disk_addr_t sector, unsigned offset, unsigned length,
++		void *data)
++{
++  struct blocklist_ctx *ctx = data;
++
++  if (ctx->num_sectors > 0)
+     {
+-      if (num_sectors > 0)
++      if (ctx->start_sector + ctx->num_sectors == sector
++	  && offset == 0 && length == GRUB_DISK_SECTOR_SIZE)
+ 	{
+-	  if (start_sector + num_sectors == sector
+-	      && offset == 0 && length == GRUB_DISK_SECTOR_SIZE)
+-	    {
+-	      num_sectors++;
+-	      return;
+-	    }
+-
+-	  print_blocklist (start_sector, num_sectors, 0, 0);
+-	  num_sectors = 0;
++	  ctx->num_sectors++;
++	  return;
+ 	}
+ 
+-      if (offset == 0 && length == GRUB_DISK_SECTOR_SIZE)
+-	{
+-	  start_sector = sector;
+-	  num_sectors++;
+-	}
+-      else
+-	print_blocklist (sector, 0, offset, length);
++      print_blocklist (ctx->start_sector, ctx->num_sectors, 0, 0, ctx);
++      ctx->num_sectors = 0;
+     }
+ 
+-  void NESTED_FUNC_ATTR print_blocklist (grub_disk_addr_t sector, unsigned num,
+-			unsigned offset, unsigned length)
++  if (offset == 0 && length == GRUB_DISK_SECTOR_SIZE)
+     {
+-      if (num_entries++)
+-	grub_printf (",");
+-
+-      grub_printf ("%llu", (unsigned long long) (sector - part_start));
+-      if (num > 0)
+-	grub_printf ("+%u", num);
+-      if (offset != 0 || length != 0)
+-	grub_printf ("[%u-%u]", offset, offset + length);
++      ctx->start_sector = sector;
++      ctx->num_sectors++;
+     }
++  else
++    print_blocklist (sector, 0, offset, length, ctx);
++}
++
++static grub_err_t
++grub_cmd_blocklist (grub_command_t cmd __attribute__ ((unused)),
++		    int argc, char **args)
++{
++  grub_file_t file;
++  char buf[GRUB_DISK_SECTOR_SIZE];
++  struct blocklist_ctx ctx = {
++    .start_sector = 0,
++    .num_sectors = 0,
++    .num_entries = 0,
++    .part_start = 0
++  };
+ 
+   if (argc < 1)
+     return grub_error (GRUB_ERR_BAD_ARGUMENT, N_("filename expected"));
+@@ -93,15 +106,16 @@ grub_cmd_blocklist (grub_command_t cmd __attribute__ ((unused)),
+     return grub_error (GRUB_ERR_BAD_DEVICE,
+ 		       "this command is available only for disk devices");
+ 
+-  part_start = grub_partition_get_start (file->device->disk->partition);
++  ctx.part_start = grub_partition_get_start (file->device->disk->partition);
+ 
+   file->read_hook = read_blocklist;
++  file->read_hook_data = &ctx;
+ 
+   while (grub_file_read (file, buf, sizeof (buf)) > 0)
+     ;
+ 
+-  if (num_sectors > 0)
+-    print_blocklist (start_sector, num_sectors, 0, 0);
++  if (ctx.num_sectors > 0)
++    print_blocklist (ctx.start_sector, ctx.num_sectors, 0, 0, &ctx);
+ 
+   grub_file_close (file);
+ 
+diff --git a/grub-core/commands/loadenv.c b/grub-core/commands/loadenv.c
+index 9a35550..4b94173 100644
+--- a/grub-core/commands/loadenv.c
++++ b/grub-core/commands/loadenv.c
+@@ -284,44 +284,51 @@ write_blocklists (grub_envblk_t envblk, struct blocklist *blocklists,
+   return 1;
+ }
+ 
++/* Context for grub_cmd_save_env.  */
++struct grub_cmd_save_env_ctx
++{
++  struct blocklist *head, *tail;
++};
++
++/* Store blocklists in a linked list.  */
++static void
++save_env_read_hook (grub_disk_addr_t sector, unsigned offset, unsigned length,
++		    void *data)
++{
++  struct grub_cmd_save_env_ctx *ctx = data;
++  struct blocklist *block;
++
++  if (offset + length > GRUB_DISK_SECTOR_SIZE)
++    /* Seemingly a bug.  */
++    return;
++
++  block = grub_malloc (sizeof (*block));
++  if (! block)
++    return;
++
++  block->sector = sector;
++  block->offset = offset;
++  block->length = length;
++
++  /* Slightly complicated, because the list should be FIFO.  */
++  block->next = 0;
++  if (ctx->tail)
++    ctx->tail->next = block;
++  ctx->tail = block;
++  if (! ctx->head)
++    ctx->head = block;
++}
++
+ static grub_err_t
+ grub_cmd_save_env (grub_extcmd_context_t ctxt, int argc, char **args)
+ {
+   struct grub_arg_list *state = ctxt->state;
+   grub_file_t file;
+   grub_envblk_t envblk;
+-  struct blocklist *head = 0;
+-  struct blocklist *tail = 0;
+-
+-  /* Store blocklists in a linked list.  */
+-  auto void NESTED_FUNC_ATTR read_hook (grub_disk_addr_t sector,
+-                                        unsigned offset,
+-                                        unsigned length);
+-  void NESTED_FUNC_ATTR read_hook (grub_disk_addr_t sector,
+-                                   unsigned offset, unsigned length)
+-    {
+-      struct blocklist *block;
+-
+-      if (offset + length > GRUB_DISK_SECTOR_SIZE)
+-        /* Seemingly a bug.  */
+-        return;
+-
+-      block = grub_malloc (sizeof (*block));
+-      if (! block)
+-        return;
+-
+-      block->sector = sector;
+-      block->offset = offset;
+-      block->length = length;
+-
+-      /* Slightly complicated, because the list should be FIFO.  */
+-      block->next = 0;
+-      if (tail)
+-        tail->next = block;
+-      tail = block;
+-      if (! head)
+-        head = block;
+-    }
++  struct grub_cmd_save_env_ctx ctx = {
++    .head = 0,
++    .tail = 0
++  };
+ 
+   if (! argc)
+     return grub_error (GRUB_ERR_BAD_ARGUMENT, "no variable is specified");
+@@ -336,13 +343,14 @@ grub_cmd_save_env (grub_extcmd_context_t ctxt, int argc, char **args)
+       return grub_error (GRUB_ERR_BAD_DEVICE, "disk device required");
+     }
+ 
+-  file->read_hook = read_hook;
++  file->read_hook = save_env_read_hook;
++  file->read_hook_data = &ctx;
+   envblk = read_envblk_file (file);
+   file->read_hook = 0;
+   if (! envblk)
+     goto fail;
+ 
+-  if (check_blocklists (envblk, head, file))
++  if (check_blocklists (envblk, ctx.head, file))
+     goto fail;
+ 
+   while (argc)
+@@ -363,12 +371,12 @@ grub_cmd_save_env (grub_extcmd_context_t ctxt, int argc, char **args)
+       args++;
+     }
+ 
+-  write_blocklists (envblk, head, file);
++  write_blocklists (envblk, ctx.head, file);
+ 
+  fail:
+   if (envblk)
+     grub_envblk_close (envblk);
+-  free_blocklists (head);
++  free_blocklists (ctx.head);
+   grub_file_close (file);
+   return grub_errno;
+ }
+diff --git a/grub-core/commands/testload.c b/grub-core/commands/testload.c
+index a1bf775..4d0280a 100644
+--- a/grub-core/commands/testload.c
++++ b/grub-core/commands/testload.c
+@@ -31,6 +31,17 @@
+ 
+ GRUB_MOD_LICENSE ("GPLv3+");
+ 
++/* Helper for grub_cmd_testload.  */
++static void
++read_progress (grub_disk_addr_t sector __attribute__ ((unused)),
++	       unsigned offset __attribute__ ((unused)),
++	       unsigned len __attribute__ ((unused)),
++	       void *data __attribute__ ((unused)))
++{
++  grub_xputs (".");
++  grub_refresh ();
++}
++
+ static grub_err_t
+ grub_cmd_testload (struct grub_command *cmd __attribute__ ((unused)),
+ 		   int argc, char *argv[])
+@@ -39,15 +50,6 @@ grub_cmd_testload (struct grub_command *cmd __attribute__ ((unused)),
+   char *buf;
+   grub_size_t size;
+   grub_off_t pos;
+-  auto void NESTED_FUNC_ATTR read_func (grub_disk_addr_t sector, unsigned offset, unsigned len);
+-
+-  void NESTED_FUNC_ATTR read_func (grub_disk_addr_t sector __attribute__ ((unused)),
+-		  unsigned offset __attribute__ ((unused)),
+-		  unsigned len __attribute__ ((unused)))
+-    {
+-      grub_xputs (".");
+-      grub_refresh ();
+-    }
+ 
+   if (argc < 1)
+     return grub_error (GRUB_ERR_BAD_ARGUMENT, N_("filename expected"));
+@@ -68,7 +70,7 @@ grub_cmd_testload (struct grub_command *cmd __attribute__ ((unused)),
+     goto fail;
+ 
+   grub_printf ("Reading %s sequentially", argv[0]);
+-  file->read_hook = read_func;
++  file->read_hook = read_progress;
+   if (grub_file_read (file, buf, size) != (grub_ssize_t) size)
+     goto fail;
+   grub_printf (" Done.\n");
+diff --git a/grub-core/fs/affs.c b/grub-core/fs/affs.c
+index 6c49e5d..726704e 100644
+--- a/grub-core/fs/affs.c
++++ b/grub-core/fs/affs.c
+@@ -531,7 +531,7 @@ grub_affs_read (grub_file_t file, char *buf, grub_size_t len)
+     (struct grub_affs_data *) file->data;
+ 
+   return grub_fshelp_read_file (data->diropen.data->disk, &data->diropen,
+-				file->read_hook,
++				file->read_hook, file->read_hook_data,
+ 				file->offset, len, buf, grub_affs_read_block,
+ 				grub_be_to_cpu32 (data->diropen.di.size),
+ 				data->log_blocksize, 0);
+diff --git a/grub-core/fs/bfs.c b/grub-core/fs/bfs.c
+index fa2fc3f..f2e39d3 100644
+--- a/grub-core/fs/bfs.c
++++ b/grub-core/fs/bfs.c
+@@ -217,9 +217,7 @@ read_bfs_file (grub_disk_t disk,
+ 	       const struct grub_bfs_superblock *sb,
+ 	       const struct grub_bfs_inode *ino,
+ 	       grub_off_t off, void *buf, grub_size_t len,
+-	       void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-						   unsigned offset,
+-						   unsigned length))
++	       grub_disk_read_hook_t read_hook, void *read_hook_data)
+ {
+   if (len == 0)
+     return GRUB_ERR_NONE;
+@@ -245,6 +243,7 @@ read_bfs_file (grub_disk_t disk,
+ 	      if (read_size > len)
+ 		read_size = len;
+ 	      disk->read_hook = read_hook;
++	      disk->read_hook_data = read_hook_data;
+ 	      err = read_extent (disk, sb, &ino->direct[i], 0, off - pos,
+ 				 buf, read_size);
+ 	      disk->read_hook = 0;
+@@ -290,6 +289,7 @@ read_bfs_file (grub_disk_t disk,
+ 	      if (read_size > len)
+ 		read_size = len;
+ 	      disk->read_hook = read_hook;
++	      disk->read_hook_data = read_hook_data;
+ 	      err = read_extent (disk, sb, &entries[i], 0, off - pos,
+ 				 buf, read_size);
+ 	      disk->read_hook = 0;
+@@ -401,6 +401,7 @@ read_bfs_file (grub_disk_t disk,
+ 	if (read_size > len)
+ 	  read_size = len;
+ 	disk->read_hook = read_hook;
++	disk->read_hook_data = read_hook_data;
+ 	err = read_extent (disk, sb, &l2_entries[l2n], 0, boff,
+ 			   buf, read_size);
+ 	disk->read_hook = 0;
+@@ -431,7 +432,7 @@ iterate_in_b_tree (grub_disk_t disk,
+   int level;
+   grub_uint64_t node_off;
+ 
+-  err = read_bfs_file (disk, sb, ino, 0, &head, sizeof (head), 0);
++  err = read_bfs_file (disk, sb, ino, 0, &head, sizeof (head), 0, 0);
+   if (err)
+     return 0;
+   node_off = grub_bfs_to_cpu64 (head.root);
+@@ -441,7 +442,8 @@ iterate_in_b_tree (grub_disk_t disk,
+     {
+       struct grub_bfs_btree_node node;
+       grub_uint64_t key_value;
+-      err = read_bfs_file (disk, sb, ino, node_off, &node, sizeof (node), 0);
++      err = read_bfs_file (disk, sb, ino, node_off, &node, sizeof (node),
++			   0, 0);
+       if (err)
+ 	return 0;
+       err = read_bfs_file (disk, sb, ino, node_off
+@@ -451,7 +453,7 @@ iterate_in_b_tree (grub_disk_t disk,
+ 				       BTREE_ALIGN) +
+ 			   grub_bfs_to_cpu_treehead (node.count_keys) *
+ 			   sizeof (grub_uint16_t), &key_value,
+-			   sizeof (grub_uint64_t), 0);
++			   sizeof (grub_uint64_t), 0, 0);
+       if (err)
+ 	return 0;
+ 
+@@ -461,7 +463,8 @@ iterate_in_b_tree (grub_disk_t disk,
+   while (1)
+     {
+       struct grub_bfs_btree_node node;
+-      err = read_bfs_file (disk, sb, ino, node_off, &node, sizeof (node), 0);
++      err = read_bfs_file (disk, sb, ino, node_off, &node, sizeof (node),
++			   0, 0);
+       if (err)
+ 	return 0;
+       {
+@@ -473,7 +476,7 @@ iterate_in_b_tree (grub_disk_t disk,
+ 
+ 	err =
+ 	  read_bfs_file (disk, sb, ino, node_off + sizeof (node), key_data,
+-			 grub_bfs_to_cpu_treehead (node.total_key_len), 0);
++			 grub_bfs_to_cpu_treehead (node.total_key_len), 0, 0);
+ 	if (err)
+ 	  return 0;
+ 	key_data[grub_bfs_to_cpu_treehead (node.total_key_len)] = 0;
+@@ -483,7 +486,7 @@ iterate_in_b_tree (grub_disk_t disk,
+ 					 (node.total_key_len), BTREE_ALIGN),
+ 			     keylen_idx,
+ 			     grub_bfs_to_cpu_treehead (node.count_keys) *
+-			     sizeof (grub_uint16_t), 0);
++			     sizeof (grub_uint16_t), 0, 0);
+ 	if (err)
+ 	  return 0;
+ 	err = read_bfs_file (disk, sb, ino, node_off
+@@ -494,7 +497,7 @@ iterate_in_b_tree (grub_disk_t disk,
+ 			     grub_bfs_to_cpu_treehead (node.count_keys) *
+ 			     sizeof (grub_uint16_t), key_values,
+ 			     grub_bfs_to_cpu_treehead (node.count_keys) *
+-			     sizeof (grub_uint64_t), 0);
++			     sizeof (grub_uint64_t), 0, 0);
+ 	if (err)
+ 	  return 0;
+ 
+@@ -556,7 +559,7 @@ find_in_b_tree (grub_disk_t disk,
+   int level;
+   grub_uint64_t node_off;
+ 
+-  err = read_bfs_file (disk, sb, ino, 0, &head, sizeof (head), 0);
++  err = read_bfs_file (disk, sb, ino, 0, &head, sizeof (head), 0, 0);
+   if (err)
+     return err;
+   node_off = grub_bfs_to_cpu64 (head.root);
+@@ -565,7 +568,8 @@ find_in_b_tree (grub_disk_t disk,
+   while (1)
+     {
+       struct grub_bfs_btree_node node;
+-      err = read_bfs_file (disk, sb, ino, node_off, &node, sizeof (node), 0);
++      err = read_bfs_file (disk, sb, ino, node_off, &node, sizeof (node),
++			   0, 0);
+       if (err)
+ 	return err;
+       if (node.count_keys == 0)
+@@ -578,7 +582,7 @@ find_in_b_tree (grub_disk_t disk,
+ 	unsigned i;
+ 	err =
+ 	  read_bfs_file (disk, sb, ino, node_off + sizeof (node), key_data,
+-			 grub_bfs_to_cpu_treehead (node.total_key_len), 0);
++			 grub_bfs_to_cpu_treehead (node.total_key_len), 0, 0);
+ 	if (err)
+ 	  return err;
+ 	key_data[grub_bfs_to_cpu_treehead (node.total_key_len)] = 0;
+@@ -589,7 +593,7 @@ find_in_b_tree (grub_disk_t disk,
+ 								 total_key_len),
+ 				       BTREE_ALIGN), keylen_idx,
+ 			     grub_bfs_to_cpu_treehead (node.count_keys) *
+-			     sizeof (grub_uint16_t), 0);
++			     sizeof (grub_uint16_t), 0, 0);
+ 	if (err)
+ 	  return err;
+ 	err = read_bfs_file (disk, sb, ino, node_off
+@@ -600,7 +604,7 @@ find_in_b_tree (grub_disk_t disk,
+ 			     grub_bfs_to_cpu_treehead (node.count_keys) *
+ 			     sizeof (grub_uint16_t), key_values,
+ 			     grub_bfs_to_cpu_treehead (node.count_keys) *
+-			     sizeof (grub_uint64_t), 0);
++			     sizeof (grub_uint64_t), 0, 0);
+ 	if (err)
+ 	  return err;
+ 
+@@ -771,7 +775,7 @@ find_file (const char *path, grub_disk_t disk,
+ 		  return grub_errno;
+ 		}
+ 	      grub_free (old_alloc);
+-	      err = read_bfs_file (disk, sb, ino, 0, alloc, symsize, 0);
++	      err = read_bfs_file (disk, sb, ino, 0, alloc, symsize, 0, 0);
+ 	      if (err)
+ 		{
+ 		  grub_free (alloc);
+@@ -974,7 +978,8 @@ grub_bfs_read (grub_file_t file, char *buf, grub_size_t len)
+   struct grub_bfs_data *data = file->data;
+ 
+   err = read_bfs_file (file->device->disk, &data->sb,
+-		       data->ino, file->offset, buf, len, file->read_hook);
++		       data->ino, file->offset, buf, len,
++		       file->read_hook, file->read_hook_data);
+   if (err)
+     return -1;
+   return len;
+@@ -1056,7 +1061,7 @@ read_bfs_attr (grub_disk_t disk,
+       if (read > len)
+ 	read = len;
+ 
+-      err = read_bfs_file (disk, sb, &ino2.ino, 0, buf, read, 0);
++      err = read_bfs_file (disk, sb, &ino2.ino, 0, buf, read, 0, 0);
+       if (err)
+ 	return -1;
+       return read;
+diff --git a/grub-core/fs/ext2.c b/grub-core/fs/ext2.c
+index 0ebde35..18429ac 100644
+--- a/grub-core/fs/ext2.c
++++ b/grub-core/fs/ext2.c
+@@ -525,11 +525,11 @@ grub_ext2_read_block (grub_fshelp_node_t node, grub_disk_addr_t fileblock)
+    POS.  Return the amount of read bytes in READ.  */
+ static grub_ssize_t
+ grub_ext2_read_file (grub_fshelp_node_t node,
+-		     void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-					unsigned offset, unsigned length),
++		     grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		     grub_off_t pos, grub_size_t len, char *buf)
+ {
+-  return grub_fshelp_read_file (node->data->disk, node, read_hook,
++  return grub_fshelp_read_file (node->data->disk, node,
++				read_hook, read_hook_data,
+ 				pos, len, buf, grub_ext2_read_block,
+ 				grub_cpu_to_le32 (node->inode.size)
+ 				| (((grub_off_t) grub_cpu_to_le32 (node->inode.size_high)) << 32),
+@@ -676,7 +676,7 @@ grub_ext2_read_symlink (grub_fshelp_node_t node)
+ 		  grub_le_to_cpu32 (diro->inode.size));
+   else
+     {
+-      grub_ext2_read_file (diro, 0, 0,
++      grub_ext2_read_file (diro, 0, 0, 0,
+ 			   grub_le_to_cpu32 (diro->inode.size),
+ 			   symlink);
+       if (grub_errno)
+@@ -709,7 +709,7 @@ grub_ext2_iterate_dir (grub_fshelp_node_t dir,
+     {
+       struct ext2_dirent dirent;
+ 
+-      grub_ext2_read_file (diro, 0, fpos, sizeof (struct ext2_dirent),
++      grub_ext2_read_file (diro, 0, 0, fpos, sizeof (struct ext2_dirent),
+ 			   (char *) &dirent);
+       if (grub_errno)
+ 	return 0;
+@@ -723,7 +723,7 @@ grub_ext2_iterate_dir (grub_fshelp_node_t dir,
+ 	  struct grub_fshelp_node *fdiro;
+ 	  enum grub_fshelp_filetype type = GRUB_FSHELP_UNKNOWN;
+ 
+-	  grub_ext2_read_file (diro, 0, fpos + sizeof (struct ext2_dirent),
++	  grub_ext2_read_file (diro, 0, 0, fpos + sizeof (struct ext2_dirent),
+ 			       dirent.namelen, filename);
+ 	  if (grub_errno)
+ 	    return 0;
+@@ -850,7 +850,8 @@ grub_ext2_read (grub_file_t file, char *buf, grub_size_t len)
+ {
+   struct grub_ext2_data *data = (struct grub_ext2_data *) file->data;
+ 
+-  return grub_ext2_read_file (&data->diropen, file->read_hook,
++  return grub_ext2_read_file (&data->diropen,
++			      file->read_hook, file->read_hook_data,
+ 			      file->offset, len, buf);
+ }
+ 
+diff --git a/grub-core/fs/fat.c b/grub-core/fs/fat.c
+index 7664153..db28158 100644
+--- a/grub-core/fs/fat.c
++++ b/grub-core/fs/fat.c
+@@ -454,8 +454,7 @@ grub_fat_mount (grub_disk_t disk)
+ 
+ static grub_ssize_t
+ grub_fat_read_data (grub_disk_t disk, struct grub_fat_data *data,
+-		    void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-				       unsigned offset, unsigned length),
++		    grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		    grub_off_t offset, grub_size_t len, char *buf)
+ {
+   grub_size_t size;
+@@ -561,6 +560,7 @@ grub_fat_read_data (grub_disk_t disk, struct grub_fat_data *data,
+ 	size = len;
+ 
+       disk->read_hook = read_hook;
++      disk->read_hook_data = read_hook_data;
+       grub_disk_read (disk, sector, offset, size, buf);
+       disk->read_hook = 0;
+       if (grub_errno)
+@@ -630,7 +630,7 @@ grub_fat_iterate_dir_next (grub_disk_t disk, struct grub_fat_data *data,
+ 
+       ctxt->offset += sizeof (dir);
+ 
+-      if (grub_fat_read_data (disk, data, 0, ctxt->offset, sizeof (dir),
++      if (grub_fat_read_data (disk, data, 0, 0, ctxt->offset, sizeof (dir),
+ 			      (char *) &dir)
+ 	   != sizeof (dir))
+ 	break;
+@@ -652,7 +652,7 @@ grub_fat_iterate_dir_next (grub_disk_t disk, struct grub_fat_data *data,
+ 	    {
+ 	      struct grub_fat_dir_entry sec;
+ 	      ctxt->offset += sizeof (sec);
+-	      if (grub_fat_read_data (disk, data, 0,
++	      if (grub_fat_read_data (disk, data, 0, 0,
+ 				      ctxt->offset, sizeof (sec), (char *) &sec)
+ 		  != sizeof (sec))
+ 		break;
+@@ -729,7 +729,7 @@ grub_fat_iterate_dir_next (grub_disk_t disk, struct grub_fat_data *data,
+       ctxt->offset += sizeof (ctxt->dir);
+ 
+       /* Read a directory entry.  */
+-      if (grub_fat_read_data (disk, data, 0,
++      if (grub_fat_read_data (disk, data, 0, 0,
+ 			      ctxt->offset, sizeof (ctxt->dir),
+ 			      (char *) &ctxt->dir)
+ 	   != sizeof (ctxt->dir) || ctxt->dir.name[0] == 0)
+@@ -1031,7 +1031,8 @@ grub_fat_open (grub_file_t file, const char *name)
+ static grub_ssize_t
+ grub_fat_read (grub_file_t file, char *buf, grub_size_t len)
+ {
+-  return grub_fat_read_data (file->device->disk, file->data, file->read_hook,
++  return grub_fat_read_data (file->device->disk, file->data,
++			     file->read_hook, file->read_hook_data,
+ 			     file->offset, len, buf);
+ }
+ 
+@@ -1064,7 +1065,7 @@ grub_fat_label (grub_device_t device, char **label)
+     {
+       offset += sizeof (dir);
+ 
+-      if (grub_fat_read_data (disk, data, 0,
++      if (grub_fat_read_data (disk, data, 0, 0,
+ 			       offset, sizeof (dir), (char *) &dir)
+ 	   != sizeof (dir))
+ 	break;
+diff --git a/grub-core/fs/fshelp.c b/grub-core/fs/fshelp.c
+index 11a1259..d56e63f 100644
+--- a/grub-core/fs/fshelp.c
++++ b/grub-core/fs/fshelp.c
+@@ -248,14 +248,13 @@ grub_fshelp_find_file (const char *path, grub_fshelp_node_t rootnode,
+ 
+ /* Read LEN bytes from the file NODE on disk DISK into the buffer BUF,
+    beginning with the block POS.  READ_HOOK should be set before
+-   reading a block from the file.  GET_BLOCK is used to translate file
+-   blocks to disk blocks.  The file is FILESIZE bytes big and the
++   reading a block from the file.  READ_HOOK_DATA is passed through as
++   the DATA argument to READ_HOOK.  GET_BLOCK is used to translate
++   file blocks to disk blocks.  The file is FILESIZE bytes big and the
+    blocks have a size of LOG2BLOCKSIZE (in log2).  */
+ grub_ssize_t
+ grub_fshelp_read_file (grub_disk_t disk, grub_fshelp_node_t node,
+-		       void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-                                                           unsigned offset,
+-                                                           unsigned length),
++		       grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		       grub_off_t pos, grub_size_t len, char *buf,
+ 		       grub_disk_addr_t (*get_block) (grub_fshelp_node_t node,
+                                                       grub_disk_addr_t block),
+@@ -307,6 +306,7 @@ grub_fshelp_read_file (grub_disk_t disk, grub_fshelp_node_t node,
+       if (blknr)
+ 	{
+ 	  disk->read_hook = read_hook;
++	  disk->read_hook_data = read_hook_data;
+ 
+ 	  grub_disk_read (disk, blknr + blocks_start, skipfirst,
+ 			  blockend, buf);
+diff --git a/grub-core/fs/hfs.c b/grub-core/fs/hfs.c
+index 9ed3330..4b2b5aa 100644
+--- a/grub-core/fs/hfs.c
++++ b/grub-core/fs/hfs.c
+@@ -243,8 +243,7 @@ grub_hfs_block (struct grub_hfs_data *data, grub_hfs_datarecord_t dat,
+    POS.  Return the amount of read bytes in READ.  */
+ static grub_ssize_t
+ grub_hfs_read_file (struct grub_hfs_data *data,
+-		    void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-				       unsigned offset, unsigned length),
++		    grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		    grub_off_t pos, grub_size_t len, char *buf)
+ {
+   grub_off_t i;
+@@ -289,6 +288,7 @@ grub_hfs_read_file (struct grub_hfs_data *data,
+       if (blknr)
+ 	{
+ 	  data->disk->read_hook = read_hook;
++	  data->disk->read_hook_data = read_hook_data;
+ 	  grub_disk_read (data->disk, blknr, skipfirst,
+ 			  blockend, buf);
+ 	  data->disk->read_hook = 0;
+@@ -1269,7 +1269,8 @@ grub_hfs_read (grub_file_t file, char *buf, grub_size_t len)
+   struct grub_hfs_data *data =
+     (struct grub_hfs_data *) file->data;
+ 
+-  return grub_hfs_read_file (data, file->read_hook, file->offset, len, buf);
++  return grub_hfs_read_file (data, file->read_hook, file->read_hook_data,
++			     file->offset, len, buf);
+ }
+ 
+ 
+diff --git a/grub-core/fs/hfsplus.c b/grub-core/fs/hfsplus.c
+index dcca581..29a3a94 100644
+--- a/grub-core/fs/hfsplus.c
++++ b/grub-core/fs/hfsplus.c
+@@ -375,11 +375,11 @@ grub_hfsplus_read_block (grub_fshelp_node_t node, grub_disk_addr_t fileblock)
+    POS.  Return the amount of read bytes in READ.  */
+ static grub_ssize_t
+ grub_hfsplus_read_file (grub_fshelp_node_t node,
+-			void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-					   unsigned offset, unsigned length),
++			grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 			grub_off_t pos, grub_size_t len, char *buf)
+ {
+-  return grub_fshelp_read_file (node->data->disk, node, read_hook,
++  return grub_fshelp_read_file (node->data->disk, node,
++				read_hook, read_hook_data,
+ 				pos, len, buf, grub_hfsplus_read_block,
+ 				node->size,
+ 				node->data->log2blksize - GRUB_DISK_SECTOR_BITS,
+@@ -477,7 +477,7 @@ grub_hfsplus_mount (grub_disk_t disk)
+     grub_be_to_cpu64 (data->volheader.extents_file.size);
+ 
+   /* Read the essential information about the trees.  */
+-  if (grub_hfsplus_read_file (&data->catalog_tree.file, 0,
++  if (grub_hfsplus_read_file (&data->catalog_tree.file, 0, 0,
+ 			      sizeof (struct grub_hfsplus_btnode),
+ 			      sizeof (header), (char *) &header) <= 0)
+     goto fail;
+@@ -487,14 +487,14 @@ grub_hfsplus_mount (grub_disk_t disk)
+   data->case_sensitive = ((magic == GRUB_HFSPLUSX_MAGIC) &&
+ 			  (header.key_compare == GRUB_HFSPLUSX_BINARYCOMPARE));
+ 
+-  if (grub_hfsplus_read_file (&data->extoverflow_tree.file, 0,
++  if (grub_hfsplus_read_file (&data->extoverflow_tree.file, 0, 0,
+ 			      sizeof (struct grub_hfsplus_btnode),
+ 			      sizeof (header), (char *) &header) <= 0)
+     goto fail;
+ 
+   data->extoverflow_tree.root = grub_be_to_cpu32 (header.root);
+ 
+-  if (grub_hfsplus_read_file (&data->extoverflow_tree.file, 0, 0,
++  if (grub_hfsplus_read_file (&data->extoverflow_tree.file, 0, 0, 0,
+ 			      sizeof (node), (char *) &node) <= 0)
+     goto fail;
+ 
+@@ -605,7 +605,7 @@ grub_hfsplus_read_symlink (grub_fshelp_node_t node)
+   if (!symlink)
+     return 0;
+ 
+-  numread = grub_hfsplus_read_file (node, 0, 0, node->size, symlink);
++  numread = grub_hfsplus_read_file (node, 0, 0, 0, node->size, symlink);
+   if (numread != (grub_ssize_t) node->size)
+     {
+       grub_free (symlink);
+@@ -649,7 +649,7 @@ grub_hfsplus_btree_iterate_node (struct grub_hfsplus_btree *btree,
+ 	saved_node = first_node->next;
+       node_count++;
+ 
+-      if (grub_hfsplus_read_file (&btree->file, 0,
++      if (grub_hfsplus_read_file (&btree->file, 0, 0,
+ 				  (((grub_disk_addr_t)
+ 				    grub_be_to_cpu32 (first_node->next))
+ 				   * btree->nodesize),
+@@ -702,7 +702,7 @@ grub_hfsplus_btree_search (struct grub_hfsplus_btree *btree,
+       node_count++;
+ 
+       /* Read a node.  */
+-      if (grub_hfsplus_read_file (&btree->file, 0,
++      if (grub_hfsplus_read_file (&btree->file, 0, 0,
+ 				  (grub_disk_addr_t) currnode
+ 				  * (grub_disk_addr_t) btree->nodesize,
+ 				  btree->nodesize, (char *) node) <= 0)
+@@ -971,8 +971,9 @@ grub_hfsplus_read (grub_file_t file, char *buf, grub_size_t len)
+   struct grub_hfsplus_data *data =
+     (struct grub_hfsplus_data *) file->data;
+ 
+-  return grub_hfsplus_read_file (&data->opened_file, file->read_hook,
+-				     file->offset, len, buf);
++  return grub_hfsplus_read_file (&data->opened_file,
++				 file->read_hook, file->read_hook_data,
++				 file->offset, len, buf);
+ }
+ 
+ /* Context for grub_hfsplus_dir.  */
+diff --git a/grub-core/fs/iso9660.c b/grub-core/fs/iso9660.c
+index e37553d..19471e8 100644
+--- a/grub-core/fs/iso9660.c
++++ b/grub-core/fs/iso9660.c
+@@ -961,6 +961,7 @@ grub_iso9660_read (grub_file_t file, char *buf, grub_size_t len)
+ 
+   /* XXX: The file is stored in as a single extent.  */
+   data->disk->read_hook = file->read_hook;
++  data->disk->read_hook_data = file->read_hook_data;
+   read_node (data->node, file->offset, len, buf);
+   data->disk->read_hook = NULL;
+ 
+diff --git a/grub-core/fs/jfs.c b/grub-core/fs/jfs.c
+index 7c17192..88b21ad 100644
+--- a/grub-core/fs/jfs.c
++++ b/grub-core/fs/jfs.c
+@@ -577,8 +577,7 @@ grub_jfs_getent (struct grub_jfs_diropen *diro)
+    POS.  Return the amount of read bytes in READ.  */
+ static grub_ssize_t
+ grub_jfs_read_file (struct grub_jfs_data *data,
+-		    void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-				       unsigned offset, unsigned length),
++		    grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		    grub_off_t pos, grub_size_t len, char *buf)
+ {
+   grub_off_t i;
+@@ -616,6 +615,7 @@ grub_jfs_read_file (struct grub_jfs_data *data,
+ 	}
+ 
+       data->disk->read_hook = read_hook;
++      data->disk->read_hook_data = read_hook_data;
+       grub_disk_read (data->disk,
+ 		      blknr << (grub_le_to_cpu16 (data->sblock.log2_blksz)
+ 				- GRUB_DISK_SECTOR_BITS),
+@@ -782,7 +782,7 @@ grub_jfs_lookup_symlink (struct grub_jfs_data *data, grub_uint32_t ino)
+ 
+   if (size <= sizeof (data->currinode.symlink.path))
+     grub_strncpy (symlink, (char *) (data->currinode.symlink.path), size);
+-  else if (grub_jfs_read_file (data, 0, 0, size, symlink) < 0)
++  else if (grub_jfs_read_file (data, 0, 0, 0, size, symlink) < 0)
+     return grub_errno;
+ 
+   symlink[size] = '\0';
+@@ -894,7 +894,8 @@ grub_jfs_read (grub_file_t file, char *buf, grub_size_t len)
+   struct grub_jfs_data *data =
+     (struct grub_jfs_data *) file->data;
+ 
+-  return grub_jfs_read_file (data, file->read_hook, file->offset, len, buf);
++  return grub_jfs_read_file (data, file->read_hook, file->read_hook_data,
++			     file->offset, len, buf);
+ }
+ 
+ 
+diff --git a/grub-core/fs/minix.c b/grub-core/fs/minix.c
+index 9655211..918fe56 100644
+--- a/grub-core/fs/minix.c
++++ b/grub-core/fs/minix.c
+@@ -249,8 +249,7 @@ grub_minix_get_file_block (struct grub_minix_data *data, unsigned int blk)
+    POS.  Return the amount of read bytes in READ.  */
+ static grub_ssize_t
+ grub_minix_read_file (struct grub_minix_data *data,
+-		      void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-					 unsigned offset, unsigned length),
++		      grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		      grub_off_t pos, grub_size_t len, char *buf)
+ {
+   grub_uint32_t i;
+@@ -301,6 +300,7 @@ grub_minix_read_file (struct grub_minix_data *data,
+ 	}
+ 
+       data->disk->read_hook = read_hook;
++      data->disk->read_hook_data = read_hook_data;
+       grub_disk_read (data->disk,
+ 		      GRUB_MINIX_ZONE2SECT(blknr),
+ 		      skipfirst, blockend, buf);
+@@ -352,7 +352,7 @@ grub_minix_lookup_symlink (struct grub_minix_data *data, grub_minix_ino_t ino)
+   if (++data->linknest > GRUB_MINIX_MAX_SYMLNK_CNT)
+     return grub_error (GRUB_ERR_SYMLINK_LOOP, N_("too deep nesting of symlinks"));
+ 
+-  if (grub_minix_read_file (data, 0, 0,
++  if (grub_minix_read_file (data, 0, 0, 0,
+ 			    GRUB_MINIX_INODE_SIZE (data), symlink) < 0)
+     return grub_errno;
+ 
+@@ -409,10 +409,10 @@ grub_minix_find_file (struct grub_minix_data *data, const char *path)
+       if (grub_strlen (name) == 0)
+ 	return GRUB_ERR_NONE;
+ 
+-      if (grub_minix_read_file (data, 0, pos, sizeof (ino),
++      if (grub_minix_read_file (data, 0, 0, pos, sizeof (ino),
+ 				(char *) &ino) < 0)
+ 	return grub_errno;
+-      if (grub_minix_read_file (data, 0, pos + sizeof (ino),
++      if (grub_minix_read_file (data, 0, 0, pos + sizeof (ino),
+ 				data->filename_size, (char *) filename)< 0)
+ 	return grub_errno;
+ 
+@@ -568,11 +568,11 @@ grub_minix_dir (grub_device_t device, const char *path,
+       grub_memset (&info, 0, sizeof (info));
+ 
+ 
+-      if (grub_minix_read_file (data, 0, pos, sizeof (ino),
++      if (grub_minix_read_file (data, 0, 0, pos, sizeof (ino),
+ 				(char *) &ino) < 0)
+ 	return grub_errno;
+ 
+-      if (grub_minix_read_file (data, 0, pos + sizeof (ino),
++      if (grub_minix_read_file (data, 0, 0, pos + sizeof (ino),
+ 				data->filename_size,
+ 				(char *) filename) < 0)
+ 	return grub_errno;
+@@ -649,7 +649,8 @@ grub_minix_read (grub_file_t file, char *buf, grub_size_t len)
+   struct grub_minix_data *data =
+     (struct grub_minix_data *) file->data;
+ 
+-  return grub_minix_read_file (data, file->read_hook, file->offset, len, buf);
++  return grub_minix_read_file (data, file->read_hook, file->read_hook_data,
++			       file->offset, len, buf);
+ }
+ 
+ 
+diff --git a/grub-core/fs/nilfs2.c b/grub-core/fs/nilfs2.c
+index 9bd4444..3f28bd7 100644
+--- a/grub-core/fs/nilfs2.c
++++ b/grub-core/fs/nilfs2.c
+@@ -630,13 +630,11 @@ grub_nilfs2_read_block (grub_fshelp_node_t node, grub_disk_addr_t fileblock)
+    POS.  Return the amount of read bytes in READ.  */
+ static grub_ssize_t
+ grub_nilfs2_read_file (grub_fshelp_node_t node,
+-		       void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t
+-							   sector,
+-							   unsigned offset,
+-							   unsigned length),
++		       grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		       grub_off_t pos, grub_size_t len, char *buf)
+ {
+-  return grub_fshelp_read_file (node->data->disk, node, read_hook,
++  return grub_fshelp_read_file (node->data->disk, node,
++				read_hook, read_hook_data,
+ 				pos, len, buf, grub_nilfs2_read_block,
+ 				grub_le_to_cpu64 (node->inode.i_size),
+ 				LOG2_NILFS2_BLOCK_SIZE (node->data), 0);
+@@ -856,7 +854,7 @@ grub_nilfs2_read_symlink (grub_fshelp_node_t node)
+   if (!symlink)
+     return 0;
+ 
+-  grub_nilfs2_read_file (diro, 0, 0,
++  grub_nilfs2_read_file (diro, 0, 0, 0,
+ 			 grub_le_to_cpu64 (diro->inode.i_size), symlink);
+   if (grub_errno)
+     {
+@@ -887,7 +885,7 @@ grub_nilfs2_iterate_dir (grub_fshelp_node_t dir,
+     {
+       struct grub_nilfs2_dir_entry dirent;
+ 
+-      grub_nilfs2_read_file (diro, 0, fpos,
++      grub_nilfs2_read_file (diro, 0, 0, fpos,
+ 			     sizeof (struct grub_nilfs2_dir_entry),
+ 			     (char *) &dirent);
+       if (grub_errno)
+@@ -902,7 +900,7 @@ grub_nilfs2_iterate_dir (grub_fshelp_node_t dir,
+ 	  struct grub_fshelp_node *fdiro;
+ 	  enum grub_fshelp_filetype type = GRUB_FSHELP_UNKNOWN;
+ 
+-	  grub_nilfs2_read_file (diro, 0,
++	  grub_nilfs2_read_file (diro, 0, 0,
+ 				 fpos + sizeof (struct grub_nilfs2_dir_entry),
+ 				 dirent.name_len, filename);
+ 	  if (grub_errno)
+@@ -1025,7 +1023,8 @@ grub_nilfs2_read (grub_file_t file, char *buf, grub_size_t len)
+ {
+   struct grub_nilfs2_data *data = (struct grub_nilfs2_data *) file->data;
+ 
+-  return grub_nilfs2_read_file (&data->diropen, file->read_hook,
++  return grub_nilfs2_read_file (&data->diropen,
++				file->read_hook, file->read_hook_data,
+ 				file->offset, len, buf);
+ }
+ 
+diff --git a/grub-core/fs/ntfs.c b/grub-core/fs/ntfs.c
+index 7ac46f9..5ea2e1b 100644
+--- a/grub-core/fs/ntfs.c
++++ b/grub-core/fs/ntfs.c
+@@ -91,21 +91,15 @@ static grub_err_t read_mft (struct grub_ntfs_data *data, grub_uint8_t *buf,
+ static grub_err_t read_attr (struct grub_ntfs_attr *at, grub_uint8_t *dest,
+ 			     grub_disk_addr_t ofs, grub_size_t len,
+ 			     int cached,
+-			     void
+-			     NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t
+-							    sector,
+-							    unsigned offset,
+-							    unsigned length));
++			     grub_disk_read_hook_t read_hook,
++			     void *read_hook_data);
+ 
+ static grub_err_t read_data (struct grub_ntfs_attr *at, grub_uint8_t *pa,
+ 			     grub_uint8_t *dest,
+ 			     grub_disk_addr_t ofs, grub_size_t len,
+ 			     int cached,
+-			     void
+-			     NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t
+-							    sector,
+-							    unsigned offset,
+-							    unsigned length));
++			     grub_disk_read_hook_t read_hook,
++			     void *read_hook_data);
+ 
+ static void
+ init_attr (struct grub_ntfs_attr *at, struct grub_ntfs_file *mft)
+@@ -207,7 +201,7 @@ find_attr (struct grub_ntfs_attr *at, grub_uint8_t attr)
+ 	  at->edat_buf = grub_malloc (n);
+ 	  if (!at->edat_buf)
+ 	    return NULL;
+-	  if (read_data (at, pa, at->edat_buf, 0, n, 0, 0))
++	  if (read_data (at, pa, at->edat_buf, 0, n, 0, 0, 0))
+ 	    {
+ 	      grub_error (GRUB_ERR_BAD_FS,
+ 			  "fail to read non-resident attribute list");
+@@ -249,7 +243,7 @@ find_attr (struct grub_ntfs_attr *at, grub_uint8_t attr)
+ 	      if (read_attr
+ 		  (at, pa + 0x10,
+ 		   u32at (pa, 0x10) * (at->mft->data->mft_size << GRUB_NTFS_BLK_SHR),
+-		   at->mft->data->mft_size << GRUB_NTFS_BLK_SHR, 0, 0))
++		   at->mft->data->mft_size << GRUB_NTFS_BLK_SHR, 0, 0, 0))
+ 		return NULL;
+ 	      pa += u16at (pa, 4);
+ 	    }
+@@ -325,9 +319,7 @@ retry:
+     {
+       if ((ctx->attr) && (ctx->attr->flags & GRUB_NTFS_AF_ALST))
+ 	{
+-	  void NESTED_FUNC_ATTR (*save_hook) (grub_disk_addr_t sector,
+-					      unsigned offset,
+-					      unsigned length);
++	  grub_disk_read_hook_t save_hook;
+ 
+ 	  save_hook = ctx->comp.disk->read_hook;
+ 	  ctx->comp.disk->read_hook = 0;
+@@ -379,9 +371,7 @@ grub_ntfs_read_block (grub_fshelp_node_t node, grub_disk_addr_t block)
+ static grub_err_t
+ read_data (struct grub_ntfs_attr *at, grub_uint8_t *pa, grub_uint8_t *dest,
+ 	   grub_disk_addr_t ofs, grub_size_t len, int cached,
+-	   void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-					       unsigned offset,
+-					       unsigned length))
++	   grub_disk_read_hook_t read_hook, void *read_hook_data)
+ {
+   grub_disk_addr_t vcn;
+   struct grub_ntfs_rlst cc, *ctx;
+@@ -480,7 +470,8 @@ read_data (struct grub_ntfs_attr *at, grub_uint8_t *pa, grub_uint8_t *dest,
+   if (!(ctx->flags & GRUB_NTFS_RF_COMP))
+     {
+       grub_fshelp_read_file (ctx->comp.disk, (grub_fshelp_node_t) ctx,
+-			     read_hook, ofs, len, (char *) dest,
++			     read_hook, read_hook_data, ofs, len,
++			     (char *) dest,
+ 			     grub_ntfs_read_block, ofs + len,
+ 			     ctx->comp.log_spc, 0);
+       return grub_errno;
+@@ -495,9 +486,7 @@ read_data (struct grub_ntfs_attr *at, grub_uint8_t *pa, grub_uint8_t *dest,
+ static grub_err_t
+ read_attr (struct grub_ntfs_attr *at, grub_uint8_t *dest, grub_disk_addr_t ofs,
+ 	   grub_size_t len, int cached,
+-	   void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-					       unsigned offset,
+-					       unsigned length))
++	   grub_disk_read_hook_t read_hook, void *read_hook_data)
+ {
+   grub_uint8_t *save_cur;
+   grub_uint8_t attr;
+@@ -532,7 +521,8 @@ read_attr (struct grub_ntfs_attr *at, grub_uint8_t *dest, grub_disk_addr_t ofs,
+     }
+   pp = find_attr (at, attr);
+   if (pp)
+-    ret = read_data (at, pp, dest, ofs, len, cached, read_hook);
++    ret = read_data (at, pp, dest, ofs, len, cached,
++		     read_hook, read_hook_data);
+   else
+     ret =
+       (grub_errno) ? grub_errno : grub_error (GRUB_ERR_BAD_FS,
+@@ -546,7 +536,7 @@ read_mft (struct grub_ntfs_data *data, grub_uint8_t *buf, grub_uint32_t mftno)
+ {
+   if (read_attr
+       (&data->mmft.attr, buf, mftno * ((grub_disk_addr_t) data->mft_size << GRUB_NTFS_BLK_SHR),
+-       data->mft_size << GRUB_NTFS_BLK_SHR, 0, 0))
++       data->mft_size << GRUB_NTFS_BLK_SHR, 0, 0, 0))
+     return grub_error (GRUB_ERR_BAD_FS, "read MFT 0x%X fails", mftno);
+   return fixup (buf, data->mft_size, (const grub_uint8_t *) "FILE");
+ }
+@@ -717,7 +707,7 @@ grub_ntfs_read_symlink (grub_fshelp_node_t node)
+     }
+ 
+   err = read_attr (&mft->attr, (grub_uint8_t *) &symdesc, 0,
+-		   sizeof (struct symlink_descriptor), 1, 0);
++		   sizeof (struct symlink_descriptor), 1, 0, 0);
+   if (err)
+     return NULL;
+ 
+@@ -743,7 +733,7 @@ grub_ntfs_read_symlink (grub_fshelp_node_t node)
+   if (!buf16)
+     return NULL;
+ 
+-  err = read_attr (&mft->attr, (grub_uint8_t *) buf16, off, len, 1, 0);
++  err = read_attr (&mft->attr, (grub_uint8_t *) buf16, off, len, 1, 0, 0);
+   if (err)
+     return NULL;
+ 
+@@ -852,7 +842,7 @@ grub_ntfs_iterate_dir (grub_fshelp_node_t dir,
+ 	    }
+           else
+             {
+-              if (read_data (at, cur_pos, bmp, 0, bitmap_len, 0, 0))
++              if (read_data (at, cur_pos, bmp, 0, bitmap_len, 0, 0, 0))
+                 {
+                   grub_error (GRUB_ERR_BAD_FS,
+                               "fails to read non-resident $BITMAP");
+@@ -899,7 +889,7 @@ grub_ntfs_iterate_dir (grub_fshelp_node_t dir,
+ 	    {
+ 	      if ((read_attr
+ 		   (at, indx, i * (mft->data->idx_size << GRUB_NTFS_BLK_SHR),
+-		    (mft->data->idx_size << GRUB_NTFS_BLK_SHR), 0, 0))
++		    (mft->data->idx_size << GRUB_NTFS_BLK_SHR), 0, 0, 0))
+ 		  || (fixup (indx, mft->data->idx_size,
+ 			     (const grub_uint8_t *) "INDX")))
+ 		goto done;
+@@ -1136,7 +1126,7 @@ grub_ntfs_read (grub_file_t file, char *buf, grub_size_t len)
+     mft->attr.save_pos = 1;
+ 
+   read_attr (&mft->attr, (grub_uint8_t *) buf, file->offset, len, 1,
+-	     file->read_hook);
++	     file->read_hook, file->read_hook_data);
+   return (grub_errno) ? -1 : (grub_ssize_t) len;
+ }
+ 
+diff --git a/grub-core/fs/ntfscomp.c b/grub-core/fs/ntfscomp.c
+index 02ea9fd..cf9e348 100644
+--- a/grub-core/fs/ntfscomp.c
++++ b/grub-core/fs/ntfscomp.c
+@@ -302,6 +302,7 @@ ntfscomp (struct grub_ntfs_attr *at, grub_uint8_t *dest, grub_disk_addr_t ofs,
+   ret = 0;
+ 
+   //ctx->comp.disk->read_hook = read_hook;
++  //ctx->comp.disk->read_hook_data = read_hook_data;
+ 
+   if ((vcn > ctx->target_vcn) &&
+       (read_block
+diff --git a/grub-core/fs/reiserfs.c b/grub-core/fs/reiserfs.c
+index 686e4da..eaa7ade 100644
+--- a/grub-core/fs/reiserfs.c
++++ b/grub-core/fs/reiserfs.c
+@@ -240,9 +240,8 @@ struct grub_reiserfs_data
+ static grub_ssize_t
+ grub_reiserfs_read_real (struct grub_fshelp_node *node,
+ 			 grub_off_t off, char *buf, grub_size_t len,
+-			 void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-							     unsigned offset,
+-							     unsigned length));
++			 grub_disk_read_hook_t read_hook,
++			 void *read_hook_data);
+ 
+ /* Internal-only functions. Not to be used outside of this file.  */
+ 
+@@ -674,7 +673,7 @@ grub_reiserfs_read_symlink (grub_fshelp_node_t node)
+   if (! symlink_buffer)
+     return 0;
+ 
+-  ret = grub_reiserfs_read_real (node, 0, symlink_buffer, len, 0);
++  ret = grub_reiserfs_read_real (node, 0, symlink_buffer, len, 0, 0);
+   if (ret < 0)
+     {
+       grub_free (symlink_buffer);
+@@ -1036,9 +1035,7 @@ grub_reiserfs_open (struct grub_file *file, const char *name)
+ static grub_ssize_t
+ grub_reiserfs_read_real (struct grub_fshelp_node *node,
+ 			 grub_off_t off, char *buf, grub_size_t len,
+-			 void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-							     unsigned offset,
+-							     unsigned length))
++			 grub_disk_read_hook_t read_hook, void *read_hook_data)
+ {
+   unsigned int indirect_block, indirect_block_count;
+   struct grub_reiserfs_key key;
+@@ -1105,6 +1102,7 @@ grub_reiserfs_read_real (struct grub_fshelp_node *node,
+                             (unsigned) block, (unsigned) offset,
+                             (unsigned) (offset + length));
+               found.data->disk->read_hook = read_hook;
++              found.data->disk->read_hook_data = read_hook_data;
+               grub_disk_read (found.data->disk,
+                               block,
+                               offset
+@@ -1131,6 +1129,7 @@ grub_reiserfs_read_real (struct grub_fshelp_node *node,
+           if (grub_errno)
+             goto fail;
+           found.data->disk->read_hook = read_hook;
++          found.data->disk->read_hook_data = read_hook_data;
+           for (indirect_block = 0;
+                indirect_block < indirect_block_count
+                  && current_position < final_position;
+@@ -1236,7 +1235,7 @@ static grub_ssize_t
+ grub_reiserfs_read (grub_file_t file, char *buf, grub_size_t len)
+ {
+   return grub_reiserfs_read_real (file->data, file->offset, buf, len,
+-				  file->read_hook);
++				  file->read_hook, file->read_hook_data);
+ }
+ 
+ /* Close the file FILE.  */
+diff --git a/grub-core/fs/romfs.c b/grub-core/fs/romfs.c
+index b79b1e1..2e35444 100644
+--- a/grub-core/fs/romfs.c
++++ b/grub-core/fs/romfs.c
+@@ -399,6 +399,7 @@ grub_romfs_read (grub_file_t file, char *buf, grub_size_t len)
+ 
+   /* XXX: The file is stored in as a single extent.  */
+   data->data->disk->read_hook = file->read_hook;
++  data->data->disk->read_hook_data = file->read_hook_data;
+   grub_disk_read (data->data->disk,
+ 		  (data->data_addr + file->offset) >> GRUB_DISK_SECTOR_BITS,
+ 		  (data->data_addr + file->offset) & (GRUB_DISK_SECTOR_SIZE - 1),		  
+diff --git a/grub-core/fs/sfs.c b/grub-core/fs/sfs.c
+index fed17d3..e7d2f72 100644
+--- a/grub-core/fs/sfs.c
++++ b/grub-core/fs/sfs.c
+@@ -345,11 +345,11 @@ grub_sfs_read_block (grub_fshelp_node_t node, grub_disk_addr_t fileblock)
+    POS.  Return the amount of read bytes in READ.  */
+ static grub_ssize_t
+ grub_sfs_read_file (grub_fshelp_node_t node,
+-		    void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-				       unsigned offset, unsigned length),
++		    grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		    grub_off_t pos, grub_size_t len, char *buf)
+ {
+-  return grub_fshelp_read_file (node->data->disk, node, read_hook,
++  return grub_fshelp_read_file (node->data->disk, node,
++				read_hook, read_hook_data,
+ 				pos, len, buf, grub_sfs_read_block,
+ 				node->size, node->data->log_blocksize, 0);
+ }
+@@ -646,7 +646,8 @@ grub_sfs_read (grub_file_t file, char *buf, grub_size_t len)
+ {
+   struct grub_sfs_data *data = (struct grub_sfs_data *) file->data;
+ 
+-  return grub_sfs_read_file (&data->diropen, file->read_hook,
++  return grub_sfs_read_file (&data->diropen,
++			     file->read_hook, file->read_hook_data,
+ 			     file->offset, len, buf);
+ }
+ 
+diff --git a/grub-core/fs/udf.c b/grub-core/fs/udf.c
+index b7f3afb..405935e 100644
+--- a/grub-core/fs/udf.c
++++ b/grub-core/fs/udf.c
+@@ -564,9 +564,7 @@ fail:
+ 
+ static grub_ssize_t
+ grub_udf_read_file (grub_fshelp_node_t node,
+-		    void NESTED_FUNC_ATTR
+-		    (*read_hook) (grub_disk_addr_t sector,
+-				  unsigned offset, unsigned length),
++		    grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		    grub_off_t pos, grub_size_t len, char *buf)
+ {
+   switch (U16 (node->block.fe.icbtag.flags) & GRUB_UDF_ICBTAG_FLAG_AD_MASK)
+@@ -591,10 +589,11 @@ grub_udf_read_file (grub_fshelp_node_t node,
+       return 0;
+     }
+ 
+-  return  grub_fshelp_read_file (node->data->disk, node, read_hook,
+-				 pos, len, buf, grub_udf_read_block,
+-				 U64 (node->block.fe.file_size),
+-				 node->data->lbshift, 0);
++  return grub_fshelp_read_file (node->data->disk, node,
++				read_hook, read_hook_data,
++				pos, len, buf, grub_udf_read_block,
++				U64 (node->block.fe.file_size),
++				node->data->lbshift, 0);
+ }
+ 
+ static unsigned sblocklist[] = { 256, 512, 0 };
+@@ -861,7 +860,7 @@ grub_udf_iterate_dir (grub_fshelp_node_t dir,
+ 
+   while (offset < U64 (dir->block.fe.file_size))
+     {
+-      if (grub_udf_read_file (dir, 0, offset, sizeof (dirent),
++      if (grub_udf_read_file (dir, 0, 0, offset, sizeof (dirent),
+ 			      (char *) &dirent) != sizeof (dirent))
+ 	return 0;
+ 
+@@ -898,7 +897,7 @@ grub_udf_iterate_dir (grub_fshelp_node_t dir,
+ 	      if (child->block.fe.icbtag.file_type == GRUB_UDF_ICBTAG_TYPE_SYMLINK)
+ 		type = GRUB_FSHELP_SYMLINK;
+ 
+-	      if ((grub_udf_read_file (dir, 0, offset,
++	      if ((grub_udf_read_file (dir, 0, 0, offset,
+ 				       dirent.file_ident_length,
+ 				       (char *) raw))
+ 		  != dirent.file_ident_length)
+@@ -937,7 +936,7 @@ grub_udf_read_symlink (grub_fshelp_node_t node)
+   raw = grub_malloc (sz);
+   if (!raw)
+     return NULL;
+-  if (grub_udf_read_file (node, NULL, 0, sz, (char *) raw) < 0)
++  if (grub_udf_read_file (node, NULL, NULL, 0, sz, (char *) raw) < 0)
+     {
+       grub_free (raw);
+       return NULL;
+@@ -1149,7 +1148,8 @@ grub_udf_read (grub_file_t file, char *buf, grub_size_t len)
+ {
+   struct grub_fshelp_node *node = (struct grub_fshelp_node *) file->data;
+ 
+-  return grub_udf_read_file (node, file->read_hook, file->offset, len, buf);
++  return grub_udf_read_file (node, file->read_hook, file->read_hook_data,
++			     file->offset, len, buf);
+ }
+ 
+ static grub_err_t
+diff --git a/grub-core/fs/ufs.c b/grub-core/fs/ufs.c
+index 089a5c6..c155912 100644
+--- a/grub-core/fs/ufs.c
++++ b/grub-core/fs/ufs.c
+@@ -331,8 +331,7 @@ grub_ufs_get_file_block (struct grub_ufs_data *data, grub_disk_addr_t blk)
+    POS.  Return the amount of read bytes in READ.  */
+ static grub_ssize_t
+ grub_ufs_read_file (struct grub_ufs_data *data,
+-		    void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-				       unsigned offset, unsigned length),
++		    grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		    grub_off_t pos, grub_size_t len, char *buf)
+ {
+   struct grub_ufs_sblock *sblock = &data->sblock;
+@@ -380,6 +379,7 @@ grub_ufs_read_file (struct grub_ufs_data *data,
+       if (blknr)
+ 	{
+ 	  data->disk->read_hook = read_hook;
++	  data->disk->read_hook_data = read_hook_data;
+ 	  grub_disk_read (data->disk,
+ 			  blknr << grub_ufs_to_cpu32 (data->sblock.log2_blksz),
+ 			  skipfirst, blockend, buf);
+@@ -455,7 +455,7 @@ grub_ufs_lookup_symlink (struct grub_ufs_data *data, int ino)
+       && INODE_SIZE (data) <= sizeof (data->inode.symlink))
+     grub_strcpy (symlink, (char *) data->inode.symlink);
+   else
+-    grub_ufs_read_file (data, 0, 0, INODE_SIZE (data), symlink);
++    grub_ufs_read_file (data, 0, 0, 0, INODE_SIZE (data), symlink);
+   symlink[INODE_SIZE (data)] = '\0';
+ 
+   /* The symlink is an absolute path, go back to the root inode.  */
+@@ -509,7 +509,7 @@ grub_ufs_find_file (struct grub_ufs_data *data, const char *path)
+       if (grub_strlen (name) == 0)
+ 	return GRUB_ERR_NONE;
+ 
+-      if (grub_ufs_read_file (data, 0, pos, sizeof (dirent),
++      if (grub_ufs_read_file (data, 0, 0, pos, sizeof (dirent),
+ 			      (char *) &dirent) < 0)
+ 	return grub_errno;
+ 
+@@ -521,7 +521,7 @@ grub_ufs_find_file (struct grub_ufs_data *data, const char *path)
+       {
+ 	char filename[namelen + 1];
+ 
+-	if (grub_ufs_read_file (data, 0, pos + sizeof (dirent),
++	if (grub_ufs_read_file (data, 0, 0, pos + sizeof (dirent),
+ 				namelen, filename) < 0)
+ 	  return grub_errno;
+ 
+@@ -659,7 +659,7 @@ grub_ufs_dir (grub_device_t device, const char *path,
+       struct grub_ufs_dirent dirent;
+       int namelen;
+ 
+-      if (grub_ufs_read_file (data, 0, pos, sizeof (dirent),
++      if (grub_ufs_read_file (data, 0, 0, pos, sizeof (dirent),
+ 			      (char *) &dirent) < 0)
+ 	break;
+ 
+@@ -679,7 +679,7 @@ grub_ufs_dir (grub_device_t device, const char *path,
+ 
+ 	grub_memset (&info, 0, sizeof (info));
+ 
+-	if (grub_ufs_read_file (data, 0, pos + sizeof (dirent),
++	if (grub_ufs_read_file (data, 0, 0, pos + sizeof (dirent),
+ 				namelen, filename) < 0)
+ 	  break;
+ 
+@@ -752,7 +752,8 @@ grub_ufs_read (grub_file_t file, char *buf, grub_size_t len)
+   struct grub_ufs_data *data =
+     (struct grub_ufs_data *) file->data;
+ 
+-  return grub_ufs_read_file (data, file->read_hook, file->offset, len, buf);
++  return grub_ufs_read_file (data, file->read_hook, file->read_hook_data,
++			     file->offset, len, buf);
+ }
+ 
+ 
+diff --git a/grub-core/fs/xfs.c b/grub-core/fs/xfs.c
+index aee1582..a5a1700 100644
+--- a/grub-core/fs/xfs.c
++++ b/grub-core/fs/xfs.c
+@@ -379,11 +379,11 @@ grub_xfs_read_block (grub_fshelp_node_t node, grub_disk_addr_t fileblock)
+    POS.  Return the amount of read bytes in READ.  */
+ static grub_ssize_t
+ grub_xfs_read_file (grub_fshelp_node_t node,
+-		     void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-					unsigned offset, unsigned length),
++		     grub_disk_read_hook_t read_hook, void *read_hook_data,
+ 		     grub_off_t pos, grub_size_t len, char *buf)
+ {
+-  return grub_fshelp_read_file (node->data->disk, node, read_hook,
++  return grub_fshelp_read_file (node->data->disk, node,
++				read_hook, read_hook_data,
+ 				pos, len, buf, grub_xfs_read_block,
+ 				grub_be_to_cpu64 (node->inode.size),
+ 				node->data->sblock.log2_bsize
+@@ -410,7 +410,7 @@ grub_xfs_read_symlink (grub_fshelp_node_t node)
+ 	if (!symlink)
+ 	  return 0;
+ 
+-	numread = grub_xfs_read_file (node, 0, 0, size, symlink);
++	numread = grub_xfs_read_file (node, 0, 0, 0, size, symlink);
+ 	if (numread != size)
+ 	  {
+ 	    grub_free (symlink);
+@@ -592,7 +592,7 @@ grub_xfs_iterate_dir (grub_fshelp_node_t dir,
+ 	    struct grub_xfs_dirblock_tail *tail;
+ 	    tail = (struct grub_xfs_dirblock_tail *) &dirblock[tail_start];
+ 
+-	    numread = grub_xfs_read_file (dir, 0,
++	    numread = grub_xfs_read_file (dir, 0, 0,
+ 					  blk << dirblk_log2,
+ 					  dirblk_size, dirblock);
+ 	    if (numread != dirblk_size)
+@@ -829,8 +829,9 @@ grub_xfs_read (grub_file_t file, char *buf, grub_size_t len)
+   struct grub_xfs_data *data =
+     (struct grub_xfs_data *) file->data;
+ 
+-  return grub_xfs_read_file (&data->diropen, file->read_hook,
+-			      file->offset, len, buf);
++  return grub_xfs_read_file (&data->diropen,
++			     file->read_hook, file->read_hook_data,
++			     file->offset, len, buf);
+ }
+ 
+ 
+diff --git a/grub-core/kern/disk.c b/grub-core/kern/disk.c
+index 94318af..76ff450 100644
+--- a/grub-core/kern/disk.c
++++ b/grub-core/kern/disk.c
+@@ -603,7 +603,7 @@ grub_disk_read (grub_disk_t disk, grub_disk_addr_t sector,
+ 	  cl = GRUB_DISK_SECTOR_SIZE - o;
+ 	  if (cl > l)
+ 	    cl = l;
+-	  (disk->read_hook) (s, o, cl);
++	  (disk->read_hook) (s, o, cl, disk->read_hook_data);
+ 	  s++;
+ 	  l -= cl;
+ 	  o = 0;
+diff --git a/include/grub/disk.h b/include/grub/disk.h
+index 013ca1f..f0e3df3 100644
+--- a/include/grub/disk.h
++++ b/include/grub/disk.h
+@@ -19,6 +19,8 @@
+ #ifndef GRUB_DISK_HEADER
+ #define GRUB_DISK_HEADER	1
+ 
++#include <config.h>
++
+ #include <grub/symbol.h>
+ #include <grub/err.h>
+ #include <grub/types.h>
+@@ -99,6 +101,10 @@ extern grub_disk_dev_t EXPORT_VAR (grub_disk_dev_list);
+ 
+ struct grub_partition;
+ 
++typedef void (*grub_disk_read_hook_t) (grub_disk_addr_t sector,
++				       unsigned offset, unsigned length,
++				       void *data);
++
+ /* Disk.  */
+ struct grub_disk
+ {
+@@ -122,8 +128,10 @@ struct grub_disk
+ 
+   /* Called when a sector was read. OFFSET is between 0 and
+      the sector size minus 1, and LENGTH is between 0 and the sector size.  */
+-  void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-		     unsigned offset, unsigned length);
++  grub_disk_read_hook_t read_hook;
++
++  /* Caller-specific data passed to the read hook.  */
++  void *read_hook_data;
+ 
+   /* Device-specific data.  */
+   void *data;
+diff --git a/include/grub/file.h b/include/grub/file.h
+index ae86401..8003985 100644
+--- a/include/grub/file.h
++++ b/include/grub/file.h
+@@ -23,6 +23,7 @@
+ #include <grub/err.h>
+ #include <grub/device.h>
+ #include <grub/fs.h>
++#include <grub/disk.h>
+ 
+ /* File description.  */
+ struct grub_file
+@@ -46,8 +47,10 @@ struct grub_file
+   void *data;
+ 
+   /* This is called when a sector is read. Used only for a disk device.  */
+-  void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-		     unsigned offset, unsigned length);
++  grub_disk_read_hook_t read_hook;
++
++  /* Caller-specific data passed to the read hook.  */
++  void *read_hook_data;
+ };
+ typedef struct grub_file *grub_file_t;
+ 
+diff --git a/include/grub/fshelp.h b/include/grub/fshelp.h
+index e437d4c..5c57236 100644
+--- a/include/grub/fshelp.h
++++ b/include/grub/fshelp.h
+@@ -23,6 +23,7 @@
+ #include <grub/types.h>
+ #include <grub/symbol.h>
+ #include <grub/err.h>
++#include <grub/disk.h>
+ 
+ typedef struct grub_fshelp_node *grub_fshelp_node_t;
+ 
+@@ -68,9 +69,8 @@ EXPORT_FUNC(grub_fshelp_find_file) (const char *path,
+    blocks have a size of LOG2BLOCKSIZE (in log2).  */
+ grub_ssize_t
+ EXPORT_FUNC(grub_fshelp_read_file) (grub_disk_t disk, grub_fshelp_node_t node,
+-				    void NESTED_FUNC_ATTR (*read_hook) (grub_disk_addr_t sector,
+-                                                                        unsigned offset,
+-                                                                        unsigned length),
++				    grub_disk_read_hook_t read_hook,
++				    void *read_hook_data,
+ 				    grub_off_t pos, grub_size_t len, char *buf,
+ 				    grub_disk_addr_t (*get_block) (grub_fshelp_node_t node,
+                                                                    grub_disk_addr_t block),
+diff --git a/util/grub-setup.c b/util/grub-setup.c
+index 187345a..5a7a857 100644
+--- a/util/grub-setup.c
++++ b/util/grub-setup.c
+@@ -138,6 +138,70 @@ write_rootdev (grub_device_t root_dev,
+ #define BOOT_SECTOR 0
+ #endif
+ 
++/* Helper for setup.  */
++static void
++save_first_sector (grub_disk_addr_t sector, unsigned offset, unsigned length,
++		   void *data)
++{
++  grub_disk_addr_t *first_sector = data;
++  grub_util_info ("the first sector is <%" PRIuGRUB_UINT64_T ",%u,%u>",
++		  sector, offset, length);
++
++  if (offset != 0 || length != GRUB_DISK_SECTOR_SIZE)
++    grub_util_error ("%s", _("the first sector of the core file is not sector-aligned"));
++
++  *first_sector = sector;
++}
++
++struct blocklists
++{
++  struct grub_boot_blocklist *first_block, *block;
++#ifdef GRUB_SETUP_BIOS
++  grub_uint16_t current_segment;
++#endif
++  grub_uint16_t last_length;
++};
++
++/* Helper for setup.  */
++static void
++save_blocklists (grub_disk_addr_t sector, unsigned offset, unsigned length,
++		 void *data)
++{
++  struct blocklists *bl = data;
++  struct grub_boot_blocklist *prev = bl->block + 1;
++
++  grub_util_info ("saving <%" PRIuGRUB_UINT64_T ",%u,%u>",
++		  sector, offset, length);
++
++  if (offset != 0 || bl->last_length != GRUB_DISK_SECTOR_SIZE)
++    grub_util_error ("%s", _("non-sector-aligned data is found in the core file"));
++
++  if (bl->block != bl->first_block
++      && (grub_target_to_host64 (prev->start)
++	  + grub_target_to_host16 (prev->len)) == sector)
++    {
++      grub_uint16_t t = grub_target_to_host16 (prev->len) + 1;
++      prev->len = grub_host_to_target16 (t);
++    }
++  else
++    {
++      bl->block->start = grub_host_to_target64 (sector);
++      bl->block->len = grub_host_to_target16 (1);
++#ifdef GRUB_SETUP_BIOS
++      bl->block->segment = grub_host_to_target16 (bl->current_segment);
++#endif
++
++      bl->block--;
++      if (bl->block->len)
++	grub_util_error ("%s", _("the sectors of the core file are too fragmented"));
++    }
++
++  bl->last_length = length;
++#ifdef GRUB_SETUP_BIOS
++  bl->current_segment += GRUB_DISK_SECTOR_SIZE >> 4;
++#endif
++}
++
+ #ifdef GRUB_SETUP_BIOS
+ /* Context for setup/identify_partmap.  */
+ struct identify_partmap_ctx
+@@ -147,7 +211,7 @@ struct identify_partmap_ctx
+   int multiple_partmaps;
+ };
+ 
+-/* Helper for setup/identify_partmap.
++/* Helper for setup.
+    Unlike root_dev, with dest_dev we're interested in the partition map even
+    if dest_dev itself is a whole disk.  */
+ static int
+@@ -190,73 +254,16 @@ setup (const char *dir,
+   grub_uint16_t core_sectors;
+ #endif
+   grub_device_t root_dev = 0, dest_dev, core_dev;
+-  struct grub_boot_blocklist *first_block, *block;
++  struct blocklists bl;
+   char *tmp_img;
+   grub_disk_addr_t first_sector;
+-#ifdef GRUB_SETUP_BIOS
+-  grub_uint16_t current_segment
+-    = GRUB_BOOT_I386_PC_KERNEL_SEG + (GRUB_DISK_SECTOR_SIZE >> 4);
+-#endif
+-  grub_uint16_t last_length = GRUB_DISK_SECTOR_SIZE;
+   FILE *fp;
+ 
+-  auto void NESTED_FUNC_ATTR save_first_sector (grub_disk_addr_t sector,
+-						unsigned offset,
+-						unsigned length);
+-  auto void NESTED_FUNC_ATTR save_blocklists (grub_disk_addr_t sector,
+-					      unsigned offset,
+-					      unsigned length);
+-
+-  void NESTED_FUNC_ATTR save_first_sector (grub_disk_addr_t sector,
+-					   unsigned offset,
+-					   unsigned length)
+-    {
+-      grub_util_info ("the first sector is <%" PRIuGRUB_UINT64_T ",%u,%u>",
+-		      sector, offset, length);
+-
+-      if (offset != 0 || length != GRUB_DISK_SECTOR_SIZE)
+-	grub_util_error ("%s", _("the first sector of the core file is not sector-aligned"));
+-
+-      first_sector = sector;
+-    }
+-
+-  void NESTED_FUNC_ATTR save_blocklists (grub_disk_addr_t sector,
+-					 unsigned offset,
+-					 unsigned length)
+-    {
+-      struct grub_boot_blocklist *prev = block + 1;
+-
+-      grub_util_info ("saving <%" PRIuGRUB_UINT64_T ",%u,%u>",
+-		      sector, offset, length);
+-
+-      if (offset != 0 || last_length != GRUB_DISK_SECTOR_SIZE)
+-	grub_util_error ("%s", _("non-sector-aligned data is found in the core file"));
+-
+-      if (block != first_block
+-	  && (grub_target_to_host64 (prev->start)
+-	      + grub_target_to_host16 (prev->len)) == sector)
+-	{
+-	  grub_uint16_t t = grub_target_to_host16 (prev->len) + 1;
+-	  prev->len = grub_host_to_target16 (t);
+-	}
+-      else
+-	{
+-	  block->start = grub_host_to_target64 (sector);
+-	  block->len = grub_host_to_target16 (1);
+ #ifdef GRUB_SETUP_BIOS
+-	  block->segment = grub_host_to_target16 (current_segment);
++  bl.current_segment =
++    GRUB_BOOT_I386_PC_KERNEL_SEG + (GRUB_DISK_SECTOR_SIZE >> 4);
+ #endif
+-
+-	  block--;
+-	  if (block->len)
+-	    grub_util_error ("%s", _("the sectors of the core file are too fragmented"));
+-	}
+-
+-      last_length = length;
+-#ifdef GRUB_SETUP_BIOS
+-      current_segment += GRUB_DISK_SECTOR_SIZE >> 4;
+-#endif
+-    }
++  bl.last_length = GRUB_DISK_SECTOR_SIZE;
+ 
+   /* Read the boot image by the OS service.  */
+   boot_path = grub_util_get_path (dir, boot_file);
+@@ -283,9 +290,9 @@ setup (const char *dir,
+   core_img = grub_util_read_image (core_path);
+ 
+   /* Have FIRST_BLOCK to point to the first blocklist.  */
+-  first_block = (struct grub_boot_blocklist *) (core_img
+-						+ GRUB_DISK_SECTOR_SIZE
+-						- sizeof (*block));
++  bl.first_block = (struct grub_boot_blocklist *) (core_img
++						   + GRUB_DISK_SECTOR_SIZE
++						   - sizeof (*bl.block));
+   grub_util_info ("root is `%s', dest is `%s'", root, dest);
+ 
+   grub_util_info ("Opening dest");
+@@ -511,38 +518,38 @@ setup (const char *dir,
+     assert (nsec <= maxsec);
+ 
+     /* Clean out the blocklists.  */
+-    block = first_block;
+-    while (block->len)
++    bl.block = bl.first_block;
++    while (bl.block->len)
+       {
+-	grub_memset (block, 0, sizeof (block));
++	grub_memset (bl.block, 0, sizeof (bl.block));
+       
+-	block--;
++	bl.block--;
+ 
+-	if ((char *) block <= core_img)
++	if ((char *) bl.block <= core_img)
+ 	  grub_util_error ("%s", _("no terminator in the core image"));
+       }
+ 
+     save_first_sector (sectors[0] + grub_partition_get_start (ctx.container),
+-		       0, GRUB_DISK_SECTOR_SIZE);
++		       0, GRUB_DISK_SECTOR_SIZE, &first_sector);
+ 
+-    block = first_block;
++    bl.block = bl.first_block;
+     for (i = 1; i < nsec; i++)
+       save_blocklists (sectors[i] + grub_partition_get_start (ctx.container),
+-		       0, GRUB_DISK_SECTOR_SIZE);
++		       0, GRUB_DISK_SECTOR_SIZE, &bl);
+ 
+     /* Make sure that the last blocklist is a terminator.  */
+-    if (block == first_block)
+-      block--;
+-    block->start = 0;
+-    block->len = 0;
+-    block->segment = 0;
++    if (bl.block == bl.first_block)
++      bl.block--;
++    bl.block->start = 0;
++    bl.block->len = 0;
++    bl.block->segment = 0;
+ 
+     write_rootdev (root_dev, boot_img, first_sector);
+ 
+     core_img = realloc (core_img, nsec * GRUB_DISK_SECTOR_SIZE);
+-    first_block = (struct grub_boot_blocklist *) (core_img
+-						  + GRUB_DISK_SECTOR_SIZE
+-						  - sizeof (*block));
++    bl.first_block = (struct grub_boot_blocklist *) (core_img
++						     + GRUB_DISK_SECTOR_SIZE
++						     - sizeof (*bl.block));
+ 
+     grub_size_t no_rs_length;
+     grub_set_unaligned32 ((core_img + GRUB_DISK_SECTOR_SIZE
+@@ -698,22 +705,22 @@ unable_to_embed:
+ #endif
+ 
+   /* Clean out the blocklists.  */
+-  block = first_block;
+-  while (block->len)
++  bl.block = bl.first_block;
++  while (bl.block->len)
+     {
+-      block->start = 0;
+-      block->len = 0;
++      bl.block->start = 0;
++      bl.block->len = 0;
+ #ifdef GRUB_SETUP_BIOS
+-      block->segment = 0;
++      bl.block->segment = 0;
+ #endif
+ 
+-      block--;
++      bl.block--;
+ 
+-      if ((char *) block <= core_img)
++      if ((char *) bl.block <= core_img)
+ 	grub_util_error ("%s", _("no terminator in the core image"));
+     }
+ 
+-  block = first_block;
++  bl.block = bl.first_block;
+ 
+ #ifdef __linux__
+   {
+@@ -766,11 +773,11 @@ unable_to_embed:
+ 		if (i == 0 && j == 0)
+ 		  save_first_sector (((grub_uint64_t) blk) * mul
+ 				     + container_start,
+-				     0, rest);
++				     0, rest, &first_sector);
+ 		else
+ 		  save_blocklists (((grub_uint64_t) blk) * mul + j
+ 				   + container_start,
+-				   0, rest);
++				   0, rest, &bl);
+ 	      }
+ 	  }
+       }
+@@ -806,13 +813,14 @@ unable_to_embed:
+ 				      >> GRUB_DISK_SECTOR_BITS)
+ 				     + j + container_start,
+ 				     fie2->fm_extents[i].fe_physical
+-				     & (GRUB_DISK_SECTOR_SIZE - 1), len);
++				     & (GRUB_DISK_SECTOR_SIZE - 1), len,
++				     &first_sector);
+ 		else
+ 		  save_blocklists ((fie2->fm_extents[i].fe_physical
+ 				    >> GRUB_DISK_SECTOR_BITS)
+ 				   + j + container_start,
+ 				   fie2->fm_extents[i].fe_physical
+-				   & (GRUB_DISK_SECTOR_SIZE - 1), len);
++				   & (GRUB_DISK_SECTOR_SIZE - 1), len, &bl);
+ 
+ 
+ 	      }
+@@ -830,12 +838,14 @@ unable_to_embed:
+       grub_util_error ("%s", grub_errmsg);
+ 
+     file->read_hook = save_first_sector;
++    file->read_hook_data = &first_sector;
+     if (grub_file_read (file, tmp_img, GRUB_DISK_SECTOR_SIZE)
+ 	!= GRUB_DISK_SECTOR_SIZE)
+       grub_util_error ("%s", _("failed to read the first sector of the core image"));
+ 
+-    block = first_block;
++    bl.block = bl.first_block;
+     file->read_hook = save_blocklists;
++    file->read_hook_data = &bl;
+     if (grub_file_read (file, tmp_img, core_size - GRUB_DISK_SECTOR_SIZE)
+ 	!= (grub_ssize_t) core_size - GRUB_DISK_SECTOR_SIZE)
+       grub_util_error ("%s", _("failed to read the rest sectors of the core image"));
+@@ -913,11 +923,11 @@ unable_to_embed:
+     ptr += GRUB_DISK_SECTOR_SIZE;
+     len -= GRUB_DISK_SECTOR_SIZE;
+ 
+-    block = first_block;
+-    while (block->len)
++    bl.block = bl.first_block;
++    while (bl.block->len)
+       {
+-	size_t cur = grub_target_to_host16 (block->len) << GRUB_DISK_SECTOR_BITS;
+-	blk = grub_target_to_host64 (block->start);
++	size_t cur = grub_target_to_host16 (bl.block->len) << GRUB_DISK_SECTOR_BITS;
++	blk = grub_target_to_host64 (bl.block->start);
+ 
+ 	if (cur > len)
+ 	  cur = len;
+@@ -932,9 +942,9 @@ unable_to_embed:
+ 
+ 	ptr += cur;
+ 	len -= cur;
+-	block--;
++	bl.block--;
+ 	
+-	if ((char *) block <= core_img)
++	if ((char *) bl.block <= core_img)
+ 	  grub_util_error ("%s", _("no terminator in the core image"));
+       }
+     core_dev->disk->partition = container;
+-- 
+1.8.1.4
+

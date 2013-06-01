@@ -1,0 +1,38 @@
+From b21a644e810f7c20844b828150d24d58ad0b776e Mon Sep 17 00:00:00 2001
+From: Andrey Borzenkov <arvidjaar@gmail.com>
+Date: Mon, 10 Dec 2012 17:00:56 +0100
+Subject: [PATCH 064/364] 	* util/grub-install.in: Remove stale TODO.
+
+---
+ ChangeLog            | 4 ++++
+ util/grub-install.in | 2 --
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 8bd581e..0b57abf 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,7 @@
++2012-12-10  Andrey Borzenkov <arvidjaar@gmail.com>
++
++	* util/grub-install.in: Remove stale TODO.
++
+ 2012-12-10  Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
+ 
+ 	* grub-core/kern/ieee1275/init.c (grub_machine_get_bootlocation): Use
+diff --git a/util/grub-install.in b/util/grub-install.in
+index 56be98f..a2cf07a 100644
+--- a/util/grub-install.in
++++ b/util/grub-install.in
+@@ -486,8 +486,6 @@ if [ x"$grub_modinfo_platform" = xefi ]; then
+ 		*)
+ 		    efi_file=grub.efi ;;
+ 	    esac
+-	   # TODO: We should also use efibootmgr, if available, to add a Boot
+-	   # entry for ourselves.
+ 	fi
+ 	efidir="$efidir/EFI/$efi_distributor"
+ 	mkdir -p "$efidir" || exit 1
+-- 
+1.8.1.4
+

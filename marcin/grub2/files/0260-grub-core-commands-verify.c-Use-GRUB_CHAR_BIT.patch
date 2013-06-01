@@ -1,0 +1,59 @@
+From f7db5c611d5560adea0c15e804d3b6dbca5d03b9 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 5 Apr 2013 10:52:13 +0200
+Subject: [PATCH 260/364] 	* grub-core/commands/verify.c: Use
+ GRUB_CHAR_BIT.
+
+---
+ ChangeLog                   | 4 ++++
+ grub-core/commands/verify.c | 6 +++---
+ 2 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 37021c0..e52e7ee 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,9 @@
+ 2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/commands/verify.c: Use GRUB_CHAR_BIT.
++
++2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* include/grub/bsdlabel.h: Use enums.
+ 
+ 2013-04-05  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/commands/verify.c b/grub-core/commands/verify.c
+index bd47611..fd6f436 100644
+--- a/grub-core/commands/verify.c
++++ b/grub-core/commands/verify.c
+@@ -77,7 +77,7 @@ read_packet_header (grub_file_t sig, grub_uint8_t *out_type, grub_size_t *len)
+ 	}
+       if (l < 224)
+ 	{
+-	  *len = (l - 192) << 8;
++	  *len = (l - 192) << GRUB_CHAR_BIT;
+ 	  if (grub_file_read (sig, &l, sizeof (l)) != 1)
+ 	    return grub_error (GRUB_ERR_BAD_SIGNATURE, N_("bad signature"));
+ 	  *len |= l;
+@@ -273,7 +273,7 @@ grub_load_public_key (grub_file_t f)
+ 	      goto fail;
+ 	    }
+ 	  
+-	  lb = (grub_be_to_cpu16 (l) + 7) / 8;
++	  lb = (grub_be_to_cpu16 (l) + GRUB_CHAR_BIT - 1) / GRUB_CHAR_BIT;
+ 	  if (lb > sizeof (buffer) - sizeof (grub_uint16_t))
+ 	    {
+ 	      grub_error (GRUB_ERR_BAD_SIGNATURE, N_("bad signature"));
+@@ -457,7 +457,7 @@ grub_verify_signature_real (char *buf, grub_size_t size,
+ 	    {
+ 	      if (ptr + 1 >= readbuf + rem)
+ 		break;
+-	      l = (((ptr[0] & ~192) << 8) | ptr[1]) + 192;
++	      l = (((ptr[0] & ~192) << GRUB_CHAR_BIT) | ptr[1]) + 192;
+ 	      ptr += 2;
+ 	    }
+ 	  else
+-- 
+1.8.1.4
+

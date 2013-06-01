@@ -1,0 +1,42 @@
+From 0dd4469b79f41c950f59eeb1f7899bb3f2e246fe Mon Sep 17 00:00:00 2001
+From: Andrey Borzenkov  <arvidjaar@gmail.com>
+Date: Mon, 8 Apr 2013 19:57:56 +0200
+Subject: [PATCH 273/364] 	* grub-core/Makefile.core.def: Add
+ kern/elfXX.c to elf module 	as extra_dist.
+
+---
+ ChangeLog                   | 5 +++++
+ grub-core/Makefile.core.def | 2 ++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 9e08bea..083d86a 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-04-08  Andrey Borzenkov <arvidjaar@gmail.com>
+ 
++	* grub-core/Makefile.core.def: Add kern/elfXX.c to elf module
++	as extra_dist.
++
++2013-04-08  Andrey Borzenkov <arvidjaar@gmail.com>
++
+ 	* grub-core/term/i386/pc/console.c: Fix cursor moving algorithm.
+ 
+ 2013-04-08  Bryan Hundven <bryanhundven@gmail.com>
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 4b4c024..fece882 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -1316,6 +1316,8 @@ module = {
+ module = {
+   name = elf;
+   common = kern/elf.c;
++
++  extra_dist = kern/elfXX.c;
+ };
+ 
+ module = {
+-- 
+1.8.1.4
+

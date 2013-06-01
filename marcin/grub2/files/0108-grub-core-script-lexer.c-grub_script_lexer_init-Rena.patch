@@ -1,0 +1,50 @@
+From 60c3912bdb7a4dcc6fed286d18d8ce83d4f9b132 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Wed, 16 Jan 2013 09:06:11 +0100
+Subject: [PATCH 108/364] 	* grub-core/script/lexer.c
+ (grub_script_lexer_init): Rename getline 	argument to prevent name
+ collision.
+
+---
+ ChangeLog                | 5 +++++
+ grub-core/script/lexer.c | 4 ++--
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index d02749b..76a9f68 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-01-16  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/script/lexer.c (grub_script_lexer_init): Rename getline
++	argument to prevent name collision.
++
+ 2013-01-15  Colin Watson  <cjwatson@ubuntu.com>
+ 
+ 	Remove nested functions from script reading and parsing.
+diff --git a/grub-core/script/lexer.c b/grub-core/script/lexer.c
+index cb9d6b0..128d238 100644
+--- a/grub-core/script/lexer.c
++++ b/grub-core/script/lexer.c
+@@ -216,7 +216,7 @@ grub_script_lexer_yywrap (struct grub_parser_param *parserstate,
+ 
+ struct grub_lexer_param *
+ grub_script_lexer_init (struct grub_parser_param *parser, char *script,
+-			grub_reader_getline_t getline, void *getline_data)
++			grub_reader_getline_t arg_getline, void *getline_data)
+ {
+   struct grub_lexer_param *lexerstate;
+ 
+@@ -232,7 +232,7 @@ grub_script_lexer_init (struct grub_parser_param *parser, char *script,
+       return 0;
+     }
+ 
+-  lexerstate->getline = getline;
++  lexerstate->getline = arg_getline;
+   lexerstate->getline_data = getline_data;
+   /* The other elements of lexerstate are all zeros already.  */
+ 
+-- 
+1.8.1.4
+

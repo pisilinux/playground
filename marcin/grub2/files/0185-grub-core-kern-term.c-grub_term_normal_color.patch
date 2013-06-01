@@ -1,0 +1,45 @@
+From 447bcdcd7ad914c3a18f6d91096fc78102e33b3e Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sat, 2 Mar 2013 23:23:51 +0100
+Subject: [PATCH 185/364] 	* grub-core/kern/term.c
+ (grub_term_normal_color), 	(grub_term_highlight_color): Add back lost
+ defaults.
+
+---
+ ChangeLog             | 5 +++++
+ grub-core/kern/term.c | 4 ++--
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 7c80ed6..3231b4b 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-03-02  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/kern/term.c (grub_term_normal_color),
++	(grub_term_highlight_color): Add back lost defaults.
++
++2013-03-02  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	Make elfload not use hooks. Opt for flags and iterators instead.
+ 
+ 2013-03-02  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/kern/term.c b/grub-core/kern/term.c
+index 34096bc..44ada25 100644
+--- a/grub-core/kern/term.c
++++ b/grub-core/kern/term.c
+@@ -29,8 +29,8 @@ struct grub_term_output *grub_term_outputs;
+ struct grub_term_input *grub_term_inputs;
+ 
+ /* Current color state.  */
+-grub_uint8_t grub_term_normal_color;
+-grub_uint8_t grub_term_highlight_color;
++grub_uint8_t grub_term_normal_color = GRUB_TERM_DEFAULT_NORMAL_COLOR;
++grub_uint8_t grub_term_highlight_color = GRUB_TERM_DEFAULT_HIGHLIGHT_COLOR;
+ 
+ void (*grub_term_poll_usb) (void) = NULL;
+ void (*grub_net_poll_cards_idle) (void) = NULL;
+-- 
+1.8.1.4
+

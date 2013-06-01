@@ -1,0 +1,50 @@
+From 52556c462eeee3a3f10f79923dd3b9eff1e520e7 Mon Sep 17 00:00:00 2001
+From: Andrey Borzenkov <arvidjaar@gmail.com>
+Date: Wed, 3 Apr 2013 11:28:16 +0200
+Subject: [PATCH 245/364] 	* util/grub-mount.c (fuse_init): Return error
+ if fuse_main 	failed.
+
+---
+ ChangeLog         | 5 +++++
+ util/grub-mount.c | 5 +++--
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 56588dd..7cda161 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-04-03  Andrey Borzenkov <arvidjaar@gmail.com>
++
++	* util/grub-mount.c (fuse_init): Return error if fuse_main
++	failed.
++
+ 2013-04-03  Francesco Lavra  <francescolavra.fl@gmail.com>
+ 
+ 	* include/grub/elf.h: Add missing ARM relocation codes and fix
+diff --git a/util/grub-mount.c b/util/grub-mount.c
+index d0ab6a2..4a2333a 100644
+--- a/util/grub-mount.c
++++ b/util/grub-mount.c
+@@ -407,7 +407,8 @@ fuse_init (void)
+       return grub_errno;
+     }
+ 
+-  fuse_main (fuse_argc, fuse_args, &grub_opers, NULL);
++  if (fuse_main (fuse_argc, fuse_args, &grub_opers, NULL))
++    grub_error (GRUB_ERR_IO, "fuse_main failed");
+ 
+   for (i = 0; i < num_disks; i++)
+     {
+@@ -427,7 +428,7 @@ fuse_init (void)
+       grub_free (loop_name);
+     }
+ 
+-  return GRUB_ERR_NONE;
++  return grub_errno;
+ }
+ 
+ static struct argp_option options[] = {  
+-- 
+1.8.1.4
+

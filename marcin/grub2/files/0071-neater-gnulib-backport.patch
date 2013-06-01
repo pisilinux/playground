@@ -1,0 +1,25 @@
+From 25b73b33cdaafb3f21c5014b090a71f8449653c5 Mon Sep 17 00:00:00 2001
+From: Colin Watson <cjwatson@ubuntu.com>
+Date: Fri, 28 Dec 2012 07:13:34 +0000
+Subject: [PATCH 071/364] neater gnulib backport
+
+---
+ m4/stdio_h.m4 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/m4/stdio_h.m4 b/m4/stdio_h.m4
+index 8458bec..d3edb42 100644
+--- a/m4/stdio_h.m4
++++ b/m4/stdio_h.m4
+@@ -35,7 +35,7 @@ AC_DEFUN([gl_STDIO_H],
+ 
+   dnl Check for declarations of anything we want to poison if the
+   dnl corresponding gnulib module is not in use, and which is not
+-  dnl guaranteed by C89.
++  dnl guaranteed by both C89 and C11.
+   gl_WARN_ON_USE_PREPARE([[#include <stdio.h>
+     ]], [dprintf fpurge fseeko ftello getdelim getline gets popen renameat
+     snprintf tmpfile vdprintf vsnprintf])
+-- 
+1.8.1.4
+

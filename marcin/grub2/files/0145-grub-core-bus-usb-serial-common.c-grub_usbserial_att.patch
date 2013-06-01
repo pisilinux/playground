@@ -1,0 +1,40 @@
+From e296c452399417a814ab8b025234235d7ea1552e Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Fri, 1 Feb 2013 21:32:17 +0100
+Subject: [PATCH 145/364] 	* grub-core/bus/usb/serial/common.c
+ (grub_usbserial_attach): Fix missing 	zero-out of port structure.
+
+---
+ ChangeLog                         | 5 +++++
+ grub-core/bus/usb/serial/common.c | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index e5b71cf..7bae470 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,8 @@
++2013-02-01  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/bus/usb/serial/common.c (grub_usbserial_attach): Fix missing
++	zero-out of port structure.
++
+ 2013-01-30  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
+ 	* grub-core/fs/xfs.c (grub_xfs_read_block): Fix computation in presence
+diff --git a/grub-core/bus/usb/serial/common.c b/grub-core/bus/usb/serial/common.c
+index 55d1884..9530259 100644
+--- a/grub-core/bus/usb/serial/common.c
++++ b/grub-core/bus/usb/serial/common.c
+@@ -51,7 +51,7 @@ grub_usbserial_attach (grub_usb_device_t usbdev, int configno, int interfno,
+ 
+   interf = usbdev->config[configno].interf[interfno].descif;
+ 
+-  port = grub_malloc (sizeof (*port));
++  port = grub_zalloc (sizeof (*port));
+   if (!port)
+     {
+       grub_print_error ();
+-- 
+1.8.1.4
+

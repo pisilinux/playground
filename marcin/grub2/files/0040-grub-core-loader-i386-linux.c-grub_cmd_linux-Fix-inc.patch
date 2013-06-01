@@ -1,0 +1,42 @@
+From 1f5027bb0ec48851cc2f9c54552a6ec1f1145930 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Tue, 18 Sep 2012 11:44:29 +0200
+Subject: [PATCH 040/364] 	* grub-core/loader/i386/linux.c
+ (grub_cmd_linux): Fix incorrect 	le-conversion. 	Reported by: BURETTE,
+ Bernard.
+
+---
+ ChangeLog                     | 6 ++++++
+ grub-core/loader/i386/linux.c | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index de80a94..b524cf6 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,9 @@
++2012-09-18  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	* grub-core/loader/i386/linux.c (grub_cmd_linux): Fix incorrect
++	le-conversion.
++	Reported by: BURETTE, Bernard.
++
+ 2012-09-17  Colin Watson  <cjwatson@debian.org>
+ 
+ 	* util/grub-mkconfig_lib.in (grub_quote): Remove outdated sentence
+diff --git a/grub-core/loader/i386/linux.c b/grub-core/loader/i386/linux.c
+index d34b2f8..bcb037c 100644
+--- a/grub-core/loader/i386/linux.c
++++ b/grub-core/loader/i386/linux.c
+@@ -839,7 +839,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+ 
+ #ifdef GRUB_MACHINE_EFI
+ #ifdef __x86_64__
+-  if (grub_le_to_cpu16 (params->version < 0x0208) &&
++  if (grub_le_to_cpu16 (params->version) < 0x0208 &&
+       ((grub_addr_t) grub_efi_system_table >> 32) != 0)
+     return grub_error(GRUB_ERR_BAD_OS,
+ 		      "kernel does not support 64-bit addressing");
+-- 
+1.8.1.4
+

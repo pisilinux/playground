@@ -1,0 +1,604 @@
+From d060cd9ae53e59c0bf1e58f05c6ead1989b7d291 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Wed, 20 Mar 2013 17:13:31 +0100
+Subject: [PATCH 217/364] 	New commands cbmemc, lscoreboot,
+ coreboot_boottime to inspect 	coreboot tables content. Support for cbmemc.
+
+---
+ ChangeLog                                        |   5 +
+ grub-core/Makefile.am                            |   1 +
+ grub-core/Makefile.core.def                      |  18 ++++
+ grub-core/commands/i386/coreboot/cb_timestamps.c | 118 +++++++++++++++++++++
+ grub-core/commands/i386/coreboot/cbls.c          | 128 +++++++++++++++++++++++
+ grub-core/kern/i386/coreboot/mmap.c              |   2 +-
+ grub-core/normal/term.c                          |  19 +++-
+ grub-core/term/i386/coreboot/cbmemc.c            | 127 ++++++++++++++++++++++
+ include/grub/i386/coreboot/lbio.h                |  30 ++++++
+ include/grub/normal.h                            |   3 +
+ 10 files changed, 446 insertions(+), 5 deletions(-)
+ create mode 100644 grub-core/commands/i386/coreboot/cb_timestamps.c
+ create mode 100644 grub-core/commands/i386/coreboot/cbls.c
+ create mode 100644 grub-core/term/i386/coreboot/cbmemc.c
+
+diff --git a/ChangeLog b/ChangeLog
+index 0fcaa65..5bb93ed 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-03-20  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	New commands cbmemc, lscoreboot, coreboot_boottime to inspect
++	coreboot tables content. Support for cbmemc.
++
++2013-03-20  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	Fix a conflict between ports structures with 2 controllers of
+ 	same kind.
+ 
+diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
+index 221466b..6f156e7 100644
+--- a/grub-core/Makefile.am
++++ b/grub-core/Makefile.am
+@@ -110,6 +110,7 @@ endif
+ 
+ if COND_i386_coreboot
+ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/i386/tsc.h
++KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/i386/coreboot/lbio.h
+ KERNEL_HEADER_FILES += $(top_builddir)/include/grub/i386/pc/int.h
+ endif
+ 
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 5c15f32..d851bc3 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -519,6 +519,24 @@ module = {
+ };
+ 
+ module = {
++  name = cbtime;
++  common = commands/i386/coreboot/cb_timestamps.c;
++  enable = i386_coreboot;
++};
++
++module = {
++  name = cbls;
++  common = commands/i386/coreboot/cbls.c;
++  enable = i386_coreboot;
++};
++
++module = {
++  name = cbmemc;
++  common = term/i386/coreboot/cbmemc.c;
++  enable = i386_coreboot;
++};
++
++module = {
+   name = regexp;
+   common = commands/regexp.c;
+   common = commands/wildcard.c;
+diff --git a/grub-core/commands/i386/coreboot/cb_timestamps.c b/grub-core/commands/i386/coreboot/cb_timestamps.c
+new file mode 100644
+index 0000000..5299ad4
+--- /dev/null
++++ b/grub-core/commands/i386/coreboot/cb_timestamps.c
+@@ -0,0 +1,118 @@
++/*
++ *  GRUB  --  GRand Unified Bootloader
++ *  Copyright (C) 2013  Free Software Foundation, Inc.
++ *
++ *  GRUB is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation, either version 3 of the License, or
++ *  (at your option) any later version.
++ *
++ *  GRUB is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <grub/dl.h>
++#include <grub/misc.h>
++#include <grub/command.h>
++#include <grub/i18n.h>
++#include <grub/i386/coreboot/lbio.h>
++#include <grub/i386/tsc.h>
++
++GRUB_MOD_LICENSE ("GPLv3+");
++
++static grub_uint32_t
++tsc2ms (grub_uint64_t tsc)
++{
++  grub_uint64_t ah = tsc >> 32;
++  grub_uint64_t al = tsc & 0xffffffff;
++
++  return ((al * grub_tsc_rate) >> 32) + ah * grub_tsc_rate;
++}
++
++static const char *descs[] = {
++  [1] = "romstage",
++  [2] = "before RAM init",
++  [3] = "after RAM init",
++  [4] = "end of romstage",
++  [8] = "start of RAM copy",
++  [9] = "end of RAM copy",
++  [10] = "start of ramstage",
++  [30] = "device enumerate",
++  [40] = "device configure",
++  [50] = "device enable",
++  [60] = "device initialize",
++  [70] = "device done",
++  [75] = "CBMEM POST",
++  [80] = "writing tables",
++  [90] = "loading payload",
++  [98] = "wake jump",
++  [99] = "selfboot jump",
++};
++
++static int
++iterate_linuxbios_table (grub_linuxbios_table_item_t table_item,
++			 void *data)
++{
++  int *available = data;
++  grub_uint64_t last_tsc = 0;
++  struct grub_linuxbios_timestamp_table *ts_table;
++  unsigned i;
++
++  if (table_item->tag != GRUB_LINUXBIOS_MEMBER_TIMESTAMPS)
++    return 0;
++
++  *available = 1;
++  ts_table = (struct grub_linuxbios_timestamp_table *) (grub_addr_t)
++    *(grub_uint64_t *) (table_item + 1);
++
++  for (i = 0; i < ts_table->used; i++)
++    {
++      grub_uint32_t tmabs = tsc2ms (ts_table->entries[i].tsc);
++      grub_uint32_t tmrel = tsc2ms (ts_table->entries[i].tsc - last_tsc);
++      last_tsc = ts_table->entries[i].tsc;
++
++      grub_printf ("%3d.%03ds %2d.%03ds %02d %s\n", 
++		   tmabs / 1000, tmabs % 1000, tmrel / 1000, tmrel % 1000,
++		   ts_table->entries[i].id,
++		   (ts_table->entries[i].id < ARRAY_SIZE (descs)
++		    && descs[ts_table->entries[i].id])
++		   ? descs[ts_table->entries[i].id] : "");
++    }
++  return 1;
++}
++
++
++static grub_err_t
++grub_cmd_coreboot_boottime (struct grub_command *cmd __attribute__ ((unused)),
++			    int argc __attribute__ ((unused)),
++			    char *argv[] __attribute__ ((unused)))
++{
++  int available = 0;
++
++  grub_linuxbios_table_iterate (iterate_linuxbios_table, &available);
++  if (!available)
++    {
++      grub_puts_ (N_("No boot time statistics is available\n"));
++      return 0;
++    }
++ return 0;
++}
++
++static grub_command_t cmd_boottime;
++
++GRUB_MOD_INIT(cbtime)
++{
++  cmd_boottime =
++    grub_register_command ("coreboot_boottime", grub_cmd_coreboot_boottime,
++			   0, N_("Get coreboot boot time statistics."));
++}
++
++GRUB_MOD_FINI(cbtime)
++{
++  grub_unregister_command (cmd_boottime);
++}
+diff --git a/grub-core/commands/i386/coreboot/cbls.c b/grub-core/commands/i386/coreboot/cbls.c
+new file mode 100644
+index 0000000..dc46d55
+--- /dev/null
++++ b/grub-core/commands/i386/coreboot/cbls.c
+@@ -0,0 +1,128 @@
++/*
++ *  GRUB  --  GRand Unified Bootloader
++ *  Copyright (C) 2013  Free Software Foundation, Inc.
++ *
++ *  GRUB is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation, either version 3 of the License, or
++ *  (at your option) any later version.
++ *
++ *  GRUB is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <grub/dl.h>
++#include <grub/misc.h>
++#include <grub/command.h>
++#include <grub/i18n.h>
++#include <grub/i386/coreboot/lbio.h>
++#include <grub/i386/tsc.h>
++
++GRUB_MOD_LICENSE ("GPLv3+");
++
++static const char *console_descs[] = {
++  "8250 UART",
++  "VGA",
++  "BTEXT",
++  "CBMEM console",
++  "SROM",
++  "EHCI debug",
++  "memory-mapped 8250 UART"
++};
++
++static const char *descs[] = {
++  [GRUB_LINUXBIOS_MEMBER_MEMORY] = "memory map (`lsmmap' to list)",
++  [GRUB_LINUXBIOS_MEMBER_MAINBOARD] = "mainboard",
++  [4] = "version",
++  [5] = "extra version",
++  [6] = "build",
++  [7] = "compile time",
++  [8] = "compile by",
++  [9] = "compile host",
++  [0xa] = "compile domain",
++  [0xb] = "compiler",
++  [0xc] = "linker",
++  [0xd] = "assembler",
++  [0xf] = "serial",
++  [GRUB_LINUXBIOS_MEMBER_CONSOLE] = "console",
++  [0x12] = "framebuffer",
++  [0x13] = "GPIO",
++  [0x15] = "VDAT",
++  [GRUB_LINUXBIOS_MEMBER_TIMESTAMPS] = "timestamps (`coreboot_boottime' to list)",
++  [GRUB_LINUXBIOS_MEMBER_CBMEMC] = "CBMEM console (`cbmem' to list)",
++  [0x18] = "MRC cache",
++  [0x19] = "VBNV",
++  [0xc8] = "CMOS option table",
++  [0xc9] = "CMOS option",
++  [0xca] = "CMOS option enum",
++  [0xcb] = "CMOS option defaults",
++  [0xcc] = "CMOS checksum",
++};
++
++static int
++iterate_linuxbios_table (grub_linuxbios_table_item_t table_item,
++			 void *data __attribute__ ((unused)))
++{
++  if (table_item->tag < ARRAY_SIZE (descs) && descs[table_item->tag])
++    grub_printf ("tag=%02x size=%02x %s",
++		 table_item->tag, table_item->size, descs[table_item->tag]);
++  else
++    grub_printf ("tag=%02x size=%02x",
++		 table_item->tag, table_item->size);
++
++  switch (table_item->tag)
++    {
++    case GRUB_LINUXBIOS_MEMBER_MAINBOARD:
++      {
++	struct grub_linuxbios_mainboard *mb;
++	mb = (struct grub_linuxbios_mainboard *) (table_item + 1);
++	grub_printf (": vendor=`%s' part_number=`%s'",
++		     mb->strings + mb->vendor,
++		     mb->strings + mb->part_number);
++	break;
++      }
++    case 0x04 ... 0x0d:
++      grub_printf (": `%s'", (char *) (table_item + 1));
++      break;
++    case GRUB_LINUXBIOS_MEMBER_CONSOLE:
++      {
++	grub_uint16_t *val = (grub_uint16_t *) (table_item + 1);
++	grub_printf (": id=%d", *val);
++	if (*val < ARRAY_SIZE (console_descs)
++	    && console_descs[*val])
++	  grub_printf (" %s", console_descs[*val]);
++      }
++    }
++  grub_printf ("\n");
++
++  return 0;
++}
++
++
++static grub_err_t
++grub_cmd_lscoreboot (struct grub_command *cmd __attribute__ ((unused)),
++			    int argc __attribute__ ((unused)),
++			    char *argv[] __attribute__ ((unused)))
++{
++  grub_linuxbios_table_iterate (iterate_linuxbios_table, 0);
++  return 0;
++}
++
++static grub_command_t cmd;
++
++GRUB_MOD_INIT(cbls)
++{
++  cmd =
++    grub_register_command ("lscoreboot", grub_cmd_lscoreboot,
++			   0, N_("List coreboot tables."));
++}
++
++GRUB_MOD_FINI(cbls)
++{
++  grub_unregister_command (cmd);
++}
+diff --git a/grub-core/kern/i386/coreboot/mmap.c b/grub-core/kern/i386/coreboot/mmap.c
+index 47efb72..6a14d29 100644
+--- a/grub-core/kern/i386/coreboot/mmap.c
++++ b/grub-core/kern/i386/coreboot/mmap.c
+@@ -32,7 +32,7 @@ check_signature (grub_linuxbios_table_header_t tbl_header)
+   return 0;
+ }
+ 
+-static grub_err_t
++grub_err_t
+ grub_linuxbios_table_iterate (int (*hook) (grub_linuxbios_table_item_t,
+ 					   void *),
+ 			      void *hook_data)
+diff --git a/grub-core/normal/term.c b/grub-core/normal/term.c
+index f89e5d2..32deba3 100644
+--- a/grub-core/normal/term.c
++++ b/grub-core/normal/term.c
+@@ -979,20 +979,21 @@ grub_ucs4_count_lines (const grub_uint32_t * str,
+ }
+ 
+ void
+-grub_xputs_normal (const char *str)
++grub_xnputs (const char *str, grub_size_t msg_len)
+ {
+   grub_uint32_t *unicode_str = NULL, *unicode_last_position;
+   int backlog = 0;
+   grub_term_output_t term;
+ 
+   grub_error_push ();
+-  grub_utf8_to_ucs4_alloc (str, &unicode_str,
+-  			   &unicode_last_position);
++
++  unicode_str = grub_malloc (msg_len * sizeof (grub_uint32_t));
++ 
+   grub_error_pop ();
+ 
+   if (!unicode_str)
+     {
+-      for (; *str; str++)
++      for (; msg_len--; str++, msg_len++)
+ 	{
+ 	  struct grub_unicode_glyph c =
+ 	    {
+@@ -1021,6 +1022,10 @@ grub_xputs_normal (const char *str)
+       return;
+     }
+ 
++  msg_len = grub_utf8_to_ucs4 (unicode_str, msg_len,
++			       (grub_uint8_t *) str, -1, 0);
++  unicode_last_position = unicode_str + msg_len;
++
+   FOR_ACTIVE_TERM_OUTPUTS(term)
+   {
+     int cur;
+@@ -1045,6 +1050,12 @@ grub_xputs_normal (const char *str)
+ }
+ 
+ void
++grub_xputs_normal (const char *str)
++{
++  grub_xnputs (str, grub_strlen (str));
++}
++
++void
+ grub_cls (void)
+ {
+   struct grub_term_output *term;
+diff --git a/grub-core/term/i386/coreboot/cbmemc.c b/grub-core/term/i386/coreboot/cbmemc.c
+new file mode 100644
+index 0000000..c58d671
+--- /dev/null
++++ b/grub-core/term/i386/coreboot/cbmemc.c
+@@ -0,0 +1,127 @@
++/*
++ *  GRUB  --  GRand Unified Bootloader
++ *  Copyright (C) 2013  Free Software Foundation, Inc.
++ *
++ *  GRUB is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation, either version 3 of the License, or
++ *  (at your option) any later version.
++ *
++ *  GRUB is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <grub/term.h>
++#include <grub/types.h>
++#include <grub/misc.h>
++#include <grub/mm.h>
++#include <grub/time.h>
++#include <grub/terminfo.h>
++#include <grub/dl.h>
++#include <grub/machine/lbio.h>
++#include <grub/command.h>
++#include <grub/normal.h>
++
++GRUB_MOD_LICENSE ("GPLv3+");
++
++struct grub_linuxbios_cbmemc
++{
++  grub_uint32_t size;
++  grub_uint32_t pointer;
++  char data[0];
++};
++
++static struct grub_linuxbios_cbmemc *cbmemc;
++
++static void
++put (struct grub_term_output *term __attribute__ ((unused)), const int c)
++{
++  if (!cbmemc)
++    return;
++  if (cbmemc->pointer < cbmemc->size)
++    cbmemc->data[cbmemc->pointer] = c;
++  cbmemc->pointer++;
++}
++
++struct grub_terminfo_output_state grub_cbmemc_terminfo_output =
++  {
++    .put = put,
++    .width = 80,
++    .height = 24
++  };
++
++static struct grub_term_output grub_cbmemc_term_output =
++  {
++    .name = "cbmemc",
++    .init = grub_terminfo_output_init,
++    .fini = 0,
++    .putchar = grub_terminfo_putchar,
++    .getxy = grub_terminfo_getxy,
++    .getwh = grub_terminfo_getwh,
++    .gotoxy = grub_terminfo_gotoxy,
++    .cls = grub_terminfo_cls,
++    .setcolorstate = grub_terminfo_setcolorstate,
++    .setcursor = grub_terminfo_setcursor,
++    .flags = GRUB_TERM_CODE_TYPE_ASCII,
++    .data = &grub_cbmemc_terminfo_output,
++  };
++
++static int
++iterate_linuxbios_table (grub_linuxbios_table_item_t table_item,
++			 void *data __attribute__ ((unused)))
++{
++  if (table_item->tag != GRUB_LINUXBIOS_MEMBER_CBMEMC)
++    return 0;
++  cbmemc = (struct grub_linuxbios_cbmemc *) (grub_addr_t)
++    *(grub_uint64_t *) (table_item + 1);
++  return 1;
++}
++
++static grub_err_t
++grub_cmd_cbmemc (struct grub_command *cmd __attribute__ ((unused)),
++		 int argc __attribute__ ((unused)),
++		 char *argv[] __attribute__ ((unused)))
++{
++  grub_size_t len;
++  char *str;
++  struct grub_linuxbios_cbmemc *cbmemc_saved;
++
++  if (!cbmemc)
++    return grub_error (GRUB_ERR_IO, "no CBMEM console found");
++
++  len = cbmemc->pointer;
++  if (len > cbmemc->size)
++    len = cbmemc->size;
++  str = cbmemc->data;
++  cbmemc_saved = cbmemc;
++  cbmemc = 0;
++  grub_xnputs (str, len);
++  cbmemc = cbmemc_saved;
++  return 0;
++}
++
++static grub_command_t cmd;
++
++GRUB_MOD_INIT (cbmemc)
++{
++  grub_linuxbios_table_iterate (iterate_linuxbios_table, 0);
++
++  if (cbmemc)
++    grub_term_register_output ("cbmemc", &grub_cbmemc_term_output);
++
++  cmd =
++    grub_register_command ("cbmemc", grub_cmd_cbmemc,
++			   0, N_("Show CBMEM console content."));
++}
++
++
++GRUB_MOD_FINI (cbmemc)
++{
++  grub_term_unregister_output (&grub_cbmemc_term_output);
++  grub_unregister_command (cmd);
++}
+diff --git a/include/grub/i386/coreboot/lbio.h b/include/grub/i386/coreboot/lbio.h
+index bac5492..b4150f4 100644
+--- a/include/grub/i386/coreboot/lbio.h
++++ b/include/grub/i386/coreboot/lbio.h
+@@ -31,11 +31,36 @@ struct grub_linuxbios_table_header
+ };
+ typedef struct grub_linuxbios_table_header *grub_linuxbios_table_header_t;
+ 
++struct grub_linuxbios_timestamp_entry
++{
++  grub_uint32_t id;
++  grub_uint64_t tsc;
++} __attribute__((packed));
++
++struct grub_linuxbios_timestamp_table
++{
++  grub_uint64_t base_tsc;
++  grub_uint32_t capacity;
++  grub_uint32_t used;
++  struct grub_linuxbios_timestamp_entry entries[0];
++} __attribute__((packed));
++
++struct grub_linuxbios_mainboard
++{
++  grub_uint8_t vendor;
++  grub_uint8_t part_number;
++  char strings[0];
++};
++
+ struct grub_linuxbios_table_item
+ {
+ #define GRUB_LINUXBIOS_MEMBER_UNUSED		0x00
+ #define GRUB_LINUXBIOS_MEMBER_MEMORY		0x01
++#define GRUB_LINUXBIOS_MEMBER_MAINBOARD		0x03
++#define GRUB_LINUXBIOS_MEMBER_CONSOLE           0x10
+ #define GRUB_LINUXBIOS_MEMBER_LINK              0x11
++#define GRUB_LINUXBIOS_MEMBER_TIMESTAMPS        0x16
++#define GRUB_LINUXBIOS_MEMBER_CBMEMC            0x17
+   grub_uint32_t tag;
+   grub_uint32_t size;
+ };
+@@ -50,4 +75,9 @@ struct grub_linuxbios_mem_region
+ };
+ typedef struct grub_linuxbios_mem_region *mem_region_t;
+ 
++grub_err_t
++EXPORT_FUNC(grub_linuxbios_table_iterate) (int (*hook) (grub_linuxbios_table_item_t,
++					   void *),
++					   void *hook_data);
++
+ #endif
+diff --git a/include/grub/normal.h b/include/grub/normal.h
+index 416faa4..4fcc3da 100644
+--- a/include/grub/normal.h
++++ b/include/grub/normal.h
+@@ -141,6 +141,9 @@ void grub_normal_free_menu (grub_menu_t menu);
+ void grub_normal_auth_init (void);
+ void grub_normal_auth_fini (void);
+ 
++void
++grub_xnputs (const char *str, grub_size_t msg_len);
++
+ grub_command_t
+ grub_dyncmd_get_cmd (grub_command_t cmd);
+ 
+-- 
+1.8.1.4
+

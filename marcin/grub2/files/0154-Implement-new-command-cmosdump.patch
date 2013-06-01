@@ -1,0 +1,195 @@
+From e720300246bd79d0cdb36dc9df4491557ee48663 Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Sun, 24 Feb 2013 19:44:17 +0100
+Subject: [PATCH 154/364] 	Implement new command cmosdump.
+
+---
+ ChangeLog                          |  4 +++
+ grub-core/Makefile.core.def        |  6 ++++
+ grub-core/commands/i386/cmosdump.c | 64 ++++++++++++++++++++++++++++++++++++++
+ include/grub/cmos.h                | 24 +++++++++++---
+ include/grub/i386/cmos.h           |  2 ++
+ include/grub/mips/loongson/cmos.h  |  2 ++
+ include/grub/mips/qemu_mips/cmos.h |  2 ++
+ 7 files changed, 100 insertions(+), 4 deletions(-)
+ create mode 100644 grub-core/commands/i386/cmosdump.c
+
+diff --git a/ChangeLog b/ChangeLog
+index 654ebcb..2faef5b 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,7 @@
++2013-02-24  Vladimir Serbinenko  <phcoder@gmail.com>
++
++	Implement new command cmosdump.
++
+ 2013-02-19  Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
+ 
+ 	Support Openfirmware disks with non-512B sectors.
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index c006abf..4b0e6e6 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -510,6 +510,12 @@ module = {
+ };
+ 
+ module = {
++  name = cmosdump;
++  common = commands/i386/cmosdump.c;
++  enable = cmos;
++};
++
++module = {
+   name = iorw;
+   common = commands/iorw.c;
+   enable = x86;
+diff --git a/grub-core/commands/i386/cmosdump.c b/grub-core/commands/i386/cmosdump.c
+new file mode 100644
+index 0000000..952d200
+--- /dev/null
++++ b/grub-core/commands/i386/cmosdump.c
+@@ -0,0 +1,64 @@
++/*
++ *  GRUB  --  GRand Unified Bootloader
++ *  Copyright (C) 2009,2013  Free Software Foundation, Inc.
++ *
++ *  GRUB is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation, either version 3 of the License, or
++ *  (at your option) any later version.
++ *
++ *  GRUB is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <grub/dl.h>
++#include <grub/command.h>
++#include <grub/misc.h>
++#include <grub/cmos.h>
++#include <grub/i18n.h>
++
++GRUB_MOD_LICENSE ("GPLv3+");
++
++static grub_err_t
++grub_cmd_cmosdump (struct grub_command *cmd __attribute__ ((unused)),
++		   int argc __attribute__ ((unused)), char *argv[] __attribute__ ((unused)))
++{
++  int i;
++
++  for (i = 0; i < 256; i++)
++    {
++      grub_err_t err;
++      grub_uint8_t value;
++      if ((i & 0xf) == 0)
++	grub_printf ("%02x: ", i);
++
++      err = grub_cmos_read (i, &value);
++      if (err)
++	return err;
++
++      grub_printf ("%02x ", value);
++      if ((i & 0xf) == 0xf)
++	grub_printf ("\n");
++    }
++  return GRUB_ERR_NONE;
++}
++
++static grub_command_t cmd;
++
++
++GRUB_MOD_INIT(cmosdump)
++{
++  cmd = grub_register_command ("cmosdump", grub_cmd_cmosdump,
++			       0,
++			       N_("Dump CMOS contents."));
++}
++
++GRUB_MOD_FINI(cmosdump)
++{
++  grub_unregister_command (cmd);
++}
+diff --git a/include/grub/cmos.h b/include/grub/cmos.h
+index 331513c..aa2b233 100644
+--- a/include/grub/cmos.h
++++ b/include/grub/cmos.h
+@@ -61,16 +61,32 @@ grub_num_to_bcd (grub_uint8_t a)
+ static inline grub_err_t
+ grub_cmos_read (grub_uint8_t index, grub_uint8_t *val)
+ {
+-  grub_outb (index, GRUB_CMOS_ADDR_REG);
+-  *val = grub_inb (GRUB_CMOS_DATA_REG);
++  if (index & 0x80)
++    {
++      grub_outb (index & 0x7f, GRUB_CMOS_ADDR_REG_HI);
++      *val = grub_inb (GRUB_CMOS_DATA_REG_HI);
++    }
++  else
++    {
++      grub_outb (index & 0x7f, GRUB_CMOS_ADDR_REG);
++      *val = grub_inb (GRUB_CMOS_DATA_REG);
++    }
+   return GRUB_ERR_NONE;
+ }
+ 
+ static inline grub_err_t
+ grub_cmos_write (grub_uint8_t index, grub_uint8_t value)
+ {
+-  grub_outb (index, GRUB_CMOS_ADDR_REG);
+-  grub_outb (value, GRUB_CMOS_DATA_REG);
++  if (index & 0x80)
++    {
++      grub_outb (index & 0x7f, GRUB_CMOS_ADDR_REG_HI);
++      grub_outb (value, GRUB_CMOS_DATA_REG_HI);
++    }
++  else
++    {
++      grub_outb (index & 0x7f, GRUB_CMOS_ADDR_REG);
++      grub_outb (value, GRUB_CMOS_DATA_REG);
++    }
+   return GRUB_ERR_NONE;
+ }
+ #else
+diff --git a/include/grub/i386/cmos.h b/include/grub/i386/cmos.h
+index 8b1fa35..27a2b21 100644
+--- a/include/grub/i386/cmos.h
++++ b/include/grub/i386/cmos.h
+@@ -24,5 +24,7 @@
+ 
+ #define GRUB_CMOS_ADDR_REG	0x70
+ #define GRUB_CMOS_DATA_REG	0x71
++#define GRUB_CMOS_ADDR_REG_HI	0x72
++#define GRUB_CMOS_DATA_REG_HI	0x73
+ 
+ #endif /* GRUB_CPU_CMOS_H */
+diff --git a/include/grub/mips/loongson/cmos.h b/include/grub/mips/loongson/cmos.h
+index f2a32d7..96d50f2 100644
+--- a/include/grub/mips/loongson/cmos.h
++++ b/include/grub/mips/loongson/cmos.h
+@@ -24,5 +24,7 @@
+ 
+ #define GRUB_CMOS_ADDR_REG	0xbfd00070
+ #define GRUB_CMOS_DATA_REG	0xbfd00071
++#define GRUB_CMOS_ADDR_REG	0xbfd00072
++#define GRUB_CMOS_DATA_REG	0xbfd00073
+ 
+ #endif /* GRUB_CPU_CMOS_H */
+diff --git a/include/grub/mips/qemu_mips/cmos.h b/include/grub/mips/qemu_mips/cmos.h
+index 4aef40e..0759704 100644
+--- a/include/grub/mips/qemu_mips/cmos.h
++++ b/include/grub/mips/qemu_mips/cmos.h
+@@ -24,5 +24,7 @@
+ 
+ #define GRUB_CMOS_ADDR_REG	0xb4000070
+ #define GRUB_CMOS_DATA_REG	0xb4000071
++#define GRUB_CMOS_ADDR_REG_HI	0xb4000072
++#define GRUB_CMOS_DATA_REG_HI	0xb4000073
+ 
+ #endif /* GRUB_CPU_CMOS_H */
+-- 
+1.8.1.4
+

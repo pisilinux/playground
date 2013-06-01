@@ -1,0 +1,53 @@
+From 8ec34c46a3cc4cacce65e3a2a671e08548c6a95e Mon Sep 17 00:00:00 2001
+From: Vladimir 'phcoder' Serbinenko <phcoder@gmail.com>
+Date: Mon, 2 Jul 2012 11:22:50 +0200
+Subject: [PATCH 006/364] 	* grub-core/net/tftp.c (ack): Fix endianness
+ problem. 	(tftp_receive): Likewise. 	Reported by: Michael
+ Davidsaver.
+
+---
+ ChangeLog            | 6 ++++++
+ grub-core/net/tftp.c | 4 ++--
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index aaeeb05..12de11f 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,11 @@
+ 2012-07-02  Vladimir Serbinenko  <phcoder@gmail.com>
+ 
++	* grub-core/net/tftp.c (ack): Fix endianness problem.
++	(tftp_receive): Likewise.
++	Reported by: Michael Davidsaver.
++
++2012-07-02  Vladimir Serbinenko  <phcoder@gmail.com>
++
+ 	* gentpl.py: Make mans depend on grub-mkconfig_lib.
+ 
+ 2012-07-02  Vladimir Serbinenko  <phcoder@gmail.com>
+diff --git a/grub-core/net/tftp.c b/grub-core/net/tftp.c
+index 9c70efb..d0f39ea 100644
+--- a/grub-core/net/tftp.c
++++ b/grub-core/net/tftp.c
+@@ -143,7 +143,7 @@ ack (tftp_data_t data, grub_uint16_t block)
+ 
+   tftph_ack = (struct tftphdr *) nb_ack.data;
+   tftph_ack->opcode = grub_cpu_to_be16 (TFTP_ACK);
+-  tftph_ack->u.ack.block = block;
++  tftph_ack->u.ack.block = grub_cpu_to_be16 (block);
+ 
+   err = grub_net_send_udp_packet (data->sock, &nb_ack);
+   if (err)
+@@ -225,7 +225,7 @@ tftp_receive (grub_net_udp_socket_t sock __attribute__ ((unused)),
+ 	    grub_priority_queue_pop (data->pq);
+ 
+ 	    if (file->device->net->packs.count < 50)
+-	      err = ack (data, tftph->u.data.block);
++	      err = ack (data, data->block + 1);
+ 	    else
+ 	      {
+ 		file->device->net->stall = 1;
+-- 
+1.8.1.4
+

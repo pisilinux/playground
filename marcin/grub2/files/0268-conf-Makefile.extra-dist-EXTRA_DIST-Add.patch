@@ -1,0 +1,47 @@
+From b970f640ef40de57c1d69ef7cbce96287d3a034f Mon Sep 17 00:00:00 2001
+From: Andrey Borzenkov  <arvidjaar@gmail.com>
+Date: Sat, 6 Apr 2013 20:49:02 +0200
+Subject: [PATCH 268/364] 	* conf/Makefile.extra-dist (EXTRA_DIST): Add 
+ grub-core/lib/libgcrypt/src/gcrypt.h.in and util/import_gcrypth.sed.
+
+---
+ ChangeLog                | 5 +++++
+ conf/Makefile.extra-dist | 2 ++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/ChangeLog b/ChangeLog
+index 300ddd0..9163911 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,10 @@
+ 2013-04-06  Andrey Borzenkov <arvidjaar@gmail.com>
+ 
++	* conf/Makefile.extra-dist (EXTRA_DIST): Add
++	grub-core/lib/libgcrypt/src/gcrypt.h.in and util/import_gcrypth.sed.
++
++2013-04-06  Andrey Borzenkov <arvidjaar@gmail.com>
++
+ 	* util/grub-install_header: Use @PACKAGE@.mo in message catalog name
+ 	instead of hardcoding grub.mo.
+ 
+diff --git a/conf/Makefile.extra-dist b/conf/Makefile.extra-dist
+index c862206..2e36500 100644
+--- a/conf/Makefile.extra-dist
++++ b/conf/Makefile.extra-dist
+@@ -31,11 +31,13 @@ EXTRA_DIST += $(shell find $(top_srcdir)/include -name '*.h')
+ EXTRA_DIST += $(shell find $(top_srcdir)/grub-core/lib -name '*.h')
+ EXTRA_DIST += $(shell find $(top_srcdir)/grub-core/gnulib -name '*.h')
+ EXTRA_DIST += grub-core/efiemu/runtime/config.h
++EXTRA_DIST += grub-core/lib/libgcrypt/src/gcrypt.h.in
+ 
+ EXTRA_DIST += grub-core/lib/LzmaDec.c
+ 
+ EXTRA_DIST += BUGS
+ EXTRA_DIST += util/i386/efi/grub-dumpdevtree
++EXTRA_DIST += util/import_gcrypth.sed
+ 
+ EXTRA_DIST += m4/gnulib-cache.m4
+ EXTRA_DIST += m4/glibc2.m4
+-- 
+1.8.1.4
+
