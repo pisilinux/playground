@@ -10,7 +10,7 @@ from pisi.actionsapi import pisitools
 
 def setup():
     autotools.configure("CONF_DRIVER=nvidia CONF_DRIVER_MODULE_NVIDIA=nvidia \
-                         CONF_MODPATH_NVIDIA=/usr/lib/nvidia-current/modules,/usr/lib/nvidia-current/modules/extensions \
+                         CONF_MODPATH_NVIDIA=/usr/lib/nvidia-current/modules,/usr/lib/xorg/modules \
                          --with-udev-rules=/lib/udev/rules.d/ \
                          --with-pidfile \
                          ")
