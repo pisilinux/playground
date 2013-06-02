@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>VirtualGL</Name>
+        <Homepage>http://virtualgl.org</Homepage>
+        <Packager>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <IsA>app:console</IsA>
+        <Summary>FIXME</Summary>
+        <Description>Redirects 3D commands from an OpenGL application onto a server-side 3D graphics card.</Description>
+        <Archive sha1sum="f042862c21ceaba57c6e1f0ec72adb4f838725e9" type="targz">mirrors://sourceforge/virtualgl/VirtualGL-2.3.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libXv-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>mesa-glu-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">VirtualGL-glx.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>virtualgl</Name>
+        <RuntimeDependencies>
+            <Dependency>libXv</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>mesa-glu</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/share/fakelib64</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>virtualgl-devel</Name>
+        <Summary>Development files for virtualgl</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">virtualgl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-06-02</Date>
+            <Version>2.3.2</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
