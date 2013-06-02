@@ -9,6 +9,13 @@ from pisi.actionsapi import cmaketools
 from pisi.actionsapi import shelltools
 
 def setup():
+    pisitools.dosed("server/", '"glx.h"', "<GL/glx.h>", ".*\.[hc].*")
+    shelltools.unlinkDir("client/putty")
+    shelltools.unlinkDir("client/x11windows")
+    shelltools.unlinkDir("include/FL")
+    shelltools.unlinkDir("server/fltk")
+    shelltools.unlink("common/glx.h")
+    shelltools.unlink("common/glxext.h")
     shelltools.makedirs("build")
     shelltools.cd("build")
     cmaketools.configure("-DCMAKE_INSTALL_PREFIX=/usr/share \
