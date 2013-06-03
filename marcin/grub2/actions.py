@@ -44,6 +44,8 @@ def setup():
                          --htmldir='/usr/share/doc/${PF}/html' ")
 
 def build():
+    #make-dist for creating all updated translation files
+    autotools.make("dist")
     autotools.make()
 
     shelltools.cd("../grub-efi")
