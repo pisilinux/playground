@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mhwd</Name>
+        <Homepage>https://github.com/amonakov/mhwd</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>ISC</License>
+        <IsA>app:console</IsA>
+        <Summary>Faster OpenGL offloading for Bumblebee</Summary>
+        <Description>Primus is a shared library that provides OpenGL and GLX APIs and implements low-overhead local-only client-side OpenGL offloading via GLX forking, similar to VirtualGL.</Description>
+        <Archive sha1sum="141361d83236ad08bd4013bcf8750cadf11bbed2" type="targz">https://dl.dropboxusercontent.com/u/60245852/source/mhwd-06-03-2013.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>hwinfo-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>mhwd</Name>
+        <RuntimeDependencies>
+            <Dependency>hwinfo</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/var/lib</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>mhwd-devel</Name>
+        <Summary>mhwd için geliştirme dosyaları</Summary>
+        <RuntimeDependencies>
+            <Dependency>hwinfo</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-06-03</Date>
+            <Version>0.2.7</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

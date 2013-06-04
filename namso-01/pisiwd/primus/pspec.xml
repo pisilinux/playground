@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>primus</Name>
+        <Homepage>https://github.com/amonakov/primus</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>ISC</License>
+        <IsA>app:console</IsA>
+        <Summary>Faster OpenGL offloading for Bumblebee</Summary>
+        <Description>Primus is a shared library that provides OpenGL and GLX APIs and implements low-overhead local-only client-side OpenGL offloading via GLX forking, similar to VirtualGL.</Description>
+        <Archive sha1sum="3ab1a58c26c5771eb7e00181375d3e1a521d5d67" type="targz">https://dl.dropboxusercontent.com/u/60245852/source/primus-06-03-13.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>mesa-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>primus</Name>
+        <RuntimeDependencies>
+            <Dependency>mesa</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/primus</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/etc/bash_completion.d</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>primus-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for primus</Summary>
+        <BuildType>_emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>mesa-32bit</Dependency>
+            <Dependency>primus</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency>mesa-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/32</Path>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2012-11-12</Date>
+            <Version>06.03.13</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

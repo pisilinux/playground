@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libx86emu</Name>
+        <Homepage>https://gitorious.org/x86emu/libx86emu</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>A small x86 emulation library</Summary>
+        <Description>Small x86 emulation library with focus of easy usage and extended execution logging functions.</Description>
+        <Archive sha1sum="e4714ce62691742407f57a3a97ab75befc1afe0c" type="tarxz">https://dl.dropboxusercontent.com/u/60245852/source/libx86emu-1.3.tar.xz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libx86emu</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libx86emu-devel</Name>
+        <Summary>Development files for libx86emu</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libx86emu</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-06-04</Date>
+            <Version>1.3</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
