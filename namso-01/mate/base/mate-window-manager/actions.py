@@ -11,13 +11,11 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("./autogen.sh --prefix=/usr \
-				    --sysconfdir=/etc \
-				    --localstatedir=/var \
-				    --disable-static \
-				    --disable-schemas-install \
-				    --with-mateconf-source='xml::/etc/mateconf/mateconf.xml.defaults' \
-				    --enable-sm")
+    autotools.configure("--disable-static           \
+                         --disable-scrollkeeper     \
+                         --disable-schemas-compile  \
+                         --with-gtk=2.0             \
+                         --with-x--prefix=/usr ")
 
 def build():
     autotools.make()
@@ -26,4 +24,3 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR()) 
     
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "NEWS", "README")
-

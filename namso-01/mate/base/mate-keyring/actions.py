@@ -11,18 +11,12 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("./autogen.sh  --disable-static \
-				     --with-gtk=2.0 \
-				     --enable-pam \
-				     --prefix=/usr \
-				     --sysconfdir=/etc \
-				     --disable-static \
-				     --localstatedir=/var \
-				     --libexecdir=/usr/lib/mate-keyring \
-				     --with-pam-dir=/lib/security \
-				     --with-root-certs=/etc")        
-        
-         
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--disable-static \
+                         --with-gtk=2.0   \
+                         --disable-schemas-compile \
+                         --with-pam-dir=/usr/lib/security \
+                         --with-root-certs=/etc/pki/tls/certs")         
 
 def build():
     autotools.make()

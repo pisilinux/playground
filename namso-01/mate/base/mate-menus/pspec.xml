@@ -23,6 +23,9 @@
 	    <Dependency>python-gudev</Dependency>
 	    <Dependency>python-gtk-devel</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">mate-menus_preferences-menu.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -43,6 +46,9 @@
 	  <Path fileType="doc">/usr/share/doc</Path>
 	  <Path fileType="data">/etc/xdg</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/etc/xdg/menus/mate-preferences-categories.menu">mate-preferences-categories.menu</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <Package>

@@ -11,9 +11,7 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("./autogen.sh --prefix=/usr \
-				    --sysconfdir=/etc \
-				    --localstatedir=/var")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
     autotools.configure()
 
 def build():
@@ -21,5 +19,5 @@ def build():
 
 def install():
     autotools.install()
+    
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "NEWS", "README")
-

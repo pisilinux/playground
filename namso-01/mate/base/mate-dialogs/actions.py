@@ -11,12 +11,14 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("./autogen.sh --disable-static \
-				    --prefix=/usr")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--disable-static      \
+                         --disable-scrollkeeper")
 
 def build():
     autotools.make()
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    
     pisitools.dodoc("README", "TODO", "THANKS", "NEWS", "ChangeLog", "HACKING", "AUTHORS", "COPYING")

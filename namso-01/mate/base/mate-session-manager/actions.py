@@ -11,15 +11,14 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 shelltools.export("HOME", get.workDIR())
+
 def setup():
-    shelltools.system("./autogen.sh --prefix=/usr \
-				    --sysconfdir=/etc \
-				    --localstatedir=/var \
-				    --libexecdir=/usr/lib \
-				    --enable-splash \
-				    --with-mateconf-source='xml::/etc/mateconf/mateconf.xml.defaults' \
-				    --with-default-wm='marco' \
-				    --disable-static")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--disable-static \
+                         --enable-ipv6 \
+                         --with-gtk=2.0 \
+                         --with-default-wm=marco \
+                         --with-x")
 
 def build():
     autotools.make()

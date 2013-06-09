@@ -13,11 +13,11 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("./autogen.sh --prefix=/usr \
-                                    --enable-all-themes \
-                                    --enable-test-themes \
-                                    --enable-icon-mapping \
-                                    --enable-test-themes")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--enable-all-themes   \
+                         --enable-test-themes  \
+                         --enable-icon-mapping \
+                         --enable-test-themes")
 
 def build():
     autotools.make()

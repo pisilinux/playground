@@ -1,0 +1,77 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+  "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+
+<Menu>
+  <Name>Preferences</Name>
+ 
+  <Menu>
+    <Name>Personal</Name>
+    <Directory>mate-personal.directory</Directory>
+    <Include>
+      <And>
+        <Category>Settings</Category>
+        <Category>X-MATE-PersonalSettings</Category>
+        <Not><Category>System</Category></Not>
+      </And>
+    </Include>
+  </Menu>
+
+  <Menu>
+    <Name>Look and Feel</Name>
+    <Directory>mate-look-and-feel.directory</Directory>
+    <Include>
+      <And>
+        <Category>Settings</Category>
+        <Category>DesktopSettings</Category>
+        <Not><Category>System</Category></Not>
+      </And>
+    </Include>
+  </Menu>
+
+  <Menu>
+    <Name>Internet and Network</Name>
+    <Directory>mate-internet-and-network.directory</Directory>
+    <Include>
+      <And>
+        <Category>Settings</Category>
+        <Category>X-MATE-NetworkSettings</Category>
+        <Not><Category>System</Category></Not>
+      </And>
+    </Include>
+  </Menu>
+
+  <Menu>
+    <Name>Hardware</Name>
+    <Directory>mate-hardware.directory</Directory>
+    <Include>
+      <And>
+        <Category>Settings</Category>
+        <Category>HardwareSettings</Category>
+        <Not><Category>System</Category></Not>
+      </And>
+    </Include>
+  </Menu>
+
+  <Menu>
+    <Name>System</Name>
+    <Directory>mate-system.directory</Directory>
+    <Include>
+      <And>
+        <Category>Settings</Category>
+        <Not><Category>System</Category></Not>
+        <Not><Category>DesktopSettings</Category></Not>
+        <Not><Category>X-MATE-NetworkSettings</Category></Not>
+        <Not><Category>HardwareSettings</Category></Not>
+        <Not><Category>X-MATE-PersonalSettings</Category></Not>
+      </And>
+    </Include>
+    <Exclude>
+      <Filename>matecc.desktop</Filename>
+    </Exclude>
+  </Menu>
+
+  <Exclude>
+    <Category>Settings</Category>
+  </Exclude>
+</Menu>
+

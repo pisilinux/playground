@@ -10,16 +10,16 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
-
 def setup():
-    shelltools.system("./autogen.sh --prefix=/usr \
-				    --sysconfdir=/etc \
-				    --localstatedir=/var \
-				    --libexecdir=/usr/bin \
-				    --disable-static ")
-
-
-
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--disable-pulse  \
+                         --disable-static \
+                         --disable-schemas-compile \
+                         --enable-polkit  \
+                         --enable-gstreamer \
+                         --with-x \
+                         --with-nssdb")
+                       
 def build():
     autotools.make()
 

@@ -13,17 +13,11 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-
-    shelltools.system("./autogen.sh --prefix=/usr \
-				    --sysconfdir=/etc \
-				    --localstatedir=/var \
-				    --disable-static \
-				    --enable-python \
-				    --disable-schemas-install \
-				    --with-mateconf-source='xml::/etc/mateconf/mateconf.xml.defaults' \
-				    --enable-locations-compression")
-    autotools.configure()
-
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--disable-static       \
+                         --with-gnu-ld          \
+                         --enable-python        \
+                         --enable-gtk-doc-html")
 
 def build():
     autotools.make()

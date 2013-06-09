@@ -13,11 +13,10 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("./autogen.sh --disable-static \
-				    --enable-python \
-				    --enable-introspection=yes \
-				    --prefix=/usr \
-				    --sysconfdir=/etc")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--disable-static \
+                         --enable-python \
+                         --enable-introspection=yes")
 
 def build():
     autotools.make()

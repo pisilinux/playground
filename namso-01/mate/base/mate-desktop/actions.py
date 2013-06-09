@@ -11,16 +11,17 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    #shelltools.export("LDFLAGS", "%s -lm" % get.LDFLAGS())
-    shelltools.system("./autogen.sh --prefix=/usr \
-				    --sysconfdir=/etc \
-				    --localstatedir=/var \
-				    --disable-static \
-				    --disable-scrollkeeper \
-				    --enable-gnucat \
-				    --disable-startup-notification \
-				    --enable-unique ")    
-    
+    autotools.autoreconf("-if")
+    autotools.configure('--disable-scrollkeeper                                \
+                         --disable-schemas-compile                             \
+                         --with-gtk=2.0                                        \
+                         --with-x                                              \
+                         --disable-static                                      \
+                         --enable-unique                                       \
+                         --enable-gtk-doc                                      \
+                         --with-pnp-ids-path="/usr/share/hwdata/pnp.ids"      \
+                         --with-omf-dir=/usr/share/omf/mate-desktop           \
+                         --enable-gnucat')
 
 def build():
     autotools.make()

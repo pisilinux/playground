@@ -13,20 +13,12 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-
-    shelltools.system("./autogen.sh --prefix=/usr \
-				    --sysconfdir=/etc \
-				    --localstatedir=/var \
-				    --disable-static \
-				    --libexecdir=/usr/lib/mate-notification-daemon \
-				    --disable-schemas-install")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--disable-schemas-compile \
+                         --with-gtk=2.0")
 
 def build():
     autotools.make()
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    
-    #pisitools.domove("/usr/", "/usr/etc/mateconf/schemas")
-
-

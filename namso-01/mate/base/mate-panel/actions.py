@@ -13,14 +13,14 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("NOCONFIGURE=yes ./autogen.sh")
-    autotools.configure("--disable-static \
-                         --with-x \
-                         --libexecdir=/usr/lib/mate-panel \
-                         --enable-introspection  \
-                         --enable-network-manager  \
-                         --disable-deprecation-flags \
-                         --disable-scrollkeeper")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--disable-scrollkeeper                 \
+                         --disable-static                       \
+                         --disable-schemas-compile              \
+                         --with-x                               \
+                         --enable-network-manager               \
+                         --libexecdir=/usr/lib/mate-panel       \
+                         --enable-introspection")
 
 def build():
     autotools.make()

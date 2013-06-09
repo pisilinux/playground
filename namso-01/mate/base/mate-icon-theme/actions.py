@@ -13,12 +13,8 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-
-    shelltools.system("./autogen.sh --prefix=/usr \
-				    --enable-icon-mapping \
-				    --disable-static ")
-
-
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--enable-icon-mapping")
 
 def build():
     autotools.make()
