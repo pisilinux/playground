@@ -13,9 +13,16 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("./autogen.sh")
-    autotools.configure("--prefix=/usr \
-                        --without-mate-panel ")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--prefix=/usr               \
+                         --disable-static            \
+                         --disable-scrollkeeper      \
+                         --disable-schemas-compile   \
+                         --enable-gdict-applet       \
+                         --enable-gtk-doc-html       \
+                         --enable-ipv6=yes           \
+                         --disable-schemas-compile   \
+                         --with-x")
 
 def build():
     autotools.make()

@@ -13,11 +13,11 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("./autogen.sh")
     autotools.configure("--disable-static \
 			 --disable-scrollkeeper \
-			 --disable-schemas-install \
-			 --enable-applets")
+			 --enable-applets \
+                         --with-gtk=2.0 \
+                         --enable-unique")
 
 def build():
     autotools.make()

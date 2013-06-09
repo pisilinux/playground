@@ -13,10 +13,13 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("./autogen.sh")
-    autotools.configure("--disable-desktop-update \
-			 --disable-icon-update \
-			 --disable-schemas-compile")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--disable-static           \
+                         --disable-scrollkeeper     \
+                         --disable-schemas-compile  \
+                         --disable-icon-update      \
+                         --disable-desktop-update   \
+                         --enable-caja-sendto")
 
 def build():
     autotools.make()

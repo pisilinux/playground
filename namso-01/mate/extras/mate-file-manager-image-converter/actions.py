@@ -13,8 +13,9 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("./autogen.sh")
-    autotools.configure("--prefix=/usr")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--prefix=/usr \
+                         --disable-static")
 
 def build():
     autotools.make()

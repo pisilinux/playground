@@ -13,11 +13,11 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("./autogen.sh")
-    autotools.configure("--disable-run-in-place \
-			 --disable-packagekit \
-			 --disable-schemas-install \
-			 --disable-deprecations")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--disable-scrollkeeper  \
+                         --disable-static        \
+                         --with-gtk=2.0          \
+                         --enable-caja-actions")
 
 def build():
     autotools.make()

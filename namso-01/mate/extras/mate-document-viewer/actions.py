@@ -13,26 +13,28 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    shelltools.system("./autogen.sh --prefix=/usr \
-				    --sysconfdir=/etc \
-				    --localstatedir=/var \
-				    --libexecdir=/usr/lib/mate-document-viewer \
-				    --disable-static \
-				    --disable-rpath \
-				    --enable-caja \
-				    --enable-pdf \
-				    --enable-tiff \
-				    --enable-djvu \
-				    --enable-dvi \
-				    --enable-xps \
-				    --enable-t1lib \
-				    --enable-comics \
-				    --enable-pixbuf \
-				    --enable-impress \
-				    --disable-scrollkeeper \
-				    --disable-introspection \
-				    --disable-schemas-compile \
-				    --disable-schemas-install")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    autotools.configure("--prefix=/usr \
+                         --sysconfdir=/etc \
+                         --localstatedir=/var \
+                         --libexecdir=/usr/lib/mate-document-viewer \
+                         --disable-static \
+                         --disable-rpath \
+                         --enable-caja \
+                         --enable-pdf \
+                         --enable-tiff \
+                         --enable-djvu \
+                         --enable-dvi \
+                         --enable-xps \
+                         --enable-t1lib \
+                         --enable-comics \
+                         --enable-pixbuf \
+                         --enable-impress \
+                         --with-gtk=2.0 \
+                         --disable-scrollkeeper \
+                         --disable-introspection \
+                         --disable-schemas-compile \
+                         --disable-schemas-install")
 
 def build():
     autotools.make()
