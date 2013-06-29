@@ -14,7 +14,7 @@
         <IsA>app:gui</IsA> 
         <Summary>Google Chrome for Linux</Summary>
         <Description>Google Chrome is another web browser which runs web pages and applications with lightning speed due to its superior JavaScript rendering engine.</Description>
-	<Archive sha1sum="d7d6a59ac188cc62f1c6c00b86bb017a02796437" type="binary">https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm</Archive>
+	<Archive sha1sum="3680f97b50bc7a198671b1798e5d0a69688e6ef4" type="binary">https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm</Archive>
         <BuildDependencies>
             <Dependency>rpm2targz</Dependency>
         </BuildDependencies>
@@ -45,7 +45,7 @@
             <Dependency>cups</Dependency>
             <Dependency>libxslt</Dependency>
             <Dependency>freetype</Dependency>
-            <Dependency>jpeg</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
             <Dependency>libgcrypt</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
             <Dependency>libvpx</Dependency>
@@ -66,6 +66,20 @@
     </Package>
 
     <History>
+        <Update release="23" type="security">
+            <Date>2013-29-06</Date>
+            <Version>28.0.1500.63</Version>
+            <Comment>Version update</Comment>
+            <Name>Yoyo Fernández</Name>
+            <Email>yoyofv@gmail.com</Email>
+        </Update>
+         <Update release="22" type="security">
+            <Date>2013-05-25</Date>
+            <Version>27.0.1453.93</Version>
+            <Comment>Version update</Comment>
+            <Name>Yoyo Fernández</Name>
+            <Email>yoyofv@gmail.com</Email>
+        </Update>
          <Update release="21" type="security">
             <Date>2013-03-27</Date>
             <Version>26.0.1410.43</Version>
