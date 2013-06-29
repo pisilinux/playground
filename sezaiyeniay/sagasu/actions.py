@@ -10,7 +10,7 @@ def setup():
     autotools.configure()
 
 def build():
-    autotools.make()
+    autotools.make("V=1")
 
 def install():
     autotools.install()
