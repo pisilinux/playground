@@ -123,6 +123,8 @@ def setup():
 
 def build():
     shelltools.export("LD_LIBRARY_PATH", "%s/lib:%s" % (get.curDIR(), get.ENV("LD_LIBRARY_PATH")))
+    if get.buildTYPE() == "emul32":
+        shelltools.export("LD_LIBRARY_PATH", "/lib32:%s" % get.ENV("LD_LIBRARY_PATH"))
     autotools.make()
 
 def install():
@@ -130,7 +132,7 @@ def install():
         qt4.install("INSTALL_ROOT=%s32" % get.installDIR())
         shelltools.move("%s32/usr/lib32" % get.installDIR(), "%s/usr" % get.installDIR())
         return
-        
+
     qt4.install()
     pisitools.dodir(qt4.bindir)
 
@@ -141,7 +143,7 @@ def install():
     pisitools.remove("%s/pkgconfig/phonon*" % qt4.libdir)
     # Phonon 4.5 provides libphononwidgets.so file
     pisitools.remove("%s/designer/libphononwidgets.so" % qt4.plugindir)
-    
+
     #Remove lost /usr/tests directory
     pisitools.removeDir("usr/tests")
 
