@@ -1,0 +1,32 @@
+--- pisi/actionsapi/pisitools.py~	2013-05-15 22:35:04.036511752 +0200
++++ pisi/actionsapi/pisitools.py	2013-05-15 22:34:50.000000000 +0200
+@@ -306,3 +306,29 @@
+ 
+     for directory in destdirGlob:
+         unlinkDir(directory)
++
++def flags(flags):
++    '''manages CFLAGS and CXXFLAGS'''
++    cflags = os.environ['CFLAGS']
++    cxxflags = os.environ['CXXFLAGS']
++    for flag in flags.split():
++        if not flag.startswith('-') and not flag.startswith('+'):
++            error(_('Flag should starts with "-" for remove or "+" for append. Unknown: %s' % flag))
++        elif flag.startswith('-'):
++            cflags = re.sub("\s?%s" % flag, "", cflags)
++            cxxflags = re.sub("\s?%s" % flag, "", cxxflags)
++        elif flag.startswith('+'):
++            cflags += " -%s" % flag[1:]
++            cxxflags += " -%s" % flag[1:]
++    os.environ['CFLAGS'] = cflags
++    os.environ['CXXFLAGS'] = cxxflags
++
++def ldflags(flags):
++    '''manages LDFLAGS'''
++    ldflags = os.environ['LDFLAGS']
++    for flag in flags.split():
++        if not flag.startswith('-') and not flag.startswith('+'):
++            error(_('Flag should starts with "-" for remove or "+" for append. Unknown: %s' % flag))
++        elif flag.startswith('-'): ldflags = re.sub("\s?%s" % flag, "", ldflags)
++        elif flag.startswith('+'): ldflags += " -%s" % flag[1:]
++    os.environ['LDFLAGS'] = ldflags
