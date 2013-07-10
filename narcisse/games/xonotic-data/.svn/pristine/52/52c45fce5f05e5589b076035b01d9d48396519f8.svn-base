@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xonotic-data</Name>
+        <Homepage>http://www.xonotic.org</Homepage>
+        <Packager>
+            <Name>Anıl Özbek</Name>
+            <Email>ozbekanil@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>xonotic</Icon>
+        <IsA>data</IsA>
+        <Summary>A fast-paced crossplatform first-person shooter</Summary>
+        <Description>xonotic-data provides data files for Xonotic.</Description>
+        <Archive sha1sum="716135609ef953f2fbed97bd6a3cf116b7afd7a9" type="zip">http://dl.xonotic.org/xonotic-0.5.0.zip</Archive>
+    </Source>
+
+    <Package>
+        <Name>xonotic-data</Name>
+        <Files>
+            <Path fileType="data">/usr/share/xonotic</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2011-10-13</Date>
+            <Version>0.5.0</Version>
+            <Comment>First release</Comment>
+            <Name>Anıl Özbek</Name>
+            <Email>ozbekanil@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
