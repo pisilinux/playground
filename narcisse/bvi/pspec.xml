@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>bvi</Name>
+        <Homepage>http://bvi.sourceforge.net/</Homepage>
+        <Packager>
+           <Name>Mathias Freire</Name>
+           <Email>mathiasfreire45@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>        
+        <IsA>app:console</IsA>        
+        <Summary>Binary file editor.</Summary>
+        <Description>The bvi is a display-oriented editor for binary files, based on the vi texteditor.</Description>
+	<Archive sha1sum="0ff213ebb5cd0993c5d1f7c8d4172aaec709aac1" type="targz">mirrors://sourceforge/bvi/bvi/1.3.2/bvi-1.3.2.src.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>ncurses-devel</Dependency>           
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>bvi</Name>
+        <RuntimeDependencies>
+            <Dependency>ncurses</Dependency>           
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>           
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/menu</Path>
+            <Path fileType="doc">/usr/share/man</Path>     
+	    <Path fileType="doc">/usr/share/doc/bvi</Path>             
+         </Files>
+    </Package>
+
+    <History>         
+        <Update release="1">
+            <Date>2013-05-24</Date>
+                <Version>1.3.2</Version>
+                <Comment>First release.</Comment>
+                <Name>Mathias Freire</Name>
+                <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+    
+    
