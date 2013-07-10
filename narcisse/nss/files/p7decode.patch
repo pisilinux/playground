@@ -1,0 +1,41 @@
+diff --git a/lib/pkcs7/p7decode.c b/lib/pkcs7/p7decode.c
+--- a/lib/pkcs7/p7decode.c
++++ b/lib/pkcs7/p7decode.c
+@@ -1753,17 +1753,17 @@ done:
+  *	into our local database.
+  */
+ PRBool
+ SEC_PKCS7VerifySignature(SEC_PKCS7ContentInfo *cinfo,
+ 			 SECCertUsage certusage,
+ 			 PRBool keepcerts)
+ {
+     return sec_pkcs7_verify_signature (cinfo, certusage,
+-				       NULL, HASH_AlgNULL, keepcerts, 0);
++				       NULL, HASH_AlgNULL, keepcerts, NULL);
+ }
+ 
+ /*
+  * SEC_PKCS7VerifyDetachedSignature
+  *	Look at a PKCS7 contentInfo and check if the signature matches
+  *	a passed-in digest (calculated, supposedly, from detached contents).
+  *	The verification checks that the signing cert is valid and trusted
+  *	for the purpose specified by "certusage".
+@@ -1862,17 +1862,17 @@ sec_pkcs7_get_signer_cert_info(SEC_PKCS7
+      */
+     if (signercert == NULL) {
+ 	/*
+ 	 * The cert usage does not matter in this case, because we do not
+ 	 * actually care about the verification itself, but we have to pick
+ 	 * some valid usage to pass in.
+ 	 */
+ 	(void) sec_pkcs7_verify_signature (cinfo, certUsageEmailSigner,
+-					   NULL, HASH_AlgNULL, PR_FALSE, 0);
++					   NULL, HASH_AlgNULL, PR_FALSE, NULL);
+ 	signercert = signerinfos[0]->cert;
+ 	if (signercert == NULL)
+ 	    return NULL;
+     }
+ 
+     switch (selector) {
+       case sec_common_name:
+ 	container = CERT_GetCommonName (&signercert->subject);
