@@ -1,0 +1,123 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>amarok</Name>
+        <Homepage>http://amarok.kde.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>amarok</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Amarok audio player</Summary>
+        <Description>Amarok is a feature-rich audio player for the KDE desktop.</Description>
+        <Archive sha1sum="98975dcb757d6d82dba93f808278e4ae1e863a78" type="tarbz2">http://download.kde.org/unstable/amarok/2.7.90/src/amarok-2.7.90.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>googlemock-devel</Dependency>
+            <Dependency>clamz</Dependency>    
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>glibc-devel</Dependency>
+            <Dependency>phonon-devel</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>libofa-devel</Dependency>    
+            <Dependency>ffmpeg-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+            <Dependency>openssl-devel</Dependency>
+            <Dependency>mysql-lib</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+            <Dependency>libmtp-devel</Dependency>
+            <Dependency>libgpod-devel</Dependency>
+            <Dependency>libqjson-devel</Dependency>
+            <Dependency>loudmouth-devel</Dependency>
+            <Dependency>liblastfm-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libmygpo-qt-devel</Dependency>
+            <Dependency>qtscriptgenerator</Dependency>
+            <Dependency>libaio-devel</Dependency>
+            <Dependency>soprano-devel</Dependency>
+            <Dependency>nepomuk-core-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">flac_mimetype_bnc671581.diff</Patch>	    
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>amarok</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>googlemock</Dependency>
+            <Dependency>clamz</Dependency>     
+            <Dependency>mesa</Dependency>
+            <Dependency>glibc</Dependency>
+            <Dependency>phonon</Dependency>
+            <Dependency>taglib</Dependency>
+            <Dependency>libofa</Dependency>
+            <Dependency>ffmpeg</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>openssl</Dependency>
+            <Dependency>mysql-lib</Dependency>
+            <Dependency>qt-webkit</Dependency>
+            <Dependency>libmtp</Dependency>
+            <Dependency>libgpod</Dependency>
+            <Dependency>libqjson</Dependency>
+            <Dependency>loudmouth</Dependency>
+            <Dependency>liblastfm</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libmygpo-qt</Dependency>
+            <Dependency>libaio</Dependency>
+            <Dependency>soprano</Dependency>
+            <Dependency>nepomuk-core</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/applications/kde4</Path>
+            <Path fileType="config">/usr/share/config.kcfg</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/dbus-1/interfaces</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/kde4</Path>
+	    <Path fileType="data">/usr/share/mime/packages</Path>
+            <Path fileType="localedata">/usr/share/locale/tr</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/kde4/apps/amarok/images/splash_screen.jpg">amarok-splash.jpg</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+       <Update release="5">
+            <Date>2013-07-11/Date>
+            <Version>2.7.90</Version>
+            <Comment>V. bump</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-01-19</Date>
+            <Version>2.7.0</Version>
+            <Comment>Cosmetics Fixed.</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-01-19</Date>
+            <Version>2.7.0</Version>
+            <Comment>Bump to new stable version.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-12-30</Date>
+            <Version>2.6.90</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
