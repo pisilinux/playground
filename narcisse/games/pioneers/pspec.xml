@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pioneers</Name>
+        <Homepage>http://pio.sourceforge.net/</Homepage>
+        <Packager>
+           <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>        
+        <IsA>app:gui</IsA>        
+        <Summary>Turnbased board strategy game (colonize an island)</Summary>
+        <Description>Pioneers is a computerized version of a well known strategy board game. The goal of the game is to colonize an island. The players play the first colonists hence the name pioneers.</Description>
+	<Archive sha1sum="573e8de138fd0588a8a4071b55daa5699eaf55d2" type="targz">mirrors://sourceforge/pio/Source/pioneers-14.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+	    <Dependency>gobject-introspection-devel</Dependency>
+	    <Dependency>gtk2-devel</Dependency>	    
+	    <Dependency>pango-devel</Dependency>
+	    <Dependency>libgnome-devel</Dependency>
+	</BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>pioneers</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+	    <Dependency>gobject-introspection</Dependency>
+	    <Dependency>gtk2</Dependency>	    
+	    <Dependency>pango</Dependency>
+	    <Dependency>libgnome</Dependency>
+	    <Dependency>icon-theme-hicolor</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+	    <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="data">/usr/share/games/pioneers</Path>
+	    <Path fileType="data">/usr/share/gnome</Path>
+	    <Path fileType="doc">/usr/share/man</Path>
+	    <Path fileType="config">/usr/share/omf/</Path>
+            <Path fileType="data">/usr/share/icons/hicolor</Path>
+	    <Path fileType="data">/usr/share/pixmaps</Path>
+	    <Path fileType="data">/usr/share/icons/gnome</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>	    
+         </Files>
+    </Package>
+    
+    <Package>
+        <Name>pioneers-editor</Name>
+	<Description>Pioneers game editor</Description>
+        <RuntimeDependencies>
+            <Dependency release="current">pioneers</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="executable">/usr/bin/pioneers-editor</Path>
+	    <Path fileType="data">/usr/share/applications/pioneers-editor.desktop</Path>
+	    <Path fileType="data">/usr/share/icons/hicolor/48x48/apps/pioneers-editor.png</Path>
+	    <Path fileType="data">/usr/share/icons/hicolor/scalable/apps/pioneers-editor.svg</Path>
+	    <Path fileType="data">/usr/share/pixmaps/pioneers-editor.png</Path>
+         </Files>
+    </Package>    
+       
+    <History>       
+        <Update release="1">
+            <Date>2013-07-05</Date>
+            <Version>14.1</Version>
+            <Comment>First release</Comment>
+            <Name>mathias freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>       
+    </History>
+</PISI>
