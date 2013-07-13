@@ -1,0 +1,41 @@
+<PISI>
+    <Source>
+        <Name>adeskbar</Name>
+        <Homepage>http://adeskbar.tuxfamily.org/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Icon>adeskbar</Icon>
+        <Summary>A Quick Application Launcher</Summary>
+        <Description>A quick and lightweight application launcher.</Description>
+        <Archive sha1sum="520e91b411a82981e51c3d5549959fb94a63f940" type="targz">http://download.tuxfamily.org/adeskbar/sources/adeskbar-0.5.1.tar.gz</Archive>
+    </Source>
+    
+    <Package>
+        <Name>adeskbar</Name>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+            <Dependency>gnome-menus</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/adeskbar</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2013-07-13</Date>
+            <Version>0.5.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
