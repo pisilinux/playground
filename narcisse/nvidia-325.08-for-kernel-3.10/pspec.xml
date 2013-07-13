@@ -1,0 +1,172 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>module-nvidia-current</Name>
+        <Homepage>http://www.nvidia.com</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>NVIDIA</License>
+        <Summary>NVIDIA drivers for GeForce 6xxx and newer GPUs</Summary>
+        <Description>NVIDIA graphics drivers provide optimized 2D/3D performance.</Description>
+        <Archive sha1sum="da51ea1916c7d0049641851459cecf7ca5870000" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86/325.08/NVIDIA-Linux-x86-325.08.run</Archive>
+        <Archive sha1sum="48e89c6f3d4d9ee319cb5f2761bee994790976c8" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86_64/325.08/NVIDIA-Linux-x86_64-325.08.run</Archive>
+	
+	<!-- This is a patch for Nvidia drivers to Kernel 3.10. For every version increase, it should be reedited -->
+	<Archive sha1sum="b64fd31cc8305641055ddc2d281aef3f3570d3ac" type="binary" target="nvidia">https://dl.dropboxusercontent.com/u/71264624/nvidia-drivers-linux-3.10.patch</Archive>
+        <!--AdditionalFiles>
+        <AdditionalFile permission="0644" target="linux-3.7.6.patch">linux-3.7.6.patch</AdditionalFile>
+        <AdditionalFile permission="0644" target="nvidia-drivers-313.18-linux-3.7+.patch">nvidia-drivers-313.18-linux-3.7+.patch</AdditionalFile>
+        <AdditionalFile permission="0644" target="nvidia-drivers-313.18-builddir-config.patch">nvidia-drivers-313.18-builddir-config.patch</AdditionalFile>
+        </AdditionalFiles-->
+        <BuildDependencies>
+            <Dependency version="3.10.0">kernel-module-headers</Dependency>
+        </BuildDependencies>	
+    </Source>
+
+    <Package>
+        <Name>module-nvidia-current</Name>
+        <IsA>driver</IsA>
+        <Summary>Kernel module for current NVIDIA graphics driver releases</Summary>
+        <RuntimeDependencies>
+            <Dependency version="3.10.0">kernel</Dependency>
+            <Dependency version="current">module-nvidia-current-userspace</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>module-nvidia-current-userspace</Name>
+        <IsA>data</IsA>
+        <Summary>Modprobe rules for nvidia-current kernel driver</Summary>
+        <Files>
+            <Path fileType="data">/etc/modprobe.d</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modprobe.d/nvidia-current.conf">modprobe.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>xorg-video-nvidia-current</Name>
+        <IsA>driver</IsA>
+        <PartOf>x11.driver</PartOf>
+        <RuntimeDependencies>
+            <AnyDependency>
+                <Dependency version="current">module-nvidia-current</Dependency>
+                <Dependency version="current">module-pae-nvidia-current</Dependency>
+            </AnyDependency>
+            <Dependency>libXv</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>libXvMC</Dependency>
+            <Dependency>libvdpau</Dependency>
+            <Dependency>vdpau-video</Dependency>
+            <Dependency>xorg-server</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/etc/OpenCL</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>xorg-video-nvidia-current-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for xorg-video-nvidia-current</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>libvdpau-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">xorg-video-nvidia-current</Dependency>
+            <Dependency>libvdpau-32bit</Dependency>
+            <Dependency>libXv-32bit</Dependency>
+            <Dependency>libX11-32bit</Dependency>
+            <Dependency>libXext-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+            <Path fileType="library">/usr/share/nvidia-current/32bit-ld.so.conf</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package-emul32.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+       <Update release="8">
+            <Date>2013-07-13</Date>
+            <Version>325.08</Version>
+            <Comment>Patched for Kernel 3.10</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+      <Update release="7">
+            <Date>2013-06-05</Date>
+            <Version>325.08</Version>
+            <Comment>V. bump</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+      <Update release="6">
+            <Date>2013-06-05</Date>
+            <Version>319.23</Version>
+            <Comment>Kernel 3.8.13</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+      <Update release="5">
+            <Date>2013-06-05</Date>
+            <Version>319.17</Version>
+            <Comment>Kernel 3.8.13</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-06-01</Date>
+            <Version>319.17</Version>
+            <Comment>Kernel 3.9.4</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-05-26</Date>
+            <Version>319.17</Version>
+            <Comment>Kernel 3.9.3</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-05-12</Date>
+            <Version>319.17</Version>
+            <Comment>Version bump</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-03-06</Date>
+            <Version>313.26</Version>
+            <Comment>Version bump</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-02-19</Date>
+            <Version>310.32</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
