@@ -1,0 +1,49 @@
+<PISI>
+    <Source>
+        <Name>qelectrotech</Name>
+        <Homepage>http://qelectrotech.org</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@opisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Icon>qelectrotech</Icon>
+        <Summary>Elektrik devre şemaları çizim aracı.</Summary>
+        <Description>Mesleki programlar arasında yer alan ve elektrik mühendisleri ve elektrik sistemleri tasarımı yapan firmaların kullanabileceği qelectrotech elektrik devre şemaları çizim aracı.</Description>
+        <Archive sha1sum="de9a303680279f4bfa22ed1992146d0644ff1c97" type="targz">http://download.tuxfamily.org/qet/tags/20130618/qelectrotech-0.3b-src.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>        
+        <Patches>
+            <Patch level="1">qelectrotech-0.3-fix-paths.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>qelectrotech</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/mime</Path>
+            <Path fileType="data">/usr/share/mimelnk</Path>
+            <Path fileType="data">/usr/share/qelectrotech</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2013-07-13</Date>
+            <Version>0.3b</Version>
+            <Comment>First Release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@opisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
