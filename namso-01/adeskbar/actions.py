@@ -11,3 +11,7 @@ def install():
     pisitools.insinto("/usr/bin/", "adeskbar.sh", "adeskbar")
     pisitools.insinto("/usr/share/pixmaps", "src/images/adeskbar.png")
     pisitools.dodoc("README")
+    
+    pisitools.domo("po/tr.po", "tr", "adeskbar.mo")
+    pisitools.domove("/usr/share/locale/tr", "/usr/share/adeskbar/locale")
+    pisitools.removeDir("/usr/share/locale")

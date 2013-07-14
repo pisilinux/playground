@@ -12,20 +12,30 @@
         <Summary>A Quick Application Launcher</Summary>
         <Description>A quick and lightweight application launcher.</Description>
         <Archive sha1sum="520e91b411a82981e51c3d5549959fb94a63f940" type="targz">http://download.tuxfamily.org/adeskbar/sources/adeskbar-0.5.1.tar.gz</Archive>
+        <AdditionalFiles>
+            <AdditionalFile target="po/tr.po" permission="0644" group="root" owner="root">tr.po</AdditionalFile>
+        </AdditionalFiles>
     </Source>
     
     <Package>
         <Name>adeskbar</Name>
         <RuntimeDependencies>
+            <Dependency>vte</Dependency>
             <Dependency>python</Dependency>
+            <Dependency>keybinder</Dependency>
+            <Dependency>python-xlib</Dependency>
+            <Dependency>dbus-python</Dependency>
             <Dependency>gnome-menus</Dependency>
+            <Dependency>python-inotify</Dependency>
+            <Dependency>python-pygobject</Dependency>
+            <Dependency>python-pyalsaaudio</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="data">/usr/share/adeskbar</Path>
             <Path fileType="data">/usr/share/applications</Path>
-            <Path fileType="data">/usr/share/pixmaps</Path>
             <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
         </Files>
     </Package>
     
