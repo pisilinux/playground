@@ -9,13 +9,12 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 from pisi.actionsapi import shelltools
 
-WorkDir="%s-%s-master" %(get.srcNAME(), get.srcVERSION())
-
 def setup():
     shelltools.system("sed -i 's/DL_Window:://' src/download_win.h")
-    autotools.autoreconf("-fi")
     autotools.configure("--prefix=/usr \
-			 --disable-libtool-lock")
+                         --mandir=/usr/share/man \
+                         --enable-shared \
+                         --disable-static")
 
 def build():
     autotools.make()
@@ -23,5 +22,5 @@ def build():
 def install():
     autotools.install()
 
-    pisitools.dodoc("CREDITS", "CHANGES", "COPYING*", "README")
+    pisitools.dodoc("CREDITS", "COPYING*", "README")
 
