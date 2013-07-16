@@ -6,15 +6,12 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import get
 from pisi.actionsapi import shelltools
+from pisi.actionsapi import get
 
-def setup():
-    shelltools.system("sed -i 's/DL_Window:://' src/download_win.h")
-    autotools.configure("--prefix=/usr \
-                         --mandir=/usr/share/man \
-                         --enable-shared \
-                         --disable-static")
+def setup(): 
+    shelltools.export("OS_CXXFLAGS", "%s -fno-strict-aliasing" % get.CXXFLAGS())
+    autotools.configure("--prefix=/usr")
 
 def build():
     autotools.make()
@@ -22,5 +19,5 @@ def build():
 def install():
     autotools.install()
 
-    pisitools.dodoc("CREDITS", "COPYING*", "README")
+    pisitools.dodoc("AUTHORS", "COPYING", "README")
 
