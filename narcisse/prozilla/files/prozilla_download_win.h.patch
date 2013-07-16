@@ -1,0 +1,11 @@
+--- src/download_win.h	2006-02-08 18:18:59.000000000 +0100
++++ src/download_win.h.patched	2007-05-22 12:19:11.000000000 +0200
+@@ -52,7 +52,7 @@
+   void handle_joining_thread();
+   void handle_dl_fatal_error();
+   void cleanup(boolean erase_dlparts);
+-  void DL_Window::print_status(download_t * download, int quiet_mode);
++  void print_status(download_t * download, int quiet_mode);
+ 
+   connection_t *connection;
+   download_t *download;

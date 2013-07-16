@@ -1,0 +1,31 @@
+--- prozilla-2.0.4/configure.in~	2006-02-09 01:19:08.000000000 +0800
++++ prozilla-2.0.4/configure.in	2013-01-13 14:30:19.104800437 +0800
+@@ -5,7 +5,7 @@
+ 
+ AM_INIT_AUTOMAKE
+ 
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS(config.h)
+ AC_CONFIG_SUBDIRS(libprozilla)
+ AC_LANG_CPLUSPLUS
+ AC_ISC_POSIX     
+--- prozilla-2.0.4/libprozilla/configure.in~	2006-02-09 01:20:02.000000000 +0800
++++ prozilla-2.0.4/libprozilla/configure.in	2013-01-13 14:37:00.475290450 +0800
+@@ -25,7 +25,7 @@
+ dnl AM_INIT_AUTOMAKE(libprozilla, 1.0.x-cvs)
+ AM_INIT_AUTOMAKE
+ 
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS(config.h)
+ AC_CANONICAL_HOST
+ 
+ AC_DEFINE(_GNU_SOURCE)
+@@ -42,7 +42,7 @@
+ AC_ISC_POSIX
+ AC_MINIX
+ 
+-AM_PROG_CC_STDC
++AC_PROG_CC
+ AC_PROG_INSTALL
+ AM_ENABLE_STATIC
+ AM_DISABLE_SHARED
