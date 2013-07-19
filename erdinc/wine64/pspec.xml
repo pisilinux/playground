@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>An emulator which lets you run Microsoft Windows applications</Summary>
         <Description>Wine allows running Windows 3.*, Windows 95/98 and Windows NT programs on a i386 (or compatible) machine running X11. It is still alpha level code; don't expect everything to work.</Description>
-        <Archive sha1sum="a19c39fab54c83d9e03e06bb506b7885fc45e94b" type="tarbz2">mirrors://sourceforge/wine/wine-1.6-rc5.tar.bz2</Archive>
+        <Archive sha1sum="f0feb6b5314d0f638fc6d4bdc43cabc028776a9c" type="tarbz2">mirrors://sourceforge/wine/wine-1.6.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>lcms-devel</Dependency>
             <Dependency>libSM-devel</Dependency>
@@ -73,10 +73,12 @@
             <Patch level="1">desktop-file-translation.patch</Patch>
             <Patch level="1">multilib.patch</Patch>
             <Patch level="1">fix_rm.patch</Patch>
+            <Patch level="0">wine-1.1.7-chinese-font-substitutes.patch</Patch>
             <Patch level="1">fedora/wine-cjk.patch</Patch>
             <Patch level="1">fedora/wine-pulse-1.5.31.patch</Patch>
             <Patch level="1">fedora/wine-pulse-winmm-Load-winealsa-if-winepulse-is-found.patch</Patch>
             <Patch level="1">fedora/wine-1.5.17-osmesa-check.patch</Patch>
+            <Patch level="1">fedora/wine-rpath.patch</Patch>
         </Patches>
     </Source>
 
@@ -236,7 +238,7 @@
     <History>
         <Update release="3">
             <Date>2013-07-14</Date>
-            <Version>1.6_rc5</Version>
+            <Version>1.6</Version>
             <Comment>Version bump.</Comment>
             <Name>Erdinç Gültekin</Name>
             <Email>erdincgultekin@pisilinux.org</Email>
