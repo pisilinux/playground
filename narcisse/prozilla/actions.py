@@ -21,6 +21,7 @@ def build():
 
 def install():
     autotools.install()
+    pisitools.dosym("/usr/bin/proz", "/usr/bin/prozilla")
 
     pisitools.dodoc("CREDITS", "COPYING*", "README")
 
