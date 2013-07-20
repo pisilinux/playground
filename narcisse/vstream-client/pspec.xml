@@ -21,7 +21,8 @@
     <Package>
         <Name>vstream-client</Name>        
         <Files>
-            <Path fileType="executable">/usr/bin</Path>    
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
          </Files>
     </Package>
     
@@ -31,8 +32,7 @@
 	  <Dependency release="current">vstream-client</Dependency>
 	</RuntimeDependencies>
         <Files>
-            <Path fileType="header">/usr/include</Path>
-	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>	    
          </Files>
     </Package>
 
