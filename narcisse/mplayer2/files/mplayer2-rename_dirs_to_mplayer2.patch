@@ -1,0 +1,14 @@
+--- configure.orig	2012-02-23 22:49:33.151824809 +0100
++++ configure	2012-02-23 22:50:02.170827069 +0100
+@@ -1181,9 +1181,9 @@
+ 
+ # Atmos: moved this here, to be correct, if --prefix is specified
+ test -z "$_bindir"  && _bindir="$_prefix/bin"
+-test -z "$_datadir" && _datadir="$_prefix/share/mplayer"
++test -z "$_datadir" && _datadir="$_prefix/share/mplayer2"
+ test -z "$_mandir"  && _mandir="$_prefix/share/man"
+-test -z "$_confdir" && _confdir="$_prefix/etc/mplayer"
++test -z "$_confdir" && _confdir="$_prefix/etc/mplayer2"
+ test -z "$_libdir"  && _libdir="$_prefix/lib"
+ test -z "$_localedir"  && _localedir="$_prefix/share/locale"
+ 
