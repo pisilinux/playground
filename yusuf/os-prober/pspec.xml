@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>os-prober</Name>
+        <Homepage>http://kitenet.net/~joey/code/os-prober</Homepage>
+        <Packager>
+            <Name>Ozan Çağlayan</Name>
+            <Email>ozan@pardus.org.tr</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <IsA>app:console</IsA>
+        <Summary>Probes disks on the system for installed operating systems</Summary>
+        <Description>os-prober detects other OSes available on a system and outputs the results in a generic machine-readable format.</Description>
+        <Archive sha1sum="971257e45ea14d50766942bf1ae651066726b1e3" type="targz">http://ftp.de.debian.org/debian/pool/main/o/os-prober/os-prober_1.61.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">os-prober-newnsdirfix.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>os-prober</Name>
+        <RuntimeDependencies>
+            <Dependency>lvm2</Dependency>
+            <Dependency>dmraid</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/os-prober</Path>
+            <Path fileType="data">/var/lib/os-prober</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-07-12</Date>
+            <Version>1.61</Version>
+            <Comment>Initial release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
