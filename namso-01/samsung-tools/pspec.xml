@@ -1,0 +1,37 @@
+<PISI>
+    <Source>
+        <Name>samsung-tools</Name>
+        <Homepage>https://launchpad.net/samsung-tools</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <IsA>app:gui</IsA>
+        <Summary>Tools for Samsung laptops</Summary>
+        <Description>Samsung dizüstü bilgisayarlar için araçlar</Description>
+        <Archive sha1sum="1f0b36dba874b992ffdcc0d2140cb3b5a84d2604" type="targz">http://launchpad.net/samsung-tools/trunk/2.2/+download/samsung-tools-2.2.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>samsung-tools</Name>
+        <RuntimeDependencies>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>notify-python</Dependency>
+            <Dependency>rfkill</Dependency>
+            <Dependency>keybinder</Dependency>
+            <Dependency>vbetool</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-07-21</Date>
+            <Version>2.2</Version>
+            <Comment>First Release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
