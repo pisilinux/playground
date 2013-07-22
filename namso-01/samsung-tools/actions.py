@@ -10,6 +10,8 @@ from pisi.actionsapi import get
 def install():
     pisitools.dosed("samsung-tools.py", "/usr/bin/python2", "/usr/bin/python")
     pisitools.dosed("samsung-tools-preferences.py", "/usr/bin/python2", "/usr/bin/python")
+    pisitools.dosed("session-service.py", "/usr/bin/python2", "/usr/bin/python")
+    pisitools.dosed("system-service.py", "/usr/bin/python2", "/usr/bin/python")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.dodoc("ChangeLog", "LICENSE", "README", "TODO")
