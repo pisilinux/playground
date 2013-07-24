@@ -1,0 +1,33 @@
+# HG changeset patch
+# User Jeff Verdon <jfverdon@gmail.com>
+# Date 1341525858 -7200
+# Node ID 812e29cdbe87af99b8e4e81095070e5b910757d5
+# Parent  bc12b15a1b1431540ad0d351005f1d133d7acd31
+Boost 1.50 was added to sdk's cmake files, but not to source files!
+Adding a small log too.
+
+diff --git a/CMake/Dependencies.cmake b/CMake/Dependencies.cmake
+--- a/CMake/Dependencies.cmake
++++ b/CMake/Dependencies.cmake
+@@ -138,6 +138,21 @@
+ 	endif()
+ 	find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} QUIET)
+ endif()
++if (Boost_FOUND AND WIN32 AND Boost_USE_STATIC_LIBS)
++	if(Boost_VERSION GREATER 104700)
++		set(OGRE_BOOST_COMPONENTS thread date_time system)
++	endif()
++	if(Boost_VERSION GREATER 104900)
++		set(OGRE_BOOST_COMPONENTS thread date_time system chrono)
++	endif()
++	find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} QUIET)
++	if(Boost_VERSION GREATER 104700)
++		macro_log_feature(Boost_SYSTEM_FOUND "boost-system" "Used for threading support" "http://boost.org" FALSE "" "")
++	endif()
++	if(Boost_VERSION GREATER 104900)
++		macro_log_feature(Boost_CHRONO_FOUND "boost-chrono" "Used for threading support" "http://boost.org" FALSE "" "")
++	endif()
++endif()
+ find_package(Boost QUIET)
+ # Optional Boost libs (Boost_${COMPONENT}_FOUND
+ macro_log_feature(Boost_FOUND "boost" "Boost (general)" "http://boost.org" FALSE "" "")

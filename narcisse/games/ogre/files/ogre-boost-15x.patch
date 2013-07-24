@@ -1,0 +1,33 @@
+diff -r 543bc7d6b82f CMake/Dependencies.cmake
+--- a/CMake/Dependencies.cmake	Sun Sep 09 23:06:10 2012 +0200
++++ b/CMake/Dependencies.cmake	Wed Sep 12 11:27:13 2012 +0200
+@@ -136,7 +136,7 @@
+ if (APPLE AND OGRE_BUILD_PLATFORM_APPLE_IOS)
+ 	set(Boost_COMPILER "-xgcc42")
+ endif()
+-set(Boost_ADDITIONAL_VERSIONS "1.51" "1.51.0" "1.50" "1.50.0" "1.49" "1.49.0" "1.48" "1.48.0" "1.47" "1.47.0" "1.46" "1.46.0" "1.45" "1.45.0" "1.44" "1.44.0" "1.42" "1.42.0" "1.41.0" "1.41" "1.40.0" "1.40")
++set(Boost_ADDITIONAL_VERSIONS "1.53" "1.53.0" "1.52" "1.52.0" "1.51" "1.51.0" "1.50" "1.50.0" "1.49" "1.49.0" "1.48" "1.48.0" "1.47" "1.47.0" "1.46" "1.46.0" "1.45" "1.45.0" "1.44" "1.44.0" "1.42" "1.42.0" "1.41.0" "1.41" "1.40.0" "1.40")
+ # Components that need linking (NB does not include header-only components like bind)
+ set(OGRE_BOOST_COMPONENTS thread date_time)
+ find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} QUIET)
+diff -r 543bc7d6b82f CMake/Templates/SDK_CMakeLists.txt.in
+--- a/CMake/Templates/SDK_CMakeLists.txt.in	Sun Sep 09 23:06:10 2012 +0200
++++ b/CMake/Templates/SDK_CMakeLists.txt.in	Wed Sep 12 11:27:13 2012 +0200
+@@ -114,7 +114,7 @@
+ 		# search names with "lib". This is the workaround.
+ 		set(CMAKE_FIND_LIBRARY_PREFIXES ${CMAKE_FIND_LIBRARY_PREFIXES} "")
+ 	endif ()
+-    set(Boost_ADDITIONAL_VERSIONS "1.51" "1.51.0" "1.50" "1.50.0" "1.49" "1.49.0" "1.48" "1.48.0" "1.47" "1.47.0" "1.46" "1.46.0" "1.45" "1.45.0" "1.44" "1.44.0" "1.42" "1.42.0" "1.41.0" "1.41" "1.40.0" "1.40")
++    set(Boost_ADDITIONAL_VERSIONS "1.53" "1.53.0" "1.52" "1.52.0" "1.51" "1.51.0" "1.50" "1.50.0" "1.49" "1.49.0" "1.48" "1.48.0" "1.47" "1.47.0" "1.46" "1.46.0" "1.45" "1.45.0" "1.44" "1.44.0" "1.42" "1.42.0" "1.41.0" "1.41" "1.40.0" "1.40")
+     # Components that need linking (NB does not include header-only components like bind)
+     set(OGRE_BOOST_COMPONENTS thread date_time)
+     find_package(Boost QUIET)
+@@ -139,7 +139,7 @@
+ else()
+ 	set(BOOST_LIBRARYDIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/release")
+ 	set(Boost_USE_STATIC_LIBS TRUE)
+-    set(Boost_ADDITIONAL_VERSIONS "1.51" "1.51.0" "1.50" "1.50.0" "1.49" "1.49.0" "1.48" "1.48.0" "1.47" "1.47.0" "1.46" "1.46.0" "1.45" "1.45.0" "1.44" "1.44.0" "1.42" "1.42.0" "1.41.0" "1.41" "1.40.0" "1.40")
++    set(Boost_ADDITIONAL_VERSIONS "1.53" "1.53.0" "1.52" "1.52.0" "1.51" "1.51.0" "1.50" "1.50.0" "1.49" "1.49.0" "1.48" "1.48.0" "1.47" "1.47.0" "1.46" "1.46.0" "1.45" "1.45.0" "1.44" "1.44.0" "1.42" "1.42.0" "1.41.0" "1.41" "1.40.0" "1.40")
+     # Components that need linking (NB does not include header-only components like bind)
+     set(OGRE_BOOST_COMPONENTS thread date_time)
+     find_package(Boost QUIET)
