@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>krdc</Name>
+        <Homepage>http://www.kde.org/applications/internet/krdc/</Homepage>
+        <Packager>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Remote Desktop Client</Summary>
+        <Description>KRDC is a client application that allows you to view or even control the desktop session on another machine that is running a compatible server. VNC and RDP is supported.</Description>
+        <Archive sha1sum="975b557445aca8654343fe790d232c5d0711a40b" type="tarxz">mirrors://kde/unstable/4.10.95/src/krdc-4.10.95.tar.xz</Archive>
+        <BuildDependencies>
+                <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+                <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+	        <Dependency>telepathy-qt-devel</Dependency>  
+	        <Dependency>libvncserver-devel</Dependency>    
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>krdc</Name>
+        <RuntimeDependencies>
+                <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+                <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
+                <Dependency versionFrom="4.10.95">kdnssd</Dependency>
+	        <Dependency>telepathy-qt</Dependency>     
+	        <Dependency>libvncserver</Dependency> 
+	</RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path> 
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>  
+    
+    <Package>
+        <Name>krdc-devel</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">krdc</Dependency>             
+	</RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>  
+
+    <History>
+        <Update release="1">
+            <Date>2013-07-23</Date>
+            <Version>4.10.95</Version>
+            <Comment>First release</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

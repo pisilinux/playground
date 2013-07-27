@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kcron</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>kcron</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Graphical task scheduler</Summary>
+        <Description>Kcron is a graphical frontend to the cron system, used to schedule regular tasks on a Unix system.</Description>
+        <Archive sha1sum="014efa30048038520168ec7012eeb911ceff0ddd" type="tarxz">mirrors://kde/unstable/4.10.95/src/kcron-4.10.95.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.95">kdepimlibs-devel</Dependency>
+            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kcron</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.95">kdepimlibs</Dependency>
+            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>            
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-07-23</Date>
+            <Version>4.10.95</Version>
+            <Comment>First release</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

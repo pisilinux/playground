@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kshisen</Name>
+        <Homepage>http://games.kde.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>kshisen</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Shisen-Sho Mahjongg like tile game</Summary>
+        <Description>Shisen-Sho is a solitaire-like game played using the standard set of Mahjong tiles. Unlike Mahjong however, Shisen-Sho has only one layer of scrambled tiles.</Description>
+        <Archive sha1sum="7725c8ae7baec47c7f8eb1d031c332c0ad630f0e" type="tarxz">mirrors://kde/unstable/4.10.95/src/kshisen-4.10.95.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.95">libkmahjongg-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kshisen</Name>        
+        <RuntimeDependencies>
+            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.95">kde-runtime</Dependency> 
+            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.95">libkmahjongg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path> 
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+		<Update release="8">
+            <Date>2013-07-23</Date>
+            <Version>4.10.95</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+        <Update release="7">
+            <Date>2013-07-02</Date>
+            <Version>4.10.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-06-10</Date>
+            <Version>4.10.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-05-06</Date>
+            <Version>4.10.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-04-03</Date>
+            <Version>4.10.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-03-06</Date>
+            <Version>4.10.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>       
+        <Update release="2">
+            <Date>2013-02-15</Date>
+            <Version>4.10.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>      
+        <Update release="1">
+            <Date>2013-01-19</Date>
+            <Version>4.9.98</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>       
+    </History>
+</PISI>
