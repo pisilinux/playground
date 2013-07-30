@@ -1,0 +1,49 @@
+<PISI>
+    <Source>
+        <Name>jokosher</Name>
+        <Homepage>https://launchpad.net/jokosher</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Icon>jokosher</Icon>
+        <Summary>A simple yet powerful multi-track studio</Summary>
+        <Description>Jokosher is a simple yet powerful multi-track studio. With it you can create and record music, podcasts and more, all from an integrated simple environment.</Description>
+        <Archive sha1sum="018c365b8c8a4e112cf01962882fcbb1f3b1784a" type="targz">https://launchpad.net/jokosher/trunk/0.11.5/+download/jokosher-0.11.5.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">jokosher-0.11.1-update-database.patch</Patch>
+            <Patch level="1">jokosher-0.11.5-cairo.patch</Patch>
+        </Patches>
+        <BuildDependencies>
+          <Dependency>python-devel</Dependency>
+          <Dependency>gstreamer-devel</Dependency>
+          <Dependency>gnonlin</Dependency>
+          <Dependency>glade</Dependency>
+          <Dependency>gst-python</Dependency>
+          <Dependency>python-pyxdg</Dependency>
+          <Dependency>dbus-python</Dependency>
+          <Dependency>python-cairo</Dependency>
+          <Dependency>python-setuptools</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>jokosher</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-07-29</Date>
+            <Version>0.11.5</Version>
+            <Comment>First Release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
