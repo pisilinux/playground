@@ -11,9 +11,12 @@
         <ExcludeArch>i686</ExcludeArch>
         <License>LGPLv2.1</License>
         <IsA>app:console</IsA>
-        <Summary>An emulator which lets you run Microsoft Windows applications</Summary>
+        <Summary>WINE Is Not An Emulator, which lets you run Microsoft Windows applications</Summary>
         <Description>Wine allows running Windows 3.*, Windows 95/98 and Windows NT programs on a i386 (or compatible) machine running X11. It is still alpha level code; don't expect everything to work.</Description>
         <Archive sha1sum="f0feb6b5314d0f638fc6d4bdc43cabc028776a9c" type="tarbz2">mirrors://sourceforge/wine/wine-1.6.tar.bz2</Archive>
+        <AdditionalFiles>
+            <AdditionalFile target="wine.keyring">wine.keyring</AdditionalFile>
+        </AdditionalFiles>
         <BuildDependencies>
             <Dependency>lcms-devel</Dependency>
             <Dependency>libSM-devel</Dependency>
@@ -27,6 +30,7 @@
             <Dependency>libgphoto2-devel</Dependency>
             <Dependency>pulseaudio-libs-devel</Dependency>
             <Dependency>gst-plugins-base-devel</Dependency>
+            <Dependency>p11-kit-devel</Dependency>
 
             <!-- Libraries used with dlopen() -->
             <Dependency>cups-devel</Dependency>
@@ -56,11 +60,37 @@
             <Dependency>fontforge</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">find-ncurses.patch</Patch>
+            <!-- wine patches -->
+            <Patch level="1" compressionType="xz">winegit/wine-7944ca4.tar.xz</Patch>
+            <!-- ubuntu patches -->
+            <Patch level="1">ubuntu/0001-winemenubuilder-silence-an-err.patch</Patch>
+            <Patch level="1">ubuntu/0002-valgrind-prevent-crash-hack.patch</Patch>
+            <Patch level="1">ubuntu/0003-server-Use-rtkit-to-set-realtime-priority-try-4.patch</Patch>
+            <Patch level="1">ubuntu/0004-avrt-Add-realtime-to-stub.patch</Patch>
+            <Patch level="1">ubuntu/0005-server-Bump-priority-on-server-to-process-messages-f.patch</Patch>
+            <Patch level="1">ubuntu/0006-rtkit-add-SIGXCPU-handling-to-wineserver.patch</Patch>
+            <Patch level="1">ubuntu/0007-mmdevapi-be-stricter-about-tests.patch</Patch>
+            <Patch level="1">ubuntu/0032-dsound-rework-ugly-mixer-logic.patch</Patch>
+            <Patch level="1">ubuntu/0033-dsound-mix-float-natively.patch</Patch>
+            <Patch level="1">ubuntu/0034-dsound-fix-format-handling-on-invalid-format-to-neve.patch</Patch>
+            <Patch level="1">ubuntu/0035-dsound-fixup-DSOUND_WaveQueue-checks.patch</Patch>
+            <Patch level="1">ubuntu/0036-dsound-remove-state-machine-from-render-buffer.patch</Patch>
+            <Patch level="1">ubuntu/0037-dsound-kill-unconditional-memory-allocation-in-mixin.patch</Patch>
+            <!-- arch patches -->            
+            <Patch level="1">arch/0001-server-Create-directories-with-the-specified-securit.patch</Patch>
+            <Patch level="1">arch/0002-server-Store-and-return-security-attributes-with-ext.patch</Patch>
+            <Patch level="1">arch/0003-ntdll-Inherit-security-attributes-from-parent-direct.patch</Patch>
+            <!-- fedora patches -->
+            <Patch level="1">fedora/wine-cjk.patch</Patch>
+            <Patch level="1">fedora/wine-pulse-1.5.31.patch</Patch>
+            <Patch level="1">fedora/wine-pulse-winmm-Load-winealsa-if-winepulse-is-found.patch</Patch>-->
+            <Patch level="1">fedora/wine-1.5.17-osmesa-check.patch</Patch>
+            <Patch level="1">fedora/wine-rpath.patch</Patch>
 
+            <Patch level="1">find-ncurses.patch</Patch>
             <!-- Use XDG_DOCUMENTS_DIR for "My Documents" -->
             <Patch level="1">documents-path.patch</Patch>
-
+            <Patch level="1">application-pdf.patch</Patch>
             <!--
             Multimedia patches from http://repo.or.cz/w/wine/multimedia.git
             It provides along with other changes a proper pulseaudio support
@@ -74,11 +104,6 @@
             <Patch level="1">multilib.patch</Patch>
             <Patch level="1">fix_rm.patch</Patch>
             <Patch level="0">wine-1.1.7-chinese-font-substitutes.patch</Patch>
-            <Patch level="1">fedora/wine-cjk.patch</Patch>
-            <Patch level="1">fedora/wine-pulse-1.5.31.patch</Patch>
-            <Patch level="1">fedora/wine-pulse-winmm-Load-winealsa-if-winepulse-is-found.patch</Patch>
-            <Patch level="1">fedora/wine-1.5.17-osmesa-check.patch</Patch>
-            <Patch level="1">fedora/wine-rpath.patch</Patch>
         </Patches>
     </Source>
 
@@ -101,7 +126,7 @@
             <Dependency>gst-plugins-base</Dependency>
             <Dependency>libtool-ltdl</Dependency>
             <Dependency>libtevent</Dependency>
-
+            <Dependency>p11-kit</Dependency>
             <!-- Libraries used with dlopen() -->
             <Dependency>cups</Dependency>
             <Dependency>gnutls</Dependency>
@@ -129,6 +154,8 @@
         <AdditionalFiles>
             <!-- winetricks script from http://kegel.com/wine/winetricks -->
             <AdditionalFile target="/usr/bin/winetricks" permission="0755">winetricks</AdditionalFile>
+            <!-- wisotool script from http://kegel.com/wine/wisotool -->
+            <AdditionalFile target="/usr/bin/wisotool" permission="0755">wisotool</AdditionalFile>
 
             <AdditionalFile target="/etc/xdg/menus/applications-merged/wine.menu" permission="0644">menu/wine.menu</AdditionalFile>
             <AdditionalFile target="/usr/share/desktop-directories/Wine.directory" permission="0644">menu/Wine.directory</AdditionalFile>
@@ -195,6 +222,7 @@
             <Dependency>fontconfig-32bit</Dependency>
             <Dependency>libXcursor-32bit</Dependency>
             <Dependency>libXxf86dga-32bit</Dependency>
+            <Dependency>p11-kit-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency>zlib-32bit</Dependency>
@@ -228,6 +256,7 @@
             <Dependency>libXdamage-32bit</Dependency>
             <Dependency>libXxf86vm-32bit</Dependency>
             <Dependency>libXxf86dga-32bit</Dependency>
+            <Dependency>p11-kit-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32/libwine.so*</Path>

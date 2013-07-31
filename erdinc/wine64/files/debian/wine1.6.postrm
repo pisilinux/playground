@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# Remove obsolete conf files
+dpkg-maintscript-helper rm_conffile /etc/sysctl.d/wine.sysctl.conf -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/sysctl.d/30-wine.conf -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/sysctl.d/31-wine.conf -- "$@"
+
+#DEBHELPER#
+

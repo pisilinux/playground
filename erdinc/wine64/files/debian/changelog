@@ -1,0 +1,5337 @@
+wine1.6 (1.6-0ubuntu1~ppa1) precise; urgency=low
+
+  * New upstream release
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 21 Jul 2013 01:58:11 -0700
+
+wine1.6 (1.6~rc5-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Tue, 16 Jul 2013 11:41:47 +0200
+
+wine1.6 (1.6~rc4-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 28 Jun 2013 18:28:00 -0700
+
+wine1.6 (1.6~rc3-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Mon, 24 Jun 2013 08:53:46 +0200
+
+wine1.6 (1.6~rc2-0ubuntu1~ppa4) precise; urgency=low
+
+  * debian/control: don't conflict with wine1.5 dummy
+    - Should prevent some unintended uninstalls
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 19 Jun 2013 14:24:32 -0700
+
+wine1.6 (1.6~rc2-0ubuntu1~ppa3) precise; urgency=low
+
+  * Fix wine1.5-dbg depends.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Tue, 18 Jun 2013 09:24:32 +0200
+
+wine1.6 (1.6~rc2-0ubuntu1~ppa2) precise; urgency=low
+
+  * debian/rules: fix a wine1.5->wine1.6 migration error
+    - Package should no longer conflict with self on amd64
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 17 Jun 2013 14:27:44 -0700
+
+wine1.6 (1.6~rc2-0ubuntu1~ppa1) precise; urgency=low
+
+  * New upstream release
+    - Bug fixes only, we are in code freeze.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 14 Jun 2013 17:42:17 -0700
+
+wine1.6 (1.6~rc1-0ubuntu1~ppa2) precise; urgency=low
+
+  * debian/control:
+    - Provide dummy wine1.5 packages to smooth upgrades
+    - Move multi-arch declarations to be adjacent to arch declarations
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 13 Jun 2013 17:02:27 -0700
+
+wine1.6 (1.6~rc1-0ubuntu1~ppa1) precise; urgency=low
+
+  * New upstream release
+    - New implementation of the typelib creation support.
+    - GLSL-based support for fixed function vertex shaders.
+    - Support for desktop launchers in virtual desktop mode.
+    - Fixes for Japanese vertical text.
+    - New Croatian translation.
+    - Various bug fixes.
+  * Rename package to wine1.6
+    - Update debian/wine1.5* files to wine1.6
+    - debian/rules: use wine1.6 package names
+    - Update debian/copyright for new year
+  * Update debian/control
+    - Use new wine1.6 as source package
+    - Depend on wine1.6 packages for intra-dependencies
+    - wine1.6-i386 replaces/provides wine1.4-i386 and wine1.5-i386
+    - wine1.6-amd64 replaces/provides wine1.4-amd64 and wine1.5-amd64
+    - wine1.6 replaces/provides wine1.5
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 10 Jun 2013 14:44:41 -0700
+
+wine1.5 (1.5.31-0ubuntu2) precise; urgency=low
+
+  * Fix wine-gecko depends on amd64.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Wed, 29 May 2013 21:32:05 +0200
+
+wine1.5 (1.5.31-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - New version of the Gecko engine based on Firefox 21.
+    - Joystick force feedback support on Mac OS X.
+    - Window management fixes in the Mac driver.
+    - Various bug fixes.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Fri, 24 May 2013 21:26:59 +0200
+
+wine1.5 (1.5.30-0ubuntu3) precise; urgency=low
+
+  * Add patch to fix up missing libwine.so.1 install.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Fri, 17 May 2013 12:24:09 +0200
+
+wine1.5 (1.5.30-0ubuntu2) precise; urgency=low
+
+  * Add desktop-file-utils to build-depends.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Thu, 16 May 2013 22:20:14 +0200
+
+wine1.5 (1.5.30-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Mouse capture support in the Mac driver.
+    - NTLM and Negotiate authentication in WinHTTP.
+    - Support for proxy bypass in WinInet.
+    - Various bug fixes.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Thu, 16 May 2013 20:28:34 +0200
+
+wine1.5 (1.5.29-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Input method support in the Mac driver.
+    - Support for TLS 1.1 and 1.2 connections on Mac OS X.
+    - JavaScript performance improvements.
+    - Various bug fixes.
+  * Luna is best pony.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Sat, 27 Apr 2013 16:08:35 +0200
+
+wine1.5 (1.5.28-0ubuntu1~ppa1) precise; urgency=low
+
+  * New upstream release
+    - GnuTLS used for all secure connections, OpenSSL is no longer needed.
+    - Mac driver enabled by default.
+    - Built-in FixedSys fonts.
+    - New icon for the joystick control panel.
+    - Postscript driver improvements.
+    - Various bug fixes.
+  * Remove build-depend and recommends of libssl
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 12 Apr 2013 15:50:23 -0700
+
+wine1.5 (1.5.27-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - System tray support in the Mac driver.
+    - Various C runtime improvements.
+    - Large icons for built-in applications.
+    - Various bug fixes.
+  * Happy easter!
+  * Contact me if you have some packaging experience, and are
+    willing to push new versions of wine, and bug me if my patch
+    series no longer applies cleanly. :)
+  * Luna is best pony.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Mon, 01 Apr 2013 09:36:45 +0200
+
+wine1.5 (1.5.26-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - OpenGL support in the Mac driver.
+    - Clipboard and drag&drop support in the Mac driver.
+    - Improvements to the URL cache.
+    - Some fixes for ARM binaries.
+    - SPARC platform no longer supported.
+    - Various bug fixes.
+  * Contact me if you have some packaging experience, and are
+    willing to push new versions of wine, and bug me if my patch
+    series no longer applies cleanly. :)
+  * Luna is best pony.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Sun, 17 Mar 2013 11:28:25 +0100
+
+wine1.5 (1.5.25-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Proper cursor support in the Mac driver.
+    - Fixes for right-to-left support in RichEdit.
+    - Initial version of a Wingdings font.
+    - Various bug fixes.
+  * Luna is best pony.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Fri, 01 Mar 2013 22:12:40 +0100
+
+wine1.5 (1.5.24-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Keyboard and mouse wheel support in the Mac driver.
+    - Regular expression support in VB Script.
+    - Many RichEdit code cleanups.
+    - Various bug fixes.
+  * Update font Recommends to no longer be transitional dummy packages
+    - fonts-droid, fonts-liberation, fonts-horai-umefont, fonts-unfonts-core
+  * Recommend libasound2-plugins in arch-specific packages (LP: #978293)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 15 Feb 2013 19:04:56 -0800
+
+wine1.5 (1.5.23-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - HTTPS support no longer dependent on OpenSSL.
+    - Support for event handling in the Mac driver.
+    - A functional Netstat built-in application.
+    - A bunch of C++ runtime math functions.
+    - Various bug fixes.
+  * Luna is best pony.
+  * Please install wine1.5-dbg and wine1.5-dbg:i386 for wine to produce useful backtraces.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Sun, 03 Feb 2013 23:43:15 +0100
+
+wine1.5 (1.5.22-0ubuntu3) precise; urgency=low
+
+  * Allocate a pointer dynamically in winepulse, to prevent an invalid free on shutdown.
+  * Refresh dbghelp patch from the one that got accepted upstream.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Thu, 31 Jan 2013 18:22:08 +0100
+
+wine1.5 (1.5.22-0ubuntu2) precise; urgency=low
+
+  * Recommend wine-gecko1.9
+  * Add patch to make winedbg backtraces from wine1.5-dbg and wine1.5-dbg:i386 not useless.
+  * Use whatever gcc to build.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Fri, 25 Jan 2013 23:48:16 +0100
+
+wine1.5 (1.5.22-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - New version of the Gecko engine.
+    - Beginnings of the Mac graphics driver.
+    - Support for ARM64 platforms.
+    - Fixes for RTL text in Uniscribe.
+    - Various bug fixes.
+  * Luna is best pony.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Sat, 19 Jan 2013 01:19:47 +0100
+
+wine1.5 (1.5.21-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Beginnings of a netstat built-in program.
+    - Support for selecting resolution in the PostScript driver.
+    - Various bug fixes.
+  * Refreshed sound patches series after one got upstreamed.
+  * Sarvatt is best pony.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Mon, 07 Jan 2013 16:59:34 +0100
+
+wine1.5 (1.5.20-0ubuntu2) precise; urgency=low
+
+  * Fix dsound messup after refreshing patch series, sorry for the crashes!
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Mon, 31 Dec 2012 03:00:52 +0100
+
+wine1.5 (1.5.20-0ubuntu1) precise; urgency=low
+
+  * New upstream belated by christmas release
+    - A bunch of dlls with ugly names for API sets support.
+    - More ATL functions implemented.
+    - Still more C++ runtime functions.
+    - Several text rendering fixes.
+    - PostScript driver improvements.
+    - Various bug fixes.
+  * Drop debian/patches/always-stack-realign.diff, upstream
+  * Luna is best pony.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Sat, 29 Dec 2012 01:04:22 +0100
+
+wine1.5 (1.5.19-0ubuntu3) precise; urgency=low
+
+  * wine1.5-i386, wine1.5-amd64:
+    - recommend libtiff4 instead of either libtiff (since we build with 4)
+      This can be changed to libtiff5 if there's sufficient motivation for
+      a separate quantal-forward build.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 17 Dec 2012 16:34:39 -0800
+
+wine1.5 (1.5.19-0ubuntu2) precise; urgency=low
+
+  * Build-depend on libtiff4-dev | libtiff-dev (may be satisfiable on raring)
+  * wine1.5-i386, wine1.5-amd64:
+    - Remove Recommends: gettext (LP: #954029)
+    - Recommend libtiff4 | libtiff5 (may make raring happy)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 12 Dec 2012 14:40:50 -0800
+
+wine1.5 (1.5.19-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Performance improvements in the DIB engine.
+    - More fleshed out XML-lite implementation.
+    - Some more C++ runtime functions.
+    - Various bug fixes.
+  * Updated winepulse slightly.
+  * Luna is best pony.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Sat, 08 Dec 2012 14:06:15 +0100
+
+wine1.5 (1.5.18-0ubuntu1) precise; urgency=low
+
+  * New upstream release.
+    - Various Windows Codecs improvements.
+    - Fixes for OLE database support.
+    - Improvements to system parameters management.
+    - Some fixes to the built-in Web browser.
+    - Fixes for XML support.
+    - Various bug fixes.
+  * One (1) of my dsound patches got upstreamed, yay?
+  * I don't know of any open sound bugs related to my code,
+    if there still are, please report them on the ubuntu forums
+    in the pulse thread, even if not using pulseaudio. Or mail
+    me directly..
+  * Luna is best pony.
+  * Sarvatt reads too many release changelogs.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Fri, 23 Nov 2012 21:06:03 +0100
+
+wine1.5 (1.5.17-0ubuntu4) precise; urgency=low
+
+  * add patches from DGhost001 for fixing memory corruption in sound.
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Mon, 12 Nov 2012 19:31:12 +0100
+
+wine1.5 (1.5.17-0ubuntu3) precise; urgency=low
+
+  * always enable stack realignment
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Sun, 11 Nov 2012 14:02:53 +0100
+
+wine1.5 (1.5.17-0ubuntu2) precise; urgency=low
+
+  * add valgrind to build-depends to enable valgrind support
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Sun, 11 Nov 2012 11:48:22 +0100
+
+wine1.5 (1.5.17-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Sub-pixel font anti-aliasing in the DIB engine.
+    - Support for automatic installation of ActiveX controls.
+    - Automatic fallback to TLS 1.0 for secure connections.
+    - Beginnings of the DirectWrite text analyzer.
+    - Better handling of font outlines in OpenGL.
+    - Various bug fixes.
+  * I don't know of any open sound bugs related to my code,
+    if there still are, please report them on the ubuntu forums
+    in the pulse thread, even if not using pulseaudio. Or mail
+    me directly..
+  * Luna is best pony!
+
+ -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Sat, 10 Nov 2012 08:29:12 +0100
+
+wine1.5 (1.5.16-0ubuntu2) precise; urgency=low
+
+  * Do not recommend gettext (LP: #954029)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 30 Oct 2012 09:05:47 -0700
+
+wine1.5 (1.5.16-0ubuntu1) precise; urgency=medium
+
+  * New upstream release
+    - New version of the Mono package.
+    - Many improvements to the CMD command-line parser.
+    - More stream classes in the C++ runtime.
+    - Support for managing services in WMI.
+    - Improved CPU detection.
+    - Various bug fixes.
+  * update recommends for new gecko and mono
+  * disable patch that works around not getting server_pid
+    - ptrace-disable.diff is not needed with server_pid bug fixed
+  * runaway realtime threads now get demoted to normal priority
+  * small fixes to dsound
+  * small fixes to winepulse
+  * I don't know of any open sound bugs related to my code,
+    if there still are, please report them on the ubuntu forums
+    in the pulse thread, even if not using pulseaudio. Or mail
+    me directly..
+  * Luna is best pony!
+
+ -- Maarten Lankhorst <m.b.lankhorst@gmail.com>  Fri, 26 Oct 2012 20:27:08 +0200
+
+wine1.5 (1.5.15-0ubuntu1) precise; urgency=medium
+
+  * New upstream release
+    - Full support for layered windows.
+    - New version of the Gecko engine based on Firefox 16.
+    - Support for broadcast sockets used by networked games.
+    - Downloaded add-ons installers are now cached.
+    - Support for persistent Internet cookies.
+    - String optimizations in JavaScript.
+    - Various bug fixes.
+  * I don't know of any open sound bugs related to my code,
+    if there still are, please report them on the ubuntu forums
+    in the pulse thread, even if not using pulseaudio. Or mail
+    me directly..
+  * Luna is best pony!
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Fri, 12 Oct 2012 21:33:49 +0200
+
+wine1.5 (1.5.14-0ubuntu1) precise; urgency=medium
+
+  * New upstream release
+    - Much better behavior of the URL cache.
+    - Improved GIF image support.
+    - More parser features in the shader compiler.
+    - Optimizations in JavaScript.
+    - Various bug fixes.
+  * I don't know of any open sound bugs related to my code,
+    if there still are, please report them on the ubuntu forums
+    in the pulse thread, even if not using pulseaudio. Or mail
+    me directly..
+  * Luna is best pony!
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Sat, 29 Sep 2012 00:34:57 +0200
+
+wine1.5 (1.5.13-0ubuntu1) precise; urgency=medium
+
+  * New upstream release
+    - Client-side window rendering using the DIB engine.
+    - Raw input support for keyboard and mouse.
+    - Support for transparent window areas using color keying.
+    - Proper C++ RTTI support on 64-bit.
+    - Implementation of logical processor information.
+    - Support for fonts with localized names.
+    - Various bug fixes.
+  * Fix for dsound breaking with oss4
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Fri, 14 Sep 2012 21:18:39 +0200
+
+wine1.5 (1.5.12-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Support for disabling individual joysticks.
+    - Better support for D3DX9 constant tables.
+    - Some XRandR improvements.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 04 Sep 2012 18:42:26 -0700
+
+wine1.5 (1.5.11-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Multi-channel support in the ALSA driver.
+    - Removal of the big X11 lock.
+    - Support for pair positioning adjustments in Uniscribe.
+    - More I/O stream implementations in the C++ runtime.
+    - Various bug fixes.
+  * Luna is still best pony
+  * Now if only dsound had multi-channel support as well.,
+    - if there is interest in proper multi-channel dsound
+      let me know, and I may create a package override for
+      dsound with dsound-openal.
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Sat, 18 Aug 2012 17:42:23 +0200
+
+wine1.5 (1.5.10-0ubuntu1~pulse19+build4) precise; urgency=low
+
+  * Add libosmesa6 to Recommends for i386 and amd64
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 13 Aug 2012 09:10:46 -0700
+
+wine1.5 (1.5.10-0ubuntu1~pulse19+build3) precise; urgency=low
+
+  * Add libosmesa6-dev to build dependencies
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 12 Aug 2012 13:11:52 -0700
+
+wine1.5 (1.5.10-0ubuntu1~pulse19+build2) precise; urgency=low
+
+  * Update recommends to pull in new gecko and mono packages
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 02 Aug 2012 22:45:21 -0700
+
+wine1.5 (1.5.10-0ubuntu1~pulse19) precise; urgency=medium
+
+  * New upstream release
+    - New version of the Gecko engine based on Firefox 14.
+    - Support for OpenGL in the DIB engine using libOSMesa.
+    - Off-screen rendering is now the default in Direct3D.
+    - Some more WMI infrastructure.
+    - Various bug fixes.
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Wed, 01 Aug 2012 14:25:30 +0200
+
+wine1.5 (1.5.9-0ubuntu2~pulse19+build1) precise; urgency=high
+
+  * Fix near-infinite loop in dsound
+    - Sorry!!! Special thanks to Loris Zinsou helping me diagnose
+      and fix it, and "Church" for also reporting it.
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Wed, 18 Jul 2012 23:09:48 +0200
+
+wine1.5 (1.5.9-0ubuntu1~pulse19) precise; urgency=medium
+
+  * New upstream release
+    - Support for GPOS font tables in Uniscribe.
+    - Support for XRandr 1.2 and 1.3.
+    - Parser improvements for the HLSL compiler.
+    - More key exchange algorithms supported on Mac OS.
+    - Relay tracing on ARM.
+    - Various bug fixes.
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Wed, 18 Jul 2012 15:26:25 +0200
+
+wine1.5 (1.5.8-0ubuntu3~pulse18) precise; urgency=low
+
+  * Fixes to make skyrim work better with low latency games:
+    - Fix winepulse to lower period size on low latency
+    - Make avrt request realtime priority in a stub
+    - Set wineserver to realtime priority. Wineserver
+      prio is slightly higher to pump messages faster
+    - Haven't figured out yet why skyrim wants a 20 ms buffer
+      but it works now
+  * Bump dsound latency back to 80 ms
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Sat, 14 Jul 2012 16:21:52 +0200
+
+wine1.5 (1.5.8-0ubuntu2~pulse18) precise; urgency=low
+
+  * Fix dsound to work better with winepulse (sorry!!!!)
+    - Completely reworks mixer logic
+  * Fix winecfg showing wrong driver loaded
+  * Recommend new gecko 1.6
+  * Luna is still best pony
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Fri, 13 Jul 2012 23:49:52 +0200
+
+wine1.5 (1.5.8-0ubuntu1~pulse18) precise; urgency=low
+
+  * New upstream release
+    - More stream functionality in the C++ runtime.
+    - A number of Windows Codecs improvements.
+    - More WBEM classes and properties.
+    - Some HTML Help fixes.
+    - Support for printing fake italic fonts.
+    - Various bug fixes.
+  * Luna is best pony
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Wed, 04 Jul 2012 20:45:19 +0200
+
+wine1.5 (1.5.7-0ubuntu4~pulse18) precise; urgency=low
+
+  * Revert previous patch and use a better one that just disables ptrace
+    - Kees Cook <kees@ubuntu.com>
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 27 Jun 2012 21:08:01 -0700
+
+wine1.5 (1.5.7-0ubuntu3~pulse18) precise; urgency=low
+
+  * Import the fix-ptrace patch from wine1.4 package, should fix some
+    games with login issues.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 25 Jun 2012 16:45:22 -0700
+
+wine1.5 (1.5.7-0ubuntu2~pulse18) precise; urgency=low
+
+  * Winepulse v18 patch
+    - Remove clock_pulse interpolation. It sadly couldn't work.
+    - Allow 2 * MinimumPeriod for shared buffers
+    - Fix all compiler warnings when compiling with 64-bits
+    - Dynamically select low latency mode if less than 2 default periods
+      are requested. This requires the rtkit patch to be useful.
+  * rtkit patch
+    - Uses rtkit to get realtime privileges in a safe manner.
+      This allows for more accurate timing and less chance of underruns.
+  * dsound patches to work nicer with winepulse
+    - Rework that uses event-based handling for rendering. In testing
+      with jackd, down to 3.3ms latency was possible. It will still
+      underrun once every few seconds, so low latency is not on by
+      default. 80 ms will be default latency.
+  * mmdevapi patch to reactivate midi with winepulse
+    - winmm will use winealsa for midi only
+  * Add patch so default valgrind on precise won't crash
+    - Don't bump fd limit with valgrind enabled.
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Sun, 24 Jun 2012 23:07:04 +0200
+
+wine1.5 (1.5.7-0ubuntu1~pulse17) precise; urgency=low
+
+  * New upstream release
+    - New version of the Gecko engine based on Firefox 13.
+    - Dynamic device support with UDisks2.
+    - More stream classes implemented in the C++ runtime.
+    - Support for metadata in TIFF files.
+    - Fleshed out WBEM implementation.
+    - Improved support for printer paper sizes.
+    - Various bug fixes.
+  * Winepulse v17 build in case of regressions with v18
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Sun, 24 Jun 2012 22:55:54 +0200
+
+wine1.5 (1.5.6-0ubuntu1~pulse17) precise; urgency=low
+
+  * New upstream release
+    - Automatic installation of the Mono add-on package.
+    - Control panel applet for joysticks.
+    - Device bitmap rendering now done through the DIB engine.
+    - Support for video rendering through DirectX (VMR-9).
+    - First steps towards a D3D shader compiler.
+    - Build fixes for DragonFly BSD.
+    - Various bug fixes.
+
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Mon, 18 Jun 2012 19:30:19 +0200
+
+wine1.5 (1.5.5-0ubuntu1~ppa1~precise1+pulse17) precise; urgency=low
+
+  * New upstream release
+    - Support for installing Mono as a Wine add-on package.
+    - Dithering of pattern brushes in the DIB engine.
+    - Support for installing the .NET 4.0 runtime.
+    - DDS files supported in D3DX9.
+    - Various bug fixes.
+
+ -- Maarten Lankhorst <maarten.lankhorst@canonical.com>  Sun, 27 May 2012 08:39:18 +0200
+
+wine1.5 (1.5.4-0ubuntu1~ppa1~precise1+pulse17) precise; urgency=low
+
+  * New upstream release
+    - A new DirectSound resampler.
+    - A Negotiate authentication provider.
+    - OpenGL support in the DIB engine.
+    - Beginnings of support for .NET mixed assemblies.
+    - Support routines for Internationalized Domain Names.
+    - Various bug fixes.
+
+ -- Maarten Lankhorst <m.b.lankhorst@gmail.com>  Sun, 13 May 2012 17:05:42 +0200
+
+wine1.5 (1.5.3-0ubuntu1~ppa1~precise4+pulse17) precise; urgency=low
+
+  * Fixed to get to a working state
+
+ -- Maarten Lankhorst <m.b.lankhorst@gmail.com>  Sun, 29 Apr 2012 10:42:29 +0200
+
+wine1.5 (1.5.3-0ubuntu1~ppa1~precise1+pulse17) precise; urgency=low
+
+  * New upstream release
+    - Support for graphics bounds tracking.
+    - A number of fixes to the builtin Internet Explorer.
+    - Support for displaying ARM code in the Wine debugger.
+    - Various DirectMusic improvements.
+    - Better namespace support in MSXML.
+    - Various bug fixes.
+  * Update pulseaudio patch to v17
+    - Add warning wine doesn't support it
+    - Add support for ALAW/MULAW formats
+    - Silence error on winecfg
+    - Fix winmm tests
+
+ -- Maarten Lankhorst <m.b.lankhorst@gmail.com>  Sat, 28 Apr 2012 17:44:06 +0200
+
+wine1.5 (1.5.2-0ubuntu1~ppa1~precise1+pulse) precise; urgency=low
+
+  * New upstream release
+    - Improved naming scheme for audio devices.
+    - Better support for finding system fonts on Mac OS X.
+    - Beginnings of support for JPEG encoding.
+    - Several printing fixes.
+    - Improvements to the URL cache.
+    - Various bug fixes.
+  * Add pulseaudio patch
+
+ -- Maarten Lankhorst <m.b.lankhorst@gmail.com>  Sat, 14 Apr 2012 13:49:03 +0200
+
+wine1.5 (1.5.1-0ubuntu1~ppa1~precise1) precise; urgency=low
+
+  * New upstream release
+    - Built-in JavaScript now preferred over Gecko in most cases.
+    - Support for scalable font resources.
+    - Fixes for audio and video playback.
+    - Support for script decoding in JScript.
+    - Various bug fixes.
+  * debian/control: change kdebase-runtime to kde-runtime
+  * debian/icons: create hicolor subfolder directory (LP: #969028)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 30 Mar 2012 16:08:40 -0700
+
+wine1.5 (1.5.0-0ubuntu1~ppa1~precise5) precise; urgency=low
+
+  * Actually save previous changes
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 29 Mar 2012 15:57:13 -0700
+
+wine1.5 (1.5.0-0ubuntu1~ppa1~precise4) precise; urgency=low
+
+  * debian/control: 
+    - depend on wine1.5:any instead of wine1.5-common
+    - depend on libncurses5 for wine1.5-amd64
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 29 Mar 2012 00:06:59 -0700
+
+wine1.5 (1.5.0-0ubuntu1~ppa1~precise3) precise; urgency=low
+
+  * Actually delete wine1.5-templates
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 28 Mar 2012 16:42:58 -0700
+
+wine1.5 (1.5.0-0ubuntu1~ppa1~precise2) precise; urgency=low
+
+  * Merge in wine1.4-0ubuntu2 changes
+    - delete unused wine1.4-templates
+    - delete references to font packages
+  * debian/control:
+    - Suggest dosbox:any for wine1.5
+    - wine1.5 no longer breaks: wine << 1.2.1 (should never see this early)
+  * maintscripts: Remove DOS-related sysctl debconf question and conf file
+  * Actually fix the debian/wine1.4 -> debian/wine1.5 filenames
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 28 Mar 2012 15:39:24 -0700
+
+wine1.5 (1.5.0-0ubuntu1~ppa1~precise1) precise; urgency=low
+
+  * New upstream release
+    - New version of the Gecko engine.
+    - Partial support for using the Trash on Mac OS X.
+    - Support for path gradients in GdiPlus.
+    - Various MSXML improvements.
+    - Fixes to 64-bit exception handling.
+    - Various bug fixes.
+  * debian/control: rename package to wine1.5
+    - wine1.5-i386:
+      - replaces/provides wine1.4-i386, wine-i386
+      - conflicts wine-i386 (a virtual package)
+      - no longer breaks/replaces empty wine, wine1.2, wine1.3 packages
+      - now recommends wine-gecko1.5
+    - wine1.5-amd64:
+      - breaks/replaces/provides wine1.4-amd64
+      - conflicts wine-amd64 (a virtual package)
+      - no longer breaks/replaces empty wine, wine1.2, wine1.3 packages
+      - now recommends wine-gecko1.5
+    - wine1.5:
+      - conflicts/replaces wine1.4, wine1.3, wine1.2
+      - no longer breaks/replaces the bundled font packages (should never see them)
+    - wine1.5-dbg now depends on wine1.5-i386 on i386 and wine1.5-amd64 on amd64
+    - wine1.2 and wine1.3 no longer exist
+      - users of them will remain transitioned to wine1.4
+    - wine metapackage now pulls in wine1.5
+    - wine1.4-common no longer exists
+      - wine1.4 breaks/replaces it
+      - wine1.5-i386 and wine1.5-amd64 depend on wine1.5:any instead
+      - This is ok since there are only wine1.5 packages available for
+        11.10 and 12.04 (ie, multiarch releases)
+   * debian/rules: change wine1.4 to wine1.5
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 27 Mar 2012 19:13:35 -0700
+
+wine1.4 (1.4-0ubuntu2) precise; urgency=low
+
+  * debian/control:
+    - Suggest dosbox in wine-common (should be dosbox:any later)
+    - Break all versions of obsolete font subpackages
+    - Make wine1.4-dbg i386 and amd64 coinstallable
+  * maintscripts: Remove DOS-related sysctl debconf question and conf file
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 13 Mar 2012 02:19:02 -0700
+
+wine1.4 (1.4-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Bug fixes only, we are in code freeze.
+  * debian/control: 
+    - break/replace packages before 1.4
+    - Add a lot of optional packages to the list of recommends that were not
+      auto-depended on by dh_shlibdeps: gettext, libcapi20-3, libcups2,
+      libdbus-1-3, libfontconfig1 | libfontconfig, libfreetype6, libgif4,
+      libgnutls26, libjpeg8, libpng12-0, libsane, libssl1.0.0, libtiff4,
+      libv4l-0, libxcomposite1, libxcursor1, libxi6, libxinerama1, libxrandr2,
+      libxrender1, libxslt1.1, libxt6, libxxf86vm1, unixodbc
+    - build-depend on libgif-dev instead of libgif-dev | libungif-dev
+    - remove build-depends on sharutils, libstdc++6
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 11 Mar 2012 07:42:41 -0700
+
+wine1.4 (1.4~rc6-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Bug fixes only, we are in code freeze.
+  * debian/control: 
+    - explicitly depend on libncurses5 (LP: #938310)
+    - bump breaks/replaces to packages before rc6
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 04 Mar 2012 19:51:50 -0800
+
+wine1.4 (1.4~rc5-0ubuntu2) precise; urgency=low
+
+  * Remerge Loic's change, got lost earlier (LP: #934849)
+  * debian/control:
+    - Reintroduce hard-dependency on wine1.4-i386 (LP: #934854)
+    - wine1.4-i386 breaks/replaces wine1.2, wine1.3 (LP: #939394)
+    - wine1.4-amd64 breaks/replaces wine1.2, wine1.3
+    - Avoid use of depends: wine1.4:any and instead use a workaround
+      that should satisfy Lucid's primitive apt (LP: #931388)
+    - Remove extraneous homepage and priority optional tags
+    - Add Pre-Depends: ${misc:Pre-Depends} to all packages
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 25 Feb 2012 20:54:03 -0800
+
+wine1.4 (1.4~rc5-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Bug fixes only, we are in code freeze.
+  * debian/patches/CJK-registry:
+    - Remove systemlink, add Gulim replacement (thanks Aric Stewart)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 24 Feb 2012 23:31:52 -0800
+
+wine1.4 (1.4~rc4-0ubuntu2) precise; urgency=low
+
+  * Rename debian/wine.menu to debian/xdg/wine.menu and update
+    wine1.4.install; this avoids dh_installmenu picking up the file and
+    installing it to /usr/share/menu which causes warnings on users' systems;
+    LP: #934849.
+
+ -- Loic Minier <email address hidden>   Mon, 20 Feb 2012 09:51:20 +0100
+
+wine1.4 (1.4~rc4-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Bug fixes only, we are in code freeze.
+  * debian/control:
+    - On amd64, depend on wine1.4-i386 | wine1.4-dev
+      This is a compromise to allow the build daemons to use wine1.4-dev on amd64
+    - On amd64, recommend wine1.4-i386.  This should make it installed except
+      in exceptional circumstances (eg installation during archive skew)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 15 Feb 2012 23:48:21 -0800
+
+wine1.4 (1.4~rc3-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Bug fixes only, we are in code freeze.
+  * debian/copyright: convert to dep5 format
+  * debian/patches/CJK-registry: Thanks Qian Hong:
+      Add WenQuanYi Micro Hei as a replacement for SimSun and PMingLiu.  
+      See http://bugs.winehq.org/show_bug.cgi?id=16325
+  * debian/control:
+    - Recreate wine metapackage, remove wine virtual package
+      This way a future app can depend on wine1.5 | wine (>= 1.5.x),
+      which should continue working even when wine1.6 is out.
+    - Mark transitional packages M-A: foreign
+      This way an i386 app depending on wine1.3 will be able to
+      pull in amd64 wine1.3, which will then pull in amd64 wine1.4,
+      unless the user only has i386 wine1.4 installed, in which case
+      apt will then pull in i386 wine1.3 as well.
+    - Recommend ttf-wqy-microhei
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 15 Feb 2012 22:37:58 -0800
+
+wine1.4 (1.4~rc2-0ubuntu2) precise; urgency=low
+
+  * Bump dpkg Pre-Depends to 1.15.7.2~ for dpkg-maintscript-helper.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 15 Feb 2012 12:34:15 +0000
+
+wine1.4 (1.4~rc2-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Bug fixes only, we are in code freeze.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 06 Feb 2012 13:33:00 -0800
+
+wine1.4 (1.4~rc1-0ubuntu1) precise; urgency=low
+
+  * Remove misc:Depends, as it was adding spurious dependencies
+    on non-multi-arch wine1.4 (see LP: #925105)
+  * Remove earlier dh_shlibdeps change as it wasn't the issue
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 01 Feb 2012 03:11:01 -0800
+
+wine1.4 (1.4~rc1-0ubuntu1~ppatest4) precise; urgency=low
+
+  * wine1.4-dev now conflict/replace/provides only wine-dev
+  * override dh_shlibdeps with -Lwine1.4-i386 -Lwine1.4-amd64
+    - should prevent wine1.4-i386 from depending on arch-specific wine1.4
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 01 Feb 2012 02:08:41 -0800
+
+wine1.4 (1.4~rc1-0ubuntu1~ppatest3) precise; urgency=low
+
+  * Create wine1.2 and wine1.3 transitional packages
+    - break+replace wine1.2, wine1.3 << 1.4~rc1
+  * Gecko is now a recommends of the arch-specific packages
+    - Should pull in the appropriate arch gecko too
+  * debian/rules: use dh_installdocs --link-doc for non wine1.4 packages
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 31 Jan 2012 00:31:59 -0800
+
+wine1.4 (1.4~rc1-0ubuntu1~ppatest2) precise; urgency=low
+
+  * Enable --win64 on amd64 configure
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 30 Jan 2012 12:07:19 -0800
+
+wine1.4 (1.4~rc1-0ubuntu1~ppatest1) precise; urgency=low
+
+  * New upstream release
+    - Improved crash dialog with support for saving the backtrace.
+    - Support for the Back button in built-in Internet Explorer.
+    - Keyboard accelerators can now be translated through po files.
+    - A number of installer fixes.
+    - Many translation updates and tweaks.
+    - Various bug fixes.
+  * Rename package to wine1.4, conflicts/replaces/provides previous wines
+  * Package now supports 64 and 32 bit Windows applications on amd64
+  * debian/control: New Multi-Arch compatible package names
+    - wine1.4-i386/wine1.4-amd64 will provide support for 32/64 bit windows apps
+    - provided wine-i386 and wine-amd64 can be depended on by packaged windows
+      applications based on their respective windows version
+    - these will in turn depend on wine1.4:any, a Multi-Arch: allowed package
+    - build-depend on debhelper 9
+    - Remove "based on wine beta" from description
+    - Bump to standards 3.9.2
+    - wine1.4-dbg is Multi-Arch: same
+  * wine1.4-dev: .so file is now in wine1.4-i386 and wine1.4-amd64 packages
+  * debian/compat: Change to 9
+  * debian/rules: Massive simplification
+  * debian/wine1.4.docs: Use documentation/README.*
+  * preinst, postinst, postrm scripts simplified to use dpkg-maintscript-helper
+    to remove obsolete conffiles
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 29 Jan 2012 06:18:17 -0800
+
+wine1.3 (1.3.37-0ubuntu4) precise; urgency=low
+
+  * debian/compat: Change to 7
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 18 Jan 2012 21:49:01 -0800
+
+wine1.3 (1.3.37-0ubuntu3) precise; urgency=low
+
+  * Specify destinations for install files
+  * debian/control: build-depend on opencl-headers
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 17 Jan 2012 15:50:30 -0800
+
+wine1.3 (1.3.37-0ubuntu2) precise; urgency=low
+
+  * debian/rules:
+    - Comment out old manual installs, migrate to .install files
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 17 Jan 2012 14:19:30 -0800
+
+wine1.3 (1.3.37-0ubuntu1) precise; urgency=low
+
+  * New upstream release
+    - Many changes
+  * Convert to 3.0 source format
+  * debian/control:
+    - Remove pre-multiarch amd64 build depends
+    - Remove quilt build depends
+    - Recommend proper gecko versions
+  * debian/rules:
+    - Remove manual dh_quilt patch and unpatch
+    - No need to uuencode/uudecode anymore with new source format
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 17 Jan 2012 09:00:34 -0800
+
+wine1.3 (1.3.28-0ubuntu2) precise; urgency=low
+
+  * debian/control:
+    - Drop build-depends on libhal-dev, libhal-storage-dev
+    - Add build-depends on libdbus-1-dev
+    - Replace build-depend on libjpeg62-dev with libjpeg-dev
+    - Add build-depends on gcc-4.5
+  * debian/rules:
+    - Build using GCC 4.5 (LP: #900901)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 16 Jan 2012 10:59:06 -0800
+
+wine1.3 (1.3.28-0ubuntu1) oneiric; urgency=low
+
+  * New upstream release (LP: #828547)
+    - Many changes over past cycle, many more apps should work
+  * Remove ttf-symbol-replacement-wine1.3 package (LP: #789479)
+    - Symbol replacement font is buggy and has better alternatives
+    - Will remain internal to Wine package for Wine use only
+  * debian/control:
+    - Apply wrap-and-sort to cleanup lists of dependencies
+    - remove libjack-dev, libaudio-dev, libesd0-dev because
+      Jack, NAS, and ESD audio servers have been removed
+    - Remove gcc-4.5-multilib build-dep and use latest GCC
+    - Add oss4-dev to build with OSS4 support
+    - Remove lib32stdc++6, not needed
+    - Recommend wine-gecko >= 1.3
+    - Add breaks/replaces for symbol-replacement
+  * debian/rules:
+    - Remove gcc-4.5 specification and use default GCC (now 4.6)
+  * Update debian/watch (thanks Matthew Young) (LP: #839107)
+  * Drop dummy-thread patch 
+    - Not upstream, doesn't allow install CS4 to finish anyway
+  
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 13 Sep 2011 15:34:48 -0700
+
+wine1.3 (1.3.15-0ubuntu6) oneiric; urgency=low
+
+  * Drop build-depends on lib32v4l-dev; this is in ia32-libs now in oneiric.
+    LP: #808064.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Fri, 26 Aug 2011 19:14:21 +0000
+
+wine1.3 (1.3.15-0ubuntu5) natty; urgency=low
+
+  * debian/control:
+    - xdg-utils promoted to recommends
+    - wine1.3-dev conflict with wine-dev
+    - build-depend on autotools-dev, debhelper 7
+    - add depends: ${shlibs:Depends} to all binary packages
+    - remove original maintainer as it matches maintainer
+  * debian/rules:
+    - use dh_prep
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 04 Apr 2011 02:32:36 -0700
+
+wine1.3 (1.3.15-0ubuntu4) natty; urgency=low
+
+  * Fix permissions on a new icon (lintian)
+  * debian/control:
+    - Make myself maintainer
+    - Fix two overlong description lines (lintian)
+  * Override lintian error about static linking wine preloader
+  * Drop redundant icon/[nl] translation from desktop patch (lintian)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 24 Mar 2011 18:04:42 -0700
+
+wine1.3 (1.3.15-0ubuntu3) natty; urgency=low
+
+  * Port to Natty (LP: #732044)
+  * ttf-symbol-replacement-wine1.3 should contain files now
+  * debian/control:
+    - ttf-symbol-replacement-wine1.3 provides ttf-symbol-replacement
+    - Bump standards version to 3.9.1
+    - Remove some ancient conflicts that are no longer relevant
+    - build-depend on versioned quilt (satisfies lintian)
+    - add ${misc:Depends} to -dbg, -dev build deps (lintian)
+  * debian/rules:
+    - remove weird code that was copying config.sub and config.guess on clean
+  * revert to upstream tools/wine.desktop (lintian)
+    - somehow IT translation was different
+  * add debian/README.source (lintian)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 23 Mar 2011 13:22:15 -0700
+
+wine1.3 (1.3.15-0ubuntu1) natty; urgency=low
+
+  * Port to Natty
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 22 Mar 2011 11:11:38 -0700
+
+wine1.3 (1.3.15-0ubuntu1~maverickppa3) maverick; urgency=low
+
+  * New 24x24 icons to populate Applications menu
+  * Remove unused debian/pgo.tar.coded, wine-winefile.svg, .desktop files
+  * debian/control: do not conflict with wine1.2-gecko
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 17 Mar 2011 06:15:17 -0700
+
+wine1.3 (1.3.15-0ubuntu1~maverickppa2) maverick; urgency=low
+
+  * Change Font Aliases to Font Replacements
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 08 Mar 2011 13:21:52 -0800
+
+wine1.3 (1.3.15-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Support for changing network passwords.
+    - Reflection support in shader compiler.
+    - Tests no longer attempt to cope with Win9x behavior.
+    - A number of MSHTML and MSXML improvements.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 06 Mar 2011 11:43:40 -0800
+
+wine1.3 (1.3.14-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Many cleanups to address Valgrind and Clang warnings.
+    - Support for creating compressed cabinet files.
+    - Translation updates.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 18 Feb 2011 18:28:11 -0800
+
+wine1.3 (1.3.13-0ubuntu1~maverickppa2) maverick; urgency=low
+
+  * Remove winetricks fix patch (included already)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 05 Feb 2011 00:05:41 -0800
+
+wine1.3 (1.3.13-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Tools for creating MSI installers.
+    - Clipboard improvements.
+    - Support for po files in the message compiler.
+    - Improvements to the Wine debugger.
+    - Various bug fixes.
+  * debian/control:
+    - Do not recommend wisotool
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 04 Feb 2011 16:19:34 -0800
+
+wine1.3 (1.3.12-0ubuntu1~maverickppa2) maverick; urgency=low
+
+  * Debian/control:
+    - Conflict wine1.2-gecko to prevent gecko mismatch
+    - Do not provide wine1.2 (provides is for virtual packages)
+  * Debian/patches:
+    - Import fix for winetricks breakage
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 21 Jan 2011 21:10:05 -0800
+
+wine1.3 (1.3.12-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Support for multiple icon sizes in winemenubuilder.
+    - Improvements to the help browser.
+    - Initial stab at DOSBox integration.
+    - Various MSI fixes.
+    - Some fixes to the Wine debugger.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 21 Jan 2011 20:14:17 -0800
+
+wine1.3 (1.3.11-0ubuntu1) maverick; urgency=low
+
+  * New upstream release
+    - PO files now used for translations.
+    - Various JavaScript improvements.
+    - Some fixes to the Wine debugger.
+    - Translation updates.
+    - Various bug fixes.
+  * debian/control: build-depend on gettext
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 07 Jan 2011 17:58:43 -0800
+
+wine1.3 (1.3.10-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Support for notification balloons in system tray.
+    - Obsolete AudioIO sound driver removed.
+    - More work on ActiveX support.
+    - Various MSI fixes.
+    - Preloader now used for 64-bit too. 
+    - Translation updates.
+    - Various bug fixes.
+  * debian/control: proper conflicts/replaces for ancient non-dummy wine packages
+  * debian/control: recommend ttf-droid, ttf-unfonts-core
+  * debian/patches: more CJK font aliases:
+     - Korean Batang->UnBatang, Dotum->UnDotum, still need a Gulim substitute
+     - Fallback Arial Unicode MS -> Droid Sans Fallback (same as Codeweavers)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 24 Dec 2010 13:57:48 -0800
+
+wine1.3 (1.3.9-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Beginnings of support for ActiveX in built-in browser.
+    - Icons on Internet shortcut menu entries.
+    - Standardization of code implementing COM interfaces.
+    - New scheme for auto-generated DLL registrations.
+    - OpenCL library wrapper.
+    - Translation updates.
+    - Various bug fixes.
+  * debian/control: recommend ttf-umefont
+  * Conflict with "wine" << 1.2.1 to prevent upgrade failures from very old
+    ppa packages.
+  * debian/patches: Have default registry include Japanese font aliases
+    for umefonts (metric-compatible with MS fonts)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 10 Dec 2010 12:27:46 -0800
+
+wine1.3 (1.3.8-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Icons in the "open with" menus.
+    - Man pages for all installed binaries.
+    - Support for schemas in MSXML.
+    - Many installer fixes.
+    - Translation updates.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 26 Nov 2010 14:59:01 -0800
+
+wine1.3 (1.3.7-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Improved system tray support.
+    - Better support for installers with assemblies.
+    - Many of the msvcrt "secure" functions implemented.
+    - A lot of fixes to the GStreamer support.
+    - Many MSXML improvements.
+    - Translation updates.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 12 Nov 2010 23:12:42 -0800
+
+wine1.3 (1.3.6-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Support for GStreamer filters.
+    - Mapping of standard cursors to native desktop cursors.
+    - Improved support for installers with services.
+    - Many MSXML improvements.
+    - Decoder for TGA-format images.
+    - Translation updates.
+    - Various bug fixes.
+  * debian/control: 
+    - build-depend on libgstreamer0.10-dev, libgstreamer-plugins-base0.10-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 29 Oct 2010 15:07:52 -0400
+
+wine1.3 (1.3.5-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Support for animated cursors.
+    - Printing directly through CUPS instead of lpr.
+    - Installer fixes for Office 2010.
+    - Many MSXML3 improvements.
+    - Improved Shader Model 4 support.
+    - Proper icons in built-in Internet Explorer.
+    - Translation updates.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 15 Oct 2010 22:32:39 -0700
+
+wine1.3 (1.3.4-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Support for right-to-left mirrored windows.
+    - Winelib now supports the ARM platform.
+    - New taskkill.exe built-in application.
+    - Inetcpl control panel fleshed out.
+    - AcceptEx is implemented now.
+    - Improved security checks for SSL connections.
+    - Translation updates.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 01 Oct 2010 16:23:13 -0700
+
+wine1.3 (1.3.3-0ubuntu1~maverickppa2) maverick; urgency=low
+
+  * Build with gcc-4.5 to support Steam overlay
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 19 Sep 2010 16:08:05 -0700
+
+wine1.3 (1.3.3-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * New upstream release
+    - Improved support for right-to-left text.
+    - Support for CMYK JPEG images.
+    - Beginnings of a Game Explorer implementation.
+    - Improved 64-bit support in MSI.
+    - Stub inetcpl control panel applet.
+    - A number of fixes to crypto support.
+    - Translation updates.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 18 Sep 2010 16:08:56 -0700
+
+wine1.3 (1.3.2-0ubuntu1~maverickppa2) maverick; urgency=low
+
+  * Port to Maverick
+  * debian/control: build with libstdc++6-4.5 instead of 4.4
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 07 Sep 2010 22:48:40 -0700
+
+wine1.3 (1.3.2-0ubuntu1~karmicppa2) karmic; urgency=low
+
+  * Port to Karmic
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 07 Sep 2010 22:43:35 -0700
+
+wine1.3 (1.3.2-0ubuntu1~lucidppa2) lucid; urgency=low
+
+  * Merge in some maverick changes:
+  * debian/control: recommend gnome-exe-thumbnailer | kdebase-runtime
+     - prevents gnome-exe-thumbnailer autoinstall on kde systems
+  * debian/control: build-dep on lib32stdc++6 on amd64
+  * debian/control: build-dep on libstdc++6-4.4-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 07 Sep 2010 22:30:23 -0700
+
+wine1.3 (1.3.2-0ubuntu1~maverickppa1) maverick; urgency=low
+
+  * Port to Maverick
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 07 Sep 2010 00:01:30 -0700
+
+wine1.3 (1.3.2-0ubuntu1~lucidppa1) lucid; urgency=low
+
+  * New upstream release
+    - Update of the Gecko engine, now including a 64-bit version.
+    - New implementation of console support on Unix terminals.
+    - Many new functions in the C runtime dlls.
+    - Various bug fixes.
+  * Recommend wine1.3-gecko instead of wine1.2-gecko (new gecko version)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 06 Sep 2010 22:28:34 -0700
+
+wine1.3 (1.3.1-0ubuntu1) lucid; urgency=low
+
+  * New upstream release
+    - Support for drag & drop between X11 and OLE.
+    - New ipconfig.exe builtin tool.
+    - Support for favorites in builtin Internet Explorer.
+    - Beginnings of a shell Explorer control.
+    - A number of DirectDraw code cleanups.
+    - Improvements to the calendar control.
+    - Various bug fixes.
+  * debian/copyright: winehq.org and 2010
+  * Remove old config.sub and config.guess (newer one in tools folder)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 22 Aug 2010 13:15:48 -0700
+
+wine1.3 (1.3.0-0ubuntu5) lucid; urgency=low
+
+  * debian/control: build-depend on unixodbc-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 17 Aug 2010 03:37:27 -0700
+
+wine1.3 (1.3.0-0ubuntu4) lucid; urgency=low
+
+  * debian/control: recommend ttf-symbol-replacement-wine1.3
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 05 Aug 2010 08:11:32 -0700
+
+wine1.3 (1.3.0-0ubuntu3) lucid; urgency=low
+
+  * New upstream release
+  * Rename package to wine1.3
+  * Import CJK registry defaults from 1.2 maverick
+  * debian/wine1.3.mime:
+    - Add lnk file mime types
+    - Remove nonstandard .exe types
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 04 Aug 2010 03:21:00 -0700
+
+wine1.2 (1.2-0ubuntu1~lucidppa1) lucid; urgency=low
+
+  * New upstream release
+  * Build-depend on libtiff4-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 16 Jul 2010 16:33:33 -0700
+
+wine1.2 (1.2~rc7-0ubuntu2) lucid; urgency=low
+
+  * Remove PGO code on suspicion of sound regressions
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 10 Jul 2010 15:06:02 -0700
+
+wine1.2 (1.2~rc7-0ubuntu1) lucid; urgency=low
+
+  * New upstream release
+    - Many translation updates.
+    - A lot of bug fixes.
+  * Use a dummy profile guide
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 09 Jul 2010 13:26:05 -0700
+
+wine1.2 (1.2~rc6-0ubuntu4) lucid; urgency=low
+
+  * debian/rules: move PGO data to make step
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 04 Jul 2010 02:47:59 -0700
+
+wine1.2 (1.2~rc6-0ubuntu3) lucid; urgency=low
+
+  * debian/rules: build with profile-guided optimization
+    - ignore coverage mismatch (likely spurious)
+    - use profile from manual testing with uuencode
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 03 Jul 2010 22:52:04 -0700
+
+wine1.2 (1.2~rc6-0ubuntu2) lucid; urgency=low
+
+  * Profile-guided optimization test
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 03 Jul 2010 12:59:32 -0700
+
+wine1.2 (1.2~rc6-0ubuntu1) lucid; urgency=low
+
+  * New upstream release
+    - Many translation updates.
+    - A lot of bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 02 Jul 2010 19:28:42 -0700
+
+wine1.2 (1.2~rc5-0ubuntu1) lucid; urgency=low
+
+  * New upstream release
+    - Many translation updates.
+    - A lot of bug fixes.
+  * Complete cs localization for .desktop files (Jan Nekvasil)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 25 Jun 2010 12:44:08 -0700
+
+wine1.2 (1.2~rc4-0ubuntu1~lucidppa2) lucid; urgency=low
+
+  * debian/control: 
+    - recommend cups-bsd for printing (LP: #566846)
+    - recommend new wisotool package
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 20 Jun 2010 21:09:49 -0700
+
+wine1.2 (1.2~rc4-0ubuntu1~lucidppa1) lucid; urgency=low
+
+  * New upstream release
+    - Many translation updates.
+    - A lot of bug fixes.
+  * debian/control: recommend new gnome-exe-thumbnailer
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 19 Jun 2010 21:12:04 -0700
+
+wine1.2 (1.2~rc3-0ubuntu1~lucidppa1) lucid; urgency=low
+
+  * New upstream release
+    - Bug fixes only due to code freeze
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 11 Jun 2010 16:04:44 -0700
+
+wine1.2 (1.2~rc2-0ubuntu1~lucidppa1) lucid; urgency=low
+
+  * New upstream release
+    - Bug fixes only due to code freeze
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 28 May 2010 23:21:17 -0700
+
+wine1.2 (1.2~rc1-0ubuntu1~lucidppa1) lucid; urgency=low
+
+  * New upstream release
+    - Many new toolbar icons.
+    - Support for alpha blending in image lists.
+    - Much more complete shader assembler.
+    - Support for Arabic font shaping and joining.
+    - A number of fixes for video rendering.
+    - Font antialiasing configuration through fontconfig.
+    - Improved handling of desktop link files.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 21 May 2010 15:18:10 -0700
+
+wine1.2 (1.1.44-0ubuntu1~lucidppa2) lucid; urgency=low
+
+  * Integrate a photoshop installer fix patch (Toni Spets)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 11 May 2010 10:50:24 +0200
+
+wine1.2 (1.1.44-0ubuntu1~lucidppa1) lucid; urgency=low
+
+  * New upstream release
+    - Many more new icons.
+    - Support for 32-bit prefixes with a 64-bit Wine.
+    - Many additional msvcr80/90 functions.
+    - Improvements to Bidi handling.
+    - More complete mmdevapi (Win7 audio) support.
+    - Improved handling of MSI patches.
+    - A number of fixes for desktop menus.
+    - Optimizations in OLE storage.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 10 May 2010 03:46:04 -0700
+
+wine1.2 (1.1.43-0ubuntu1~lucidppa4) lucid; urgency=low
+
+  * debian/control:
+    - Have wine1.2-dev not conflict with its own wine-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 01 May 2010 13:42:04 -0700
+
+wine1.2 (1.1.43-0ubuntu1~lucidppa3) lucid; urgency=low
+
+  * Don't use cautious-launcher so right click -> Open with Wine works
+  * debian/control:
+    - Conflict with wine1.0 packages on Lucid
+    - Recommend new winetricks package
+  * Merge in Lucid menu item translations
+    - pt (João Santos), he (Yaron)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 26 Apr 2010 14:04:08 -0700
+
+wine1.2 (1.1.43-0ubuntu1~lucidppa2) lucid; urgency=low
+
+  * Re-add dummy packages to smooth upgrades (for ppa only)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 21 Apr 2010 14:54:17 -0700
+
+wine1.2 (1.1.43-0ubuntu1~lucidppa1) lucid; urgency=low
+
+  * New upstream release
+    - A number of new icons.
+    - Improved support for alpha channel in bitmaps.
+    - Many Direct3D fixes and optimizations.
+    - More complete msvcr80/90 implementations.
+    - A wide range of 64-bit fixes.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 21 Apr 2010 14:11:14 -0700
+
+wine1.2 (1.1.42-0ubuntu3) lucid; urgency=low
+
+  * Rebuild with png support now that ia32-libs updated (LP: #554293)
+  * debian/control: use lib32v4l on amd64
+  * debian/control: no longer provide dummy "wine" package (LP: #527732)
+    - includes wine, wine-dev, and wine-gecko
+    - will require a rebuild of wine and wine-gecko packages
+  * Translations for menu items: (LP: #386125) 
+    - hu (Gabor Kelemen), ru (Vladimir Makhnychev), nl (Paul van Genderen),
+      el (Jennie Petoumenou), es (David Rando), pt_BR (André Desgualdo Pereira),
+      fr (Francois Gouget), da (zenith), lt (Marius Gedminas),
+      cs (Jan Nekvasil), eu (Ibai Oihanguren)
+    - Also change C:\ to C: for all translations
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 14 Apr 2010 19:50:52 -0700
+
+wine1.2 (1.1.42-0ubuntu2) lucid; urgency=low
+
+  * Make embedded tahoma font wine-specifc again [LP: #514493, #412195]
+  * Rebuild with new libpng (LP: #554293)
+  * Include IT translation for menu items (Sergio Zanchetta)
+  * Higher version number to surpass PPA version (LP: #530493)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 10 Apr 2010 14:08:44 -0700
+
+wine1.2 (1.1.42-0ubuntu1) lucid; urgency=low
+
+  * New upstream release
+    - Support for shared 32/64-bit setups.
+    - Dwarf debug info support for better backtraces.
+    - More standard actions supported in MSI.
+    - Support for TIFF image format in WinCodecs.
+    - A number of Direct3D improvements.
+    - Shell fixes for better Internet Explorer support.
+    - Various bug fixes.
+  * Should build with new mpg123 (LP: #456132)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 07 Apr 2010 01:39:47 -0700
+
+wine1.2 (1.1.41-0ubuntu2) lucid; urgency=low
+
+  * debian/control: build depend on libv4l-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 21 Mar 2010 18:30:45 -0700
+
+wine1.2 (1.1.41-0ubuntu1) lucid; urgency=low
+
+  * New upstream release
+    - A wide range of Direct3D improvements.
+    - Support for SHA-256, SHA-384, and SHA-512 algorithms.
+    - A number of MSHTML fixes.
+    - Support for mp3 decoding on Mac OS X.
+    - Various widl improvements.
+    - More typelib fixes.
+    - OLE storage improvements.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 19 Mar 2010 17:56:00 -0700
+
+wine1.2 (1.1.40-0ubuntu2) lucid; urgency=low
+
+  * New upstream release
+    - Support for Wow64 registry redirection.
+    - Increased coverage of MSI standard actions.
+    - Various Wordpad improvements.
+    - Many shell fixes for better IE support.
+    - Improved support for typelibs.
+    - Better GL card detection.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 07 Mar 2010 12:11:37 -0800
+
+wine1.2 (1.1.39-0ubuntu1) lucid; urgency=low
+
+  * New upstream release
+    - Support for registry symbolic links.
+    - Many MSI fixes.
+    - Build process improvements.
+    - MSXML cleanups and fixes.
+    - A number of MSHTML improvements.
+    - Various bug fixes.
+  * debian/control: build with mpg123 on amd64
+    - The 1.10.1 prerelease should fix the previous build failure. (LP: #522916)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 19 Feb 2010 15:26:37 -0800
+
+wine1.2 (1.1.38-0ubuntu1) lucid; urgency=low
+
+  * New upstream release
+    - Better support for memory allocations debugging.
+    - Improved MIDI support.
+    - A wide range of Direct3D fixes.
+    - OLEDB fixes (should fix Clipart in Office).
+    - Improved debugger support on x86-64.
+    - Many MSI fixes.
+    - Various bug fixes.
+  * Also rebuild (LP: #506320)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 07 Feb 2010 14:53:05 -0800
+
+wine1.2 (1.1.37-0ubuntu2) lucid; urgency=low
+
+  * No changes rebuild to force building with new ia32-libs
+
+ -- Scott Ritchie <scott@open-vote.org>  Tue, 02 Feb 2010 15:25:14 -0800
+
+wine1.2 (1.1.37-0ubuntu1) lucid; urgency=low
+
+  * New upstream release
+    - A number of fixes in AVI file support.
+    - Several MSXML improvements.
+    - A few MSI fixes.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Tue, 02 Feb 2010 11:15:03 -0800
+
+wine1.2 (1.1.36-0ubuntu3) lucid; urgency=low
+
+  * debian/{rules,wine.sysctl.conf}: actually drop the static sysctl files.
+  * debian/wine.{dirs,install}.*: remove the no longer shipped /etc/sysctl.d.
+  * debian/rules: add missing dh_installdebconf for debconf (LP: #511014).
+  * debian/control: fix Conflict/Replace versions of wine (LP: #511052).
+  * debian/wine1.2.postrm: include confmodule sooner (Debian bug 133029).
+  * debian/wine1.2.{postinst,preinst,postrm}:
+    - clean up sysctl files using wine1.2 package and version.
+    - use "lt" instead of "lt-nl" to handle the case of a newly installed
+      wine1.2 package replacing an older wine package.
+    - include the wine package's 30-wine.conf md5sum for comparison.
+
+ -- Kees Cook <kees@ubuntu.com>  Fri, 22 Jan 2010 02:03:07 -0800
+
+wine1.2 (1.1.36-0ubuntu2) lucid; urgency=low
+
+  * Port to Lucid
+  * Port Kees' changes from wine package:
+    * debian/{control,*.lpia}: removed lpia arch since it is not supported.
+    * debian/rules: support "parallel=N" in DEB_BUILD_OPTIONS.
+    * implement an execute bit checker for the Ubuntu Non-Exec Policy
+    (LP: #506702):
+      - debian/wine1.2.mime: update mime handlers to use new launcher.
+        - fix a typo in kees patch that removed x-winexe mimetype.
+      - debian/patches/nonexec-launcher.diff: use new launcher for desktop file.
+    * debian/wine1.2.{postinst,preinst,postrm}: clean up old static sysctl
+      files (LP: #352119).
+    * debian/control, debian/wine1.2.{templates,config,postinst,postrm}: add
+      debconf question for selecting a sensible mmap_min_addr system setting
+      (LP: #475540).
+  * debian/wine1.2.{postinst,postrm}:
+    - use "start procps || true" instead of invoke-rc.d (LP: #447197)
+  * debian/control: update text in wine, wine-dev, and wine-gecko to say that
+    its for easing wine upgrades and not just for PPA users now.
+
+ -- Scott Ritchie <scott@open-vote.org>  Sat, 16 Jan 2010 17:12:15 -0800
+
+wine1.2 (1.1.36-0ubuntu1) karmic; urgency=low
+
+  * New upstream release
+    - Completion of the 16-bit separation.
+    - Improved Shader Model 4 support.
+    - A ton of memory leak fixes.
+    - Improved debugging support for MinGW.
+    - A number of MSHTML fixes.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 08 Jan 2010 15:22:46 -0800
+
+wine1.2 (1.1.35-0ubuntu1) karmic; urgency=low
+
+  * New upstream release
+    - Support for OLE transacted storage.
+    - Better certificate checking on secure connections.
+    - More progress on the 16-bit separation.
+    - Left 4 Dead 2 DRM really supported now.
+    - MSI performance improvements.
+    - 64-bit fixes in debugger support.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 18 Dec 2009 18:01:30 -0800
+
+wine1.2 (1.1.34-0ubuntu1) karmic; urgency=low
+
+  * New upstream release
+    - Many fixes for crypto certificates support.
+    - A lot of MSHTML improvements.
+    - Various fixes to support the Left 4 Dead 2 DRM.
+    - A number of OLE marshalling fixes.
+    - More Listview improvements.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 06 Dec 2009 15:59:38 -0800
+
+wine1.2 (1.1.33-0ubuntu1~ppa1) karmic; urgency=low
+
+  * New upstream release
+    - Gecko now installed at wineprefix creation time.
+    - Better support for certificates in crypt32.
+    - Improved sound support in mciwave.
+    - Some more Direct3D 10 functions.
+    - Many cleanups for issues spotted by Valgrind.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 13 Nov 2009 17:43:31 -0800
+
+wine1.2 (1.1.32-0ubuntu1~ppa2) karmic; urgency=low
+
+  * Remove photoshop patch to fix FTBFS
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 27 Oct 2009 00:40:11 -0700
+
+wine1.2 (1.1.32-0ubuntu1~ppa1) karmic; urgency=low
+
+  * New upstream release
+    - Many crypto fixes, particularly on 64-bit.
+    - Improved DVD access on Mac OS.
+    - Several common controls improvements.
+    - Various HTML support improvements.
+    - More DIB optimizations.
+    - Various bug fixes.
+  * debian/control: add dummy wine, wine-dev, and wine-gecko packages to point
+      to their wine1.2 equivalents for upgrading users
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 25 Oct 2009 02:38:47 -0700
+
+wine1.2 (1.1.31-0ubuntu2) karmic; urgency=low
+
+  * Use Quilt patch system
+  * Apply small installer workaround patch that may help Photoshop installs
+  * debian/control:
+    - ttf-tahoma-replacement and ttf-symbol-replacement are Recommends
+  * Symbol should no longer install an empty tahoma dir (LP: #397254)
+  * debian/wine1.2.postinst: replace invoke-rc.d with service (LP: #447197)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 11 Oct 2009 21:29:59 -0700
+
+wine1.2 (1.1.31-0ubuntu1) karmic; urgency=low
+
+  * New upstream release
+    - Vastly improved monthcal control.
+    - Performance improvements for DIB sections.
+    - Several sound driver fixes.
+    - Beginning of ActiveX support in JScript.
+    - More Direct3D 10 work.
+    - More 16-bit dlls split off to separate modules.
+    - Support for attachments in MAPI.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 09 Oct 2009 14:03:59 -0700
+
+wine1.2 (1.1.30-0ubuntu4) karmic; urgency=low
+
+  * debian/control:
+    - update package description to show beta release (LP: #443965)
+    - move homepage into actual homepage field
+    - bump standards version to 3.8.3
+    - put fonts in section fonts instead of x11
+    - put wine1.2-dbg in debug section
+    - explicit wine1.2 in otherosfs section
+    - bump debhelper build-depends version to clear lintian warning
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 05 Oct 2009 12:17:08 -0700
+
+wine1.2 (1.1.30-0ubuntu3) karmic; urgency=low
+
+  * Add all of Joel Hodsworths icons using uuencode
+  * debian/control: build-depend on sharutils
+  * debian/rules: use proper name for wine.sysctl.conf
+  * debian/copyright: 
+    - remove reference to unused ubuntustudio icons
+    - bump year from 2004 to 2009
+  * debian/wine-browsedrive.desktop: use folder-wine icon
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 29 Sep 2009 02:06:59 -0700
+
+wine1.2 (1.1.30-0ubuntu2) karmic; urgency=low
+
+  * Build-depend on libopenal-dev
+  * Delete unused debian/patches
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 28 Sep 2009 10:02:44 -0700
+
+wine1.2 (1.1.30-0ubuntu1) karmic; urgency=low
+
+  * New upstream release
+    - Support for OpenAL.
+    - Many improvements in HTML and JavaScript support.
+    - Many common controls fixes and improvements.
+    - More Direct3D 10 work.
+    - Better MAPI support.
+    - Various bug fixes.
+  * Drop Roderick's patch as it's integrated upstream.
+  * Add new wine icon at different sizes
+    - icons by Joel Holdsworth <joel@airwebreathe.org.uk>
+    - replacements for the other icons coming soon
+    - debian/rules: install as a subfolder
+    - only the 32x32 one is used and installed to /usr/share/pixmaps
+  * debian/rules: remove deprecated dh_desktop
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 26 Sep 2009 07:56:57 -0700
+
+wine1.2 (1.1.29-0ubuntu3) karmic; urgency=low
+
+  * debian/rules: fix debug package misspelling so it actually builds
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 23 Sep 2009 04:26:39 -0700
+
+wine1.2 (1.1.29-0ubuntu2) karmic; urgency=low
+
+  * debian/rules: create separate wine1.2-debug package
+  * debian/control: only build libmpg123 on i386 (seems amd64 is broken)
+  * fontconfig file for tahoma to disable embedded bitmaps (LP: #412195)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 16 Sep 2009 18:06:42 -0700
+
+wine1.2 (1.1.29-0ubuntu1) karmic; urgency=low
+
+  * New upstream release
+    - Improved Gecko integration by using Wine's network layers.
+    - Use of external libmpg123 for mp3 decoding.
+    - Support for JPEG and PNG formats in WindowsCodecs.
+    - Many regression test fixes for Win64 and Windows 7.
+    - Various bug fixes.
+  * Debian/control: build-depend on libmpg123-dev
+  * Include Roderick Colenbranders steam regression fix patch
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 07 Sep 2009 11:36:25 -0700
+
+wine1.2 (1.1.28-0ubuntu1) karmic; urgency=low
+
+  * New upstream release
+    - Support for IRDA protocol.
+    - Faster initial wineprefix creation.
+    - Axis remapping with evdev joysticks.
+    - More image formats in WindowsCodecs.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 25 Aug 2009 19:07:47 -0700
+
+wine1.2 (1.1.27-0ubuntu2) karmic; urgency=low
+
+  * debian/control: build-depend on libgsm1-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 19 Aug 2009 05:49:48 -0700
+
+wine1.2 (1.1.27-0ubuntu1) karmic; urgency=low
+
+  * New upstream release
+    - New version of the Gecko engine.
+    - New GSM 06.10 codec support.
+    - Improved support for the disk volume APIs.
+    - Support for XShm pixmaps for better performance.
+    - Various bug fixes.
+  * debian/control: wine-dev depends on wine1.2 (LP: #410911)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 10 Aug 2009 03:43:41 -0700
+
+wine1.2 (1.1.26-0ubuntu1) karmic; urgency=low
+
+  * New upstream release
+    - Still more translation updates.
+    - Faster bitmap stretching using XRender.
+    - Proxy support in WinHTTP.
+    - Many more JScript functions.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 17 Jul 2009 23:15:37 -0700
+
+wine1.2 (1.1.25-0ubuntu1) karmic; urgency=low
+
+  * New upstream release
+    - A ton of translation updates.
+    - Support for various Unicode file encodings in Notepad.
+    - Improved memory management, especially for OpenGL.
+    - Desktop menus now cleaned up automatically.
+    - Beginnings of a windowscodecs DLL implementation.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 08 Jul 2009 14:32:46 -0700
+
+wine1.2 (1.1.24-0ubuntu2) karmic; urgency=low
+
+  * Split ttf-symbol-replacement into separate package
+  * Have Wine depend on ttf-tahoma-replacement and ttf-symbol-replacement
+  * Change defoma hints for tahoma-replacement to not say just "tahoma"
+  * ttf-tahoma-replacement.install: install as tahoma-replacement not "tahoma" 
+  * Recommend wine1.2-gecko instead of wine-gecko
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 28 Jun 2009 23:34:52 -0700
+
+wine1.2 (1.1.24-0ubuntu1) karmic; urgency=low
+
+  * Port to Karmic, create 1.2 branch, basing off Jaunty PPA version
+  * debian/control: conflict/replace/provide old Wine
+  * Split Tahoma replacement font into separate package, ttf-tahoma-replacement
+  * debian: rename all files to wine1.2.foo
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 28 Jun 2009 12:22:31 -0700
+
+wine (1.1.24~winehq0~ubuntu~9.04-0ubuntu1) jaunty; urgency=low
+
+  * New upstream release
+    - Support for freedesktop file associations.
+    - Support for exception handling on 64-bit.
+    - Improved ARB shaders.
+    - Fixes for the FBO mode.
+    - Many listview improvements.
+    - Various bug fixes.
+  * Change suggests: msttcorefonts to recommends: ttf-mscorefonts-installer
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 20 Jun 2009 21:52:45 -0700
+
+wine (1.1.23~winehq0~ubuntu~9.04-0ubuntu1) jaunty; urgency=low
+
+  * New upstream release
+    - Support for registering MIME types with the Linux desktop.
+    - FBO mode is now the default for Direct3D.
+    - Support for COM proxy delegation.
+    - Improved support for the Mingw cross-compile.
+    - Proper fullscreen mode for the virtual desktop.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 05 Jun 2009 12:30:12 -0700
+
+wine (1.1.22~winehq0~ubuntu~9.04-0ubuntu1) jaunty; urgency=low
+
+  * New upstream release
+    - More improvements to OLE copy/paste.
+    - Beginnings of x86_64 exception handling.
+    - Direct3D locking fixes.
+    - ARB shaders improvements.
+    - Better OpenGL pixel format support.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 22 May 2009 15:18:18 -0700
+
+wine (1.1.21~winehq0~ubuntu~9.04-0ubuntu1) jaunty; urgency=low
+
+  * New upstream release
+    - Beginnings of shader model 4 support.
+    - Support for copying/pasting images from X11 applications.
+    - A number of GDIPlus improvements.
+    - Various listview fixes.
+    - 64-bit support in winemaker.
+    - Support for building on Mac OS X Snow Leopard.
+    - Various bug fixes.
+  * New icons for wine, winecfg, winefile, and notepad
+    - Thanks to Christian Dannie Storgaard
+    - No small sized icons yet; they will be pushed upstream
+    - No icon for uninstall (will be phased out)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 08 May 2009 13:09:33 -0700
+
+wine (1.1.20~winehq0~ubuntu~9.04-0ubuntu1) jaunty; urgency=low
+
+  * New upstream release
+    - Show a dialog on application crashes.
+    - Much improved OLE copy/paste support.
+    - Various listview improvements.
+    - More Direct3D code cleanups.
+    - Various bug fixes.
+  * New icons taken from the ubuntustudio-icon-theme package
+  * Remove unused wine-regedit, wine-winehelp, and wine-winemine icons
+  * debian/copyright: mention ubuntustudio icons CC-by-SA license
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 24 Apr 2009 15:48:22 -0700
+
+wine (1.1.19~winehq0~ubuntu~9.04-0ubuntu1) jaunty; urgency=low
+
+  * New upstream release
+    - Support for Visual C++ project files in winemaker.
+    - Improvements to the Esound driver.
+    - Many Direct3D code cleanups.
+    - Fixes to OLE clipboard handling.
+    - OpenBSD compilation fixed.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 10 Apr 2009 15:27:45 -0700
+
+wine (1.1.18~winehq0~ubuntu~9.04-0ubuntu2) jaunty; urgency=low
+
+  * debian/rules: remove cleanup of temporary library directory
+    on amd64 (should have gone with the rest of it last update)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 30 Mar 2009 02:35:06 -0700
+
+wine (1.1.18~winehq0~ubuntu~9.04-0ubuntu1) jaunty; urgency=low
+
+  * Port to Jaunty
+  * New upstream release
+    - RPC over HTTP support.
+    - Improved support for upgrades in MSI.
+    - Debug symbols in WineDbg on Mac OS X.
+    - Many Direct3D code cleanups.
+    - Various bug fixes.
+  * debian/rules: 
+    Remove all the manual links to libraries since .so symlinks are created in /usr/lib32 for us
+    Delete some old comments when the rules file was created
+  * debian/changelog:
+    Change libjack0.100.0-dev build depends to libjack-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 27 Mar 2009 18:40:44 -0700
+
+wine (1.1.17~winehq0~ubuntu~8.10-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Joystick support on Mac OS X.
+    - Implementation of iphlpapi on Solaris.
+    - A number of 64-bit improvements.
+    - Obsolete LinuxThreads support has been removed.
+    - Many fixes to the regression tests on Windows.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 13 Mar 2009 14:05:48 -0700
+
+wine (1.1.16~winehq0~ubuntu~8.10-0ubuntu2) intrepid; urgency=low
+
+  * debian/wine-uninstaller.desktop: fix exec link
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 04 Mar 2009 11:11:13 -0800
+
+wine (1.1.16~winehq0~ubuntu~8.10-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Improved SANE scanner support.
+    - Support for digital CD audio playback.
+    - Improved cookies management in Wininet.
+    - Support for building stand-alone 16-bit modules.
+    - Many fixes to the regression tests on Windows.
+    - Various bug fixes.
+  * Reverse previous patch as it's now included
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 27 Feb 2009 21:53:15 -0800
+
+wine (1.1.15~winehq0~ubuntu~8.10-0ubuntu4) intrepid; urgency=low
+
+  * Cherry pick a patch from git to prevent build failure
+    - Should be included in 1.1.16
+  * Revert previous (nonworking) changes with binutils build dep
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Wed, 18 Feb 2009 13:55:56 -0800
+
+wine (1.1.15~winehq0~ubuntu~8.10-0ubuntu3) intrepid; urgency=low
+
+  * Change build depend on binutils to binutils-multiarch
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 14 Feb 2009 16:55:25 -0800
+
+wine (1.1.15~winehq0~ubuntu~8.10-0ubuntu2) intrepid; urgency=low
+
+  * Build depend on binutils to prevent launchpad build failure
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 14 Feb 2009 11:28:37 -0800
+
+wine (1.1.15~winehq0~ubuntu~8.10-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Gecko engine update.
+    - Better region support in GdiPlus.
+    - Support for cross-compilation in winegcc.
+    - Beginnings of MS Text Framework support.
+    - Many fixes to the regression tests on Windows.
+    - Various bug fixes.
+  * Gecko package will be updated separately
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 14 Feb 2009 02:16:31 -0800
+
+wine (1.1.14~winehq0~ubuntu~8.10-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Various bug fixes for Internet Explorer 7.
+    - Many crypt32 improvements, including new export wizard.
+    - Better support for windowless Richedit.
+    - Improvements to the print dialog.
+    - Many fixes to the regression tests on Windows.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 30 Jan 2009 10:41:27 -0800
+
+wine (1.1.13~winehq0~ubuntu~8.10-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Freedesktop.org-compliant startup notifications.
+    - Many fixes for 64-bit application support.
+    - Improved graphics support in Internet Explorer.
+    - Various Richedit improvements.
+    - Better certificate manager dialog.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 17 Jan 2009 10:40:07 -0800
+
+wine (1.1.12~winehq0~ubuntu~8.10-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Some simple 64-bit apps should now run.
+    - Support for subpixel font rendering.
+    - 64-bit code generation in the IDL compiler.
+    - New version of the Gecko engine.
+    - Various bug fixes.
+  * wine-gecko will be updated separately
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 02 Jan 2009 13:29:19 -0800
+
+wine (1.1.11~winehq0~ubuntu~8.10-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Numerous fixes for IE7 support.
+    - Support for 64-bit cross-compile using Mingw64.
+    - User interface support for crypto certificates.
+    - Better support for MSI installation patches.
+    - Various Direct3D optimizations.
+    - Various bug fixes.
+  * Remove libx86-dev from build depends (not sure why I added it)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 20 Dec 2008 17:39:51 -0800
+
+wine (1.1.10~winehq0~ubuntu~8.10-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Support for virtual memory write watches.
+    - Workarounds for the WINAPI compiler bug on Mac OS.
+    - Several fixes for the 64-bit build.
+    - Some more GdiPlus functions.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 05 Dec 2008 13:39:52 -0800
+
+wine (1.1.9~winehq0~ubuntu~8.10-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - A large number of regression test fixes.
+    - Performance improvements in memory management.
+    - Improved POP3 support in inetcomm.
+    - Initial implementation of the XInput DLL.
+    - Various bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 21 Nov 2008 11:14:16 -0800
+
+wine (1.1.8~winehq0~ubuntu~8.10-0ubuntu2) intrepid; urgency=low
+
+  * Link libgnutls.so.26 on amd64
+  * Fix link for libdbus-1.so.3 on amd64
+  * Build-depend on libgnutls-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Mon, 10 Nov 2008 20:32:50 -0800
+
+wine (1.1.8~winehq0~ubuntu~8.10-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Substantial parts of inetcomm implemented (for Outlook).
+    - Still better crypt32 support.
+    - Memory management improvements.
+    - Theming support for buttons.
+    - Various bug fixes.
+  * Rebase around Intrepid packages (re-adds sysctl.d files)
+  * Add libx86-dev to build depends
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 07 Nov 2008 14:03:12 -0800
+
+wine (1.0.1-0ubuntu2) intrepid; urgency=low
+
+  * debian/wine-browsedrive.desktop:
+    - remove $HOME in Exec=xdg-open .wine/dosdevices/c:
+    - Should make "Brose C:\ Drive" work again.  (LP: #223989)
+  * debian/control:
+    - Replace libcupsys2-dev build depend with renamed libcups2-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sun, 26 Oct 2008 12:06:10 -0700
+
+wine (1.0.1-0ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Bug Fix only release (LP: #285341)
+  * Update includes our tools/wine.desktop patch, so we no longer have that
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 18 Oct 2008 00:44:19 -0700
+
+wine (1.0.0-1ubuntu11) intrepid; urgency=low
+
+  * debian/control: add new wine-gecko to Recommends for Wine
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 14 Oct 2008 16:05:17 -0700
+
+wine (1.0.0-1ubuntu10) intrepid; urgency=low
+
+  * Reverting last revision, moved procps from Build-Dep to Depends.
+
+ -- Nicolas Valcárcel <nvalcarcel@ubuntu.com>  Sat, 23 Aug 2008 13:43:08 -0500
+
+wine (1.0.0-1ubuntu9) intrepid; urgency=low
+
+  * Added procps to Build-Depends to make postinst happy. 
+
+ -- Nicolas Valcárcel <nvalcarcel@ubuntu.com>  Sat, 16 Aug 2008 01:16:58 -0500
+
+wine (1.0.0-1ubuntu8) intrepid; urgency=low
+
+  * create debian/wine.sysctl.conf
+    - now Wine can access the lower 64k of memory (LP: #114025)
+  * debian/rules: add rules for installing wine.sysctl.conf
+  * debian/wine.dirs.*: add /etc/sysctl.d folder
+  * debian/wine.install.*: add /etc/sysctl.d install folder
+  * remove non arch-specific .install and .dirs files.
+  * debian/wine.postinst: add invoke-rc.d procps start
+    - so no reboot is required for Wine's sysctl.conf setting
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 07 Aug 2008 04:28:31 -0700
+
+wine (1.0.0-1ubuntu7) intrepid; urgency=low
+
+  * debian/control: add ttf-liberation to recommends
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 15 Jul 2008 03:15:53 -0700
+
+wine (1.0.0-1ubuntu6) intrepid; urgency=low
+
+  * debian/control: change winbind from depends to recommends (LP: 247746)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 12 Jul 2008 01:43:52 -0700
+
+wine (1.0.0-1ubuntu5) intrepid; urgency=low
+
+  * debian/wine-browsedrive.desktop: 
+    - change xdg-open ~.wine/drive_c  to  xdg-open $HOME/.wine/dosdevices/c:
+    - Opens correct folder even if c drive changed (LP: 223989)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 10 Jul 2008 13:09:33 -0700
+
+wine (1.0.0-1ubuntu4) intrepid; urgency=low
+
+  * Re-add dh_installchangelogs to install this changelog (LP: #242072)
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 27 Jun 2008 13:22:56 -0700
+
+wine (1.0.0-1ubuntu3) intrepid; urgency=low
+
+  * tools/wine.desktop: associate wine with .msi files
+  * tools/wine.desktop: change to "Wine Windows Program Loader"
+    - retranslate all current entries (LP: #235593)
+    - add ca, pt, pt_br, it, da, nb, nn translations
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 21 Jun 2008 17:42:12 -0700
+
+wine (1.0.0-1ubuntu2) intrepid; urgency=low
+
+  * debian/wine.mime: associate wine with .msi files
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 20 Jun 2008 03:12:37 -0700
+
+wine (1.0.0-1ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - First stable release of Wine
+  * Change to 1.0.0 versioning scheme since Wine will make a 1.0.1
+  * Remove dh_installchangelogs since the upstream changelog was removed
+    - It is now available online at winehq.org
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 17 Jun 2008 10:22:39 -0700
+
+wine (1.0-rc3-1ubuntu1) intrepid; urgency=low
+
+  * New upstream release
+    - Bugfixes only due to feature freeze pending 1.0 release
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 30 May 2008 08:48:53 -0700
+
+wine (1.0-rc2-1ubuntu1) intrepid; urgency=low
+
+  * Bump version number because Debian autosynced on top
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 27 May 2008 18:46:28 -0700
+
+wine (1.0~rc2-1) intrepid; urgency=low
+
+  * New upstream release
+    - Bugfixes only due to feature freeze pending 1.0 release
+  * Depend explicitly on winbind package for ntlm_auth
+    - This provides some added functionality, even though Wine doesn't use it 
+      at build time, which is why it isn't included with shlibs:Depends
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 24 May 2008 08:16:24 -0700
+
+wine (1.0~rc1-0ubuntu1) intrepid; urgency=low
+
+  * Port from winehq package; update to intrepid
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 13 May 2008 23:56:19 -0700
+
+wine (1.0~rc1~winehq0~ubuntu~8.04-1) hardy; urgency=low
+
+  * New upstream release
+    - Bugfixes only due to feature freeze pending 1.0 release
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 09 May 2008 15:02:02 -0700
+
+wine (0.9.61~winehq0~ubuntu~8.04-1) hardy; urgency=low
+
+  * Added lib32dns-mdns to dependencies for amd64 version
+    - Internet applications doing domain lookups should work now on amd64
+  * New upstream release
+    - Automatic updating of the WINEPREFIX directory.
+    - Winhelp now uses Richedit as display engine.
+    - Many RichEdit fixes.
+    - More improvements to IME support.
+    - More quartz fixes.
+    - Implementation for many more Gdiplus functions.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 03 May 2008 02:17:45 -0700
+
+wine (0.9.60~winehq0~ubuntu~8.04-1ubuntu1) hardy; urgency=low
+
+  * Pre-Depends on newer dpkg instead of lzma
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 18 Apr 2008 22:05:58 -0700
+
+wine (0.9.60~winehq0~ubuntu~8.04-1) hardy; urgency=low
+
+  * New upstream release
+    - Better support for Windows IMEs.
+    - Option for Windows-style window decorations.
+    - Improved system tray behavior.
+    - Window management fixes.
+    - Improved quartz audio support.
+    - Better support for launching apps from Unix file managers.
+    - Lots of bug fixes.
+  * The backported system tray regression patch no longer applies
+  * Compress package with lzma and add Pre-Depends: lzma
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 18 Apr 2008 10:27:19 -0700
+
+wine (0.9.59-0ubuntu4) hardy; urgency=low
+
+  * Remove MIME entry for application/x-zip-compressed (LP: #213062)
+  * Fix the 32 bit links for libldap, libldap_r, and liblber in amd64 version
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 10 Apr 2008 03:40:33 -0700
+
+wine (0.9.59-0ubuntu3) hardy; urgency=low
+
+  * Backport patch to fix system tray regression (LP: #214659)
+  * Delete old font patches in debian/patches
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Thu, 10 Apr 2008 01:53:33 -0700
+
+wine (0.9.59-0ubuntu2) hardy; urgency=low
+
+  * Re-introduced lpia changes which were forgotten with last upload
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 09 Apr 2008 18:21:35 +0200
+
+wine (0.9.59-0ubuntu1) hardy; urgency=low
+
+  * New upstream release
+    - Improved support for the .NET framework.
+    - Better services handling through a separate services.exe process.
+    - Support for ATI fragment shader.
+    - Better support for http proxies.
+    - Window management fixes.
+    - Pre-compiled fonts are now available in the source tree.
+    - Lots of bug fixes.
+  * The old font patches are gone now since they're included
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Sat, 05 Apr 2008 23:58:26 -0700
+
+wine (0.9.58-0ubuntu3) hardy; urgency=low
+
+  * Make Wine Ready for LPIA
+    + debian/control: 
+      - added to some build-deps the lpia arch where it's
+        necessary
+      - added myself to uploaders
+    + debian/*.lpia:
+      - copied *.i386 suffixed files to *.lpia suffixed files to install wine
+        correctly on lpia
+
+ -- Stephan Hermann <sh@sourcecode.de>  Fri, 04 Apr 2008 15:57:20 +0200
+
+wine (0.9.58-0ubuntu2) hardy; urgency=low
+
+  * add lithuanian glyphs to fonts file.
+    For reference the patch is in debian/patches/ and will go away with 0.9.59
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 26 Mar 2008 11:26:42 +0100
+
+wine (0.9.58-0ubuntu1) hardy; urgency=low
+
+  * New upstream release
+    - The default version is now Windows XP.
+    - Many Richedit improvements.
+    - Beginning of jscript dll support.
+    - Shell folders now respect XDG directory configuration.
+    - Many translation updates.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 21 Mar 2008 23:45:25 -0700
+
+wine (0.9.57-0ubuntu3) hardy; urgency=low
+
+  * debian/wine-*.desktop:
+    - fixed some broken utf8 chars in catalan translation in .desktop files
+      (LP: #199211)
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 19 Mar 2008 21:05:35 +0100
+
+wine (0.9.57-0ubuntu2) hardy; urgency=low
+
+  * debian/control:
+    - added libxi-dev and libxinerama-dev to let wine recognize both libs on
+      i386
+  * debian/wine-*.desktop:
+    - fixed some broken utf8 characters inside .desktop files (LP: #198761)
+
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 19 Mar 2008 20:41:57 +0100
+
+wine (0.9.57-0ubuntu1) hardy; urgency=low
+
+  [Stephan Hermann]
+  * Add catalanian translation (LP: #199211)
+
+  [Scott Ritchie]
+  * New upstream release
+    - Support for multiple OpenGL pixel formats.
+    - Improved support for color profiles.
+    - Many window management fixes.
+    - Better fullscreen support.
+    - Lots of bug fixes.
+  * Reverse dlls/winealsa.drv/waveinit.c patch as it is now upstream
+  * debian/rules:
+    - Add 64 bit symlink for libcapi20.so, libjack.so, libodbc.so
+    - Now Wine builds with capi20, jack, and odbc support on amd64
+  * debian/control:
+    - Update the package description text to be clear and simple (LP: #159412)
+  * fonts/Makefile.in:
+    - Workaround an incompatible change in fontforge (LP: #199331)
+  * Add Polish translation to .desktop files (LP: #198761)
+    - The translation to wine.desktop was sent upstream
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 07 Mar 2008 17:43:22 -0800
+
+wine (0.9.56-0ubuntu1) hardy; urgency=low
+
+  * New upstream release (LP: #197588)
+    - Proper handling of OpenGL/Direct3D windows with menu bars.
+    - Stubs for all the d3dx9_xx dlls.
+    - Several graphics optimizations.
+    - Many installer fixes.
+    - Improved MIME message support.
+    - Lots of bug fixes.
+  * debian/rules:
+    - reset LDFLAGS to let wine not crash anymore, (LP: #191575)
+      thx to Albert Damen <albrt@gmx.net> who came up with this solution.
+      (http://www.winehq.org/pipermail/wine-bugs/2007-July/062505.html)
+    - adjust dh_strip call (LP: #185513)
+  * debian/control:
+    - remove gcc-3.4 build-dep
+    - get rid of quilt
+  * cleaned debian/patches
+  * Add finnish translation to desktop files (LP: #196916)
+  * dlls/winealsa.drv/waveinit.c: (LP: #195507)
+    - let wine use the default alsa device
+      (http://bugs.winehq.org/show_bug.cgi?id=10942)
+  * Preloader warning (preloader: Warning: failed to reserve range
+    00000000-60000000) does not occure anymore (LP: #114025)
+
+ -- Stephan Hermann <sh@sourcecode.de>  Fri, 22 Feb 2008 20:10:36 +0100
+
+wine (0.9.55-0ubuntu1) hardy; urgency=low
+
+  The "Just before FF" Release
+  * New upstream release
+    - Direct3D improvements, including driver version emulation.
+    - Beginnings of support for OLE objects in Richedit.
+    - Several fixes to the animation control.
+    - A bunch of fixes for regression test failures.
+    - Lots of bug fixes.
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 13 Feb 2008 21:00:57 +0100
+
+wine (0.9.54-0ubuntu4) hardy; urgency=low
+
+  * debian/rules: 
+    - revert dh_shlibdeps change from 0.9.54-0ubuntu3
+    - synced with scotts list of symlinks 
+    - for amd64 arch: (LP: #187222)
+      + removed dh_shlibdeps because of a broken shlibs handling in ia32-libs
+        it failes
+      + instead add shlibs:Depends=* to dh_gencontrol -- -V
+  * debian/control: 
+    - added unixodbc-dev to b-d (needed for a configure check against libodbc)
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 30 Jan 2008 19:35:31 +0100
+
+wine (0.9.54-0ubuntu3) hardy; urgency=low
+
+  * debian/rules:
+    - dh_shlibdeps: add -Xusr/lib32/wine/ to ignore the wine dll dir
+
+ -- Stephan Hermann <sh@sourcecode.de>  Mon, 28 Jan 2008 01:42:28 +0100
+
+wine (0.9.54-0ubuntu2) hardy; urgency=low
+
+  * debian/rules: 
+    - amd64 specific:
+      + added symlink for libjpeg (LP: #144419)
+      + added symlink for libcups (LP: #155665)
+      + added symlink for libxml2 (LP: #135417)
+  * debian/control: 
+    - add quilt to build-dep as patch system
+  * debian/patches/01_ubuntu_fix_libpng_check.patch:
+    - added patch to fix the libpng check to actually catch libpng12
+  * debian/patches/90_ubuntu_update_configure.patch:
+    - configure patch after "autoconf" run to use the updated libpng12 fix
+  * debian/wine-*.desktop
+    - Added Swedish Translation (LP: #152745)
+    - Added German Translation
+
+ -- Stephan Hermann <sh@sourcecode.de>  Sun, 27 Jan 2008 16:35:13 +0100
+
+wine (0.9.54-0ubuntu1) hardy; urgency=low
+
+  * New upstream version:
+    - Photoshop CS/CS2 should now work, please help us testing it.
+      See http://wiki.winehq.org/AdobePhotoshop for details.
+    - A number of RPC fixes.
+    - Various improvements to the debugger support.
+    - Lots of bug fixes.
+
+  * debian/control:
+    - get rid of libjpeg-mmx-dev
+
+ -- Stephan Hermann <sh@sourcecode.de>  Fri, 25 Jan 2008 19:32:45 +0100
+
+wine (0.9.53-0ubuntu1) hardy; urgency=low
+
+  * New upstream version
+    - RunOnce and Run entries now executed on startup.
+    - Beginnings of support for emulated disk devices.
+    - Many Richedit improvements.
+    - Nicer looking color dialog.
+    - Lots of bug fixes.
+
+ -- Stephan Hermann <sh@sourcecode.de>  Sat, 12 Jan 2008 17:21:50 +0100
+
+wine (0.9.52-0ubuntu1) hardy; urgency=low
+
+  [ Stephan Hermann ]
+  [Scott Ritchie]
+  * New upstream version
+    - Improved graphics tablet support.
+    - Support for RPC context handles.
+    - Fixes for some longstanding screen depth issues.
+    - Implementation of "My Network Places" shell folder.
+    - Lots of bug fixes.
+  * Use bzip2 compression rather than gzip for deb to save bandwidth
+  * Use gcc-3.4 to actually fix copy protection
+
+  [Stephan Hermann]
+  * debian/control:
+    - Bumped Standards-Version to 3.7.3
+    - Changed giflib3g-dev to libgif-dev
+
+  [ Scott Kitterman ]
+  * debian/control:
+    - Prefer libgif-dev to libungif4-dev in build-dep to avoid later problem
+      with fontforge needing libgif which conflicts with libungif4
+
+ -- Scott Kitterman <scott@kitterman.com>  Sat, 05 Jan 2008 11:55:30 -0500
+
+wine (0.9.51-0ubuntu1) hardy; urgency=low
+
+  * New Upstream Release
+    - Using Scott Ritchies packages from winehq.org
+  * debian/rules: 
+    - Changed dh_iconcache to dh_icons
+    - Added dh_desktop because we install some .desktop files
+ 
+
+ -- Stephan Hermann <sh@sourcecode.de>  Sat, 22 Dec 2007 14:32:10 +0100
+
+wine (0.9.51~winehq0~ubuntu~7.10-1) gutsy; urgency=low
+
+  * New upstream release
+    - A bunch of WinHelp improvements.
+    - Better Japanese font support.
+    - A ton of rpcrt4 fixes.
+    - Several Alsa capture fixes.
+    - Improved support for screen resolution changes.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 14 Dec 2007 15:32:11 -0800
+
+wine (0.9.50~winehq0~ubuntu~7.10-2) gutsy; urgency=low
+
+  * Use gcc-4.2 instead of default to fix copy protection
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 11 Dec 2007 15:18:44 -0800
+
+wine (0.9.50~winehq0~ubuntu~7.10-1) gutsy; urgency=low
+
+  * New upstream release
+    - Completed I/O completion.
+    - Improved user credentials management, including Mac Keychain support.
+    - More Valgrinding.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 30 Nov 2007 21:38:43 -0800
+
+wine (0.9.46-0ubuntu1) gutsy; urgency=low
+
+  * New upstream release
+    - A variety of fixes to improve Photoshop CS2 support.
+    - More complete support for device installation in setupapi.
+    - New Bidi text implementation that doesn't depend on libicu.
+    - The usual assortment of Direct3D improvements.
+    - Beginning of I/O completion ports support.
+    - Lots of bug fixes.
+  * Remove libicu36-dev from build depends - Wine no longer uses it
+  * Remove libgl1-mesa-dev | libgl-dev from build depends - it was a duplicate
+  * Link to the ssl and crypto libraries on amd64
+  * Added all the pretty icons someone sent to the wine mailing list a while ago
+  * Modified the .desktop files to use the pretty icons
+    - Also changed the location of some of the tools to more logical places
+    - And removed some of the unimportant ones
+  * Added dh_installmime to rules to make the .mime file actually work
+  * Created a wine.menu file to make the Applications->Wine folder system-wide
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 28 Sep 2007 14:47:50 -0700
+
+wine (0.9.45-0ubuntu1) gutsy; urgency=low
+
+  * New upstream release
+    - Better heuristics for making windows managed.
+    - Automatic detection of timezone parameters.
+    - Improvements to the builtin WordPad.
+    - Better signatures support in crypt32.
+    - Still more gdiplus functions.
+    - Lots of bug fixes.
+  * Incorporate the 32 bit building procedure from winehq packages
+    - This procedure works around the lack of .so links in /usr/lib32
+    - Configure requires .so files, so we make temp .so's in a temp folder
+  * Comment out the --enable-win64 in 64 bit configure
+    - Support for Win 64 bit binaries is completely broken in Wine at the moment
+    - 64 mode prevents Wine from working with 32 bit binaries, making it nearly worthless.
+  * Updated the build depends:
+    - Added libpng12-dev (Wine now uses it)
+    - Removed freeglut (Wine now doesn't use it)
+    - Added many amd64 specific ones for packages that have 32 bit versions
+    - Added gcc-multilib [amd64]
+  * Set myself as uploader rather than original maintainer
+  * Removed libwine and libwine-dev dummy packages
+    - They were only needed to work around bugs in apt when users had an old libwine-* package
+    - Feisty users won't have them, so they're no longer needed
+    - Removed libwine.links and libwine-dev.links as well
+  * Added the wine.mime file from upstream to handle .exe files
+  * The 64 bit package should install libraries into /usr/lib32 now
+    - Removed wine.install, wine-dev.install, wine.dirs
+    - And then replaced them with wine.install.i386, wine.install.amd64, etc
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Tue, 18 Sep 2007 21:11:38 -0700
+
+wine (0.9.42-0ubuntu1) gutsy; urgency=low
+
+  * New upstream release.	(LP: #128980)
+  * Changes from upstream:
+    - Support for activation contexts and side-by-side assemblies.
+    - Many more gdiplus functions.
+    - More messaging support in crypt32.dll.
+    - Many HTTP protocol handling fixes.
+    - Lots of bug fixes.
+
+ -- Arthur Loiret <arthur.loiret@gmail.com>  Fri, 27 Jul 2007 18:23:02 +0200
+
+wine (0.9.41-0ubuntu2) gutsy; urgency=low
+
+  * debian/rules: ignore dh_strip errors to fix FTBFS in buildds
+
+ -- Arthur Loiret <arthur.loiret@gmail.com>  Sun, 15 Jul 2007 06:33:51 +0200
+
+wine (0.9.41-0ubuntu1) gutsy; urgency=low
+
+  * New upstream release
+  * debian/rules:
+    - Remove comments in binary-arch target
+    - Fix debian-rules-ignores-make-clean-error
+  * debian/control:
+    - Make wine-dev bin-NMU safe
+    - Add Uploaders field
+  * Changes from version 0.9.40:
+    - Many MSHTML improvements.
+    - A few more sound fixes.
+    - Many Direct3D fixes.
+    - Lots of bug fixes.
+  * Changes from version 0.9.41:
+    - A number of gdiplus functions.
+    - More complete pdh.dll implementation.
+    - Support for MSI remote calls.
+    - Messaging support in crypt32.dll.
+    - Lots of bug fixes.
+
+ -- Arthur Loiret <arthur.loiret@gmail.com>  Sat, 14 Jul 2007 14:27:25 +0200
+
+wine (0.9.39-0ubuntu1) gutsy; urgency=low
+
+  * New upstream release
+  * Add debian/watch
+  * Update Standards-Version to 3.7.2
+  * Update compat and debhelper version to 5
+  * debian/control:
+    - remove duplicate Depends on libstdc++6
+    - Add homepage to extended description
+  * debian/libwine{,-dev}.links: link /usr/share/doc/libwine{,-dev} to
+    /usr/share/doc/wine{,-dev} to fix missing debian changelogs.
+  * Changes from upstream:
+    - Many MSHTML improvements.
+    - Several improvements to the sound support.
+    - A number of Winsock fixes.
+    - Several new supported constructs in the IDL compiler.
+    - Many Direct3D threading fixes.
+    - Lots of bug fixes.
+
+ -- Arthur Loiret <arthur.loiret@gmail.com>  Sun, 17 Jun 2007 11:23:24 +0200
+
+wine (0.9.38-0ubuntu1) gutsy; urgency=low
+
+  * New Upstream Version
+  * Changes from Upstream:
+    - Beginnings of support for copy protected kernel drivers
+    - More MSI automation support
+    - Many 64-bit compilation fixes
+    - A number of OLE fixes
+    - Lots of bug fixes 
+
+ -- Stephan Hermann <sh@sourcecode.de>  Sat,  2 Jun 2007 08:41:21 +0000
+
+wine (0.9.37-0ubuntu3) gutsy; urgency=low
+
+  * debian/wine.binfmt:
+    - changed /usr/bin/wine-auto to /usr/bin/wine
+
+ -- Stephan Hermann <sh@sourcecode.de>  Fri, 25 May 2007 11:52:01 +0200
+
+wine (0.9.37-0ubuntu2) gutsy; urgency=low
+
+  * debian/control: 
+    - Added libstdc++6-4.1-dev to build-dep for easier backports to Ubuntu
+      releases < Gutsy Gibbon
+  * Added debian/wineserver-restart-required.update-notifier for notifiying
+    the user when wine is upgraded
+  * debian/wine.postinst:
+    - added rule for package upgrade to copy
+      usr/share/wine/wineserver-restart-required.update-notifier to
+      var/lib/update-notifier/user.d/wineserver-restart-required
+  * debian/rules: 
+    - removed -fno-stack-protector 
+      + (Upstream Fix: http://bugs.winehq.org/show_bug.cgi?id=6035)
+      + (Ubuntu Closes: LP #56965)
+    - copied debian/winserver-restart-required.update-notifier to usr/share/wine
+
+ -- Stephan Hermann <sh@sourcecode.de>  Fri, 18 May 2007 06:36:52 +0000
+
+wine (0.9.37-0ubuntu1) gutsy; urgency=low
+
+  * New Upstream Release
+    - MSI automation with JScript/VBScript support.
+    - Various MSHTML improvements.
+    - The usual assortment of Direct3D fixes.
+    - Support for a few more exe protection schemes.
+    - Lots of bug fixes.
+
+ -- Stephan Hermann <sh@sourcecode.de>  Sat, 12 May 2007 14:18:53 +0200
+
+wine (0.9.36-0ubuntu2) gutsy; urgency=low
+
+  * Removed debian/patches/* completly and updated debian/rules accordingly
+    Fixes were applied upstream
+  * Removed dpatch from build-deps
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed,  2 May 2007 10:08:23 +0200
+
+wine (0.9.36-0ubuntu1) gutsy; urgency=low
+
+  * New Upstream release
+  * Merged with winehq package again
+  * debian/control:
+    - Changed libstdc++-4.0-dev to libstdc++-4.2-dev
+
+ -- Stephan Hermann <sh@sourcecode.de>  Sun, 29 Apr 2007 14:49:53 +0200
+
+wine (0.9.36~winehq0~ubuntu~7.04-1) feisty; urgency=low
+
+  * Add missing build depends libesd0-dev libxrandr-dev liblcms1-dev
+    x11proto-xinerama-dev
+  * Should fix issues with screen scrolling, color management, multiple
+    monitors and esd
+  * Remove one of the duplicate build-depends libxt-dev
+  * Updated the list of debian split libwine-* packages this replaces
+  * New upstream release
+    - Midi support in the CoreAudio driver.
+    - Mixer support in the Alsa driver.
+    - A lot of MSI fixes.
+    - Implementation for most D3DRM functions.
+    - The usual assortment of Direct3D fixes.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 27 Apr 2007 11:34:05 -0700
+
+wine (0.9.35-0ubuntu1) gutsy; urgency=low
+
+  * New Upstream Version
+  * Added additional xrender.c patch to wine-0.9.35
+    (http://www.winehq.org/pipermail/wine-devel/2007-April/055637.html)
+
+ -- Stephan Hermann <sh@sourcecode.de>  Sun, 15 Apr 2007 11:30:19 +0200
+
+wine (0.9.35~winehq0~ubuntu~6.10-1) edgy; urgency=low
+
+  * New upstream release
+    - Broken aRts sound driver now removed for good.
+    - Many fixes to the Quartz DLL sound support.
+    - File I/O performance improvements.
+    - The usual assortment of Direct3D fixes.
+    - Lots of bug fixes.
+  * Removed no longer needed build-depends: libarts1-dev
+
+ -- Scott Ritchie <scottritchie@ubuntu.com>  Fri, 13 Apr 2007 21:54:02 -0700
+
+wine (0.9.34-0ubuntu1) feisty; urgency=low
+
+  * New Upstream Release
+
+ -- Stephan Hermann <sh@sourcecode.de>  Fri,  6 Apr 2007 14:26:57 +0200
+
+wine (0.9.34~winehq0~ubuntu~6.10-1) edgy; urgency=low
+
+  * New upstream release
+    - Support for Xcursor.
+    - A range of fixes for various installers.
+    - New builtin xcopy tool.
+    - The usual assortment of Direct3D fixes.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Fri, 30 Mar 2007 18:43:45 -0700
+
+wine (0.9.33-0ubuntu1) feisty; urgency=low
+
+  * New Upstream Release
+    - Many Direct3D fixes and performance improvements.
+    - More comctl32 tests and some bug fixes.
+    - Compatibility improvements in cmd.exe.
+    - Still more fixes to builtin OLE.
+    - Support for process control on Solaris.
+    - Lots of bug fixes.
+
+ -- Stephan Hermann <sh@sourcecode.de>  Mon, 19 Mar 2007 19:39:57 +0100
+
+wine (0.9.32-0ubuntu1) feisty; urgency=low
+
+  * New Upstream Release
+    - Remaining Ubuntu Changes:
+      * debian/wine.mime, debian/rules: stop MIME-based execution, drop
+        upstream .desktop file.
+      * debian/wine.prerm, debian/wine.postinst, debian/wine.binfmt,
+        debian/rules, debian/control: adding execution via binfmt-support
+        (LP: #85338).
+      * debian/control: dropped libjpeg-mmx-dev; no longer in archives.
+      * debian/wine-*.desktop:
+        - Added desktopfiles (Closes: LP #82776, #82778, #82778, #82779,
+          #82780, #82781)
+      * debian/control:
+        - added | libstdc++6-dev to build deps
+      * debian/rules:
+        - copy desktop files to the right position
+        - added dh_iconcache 
+
+
+ -- Stephan Hermann <sh@sourcecode.de>  Sat,  3 Mar 2007 18:08:28 +0100
+
+wine (0.9.32~winehq0~ubuntu~6.10-1) edgy; urgency=low
+
+  * New upstream release
+    - Many Direct3D fixes and performance improvements.
+    - Several new features in the builtin cmd.exe.
+    - Improvements to HTML help support.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Fri,  2 Mar 2007 13:51:43 -0800
+
+wine (0.9.31-0ubuntu1) feisty; urgency=low
+
+  * New Upstream release
+    - Remaining Ubuntu Changes:
+      * debian/wine.mime, debian/rules: stop MIME-based execution, drop
+        upstream .desktop file.
+      * debian/wine.prerm, debian/wine.postinst, debian/wine.binfmt,
+        debian/rules, debian/control: adding execution via binfmt-support
+        (LP: #85338).
+      * debian/control: dropped libjpeg-mmx-dev; no longer in archives.
+      * debian/wine-*.desktop:
+        - Added desktopfiles (Closes: LP #82776, #82778, #82778, #82779, #82780,
+          #82781)
+      * debian/control:
+        - added | libstdc++6-dev to build deps
+      * debian/rules:
+        - copy desktop files to the right position
+        - added dh_iconcache 
+ 
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 28 Feb 2007 14:08:56 +0100
+
+wine (0.9.31~winehq0~ubuntu~6.10-1) edgy; urgency=low
+
+  * New upstream release
+    - Many Direct3D fixes and performance improvements.
+    - Several new comctl32 test cases.
+    - IDL compiler improvements.
+    - More OLE32 marshalling fixes.
+    - Lots of bug fixes.
+  * Removed build depend libxxf86dga-dev, depend libxxf86dga1
+
+ -- Scott Ritchie <scott@open-vote.org>  Fri, 16 Feb 2007 18:57:10 -0800
+
+wine (0.9.30-0ubuntu4) feisty; urgency=low
+
+  * debian/wine.mime, debian/rules: stop MIME-based execution, drop
+    upstream .desktop file.
+  * debian/wine.prerm, debian/wine.postinst, debian/wine.binfmt,
+    debian/rules, debian/control: adding execution via binfmt-support
+    (LP: #85338).
+  * debian/control: dropped libjpeg-mmx-dev; no longer in archives.
+
+ -- Kees Cook <kees@ubuntu.com>  Fri, 16 Feb 2007 11:17:03 -0800
+
+wine (0.9.30-0ubuntu3) feisty; urgency=low
+
+  * debian/wine-*.desktop:
+    - Added desktopfiles (Closes: LP #82776, #82778, #82778, #82779, #82780,
+      #82781)
+  * debian/control:
+    - added | libstdc++6-dev to build deps
+  * debian/rules:
+    - copy desktop files to the right position
+    - added dh_iconcache 
+
+ -- Stephan Hermann <sh@sourcecode.de>  Thu,  8 Feb 2007 10:57:25 +0100
+
+wine (0.9.30-0ubuntu2) feisty; urgency=low
+
+  * debian/rules: 
+    - Removed dpatch rules 
+
+ -- Stephan Hermann <sh@sourcecode.de>  Fri, 26 Jan 2007 19:27:06 +0100
+
+wine (0.9.30-0ubuntu1) feisty; urgency=low
+
+  * New Upstream release
+  * What's new in this release:
+    - Many improvements to Direct3D shaders and state management.
+    - Support for inter-process memory allocations.
+    - OLE32 marshalling fixes.
+    - Lots of bug fixes.
+  * debian/control: 
+    - Removed dpatch from build-deps
+    - Removed debian/patches/ directory, because all bugfixes are now in
+      upstream.
+
+ -- Stephan Hermann <sh@sourcecode.de>  Fri, 26 Jan 2007 17:45:43 +0100
+
+wine (0.9.29-0ubuntu3) feisty; urgency=low
+
+  * debian/control: introduced dpatch to build-deps
+  * added 01_ubuntu_mdi_c.dpatch (Closes: LP #81182)
+
+ -- Stephan Hermann <sh@sourcecode.de>  Thu, 25 Jan 2007 09:41:25 +0100
+
+wine (0.9.29-0ubuntu2) feisty; urgency=low
+
+  * debian/control: 
+    - Added Suggest: xdg-utils (Closed: LP #80849)
+
+ -- Stephan Hermann <sh@sourcecode.de>  Tue, 23 Jan 2007 11:33:21 +0100
+
+wine (0.9.29-0ubuntu1) feisty; urgency=low
+
+  * New Upstream release
+
+ -- Stephan Hermann <sh@sourcecode.de>  Thu, 11 Jan 2007 13:30:36 +0100
+
+wine (0.9.29~winehq0~ubuntu~6.10-1) edgy; urgency=low
+
+  * New upstream release
+    - More work on the new Direct3D state management.
+    - Debugger support for Mac OS.
+    - Many OLE fixes and improvements.
+    - Audio input support on Mac OS.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Tue,  9 Jan 2007 21:09:52 -0800
+
+wine (0.9.28-0ubuntu1) feisty; urgency=low
+
+  * New Upstream release
+
+ -- Stephan Hermann <sh@sourcecode.de>  Mon,  8 Jan 2007 13:33:11 +0100
+
+wine (0.9.28~winehq0~ubuntu~6.10-1) edgy; urgency=low
+
+  * New upstream release
+    - OpenGL in child windows should work again.
+    - Better mouse support in games.
+    - Beginnings of new state management in Direct3D.
+    - Improved audio and font support on Mac OS.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Sat, 23 Dec 2006 21:48:25 -0800
+	
+wine (0.9.27-0ubuntu1) feisty; urgency=low
+
+  * New Upstream Release
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 13 Dec 2006 13:30:08 +0100
+
+wine (0.9.27~winehq0~ubuntu~6.10-1) edgy; urgency=low
+
+  * New upstream release
+    - Better support for noexec kernels.
+    - Better Dwarf support in dbghelp.
+    - Several Winsock fixes.
+    - Various code cleanups.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Sat,  9 Dec 2006 16:32:53 -0800
+
+wine (0.9.26-0ubuntu1) feisty; urgency=low
+
+  * New Upstream Release
+
+ -- Stephan Hermann <sh@sourcecode.de>  Thu, 30 Nov 2006 11:01:59 +0100
+
+
+wine (0.9.26~winehq0~ubuntu~6.10-1) edgy; urgency=low
+
+  * New upstream release
+    - Better support for Unix locale settings.
+    - Improved X11 keyboard support.
+    - Various MSI fixes.
+    - Winecfg improvements.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Mon, 27 Nov 2006 23:25:44 -0800
+
+wine (0.9.25-0ubuntu1) feisty; urgency=low
+ 
+  * New Upstream release
+  * debian/control: 
+    - Changed build-deps
+      + linux-kernel-headers => linux-libc-dev
+      + libfontconfig-dev => libfontconfig1-dev
+
+ -- Stephan Hermann <sh@sourcecode.de>  Fri,  24 Nov 2006 10:05:00 +0100
+
+wine (0.9.25~winehq0~ubuntu~6.10-1) edgy; urgency=low
+
+  * New upstream release
+    - Many more fixes for installer support.
+    - Many MSHTML improvements.
+    - Support for NTLMv2.
+    - RPC over TCP improvements.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Sat, 11 Nov 2006 17:33:14 -0800
+
+wine (0.9.24~winehq0~ubuntu~6.10-1) edgy; urgency=low
+
+  * New upstream release
+    - Support for multiple monitors using Xinerama.
+    - Various MSI fixes and improvements.
+    - A ton of memory leaks fixed.
+    - Many common controls fixes.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Sun, 29 Oct 2006 17:12:35 -0800
+
+wine (0.9.22-0ubuntu4) feisty; urgency=low
+
+  * Rebuild for ldbl128 change on powerpc and sparc.
+
+ -- Matthias Klose <doko@ubuntu.com>  Thu,  2 Nov 2006 10:27:26 +0000
+
+
+wine (0.9.22-0ubuntu3) edgy; urgency=low
+
+  * Re-apply dropped change from dapper:  (Closes: Ubuntu #63492)
+  + Remove insecure mailcap entries; MS Windows '.exe' files should be run
+    using 'binfmt-misc' support instead.  (Closes: Ubuntu #24829)
+
+ -- Paul Sladen <ubuntu@paul.sladen.org>  Fri, 13 Oct 2006 02:15:26 +0100
+
+wine (0.9.22-0ubuntu2) edgy; urgency=low
+
+  * Fixed diff.gz
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 11 Oct 2006 14:03:46 +0200
+
+wine (0.9.22-0ubuntu1) edgy; urgency=low
+
+  * New Upstream Release
+    - The usual assortment of MSI improvements.
+    - Several bug fixes to the various common controls.
+    - Pixel shaders enabled by default in D3D.
+    - Various improvements to the build process.
+    - Many translation updates.
+    - Lots of bug fixes.
+    + Thx Scott Ritchie
+  * debian/control: 
+    - added build-deps libhal-dev, libhal-storage-dev, libgphoto2-2-dev
+
+ -- Stephan Hermann <sh@sourcecode.de>  Fri,  6 Oct 2006 15:49:27 +0200
+
+wine (0.9.21-0ubuntu1) edgy; urgency=low
+
+  * New upstream version
+  * Changelog from Upstream:
+    - OpenGL restructurations.
+    - The usual assortment of MSI improvements.
+    - Several Richedit fixes.
+    - WCMD Winelib app renamed to CMD for compatibility.
+    - Many improvements to the Wintrust DLL.
+    - Some code cleanups.
+    - Lots of bug fixes.
+
+ -- Stephan Hermann <sh@sourcecode.de>  Thu, 14 Sep 2006 14:39:06 +0200
+
+wine (0.9.20-0ubuntu3) edgy; urgency=low
+
+  * debian/rules: changed x86_64 to amd64 to provide amd64 packages
+
+ -- Stephan Hermann <sh@sourcecode.de>  Tue, 12 Sep 2006 12:42:46 +0200
+
+wine (0.9.20-0ubuntu2) edgy; urgency=low
+
+  * debian/rules: changed ARCH = $(DEB_BUILD_ARCH) to 
+    ARCH += $(DEB_BUILD_ARCH) (trying to fix amd64 build)
+
+ -- Stephan Hermann <sh@sourcecode.de>  Mon, 11 Sep 2006 15:20:47 +0200
+
+wine (0.9.20-0ubuntu1) edgy; urgency=low
+
+  * New WineHQ Release
+  * debian/rules:
+    - added to CFLAGS -fno-stack-protector
+    - added some code to build wine on x86_64 archs
+  * debian/control:
+    - Removed libjack0.80.0-dev from build-deps
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 30 Aug 2006 12:47:41 +0200
+
+wine (0.9.20~winehq0~ubuntu~6.06-1) unstable; urgency=low
+
+  * New upstream release
+    - XEmbed system tray support.
+    - Many improvements to NTLM support.
+    - Many messages made localizable instead of hardcoded to English.
+    - Improved support for various OpenGL platforms.
+    - More improvements to the IDL compiler.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Thu, 24 Aug 2006 16:06:35 -0700
+
+wine (0.9.19~winehq0~ubuntu~6.06-2) unstable; urgency=low
+
+  * Added my own patch to make Full Tilt Poker work
+
+ -- Scott Ritchie <scott@open-vote.org>  Fri, 11 Aug 2006 00:19:57 -0700
+wine (0.9.19-0ubuntu3) edgy; urgency=low
+
+  * debian/rules: Added -fno-stack-protector to CFLAGS to fix segmentation
+    faults (Closes: lp #56965)
+
+ -- Stephan Hermann <sh@sourcecode.de>  Wed, 23 Aug 2006 13:15:31 +0200
+
+wine (0.9.19-0ubuntu2) edgy; urgency=low
+
+  * debian/rules: Fix rules file to determina $DEB_BUILD_ARCH and build wine
+    for 64bit
+
+ -- Stephan Hermann <sh@sourcecode.de>  Sun, 20 Aug 2006 10:19:05 +0200
+
+wine (0.9.19-0ubuntu1) edgy; urgency=low
+
+  * New upstream version
+  * debian/control:
+    - Removed libicu28-dev,libjack0.80.0-dev from build-dep
+
+ -- Stephan Hermann <sh@sourcecode.de>  Sat, 19 Aug 2006 23:14:28 +0200
+
+wine (0.9.19~winehq0~ubuntu~6.06-1) unstable; urgency=low
+
+  * New upstream release
+    - Support for a proper Trash folder.
+    - Many improvements to the IDL compiler.
+    - Better FreeBSD support.
+    - A number of MSI bug fixes.
+    - Many RichEdit improvements.
+
+ -- Scott Ritchie <scott@open-vote.org>  Thu, 10 Aug 2006 23:20:48 -0700
+
+wine (0.9.18~winehq0~ubuntu~6.06-1) unstable; urgency=low
+
+  * New upstream release
+    - Still more work on Direct3D.
+    - A lot of MSI bug fixes and improvements.
+    - More compatible memory management.
+    - Several fixes for Win64 support.
+    - Some performance improvements.
+
+ -- Scott Ritchie <scott@open-vote.org>  Sat, 29 Jul 2006 20:34:02 -0700
+
+wine (0.9.17~winehq0~ubuntu~6.06-1) unstable; urgency=low
+
+  * New upstream release
+    - Still more work on Direct3D shaders.
+    - Now using the Gecko engine directly for MSHTML.
+    - Better support for apps switching to full screen mode.
+    - Support for multiple joysticks.
+
+ -- Scott Ritchie <scott@open-vote.org>  Wed, 12 Jul 2006 21:36:19 -0700
+
+wine (0.9.16~winehq0~ubuntu~6.06-1) unstable; urgency=low
+
+  * New upstream release
+    - More work on Direct3D shaders.
+    - Major DirectDraw rewrite on top of Direct3D.
+    - Support for debug information in Dwarf format.
+    - Beginnings of an OleView Winelib application.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Thu, 22 Jun 2006 00:44:54 -0700
+
+wine (0.9.15~winehq0~ubuntu~6.06-1) unstable; urgency=low
+
+  * New upstream release
+    - More MS/RPC improvements.
+    - Core Audio driver for Mac OS X.
+    - More complete DNSAPI dll.
+    - Improvements to Web browser support.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Thu,  8 Jun 2006 16:30:06 -0700
+
+wine (0.9.14~winehq1~ubuntu~6.06-1) unstable; urgency=low
+
+  * New upstream release
+    - Better MS/RPC compatibility.
+    - Many fixes to Direct3D shaders.
+    - Several improvements to the header control.
+    - Lots of bug fixes.
+  * Added libgl-dev, libicu-dev, libjack-dev, freeglut-dev virtual packages as 
+    options in build-depends
+  * Added ${shlibs:Depends} to depends
+
+ -- Scott Ritchie <scott@open-vote.org>  Sun, 28 May 2006 21:26:30 -0700
+
+wine (0.9.13~winehq1~ubuntu~6.06-1) unstable; urgency=low
+
+  * New upstream release
+    - New GPhoto backend for TWAIN.
+    - Dynamic drive configuration using HAL.
+    - A gazillion Direct3D fixes.
+    - New TCP transport for RPC.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Sat, 13 May 2006 02:16:47 -0700
+
+wine (0.9.12~winehq2~ubuntu~6.06-1) unstable; urgency=low
+
+  * Changed libicu28-dev to libicu34-dev
+  * Package is now separate from the Breezy version
+  * This is the first package to enter the winehq dapper repo
+
+ -- Scott Ritchie <scott@open-vote.org>  Thu,  4 May 2006 01:04:44 -0700
+
+wine (0.9.12~winehq1-1) unstable; urgency=low
+
+  * New upstream release
+    - New Winelib Internet Explorer application (all 5 lines of it).
+    - Several improvements to the font support.
+    - More work on the IDL compiler.
+    - Faster drawing of the cards in Solitaire (very important feature).
+    - A number of fixes for issues found by the Coverity code cheker.
+
+ -- Scott Ritchie <scott@open-vote.org>  Mon, 17 Apr 2006 01:17:15 -0700
+
+wine (0.9.11~winehq1-1) unstable; urgency=low
+
+  * New upstream release
+    - Fake dll files created in the system directory to help installers.
+    - Desktop mode now properly supports multiple processes.
+    - Better type parsing in dbghelp.
+    - Several OpenGL fixes.
+    - A bunch of Unicode functions in advpack.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Fri, 31 Mar 2006 15:18:06 -0800
+
+wine (0.9.10~winehq1-2) unstable; urgency=low
+
+  * Added new build depends, libglut3-dev | freeglut3-dev
+
+ -- Scott Ritchie <scott@open-vote.org>  Mon, 20 Mar 2006 10:15:13 -0800
+
+wine (0.9.10~winehq1-1) unstable; urgency=low
+
+  * New upstream release
+    - Improved ESD audio driver.
+    - More Web browser improvements in mshtml and wininet.
+    - Direct3D fixes and preparation for ddraw code migration.
+    - Explorer process now managing the desktop window.
+    - Lots of bug fixes.
+  * New naming scheme uses ~winehq1 at end of version name.  This should make Dapper packages replace.
+
+ -- Scott Ritchie <scott@open-vote.org>  Wed, 15 Mar 2006 23:04:54 -0800
+
+wine (0.9.9-winehq-2) unstable; urgency=low
+
+  * Adjusted build depends to make compatible with Dapper by allowing different packages
+    - libjack0.80.0-dev | libjack0.100.0-dev
+    - libicu28-dev | libicu34-dev
+  * Next release will use newer version numbering system to make Dapper have higher numbers (-00winehq)
+
+ -- Scott Ritchie <scott@open-vote.org>  Sun, 12 Mar 2006 12:41:39 -0800
+
+wine (0.9.9-winehq-1) unstable; urgency=low
+
+  * New upstream release
+    - Many new features and improvements in Richedit.
+    - More Web browser support.
+    - Recursive directory change notifications.
+    - Wine installation is now fully relocatable.
+    - Direct3D 8 and 9 now use the same code.
+    - Many debugger improvements.
+    - Systray is now handled by the explorer process.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Fri,  3 Mar 2006 18:05:17 -0800
+
+wine (0.9.8-winehq-1) unstable; urgency=low
+
+  * New upstream release
+    - Better Web browser support.
+    - Beginnings of a Wordpad application.
+    - Many richedit improvements.
+    - A number of Direct3D fixes.
+    - A few more options in winecfg.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Wed, 15 Feb 2006 21:45:23 -0800
+
+wine (0.9.7-winehq-1) unstable; urgency=low
+
+  * New upstream release
+    - Directory change notifications can use inotify now.
+    - Hardware breakpoints in the Wine debugger.
+    - Beginnings of support for tape APIs.
+    - A bunch of improvements to the IDL compiler.
+    - Better scheme for mapping My Documents etc. to Unix directories.
+    - Lots of bug fixes.
+  * The BUGS textfile is gone, and is now removed from the docs file
+ -- Scott Ritchie <scott@open-vote.org>  Thu,  2 Feb 2006 18:01:46 -0800
+
+wine (0.9.6-winehq-1) unstable; urgency=high
+
+  * New upstream release
+    - A bunch of OLE fixes and improvements.
+    - DirectSound improvements, including full duplex support.
+    - Fix for the Windows metafile vulnerability.
+    - Many static control improvements.
+    - Some fixes for copy protection support.
+    - Lots of bug fixes.
+  * Package now replaces libwine-gl properly
+ -- Scott Ritchie <scott@open-vote.org>  Thu, 19 Jan 2006 22:01:04 -0800
+
+wine (0.9.5-winehq-1) unstable; urgency=low
+
+  * New upstream release
+    - A number of MSI fixes.
+    - More improvements to the IDL compiler.
+    - Lots of bug fixes.
+ -- Scott Ritchie <scott@open-vote.org>  Wed,  4 Jan 2006 08:34:21 -0800
+
+wine (0.9.4-winehq-1) unstable; urgency=low
+
+  * New upstream release
+    - Improvements to the IDL compiler.
+    - Some infrastructure work for loadable driver support.
+    - The usual assortment of Direct3D improvements.
+    - IME support in the edit control.
+    - Better support for AVI animations.
+    - Debugging support improvements.
+    - Relay traces now work on NX platforms.
+
+ -- Scott Ritchie <scott@open-vote.org>  Thu, 29 Dec 2005 18:44:00 -0800
+
+wine (0.9.3-winehq-1) unstable; urgency=low
+
+  * New upstream release
+    - Many marshalling fixes in rpcrt4.
+    - Various OLE improvements and fixes.
+    - Better audio driver management in winecfg.
+    - Many wininet fixes.
+    - Several Web browser improvements.
+    - More dbghelp APIs implemented.
+    - Directory objects in wineserver.
+    - Lots of bug fixes.
+  * Add new build depends: prelink, libsane-dev, libsane-extras-dev.
+  * Remove build-dependency valgrind.  Doesn't have any use in a binary package.
+  * The above two should make some things faster and scanners work.
+
+ -- Scott Ritchie <scott@open-vote.org>  Thu,  8 Dec 2005 21:49:54 -0800
+
+wine (0.9.2-winehq-1) unstable; urgency=low
+
+  * New upstream release
+    - Winelib Explorer app (just a wrapper around winefile for now).
+    - Debugger cleanups and improvements.
+    - Many wininet fixes.
+    - Better autogenerated API manpages.
+    - A bunch of Korean translations.
+    - Lots of bug fixes.
+  * Added missing build depends: libxt-dev
+
+ -- Scott Ritchie <scott@open-vote.org>  Mon, 28 Nov 2005 18:10:51 -0800
+
+wine (0.9.1-winehq-3) unstable; urgency=low
+
+  * Added a dependency on libxxf86dga1, since it is now required.
+     In the future, I may make a Wine package without X at all, but
+     when X is compiled in we need to have it as a dependency here.
+
+ -- Scott Ritchie <scott@open-vote.org>  Sat, 12 Nov 2005 11:52:17 -0800
+
+wine (0.9.1-winehq-2) unstable; urgency=low
+
+  * Added some missing build-depends: libldap2-dev, libxml2-dev, 
+     libxslt1-dev, valgrind, libxxf86vm-dev, libxxf86dga-dev
+  * Replaced build dependency mesa-common-dev with the package that
+     replaces it, libgl1-mesa-dev
+ -- Scott Ritchie <scott@open-vote.org>  Thu, 10 Nov 2005 23:02:55 -0800
+
+wine (0.9.1-winehq-1) unstable; urgency=low
+
+  * New upstream release
+    - Support for Find function in regedit.
+    - Winelib app to eject a CD.
+    - Many MSI improvements.
+    - Better support for running text-mode apps without X.
+    - Improved support for various code obfuscation tools.
+
+ -- Scott Ritchie <scott@open-vote.org>  Thu, 10 Nov 2005 12:52:27 -0800
+
+wine (0.9.0-winehq-2) unstable; urgency=low
+
+  * Wine now depends on libstc++6
+  * Added missing build-depend libstdc++6-4.0-dev
+  * Since Mono no longer attempts to use Wine, libwine-cil is added to 
+    conflicts and replaces section like the other legacy libwine-* packages
+  * xwine is also added to the replaces and conflicts section, since it
+    does nothing just like winesetuptk.
+
+ -- Scott Ritchie <scott@open-vote.org>  Tue,  1 Nov 2005 15:04:32 -0800
+
+wine (0.9.0-winehq-1) unstable; urgency=low
+
+  * MASSIVE New upstream release
+    - This is Wine's first beta release, meaning things
+      are going to be a lot more stable, and further
+      regressions in numbered versions shouldn't happen.
+    - Too many changes to list.
+
+ -- Scott Ritchie <scott@open-vote.org>  Tue, 25 Oct 2005 12:14:34 -0700
+
+wine (0.0.20050725-winehq-1) unstable; urgency=low
+
+  * Actually two new upstream releases in this one - I skipped the last due to
+    all the config file weirdness.
+  * New upstream release (older one):
+    - Configuration settings moved to the registry.
+    - Graphical Wine configuration tool is now enabled.
+    - More MSI and OLE improvements.
+    - Reorganisation of the DirectDraw directory.
+    - Initial support for webcams.
+    - Lots of bug fixes.
+  * New upstream release (newer one):
+    - Beginnings of theme support in common controls.
+    - Many MSHTML improvements.
+    - A bunch of OLE fixes for InstallShield installers.
+    - Many Direct3D fixes and improvements.
+    - Beginnings of LDAP support.
+    - Various cleanups after removal of the config file.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Thu, 28 Jul 2005 11:58:28 -0700
+
+wine (0.0.20050524-winehq-1) unstable; urgency=low
+
+  * New upstream release
+    - Many MSI improvements.
+    - More features in the file manager.
+    - Better compatibility for Winelib import libraries.
+    - SGML documentation moved out of the source tree.
+    - Header files cleanups.
+    - Lots of bug fixes.
+  * Documentation files have been moved into a seperate package due to upstream 
+    changes
+
+ -- Scott Ritchie <scott@open-vote.org>  Tue, 31 May 2005 20:09:53 -0700
+
+wine (0.0.20050419-winehq-1) unstable; urgency=low
+
+  * New upstream release
+    - Mailslot support.
+    - Support for side mouse buttons (X buttons).
+    - More Richedit improvements.
+    - Loading of Windows registry files disabled for now.
+    - Many code cleanups.
+    - Lots of bug fixes.
+  * Now use winehq version numbering (-winehq) to not create weirdness with 
+    other packages at same version number
+
+ -- Scott Ritchie <scott@open-vote.org>  Sun,  8 May 2005 15:21:46 -0700
+
+wine (0.0.20050310-1) unstable; urgency=low
+
+  * New upstream release
+    -  Initial implementation of a true Richedit control.
+    - Shell extension for browsing Unix directories.
+    - More MSI work.
+    - PBuffer support in OpenGL.
+    - Window painting regressions should be fixed.
+    - Lots of bug fixes
+
+ -- Scott Ritchie <scott@open-vote.org>  Fri, 11 Mar 2005 00:11:06 -0800
+
+wine (0.0.20050211-1) unstable; urgency=low
+
+  * New upstream release
+    - Still more work on the MSI dll.
+    - More OLE work, including a builtin stdole32.tlb.
+    - Fixed inter-process window resize and repaint.
+    - Lots of bug fixes.
+  * Changed dummy packages to architecture "all", set rules file's 
+    dh_installchangelog to only do architecture dependant ones.  This should 
+    keep the changelog out of the dummy packages, making them a good meg smaller
+  * Added MIME types application/x-msdownload, application/exe, 
+    application/x-exe, application/dos-exe, vms/exe, application/x-winexe, 
+    application/msdos-windows, application/x-msdos-program, 
+    and application/x-zip-compressed
+
+ -- Scott Ritchie <scott@open-vote.org>  Fri, 11 Feb 2005 23:19:14 -0800
+
+wine (0.0.20050111-1) unstable; urgency=low
+
+  * New upstream release
+    - Many OLE bug fixes and improvements.
+    - A lot more work on the MSI dll.
+    - Update regions now handled in the Wine server.
+    - Beginnings of typelib generation in the IDL compiler.
+    - Many janitorial cleanups.
+    - Lots of bug fixes.
+
+ -- Scott Ritchie <scott@open-vote.org>  Tue, 11 Jan 2005 12:32:08 -0800
+
+wine (0.0.20041201-1) unstable; urgency=high
+
+  * New maintainer Scott Ritchie
+  * New Upstream release 20041201
+    -Many changes since last package, most notably setup is much simpler and no
+     longer requires special tools or configuration files.
+  * Removed deprecated winesetuptk and wine-utils.
+  * Removed deprecated libwine-* packages, which are now merged into wine.
+    -Wine's binaries were required for running winelib compiled packages anyway
+  * Changed libwine-dev to wine-dev, all proper development files should now
+    be there (everything from /usr/include and the library symlinks).
+  * Merged libwine into wine upon advice from upstream authors, as all binaries
+    in wine were required by winelib compiled packages anyway.  This package
+    should now replace everything wine related that is older.
+  * Added dummy packages libwine (which depends on wine) and libwine-dev (which
+    depends on wine-dev) in order to ease upgrade from older versions.
+  * Removed old Debian hacks into the source code - the source code should be
+    the standard winehq.org source now.
+  * Changed the package format to a more standard one - as wine was changed
+    upstream to be built more consistantly now, and a separate wine-docs package
+    is no longer needed.
+    -Wine docs such as the user guide are now in /usr/share/doc/wine along with
+     the rest of the documentation.
+    -Wine development docs such as the winelib user guide are now in
+     /usr/share/doc/wine-dev
+  * Updated build depends due to upstream changes
+  * Upstream wineprefixcreate program now removes the need for the package
+    maintainer to create special directories and configuration
+  * Many old bugs should be gone due to above changes
+  * Upgraded to new standards version of Debian Policy (also removing manual
+    prompting code that took place in preinstall script.)
+
+ -- Scott Ritchie <scott@open-vote.org>  Mon, 22 Nov 2004 20:30:57 -0800
+
+wine (0.0.20040716-1.3) unstable; urgency=high
+
+  * NMU.
+  * Build against changed libcapi20 API.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 10 Nov 2004 19:21:13 +0100
+
+wine (0.0.20040716-1.2) unstable; urgency=low
+
+  * NMU.
+  * Change libcapi20 build dependency to libcapi20-dev.
+
+ -- Matthias Klose <doko@debian.org>  Sat,  4 Sep 2004 10:16:31 +0200
+
+wine (0.0.20040716-1.1) unstable; urgency=high
+
+  * NMU.
+  * Fix libcapi build dependency (closes: #267536).
+
+ -- Matthias Klose <doko@debian.org>  Sat, 28 Aug 2004 02:04:55 +0200
+
+wine (0.0.20040716-1) unstable; urgency=low
+
+  * New upstream release 20040716 (closes: #261547)
+    - Implementation of the Microsoft Installer dll.
+    - Beginnings of proper inter-process window repaints.
+    - Several DirectSound improvements.
+    - Fixes for the regressions caused by the new filesystem support.
+    - Lots of bug fixes.
+  * Applied winelauncher patch from Kevin Shanahan which allows
+    each $WINEPREFIX to have its own flag files to disable
+    prelaunch and debug windows.
+  * Remove binfmt-support-specific doubledash hack from winelauncher,
+    it's apparently no longer needed (nor does it work anymore).
+    Closes: #261855.
+  * Added Turkish debconf translation. Closes: #252942.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat, 14 Aug 2004 17:11:52 +0200
+
+wine (0.0.20040615-1) unstable; urgency=low
+
+  * New upstream release 20040615
+    - Major winedbg rewrite using the dbghelp dll.
+    - New Wine preloader to reserve memory areas at startup.
+    - Many improvements to the audio support.
+    - Lots of bug fixes.
+  * Acknowledge NMU (closes: #251107), which although imperfectly
+    executed, was well meant.
+  * Install wine-preloader into libwine.
+  * Add GLUT to build dependencies. Closes: #253715.
+  * Remove mention of unmaintained daily CVS builds from README.Debian.
+    Closes: #252370.
+  * Mention wineprefixcreate in README.Debian.
+  * Change default winebrowser registry key to "sensible-browser" instead
+    of a hardcoded list of common browsers. Closes: #249583.
+    This may not change existing installations, it may be necessary for
+    you to change the registry entry yourself on existing installations.
+    I've mentioned how to do this in README.Debian.
+    (It may be possible to make winebrowser ignore the registry entry
+    entirely and hardcode it to always use sensible-browser, but I
+    am not sure if that's a good idea.)
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 17 Jun 2004 08:22:56 +0200
+
+wine (0.0.20040505-2) unstable; urgency=low
+
+  * NMU.
+  * Rebuild against libcupsys2-gnutls10 (fixed: Bug#251107)
+
+ -- Kenshi Muto <kmuto@debian.org>  Sun, 13 Jun 2004 03:45:00 +0000
+
+wine (0.0.20040505-1) unstable; urgency=low
+
+  * New upstream release 20040505 (Closes: #248554)
+    - Many more filesystem improvements, including autodetection
+      of drive types and devices, and support for editing the drive
+      configuration with winecfg.
+    - Many Direct3D improvements.
+    - Several fixes to the various sound drivers.
+    - Lots of bug fixes.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Wed, 12 May 2004 02:04:29 +0200
+
+wine (0.0.20040408-1) unstable; urgency=low
+
+  * New upstream release 20040408 (Closes: #245679)
+    - DOS devices and drives are now configured through symlinks.
+    - Many shell32 improvements.
+    - New task manager merged from ReactOS.
+    - First version of wineprefixcreate tool for initial setup.
+    - Lots of bug fixes.
+  * Redirect errors from final "kill" command in winelauncher to
+    /dev/null, since any failures there should be harmless.
+    Closes: #238065.
+  * Install taskmgr into wine-utils.
+  * Set ICUUC_LIB and ICUDATA_LIB variables for configure,
+    needed to compile this Wine release against the old ICU
+    version in Debian, as instructed by Shachar Shemesh.
+  * Adapted skeleton wine configuration in /usr/share/wine/skel
+    to contain DOS device and drive symlinks. For existing
+    installs, it seems wine will convert the old config to the
+    new symlink-based scheme automatically, for a limited
+    transition period. But I thought it best to update the
+    packaging now anyway, to make sure I got it right before
+    it's too late.
+  * Install wineprefixcreate into wine. This seems to be
+    an alternative to copying /usr/share/wine/skel into ~/.wine.
+  * Added Danish debconf translation. Closes: #234064.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Tue, 20 Apr 2004 15:14:11 +0200
+
+wine (0.0.20040309-1) unstable; urgency=low
+
+  * New upstream release 20040309
+    - Much improved winegcc tool, now used to build Wine itself.
+    - VxDs are now separate libraries for better modularity.
+    - Improvements and simplifications to the drive configuration.
+    - New setupapi INF script to create the initial registry.
+    - Many improvements to the various multimedia dlls.
+    - Lots of bug fixes.
+  * Moved skeleton wine configuration from /usr/share/wine to
+    /usr/share/wine/skel. Updated README.Debian to reflect this.
+  * Install patched tools/wineinstall into /usr/share/wine.
+    If the script happens to work, it might be better to use it
+    than copying the /usr/share/wine/skel into ~/.wine, since
+    it would also be able to upgrade an old installation, and
+    has more tweaks, but I haven't tested this script much lately.
+  * Moved wineconf from /usr/lib/wine to /usr/share/wine.
+  * Install generic.ppd and wine.inf in /usr/share/wine.
+  * There's no longer a winedefault.reg. Everything is handled by
+    wine.inf. Added explanation on how to use wine.inf to
+    README.Debian.
+  * Create program symlinks manually in debian/rules instead of
+    using dh_link, since these symlinks must be absolute, otherwise
+    they won't work when "cp -r"-ed into ~/.wine. Closes: #235406.
+  * Try to make winelauncher look for an existing config file
+    in $WINEPREFIX (before complaining that you have to run
+    winesetup). Closes: #235405.
+  * There's now a man page for widl.
+  * There's now a man page for winebuild. Closes: #114673.
+  * Update libwine-* package list in README.Debian.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Wed, 10 Mar 2004 22:10:06 +0100
+
+wine (0.0.20040213-1) unstable; urgency=low
+
+  * New upstream release 20040213
+    - Improved support for screen resolution changes.
+    - More shell32 improvements.
+    - Several Winelib compatibility fixes.
+    - Beginnings of support for typelib creation.
+    - Lots of bug fixes.
+  * Moved wine.bin, wine-[kp]thread and wineserver from wine to libwine,
+    since these are going to be needed for Winelib programs too.
+  * Added winebrowser and expand to the wine package.
+  * Added libfontconfig1-dev, libssl-dev, and libcapi20-2 to
+    Build-Depends.
+  * Added new package libwine-capi to contain the capi20 module.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Tue, 24 Feb 2004 14:09:34 +0100
+
+wine (0.0.20040121-2) unstable; urgency=high
+
+  * Urgency high since this should hit testing as
+    soon as possible (both to help jack migration, and
+    to supersede the currently NPTL-incompatible version
+    in testing).
+  * Fixed debian/rules to also make libwine-jack depend
+    on libjack0.80.0-0. Sorry for the mistake.
+  * Put dlls/twain/README into the libwine-twain package.
+    Closes: #224941.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Tue, 27 Jan 2004 18:46:48 +0100
+
+wine (0.0.20040121-1) unstable; urgency=low
+
+  * New upstream release 20040121
+    - Many improvements in the shell32 dll.
+    - Better support for constructors in C++ Winelib apps.
+    - Improved Regedit tool.
+    - Full support for graphic tablets.
+    - Lots of DirectMusic improvements.
+    - Better support for video playback.
+    - Full IME support for Asian locales.
+    - Lots of bug fixes.
+  * The exec shield workaround was also disabled again upstream
+    "because it caused too much trouble". Perhaps #224837 was
+    some of that trouble. Need verification.
+  * Build-Depend on libjack0.80.0-dev instead of libjack0.71.2-dev.
+    Closes: #228786.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 22 Jan 2004 05:08:49 +0100
+
+wine (0.0.20031212-1) unstable; urgency=low
+
+  * New upstream release 20031212
+    - Initial implementation of XDND drag&drop support.
+    - Improved startup performance on remote displays.
+    - Major improvements in the oleaut32 dll.
+    - Some support for Netbios functions.
+    - Work around for Exec Shield and prelinking troubles.
+    - Many code cleanups.
+    - Lots of bug fixes.
+  * It seems regapi is no more, have to remove it from the
+    packages. (A man page for it is not needed anymore then,
+    which closes #83261)
+  * The tool regedit supersedes it, so I'm using that now to
+    build the skeleton configuration in /usr/share/wine. I
+    patched regedit to accept input from stdin if a filename
+    of "-" is given, so input can still be zcat-ed to it.
+  * Updated README.Debian for regedit instead of regapi, and
+    mention that regedit is in wine-utils (still).
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat, 20 Dec 2003 05:41:29 +0100
+
+wine (0.0.20031118-1) unstable; urgency=low
+
+  * New upstream release 20031118 (closes: #211906)
+    - Many printing improvements.
+    - Run-time detection of NPTL threading. (closes: #218476)
+    - Lots of code merges from Crossover Office 2.1.
+    - Some reorganization of the source tree.
+    - Lots of bug fixes.
+  * Install wine.bin-kthread and wine.bin-pthread binaries into
+    /usr/bin to allow the threading autoselection to work.
+  * The DNS lookup issues is also claimed to have been fixed now,
+    probably because of the NPTL detection. Closes: #214252.
+  * Added winecpp to libwine-dev.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Wed, 17 Dec 2003 03:14:12 +0100
+
+wine (0.0.20031016-1) unstable; urgency=low
+
+  * New upstream release 20031016
+    - Support for the Xrandr extension.
+    - Dll separation of kernel and ntdll is finished.
+    - Many enhanced metafile improvements.
+    - Lots of bug fixes.
+  * DocBook DSSSL stylesheets are apparently no longer included in the
+    upstream source. However, they have one available separately
+    (in the "tools" module of CVS), so I put it into the debian/
+    directory and let the debian/rules file generate the documentation
+    itself (without using upstream makefile) using that stylesheet.
+    I also chose to continue to build each book as many small HTML
+    files instead of as one big HTML file, since that's the "tried and
+    true" way, or something.
+  * Some old plaintext documentation has also been removed upstream,
+    they've been removed from the packaging too.
+  * Added HURD and FreeBSD to architecture fields, as requested.
+    Closes: #222227.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun, 30 Nov 2003 17:36:44 +0100
+
+wine (0.0.20030911-1) unstable; urgency=low
+
+  * New upstream release 20030911
+    - Many improvements to the winecfg configuration tool.
+    - Massive header files cleanup for better source compatibility.
+    - Some more progress on the kernel/ntdll separation.
+    - Lots of bug fixes.
+    (Yes, newer upstream releases exist, I plan to upload each of
+     them with a few days in between to allow them to be archived
+     on snapshot.debian.net)
+  * Install rpcss, rundll32, start, winemenubuilder into libwine.
+  * Install *.def files into libwine-dev.
+  * Build-depend on libicu-dev, so that support for non-Western
+    languages gets compiled in. Suggest libicu21c102 for libwine.
+  * Added missing "]" in winedefault.reg. Closes: #218612.
+  * Fixed doc-base (it apparently got broken after the wine-doc
+    changes). Closes: #215393.
+  * Fixed dash compatibility of winelauncher. Closes: #219624.
+  * Noted that daily builds haven't been working lately
+    in README.Debian. Closes: #213729.
+  * Tried to fix configure to detect current freetype.
+  * Started rewriting the build system a little bit to make it
+    possible to make winelauncher configure Wine automatically
+    without winesetup's help. This is not finished yet, though,
+    and since I'm far behind on Wine releases now, I think I'll
+    do it later. Still, I did get around to po-debconfify the
+    still unused debconf templates (closes: #203286), and put
+    a skeleton per-user no-Windows configuration into
+    /usr/share/wine that it's possible to copy into ~/.wine for
+    those who want to do so.
+  * Updated README.Debian to reflect (some of) the above.
+  * /var/lib/wine/drivec is no longer in the package.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Fri, 28 Nov 2003 13:28:20 +0100
+
+wine (0.0.20030813-2) unstable; urgency=low
+
+  * Pthread changes in current glibc CVS caused Wine to not work.
+    This has to be fixed both Wine-side and glibc-side. This upload
+    fixes it on the Wine side by applying a patch from WineHQ CVS
+    for this. Closes: #210300.
+    (The glibc side is bug #210347, which must also be fixed before
+    Wine runs again, sorry.)
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 11 Sep 2003 14:16:33 +0200
+
+wine (0.0.20030813-1) unstable; urgency=low
+
+  * New upstream release 20030813
+    - Partial implementation of the Microsoft Installer (msi.dll).
+    - GUI for regedit (from ReactOS).
+    - DirectMusic dlls reorganization.
+    - Many Wininet improvements.
+    - Lots of bug fixes.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Wed, 20 Aug 2003 19:29:44 +0200
+
+wine (0.0.20030709-3) unstable; urgency=low
+
+  * Place winspool.drv into libwine, not libwine-print, so that programs
+    that link to it don't need libwine-print. Closes: #202050.
+  * Remove stale libwine.so and libwine_unicode.so symlinks
+    in preinst. Closes: #202116.
+  * Build-depend on libjack0.71.2-dev instead of libjack0.50.0-dev.
+    I am not sure that this jack version will work with Wine, but since
+    0.50.0 is apparently no longer in unstable, I guess I have no choice.
+    Closes: #202237.
+  * Changed wine-doc build rules a bit to be more in line with upstream
+    documentation layout. This will change the directory layout in the
+    wine-doc package, you may have to adjust your bookmarks. Closes: #202310.
+  * Added winecfg program to wine-utils.
+  * Updated Standards-Version to 3.6.0, rearranged debian/rules file
+    a bit to have a separate binary-indep rule for building wine-doc.
+  * Corrected sections in control file (finally).
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Mon, 21 Jul 2003 16:18:16 +0200
+
+wine (0.0.20030709-2) unstable; urgency=low
+
+  * Fixed shlibs so we don't depend on nvidia-glx. Closes: #201257, #201300.
+  * Found out that wine was never ported to alpha after all (the alpha
+    references in the win32 headers must be from NT or something, there's
+    apparently no actual code in Wine for alpha), so I removed that again.
+    Now only i386, powerpc, and sparc remain.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Tue, 15 Jul 2003 10:05:32 +0200
+
+wine (0.0.20030709-1) unstable; urgency=low
+
+  * New upstream release 20030709
+    - Still more Direct3D and DirectSound improvements.
+    - Inter-process clipboard support.
+    - Locale handling improvements.
+    - More progress on the kernel/ntdll separation.
+    - Lots of bug fixes.
+  * Added powerpc, sparc, and alpha to architectures, let's see
+    if the packages actually build on those...
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Mon, 14 Jul 2003 15:13:27 +0200
+
+wine (0.0.20030618-1) unstable; urgency=low
+
+  * New upstream release 20030618 (closes: #198646)
+    - Still more Direct3D and DirectSound improvements.
+    - Tons of fixes merged from Crossover Office 2.0.
+    - New iphlpapi dll.
+    - Lots of bug fixes.
+  * There's supposed to be a fix for Lotus Notes in this release.
+    Closes: #196156, #196938.
+  * Build-depend on libartsc0-dev (yeah, finally someone told me).
+    Closes: #197255.
+  * Build-depend on libjpeg62-dev | libjpeg-dev instead of just
+    libjpeg-dev. Closes: #196136.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Tue, 24 Jun 2003 21:52:30 +0200
+
+wine (0.0.20030508-2) unstable; urgency=low
+
+  * Added winevdm.exe.so to the wine package (no, not wine-utils).
+    Closes: #195950, #196013.
+  * Make it possible to build from source with libjack0.71.2. However,
+    I'm not convinced that the code might work with a new jack version,
+    so I'll still be compiling against the older version myself.
+    Closes: #196014.
+  * Since people keep complaining about libwine-arts depending on arts
+    4:2.2.2, without telling me what's wrong with that, I now
+    depend on arts 1.1.2, clearly an even older arts, but if they can't
+    tell me what they want me to do, I'll teach'em to. Closes: #195518.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Wed,  4 Jun 2003 07:26:12 +0200
+
+wine (0.0.20030508-1) unstable; urgency=low
+
+  * New upstream release 20030508 (closes: #192873)
+    - Some more reorganizations of the source tree.
+    - A few more steps towards kernel/ntdll separation.
+    - Many Direct3D improvements.
+    - More compatible COM interfaces definitions.
+    - Lots of bug fixes.
+  * Build-depend on flex-old | flex (<< 2.5.31)
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Mon,  2 Jun 2003 04:40:08 +0200
+
+wine (0.0.20030408-1) unstable; urgency=low
+
+  * Long overdue Wine updates for Debian
+    (Closes: #181499, #183854).
+    Wonder if I should RFA.
+  * New upstream release 20030408
+    - Some reorganizations of the source tree.
+    - File change notifications.
+    - Support for all variants of glibc 2.3.
+    - Many documentation updates.
+    - Lots of bug fixes.
+  * New upstream release 20030318
+    - Many Direct Sound improvements.
+    - File locking support.
+    - Progress on kernel/ntdll dll separation.
+    - Lots of bug fixes.
+  * New upstream release 20030219 (Closes: #183854)
+    - Better dead keys support.
+    - Many debugger fixes.
+    - More Direct3D work.
+    - Lots of bug fixes.
+  * Fixed winelauncher bashism (Closes: #178986)
+  * Created libwine-jack package.
+  * Changed build dependencies (added glu, ungif and jack).
+    They're no longer compatible with potato.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 17 Apr 2003 14:55:30 +0200
+
+wine (0.0.20030115-2) unstable; urgency=low
+
+  * Added workaround for the broken docbook-utils in woody
+    in debian/rules. Closes: #172082.
+  * Hopefully less winelauncher failures in case of Ctrl-C.
+    Closes: #176615.
+  * Automatically add "--" if launched as wine-auto, and
+    make binfmt-support launch that. Closes: #178521.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Mon, 27 Jan 2003 18:18:26 +0100
+
+wine (0.0.20030115-1) unstable; urgency=low
+
+  * New upstream release 20030115
+    - Much better header files compatibility in Winelib.
+    - A ton of Direct3D work.
+    - Many improvements in sound support.
+    - New wineboot tool to simulate a Windows reboot.
+    - Lots of bug fixes.
+  * New tool wineboot placed in wine-utils.
+  * Installed winewrap and winegcc/wineg++ into libwine-dev.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun, 19 Jan 2003 21:03:50 +0100
+
+wine (0.0.20021219-1) unstable; urgency=low
+
+  * New upstream release 20021219
+    - DLL linking now done through import libraries.
+    - A couple of new tools to make Winelib easier to use.
+    - Many Direct3D improvements.
+    - Improved Windows compatibility of the regression tests.
+    - Lots of bug fixes.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat, 21 Dec 2002 21:03:21 +0100
+
+wine (0.0.20021125-1) unstable; urgency=low
+
+  * New upstream release 20021125
+    - Finished conversion to STRICT compilation mode.
+    - WinHelp revival.
+    - Client-side fonts supported even without RENDER extension.
+    - Regression tests no longer require Perl.
+    - Lots of bug fixes.
+  * Removed libperl-dev from build dependencies accordingly.
+  * CUPS is now loaded dynamically, so I made debian/rules add
+    the necessary libcupsys2 dependency itself.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 28 Nov 2002 17:25:21 +0100
+
+wine (0.0.20021031-1) unstable; urgency=low
+
+  * New upstream release 20021031
+    - Complete listview overhaul.
+    - Beginnings of real RPC support.
+    - Most dlls now build properly in STRICT mode.
+    - Inter-process window activation and focus handling.
+    - Many improvements to AVI support.
+    - Lots of bug fixes.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Wed,  6 Nov 2002 15:36:15 +0100
+
+wine (0.0.20021007-1) unstable; urgency=low
+
+  * New upstream release 20021007 (closes: #164607)
+    - Massive listview rewrite.
+    - New MS RLE codec.
+    - winemaker should be working again.
+    - Beginnings of Direct3D 8 support.
+    - Lots of bug fixes.
+  * Patched to work with glibc 2.3. Closes: #165323.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun, 20 Oct 2002 23:11:17 +0200
+
+wine (0.0.20020904-1) unstable; urgency=low
+
+  * New upstream release 20020904
+    - Much improved PowerPC support.
+    - More correct locale definitions.
+    - Progress on the conversion of handle types to pointers.
+    - Many Visio and Quicken fixes merged from Crossover.
+    - Lots of bug fixes.
+  * Yeah, I know I'm late in packaging this release,
+    but I've been sick. Closes: #159867.
+  * Fixed debian/*.dirs (many of them accidentally contained
+    /usr/share/doc/libwine-twain). Closes: #157063.
+  * Changed gluck.debian.org to people.debian.org in README.Debian
+    since it's reported that the apt source doesn't work otherwise.
+  * Fixed path of system.ini in README.Debian. Closes: #159833.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Fri, 13 Sep 2002 15:44:32 +0200
+
+wine (0.0.20020804-2) unstable; urgency=low
+
+  * Made comdlg32 import winspool using delayed imports
+    instead of regular imports. This should make comdlg32
+    work without libwine-print as long as the print
+    dialog isn't opened (trying that will probably crash).
+    Closes: #156338.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 15 Aug 2002 21:38:38 +0200
+
+wine (0.0.20020804-1) unstable; urgency=low
+
+  * New upstream release (closes: #155542)
+    - Beginnings of an IDL compiler.
+    - Several new winedbg features.
+    - More OLE and shell improvements.
+    - NAS and AudioIO sound drivers.
+    - Still more Sparc portability fixes.
+    - Lots of bug fixes.
+  * New tool widl placed in libwine-dev.
+  * The new NAS driver is placed in a new libwine-nas package.
+    For some reason, the build system makes this driver depend on X11,
+    but I don't know enough about NAS to know if it's supposed to.
+  * The AudioIO driver is for Solaris, so it isn't built.
+  * There's now a man page for winebuild (closes: #83274).
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Tue,  6 Aug 2002 19:42:51 +0200
+
+wine (0.0.20020710-1) unstable; urgency=low
+
+  * New upstream release 20020710
+    - DirectSound 8 and DirectInput 8 support.
+    - Many OLE improvements.
+    - Support for font downloading in Postscript driver.
+    - ALSA sound driver.
+    - More portability fixes, particularly for Sparc.
+    - Lots of bug fixes.
+  * Split off libwine components with heavy dependencies
+    into separately installable packages (closes: #148479):
+    libwine-print (depends on CUPS)
+    libwine-twain (depends on SANE)
+    libwine-alsa  (depends on ALSA)
+    libwine-arts  (depends on aRts)
+  * List all the Wine packages in README.Debian.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 25 Jul 2002 04:48:55 +0200
+
+wine (0.0.20020605-1) unstable; urgency=low
+
+  * New upstream release 20020605 (Closes: #150139)
+    - Better Mingw support, including cross-compilation on Linux.
+    - Still more dll separation work.
+    - Winelib applications now get loaded much like builtin dlls.
+    - Some command-line options replaced by config entries.
+    - Multimedia improvements, including an MP3 decoder.
+    - Massive whitespace cleanup.
+    - New Winelib file manager.
+    - Lots of bug fixes.
+  * Fixed wine-doc.doc-base. Closes: #149649.
+  * Added Catalan debconf template. Closes: #139745.
+  * New tool regsvr32 placed in wine.
+  * New tool winefile placed in wine-utils.
+  * Wine build system has changed and installs hardlinked binaries.
+    I'll just package the hardlinked files as ordinary files for now.
+    But at least there's no longer .so files in /usr/bin (closes: #148357).
+  * Removed README.Debian reference to my old apt repository on WineHQ;
+    since they no longer run Debian, I can't host it there anymore.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun, 23 Jun 2002 04:55:39 +0200
+
+wine (0.0.20020509-1) unstable; urgency=low
+
+  * New upstream release 20020509
+    - More dll separation work.
+    - Many async I/O improvements.
+    - Still more unit tests.
+    - A lot less multimedia code.
+    - Many portability fixes, esp. for ReactOS.
+    - Lots of bug fixes.
+  * New tool winepath placed in wine-utils.
+  * clock and hlp2sgml removed from wine-utils.
+  * Added German debconf templates. Closes: #139095.
+  * Added Catalan debconf template. Closes: #139746.
+  * Doubled size of MAX_FONTS. Closes: #145033.
+  * Explicitly depend on libfreetype6, and changed Wine code
+    to look for libfreetype.so.6 instead of libfreetype.so.
+    Closes: #146136.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Mon, 13 May 2002 05:58:19 +0200
+
+wine (0.0.20020411-1) unstable; urgency=low
+
+  * New upstream release 20020411
+    - Beginnings of an SMB client implementation.
+    - New naming scheme and location for builtin dlls.
+    - aRts sound driver.
+    - A bunch of unit tests.
+    - Much more complete setupapi implementation.
+    - Some dll separation progress.
+    - The usual common controls rewrites.
+    - Much improved Microsoft Office support.
+    - Lots of bug fixes.
+  * Wine license changed to LGPL. Updated debian/copyright.
+  * Build system changed. Updated debian/* files.
+  * New build dependency libarts-dev added for aRts driver.
+  * New build dependency libsane-dev added for TWAIN support.
+  * New tool regedit placed in wine-utils.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat, 13 Apr 2002 14:31:02 +0200
+
+wine (0.0.20020228-1) unstable; urgency=low
+
+  * New upstream release 20020228
+    - Client-side font rendering using Xrender.
+    - Local server COM support.
+    - Many DrawText improvements.
+    - A ton of fixes for better MS Office support.
+    - Preliminary support for C unit tests.
+    - Lots of bug fixes.
+  * Updated the build dependencies, been too long since last time.
+  * Added tchar.h to list of headers to install in include/Makefile.in.
+    Closes: #131918.
+  * Made winelauncher errors about not finding winesetup more
+    helpful. Closes: #135263.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Fri,  8 Mar 2002 12:21:08 +0100
+
+wine (0.0.20020122-2) unstable; urgency=low
+
+  * Sigh. Conflict with binfmt-support (<< 1.1.2), then.
+    Closes: #130887.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat, 26 Jan 2002 23:21:36 +0100
+
+wine (0.0.20020122-1) unstable; urgency=low
+
+  * New upstream release 20020122
+    - Lots of improvements to asynchronous I/O.
+    - Beginnings of unit testing infrastructure.
+    - Inter-process DDE should work now.
+    - Lots of bug fixes.
+  * dosmod no longer exist. (Closes: #83260)
+  * Tried to make the winelauncher script behave in the absence
+    of a display. Closes: #128068. (Also tried to make the script
+    return the correct error code while I was at it. Didn't I have
+    a bug on that once?)
+  * Updated Spanish debconf templates. Closes: #120241, #128927.
+  * Changed short description of wine-utils from "Wine Emulator"
+    to "Windows Emulator" to match the other binary packages...
+  * Install wine.xpm and wine_small.xpm into /usr/share/pixmaps.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Fri, 25 Jan 2002 15:58:51 +0100
+
+wine (0.0.20011226-2) unstable; urgency=low
+
+  * Added xlibmesa-dev to the build dependencies.
+  * Added "undocumented" manpage for wineconsole.
+  * Added support for the binfmt-support package. Closes: #89386.
+  * Prepend "--" to arguments in wineshelllink. Closes: #128124.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat, 12 Jan 2002 00:06:15 +0100
+
+wine (0.0.20011226-1) unstable; urgency=low
+
+  * New upstream release 20011226
+    - Many improvements to audio support.
+    - Lots of new actions in SystemParametersInfo.
+    - New console based on Win32 window instead of xterm.
+    - Server protocol redesigned.
+    - More shlwapi improvements.
+    - Lots of bug fixes (Closes: #115482).
+  * Placed the new wineconsole program into the wine package.
+  * Changed build dependency cygnus-stylesheets to docbook-utils.
+    Closes: #123736.
+  * Updated Standards-Version to 3.5.6.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 27 Dec 2001 10:41:11 +0100
+
+wine (0.0.20011108-2) unstable; urgency=low
+
+  * Revert to debhelper v2 compatibility, and wrote ldconfig into
+    postinst manually, since debhelper no longer likes libwine.so
+    anyway. Closes: #119051.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun, 11 Nov 2001 13:18:40 +0100
+
+wine (0.0.20011108-1) unstable; urgency=low
+
+  * New upstream release 20011108
+    - Shared windows support starts doing something useful.
+    - Overlapped I/O improvements.
+    - Support for running files from removable media.
+    - Many shlwapi improvements.
+    - Quartz dll keeps growing.
+    - Lots of bug fixes (Closes: #115319).
+  * Present a verification question if Wine is launched
+    as a MIME handler from mailcap (Closes: #114977).
+  * Tried to add a KDE file association (Closes: #118430).
+    If anyone has suggestions for improving that (I didn't manage
+    to make Wine launch on left-click, only on right-click
+    and then selecting WINE), please let me know.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Fri,  9 Nov 2001 03:05:30 +0100
+
+wine (0.0.20011004-1) unstable; urgency=low
+
+  * New upstream release 20011004
+    - Beginnings of shared window handles.
+    - Much improved typelib support.
+    - Tons of new code in quartz dll.
+    - Lots of bug fixes (Closes: #109668).
+  * The specmaker tool has been replaced by the winedump tool
+    (Closes: #87552).
+  * This release was apparently badly timed (it was exceedingly broken).
+    However, one day after the release, all the major breakages were
+    fixed in the CVS tree (i.e. business as usual in the Wine project).
+    So I've applied the current CVS patches to make this Debian
+    release somewhat useful.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat,  6 Oct 2001 13:15:44 +0200
+
+wine (0.0.20010824-1) unstable; urgency=low
+
+  * New upstream release 20010824
+    - Inter-process SendMessage support
+    - More DDE improvements
+    - Preparation work for shared window handles
+    - Several debugger improvements
+    - Better GDI objects management
+    - Lots of bug fixes
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun, 26 Aug 2001 15:27:56 +0200
+
+wine (0.0.20010731-1) unstable; urgency=low
+
+  * New upstream release 20010731
+    - 16-bit comm routines reimplemented properly
+    - More improvements to the Postscript driver
+    - A few more steps towards dll separation
+    - Lots of bug fixes
+  * And from release 20010629 (which I didn't package
+    because I think it was a very unstable release)
+    - Better font metrics support in Postscript driver using Freetype
+    - Major window management redesign (still in progress)
+    - Message queues in wineserver to prepare for inter-process messaging
+    - DDE merged from Corel tree, plus various fixes
+    - 64-bit file size support
+    - Lots of bug fixes
+  * You wanted a more recent Wine, you got it (closes: #109230)
+  * Applied another Linux 2.4 winsock patch.
+  * Updated README.Debian to point to WineHQ resources and such
+    (troubleshooting guide, FAQ, etc).
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun, 26 Aug 2001 15:21:57 +0200
+
+wine (0.0.20010510-3) unstable; urgency=low
+
+  * Applied patch from Marcus Meissner to make CUPS support
+    build on potato.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 17 May 2001 20:05:46 +0200
+
+wine (0.0.20010510-2) unstable; urgency=low
+
+  * Added CUPS build dependency, and installed it on my build
+    machines, so users that need printing can take advantage of
+    Wine's new support for CUPS.
+  * Moved sample config files potentially referenced from postinst
+    from /usr/share/doc/wine to /usr/share/wine, and added symlinks
+    to them in /usr/share/doc/wine, as per Debian policy.
+  * There's a new generic.ppd among the sample config files, I'm
+    not sure what to do with it other than stuff it into
+    /usr/share/doc/wine.
+  * Updated Standards-Version to 3.5.4.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 17 May 2001 13:10:06 +0200
+
+wine (0.0.20010510-1) unstable; urgency=low
+
+  * New upstream release 20010510
+    - Many improvements to printing support
+    - Some graphics driver restructures
+    - Lots of bug fixes
+  * And from release 20010418 (which I didn't package
+    because I think it was a very bad release)
+    - DirectDraw restructuration and improvements
+    - MSVCRT headers for compiling Winelib apps
+    - Postscript driver enhancements
+    - Several multimedia fixes
+    - Lots of bug fixes
+  * Declared versioned dependency on debhelper v3.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat, 12 May 2001 12:15:41 +0200
+
+wine (0.0.20010326-3) unstable; urgency=low
+
+  * Maybe tell postinst too that I moved documentation/samples/*
+    (system.ini) from libwine to wine. Closes: #92446.
+  * Added Spanish to wine.templates. Closes: #92316.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun,  1 Apr 2001 21:52:30 +0200
+
+wine (0.0.20010326-2) unstable; urgency=low
+
+  * Implemented DEB_BUILD_OPTIONS *properly*.
+  * Cleaner .a file handling in debian/rules.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Fri, 30 Mar 2001 11:39:04 +0200
+
+wine (0.0.20010326-1) unstable; urgency=low
+
+  * New upstream release
+    - Serial async I/O improvements
+    - Support for app-specific dll overrides in config file
+    - Lots of bug fixes.
+  * New build dependency libperl-dev (because of the new
+    winetest program, which is supposed to be wine's new
+    API test suite, but though it was necessary to compile
+    it, I don't think it's useful to have in the debian
+    packages, is it?)
+  * There's a new winecheck script too, but I didn't include
+    it either, as I'm not sure how it works and whether it
+    would be useful in Debian packages.
+  * Made the dependency on xbase-clients versioned >= 4.0,
+    so it doesn't satisfy potato xfree86 3.x users, forcing
+    the ORed xcontrib dependency instead.
+  * Added Suggests: msttcorefonts (neat package).
+  * Moved documentation/samples/* from libwine to wine.
+  * Implemented DEB_BUILD_OPTIONS stuff.
+    Upgraded Standards-Version to 3.5.2.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Wed, 28 Mar 2001 16:31:47 +0200
+
+wine (0.0.20010305-1) unstable; urgency=low
+
+  * New upstream release 20010305.
+    - Some improvements to the wineserver protocol.
+    - The usual common controls fixes/improvements.
+    - Version information in builtin dlls.
+    - Lots of bug fixes.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Tue,  6 Mar 2001 00:35:21 +0100
+
+wine (0.0.20010216-5) unstable; urgency=low
+
+  * Added dependency on xbase-clients | xcontrib, since the
+    winelauncher needs xmessage in order to operate.
+  * Made winelauncher handle filenames with spaces. Closes: #87710.
+  * Moved libwine's unused config stuff to wine (though still not used).
+  * Fixed bashism in libwine.preinst. Closes: #87864.
+  * Added French debconf translations. Closes: #87749, #87750.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Mon, 26 Feb 2001 17:19:50 +0100
+
+wine (0.0.20010216-4) unstable; urgency=low
+
+  * Gave in and killed the OSMesa support, by overriding
+    the config.cache with a debian/config.anticache in rules.
+    Sadly, users most likely can no longer use plain old non-GLX
+    Mesa (without hardware acceleration) to play Half-Life at 0.2 fps
+    anymore, but maybe that's no big loss anyway.
+    Closes: #83391, #83393.
+  * Removed MesaGL mess explanation from README.Debian again.
+  * Changed german translation of libwine.templates. Closes: #87604.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun, 25 Feb 2001 19:23:11 +0100
+
+wine (0.0.20010216-3) unstable; urgency=low
+
+  * Made Wine a handler of the application/x-msdos-program MIME
+    type. (Soon your Unix mailers will also be able to run all
+    those Windows viruses, muahahaha...)
+  * Added a GNOME file association for that too.
+    (But I don't know how to do that for KDE... if there's anything
+    extra I need to do to make it work in KDE too, send a patch
+    to the bug tracker or something)
+  * Moved winemaker manpage to where winemaker is now (wine-utils).
+  * Added "undocumented" manpage for specmaker and wine.bin.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun, 25 Feb 2001 11:26:35 +0100
+
+wine (0.0.20010216-2) unstable; urgency=low
+
+  * Oops... seems that as I moved from one machine to another, the
+    0.0.20010216-1 was built on top of 0.0.20010112-2, not -3.
+    Now I've imported the changes that was done to -3
+    (changelog and shlibs.local)...
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Wed, 21 Feb 2001 20:34:55 +0100
+
+wine (0.0.20010216-1) unstable; urgency=low
+
+  * New upstream release 20010216.
+    - Several PostScript driver enhancements.
+    - Improved enhanced metafiles support.
+    - Beginnings of PowerPC support.
+    - Lots of bug fixes. (Closes: #83214)
+  * libwine_tsx11.so is new, placed it in /usr/lib.
+  * specmaker is new, placed it in wine-utils.
+  * Updated README.Debian to explain the MesaGL mess.
+  * Built with debhelper v3.
+  * Moved winemaker from libwine-dev to wine-utils, since it's just a
+    porting tool for preparing windows for winelib compilation, not
+    a build requirement once the sources have been prepared.
+  * Removed rpath hack from debian/rules, assuming that winelauncher
+    does a good enough job (or recognizing that the upstream configure
+    adds rpath itself so I wouldn't have to anyway).
+  * Patched winelauncher a lot, so now it works without rpath in the
+    Debian packaging, and works with the winelib apps.
+  * Moved /usr/lib/*.so symlinks to libwine-dev.
+  * Finally moved the /var/lib/wine stuff from libwine to wine.
+  * Someone apparently translated libwine.templates to German.
+    While not terribly useful (the first message might be obsolete
+    and the other isn't actually used, at least not right now),
+    especially not without also translating wine.templates, I just
+    threw it into libwine.templates anyway to close the bug.
+    Closes: #83366.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Mon, 19 Feb 2001 22:00:36 +0100
+
+wine (0.0.20010112-3) unstable; urgency=low
+
+  * Added shlibs.local, to use "xlibosmesa3 | mesag3" instead of just
+    xlibosmesa3, so that users that use mesag3 can just add a symlink
+    (or mesag3 can be made to provide such a symlink itself).
+    On the other hand, would adding a Build-Conflicts: xlibosmesa-dev
+    (and build without OSMesa support) be a better idea...?
+  * Removed bashism from winelauncher script. Closes: #83559.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Fri, 26 Jan 2001 16:36:03 +0100
+
+wine (0.0.20010112-2) unstable; urgency=low
+
+  * Updated README.Debian. Closes: #82624.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Wed, 17 Jan 2001 16:52:06 +0100
+
+wine (0.0.20010112-1) unstable; urgency=low
+
+  * New upstream release 20010112.
+    This version of Wine unfortunately doesn't support a global config
+    file, so the default wine.conf is now removed from the package.
+    I'll just have to recommend using winesetuptk for now.
+  * Using debconf to notify the sysadmin of the above issue, and ask
+    whether to delete /etc/wine.conf.
+  * Decided to use winelauncher like it was intended; rename the main
+    wine binary to wine.bin, and rename winelauncher to wine.
+    This will also automatically launch winesetup if there's no config.
+  * Removing wine.conf in postrm if wine is purged.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat, 13 Jan 2001 16:38:56 +0100
+
+wine (0.0.20001222-2) unstable; urgency=low
+
+  * Added usr/lib to libwine-dev.dirs. (Oops.)
+  * Added ldconfig to libwine.postinst.
+  * Now that winesetuptk is available, I added winesetup to Suggests,
+    and mentioned it in README.Debian. The next Wine release ought to
+    have support for a new global config file, I plan to remove wine.conf
+    from the package once that happens.
+  * Added information about other sources for Wine .deb packages
+    (from the WineHQ download page) to README.Debian.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 11 Jan 2001 18:34:39 +0100
+
+wine (0.0.20001222-1) unstable; urgency=low
+
+  * New upstream release 20001222.
+    The configuration file format has changed, but I've kept the wine.conf
+    in here since the winesetuptk tool isn't ready yet (I'm waiting for it
+    to handle the new configuration file format), and wine will simply
+    automatically generate a ~/.wine/config using the old wine.conf.
+  * Updated README.Debian to explain these config issues.
+  * Built more of the winelib apps, put some of them (including the
+    all-important "winemine") into wine-utils.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat, 23 Dec 2000 04:54:03 +0100
+
+wine (0.0.20001202-1) unstable; urgency=low
+
+  * New upstream release 20001202.
+    New tools winelauncher and wineshelllink.
+    Updated wine.conf.
+    (I ought to use winelauncher for something, maybe soon.)
+  * Updated Build-Depends for XFree86 4.0.
+  * Install regapi into wine. Closes: #76138, #47857.
+    Also put winedefault.reg into wine instead of libwine.
+    Will clean up the inconsistencies, such as drive setup
+    and files being in libwine instead of wine, later.
+  * Moved winebuild, wmc, and wrc from wine-utils and
+    into libwine-dev, since these are tools required for
+    compiling Winelib apps.
+  * Added LDFLAGS with rpath set to /usr/lib/wine as arguments
+    to make during build, so that regapi and winedbg works.
+    Closes: #72243 (may have been closed by 20001026-2 too).
+    Eventually DLL separation will remove the need for rpath,
+    but I'll keep it until then.
+  * Added a new fake drive for /usr/bin, so that wine can find
+    winedbg.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sun,  3 Dec 2000 11:15:53 +0100
+
+wine (0.0.20001026-2) unstable; urgency=low
+
+  * Repackaged with debhelper, since debmake proved too limited.
+    Closes: #69467, #69469, #69570, #70820, #71461.
+  * The default wine.conf update and the libdir fix (and
+    the repackaging) closes: #67381, #67382.
+  * Reorganized wine-doc package, it now features HTML docs.
+  * Took Windows directories with spaces out of the package proper,
+    since debhelper didn't cope with them. Created them in postinst
+    instead for now.
+  * Some initial debconf support. But doing real configuration
+    questions must wait until I've patched the upstream
+    tools/wineinstall script for easier debconf integration.
+  * Moved Drive C path from /usr/share/wine/drivec to
+    /var/lib/wine/drivec for FHS compliance. (libwine.preinst takes
+    care of moving the actual contents and performing a search &
+    replace in wine.conf.) Closes: #70618, #70619, #70620.
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Sat, 28 Oct 2000 23:40:07 +0200
+
+wine (0.0.20001026-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Fri, 27 Oct 2000 05:11:28 +0200
+
+wine (0.0.20001002-1) unstable; urgency=low
+
+  * New maintainer Ove Kaaven.
+  * New upstream release
+  * Update default wine.conf, fixed EXTRA_LD_LIBRARY_PATH.
+  * Set --libdir=/usr/lib/wine explicitly, the $${exec_prefix} didn't work.
+  * Added a few Windows directories into the /usr/share/wine/drivec.
+  * Add an empty winsock.dll file to Windows directory in libwine.
+  * Initialize win.ini and system.ini in Windows directory in
+    libwine.postinst. (Hmm. Wonder if a --purge should remove everything?
+    If the user only wanted to remove the .deb to compile wine himself,
+    that might be a bad idea if the user installed something...)
+
+ -- Ove Kaaven <ovek@arcticnet.no>  Thu, 26 Oct 2000 12:52:42 +0200
+
+wine (0.0.20000909-1) unstable;
+
+  * New version for unstable.  Hopefully, this one will run.
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Wed, 20 Sep 2000 10:01:17 -0800
+
+wine (0.0.20000801-1) unstable; urgency=low
+
+  * New version for unstable.  Enjoy.
+  * elfdlls are seperated from libwine and put into /usr/lib/wine
+  * lib directories moved, should close a few bugs in 20000614
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Mon, 20 May 2000 10:01:17 -0800
+
+wine (0.0.20000614-1) unstable; urgency=low
+
+  * New version for unstable.  Enjoy.
+  * Many new upstream bug fixes. wine-utils now contains utilities.
+  * Directory structure reorganized for debian.
+  * elfdlls are seperated from libwine and put int /usr/share/wine/lib
+  * winebuild now included. Closes#62395
+  * fnt2bdf now included. Closes#61214 Closes#64892
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Mon, 20 May 2000 10:01:17 -0800
+
+wine (0.0.20000430-1) unstable; urgency=low
+
+  * New version for unstable.  Enjoy.
+  * Many new upstream bug fixes, and a few file moves, so expect bugs.
+  * Directory structure reorganized for debian.
+  * elfdlls are seperated from libwine and put int /usr/share/wine/lib
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Sat, 13 May 2000 10:01:17 -0800
+
+wine (0.0.20000326-2) unstable; urgency=low
+
+  * Tryed out the elfdll stuff.  Didn't work yet.
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Mon, 14 Feb 2000 18:01:17 -0800
+
+wine (0.0.20000326-1) unstable; urgency=low
+
+  * New version for unstable.  Enjoy.
+  * Many new upstream bug fixes, and a few file moves, so expect bugs.
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Mon, 14 Feb 2000 18:01:17 -0800
+
+wine (0.0.20000130-1) unstable; urgency=low
+
+  * New version for unstable.  Closes a few bugs.
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Mon, 14 Feb 2000 18:01:17 -0800
+
+wine (0.0.20000109-2) frozen; urgency=low
+
+  * OpenGL depends fixed.  Closes 55313 55365 55186
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Wed, 14 Dec 1999 18:01:17 -0800
+
+wine (0.0.20000109-1) unstable; urgency=low
+
+  * Assorted upstream Bug fixs as always :).
+  * Compiled with Xpm again.  Closes #54910
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Wed, 14 Dec 1999 18:01:17 -0800
+
+wine (0.0.991212-1) unstable; urgency=low
+
+  * Assorted upstream Bug fixs as always :).
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Wed, 14 Dec 1999 18:01:17 -0800
+
+wine (0.0.991114-2) unstable; urgency=low
+
+  * Added check for /usr/X11R6/lib/libwine*.  Closes: 43322 43597
+  * fixed dependency on libwine.
+  * Assorted upstream Bug fixs as always :).
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Wed, 21 Nov 1999 18:01:17 -0800
+
+wine (0.0.991114-1) unstable; urgency=low
+
+  * New upstream version.
+  * Assorted upstream Bug fixs as always :).
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Wed, 14 Nov 1999 18:01:17 -0800
+
+wine (0.0.991031-1) unstable; urgency=low
+
+  * New upstream version.
+  * Changed a to point to /floppy instead of /mnt/fd0.
+  * Now links to mesa.  Closes: #47312
+  * symtable is now set correctly in wine.conf. Closes: #43601  
+  * Assorted upstream Bug fixs as always :).
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Wed,  3 Nov 1999 18:01:17 -0800
+
+wine (0.0.990923-2) unstable; urgency=low
+
+  * Packaging fix.
+  * libgl1 dependecy now libmesagl.  Closes: #47351 #47014 #46937 #46937
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Sat, 16 Oct 1999 09:09:27 -0700
+
+wine (0.0.990923-1) unstable; urgency=low
+
+  *New Upstream release.
+  *Lots of bug fixes (of course).
+  *Reworked msacm driver.  
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Tue, 05 Oct 1999 14:21:46 -0700
+
+wine (0.0.990815-1) unstable; urgency=low
+
+  * New Upstream release.
+  * Lots of bug fixes.
+  * Many more dlls are seperate from the main library.
+  * includes documentation/ directory included. Closes: #29103
+  * fixed depend problem. Closes: #43320 #43325 #43332
+  * wine.conf is now back in /etc. Closes: #43387 
+  
+ -- Andrew D. Lenharth <andrewl@debian.org>  Tue, 24 Aug 1999 14:21:46 -0700
+
+wine (0.0.990731-1) unstable; urgency=low
+
+  * New upstream version
+  * Lots of bug fixes.
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Tue, 24 Aug 1999 12:18:25 -0700
+
+wine (0.0.990704-2) unstable; urgency=low
+
+  * New maintainer Andrew Lenharth.
+  * Repackaged.
+  * libwine0.0.971116 renamed to libwine
+
+ -- Andrew D. Lenharth <andrewl@debian.org>  Sun,  1 Aug 1999 14:36:54 -0700
+
+wine (0.0.990704-1) unstable; urgency=low
+
+  * New upstream release:
+    - Server communication optimized.
+    - Many window painting fixes.
+    - Portability improvements.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@debian.org>  Mon,  5 Jul 1999 13:17:44 +0200
+
+wine (0.0.990613-1) unstable; urgency=low
+
+  * New upstream release:
+    - All tasks now run in their own thread.
+    - Win32 debug API preliminary implementation.
+    - New Winelib app: a command-line interpreter.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 14 Jun 1999 12:47:10 +0200
+
+wine (0.0.990523-1) unstable; urgency=low
+
+  * New upstream release:
+    - Printing improvements
+    - X input and multimedia timers moved to service thread.
+    - More threading and locking fixes.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 31 May 1999 17:49:52 +0200
+
+wine (0.0.990508-1) unstable; urgency=low
+
+  * New upstream release:
+    - Lots of threading fixes.
+    - Start of enhanced metafile support.
+    - Several common controls improvements.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 10 May 1999 16:14:26 +0200
+
+wine (0.0.990426-1) unstable; urgency=low
+
+  * New upstream release:
+    - Resources in built-in DLLs.
+    - Threading support for FreeBSD and Solaris.
+    - Lots of threading and synchronization changes.
+    - Loader reorganization and new load order support.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Tue, 27 Apr 1999 14:16:38 +0200
+
+wine (0.0.990328-1) unstable; urgency=low
+
+  * New upstream release:
+    - Lots of new OLE stuff.
+    - Use separate threads for Win32 processes.
+    - Various multimedia improvements.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Sun, 28 Mar 1999 21:54:03 +0200
+
+wine (0.0.990214-1) unstable; urgency=low
+
+  * New upstream release:
+    - More reorganizations of headers and drivers.
+    - Still more OLE stuff.
+    - Many new functions and stubs.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 15 Feb 1999 14:24:45 +0100
+
+wine (0.0.990131-1) unstable; urgency=low
+
+  * Add menu support (Fix bug #19196).
+  * Correct dosmod.1 symlink (Bugs #32361, #32342, #32236).
+  * New upstream release:
+    - Tons of new OLE stuff.
+    - Several improvements to DirectDraw support.
+    - Better message queues.
+    - Many new functions and stubs.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon,  1 Feb 1999 11:08:20 +0100
+
+wine (0.0.990110-3) unstable; urgency=low
+
+  * Rebuild with OpenGL dev. libs so DirectX emulation works.
+  * Make dosmod.1 point to wine.1 rather than undocumented.7.
+
+ -- Vincent Renardias <vincent@waw.com>  Tue, 19 Jan 1999 18:25:22 +0100
+
+wine (0.0.990110-2) unstable; urgency=low
+
+  * Updated documentation (Fix bug #31873).
+  * Add missing dep. on libwine (Fix bug #31982).
+
+ -- Vincent Renardias <vincent@waw.com>  Sat, 16 Jan 1999 22:43:48 +0100
+
+wine (0.0.990110-1) unstable; urgency=low
+
+  * New upstream release:
+    - Many more COM interfaces definitions.
+    - Improvements to the resource compiler.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 11 Jan 1999 04:36:02 +0100
+
+wine (0.0.990103-1) unstable; urgency=low
+
+  * New upstream release:
+    WHAT'S NEW with Wine-990103: (see ChangeLog for details)
+      - Improved console support.
+      - Tons of new stubs.
+      - Improvements to header files compatibility.
+      - More features in Wine server.
+      - Lots of bug fixes.
+  * Added several more READMEs.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon,  4 Jan 1999 13:05:48 +0100
+
+wine (0.0.981211-1) unstable; urgency=low
+
+  * New upstream release:
+    WHAT'S NEW with Wine-981211:
+      - A lot of code moved around for a better structure.
+      - New console support.
+      - Beginnings of TTY driver.
+      - Tons of new stubs.
+      - More DOS and native USER support.
+      - Lots of bug fixes.
+    WHAT'S NEW with Wine-981108:
+      - More common controls.
+      - Better separation of X11-dependent code.
+      - More DOS support.
+      - Winsock IPX support.
+      - Lots of bug fixes.
+    WHAT'S NEW with Wine-981025:
+      - KDE drag&drop support.
+      - Still more common controls and SHELL32 features.
+      - More Postscript driver functions.
+      - Lots of bug fixes.
+  * Updated FAQ.
+  * Removed installation of texinfo manual (doesn't work since 2 releases)
+
+ -- Vincent Renardias <vincent@waw.com>  Tue, 29 Dec 1998 14:52:20 +0100
+
+wine (0.0.981018-1.1) frozen unstable; urgency=low
+
+  * Non-maintainer release.
+  * Recompiled with new libc, to fix __register_frame_info problem,
+    at maintainer's request.
+  * Build manpages with "c2man-wine" (now packaged as such), because
+    the mainline c2man lacks an option wine uses.
+  * A bugfix in c2man-wine fixes the problem of manpages with spaces in
+    their names.  Removed the attempted workaround (which didn't work :)
+    of removing those manpages after they are generated.
+
+ -- Richard Braakman <dark@xs4all.nl>  Mon, 14 Dec 1998 14:28:48 +0100
+
+wine (0.0.981018-1) unstable; urgency=low
+
+  * New upstream release:
+    - ELF DLL loader.
+    - Some more DOS support.
+    - Still more common controls and SHELL32 features.
+    - Using Windows native USER.DLL may work.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 19 Oct 1998 17:33:08 +0200
+
+wine (0.0.980927-1) unstable; urgency=low
+
+  * New upstream release:
+    - Still more common controls and SHELL32 features.
+    - MIDI I/O support.
+    - Several new undocumented KERNEL functions.
+    - More DOS exe stuff including some debugger support.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 28 Sep 1998 15:35:42 +0200
+
+wine (0.0.980913-2) unstable; urgency=low
+
+  * Just fixed a bug that made libwine-dev useless
+    since ~ 1 year ago (Which makes we wonder if anyone
+    actually used this package since this bug has never
+    been reported to me ;).
+  * Include graphics/psdrv/README as /usr/doc/wine/README.psdrv
+    (Bug #26699).
+  * Patches included from winehq.com:
+    - callproc.diff: Fix the CallProc{Ex}32W function.
+    - file_fix: Fix FILE_Read & FILE_Write behavior.
+    - int_fix: Missing last minute change.
+    - more_tsx: Fixed ``threadsafeness''.
+
+ -- Vincent Renardias <vincent@waw.com>  Tue, 15 Sep 1998 16:02:56 +0200
+
+wine (0.0.980913-1) unstable; urgency=low
+
+  * New upstream release:
+    - Even more common controls stuff.
+    - Many PostScript driver improvements.
+    - More DOS executables support.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Sun, 13 Sep 1998 20:48:23 +0200
+
+wine (0.0.980822-1) unstable; urgency=low
+
+  * New upstream release:
+    - Improved mmio support.
+    - VxDCall support.
+    - More common controls and shell32 stuff.
+    - Better DOS executables support.
+    - Lots of bug fixes.
+  * Patches included from winehq.com:
+    - SetWindowLong: it's now possible to switch between the listview
+      and the iconview in the word95 File open dialog.
+    - RevokeDragDrop: New stub.
+  * Put the manpages in the correct directory!
+
+ -- Vincent Renardias <vincent@waw.com>  Thu, 27 Aug 1998 14:17:26 +0200
+
+wine (0.0.980809-3) unstable; urgency=low
+
+  * Patches from winehq.com applied:
+    - glibc2-dos: nows builds dosmod properly on libc6.
+
+ -- Vincent Renardias <vincent@waw.com>  Thu, 13 Aug 1998 14:03:24 +0200
+
+wine (0.0.980809-2) unstable; urgency=low
+
+  * Added loader/dos/dosmod in the binary package.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 10 Aug 1998 18:09:26 +0200
+
+wine (0.0.980809-1) unstable; urgency=low
+
+  * New upstream release:
+    - Preliminary DOS executables support.
+    - Postscript driver improvements.
+    - More client/server stuff.
+    - Better shell32.dll builtin support.
+    - Proper Win16 mutex locking.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Sun,  9 Aug 1998 16:25:30 +0200
+
+wine (0.0.980726-1) unstable; urgency=low
+
+  * New upstream release:
+    - Still more common controls stuff.
+    - More DirectDraw support.
+    - Compilation problems should be gone.
+    - Lots of bug fixes.
+    - Much improved manual pages generation.
+  * Now takes over 2 hours to build... ;(
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 27 Jul 1998 12:58:43 +0200
+
+wine (0.0.980712-1) unstable; urgency=low
+
+  * tried to fix #24140.
+  * New upstream release:
+    - More common controls stuff.
+    - Win32s VxD support.
+    - Beginnings of client/server architecture.
+    - More NLS support.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 13 Jul 1998 12:47:47 +0200
+
+wine (0.0.980628-2) unstable; urgency=low
+
+  * Added more doc. files (Bug #24139).
+  * Patches from www.winehq.com included:
+    - stub-for-fontview (Allows c:\windows\fontview.exe to start).
+    - winelib_snoop16 (Fix pbm when linking with libwine.so).
+
+ -- Vincent Renardias <vincent@waw.com>  Thu,  2 Jul 1998 16:23:49 +0200
+
+wine (0.0.980628-1) unstable; urgency=low
+
+  * New upstream release:
+    - Common controls improvements.
+    - Win16 DLL snooping.
+    - Preliminary internal Postscript driver.
+    - Improved DIB section handling.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 29 Jun 1998 12:27:40 +0200
+
+wine (0.0.980614-1) unstable; urgency=low
+
+  * New upstream release:
+    - Many drawing fixes.
+    - Inter-DLL calls snooping.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 15 Jun 1998 11:37:51 +0200
+
+wine (0.0.980601-1) unstable; urgency=low
+
+  * New upstream release:
+    - New resource compiler.
+    - Toolbar control.
+    - Partial implementation of CreateDIBSection.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon,  1 Jun 1998 17:05:08 +0200
+
+wine (0.0.980517-2) unstable; urgency=low
+
+  * Patches from www.winehq.com included:
+    commdlg_crash
+
+ -- Vincent Renardias <vincent@waw.com>  Wed, 20 May 1998 12:58:43 +0200
+
+wine (0.0.980517-1) unstable; urgency=low
+
+  * New upstream release:
+    - Lots of common controls improvements.
+    - Better thunking support.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Sun, 17 May 1998 20:13:29 +0200
+
+wine (0.0.980503-3) unstable; urgency=low
+
+  * Correct dependencies... *sigh*
+
+ -- Vincent Renardias <vincent@waw.com>  Thu, 14 May 1998 16:05:00 +0200
+
+wine (0.0.980503-2) unstable; urgency=low
+
+  * Fix debian/rules (Fix #22382)
+  * Patch from www.winehq.com included:
+    - word980503.diff: makes Word95's file dialog boxes work.
+
+ -- Vincent Renardias <vincent@waw.com>  Tue, 12 May 1998 16:28:49 +0200
+
+wine (0.0.980503-1) unstable; urgency=low
+
+  * New upstream release:
+    - Module loading restructuration.
+    - Some rotated text support.
+    - Documentation for many more functions.
+    - Lots of bug fixes.
+  * Patches from www.winehq.com included:
+    - crtdll.diff: More functions implemented.
+    - module.diff: Fix patch mess in LoadModule16.
+    - profile: Make PROFILE_GetSection work properly.
+    - region: Fixes a problem with CombineRgn().
+
+ -- Vincent Renardias <vincent@waw.com>  Tue, 12 May 1998 16:28:49 +0200
+
+wine (0.0.980413-2) unstable; urgency=low
+
+  * Patches from www.winehq.com included:
+    - arc_fix: Allows tk/tcl 8.0 (wish80.exe) to draw properly.
+    - default_bitmap_depth: fix buglet in displaying.
+    - metafile32: improved matefile support.
+    - mohr.diff: missing 'break;' statement.
+    - profile2: tweak profile reading in registry.
+    - rootcursor: Don't change the cursor look on the rootwindow.
+  * Updated FAQ.
+  * Updated html documentation.
+
+ -- Vincent Renardias <vincent@waw.com>  Fri, 17 Apr 1998 21:49:55 +0200
+
+wine (0.0.980413-1) unstable; urgency=low
+
+  * New upstream release:
+    - Flat thunks support.
+    - Many more autoconf checks for better portability.
+    - DIALOGEX resource support.
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 13 Apr 1998 16:26:48 +0200
+
+wine (0.0.980329-1) unstable; urgency=low
+
+  * New upstream release:
+    - More ImageLists support.
+    - More Win32 metafile support.
+    - Still some debugging output changes.
+    - Lots of bug fixes.
+  * Fix ugly shlibs.local bug (fortunatly, noone noticed ;)
+  * Patches included from winehq.com: init_crash, managed_winpos, relay_string.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 30 Mar 1998 19:18:42 +0200
+
+wine (0.0.980315-1) frozen unstable; urgency=low
+
+  * New upstream release:
+    - Preliminary ImageLists support.
+    - Beginnings of enhanced metafiles.
+    - More debugging macros changes.
+    - Lots of bug fixes.
+  * Fix critical Bug #19429: libwine now depends on wine since
+    for now this library is totally useless without it.
+
+ -- Vincent Renardias <vincent@waw.com>  Fri, 20 Mar 1998 22:18:05 +0100
+
+wine (0.0.980301-1) unstable; urgency=low
+
+  * New upstream release:
+    - New debugging printfs scheme.
+    - Better DOS device handling.
+    - Lots of bug fixes.
+  * Polished debian/rules file.
+  * Updated html doc & FAQ.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon,  2 Mar 1998 20:21:44 +0100
+
+wine (0.0.980104-2) unstable; urgency=low
+
+  * Include GNU Info & Postscript documentation as well as extra
+    manpages in wine-doc.
+
+ -- Vincent Renardias <vincent@waw.com>  Sat, 10 Jan 1998 15:49:19 +0100
+
+wine (0.0.980104-1) unstable; urgency=low
+
+  * New upstream release:
+    - Beginnings of DirectDraw/DirectSound support.
+    - Preliminary threading support based on clone().
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Thu,  8 Jan 1998 01:43:26 +0100 
+
+wine (0.0.971221-2) unstable; urgency=low
+
+  * Included the following patches from www.winehq.com/patches/ :
+    - ComboBox Fix (Bertho Stultiens). 
+    - Console Fix (Karl Garrison). 
+    - SetMetaFileBitsEx function updated. 
+    - fd_set Winsock fixes (Ove Kaaven). 
+  * Now compiled with egcs (gcc dies with sig 11 on misc/shellord.c). 
+
+ -- Vincent Renardias <vincent@waw.com>  Thu,  1 Jan 1998 16:06:13 +0100
+
+wine (0.0.971221-1) unstable; urgency=low
+
+  * New upstream release (Bug #16209):
+    - Preliminary GDI paths support.
+    - DrawFrameControl implementation.
+    - Multimedia support for time and joystick functions.
+    - Win32 spec files now generate C code for Winelib.
+    - Tons of new Win32 functions and stubs.
+    - Lots of bug fixes.
+  * Corrected 2 buglets in debian/rules; closes:#15054, #15051.
+  * strip fnt2bdf (Fix #15724).
+  * Added libwine-dbg binary package.
+  * Adjusted packages section/priority.
+  * Moved libwine.a from libwine0.0.971116 to libwine-dbg.
+  * Compile with '-O3' flag.
+
+ -- Vincent Renardias <vincent@waw.com>  Sun, 28 Dec 1997 21:13:53 +0100
+
+wine (0.0.971116-1) unstable; urgency=low
+
+  * New upstream code.
+    - Emulator and library unification.
+    - New About dialog.
+    - Menus improvements.
+    - Lots of bug fixes.
+    - Now compiles under libc6 without additional patch.
+  * Added libwine0.0.971116 (Yes, the name is ugly ;) & libwine-dev packages;
+    They allow to compile Win32 C code as native Linux executable.
+    (Examples included in libwine-dev)
+  * Added wine.sym file to aid debugging.
+  * Added wine-doc package (FAQ + misc. documentation).
+  * Updated packages descriptions.
+  * Include more documentation in main package.
+
+ -- Vincent Renardias <vincent@waw.com>  Mon, 17 Nov 1997 16:11:34 +0100
+
+wine (0.0.971101-1) unstable; urgency=low
+
+  * New upstream code (#14057).
+  * Recompiled with libc6/xlib6g/xpm4g (#12715,#12918).
+  * Added documentation/fonts file.
+
+ -- Vincent Renardias <vincent@waw.com>  Sat, 20 Sep 1997 21:56:44 +0200
+
+wine (0.0.970914-1) unstable; urgency=low
+
+  * New Upstream Source:
+    - Better resource handling.
+    - New Progress control.
+    - Improved PE module support.
+    - Many relay code changes.
+    - Lots of bug fixes.
+  * Include wineconf configuration script.
+  * Use pristine source.
+
+ -- Vincent Renardias <vincent@waw.com>  Fri, 29 Aug 1997 22:06:05 +0200
+
+wine (0.0.970804-1) unstable; urgency=low
+
+  * New Upstream Source:
+    - Joystick support,
+    - More Win32 stuff,
+    - Lots of bug fixes.
+
+ -- Vincent Renardias <vincent@waw.com>  Sat, 9 Aug 1997 17:31:05 +0200
+
+wine (0.0.970720-1) unstable; urgency=low
+
+  * new upstream source.
+  * new maintainer.
+  * released to unstable.
+  * compiled with libc6.
+  * modified dependencies (Fixes #5992).
+  * moved /usr/bin/wine to /usr/X11R6/bin.
+  * use /usr/lib/wine [ (c) bcwhite ].
+  * Modified numbering scheme after agreement with upstream maintainer.
+
+ -- Vincent Renardias <vincent@waw.com>  Sat, 26 Jul 1997 17:47:45 +0200
+
+wine (970629-1) experimental; urgency=LOW
+
+  * new upstream source
+
+ -- Brian White <bcwhite@verisim.com>  Wed, 4 Dec 1996 20:49:55 -0500
+
+wine (951124-1) experimental; urgency=LOW
+
+  * first Debianized packages
+
+ -- Brian White <bcwhite@verisim.com>  Sun, 26 Nov 1996 23:02:47 -0400
+
+
+Local variables:
+mode: debian-changelog
+End:
