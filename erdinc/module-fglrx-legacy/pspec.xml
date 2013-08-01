@@ -25,7 +25,7 @@
             <AdditionalFile target="desktop-files.patch">desktop-files.patch</AdditionalFile>
         </AdditionalFiles>
         <BuildDependencies>
-            <Dependency version="3.10.0">kernel-module-headers</Dependency>
+            <Dependency versionFrom="3.10.0">kernel-module-headers</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -37,7 +37,7 @@
         <IsA>driver</IsA>
         <Summary>Kernel module for ATI display drivers</Summary>
         <RuntimeDependencies>
-            <Dependency version="3.10.0">kernel</Dependency>
+            <Dependency versionFrom="3.10.0">kernel</Dependency>
             <Dependency version="current">module-fglrx-legacy-userspace</Dependency>
         </RuntimeDependencies>
         <Files>
