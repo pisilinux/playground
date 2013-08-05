@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>smokinguns</Name>
+        <Homepage>http://www.smokin-guns.net</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>smokinguns</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>A realistic simulation of the Old West's great atmosphere</Summary>
+        <Description>Smokin' Guns is intended to be a realistic simulation of the Old West's great atmosphere. It is being developed on top of id Software's Quake3 Arena engine.</Description>
+        <Archive sha1sum="d79f5d4d2addb498eee62ebf852c244841cb4eb9" type="zip">https://content.wuala.com/contents/burakfazil/Belgeler/SmokinGuns1.1.zip</Archive>
+        <BuildDependencies>
+            <Dependency>libsdl-devel</Dependency>
+            <Dependency>openal-devel</Dependency>
+            <Dependency>freealut-devel</Dependency>
+            <Dependency>libvorbis-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <!--<Patch>ioq3_1106_oggsub.diff</Patch>-->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>smokinguns</Name>
+        <RuntimeDependencies>
+            <Dependency>libsdl</Dependency>
+            <Dependency>openal</Dependency>
+            <Dependency>freealut</Dependency>
+            <Dependency>libvorbis</Dependency>
+         </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/smokinguns</Path>
+	    <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/smokinguns.desktop">smokinguns.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/smokinguns.png">smokinguns.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+	<Update release="3">
+            <Date>2013-08-30</Date>
+            <Version>1.1</Version>
+            <Comment>Engine Update</Comment>
+            <Name>Burak Fazıl ERTÜRK</Name>
+            <Email>burakfazilerturk@gmail.com</Email>   
+	</Update>
+	<Update release="2">
+            <Date>2013-03-13</Date>
+            <Version>1.1</Version>
+            <Comment>URL Fixed</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2010-03-17</Date>
+            <Version>1.1_beta4</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
