@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>go</Name>
+        <Homepage>http://golang.org/</Homepage>
+        <Packager>
+            <Name>Fatih Turgel</Name>
+            <Email>hitaf@pisilinux.org</Email>
+        </Packager>
+        <License>BSD</License>
+        <Summary>A concurrent garbage collected and typesafe programming language</Summary>
+        <Description>A concurrent garbage collected and typesafe programming language</Description>
+        <Archive sha1sum="f365aed8183e487a48a66ace7bf36e5974dffbb3" type="targz">https://go.googlecode.com/files/go1.1.1.src.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>emacs</Dependency>
+            <Dependency>mercurial</Dependency>
+            <Dependency>zsh</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>go</Name>
+        <RuntimeDependencies>
+            <Dependency>emacs</Dependency>
+            <Dependency>mercurial</Dependency>
+            <Dependency>zsh</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/profile.d/go.sh">go.sh</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-06</Date>
+            <Version>1.1.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Fatih Turgel</Name>
+            <Email>hitaf@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
