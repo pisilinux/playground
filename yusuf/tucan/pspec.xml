@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>tucan</Name>
+        <Homepage>http://tucaneando.com</Homepage>
+        <Packager>
+            <Name>Osman Karagöz</Name>
+            <Email>osmank3@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <Icon>tucan</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Download manager</Summary>
+        <Description>Tucan Manager is a free and open source software designed for automatic management of downloads and uploads at hosting sites like rapidshare or megaupload.</Description>
+        <Archive sha1sum="c2aa4447a6a802c975b218815648536814ea2ae4" type="targz">http://forja.rediris.es/frs/download.php/1470/tucan-0.3.10.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">turkish.patch</Patch>
+            <Patch>desktop.patch</Patch>
+            <Patch>locale.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>tucan</Name>
+        <RuntimeDependencies>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>python-imaging</Dependency>
+            <Dependency>tesseract</Dependency>
+            <Dependency>librsvg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/tucan</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-07</Date>
+            <Version>0.3.10</Version>
+            <Comment>First release.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
