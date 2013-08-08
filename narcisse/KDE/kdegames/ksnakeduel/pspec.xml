@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Snake like game</Summary>
         <Description>KSnake is a simple Snake-like game for the K Desktop Environment. The aim of KSnake is to survive as long as possible and eat as many fruits as you can.</Description>
-        <Archive sha1sum="f2e282b6cf246c756dc9035b842d6cd844e4715f" type="tarxz">mirrors://kde/unstable/4.10.95/src/ksnakeduel-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="1d98b4f13197395d7f601d2473f938573b076a08" type="tarxz">mirrors://kde/unstable/4.10.97/src/ksnakeduel-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>ksnakeduel</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

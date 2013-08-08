@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>KGeography is a geography learning tool</Summary>
         <Description>KGeography is a geography learning tool, which allows you to learn about the political divisions of some countries (divisions, capitals of those divisions and their associated flags if there are some).</Description>
-        <Archive sha1sum="463604a7e8bfdedd6fa84a65575bd16d114e82ac" type="tarxz">mirrors://kde/unstable/4.10.95/src/kgeography-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="87002c2ff3fbaade7919017e67643cacad9444ab" type="tarxz">mirrors://kde/unstable/4.10.97/src/kgeography-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kgeography</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>    
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

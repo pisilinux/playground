@@ -12,18 +12,18 @@
         <IsA>app:gui</IsA>
         <Summary>UML modelling tool and code generator</Summary>
         <Description>Umbrello UML Modeller is a Unified Modelling Language diagram editor for KDE.</Description>
-        <Archive sha1sum="51f213c77d69fcb76d56abc5d5c1c7fc65513513" type="tarxz">mirrors://kde/unstable/4.10.95/src/umbrello-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="3630a234a8ce144d91feebdba18b7f906ced5ebf" type="tarxz">mirrors://kde/unstable/4.10.97/src/umbrello-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>umbrello</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
 	</RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -33,6 +33,13 @@
     </Package>  
 
     <History>
+        <Update release="2">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

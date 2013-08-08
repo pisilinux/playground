@@ -12,18 +12,18 @@
         <IsA>app:gui</IsA>
         <Summary>Kdevelop sscripts.</Summary>
         <Description>Kdevelop sscripts.</Description>
-        <Archive sha1sum="c41dd0b6c9e84930c0a8a7363823e3def0311c09" type="tarxz">mirrors://kde/unstable/4.10.95/src/kde-dev-scripts-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="42eb28573af0acbad0638e116fa688f4f37fface" type="tarxz">mirrors://kde/unstable/4.10.97/src/kde-dev-scripts-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kdedev-scripts</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
             <Dependency>perl-XML-DOM</Dependency>
             <Dependency>perl-DateTime-Locale</Dependency>
 	</RuntimeDependencies>
@@ -37,6 +37,13 @@
     </Package>  
 
     <History>
+        <Update release="2">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>A desktop planetarium for KDE</Summary>
         <Description>KStars is a Desktop Planetarium for KDE. It provides an accurate graphical simulation of the night sky, from any location on Earth, at any date and time. The display includes up to 100 million stars, 13,000 deep-sky objects, all 8 planets, the Sun and Moon, and thousands of comets and asteroids.</Description>
-        <Archive sha1sum="da7834f20d3f46b32453085a5e7c44c7747bf9b2" type="tarxz">mirrors://kde/unstable/4.10.95/src/kstars-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="f6c511c0003b7a39914a31ec195324644b8525b5" type="tarxz">mirrors://kde/unstable/4.10.97/src/kstars-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>    
             <Dependency>indilib-devel</Dependency>
             <Dependency>eigen</Dependency>
             <Dependency>xplanet</Dependency>
@@ -27,8 +27,8 @@
     <Package>
         <Name>kstars</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>    
             <Dependency>indilib</Dependency>    
             <Dependency>xplanet</Dependency>
             <Dependency>cfitsio</Dependency>
@@ -45,6 +45,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

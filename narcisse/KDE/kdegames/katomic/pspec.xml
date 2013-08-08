@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Sokoban like logic game</Summary>
         <Description>KAtomic is both fun and educational game built around molecular geometry.</Description>
-        <Archive sha1sum="fe4af586a367f8ac26c9db24ec818abcde917749" type="tarxz">mirrors://kde/unstable/4.10.95/src/katomic-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="186f10a8bfae584272af014b08ddbea8064abcea" type="tarxz">mirrors://kde/unstable/4.10.97/src/katomic-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>katomic</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

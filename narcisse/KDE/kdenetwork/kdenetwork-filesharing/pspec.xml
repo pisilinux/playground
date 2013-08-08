@@ -12,16 +12,16 @@
         <IsA>library</IsA>
         <Summary>Filesharing configuration modlue.</Summary>
         <Description>Filesharing configuration modlue.</Description>
-        <Archive sha1sum="ab3f3e98f21d4c90f2b9d45a96fa86961bea6da9" type="tarxz">mirrors://kde/unstable/4.10.95/src/kdenetwork-filesharing-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="51ec3d3a7a3b919f6a92e7588017f3137d9dd507" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdenetwork-filesharing-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>   
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>   
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kdenetwork-filesharing</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
 	</RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
@@ -31,6 +31,13 @@
     </Package>  
 
     <History>
+        <Update release="2">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

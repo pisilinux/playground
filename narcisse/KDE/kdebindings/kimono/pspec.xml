@@ -12,13 +12,13 @@
         <IsA>library</IsA>
         <Summary>.NET/Mono bindings for the KDE libraries</Summary>
         <Description>.NET/Mono bindings for the KDE libraries</Description>
-        <Archive sha1sum="cc26884802f1eb8d52e4bd73448bfb621345f865" type="tarxz">mirrors://kde/unstable/4.10.95/src/kimono-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="67442bb907a80ae03a0f0e53d5e7b6b8cbdb3327" type="tarxz">mirrors://kde/unstable/4.10.97/src/kimono-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">qyoto-devel</Dependency>
-            <Dependency versionFrom="4.10.95">smoke-gen-devel</Dependency>
-            <Dependency versionFrom="4.10.95">smoke-kde-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kdepimlibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">qyoto-devel</Dependency>
+            <Dependency versionFrom="4.10.97">smoke-gen-devel</Dependency>
+            <Dependency versionFrom="4.10.97">smoke-kde-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdepimlibs-devel</Dependency>
             <Dependency>mono-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -26,8 +26,8 @@
     <Package>
         <Name>kimono</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">qyoto</Dependency>
-            <Dependency versionFrom="4.10.95">smoke-kde</Dependency>
+            <Dependency versionFrom="4.10.97">qyoto</Dependency>
+            <Dependency versionFrom="4.10.97">smoke-kde</Dependency>
             <Dependency>mono-devel</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -38,6 +38,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

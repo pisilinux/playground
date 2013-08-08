@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>A jukebox, tagger and music collection manager</Summary>
         <Description>A jukebox, tagger and music collection manager</Description>
-        <Archive sha1sum="11a95cac02dd7d859511db61817ccb8f93a7a116" type="tarxz">mirrors://kde/unstable/4.10.95/src/juk-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="cddd75ac3fcb6b59398ad98da266e06a10eb0473" type="tarxz">mirrors://kde/unstable/4.10.97/src/juk-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
             <Dependency>taglib-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -24,8 +24,8 @@
     <Package>
         <Name>juk</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
             <Dependency>taglib</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -38,6 +38,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

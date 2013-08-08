@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Three in a row game</Summary>
         <Description>KDiamond is a single player puzzle game. The object of the game is to build lines of three similar diamonds.</Description>
-        <Archive sha1sum="ecc8464e9bf3c890c783eedfc58960bbf751968f" type="tarxz">mirrors://kde/unstable/4.10.95/src/kdiamond-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="03ecf682528a9e54898e3e51757c8a9a41d571ad" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdiamond-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kdiamond</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

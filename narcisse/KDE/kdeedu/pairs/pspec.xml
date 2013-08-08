@@ -12,10 +12,10 @@
         <IsA>app:gui</IsA>
         <Summary>A pairs matching game.</Summary>
         <Description>Pairs is a pairs-matching game for kids on KDE4</Description>
-        <Archive sha1sum="299bad4e66d55c9cbd29a5b4805d4d983515b383" type="tarxz">http://download.kde.org/unstable/4.10.95/src/pairs-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="3059de41172a41ba595ab5ba6edcbd117fc40ff0" type="tarxz">http://download.kde.org/unstable/4.10.97/src/pairs-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -23,8 +23,8 @@
     <Package>
         <Name>pairs</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>
             <Dependency>phonon</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -41,6 +41,13 @@
     
     
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

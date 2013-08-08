@@ -12,18 +12,18 @@
         <IsA>app:gui</IsA>
         <Summary>Application template generator</Summary>
         <Description>KAppTemplate is a shell script that will create the necessary framework to develop several types of applications, including applications based on the KDE development platform.</Description>
-        <Archive sha1sum="60e2d57e7a4d3fb11d913c990dcff5310117e1ab" type="tarxz">mirrors://kde/unstable/4.10.95/src/kapptemplate-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="0a66b301eabf8857baf2ef414d7b2cfe575778da" type="tarxz">mirrors://kde/unstable/4.10.97/src/kapptemplate-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kapptemplate</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
 	</RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -33,6 +33,13 @@
     </Package>  
 
     <History>
+        <Update release="2">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

@@ -13,9 +13,9 @@
         <IsA>app:gui</IsA>
         <Summary>A graph theory IDE</Summary>
         <Description>Rocs aims to be a graph theory IDE for helping professors to show the results of a graph algorithm and also helping students to do the algorithms.</Description>
-        <Archive sha1sum="e7db837dd0efe381f197b33d9579f1af9f4a18b9" type="tarxz">mirrors://kde/unstable/4.10.95/src/rocs-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="deb27fda9fc9b6ceca751d92dc364a4ab5b1416d" type="tarxz">mirrors://kde/unstable/4.10.97/src/rocs-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
             <Dependency>boost-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -23,7 +23,7 @@
     <Package>
         <Name>rocs</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
             <Dependency>boost</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

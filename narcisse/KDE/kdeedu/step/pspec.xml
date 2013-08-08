@@ -13,9 +13,9 @@
         <IsA>app:gui</IsA>
         <Summary>Interactive physical simulator</Summary>
         <Description>Step is an interactive physical simulator. It allows you to explore the physical world through simulations.</Description>
-        <Archive sha1sum="d96a5c2a9f1e1a20ebd28a46c05838d2d792a4a7" type="tarxz">mirrors://kde/unstable/4.10.95/src/step-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="2ed3725741b603f2c0972c928651612c3b515c41" type="tarxz">mirrors://kde/unstable/4.10.97/src/step-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
             <Dependency>eigen</Dependency>
             <Dependency>cln-devel</Dependency>
             <Dependency>gsl-devel</Dependency>
@@ -26,7 +26,7 @@
     <Package>
         <Name>step</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
             <Dependency>eigen</Dependency>
             <Dependency>cln</Dependency>
             <Dependency>gsl</Dependency>
@@ -43,6 +43,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

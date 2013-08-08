@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>Hunt gold, dodge enemies and solve puzzles</Summary>
         <Description>KGoldrunner is an action game where the hero runs through a maze and dodges enemies. You must guide the hero with the mouse or keyboard and collect all the gold nuggets, then you can climb up into the next level. Your enemies are also after the gold. Worse still, they are after you.</Description>
-        <Archive sha1sum="6dc34426db9ff9210b8195d0baed1fd558132cc8" type="tarxz">mirrors://kde/unstable/4.10.95/src/kgoldrunner-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="49e5ddb9a6f839d0b33df1eb891dd01d2e44a6ec" type="tarxz">mirrors://kde/unstable/4.10.97/src/kgoldrunner-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
             <Dependency>openal-devel</Dependency>    
         </BuildDependencies>
     </Source>
@@ -24,8 +24,8 @@
     <Package>
         <Name>kgoldrunner</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
             <Dependency>openal</Dependency>    
         </RuntimeDependencies>
         <Files>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

@@ -13,10 +13,10 @@
         <IsA>library</IsA>
         <Summary>A KDE library for mathematical features</Summary>
         <Description>analitza is a library to add mathematical features to programs.</Description>
-        <Archive sha1sum="dfb52b7364b1b9742d375edebee35a9e614b2c52" type="tarxz">mirrors://kde/unstable/4.10.95/src/analitza-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="83a7013c538cb947a97f01a0faed7876eead6d87" type="tarxz">mirrors://kde/unstable/4.10.97/src/analitza-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>    
             <Dependency>readline-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -27,8 +27,8 @@
             <Dependency>qt</Dependency>
             <Dependency>mesa</Dependency>	    
             <Dependency>mesa-glu</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -51,6 +51,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="9">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

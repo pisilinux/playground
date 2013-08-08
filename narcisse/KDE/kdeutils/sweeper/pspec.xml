@@ -13,9 +13,9 @@
         <IsA>app:gui</IsA>
         <Summary>A system cleaner</Summary>
         <Description>Sweeper helps to clean unwanted traces the user leaves on the system and to regain disk space removing unused temporary files.</Description>
-        <Archive sha1sum="d6c299507be0f839e577689570529e9e43bc752b" type="tarxz">mirrors://kde/unstable/4.10.95/src/sweeper-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="1560d2f0689927ec3666ef572910b8363676298a" type="tarxz">mirrors://kde/unstable/4.10.97/src/sweeper-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">sweeper-4.7.90-desktop_docpath.patch</Patch>
@@ -25,7 +25,7 @@
     <Package>
         <Name>sweeper</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

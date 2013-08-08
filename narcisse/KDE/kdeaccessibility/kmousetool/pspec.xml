@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>Automatic mouse click</Summary>
         <Description>KMouseTool is a Linux-based KDE program. It clicks the mouse for you, so you don't have to. KMouseTool works with any mouse or pointing device.</Description>
-        <Archive sha1sum="eb73106c8361019bc28f92e2db5fe96ead83a90c" type="tarxz">mirrors://kde/unstable/4.10.95/src/kmousetool-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="b04ca62272c866e2142906aae00d94590dc8211e" type="tarxz">mirrors://kde/unstable/4.10.97/src/kmousetool-4.10.97.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>phonon-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
             <Dependency>libXtst-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -25,7 +25,7 @@
         <Name>kmousetool</Name>
         <RuntimeDependencies>
             <Dependency>phonon</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
             <Dependency>libXtst</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

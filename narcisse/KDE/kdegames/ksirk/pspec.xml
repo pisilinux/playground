@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>World domination strategy game</Summary>
         <Description>The goal of the KsirK is simply to conquer the World... It is done by attacking your neighbors with your armies.</Description>
-        <Archive sha1sum="b4c52a857a814b2745d8e32356a0266ddc1a25d6" type="tarxz">mirrors://kde/unstable/4.10.95/src/ksirk-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="1ceae447f90b59908205cf2adcb8ae5cf767f611" type="tarxz">mirrors://kde/unstable/4.10.97/src/ksirk-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>ksirk</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

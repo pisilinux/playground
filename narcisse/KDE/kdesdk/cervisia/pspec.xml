@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cervisia</Name>
+        <Homepage>http://www.kde.org/</Homepage>
+        <Packager>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Graphical CVS client</Summary>
+        <Description>Cervisia is a front-end for the CVS version control system client.</Description>
+        <Archive sha1sum="fdda32d514a73b600a1963ffedc94307245e4991" type="tarxz">mirrors://kde/unstable/4.10.97/src/cervisia-4.10.97.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cervisia</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+	</RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path> 
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>  
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>First release</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

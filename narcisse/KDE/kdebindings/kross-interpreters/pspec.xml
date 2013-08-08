@@ -12,9 +12,9 @@
         <Icon>kross-interpreters</Icon>
         <Summary>KDE4 interpreters</Summary>
         <Description>kross-interpreters consists of several interpreters for KDE4.</Description>
-        <Archive sha1sum="d2360e1757d53fb8405951ef4e1b9a1c9d4e1827" type="tarxz">mirrors://kde/unstable/4.10.95/src/kross-interpreters-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="e3cec11f62758fbdb5c5bdf7cb92ba1e09ee94bc" type="tarxz">mirrors://kde/unstable/4.10.97/src/kross-interpreters-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
             <Dependency>sun-jdk</Dependency>
             <Dependency>ruby-devel</Dependency>
         </BuildDependencies>
@@ -44,7 +44,7 @@
         <Description>Python-kross contains KDE4 kross bindings for Python.</Description>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib/kde4/krosspython.so</Path>
@@ -58,7 +58,7 @@
         <Summary>KDE4 kross Ruby bindings</Summary>
         <Description>Ruby-kross contains KDE4 kross bindings for Ruby.</Description>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
             <Dependency>ruby</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -73,7 +73,7 @@
         <Summary>KDE4 kross Java bindings</Summary>
         <Description>Java-kross contains KDE4 kross bindings for Java.</Description>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
             <Dependency>sun-jre</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -83,6 +83,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

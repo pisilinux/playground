@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>A touch typing tutor</Summary>
         <Description>KTouch is a program for learning to touch type. It provides you with text to train on and adjusts to different levels depending on how good you are. It also displays which key to press next and the correct finger to use. You learn typing with all fingers, step by step, without having to look down at the keyboard all the time to find your keys (which slows you down a lot). It is convenient for all ages and the perfect typing tutor for schools, universities and individuals.</Description>
-        <Archive sha1sum="a9d59fde9f7c7d9101a01c2066ddf722de994ba8" type="tarxz">mirrors://kde/unstable/4.10.95/src/ktouch-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="7a0e3d2257692586a95be540f5dd30f6aa8d2c16" type="tarxz">mirrors://kde/unstable/4.10.97/src/ktouch-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>    
             <Dependency>phonon-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -24,8 +24,8 @@
     <Package>
         <Name>ktouch</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>    
             <Dependency>phonon</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -41,6 +41,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Space arcade game</Summary>
         <Description>In KSpaceDuel, each of two possible players controls a satellite spaceship orbiting the sun. As the game progresses players have to eliminate opponent's spacecraft. As soon as the opponent's satellite is destroyed, the remaining player wins the round.</Description>
-        <Archive sha1sum="6fea80c13e995684e195a98c31b58ff0bab4d012" type="tarxz">mirrors://kde/unstable/4.10.95/src/kspaceduel-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="e338b0715cbcae023181e67734ceda4f321756f0" type="tarxz">mirrors://kde/unstable/4.10.97/src/kspaceduel-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kspaceduel</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

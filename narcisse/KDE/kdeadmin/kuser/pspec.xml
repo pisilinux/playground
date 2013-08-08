@@ -13,20 +13,20 @@
         <IsA>app:gui</IsA>
         <Summary>User and group administration tools.</Summary>
         <Description>KUser is an application for managing users and groups on your system.</Description>
-        <Archive sha1sum="e5d4762268a94b28139b24854fd6157b6280ddc2" type="tarxz">mirrors://kde/unstable/4.10.95/src/kuser-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="745ea3d16d24c357266d5b1ac01e5715891b9f4b" type="tarxz">mirrors://kde/unstable/4.10.97/src/kuser-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kdepimlibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdepimlibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kuser</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.95">kdepimlibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">kdepimlibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -36,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="2">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 	<Update release="1">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

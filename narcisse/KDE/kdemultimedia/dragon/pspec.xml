@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Dragon Player: Simple video player for KDE 4</Summary>
         <Description>A multimedia player where the focus is on simplicity, instead of.</Description>
-        <Archive sha1sum="7b481116933f8f49203f32898925646938a60b2f" type="tarxz">mirrors://kde/unstable/4.10.95/src/dragon-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="b40eef5d2b98bfc105504828311f410d45c3a651" type="tarxz">mirrors://kde/unstable/4.10.97/src/dragon-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>dragon</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
             <Dependency>phonon</Dependency>
             <Dependency>xine-lib</Dependency>
             <Dependency>qt</Dependency>
@@ -38,6 +38,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="9">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>
