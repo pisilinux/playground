@@ -28,7 +28,6 @@
 	    <Dependency>libXft-devel</Dependency>
 	    <Dependency>gtk2-devel</Dependency>
         </BuildDependencies>
-
     </Source>
 
     <Package>
@@ -46,13 +45,18 @@
 	    <Dependency>glib2</Dependency>
 	    <Dependency>cairo</Dependency>
 	    <Dependency>libXft</Dependency>
-	    <Dependency>gtk</Dependency>
+	    <Dependency>gtk2</Dependency>
         </RuntimeDependencies>
 
         <Files>
-            <Path fileType="all">/</Path>
+            <Path fileType="config">/etc</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+	    <Path fileType="man">/usr/share/man</Path>
+	    <Path fileType="data">/usr/share/tint2</Path>
         </Files>
-
     </Package>
 
     <History>
