@@ -13,12 +13,12 @@
         <IsA>app:gui</IsA>
         <Summary>KSCD: KDE Audio Player</Summary>
         <Description>KSCD: KDE Audio Player</Description>
-        <Archive sha1sum="b830535f1e31da054e7e654aab040b796bf96cc2" type="tarxz">mirrors://kde/unstable/4.10.95/src/kscd-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="8bad7bae25f9e6a34eec10fe04309275319b2a7c" type="tarxz">mirrors://kde/unstable/4.10.97/src/kscd-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkcddb</Dependency>
-            <Dependency versionFrom="4.10.95">libkcompactdisc</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkcddb</Dependency>
+            <Dependency versionFrom="4.10.97">libkcompactdisc</Dependency>
             <Dependency>musicbrainz3-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -26,10 +26,10 @@
     <Package>
         <Name>kscd</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.95">libkcddb</Dependency>
-            <Dependency versionFrom="4.10.95">libkcompactdisc</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">libkcddb</Dependency>
+            <Dependency versionFrom="4.10.97">libkcompactdisc</Dependency>
             <Dependency>musicbrainz3</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -42,6 +42,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

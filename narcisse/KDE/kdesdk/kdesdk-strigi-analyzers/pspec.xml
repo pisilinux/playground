@@ -12,16 +12,16 @@
         <IsA>library</IsA>
         <Summary>Analyzer plugins for strigi</Summary>
         <Description>Analyzer plugins for strigi</Description>
-        <Archive sha1sum="895765d4edf5e23461e626903f6048088a71fa23" type="tarxz">mirrors://kde/unstable/4.10.95/src/kdesdk-strigi-analyzers-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="a05d732bd36efcd90e9d9c9e0cc544f40eff4fe3" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdesdk-strigi-analyzers-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kdesdk-strigi-analyzers</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
 	</RuntimeDependencies>
         <Files>            
             <Path fileType="library">/usr/lib</Path>
@@ -31,6 +31,13 @@
     </Package>  
 
     <History>
+        <Update release="2">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

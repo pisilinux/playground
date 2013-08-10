@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>A KDE frontend for the Linux Infrared Remote Control system</Summary>
         <Description>KRemoteControl is a KDE frontend for the Linux Infrared Remote Control system (LIRC). It consist of two parts: a systemtray applet and a configuration module.</Description>
-        <Archive sha1sum="7ecdf0649354c347612120ada8659cfb70921dde" type="tarxz">mirrors://kde/unstable/4.10.95/src/kremotecontrol-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="09cd1dbde6f00432efb66d54ad0879e0e07eab93" type="tarxz">mirrors://kde/unstable/4.10.97/src/kremotecontrol-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kde-workspace-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-workspace-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
             <Dependency>libXext-devel</Dependency>
         </BuildDependencies>
         <Patches>
@@ -27,8 +27,8 @@
     <Package>
         <Name>kremotecontrol</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kde-workspace</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-workspace</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
             <Dependency>libXext</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -42,6 +42,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

@@ -12,18 +12,18 @@
         <IsA>app:gui</IsA>
         <Summary>Kio slaves</Summary>
         <Description>Kdio slaves</Description>
-        <Archive sha1sum="1f9ac2f4a12c0419d64b1e21dbc46c3d69796ab3" type="tarxz">mirrors://kde/unstable/4.10.95/src/kdesdk-kioslaves-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="d2310e3c85c61dd2f5c5d4b44ba300c5dd3f8722" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdesdk-kioslaves-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kdesdk-kioslaves</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
 	</RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -34,6 +34,13 @@
     </Package>  
 
     <History>
+        <Update release="2">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

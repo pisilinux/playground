@@ -12,16 +12,16 @@
         <IsA>library</IsA>
         <Summary>Shared libraries for KDE games</Summary>
         <Description>Shared libraries for KDE games</Description>
-        <Archive sha1sum="02c42b96626811494676ce1950266a978661b071" type="tarxz">mirrors://kde/unstable/4.10.95/src/libkdegames-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="7a257c57ef6198c192e696b82a3834263baa829c" type="tarxz">mirrors://kde/unstable/4.10.97/src/libkdegames-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>libkdegames</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -36,7 +36,7 @@
         <Summary>Shared libraries for KDE games.</Summary>
         <RuntimeDependencies>
             <Dependency release="current">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -46,6 +46,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

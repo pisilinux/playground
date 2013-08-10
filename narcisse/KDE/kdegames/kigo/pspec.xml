@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>A go board game</Summary>
         <Description>Kigo is an open-source implementation of the popular Go game. Go is a strategic board game for two players.</Description>
-        <Archive sha1sum="3192b88184c8c59ba51338947bcc4ad408a82448" type="tarxz">mirrors://kde/unstable/4.10.95/src/kigo-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="1df836c3a1caa3a0949a386a3f063c86a58af39f" type="tarxz">mirrors://kde/unstable/4.10.97/src/kigo-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>  
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>  
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kigo</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>   
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>   
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

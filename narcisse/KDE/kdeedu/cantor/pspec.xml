@@ -13,11 +13,11 @@
         <IsA>app:gui</IsA>
         <Summary>A KDE frontend to mathematical softwares</Summary>
         <Description>Cantor is an application that lets you use your favorite mathematical applications from within a nice KDE-integrated Worksheet Interface. It offers assistant dialogs for common tasks and allows you to share your worksheets with others.</Description>
-        <Archive sha1sum="ddf07723fe0a23507ea4f4ac717e70d39e4c3960" type="tarxz">mirrors://kde/unstable/4.10.95/src/cantor-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="0db5c4639ba18488c2d5fd0ac7eba6c75891bc92" type="tarxz">mirrors://kde/unstable/4.10.97/src/cantor-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>    
-            <Dependency versionFrom="4.10.95">analitza-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">analitza-devel</Dependency>
             <Dependency>libspectre-devel</Dependency>
             <Dependency>libqalculate-devel</Dependency>
             <Dependency>R-devel</Dependency>
@@ -28,8 +28,8 @@
     <Package>
         <Name>cantor</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>    
             <Dependency>analitza</Dependency>
             <Dependency>libspectre</Dependency>
             <Dependency>libqalculate</Dependency>
@@ -78,6 +78,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="9">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

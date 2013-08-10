@@ -12,10 +12,10 @@
         <IsA>app:gui</IsA>
         <Summary>KDE4 web development applications</Summary>
         <Description>Contains web development applications that ship with KDE4.</Description>
-        <Archive sha1sum="824a15cee2f87dd9b6188df5efcaa9bd64620079" type="tarxz">mirrors://kde/unstable/4.10.95/src/kdewebdev-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="05188f2cf93744f797b1ad8cc4ccd15c39a1951c" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdewebdev-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kdepimlibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdepimlibs-devel</Dependency>
             <Dependency>tidy-devel</Dependency>
             <Dependency>ruby</Dependency>
             <Dependency>libxml2-devel</Dependency>
@@ -26,8 +26,8 @@
     <Package>
         <Name>kdewebdev</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kdepimlibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdepimlibs</Dependency>
             <Dependency>tidy</Dependency>
             <Dependency>ruby</Dependency>
             <Dependency>libxslt</Dependency>
@@ -51,6 +51,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

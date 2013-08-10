@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Network construction game</Summary>
         <Description>KNetWalk is a single player logic game. The object of the game is to start the LAN, connecting all the terminals to the server, in as few turns as possible.</Description>
-        <Archive sha1sum="778282ddffa2a7642a68f5f641979afc09e522fd" type="tarxz">mirrors://kde/unstable/4.10.95/src/knetwalk-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="c78f96660586dbc169a040f30165da4eb6eb422b" type="tarxz">mirrors://kde/unstable/4.10.97/src/knetwalk-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>knetwalk</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

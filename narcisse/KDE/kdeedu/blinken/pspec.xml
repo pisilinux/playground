@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>A memory enhancement game</Summary>
         <Description>Blinken is the KDE version of the well-known game Simon Says. Follow the pattern of sounds and lights as long as you can! Press the start game button to begin. Watch the computer and copy the pattern it makes. Complete the sequence in the right order to win.</Description>
-        <Archive sha1sum="1d353f10cf0a9d84a9271835d3a187fdf4e5178a" type="tarxz">mirrors://kde/unstable/4.10.95/src/blinken-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="8fa1a171236c3428cdfca3e897504f07e28539a1" type="tarxz">mirrors://kde/unstable/4.10.97/src/blinken-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>
 	    <Dependency>qt-devel</Dependency>
 	    <Dependency>phonon-devel</Dependency>
         </BuildDependencies>
@@ -25,8 +25,8 @@
     <Package>
         <Name>blinken</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>
 	    <Dependency>qt</Dependency>
 	    <Dependency>phonon</Dependency>
         </RuntimeDependencies>
@@ -43,6 +43,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="9">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

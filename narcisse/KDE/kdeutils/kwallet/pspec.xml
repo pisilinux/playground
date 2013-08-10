@@ -13,16 +13,16 @@
         <IsA>app:gui</IsA>
         <Summary>A wallet management tool</Summary>
         <Description>KWalletManager is a tool to manage the passwords on your system. By using the KDE wallet subsystem it not only allows you to keep your own secrets but also to access and manage the passwords of every application that integrates with the wallet.</Description>
-        <Archive sha1sum="53c0763835985afb4d25b06be27bb7d0666cdb5f" type="tarxz">mirrors://kde/unstable/4.10.95/src/kwallet-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="a0e03d683cb087ac969af4ec411cb6339d120f84" type="tarxz">mirrors://kde/unstable/4.10.97/src/kwallet-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kwallet</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

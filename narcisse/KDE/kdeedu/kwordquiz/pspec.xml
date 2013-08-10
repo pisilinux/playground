@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>A powerful way to master new vocabularies</Summary>
         <Description>KWordQuiz is a tool that gives you a powerful way to master new vocabularies. It may be a language or any other kind of terminology.</Description>
-        <Archive sha1sum="e75bbb6e877f3d4c8ce9d3156758a2ffdfe3dbff" type="tarxz">mirrors://kde/unstable/4.10.95/src/kwordquiz-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="1c1bca44d19e14a6fbea4c9fdaa851797e92619a" type="tarxz">mirrors://kde/unstable/4.10.97/src/kwordquiz-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -24,8 +24,8 @@
     <Package>
         <Name>kwordquiz</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>
             <Dependency>phonon</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

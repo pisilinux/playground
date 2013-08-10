@@ -12,9 +12,9 @@
         <IsA>library</IsA>
         <Summary>Language independent library for Qt bindings</Summary>
         <Description>Language independent library for Qt bindings.</Description>
-        <Archive sha1sum="91d392058cb525a1b9e0f29c5860016354dc22de" type="tarxz">mirrors://kde/unstable/4.10.95/src/smokeqt-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="e7abf5b5d95eaf381687f8e064f4dad49963a9c6" type="tarxz">mirrors://kde/unstable/4.10.97/src/smokeqt-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">smoke-gen-devel</Dependency>
+            <Dependency versionFrom="4.10.97">smoke-gen-devel</Dependency>
             <Dependency>qt-devel</Dependency>
             <Dependency>qwt-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
@@ -27,7 +27,7 @@
     <Package>
         <Name>smoke-qt</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">smoke-gen</Dependency>
+            <Dependency versionFrom="4.10.97">smoke-gen</Dependency>
             <Dependency>qt</Dependency>
             <Dependency>qwt</Dependency>
             <Dependency>phonon</Dependency>
@@ -54,6 +54,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

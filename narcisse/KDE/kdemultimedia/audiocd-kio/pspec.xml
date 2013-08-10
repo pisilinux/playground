@@ -13,11 +13,11 @@
         <IsA>library</IsA>
         <Summary>Multi-purpose KDE library for Audio CD operations</Summary>
         <Description>Multi-purpose KDE library for Audio CD operations.</Description>
-        <Archive sha1sum="364b04122b894e21cadbceeb0a20615d2905bc86" type="tarxz">mirrors://kde/unstable/4.10.95/src/audiocd-kio-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="9510e187aaa5c53925d22da02e63e4b95f04913c" type="tarxz">mirrors://kde/unstable/4.10.97/src/audiocd-kio-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkcddb</Dependency>
-            <Dependency versionFrom="4.10.95">libkcompactdisc</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkcddb</Dependency>
+            <Dependency versionFrom="4.10.97">libkcompactdisc</Dependency>
             <Dependency>lame-devel</Dependency>
             <Dependency>cdparanoia-devel</Dependency>    
             <Dependency>flac-devel</Dependency>
@@ -29,10 +29,10 @@
     <Package>
         <Name>audiocd-kio</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.95">libkcddb</Dependency>  
-            <Dependency versionFrom="4.10.95">libkcompactdisc</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">libkcddb</Dependency>  
+            <Dependency versionFrom="4.10.97">libkcompactdisc</Dependency>
             <Dependency>lame</Dependency>    
             <Dependency>xine-lib</Dependency> 
             <Dependency>libvorbis</Dependency> 
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="9">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

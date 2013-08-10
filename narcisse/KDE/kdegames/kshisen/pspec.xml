@@ -13,22 +13,22 @@
         <IsA>app:gui</IsA>
         <Summary>Shisen-Sho Mahjongg like tile game</Summary>
         <Description>Shisen-Sho is a solitaire-like game played using the standard set of Mahjong tiles. Unlike Mahjong however, Shisen-Sho has only one layer of scrambled tiles.</Description>
-        <Archive sha1sum="7725c8ae7baec47c7f8eb1d031c332c0ad630f0e" type="tarxz">mirrors://kde/unstable/4.10.95/src/kshisen-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="19f934210542c2acd58d7215608ed9cc35711f36" type="tarxz">mirrors://kde/unstable/4.10.97/src/kshisen-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkmahjongg-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkmahjongg-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kshisen</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency> 
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">libkmahjongg</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency> 
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">libkmahjongg</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

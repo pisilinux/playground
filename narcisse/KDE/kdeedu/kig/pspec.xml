@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>An interactive geometry application</Summary>
         <Description>Kig is an application for interactive geometry.</Description>
-        <Archive sha1sum="220c1ea4972316adbc1ba4acb0f6ae0b4ed5a67a" type="tarxz">mirrors://kde/unstable/4.10.95/src/kig-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="f4597600fd869579ca0b56e5e84d0581dcbb86a0" type="tarxz">mirrors://kde/unstable/4.10.97/src/kig-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>    
             <Dependency>boost-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -24,8 +24,8 @@
     <Package>
         <Name>kig</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>    
             <Dependency>boost</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -40,6 +40,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

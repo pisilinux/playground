@@ -12,9 +12,9 @@
         <IsA>library</IsA>
         <Summary>.NET/Mono bindings for the Qt libraries</Summary>
         <Description>.NET/Mono bindings for the Qt libraries</Description>
-        <Archive sha1sum="9f4a80d73f749ec984f17c10afe2a884e182dc43" type="tarxz">mirrors://kde/unstable/4.10.95/src/qyoto-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="b0af2631a6692b7063c8bc093134b422207ae8a4" type="tarxz">mirrors://kde/unstable/4.10.97/src/qyoto-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">smoke-qt-devel</Dependency>
+            <Dependency versionFrom="4.10.97">smoke-qt-devel</Dependency>
             <Dependency>mono-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -22,7 +22,7 @@
     <Package>
         <Name>qyoto</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">smoke-gen</Dependency>
+            <Dependency versionFrom="4.10.97">smoke-gen</Dependency>
             <Dependency>mono-devel</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -45,6 +45,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

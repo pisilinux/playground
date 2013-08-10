@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>Parley is a program to help you memorize things.</Summary>
         <Description>Parley is a program to help you memorize things. Parley supports many language specific features but can be used for other learning tasks just as well. It uses the spaced repetition learning method, also known as flash cards. Creating new vocabulary collections with Parley is easy, but of course it is even better if you can use some of our premade files. Have a look at the KDE-Files.org page or use the "Download New Collections" feature directly in Parley.</Description>
-        <Archive sha1sum="d82c1d410631323b2f4e3cf596c5f2cf1823f0eb" type="tarxz">mirrors://kde/unstable/4.10.95/src/parley-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="7d88dec8e801b492d69ef77ea48f5613d663c166" type="tarxz">mirrors://kde/unstable/4.10.97/src/parley-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
             <Dependency>libxslt-devel</Dependency>
             <Dependency>libXrender-devel</Dependency>
@@ -26,8 +26,8 @@
     <Package>
         <Name>parley</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>
             <Dependency>phonon</Dependency>
             <Dependency>libxslt</Dependency>
             <Dependency>libXrender</Dependency>
@@ -44,6 +44,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

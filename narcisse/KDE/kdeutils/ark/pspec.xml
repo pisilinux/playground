@@ -13,12 +13,12 @@
         <IsA>app:gui</IsA>
         <Summary>An archiving tool</Summary>
         <Description>Ark is a program for managing various archive formats within the KDE environment.</Description>
-        <Archive sha1sum="bb8d4fc983622e62bd4df80c4e0d47222f97a31f" type="tarxz">mirrors://kde/unstable/4.10.95/src/ark-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="53005272340c3486a5024a6e1b185be501d328c1" type="tarxz">mirrors://kde/unstable/4.10.97/src/ark-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kde-workspace</Dependency>
-            <Dependency versionFrom="4.10.95">kde-baseapps</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-workspace</Dependency>
+            <Dependency versionFrom="4.10.97">kde-baseapps</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
             <Dependency>libarchive-devel</Dependency>
             <Dependency>libzip-devel</Dependency>
         </BuildDependencies>
@@ -30,10 +30,10 @@
     <Package>
         <Name>ark</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kde-workspace</Dependency>
-            <Dependency versionFrom="4.10.95">kde-baseapps</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kde-workspace</Dependency>
+            <Dependency versionFrom="4.10.97">kde-baseapps</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
             <Dependency>libarchive</Dependency>
             <Dependency>libzip</Dependency>
             <Dependency>qt</Dependency>
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="9">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

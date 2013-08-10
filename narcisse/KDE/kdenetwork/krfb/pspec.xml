@@ -12,10 +12,10 @@
         <IsA>app:gui</IsA>
         <Summary>Desktop sharing utility</Summary>
         <Description>KDE Desktop Sharing is a manager for easily sharing a desktop session with another system. The desktop session can be viewed or controlled remotely by any VNC or RFB client</Description>
-        <Archive sha1sum="146da785c26e42177e0d4ac4cd59a30c407c2212" type="tarxz">mirrors://kde/unstable/4.10.95/src/krfb-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="388764a6a86d11df6fe067c53785a9d626f7c22f" type="tarxz">mirrors://kde/unstable/4.10.97/src/krfb-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-                <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-                <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>
+                <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+                <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
 	        <Dependency>telepathy-qt-devel</Dependency>
 	        <Dependency>libXdamage-devel</Dependency>
 	        <Dependency>libXext-devel</Dependency>	
@@ -28,9 +28,9 @@
     <Package>
         <Name>krfb</Name>
         <RuntimeDependencies>
-                <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-                <Dependency versionFrom="4.10.95">kde-runtime</Dependency>
-                <Dependency versionFrom="4.10.95">kdnssd</Dependency>
+                <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+                <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+                <Dependency versionFrom="4.10.97">kdnssd</Dependency>
 	        <Dependency>telepathy-qt</Dependency>
 	        <Dependency>libXdamage</Dependency>
 	        <Dependency>libXext</Dependency>	
@@ -47,6 +47,13 @@
     </Package>  
 
     <History>
+        <Update release="2">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

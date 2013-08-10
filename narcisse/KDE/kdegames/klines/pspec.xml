@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Kolor Lines</Summary>
         <Description>Kolor Lines is a simple but highly addictive, one player game for KDE. Kolor Lines has been inspired by well known game of Color Lines. The goal of Kolor Lines is quite plain. The player has to move the colored balls around the game board, gathering them into the lines of the same color by five.</Description>
-        <Archive sha1sum="ca76f837e29337923f3b49603e0296d1a2cb6776" type="tarxz">mirrors://kde/unstable/4.10.95/src/klines-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="95aab3c0745e1b40125f2571576750dac7e75da7" type="tarxz">mirrors://kde/unstable/4.10.97/src/klines-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>klines</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

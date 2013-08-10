@@ -13,16 +13,16 @@
         <IsA>app:gui</IsA>
         <Summary>A character selector</Summary>
         <Description>KCharSelect is a tool to select special characters from all installed fonts and copy them into the clipboard.</Description>
-        <Archive sha1sum="7ee9c3dc290ca2c35e88f3e4b39acf3963bca8d8" type="tarxz">mirrors://kde/unstable/4.10.95/src/kcharselect-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="e18fbd6c2409560b71572cd03488bea4064f473b" type="tarxz">mirrors://kde/unstable/4.10.97/src/kcharselect-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kcharselect</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -33,6 +33,13 @@
     </Package>
     
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

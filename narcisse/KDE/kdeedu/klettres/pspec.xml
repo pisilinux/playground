@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>An alphabet learning application</Summary>
         <Description>KLettres is an application specially designed to help the user to learn alphabet in a new language and then to learn to read simple syllables. The user can be a young child aged from two and a half or an adult that wants to learn the basics of a foreign language.</Description>
-        <Archive sha1sum="d7bf56abbce2c6b127cf9eb74a2645868ecc5e01" type="tarxz">mirrors://kde/unstable/4.10.95/src/klettres-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="a2332ccb7cd6a8441f11475c97384f8f9a8f68dd" type="tarxz">mirrors://kde/unstable/4.10.97/src/klettres-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>    
             <Dependency>phonon-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -24,8 +24,8 @@
     <Package>
         <Name>klettres</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">libkdeedu</Dependency>    
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>    
             <Dependency>phonon</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

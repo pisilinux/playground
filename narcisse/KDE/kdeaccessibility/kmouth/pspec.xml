@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>A speech synthesizer frontend</Summary>
         <Description>KMouth is a program which enables persons that cannot speak to let their computer speak, e.g. mutal people or people who have lost their voice. It has a text input field and speaks the sentences that you enter. It also has support for user defined phrasebooks.</Description>
-        <Archive sha1sum="e01018b6f2e4941c447e1320a332e757e8b93d63" type="tarxz">mirrors://kde/unstable/4.10.95/src/kmouth-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="1ae2cead42c9be976dfe98801ea4cae67c444711" type="tarxz">mirrors://kde/unstable/4.10.97/src/kmouth-4.10.97.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -24,7 +24,7 @@
         <Name>kmouth</Name>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

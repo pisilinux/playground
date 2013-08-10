@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>A jigsaw puzzle game</Summary>
         <Description>Palapeli is a single-player jigsaw puzzle game. Unlike other games in that genre, you are not limited to aligning pieces on imaginary grids.</Description>
-        <Archive sha1sum="9c7966437d22eb614b0c807540e3f2a760178195" type="tarxz">mirrors://kde/unstable/4.10.95/src/palapeli-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="bd54ee03568901d19adf07da00f580082399f230" type="tarxz">mirrors://kde/unstable/4.10.97/src/palapeli-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>palapeli</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.95">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
+            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

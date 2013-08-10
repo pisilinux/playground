@@ -14,11 +14,11 @@
         <IsA>app:gui</IsA>
         <Summary>KDE4 PIM Runtime Environment</Summary>
         <Description>kdepim-runtime contains KDE4 PIM (Personal Information Management) runtime environment like akonadi agents.</Description>
-        <Archive sha1sum="c7501e246741aa53c8e9ba70bd5685249df5293b" type="tarxz">mirrors://kde/unstable/4.10.95/src/kdepim-runtime-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="bc34eb2b95450707159757522ebfa6d2e814f0b0" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdepim-runtime-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.95">nepomuk-core-devel</Dependency>    
-            <Dependency versionFrom="4.10.95">kdepimlibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">nepomuk-core-devel</Dependency>    
+            <Dependency versionFrom="4.10.97">kdepimlibs-devel</Dependency>
             <Dependency>akonadi-devel</Dependency>
             <Dependency>shared-desktop-ontologies</Dependency>
             <Dependency>soprano-devel</Dependency>
@@ -38,9 +38,9 @@
     <Package>
         <Name>kdepim-runtime</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.95">nepomuk-core</Dependency>     
-            <Dependency versionFrom="4.10.95">kdepimlibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">nepomuk-core</Dependency>     
+            <Dependency versionFrom="4.10.97">kdepimlibs</Dependency>
             <Dependency>akonadi</Dependency>
             <Dependency>shared-desktop-ontologies</Dependency>
             <Dependency>soprano</Dependency>
@@ -66,6 +66,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
       <Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>

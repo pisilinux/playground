@@ -13,9 +13,9 @@
         <IsA>app:gui</IsA>
         <Summary>Virtual globe and eorld atlas</Summary>
         <Description>Marble is a virtual globe and world atlas that you can use to learn more about the Earth.</Description>
-        <Archive sha1sum="5f118e29cefdf89365d5e6be86d9eeefd9bb2ca3" type="tarxz">mirrors://kde/unstable/4.10.95/src/marble-4.10.95.tar.xz</Archive>
+        <Archive sha1sum="cbe6407dc0dddf099082d874748db24ca85d1f4d" type="tarxz">mirrors://kde/unstable/4.10.97/src/marble-4.10.97.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
             <Dependency>gpsd-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
             <Dependency>qt-webkit-devel</Dependency>
@@ -28,7 +28,7 @@
     <Package>
         <Name>marble</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.95">kdelibs</Dependency>
+            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
             <Dependency>gpsd-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
             <Dependency>qt-webkit-devel</Dependency>
@@ -58,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2013-08-05</Date>
+            <Version>4.10.97</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2013-07-23</Date>
             <Version>4.10.95</Version>
