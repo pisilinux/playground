@@ -10,27 +10,24 @@
         </Packager>
         <License>GPLv3</License>
         <IsA>app</IsA>
-        <Summary>Masüstü duvar kağıdı değiştirme programcığı</Summary>
+        <Summary>Masüstü duvar kağıdı değiştirme programı</Summary>
         <Description>Esetroot hafif masaüstü yöneticilerinde masaüstü duvar kağıdı değiştirmek için kullanılır</Description>
         <Archive sha1sum="5fa150afff8536f57c4709b617a8738900bc3818" type="targz">https://celti.name/arch/esetroot-20030422.tar.gz</Archive>
-
         <BuildDependencies>
             <Dependency>imlib2-devel</Dependency>
         </BuildDependencies>
-
     </Source>
 
     <Package>
         <Name>esetroot</Name>
-  
         <RuntimeDependencies>
             <Dependency>imlib2</Dependency>
         </RuntimeDependencies>
 
         <Files>
-            <Path fileType="all">/</Path>
-        </Files>
- 
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+         </Files>
     </Package>
 
     <History>
