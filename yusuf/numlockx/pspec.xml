@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>numlockx</Name>
+        <Homepage>http://home.kde.org/~seli/numlockx/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Packager>
+        <License>MIT</License>
+        <PartOf>x11.library</PartOf>
+        <IsA>app:console</IsA>
+        <Summary>NumLockX turns on NumLock after starting X.</Summary>
+        <Description>NumLockX turns on NumLock after starting X.</Description>
+        <Archive sha1sum="0bc24c61a6bcbdaff3215b3c5c120e7d9142b1bf" type="targz">http://home.kde.org/~seli/numlockx/numlockx-1.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libXtst-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>numlockx</Name>
+        <RuntimeDependencies>
+            <Dependency>libXtst</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-08-10</Date>
+            <Version>1.2</Version>
+            <Comment>pisi</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Update>
+    </History>
+</PISI>
