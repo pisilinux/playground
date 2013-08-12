@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>vokoscreen</Name>
+        <Homepage>http://www.kohaupt-online.de/hp/</Homepage>
+        <Packager>
+            <Name>Pisilinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>vokoscreen</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>New desktop recording program</Summary>
+        <Description>Vokoscreen is a new application you to record your desktop. It’s very simple and it uses a minimalistic GUI</Description>
+        <Archive sha1sum="50e98784afff276aea79e88173794b5752b69343" type="targz">http://ppa.launchpad.net/vokoscreen-dev/vokoscreen/ubuntu/pool/main/v/vokoscreen/vokoscreen_1.7.0-1~precise1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>pkgconfig</Dependency>
+	    <Dependency>qt-devel</Dependency>
+	    <Dependency>opencv-devel</Dependency>
+	    <Dependency>libX11-devel</Dependency>
+	    <Dependency>alsa-lib-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>vokoscreen</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>ffmpeg</Dependency>
+	    <Dependency>lame</Dependency>
+	    <Dependency>opencv</Dependency>
+	    <Dependency>libX11</Dependency>
+	    <Dependency>alsa-lib</Dependency>
+            <Dependency>mkvtoolnix</Dependency>   
+        </RuntimeDependencies>
+       
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-12</Date>
+            <Version>1.7</Version>
+            <Comment>First release</Comment>
+            <Name>Burak Fazıl ERTÜRK</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
