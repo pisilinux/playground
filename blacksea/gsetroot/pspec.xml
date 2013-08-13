@@ -12,9 +12,10 @@
         <IsA>app</IsA>
         <Summary>Gtk based wallpaper selection program</Summary>
         <Description>Gsetroot is a C/Gtk-based front end for Esetroot</Description>
-        <Archive sha1sum="29f39222e6a1bd250f21fe3f0ea3c5f0559c2775" type="targz">http://downloads.sourceforge.net/project/gsetroot/gsetroot/gsetroot-1.1/gsetroot-1.1.tar.gz</Archive>
+        <Archive sha1sum="29f39222e6a1bd250f21fe3f0ea3c5f0559c2775" type="targz">mirrors://sourceforge/gsetroot/gsetroot/gsetroot-1.1/gsetroot-1.1.tar.gz</Archive>
          <AdditionalFiles>
             <AdditionalFile target="po/tr.po" permission="0644" group="root" owner="root">tr.po</AdditionalFile>
+            <AdditionalFile target="po/tr.gmo" permission="0644" group="root" owner="root">tr.gmo</AdditionalFile>
         </AdditionalFiles>
 	<BuildDependencies>
             <Dependency>imlib2-devel</Dependency>
@@ -23,12 +24,14 @@
 	    <Dependency>atkmm-devel</Dependency>
             <Dependency>pangomm-devel</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">tr-po.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
         <Name>gsetroot</Name>
          <RuntimeDependencies>
-            <Dependency>esetroot</Dependency>
 	    <Dependency>imlib2</Dependency>
             <Dependency>gtk3</Dependency>
 	    <Dependency>gtkmm</Dependency>
@@ -37,15 +40,19 @@
         </RuntimeDependencies>
          <Files>
 	    <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="data">/usr/share/gsetroot</Path>
-            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="doc">/usr/share/doc</Path>
-	    <Path fileType="doc">/usr/doc</Path>
-            <Path fileType="data">/usr/share/pixmaps</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="2">
+            <Date>2013-08-13</Date>
+            <Version>1.1</Version>
+            <Comment>adapt tr.po, correckting build</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2013-08-10</Date>
             <Version>1.1</Version>
