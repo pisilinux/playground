@@ -8,10 +8,10 @@
             <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
         </Packager>
-        <License>GPLv3</License>
+        <License>AS IS</License>
         <IsA>app</IsA>
-        <Summary>Masüstü duvar kağıdı değiştirme programı</Summary>
-        <Description>Esetroot hafif masaüstü yöneticilerinde masaüstü duvar kağıdı değiştirmek için kullanılır</Description>
+        <Summary>Eterm's root background setter, packaged separately</Summary>
+        <Description>Eterm's root background setter, packaged separately</Description>
         <Archive sha1sum="5fa150afff8536f57c4709b617a8738900bc3818" type="targz">https://celti.name/arch/esetroot-20030422.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>imlib2-devel</Dependency>
@@ -23,11 +23,10 @@
         <RuntimeDependencies>
             <Dependency>imlib2</Dependency>
         </RuntimeDependencies>
-
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="doc">/usr/share/doc</Path>
-         </Files>
+        </Files>
     </Package>
 
     <History>
