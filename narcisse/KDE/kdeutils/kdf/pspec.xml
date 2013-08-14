@@ -13,16 +13,16 @@
         <IsA>app:gui</IsA>
         <Summary>View disk usage</Summary>
         <Description>KDiskFree displays the available file devices (hard drive partitions, floppy and CD drives, etc.) along with information on their capacity, free space, type and mount point.</Description>
-        <Archive sha1sum="8f76f9cff8d22b618a78834d8f83cc8b5a81ccd9" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdf-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="b571b719efdf633b72065cfa1862ad662a7d81bb" type="tarxz">mirrors://kde/stable/4.11.0/src/kdf-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kdf</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

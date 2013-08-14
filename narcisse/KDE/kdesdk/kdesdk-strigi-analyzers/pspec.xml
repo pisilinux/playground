@@ -12,16 +12,16 @@
         <IsA>library</IsA>
         <Summary>Analyzer plugins for strigi</Summary>
         <Description>Analyzer plugins for strigi</Description>
-        <Archive sha1sum="a05d732bd36efcd90e9d9c9e0cc544f40eff4fe3" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdesdk-strigi-analyzers-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="d6e42e178d7dbf12acd59062bbcccb033b2fa875" type="tarxz">mirrors://kde/stable/4.11.0/src/kdesdk-strigi-analyzers-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kdesdk-strigi-analyzers</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
 	</RuntimeDependencies>
         <Files>            
             <Path fileType="library">/usr/lib</Path>
@@ -31,6 +31,13 @@
     </Package>  
 
     <History>
+        <Update release="3">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

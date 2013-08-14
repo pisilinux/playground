@@ -12,18 +12,18 @@
         <IsA>app:gui</IsA>
         <Summary>UML modelling tool and code generator</Summary>
         <Description>Umbrello UML Modeller is a Unified Modelling Language diagram editor for KDE.</Description>
-        <Archive sha1sum="3630a234a8ce144d91feebdba18b7f906ced5ebf" type="tarxz">mirrors://kde/unstable/4.10.97/src/umbrello-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="ec1552e8d854c41ef5febcee581f4cc16b8869e6" type="tarxz">mirrors://kde/stable/4.11.0/src/umbrello-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>umbrello</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
 	</RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -33,6 +33,13 @@
     </Package>  
 
     <History>
+        <Update release="3">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

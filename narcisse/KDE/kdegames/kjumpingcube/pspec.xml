@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Territory capture game</Summary>
         <Description>KJumpingCube is a simple tactical game.</Description>
-        <Archive sha1sum="1a1b49afb4a6d3668a6cb370684924d669058467" type="tarxz">mirrors://kde/unstable/4.10.97/src/kjumpingcube-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="016196c8b05572136b9436427a8a136518a32f07" type="tarxz">mirrors://kde/stable/4.11.0/src/kjumpingcube-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kjumpingcube</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

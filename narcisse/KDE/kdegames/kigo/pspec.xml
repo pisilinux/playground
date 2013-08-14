@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>A go board game</Summary>
         <Description>Kigo is an open-source implementation of the popular Go game. Go is a strategic board game for two players.</Description>
-        <Archive sha1sum="1df836c3a1caa3a0949a386a3f063c86a58af39f" type="tarxz">mirrors://kde/unstable/4.10.97/src/kigo-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="9753b7cde11acca14d63217e91c2534cc13c35b7" type="tarxz">mirrors://kde/stable/4.11.0/src/kigo-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>  
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>  
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kigo</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>   
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>   
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

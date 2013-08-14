@@ -13,22 +13,22 @@
         <IsA>app:gui</IsA>
         <Summary>Shisen-Sho Mahjongg like tile game</Summary>
         <Description>Shisen-Sho is a solitaire-like game played using the standard set of Mahjong tiles. Unlike Mahjong however, Shisen-Sho has only one layer of scrambled tiles.</Description>
-        <Archive sha1sum="19f934210542c2acd58d7215608ed9cc35711f36" type="tarxz">mirrors://kde/unstable/4.10.97/src/kshisen-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="05cbe373149c9b951d396022a58984428fb48919" type="tarxz">mirrors://kde/stable/4.11.0/src/kshisen-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">libkmahjongg-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">libkmahjongg-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kshisen</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency> 
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">libkmahjongg</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency> 
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">libkmahjongg</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

@@ -13,12 +13,12 @@
         <IsA>app:gui</IsA>
         <Summary>An archiving tool</Summary>
         <Description>Ark is a program for managing various archive formats within the KDE environment.</Description>
-        <Archive sha1sum="53005272340c3486a5024a6e1b185be501d328c1" type="tarxz">mirrors://kde/unstable/4.10.97/src/ark-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="aa8e91d415096a55ad910dad83f7eb6abdf88f1f" type="tarxz">mirrors://kde/stable/4.11.0/src/ark-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kde-workspace</Dependency>
-            <Dependency versionFrom="4.10.97">kde-baseapps</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace</Dependency>
+            <Dependency versionFrom="4.11.0">kde-baseapps</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
             <Dependency>libarchive-devel</Dependency>
             <Dependency>libzip-devel</Dependency>
         </BuildDependencies>
@@ -30,10 +30,10 @@
     <Package>
         <Name>ark</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kde-workspace</Dependency>
-            <Dependency versionFrom="4.10.97">kde-baseapps</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace</Dependency>
+            <Dependency versionFrom="4.11.0">kde-baseapps</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
             <Dependency>libarchive</Dependency>
             <Dependency>libzip</Dependency>
             <Dependency>qt</Dependency>
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="10">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

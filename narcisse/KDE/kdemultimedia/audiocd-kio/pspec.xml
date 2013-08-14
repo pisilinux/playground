@@ -13,11 +13,11 @@
         <IsA>library</IsA>
         <Summary>Multi-purpose KDE library for Audio CD operations</Summary>
         <Description>Multi-purpose KDE library for Audio CD operations.</Description>
-        <Archive sha1sum="9510e187aaa5c53925d22da02e63e4b95f04913c" type="tarxz">mirrors://kde/unstable/4.10.97/src/audiocd-kio-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="dd22eb26047aef9f332af6c60c073685ccbcb9cb" type="tarxz">mirrors://kde/stable/4.11.0/src/audiocd-kio-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">libkcddb</Dependency>
-            <Dependency versionFrom="4.10.97">libkcompactdisc</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">libkcddb</Dependency>
+            <Dependency versionFrom="4.11.0">libkcompactdisc</Dependency>
             <Dependency>lame-devel</Dependency>
             <Dependency>cdparanoia-devel</Dependency>    
             <Dependency>flac-devel</Dependency>
@@ -29,10 +29,10 @@
     <Package>
         <Name>audiocd-kio</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.97">libkcddb</Dependency>  
-            <Dependency versionFrom="4.10.97">libkcompactdisc</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">libkcddb</Dependency>  
+            <Dependency versionFrom="4.11.0">libkcompactdisc</Dependency>
             <Dependency>lame</Dependency>    
             <Dependency>xine-lib</Dependency> 
             <Dependency>libvorbis</Dependency> 
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="10">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

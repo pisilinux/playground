@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>Hunt gold, dodge enemies and solve puzzles</Summary>
         <Description>KGoldrunner is an action game where the hero runs through a maze and dodges enemies. You must guide the hero with the mouse or keyboard and collect all the gold nuggets, then you can climb up into the next level. Your enemies are also after the gold. Worse still, they are after you.</Description>
-        <Archive sha1sum="49e5ddb9a6f839d0b33df1eb891dd01d2e44a6ec" type="tarxz">mirrors://kde/unstable/4.10.97/src/kgoldrunner-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="e28245a4c1c8327669a353fa47913bb893498526" type="tarxz">mirrors://kde/stable/4.11.0/src/kgoldrunner-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
             <Dependency>openal-devel</Dependency>    
         </BuildDependencies>
     </Source>
@@ -24,8 +24,8 @@
     <Package>
         <Name>kgoldrunner</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
             <Dependency>openal</Dependency>    
         </RuntimeDependencies>
         <Files>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

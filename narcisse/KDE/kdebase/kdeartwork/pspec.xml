@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>Additional KDE4 Artwork</Summary>
         <Description>kdeartwork contains additional KDE4 Artwork (window decorations, widget styles, wallpapers and the like).</Description>
-        <Archive sha1sum="3d30a777e218f2763a92273fbf18fe7320165880" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdeartwork-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="e2240e998483cd5f65a1602c8c410bb8453c2b4b" type="tarxz">mirrors://kde/stable/4.11.0/src/kdeartwork-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-workspace-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace-devel</Dependency>
             <Dependency>eigen</Dependency>
             <Dependency>mesa-devel</Dependency>
             <Dependency>libXt-devel</Dependency>
@@ -65,8 +65,8 @@
         <Summary>Additional KDE4 widget styles and window decorations (including Aurorae theme engine)</Summary>
         <Description>Contains additional widget styles and window decorations for KDE4.</Description>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kde-workspace</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
@@ -82,8 +82,8 @@
         <Summary>Additional KDE4 screensavers</Summary>
         <Description>Contains additional screensavers for KDE4.</Description>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kde-workspace</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace</Dependency>
             <Dependency>xscreensaver</Dependency>
             <Dependency>mesa</Dependency>
             <Dependency>libXt</Dependency>
@@ -116,6 +116,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

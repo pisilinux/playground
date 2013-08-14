@@ -12,11 +12,11 @@
         <IsA>app:gui</IsA>
         <Summary>KDE4 Runtime Requirements</Summary>
         <Description>kde-runtime contains KDE4 base runtime applications and data files needed at runtime by other KDE applications. In this package, core applications and libraries like Nepomuk server, kcmshell4, kwalletd, kio libraries and kdesu are included.</Description>
-	<Archive type="tarxz" sha1sum="e9978a730bd2f6fb809632b8293cee01f3d95156">mirrors://kde/unstable/4.10.97/src/kde-runtime-4.10.97.tar.xz</Archive>
+	<Archive type="tarxz" sha1sum="87f693a9cbb149dfa2be49d98562b2bc7add99b7">mirrors://kde/stable/4.11.0/src/kde-runtime-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-	    <Dependency versionFrom="4.10.97">kdepimlibs-devel</Dependency>
-	    <Dependency versionFrom="4.10.97">kactivities-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+	    <Dependency versionFrom="4.11.0">kdepimlibs-devel</Dependency>
+	    <Dependency versionFrom="4.11.0">kactivities-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
             <Dependency>shared-desktop-ontologies</Dependency>
             <Dependency>redland-devel</Dependency>
@@ -86,9 +86,9 @@
         <Name>kde-runtime</Name>
         <IsA>app:gui</IsA>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-	    <Dependency versionFrom="4.10.97">kdepimlibs</Dependency>
-	    <Dependency versionFrom="4.10.97">kactivities</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+	    <Dependency versionFrom="4.11.0">kdepimlibs</Dependency>
+	    <Dependency versionFrom="4.11.0">kactivities</Dependency>
             <Dependency>phonon</Dependency>
             <Dependency>shared-desktop-ontologies</Dependency>
             <Dependency>redland</Dependency>
@@ -190,6 +190,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

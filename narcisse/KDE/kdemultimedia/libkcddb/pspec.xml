@@ -12,9 +12,9 @@
         <IsA>library</IsA>
         <Summary>MKDE library for CDDB (Compact Disc Database)</Summary>
         <Description>KDE library for CDDB (Compact Disc Database).</Description>
-        <Archive sha1sum="9b43d87456d93911984c09ac1b4aae579d9dd5ba" type="tarxz">mirrors://kde/unstable/4.10.97/src/libkcddb-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="818157b0a306d82a102ce0e2f85ac0275323dbc5" type="tarxz">mirrors://kde/stable/4.11.0/src/libkcddb-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
             <Dependency>musicbrainz5-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -22,7 +22,7 @@
     <Package>
         <Name>libkcddb</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
             <Dependency>musicbrainz5</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="10">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

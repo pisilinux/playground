@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>An application presenting the periodic table of elements</Summary>
         <Description>Kalzium is an application which will show you some information about the periodic system of the elements. Therefore you could use it as an information database.</Description>
-        <Archive sha1sum="ecb91d67025b80916a7beee654ec736a0d488d59" type="tarxz">mirrors://kde/unstable/4.10.97/src/kalzium-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="f206cbd593aa1ee1bce0f089099aae198b4fb5f2" type="tarxz">mirrors://kde/stable/4.11.0/src/kalzium-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>    
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">libkdeedu-devel</Dependency>    
             <Dependency>eigen</Dependency>
             <Dependency>avogadro-devel</Dependency>
             <Dependency>openbabel-devel</Dependency>
@@ -31,8 +31,8 @@
     <Package>
         <Name>kalzium</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>    
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">libkdeedu</Dependency>    
             <Dependency>eigen</Dependency>
             <Dependency>avogadro-libs</Dependency>
             <Dependency>openbabel</Dependency>
@@ -64,6 +64,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

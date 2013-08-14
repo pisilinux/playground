@@ -13,19 +13,19 @@
         <IsA>app:gui</IsA>
         <Summary>Five in a row board game</Summary>
         <Description>Bovo is a Gomoku like game for two players, where the opponents alternate in placing their respective pictogram on the game board..</Description>
-        <Archive sha1sum="73b0f2753380a539c73016cd5f631820fc5019bc" type="tarxz">mirrors://kde/unstable/4.10.97/src/bovo-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="96429d14bf801aa2950c018146da0632facaabe4" type="tarxz">mirrors://kde/stable/4.11.0/src/bovo-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>bovo</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
             <Dependency>qt</Dependency>   
         </RuntimeDependencies>
         <Files>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

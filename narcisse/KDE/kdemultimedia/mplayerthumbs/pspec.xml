@@ -12,9 +12,9 @@
         <IsA>app:gui</IsA>
         <Summary>KDE4 multimedia applications</Summary>
         <Description>MPlayer based thumbnail generator for video files</Description>
-        <Archive sha1sum="fc71050adabbc2017fd1e2717d4aaf478d4c7706" type="tarxz">mirrors://kde/unstable/4.10.97/src/mplayerthumbs-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="b71789470433ce8c555857301781fc47e5bbc12c" type="tarxz">mirrors://kde/stable/4.11.0/src/mplayerthumbs-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
             <Dependency>mplayer</Dependency>
         </BuildDependencies>
     </Source>
@@ -22,7 +22,7 @@
     <Package>
         <Name>mplayerthumbs</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
             <Dependency>mplayer</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

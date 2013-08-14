@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>3-D game based on Rubik's Cube</Summary>
         <Description>Kubrick is based on the famous Rubik's Cube™ puzzle, invented by Professor Erno Rubik in Hungary in the 1970s.</Description>
-        <Archive sha1sum="12a5142b27899f7fe596328614c87a283a5a4ac3" type="tarxz">mirrors://kde/unstable/4.10.97/src/kubrick-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="f249947c3640872a2cdb309b63ed682559ababde" type="tarxz">mirrors://kde/stable/4.11.0/src/kubrick-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kubrick</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

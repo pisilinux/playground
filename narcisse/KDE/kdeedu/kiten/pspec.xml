@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>A Japanese reference/study tool</Summary>
         <Description>Kiten is a Japanese reference/study tool.</Description>
-        <Archive sha1sum="564b49103a8f7adbd1cdf170ba5b17119abd519f" type="tarxz">mirrors://kde/unstable/4.10.97/src/kiten-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="f7d0792c017704591a5840b615f15cd73fa0999b" type="tarxz">mirrors://kde/stable/4.11.0/src/kiten-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>    
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">libkdeedu-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kiten</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>    
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">libkdeedu</Dependency>    
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -51,6 +51,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

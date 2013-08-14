@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Miniature golf</Summary>
         <Description>Kolf is a miniature golf game with 2d top-down view. Courses are dynamic, and up to 10 people can play at once in competition.</Description>
-        <Archive sha1sum="0e5e90f84a33d70af1277f9d110513b00254d24d" type="tarxz">mirrors://kde/unstable/4.10.97/src/kolf-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="b3aeed99ffe55d6ca06e4af8e2a6490a41bdf3a8" type="tarxz">mirrors://kde/stable/4.11.0/src/kolf-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kolf</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

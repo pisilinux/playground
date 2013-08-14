@@ -13,16 +13,16 @@
         <IsA>app:gui</IsA>
         <Summary>Library used for loading and rendering of Mahjongg tilesets</Summary>
         <Description>Library used for loading and rendering of Mahjongg tilesets.</Description>
-        <Archive sha1sum="a8219044fc54a8c537d9fed9fa3b1ef17414b61d" type="tarxz">mirrors://kde/unstable/4.10.97/src/libkmahjongg-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="ec7b32b5c0f767f06a36202f2276dc0fe08ebd53" type="tarxz">mirrors://kde/stable/4.11.0/src/libkmahjongg-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>libkmahjongg</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -44,6 +44,13 @@
     </Package>        
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Practice calculating with fractions and percentages</Summary>
         <Description>KBruch is a small program to practice calculating with fractions and percentages. Different exercises are provided for this purpose and you can use the learning mode to practice with fractions. The program checks the user's input and gives feedback.</Description>
-        <Archive sha1sum="4b2d504b5dec344fce00123a58ea96dde6a06b65" type="tarxz">mirrors://kde/unstable/4.10.97/src/kbruch-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="7010da4294dc50d15be8c5672dcf2032e708fb82" type="tarxz">mirrors://kde/stable/4.11.0/src/kbruch-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>    
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">libkdeedu-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kbruch</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>    
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">libkdeedu</Dependency>    
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -38,6 +38,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

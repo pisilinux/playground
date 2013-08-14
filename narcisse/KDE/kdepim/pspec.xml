@@ -14,11 +14,11 @@
         <IsA>library</IsA>
         <Summary>KDE4 PIM (Personal Information Managemant) applications</Summary>
         <Description>Contains KDE4 Personal Information Management applications. In package KMail (e-mail client), KNode (newsreader), and KOrganizer (organize journals, events, appointments), akregator (RSS feed aggregator), knotes (sticky notes for desktop) applications are included.</Description>
-        <Archive sha1sum="88bdf638db20d46d13d3286612ef4ffacbc92d3a" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdepim-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="e71f685a06acef59f49540fba763541fb4b9f5a5" type="tarxz">mirrors://kde/stable/4.11.0/src/kdepim-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">nepomuk-widgets-devel</Dependency>  
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kdepimlibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">nepomuk-widgets-devel</Dependency>  
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdepimlibs-devel</Dependency>
             <Dependency>akonadi-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
             <Dependency>libassuan-devel</Dependency>
@@ -53,10 +53,10 @@
     <Package>
         <Name>kdepim</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">nepomuk-widgets</Dependency>  
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kdepimlibs</Dependency>
-            <Dependency versionFrom="4.10.97">kdepim-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">nepomuk-widgets</Dependency>  
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdepimlibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdepim-runtime</Dependency>
             <Dependency>akonadi</Dependency>
             <Dependency>phonon</Dependency>
             <Dependency>libassuan</Dependency>
@@ -92,6 +92,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>
