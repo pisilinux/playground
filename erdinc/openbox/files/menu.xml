@@ -293,6 +293,12 @@
       <startupnotify><enabled>yes</enabled></startupnotify>
     </action>
   </item>
+  <item label="Sound Volume Manager">
+    <action name="Execute">
+      <command>pavucontrol</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action>
+  </item>
   <item label="Manage Cups Printers">
     <action name="Execute">
       <command>xdg-open http://localhost:631/</command>
@@ -318,8 +324,6 @@
   </item>
     <item label="LX-Panel">
     <action name="Execute"><command>lxpanel</command></action>
-   <item label="Sound-Volume Control">
-    <action name="Execute"><command>pavucontrol</command></action>
   </item>
   <separator label="Applications" />
   <menu id="apps-accessories-menu"/>
