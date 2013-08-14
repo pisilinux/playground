@@ -126,23 +126,23 @@
   </item>
 </menu>
 
-<menu id="apps-office-menu" label="Ofis">
-  <item label="LibreOffice Veritabanı Geliştirme">
+<menu id="apps-office-menu" label="Office">
+  <item label="LibreOffice Base">
     <action name="Execute">
       <command>libreoffice --base</command>
     </action>
   </item>
-  <item label="LibreOffice Hesap Tablosu">
+  <item label="LibreOffice Calc">
     <action name="Execute">
       <command>libreoffice --calc</command>
     </action>
   </item>
-  <item label="LibreOffice Sunum">
+  <item label="LibreOffice Impress">
     <action name="Execute">
       <command>libreoffice --impress</command>
     </action>
   </item>
-  <item label="LibreOffice Kelime İşlemci">
+  <item label="LibreOffice writer">
     <action name="Execute">
       <command>libreoffice --writer</command>
     </action>
@@ -290,6 +290,12 @@
   <item label="KDE Control Center">
     <action name="Execute">
       <command>systemsettings</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action>
+  </item>
+  <item label="Sound Volume Manager">
+    <action name="Execute">
+      <command>pavucontrol</command>
       <startupnotify><enabled>yes</enabled></startupnotify>
     </action>
   </item>
