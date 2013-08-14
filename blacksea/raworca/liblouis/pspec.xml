@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>liblouis</Name>
+        <Homepage>http://liblouis.googlecode.com/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <IsA>app</IsA>
+        <Summary> Braille translator </Summary>
+        <Description> Braille translator</Description>
+        <Archive sha1sum="a2ba4d99bab07900dba02a03349f2099beb9b490" type="targz">http://liblouis.googlecode.com/files/liblouis-2.5.3.tar.gz</Archive>
+        <!--
+        <BuildDependencies>
+            <Dependency>Dep1-devel</Dependency>
+            <Dependency>Dep2-devel</Dependency>
+            <Dependency>Dep3-devel</Dependency>
+            <Dependency versionFrom="">Dep4-devel</Dependency>
+        </BuildDependencies>
+        -->
+        <!--
+        <Patches>
+            <Patch>liblouis.patch</Patch>
+            <Patch level="1">liblouis.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>liblouis</Name>
+        <!--
+        <RuntimeDependencies>
+            <Dependency>Dep1</Dependency>
+            <Dependency>Dep2</Dependency>
+            <Dependency>Dep3</Dependency>
+            <Dependency versionFrom="">Dep4</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="all">/</Path>
+            <!--
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            -->
+        </Files>
+        <!--
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/liblouis.desktop">liblouis.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/liblouis.png">liblouis.png</AdditionalFile>
+        </AdditionalFiles>
+        -->
+        <!--
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+        -->
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-13</Date>
+            <Version>2.5.3</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
