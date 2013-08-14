@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>obmenu</Name>
+        <Homepage>http://obmenu.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community </Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>obmenu</Icon>
+        <IsA>app</IsA>
+        <Summary>Openbox menu editor</Summary>
+        <Description>Openbox menu editor. Edit your complex xml-based openbox menu easily</Description>
+        <Archive sha1sum="7b638d5309ca463980782c60d94e76f02565b596" type="targz">http://downloads.sourceforge.net/project/obmenu/obmenu/1.0/obmenu-1.0.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>obmenu</Name>
+        <RuntimeDependencies>
+            <Dependency>openbox</Dependency>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>python</Dependency>
+        </RuntimeDependencies>
+
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-14</Date>
+            <Version>1.0</Version>
+            <Comment>First release</Comment>
+            <Name>Burak Fazıl ERTÜRK</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
