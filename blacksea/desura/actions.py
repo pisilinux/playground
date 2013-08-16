@@ -19,5 +19,5 @@ NoStrip = ["/"]
     
 def install():  
     pisitools.insinto("/opt/desura/", "desura", "desura")
-    shelltools.chmod("%s/opt/desura/desura" % get.installDIR())
-    shelltools.chown("%s/opt/desura/desura" % get.installDIR())
+    shelltools.chmod("%s/opt/desura/desura" % get.installDIR(), 0755)
+    shelltools.chown("%s/opt/desura/desura" % get.installDIR(), gid="users")

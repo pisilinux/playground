@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Breakout like game</Summary>
         <Description>KBreakout is a Breakout like game. The object of the game is to destroy as many bricks as possible without losing the ball.</Description>
-        <Archive sha1sum="d1fdddccf8d313227a1864533b8764e6797fd044" type="tarxz">mirrors://kde/unstable/4.10.97/src/kbreakout-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="b8559bba88f9793203d3e7f46b05f81893403453" type="tarxz">mirrors://kde/stable/4.11.0/src/kbreakout-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kbreakout</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

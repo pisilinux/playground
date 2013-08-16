@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>pysdm</Name>
@@ -14,7 +14,7 @@
         <Description>Pysdm diskleri sistem açılışında otomatik olarak bağlamaya olanak sağlayan fstab girişleri üreten bir programdır</Description>
         <Archive sha1sum="f364a95e86d30d4c2bfd487bce59a1d2fbdd6cb3" type="targz">http://downloads.sourceforge.net/project/pysdm/pysdm/pysdm 0.4.1/pysdm-0.4.1.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>pyGTK</Dependency>
+            <Dependency>python-gtk-devel</Dependency>
             <Dependency>python</Dependency>
         </BuildDependencies>
     </Source>
@@ -22,9 +22,13 @@
     <Package>
         <Name>pysdm</Name>
         <RuntimeDependencies>
-            <Dependency>pyGTK</Dependency>
+            <Dependency>python-gtk</Dependency>
             <Dependency>python</Dependency>
         </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
 
     </Package>
 

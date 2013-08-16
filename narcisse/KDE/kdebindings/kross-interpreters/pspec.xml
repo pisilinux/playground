@@ -12,9 +12,9 @@
         <Icon>kross-interpreters</Icon>
         <Summary>KDE4 interpreters</Summary>
         <Description>kross-interpreters consists of several interpreters for KDE4.</Description>
-        <Archive sha1sum="e3cec11f62758fbdb5c5bdf7cb92ba1e09ee94bc" type="tarxz">mirrors://kde/unstable/4.10.97/src/kross-interpreters-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="647af2a112e571ebdb435e6948268075f97486b0" type="tarxz">mirrors://kde/stable/4.11.0/src/kross-interpreters-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
             <Dependency>sun-jdk</Dependency>
             <Dependency>ruby-devel</Dependency>
         </BuildDependencies>
@@ -44,7 +44,7 @@
         <Description>Python-kross contains KDE4 kross bindings for Python.</Description>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib/kde4/krosspython.so</Path>
@@ -58,7 +58,7 @@
         <Summary>KDE4 kross Ruby bindings</Summary>
         <Description>Ruby-kross contains KDE4 kross bindings for Ruby.</Description>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
             <Dependency>ruby</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -73,7 +73,7 @@
         <Summary>KDE4 kross Java bindings</Summary>
         <Description>Java-kross contains KDE4 kross bindings for Java.</Description>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
             <Dependency>sun-jre</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -83,6 +83,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

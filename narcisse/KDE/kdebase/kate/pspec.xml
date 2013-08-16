@@ -13,9 +13,9 @@
         <IsA>app:gui</IsA>
         <Summary>KDE4 text editor</Summary>
         <Description>Kate is a multi-document, multi-view text editor for KDE. It features stuff like codefolding, syntaxhighlighting, dynamic word wrap, an embedded console, an extensive plugin interface and some prelimentary scripting support.</Description>
-	<Archive type="tarxz" sha1sum="17335cd79f7f7f7613111490eb2a44dc5cda45bf">mirrors://kde/unstable/4.10.97/src/kate-4.10.97.tar.xz</Archive>
+	<Archive type="tarxz" sha1sum="0032f388618fa3d035ee206e3014c362d419b965">mirrors://kde/stable/4.11.0/src/kate-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
             <Dependency>python-kde-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -23,7 +23,7 @@
     <Package>
         <Name>kate</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
             <Dependency>python-kde</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -67,7 +67,7 @@
         <Name>kate-devel</Name>
         <Summary>Development files for kate</Summary>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
             <Dependency>python-kde-devel</Dependency>
             <Dependency>kate</Dependency>
         </RuntimeDependencies>
@@ -77,6 +77,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

@@ -12,10 +12,10 @@
         <IsA>app:gui</IsA>
         <Summary>Dial-up connection tool.</Summary>
         <Description>KPPP is a modem dialer for connecting to a dial-up Internet Service Provider.</Description>
-        <Archive sha1sum="d7df3fd70af6e2a04bfacaaf67c89bfc770b91af" type="tarxz">mirrors://kde/unstable/4.10.97/src/kppp-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="5322ed6fe8122940f618c04dd51c6dbff7b9f437" type="tarxz">mirrors://kde/stable/4.11.0/src/kppp-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
 	        <Dependency>ppp-devel</Dependency>	    
         </BuildDependencies>
     </Source>
@@ -23,8 +23,8 @@
     <Package>
         <Name>kppp</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
 	        <Dependency>ppp</Dependency>
 	</RuntimeDependencies>
         <Files>
@@ -35,6 +35,13 @@
     </Package>  
 
     <History>
+        <Update release="3">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

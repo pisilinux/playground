@@ -12,10 +12,10 @@
         <IsA>app:gui</IsA>
         <Summary>Picmi is a single player logic-based puzzle game</Summary>
         <Description>Picmi is a single player logic-based puzzle game. The goal is to color cells according to numbers given at the side of the board in order to uncover a hidden pattern or picture. </Description>
-        <Archive sha1sum="cd60a7f2916bc7e1fcd8c253d6d1261afcaccfa0" type="tarxz">mirrors://kde/unstable/4.10.97/src/picmi-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="80d577618e1b957f6fe57986ef03ab42437d914f" type="tarxz">mirrors://kde/stable/4.11.0/src/picmi-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
@@ -23,8 +23,8 @@
         <Name>picmi</Name>
         <Icon>picmi</Icon>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

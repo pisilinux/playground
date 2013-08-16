@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>A powerful way to master new vocabularies</Summary>
         <Description>KWordQuiz is a tool that gives you a powerful way to master new vocabularies. It may be a language or any other kind of terminology.</Description>
-        <Archive sha1sum="1c1bca44d19e14a6fbea4c9fdaa851797e92619a" type="tarxz">mirrors://kde/unstable/4.10.97/src/kwordquiz-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="5a8cd264eb1650fc7f772ae5fb29cb3789b77ee0" type="tarxz">mirrors://kde/stable/4.11.0/src/kwordquiz-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">libkdeedu-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">libkdeedu-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -24,8 +24,8 @@
     <Package>
         <Name>kwordquiz</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">libkdeedu</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">libkdeedu</Dependency>
             <Dependency>phonon</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

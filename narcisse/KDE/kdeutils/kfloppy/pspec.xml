@@ -13,16 +13,16 @@
         <IsA>app:gui</IsA>
         <Summary>A floppy formatter</Summary>
         <Description>KFloppy is a utility that provides a straightforward graphical means to format 3.5" and 5.25" floppy disks.</Description>
-        <Archive sha1sum="e4e45ddd02c049c086e3006f987e7b2142cc17a9" type="tarxz">mirrors://kde/unstable/4.10.97/src/kfloppy-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="c3abdbb0adeca3fa6aaac03b99e6eed1e545a8c2" type="tarxz">mirrors://kde/stable/4.11.0/src/kfloppy-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kfloppy</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -33,6 +33,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

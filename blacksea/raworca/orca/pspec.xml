@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>orca</Name>
+        <Homepage>https://projects.gnome.org/orca/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <Icon>orca</Icon>
+        <IsA>app</IsA>
+        <Summary>Screen reader for individuals who are blind or visually impaired</Summary>
+        <Description>Screen reader for individuals who are blind or visually impaired</Description>
+        <Archive sha1sum="f9bed2a35b63aa66e782682e49896fb5d8f8d30f" type="binary">http://ftp.acc.umu.se/pub/GNOME/sources/orca/3.9/orca-3.9.5.tar.xz</Archive>
+        <!--
+        <BuildDependencies>
+            <Dependency>at-spi2-atk</Dependency>
+            <Dependency>gsettings-desktop-schemas-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+	    <Dependency>speech-dispatcher-devel</Dependency>
+            <Dependency>Dep2-devel</Dependency>
+            <Dependency>Dep3-devel</Dependency>
+            <Dependency versionFrom="">Dep4-devel</Dependency>
+        </BuildDependencies>
+        -->
+        <!--
+        <Patches>
+            <Patch>orca.patch</Patch>
+            <Patch level="1">orca.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>orca</Name>
+        <!--
+        <RuntimeDependencies>
+            <Dependency>gsettings-desktop-schemas</Dependency>
+            <Dependency>python-pyxdg</Dependency>
+            <Dependency>dbus-python</Dependency>
+	    <Dependency>gtk3</Dependency>
+            <Dependency>speech-dispatcher</Dependency>
+            <Dependency>gnome-doc-utils</Dependency>
+	    <Dependency>itstool</Dependency>
+	    <Dependency>intltool</Dependency>
+            <Dependency versionFrom="">Dep4</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="all">/</Path>
+            <!--
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            -->
+        </Files>
+        <!--
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/orca.desktop">orca.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/orca.png">orca.png</AdditionalFile>
+        </AdditionalFiles>
+        -->
+        <!--
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+        -->
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-13</Date>
+            <Version>3.9.5</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

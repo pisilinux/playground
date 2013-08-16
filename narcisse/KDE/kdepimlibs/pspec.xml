@@ -12,11 +12,11 @@
         <IsA>library</IsA>
         <Summary>KDE4 PIM libraries</Summary>
         <Description>Contains KDE4 PIM (Personal Information Management) base libraries.</Description>
-	<Archive sha1sum="5f0ab98f1c2f2bf45ea5b7f28f9874e6d58597c8" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdepimlibs-4.10.97.tar.xz</Archive>
+	<Archive sha1sum="8fa13be4729184b50edf404cc7de8dbd97c23636" type="tarxz">mirrors://kde/stable/4.11.0/src/kdepimlibs-4.11.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-	    <Dependency versionFrom="4.10.97">nepomuk-core-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+	    <Dependency versionFrom="4.11.0">nepomuk-core-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
             <Dependency>akonadi-devel</Dependency>
             <Dependency>boost-devel</Dependency>
@@ -37,8 +37,8 @@
         <Name>kdepimlibs</Name>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-	    <Dependency versionFrom="4.10.97">nepomuk-core</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+	    <Dependency versionFrom="4.11.0">nepomuk-core</Dependency>
             <Dependency>akonadi</Dependency>
             <Dependency>phonon</Dependency>
             <Dependency>prison</Dependency>
@@ -83,6 +83,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

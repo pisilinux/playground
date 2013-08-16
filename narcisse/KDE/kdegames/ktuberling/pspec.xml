@@ -13,18 +13,18 @@
         <IsA>app:gui</IsA>
         <Summary>Picture game for children</Summary>
         <Description>KTuberling a simple constructor game suitable for children and adults alike. The idea of the game is based around a once popular doll making concept.</Description>
-        <Archive sha1sum="c5f05d07663aa90a31770fbcdfd4b9820524fdb9" type="tarxz">mirrors://kde/unstable/4.10.97/src/ktuberling-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="7528f966835e53ca46e74ae4cf53739ed0d3cc69" type="tarxz">mirrors://kde/stable/4.11.0/src/ktuberling-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>    
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>    
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>ktuberling</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>  
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>  
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

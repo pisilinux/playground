@@ -12,12 +12,12 @@
         <IsA>app:gui</IsA>
         <Summary>Download manager for KDE</Summary>
         <Description>KGet is an advanced download manager with support for Metalink and Bittorrent.</Description>
-        <Archive sha1sum="abfbd7dbdaf41199d956721b386ca54e17773ebc" type="tarxz">mirrors://kde/unstable/4.10.97/src/kget-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="a31afa2747a50edbd20fe785e75c8746e0684c83" type="tarxz">mirrors://kde/stable/4.11.0/src/kget-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-workspace-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kdepimlibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdepimlibs-devel</Dependency>
             <Dependency>gpgme-devel</Dependency>
             <Dependency>libmms-devel</Dependency>	
             <Dependency>qca2-devel</Dependency> 
@@ -29,10 +29,10 @@
     <Package>
         <Name>kget</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kde-workspace</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.97">kdepimlibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">kdepimlibs</Dependency>
             <Dependency>gpgme</Dependency>
             <Dependency>libmms</Dependency>	
             <Dependency>qca2</Dependency> 
@@ -47,6 +47,13 @@
     </Package>  
 
     <History>
+        <Update release="3">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>brltty</Name>
+        <Homepage>http://mielke.cc/brltty/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <IsA>app</IsA>
+        <Summary>Braille display driver for Linux</Summary>
+        <Description>Braille display driver for Linux</Description>
+        <Archive sha1sum="df5aa180cf9213174e34f1f9086650f47e947319" type="targz">http://mielke.cc/brltty/releases/brltty-4.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>bluez-libs-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+	    <Dependency>at-spi2-core-devel</Dependency>
+   	    <Dependency>libXaw-devel</Dependency>
+	    <Dependency>icu4c-devel</Dependency>
+	    <Dependency>tcl-devel</Dependency>
+	    <Dependency>at-spi2-atk-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>brltty</Name>
+        <RuntimeDependencies>
+            <Dependency>bluez-libs</Dependency>
+            <Dependency>at-spi2-core</Dependency>
+            <Dependency>atk</Dependency>
+	    <Dependency>libXaw</Dependency>
+	    <Dependency>icu4c</Dependency>
+	    <Dependency>tcl</Dependency>
+	    <Dependency>at-spi2-atk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+                <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-13</Date>
+            <Version>4.5</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

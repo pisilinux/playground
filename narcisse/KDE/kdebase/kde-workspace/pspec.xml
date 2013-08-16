@@ -11,15 +11,15 @@
         <License>GPLv2</License>
         <Summary>KDE4 Workspace consists of what is the desktop of the KDE4</Summary>
         <Description>kde-workspace contains the main KDE components like kdm (the login manager of KDE), khotkeys (a hotkey daemon), klipper (a cut paste history utility), kmenuedit (the menu editor), krandrtray (resize and rotate X screens), krunner (a command run interface), ksysguard (a performance monitor), kwin (the window manager of KDE), kxkb (a utility to switch keyboard maps), plasma (the KDE desktop, panels and widgets workspace application) and systemsettings (the configuration editor).</Description>
-	<Archive sha1sum="1904feb2e8b1828719c601e31a94dea8e05760a7" type="tarxz">mirrors://kde/unstable/4.10.97/src/kde-workspace-4.10.97.tar.xz</Archive>
+	<Archive sha1sum="3e877c9f82ad4b3d10c0752adbb50240707d632d" type="tarxz">mirrors://kde/stable/4.11.0/src/kde-workspace-4.11.0.tar.xz</Archive>
         <Archive sha1sum="e39b6ee9bf034b877b1f68e9a1b47204c70aa587" type="targz">http://source.pisilinux.org/1.0/krita-scheme.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>qt-webkit-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kdepimlibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kdepim-runtime</Dependency>    
-            <Dependency versionFrom="4.10.97">kactivities-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-base-artwork</Dependency>             
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdepimlibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdepim-runtime</Dependency>    
+            <Dependency versionFrom="4.11.0">kactivities-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-base-artwork</Dependency>             
             <Dependency>phonon-devel</Dependency>
             <!-- Needed by calendar and akonadi dataengines -->
             <Dependency>akonadi-devel</Dependency>
@@ -194,10 +194,10 @@
         <IsA>app:gui</IsA>
         <RuntimeDependencies>
             <Dependency>qt-webkit</Dependency>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kdepimlibs</Dependency>
-            <Dependency versionFrom="4.10.97">kactivities</Dependency>
-            <Dependency versionFrom="4.10.97">kde-base-artwork</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdepimlibs</Dependency>
+            <Dependency versionFrom="4.11.0">kactivities</Dependency>
+            <Dependency versionFrom="4.11.0">kde-base-artwork</Dependency>
             <Dependency>qoauth</Dependency>
             <Dependency>polkit-qt_1</Dependency>
             <Dependency>soprano</Dependency>
@@ -452,6 +452,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

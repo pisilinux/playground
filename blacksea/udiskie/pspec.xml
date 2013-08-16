@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>udiskie</Name>
+        <Homepage>https://bitbucket.org/byronclark/udiskie</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>app</IsA>
+        <Summary>Automatically mount removable storage devices</Summary>
+        <Description>Udiskie is a simple daemon that uses udisks to automatically mount removable storage devices</Description>
+        <Archive sha1sum="4fc5b1343175f52a6efde4a7098342b3fb130065" type="targz">https://bitbucket.org/byronclark/udiskie/downloads/udiskie-0.4.1.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>udiskie</Name>
+        <RuntimeDependencies>
+            <Dependency>dbus-python</Dependency>
+            <Dependency>python-Notifier</Dependency>
+            <Dependency>udisks</Dependency>
+            <Dependency>python-pygobject</Dependency>
+         </RuntimeDependencies>
+         
+	 <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+          </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-14</Date>
+            <Version>0.4.1</Version>
+            <Comment>First release</Comment>
+            <Name>Burak Fazıl ERTÜRK</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -12,16 +12,16 @@
         <IsA>app:gui</IsA>
         <Summary>Tools for translating DocBook XML files with Gettex</Summary>
         <Description>This is a collection of tools that facilitate translating DocBook XML files using Gettext message files (PO files).</Description>
-        <Archive sha1sum="75f440e9c6eac8bfb6a23ac7ed9202add8f786f4" type="tarxz">mirrors://kde/unstable/4.10.97/src/poxml-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="197ac3dc0a85f69e932a572dae56f4666b46e16d" type="tarxz">mirrors://kde/stable/4.11.0/src/poxml-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>poxml</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
 	</RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -32,6 +32,13 @@
     </Package>  
 
     <History>
+        <Update release="3">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

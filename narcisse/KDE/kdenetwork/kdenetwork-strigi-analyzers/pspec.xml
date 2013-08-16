@@ -12,9 +12,9 @@
         <IsA>library</IsA>
         <Summary>Torrent plugins for Strigi</Summary>
         <Description>Torrent plugins for Strigi.</Description>
-        <Archive sha1sum="66ca918756f8851f104f94b08e958a62f6f2b7ff" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdenetwork-strigi-analyzers-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="0227e4686eea9b1f228e6bc15dfe8fa9ec270d5b" type="tarxz">mirrors://kde/stable/4.11.0/src/kdenetwork-strigi-analyzers-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency> 
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency> 
             <Dependency>libstreamanalyzer-devel</Dependency>  
         </BuildDependencies>
     </Source>
@@ -22,7 +22,7 @@
     <Package>
         <Name>kdenetwork-strigi-analyzers</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
             <Dependency>libstreamanalyzer</Dependency>
 	</RuntimeDependencies>
         <Files>
@@ -33,6 +33,13 @@
     </Package>  
 
     <History>
+        <Update release="3">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

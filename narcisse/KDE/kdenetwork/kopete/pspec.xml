@@ -13,11 +13,11 @@
         <IsA>app:gui</IsA>
         <Summary>Instant messaging application for KDE</Summary>
         <Description>Kopete is an instant messenger supporting AIM, ICQ, Windows Live Messenger, Yahoo, Jabber, Gadu-Gadu, Novell GroupWise Messenger, and more.</Description>
-        <Archive sha1sum="7b71e91479b250ff935bb1e9338211dc7d78d425" type="tarxz">mirrors://kde/unstable/4.10.97/src/kopete-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="a67716f14a07cdbacf3df40983db17f594eb768b" type="tarxz">mirrors://kde/stable/4.11.0/src/kopete-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-                <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-                <Dependency versionFrom="4.10.97">kdepimlibs-devel</Dependency>
-	        <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+                <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+                <Dependency versionFrom="4.11.0">kdepimlibs-devel</Dependency>
+	        <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
                 <Dependency>libidn-devel</Dependency>
                 <Dependency>jasper-devel</Dependency>
 	        <Dependency>qt-devel</Dependency>
@@ -41,12 +41,12 @@
     <Package>
         <Name>kopete</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kdepimlibs</Dependency>
-	        <Dependency versionFrom="4.10.97">kdepim</Dependency>
-	        <Dependency versionFrom="4.10.97">kdepim-runtime</Dependency>
-	        <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
-	        <Dependency versionFrom="4.10.97">kdnssd</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdepimlibs</Dependency>
+	        <Dependency versionFrom="4.11.0">kdepim</Dependency>
+	        <Dependency versionFrom="4.11.0">kdepim-runtime</Dependency>
+	        <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
+	        <Dependency versionFrom="4.11.0">kdnssd</Dependency>
                 <Dependency>libidn</Dependency>
                 <Dependency>jasper</Dependency>
 	        <Dependency>qt</Dependency>
@@ -85,6 +85,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

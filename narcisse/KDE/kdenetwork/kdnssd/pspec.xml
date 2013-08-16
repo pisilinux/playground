@@ -12,9 +12,9 @@
         <IsA>library</IsA>
         <Summary>DNS-SD Protocol Library for the KDE Platform</Summary>
         <Description>This library is for handling the DNS-based Service Discovery Protocol (DNS-SD)</Description>
-        <Archive sha1sum="1df5b08fb2f0f1ad2f1c133e1f15e40ae94aa25b" type="tarxz">mirrors://kde/unstable/4.10.97/src/kdnssd-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="d8957dab1a0516474b856bc5d1ef647be8dfb1a2" type="tarxz">mirrors://kde/stable/4.11.0/src/kdnssd-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
 	    <Dependency>qt-devel</Dependency>	    
         </BuildDependencies>
     </Source>
@@ -22,7 +22,7 @@
     <Package>
         <Name>kdnssd</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
 	    <Dependency>qt</Dependency>
 	</RuntimeDependencies>
         <Files>
@@ -33,6 +33,13 @@
     </Package>  
 
     <History>
+        <Update release="3">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

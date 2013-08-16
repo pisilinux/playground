@@ -13,12 +13,12 @@
         <IsA>app:gui</IsA>
         <Summary>KSCD: KDE Audio Player</Summary>
         <Description>KSCD: KDE Audio Player</Description>
-        <Archive sha1sum="8bad7bae25f9e6a34eec10fe04309275319b2a7c" type="tarxz">mirrors://kde/unstable/4.10.97/src/kscd-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="b1e6dccfab3c2c4246bcff43880ab8e9938ee915" type="tarxz">mirrors://kde/stable/4.11.0/src/kscd-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
-            <Dependency versionFrom="4.10.97">libkcddb</Dependency>
-            <Dependency versionFrom="4.10.97">libkcompactdisc</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">libkcddb</Dependency>
+            <Dependency versionFrom="4.11.0">libkcompactdisc</Dependency>
             <Dependency>musicbrainz3-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -26,10 +26,10 @@
     <Package>
         <Name>kscd</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
-            <Dependency versionFrom="4.10.97">libkcddb</Dependency>
-            <Dependency versionFrom="4.10.97">libkcompactdisc</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">libkcddb</Dependency>
+            <Dependency versionFrom="4.11.0">libkcompactdisc</Dependency>
             <Dependency>musicbrainz3</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -42,6 +42,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

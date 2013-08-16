@@ -12,20 +12,20 @@
         <IsA>app:gui</IsA>
         <Summary>Desktop companion.</Summary>
         <Description>AMOR, or Amusing Misuse Of Resources, displays an animated character who wanders about the screen, doing tricks and giving the occasional hint.</Description>
-        <Archive sha1sum="17bc70608b40beaad0b7b8c85837a5f57dfd51a2" type="tarxz">mirrors://kde/unstable/4.10.97/src/amor-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="c596b2f57ef6cf87cddc4587178fa70e27865f47" type="tarxz">mirrors://kde/stable/4.11.0/src/amor-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-	    <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-workspace-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+	    <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace-devel</Dependency>
             <Dependency>libXext-devel</Dependency>
         </BuildDependencies>        
     </Source>
     <Package>
         <Name>amor</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-	    <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-workspace</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+	    <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace</Dependency>
             <Dependency>libXext</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

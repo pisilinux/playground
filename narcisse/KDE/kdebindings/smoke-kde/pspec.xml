@@ -12,23 +12,23 @@
         <IsA>desktop.kde.base</IsA>
         <Summary>sLanguage independent library for KDE bindings.</Summary>
         <Description>Language independent library for KDE bindings</Description>
-        <Archive sha1sum="26060e6f81319a4f853f30e24764a423b51985ea" type="tarxz">mirrors://kde/unstable/4.10.97/src/smokekde-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="d99082d9f48ff0d6758d26d1e47cb1e44d2a7992" type="tarxz">mirrors://kde/stable/4.11.0/src/smokekde-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">smoke-gen-devel</Dependency>
-            <Dependency versionFrom="4.10.97">smoke-qt-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kate</Dependency>
-            <Dependency versionFrom="4.10.97">kdepimlibs</Dependency>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">okular</Dependency>
+            <Dependency versionFrom="4.11.0">smoke-gen-devel</Dependency>
+            <Dependency versionFrom="4.11.0">smoke-qt-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kate</Dependency>
+            <Dependency versionFrom="4.11.0">kdepimlibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">okular</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>smoke-kde</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kdepimlibs</Dependency>
-            <Dependency versionFrom="4.10.97">smoke-qt</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kdepimlibs</Dependency>
+            <Dependency versionFrom="4.11.0">smoke-qt</Dependency>
             <Dependency>attica</Dependency>
             <Dependency>soprano</Dependency>
         </RuntimeDependencies>
@@ -51,6 +51,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

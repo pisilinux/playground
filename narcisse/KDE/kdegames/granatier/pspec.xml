@@ -13,10 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>A Bomberman game</Summary>
         <Description>Granatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.</Description>
-        <Archive sha1sum="5fc915995d849771295925283a7c017e19dd562d" type="tarxz">mirrors://kde/unstable/4.10.97/src/granatier-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="37c4453c5c1c1712912383e2be1766be5f5948cd" type="tarxz">mirrors://kde/stable/4.11.0/src/granatier-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">libkdegames-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
             <Dependency>openal-devel</Dependency>    
         </BuildDependencies>
     </Source>
@@ -24,8 +24,8 @@
     <Package>
         <Name>granatier</Name>        
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">libkdegames</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">libkdegames</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
             <Dependency>openal</Dependency>    
         </RuntimeDependencies>
         <Files>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>

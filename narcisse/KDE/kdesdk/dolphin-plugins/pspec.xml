@@ -12,20 +12,20 @@
         <IsA>library</IsA>
         <Summary>Extra dolphin plugins</Summary>
         <Description>This package contains plugins that offer integration in Dolphin with the following version control systems:</Description>
-        <Archive sha1sum="e0d2af97a2cc2d7871a02ad962ca9d36d3f2985a" type="tarxz">mirrors://kde/unstable/4.10.97/src/dolphin-plugins-4.10.97.tar.xz</Archive>
+        <Archive sha1sum="e58a4908dfcfcab93dc39dfe465df074153df81d" type="tarxz">mirrors://kde/stable/4.11.0/src/dolphin-plugins-4.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-workspace-devel</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace-devel</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>dolphin-plugins</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.10.97">kdelibs</Dependency>
-            <Dependency versionFrom="4.10.97">kde-workspace</Dependency>
-            <Dependency versionFrom="4.10.97">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.0">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.0">kde-workspace</Dependency>
+            <Dependency versionFrom="4.11.0">kde-runtime</Dependency>
 	</RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
@@ -35,6 +35,13 @@
     </Package>  
 
     <History>
+        <Update release="3">
+            <Date>2013-08-14</Date>
+            <Version>4.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-08-05</Date>
             <Version>4.10.97</Version>
