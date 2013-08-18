@@ -5,14 +5,15 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt
 
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import qt4
+from pisi.actionsapi import kde4
 
 def setup():
-    qt4.configure()
+    kde4.configure()
 
 def build():
-    qt4.make()
+    kde4.make()
 
 def install():
-    qt4.install()
+    kde4.install()
 
+    pisitools.dodoc("README")
