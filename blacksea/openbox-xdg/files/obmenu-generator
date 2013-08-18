@@ -333,26 +333,26 @@ require '${config_file}';
 
 our \$SCHEMA = [
     #             COMMAND                 LABEL                ICON
-    {item => ['pcmanfm',             'File Manager',      'file-manager']},
+    {item => ['pcmanfm',             'Dosya Yöneticisi',    'file-manager']},
     {item => ['konsole',               'Terminal',          'terminal']},
-    {item => ['kate',                  'Editor',            'text-editor']},
-    {item => ['firefox',              'Web Browser',       'web-browser']},
-    {item => ['gmrun',                'Run command',       'system-run']},
+    {item => ['kate',                 'Metin Editörü',            'text-editor']},
+    {item => ['firefox',              'Web Tarayıcı',       'web-browser']},
+    {item => ['krunner',           'Uygulama Çalıştır',       'system-run']},
 
 
-    {sep => 'Applications'},
+    {sep => 'Uygulamalar'},
 
     #          NAME            LABEL                ICON
-    {cat => ['utility',     'Accessories', 'applications-utilities']},
-    {cat => ['development', 'Development', 'applications-development']},
-    {cat => ['education',   'Education',   'applications-science']},
-    {cat => ['game',        'Games',       'applications-games']},
-    {cat => ['graphics',    'Graphics',    'applications-graphics']},
-    {cat => ['audiovideo',  'Multimedia',  'applications-multimedia']},
-    {cat => ['network',     'Network',     'applications-internet']},
-    {cat => ['office',      'Office',      'applications-office']},
-    {cat => ['settings',    'Settings',    'applications-accessories']},
-    {cat => ['system',      'System',      'applications-system']},
+    {cat => ['utility',     'Yardımcı Programlar', 'applications-utilities']},
+    {cat => ['development', 'Geliştirme', 'applications-development']},
+    {cat => ['education',   'Eğitim',   'applications-science']},
+    {cat => ['game',        'Oyunlar',       'applications-games']},
+    {cat => ['graphics',    'Grafik',    'applications-graphics']},
+    {cat => ['audiovideo',  'Çoklu Ortam',  'applications-multimedia']},
+    {cat => ['network',     'İnternet',     'applications-internet']},
+    {cat => ['office',      'Ofis',      'applications-office']},
+    {cat => ['settings',    'Ayarlar',    'applications-accessories']},
+    {cat => ['system',      'Sistem',      'applications-system']},
 
     #{cat => ['qt',          'QT Applications',    'qtlogo']},
     #{cat => ['gtk',         'GTK Applications',   'gnome-applications']},
@@ -378,7 +378,9 @@ our \$SCHEMA = [
 
     # This options uses the default OpenBox action "Exit"
     {exit => ['Exit', 'exit']},
-]
+    {item => ['oblogout', 'KAPAT', 'exit']},
+    
+ ]
 SCHEMA_FILE
 
     exit if $stdout_config;
@@ -638,8 +640,7 @@ EOL
     <item label="Edit the schema file"><action name="Execute"><execute>$CONFIG{editor} $schema_file</execute></action></item>
     <item label="Edit the configuration file"><action name="Execute"><execute>$CONFIG{editor} $config_file</execute></action></item>
     <separator />
-    <item label="Regenerate configuration file"><action name="Execute"><execute>$0 -r</execute></action></item>
-  </menu>
+    </menu>
 CONFIG_MENU
     }
 }

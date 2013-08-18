@@ -34,9 +34,20 @@
 	    <Dependency>icu4c</Dependency>
 	    <Dependency>tcl</Dependency>
 	    <Dependency>at-spi2-atk</Dependency>
+	    <Dependency>cython</Dependency>
+	    <Dependency>gpm</Dependency>
         </RuntimeDependencies>
         <Files>
-                <Path fileType="all">/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="data">/usr/lib/python2.7/site-packages</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
         </Files>
     </Package>
 
@@ -45,8 +56,8 @@
             <Date>2013-08-13</Date>
             <Version>4.5</Version>
             <Comment>First release</Comment>
-            <Name>PisiLinux Community</Name>
-            <Email>admin@pisilinux.org</Email>
+            <Name>Burak Erturk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

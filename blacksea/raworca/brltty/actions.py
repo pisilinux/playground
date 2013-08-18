@@ -11,22 +11,24 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 
-def setup():
-    autotools.configure("--prefix=/usr \
-    --sysconfdir=/etc \
-    --localstatedir=/var \
-    --mandir=/usr/share/man \
-    --with-tables-directory=/usr/share/brltty \
-    --with-screen-driver=lx \
-    --enable-gpm \
-    --disable-java-bindings \
-    --disable-static")
 
+def setup():
+
+    autotools.configure("--prefix=/usr \
+--sysconfdir='${prefix}/etc' \
+--localstatedir='${prefix}/var'  \
+--mandir='${prefix}/usr/share/man' \
+--with-lib-directory='${prefix}/usr/lib/brltty' \
+--with-tables-directory='${prefix}/usr/share/brltty' \
+--enable-gpm \
+--disable-java-bindings \
+--disable-static")
 
 
 def build():
     autotools.make()
 
 def install():
-    autotools.install()
-    pisitools.dodoc("AUTHORS", "BUGS", "ChangeLog", "COPYING", "NEWS", "README")
+     autotools.install()
+  
+     pisitools.dodoc("README")

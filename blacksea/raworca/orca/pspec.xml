@@ -13,31 +13,22 @@
         <IsA>app</IsA>
         <Summary>Screen reader for individuals who are blind or visually impaired</Summary>
         <Description>Screen reader for individuals who are blind or visually impaired</Description>
-        <Archive sha1sum="f9bed2a35b63aa66e782682e49896fb5d8f8d30f" type="binary">http://ftp.acc.umu.se/pub/GNOME/sources/orca/3.9/orca-3.9.5.tar.xz</Archive>
-        <!--
+        <Archive sha1sum="1ca074e673ef40854c58a912c805f6edb5e56f20" type="tarxz">http://ftp.acc.umu.se/pub/GNOME/sources/orca/3.4/orca-3.4.2.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>at-spi2-atk</Dependency>
-            <Dependency>gsettings-desktop-schemas-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
-	    <Dependency>speech-dispatcher-devel</Dependency>
-            <Dependency>Dep2-devel</Dependency>
-            <Dependency>Dep3-devel</Dependency>
-            <Dependency versionFrom="">Dep4-devel</Dependency>
-        </BuildDependencies>
-        -->
-        <!--
-        <Patches>
-            <Patch>orca.patch</Patch>
-            <Patch level="1">orca.patch</Patch>
-        </Patches>
-        -->
+	    <Dependency>itstool</Dependency>
+	    <Dependency>python-pygobject-devel</Dependency>
+	    <Dependency>python</Dependency>
+	    <Dependency>gnome-doc-utils</Dependency>
+	</BuildDependencies>
     </Source>
 
     <Package>
         <Name>orca</Name>
-        <!--
         <RuntimeDependencies>
             <Dependency>gsettings-desktop-schemas</Dependency>
+	    <Dependency>python-pygobject</Dependency>
             <Dependency>python-pyxdg</Dependency>
             <Dependency>dbus-python</Dependency>
 	    <Dependency>gtk3</Dependency>
@@ -45,12 +36,8 @@
             <Dependency>gnome-doc-utils</Dependency>
 	    <Dependency>itstool</Dependency>
 	    <Dependency>intltool</Dependency>
-            <Dependency versionFrom="">Dep4</Dependency>
         </RuntimeDependencies>
-        -->
         <Files>
-            <Path fileType="all">/</Path>
-            <!--
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="config">/etc</Path>
             <Path fileType="library">/usr/lib</Path>
@@ -60,7 +47,6 @@
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="info">/usr/share/info</Path>
             <Path fileType="doc">/usr/share/doc</Path>
-            -->
         </Files>
         <!--
         <AdditionalFiles>
@@ -79,7 +65,7 @@
     <History>
         <Update release="1">
             <Date>2013-08-13</Date>
-            <Version>3.9.5</Version>
+            <Version>3.4.2</Version>
             <Comment>First release</Comment>
             <Name>PisiLinux Community</Name>
             <Email>admin@pisilinux.org</Email>
