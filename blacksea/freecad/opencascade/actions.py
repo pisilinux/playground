@@ -13,22 +13,8 @@ from pisi.actionsapi import libtools
 WorkDir = "ros/"
 
 def setup():
-    autotools.configure("--with-gl2ps=/usr/include \
-                         --with-tbb-include=/usr/include/tbb \
-                         --with-tbb-library=/usr/lib \
-                         --with-tcl=/usr/lib \
-                         --with-tk=/usr/lib \
-                         --with-ftgl=/usr/include \
-                         --with-freetype=/usr \
-                         --with-xmu-include=/usr/include/X11 \
-                         --with-xmu-library=/usr/lib \
-                         --with-qt \
-                         --with-x \
-                         --enable-shared \
-                         --enable-openmp \
-                         --disable-debug \
-                         --enable-production \
-                         --libdir=%s/usr/lib" % get.installDIR())
+    autotools.autoreconf("-fi")
+    autotools.configure("--disable-debug --enable-production")
 
 def build():
     autotools.make()
@@ -38,3 +24,4 @@ def install():
     autotools.install()
     pisitools.domove("/usr/inc/*", "/usr/include/occ/") 
     pisitools.removeDir("/usr/inc") 
+    pisitools.dodoc("LICENSE")
