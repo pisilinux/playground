@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>CAD/CAE, 3D surface/solid modeling and data exchange</Summary>
         <Description>OpenCASCADE includes components for 3D surface and solid modeling, visualization, data exchange and rapid application development.</Description>
-        <Archive sha1sum="4025ba07d2d4192d803e265614c72e5ae5b436ed" type="targz">http://files.opencascade.com/OCCT/OCC_6.5.1_release/OpenCASCADE651.tar.gz</Archive>
+        <Archive sha1sum="4025ba07d2d4192d803e265614c72e5ae5b436ed" type="targz">http://files.opencascade.com/OCCT/OCC_6.6.0_release/OpenCASCADE660.tgz</Archive>
         <BuildDependencies>
             <Dependency>boost-devel</Dependency>
             <Dependency>xerces-c-devel</Dependency>
@@ -29,14 +29,7 @@
             <Dependency>freetype-devel</Dependency>
             <Dependency>mesa-devel</Dependency>
         </BuildDependencies>
-         <Patches>
-            <Patch>fix-ftgl-includes.patch</Patch>
-            <Patch>fix-atol.patch</Patch>
-	    <Patch level="1">fix-build-g++4.6.patch</Patch>
-	    <Patch>a.patch</Patch>
-        </Patches>
     </Source>
-
     <Package>
         <Name>OpenCASCADE</Name>
         <RuntimeDependencies>
@@ -75,7 +68,7 @@
     <History>
         <Update release="1">
             <Date>2011-07-21</Date>
-            <Version>6.5.1</Version>
+            <Version>6.6.0</Version>
             <Comment>First release.</Comment>
             <Name>Kaan Akşit</Name>
             <Email>kunguz@gmail.com</Email>
