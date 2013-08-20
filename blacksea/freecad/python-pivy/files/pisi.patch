@@ -1,0 +1,16 @@
+Description: Undocumented upstream changes
+ This patch has been created by dpkg-source during the package build
+ but it might have accumulated changes from several uploads. Please
+ check the changelog to (hopefully) learn more on those changes.
+
+--- pivy-0.5.0~v609hg.orig/pivy/quarter/QuarterWidget.py
++++ pivy-0.5.0~v609hg/pivy/quarter/QuarterWidget.py
+@@ -231,7 +231,7 @@ class QuarterWidget(QtOpenGL.QGLWidget):
+             self.soeventmanager.addSoScXMLStateMachine(sostatemachine)
+             sostatemachine.initialize()
+         else:
+-            raise "could not initialize statemachine, given file not found?"
++            raise IOError("could not initialize statemachine, given file not found?")
+ 
+         self.headlight = coin.SoDirectionalLight()
+ 

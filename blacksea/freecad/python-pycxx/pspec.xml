@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>python-pycxx</Name>
+        <Homepage>http://cxx.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Kaan Akşit</Name>
+            <Email>kunguz@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Summary>CXX/Objects makes it easier to write Python extensions</Summary>
+        <Description>The chief way in which python-pycxx makes it easier to write Python extensions is that it greatly increases the probability that your program will not make a reference-counting error and will not have to continually check error returns from the Python C API.</Description>
+        <Archive sha1sum="12245dd18e3bd1d5dc4190d01eba6dd31ff39c07" type="targz">mirrors://sourceforge/cxx/pycxx-6.2.3.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>python-pycxx</Name>
+        <IsA>data</IsA>
+        <Files>
+            <Path fileType="data">/usr/share/python2.7/CXX</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/CXX</Path>
+        </Files>
+    </Package>
+    <Package>
+         <Name>python-pycxx-devel</Name>
+         <IsA>library</IsA>
+         <Summary>Development files for python-pycxx</Summary>
+         <RuntimeDependencies>
+             <Dependency release="current">python-pycxx</Dependency>
+         </RuntimeDependencies>
+         <Files>
+             <Path fileType="header">/usr/include/python2.7/CXX</Path>
+         </Files>
+    </Package>
+    <Package>
+         <Name>python-pycxx-docs</Name>
+         <IsA>data:doc</IsA>
+         <Summary>Documents for python-pycxx</Summary>
+         <RuntimeDependencies>
+             <Dependency release="current">python-pycxx</Dependency>
+         </RuntimeDependencies>
+         <Files>
+            <Path fileType="doc">/usr/share/doc/python-pycxx</Path>
+         </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2011-07-14</Date>
+            <Version>6.2.3</Version>
+            <Comment>First release</Comment>
+            <Name>Kaan Akşit</Name>
+            <Email>kunguz@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

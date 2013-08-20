@@ -1,0 +1,12 @@
+ 
+../../../src/Draw/Draw_Window.cxx: In function 'void Prompt(Tcl_Interp*, int)':
+../../../src/Draw/Draw_Window.cxx:73:41: error: 'Tcl_Interp' has no member named 'result'
+../../../src/Draw/Draw_Window.cxx: In function 'Standard_Boolean Init_Appli()':
+../../../src/Draw/Draw_Window.cxx:1047:37: error: 'Tcl_Interp' has no member named 'result'
+make[3]: *** [Draw_Window.lo] Hata 1
+
+
+
+
+bash> CPPFLAGS="-DUSE_INTERP_ERRORLINE" ./configure
+Then make && make install as usual.

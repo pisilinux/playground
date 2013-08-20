@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>FreeCAD</Name>
+        <Homepage>http://sourceforge.net/projects/free-cad/</Homepage>
+        <Packager>
+            <Name>Kaan Akşit</Name>
+            <Email>kunguz@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>freecad</Icon>
+        <Summary>An Open Source 3D CAD/CAE program</Summary>
+        <Description>FreeCAD is an Open Source 3D CAD/CAE program, based on OpenCascade, QT and Python. It features key concepts like macro recording, workbenches, ability to run as server and dynamically loadable application extensions.</Description>
+        <Archive sha1sum="29f80b84c5405d5dc9ab988db2c2a41018b90b15" type="targz">mirrors://sourceforge/free-cad/freecad-0.12.5284.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>libgfortran</Dependency>
+            <Dependency>python-pycxx-devel</Dependency>
+            <Dependency>python-pivy</Dependency>
+            <Dependency>xerces-c-devel</Dependency>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>eigen</Dependency>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>coin</Dependency>
+            <Dependency>doxygen</Dependency>
+            <Dependency>OpenCASCADE-devel</Dependency>
+            <Dependency>ode-devel</Dependency>
+            <Dependency>coin-devel</Dependency>
+            <Dependency>SoQt-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>freeglut-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+            <Dependency versionFrom="3.0.5">eigen-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">fixincludesofgl.diff</Patch>
+        </Patches>
+    </Source>
+    <Package>
+        <Name>FreeCAD</Name>
+        <IsA>app:gui</IsA>
+        <IsA>library</IsA>
+        <RuntimeDependencies>
+            <Dependency>mesa</Dependency>
+            <Dependency>libgfortran</Dependency>
+            <Dependency>python-pycxx</Dependency>
+            <Dependency>python-pivy</Dependency>
+            <Dependency>xerces-c</Dependency>
+            <Dependency>boost</Dependency>
+            <Dependency>eigen</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>doxygen</Dependency>
+            <Dependency>OpenCASCADE</Dependency>
+            <Dependency>ode</Dependency>
+            <Dependency>coin</Dependency>
+            <Dependency>SoQt</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>freeglut</Dependency>
+            <Dependency>qt-webkit</Dependency>
+            <Dependency versionFrom="3.0.5">eigen</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/freecad</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="executable">/usr/lib/freecad/bin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/freecad</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/freecad.desktop">freecad.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/freecad.png">freecad.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <Package>
+         <Name>FreeCAD-devel</Name>
+         <IsA>data</IsA>
+         <Summary>Development files for FreeCAD</Summary>
+         <RuntimeDependencies>
+             <Dependency release="current">FreeCAD</Dependency>
+         </RuntimeDependencies>
+         <Files>
+            <Path fileType="header">/usr/include</Path>
+         </Files>
+    </Package>
+    <Package>
+         <Name>FreeCAD-docs</Name>
+         <IsA>data:doc</IsA>
+         <Summary>Documents for FreeCAD</Summary>
+         <RuntimeDependencies>
+             <Dependency release="current">FreeCAD</Dependency>
+         </RuntimeDependencies>
+         <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+         </Files>
+    </Package>
+    <History>
+        <Update release="2">
+            <Date>2012-01-30</Date>
+            <Version>0.12.5284</Version>
+            <Comment>First release</Comment>
+            <Name>Kaan Akşit</Name>
+            <Email>kunguz@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-08-07</Date>
+            <Version>0.11.4422</Version>
+            <Comment>First release</Comment>
+            <Name>Kaan Akşit</Name>
+            <Email>kunguz@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>OpenCASCADE</Name>
+        <Homepage>http://www.opencascade.org/</Homepage>
+        <Packager>
+            <Name>Kaan Akşit</Name>
+            <Email>kunguz@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>CAD/CAE, 3D surface/solid modeling and data exchange</Summary>
+        <Description>OpenCASCADE includes components for 3D surface and solid modeling, visualization, data exchange and rapid application development.</Description>
+        <Archive sha1sum="4025ba07d2d4192d803e265614c72e5ae5b436ed" type="targz">http://files.opencascade.com/OCCT/OCC_6.5.1_release/OpenCASCADE651.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>xerces-c-devel</Dependency>
+            <Dependency>coin-devel</Dependency>
+            <Dependency>SoQt-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>ftgl-devel</Dependency>
+            <Dependency>libXmu-devel</Dependency>
+            <Dependency>tcl-devel</Dependency>
+            <Dependency>gl2ps-devel</Dependency>
+            <Dependency>intel-tbb-devel</Dependency>
+            <Dependency>FreeImage-devel</Dependency>
+            <Dependency>tcltk-devel</Dependency>
+            <Dependency>freetype-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+        </BuildDependencies>
+         <Patches>
+            <Patch>fix-ftgl-includes.patch</Patch>
+            <Patch>fix-atol.patch</Patch>
+	    <Patch level="1">fix-build-g++4.6.patch</Patch>
+	    <Patch>a.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>OpenCASCADE</Name>
+        <RuntimeDependencies>
+            <Dependency>boost</Dependency>
+            <Dependency>xerces-c</Dependency>
+            <Dependency>coin</Dependency>
+            <Dependency>SoQt</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>ftgl</Dependency>
+            <Dependency>libXmu</Dependency>
+            <Dependency>tcl</Dependency>
+            <Dependency>gl2ps</Dependency>
+            <Dependency>intel-tbb</Dependency>
+            <Dependency>FreeImage</Dependency>
+            <Dependency>tcltk</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>mesa</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="data">/usr/src/</Path>
+            <Path fileType="data">/usr/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>OpenCASCADE-devel</Name>
+        <Summary>Development files for OpenCASCADE</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">OpenCASCADE</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2011-07-21</Date>
+            <Version>6.5.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Kaan Akşit</Name>
+            <Email>kunguz@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

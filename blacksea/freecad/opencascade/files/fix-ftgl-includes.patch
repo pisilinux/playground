@@ -1,0 +1,143 @@
+Fix detection of FTGL in configure.in
+
+Also modify installed headers to search for FTGL headers in
+the right directory.  This is not needed to build opencascade,
+but may help people including those headers.
+And last, fix usage of FTGL, FTFace is an internal structure
+of FTGL and is no more exported.
+
+--- configure.orig	2011-07-19 21:57:37.796000002 +0300
++++ configure	2011-07-20 00:57:12.626000096 +0300
+@@ -15737,7 +15737,7 @@
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ $ac_includes_default
+-#include <FTGL/FTGL.h>
++#include <FTGL/ftgl.h>
+ _ACEOF
+ rm -f conftest.$ac_objext
+ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
+@@ -15772,7 +15772,7 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <FTGL/FTGL.h>
++#include <FTGL/ftgl.h>
+ _ACEOF
+ if { (eval echo "$as_me:$LINENO: \"$ac_cpp conftest.$ac_ext\"") >&5
+   (eval $ac_cpp conftest.$ac_ext) 2>conftest.er1
+@@ -15871,7 +15871,7 @@
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ 
+-#include <FTGL/FTGL.h>
++#include <FTGL/ftgl.h>
+ #include <FTGL/FTGLTextureFont.h>
+ 
+ int
+Index: inc/OpenGl_FontMgr.hxx
+===================================================================
+--- inc.orig/OpenGl_FontMgr.hxx
++++ inc/OpenGl_FontMgr.hxx
+@@ -7,7 +7,7 @@
+ # include <stdlib.h>
+ #endif
+ 
+-#include <FTFont.h>
++#include <FTGL/FTFont.h>
+ 
+ #include <InterfaceGraphic.hxx>
+ #include <TCollection_HAsciiString.hxx>
+Index: inc/OpenGl_TextRender.hxx
+===================================================================
+--- inc.orig/OpenGl_TextRender.hxx
++++ inc/OpenGl_TextRender.hxx
+@@ -5,7 +5,7 @@
+ #include <NCollection_DataMap.hxx>
+ #include <TCollection_AsciiString.hxx>
+ #include <TCollection_HAsciiString.hxx>
+-#include <FTFont.h>
++#include <FTGL/FTFont.h>
+ 
+ #define NUM_FONT_SIZES 40
+ #define NUM_CHAR_FONT 1024
+Index: src/OpenGl/OpenGl_FontMgr.cxx
+===================================================================
+--- src.orig/OpenGl/OpenGl_FontMgr.cxx
++++ src/OpenGl/OpenGl_FontMgr.cxx
+@@ -1,8 +1,6 @@
+ #include <OpenGl_FontMgr.hxx>
+ 
+-#include <FTGLTextureFont.h>        
+-#include <FTLibrary.h>
+-#include <FTFace.h>
++#include <FTGL/ftgl.h>
+ #include <Standard_Stream.hxx>
+ 
+ #undef TRACE
+@@ -60,6 +58,8 @@
+ void OpenGl_FontMgr::_initializeFontDB()
+ {
+   Handle(OSD_FontMgr) fntMgr = OSD_FontMgr::GetInstance();
++  FT_Library  library;
++  int error = FT_Init_FreeType( &library );
+   if ( !fntMgr.IsNull() ) {
+ 
+     OSD_NListOfSystemFont fontList = fntMgr->GetAvalableFonts();
+@@ -68,13 +68,14 @@
+       OSD_NListOfSystemFont::Iterator it(fontList);
+       for ( ; it.More(); it.Next() ) {
+         OGLFont_SysInfo* info = new OGLFont_SysInfo();
+-        if ( it.Value()->FontAspect() == OSD_FA_Regular ) {
++        if ( it.Value()->FontAspect() == OSD_FA_Regular && !error ) {
+           //this workaround for fonts with names dependent on system locale.
+           //for example: "Times New Roman Fett Kursive" or "Times New Roman Gras Italiqui"
+-          FTFace face(it.Value()->FontPath()->ToCString());
+-              
+-          if ( face.Error() == FT_Err_Ok ) {
+-            if ( (*face.Face())->style_flags == 0 ) {
++          FT_Face ftFace;
++          error = FT_New_Face(library,
++              it.Value()->FontPath()->ToCString(), 0, &ftFace);
++          if ( !error ) {
++            if ( ftFace->style_flags == 0 ) {
+               info->SysFont = it.Value();
+             }
+             else {
+@@ -82,27 +83,30 @@
+ #ifdef TRACE
+               cout << "TKOpenGl::initializeFontDB() detected new font!\n"
+                 << "\tFont Previous Name: " << it.Value()->FontName()->ToCString() << endl
+-                << "\tFont New Name: " << (*face.Face())->family_name << endl
+-                << "\tFont Aspect: " << (*face.Face())->style_flags << endl;
++                << "\tFont New Name: " << ftFace->family_name << endl
++                << "\tFont Aspect: " << ftFace->style_flags << endl;
+ #endif
+               OSD_FontAspect aspect = OSD_FA_Regular;
+-              if ( (*face.Face())->style_flags == (FT_STYLE_FLAG_ITALIC | FT_STYLE_FLAG_BOLD) )
++              if ( ftFace->style_flags == (FT_STYLE_FLAG_ITALIC | FT_STYLE_FLAG_BOLD) )
+                 aspect = OSD_FA_BoldItalic;
+-              else if ( (*face.Face())->style_flags == FT_STYLE_FLAG_ITALIC )
++              else if ( ftFace->style_flags == FT_STYLE_FLAG_ITALIC )
+                 aspect = OSD_FA_Italic;
+-              else if ( (*face.Face())->style_flags == FT_STYLE_FLAG_BOLD )
++              else if ( ftFace->style_flags == FT_STYLE_FLAG_BOLD )
+                 aspect = OSD_FA_Bold;
+ 
+ #ifdef TRACE
+               cout << "\tOSD_FontAspect: " << aspect << endl;
+ #endif
+               Handle(TCollection_HAsciiString) aFontName =
+-                new TCollection_HAsciiString( (*face.Face())->family_name );
++                new TCollection_HAsciiString( ftFace->family_name );
+               info->SysFont = new OSD_SystemFont( aFontName, aspect, it.Value()->FontPath() );
+             }
+           }
+           else
++          {
++            error = 0;
+             continue;
++          }
+         } else {
+           info->SysFont = it.Value();
+         }
