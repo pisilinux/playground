@@ -1,0 +1,568 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kernel</Name>
+        <Homepage>http://www.kernel.org</Homepage>
+        <Packager>
+            <Name>Anka-Team Kernel-Squad</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>kernel</IsA>
+        <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
+        <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
+        <Archive sha1sum="2a922a4268bf69381747d219a05a729f5b0c3ba0" type="tarbz2">https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.10.tar.bz2</Archive>
+        <AdditionalFiles>
+            <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
+            <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
+            <AdditionalFile permission="0755" target="generate-module-list">scripts/generate-module-list</AdditionalFile>
+            <AdditionalFile permission="0755" target="apply_patches">scripts/apply_patches</AdditionalFile>
+            <AdditionalFile permission="0755" target="create_quilt_tree">scripts/create_quilt_tree</AdditionalFile>
+            <AdditionalFile permission="0755" target="kcooker-rebase">scripts/kcooker-rebase</AdditionalFile>
+            <AdditionalFile permission="0755" target="update_configs">scripts/update_configs</AdditionalFile>
+        </AdditionalFiles>
+        <BuildDependencies>
+            <Dependency>pisi</Dependency>
+            <Dependency>gtk2-devel</Dependency><!-- For perf gtk2 support-->
+            <Dependency>cpio</Dependency>
+            <Dependency>unifdef</Dependency>
+            <Dependency>elfutils</Dependency>
+            <Dependency>diffutils</Dependency>
+            <Dependency>newt-devel</Dependency><!-- For perf -->
+            <Dependency>xmlto</Dependency>
+            <Dependency>asciidoc</Dependency>
+            <Dependency>pciutils-devel</Dependency>
+            <Dependency>numactl-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <!-- linux patches -->
+            <Patch level="1" compressionType="xz">patches/linux/patch-3.10.9.xz</Patch>
+
+            <!-- Mandriva patches -->
+            <Patch level="1">patches/mandriva/acpi-processor-M720SR-limit-to-C2.patch</Patch>
+            <!-- Mageia Kernel Patches -->                                                                                      
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-3rdparty-1.0-tree.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-3rdparty-merge.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-acerhk-0.5.35.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-acerhk-2.6.36-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-acerhk-extra-cflags.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-acerhk-fix-build-with-function-tracer.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-acerhk-fix-include.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-acerhk-kbuild.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-acerhk-proc_dir_entry-owner.patch</Patch>
+
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-aes2501-r19.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-aes2501-kbuild.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-aes2501-rmmod-oops-fix.patch</Patch>
+
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-rfswitch-1.3.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-rfswitch-3.0-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-rfswitch-build-fix.patch</Patch>
+
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-ndiswrapper-1.58.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-ndiswrapper-Makefile-build-fix.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-ndiswrapper-Kconfig.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-ndiswrapper-kernel-3.9-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-ndiswrapper-kernel-3.10-buildfix.patch</Patch>
+
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-viahss-0.92.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-viahss-2.6.35-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-viahss-3.0-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-viahss-config.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty/3rd-viahss-module-license.patch</Patch>
+
+            <Patch level="1">patches/mageia/drm/gpu-drm-radeon-fix-WREG32_OR-macro-setting-bits-in-a-register.patch</Patch>    
+            <Patch level="1">patches/mageia/drm/gpu-drm-radeon-r7xx-fix-copy-paste-typo-in-golden-register-setup.patch</Patch> 
+
+            <Patch level="1">patches/mageia/net/net-netfilter-IFWLOG.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-netfilter-IFWLOG-mdv.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-netfilter-IFWLOG-2.6.35-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-netfilter-IFWLOG-2.6.37-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-ipv4-netfilter-ipt_IFWLOG-3.6-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-netfilter-IFWLOG-3.7-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-sis190-fix-list-usage.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-wireless-bcma-add-support-for-BCM43142.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-wireless-iwlwifi-bump-required-firmware-API-version-for-3160-7260.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-wireless-iwlwifi-make-TX-seqno-validation-more-efficient.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-wireless-iwlwifi-mvm-adjust-firmware-D3-configuration-API.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-wireless-iwlwifi-mvm-support-BSS-only.patch</Patch>
+            <Patch level="1">patches/mageia/net/net-wireless-iwlwifi-pcie-dont-read-INTA-register-in-ICT-IRQ-handler.patch</Patch>
+            <Patch level="1">patches/mageia/net/stable-genetlink-fix-family-dump-race.patch</Patch>
+
+            <Patch level="1">patches/mageia/scsi/scsi-megaraid-new-sysfs-name.patch</Patch>
+            <Patch level="1">patches/mageia/scsi/scsi-ppscsi-2.6.2.patch</Patch>
+            <Patch level="1">patches/mageia/scsi/scsi-ppscsi-update-for-scsi_data_buffer.patch</Patch>
+            <Patch level="1">patches/mageia/scsi/scsi-ppscsi-3.0-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/scsi/scsi-ppscsi_fixes.patch</Patch>
+            <Patch level="1">patches/mageia/scsi/scsi-ppscsi-mdvbz45393.patch</Patch>
+            <Patch level="1">patches/mageia/scsi/revert-scsi-sd-update-write-same-heuristics.patch</Patch>
+
+            <Patch level="1">patches/mageia/x86/platform-x86-add-shuttle-wmi-driver.patch</Patch>
+            <Patch level="1">patches/mageia/x86/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
+            <Patch level="1">patches/mageia/x86/x86-boot-video-80x25-if-break.patch</Patch>
+            <Patch level="1">patches/mageia/x86/x86-cpufreq-speedstep-dothan-3.patch</Patch>
+            <Patch level="1">patches/mageia/x86/x86-default_poweroff_up_machines.patch</Patch>
+
+            <Patch level="1">patches/mageia/x86/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
+            <Patch level="1">patches/mageia/x86/x86-p4_clockmod-reasonable-default-for-scaling_min_freq.patch</Patch>
+            <Patch level="1">patches/mageia/x86/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
+ 
+
+            <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
+            <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
+            <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
+            <Patch level="1">patches/mageia/bluetooth-hci_usb-disable-isoc-transfers.patch</Patch>
+            <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
+            <Patch level="1">patches/mageia/dm-raid-aliases.patch</Patch>
+            <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
+            <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
+            <Patch level="1">patches/mageia/ide-pci-sis5513-965.patch</Patch>
+            <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
+            <Patch level="1">patches/mageia/smack-unionfs-deadlock-fix.patch</Patch>
+            <Patch level="1">patches/mageia/sound-alsa-hda-ad1884a-hp-dc-model.patch</Patch>
+            <Patch level="1">patches/mageia/sound-bluetooth-SCO-support.patch</Patch>
+            <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
+            <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/input-elantech-fix-for-newer-hardware-versions-v7.patch</Patch>
+
+            <!-- Fedora Kernel Patches -->
+
+            <Patch level="1">patches/fedora/acpi-sony-nonvs-blacklist.patch</Patch>
+            <Patch level="1">patches/fedora/ath9k_rx_dma_stop_check.patch</Patch>
+            <Patch level="1">patches/fedora/bridge-only-expire-the-mdb-entry-when-query-is-received.patch</Patch>
+            <Patch level="1">patches/fedora/bridge-send-query-as-soon-as-leave-is-received.patch</Patch>
+            <Patch level="1">patches/fedora/disable-i8042-check-on-apple-mac.patch</Patch>
+            <Patch level="1">patches/fedora/drm-exynos-fix-multiple-definition-build-error.patch</Patch>
+            <Patch level="1">patches/fedora/drm-i915-dp-stfu.patch</Patch>
+            <Patch level="1">patches/fedora/drm-radeon-Disable-writeback-by-default-on-ppc.patch</Patch>
+            <Patch level="1">patches/fedora/intel_iommu-Downgrade-the-warning-if-enabling-irq-remapping-fails.patch</Patch>
+            <Patch level="1">patches/fedora/iwl3945-better-skb-management-in-rx-path.patch</Patch>
+            <Patch level="1">patches/fedora/iwl4965-better-skb-management-in-rx-path.patch</Patch>
+            <Patch level="1">patches/fedora/lis3-improve-handling-of-null-rate.patch</Patch>
+            <Patch level="1">patches/fedora/makefile-after_link.patch</Patch>
+            <Patch level="1">patches/fedora/no-pcspkr-modalias.patch</Patch>
+            <Patch level="1">patches/fedora/nowatchdog-on-virt.patch</Patch>
+            <Patch level="1">patches/fedora/scsi-sd_revalidate_disk-prevent-NULL-ptr-deref.patch</Patch>
+            <Patch level="1">patches/fedora/selinux-apply-different-permission-to-ptrace-child.patch</Patch>
+            <Patch level="1">patches/fedora/serial-460800.patch</Patch>
+            <Patch level="1">patches/fedora/silence-acpi-blacklist.patch</Patch>
+            <Patch level="1">patches/fedora/silence-noise.patch</Patch>
+            <Patch level="1">patches/fedora/taint-vbox.patch</Patch>
+            <Patch level="1">patches/fedora/vmbugon-warnon.patch</Patch>
+            <!--<Patch level="1">patches/fedora/VMX-x86-handle-host-TSC-calibration-failure.patch</Patch>-->
+	    
+            <Patch level="1">patches/fedora/vt-Drop-K_OFF-for-VC_MUTE.patch</Patch>
+            <Patch level="1">patches/fedora/weird-root-dentry-name-debug.patch</Patch>
+
+            <!-- OpenSuSE Kernel Patches -->
+            <Patch level="1" compressionType="bz2">patches/suse/patches.apparmor.tar.bz2</Patch>
+            <Patch level="1" compressionType="bz2">patches/suse/patches.arch.tar.bz2</Patch>
+            <Patch level="1" compressionType="bz2">patches/suse/patches.drivers.tar.bz2</Patch>
+            <Patch level="1" compressionType="bz2">patches/suse/patches.fixes.tar.bz2</Patch>
+            <Patch level="1" compressionType="bz2">patches/suse/patches.rpmify.tar.bz2</Patch>
+            <Patch level="1">patches/suse/patches.suse/0001-vfs-Hooks-for-more-fine-grained-directory-permission.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0002-vfs-Add-generic-IS_ACL-test-for-acl-support.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0003-vfs-Add-IS_RICHACL-test-for-richacl-support.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0004-richacl-In-memory-representation-and-helper-function.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0005-richacl-Permission-mapping-functions.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0006-richacl-Compute-maximum-file-masks-from-an-acl.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0007-richacl-Update-the-file-masks-in-chmod.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0008-richacl-Permission-check-algorithm.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0009-richacl-Helper-functions-for-implementing-richacl-in.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0010-richacl-Create-time-inheritance.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0011-richacl-Check-if-an-acl-is-equivalent-to-a-file-mode.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0012-richacl-Automatic-Inheritance.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0013-richacl-Restrict-access-check-algorithm.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0014-richacl-xattr-mapping-functions.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/0016-ext4-Implement-richacl-support-in-ext4.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/8250-sysrq-ctrl_o.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/b43-missing-firmware-info.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/btrfs-use-correct-device-for-maps.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/connector-read-mostly.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/crasher-26.diff</Patch>
+            <Patch level="1">patches/suse/patches.suse/dm-emulate-blkrrpart-ioctl.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/dm-mpath-leastpending-path-update.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/dm-mpath-no-activate-for-offlined-paths.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/dm-mpath-no-partitions-feature.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/dm-raid45-26-Nov-2009.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/dmraid45-api-updates.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/dm-raid45-split-dependencies.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/genksyms-add-override-flag.diff</Patch>
+            <Patch level="1">patches/suse/patches.suse/ida-remove-warning-dump-stack.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/kbd-ignore-gfx.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/mpath-fix.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/netfilter-ip_conntrack_slp.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/ovl01-vfs-add-i_op-dentry_open.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/ovl02-vfs-export-do_splice_direct-to-modules.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/ovl03-vfs-export-inode_permission-to-modules.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/ovl04-vfs-introduce-clone_private_mount.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/ovl05-overlay-filesystem.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/ovl06-overlayfs-add-statfs-support.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/ovl07-overlayfs-implement-show_options.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/ovl08-overlay-overlay-filesystem-documentation.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/ovl09-fs-limit-filesystem-stacking-depth.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/readahead-request-tunables.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/revert-x86-remove-warning-and-warning_symbol-from-struct-stacktrace_ops.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/scsi-error-test-unit-ready-timeout.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/scsi-netlink-ml.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/sd_init.mark_majors_busy.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/setuid-dumpable-wrongdir.patch</Patch>
+            <Patch level="1">patches/suse/patches.suse/stack-unwind.patch</Patch>
+
+            <!-- Pisilinux Kernel Patches -->
+            <!--<Patch level="1">patches/pisilinux/define-BCMA-wireless-specific-PLLs.patch</Patch>-->
+            <!--<Patch level="1">patches/pisilinux/ath9k-mesh-powersave-support.patch</Patch>-->
+
+            <!-- Blacklist 2 Lenovo in acer-wmi (#15967)-->
+            <Patch level="1">patches/pisilinux/0001-Add-Lenovo-Ideapad-S12-to-acer-blacklist.patch</Patch>
+
+            <!-- hid-apple: Invert Fn+F? behaviour on apple keyboards-->
+            <Patch level="1">patches/pisilinux/invert-hidapple-fnkey-behaviour.patch</Patch>
+
+            <!-- lmpcm_usb: Logitech lmpcm_usb driver -->
+            <Patch level="1">patches/pisilinux/linux-2.6-add-lmpcm_usb-driver.patch</Patch>
+
+            <!-- Add RF kill switch drivers for Fujitsu Amilo M7400 and M7440
+                 http://fsam7440.sourceforge.net
+                 http://www.zwobble.de -->
+            <!--<Patch level="1">patches/pisilinux/linux-2.6-add-fujitsu-amilo-74xx-rfkill-drivers.patch</Patch>-->
+
+            <!-- Fallback to vesa 640x480x16 on undefined video mode number (Fixes #7117)
+            <Patch level="1">patches/pisilinux/vesa_fallback_on_fail.patch</Patch>-->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>kernel</Name>
+        <RuntimeDependencies>
+            <!-- FIXME: Should be replaced by dracut -->
+            <Dependency>pisi</Dependency>
+            <Dependency>mkinitramfs</Dependency>
+            <Dependency>linux-firmware</Dependency>
+            <Dependency>grub2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable" permanent="true">/boot</Path>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+            <Path fileType="data">/etc/kernel</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+        <BuildFlags>
+            <Flag>noDelta</Flag>
+        </BuildFlags>
+    </Package>
+
+    <Package>
+        <Name>kernel-module-headers</Name>
+        <Summary>Kernel header files for external module building</Summary>
+        <Description>kernel-module-headers includes the C header files and the necessary Kbuild files for being able to build external kernel modules.</Description>
+        <Files>
+            <Path fileType="header">/usr/src/linux-headers*</Path>
+            <Path fileType="header">/tmp-headers*</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>kernel-headers</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Header files for the Linux kernel for use by glibc</Summary>
+        <Description>kernel-headers includes the C header files that specify the interface between the Linux kernel and userspace libraries and programs. The header files define structures and constants that are needed for building most standard programs and are also needed for rebuilding the glibc package.</Description>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>kernel-docs</Name>
+        <Summary>Documentation and scripts for the Linux kernel</Summary>
+        <Description>kernel-docs includes several documentation files and scripts for managing several debugging and other tasks.</Description>
+        <Files>
+            <Path fileType="header">/usr/src/linux-headers*/Documentation</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>cpupowertools</Name>
+        <Summary>CPU power management tools</Summary>
+        <Description>cpupowertools contains utilities to manage power management and frequency scaling policies of modern CPUs.</Description>
+        <Files>
+            <Path fileType="man">/usr/share/man/man1/cpupower*</Path>
+            <Path fileType="executable">/usr/bin/cpupower</Path>
+            <Path fileType="executable">/usr/bin/*-decode</Path>
+            <Path fileType="library">/usr/lib/libcpupower*</Path>
+            <Path fileType="data">/usr/share/locale/*/*/cpupower.mo</Path>
+            <Path fileType="data">/lib/systemd/system</Path>
+            <Path fileType="config">/etc/conf.d</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/lib/systemd/system/cpupower.service">cpupower.service</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/cpupower">cpupower.config</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>perf</Name>
+        <Summary>Performance analyser tool that makes full use of the Linux performance counter subsystem</Summary>
+        <Description>perf is a new tool which is used to optimize, validate and measure applications, workloads or the full system through the Linux performance counter subsystem.</Description>
+        <RuntimeDependencies>
+            <Dependency>newt</Dependency>
+            <Dependency>elfutils</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>numactl</Dependency>
+            <Dependency>libunwind</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/perf*</Path>
+            <Path fileType="man">/usr/share/man/man1/perf*</Path>
+            <Path fileType="doc">/usr/share/perf-doc*</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="21">
+            <Date>2013-08-20</Date>
+            <Version>3.10.9</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.9</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="20">
+            <Date>2013-08-12</Date>
+            <Version>3.10.6</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.6</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="19">
+            <Date>2013-08-11</Date>
+            <Version>3.10.5</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.5</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="18">
+            <Date>2013-08-01</Date>
+            <Version>3.10.4</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.4</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="17">
+            <Date>2013-07-17</Date>
+            <Version>3.10.2</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.2</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="16">
+            <Date>2013-07-17</Date>
+            <Version>3.10.1</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.1</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="15">
+            <Date>2013-07-04</Date>
+            <Version>3.10.0</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="14">
+            <Date>2013-06-21</Date>
+            <Version>3.8.13</Version>
+            <Comment>Fix TSC calibration failure</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="13">
+            <Date>2013-06-15</Date>
+            <Version>3.8.13</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.13</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="12">
+            <Date>2013-04-18</Date>
+            <Version>3.8.8</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.8</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="11">
+            <Date>2013-03-31</Date>
+            <Version>3.8.5</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.5</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="10">
+            <Date>2013-03-25</Date>
+            <Version>3.8.4</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.4</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Yoyo Fernández</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2013-03-14</Date>
+            <Version>3.8.3</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.3</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Richard de Bruin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2013-03-06</Date>
+            <Version>3.8.2</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.2</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2013-03-03</Date>
+            <Version>3.8.1</Version>
+            <Comment>update to current line</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2013-02-22</Date>
+            <Version>3.8.0</Version>
+            <Comment>update to final line with patch</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-02-17</Date>
+            <Version>3.8.0</Version>
+            <Comment>obsoletemans wifi fixing</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-02-12</Date>
+            <Version>3.8.0</Version>
+            <Comment>bump to -rc7</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-02-06</Date>
+            <Version>3.7.6</Version>
+            <Comment>http://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.7.6</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-01-28</Date>
+            <Version>3.7.5</Version>
+            <Comment>http://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.7.5</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-01-18</Date>
+            <Version>3.7.4</Version>
+            <Comment>http://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.7.4</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-01-15</Date>
+            <Version>3.7.2</Version>
+            <Comment>First release</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
