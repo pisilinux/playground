@@ -9,7 +9,7 @@
 from pisi.actionsapi import pythonmodules
 from pisi.actionsapi import get
 
-
+WorkDir = "pivy-%s~svn765" % get.srcVERSION()
 
 def install():
     pythonmodules.install()
