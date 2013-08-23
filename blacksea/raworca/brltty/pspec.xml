@@ -12,7 +12,7 @@
         <IsA>app</IsA>
         <Summary>Braille display driver for Linux</Summary>
         <Description>Braille display driver for Linux</Description>
-        <Archive sha1sum="df5aa180cf9213174e34f1f9086650f47e947319" type="targz">http://mielke.cc/brltty/releases/brltty-4.5.tar.gz</Archive>
+        <Archive sha1sum="d25802d08599b75841e7bb2f29bc88737f2992d2" type="targz">http://mielke.cc/brltty/releases/brltty-4.2.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>bluez-libs-devel</Dependency>
             <Dependency>atk-devel</Dependency>
@@ -22,7 +22,14 @@
 	    <Dependency>tcl-devel</Dependency>
 	    <Dependency>at-spi2-atk-devel</Dependency>
         </BuildDependencies>
-    </Source>
+	<!--
+	<Patches>
+            <Patch level="1">brltty-4.5-fix-ldflags.patch</Patch>
+	    <Patch level="1">brltty-4.5-fix-mk4build-cross.patch</Patch>
+	    <Patch level="1">brltty-4.5-udev.patch</Patch>
+        </Patches>
+	-->
+	</Source>
 
     <Package>
         <Name>brltty</Name>

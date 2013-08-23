@@ -1,4 +1,4 @@
- #!/usr/bin/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Licensed under the GNU General Public License, version 3.
@@ -11,10 +11,18 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 
+
 def setup():
 
-    autotools.configure()
-
+    autotools.configure("--prefix=/usr \
+--sysconfdir='${prefix}/etc' \
+--localstatedir='${prefix}/var'  \
+--mandir='${prefix}/usr/share/man' \
+--with-lib-directory='${prefix}/usr/lib/brltty' \
+--with-tables-directory='${prefix}/usr/share/brltty' \
+--enable-gpm \
+--disable-java-bindings \
+--disable-static")
 
 
 def build():
