@@ -1,0 +1,273 @@
+From: ilv <ilv@opencascade.com>
+Date: Fri, 23 Nov 2012 11:01:28 +0000 (+0400)
+Subject: 0023487: Remove obsolete BRepTools::OuterShell() function
+X-Git-Tag: V6_6_0_beta~216
+X-Git-Url: http://vm-dev-git/gitweb/?p=occt.git;a=commitdiff_plain;h=2f0109b77db12114b82e3f3c97239f243e41db3c
+
+0023487: Remove obsolete BRepTools::OuterShell() function
+
+All corresponding calls to BRepTools::OuterShell() replaced by function BRepClass3d::OuterShell()
+Changed function BRepClass3d::OuterShell
+---
+
+diff --git a/src/BRepClass3d/BRepClass3d.cdl b/src/BRepClass3d/BRepClass3d.cdl
+index c435db5..4e4945d 100755
+--- a/src/BRepClass3d/BRepClass3d.cdl
++++ b/src/BRepClass3d/BRepClass3d.cdl
+@@ -60,5 +60,6 @@ is
+     	    returns Shell from TopoDS;
+ 	---Purpose: Returns the outer most shell of <S>. Returns a Null
+ 	--          shell if <S> has no outer shell. 
++	--          If <S> has only one shell, then it will return, without checking orientation. 
+        
+ end BRepClass3d;
+diff --git a/src/BRepClass3d/BRepClass3d.cxx b/src/BRepClass3d/BRepClass3d.cxx
+index cffa340..74c760d 100644
+--- a/src/BRepClass3d/BRepClass3d.cxx
++++ b/src/BRepClass3d/BRepClass3d.cxx
+@@ -61,8 +61,25 @@ TopoDS_Shell BRepClass3d::OuterShell(const TopoDS_Solid& aSolid)
+   aTol=1.e-7;
+   bFound=Standard_False;
+   //
+-  aIt.Initialize(aSolid);
+-  for (; aIt.More(); aIt.Next()) { 
++  // if solid has one shell, it will return, without checking orientation 
++  Standard_Integer aShellCounter = 0;
++  for (aIt.Initialize(aSolid); aIt.More(); aIt.Next()) {
++    const TopoDS_Shape& aSx=aIt.Value();
++    if (aSx.ShapeType()==TopAbs_SHELL) {
++      aShell=*((TopoDS_Shell*)&aSx);
++      aShellCounter++;
++      if (aShellCounter >= 2)
++        break;
++    }
++  }
++  if (aShellCounter == 0) {
++    return aDummy;
++  }
++  else if (aShellCounter == 1) {
++    return aShell;
++  }
++  //
++  for (aIt.Initialize(aSolid); aIt.More(); aIt.Next()) { 
+     const TopoDS_Shape& aSx=aIt.Value();
+     if (aSx.ShapeType()==TopAbs_SHELL) {
+       aShell=*((TopoDS_Shell*)&aSx);
+diff --git a/src/BRepTools/BRepTools.cdl b/src/BRepTools/BRepTools.cdl
+index 6a739aa..a981c0c 100755
+--- a/src/BRepTools/BRepTools.cdl
++++ b/src/BRepTools/BRepTools.cdl
+@@ -53,9 +53,6 @@ package BRepTools
+ 	--          * OuterWire : A method to find the outer wire of a
+ 	--          face.
+ 	--          
+-	--          * OuterShell : A method to find the outer shell of
+-	--          a solid.
+-	--          
+ 	--          * Map3DEdges : A method to map all the 3D Edges of
+ 	--          a Shape.
+ 	--          
+@@ -234,10 +231,6 @@ is
+ 	---Purpose: Returns the outer most wire of <F>. Returns a Null
+ 	--          wire if <F> has no wires.
+     
+-    OuterShell(S : Solid from TopoDS) returns Shell from TopoDS;
+-	---Purpose: Returns the outer most shell of <S>. Returns a Null
+-	--          wire if <S> has no shells.
+-    
+     Map3DEdges(S    : Shape from TopoDS;
+     	       M    : in out IndexedMapOfShape from TopTools);
+ 	  ---Purpose: Stores in the map  <M> all the 3D topology edges
+diff --git a/src/BRepTools/BRepTools.cxx b/src/BRepTools/BRepTools.cxx
+index aa39dc2..7aa0648 100755
+--- a/src/BRepTools/BRepTools.cxx
++++ b/src/BRepTools/BRepTools.cxx
+@@ -586,22 +586,6 @@ TopoDS_Wire  BRepTools::OuterWire(const TopoDS_Face& F)
+   return Wres;
+ }
+ 
+-
+-//=======================================================================
+-//function : OuterShell
+-//purpose  : 
+-//=======================================================================
+-
+-TopoDS_Shell  BRepTools::OuterShell(const TopoDS_Solid& S)
+-{
+-  TopExp_Explorer its(S,TopAbs_SHELL);
+-  if (its.More())
+-    return TopoDS::Shell(its.Current());
+-  else
+-    return TopoDS_Shell();
+-}
+-
+-
+ //=======================================================================
+ //function : Map3DEdges
+ //purpose  : 
+diff --git a/src/TopOpeBRepBuild/TopOpeBRepBuild_KPart.cxx b/src/TopOpeBRepBuild/TopOpeBRepBuild_KPart.cxx
+index f9f37b9..c2cc474 100755
+--- a/src/TopOpeBRepBuild/TopOpeBRepBuild_KPart.cxx
++++ b/src/TopOpeBRepBuild/TopOpeBRepBuild_KPart.cxx
+@@ -37,6 +37,7 @@
+ #include <BRep_Tool.hxx>
+ #include <BRep_Builder.hxx>
+ #include <BRepTools.hxx>
++#include <BRepClass3d.hxx>
+ #include <BRepClass3d_SolidExplorer.hxx>
+ #include <TopOpeBRepTool_EXPORT.hxx>
+ #include <TopOpeBRepTool_SC.hxx>
+@@ -738,11 +739,11 @@ void TopOpeBRepBuild_Builder::MergeKPartisdisj()
+ //modified by NIZHNY-MKK  Fri May 19 16:47:23 2000.END
+       sol1 = TopoDS::Solid(exsol1.Current());
+       ChangeMerged(sol1,myState1);
+-      outsha1 = BRepTools::OuterShell(sol1);
++      outsha1 = BRepClass3d::OuterShell(sol1);
+       
+       sol2 = TopoDS::Solid(exsol2.Current());
+       ChangeMerged(sol2,myState2);
+-      outsha2 = BRepTools::OuterShell(sol2);
++      outsha2 = BRepClass3d::OuterShell(sol2);
+       
+       TopAbs_State stsol1 = KPclasSS(outsha1,sol2);
+       TopAbs_State stsol2 = KPclasSS(outsha2,sol1);
+@@ -1909,8 +1910,8 @@ static TopoDS_Solid BuildNewSolid(const TopoDS_Solid& sol1,
+   TopoDS_Shell outsha;
+   Standard_Integer icla;
+   TopoDS_Solid othersol;
+-  TopoDS_Shell outsha1 = BRepTools::OuterShell(sol1);
+-  TopoDS_Shell outsha2 = BRepTools::OuterShell(sol2);
++  TopoDS_Shell outsha1 = BRepClass3d::OuterShell(sol1);
++  TopoDS_Shell outsha2 = BRepClass3d::OuterShell(sol2);
+ 
+   
+   TopoDS_Solid newsol;
+@@ -2057,9 +2058,9 @@ static Standard_Boolean disjPerformFuse(const TopTools_IndexedMapOfShape& theMap
+ 	continue;
+       }
+       sol2 = TopoDS::Solid(localshape2);
+-      outsha2 = BRepTools::OuterShell(sol2);
++      outsha2 = BRepClass3d::OuterShell(sol2);
+       
+-      outsha1 = BRepTools::OuterShell(acurrentsolid);
++      outsha1 = BRepClass3d::OuterShell(acurrentsolid);
+       TopAbs_State stsol1 = aShapeClassifier.StateShapeShape(outsha1,Snull,sol2);
+       TopAbs_State stsol2 = aShapeClassifier.StateShapeShape(outsha2,Snull,acurrentsolid);
+       Standard_Integer ires=RESUNDEF, icla1=SHEUNDEF, icla2=SHEUNDEF;
+@@ -2114,7 +2115,7 @@ static Standard_Boolean disjPerformCommon(const TopTools_IndexedMapOfShape& theM
+     if(localshape1.ShapeType()!=TopAbs_SOLID)
+       return Standard_False;    
+     sol1 = TopoDS::Solid(localshape1);
+-    outsha1 = BRepTools::OuterShell(sol1);
++    outsha1 = BRepClass3d::OuterShell(sol1);
+ 
+     for(Standard_Integer j=1; j<=aMapOfSeparatedSolid2.Extent(); j++) {
+       const TopoDS_Shape& localshape2 = aMapOfSeparatedSolid2(j);
+@@ -2122,7 +2123,7 @@ static Standard_Boolean disjPerformCommon(const TopTools_IndexedMapOfShape& theM
+ 	return Standard_False;
+       
+       sol2 = TopoDS::Solid(localshape2);
+-      outsha2 = BRepTools::OuterShell(sol2);
++      outsha2 = BRepClass3d::OuterShell(sol2);
+       TopAbs_State stsol1 = aShapeClassifier.StateShapeShape(outsha1,Snull,sol2);
+       TopAbs_State stsol2 = aShapeClassifier.StateShapeShape(outsha2,Snull,sol1);
+       Standard_Integer ires=RESUNDEF, icla1=SHEUNDEF, icla2=SHEUNDEF;
+@@ -2201,8 +2202,8 @@ static Standard_Boolean disjPerformCut(const TopTools_IndexedMapOfShape& theMapO
+       if(localshape2.ShapeType()!=TopAbs_SOLID)
+ 	return Standard_False;      
+       sol2 = TopoDS::Solid(localshape2);
+-      outsha2 = BRepTools::OuterShell(sol2);
+-      outsha1 = BRepTools::OuterShell(acurrentsolid);
++      outsha2 = BRepClass3d::OuterShell(sol2);
++      outsha1 = BRepClass3d::OuterShell(acurrentsolid);
+       TopAbs_State stsol1 = aShapeClassifier.StateShapeShape(outsha1,Snull,sol2);
+       TopAbs_State stsol2 = aShapeClassifier.StateShapeShape(outsha2,Snull,acurrentsolid);
+       Standard_Integer ires=RESUNDEF, icla1=SHEUNDEF, icla2=SHEUNDEF;
+diff --git a/src/TopoDSToStep/TopoDSToStep_MakeBrepWithVoids.cxx b/src/TopoDSToStep/TopoDSToStep_MakeBrepWithVoids.cxx
+index 33bd75b..f6036cc 100755
+--- a/src/TopoDSToStep/TopoDSToStep_MakeBrepWithVoids.cxx
++++ b/src/TopoDSToStep/TopoDSToStep_MakeBrepWithVoids.cxx
+@@ -33,7 +33,7 @@
+ #include <TopoDS_Shell.hxx>
+ #include <TopoDS.hxx>
+ #include <TColStd_SequenceOfTransient.hxx>
+-#include <BRepTools.hxx>
++#include <BRepClass3d.hxx>
+ #include <StdFail_NotDone.hxx>
+ #include <Transfer_FinderProcess.hxx>
+ #include <TransferBRep_ShapeMapper.hxx>
+@@ -63,7 +63,7 @@ TopoDSToStep_MakeBrepWithVoids::
+   Handle(StepShape_OrientedClosedShell)           aOCShell;
+   Handle(StepShape_HArray1OfOrientedClosedShell)  aVoids;
+ 
+-  aOutShell = BRepTools::OuterShell(aSolid);
++  aOutShell = BRepClass3d::OuterShell(aSolid);
+ 
+   TopoDSToStep_Builder StepB;
+   TopoDSToStep_Tool    aTool;
+diff --git a/src/TopoDSToStep/TopoDSToStep_MakeFacetedBrep.cxx b/src/TopoDSToStep/TopoDSToStep_MakeFacetedBrep.cxx
+index 2256bab..5327807 100755
+--- a/src/TopoDSToStep/TopoDSToStep_MakeFacetedBrep.cxx
++++ b/src/TopoDSToStep/TopoDSToStep_MakeFacetedBrep.cxx
+@@ -26,7 +26,7 @@
+ #include <TopoDSToStep_Builder.hxx>
+ #include <TopoDSToStep_Tool.hxx>
+ #include <TopoDS_Iterator.hxx>
+-#include <BRepTools.hxx>
++#include <BRepClass3d.hxx>
+ #include <Transfer_FinderProcess.hxx>
+ #include <TransferBRep_ShapeMapper.hxx>
+ #include <TCollection_HAsciiString.hxx>
+@@ -85,7 +85,7 @@ TopoDSToStep_MakeFacetedBrep::
+   done = Standard_False;
+ 
+   // Looking for the Outer Shell
+-  TopoDS_Shell aOuterShell = BRepTools::OuterShell(aSolid);
++  TopoDS_Shell aOuterShell = BRepClass3d::OuterShell(aSolid);
+ 
+   if (!aOuterShell.IsNull()) {
+     if (aOuterShell.Closed()) {
+diff --git a/src/TopoDSToStep/TopoDSToStep_MakeFacetedBrepAndBrepWithVoids.cxx b/src/TopoDSToStep/TopoDSToStep_MakeFacetedBrepAndBrepWithVoids.cxx
+index f18f7a7..98ebd69 100755
+--- a/src/TopoDSToStep/TopoDSToStep_MakeFacetedBrepAndBrepWithVoids.cxx
++++ b/src/TopoDSToStep/TopoDSToStep_MakeFacetedBrepAndBrepWithVoids.cxx
+@@ -33,7 +33,7 @@
+ #include <TopoDS_Shell.hxx>
+ #include <TopoDS.hxx>
+ #include <TColStd_SequenceOfTransient.hxx>
+-#include <BRepTools.hxx>
++#include <BRepClass3d.hxx>
+ #include <StdFail_NotDone.hxx>
+ #include <Transfer_FinderProcess.hxx>
+ #include <TransferBRep_ShapeMapper.hxx>
+@@ -59,7 +59,7 @@ TopoDSToStep_MakeFacetedBrepAndBrepWithVoids::
+   Handle(StepShape_OrientedClosedShell)           aOCShell;
+   Handle(StepShape_HArray1OfOrientedClosedShell)  aVoids;
+ 
+-  aOutShell = BRepTools::OuterShell(aSolid);
++  aOutShell = BRepClass3d::OuterShell(aSolid);
+ 
+   TopoDSToStep_Builder StepB;
+   TopoDSToStep_Tool    aTool;
+diff --git a/src/TopoDSToStep/TopoDSToStep_MakeManifoldSolidBrep.cxx b/src/TopoDSToStep/TopoDSToStep_MakeManifoldSolidBrep.cxx
+index b6e135d..84b8d7b 100755
+--- a/src/TopoDSToStep/TopoDSToStep_MakeManifoldSolidBrep.cxx
++++ b/src/TopoDSToStep/TopoDSToStep_MakeManifoldSolidBrep.cxx
+@@ -24,7 +24,7 @@
+ #include <TopoDSToStep.hxx>
+ #include <TopoDSToStep_Builder.hxx>
+ #include <TopoDSToStep_Tool.hxx>
+-#include <BRepTools.hxx>
++#include <BRepClass3d.hxx>
+ #include <Transfer_FinderProcess.hxx>
+ #include <TransferBRep_ShapeMapper.hxx>
+ #include <TCollection_HAsciiString.hxx>
+@@ -89,7 +89,7 @@ TopoDSToStep_MakeManifoldSolidBrep::
+   TopoDSToStep_MakeManifoldSolidBrep(const TopoDS_Solid& aSolid,
+ 				     const Handle(Transfer_FinderProcess)& FP)
+ {
+-  TopoDS_Shell aOuterShell = BRepTools::OuterShell(aSolid);
++  TopoDS_Shell aOuterShell = BRepClass3d::OuterShell(aSolid);
+   if (!aOuterShell.IsNull()) {
+ 
+     theManifoldSolidBrep = MakeManifoldSolidBrep(aOuterShell, FP);
