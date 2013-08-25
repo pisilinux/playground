@@ -14,7 +14,6 @@ def setup():
     autotools.configure("--prefix=/usr \
                          --mandir=/usr/share/man \
                          --enable-optimization \
-                         --enable-3ds-import \
                          --enable-javascript-api \
                          --enable-threadsafe \
                          --enable-exceptions \

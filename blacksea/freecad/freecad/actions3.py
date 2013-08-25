@@ -33,6 +33,5 @@ def build():
 def install():
     libtools.libtoolize()
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-
     pisitools.dosym("/usr/lib/freecad/FreeCAD", "/usr/bin/FreeCAD") 
     pisitools.dosym("/usr/lib/freecad/FreeCADCmd", "/usr/bin/FreeCADCmd")
