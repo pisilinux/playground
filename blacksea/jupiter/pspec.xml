@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>jupiter</Name>
+        <Homepage>http://sourceforge.net/projects/jupiter/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <Icon>jupiter</Icon>
+        <IsA>app</IsA>
+        <Summary>Simple, easy to use hardware and power management applet for all i386 and x86_64 Linux laptops, and netbooks</Summary>
+        <Description>Simple, easy to use hardware and power management applet for all i386 and x86_64 Linux laptops, and netbooks</Description>
+        <Archive sha1sum="e86175a8522d8627e4063ccb8a94c3196c905f26" type="binary">http://downloads.sourceforge.net/project/jupiter/jupiter-0.1.11-1.noarch.rpm</Archive>
+        <BuildDependencies>
+            <Dependency>rpm2targz</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>jupiter.patch</Patch>
+            <Patch level="1">jupiter.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>jupiter</Name>
+        <RuntimeDependencies>
+            <Dependency>acpid</Dependency>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>sudo</Dependency>
+        </RuntimeDependencies>
+       
+	<Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <!--
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/jupiter.desktop">jupiter.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/jupiter.png">jupiter.png</AdditionalFile>
+        </AdditionalFiles>
+        -->
+        <!--
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+        -->
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-27</Date>
+            <Version>0.1.11</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
