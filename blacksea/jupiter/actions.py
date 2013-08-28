@@ -8,14 +8,11 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-WorkDir = "."
-
-def setup():
-    shelltools.system("rpm2targz -v %s/jupiter-0.1.11-1.noarch.rpm" %get.workDIR())
-    shelltools.system("tar xfvz %s/jupiter-0.1.11-1.noarch.tar.gz" %get.workDIR())
+NoStrip = ["/usr/share/applications/jupiter.desktop"]
 
 
 def install():
-    pisitools.insinto("/etc/", "./etc/*")
+    pisitools.insinto("/etc/pm/", "./pm/*")
     pisitools.insinto("/usr/", "./usr/*")
+    shelltools.chmod("%s/usr/bin/jupiter" % get.installDIR(), 0755)
 
