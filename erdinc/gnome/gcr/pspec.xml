@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gcr</Name>
+        <Homepage>http://www.gnome.org/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <Summary>The Gcr package contains libraries used for displaying certificates and accessing key stores.</Summary>
+        <Description>The Gcr package contains libraries used for displaying certificates and accessing key stores. It also provides the viewer for crypto files on the GNOME Desktop.</Description>
+        <Archive sha1sum="405f78f134d801767e3a5f210121046b8fa75a19" type="tarxz">mirrors://gnome/gcr/3.9/gcr-3.9.90.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>p11-kit-devel</Dependency>
+            <Dependency>libtasn1-devel</Dependency>
+            <Dependency>libgcrypt-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gcr</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>p11-kit</Dependency>
+            <Dependency>libtasn1</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>vala</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/gtk-doc</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/GConf</Path>
+            <Path fileType="data">/usr/share/gcr-3</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="data">/usr/share/vala</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/mime</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>gcr-devel</Name>
+        <Summary>Development files for gcr</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">gcr</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>p11-kit-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>gcr-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for gcr</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>glib2-32bit</Dependency>
+            <Dependency>pango-32bit</Dependency>
+            <Dependency>libtasn1-32bit</Dependency>
+            <Dependency>libgcrypt-32bit</Dependency>
+            <Dependency>gtk3-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">gcr</Dependency>
+            <Dependency>glib2-32bit</Dependency>
+            <Dependency>pango-32bit</Dependency>
+            <Dependency>libtasn1-32bit</Dependency>
+            <Dependency>libgcrypt-32bit</Dependency>
+            <Dependency>gtk3-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2013-08-29</Date>
+            <Version>3.9.90</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-07-31</Date>
+            <Version>3.8.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-07-30</Date>
+            <Version>3.8.0</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-03-30</Date>
+            <Version>3.8.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-11-21</Date>
+            <Version>3.6.2</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
