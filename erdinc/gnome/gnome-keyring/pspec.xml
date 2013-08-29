@@ -56,29 +56,6 @@
     </Package>
 
     <Package>
-        <Name>gnome-keyring-docs</Name>
-        <IsA>data:doc</IsA>
-        <Summary>gnome-keyring reference documents</Summary>
-        <Files>
-            <Path fileType="doc">/usr/share/gtk-doc</Path>
-        </Files>
-    </Package>
-
-    <Package>
-        <Name>gnome-keyring-devel</Name>
-        <Summary>Development files for gnome-keyring</Summary>
-        <RuntimeDependencies>
-            <Dependency release="current">gnome-keyring</Dependency>
-            <Dependency>gtk2-devel</Dependency>
-            <Dependency>libtasn1-devel</Dependency>
-        </RuntimeDependencies>
-        <Files>
-            <Path fileType="header">/usr/include</Path>
-            <Path fileType="data">/usr/lib/pkgconfig</Path>
-        </Files>
-    </Package>
-
-    <Package>
         <Name>gnome-keyring-32bit</Name>
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for gnome-keyring</Summary>
