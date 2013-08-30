@@ -9,6 +9,7 @@
             <Email>admin@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
+        <License>PEL</License>
         <IsA>app:console</IsA>
         <Summary>Coin3D is a high-level 3D graphics toolkit.</Summary>
         <Description>Is a high-level 3D graphics toolkit, fully compatible with SGI Open Inventor 2.1.</Description>
@@ -19,13 +20,14 @@
             <Dependency>libSM-devel</Dependency>
             <Dependency>libICE-devel</Dependency>
             <Dependency>doxygen</Dependency>
-	    <Dependency>expat-devel</Dependency>
 	    <Dependency>libglade-devel</Dependency>
         </BuildDependencies>
          <Patches>
             <Patch>clang-name-lookup.diff</Patch>
-            <Patch level="1">coin-3.1.3-gcc-4.7.patch</Patch>
-        </Patches>
+            <Patch level="1">fix_gcc_4_8_1.patch</Patch>
+            <Patch level="1">Coin-2.5.0-inttypes.patch</Patch>
+            <Patch level="1">Coin-2.4.6-man3.diff</Patch>
+         </Patches>
     </Source>
 
     <Package>
@@ -35,7 +37,6 @@
             <Dependency>mesa</Dependency>
             <Dependency>libSM</Dependency>
             <Dependency>libICE</Dependency>
-	    <Dependency>expat</Dependency>
 	    <Dependency>libglade</Dependency>
         </RuntimeDependencies>
         <Files>

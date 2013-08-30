@@ -14,7 +14,6 @@ def setup():
     autotools.configure("--prefix=/usr \
                          --mandir=/usr/share/man \
                          --enable-optimization \
-                         --enable-3ds-import \
                          --enable-javascript-api \
                          --enable-threadsafe \
                          --enable-exceptions \
@@ -22,6 +21,7 @@ def setup():
                          --with-mesa \
                          --disable-debug \
                          --enable-shared \
+                         --enable-html \
                          --disable-maintainer-mode \
                          --disable-dependency-tracking \
                          --enable-system-expat")

@@ -17,23 +17,25 @@
         <BuildDependencies>
             <Dependency>boost-devel</Dependency>
             <Dependency>libspnav-devel</Dependency>
-	    <Dependency>xerces-c-devel</Dependency>
-	    <Dependency>python-pivy</Dependency>
-	    <Dependency>python-qt-devel</Dependency>
-	    <Dependency versionFrom="6.6.0">OpenCASCADE-devel</Dependency>
-	    <Dependency versionFrom="3.0.5">eigen-devel</Dependency>
-            <Dependency versionFrom="3.1.3">coin-devel</Dependency>
-	    <Dependency>swig</Dependency>
+            <Dependency>xerces-c-devel</Dependency>
+            <Dependency>python-pivy</Dependency>
+            <Dependency>python-qt-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>eigen3-devel</Dependency>
+            <Dependency>coin-devel</Dependency>
+            <Dependency>swig</Dependency>
             <Dependency>python-matplotlib</Dependency>
-	    <Dependency>libgfortran</Dependency>
-	    <Dependency>curl</Dependency>
-    <!--    <Dependency>desktop-file-utils</Dependency>   -->
+            <Dependency>libgfortran</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+            <Dependency>OCE-devel</Dependency>
+            <Dependency>SoQt-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>mesa-glu-devel</Dependency>
         </BuildDependencies>
-        <!--
         <Patches>
             <Patch level="1">freecad-0.13.1830-remove-qt3-support.patch</Patch>
+            <Patch level="1">fix_BrepTools.patch</Patch>
         </Patches>
-        -->
     </Source>
 
     <Package>
@@ -41,39 +43,41 @@
         <RuntimeDependencies>
             <Dependency>boost</Dependency>
             <Dependency>libspnav</Dependency>
-	    <Dependency>xerces-c</Dependency>
-	    <Dependency>python-pivy</Dependency>
-	    <Dependency>python-qt</Dependency>
-	    <Dependency versionFrom="6.6.0">OpenCASCADE</Dependency>
-	    <Dependency versionFrom="3.0.5">eigen</Dependency>
-            <Dependency versionFrom="3.1.3">coin</Dependency>
-	    <Dependency>swig</Dependency>
+            <Dependency>xerces-c</Dependency>
+            <Dependency>python-pivy</Dependency>
+            <Dependency>python-qt</Dependency>
+            <Dependency>qt-webkit</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>eigen3</Dependency>
+            <Dependency>coin</Dependency>
+            <Dependency>swig</Dependency>
             <Dependency>python-matplotlib</Dependency>
-	    <Dependency>libgfortran</Dependency>
-	    <Dependency>python-matplotlib</Dependency>
-	    <Dependency>shared-mime-info</Dependency>
+            <Dependency>libgfortran</Dependency>
+            <Dependency>OCE</Dependency>
+            <Dependency>SoQt</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>mesa-glu</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="data">/usr/share/freecad</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/</Path>
             <Path fileType="data">/usr/share/pixmaps</Path>
             <Path fileType="data">/usr/share/applications</Path>
-            <Path fileType="executable">/usr/lib/freecad/bin</Path>
-            <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="library">/usr/lib/freecad</Path>
+            <Path fileType="data">/usr/share/freecad</Path>
+            <Path fileType="data">/usr/Mod</Path>
+            <Path fileType="data">/usr/doc</Path>
         </Files>
-        <!--
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/freecad.desktop">freecad.desktop</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/freecad.png">freecad.png</AdditionalFile>
         </AdditionalFiles>
-        -->
     </Package>
     <Package>
-         <Name>FreeCAD-devel</Name>
+         <Name>freecad-devel</Name>
          <IsA>data</IsA>
-         <Summary>Development files for FreeCAD</Summary>
+         <Summary>Development files for freecad</Summary>
          <RuntimeDependencies>
-             <Dependency release="current">FreeCAD</Dependency>
+             <Dependency release="current">freecad</Dependency>
          </RuntimeDependencies>
          <Files>
             <Path fileType="header">/usr/include</Path>
@@ -81,14 +85,15 @@
     </Package>
     
     <Package>
-         <Name>FreeCAD-docs</Name>
-         <IsA>data:doc</IsA>
-         <Summary>Documents for FreeCAD</Summary>
+         <Name>freecad-qt-designer-plugin</Name>
+         <IsA>library</IsA>
+         <Summary>Plugins for for Qt-Designer</Summary>
          <RuntimeDependencies>
-             <Dependency release="current">FreeCAD</Dependency>
+             <Dependency release="current">freecad</Dependency>
+             <Dependency>qt-designer</Dependency>
          </RuntimeDependencies>
          <Files>
-            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="library">/usr/lib/qt4/plugins/designer</Path>
          </Files>
     </Package>
   
@@ -97,8 +102,8 @@
             <Date>2013-08-22</Date>
             <Version>0.13.1830</Version>
             <Comment>First release</Comment>
-            <Name>PisiLinux Community</Name>
-            <Email>admin@pisilinux.org</Email>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
         </Update>
     </History>
 </PISI>

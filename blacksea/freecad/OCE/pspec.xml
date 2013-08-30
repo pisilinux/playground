@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>OCE</Name>
+        <Homepage>https://github.com/tpaviot/oce</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Open CASCADE Technology Public License</License>
+        <IsA>app:console</IsA>
+        <Summary>CAD/CAE, 3D surface/solid modeling and data exchange</Summary>
+        <Description>Open CASCADE community edition includes components for 3D surface and solid modeling, visualization, data exchange and rapid application development.</Description>
+        <Archive sha1sum="3d1076ea77e524027a7769eb5113062a0c2c2de3" type="tarxz">http://source.pisilinux.org/1.0/oce-0.12-20130827.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>gl2ps-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>mesa-glu-devel</Dependency>
+        </BuildDependencies>
+      </Source>
+
+    <Package>
+        <Name>OCE</Name>
+        <RuntimeDependencies>
+            <Dependency>gl2ps</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>mesa-glu</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="data">/usr/share/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>OCE-devel</Name>
+        <Summary>Development files for OCE</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">OCE</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/oce</Path>
+        </Files>
+    </Package>
+    <History>
+      <Update release="1">
+            <Date>2013-08-25</Date>
+            <Version>0_20130825</Version>
+            <Comment>First release</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
