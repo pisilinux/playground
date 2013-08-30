@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cracklib</Name>
+        <Homepage>http://www.sourceforge.net/projects/cracklib</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Password Checking Library</Summary>
+        <Description>CrackLib tests passwords to determine whether they match certain security-oriented characteristics, with the purpose of stopping users from choosing passwords that are easy to guess.</Description>
+        <Archive sha1sum="827dcd24b14bf23911c34f4226b4453b24f949a3" type="targz">mirrors://sourceforge/cracklib/cracklib-2.9.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>miscfiles</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cracklib</Name>
+        <RuntimeDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>python</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/lib</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/cracklib</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>cracklib-devel</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Development files for cracklib</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">cracklib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2013-08-30</Date>
+            <Version>2.9.0</Version>
+            <Comment>Version bump, clean cracklib.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-15</Date>
+            <Version>2.8.22</Version>
+            <Comment>New version</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-08-23</Date>
+            <Version>2.8.19</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
