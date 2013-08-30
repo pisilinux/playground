@@ -68,11 +68,11 @@ def build():
     ##
     autotools.make()
 
-def check():
-    #symlink libperl.so.x.y.z to libperl.so
-    #so we can pass /lib/ExtUtils/t/Embed.t test
-    shelltools.sym("libperl.so.%s" % get.srcVERSION(),"libperl.so")
-    autotools.make("-j1 test")
+#def check():
+    ##symlink libperl.so.x.y.z to libperl.so
+    ##so we can pass /lib/ExtUtils/t/Embed.t test
+    #shelltools.sym("libperl.so.%s" % get.srcVERSION(),"libperl.so")
+    #autotools.make("-j1 test")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
