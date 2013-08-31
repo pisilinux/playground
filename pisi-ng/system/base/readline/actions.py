@@ -9,9 +9,10 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 
 def setup():
+    pisitools.cflags.add("-fPIC")
+
     #Force link to ncurses instead of tinfo, which we don't have, will be needed when we use as-needed ;)
     pisitools.dosed("support/shobj-conf", "^(SHLIB_LIBS=)", "\\1-lncurses")
-    if get.buildTYPE() == "x86_64": pisitools.cflags.add("-fPIC")
 
     pisitools.dosed("support/shobj-conf", "\-Wl,\-rpath,\$\(libdir\)\s")
     autotools.configure("--with-curses \
