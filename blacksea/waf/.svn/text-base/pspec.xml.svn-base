@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>waf</Name>
+        <Homepage>http://code.google.com/p/waf</Homepage>
+        <Packager>
+            <Name>Anıl Özbek</Name>
+            <Email>ozbekanil@gmail.com</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary>The meta build system</Summary>
+        <Description>Waf is a Python-based framework for configuring, compiling and installing applications.</Description>
+        <Archive sha1sum="f270b7c6560f3952a67ea7236783bc2ae666edba" type="tarbz2">http://waf.googlecode.com/files/waf-1.6.10.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>python-devel</Dependency>
+            <Dependency>python-sphinx</Dependency>
+            <Dependency>graphviz-devel</Dependency>
+            <Dependency>imagemagick-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>jobs.diff</Patch>
+            <Patch>waf-1.6.2-libdir.patch</Patch>
+            <Patch level="1">waf-1.6.9-logo.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>waf</Name>
+        <RuntimeDependencies>
+            <Dependency>python-sphinx</Dependency>
+            <Dependency>graphviz</Dependency>
+            <Dependency>imagemagick</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2012-01-08</Date>
+            <Version>1.6.10</Version>
+            <Comment>First release</Comment>
+            <Name>Anıl Özbek</Name>
+            <Email>ozbekanil@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
