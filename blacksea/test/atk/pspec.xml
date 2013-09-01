@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>atk</Name>
+        <Homepage>http://developer.gnome.org/atk</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>GTK+ and GNOME Accessibility Toolkit</Summary>
+        <Description>These libraries provide tools for making software for people with disabilities.</Description>
+        <Archive sha1sum="4f7c765a6fdadabd1c386d74c43a63fc87f0a344" type="tarxz">http://ftp.gnome.org/pub/GNOME/sources/atk/2.9/atk-2.9.4.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>gnome-common</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>atk</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+
+
+
+    <History>
+        <Update release="4">
+            <Date>2013-08-21</Date>
+            <Version>2.9.4</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-04-07</Date>
+            <Version>2.8.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-24</Date>
+            <Version>2.7.91</Version>
+            <Comment>V.Bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-10-22</Date>
+            <Version>2.7.2</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
