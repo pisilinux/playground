@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>file</Name>
+        <Homepage>http://www.darwinsys.com/file/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <Summary>Program to identify a file's format by scanning binary data for patterns</Summary>
+        <Description>Program to identify a file's format by scanning binary data for patterns.</Description>
+        <Archive sha1sum="064c8f17a5f7ae1e336a9285131e046d3b2d04d7" type="targz">ftp://ftp.astron.com/pub/file/file-5.14.tar.gz</Archive>
+        <!-- An update to this package can easily break pisi, pay attention! -->
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+            <!-- remove python dependencies while bootstrap -->
+            <Dependency>python-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>file</Name>
+        <RuntimeDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>python</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/misc</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2013-09-01</Date>
+            <Version>5.14</Version>
+            <Comment>Version bump, clean file.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-03-04</Date>
+            <Version>5.13</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-16</Date>
+            <Version>5.12</Version>
+            <Comment>New Release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-11-22</Date>
+            <Version>5.11</Version>
+            <Comment>First release</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
