@@ -11,24 +11,28 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
-def setup():
-    cmaketools.configure("-DUSE_OPENSSL=ON")
+dirs=["build","plugins"]
 
-    #shelltools.cd("plugins")
-    #cmaketools.configure()
-    #shelltools.cd("..")
+def setup():
+    shelltools.makedirs("build")
+    for dir in dirs:
+        shelltools.cd(dir)
+        cmaketools.configure("-DUSE_OPENSSL=ON -DCMAKE_INSTALL_PREFIX=/usr" ,sourceDir="..")
+        shelltools.cd("..")
 
 def build():
+    shelltools.cd("build")
+    cmaketools.make()
+    shelltools.cd("..")
+
+    shelltools.cd("plugins")
     cmaketools.make()
 
-    #shelltools.cd("plugins")
-    #cmaketools.make()
-    #shelltools.cd("..")
 
 def install():
-    #shelltools.cd("plugins")
-    #cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
-    #shelltools.cd("..")
-    cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
+    for dir in dirs:
+        shelltools.cd(dir)
+        cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
+        shelltools.cd("..")
 
     pisitools.dodoc("LICENSE", "README")
