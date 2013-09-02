@@ -1881,7 +1881,7 @@ verwenden. Dies könnte nicht funktionieren.</translation>
         <source>Are you sure you want to remove
 %1 (%2)
 from your contact list?</source>
-        <translation type="unfinished">%1 kişisini (%2) iletişim listenizden silmek istediğinizden
+        <translation type="unfinished">%1 kişisini (%2) Kişi listenizden silmek istediğinizden
 emin misiniz?</translation>
     </message>
     <message>
@@ -2003,7 +2003,7 @@ Would you like to try loading the old one?</source>
     <message>
         <location filename="../src/dialogs/mmsenddlg.cpp" line="119"/>
         <source>Multiple Recipient Contact List</source>
-        <translation type="unfinished"></translation>
+        <translation>Çoklu Alıcı Kişi Listesi</translation>
     </message>
     <message>
         <location filename="../src/dialogs/mmsenddlg.cpp" line="137"/>
@@ -3328,7 +3328,7 @@ Normally, this menu shows only commonly used encodings.</source>
     <message>
         <location filename="../src/settings/contactlist.cpp" line="58"/>
         <source>Contact List</source>
-        <translation type="unfinished">İletişim listesi</translation>
+        <translation>Kişi listesi</translation>
     </message>
     <message>
         <location filename="../src/settings/contactlist.cpp" line="60"/>
@@ -3358,7 +3358,7 @@ Normally, this menu shows only commonly used encodings.</source>
     <message>
         <location filename="../src/settings/contactlist.cpp" line="83"/>
         <source>Show the &quot;--online--&quot; and &quot;--offline--&quot; bars in the contact list</source>
-        <translation type="unfinished">Zeige die &quot;--online--&quot; und &quot;--offline--&quot; Balken in der Kontaktliste</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/settings/contactlist.cpp" line="90"/>
@@ -3505,7 +3505,7 @@ Normally, this menu shows only commonly used encodings.</source>
     <message>
         <location filename="../src/settings/contactlist.cpp" line="179"/>
         <source>Hotkey to show/hide the contact list window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişi listesini gösterim/gizleme penceresi için kısayol</translation>
     </message>
     <message>
         <location filename="../src/settings/contactlist.cpp" line="197"/>
@@ -3683,12 +3683,12 @@ Normally, this menu shows only commonly used encodings.</source>
     <message>
         <location filename="../src/settings/contactlist.cpp" line="71"/>
         <source>Contact List Appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişi listesi görünümü</translation>
     </message>
     <message>
         <location filename="../src/settings/contactlist.cpp" line="162"/>
         <source>Contact List Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişi listesi davranışı</translation>
     </message>
     <message>
         <location filename="../src/settings/contactlist.cpp" line="75"/>
@@ -4329,7 +4329,7 @@ Works with many different window managers.</source>
         <location filename="../src/settings/shortcuts.cpp" line="53"/>
         <location filename="../src/settings/shortcuts.cpp" line="123"/>
         <source>Contact List Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişi listesi kısayolları</translation>
     </message>
     <message>
         <location filename="../src/settings/shortcuts.cpp" line="61"/>
@@ -4447,7 +4447,7 @@ Works with many different window managers.</source>
     <message>
         <location filename="../src/settings/shortcuts.cpp" line="95"/>
         <source>Hide contact list</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişi listesini gizle</translation>
     </message>
     <message>
         <location filename="../src/settings/shortcuts.cpp" line="96"/>
@@ -6152,7 +6152,7 @@ Select another picture?</source>
     <message>
         <location filename="../src/userdlg/owner.cpp" line="130"/>
         <source>Use server side contact list</source>
-        <translation type="unfinished"></translation>
+        <translation>Sunucu kaynaklı kişi listesini kullan</translation>
     </message>
     <message>
         <location filename="../src/userdlg/owner.cpp" line="131"/>
@@ -6499,7 +6499,7 @@ Select another picture?</source>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="163"/>
         <source>Contact List</source>
-        <translation type="unfinished">İletişim listesi</translation>
+        <translation type="unfinished">Kişi listesi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="164"/>
@@ -6623,7 +6623,7 @@ Select another picture?</source>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="631"/>
         <source> - Contact List</source>
-        <translation type="unfinished"> - İletişim listesi</translation>
+        <translation type="unfinished"> - Kişi listesi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="635"/>
@@ -6723,33 +6723,33 @@ Send anyway?</source>
         <location filename="../src/userevents/usersendevent.cpp" line="1430"/>
         <location filename="../src/userevents/usersendevent.cpp" line="1476"/>
         <source>error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Hata</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1462"/>
         <source>done</source>
-        <translation type="unfinished">Tamam</translation>
+        <translation>Tamamlandı</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1466"/>
         <source>cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>iptal edildi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1470"/>
         <source>failed</source>
-        <translation type="unfinished">Başarısız</translation>
+        <translation>Başarısız</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1473"/>
         <source>timed out</source>
-        <translation type="unfinished">Zaman aştı</translation>
+        <translation>Zaman aştı</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1516"/>
         <source>Direct send failed,
 send through server?</source>
-        <translation type="unfinished">Doğrudan iletim başarısız, 
+        <translation>Doğrudan iletim başarısız, 
 sunucu aracılığı ile gönderiyor musunuz?</translation>
     </message>
     <message>
@@ -6762,12 +6762,12 @@ Send...</source>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1546"/>
         <source> to Contact List</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişi listesine</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1546"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1594"/>
