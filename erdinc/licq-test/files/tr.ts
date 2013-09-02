@@ -1303,22 +1303,22 @@ Ayrıntılar için ağ arayüzüne bakın.</translation>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="71"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Engelle</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="72"/>
         <source>Ignore event completely.</source>
-        <translation type="unfinished"></translation>
+        <translation>Olayı tamamen engelle.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="76"/>
         <source>Event Types</source>
-        <translation type="unfinished"></translation>
+        <translation>Olay türleri</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="95"/>
         <source>Expression</source>
-        <translation type="unfinished"></translation>
+        <translation>İfade</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="100"/>
@@ -1333,7 +1333,7 @@ Note: Multibyte characters are not handled so UTF8 characters will be handled as
     <message>
         <location filename="../src/views/floatyview.cpp" line="55"/>
         <source>%1 Floaty (%2)</source>
-        <translation type="unfinished">%1 hepüstte (%2)</translation>
+        <translation>%1 hepüstte (%2)</translation>
     </message>
 </context>
 <context>
@@ -1341,17 +1341,17 @@ Note: Multibyte characters are not handled so UTF8 characters will be handled as
     <message>
         <location filename="../src/widgets/fontedit.cpp" line="50"/>
         <source>Choose...</source>
-        <translation type="unfinished"></translation>
+        <translation>Seç...</translation>
     </message>
     <message>
         <location filename="../src/widgets/fontedit.cpp" line="51"/>
         <source>Select a font from the system list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistem listesinden bir font seç</translation>
     </message>
     <message>
         <location filename="../src/widgets/fontedit.cpp" line="61"/>
         <source>default (%1)</source>
-        <translation type="unfinished">standard (%1)</translation>
+        <translation>öntanımlı (%1)</translation>
     </message>
 </context>
 <context>
@@ -1359,50 +1359,50 @@ Note: Multibyte characters are not handled so UTF8 characters will be handled as
     <message>
         <location filename="../src/dialogs/forwarddlg.cpp" line="63"/>
         <source>Message</source>
-        <translation type="unfinished">İleti</translation>
+        <translation>İleti</translation>
     </message>
     <message>
         <location filename="../src/dialogs/forwarddlg.cpp" line="67"/>
         <source>URL</source>
-        <translation type="unfinished">URL</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../src/dialogs/forwarddlg.cpp" line="72"/>
         <source>Unable to forward this message type (%s).</source>
-        <translation type="unfinished">Bu mesaj tipini (%s) iletemiyorum.</translation>
+        <translation>Bu mesaj tipini (%s) iletemiyorum.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/forwarddlg.cpp" line="77"/>
         <source>Forward %1 To User</source>
-        <translation type="unfinished">%1 i Kullanıcıya ilet</translation>
+        <translation>%1 i Kullanıcıya ilet</translation>
     </message>
     <message>
         <location filename="../src/dialogs/forwarddlg.cpp" line="81"/>
         <source>Drag the user to forward to here:</source>
-        <translation type="unfinished">Kullanıcıya iletmek için, kullanıcıyı buraya sürükleyin.</translation>
+        <translation>Kullanıcıya iletmek için, kullanıcıyı buraya sürükleyin.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/forwarddlg.cpp" line="88"/>
         <source>&amp;Forward</source>
-        <translation type="unfinished">&amp;İlet</translation>
+        <translation>&amp;İlet</translation>
     </message>
     <message>
         <location filename="../src/dialogs/forwarddlg.cpp" line="92"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Vazgeç</translation>
+        <translation>&amp;Vazgeç</translation>
     </message>
     <message>
         <location filename="../src/dialogs/forwarddlg.cpp" line="115"/>
         <source>Forwarded message:
 </source>
-        <translation type="unfinished">İletilecek mesaj:
+        <translation>İletilecek mesaj:
 </translation>
     </message>
     <message>
         <location filename="../src/dialogs/forwarddlg.cpp" line="123"/>
         <source>Forwarded URL:
 </source>
-        <translation type="unfinished">İletilecek URL:
+        <translation>İletilecek URL:
 </translation>
     </message>
 </context>
@@ -1411,37 +1411,37 @@ Note: Multibyte characters are not handled so UTF8 characters will be handled as
     <message>
         <location filename="../src/dialogs/gpgkeymanager.cpp" line="86"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ekle</translation>
     </message>
     <message>
         <location filename="../src/dialogs/gpgkeymanager.cpp" line="93"/>
         <source>&amp;Edit...</source>
-        <translation type="unfinished">&amp;Editieren...</translation>
+        <translation>&amp;Düzenleme...</translation>
     </message>
     <message>
         <location filename="../src/dialogs/gpgkeymanager.cpp" line="94"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kaldır</translation>
     </message>
     <message>
         <location filename="../src/dialogs/gpgkeymanager.cpp" line="72"/>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı</translation>
     </message>
     <message>
         <location filename="../src/dialogs/gpgkeymanager.cpp" line="65"/>
         <source>Licq - GPG Key Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Licq - GPG Anahtar Yöneticisi</translation>
     </message>
     <message>
         <location filename="../src/dialogs/gpgkeymanager.cpp" line="72"/>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkin</translation>
     </message>
     <message>
         <location filename="../src/dialogs/gpgkeymanager.cpp" line="72"/>
         <source>Key ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Anahtar kimliği</translation>
     </message>
     <message>
         <location filename="../src/dialogs/gpgkeymanager.cpp" line="155"/>
@@ -3777,37 +3777,37 @@ If not checked user will only be added to the new group.</source>
     <message>
         <location filename="../src/settings/events.cpp" line="113"/>
         <source>Flash taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Flaş görev çubuğu</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="114"/>
         <source>Flash the taskbar on incoming messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelen ileti olduğunda görev çubuğu parıldasın</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="117"/>
         <source>Blink all events</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm olaylarda yanıp/sön</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="118"/>
         <source>All incoming events will blink</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm gelen olaylarda yanıp/sönecek</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="121"/>
         <source>Blink urgent events</source>
-        <translation type="unfinished"></translation>
+        <translation>Acil olaylarda yanıp/sön</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="122"/>
         <source>Only urgent events will blink</source>
-        <translation type="unfinished"></translation>
+        <translation>Yalnız acil olaylarda yanıp/sön</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="127"/>
         <source>Hot key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kısayol tuşu:</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="130"/>
@@ -3818,12 +3818,12 @@ Enter the hotkey literally, like &quot;shift+f10&quot;, or &quot;none&quot; for 
     <message>
         <location filename="../src/settings/events.cpp" line="143"/>
         <source>Paranoia</source>
-        <translation type="unfinished">Paranoia</translation>
+        <translation>Paranoya</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="146"/>
         <source>Ignore new users</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni kullanıcıları engelle</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="147"/>
@@ -3833,7 +3833,7 @@ Enter the hotkey literally, like &quot;shift+f10&quot;, or &quot;none&quot; for 
     <message>
         <location filename="../src/settings/events.cpp" line="150"/>
         <source>Ignore mass messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Toplu mesajları engelle</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="151"/>
@@ -6391,7 +6391,7 @@ Select another picture?</source>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="148"/>
         <source>Occupied</source>
-        <translation type="unfinished">Beschäftigt</translation>
+        <translation>Meşgul</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="149"/>
@@ -6411,67 +6411,67 @@ Select another picture?</source>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="159"/>
         <source>System Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistem grupları</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="163"/>
         <source>Notify when this contact comes online.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu kulanıcı çevrimiçi olduğunda bildir.</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="167"/>
         <source>Contact will see you online even if you&apos;re invisible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişiler seni görünmez olduğund&apos;a çevrimiçi görecek</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="171"/>
         <source>Contact will always see you as offline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişiler seni herzaman çevrimidışı görecek</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="175"/>
         <source>Ignore any events from this contact.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu kişiden gelen tüm olayları engelle</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="179"/>
         <source>Contact was recently added to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Son zamanlarda kişi listesine eklenen.</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="184"/>
         <source>Custom Auto Response</source>
-        <translation type="unfinished"></translation>
+        <translation>Özel Otomatik Yanıt</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="193"/>
         <source>Hints</source>
-        <translation type="unfinished"></translation>
+        <translation>İpuçları</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="197"/>
         <source>Clear</source>
-        <translation type="unfinished">Temizle</translation>
+        <translation>Temizle</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="298"/>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grup</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="300"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokal</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="300"/>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Sunucu</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="302"/>
         <source>Member</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı</translation>
     </message>
 </context>
 <context>
@@ -6479,230 +6479,232 @@ Select another picture?</source>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="159"/>
         <source>Message</source>
-        <translation type="unfinished">İleti</translation>
+        <translation>İleti</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="160"/>
         <source>URL</source>
-        <translation type="unfinished">URL</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="161"/>
         <source>Chat Request</source>
-        <translation type="unfinished">Sohbet isteği</translation>
+        <translation>Sohbet isteği</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="162"/>
         <source>File Transfer</source>
-        <translation type="unfinished">Dosya Transferi</translation>
+        <translation>Dosya Transferi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="163"/>
         <source>Contact List</source>
-        <translation type="unfinished">Kişi listesi</translation>
+        <translation>Kişi listesi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="164"/>
         <source>SMS</source>
-        <translation type="unfinished"></translation>
+        <translation>SMS</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="701"/>
         <source>Send through server</source>
-        <translation type="unfinished"></translation>
+        <translation>Sunucu ile gönder</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="195"/>
         <location filename="../src/userevents/usersendevent.cpp" line="702"/>
         <location filename="../src/userevents/usersendevent.cpp" line="1546"/>
         <source>Urgent</source>
-        <translation type="unfinished">İvedi</translation>
+        <translation>İvedi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="171"/>
         <source>Message Type</source>
-        <translation type="unfinished"></translation>
+        <translation>İleti yöntemi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="176"/>
         <source>Send Through Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Sunucu ile gönder</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="198"/>
         <source>Multiple Recipients</source>
-        <translation type="unfinished">Çaklu alıcı</translation>
+        <translation>Çaklu alıcı</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="204"/>
         <source>Smileys</source>
-        <translation type="unfinished"></translation>
+        <translation>Gülücükler</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="205"/>
         <source>Text Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı rengi...</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="206"/>
         <source>Background Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aarkaplan rengi...</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="211"/>
         <location filename="../src/userevents/usersendevent.cpp" line="1490"/>
         <source>&amp;Send</source>
-        <translation type="unfinished">&amp;Gönder</translation>
+        <translation>&amp;Gönder</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="272"/>
         <source>Error! no owner set</source>
-        <translation type="unfinished"></translation>
+        <translation>Hata! sahiplik atanmamış</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="419"/>
         <source>URL:</source>
-        <translation type="unfinished">URL:</translation>
+        <translation>URL:</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="431"/>
         <source>Multiparty:</source>
-        <translation type="unfinished"></translation>
+        <translation>Çoklu parti:</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="435"/>
         <location filename="../src/userevents/usersendevent.cpp" line="1957"/>
         <source>Invite</source>
-        <translation type="unfinished">Davet et</translation>
+        <translation>Davet et</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="444"/>
         <source>File(s):</source>
-        <translation type="unfinished">Tarih (en):</translation>
+        <translation>Dosya(lar):</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="448"/>
         <source>Browse</source>
-        <translation type="unfinished">Gözat</translation>
+        <translation>Gözat</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="450"/>
         <source>Edit</source>
-        <translation type="unfinished">Düzenle</translation>
+        <translation>Düzenle</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="460"/>
         <source>Drag Users Here - Right Click for Options</source>
-        <translation type="unfinished">Kullanıcıları buraya sürükle- Seçenekler için ters-tıkla</translation>
+        <translation>Kullanıcıları buraya sürükle- Seçenekler için ters-tıkla</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="470"/>
         <source>Phone:</source>
-        <translation type="unfinished">Telefon:</translation>
+        <translation>Telefon:</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="478"/>
         <source>Chars left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalan karakter:</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="620"/>
         <source> - URL</source>
-        <translation type="unfinished"> - URL</translation>
+        <translation> - URL</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="623"/>
         <source> - Chat Request</source>
-        <translation type="unfinished"> - Sohbet isteği</translation>
+        <translation> - Sohbet isteği</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="627"/>
         <source> - File Transfer</source>
-        <translation type="unfinished"> - Transfer Detayı</translation>
+        <translation> - Dosya gönderimi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="631"/>
         <source> - Contact List</source>
-        <translation type="unfinished"> - Kişi listesi</translation>
+        <translation> - Kişi listesi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="635"/>
         <source> - SMS</source>
-        <translation type="unfinished"></translation>
+        <translation> - SMS</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="642"/>
         <source> - Message</source>
-        <translation type="unfinished"> - İleti</translation>
+        <translation> - İleti</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="700"/>
         <source>Select type of message to send</source>
-        <translation type="unfinished"></translation>
+        <translation>İleti yöntemini seç</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="703"/>
         <source>Multiple recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Çoklu alıcı</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="704"/>
         <source>Insert smileys</source>
-        <translation type="unfinished"></translation>
+        <translation>Gülücük ekle</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="705"/>
         <source>Change text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı rengini değiştir</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="706"/>
         <source>Change background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Arkaplan rengini değiştir</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="826"/>
         <source>%1 has joined the conversation.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 sohbete katıldı</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="853"/>
         <source>%1 has left the conversation.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 sohbeti terketti.</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1176"/>
         <source>You didn&apos;t edit the SMS.
 Do you really want to send it?</source>
-        <translation type="unfinished"></translation>
+        <translation>SMS'i değiştirmedini&apos;z.
+Göndermek istediğinizden emin misiniz?</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1177"/>
         <source>You didn&apos;t edit the message.
 Do you really want to send it?</source>
-        <translation type="unfinished">Mesajı değiştirmediniz.
+        <translation>Mesajı değiştirmedini&apos;z.
 Göndermek istediğinizden emin misiniz?</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1183"/>
         <source>No URL specified</source>
-        <translation type="unfinished"></translation>
+        <translation>URL belirtilmedi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1188"/>
         <source>You must specify a file to transfer!</source>
-        <translation type="unfinished">Transfer etmek için bir dosya belirlemelisiniz!</translation>
+        <translation>Transfer etmek için bir dosya belirlemelisiniz!</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1208"/>
         <source>Message can&apos;t be sent securely through the server!
 Send anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation> İleti sunucu üzerinden güvenli bir şekilde gönderilemed&apos;i!
+Yinede gönderilsinmi?</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1403"/>
         <source>Sending </source>
-        <translation type="unfinished">Gönder </translation>
+        <translation>Gönderim </translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1404"/>
@@ -6743,7 +6745,7 @@ Send anyway?</source>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1473"/>
         <source>timed out</source>
-        <translation>Zaman aştı</translation>
+        <translation>Zaman aşımı</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1516"/>
@@ -6773,21 +6775,21 @@ Send...</source>
         <location filename="../src/userevents/usersendevent.cpp" line="1594"/>
         <location filename="../src/userevents/usersendevent.cpp" line="1615"/>
         <source>No reason provided</source>
-        <translation type="unfinished"></translation>
+        <translation>Neden belirsiz</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1596"/>
         <source>File transfer with %1 refused:
 %2</source>
-        <translation type="unfinished">%2, transferi reddetti:
-%2 {1 ?}</translation>
+        <translation>%1, ile dosya transferi reddedildi:
+%2</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1617"/>
         <source>Chat with %1 refused:
 %2</source>
-        <translation type="unfinished">%2 ile sohbet isteği reddedildi.:
-%2 {1 ?}</translation>
+        <translation>%1 ile sohbet isteği reddedildi:
+%2</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1783"/>
@@ -6799,18 +6801,18 @@ Seçenekler için ters-tıkla</translation>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1949"/>
         <source>Clear</source>
-        <translation type="unfinished">Temizle</translation>
+        <translation>Temizle</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1964"/>
         <location filename="../src/userevents/usersendevent.cpp" line="1966"/>
         <source>Select files to send</source>
-        <translation type="unfinished"></translation>
+        <translation>Göndermek için dosya seç</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="2003"/>
         <source>%1 Files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Dosya</translation>
     </message>
 </context>
 <context>
@@ -6828,23 +6830,23 @@ Seçenekler için ters-tıkla</translation>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="721"/>
         <source>&amp;View</source>
-        <translation>Bak</translation>
+        <translation>&amp;Bak</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="128"/>
         <location filename="../src/userevents/userviewevent.cpp" line="258"/>
         <source>Nex&amp;t</source>
-        <translation>Sonraki</translation>
+        <translation>Sonrak&amp;i</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="757"/>
         <source>A&amp;dd %1 Users</source>
-        <translation>%1 kişi ekle</translation>
+        <translation>%1 kişi e&amp;kle</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="121"/>
         <source>Aut&amp;o Close</source>
-        <translation>Otomatik kapama</translation>
+        <translation>Ot&amp;omatik kapama</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="133"/>
@@ -6855,19 +6857,19 @@ Seçenekler için ters-tıkla</translation>
         <location filename="../src/userevents/userviewevent.cpp" line="708"/>
         <location filename="../src/userevents/userviewevent.cpp" line="719"/>
         <source>&amp;Quote</source>
-        <translation>Atfet</translation>
+        <translation>&amp;Alıntıla</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="687"/>
         <location filename="../src/userevents/userviewevent.cpp" line="707"/>
         <location filename="../src/userevents/userviewevent.cpp" line="718"/>
         <source>&amp;Reply</source>
-        <translation>Yanıtla</translation>
+        <translation>&amp;Yanıtla</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="694"/>
         <source>A&amp;ccept</source>
-        <translation>Kabul et</translation>
+        <translation>K&amp;abul et</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="134"/>
