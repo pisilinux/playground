@@ -4,23 +4,15 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/licenses/gpl.txt
 
+from pisi.actionsapi import get
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
-from pisi.actionsapi import get
 
 configTemplateDir = "/usr/share/libtool/config"
 
 def setup():
-    cflags = "%s -fPIC" % get.CFLAGS()
-    options = "--enable-static=no"
-
-    if get.buildTYPE() == "emul32":
-        options += " --libdir=/usr/lib32"
-        cflags += " -m32"
-
-    shelltools.export("CFLAGS", cflags)
-    autotools.configure(options)
+    pisitools.cflags.add("-fPIC")
+    autotools.configure("--enable-static=no")
 
 def build():
     autotools.make()
