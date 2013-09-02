@@ -407,7 +407,7 @@ Ayrıntılar için ağ arayüzüne ayrıntılar için bakın.></translation>
         <location filename="../src/dialogs/chatdlg.cpp" line="712"/>
         <source>Unable to create new thread.
 See Network Window for details.</source>
-        <translation>Yeni konu oluşturulamıyor.
+        <translation>Yeni etkinlik oluşturulamıyor.
 Ayrıntılar için ağ arayüzüne ayrıntılar için bakın.></translation>
     </message>
     <message>
@@ -1141,93 +1141,98 @@ Ayrıntılar için ağ arayüzüne bakın.</translation>
         <location filename="../src/dialogs/filedlg.cpp" line="394"/>
         <source>Unable to reach remote host.
 See Network Window for details.</source>
-        <translation type="unfinished"></translation>
+        <translation> Uzak sunucuya ulaşılamıyor.
+Ayrıntılar için ağ arayüzüne bakın.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="401"/>
         <source>Bind error.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlantı hatası.
+</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="404"/>
         <source>Unable to bind to a port.
 See Network Window for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Her hangi bir porta bağlanılamadı.
+Ayrıntılar için ağ arayüzüne bakın.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="411"/>
         <source>Not enough resources.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Yetersiz kaynak.
+</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="414"/>
         <source>Unable to create a thread.
 See Network Window for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni etkinlik oluşturulamıyor.
+Ayrıntılar için ağ arayüzüne bakın.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="430"/>
         <source>Connecting to remote...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzak bağlantı...</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="443"/>
         <source>MB</source>
-        <translation type="unfinished"></translation>
+        <translation>MB</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="447"/>
         <source>KB</source>
-        <translation type="unfinished"></translation>
+        <translation>KB</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="451"/>
         <source>Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Bytes</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="455"/>
         <source>Byte</source>
-        <translation type="unfinished"></translation>
+        <translation>Byte</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="493"/>
         <source>File already exists and is at least as big as the incoming file.</source>
-        <translation type="unfinished">Dosya zaten var (gözüküyor) ve neredeyse gelen dosya kadar büyük.</translation>
+        <translation>Dosya zaten var (gözüküyor) ve neredeyse gelen dosya kadar büyük.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="493"/>
         <location filename="../src/dialogs/filedlg.cpp" line="500"/>
         <source>Overwrite</source>
-        <translation type="unfinished">Üzerine Yaz</translation>
+        <translation>Üzerine Yaz</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="493"/>
         <location filename="../src/dialogs/filedlg.cpp" line="517"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="500"/>
         <source>File already exists and appears incomplete.</source>
-        <translation type="unfinished">DOsya zaten var (gözüküyor) ancak tamamlanmamış (gibi).</translation>
+        <translation>Dosya zaten var (gözüküyor) ancak tamamlanmamış (gibi).</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="500"/>
         <source>Resume</source>
-        <translation type="unfinished">Devam et</translation>
+        <translation>Devam et</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="517"/>
         <source>Open error - unable to open file for writing.</source>
-        <translation type="unfinished">Açma Hatası : Dosyayı yazmak için açamıyorum.</translation>
+        <translation>Açma Hatası : Dosya yazmak için açılamıyor.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filedlg.cpp" line="517"/>
         <source>Retry</source>
-        <translation type="unfinished">Tekrar dene</translation>
+        <translation>Tekrar dene</translation>
     </message>
 </context>
 <context>
@@ -1235,7 +1240,7 @@ See Network Window for details.</source>
     <message>
         <location filename="../src/widgets/filenameedit.cpp" line="52"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarama...</translation>
     </message>
 </context>
 <context>
@@ -1243,52 +1248,52 @@ See Network Window for details.</source>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="44"/>
         <source>New Event Filter Rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni olay ayıklama kuralı</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="44"/>
         <source>Edit Event Filter Rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Olay ayıklama kuralını düzenle</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="49"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Genel</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="52"/>
         <source>Enable rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Kural etkin</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="53"/>
         <source>Uncheck to disable this rule without removing it.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="56"/>
         <source>Any protocol</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhangi bir protokol</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="60"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Eylem</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="63"/>
         <source>Accept normally</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal onay</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="64"/>
         <source>Accept event and perform normal on event actions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Olay ve normal gerçekleşen olay eylemlerini onayla</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="67"/>
         <source>Accept silently</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessizce onayla</translation>
     </message>
     <message>
         <location filename="../src/dialogs/filterruledlg.cpp" line="68"/>
