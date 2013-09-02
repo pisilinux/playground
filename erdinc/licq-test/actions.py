@@ -13,7 +13,9 @@ from pisi.actionsapi import get
 def setup():
     shelltools.makedirs("build")
     shelltools.cd("build")
-    cmaketools.configure("-DUSE_OPENSSL=ON -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_PLUGINS=ON", sourceDir="..")
+    cmaketools.configure("-DCMAKE_INSTALL_PREFIX=/usr \
+                          -DUSE_OPENSSL=ON \
+                          -DBUILD_PLUGINS=ON", sourceDir="..")
 
 
 def build():
@@ -24,6 +26,6 @@ def build():
 def install():
     shelltools.cd("build")
     cmaketools.install()
-
     shelltools.cd("..")
+
     pisitools.dodoc("LICENSE", "README")
