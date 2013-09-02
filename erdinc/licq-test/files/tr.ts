@@ -6901,41 +6901,41 @@ Request was cancelled.</source>
         <location filename="../src/userevents/userviewevent.cpp" line="748"/>
         <location filename="../src/userevents/userviewevent.cpp" line="760"/>
         <source>A&amp;dd User</source>
-        <translation>Kişi ekle</translation>
+        <translation>Kişi e&amp;kle</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="726"/>
         <source>A&amp;uthorize</source>
-        <translation>Yetkilendir</translation>
+        <translation>Y&amp;etkilendir</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="695"/>
         <location filename="../src/userevents/userviewevent.cpp" line="727"/>
         <source>&amp;Refuse</source>
-        <translation>Reddet</translation>
+        <translation>&amp;Reddet</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="256"/>
         <source>Nex&amp;t (%1)</source>
-        <translation>Sonraki (%1)</translation>
+        <translation>Sonrak&amp;i (%1)</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="709"/>
         <location filename="../src/userevents/userviewevent.cpp" line="720"/>
         <source>&amp;Forward</source>
-        <translation>&amp;İlet</translation>
+        <translation>&amp;İlerle</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="765"/>
         <source>&amp;View Email</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;View E-postaya bak</translation>
     </message>
     <message>
         <location filename="../src/userevents/userviewevent.cpp" line="731"/>
         <location filename="../src/userevents/userviewevent.cpp" line="740"/>
         <location filename="../src/userevents/userviewevent.cpp" line="749"/>
         <source>&amp;View Info</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bilgilere bak</translation>
     </message>
 </context>
 <context>
@@ -6943,92 +6943,92 @@ Request was cancelled.</source>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="62"/>
         <source>Licq Utility: %1</source>
-        <translation type="unfinished">Licq-Faidelileri: %1</translation>
+        <translation>Licq Hizmeti: %1</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="63"/>
         <source>Command:</source>
-        <translation type="unfinished"></translation>
+        <translation>Komut:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="70"/>
         <source>Window:</source>
-        <translation type="unfinished">Pencere:</translation>
+        <translation>Pencere:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="76"/>
         <source>GUI</source>
-        <translation type="unfinished">GAB</translation>
+        <translation>Arayüz</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="79"/>
         <source>Terminal</source>
-        <translation type="unfinished">Terminal</translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="82"/>
         <source>Internal</source>
-        <translation type="unfinished">Dahili</translation>
+        <translation>Dahili</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="86"/>
         <source>Description:</source>
-        <translation type="unfinished">Açıklama:</translation>
+        <translation>Açıklama:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="91"/>
         <source>Edit final command</source>
-        <translation type="unfinished">komut sonu düzenle</translation>
+        <translation>komut sonunu düzenle</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="94"/>
         <source>User Fields</source>
-        <translation type="unfinished">Kişi Alanları</translation>
+        <translation>Kişi Alanları</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="125"/>
         <source>&amp;Run</source>
-        <translation type="unfinished">Koştur</translation>
+        <translation>&amp;Çalıştır</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="128"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Vazgeç</translation>
+        <translation>&amp;Vazgeç</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="187"/>
         <source>Edit:</source>
-        <translation type="unfinished">Düzenle:</translation>
+        <translation>Düzenle:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="195"/>
         <source>Running:</source>
-        <translation type="unfinished">Koşuyor:</translation>
+        <translation>Çalışıyor:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="222"/>
         <source>Command Window</source>
-        <translation type="unfinished">Komut penceresi</translation>
+        <translation>Komut penceresi</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="245"/>
         <source>Failed:</source>
-        <translation type="unfinished">Başarısız</translation>
+        <translation>Başarısız:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="251"/>
         <source>Done</source>
-        <translation type="unfinished">Fertig</translation>
+        <translation>Tamamlandı:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="259"/>
         <source>Done:</source>
-        <translation type="unfinished">Oldu:</translation>
+        <translation>Tamamlandı:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/utilitydlg.cpp" line="260"/>
         <source>C&amp;lose</source>
-        <translation type="unfinished">&amp;Kapa</translation>
+        <translation>K&amp;apa</translation>
     </message>
 </context>
 <context>
@@ -7043,19 +7043,19 @@ Request was cancelled.</source>
         <location filename="../src/core/messagebox.cpp" line="88"/>
         <location filename="../src/core/messagebox.cpp" line="93"/>
         <source>Licq Question</source>
-        <translation>Licq Frage</translation>
+        <translation>Licq Soruları</translation>
     </message>
     <message>
         <location filename="../src/core/messagebox.cpp" line="76"/>
         <location filename="../src/core/messagebox.cpp" line="79"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Evet</translation>
     </message>
     <message>
         <location filename="../src/core/messagebox.cpp" line="76"/>
         <location filename="../src/core/messagebox.cpp" line="79"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Hayır</translation>
     </message>
 </context>
 </TS>
