@@ -1552,7 +1552,7 @@ The key isn&apos;t deleted from your keyring.</source>
     <message>
         <location filename="../src/dialogs/hintsdlg.cpp" line="38"/>
         <source>Licq - Hints</source>
-        <translation>Licq - Tips</translation>
+        <translation>Licq - İpuçları</translation>
     </message>
 </context>
 <context>
@@ -4721,7 +4721,7 @@ Iconset &apos;%2&apos; has been disabled.</source>
     <message>
         <location filename="../src/settings/status.cpp" line="67"/>
         <source>Auto Away:</source>
-        <translation type="unfinished">Automatisch Abwesend:</translation>
+        <translation>Otomatik İptal:</translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="68"/>
@@ -4733,22 +4733,22 @@ Iconset &apos;%2&apos; has been disabled.</source>
         <location filename="../src/settings/status.cpp" line="83"/>
         <location filename="../src/settings/status.cpp" line="94"/>
         <source>Never</source>
-        <translation type="unfinished">Niemals</translation>
+        <translation>Asla</translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="78"/>
         <source>Auto N/A:</source>
-        <translation type="unfinished">Automatisch nicht verfügbar</translation>
+        <translation>Otomatik kullanılamıyor</translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="79"/>
         <source>Number of minutes of inactivity after which to automatically be marked &quot;not available&quot;.  Set to &quot;0&quot; to disable.</source>
-        <translation type="unfinished">Anzahl der Minuten, nach denen man automatisch als &apos;Nicht erreichbar&apos; markiert wird. Auf 0 setzen, um diese Funktion auszuschalten.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="89"/>
         <source>Auto Offline:</source>
-        <translation type="unfinished">Automatsch Offline:</translation>
+        <translation type="unfinished">Otomatik Çevrimdışı:</translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="90"/>
@@ -4758,33 +4758,33 @@ Iconset &apos;%2&apos; has been disabled.</source>
     <message>
         <location filename="../src/settings/status.cpp" line="100"/>
         <source>Default Auto Response Messages</source>
-        <translation type="unfinished">Standard-Nachricht für automatische Antworten</translation>
+        <translation>Otomatik cevaplar için öntanımlı mesaj</translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="103"/>
         <source>Status:</source>
-        <translation type="unfinished">Status:</translation>
+        <translation>Durum:</translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="115"/>
         <source>Preset slot:</source>
-        <translation type="unfinished">Voreinstellung:</translation>
+        <translation>Önceden ayarlanmış slot:</translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="129"/>
         <source>Hints</source>
-        <translation type="unfinished"></translation>
+        <translation>İpuçları</translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="135"/>
         <source>Save</source>
-        <translation type="unfinished">Sichern</translation>
+        <translation>Kaydet</translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="171"/>
         <location filename="../src/settings/status.cpp" line="179"/>
         <source>Previous Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Önceki ileti</translation>
     </message>
 </context>
 <context>
@@ -4792,7 +4792,7 @@ Iconset &apos;%2&apos; has been disabled.</source>
     <message>
         <location filename="../src/settings/settingsdlg.cpp" line="63"/>
         <source>Licq - Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Licq - Ayarları</translation>
     </message>
 </context>
 <context>
@@ -4800,32 +4800,32 @@ Iconset &apos;%2&apos; has been disabled.</source>
     <message>
         <location filename="../src/widgets/shortcutedit.cpp" line="93"/>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Giriş</translation>
     </message>
     <message>
         <location filename="../src/widgets/shortcutedit.cpp" line="95"/>
         <source>Shift+</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+</translation>
     </message>
     <message>
         <location filename="../src/widgets/shortcutedit.cpp" line="97"/>
         <source>Ctrl+</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+</translation>
     </message>
     <message>
         <location filename="../src/widgets/shortcutedit.cpp" line="99"/>
         <source>Alt+</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+</translation>
     </message>
     <message>
         <location filename="../src/widgets/shortcutedit.cpp" line="101"/>
         <source>Meta+</source>
-        <translation type="unfinished"></translation>
+        <translation>Meta+</translation>
     </message>
     <message>
         <location filename="../src/widgets/shortcutedit.cpp" line="112"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Yok</translation>
     </message>
 </context>
 <context>
@@ -4833,7 +4833,7 @@ Iconset &apos;%2&apos; has been disabled.</source>
     <message>
         <location filename="../src/widgets/shortcutedit.cpp" line="44"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
 </context>
 <context>
@@ -4841,32 +4841,32 @@ Iconset &apos;%2&apos; has been disabled.</source>
     <message>
         <location filename="../src/dialogs/showawaymsgdlg.cpp" line="144"/>
         <source>error</source>
-        <translation>Fehler</translation>
+        <translation>Hata</translation>
     </message>
     <message>
         <location filename="../src/dialogs/showawaymsgdlg.cpp" line="141"/>
         <source>timed out</source>
-        <translation>Zeitüberschreitung</translation>
+        <translation>Zaman aşımı</translation>
     </message>
     <message>
         <location filename="../src/dialogs/showawaymsgdlg.cpp" line="138"/>
         <source>failed</source>
-        <translation>fehlgeschlagen</translation>
+        <translation>sonlandırıldı</translation>
     </message>
     <message>
         <location filename="../src/dialogs/showawaymsgdlg.cpp" line="69"/>
         <source>&amp;Show Again</source>
-        <translation>Erneut anzeigen</translation>
+        <translation>&amp;Tekrar göster</translation>
     </message>
     <message>
         <location filename="../src/dialogs/showawaymsgdlg.cpp" line="83"/>
         <source>%1 Response for %2</source>
-        <translation>%1 Antwort für %2</translation>
+        <translation>%2 için %1 cevap</translation>
     </message>
     <message>
         <location filename="../src/dialogs/showawaymsgdlg.cpp" line="131"/>
         <source>refused</source>
-        <translation type="unfinished"></translation>
+        <translation>reddedildi</translation>
     </message>
 </context>
 <context>
@@ -4874,12 +4874,12 @@ Iconset &apos;%2&apos; has been disabled.</source>
     <message>
         <location filename="../src/dialogs/statsdlg.cpp" line="45"/>
         <source>Licq - Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Licq - İstatistikleri</translation>
     </message>
     <message>
         <location filename="../src/dialogs/statsdlg.cpp" line="85"/>
         <source>Daemon Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Artalan süreci istatistikleri</translation>
     </message>
     <message>
         <location filename="../src/dialogs/statsdlg.cpp" line="86"/>
