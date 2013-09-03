@@ -28,4 +28,8 @@ def install():
     cmaketools.install()
     shelltools.cd("..")
 
+    # Licq-web plugin
+    pisitools.dodir("/var/www/localhost/htdocs")
+    pisitools.insinto("/var/www/localhost/htdocs/", "plugins/licqweb/")
+
     pisitools.dodoc("LICENSE", "README")

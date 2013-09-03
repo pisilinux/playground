@@ -1585,7 +1585,7 @@ The key isn&apos;t deleted from your keyring.</source>
     <message>
         <location filename="../src/dialogs/historydlg.cpp" line="115"/>
         <source>&amp;Regular expression</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Düzenli ifade</translation>
     </message>
     <message>
         <location filename="../src/dialogs/historydlg.cpp" line="120"/>
@@ -2615,7 +2615,7 @@ Double click - Set auto response</source>
     <message>
         <location filename="../src/dialogs/randomchatdlg.cpp" line="82"/>
         <source>Licq - Random Chat Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Licq - Rastgele sohbet araması</translation>
     </message>
 </context>
 <context>
@@ -2623,22 +2623,22 @@ Double click - Set auto response</source>
     <message>
         <location filename="../src/dialogs/refusedlg.cpp" line="48"/>
         <source>Refusal message for %1 with </source>
-        <translation type="unfinished">%1 için red iletisi...  </translation>
+        <translation>%1 için red iletisi...  </translation>
     </message>
     <message>
         <location filename="../src/dialogs/refusedlg.cpp" line="60"/>
         <source>Refuse</source>
-        <translation type="unfinished">reddet</translation>
+        <translation>reddet</translation>
     </message>
     <message>
         <location filename="../src/dialogs/refusedlg.cpp" line="64"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <location filename="../src/dialogs/refusedlg.cpp" line="68"/>
         <source>Licq - %1 Refusal</source>
-        <translation type="unfinished"></translation>
+        <translation>Licq - %1 Reddetme</translation>
     </message>
 </context>
 <context>
@@ -2647,246 +2647,246 @@ Double click - Set auto response</source>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="216"/>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="329"/>
         <source>Reset Search</source>
-        <translation>Erneut suchen</translation>
+        <translation>Yeniden arama</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="229"/>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="330"/>
         <source>Enter search parameters and select &apos;Search&apos;</source>
-        <translation>Geben Sie die Suchparameter ein, und drücken Sie &apos;Suchen&apos;</translation>
+        <translation>Arama parametrelerini girin, ve &apos;Arama&apos; basın</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="287"/>
         <source>Searching (this can take awhile)...</source>
-        <translation>Suche (das kann eine Weile dauern)...</translation>
+        <translation>Arama (bu biraz zaman alabilir)...</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="406"/>
         <source>More users found. Narrow search.</source>
-        <translation>Mehr User gefunden. Suche weiter eingrenzen.</translation>
+        <translation>Çok fazla kullanıcı bulundu. Aramayı daraltarak devam et.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="144"/>
         <source>Alias:</source>
-        <translation>Alias:</translation>
+        <translation>Lakap:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="258"/>
         <source>Cancel</source>
-        <translation>Abbruch</translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="420"/>
         <source>Search failed.</source>
-        <translation>Suche fehlgeschlagen.</translation>
+        <translation>AArama sonlandırıldı.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="440"/>
         <source>&amp;Add %1 Users</source>
-        <translation>%1 User hinzufügen</translation>
+        <translation>%1 kullanıcı &amp;ekle</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="199"/>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="437"/>
         <source>&amp;Add User</source>
-        <translation>User hinzufügen</translation>
+        <translation>Kullanıcı &amp;ekle</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="211"/>
         <source>&amp;Search</source>
-        <translation>&amp;Suchen</translation>
+        <translation>&amp;Arama</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="64"/>
         <source>Licq - User Search</source>
-        <translation>Licq - User Suche</translation>
+        <translation>Licq - Kullanıcı araması</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="89"/>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="98"/>
         <source>Unspecified</source>
-        <translation type="unfinished">Nicht angegeben</translation>
+        <translation>Belirtilmemiş</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="148"/>
         <source>Gender:</source>
-        <translation type="unfinished">Geschlecht:</translation>
+        <translation>Cinsiyet:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="99"/>
         <source>Female</source>
-        <translation type="unfinished">Weiblich</translation>
+        <translation>Bayan</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="100"/>
         <source>Male</source>
-        <translation type="unfinished">Männlich</translation>
+        <translation>Bay</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="149"/>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dil</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="154"/>
         <source>City:</source>
-        <translation type="unfinished">Stadt:</translation>
+        <translation>Şehir:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="155"/>
         <source>State:</source>
-        <translation type="unfinished">Bundesstaat:</translation>
+        <translation>Eyalet:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="156"/>
         <source>Country:</source>
-        <translation type="unfinished">Land:</translation>
+        <translation>Ülke:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="162"/>
         <source>Keyword:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anahtar Kelime:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="408"/>
         <source>%1 more users found. Narrow search.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 çok fazla kullanıcı bulundu. Aramayı daraltarak devam et.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="194"/>
         <source>View &amp;Info</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bilgileri göster</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="404"/>
         <source>Search complete.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arama tamamlandı</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="181"/>
         <source>Alias</source>
-        <translation type="unfinished">Alias</translation>
+        <translation>Lakap</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="145"/>
         <source>First name:</source>
-        <translation type="unfinished"></translation>
+        <translation>İlk isim</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="146"/>
         <source>Last name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Soy isim</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="147"/>
         <source>Age range:</source>
-        <translation type="unfinished"></translation>
+        <translation>Yaş aralığı</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="157"/>
         <source>Company name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuruluş adı</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="158"/>
         <source>Company department:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuruluş birimi</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="159"/>
         <source>Company position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuruluş pozisyonu</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="161"/>
         <source>Email address:</source>
-        <translation type="unfinished"></translation>
+        <translation>E-posta adresi</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="168"/>
         <source>Return online users only</source>
-        <translation type="unfinished"></translation>
+        <translation>sadece çevrimiçi kullanıcılara dön</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="181"/>
         <source>UIN</source>
-        <translation type="unfinished">UIN</translation>
+        <translation>UIN</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="181"/>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>İsim</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="181"/>
         <source>Email</source>
-        <translation type="unfinished">eMail</translation>
+        <translation>E-posta</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="182"/>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Durum</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="373"/>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Çevrimdışı</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="376"/>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>Çevrimiçi</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="380"/>
         <source>Unknown</source>
-        <translation type="unfinished">unbekannt</translation>
+        <translation>Tanımlanamayan</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="388"/>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>Kadın</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="391"/>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>Erkek</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="384"/>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="394"/>
         <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation>?</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="398"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Hayır</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="398"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Evet</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="80"/>
         <source>Search Criteria</source>
-        <translation type="unfinished"></translation>
+        <translation>Arama Kriterleri</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="137"/>
         <source>UIN:</source>
-        <translation type="unfinished">UIN:</translation>
+        <translation>UIN:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="176"/>
         <source>Result</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonuç</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="182"/>
         <source>A/G</source>
-        <translation type="unfinished"></translation>
+        <translation>A/G</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="182"/>
@@ -2896,18 +2896,18 @@ Double click - Set auto response</source>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="222"/>
         <source>Close</source>
-        <translation type="unfinished">Kapat</translation>
+        <translation>Kapat</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="295"/>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="413"/>
         <source>New Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni arama</translation>
     </message>
     <message>
         <location filename="../src/dialogs/searchuserdlg.cpp" line="296"/>
         <source>Search interrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Arama kesintiye uğradı</translation>
     </message>
 </context>
 <context>
@@ -2915,39 +2915,39 @@ Double click - Set auto response</source>
     <message>
         <location filename="../src/settings/chat.cpp" line="62"/>
         <source>Chat</source>
-        <translation type="unfinished">Sohbet</translation>
+        <translation>Sohbet</translation>
     </message>
     <message>
         <location filename="../src/settings/chat.cpp" line="64"/>
         <location filename="../src/settings/chat.cpp" line="260"/>
         <source>Chat Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Sohbet görüntüleme</translation>
     </message>
     <message>
         <location filename="../src/settings/chat.cpp" line="66"/>
         <location filename="../src/settings/chat.cpp" line="402"/>
         <source>History Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmiş görüntüleme</translation>
     </message>
     <message>
         <location filename="../src/settings/chat.cpp" line="77"/>
         <source>General Chat Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Genel sohbet seçenekleri</translation>
     </message>
     <message>
         <location filename="../src/settings/chat.cpp" line="80"/>
         <source>Chatmode messageview</source>
-        <translation type="unfinished"></translation>
+        <translation>Sohbet modu mesaj görünümü</translation>
     </message>
     <message>
         <location filename="../src/settings/chat.cpp" line="81"/>
         <source>Show the current chat history in Send Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçerli sohbet geçmişini iletim penceresinde göster</translation>
     </message>
     <message>
         <location filename="../src/settings/chat.cpp" line="85"/>
         <source>Tabbed chatting</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekmeli sohbet</translation>
     </message>
     <message>
         <location filename="../src/settings/chat.cpp" line="86"/>
@@ -3898,77 +3898,77 @@ Enter the hotkey literally, like &quot;shift+f10&quot;, or &quot;none&quot; for 
     <message>
         <location filename="../src/settings/events.cpp" line="203"/>
         <source>Expression</source>
-        <translation type="unfinished"></translation>
+        <translation>İfade</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="211"/>
         <source>Hints</source>
-        <translation type="unfinished"></translation>
+        <translation>İpuçları</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="214"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Geri al</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="217"/>
         <source>Add</source>
-        <translation type="unfinished">Ekle</translation>
+        <translation>Ekle</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="220"/>
         <source>Remove</source>
-        <translation type="unfinished">Sil</translation>
+        <translation>Sil</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="223"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Geliştirme</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="226"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Yukarı taşı</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="229"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Aşağı taşı</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="340"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Evet</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="340"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Hayır</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="345"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Onay</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="346"/>
         <source>Silent</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessiz</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="347"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Engelle</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="353"/>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Her hangi</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="373"/>
         <source>(Multiple)</source>
-        <translation type="unfinished"></translation>
+        <translation>(çoklu)</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="405"/>
@@ -3983,7 +3983,7 @@ Enter the hotkey literally, like &quot;shift+f10&quot;, or &quot;none&quot; for 
     <message>
         <location filename="../src/settings/events.cpp" line="67"/>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Süzgeç</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="78"/>
@@ -3993,17 +3993,17 @@ Enter the hotkey literally, like &quot;shift+f10&quot;, or &quot;none&quot; for 
     <message>
         <location filename="../src/settings/events.cpp" line="97"/>
         <source>Never</source>
-        <translation type="unfinished">Niemals</translation>
+        <translation>Asla</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="98"/>
         <source>Only when online</source>
-        <translation type="unfinished"></translation>
+        <translation>Sadece çevrimiçi olunduğunda</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="99"/>
         <source>When online or away</source>
-        <translation type="unfinished"></translation>
+        <translation>Çevrimiçi ya da uzakta iken</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="100"/>
@@ -4018,7 +4018,7 @@ Enter the hotkey literally, like &quot;shift+f10&quot;, or &quot;none&quot; for 
     <message>
         <location filename="../src/settings/events.cpp" line="102"/>
         <source>Always</source>
-        <translation type="unfinished"></translation>
+        <translation>Her zaman</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="103"/>
@@ -4136,7 +4136,7 @@ Works with many different window managers.</source>
     <message>
         <location filename="../src/settings/general.cpp" line="146"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmiş:</translation>
     </message>
     <message>
         <location filename="../src/settings/general.cpp" line="147"/>
@@ -4738,7 +4738,7 @@ Iconset &apos;%2&apos; has been disabled.</source>
     <message>
         <location filename="../src/settings/status.cpp" line="78"/>
         <source>Auto N/A:</source>
-        <translation>Otomatik kullanılamıyor</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="79"/>
@@ -4748,7 +4748,7 @@ Iconset &apos;%2&apos; has been disabled.</source>
     <message>
         <location filename="../src/settings/status.cpp" line="89"/>
         <source>Auto Offline:</source>
-        <translation type="unfinished">Otomatik Çevrimdışı:</translation>
+        <translation>Otomatik Çevrimdışı:</translation>
     </message>
     <message>
         <location filename="../src/settings/status.cpp" line="90"/>
@@ -4889,33 +4889,34 @@ Iconset &apos;%2&apos; has been disabled.</source>
     <message>
         <location filename="../src/dialogs/statsdlg.cpp" line="88"/>
         <source>Last reset</source>
-        <translation type="unfinished"></translation>
+        <translation>En son gerialma</translation>
     </message>
     <message>
         <location filename="../src/dialogs/statsdlg.cpp" line="90"/>
         <source>Number of users</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcıların numarası</translation>
     </message>
     <message>
         <location filename="../src/dialogs/statsdlg.cpp" line="92"/>
         <source>Event Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkinlik İstatistikleri</translation>
     </message>
     <message>
         <location filename="../src/dialogs/statsdlg.cpp" line="93"/>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Bugün</translation>
     </message>
     <message>
         <location filename="../src/dialogs/statsdlg.cpp" line="94"/>
         <source>Total</source>
-        <translation type="unfinished"></translation>
+        <translation>Toplam</translation>
     </message>
     <message>
         <location filename="../src/dialogs/statsdlg.cpp" line="117"/>
         <source>Do you really want to
 reset your statistics?</source>
-        <translation type="unfinished"></translation>
+        <translation>İstatistikleri resetlemek 
+istediğinden eminmisin?</translation>
     </message>
 </context>
 <context>
@@ -4923,147 +4924,147 @@ reset your statistics?</source>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="76"/>
         <source>&amp;View System Messages...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistem mesajlarına &amp;bak...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="81"/>
         <source>&amp;Add User...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı &amp;ekle</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="83"/>
         <source>A&amp;uthorize User...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı y&amp;etkilendirmesi...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="84"/>
         <source>Re&amp;quest Authorization...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta&amp;lep yetkilendirmesi</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="86"/>
         <source>&amp;Popup All Messages...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm iletiler açılır &amp;pencerede...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="87"/>
         <source>Edit &amp;Groups...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Grupları düzenle...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="89"/>
         <source>Update All Users</source>
-        <translation type="unfinished">Tüm kişileri güncelle</translation>
+        <translation>Tüm kişileri güncelle</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="90"/>
         <source>Update Current Group</source>
-        <translation type="unfinished">Şu anki grubu güncelle</translation>
+        <translation>Şu anki grubu güncelle</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="91"/>
         <source>&amp;Redraw User Window</source>
-        <translation type="unfinished">&amp;Hauptfenster neu zeichnen</translation>
+        <translation>&amp;Kullanıcı penceresini yeniden göster</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="92"/>
         <source>&amp;Save All Users</source>
-        <translation type="unfinished">Tüm Kişi&apos;leri sakla</translation>
+        <translation>Tüm Kişileri &amp;kaydet</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="95"/>
         <source>&amp;Status</source>
-        <translation type="unfinished">Durum</translation>
+        <translation>&amp;Durum</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="119"/>
         <source>&amp;Group</source>
-        <translation type="unfinished">&amp;Grup</translation>
+        <translation>&amp;Grup</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="139"/>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Yardım</translation>
+        <translation>&amp;Yardım</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="140"/>
         <source>&amp;Hints...</source>
-        <translation type="unfinished">&amp;İpuçları...</translation>
+        <translation>&amp;İpuçları...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="141"/>
         <source>&amp;About...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hakkında...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="142"/>
         <source>&amp;Statistics...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;İstatistikler...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="149"/>
         <source>Set &amp;Auto Response...</source>
-        <translation type="unfinished">&amp;Otomatik yanıt belirle</translation>
+        <translation>&amp;Otomatik yanıt belirle</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="151"/>
         <source>&amp;Network Window...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ağ arayüzü...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="152"/>
         <source>&amp;Mini Mode</source>
-        <translation type="unfinished">&amp;Ufacık</translation>
+        <translation>&amp;Mini mod</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="154"/>
         <source>Show Offline &amp;Users</source>
-        <translation type="unfinished">&amp;Bağlı olmayanları da göster</translation>
+        <translation>Bağlı &amp;olmayanları da göster</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="164"/>
         <source>Sa&amp;ve Settings</source>
-        <translation type="unfinished">&amp;Ayarları sakla</translation>
+        <translation>Ayarları sa&amp;kla</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="166"/>
         <source>E&amp;xit</source>
-        <translation type="unfinished">&amp;Çıkış</translation>
+        <translation>Ç&amp;ıkış</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="75"/>
         <source>S&amp;ystem Functions</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;istem işlevleri</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="80"/>
         <source>User &amp;Functions</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı &amp;işlevleri</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="82"/>
         <source>A&amp;dd Group...</source>
-        <translation type="unfinished"></translation>
+        <translation>Grup e&amp;kle...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="156"/>
         <source>Sh&amp;ow Empty Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Boş grupları gös&amp;ter</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="158"/>
         <source>S&amp;ettings...</source>
-        <translation type="unfinished"></translation>
+        <translation>D&amp;üzenleme...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="159"/>
         <source>&amp;Accounts...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hesaplar...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="160"/>
         <source>GPG &amp;Key Manager...</source>
-        <translation type="unfinished"></translation>
+        <translation>GPG &amp;anahtar yöneticisi</translation>
     </message>
 </context>
 <context>
@@ -5071,47 +5072,47 @@ reset your statistics?</source>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="516"/>
         <source>&amp;Info...</source>
-        <translation type="unfinished">&amp;Bilgi...</translation>
+        <translation>&amp;Bilgi...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="517"/>
         <source>View &amp;History...</source>
-        <translation type="unfinished">Geçmişe bak...</translation>
+        <translation>&amp;Geçmişe bak...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="518"/>
         <source>&amp;Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Düzenleme...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="560"/>
         <source>ICQ Phone &quot;Follow Me&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>ICQ Telefon &quot;Takip Beni&quot;</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="569"/>
         <source>Don&apos;t Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Gösterim Yap&apos;ma</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="570"/>
         <source>Available</source>
-        <translation type="unfinished">Verfügbar</translation>
+        <translation>Uygun</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="571"/>
         <source>Busy</source>
-        <translation type="unfinished"></translation>
+        <translation>Meşgul</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="576"/>
         <source>ICQ User S&amp;earch...</source>
-        <translation type="unfinished"></translation>
+        <translation>ICQ kullanıcısı A&amp;rama...</translation>
     </message>
     <message>
         <location filename="../src/core/systemmenu.cpp" line="579"/>
         <source>ICQ Ra&amp;ndom Chat...</source>
-        <translation type="unfinished"></translation>
+        <translation>ICQ Rast&amp;gele Sohbet</translation>
     </message>
 </context>
 <context>
@@ -5120,18 +5121,19 @@ reset your statistics?</source>
         <location filename="../src/dockicons/themeddockicon.cpp" line="79"/>
         <source>Unable to load dock theme file:
 (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dok tema dosyası yüklenemiyor:
+(%1)</translation>
     </message>
     <message>
         <location filename="../src/dockicons/themeddockicon.cpp" line="93"/>
         <source>Dock theme unspecified image: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dok teması belirlenmemiş resmi: %1</translation>
     </message>
     <message>
         <location filename="../src/dockicons/themeddockicon.cpp" line="99"/>
         <location filename="../src/dockicons/themeddockicon.cpp" line="132"/>
         <source>Unable to load dock theme image: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dok tema resmi: %1 yüklenemiyor</translation>
     </message>
 </context>
 <context>
@@ -5139,7 +5141,7 @@ reset your statistics?</source>
     <message>
         <location filename="../src/widgets/timezoneedit.cpp" line="44"/>
         <source>Unknown</source>
-        <translation type="unfinished">unbekannt</translation>
+        <translation>Tanımlanamayan</translation>
     </message>
 </context>
 <context>
@@ -5147,7 +5149,7 @@ reset your statistics?</source>
     <message>
         <location filename="../src/widgets/treepager.cpp" line="38"/>
         <source>Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategoriler</translation>
     </message>
 </context>
 <context>
@@ -5155,104 +5157,104 @@ reset your statistics?</source>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="28"/>
         <source>Unicode</source>
-        <translation type="unfinished"></translation>
+        <translation>Unicode</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="31"/>
         <location filename="../src/helpers/usercodec.cpp" line="32"/>
         <source>Arabic</source>
-        <translation type="unfinished"></translation>
+        <translation>Arapça</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="34"/>
         <location filename="../src/helpers/usercodec.cpp" line="35"/>
         <source>Baltic</source>
-        <translation type="unfinished"></translation>
+        <translation>Baltık dilleri</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="37"/>
         <location filename="../src/helpers/usercodec.cpp" line="38"/>
         <source>Central European</source>
-        <translation type="unfinished"></translation>
+        <translation>Central European</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="40"/>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Çince</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="41"/>
         <source>Chinese Traditional</source>
-        <translation type="unfinished"></translation>
+        <translation>Çince geleneksel</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="43"/>
         <location filename="../src/helpers/usercodec.cpp" line="44"/>
         <location filename="../src/helpers/usercodec.cpp" line="45"/>
         <source>Cyrillic</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiril</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="47"/>
         <source>Esperanto</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperanto</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="49"/>
         <location filename="../src/helpers/usercodec.cpp" line="50"/>
         <source>Greek</source>
-        <translation type="unfinished"></translation>
+        <translation>Yunanca</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="53"/>
         <location filename="../src/helpers/usercodec.cpp" line="54"/>
         <source>Hebrew</source>
-        <translation type="unfinished"></translation>
+        <translation>İbranice</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="56"/>
         <location filename="../src/helpers/usercodec.cpp" line="57"/>
         <location filename="../src/helpers/usercodec.cpp" line="58"/>
         <source>Japanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Japonca</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="60"/>
         <source>Korean</source>
-        <translation type="unfinished"></translation>
+        <translation>Korece</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="62"/>
         <location filename="../src/helpers/usercodec.cpp" line="63"/>
         <location filename="../src/helpers/usercodec.cpp" line="64"/>
         <source>Western European</source>
-        <translation type="unfinished"></translation>
+        <translation>Western European</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="66"/>
         <source>Tamil</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamilce</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="68"/>
         <source>Thai</source>
-        <translation type="unfinished"></translation>
+        <translation>Tayland</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="70"/>
         <location filename="../src/helpers/usercodec.cpp" line="71"/>
         <source>Turkish</source>
-        <translation type="unfinished"></translation>
+        <translation>Türkçe</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="73"/>
         <source>Ukrainian</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrayna dili</translation>
     </message>
     <message>
         <location filename="../src/helpers/usercodec.cpp" line="29"/>
         <source>Unicode-16</source>
-        <translation type="unfinished"></translation>
+        <translation>Unicode-16</translation>
     </message>
 </context>
 <context>
@@ -5260,63 +5262,63 @@ reset your statistics?</source>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="93"/>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü</translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="112"/>
         <source>Send</source>
-        <translation type="unfinished">Gönder</translation>
+        <translation>Gönder</translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="118"/>
         <source>Retrieve</source>
-        <translation type="unfinished"></translation>
+        <translation>Geri al</translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="118"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncelle</translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="334"/>
         <source>Licq - Info </source>
-        <translation type="unfinished">Licq - Info </translation>
+        <translation>Licq - Bilgisi </translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="324"/>
         <source>INVALID USER</source>
-        <translation type="unfinished"></translation>
+        <translation>GEÇERSİZ KULLANICI</translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="204"/>
         <source>Updating...</source>
-        <translation type="unfinished">Ändern...</translation>
+        <translation>Güncelleme...</translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="233"/>
         <source>Updating server...</source>
-        <translation type="unfinished">Ändere Information auf dem Server...</translation>
+        <translation>Sunucu güncellemesi...</translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="346"/>
         <location filename="../src/userdlg/userdlg.cpp" line="363"/>
         <source>error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>hata</translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="353"/>
         <source>done</source>
-        <translation type="unfinished">Tamam</translation>
+        <translation>tamamlandı</translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="357"/>
         <source>failed</source>
-        <translation type="unfinished"></translation>
+        <translation>eksik</translation>
     </message>
     <message>
         <location filename="../src/userdlg/userdlg.cpp" line="360"/>
         <source>timed out</source>
-        <translation type="unfinished"></translation>
+        <translation>zaman aşımı</translation>
     </message>
 </context>
 <context>
@@ -5325,62 +5327,62 @@ reset your statistics?</source>
         <location filename="../src/userevents/usereventcommon.cpp" line="103"/>
         <location filename="../src/userevents/usereventcommon.cpp" line="281"/>
         <source>Unknown</source>
-        <translation>unbekannt</translation>
+        <translation>Tanımlanamayan</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="100"/>
         <source>User&apos;s current local time</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı&apos;ların geçerli yerel saati</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="110"/>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="245"/>
         <source>Open user menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı menüsünü aç</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="249"/>
         <source>Open / close secure channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Güvenli kanalı aç/kapa</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="115"/>
         <source>History...</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmiş...</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="246"/>
         <source>Show user history</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı geçmişini göster</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="116"/>
         <source>User Info...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı bilgisi</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="247"/>
         <source>Show user information</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı bilgilerini göster</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="119"/>
         <source>Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodlama</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="248"/>
         <source>Select the text encoding used for outgoing messages.</source>
-        <translation type="unfinished"></translation>
+        <translation>Giden iletiler için kullanılan metin kodlamasını seç.</translation>
     </message>
     <message>
         <location filename="../src/userevents/usereventcommon.cpp" line="126"/>
         <source>Secure Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Güvenli Kanal</translation>
     </message>
 </context>
 <context>
@@ -5388,7 +5390,7 @@ reset your statistics?</source>
     <message>
         <location filename="../src/userevents/usereventtabdlg.cpp" line="174"/>
         <source>[UNKNOWN_USER]</source>
-        <translation type="unfinished"></translation>
+        <translation>[TANIMLANAMAYAN_KULLANICI]</translation>
     </message>
 </context>
 <context>
@@ -5396,77 +5398,77 @@ reset your statistics?</source>
     <message>
         <location filename="../src/core/usermenu.cpp" line="72"/>
         <source>Send</source>
-        <translation type="unfinished">Gönder</translation>
+        <translation>Gönder</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="78"/>
         <source>Send &amp;Message...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ileti gönder...</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="79"/>
         <source>Send &amp;URL...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;URL gönder...</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="80"/>
         <source>Send &amp;Chat Request...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sohbet isteği gönder...</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="81"/>
         <source>Send &amp;File Transfer...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dosya iletimi gönder...</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="82"/>
         <source>Send Contact &amp;List...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişi &amp;listesi gönder...</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="83"/>
         <source>Send &amp;Authorization...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Yetkilendirme gönder...</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="84"/>
         <source>Send Authorization Re&amp;quest...</source>
-        <translation type="unfinished"></translation>
+        <translation>Yetkilendirme is&amp;teği gönder...</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="85"/>
         <source>Send &amp;SMS...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;SMS gönder...</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="87"/>
         <source>Update Info Plugin List</source>
-        <translation type="unfinished"></translation>
+        <translation> Bilgi eklentisi listesini güncelle</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="88"/>
         <source>Update Status Plugin List</source>
-        <translation type="unfinished"></translation>
+        <translation>Durum eklentisini güncelle</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="89"/>
         <source>Update Phone &quot;Follow Me&quot; Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefon güncelle &quot;Takip Beni&quot; Durum</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="90"/>
         <source>Update ICQphone Status</source>
-        <translation type="unfinished"></translation>
+        <translation>ICQphone durumunu güncelle</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="91"/>
         <source>Update File Server Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosya sunucusu durumunu güncelle</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="97"/>
         <source>Misc Modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Karma modunda</translation>
     </message>
     <message>
         <location filename="../src/core/usermenu.cpp" line="104"/>
@@ -6321,7 +6323,7 @@ Select another picture?</source>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="83"/>
         <source>Accept in Not Available</source>
-        <translation type="unfinished">Uygun Değil modunda kabul et.</translation>
+        <translation>Uygun Değil modunda kabul et.</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="87"/>
@@ -6331,62 +6333,62 @@ Select another picture?</source>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="91"/>
         <source>Accept in Do not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>"Rahatsız Etme" modunda onayla</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="113"/>
         <source>Use real IP (LAN)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerçek İp (LAN) kullan</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="114"/>
         <source>Use real IP for when sending to this contact.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu kullanıcıya iletim gönderiminde gerçek İP'ni kullan</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="129"/>
         <source>Status to User</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı durumu</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="132"/>
         <source>Not overridden</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçersiz değil</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="133"/>
         <source>Contact will see your normal status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişiler seni normal durumda görecek</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="136"/>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>Çevrimiçi</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="137"/>
         <source>Contact will always see you as online.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişiler seni herzaman "Çevrimiçi durumunda görecek</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="140"/>
         <source>Away</source>
-        <translation type="unfinished">Abwesend</translation>
+        <translation>Yok</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="141"/>
         <source>Contact will always see your status as away.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişiler seni herzaman "Yok" durumunda görecek</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="144"/>
         <source>Not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Uygun değil</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="145"/>
         <source>Contact will always see your status as not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişiler seni herzaman "Uygun değil" durumunda görecek</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="148"/>
@@ -6396,17 +6398,17 @@ Select another picture?</source>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="149"/>
         <source>Contact will always see your status as occupied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişiler seni herzaman "Meşgul" durumunda görecek</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="152"/>
         <source>Do not disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Rahatsız etmeyin</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="153"/>
         <source>Contact will always see your status as do not disturb.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişiler seni her zaman "rahatsız etmeyin" durumunda görecek</translation>
     </message>
     <message>
         <location filename="../src/userdlg/settings.cpp" line="159"/>
@@ -6709,7 +6711,7 @@ Yinede gönderilsinmi?</translation>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1404"/>
         <source>via server</source>
-        <translation type="unfinished">Sunucu aracılığı ile</translation>
+        <translation type="unfinished">Sunucu aracılığıyla</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1404"/>
@@ -6752,14 +6754,15 @@ Yinede gönderilsinmi?</translation>
         <source>Direct send failed,
 send through server?</source>
         <translation>Doğrudan iletim başarısız, 
-sunucu aracılığı ile gönderiyor musunuz?</translation>
+sunucu aracılığıylamı gönderiyorsun?</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1533"/>
         <source>%1 is in %2 mode:
 %3
 Send...</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 içinde mod:
+%3</translation>
     </message>
     <message>
         <location filename="../src/userevents/usersendevent.cpp" line="1546"/>
