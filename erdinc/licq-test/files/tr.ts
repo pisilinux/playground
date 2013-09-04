@@ -3851,7 +3851,7 @@ Enter the hotkey literally, like &quot;shift+f10&quot;, or &quot;none&quot; for 
     <message>
         <location filename="../src/settings/events.cpp" line="151"/>
         <source>Determines if mass messages are ignored or not.</source>
-        <translation type="unfinished">Nachrichten an mehr als einen Empfänger ignorieren</translation>
+        <translation>>Toplu iletileri engellimi değilmi belirle</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="154"/>
@@ -3861,52 +3861,52 @@ Enter the hotkey literally, like &quot;shift+f10&quot;, or &quot;none&quot; for 
     <message>
         <location filename="../src/settings/events.cpp" line="155"/>
         <source>Determines if web panel messages are ignored or not.</source>
-        <translation type="unfinished">Nachrichten des Web-Panel ignorieren</translation>
+        <translation>Web-Paneli iletileri engellimi değilmi belirle</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="158"/>
         <source>Ignore email pager</source>
-        <translation type="unfinished"></translation>
+        <translation>E-posta çağrısını engelle</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="159"/>
         <source>Determines if email pager messages are ignored or not.</source>
-        <translation type="unfinished">eMail-Pager-Nachrichten ingnorieren</translation>
+        <translation>E-posta çağrısı engellimi değilmi belirle</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="182"/>
         <source>Disable sound for active window</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkin pencere için sesi devre dışı bırak</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="183"/>
         <source>Don&apos;t perform OnEvent command if chat window for user is currently active.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı için sohbet penceresi etkin ise, AçıkEtkinlik komutunu başlatma</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="197"/>
         <source>Rules for Incoming Events</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelen etkinlikler için kural</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="203"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkin</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="203"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Eylem</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="203"/>
         <source>Protocol</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokol</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="203"/>
         <source>Event Type</source>
-        <translation type="unfinished">Ereignis Typ</translation>
+        <translation>Etkinlik türü</translation>
     </message>
     <message>
         <location filename="../src/settings/events.cpp" line="203"/>
@@ -4046,23 +4046,23 @@ Online also includes Free for chat.</source>
         <location filename="../src/settings/general.cpp" line="48"/>
         <location filename="../src/settings/general.cpp" line="61"/>
         <source>Docking</source>
-        <translation type="unfinished">Andocken</translation>
+        <translation>Yerleştirme</translation>
     </message>
     <message>
         <location filename="../src/settings/general.cpp" line="50"/>
         <location filename="../src/settings/general.cpp" line="123"/>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipleri</translation>
     </message>
     <message>
         <location filename="../src/settings/general.cpp" line="64"/>
         <source>Use dock icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Dock simgesini kullan</translation>
     </message>
     <message>
         <location filename="../src/settings/general.cpp" line="65"/>
         <source>Controls whether or not the dockable icon should be displayed.</source>
-        <translation type="unfinished">Kontrolliert, ob das Dock-Icon angezeigt wird.</translation>
+        <translation type="unfinished">Dock simgesinin gösterimi kontrolü.</translation>
     </message>
     <message>
         <location filename="../src/settings/general.cpp" line="68"/>
