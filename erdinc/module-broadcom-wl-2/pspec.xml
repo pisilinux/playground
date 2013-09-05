@@ -1,0 +1,137 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>module-broadcom-wl</Name>
+        <Homepage>http://www.broadcom.com/support/802.11/linux_sta.php</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>freedist</License>
+        <IsA>driver</IsA>
+        <Summary>Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver for use with Broadcom's BCM4311, BCM4312, BCM4321, and BCM4322 based hardware</Summary>
+        <Description>This package contains Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver for use with Broadcom's BCM4311, BCM4312, BCM4321, and BCM4322 based hardware. You must read the LICENSE.txt file in the docs directory before using this software.</Description>
+        <Archive sha1sum="01aa32f9e85621253a3f15cf4361bb80d41da3e8" type="targz" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-portsrc_x86_32-v5_100_82_112.tar.gz</Archive>
+        <Archive sha1sum="5bd78c20324e6a4aa9f3fafdc6f0155e884d5131" type="targz" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-portsrc_x86_64-v5_100_82_112.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency version="3.10.10">kernel-module-headers</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="0">patch/broadcom-wl-fix-build-with-3.2.0.patch</Patch>
+            <Patch level="0">patch/broadcom-wl-fix-build-with-3.4.0.patch</Patch>
+            <Patch level="1">patch/broadcom-wl-fix-build-with-3.10.0.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>module-broadcom-wl</Name>
+        <RuntimeDependencies>
+            <Dependency version="3.10.10">kernel</Dependency>
+            <Dependency release="current">module-broadcom-wl-userspace</Dependency>
+        </RuntimeDependencies>
+        <Replaces>
+            <Package>broadcom-wl</Package>
+        </Replaces>
+        <Files>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+        </Files>
+        <BuildFlags>
+            <Flag>noDelta</Flag>
+        </BuildFlags>
+    </Package>
+
+    <Package>
+        <Name>module-broadcom-wl-userspace</Name>
+        <Summary>modprobe rules and documents for broadcom-wl kernel driver</Summary>
+        <Files>
+            <Path fileType="data">/etc/modprobe.d</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modprobe.d/broadcom-wl.conf">conf/broadcom-wl</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modprobe.d/broadcom-wl-alias.conf">conf/broadcom-wl-alias.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modprobe.d/broadcom-wl-blacklist.conf">conf/broadcom-wl-blacklist.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="10">
+            <Date>2013-08-30</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>3.10.10</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="10">
+            <Date>2013-08-20</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>3.10.9</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2013-08-20</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>3.10.x</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2013-08-11</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>without blacklist</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2013-07-26</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>Rebuild for Kernel 3.10.x</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-06-15</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>rebuild for Kernel 3.8.13</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-05-26</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>rebuild for Kernel 3.9.4</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-05-26</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>Kernel 3.9.3</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-02-07</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>Runtime dep</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-01</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>bump+fix for new kernel-line</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-09-15</Date>
+            <Version>5.100.82.38</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
