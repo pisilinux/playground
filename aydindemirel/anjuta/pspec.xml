@@ -13,13 +13,10 @@
         <IsA>app:gui</IsA>
         <Summary>Versatile Integrated Development Environment (IDE) for C and C++ on GNU/Linux</Summary>
         <Description>Anjuta DevStudio is a versatile Integrated Development Environment (IDE) on GNOME Desktop Environment and features a number of advanced programming facilities. These include project management, application and class wizards, an on-board interactive debugger, powerful source editor, syntax highlighting, intellisense autocompletions, symbol navigation, version controls, integrated GUI designing and other tools.</Description>
-        <Archive sha1sum="4c5f5b171f606e9e8b8296e46d62a20f5febfc6b" type="tarxz">http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.6/anjuta-3.6.1.tar.xz</Archive>
-		<Patches>
-			<Patch level="1">cxx-check.patch</Patch>
-			<Patch level="1">no-member-named.patch</Patch>
-			<Patch level="1">fix-unloaded-xml-files.patch</Patch>
-			<Patch level="1">fix-missing-bracket.patch</Patch>
-		</Patches>
+        <Archive sha1sum="0e1f23af8e80f5ebd7e0781fd4f1d035d77ec416" type="tarxz">http://ftp.gnome.org/pub/GNOME/sources/anjuta/3.8/anjuta-3.8.4.tar.xz</Archive>
+	<Patches>
+	    <Patch level="1">fix-missing-bracket.patch</Patch>
+	</Patches>
         <BuildDependencies>
             <Dependency>autogen-devel</Dependency>
             <Dependency>devhelp-devel</Dependency>
@@ -30,19 +27,12 @@
             <Dependency>libunique-devel</Dependency>
             <Dependency>gdl-devel</Dependency>
             <Dependency>glade-devel</Dependency>
-            <!-- in fedora gnome-build is merged into anjuta
-            <Dependency>gnome-build-devel</Dependency>
-            -->
             <Dependency>gnome-common</Dependency>
-            <Dependency>gnome-doc-utils</Dependency>
             <Dependency>graphviz-devel</Dependency>
             <Dependency>gtksourceview3-devel</Dependency>
             <Dependency>subversion</Dependency>
             <Dependency>valgrind</Dependency>
-            <Dependency>vte3-devel</Dependency>
-            <Dependency>vte3</Dependency>
             <Dependency>webkit-gtk2-devel</Dependency>
-            <Dependency>gtk3</Dependency>
             <Dependency>libxml2-devel</Dependency>
             <Dependency>libxslt-devel</Dependency>
             <Dependency>libXinerama-devel</Dependency>
@@ -50,9 +40,18 @@
             <Dependency>libXrandr-devel</Dependency>
             <Dependency>libXcursor-devel</Dependency>
             <Dependency>libXcomposite-devel</Dependency>
+            <Dependency>itstool</Dependency>
+            <Dependency>apr</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>vte3-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>neon-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
         </BuildDependencies>
-        <Patches>
-        </Patches>
     </Source>
 
     <Package>
@@ -60,9 +59,7 @@
         <RuntimeDependencies>
             <Dependency>autogen</Dependency>
             <Dependency>devhelp</Dependency>
-            <!-- Not packaged yet, in my PG
-            <Dependency>libgda</Dependency> For system-db plugin
-            -->
+            <Dependency>libgda</Dependency> 
             <Dependency>libglade</Dependency>
             <Dependency>libgnome</Dependency>
             <Dependency>libgnomeui</Dependency>
@@ -70,11 +67,22 @@
             <Dependency>gdl</Dependency>
             <Dependency>glade</Dependency>
             <Dependency>graphviz</Dependency>
-            <Dependency>gtksourceview</Dependency>
+            <Dependency>gtksourceview3</Dependency>
             <Dependency>subversion</Dependency>
             <Dependency>valgrind</Dependency>
             <Dependency>vte</Dependency>
-            <!-- <Dependency>yelp</Dependency> For help menu -->
+            <Dependency>apr</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>vte3</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>neon</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>openldap-client</Dependency>
+            <Dependency>apr-util</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
@@ -87,6 +95,8 @@
             <Path fileType="data">/usr/share/gnome</Path>
             <Path fileType="data">/usr/share/omf</Path>
             <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/help</Path>
+            <Path fileType="data">/usr/share/glib-2.0/schemas</Path>
             <Path fileType="data">/usr/share/applications</Path>
             <Path fileType="data">/usr/share/pixmaps</Path>
             <Path fileType="data">/usr/share/glade3</Path>
@@ -99,17 +109,45 @@
     <Package>
         <Name>anjuta-devel</Name>
         <Summary>Development files for anjuta</Summary>
+        <BuildDependencies>
+            <Dependency>gdl-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">anjuta</Dependency>
+            <Dependency>gdl-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
             <!-- FIXME: Remove this if not necessary -->
             <Path fileType="man">/usr/share/man/man3</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2013-08-31</Date>
+            <Version>3.8.4</Version>
+            <Comment>missing dep.</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-08-30</Date>
+            <Version>3.8.4</Version>
+            <Comment>missing dep.</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-08-26</Date>
+            <Version>3.8.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Aydın Demirel</Name>
+            <Email>aydin.demirel@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2013-03-15</Date>
             <Version>3.6.1</Version>
