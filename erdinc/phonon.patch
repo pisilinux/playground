@@ -1,0 +1,843 @@
+diff -Nurp a/phonon/CMakeLists.txt b/phonon/CMakeLists.txt
+--- a/phonon/CMakeLists.txt	2013-06-28 20:12:33.564793916 +0300
++++ b/phonon/CMakeLists.txt	2013-07-10 01:47:02.000000000 +0300
+@@ -2,16 +2,8 @@
+ # define the cmake variable KDEBASE_DISABLE_MULTIMEDIA, i.e,
+ # % cmake -DKDEBASE_DISABLE_MULTIMEDIA=ON
+ #
+-
+ project(PHONON-KDE-RUNTIME)
+-find_package(KDE4 REQUIRED)
+-
+-include(KDE4Defaults)
+-include(MacroLibrary)
+-include(CheckFunctionExists)
+-include(CheckIncludeFiles)
+ 
+-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+ add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+ 
+ include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${KDE4_INCLUDES})
+@@ -29,7 +21,9 @@ if(KDEBASE_DISABLE_MULTIMEDIA)
+ else(KDEBASE_DISABLE_MULTIMEDIA)
+    set(PHONON_MIN_VERSION "4.4.57")
+    macro_ensure_version("${PHONON_MIN_VERSION}" "${PHONON_VERSION}" _phonon_version_ok)
+-   macro_log_feature(_phonon_version_ok "Phonon" "Phonon library" "git://anongit.kde.org/phonon.git" TRUE "${PHONON_MIN_VERSION}" "STRONGLY RECOMMENDED: Required for playing audio and video throughout KDE")
++   if(NOT _phonon_version_ok)
++    message(FATAL_ERROR "The installed Phonon is too old. Found version ${PHONON_VERSION}. Required is ${PHONON_MIN_VERSION}")
++   endif()
+ 
+    find_package(Alsa)
+    option(WITH_ALSA "Use ALSA, if found" ON)
+@@ -54,7 +48,10 @@ else(KDEBASE_DISABLE_MULTIMEDIA)
+       endif(ALSA_VERSION_STR AND NOT WIN32)
+    endif(ALSA_FOUND)
+    if(NOT WIN32)
+-      macro_log_feature(HAVE_CURRENT_ALSA "ALSA" "The Advanced Linux Sound Architecture (ALSA) library" "http://www.alsa-project.org/" FALSE "1.0.14a" "A current ALSA library is needed for dmix and virtual device listing")
++      add_feature_info("Dmix and virtual device listing" HAVE_CURRENT_ALSA
++                       "The ALSA library (http://www.alsa-project.org) is needed for building
++                        some additional Phonon features"
++                      )
+    endif(NOT WIN32)
+ 
+    add_subdirectory(kded-module)
+diff -Nurp a/phonon/kcm/audiosetup.cpp b/phonon/kcm/audiosetup.cpp
+--- a/phonon/kcm/audiosetup.cpp	2013-06-28 20:12:33.564793916 +0300
++++ b/phonon/kcm/audiosetup.cpp	2013-07-10 01:47:02.000000000 +0300
+@@ -485,7 +485,7 @@ void AudioSetup::updateSource(const pa_s
+     if (false && info.ports.size()) {
+         int idx = deviceBox->currentIndex();
+         if (idx >= 0) {
+-            int64_t index = deviceBox->itemData(idx).toInt();
++            qint64 index = deviceBox->itemData(idx).toInt();
+             if (index < 0 && ((-1*index) - 1) == i->index) {
+                 portBox->blockSignals(true);
+                 portBox->setCurrentIndex(portBox->findData(info.activePort));
+@@ -603,8 +603,7 @@ void AudioSetup::profileChanged()
+     QString profile = profileBox->itemData(profileBox->currentIndex()).toString();
+     kDebug() << "Changing profile to" << profile;
+ 
+-    cardInfo &card_info = s_Cards[card_index];
+-    Q_ASSERT(card_info.profiles.size());
++    Q_ASSERT(s_Cards[card_index].profiles.size());
+ 
+     pa_operation *operation =
+             pa_context_set_card_profile_by_index(s_context,
+@@ -666,7 +665,7 @@ void AudioSetup::reallyUpdateVUMeter()
+         inputLevels->setValue(val-1);
+ }
+ 
+-static deviceInfo &getDeviceInfo(int64_t index)
++static deviceInfo &getDeviceInfo(qint64 index)
+ {
+     if (index >= 0) {
+       Q_ASSERT(s_Sinks.contains(index));
+@@ -687,7 +686,7 @@ void AudioSetup::deviceChanged()
+         _updatePlacementTester();
+         return;
+     }
+-    int64_t index = deviceBox->itemData(idx).toInt();
++    qint64 index = deviceBox->itemData(idx).toInt();
+     deviceInfo &device_info = getDeviceInfo(index);
+ 
+     kDebug() << QString("Updating ports for device '%1' (%2 ports available)")
+@@ -723,13 +722,15 @@ void AudioSetup::deviceChanged()
+ 
+ void AudioSetup::portChanged()
+ {
+-    int64_t index = deviceBox->itemData(deviceBox->currentIndex()).toInt();
++    qint64 index = deviceBox->itemData(deviceBox->currentIndex()).toInt();
+ 
+     QString port = portBox->itemData(portBox->currentIndex()).toString();
+     kDebug() << "Changing port to" << port;
+ 
++#ifndef QT_NO_DEBUG
+     deviceInfo &device_info = getDeviceInfo(index);
+     Q_ASSERT(device_info.ports.size());
++#endif /* QT_NO_DEBUG */
+ 
+     pa_operation *o;
+     if (index >= 0) {
+@@ -778,7 +779,7 @@ void AudioSetup::_updatePlacementTester(
+     if (idx < 0)
+       return;
+ 
+-    int64_t index = deviceBox->itemData(idx).toInt();
++    qint64 index = deviceBox->itemData(idx).toInt();
+     deviceInfo& sink_info = getDeviceInfo(index);
+ 
+     if (index < 0) {
+diff -Nurp a/phonon/kcm/audiosetup.h b/phonon/kcm/audiosetup.h
+--- a/phonon/kcm/audiosetup.h	2013-06-28 20:12:33.564793916 +0300
++++ b/phonon/kcm/audiosetup.h	2013-07-10 01:47:02.000000000 +0300
+@@ -53,7 +53,7 @@ class AudioSetup : public QWidget, priva
+     Q_OBJECT
+ 
+     public:
+-        AudioSetup(QWidget *parent = 0);
++        explicit AudioSetup(QWidget *parent = 0);
+         ~AudioSetup();
+ 
+         void load();
+diff -Nurp a/phonon/kcm/audiosetup.ui b/phonon/kcm/audiosetup.ui
+--- a/phonon/kcm/audiosetup.ui	2013-06-28 20:12:33.564793916 +0300
++++ b/phonon/kcm/audiosetup.ui	2013-07-10 01:47:02.000000000 +0300
+@@ -19,7 +19,7 @@
+      </property>
+      <layout class="QGridLayout" name="_3">
+       <item row="3" column="1">
+-       <widget class="QComboBox" name="profileBox">
++       <widget class="KComboBox" name="profileBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+@@ -88,7 +88,7 @@
+        </widget>
+       </item>
+       <item row="1" column="1">
+-       <widget class="QComboBox" name="portBox">
++       <widget class="KComboBox" name="portBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+diff -Nurp a/phonon/kcm/backendselection.cpp b/phonon/kcm/backendselection.cpp
+--- a/phonon/kcm/backendselection.cpp	2013-06-28 20:12:33.565793876 +0300
++++ b/phonon/kcm/backendselection.cpp	2013-07-10 01:47:02.000000000 +0300
+@@ -197,7 +197,7 @@ void BackendSelection::selectionChanged(
+         m_comment->setText(service->comment());
+         const QString website = service->property("X-KDE-PhononBackendInfo-Website").toString();
+         m_website->setText(QString("<a href=\"%1\">%1</a>").arg(website));
+-        connect(m_website, SIGNAL(linkActivated(const QString &)), SLOT(openWebsite(const QString &)), Qt::UniqueConnection);
++        connect(m_website, SIGNAL(linkActivated(QString)), SLOT(openWebsite(QString)), Qt::UniqueConnection);
+         m_version->setText(service->property("X-KDE-PhononBackendInfo-Version").toString());
+         showBackendKcm(service);
+     }
+diff -Nurp a/phonon/kcm/backendselection.h b/phonon/kcm/backendselection.h
+--- a/phonon/kcm/backendselection.h	2013-06-28 20:12:33.565793876 +0300
++++ b/phonon/kcm/backendselection.h	2013-07-10 01:47:02.000000000 +0300
+@@ -33,7 +33,7 @@ class BackendSelection : public QWidget,
+ {
+     Q_OBJECT
+     public:
+-        BackendSelection(QWidget *parent = 0);
++        explicit BackendSelection(QWidget *parent = 0);
+ 
+         void load();
+         void save();
+diff -Nurp a/phonon/kcm/CMakeLists.txt b/phonon/kcm/CMakeLists.txt
+--- a/phonon/kcm/CMakeLists.txt	2013-06-28 20:12:33.564793916 +0300
++++ b/phonon/kcm/CMakeLists.txt	2013-07-10 01:47:02.000000000 +0300
+@@ -1,10 +1,21 @@
+-set(PULSEAUDIO_MINIMUM_VERSION "0.9.16")
+-macro_optional_find_package(PulseAudio)
+-macro_log_feature(PULSEAUDIO_FOUND "PulseAudio" "PulseAudio Audio Server" "http://www.pulseaudio.org/" FALSE "0.9.16" "libpulse is needed for audio setup GUI")
++macro_optional_find_package(PulseAudio 0.9.16)
++set_package_properties(PulseAudio PROPERTIES DESCRIPTION "PulseAudio Audio Server"
++                       URL "http://www.pulseaudio.org/"
++                       TYPE OPTIONAL
++                       PURPOSE "libpulse is needed for audio setup GUI"
++                      )
++
+ find_package(GLIB2)
++set_package_properties(GLIB2 PROPERTIES DESCRIPTION "Low-level core library for data structure handling, portability wrappers, etc."
++                       URL "http://www.gtk.org"
++                       TYPE OPTIONAL
++                      )
+ 
+ pkg_check_modules(CANBERRA libcanberra)
+-macro_log_feature(CANBERRA_FOUND "libcanberra" "libcanberra audio library" "http://0pointer.de/lennart/projects/libcanberra/" FALSE "" "libcanberra is needed for audio setup GUI")
++add_feature_info ("Audio setup GUI" CANBERRA_FOUND
++                  "libcanberra is needed for audio setup GUI
++                  * http://0pointer.de/lennart/projects/libcanberra"
++                 )
+ 
+ set(kcmphonon_SRCS main.cpp devicepreference.cpp backendselection.cpp)
+ kde4_add_ui_files(kcmphonon_SRCS devicepreference.ui backendselection.ui)
+diff -Nurp a/phonon/kcm/devicepreference.cpp b/phonon/kcm/devicepreference.cpp
+--- a/phonon/kcm/devicepreference.cpp	2013-06-28 20:12:33.565793876 +0300
++++ b/phonon/kcm/devicepreference.cpp	2013-07-10 01:47:02.000000000 +0300
+@@ -22,6 +22,7 @@
+ #include "devicepreference.h"
+ 
+ #include <QtCore/QList>
++#include <QtCore/QPointer>
+ #include <QtDBus/QDBusConnection>
+ #include <QtDBus/QDBusReply>
+ #include <QtDBus/QDBusInterface>
+@@ -246,21 +247,21 @@ DevicePreference::DevicePreference(QWidg
+ 
+     // Connect all model data change signals to the changed slot
+     for (int i = -1; i <= LastCategory; ++i) {
+-        connect(m_audioOutputModel[i], SIGNAL(rowsInserted(const QModelIndex &, int, int)), this, SIGNAL(changed()));
+-        connect(m_audioOutputModel[i], SIGNAL(rowsRemoved(const QModelIndex &, int, int)), this, SIGNAL(changed()));
++        connect(m_audioOutputModel[i], SIGNAL(rowsInserted(QModelIndex, int, int)), this, SIGNAL(changed()));
++        connect(m_audioOutputModel[i], SIGNAL(rowsRemoved(QModelIndex, int, int)), this, SIGNAL(changed()));
+         connect(m_audioOutputModel[i], SIGNAL(layoutChanged()), this, SIGNAL(changed()));
+-        connect(m_audioOutputModel[i], SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), this, SIGNAL(changed()));
++        connect(m_audioOutputModel[i], SIGNAL(dataChanged(QModelIndex, QModelIndex)), this, SIGNAL(changed()));
+         if (m_audioCaptureModel.contains(i)) {
+-            connect(m_audioCaptureModel[i], SIGNAL(rowsInserted(const QModelIndex &, int, int)), this, SIGNAL(changed()));
+-            connect(m_audioCaptureModel[i], SIGNAL(rowsRemoved(const QModelIndex &, int, int)), this, SIGNAL(changed()));
++            connect(m_audioCaptureModel[i], SIGNAL(rowsInserted(QModelIndex, int, int)), this, SIGNAL(changed()));
++            connect(m_audioCaptureModel[i], SIGNAL(rowsRemoved(QModelIndex , int, int)), this, SIGNAL(changed()));
+             connect(m_audioCaptureModel[i], SIGNAL(layoutChanged()), this, SIGNAL(changed()));
+-            connect(m_audioCaptureModel[i], SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), this, SIGNAL(changed()));
++            connect(m_audioCaptureModel[i], SIGNAL(dataChanged(QModelIndex, QModelIndex)), this, SIGNAL(changed()));
+         }
+         if (m_videoCaptureModel.contains(i)) {
+-            connect(m_videoCaptureModel[i], SIGNAL(rowsInserted(const QModelIndex &, int, int)), this, SIGNAL(changed()));
+-            connect(m_videoCaptureModel[i], SIGNAL(rowsRemoved(const QModelIndex &, int, int)), this, SIGNAL(changed()));
++            connect(m_videoCaptureModel[i], SIGNAL(rowsInserted(QModelIndex, int, int)), this, SIGNAL(changed()));
++            connect(m_videoCaptureModel[i], SIGNAL(rowsRemoved(QModelIndex, int, int)), this, SIGNAL(changed()));
+             connect(m_videoCaptureModel[i], SIGNAL(layoutChanged()), this, SIGNAL(changed()));
+-            connect(m_videoCaptureModel[i], SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), this, SIGNAL(changed()));
++            connect(m_videoCaptureModel[i], SIGNAL(dataChanged(QModelIndex, QModelIndex)), this, SIGNAL(changed()));
+         }
+     }
+ 
+@@ -767,19 +768,19 @@ void DevicePreference::on_applyPreferenc
+         return;
+     }
+ 
+-    KDialog dialog(this);
+-    dialog.setButtons(KDialog::Ok | KDialog::Cancel);
+-    dialog.setDefaultButton(KDialog::Ok);
++    QPointer<KDialog> dialog = new KDialog(this);
++    dialog->setButtons(KDialog::Ok | KDialog::Cancel);
++    dialog->setDefaultButton(KDialog::Ok);
+ 
+-    QWidget mainWidget(&dialog);
+-    dialog.setMainWidget(&mainWidget);
++    QWidget *mainWidget = new QWidget(dialog);
++    dialog->setMainWidget(mainWidget);
+ 
+-    QLabel label(&mainWidget);
+-    label.setText(i18n("Apply the currently shown device preference list to the following other "
++    QLabel *label = new QLabel(mainWidget);
++    label->setText(i18n("Apply the currently shown device preference list to the following other "
+                 "audio playback categories:"));
+-    label.setWordWrap(true);
++    label->setWordWrap(true);
+ 
+-    KListWidget list(&mainWidget);
++    KListWidget *list = new KListWidget(mainWidget);
+ 
+     for (catIndex = 0; catIndex < categoryListCount; catIndex ++) {
+         Category cat = cap ? NoCategory : categoryList[catIndex];
+@@ -788,15 +789,15 @@ void DevicePreference::on_applyPreferenc
+         QListWidgetItem *item = NULL;
+         if (cap) {
+             if (capcat == NoCaptureCategory) {
+-                item = new QListWidgetItem(i18n("Default/Unspecified Category"), &list, capcat);
++                item = new QListWidgetItem(i18n("Default/Unspecified Category"), list, capcat);
+             } else {
+-                item = new QListWidgetItem(categoryToString(capcat), &list, capcat);
++                item = new QListWidgetItem(categoryToString(capcat), list, capcat);
+             }
+         } else {
+             if (cat == NoCategory) {
+-                item = new QListWidgetItem(i18n("Default/Unspecified Category"), &list, cat);
++                item = new QListWidgetItem(i18n("Default/Unspecified Category"), list, cat);
+             } else {
+-                item = new QListWidgetItem(categoryToString(cat), &list, cat);
++                item = new QListWidgetItem(categoryToString(cat), list, cat);
+             }
+         }
+ 
+@@ -806,19 +807,19 @@ void DevicePreference::on_applyPreferenc
+         }
+     }
+ 
+-    QVBoxLayout layout(&mainWidget);
+-    layout.setMargin(0);
+-    layout.addWidget(&label);
+-    layout.addWidget(&list);
++    QVBoxLayout *layout = new QVBoxLayout(mainWidget);
++    layout->setMargin(0);
++    layout->addWidget(label);
++    layout->addWidget(list);
+ 
+-    switch (dialog.exec()) {
++    switch (dialog->exec()) {
+     case QDialog::Accepted:
+         for (catIndex = 0; catIndex < categoryListCount; catIndex ++) {
+             Category cat = cap ? NoCategory : categoryList[catIndex];
+             CaptureCategory capcat = cap ? capCategoryList[catIndex] : NoCaptureCategory;
+ 
+             if (cap ? capcat != catItem->captureCategory() : cat != catItem->category()) {
+-                QListWidgetItem *item = list.item(catIndex);
++                QListWidgetItem *item = list->item(catIndex);
+                 Q_ASSERT(item->type() == cap ? (int) capcat : (int) cat);
+                 if (item->checkState() == Qt::Checked) {
+                     switch (catItem->odtype()) {
+@@ -847,6 +848,8 @@ void DevicePreference::on_applyPreferenc
+         // nothing to do
+         break;
+     }
++
++    delete dialog;
+ }
+ 
+ void DevicePreference::on_showAdvancedDevicesCheckBox_toggled()
+diff -Nurp a/phonon/kcm/devicepreference.h b/phonon/kcm/devicepreference.h
+--- a/phonon/kcm/devicepreference.h	2013-06-28 20:12:33.565793876 +0300
++++ b/phonon/kcm/devicepreference.h	2013-07-10 01:47:02.000000000 +0300
+@@ -39,7 +39,7 @@ class DevicePreference : public QWidget,
+ {
+     Q_OBJECT
+     public:
+-        DevicePreference(QWidget *parent = 0);
++        explicit DevicePreference(QWidget *parent = 0);
+         virtual ~DevicePreference();
+ 
+         void load();
+diff -Nurp a/phonon/kcm/kcm_phonon.desktop b/phonon/kcm/kcm_phonon.desktop
+--- a/phonon/kcm/kcm_phonon.desktop	2013-06-28 20:12:33.565793876 +0300
++++ b/phonon/kcm/kcm_phonon.desktop	2013-08-07 17:59:56.000000000 +0300
+@@ -10,152 +10,82 @@ X-KDE-ParentApp=kcontrol
+ X-KDE-System-Settings-Parent-Category=audio-and-video
+ X-DocPath=kcontrol/phonon/index.html
+ 
+-Name=Phonon
+-Name[ar]=فونون
+-Name[ast]=Phonon
+-Name[bg]=Phonon
+-Name[bn]=ফোনন
+-Name[bs]=Fonon
+-Name[ca]=Phonon
+-Name[ca@valencia]=Phonon
+-Name[cs]=Phonon
+-Name[da]=Phonon
+-Name[de]=Phonon
+-Name[el]=Phonon
+-Name[en_GB]=Phonon
+-Name[eo]=Phonon
+-Name[es]=Phonon
+-Name[et]=Phonon
+-Name[eu]=Phonon
+-Name[fa]=Phonon
+-Name[fi]=Phonon
+-Name[fr]=Phonon
+-Name[ga]=Phonon
+-Name[gl]=Phonon
+-Name[gu]=ફોનોન
+-Name[he]=Phonon
+-Name[hi]=फोनोन
+-Name[hr]=Phonon
+-Name[hu]=Phonon
+-Name[ia]=Phonon
+-Name[id]=Phonon
+-Name[is]=Phonon
+-Name[it]=Phonon
+-Name[ja]=Phonon
+-Name[kk]=Phonon
+-Name[km]=Phonon
+-Name[kn]=ಫೋನಾನ್
+-Name[ko]=Phonon
+-Name[lt]=Phonon
+-Name[lv]=Phonon
+-Name[ml]=ഫോണോണ്‍
+-Name[mr]=फोनॉन
+-Name[nb]=Phonon
+-Name[nds]=Phonon
+-Name[nl]=Phonon
+-Name[nn]=Phonon
+-Name[pa]=ਫਨੋਨ
+-Name[pl]=Phonon
+-Name[pt]=Phonon
+-Name[pt_BR]=Phonon
+-Name[ro]=Phonon
+-Name[ru]=Phonon
+-Name[si]=Phonon
+-Name[sk]=Phonon
+-Name[sl]=Phonon
+-Name[sr]=Фонон
+-Name[sr@ijekavian]=Фонон
+-Name[sr@ijekavianlatin]=Phonon
+-Name[sr@latin]=Phonon
+-Name[sv]=Phonon
+-Name[tg]=Phonon
+-Name[th]=โฟนอน
+-Name[tr]=Phonon
+-Name[ug]=Phonon
+-Name[uk]=Phonon
+-Name[vi]=Phonon
+-Name[wa]=Phonon
+-Name[x-test]=xxPhononxx
+-Name[zh_CN]=Phonon
+-Name[zh_TW]=Phonon
+-Comment=Sound and Video Configuration
+-Comment[ar]=ضبط الصوت و الفيديو
+-Comment[ast]=Configuración del sistema de soníu y video
+-Comment[be@latin]=Nałady huku j videa
+-Comment[bg]=Настройки на звук и видео
+-Comment[bn]=সাউণ্ড এবং ভিডিও কনফিগারেশন
+-Comment[bn_IN]=শব্দ ও ভিডিও কনফিগারেশন
+-Comment[bs]=Postava zvuka i videa
+-Comment[ca]=Configuració del so i del vídeo
+-Comment[ca@valencia]=Configuració del so i del vídeo
+-Comment[cs]=Nastavení zvuku a videa
+-Comment[csb]=Kònfigùracëjô systemë zwãkù ë òbrôzu
+-Comment[da]=Konfiguration af lyd og video
+-Comment[de]=Audio- und Video-Einrichtung
+-Comment[el]=Διαμόρφωση ήχου και βίντεο
+-Comment[en_GB]=Sound and Video Configuration
+-Comment[eo]=Agordoj por sono kaj video
+-Comment[es]=Configuración del sistema de sonido y vídeo
+-Comment[et]=Heli ja video seadistamine
+-Comment[eu]=Soinu eta bideoaren konfiguraketa
+-Comment[fa]=پیکربندی صدا و ویدیو
+-Comment[fi]=Ääni- ja videoasetukset
+-Comment[fr]=Configuration du système son et vidéo
+-Comment[fy]=Lûd en fideo konfigurtaasje
+-Comment[ga]=Cumraíocht Fuaime/Físe
+-Comment[gl]=Configuración do son e vídeo
+-Comment[gu]=ઘ્વનિ અને વિડીઓ રૂપરેખાંકન
+-Comment[he]=הגדרות שמע ווידאו
+-Comment[hi]=आवाज तथा वीडियो कॉन्फ़िगुरेशन
+-Comment[hne]=अवाज अउ वीडियो कान्फिगरेसन
+-Comment[hr]=Konfiguracija Zvuka i Videa
+-Comment[hsb]=Připrawjenje zwuka a wideja
+-Comment[hu]=Hang- és videobeállítások
+-Comment[ia]=Configuration de Sono e Video
+-Comment[id]=Konfigurasi Suara dan Video
+-Comment[is]=Stillingar hljóð- og vídeó
+-Comment[it]=Configurazione audio e video
+-Comment[ja]=音と映像の設定
+-Comment[kk]=Дыбыс пен Бейне параметрлері
+-Comment[km]=ការ​កំណត់​រចនាសម្ព័ន្ធ​សំឡេង និង​វីដេអូ
+-Comment[kn]=ಶ್ರವ್ಯಾಂಶ ಮತ್ತು ದೃಶ್ಯಾಂಶ (ಧ್ವನಿ ಮತ್ತು ವಿಡಿಯೋ) ಸಂರಚನೆ
+-Comment[ko]=소리와 동영상 설정
+-Comment[ku]=Veavakirina Deng û Vîdeoyê
+-Comment[lt]=Garso ir video konfigūravimas
+-Comment[lv]=Skaņas un Video konfigurācija
+-Comment[mk]=Конфигурација на звук и видео
+-Comment[ml]=ശബ്ദ-ചലചിത്ര ക്രമീകരണം
+-Comment[mr]=आवाज व व्हिडीओ संयोजना
+-Comment[nb]=Oppsett av lyd og video
+-Comment[nds]=Video un Kläng instellen
+-Comment[nl]=Geluid en video instellen
+-Comment[nn]=Oppsett av lyd og video
+-Comment[or]=ଧ୍ୱନି ଏବଂ ଭିଡ଼ିଓ ସଂରଚନା
+-Comment[pa]=ਸਾਊਂਡ ਅਤੇ ਵੀਡਿਓ ਸੰਰਚਨਾ
+-Comment[pl]=Konfiguracja dźwięku i obrazu
+-Comment[pt]=Configuração do Som e Vídeo
+-Comment[pt_BR]=Configuração de som e vídeo
+-Comment[ro]=Configurare sunet și video
+-Comment[ru]=Настройка звука и видео
+-Comment[si]=ශ්‍රව්‍ය හා දෘශ්‍ය සැකසුම්
+-Comment[sk]=Nastavenie zvuku a videa
+-Comment[sl]=Nastavitev zvoka in videa
+-Comment[sr]=Постава звука и видеа
+-Comment[sr@ijekavian]=Постава звука и видеа
+-Comment[sr@ijekavianlatin]=Postava zvuka i videa
+-Comment[sr@latin]=Postava zvuka i videa
+-Comment[sv]=Ljud- och videoinställning
+-Comment[ta]=ஒலி ஒளி வடிவமைப்பு
+-Comment[tg]=Танзимоти овоз ва видео
+-Comment[th]=ปรับแต่งระบบเสียงและวิดีโอ
+-Comment[tr]=Ses ve Video Yapılandırması
+-Comment[ug]=ئۈن ۋە سىن سەپلىمىسى
+-Comment[uk]=Налаштування звукової та відео-системи
+-Comment[vi]=Cấu hình âm thanh và phim ảnh
+-Comment[wa]=Apontiaedje do son et del videyo
+-Comment[x-test]=xxSound and Video Configurationxx
+-Comment[zh_CN]=音频和视频配置
+-Comment[zh_TW]=聲音與影像設定
++Name=Audio and Video Settings
++Name[bg]=Настройки на звук и видео
++Name[bs]=Postavka zvuka i videa
++Name[ca]=Configuració de l'àudio i del vídeo
++Name[cs]=Nastavení zvuku a videa
++Name[da]=Lyd- og videoindstillinger
++Name[de]=Audio- und Videoeinstellungen
++Name[el]=Ρυθμίσεις ήχου και βίντεο
++Name[es]=Preferencias de audio y vídeo
++Name[eu]=Audio eta bideo ezarpenak
++Name[fi]=Ääni- ja videoasetukset
++Name[fr]=Configuration du son et de la vidéo
++Name[gl]=Configuración do son e vídeo
++Name[hu]=Hang- és videóbeállítások
++Name[ia]=Preferentias de Audio e Video
++Name[it]=Impostazioni audio e video
++Name[ja]=音と映像の設定
++Name[kk]=Аудио мен Видео баптауы
++Name[ko]=오디오 및 비디오 설정
++Name[lt]=Audio ir Video nustatymai
++Name[nl]=Audio- en video-instellingen
++Name[nn]=Lyd- og filminnstillingar
++Name[pa]=ਆਡੀਓ ਅਤੇ ਵਿਡੀਓ ਸੈਟਿੰਗ
++Name[pt]=Configuração do Áudio e Vídeo
++Name[pt_BR]=Configurações de áudio e vídeo
++Name[ru]=Настройка видео и аудио
++Name[sk]=Nastavenia zvuku a videa
++Name[sl]=Nastavitve zvoka in videa
++Name[sr]=Аудио и видео поставке
++Name[sr@ijekavian]=Аудио и видео поставке
++Name[sr@ijekavianlatin]=Audio i video postavke
++Name[sr@latin]=Audio i video postavke
++Name[sv]=Ljud- och videoinställningar
++Name[tr]=Ses ve Video Ayarları
++Name[uk]=Параметри звуку та відео
++Name[wa]=Apontiaedjes odio et videyo
++Name[x-test]=xxAudio and Video Settingsxx
++Name[zh_CN]=音频和视频设置
++Name[zh_TW]=音效與影像設定
++Comment=Settings for the Phonon multimedia framework
++Comment[bg]=Настройки на мултимедийната среда Phonon
++Comment[bs]=Postavke za Phonon multimedijalno okruženje
++Comment[ca]=Arranjament per l'entorn de treball multimèdia Phonon
++Comment[cs]=Nastavení pro multimediální framework Phonon
++Comment[da]=Indstilling af multimedieframeworket Phonon
++Comment[de]=Einstellungen für das Phonon-Multimedia-Framework
++Comment[el]=Ρυθμίσεις για το πλαίσιο εργασίας πολυμέσων Phonon
++Comment[es]=Preferencias para la infraestructura multimedia Phonon
++Comment[eu]=Phonon multimedia azpiegituraren ezarpenak
++Comment[fi]=Phonon-multimediakehyksen asetukset
++Comment[fr]=Configuration de l'ensemble multimédia Phonon
++Comment[gl]=Configuración do framework multimedia de Phonon
++Comment[hu]=A Phonon multimédia keretrendszer beállításai
++Comment[ia]=Preferentias pro le schema de multimedia de Phonon
++Comment[it]=Impostazioni dell'infrastruttura multimediale Phonon
++Comment[kk]=Phonon мультимедиа құрылым баптауы
++Comment[ko]=Phonon 멀티미디어 프레임워크 설정
++Comment[nl]=Instellingen voor het Phonon multimedia-framework
++Comment[nn]=Innstillingar for Phonon multimedia-rammeverk
++Comment[pa]=ਫਨੋਨ ਮਲਟੀਮੀਡਿਆ ਫਰੇਮਵਰਕ ਲਈ ਸੈਟਿੰਗ
++Comment[pt]=Configuração da plataforma multimédia do Phonon
++Comment[pt_BR]=Configurações da plataforma multimídia Phonon
++Comment[ru]=Настройка мультимедийной платформы Phonon
++Comment[sk]=Nastavenia pre multimediálny framework Phonon
++Comment[sl]=Nastavitve predstavnostnega ogrodja Phonon
++Comment[sr]=Поставке за мултимедијски радни оквир Фонон
++Comment[sr@ijekavian]=Поставке за мултимедијски радни оквир Фонон
++Comment[sr@ijekavianlatin]=Postavke za multimedijski radni okvir Phonon
++Comment[sr@latin]=Postavke za multimedijski radni okvir Phonon
++Comment[sv]=Inställningar av Phonon multimediaramverk
++Comment[tr]=Phonon çoklu ortam çalışma çerçevesi için ayarlar
++Comment[uk]=Параметри роботи мультимедійної оболонки Phonon
++Comment[wa]=Apontiaedjes po l' evironmint multimedia Phonon
++Comment[x-test]=xxSettings for the Phonon multimedia frameworkxx
++Comment[zh_CN]=Phonen 多媒体框架的设置
++Comment[zh_TW]=Phonon 多媒體框架的設定
+ X-KDE-Keywords=Sound,Phonon,Audio,Video,Output,Device,Notification,Music,Communication,Media,NMM,GStreamer,Xine
+ X-KDE-Keywords[bg]=Sound,Phonon,Audio,Video,Output,Device,Notification,Music,Communication,Media,NMM,GStreamer,Xine,Звук,Видео,Изход,Устройство,Уведомление,Музика,Общуване,Медия
+ X-KDE-Keywords[bn]=Sound,Phonon,Audio,Video,Output,Device,Notification,Music,Communication,Media,NMM,GStreamer,Xine
+@@ -196,7 +126,7 @@ X-KDE-Keywords[pt_BR]=Som,Phonon,Áudio,
+ X-KDE-Keywords[ro]=sunet,phonon,audio,video,ieșire,dispozitiv,notificare,muzică,comunicare,media,NMM,GStreamer,Xine
+ X-KDE-Keywords[ru]=Sound,Phonon,Audio,Video,Output,Device,Notification,Music,Communication,Media,NMM,GStreamer,Xine,звук,аудио,видео,вывод,устройство,уведомления,музыка,связь,общение,медиа
+ X-KDE-Keywords[sk]=Zvuk,Phonon,Audio,Video,Output,Zariadenie,Notifikácia,Hudba,Komunikácia,Mádia,NMM,GStreamer,Xine
+-X-KDE-Keywords[sl]=zvok,phonon,audio,video,predvajanje,naprava,naprave,obvestila,glasba,komunikacija,igre,snemanje,večpredstavnost,nmm,gstreamer,xine,vlc
++X-KDE-Keywords[sl]=zvok,phonon,audio,video,predvajanje,naprava,naprave,obvestila,glasba,komunikacija,igre,snemanje,predstavnost,nmm,gstreamer,xine,vlc
+ X-KDE-Keywords[sr]=Sound,Phonon,Audio,Video,Output,Device,Notification,Music,Communication,Media,NMM,GStreamer,Xine,звук,Фонон,аудио,видео,излаз,уређај,обавештење,музика,комуникација,медија,НММ,Гстример,Ксин
+ X-KDE-Keywords[sr@ijekavian]=Sound,Phonon,Audio,Video,Output,Device,Notification,Music,Communication,Media,NMM,GStreamer,Xine,звук,Фонон,аудио,видео,излаз,уређај,обавештење,музика,комуникација,медија,НММ,Гстример,Ксин
+ X-KDE-Keywords[sr@ijekavianlatin]=Sound,Phonon,Audio,Video,Output,Device,Notification,Music,Communication,Media,NMM,GStreamer,Xine,zvuk,Phonon,audio,video,izlaz,uređaj,obaveštenje,muzika,komunikacija,medija,NMM,GStreamer,Xine
+diff -Nurp a/phonon/kcm/testspeakerwidget.cpp b/phonon/kcm/testspeakerwidget.cpp
+--- a/phonon/kcm/testspeakerwidget.cpp	2013-06-28 20:12:33.565793876 +0300
++++ b/phonon/kcm/testspeakerwidget.cpp	2013-07-10 01:47:02.000000000 +0300
+@@ -27,6 +27,7 @@ static TestSpeakerWidget *s_CurrentWidge
+ static void finish_cb(ca_context *, uint32_t id, int, void *)
+ {
+   Q_ASSERT(id == 0);
++  Q_UNUSED(id); // Suppress compiler warning if QT_NO_DEBUG
+   if (s_CurrentWidget && s_CurrentWidget->isChecked()) {
+     s_CurrentIndex = PA_INVALID_INDEX;
+     s_CurrentWidget->setChecked(false);
+diff -Nurp a/phonon/kded-module/hardwaredatabase.h b/phonon/kded-module/hardwaredatabase.h
+--- a/phonon/kded-module/hardwaredatabase.h	2013-06-28 20:12:33.565793876 +0300
++++ b/phonon/kded-module/hardwaredatabase.h	2013-07-10 01:47:02.000000000 +0300
+@@ -68,7 +68,7 @@ namespace HardwareDatabase
+             const QString iconName;
+ 
+             /**
+-             * Tells the intial preference in the device list. This determines default ordering of
++             * Tells the initial preference in the device list. This determines default ordering of
+              * devices and can be used to make sure a default setup uses the correct audio devices.
+              */
+             const int initialPreference;
+diff -Nurp a/phonon/kded-module/phononserver.cpp b/phonon/kded-module/phononserver.cpp
+--- a/phonon/kded-module/phononserver.cpp	2013-06-28 20:12:33.566793836 +0300
++++ b/phonon/kded-module/phononserver.cpp	2013-07-10 01:47:02.000000000 +0300
+@@ -1,5 +1,6 @@
+-/*  This file is part of the KDE project
++/*
+     Copyright (C) 2008 Matthias Kretz <kretz@kde.org>
++    Copyright (C) 2013 Harald Sitter <sitter@kde.org>
+ 
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the GNU General Public License as
+@@ -15,7 +16,6 @@
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+     02110-1301, USA.
+-
+ */
+ 
+ #include "phononserver.h"
+@@ -40,6 +40,7 @@
+ #include <QtDBus/QDBusMessage>
+ #include <QtDBus/QDBusMetaType>
+ #include <QtCore/QVariant>
++#include <phonon/pulsesupport.h>
+ #include <Solid/AudioInterface>
+ #include <Solid/GenericInterface>
+ #include <Solid/Device>
+@@ -65,8 +66,8 @@ PhononServer::PhononServer(QObject *pare
+     m_config(KSharedConfig::openConfig("phonondevicesrc", KConfig::SimpleConfig))
+ {
+     findDevices();
+-    connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceAdded(const QString &)), SLOT(deviceAdded(const QString &)));
+-    connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceRemoved(const QString &)), SLOT(deviceRemoved(const QString &)));
++    connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceAdded(QString)), SLOT(deviceAdded(QString)));
++    connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceRemoved(QString)), SLOT(deviceRemoved(QString)));
+ }
+ 
+ PhononServer::~PhononServer()
+@@ -381,9 +382,17 @@ static void removeOssOnlyDevices(QList<P
+ 
+ void PhononServer::findDevices()
+ {
+-    KConfigGroup globalConfigGroup(m_config, "Globals");
+-    //const int cacheVersion = globalConfigGroup.readEntry("CacheVersion", 0);
+-    // cacheVersion 1 is KDE 4.1, 0 is KDE 4.0
++    if (Phonon::PulseSupport *pulse = Phonon::PulseSupport::getInstance()) {
++        // NOTE: This is relying on internal behavior....
++        //       enable internally simply sets a bool that is later && with the
++        //       actually PA activity.
++        //       Should this function ever start doing more, this will break horribly.
++        pulse->enable();
++        if (pulse->isActive()) {
++            kDebug(601) << "Not looking for devices as Phonon::PulseSupport is active.";
++            return;
++        }
++    }
+ 
+     // Fetch the full list of audio and video devices from Solid
+     const QList<Solid::Device> &solidAudioDevices =
+@@ -423,6 +432,8 @@ void PhononServer::findDevices()
+         int cardNum = -1;
+         int deviceNum = -1;
+ 
++        kDebug(601) << "looking at device:" << audioIface->name() << audioIface->driverHandle();
++
+         bool capture = audioIface->deviceType() & Solid::AudioInterface::AudioInput;
+         bool playback = audioIface->deviceType() & Solid::AudioInterface::AudioOutput;
+ 
+@@ -607,12 +618,12 @@ void PhononServer::findDevices()
+         }
+ 
+         kDebug(601) << "Solid video device:" << hwDevice.product() << hwDevice.description();
+-        foreach (const QString driverName, videoDevice->supportedDrivers()) {
++        foreach (const QString & driverName, videoDevice->supportedDrivers()) {
+             kDebug(601) << "- driver" << driverName << ":" << videoDevice->driverHandle(driverName);
+         }
+ 
+         // Iterate through the supported drivers to create different access objects for each one
+-        foreach (const QString driverName, videoDevice->supportedDrivers()) {
++        foreach (const QString & driverName, videoDevice->supportedDrivers()) {
+             deviceIds.clear();
+             accessPreference = 0;
+             driver = PS::DeviceAccess::InvalidDriver;
+@@ -692,11 +703,16 @@ void PhononServer::findDevices()
+     QList<int> askToRemoveAudioIndexes;
+     QList<int> askToRemoveVideoIndexes;
+ 
++    kDebug(601) << "groups:" << groupList;
++    kDebug(601) << "already found devices:" << alreadyFoundCards;
++
+     foreach (const QString &groupName, groupList) {
+         if (alreadyFoundCards.contains(groupName)) {
+             continue;
+         }
+ 
++        kDebug(601) << "group not found:" << groupName;
++
+         const bool isAudio = groupName.startsWith(QLatin1String("AudioDevice_"));
+         const bool isVideo = groupName.startsWith(QLatin1String("VideoDevice_"));
+         const bool isPlayback = isAudio && groupName.endsWith(QLatin1String("playback"));
+@@ -1081,11 +1097,15 @@ void PhononServer::askToRemoveDevices(co
+     if (!areAudio && !areVideo)
+         return;
+ 
++    const QString &dontEverAsk = QLatin1String("phonon_always_forget_devices");
+     const QString &dontAskAgainName = QLatin1String("phonon_forget_devices_") +
+         devList.join(QLatin1String("_"));
+ 
++    // Please note that dontEverAsk overrides the device specific lists
++    // i.e. if it is set we always return
+     KMessageBox::ButtonCode result;
+-    if (!KMessageBox::shouldBeShownYesNo(dontAskAgainName, result)) {
++    if (!KMessageBox::shouldBeShownYesNo(dontEverAsk, result) ||
++            !KMessageBox::shouldBeShownYesNo(dontAskAgainName, result)) {
+         if (result == KMessageBox::Yes) {
+             if (areAudio) {
+                 kDebug(601) << "removeAudioDevices" << indexes;
+diff -Nurp a/phonon/kded-module/phononserver.desktop b/phonon/kded-module/phononserver.desktop
+--- a/phonon/kded-module/phononserver.desktop	2013-06-28 20:12:33.566793836 +0300
++++ b/phonon/kded-module/phononserver.desktop	2013-07-10 01:47:02.000000000 +0300
+@@ -57,7 +57,7 @@ Name[ro]=Politică de sunet
+ Name[ru]=Звуковой сервер
+ Name[si]=ශ්‍රව්‍ය ප්‍රතිපත්තිය
+ Name[sk]=Politika zvuku
+-Name[sl]=Pravila za zvok
++Name[sl]=Pravilnik za zvok
+ Name[sr]=Смернице звука
+ Name[sr@ijekavian]=Смјернице звука
+ Name[sr@ijekavianlatin]=Smjernice zvuka
+@@ -93,6 +93,7 @@ Comment[fi]=Tarjoaa äänijärjestelmäk
+ Comment[fr]=Fournit une politique de système sonore aux applications
+ Comment[ga]=Soláthraíonn sé polasaí fuaime d'fheidhmchláir
+ Comment[gl]=Fornece a política so sistema de son aos programas
++Comment[gu]=કાર્યક્રમોને ધ્વનિ સિસ્ટમ નિતી પૂરી પાડે છે
+ Comment[he]=מספק מדיניות מערכת השמע עבור יישומים
+ Comment[hi]=अनुप्रयोगों के लिए ध्वनि प्रणाली नीति उपलब्ध कराता है
+ Comment[hr]=Omogućuje aplikacijama pristup pravilima zvučnog sustava
+@@ -121,7 +122,7 @@ Comment[ro]=Oferă applicațiilor politi
+ Comment[ru]=Правила доступа к звуковой системе для приложений
+ Comment[si]=යෙදුම් වලට ශ්‍රව්‍ය පද්ධති ප්‍රතිපත්ති සපයයි
+ Comment[sk]=Poskytuje systémovú politiku zvuku aplikáciám
+-Comment[sl]=Programom omogoča dostop do sistemkih pravil za zvok
++Comment[sl]=Programom omogoča dostop do sistemskih pravilnikov za zvok
+ Comment[sr]=Испоставља програмима смернице звучног система
+ Comment[sr@ijekavian]=Испоставља програмима смјернице звучног система
+ Comment[sr@ijekavianlatin]=Ispostavlja programima smjernice zvučnog sistema
+diff -Nurp a/phonon/platform_kde/kdeplatformplugin.cpp b/phonon/platform_kde/kdeplatformplugin.cpp
+--- a/phonon/platform_kde/kdeplatformplugin.cpp	2013-06-28 20:12:33.566793836 +0300
++++ b/phonon/platform_kde/kdeplatformplugin.cpp	2013-07-10 01:47:02.000000000 +0300
+@@ -122,8 +122,8 @@ QObject *KdePlatformPlugin::createBacken
+     if (!backend) {
+         const QLatin1String suffix("/phonon_backend/");
+         const QStringList libFilter(newService->library() + QLatin1String(".*"));
+-        foreach (QString libPath, QCoreApplication::libraryPaths()) {
+-            libPath += suffix;
++        foreach (const QString &libPathBase, QCoreApplication::libraryPaths()) {
++            const QString libPath = libPathBase + suffix;
+             const QDir dir(libPath);
+             foreach (const QString &pluginName, dir.entryList(libFilter, QDir::Files)) {
+                 QPluginLoader pluginLoader(libPath + pluginName);
+diff -Nurp a/phonon/platform_kde/kiomediastream.cpp b/phonon/platform_kde/kiomediastream.cpp
+--- a/phonon/platform_kde/kiomediastream.cpp	2013-06-28 20:12:33.566793836 +0300
++++ b/phonon/platform_kde/kiomediastream.cpp	2013-07-10 01:47:02.000000000 +0300
+@@ -57,22 +57,22 @@ void KioMediaStream::reset()
+         Q_ASSERT(d->kiojob);
+         d->open = false;
+         setStreamSeekable(true);
+-        connect(d->kiojob, SIGNAL(open(KIO::Job *)), this, SLOT(_k_bytestreamFileJobOpen(KIO::Job *)));
+-        connect(d->kiojob, SIGNAL(position(KIO::Job *, KIO::filesize_t)),
+-                this, SLOT(_k_bytestreamSeekDone(KIO::Job *, KIO::filesize_t)));
++        connect(d->kiojob, SIGNAL(open(KIO::Job*)), this, SLOT(_k_bytestreamFileJobOpen(KIO::Job*)));
++        connect(d->kiojob, SIGNAL(position(KIO::Job*, KIO::filesize_t)),
++                this, SLOT(_k_bytestreamSeekDone(KIO::Job*, KIO::filesize_t)));
+     } else {
+         d->kiojob = KIO::get(d->url, KIO::NoReload, KIO::HideProgressInfo);
+         Q_ASSERT(d->kiojob);
+         setStreamSeekable(false);
+-        connect(d->kiojob, SIGNAL(totalSize(KJob *, qulonglong)),
+-                this, SLOT(_k_bytestreamTotalSize(KJob *,qulonglong)));
++        connect(d->kiojob, SIGNAL(totalSize(KJob*, qulonglong)),
++                this, SLOT(_k_bytestreamTotalSize(KJob*, qulonglong)));
+         d->kiojob->suspend();
+     }
+ 
+     d->kiojob->addMetaData("UserAgent", QLatin1String("KDE Phonon"));
+-    connect(d->kiojob, SIGNAL(data(KIO::Job *,const QByteArray &)),
+-            this, SLOT(_k_bytestreamData(KIO::Job *,const QByteArray &)));
+-    connect(d->kiojob, SIGNAL(result(KJob *)), this, SLOT(_k_bytestreamResult(KJob *)));
++    connect(d->kiojob, SIGNAL(data(KIO::Job*, QByteArray)),
++            this, SLOT(_k_bytestreamData(KIO::Job*, QByteArray)));
++    connect(d->kiojob, SIGNAL(result(KJob*)), this, SLOT(_k_bytestreamResult(KJob*)));
+ }
+ 
+ KioMediaStream::~KioMediaStream()
+diff -Nurp a/phonon/platform_kde/phononbackend.desktop b/phonon/platform_kde/phononbackend.desktop
+--- a/phonon/platform_kde/phononbackend.desktop	2013-06-28 20:12:33.566793836 +0300
++++ b/phonon/platform_kde/phononbackend.desktop	2013-07-10 01:47:02.000000000 +0300
+@@ -62,7 +62,7 @@ Name[ro]=Suportul multimedia KDE
+ Name[ru]=Мультимедийная подсистема KDE
+ Name[si]=KDE බහුමාධ්‍යය පසුඈදුම
+ Name[sk]=Multimediálny backend pre KDE
+-Name[sl]=KDE-jevo ogrodje za večpredstavnost
++Name[sl]=KDE-jevo zaledje za predstavnost
+ Name[sr]=КДЕ‑ова мултимедијска позадина
+ Name[sr@ijekavian]=КДЕ‑ова мултимедијска позадина
+ Name[sr@ijekavianlatin]=KDE‑ova multimedijska pozadina
+diff -Nurp a/phonon/platform_kde/phonon.notifyrc b/phonon/platform_kde/phonon.notifyrc
+--- a/phonon/platform_kde/phonon.notifyrc	2013-06-28 20:12:33.566793836 +0300
++++ b/phonon/platform_kde/phonon.notifyrc	2013-07-10 01:47:02.000000000 +0300
+@@ -52,7 +52,7 @@ Comment[ro]=Sistem multimedia
+ Comment[ru]=Мультимедийная подсистема
+ Comment[si]=බහුමාධ්‍ය පද්ධතිය
+ Comment[sk]=Multimediálny systém
+-Comment[sl]=Večpredstavnostni sistem
++Comment[sl]=Predstavnostni sistem
+ Comment[sr]=Мултимедијални систем
+ Comment[sr@ijekavian]=Мултимедијални систем
+ Comment[sr@ijekavianlatin]=Multimedijalni sistem
+@@ -176,6 +176,7 @@ Name[fi]=Äänen ulostulolaite vaihtui
+ Name[fr]=Le périphérique de sortie audio a changé
+ Name[ga]=Athraíodh an Gléas Aschurtha Fuaime
+ Name[gl]=Cambio de dispositivo de saída de son
++Name[gu]=ધ્વનિ આઉટપુટ ઉપકરણ બદલાયેલ છે
+ Name[he]=התקן פלט שמע שונה
+ Name[hi]=ऑडियो आउटपुट युक्ति परिवर्तित
+ Name[hr]=Promijenjen je uređaj za izlaz zvuka
+@@ -237,6 +238,7 @@ Comment[fi]=Ilmoitus äänen ulostulolai
+ Comment[fr]=Notification lorsque le périphérique de sortie audio a changé automatiquement
+ Comment[ga]=Fógra nuair a athraítear an gléas aschurtha fuaime go huathoibríoch
+ Comment[gl]=A notificación para cando se cambia automaticamente de dispositivo de saída de son
++Comment[gu]=જ્યારે ધ્વનિ આઉટપુટ ઉપકરણ આપમેળે બદલાય ત્યારે નોંધણી
+ Comment[he]=הודעה כאשר התקן פלט שמע השתנה אוטומטית
+ Comment[hi]=अधिसूचना जब ऑडियो आउटपुट युक्ति स्वचालित रूप से बदल गया है
+ Comment[hr]=Obavijest prilikom automatske promijene izlaznog audio uređaja
+diff -Nurp a/phonon/serviceregistry.h b/phonon/serviceregistry.h
+--- a/phonon/serviceregistry.h	2013-06-28 20:12:33.567793796 +0300
++++ b/phonon/serviceregistry.h	2013-07-10 01:47:02.000000000 +0300
+@@ -27,7 +27,7 @@ class ServiceRegistry : public QDBusAbst
+     Q_OBJECT
+     Q_CLASSINFO("D-Bus Interface", "org.kde.Phonon.ServiceRegistry")
+ public:
+-    ServiceRegistry(QObject *parent);
++    explicit ServiceRegistry(QObject *parent);
+     virtual ~ServiceRegistry();
+ 
+ public Q_SLOTS: // METHODS
