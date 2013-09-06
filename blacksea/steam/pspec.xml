@@ -2,53 +2,47 @@
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
-        <Name>Steam</Name>
+        <Name>steam</Name>
         <Homepage>http://store.steampowered.com/</Homepage>
         <Packager>
             <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
         </Packager>
-        <License>GPLv2</License>
-        <IsA>app:gui</IsA>
-        <Icon>Steam</Icon>
-        <Summary>Steam Digital Platform Runner</Summary>
-        <Description>Steam</Description>
-        <Archive sha1sum="0d123a67b78f60704936fad6e78f2b23685d4ad9" type="targz">http://repo.steampowered.com/steam/archive/precise/steam_1.0.0.39.tar.gz</Archive>
-        <AdditionalFiles>
-            <AdditionalFile target="/usr/bin/steam" permission="0755" owner="root,user">steam.sh</AdditionalFile>
-            <AdditionalFile target="/usr/share/applications/steam.desktop" permission="0644" owner="root,user">steam.desktop</AdditionalFile>
-            <AdditionalFile target="/usr/share/pixmaps/steam.png" permission="0644" owner="root,user">steam.png</AdditionalFile>
-        </AdditionalFiles>
+     	<License>Valve Corporation</License>
+        <Icon>steam</Icon>
+        <IsA>app</IsA>
+        <Summary>Steam for linux</Summary>
+        <Description>Steam Digital Platform Runner</Description>
+        <Archive sha1sum="336830961f5b3ea01418c4b675db6d55bf8a1cc6" type="targz">http://repo.steampowered.com/steam/pool/steam/s/steam/steam_1.0.0.41.tar.gz</Archive>
     </Source>
-    
+
     <Package>
-        <Name>Steam</Name>
+        <Name>steam</Name>
         <RuntimeDependencies>
-	    <Dependency>libpng</Dependency>
-	    <Dependency>libX11</Dependency>
-	    <Dependency>libxcb</Dependency>
-	    <Dependency>libXdmcp</Dependency>
-	    <Dependency>libXpm</Dependency>
-            <Dependency>lsb-release</Dependency>
-	    <Dependency>orbit2</Dependency>
-	    <Dependency>xdg-utils</Dependency>
-	    <Dependency>glew</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
         </RuntimeDependencies>
+
         <Files>
-	    <Path fileType="data">/usr/share/steam/</Path>
-            <Path fileType="data">/usr/bin/</Path>
-	    <Path fileType="data">/usr/share/applications</Path>
-	    <Path fileType="data">/usr/lib/steam</Path>
-    </Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
     </Package>
-    
+
     <History>
         <Update release="1">
-            <Date>2013-07-30</Date>
-            <Version>1.0.39</Version>
-            <Comment>First Release</Comment>
-            <Name>Burak Fazıl ERTÜRK</Name>
-            <Email>burakerturk@pisilinux.org</Email>
+            <Date>2013-09-07</Date>
+            <Version>1.0.0.41</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>
