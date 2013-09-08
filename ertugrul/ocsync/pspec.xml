@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ocsync</Name>
+        <Homepage>http://owncloud.org/sync-clients</Homepage>
+        <Packager>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>The ownCloud client software</Summary>
+        <Description>a lightweight utility to synchronize files between multiple systems</Description>
+        <Archive sha1sum="fd03129687e1f66c78e7e2a5d9e114e0bd7de35b" type="tarbz2">http://download.owncloud.com/download/ocsync-0.90.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>samba-devel</Dependency>
+            <Dependency>iniparser-devel</Dependency>
+            <Dependency>neon-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ocsync</Name>
+        <RuntimeDependencies>
+            <Dependency>samba</Dependency>
+            <Dependency>iniparser</Dependency>i
+            <Dependency>neon</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>ocsync-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>ocsync</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-09-04</Date>
+            <Version>0.90.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

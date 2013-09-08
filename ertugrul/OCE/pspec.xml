@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>OCE</Name>
+        <Homepage>https://github.com/tpaviot/oce</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>oce stands for *O*pencascade *C*ommunity *E*dition,CAD/CAE, 3D surface/solid modeling and data exchange</Summary>
+        <Description>This project aims at gathering patches/changes/improvements from the OCC community over the latest release, includes components for 3D surface and solid modeling, visualization, data exchange and rapid application development.</Description>
+        <Archive sha1sum="02a055f844c6f24cdbd214666a9f916636492e26" type="zip">https://github.com/tpaviot/oce/archive/oce-master.zip</Archive>
+        <BuildDependencies>
+            <!--<Dependency>boost-devel</Dependency>
+            <Dependency>xerces-c-devel</Dependency>
+            <Dependency>coin-devel</Dependency>
+            <Dependency>SoQt-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>ftgl-devel</Dependency>
+            <Dependency>libXmu-devel</Dependency>
+            <Dependency>tcl-devel</Dependency>
+            <Dependency>intel-tbb-devel</Dependency>
+            <Dependency>FreeImage-devel</Dependency>
+            <Dependency>tcltk-devel</Dependency>
+            <Dependency>freetype-devel</Dependency>-->
+            <Dependency>gl2ps-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>mesa-glu-devel</Dependency>
+        </BuildDependencies>
+        <!--<Patches>
+            <Patch level="1">opencascade-6.6.0-fixed-DESTDIR.patch</Patch>
+          </Patches>-->
+      </Source>
+
+    <Package>
+        <Name>OCE</Name>
+        <RuntimeDependencies>
+          <!--<Dependency>boost</Dependency>
+            <Dependency>xerces-c</Dependency>
+            <Dependency>coin</Dependency>
+            <Dependency>SoQt</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>ftgl</Dependency>
+            <Dependency>libXmu</Dependency>
+            <Dependency>tcl</Dependency>
+            <Dependency>intel-tbb</Dependency>
+            <Dependency>FreeImage</Dependency>
+            <Dependency>tcltk</Dependency>
+            <Dependency>freetype</Dependency>-->
+            <Dependency>gl2ps</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>mesa-glu</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="data">/usr/share/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>OCE-devel</Name>
+        <Summary>Development files for OCE</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">OCE</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/oce</Path>
+        </Files>
+    </Package>
+    <History>
+      <Update release="1">
+            <Date>2013-08-25</Date>
+            <Version>0_20130825</Version>
+            <Comment>First release.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

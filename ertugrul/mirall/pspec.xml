@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mirall</Name>
+        <Homepage>http://owncloud.org/sync-clients</Homepage>
+        <Packager>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>The ownCloud client software</Summary>
+        <Description>a lightweight utility to synchronize files between multiple systems</Description>
+        <Archive sha1sum="1e41026003aee47ee1c2f4dfe21d16794655d75b" type="tarbz2">http://download.owncloud.com/download/mirall-1.4.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>ocsync-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>mirall</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>ocsync</Dependency>
+            <Dependency>qt-webkit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="localedata">/usr/share/owncloud</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-09-04</Date>
+            <Version>1.4.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

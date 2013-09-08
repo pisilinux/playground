@@ -1,0 +1,12 @@
+diff -Naur FreeCAD-0.12.5284.orig/src/Mod/Image/Gui/GLImageBox.cpp FreeCAD-0.12.5284/src/Mod/Image/Gui/GLImageBox.cpp
+--- FreeCAD-0.12.5284.orig/src/Mod/Image/Gui/GLImageBox.cpp	2012-02-14 18:28:25.880813371 +0200
++++ FreeCAD-0.12.5284/src/Mod/Image/Gui/GLImageBox.cpp	2012-02-14 18:29:36.605818607 +0200
+@@ -28,6 +28,8 @@
+ #endif
+ 
+ #include "GLImageBox.h"
++#include <GL/glu.h>
++#include <GL/glut.h>
+ 
+ using namespace ImageGui;
+ 
