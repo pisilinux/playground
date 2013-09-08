@@ -95,14 +95,8 @@
             <!-- ksplashx: Keep XDM background if available -->
             <Patch level="1">pisilinux/ksplashx-keep-xdm-background.patch</Patch>
 
-            <!-- Drop caption from systemsettings.desktop which avoids the translation of the caption -->
-            <!-- Do we need this 4.8.1? -->
-            <Patch level="1">pisilinux/drop-caption-from-systemsettings-desktop.patch</Patch>
-
             <!-- Change kxftconfig defaults -->
             <Patch level="1">pisilinux/kxftconfig-defaults.patch</Patch>
-
-            <Patch level="1">pisilinux/disable-kdm-active-session-popup-on-livemediums.diff</Patch>
 
             <!-- Load current KDM language properly, instead of just selecting Catalan by default -->
             <Patch level="1">pisilinux/fix-kdm-language-selection.diff</Patch>
