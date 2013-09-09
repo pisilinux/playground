@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>google-earth</Name>
+        <Homepage>http://www.google.com/intl/tr/earth/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>EULA</License>
+        <Icon>google-earth</Icon>
+        <IsA>app</IsA>
+        <Summary>3D planet viewer</Summary>
+        <Description>A legacy 3D interface to view satellite images of Earth and other objects</Description>
+        <Archive sha1sum="d598dc3b579e7e94edca77f91ea6ea20b7b3da8e" type="binary">http://dl.google.com/dl/earth/client/current/google-earth-stable_current_x86_64.rpm</Archive>
+        <BuildDependencies>
+            <Dependency>rpm2targz</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>google-earth</Name>
+        <RuntimeDependencies>
+            <Dependency>libXrender</Dependency>
+            <Dependency>libSM</Dependency>
+	    <Dependency>desktop-file-utils</Dependency>
+	    <Dependency>shared-mime-info</Dependency>
+	    <Dependency>xdg-utils</Dependency>
+	    <Dependency>fontconfig</Dependency>
+	    <Dependency>mesa</Dependency>
+	    <Dependency>qt</Dependency>
+            <Dependency>uClibc</Dependency>
+	    <Dependency>fontconfig-32bit</Dependency>
+	    <Dependency>freetype-32bit</Dependency>
+	    <Dependency>qt-webkit</Dependency>
+	    <Dependency>libXext-32bit</Dependency>
+	    <Dependency>mesa-glu</Dependency>
+	    <Dependency>libXext</Dependency>
+	    <Dependency>libICE</Dependency>
+        </RuntimeDependencies>
+
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="data">/opt/google</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/google-earth.desktop">google-earth.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/google-earth.png">google-earth.png</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0755" target="/usr/bin/google-earth">google-earth</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/mime/packages/google-earth-mimetypes.xml">google-earth-mimetypes.xml</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-09-08</Date>
+            <Version>7.1</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
