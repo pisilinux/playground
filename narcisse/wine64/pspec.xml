@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>WINE Is Not An Emulator, which lets you run Microsoft Windows applications</Summary>
         <Description>Wine allows running Windows 3.*, Windows 95/98 and Windows NT programs on a i386 (or compatible) machine running X11. It is still alpha level code; don't expect everything to work.</Description>
-        <Archive sha1sum="6747086821b4ed0a452c5e2d6793f1e09372d06c" type="tarbz2">file:///home/idris/Programlar/PisiLinux-master/hardware/emulator/wine64/wine-1.7.0.tar.bz2</Archive>
+        <Archive sha1sum="f3a074c277d2eb0789b807755578afa6ad8ec0ae" type="tarbz2">mirrors://sourceforge/wine/wine-1.7.1.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>lcms2-devel</Dependency>
             <Dependency>libSM-devel</Dependency>
@@ -263,6 +263,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2013-09-12</Date>
+            <Version>1.7.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2013-08-05</Date>
             <Version>1.7.0</Version>
