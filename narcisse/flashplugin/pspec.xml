@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>flashplugin</Name>
+        <Homepage>http://labs.adobe.com/technologies/flashplayer10</Homepage>
+        <Packager>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Macromedia</License>
+        <IsA>library</IsA>
+        <Summary>Adobe Flash Player</Summary>
+        <Description>Adobe (Macromedia) Flash Player is an application to present interactive (and possibly multimedia-containing) content created using Adobe Flash.</Description>
+	<Archive sha1sum="5295902277c900f3b8fb1158cac4df473c421f55" type="tarxz" target="i686">https://dl.dropboxusercontent.com/u/71264624/flashplugin-11.2.202.310-i386.tar.xz</Archive>
+        <Archive sha1sum="30327b87481f0b46d6616c950d1dd4d12a32dd65" type="tarxz" target="x86_64">https://dl.dropboxusercontent.com/u/71264624/flashplugin-11.2.202.310-x86_64.tar.xz</Archive>
+        <!--fpdownload.macromedia.com/get/flashplayer/pdc/11.2.202.291/install_flash_player_11_linux.x86_64.tar.gz-->
+    </Source>
+
+    <Package>
+        <Name>flashplugin</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>libSM</Dependency>
+            <Dependency>libICE</Dependency>
+            <Dependency>libXpm</Dependency>
+            <Dependency>libXft</Dependency>
+            <Dependency>libXcursor</Dependency>
+            <Dependency>libXrender</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libXt</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>nss</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+        <BuildFlags>
+            <Flag>noDelta</Flag>
+        </BuildFlags>
+    </Package>
+
+    <History>
+        <Update release="8" type="security">
+            <Date>2013-07-14</Date>
+            <Version>11.2.202.310</Version>
+            <Comment>security update</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+        <Update release="7" type="security">
+            <Date>2013-07-14</Date>
+            <Version>11.2.202.297</Version>
+            <Comment>security update</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="6" type="security">
+            <Date>2013-06-13</Date>
+            <Version>11.2.202.291</Version>
+            <Comment>security update</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="5" type="security">
+            <Date>2013-04-23</Date>
+            <Version>11.2.202.280</Version>
+            <Comment>security update</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="4" type="security">
+            <Date>2013-03-21</Date>
+            <Version>11.2.202.275</Version>
+            <Comment>Version bump</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertan@pisilinux.org</Email>
+        </Update>
+        <Update release="3" type="security">
+            <Date>2013-03-06</Date>
+            <Version>11.2.202.273</Version>
+            <Comment>Version bump</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertan@pisilinux.org</Email>
+        </Update>
+        <Update release="2" type="security">
+            <Date>2013-02-12</Date>
+            <Version>11.2.202.270</Version>
+            <Comment>security update</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1" type="security">
+            <Date>2013-01-09</Date>
+            <Version>11.2.202.261</Version>
+            <Comment>First release</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
