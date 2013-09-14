@@ -24,14 +24,13 @@ def setup():
     autotools.configure()
 
 def build():
-   autotools.make('OPT="%s" -j1' % flags)
-  #   autotools.make("--prefix=/usr/bin/cdparanoia \
-         #           --mandir=/usr/share/man/cdparanoia")
+    autotools.make('OPT="%s" -j1' % flags)
+
     
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     # No static libs
-   # pisitools.remove("/usr/lib/*.a")
+    #pisitools.remove("/usr/lib/*.a")
 
     pisitools.dodoc("COPYING*", "README")
