@@ -37,7 +37,7 @@
         </BuildDependencies>
         <Patches>
             <!-- linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-3.10.11.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-3.10.12.xz</Patch>
 
             <!-- Mandriva patches -->
             <Patch level="1">patches/mandriva/acpi-processor-M720SR-limit-to-C2.patch</Patch>
@@ -80,8 +80,8 @@
             <Patch level="1">patches/mageia/net/net-wireless-iwlwifi-mvm-support-BSS-only.patch</Patch>
             <Patch level="1">patches/mageia/net/net-wireless-iwlwifi-pcie-dont-read-INTA-register-in-ICT-IRQ-handler.patch</Patch>
             <Patch level="1">patches/mageia/net/stable-genetlink-fix-family-dump-race.patch</Patch>
-            <Patch level="1">patches/mageia/net/net-sched-psched_ratecfg_precompute-improvements.patch</Patch>
-            <Patch level="1">patches/mageia/net/net-sched-restore-linklayer-atm-handling.patch</Patch>
+	    <Patch level="1">patches/mageia/net/net-sched-psched_ratecfg_precompute-improvements.patch</Patch>
+            <!--<Patch level="1">patches/mageia/net/net-sched-restore-linklayer-atm-handling.patch</Patch>sil-->
 
             <Patch level="1">patches/mageia/scsi/scsi-megaraid-new-sysfs-name.patch</Patch>
             <Patch level="1">patches/mageia/scsi/scsi-ppscsi-2.6.2.patch</Patch>
@@ -226,6 +226,9 @@
             <!-- Blacklist 2 Lenovo in acer-wmi (#15967)-->
             <Patch level="1">patches/pisilinux/0001-Add-Lenovo-Ideapad-S12-to-acer-blacklist.patch</Patch>
 
+                                <!-- Asus-laptop Bug 969551-->
+            <Patch level="1">patches/pisilinux/asus-laptop.patch</Patch>
+
             <!-- hid-apple: Invert Fn+F? behaviour on apple keyboards-->
             <Patch level="1">patches/pisilinux/invert-hidapple-fnkey-behaviour.patch</Patch>
 
@@ -332,9 +335,9 @@
 
     <History>
         <Update release="23">
-            <Date>2013-09-10</Date>
-            <Version>3.10.11</Version>
-            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.11</Comment>
+            <Date>2013-09-15</Date>
+            <Version>3.10.12</Version>
+            <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.12</Comment>
             <Type package="kernel">security</Type>
             <Requires>
                 <Action package="kernel">systemRestart</Action>
