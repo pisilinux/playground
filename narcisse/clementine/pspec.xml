@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>clementine</Name>
+        <Homepage>http://code.google.com/p/clementine-player</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>GPLv3</License>
+        <Icon>clementine</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>A cross-platform music player based on Amarok 1.4</Summary>
+        <Description>Clementine is a modern music player and library organiser. Clementine is a port of Amarok 1.4, with some features rewritten to take advantage of Qt4.</Description>
+        <Archive sha1sum="1e8812052e6eceeb19ca41236094eaffdde77d17" type="targz">https://clementine-player.googlecode.com/files/clementine-1.2.0rc4.tar.gz</Archive>
+        <AdditionalFiles>
+            <AdditionalFile target="src/translations/tr.po">tr.po</AdditionalFile>
+            <AdditionalFile target="src/translations/tr_TR.po">tr_TR.po</AdditionalFile>
+        </AdditionalFiles>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>googlemock-devel</Dependency>
+            <Dependency>fftw3-devel</Dependency>
+            <Dependency>libmtp-devel</Dependency>
+            <Dependency>ffmpeg-devel</Dependency>
+            <Dependency>libqxt-devel</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>libgpod-devel</Dependency>
+            <Dependency versionFrom="0.90">libcdio-devel</Dependency>
+            <Dependency>libplist-devel</Dependency>
+            <Dependency>libqjson-devel</Dependency>
+            <Dependency>protobuf-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>liblastfm-devel</Dependency>
+            <Dependency>libechonest-devel</Dependency>
+            <Dependency>libprojectM-devel</Dependency>
+            <Dependency>qtiocompressor-devel</Dependency>
+            <Dependency>gst-plugins-base-devel</Dependency>
+            <Dependency>libimobiledevice-devel</Dependency>
+            <Dependency>libchromaprint-devel</Dependency>
+            <Dependency>google-sparsehash</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">clementine-1.0.1-translation-test-delete.patch</Patch>
+	    <!--<Patch level="1">fix_glib-2.35.0_build.patch</Patch>-->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>clementine</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>boost</Dependency>
+            <Dependency>googlemock</Dependency>
+            <Dependency>fftw3</Dependency>
+            <Dependency>libmtp</Dependency>
+            <Dependency>ffmpeg</Dependency>
+            <Dependency>libqxt</Dependency>
+            <Dependency>taglib</Dependency>
+            <Dependency>libgpod</Dependency>
+            <Dependency versionFrom="0.90">libcdio</Dependency>
+            <Dependency>libplist</Dependency>
+            <Dependency>libqjson</Dependency>
+            <Dependency>protobuf</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>liblastfm</Dependency>
+            <Dependency>libechonest</Dependency>
+            <Dependency>libprojectM</Dependency>
+            <Dependency>qtiocompressor</Dependency>
+            <Dependency>gst-plugins-base</Dependency>
+            <Dependency>libimobiledevice</Dependency>
+            <Dependency>qt-sql-sqlite</Dependency>
+            <Dependency>libchromaprint</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/clementine</Path>
+            <Path fileType="data">/usr/share/kde4/services</Path>
+            <Path fileType="localedata">/usr/share/clementine/locale</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2013-09-20</Date>
+            <Version>1.2.0_rc4</Version>
+            <Comment>V. bump</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+       <Update release="2">
+            <Date>2013-07-08</Date>
+            <Version>1.1.1</Version>
+            <Comment>rebuild</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-11-19</Date>
+            <Version>1.1.1</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
