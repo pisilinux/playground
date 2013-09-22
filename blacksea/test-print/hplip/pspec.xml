@@ -1,0 +1,152 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>hplip</Name>
+        <Homepage>http://hplip.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <License>MIT</License>
+        <Summary>HP Linux Imaging and Printing System</Summary>
+        <Description>HP Linux Imaging and Printing (HPLIP) System includes printer and scanner drivers and related service tools.</Description>
+        <Archive sha1sum="208f4816661e35cc32850c0ed2b402e0c54350c6" type="targz">http://downloads.sourceforge.net/project/hplip/hplip/3.13.9/hplip-3.13.9.tar.gz</Archive>
+        <AdditionalFiles>
+            <!-- PPD patcher -->
+            <AdditionalFile permission="0755" target="patch-ppds">patch-ppds.sh</AdditionalFile>
+            <AdditionalFile permission="0755" target="copy-deviceids">fedora/copy-deviceids.py</AdditionalFile>
+
+            <!-- PPD patches -->
+            <AdditionalFile target="ppd-patches/001-hplip-deviceIDs-ppd.patch">fedora/hplip-deviceIDs-ppd.patch</AdditionalFile>
+            <AdditionalFile target="ppd-patches/002-hplip-ppd-ImageableArea.patch">fedora/hplip-ppd-ImageableArea.patch</AdditionalFile>
+        </AdditionalFiles>
+        <BuildDependencies>
+	    <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>foomatic-db</Dependency>
+            <Dependency>net-snmp-devel</Dependency>
+            <Dependency>sane-backends-devel</Dependency>
+            <Dependency>cups-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>pisilinux/hp-mkuri.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>hplip</Name>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <IsA>driver</IsA>
+        <RuntimeDependencies>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>net-snmp</Dependency>
+            <Dependency>foomatic-db</Dependency>
+            <Dependency>sane-backends</Dependency>
+            <Dependency>cups</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/etc/sane.d/dll.d</Path>
+            <Path fileType="config">/etc/hp/hplip.conf</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/lib/cups/backend</Path>
+            <Path fileType="executable">/usr/lib/cups/filter</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/var/lib/hp</Path>
+            <Path fileType="data">/usr/share/cups</Path>
+            <Path fileType="data">/usr/share/hplip</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/PolicyKit</Path>
+            <Path fileType="data">/usr/share/hplip/prnt/plugins</Path>
+            <Path fileType="data">/var/log/hp</Path>
+            <Path fileType="data">/lib/udev/rules.d</Path>
+            <Path fileType="config">/etc/cron.daily/</Path>
+        </Files>
+
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>hplip-gui</Name>
+        <Icon>hplip</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>A set of useful utilities written in Qt for managing HP devices</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">hplip</Dependency>
+            <Dependency>python-reportlab</Dependency>
+            <Dependency>python-pygobject</Dependency>
+            <Dependency>python-qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/hp-toolbox</Path>
+            <Path fileType="executable">/usr/bin/hp-systray</Path>
+            <Path fileType="executable">/usr/bin/hp-print</Path>
+            <Path fileType="data">/usr/share/hplip/toolbox.py</Path>
+            <Path fileType="data">/usr/share/hplip/systray.py</Path>
+            <Path fileType="data">/usr/share/hplip/print.py</Path>
+
+            <Path fileType="data">/etc/xdg/autostart</Path>
+            <Path fileType="data">/usr/share/applications/*.desktop</Path>
+            <Path fileType="data">/usr/share/hplip/data/images</Path>
+            <Path fileType="data">/usr/share/hplip/plugins</Path>
+            <Path fileType="data">/usr/share/hplip/ui4</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/hplip.png">hplip.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>hplip-docs</Name>
+        <IsA>data:doc</IsA>
+        <Summary>Documentation files for HPLIP</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">hplip</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2013-06-06</Date>
+            <Version>3.13.9</Version>
+            <Comment>Sha1sum Fixed</Comment>            
+            <Name>Osman Erkan</Name>
+            <Email>Osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-06-06</Date>
+            <Version>3.13.4</Version>
+            <Comment>Sha1sum Fixed</Comment>            
+            <Name>Osman Erkan</Name>
+            <Email>Osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-04-26</Date>
+            <Version>3.13.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-03-03</Date>
+            <Version>3.13.2</Version>
+            <Comment>V.Bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-12-14</Date>
+            <Version>3.12.11</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
