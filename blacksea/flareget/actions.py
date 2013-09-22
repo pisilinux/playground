@@ -19,10 +19,13 @@ def setup():
       shelltools.system("tar xfvz flareget-2.0-15.x86_64.tar.gz")
 
 def install():
-    shelltools.cd("flareget_2.0-15_x86_64(stable)_rpm")
-    pisitools.insinto("/lib/","./lib/*")
-    pisitools.insinto("/usr/bin/","./usr/bin/*")
-    pisitools.insinto("/usr/sbin/","./usr/sbin/*")
-    pisitools.insinto("/usr/share/","./usr/share/*")
-    pisitools.insinto("/usr/lib/","./usr/lib64/*")
-
+      shelltools.cd("flareget_2.0-15_x86_64(stable)_rpm")
+      pisitools.insinto("/lib/","./lib/*")
+      pisitools.insinto("/usr/bin/","./usr/bin/*")
+      pisitools.insinto("/usr/sbin/","./usr/sbin/*")
+      pisitools.insinto("/usr/share/","./usr/share/*")
+      pisitools.insinto("/usr/lib/","./usr/lib64/*")
+      shelltools.chmod("%s/usr/bin/flare-grab" % get.installDIR(), 0755)
+      shelltools.chown("%s/usr/bin/flare-grab" % get.installDIR(), gid="users")
+      shelltools.chmod("%s/usr/bin/flareget" % get.installDIR(), 0755)
+      shelltools.chown("%s/usr/bin/flareget" % get.installDIR(), gid="users")
