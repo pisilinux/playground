@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kingsoft-office</Name>
+        <Homepage>http://wps-community.org/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Zhuhai Kingsoft Office Software Co. Ltd</License>
+        <License>GPLv2</License>
+        <License>LPGPLv2.1</License>
+        <Icon>kingsoft-office</Icon>
+        <IsA>app</IsA>
+        <Summary>Kingsoft Office Suite</Summary>
+        <Description>Kingsoft Office (WPS Office), is an office productivity suite.</Description>
+        <Archive sha1sum="77bc43e4523fced71f86a73a49ccd86362b711c8" type="binary">http://wdl.cache.ijinshan.com/wps/download/Linux/unstable/kingsoft-office_9.1.0.4184~a12p1_i386.deb</Archive>
+    </Source>
+
+    <Package>
+        <Name>kingsoft-office</Name>
+        <RuntimeDependencies>
+            <Dependency>fontconfig-32bit</Dependency>
+            <Dependency>glib2-32bit</Dependency>
+            <Dependency>mesa-glu-32bit</Dependency>
+            <Dependency>libSM-32bit</Dependency>
+            <Dependency>libXdmcp-32bit</Dependency>
+            <Dependency>libXext-32bit</Dependency>
+            <Dependency>fontconfig-32bit</Dependency>
+            <Dependency>libXrender-32bit</Dependency>
+            <Dependency>libglade</Dependency>
+            <Dependency>mesa-32bit</Dependency>
+            <Dependency>zlib-32bit</Dependency>
+            <Dependency>libX11-32bit</Dependency>
+            <Dependency>libICE-32bit</Dependency>
+            <Dependency>libpng12-32bit</Dependency>
+            <Dependency>freetype-32bit</Dependency>
+            <Dependency>gst-plugins-base</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>libmng-32bit</Dependency>
+        </RuntimeDependencies>
+       
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/opt</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <!--
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/kingsoft-office.desktop">kingsoft-office.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/kingsoft-office.png">kingsoft-office.png</AdditionalFile>
+        </AdditionalFiles>
+        -->
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-09-23</Date>
+            <Version>9.1.0.4184</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

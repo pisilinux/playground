@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libpng12</Name>
+        <Homepage>http://www.libpng.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>library</IsA>
+        <PartOf>library</PartOf>
+        <Summary>Portable Network Graphics library</Summary>
+        <Description>The Portable Network Graphics (PNG) format was designed to replace the older and simpler GIF format and, to some extent, the much more complex TIFF format. Project's main aim is to concentrate on two major uses: the World Wide Web (WWW) and image-editing.</Description>
+        <Archive sha1sum="c4d1881a376836a45688446624fd5d834ea118f0" type="tarbz2">mirrors://sourceforge/libpng/libpng-1.2.50.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>zlib-devel</Dependency>
+        </BuildDependencies>
+        <Patches> 
+            <Patch level="1">apng.patch</Patch>
+            <Patch level="1">pngconf-setjmp.patch</Patch>
+            <Patch level="1">constantize.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libpng12</Name>
+        <RuntimeDependencies>
+            <Dependency>zlib</Dependency>
+        </RuntimeDependencies>
+        <Replaces>
+            <Package>libpng12</Package>
+        </Replaces>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+<!--<Package>
+        <Name>libpng12-devel</Name>
+        <PartOf>library</PartOf>
+        <Summary>Development files for libpng12</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libpng12</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/libpng12</Path>
+            <Path fileType="header">/usr/include/libpng12</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/pkgconfig</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>-->
+
+    <Package>
+        <Name>libpng12-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for libpng12</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>zlib-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">libpng12</Dependency>
+            <Dependency>zlib-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2013-09-23</Date>
+            <Version>1.2.50</Version>
+            <Comment>Version bump</Comment>
+            <Name>Burak Fazıl Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-07-10</Date>
+            <Version>1.2.44</Version>
+            <Comment>
+	        Build for pardususer.de by atolboo@gmail.com 2011-12-02
+                Rename libpng package as libpng12 and add lib32 package for libpng12
+                Thanks Onur Küçük, Ozan Çağlayan, Eren Türkay, Pınar Yanardağ,
+                İsmail Dönmez, and S.Çağlar Onur for their previous work on libpng
+            </Comment>
+            <Name>Anıl Özbek</Name>
+            <Email>ozbekanil@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
