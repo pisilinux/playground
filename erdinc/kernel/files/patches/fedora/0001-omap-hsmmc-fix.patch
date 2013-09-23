@@ -1,0 +1,486 @@
+From 9e6eeee6a1e0477f237dee5015c982296a91403f Mon Sep 17 00:00:00 2001
+From: Pantelis Antoniou <panto@antoniou-consulting.com>
+Date: Fri, 26 Oct 2012 15:48:00 +0300
+Subject: [PATCH 1/2] omap-hsmmc: Correct usage of of_find_node_by_name
+
+of_find_node_by_name expect to have the parent node reference taken.
+---
+ drivers/mmc/host/omap_hsmmc.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+From 364d4535955f21a8ce13e969aedde946a2d566b8 Mon Sep 17 00:00:00 2001
+From: Pantelis Antoniou <panto@antoniou-consulting.com>
+Date: Fri, 30 Nov 2012 12:18:16 +0200
+Subject: [PATCH 2/2] omap_hsmmc: Add reset gpio
+
+Add a gpio property for controlling reset of the mmc device.
+eMMC on the beaglebone black requires it.
+
+Signed-off-by: Pantelis Antoniou <panto@antoniou-consulting.com>
+---
+ drivers/mmc/host/omap_hsmmc.c          | 40 +++++++++++++++++++++++++++++++++-
+ include/linux/platform_data/mmc-omap.h |  3 +++
+ 2 files changed, 42 insertions(+), 1 deletion(-)
+
+From e1e06db0fb0ae8cfc2b3dc9c08b3237a050e2789 Mon Sep 17 00:00:00 2001
+From: Matt Porter <mporter@ti.com>
+Date: Thu, 7 Mar 2013 04:16:38 +0000
+Subject: [PATCH 04/13] mmc: omap_hsmmc: set max_segs based on dma engine
+ limits
+
+The EDMA DMAC has a hardware limitation that prevents supporting
+scatter gather lists with any number of segments. The DMA Engine
+API reports the maximum number of segments a channel can support
+via the optional dma_get_slave_sg_limits() API. If the max_nr_segs
+limit is present, the value is used to configure mmc->max_segs
+appropriately.
+
+Signed-off-by: Matt Porter <mporter@ti.com>
+Acked-by: Tony Lindgren <tony@atomide.com>
+---
+ drivers/mmc/host/omap_hsmmc.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+From b13c0c62ddf7a3a7d5b96fed8ea80f21f3bb2dad Mon Sep 17 00:00:00 2001
+From: Pantelis Antoniou <panto@antoniou-consulting.com>
+Date: Wed, 17 Jul 2013 20:00:13 +0300
+Subject: [PATCH 12/13] mmc: omap_hsmmc: Fix the crashes due to the interrupts
+ racing
+
+---
+ drivers/mmc/host/omap_hsmmc.c | 120 +++++++++++++++++++++++++++++++-----------
+ 1 file changed, 88 insertions(+), 32 deletions(-)
+diff --git a/include/linux/platform_data/mmc-omap.h b/include/linux/platform_data/mmc-omap.h
+index 2bf1b30..d548994 100644
+--- a/include/linux/platform_data/mmc-omap.h
++++ b/include/linux/platform_data/mmc-omap.h
+@@ -115,6 +115,9 @@ struct omap_mmc_platform_data {
+ 
+ 		int switch_pin;			/* gpio (card detect) */
+ 		int gpio_wp;			/* gpio (write protect) */
++		int gpio_reset;			/* gpio (reset) */
++		int gpio_reset_active_low;	/* 1 if reset is active low */
++		u32 gpio_reset_hold_us;		/* time to hold in us */
+ 
+ 		int (*set_bus_mode)(struct device *dev, int slot, int bus_mode);
+ 		int (*set_power)(struct device *dev, int slot,
+diff -Nuar a/drivers/mmc/host/omap_hsmmc.c b/drivers/mmc/host/omap_hsmmc.c
+--- a/drivers/mmc/host/omap_hsmmc.c	2013-09-16 23:17:51.000000000 +0300
++++ b/drivers/mmc/host/omap_hsmmc.c	2013-09-23 03:54:18.000000000 +0300
+@@ -41,6 +41,8 @@
+ #include <linux/pinctrl/consumer.h>
+ #include <linux/pm_runtime.h>
+ #include <linux/platform_data/mmc-omap.h>
++#include <linux/pinctrl/consumer.h>
++#include <linux/err.h>
+ 
+ /* OMAP HSMMC Host Controller Registers */
+ #define OMAP_HSMMC_SYSSTATUS	0x0014
+@@ -172,7 +174,7 @@
+ 	unsigned char		power_mode;
+ 	int			suspended;
+ 	int			irq;
+-	int			use_dma, dma_ch;
++	int			use_dma;
+ 	struct dma_chan		*tx_chan;
+ 	struct dma_chan		*rx_chan;
+ 	int			slot_id;
+@@ -181,10 +183,15 @@
+ 	int			protect_card;
+ 	int			reqs_blocked;
+ 	int			use_reg;
+-	int			req_in_progress;
+ 	struct omap_hsmmc_next	next_data;
+ 
+ 	struct	omap_mmc_platform_data	*pdata;
++
++	unsigned int		req_flags;
++#define RQF_REQ_IN_PROGRESS	(1 << 0)
++#define RQF_DMA_IN_PROGRESS	(1 << 1)
++#define RQF_REQ_DONE		(1 << 2)
++#define RQF_DMA_DONE		(1 << 3)
+ };
+ 
+ static int omap_hsmmc_card_detect(struct device *dev, int slot)
+@@ -392,6 +399,7 @@
+ static int omap_hsmmc_gpio_init(struct omap_mmc_platform_data *pdata)
+ {
+ 	int ret;
++	unsigned long flags;
+ 
+ 	if (gpio_is_valid(pdata->slots[0].switch_pin)) {
+ 		if (pdata->slots[0].cover)
+@@ -421,6 +429,24 @@
+ 	} else
+ 		pdata->slots[0].gpio_wp = -EINVAL;
+ 
++	if (gpio_is_valid(pdata->slots[0].gpio_reset)) {
++		flags = pdata->slots[0].gpio_reset_active_low ?
++				GPIOF_OUT_INIT_LOW : GPIOF_OUT_INIT_HIGH;
++		ret = gpio_request_one(pdata->slots[0].gpio_reset, flags,
++				"mmc_reset");
++		if (ret)
++			goto err_free_wp;
++
++		/* hold reset */
++		udelay(pdata->slots[0].gpio_reset_hold_us);
++
++		gpio_set_value(pdata->slots[0].gpio_reset,
++				!pdata->slots[0].gpio_reset_active_low);
++
++	} else
++		pdata->slots[0].gpio_reset = -EINVAL;
++
++
+ 	return 0;
+ 
+ err_free_wp:
+@@ -434,6 +460,8 @@
+ 
+ static void omap_hsmmc_gpio_free(struct omap_mmc_platform_data *pdata)
+ {
++	if (gpio_is_valid(pdata->slots[0].gpio_reset))
++		gpio_free(pdata->slots[0].gpio_reset);
+ 	if (gpio_is_valid(pdata->slots[0].gpio_wp))
+ 		gpio_free(pdata->slots[0].gpio_wp);
+ 	if (gpio_is_valid(pdata->slots[0].switch_pin))
+@@ -788,7 +816,7 @@
+ 	 * ac, bc, adtc, bcr. Only commands ending an open ended transfer need
+ 	 * a val of 0x3, rest 0x0.
+ 	 */
+-	if (cmd == host->mrq->stop)
++	if (host->mrq && cmd == host->mrq->stop)
+ 		cmdtype = 0x3;
+ 
+ 	cmdreg = (cmd->opcode << 24) | (resptype << 16) | (cmdtype << 22);
+@@ -804,7 +832,8 @@
+ 	if (host->use_dma)
+ 		cmdreg |= DMAE;
+ 
+-	host->req_in_progress = 1;
++	host->req_flags |=  RQF_REQ_IN_PROGRESS;
++	host->req_flags &= ~RQF_REQ_DONE;
+ 
+ 	OMAP_HSMMC_WRITE(host->base, ARG, cmd->arg);
+ 	OMAP_HSMMC_WRITE(host->base, CMD, cmdreg);
+@@ -827,19 +856,35 @@
+ 
+ static void omap_hsmmc_request_done(struct omap_hsmmc_host *host, struct mmc_request *mrq)
+ {
+-	int dma_ch;
++	int completed;
+ 	unsigned long flags;
++	
++	BUG_ON(mrq == NULL);
+ 
+ 	spin_lock_irqsave(&host->irq_lock, flags);
+-	host->req_in_progress = 0;
+-	dma_ch = host->dma_ch;
+-	spin_unlock_irqrestore(&host->irq_lock, flags);
++
++	host->req_flags &= ~RQF_REQ_IN_PROGRESS;
++	host->req_flags |=  RQF_REQ_DONE;
++
++	/* completed? */
++	if (mrq->data && host->use_dma)
++		completed = (host->req_flags & RQF_DMA_DONE) == RQF_DMA_DONE;
++	else
++		completed = 1;
+ 
+ 	omap_hsmmc_disable_irq(host);
+ 	/* Do not complete the request if DMA is still in progress */
+-	if (mrq->data && host->use_dma && dma_ch != -1)
++	if (!completed) {
++		spin_unlock_irqrestore(&host->irq_lock, flags);
++		pr_debug("%s: not completed!\n", __func__);
+ 		return;
++	}
++
++	/* clear the flags now */
++	host->req_flags &= ~(RQF_REQ_DONE | RQF_DMA_DONE);
+ 	host->mrq = NULL;
++	spin_unlock_irqrestore(&host->irq_lock, flags);
++
+ 	mmc_request_done(host->mmc, mrq);
+ }
+ 
+@@ -856,6 +901,7 @@
+ 		if (host->cmd && host->cmd->opcode == 6 &&
+ 		    host->response_busy) {
+ 			host->response_busy = 0;
++			pr_debug("%s: response_busy = 0\n", __func__);
+ 			return;
+ 		}
+ 
+@@ -871,9 +917,11 @@
+ 		data->bytes_xfered = 0;
+ 
+ 	if (!data->stop) {
++		pr_debug("%s: calling omap_hsmmc_request_done\n", __func__);
+ 		omap_hsmmc_request_done(host, data->mrq);
+ 		return;
+ 	}
++	pr_debug("%s: calling omap_hsmmc_start_command\n", __func__);
+ 	omap_hsmmc_start_command(host, data->stop, NULL);
+ }
+ 
+@@ -883,6 +931,8 @@
+ static void
+ omap_hsmmc_cmd_done(struct omap_hsmmc_host *host, struct mmc_command *cmd)
+ {
++	unsigned long flags;
++
+ 	host->cmd = NULL;
+ 
+ 	if (cmd->flags & MMC_RSP_PRESENT) {
+@@ -899,6 +949,18 @@
+ 	}
+ 	if ((host->data == NULL && !host->response_busy) || cmd->error)
+ 		omap_hsmmc_request_done(host, cmd->mrq);
++	else {
++		spin_lock_irqsave(&host->irq_lock, flags);
++		/* we use DMA, and DMA is completed - kick the can */
++		if ((host->req_flags & RQF_DMA_DONE) != 0) {
++			host->req_flags &= ~(RQF_REQ_IN_PROGRESS | RQF_REQ_DONE | RQF_DMA_DONE);
++			host->mrq = NULL;
++			mmc_request_done(host->mmc, cmd->mrq);
++		} else {
++			pr_debug("%s: not calling omap_hsmmc_request_done!\n", __func__);
++		}
++		spin_unlock_irqrestore(&host->irq_lock, flags);
++	}
+ }
+ 
+ /*
+@@ -906,17 +968,19 @@
+  */
+ static void omap_hsmmc_dma_cleanup(struct omap_hsmmc_host *host, int errno)
+ {
+-	int dma_ch;
++	int dma_in_progress;
+ 	unsigned long flags;
+ 
+ 	host->data->error = errno;
+ 
+ 	spin_lock_irqsave(&host->irq_lock, flags);
+-	dma_ch = host->dma_ch;
+-	host->dma_ch = -1;
++	dma_in_progress = host->use_dma &&
++			(host->req_flags & RQF_DMA_IN_PROGRESS) != 0;
++	host->req_flags &= ~RQF_DMA_IN_PROGRESS;
++	host->req_flags |=  RQF_DMA_DONE;
+ 	spin_unlock_irqrestore(&host->irq_lock, flags);
+ 
+-	if (host->use_dma && dma_ch != -1) {
++	if (dma_in_progress) {
+ 		struct dma_chan *chan = omap_hsmmc_get_dma_chan(host, host->data);
+ 
+ 		dmaengine_terminate_all(chan);
+@@ -1006,16 +1070,23 @@
+ 					int err, int end_cmd)
+ {
+ 	if (end_cmd) {
++		pr_debug("%s end_cmd\n", __func__);
+ 		omap_hsmmc_reset_controller_fsm(host, SRC);
+ 		if (host->cmd)
+ 			host->cmd->error = err;
+ 	}
+ 
+ 	if (host->data) {
++		pr_debug("%s host->data; resetting dma\n", __func__);
+ 		omap_hsmmc_reset_controller_fsm(host, SRD);
+ 		omap_hsmmc_dma_cleanup(host, err);
+ 	} else if (host->mrq && host->mrq->cmd)
++	} else if (host->mrq && host->mrq->cmd) {
++		pr_debug("%s error\n", __func__);
+ 		host->mrq->cmd->error = err;
++	} else {
++		pr_debug("%s nothing\n", __func__);
++	}
+ }
+ 
+ static void omap_hsmmc_do_irq(struct omap_hsmmc_host *host, int status)
+@@ -1057,9 +1128,10 @@
+ 	struct omap_hsmmc_host *host = dev_id;
+ 	int status;
+ 
+-	status = OMAP_HSMMC_READ(host->base, STAT);
+-	while (status & INT_EN_MASK && host->req_in_progress) {
+-		omap_hsmmc_do_irq(host, status);
++	while ((status = OMAP_HSMMC_READ(host->base, STAT)) & INT_EN_MASK) {
++
++		if (host->req_flags & RQF_REQ_IN_PROGRESS)
++			omap_hsmmc_do_irq(host, status);
+ 
+ 		/* Flush posted write */
+ 		status = OMAP_HSMMC_READ(host->base, STAT);
+@@ -1200,13 +1272,15 @@
+ static void omap_hsmmc_dma_callback(void *param)
+ {
+ 	struct omap_hsmmc_host *host = param;
++	struct mmc_request *mrq = host->mrq;
+ 	struct dma_chan *chan;
+ 	struct mmc_data *data;
+-	int req_in_progress;
++	int completed;
+ 
+ 	spin_lock_irq(&host->irq_lock);
+-	if (host->dma_ch < 0) {
++	if ((host->req_flags & RQF_DMA_IN_PROGRESS) == 0) {
+ 		spin_unlock_irq(&host->irq_lock);
++		pr_debug("%s: No DMA in progress!\n", __func__);
+ 		return;
+ 	}
+ 
+@@ -1217,17 +1291,22 @@
+ 			     data->sg, data->sg_len,
+ 			     omap_hsmmc_get_dma_dir(host, data));
+ 
+-	req_in_progress = host->req_in_progress;
+-	host->dma_ch = -1;
+-	spin_unlock_irq(&host->irq_lock);
++	host->req_flags &= ~RQF_DMA_IN_PROGRESS;
++	host->req_flags |= RQF_DMA_DONE;
+ 
+-	/* If DMA has finished after TC, complete the request */
+-	if (!req_in_progress) {
+-		struct mmc_request *mrq = host->mrq;
++	completed = (host->req_flags & RQF_REQ_DONE) != 0;
+ 
+-		host->mrq = NULL;
+-		mmc_request_done(host->mmc, mrq);
++	if (!completed) {
++		spin_unlock_irq(&host->irq_lock);
++		pr_debug("%s: not completed\n", __func__);
++		return;
+ 	}
++
++	host->req_flags &= ~(RQF_REQ_DONE | RQF_DMA_DONE);
++	host->mrq = NULL;
++	spin_unlock_irq(&host->irq_lock);
++
++	mmc_request_done(host->mmc, mrq);
+ }
+ 
+ static int omap_hsmmc_pre_dma_transfer(struct omap_hsmmc_host *host,
+@@ -1295,7 +1374,7 @@
+ 		 */
+ 		return -EINVAL;
+ 
+-	BUG_ON(host->dma_ch != -1);
++	BUG_ON((host->req_flags & RQF_DMA_IN_PROGRESS) != 0);
+ 
+ 	chan = omap_hsmmc_get_dma_chan(host, data);
+ 
+@@ -1329,7 +1408,7 @@
+ 	/* Does not fail */
+ 	dmaengine_submit(tx);
+ 
+-	host->dma_ch = 1;
++	host->req_flags |= RQF_DMA_IN_PROGRESS;
+ 
+ 	dma_async_issue_pending(chan);
+ 
+@@ -1449,8 +1528,11 @@
+ 	struct omap_hsmmc_host *host = mmc_priv(mmc);
+ 	int err;
+ 
+-	BUG_ON(host->req_in_progress);
+-	BUG_ON(host->dma_ch != -1);
++	BUG_ON((host->req_flags & RQF_REQ_IN_PROGRESS) != 0);
++	BUG_ON((host->req_flags & RQF_REQ_DONE) != 0);
++	BUG_ON((host->req_flags & RQF_DMA_IN_PROGRESS) != 0);
++	BUG_ON((host->req_flags & RQF_DMA_DONE) != 0);
++
+ 	if (host->protect_card) {
+ 		if (host->reqs_blocked < 3) {
+ 			/*
+@@ -1720,7 +1802,8 @@
+ 	struct device_node *np = dev->of_node;
+ 	u32 bus_width, max_freq;
+ 	int cd_gpio, wp_gpio;
+-
++	enum of_gpio_flags reset_flags;
++	
+ 	cd_gpio = of_get_named_gpio(np, "cd-gpios", 0);
+ 	wp_gpio = of_get_named_gpio(np, "wp-gpios", 0);
+ 	if (cd_gpio == -EPROBE_DEFER || wp_gpio == -EPROBE_DEFER)
+@@ -1737,6 +1820,14 @@
+ 	pdata->nr_slots = 1;
+ 	pdata->slots[0].switch_pin = cd_gpio;
+ 	pdata->slots[0].gpio_wp = wp_gpio;
++	reset_flags = 0;
++	pdata->slots[0].gpio_reset = of_get_named_gpio_flags(np,
++			"reset-gpios", 0, &reset_flags);
++	pdata->slots[0].gpio_reset_active_low =
++		(reset_flags & OF_GPIO_ACTIVE_LOW) != 0;
++	pdata->slots[0].gpio_reset_hold_us = 100;	/* default */
++	of_property_read_u32(np, "reset-gpio-hold-us",
++			&pdata->slots[0].gpio_reset_hold_us);
+ 
+ 	if (of_find_property(np, "ti,non-removable", NULL)) {
+ 		pdata->slots[0].nonremovable = true;
+@@ -1777,6 +1868,7 @@
+ 	const struct of_device_id *match;
+ 	dma_cap_mask_t mask;
+ 	unsigned tx_req, rx_req;
++	struct dma_slave_sg_limits *dma_sg_limits;
+ 	struct pinctrl *pinctrl;
+ 
+ 	match = of_match_device(of_match_ptr(omap_mmc_of_match), &pdev->dev);
+@@ -1801,6 +1893,10 @@
+ 		dev_err(&pdev->dev, "No Slots\n");
+ 		return -ENXIO;
+ 	}
++	
++	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
++	if (IS_ERR(pinctrl))
++		dev_warn(&pdev->dev, "unable to select pin group\n");
+ 
+ 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+ 	irq = platform_get_irq(pdev, 0);
+@@ -1826,13 +1922,13 @@
+ 	host->pdata	= pdata;
+ 	host->dev	= &pdev->dev;
+ 	host->use_dma	= 1;
+-	host->dma_ch	= -1;
+ 	host->irq	= irq;
+ 	host->slot_id	= 0;
+ 	host->mapbase	= res->start + pdata->reg_offset;
+ 	host->base	= ioremap(host->mapbase, SZ_4K);
+ 	host->power_mode = MMC_POWER_OFF;
+ 	host->next_data.cookie = 1;
++	host->req_flags	= 0;
+ 
+ 	platform_set_drvdata(pdev, host);
+ 
+@@ -1892,6 +1988,15 @@
+ 	/* Since we do only SG emulation, we can have as many segs
+ 	 * as we want. */
+ 	mmc->max_segs = 1024;
++	/* Eventually we should get our max_segs limitation for EDMA by
++	 * querying the dmaengine API */
++	if (pdev->dev.of_node) {
++		struct device_node *parent = of_node_get(pdev->dev.of_node->parent);
++		struct device_node *node;
++		node = of_find_node_by_name(parent, "edma");
++		if (node)
++			mmc->max_segs = 16;
++	}
+ 
+ 	mmc->max_blk_size = 512;       /* Block Length at max can be 1024 */
+ 	mmc->max_blk_count = 0xFFFF;    /* No. of Blocks is 16 bits */
+@@ -1952,6 +2057,13 @@
+ 		ret = -ENXIO;
+ 		goto err_irq;
+ 	}
++	
++	/* Some DMA Engines only handle a limited number of SG segments */
++	dma_sg_limits = dma_get_slave_sg_limits(host->rx_chan,
++						DMA_SLAVE_BUSWIDTH_4_BYTES,
++						mmc->max_blk_size / 4);
++	if (dma_sg_limits && dma_sg_limits->max_seg_nr)
++		mmc->max_segs = dma_sg_limits->max_seg_nr;
+ 
+ 	/* Request IRQ for MMC operations */
+ 	ret = request_irq(host->irq, omap_hsmmc_irq, 0,

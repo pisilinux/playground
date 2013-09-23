@@ -1,0 +1,67 @@
+From: Suresh Jayaraman <sjayaraman@suse.de>
+Subject: [PATCH] automate config options for kernel-desktop
+References: FATE#305694
+Patch-mainline: Never
+
+Automate the desktop only kernel configuration options with the new
+CONFIG_KERNEL_DESKTOP.
+
+Signed-off-by: Suresh Jayaraman <sjayaraman@suse.de>
+---
+ init/Kconfig           |    6 ++++++
+ kernel/Kconfig.hz      |    1 +
+ kernel/Kconfig.preempt |    1 +
+ 3 files changed, 8 insertions(+)
+
+diff -Nuar a/init/Kconfig b/init/Kconfig
+--- a/init/Kconfig	2013-09-16 23:17:51.000000000 +0300
++++ b/init/Kconfig	2013-09-23 08:52:22.131067138 +0300
+@@ -1,3 +1,9 @@
++config KERNEL_DESKTOP
++	bool "Kernel to suit desktop workloads"
++	help
++	  This is an option used to tune kernel parameters to better suit
++	  desktop workloads.
++
+ config ARCH
+ 	string
+ 	option env="ARCH"
+@@ -862,6 +868,7 @@
+ menuconfig CGROUPS
+ 	boolean "Control Group support"
+ 	depends on EVENTFD
++	default !KERNEL_DESKTOP
+ 	help
+ 	  This option adds support for grouping sets of processes together, for
+ 	  use with process control subsystems such as Cpusets, CFS, memory
+@@ -1016,7 +1023,7 @@
+ 
+ menuconfig CGROUP_SCHED
+ 	bool "Group CPU scheduler"
+-	default n
++	default !KERNEL_DESKTOP
+ 	help
+ 	  This feature lets CPU scheduler recognize task groups and control CPU
+ 	  bandwidth allocation to such task groups. It uses cgroups to group
+diff -Nuar a/kernel/Kconfig.hz b/kernel/Kconfig.hz
+--- a/kernel/Kconfig.hz	2013-09-16 23:17:51.000000000 +0300
++++ b/kernel/Kconfig.hz	2013-09-23 08:53:45.696064245 +0300
+@@ -4,6 +4,7 @@
+ 
+ choice
+ 	prompt "Timer frequency"
++	default HZ_1000 if KERNEL_DESKTOP
+ 	default HZ_250
+ 	help
+ 	 Allows the configuration of the timer frequency. It is customary
+diff -Nuar a/kernel/Kconfig.preempt b/kernel/Kconfig.preempt
+--- a/kernel/Kconfig.preempt	2013-09-16 23:17:51.000000000 +0300
++++ b/kernel/Kconfig.preempt	2013-09-23 08:54:30.999062676 +0300
+@@ -1,6 +1,7 @@
+ 
+ choice
+ 	prompt "Preemption Model"
++	default PREEMPT if KERNEL_DESKTOP
+ 	default PREEMPT_NONE
+ 
+ config PREEMPT_NONE

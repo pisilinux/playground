@@ -1,0 +1,39 @@
+From: Andi Kleen <andi@firstfloor.org>
+Subject: Fix stack unwinder Kconfig
+Patch-mainline: never
+References: bnc#402518
+
+Incremental patch for dwarf2 unwinder
+
+Fix the Kconfigs that do SELECT FRAME_POINTER to do select UNWIND_INFO
+instead.
+
+Signed-off-by: Andi Kleen <ak@linux.intel.com>
+Acked-by: Jan Beulich <jbeulich@novell.com>
+
+---
+ lib/Kconfig.debug |    6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+--- a/lib/Kconfig.debug	2013-09-16 23:17:51.000000000 +0300
++++ b/lib/Kconfig.debug	2013-09-23 09:02:40.640045723 +0300
+@@ -1366,7 +1366,8 @@
+ 	depends on FAULT_INJECTION_DEBUG_FS && STACKTRACE_SUPPORT
+ 	depends on !X86_64
+ 	select STACKTRACE
+-	select FRAME_POINTER if !MIPS && !PPC && !S390 && !MICROBLAZE && !ARM_UNWIND && !ARC
++	select FRAME_POINTER if !MIPS && !PPC && !S390 && !MICROBLAZE && !X86 && !ARM_UNWIND && !ARC
++	select UNWIND_INFO if X86 && !FRAME_POINTER
+ 	help
+ 	  Provide stacktrace filter for fault-injection capabilities
+ 
+@@ -1376,7 +1377,8 @@
+ 	depends on DEBUG_KERNEL
+ 	depends on STACKTRACE_SUPPORT
+ 	depends on PROC_FS
+-	select FRAME_POINTER if !MIPS && !PPC && !S390 && !MICROBLAZE && !ARM_UNWIND && !ARC
++	select FRAME_POINTER if !MIPS && !PPC && !S390 && !MICROBLAZE && !X86 && !ARM_UNWIND && !ARC
++	select UNWIND_INFO if X86 && !FRAME_POINTER
+ 	select KALLSYMS
+ 	select KALLSYMS_ALL
+ 	select STACKTRACE
