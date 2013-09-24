@@ -106,7 +106,7 @@
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
 
-            <!-- Fedora Kernel Patches 
+<!-- Fedora Kernel Patches -->
 
             <Patch level="1">patches/fedora/0001-am335x-dts-Add-beaglebone-black-DTS.patch</Patch>
 	    <Patch level="1">patches/fedora/0001-omap-hsmmc-fix.patch</Patch>
@@ -125,31 +125,31 @@
             <Patch level="1">patches/fedora/disable-i8042-check-on-apple-mac.patch</Patch>
             <Patch level="1">patches/fedora/drm-i915-dp-stfu.patch</Patch>
             <Patch level="1">patches/fedora/drm-radeon-Disable-writeback-by-default-on-ppc.patch</Patch>    
-            <Patch level="1">patches/fedora/efi-dont-map-boot-services-on-32bit.patch</Patch>
+<!--             <Patch level="1">patches/fedora/efi-dont-map-boot-services-on-32bit.patch</Patch> -->
             <Patch level="1">patches/fedora/fs-proc-devtree-remove_proc_entry.patch</Patch>
             <Patch level="1">patches/fedora/input-kill-stupid-messages.patch</Patch>
-            <Patch level="1">patches/fedora/keys-expand-keyring.patch</Patch>
-            <Patch level="1">patches/fedora/keys-krb-support.patch</Patch>
+<!--             <Patch level="1">patches/fedora/keys-expand-keyring.patch</Patch> -->
+<!--             <Patch level="1">patches/fedora/keys-krb-support.patch</Patch> -->
             <Patch level="1">patches/fedora/lis3-improve-handling-of-null-rate.patch</Patch>
-            <Patch level="1">patches/fedora/makefile-after_link.patch</Patch>
+<!--             <Patch level="1">patches/fedora/makefile-after_link.patch</Patch> -->
             <Patch level="1">patches/fedora/no-pcspkr-modalias.patch</Patch>
             <Patch level="1">patches/fedora/nowatchdog-on-virt.patch</Patch>    
             <Patch level="1">patches/fedora/ntp-Make-periodic-RTC-update-more-reliable.patch</Patch>
             <Patch level="1">patches/fedora/scsi-sd_revalidate_disk-prevent-NULL-ptr-deref.patch</Patch>
-            <Patch level="1">patches/fedora/selinux-apply-different-permission-to-ptrace-child.patch</Patch>
+<!--             <Patch level="1">patches/fedora/selinux-apply-different-permission-to-ptrace-child.patch</Patch> -->
             <Patch level="1">patches/fedora/serial-460800.patch</Patch>
             <Patch level="1">patches/fedora/silence-acpi-blacklist.patch</Patch>
             <Patch level="1">patches/fedora/silence-noise.patch</Patch>
             <Patch level="1">patches/fedora/taint-vbox.patch</Patch>
             <Patch level="1">patches/fedora/vmbugon-warnon.patch</Patch>    
             <Patch level="1">patches/fedora/vt-Drop-K_OFF-for-VC_MUTE.patch</Patch>
-            <Patch level="1">patches/fedora/silence-fbcon-logo.patch</Patch>-->
-            <!--<Patch level="1">patches/fedora/modsign-uefi.patch</Patch>
-            <Patch level="1">patches/fedora/hibernate-freeze-filesystems.patch</Patch>
-            <Patch level="1">patches/fedora/sysrq-secure-boot.patch</Patch>
-            <Patch level="1">patches/fedora/secure-modules.patch</Patch>-->
+            <Patch level="1">patches/fedora/silence-fbcon-logo.patch</Patch>
+<!--             <Patch level="1">patches/fedora/modsign-uefi.patch</Patch> -->
+<!--             <Patch level="1">patches/fedora/hibernate-freeze-filesystems.patch</Patch> -->
+<!--             <Patch level="1">patches/fedora/sysrq-secure-boot.patch</Patch> -->
+<!--             <Patch level="1">patches/fedora/secure-modules.patch</Patch> -->
 
-            <!-- OpenSuSE Kernel Patches 
+<!-- OpenSuSE Kernel Patches -->
             <Patch level="1" compressionType="xz">patches/suse/patches.arch.tar.xz</Patch>
             <Patch level="1" compressionType="xz">patches/suse/patches.drivers.tar.xz</Patch>
             <Patch level="1" compressionType="xz">patches/suse/patches.fixes.tar.xz</Patch>
@@ -201,7 +201,7 @@
             <Patch level="1">patches/suse/patches.suse/sd_init.mark_majors_busy.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/setuid-dumpable-wrongdir.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/stack-unwind.patch</Patch>
-            <Patch level="1">patches/suse/patches.suse/suse-hv-Drivers-hv-util-Fix-a-bug-in-util-version-negotiatio.patch</Patch>-->
+            <Patch level="1">patches/suse/patches.suse/suse-hv-Drivers-hv-util-Fix-a-bug-in-util-version-negotiatio.patch</Patch>
 
             <!-- Pisilinux Kernel Patches -->
             <!-- Blacklist 2 Lenovo in acer-wmi (#15967)-->
@@ -216,8 +216,6 @@
                  http://www.zwobble.de -->
             <!--<Patch level="1">patches/pisilinux/linux-2.6-add-fujitsu-amilo-74xx-rfkill-drivers.patch</Patch>-->
 
-            <!-- Fallback to vesa 640x480x16 on undefined video mode number (Fixes #7117)
-            <Patch level="1">patches/pisilinux/vesa_fallback_on_fail.patch</Patch>-->
         </Patches>
     </Source>
 
