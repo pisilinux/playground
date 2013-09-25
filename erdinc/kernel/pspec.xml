@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="1038964c573c4c016af35c84f06cbc79cc43cc61" type="tarbz2">https://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-3.12-rc1.tar.bz2</Archive>
+        <Archive sha1sum="684f47bcd810c43ceeaf47e23786ce851920ef93" type="tarbz2">https://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-3.12-rc2.tar.bz2</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -107,12 +107,9 @@
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
 
 <!-- Fedora Kernel Patches -->
-
-            <Patch level="1">patches/fedora/0001-am335x-dts-Add-beaglebone-black-DTS.patch</Patch>
 	    <Patch level="1">patches/fedora/0001-omap-hsmmc-fix.patch</Patch>
             <Patch level="1">patches/fedora/0001-reset-Add-driver-for-gpio-controlled-reset-pins.patch</Patch>
             <Patch level="1">patches/fedora/0002-dma-edma-add-device_slave_sg_limits-support.patch</Patch>
-            <Patch level="1">patches/fedora/0002-dts-beaglebone-Add-I2C-definitions-for-EEPROMs-capes.patch</Patch>
             <Patch level="1">patches/fedora/0005-da8xx-config-Enable-MMC-and-FS-options.patch</Patch>
             <Patch level="1">patches/fedora/0011-sound-soc-soc-dmaengine-pcm-Add-support-for-new-DMAE.patch</Patch>
             <Patch level="1">patches/fedora/acpi-sony-nonvs-blacklist.patch</Patch>
@@ -151,8 +148,8 @@
 
 <!-- OpenSuSE Kernel Patches -->
             <Patch level="1" compressionType="xz">patches/suse/patches.arch.tar.xz</Patch>
-            <Patch level="1" compressionType="xz">patches/suse/patches.drivers.tar.xz</Patch>
             <Patch level="1" compressionType="xz">patches/suse/patches.fixes.tar.xz</Patch>
+            <Patch level="1">patches/suse/pstore_disable_efi_backend_by_default.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/0001-vfs-Hooks-for-more-fine-grained-directory-permission.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/0002-vfs-Add-generic-IS_ACL-test-for-acl-support.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/0003-vfs-Add-IS_RICHACL-test-for-richacl-support.patch</Patch>
@@ -168,8 +165,7 @@
             <Patch level="1">patches/suse/patches.suse/0013-richacl-Restrict-access-check-algorithm.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/0014-richacl-xattr-mapping-functions.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/0016-ext4-Implement-richacl-support-in-ext4.patch</Patch>
-            <Patch level="1">patches/suse/patches.suse/ovl01-vfs-add-i_op-dentry_open.patch</Patch>
-            <Patch level="1">patches/suse/patches.suse/ovl02-vfs-export-do_splice_direct-to-modules.patch</Patch>
+	    <Patch level="1">patches/suse/patches.suse/ovl02-vfs-export-do_splice_direct-to-modules.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/ovl03-vfs-export-inode_permission-to-modules.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/ovl04-vfs-introduce-clone_private_mount.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/ovl05-overlay-filesystem.patch</Patch>
@@ -216,6 +212,8 @@
                  http://www.zwobble.de -->
             <!--<Patch level="1">patches/pisilinux/linux-2.6-add-fujitsu-amilo-74xx-rfkill-drivers.patch</Patch>-->
 
+            <!-- Fallback to vesa 640x480x16 on undefined video mode number (Fixes #7117)
+            <Patch level="1">patches/pisilinux/vesa_fallback_on_fail.patch</Patch>-->
         </Patches>
     </Source>
 
