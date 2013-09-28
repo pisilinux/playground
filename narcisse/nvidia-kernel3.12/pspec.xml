@@ -11,19 +11,14 @@
         <License>NVIDIA</License>
         <Summary>NVIDIA drivers for GeForce 6xxx and newer GPUs</Summary>
         <Description>NVIDIA graphics drivers provide optimized 2D/3D performance.</Description>
-        <Archive sha1sum="da51ea1916c7d0049641851459cecf7ca5870000" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86/325.08/NVIDIA-Linux-x86-325.08.run</Archive>
-        <Archive sha1sum="48e89c6f3d4d9ee319cb5f2761bee994790976c8" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86_64/325.08/NVIDIA-Linux-x86_64-325.08.run</Archive>
-	
-	<!-- This is a patch for Nvidia drivers to Kernel 3.10. For every version increase, it should be reedited -->
-	<Archive sha1sum="b64fd31cc8305641055ddc2d281aef3f3570d3ac" type="binary" target="nvidia">https://dl.dropboxusercontent.com/u/71264624/nvidia-drivers-linux-3.10.patch</Archive>
-        <!--AdditionalFiles>
-        <AdditionalFile permission="0644" target="linux-3.7.6.patch">linux-3.7.6.patch</AdditionalFile>
-        <AdditionalFile permission="0644" target="nvidia-drivers-313.18-linux-3.7+.patch">nvidia-drivers-313.18-linux-3.7+.patch</AdditionalFile>
-        <AdditionalFile permission="0644" target="nvidia-drivers-313.18-builddir-config.patch">nvidia-drivers-313.18-builddir-config.patch</AdditionalFile>
-        </AdditionalFiles-->
+        <Archive sha1sum="78aa8cecd75207e402bbd5c5a9577d9df410b3c8" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86/325.15/NVIDIA-Linux-x86-325.15.run</Archive>
+        <Archive sha1sum="1a229d80141e214c7ff8403c16e2eda786cdd67c" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86_64/325.15/NVIDIA-Linux-x86_64-325.15.run</Archive>
+        <AdditionalFiles>
+           <AdditionalFile permission="0644" target="kernel_v3.11.patch">kernel_v3.11.patch</AdditionalFile>
+       </AdditionalFiles> 
         <BuildDependencies>
-            <Dependency version="3.10.0">kernel-module-headers</Dependency>
-        </BuildDependencies>	
+            <Dependency version="3.12.0">kernel-module-headers</Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>
@@ -31,7 +26,7 @@
         <IsA>driver</IsA>
         <Summary>Kernel module for current NVIDIA graphics driver releases</Summary>
         <RuntimeDependencies>
-            <Dependency version="3.10.0">kernel</Dependency>
+            <Dependency version="3.12.0">kernel</Dependency>
             <Dependency version="current">module-nvidia-current-userspace</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -94,6 +89,7 @@
             <Dependency>libXv-32bit</Dependency>
             <Dependency>libX11-32bit</Dependency>
             <Dependency>libXext-32bit</Dependency>
+            <Dependency>zlib-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32</Path>
@@ -105,38 +101,66 @@
     </Package>
 
     <History>
-       <Update release="8">
-            <Date>2013-07-13</Date>
-            <Version>325.08</Version>
-            <Comment>Patched for Kernel 3.10</Comment>
+         <Update release="13">
+            <Date>2013-09-18</Date>
+            <Version>325.15</Version>
+            <Comment>Patch for Kernel 3.11 and higher versions.</Comment>
             <Name>Mathias Freire</Name>
             <Email>mathiasfreire45@gmail.com</Email>
         </Update>
-      <Update release="7">
-            <Date>2013-06-05</Date>
-            <Version>325.08</Version>
-            <Comment>V. bump</Comment>
-            <Name>Mathias Freire</Name>
-            <Email>mathiasfreire45@gmail.com</Email>
-        </Update>
-      <Update release="6">
-            <Date>2013-06-05</Date>
-            <Version>319.23</Version>
-            <Comment>Kernel 3.8.13</Comment>
+       <Update release="12">
+            <Date>2013-09-18</Date>
+            <Version>325.15</Version>
+            <Comment>3.10.12</Comment>
             <Name>Erdinç Gültekin</Name>
             <Email>erdincgultekin@pisilinux.org</Email>
         </Update>
-      <Update release="5">
-            <Date>2013-06-05</Date>
-            <Version>319.17</Version>
-            <Comment>Kernel 3.8.13</Comment>
+        <Update release="11">
+            <Date>2013-08-20</Date>
+            <Version>325.15</Version>
+            <Comment>3.10.10</Comment>
             <Name>Erdinç Gültekin</Name>
             <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="10">
+            <Date>2013-08-20</Date>
+            <Version>325.15</Version>
+            <Comment>3.10.9</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2013-08-20</Date>
+            <Version>325.15</Version>
+            <Comment>Version bump</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2013-08-12</Date>
+            <Version>319.32</Version>
+            <Comment>rebuld for kernel 3.10.6</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2013-08-11</Date>
+            <Version>319.32</Version>
+            <Comment>rebuld for kernel 3.10.5</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-07-05</Date>
+            <Version>319.32</Version>
+            <Comment>Version bump</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
         </Update>
         <Update release="5">
-            <Date>2013-06-01</Date>
+            <Date>2013-06-05</Date>
             <Version>319.17</Version>
-            <Comment>Kernel 3.9.4</Comment>
+            <Comment>Kernel 3.8.13</Comment>
             <Name>Erdinç Gültekin</Name>
             <Email>erdincgultekin@pisilinux.org</Email>
         </Update>

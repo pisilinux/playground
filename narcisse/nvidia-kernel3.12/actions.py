@@ -27,14 +27,9 @@ else:
     libdir = "/usr/lib"
 
 def setup():
-    shelltools.system("sh NVIDIA-Linux-%s-%s.run --extract-only --target tmp"
+    shelltools.system("sh NVIDIA-Linux-%s-%s.run -x --target tmp"
                       % (arch, get.srcVERSION()))
-    shelltools.cd("tmp")
-    shelltools.system("patch -p1 < %s/nvidia/nvidia-drivers-linux-3.10.patch" %get.workDIR())
-    shelltools.cd("%s" %get.workDIR())
-
     shelltools.move("tmp/*", ".")
-    shelltools.system("rm nvidia/nvidia-drivers-linux-3.10.patch")
 
     # Our libc is TLS enabled so use TLS library
     shelltools.unlink("*-tls.so*")
@@ -46,9 +41,7 @@ def setup():
     shelltools.echo("ld.so.conf", nvlibdir)
     shelltools.echo("XvMCConfig", "%s/libXvMCNVIDIA.so" % nvlibdir)
     
-    #shelltools.system("patch --remove-empty-files --no-backup-if-mismatch -p2 -i linux-3.7.6.patch")
-    #shelltools.system("patch --remove-empty-files --no-backup-if-mismatch -p1 -i nvidia-drivers-313.18-linux-3.7+.patch")
-    #shelltools.system("patch --remove-empty-files --no-backup-if-mismatch -p1 -i nvidia-drivers-313.18-builddir-config.patch")
+    shelltools.system("patch --remove-empty-files --no-backup-if-mismatch -p1 -i kernel_v3.11.patch")
 
 def build():
     # We don't need kernel module for emul32 build
@@ -64,7 +57,7 @@ def install():
 
     if not get.buildTYPE() == 'emul32':
     # Kernel driver
-        pisitools.insinto("/lib/modules/%s/extra/nvidia" % KDIR,
+        pisitools.insinto("/lib/modules/%s/extra/nvidia" % ".".join(KDIR.split(".")[:-1]),
                           "kernel/nvidia.ko", "%s.ko" % driver)
 
         # Command line tools and their man pages

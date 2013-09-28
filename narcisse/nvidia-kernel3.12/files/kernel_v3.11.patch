@@ -1,0 +1,61 @@
+
+--- a/kernel/nv-linux.h
++++ b/kernel/nv-linux.h
+@@ -957,7 +957,11 @@ static inline int nv_execute_on_all_cpus
+ #endif
+ 
+ #if !defined(NV_VMWARE)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 11, 0)
++#define NV_NUM_PHYSPAGES                get_num_physpages()
++#else
+ #define NV_NUM_PHYSPAGES                num_physpages
++#endif
+ #define NV_GET_CURRENT_PROCESS()        current->tgid
+ #define NV_IN_ATOMIC()                  in_atomic()
+ #define NV_LOCAL_BH_DISABLE()           local_bh_disable()
+--- a/kernel/nv-drm.c
++++ b/kernel/nv-drm.c
+@@ -106,7 +106,11 @@ static const struct file_operations nv_d
+     .unlocked_ioctl = drm_ioctl,
+     .mmap = drm_gem_mmap,
+     .poll = drm_poll,
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 12, 0)
++//  .fasync = drm_fasync,
++#else
+     .fasync = drm_fasync,
++#endif
+     .read = drm_read,
+     .llseek = noop_llseek,
+ };
+@@ -202,12 +206,16 @@ RM_STATUS NV_API_CALL nv_alloc_os_descri
+     memset(&nv_obj->base, 0, sizeof(nv_obj->base));
+     nv_obj->pages = pages;
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 12, 0)
++    drm_gem_private_object_init(nvl->drm, &nv_obj->base, size);
++#else
+     ret = drm_gem_private_object_init(nvl->drm, &nv_obj->base, size);
+     if (ret)
+     {
+         status = RM_ERR_OPERATING_SYSTEM;
+         goto done;
+     }
++#endif
+ 
+     ret = drm_gem_handle_create(file_priv, &nv_obj->base, handle);
+     if (ret)
+--- a/kernel/nv.c
++++ b/kernel/nv.c
+@@ -16,8 +16,12 @@
+ #include "rmil.h"
+ 
+ #if defined(MODULE_LICENSE)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 12, 0)
++MODULE_LICENSE("GPL");
++#else
+ MODULE_LICENSE("NVIDIA");
+ #endif
++#endif
+ #if defined(MODULE_INFO)
+ MODULE_INFO(supported, "external");
+ #endif
