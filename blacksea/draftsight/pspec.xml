@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>draftsight</Name>
+        <Homepage>http://www.3ds.com/products/draftsight/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>EULA</License>
+        <License>Dassault Systèmes SolidWorks Corporation</License>
+        <Icon>draftsight</Icon>
+        <IsA>app</IsA>
+        <Summary>Dassault Systemes' freeware CAD software for your DWG files.</Summary>
+        <Description>Dassault Systemes' freeware CAD software for your DWG files.</Description>
+        <Archive sha1sum="ece212be59bf64d0907899048095a058b2828ff9" type="binary">http://dl-ak.solidworks.com/nonsecure/draftsight/V1R4.0/draftSight.rpm</Archive>
+        <BuildDependencies>
+            <Dependency>rpm2targz</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>draftsight</Name>
+        <RuntimeDependencies>
+            <Dependency>mesa-32bit</Dependency>
+            <Dependency>cups-32bit</Dependency>
+            <Dependency>zlib-32bit </Dependency>
+            <Dependency>glib2-32bit</Dependency>
+            <Dependency>libSM-32bit</Dependency>
+            <Dependency>expat-32bit</Dependency>
+            <Dependency>libXt-32bit</Dependency>
+            <Dependency>libX11-32bit</Dependency>
+            <Dependency>libICE-32bit</Dependency>
+            <Dependency>libXext-32bit</Dependency>
+            <Dependency>alsa-lib-32bit</Dependency>
+            <Dependency>mesa-glu-32bit</Dependency>
+            <Dependency>libXrender-32bit</Dependency>
+            <Dependency>fontconfig-32bit</Dependency>
+            <Dependency>libglade</Dependency>
+            <!-- <Dependency>nas-32bit</Dependency>-->
+        </RuntimeDependencies>
+
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/opt</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/draftsight.desktop">draftsight.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/draftsight.png">draftsight.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-09-26</Date>
+            <Version>1R.4.0</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
