@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>giblib</Name>
+        <Homepage>http://freshmeat.net/projects/giblib</Homepage>
+        <Packager>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>GPLv3</License>
+        <Summary>library to wrap imblib</Summary>
+        <PartOf>system</PartOf>
+        <Description> wrapper adding string functions and fontstyles</Description>
+        <Archive sha1sum="342e6f7882c67d2277e1765299e1be5078329ab0" type="targz">http://linuxbrit.co.uk/downloads/giblib-1.2.4.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>imlib2-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>giblib</Name>
+        <RuntimeDependencies>
+            <Dependency>imlib2</Dependency>    
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr</Path>
+            <Path fileType="docs">/usr/share/docs</Path>
+         </Files>
+    </Package>
+    
+    <History>
+      <Update release="1">
+            <Date>2013-09-28</Date>
+            <Version>1.2.3</Version>
+            <Comment>First release.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

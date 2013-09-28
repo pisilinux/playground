@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>feh</Name>
+        <Homepage>http://feh.finalrewind.org/</Homepage>
+        <Packager>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Packager>
+        <License>Mit</License>
+        <IsA>app:console</IsA>
+        <PartOf>multimedia.graphics</PartOf>
+        <Summary>Lightweight imageviewer using imlib2</Summary>
+        <Description>feh is an X11 image viewer aimed mostly at console users.  Unlike most other viewers, it does not have a fancy GUI, but simply displays images. It is controlled via commandline arguments and configurable key/mouse actions</Description>
+        <Archive sha1sum="6e93c9bbc339d36002ead189d0a94880f58876bd" type="tarbz2">http://feh.finalrewind.org/feh-2.9.3.tar.bz2</Archive>
+        <BuildDependencies>
+          <Dependency>giblib</Dependency>
+          <Dependency>libXt-devel</Dependency>
+          <Dependency>libXinerama-devel</Dependency>
+          <Dependency>imlib2-devel</Dependency>
+        </BuildDependencies>
+      </Source>
+      
+    <Package>
+        <Name>feh</Name>
+        <RuntimeDependencies>
+            <Dependency>giblib</Dependency>
+            <Dependency>libXt</Dependency>
+            <Dependency>libXinerama</Dependency>
+            <Dependency>imlib2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    
+    <History>
+      <Update release="1">
+            <Date>2013-09-28</Date>
+            <Version>2.9.3</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+      </Update>
+    </History>
+</PISI>
