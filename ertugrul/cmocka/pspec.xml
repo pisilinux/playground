@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cmocka</Name>
+        <Homepage>http://cmocka.org/</Homepage>
+        <Packager>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>A unit testing framework for C</Summary>
+        <Description>There are a variety of C unit testing frameworks available, but CMocka offers support for mock objects, different platforms and compilers.</Description>
+        <Archive sha1sum="1da4e203dd0671eb32d8735d71a910e5d0d26b10" type="targz">https://open.cryptomilk.org/attachments/download/19/cmocka-0.3.1.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>cmocka</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>cmocka-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>cmocka</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-09-29</Date>
+            <Version>0.3.1</Version>
+            <Comment>First release</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
