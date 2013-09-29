@@ -1,5 +1,5 @@
---- gcstar/lib/gcstar/GCLang/TR/GCstar.pm	2012-01-23 07:52:40.000000000 +0200
-+++ gcstar/lib/gcstar/GCLang/TR/GCstar.pm	2013-08-21 01:27:53.719217373 +0300
+--- gcstar/lib/gcstar/GCLang/TR/GCstar-orig.pm	2013-08-21 00:36:12.000000000 +0300
++++ gcstar/lib/gcstar/GCLang/TR/GCstar.pm	2013-08-30 22:40:14.000000000 +0300
 @@ -20,12 +20,12 @@
  #
  #  You should have received a copy of the GNU General Public License
@@ -11,7 +11,7 @@
  #
  # Turkish Language File, v.2
 -# KaraGarga, 17/07/2006
-+# KaraGarga, 17/07/2006, Ayhan YALÇINSOY 00/12/2012
++# KaraGarga, 17/07/2006, Ayhan YALÇINSOY 30/08/2013
  # 
  ###################################################   
  
@@ -20,10 +20,9 @@
          'InstallMissing' => 'Eksik',
          'InstallMissingFor' => 'Eksikler',
 -        'InstallCleanDirectory' => 'Removing GCstar\'s files in directory: ',
--        'InstallCopyDirectory' => 'Copying files in directory: ',
--        'InstallCopyDesktop' => 'Copying desktop file in: ',
 +        'InstallCleanDirectory' => 'GCstar dosyaları kaldırılıyor: ',
-+        'InstallCopyDirectory' => 'Dosyalar dizine kopyalanıyor: ',
+         'InstallCopyDirectory' => 'Dosyalar dizine kopyalanıyor: ',
+-        'InstallCopyDesktop' => 'Copying desktop file in: ',
 +        'InstallCopyDesktop' => 'Masaüstü dosyaları kopyalanıyor: ',
  
  #Update
@@ -188,7 +187,7 @@
          
          'RandomTooltip' => 'Bana öneride bulun. Rastgele dosya seçer.',
          'RandomError'=> 'Tüm başlıkları izlemişsiniz ya da veritanında başlık yok.', # Accepts model codes
-@@ -228,102 +222,103 @@
+@@ -228,129 +222,132 @@
  Adolfo González: Programcı
  ',
          'AboutLicense' => 'GNU GPL lisansı altında dağıtılmaktadır
@@ -196,7 +195,9 @@
 -        'AboutTranslation' => 'Türkçe çeviri KaraGarga\'ya aittir',
 +Logoların telif hakları le Spektre
 +http://le-spektre.org\'a aittir.',
-+        'AboutTranslation' => 'KaraGarga(2006),Ayhan YALÇINSOY(2012) tarafından Türkçe\'ye çevrilmiştir',
++        'AboutTranslation' => 'KaraGarga(2006),
++Ayhan YALÇINSOY(2012)
++tarafından Türkçe\'ye çevrilmiştir',
          'AboutDesign' => 'Łukasz Kowalczk (Qoolman): Skin Designer
  Logo ve webtasarımı: le Spektre',
  
@@ -313,6 +314,13 @@
 -        'ModelFilterQuick' => 'Create a quick filter',
 -        'ModelTooltipName' => 'Use a name to re-use this model for many collections. If empty, the settings will be directly stored in the collection itself',
 -        'ModelTooltipLabel' => 'The field name as it will be displayed',
+-        'ModelTooltipGroup' => 'Used to group fields. Items with no value here will be in a default group',
+-        'ModelTooltipHistory' => 'Should the previous entered values be stored in a list associated to the field',
+-        'ModelTooltipFormat' => 'This format is used to determine the action to open the file with the Play button',
+-        'ModelTooltipLending' => 'This will add some fields to manage lendings',
+-        'ModelTooltipTagging' => 'This will add some fields to manage tags',
+-        'ModelTooltipNumeric' => 'Should the values be consider as numbers for comparison',
+-        'ModelTooltipQuick' => 'This will add a submenu in the Filters one',
 +        'ModelFieldFileUrl' => 'Adres',
 +        'ModelFieldFileEbook' => 'E-kitap',
 +        'ModelOptionsFields' => 'Kullanılaca alanlar',
@@ -335,16 +343,12 @@
 +        'ModelFilterQuick' => 'Hızlı bir süzgeç oluştur',
 +        'ModelTooltipName' => 'Bu modeli birçok kez kullanmak için bir isim kullanın. Eğer boşsa, ayarlar doğrudan arşivin kendisinde depolanacaktır.',
 +        'ModelTooltipLabel' => 'Alan adı gösterileceği gibidir',
-         'ModelTooltipGroup' => 'Used to group fields. Items with no value here will be in a default group',
-         'ModelTooltipHistory' => 'Should the previous entered values be stored in a list associated to the field',
--        'ModelTooltipFormat' => 'This format is used to determine the action to open the file with the Play button',
--        'ModelTooltipLending' => 'This will add some fields to manage lendings',
--        'ModelTooltipTagging' => 'This will add some fields to manage tags',
++        'ModelTooltipGroup' => 'Grup alanları için kullanılır. Değer girilmemiş ögeler öntanımlı bir grupta yer alır',
++        'ModelTooltipHistory' => 'Önceki girilen değerler alanla ilgili bir listeye kaydedilmeli',
 +        'ModelTooltipFormat' => 'Bu biçim oynat düğmesiyle dosya açmak maksadıyla eylem tanımlamak için kullanılır.',
 +        'ModelTooltipLending' => 'Ödünç vermeleri yönetmek için bazı alanlar ekler',
 +        'ModelTooltipTagging' => 'Etiketleri yönetmek için bazı alanlar ekler',
-         'ModelTooltipNumeric' => 'Should the values be consider as numbers for comparison',
--        'ModelTooltipQuick' => 'This will add a submenu in the Filters one',
++        'ModelTooltipNumeric' => 'Karşılaştırma için değerler rakam olmalıdır',
 +        'ModelTooltipQuick' => 'Bu bir süzgece alt menü ekler',
          
          'ResultsTitle' => 'Bir başlık seçiniz', # Accepts model codes
@@ -372,7 +376,8 @@
          'OptionsUseRelativePaths' => 'Kapak resimleri için değişken dizin yapısı kullan',
          'OptionsLayout' => 'Başlık Bilgileri Paneli',
          'OptionsStatus' => 'Durum barını göster',
-@@ -331,10 +326,10 @@
+-        'OptionsUseStars' => 'Use stars to display ratings',
++        'OptionsUseStars' => 'Puanlamayı göstermek için yıldız kullan',
          'OptionsWarning' => 'Dikkat: Bu alandaki değişikleri uygulamak için yazılımı tekrar başlatmalısınız.',
          'OptionsRemoveConfirm' => 'Başlık silmeden önce onay iste',
          'OptionsAutoSave' => 'Veritabanını otomatik olarak kaydet',
@@ -385,8 +390,10 @@
          'OptionsProgramTitle' => 'Bir Program Seçiniz',
  		'OptionsPlugins' => 'Bilginin alınacağı siteyi seçiniz',
  		'OptionsAskPlugins' => 'Sor (Tüm Siteler)',
-@@ -343,14 +338,14 @@
-         'OptionsPluginsMultiPerField' => 'Seçtiğim Siteler (per field)',
+ 		'OptionsPluginsMulti' => 'Seçtiğim Siteler',
+ 		'OptionsPluginsMultiAsk' => 'Sor (Seçtiğim Siteler)',
+-        'OptionsPluginsMultiPerField' => 'Seçtiğim Siteler (per field)',
++        'OptionsPluginsMultiPerField' => 'Seçtiğim Siteler (alan başına)',
          'OptionsPluginsMultiPerFieldWindowTitle' => 'Many sites per field order selection',
          'OptionsPluginsMultiPerFieldDesc' => 'For each selected field we will return the first non empty information beginning from left',
 -        'OptionsPluginsMultiPerFieldFirst' => 'First',
@@ -406,11 +413,18 @@
          'OptionsLang' => 'Dil',
          'OptionsMain' => 'Genel',
          'OptionsPaths' => 'Dizin',
-@@ -363,27 +358,27 @@
+@@ -358,92 +355,91 @@
+         'OptionsConveniences' => 'Diğer',
+         'OptionsDisplay' => 'Görsel',
+         'OptionsToolbar' => 'Menü',
+-        'OptionsToolbars' => {0 => 'Yok', 1 => 'Küçük', 2 => 'Büyük', 3 => 'System setting'},
++        'OptionsToolbars' => {0 => 'Yok', 1 => 'Küçük', 2 => 'Büyük', 3 => 'Sistem ayarları'},
+         'OptionsToolbarPosition' => 'Konum',
          'OptionsToolbarPositions' => {0 => 'Üst', 1 => 'Alt', 2 => 'Sol', 3 => 'Sağ'},
          'OptionsExpandersMode' => 'Expanders too long',
-         'OptionsExpandersModes' => {'asis' => 'Do nothing', 'cut' => 'Cut', 'wrap' => 'Line wrap'},
+-        'OptionsExpandersModes' => {'asis' => 'Do nothing', 'cut' => 'Cut', 'wrap' => 'Line wrap'},
 -        'OptionsDateFormat' => 'Date Format',
++        'OptionsExpandersModes' => {'asis' => 'Hiçbiri', 'cut' => 'Kes', 'wrap' => 'Line wrap'},
 +        'OptionsDateFormat' => 'Tarih Biçimi',
          'OptionsDateFormatTooltip' => 'Format is the one used by strftime(3). Default is %d/%m/%Y',
          'OptionsView' => 'Film Listesi',
@@ -435,16 +449,46 @@
          'OptionsPathProgramsGroup' => 'Yazılımlar',
 -        'OptionsProgramsSystem' => 'Use programs defined by system',
 -        'OptionsProgramsUser' => 'Use specified programs',
+-        'OptionsProgramsSet' => 'Set programs',
 +        'OptionsProgramsSystem' => 'Sistem tarafından tanımlanan programları kullan',
 +        'OptionsProgramsUser' => 'Belirlenen programları kullan',
-         'OptionsProgramsSet' => 'Set programs',
++        'OptionsProgramsSet' => 'Yazılımları ayarla',
          'OptionsPathImagesGroup' => 'Resimler',
          'OptionsInternetDataGroup' => 'Veri alma',
-@@ -412,14 +407,13 @@
+         'OptionsInternetSettingsGroup' => 'Ayarlar',
+         'OptionsDisplayInformationGroup' => 'Bilgi gösterimi',
+         'OptionsDisplayArticlesGroup' => 'Articles',
+         'OptionsImagesDisplayGroup' => 'Görsel',
+-        'OptionsImagesStyleGroup' => 'Stil',
++        'OptionsImagesStyleGroup' => 'Biçem',
+         'OptionsDetailedPreferencesGroup' => 'Seçenekler',
+-        'OptionsFeaturesConveniencesGroup' => 'Conveniences',
+-        'OptionsPicturesFormat' => 'Prefix to use for pictures:',
++        'OptionsFeaturesConveniencesGroup' => 'Uygunluk',
++        'OptionsPicturesFormat' => 'Resimler için kullanılacak önek:',
+         'OptionsPicturesFormatInternal' => 'gcstar__',
+-        'OptionsPicturesFormatTitle' => 'Title or name of the associated item',
++        'OptionsPicturesFormatTitle' => 'İlgili ögenin başlığı yada adı',
+         'OptionsPicturesWorkingDir' => '%WORKING_DIR% or . will be replaced with collection directory (use only on beginning of path)',
+-        'OptionsPicturesFileBase' => '%FILE_BASE% will be replaced by collection file name without suffix (.gcs)',
++        'OptionsPicturesFileBase' => '(.gcs) soneki olmayan dosya isimleri %FILE_BASE% ile değiştirilecek',
+         'OptionsPicturesWorkingDirError' => '%WORKING_DIR% could only be used on the beginning of the path for pictures',
+-        'OptionsConfigureMailers' => 'Configure mailing programs',
++        'OptionsConfigureMailers' => 'E-posta uygulamasını yapılandır',
+ 
+         'ImagesOptionsButton' => 'Ayarlar',
+         'ImagesOptionsTitle' => 'Kağak listesi için ayarlar',
+         'ImagesOptionsSelectColor' => 'Renk seçiniz',
+-        'ImagesOptionsUseOverlays' => 'Use image overlays',
++        'ImagesOptionsUseOverlays' => 'Resim kaplaması kullan',
+         'ImagesOptionsBg' => 'Arkaplan',
+         'ImagesOptionsBgPicture' => 'Arkaplan resmi kullan',
+         'ImagesOptionsFg'=> 'Seçim',
          'ImagesOptionsBgTooltip' => 'Arkaplanı değiştir',
          'ImagesOptionsFgTooltip'=> 'Seçili alan rengini değiştir',
-         'ImagesOptionsResizeImgList' => 'Automatically change number of columns',
+-        'ImagesOptionsResizeImgList' => 'Automatically change number of columns',
 -        'ImagesOptionsAnimateImgList' => 'Use animations',
++        'ImagesOptionsResizeImgList' => 'Sütun sayısı otomatik olarak değişir',
          'ImagesOptionsSizeLabel' => 'Boyut',
          'ImagesOptionsSizeList' => {0 => 'Minik', 1 => 'Küçük', 2 => 'Orta', 3 => 'Büyük', 4 => 'Devasa'},
          'ImagesOptionsSizeTooltip' => 'Resim boyutu seçiniz',
@@ -452,11 +496,15 @@
          'DetailedOptionsTitle' => 'Detaylı liste için ayarlar',
          'DetailedOptionsImageSize' => 'Kapak boyutu',
 -        'DetailedOptionsGroupItems' => 'Filmleri Koleksiyon türüne göre sınıflandır',
+-        'DetailedOptionsSecondarySort' => 'Sort field for children',
 +        'DetailedOptionsGroupItems' => 'Filmleri arşiv türüne göre sınıflandır',
-         'DetailedOptionsSecondarySort' => 'Sort field for children',
++        'DetailedOptionsSecondarySort' => 'Çocuklar için alanları sırala',
  		'DetailedOptionsFields' => 'Gösterilecek alanları seçiniz',
-         'DetailedOptionsGroupedFirst' => 'Keep together orphaned items',
-@@ -429,21 +423,21 @@
+-        'DetailedOptionsGroupedFirst' => 'Keep together orphaned items',
++        'DetailedOptionsGroupedFirst' => 'Sahipsiz ögeleri birlikte tut',
+         'DetailedOptionsAddCount' => 'Add number of elements on categories',
+ 
+         'ExtractButton' => 'Bilgi',
          'ExtractTitle' => 'Video Bilgisi',
          'ExtractImport' => 'Bu değerleri kullan',
  
@@ -485,7 +533,7 @@
          'ImportExportFile' => 'Dosya',
          'ImportExportFieldsUnused' => 'Kullanılmayacak alanlar',
          'ImportExportFieldsUsed' => 'Kullanılacak alanlar',
-@@ -456,17 +450,17 @@
+@@ -456,17 +452,17 @@
          'ImportNewList' => 'Yeni veritabanı oluştur',
          'ImportCurrentList' => 'Açık olan veritabanına aktar',
          'ImportDropError' => 'Dosyanın açılmasında sorun çıktı. Bir önceki veritabanı yüklenecek.',
@@ -510,7 +558,7 @@
  
          #Some default panels
          'PanelCompact' => 'İşlevsel',
-@@ -475,23 +469,23 @@
+@@ -475,23 +471,23 @@
  
          'PanelSearchButton' => 'Bilgi Al',
          'PanelSearchTip' => 'Bu film için internetten bilgi al',
@@ -528,10 +576,11 @@
 -        'PanelImageNoImage' => 'No image',
 +        'PanelImageNoImage' => 'Resim yok',
          'PanelSelectFileTitle' => 'Dosya Seçiniz',
-         'PanelLaunch' => 'Launch',        
+-        'PanelLaunch' => 'Launch',        
 -        'PanelRestoreDefault' => 'Restore default',
 -        'PanelRefresh' => 'Update',
 -        'PanelRefreshTip' => 'Update information from web',
++        'PanelLaunch' => 'Başlat',        
 +        'PanelRestoreDefault' => 'Varsayılana sıfırla',
 +        'PanelRefresh' => 'Güncelle',
 +        'PanelRefreshTip' => 'Bilgileri internetten güncelle',
@@ -543,21 +592,26 @@
  
          'PanelWeb' => 'Bilgileri göster',
          'PanelWebTip' => 'Bu filmin internet bilgisini göster', # Accepts model codes
-@@ -500,7 +494,7 @@
+@@ -500,9 +496,9 @@
          'PanelDateSelect' => 'Tarih Seçiniz',
          'PanelNobody' => 'Kimse',
          'PanelUnknown' => 'Bilinmiyor',
 -        'PanelAdded' => 'Add date',
 +        'PanelAdded' => 'Tarih Ekle',
          'PanelRating' => 'Puan',
-         'PanelPressRating' => 'Press Rating',
+-        'PanelPressRating' => 'Press Rating',
++        'PanelPressRating' => 'Puanlamayı Göster',
          'PanelLocation' => 'Yer',
-@@ -515,10 +509,10 @@
+ 
+         'PanelLending' => 'Ödünç',
+@@ -514,11 +510,11 @@
+         'PanelLendedYes' => 'Ödün verilme',
          'PanelLendedNo' => 'Arşivde',
  
-         'PanelTags' => 'Tags',
+-        'PanelTags' => 'Tags',
 -        'PanelFavourite' => 'Favourite',
 -        'TagsAssigned' => 'Assigned Tags', 
++        'PanelTags' => 'Etiketler',
 +        'PanelFavourite' => 'Güzel',
 +        'TagsAssigned' => 'Atanan Etiketler', 
  
@@ -566,7 +620,7 @@
  
          'CheckUndef' => 'Farketmez',
          'CheckYes' => 'Evet',
-@@ -527,26 +521,26 @@
+@@ -527,26 +523,26 @@
          'ToolbarAll' => 'Tümünü Göster',
          'ToolbarAllTooltip' => 'Tüm filmleri görmek için tıklayınız',
          'ToolbarGroupBy' => 'Grupla',
@@ -593,8 +647,9 @@
          'PluginsAuthor' => 'Yazarı',
          'PluginsLang' => 'Dil',
          'PluginsUseSite' => 'Her zaman bu siteyi kullan',
-         'PluginsPreferredTooltip' => 'Site recommended by GCstar',
+-        'PluginsPreferredTooltip' => 'Site recommended by GCstar',
 -        'PluginDisabled' => 'Disabled',
++        'PluginsPreferredTooltip' => 'GCstar tarafından önerilen site',
 +        'PluginDisabled' => 'Kapalı',
  
          'BorrowersTitle' => 'Ödünç Seçenekleri',
@@ -603,7 +658,7 @@
          'BorrowersName' => 'Adı',
          'BorrowersEmail' => 'E-posta',
          'BorrowersAdd' => 'Ekle',
-@@ -556,15 +550,15 @@
+@@ -556,15 +552,15 @@
          'BorrowersSubject' => 'Posta konusu',
          'BorrowersNotice1' => '%1 - Ödünç alanın adı',
          'BorrowersNotice2' => '%2 - Film adı',
@@ -624,7 +679,7 @@
  
          'MailTitle' => 'E-posta gönder',
          'MailFrom' => 'Kimden: ',
-@@ -574,9 +568,9 @@
+@@ -574,9 +570,9 @@
          'MailSendmailError' => 'Sendmail istemcisini çalıştıramıyor',
  
          'SearchTooltip' => 'Detaylı arama için tıklayınız', # Accepts model codes
@@ -637,7 +692,7 @@
  
          'QueryReplaceField' => 'Değiştirilecek alan',
          'QueryReplaceOld' => 'Şimdiki değer',
-@@ -606,72 +600,70 @@
+@@ -606,72 +602,70 @@
          'GenresExport' => 'Listeyi kaydet',
          'GenresModify' => 'Tür Düzenle',
  

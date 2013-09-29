@@ -1,0 +1,56 @@
+<PISI>
+    <Source>
+        <Name>pspp</Name>
+        <Homepage>http://www.gnu.org/software/pspp/pspp.html</Homepage>
+        <Packager>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <PartOf>science.mathematics</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>İstatistik analiz programı</Summary>
+        <Description>İstatistik analiz programı</Description>
+        <BuildDependencies>
+            <Dependency>gsl-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>gtksourceview-devel</Dependency>
+            <Dependency>libglade-devel</Dependency>
+            <Dependency>plotutils-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="069fae733b10ce07afa8f68b101aea455c406d64" type="targz">/home/PisiLinux10/İndirilenler/pspp-0.8.1.tar.gz</Archive>
+        <Patches>
+<!-- <Patch level="1">automake-tr.patch</Patch> -->
+<!-- 		  <Patch level="1">makefile.patch</Patch> -->
+<!--             <Patch level="1">pspp-0001-stdio-don-t-assume-gets-any-more.patch</Patch> -->
+<!-- 		  <Patch level="0">turkish.patch</Patch> -->
+        </Patches>
+    </Source>
+    <Package>
+        <Name>pspp</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/pspp/pspp.desktop" permission="0644" group="root" owner="root">pspp.desktop</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/locale/tr/LC_MESSAGES/pspp.mo">pspp.mo</AdditionalFile>
+        </AdditionalFiles>
+        <RuntimeDependencies>
+            <Dependency>gsl</Dependency>
+	    <Dependency>gtk2</Dependency>
+	    <Dependency>libglade</Dependency> 
+	    <Dependency>plotutils</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-09-28</Date>
+            <Version>0.8.1</Version>
+            <Comment>update</Comment>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

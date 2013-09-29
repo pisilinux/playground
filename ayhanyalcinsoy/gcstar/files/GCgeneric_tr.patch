@@ -1,0 +1,45 @@
+--- gcstar/lib/gcstar/GCLang/TR/GCModels/GCgeneric.pm	2013-09-08 21:14:54.256000028 +0300
++++ gcstar/lib/gcstar/GCLang/TR/GCModels/GCgeneric.pm	2013-08-30 23:46:19.871326538 +0300
+@@ -0,0 +1,42 @@
++{
++    package GCLang::TR::GCModels::GCgeneric;
++
++    use utf8;
++###################################################
++#
++#  Copyright 2005-2010 Christian Jodar
++#
++#  This file is part of GCstar.
++#
++#  GCstar is free software; you can redistribute it and/or modify
++#  it under the terms of the GNU General Public License as published by
++#  the Free Software Foundation; either version 2 of the License, or
++#  (at your option) any later version.
++#
++#  GCstar is distributed in the hope that it will be useful,
++#  but WITHOUT ANY WARRANTY; without even the implied warranty of
++#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++#  GNU General Public License for more details.
++#
++#  You should have received a copy of the GNU General Public License
++#  along with GCstar; if not, write to the Free Software
++#  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
++#
++###################################################
++    
++    use strict;
++    use base 'Exporter';
++
++    our @EXPORT = qw(%lang);
++
++    our %lang = (
++    
++        Items => {0 => 'Item',
++                  1 => 'Item',
++                  X => 'Items'
++                  },
++        NewItem => 'Yeni öge',
++     );
++}
++
++1;
