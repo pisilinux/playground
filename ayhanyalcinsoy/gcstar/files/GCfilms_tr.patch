@@ -1,0 +1,94 @@
+--- gcstar/lib/gcstar/GCLang/TR/GCModels/GCfilms.pm	2013-09-08 21:14:54.256000028 +0300
++++ gcstar/lib/gcstar/GCLang/TR/GCModels/GCfilms.pm	2013-08-30 23:41:25.987319832 +0300
+@@ -0,0 +1,91 @@
++{
++    package GCLang::TR::GCModels::GCfilms;
++
++    use utf8;
++###################################################
++#
++#  Copyright 2005-2010 Christian Jodar
++#
++#  This file is part of GCstar.
++#
++#  GCstar is free software; you can redistribute it and/or modify
++#  it under the terms of the GNU General Public License as published by
++#  the Free Software Foundation; either version 2 of the License, or
++#  (at your option) any later version.
++#
++#  GCstar is distributed in the hope that it will be useful,
++#  but WITHOUT ANY WARRANTY; without even the implied warranty of
++#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++#  GNU General Public License for more details.
++#
++#  You should have received a copy of the GNU General Public License
++#  along with GCstar; if not, write to the Free Software
++#  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
++#
++###################################################
++    
++    use strict;
++    use base 'Exporter';
++
++    our @EXPORT = qw(%lang);
++
++    our %lang = (
++    
++        CollectionDescription => 'Film Arşivi',
++        Items => 'Filmler',
++        NewItem => 'Film Ekle',
++    
++    
++        Id => 'Nu.',
++        Title => 'Film Adı',
++        Date => 'Yıl',
++        Time => 'Süre',
++        Director => 'Yönetmen',
++        Country => 'Ülke',
++        MinimumAge => 'Yaş Grubu',
++        Genre => 'Türü',
++        Image => 'Kapak',
++        Original => 'Özgün Adı',
++        Actors => 'Oyuncular',
++        Actor => 'Aktör',
++        Role => 'Rol',
++        Comment => 'Yorumlar, Ödüller ve Diğer Bilgiler',
++        Synopsis => 'Konu',
++        Seen => 'İzlendi',
++        Number => 'Sayısı',
++        Format => 'Medya',
++        Region => 'Bölge',
++        Identifier => 'Tanıtıcı',
++        Url => 'Web',
++        Audio => 'Ses',
++        Video => 'Video formatı',
++        Trailer => 'Video dosyası',
++        Serie => 'Seri',
++        Rank => 'Sıralama',
++        Subtitles => 'Altyazı(lar)',
++
++        SeenYes => 'İzlendi',
++        SeenNo => 'İzlenmedi',
++
++        AgeUnrated => 'Değerlendirilmemiş',
++        AgeAll => 'Herkes',
++        AgeParent => 'Ebeveyn Kontrollü',
++
++        Main => 'Genel Bilgiler',
++        General => 'Genel',
++        Details => 'Detaylar',
++
++        Information => 'Bilgi',
++        Languages => 'Dil(ler)',
++        Encoding => 'Kodlama',
++
++        FilterAudienceAge => 'İzleyici grubu',
++        FilterSeenNo => 'İzlen_medi',
++        FilterSeenYes => 'İ_zlendi',
++        FilterRatingSelect => '_Puanı En Az...',
++
++        ExtractSize => 'Boyut',
++     );
++}
++
++1;
