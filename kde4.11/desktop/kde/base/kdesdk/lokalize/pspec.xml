@@ -12,10 +12,10 @@
         <IsA>app:gui</IsA>
         <Summary>Computer-Aided Translation System</Summary>
         <Description>Lokalize is a computer-aided translation system that focuses on productivity and quality assurance. </Description>
-        <Archive sha1sum="0af9576c292bade1202d051afb52c01dd5e0ddb9" type="tarxz">mirrors://kde/stable/4.11.1/src/lokalize-4.11.1.tar.xz</Archive>
+        <Archive sha1sum="875429ea7297003843efa357bf1e110eed967075" type="tarxz">mirrors://kde/stable/4.11.2/src/lokalize-4.11.2.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="4.11.1">kdelibs-devel</Dependency>
-            <Dependency versionFrom="4.11.1">kde-runtime-devel</Dependency>
+            <Dependency versionFrom="4.11.2">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.2">kde-runtime-devel</Dependency>
             <Dependency>hunspell-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -23,9 +23,9 @@
     <Package>
         <Name>lokalize</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="4.11.1">kdelibs</Dependency>
-            <Dependency versionFrom="4.11.1">kde-runtime</Dependency>
-            <Dependency versionFrom="4.11.1">kdesdk-strigi-analyzers</Dependency>
+            <Dependency versionFrom="4.11.2">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.2">kde-runtime</Dependency>
+            <Dependency versionFrom="4.11.2">kdesdk-strigi-analyzers</Dependency>
         </RuntimeDependencies>
         <Replaces>
             <Package>kdesdk</Package>
@@ -38,6 +38,13 @@
     </Package>  
 
     <History>
+        <Update release="2">
+            <Date>2013-10-02</Date>
+            <Version>4.11.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2013-09-03</Date>
             <Version>4.11.1</Version>
