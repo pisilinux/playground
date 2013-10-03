@@ -12,7 +12,7 @@ if [ "$1" != "" ] && [ "$1" = "--newini" ]; then
     echo "Your old ini file has been renamed to mameini.bak"
     mv mame.ini mameini.bak
   fi
-  /usr/share/sdlmame/sdlmame \
+  /usr/share/sdlmame/mame64 \
     -artpath "$home/.mame/artwork;artwork" \
     -ctrlrpath "$home/.mame/ctrlr;ctrlr" \
     -inipath $home/.mame/ini \
@@ -36,7 +36,7 @@ elif [ ! -e $HOME/.mame ]; then
   mkdir $HOME/.mame
   mkdir $HOME/.mame/{artwork,cfg,comments,ctrlr,diff,ini,inp,memcard,nvram,samples,snap,sta}
   cd $HOME/.mame
-  /usr/share/sdlmame/sdlmame \
+  /usr/share/sdlmame/mame64 \
     -artpath "$home/.mame/artwork;artwork" \
     -ctrlrpath "$home/.mame/ctrlr;ctrlr" \
     -inipath $home/.mame/ini \
@@ -54,5 +54,5 @@ elif [ ! -e $HOME/.mame ]; then
     -createconfig
 else
   cd /usr/share/sdlmame
-  ./sdlmame "$@"
+  #./sdlmame "$@"
 fi

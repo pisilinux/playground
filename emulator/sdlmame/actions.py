@@ -28,5 +28,7 @@ def install():
     pisitools.insinto("/usr/share/man/man6", "src/osd/sdl/man/*.6*")
     for d in ["artwork", "ctrlr", "src/osd/sdl/keymaps"]:
         pisitools.insinto("%s/%s" % (data_dir, d.split("/").pop()), "%s/*" % d)
+        
+    pisitools.dosym("/usr/share/sdlmame/mame64", "/usr/bin/sdlmame")    
 
     pisitools.dodoc("docs/*")
