@@ -14,7 +14,7 @@
         <IsA>app:gui</IsA>
         <Summary>A standalone 3D first person shooter game</Summary>
         <Description>Alien Arena is a standalone 3D first person online deathmatch shooter crafted from the original source code of Quake II and Quake III.</Description>
-        <Archive sha1sum="eb404097a9cc1b974bf6bc7671070c430ccbc2e4" type="targz">http://red.planetarena.org/files/alienarena-7.65-linux20130207.tar.gz</Archive>
+        <Archive sha1sum="7c52bfcc8a578167301ccac9d20997716dac8a37" type="targz">http://red.planetarena.org/files/alienarena-7.66-linux20130827.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>libjpeg-turbo-devel</Dependency>
             <Dependency>libXxf86dga-devel</Dependency>
@@ -26,8 +26,8 @@
         </BuildDependencies>
         <Patches>
             <Patch level="1">use_home_dir.patch</Patch>
-            <Patch level="1">alienarena-7.45-no-qglBlitFramebufferEXT.patch</Patch>
-            <!--<Patch level="1">alienarena-7.50-nodata.patch</Patch>
+            <!--<Patch level="1">alienarena-7.45-no-qglBlitFramebufferEXT.patch</Patch>
+            <Patch level="1">alienarena-7.50-nodata.patch</Patch>
             <Patch level="1">alienarena-7.50-NAN.patch</Patch>-->
         </Patches>
     </Source>
@@ -59,7 +59,14 @@
     </Package>
 
     <History>
-        <Update release="2">
+         <Update release="3">
+            <Date>2013-10-09</Date>
+            <Version>7.66</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+       <Update release="2">
             <Date>2013-07-10</Date>
             <Version>7.65</Version>
             <Comment>Version bump.</Comment>
