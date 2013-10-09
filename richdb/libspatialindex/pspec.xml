@@ -8,7 +8,7 @@
             <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
         </Packager>
-        <License>GPL</License>
+        <License>MIT</License>
         <PartOf>science.gis</PartOf>
         <IsA>library</IsA>
         <Summary>C++ implementation of R*-tree, an MVR-tree and a TPR-tree with C API</Summary>
@@ -16,7 +16,10 @@
         <BuildDependencies>
             <Dependency>libgcc</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="f0dacc628af9fda5cd093c0f9d3ea61adadbcf9b" type="tarbz2">http://download.osgeo.org/libspatialindex/spatialindex-src-1.8.1.tar.bz2</Archive>
+        <Archive sha1sum="9fa68fd250f1614792f4e5055a62748994c76e4e" type="tarbz2">http://download.osgeo.org/libspatialindex/spatialindex-src-1.8.0.tar.bz2</Archive>
+    <Patches>
+    <Patch level="0">spatialindex-1.8.0-soname.patch</Patch>
+    </Patches>
     </Source>
     <Package>
         <Name>libspatialindex</Name>
@@ -38,7 +41,7 @@
     <History>
 	<Update release="2">
             <Date>2013-10-08</Date>
-            <Version>1.8.1</Version>
+            <Version>1.8.0</Version>
             <Comment>Version bump</Comment>
             <Name>Richard de Bruin</Name>
             <Email>richdb@pisilinux.org</Email>
