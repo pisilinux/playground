@@ -7,7 +7,7 @@ diff -Naur fluxbox-1.3.1.orig/util/startfluxbox.in fluxbox-1.3.1/util/startfluxb
  # idesk &
 +exec /usr/libexec/polkit-gnome-authentication-agent-1 &
 +exec gvtray &
-+exec NetworkManager &
++exec /usr/sbin/NetworkManager &
 
  # And last but not least we start fluxbox.
  # Because it is the last app you have to run it with ''exec'' before it.
