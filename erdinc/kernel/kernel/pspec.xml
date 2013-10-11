@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="684f47bcd810c43ceeaf47e23786ce851920ef93" type="tarbz2">https://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-3.12-rc2.tar.bz2</Archive>
+        <Archive sha1sum="69e90ab0e997552a5bcdedd1a2ec76f5f69d4671" type="tarbz2">https://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-3.12-rc4.tar.bz2</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -117,7 +117,6 @@
             <Patch level="1">patches/fedora/ath9k_rx_dma_stop_check.patch</Patch>
             <Patch level="1">patches/fedora/crash-driver.patch</Patch>
             <Patch level="1">patches/fedora/criu-no-expert.patch</Patch>
-            <Patch level="1">patches/fedora/cve-2013-2147-ciss-info-leak.patch</Patch>
             <Patch level="1">patches/fedora/debug-bad-pte-modules.patch</Patch>
             <Patch level="1">patches/fedora/disable-i8042-check-on-apple-mac.patch</Patch>
             <Patch level="1">patches/fedora/drm-i915-dp-stfu.patch</Patch>
@@ -197,7 +196,6 @@
             <Patch level="1">patches/suse/patches.suse/sd_init.mark_majors_busy.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/setuid-dumpable-wrongdir.patch</Patch>
             <Patch level="1">patches/suse/patches.suse/stack-unwind.patch</Patch>
-            <Patch level="1">patches/suse/patches.suse/suse-hv-Drivers-hv-util-Fix-a-bug-in-util-version-negotiatio.patch</Patch>
 
             <!-- Pisilinux Kernel Patches -->
             <!-- Blacklist 2 Lenovo in acer-wmi (#15967)-->
@@ -304,7 +302,7 @@
 
     <History>
         <Update release="24">
-            <Date>2013-09-22</Date>
+            <Date>2013-10-08</Date>
             <Version>3.12.0</Version>
             <Comment>rc test</Comment>
             <Type package="kernel">security</Type>
