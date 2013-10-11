@@ -18,30 +18,23 @@
             <Dependency>libxfce4util-devel</Dependency>
             <Dependency>perl-ExtUtils-Depends</Dependency>
             <Dependency>perl-ExtUtils-PkgConfig</Dependency>
-<<<<<<< HEAD
-            <Dependency release="4">libxfce4util-devel</Dependency>
-=======
->>>>>>> 9de22661d9cb842ef5d137deafb795148cc692b0
             <Dependency>perl-Glib</Dependency>
             <Dependency>gtk-doc</Dependency>
         </BuildDependencies>
         <Patches>
-<<<<<<< HEAD
-            <!--    <Patch level="1">simplify_checks.patch</Patch>-->
-=======
 <!--             <Patch level="1">simplify_checks.patch</Patch> -->
->>>>>>> 9de22661d9cb842ef5d137deafb795148cc692b0
         </Patches>
     </Source>
 
     <Package>
         <Name>xfconf</Name>
         <RuntimeDependencies>
-            <Dependency release="4">libxfce4util</Dependency>
+            <Dependency>libxfce4util</Dependency>
             <Dependency>perl-Glib</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/libexec</Path>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="man">/usr/share/man</Path>
@@ -57,7 +50,7 @@
         <Summary>Xfconf development files</Summary>
         <RuntimeDependencies>
             <Dependency release="current">xfconf</Dependency>
-            <Dependency release="4">libxfce4util-devel</Dependency>
+            <Dependency>libxfce4util-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -67,13 +60,6 @@
     </Package>
 
     <History>
-        <Update release="3">
-            <Date>2013-10-11</Date>
-            <Version>4.10.0</Version>
-            <Comment>Rebuild</Comment>
-            <Name>Burak Fazıl Ertürk</Name>
-            <Email>burkerturk@pisilinux.org</Email>
-        </Update>
         <Update release="2">
             <Date>2013-08-15</Date>
             <Version>4.10.0</Version>

@@ -9,17 +9,12 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-<<<<<<< HEAD
-    autotools.configure("--libexecdir=/usr/lib \
-                         --disable-static")
-=======
     autotools.configure("--prefix=/usr \
                          --libexecdir=/usr/lib \
                          --disable-static \
                          --disable-debug \
                          --disable-gladeui \
                          --enable-startup-notification")
->>>>>>> 9de22661d9cb842ef5d137deafb795148cc692b0
 
 def build():
     autotools.make()
@@ -27,5 +22,6 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
+    #pisitools.removeDir("/etc")
 
     pisitools.dodoc("COPYING*", "NEWS", "README", "TODO", "ChangeLog", "AUTHORS")

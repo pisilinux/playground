@@ -12,17 +12,12 @@ def setup():
     autotools.configure("--prefix=/usr \
                          --sbindir=/usr/bin \
                          --libexecdir=/usr/lib \
-<<<<<<< HEAD
-                         --disable-static \
-                         --enable-gtk-doc")
-=======
                          --localstatedir=/var \
                          --disable-static \
                          --disable-gtk-doc \
                          --disable-debug")
 
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
->>>>>>> 9de22661d9cb842ef5d137deafb795148cc692b0
 
 def build():
     autotools.make()
