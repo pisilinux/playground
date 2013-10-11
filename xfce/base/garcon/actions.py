@@ -10,7 +10,6 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system('xdt-autogen')
     autotools.configure('--enable-static=no')
 
 def build():

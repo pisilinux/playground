@@ -6,16 +6,19 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import get
 
 def setup():
-    autotools.configure('--disable-static')
-
-    pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
+    autotools.configure("--prefix=/usr \
+                         --sbindir=/usr/bin \
+                         --libexecdir=/usr/lib \
+                         --disable-static \
+                         --enable-gtk-doc")
 
 def build():
     autotools.make()
 
 def install():
-    autotools.install()
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.dodoc("AUTHORS", "ChangeLog*", "COPYING", "NEWS", "README*", "THANKS", "TODO")

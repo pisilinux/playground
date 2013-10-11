@@ -10,9 +10,8 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system('xdt-autogen')
-    autotools.configure("--disable-static \
-                         --enable-startup-notification")
+    autotools.configure("--libexecdir=/usr/lib \
+                         --disable-static")
 
 def build():
     autotools.make()
@@ -20,6 +19,5 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    #pisitools.removeDir("/etc")
 
     pisitools.dodoc("COPYING*", "NEWS", "README", "TODO", "ChangeLog", "AUTHORS")

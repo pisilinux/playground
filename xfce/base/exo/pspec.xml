@@ -17,7 +17,7 @@
         <Archive sha1sum="dd1fed0591f661f3c2f8d238b9447e59be48e3f1" type="tarbz2">mirrors://xfce/src/xfce/exo/0.10/exo-0.10.2.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>perl-URI</Dependency>
-            <Dependency>libxfce4ui-devel</Dependency>
+            <Dependency release="4">libxfce4ui-devel</Dependency>
             <Dependency>gtk2-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -27,7 +27,7 @@
         <RuntimeDependencies>
             <Dependency>perl-URI</Dependency>
             <Dependency>icon-theme-hicolor</Dependency>           
-            <Dependency>libxfce4ui</Dependency>
+            <Dependency release="4">libxfce4ui</Dependency>
             <Dependency>gtk2</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -52,7 +52,7 @@
         <Summary>Development files for exo</Summary>
         <RuntimeDependencies>
             <Dependency release="current">exo</Dependency>
-            <Dependency>libxfce4util-devel</Dependency>
+            <Dependency release="4">libxfce4util-devel</Dependency>
             <Dependency>gtk2-devel</Dependency>
         </RuntimeDependencies>
         <Files>
