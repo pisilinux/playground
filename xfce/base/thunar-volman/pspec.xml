@@ -15,33 +15,29 @@
 thunar-volman is installed and configured properly, and you plug in your digical camera, it will automatically spawn your preferred photo application and import the new pictures from your camera.</Description>
         <Archive sha1sum="2e62c9b0bec5c164e9c632671c81966c4220823c" type="tarbz2">http://archive.xfce.org/xfce/4.10/src/thunar-volman-0.8.0.tar.bz2</Archive>
         <BuildDependencies>>
-<!--             <Dependency>xfconf-devel</Dependency> -->
-<!--             <Dependency>libxfce4util-devel</Dependency> -->
+            <Dependency>xfconf-devel</Dependency>
+            <Dependency>libxfce4util-devel</Dependency>
             <Dependency>libxfce4ui-devel</Dependency>
             <Dependency>Thunar-devel</Dependency>
-<!--             <Dependency>exo-devel</Dependency> -->
-<!--             <Dependency>glib2-devel</Dependency> -->
-<!--             <Dependency>gtk2-devel</Dependency> -->
-<!--             <Dependency>exo-devel</Dependency> -->
-<!--             <Dependency>pango-devel</Dependency> -->
+            <Dependency>exo-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>exo-devel</Dependency>
             <Dependency>icon-theme-hicolor</Dependency>
-<!--             <Dependency>libnotify-devel</Dependency> -->
+            <Dependency>libnotify-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>thunar-volman</Name>
         <RuntimeDependencies>
-<!--             <Dependency>xfconf</Dependency> -->
-<!--             <Dependency>libxfce4util</Dependency> -->
+            <Dependency>xfconf</Dependency> 
+            <Dependency>libxfce4util</Dependency>
             <Dependency>libxfce4ui</Dependency>
             <Dependency>Thunar</Dependency>
-<!--             <Dependency>exo</Dependency> -->
-<!--             <Dependency>glib2</Dependency> -->
-<!--             <Dependency>gtk2</Dependency> -->
-<!--             <Dependency>exo</Dependency> -->
-<!--             <Dependency>pango</Dependency> -->
-<!--             <Dependency>libnotify</Dependency> -->
+            <Dependency>exo</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>exo</Dependency>
+            <Dependency>libnotify</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="doc">/usr/share/doc</Path>
@@ -55,7 +51,7 @@ thunar-volman is installed and configured properly, and you plug in your digical
         <Update release="3">
             <Date>2013-10-10</Date>
             <Version>0.8.0</Version>
-            <Comment>fix dep</Comment>
+            <Comment>Rebuild, cleanup</Comment>
             <Name>Kamil Atlı</Name>
             <Email>suvarice@gmail.com</Email>
         </Update>

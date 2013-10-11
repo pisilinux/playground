@@ -10,15 +10,13 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-  #  shelltools.system('xdt-autogen')
     autotools.configure("--prefix=/usr \
-    --sysconfdir=/etc \
-    --libexecdir=/usr/lib \
-    --localstatedir=/var \
-    --disable-static \
-    --enable-gtk-doc \
-    --disable-debug \
-    --with-vendor-info='Pisi Linux'")
+                         --libexecdir=/usr/lib \
+                         --disable-static \
+                         --disable-gtk-doc \
+                         --disable-gladeui \
+                         --disable-debug \
+                         --with-vendor-info='Pisi Linux'")
 
 def build():
     autotools.make()
