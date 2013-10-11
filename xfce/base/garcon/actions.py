@@ -10,7 +10,14 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+<<<<<<< HEAD
     autotools.configure('--enable-static=no')
+=======
+    autotools.configure("--prefix=/usr \
+                         --libexecdir=/usr/lib \
+                         --disable-static \
+                         --disable-debug")
+>>>>>>> 9de22661d9cb842ef5d137deafb795148cc692b0
 
 def build():
     autotools.make()

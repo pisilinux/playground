@@ -5,7 +5,7 @@
         <Name>xfconf</Name>
         <Homepage>http://www.xfce.org</Homepage>
         <Packager>
-            <Name>Alper Tekinalp</Name>
+            <Name>Pisi Linux Admins</Name>
             <Email>admins@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
@@ -14,16 +14,23 @@
         <Description>Xfconf is a hirerchical (tree-like) configuration system for the Xfce graphical desktop environment.</Description>
         <Archive sha1sum="c1ee751ea1139f5b656476b0ef2d46d52630aa47" type="tarbz2">http://archive.xfce.org/xfce/4.10/src/xfconf-4.10.0.tar.bz2</Archive>
         <BuildDependencies>
-         <!--   <Dependency>xfce4-dev-tools</Dependency>-->
-            <Dependency>gtk-doc</Dependency>
+            <Dependency>xfce4-dev-tools</Dependency>
+            <Dependency>libxfce4util-devel</Dependency>
             <Dependency>perl-ExtUtils-Depends</Dependency>
             <Dependency>perl-ExtUtils-PkgConfig</Dependency>
+<<<<<<< HEAD
             <Dependency release="4">libxfce4util-devel</Dependency>
+=======
+>>>>>>> 9de22661d9cb842ef5d137deafb795148cc692b0
             <Dependency>perl-Glib</Dependency>
-            <Dependency>chrpath</Dependency>
+            <Dependency>gtk-doc</Dependency>
         </BuildDependencies>
         <Patches>
+<<<<<<< HEAD
             <!--    <Patch level="1">simplify_checks.patch</Patch>-->
+=======
+<!--             <Patch level="1">simplify_checks.patch</Patch> -->
+>>>>>>> 9de22661d9cb842ef5d137deafb795148cc692b0
         </Patches>
     </Source>
 

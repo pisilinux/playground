@@ -10,11 +10,21 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+<<<<<<< HEAD
 
     autotools.configure("--libexecdir=/usr/lib \
                         --disable-static \
                         --enable-gtk-doc \
                         --with-vendor-info='Pisi Linux'")
+=======
+    autotools.configure("--prefix=/usr \
+                         --libexecdir=/usr/lib \
+                         --disable-static \
+                         --disable-gtk-doc \
+                         --disable-gladeui \
+                         --disable-debug \
+                         --with-vendor-info='Pisi Linux'")
+>>>>>>> 9de22661d9cb842ef5d137deafb795148cc692b0
 
 def build():
     autotools.make()

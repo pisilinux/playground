@@ -15,7 +15,7 @@
         <Description>The Xfce4 window manager manages the placement of application windows on the screen, provides beautiful window decorations, manages workspaces or virtual desktops, and natively supports multiscreen mode.</Description>
         <Archive sha1sum="cbfb1beee0e952f133ef851526823b472992de1d" type="tarbz2">http://archive.xfce.org/src/xfce/xfwm4/4.10/xfwm4-4.10.1.tar.bz2</Archive>
         <BuildDependencies>
-            <!--        <Dependency>libxfce4util-devel</Dependency>
+            <Dependency>libxfce4util-devel</Dependency>
             <Dependency>gtk2-devel</Dependency>
             <Dependency>libXrender-devel</Dependency>
             <Dependency>libXrandr-devel</Dependency>
@@ -26,20 +26,18 @@
             <Dependency>gdk-pixbuf-devel</Dependency>
             <Dependency>xfconf-devel</Dependency>
             <Dependency>libxfce4util-devel</Dependency>
+            <Dependency>libxfce4ui-devel</Dependency>
             <Dependency>libXext-devel</Dependency>
             <Dependency>libglade-devel</Dependency>
-            <Dependency>libXdamage-devel</Dependency> -->
             <Dependency>libwnck2-devel</Dependency>
-            <Dependency>libxfce4ui-devel</Dependency>
-
-
+            <Dependency>libXdamage-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>xfwm4</Name>
         <RuntimeDependencies>
-        <!--       <Dependency>libxfce4util</Dependency>
+            <Dependency>libxfce4util</Dependency>
             <Dependency>gtk2</Dependency>
             <Dependency>libXrender</Dependency>
             <Dependency>libXrandr</Dependency>
@@ -50,12 +48,11 @@
             <Dependency>gdk-pixbuf</Dependency>
             <Dependency>xfconf</Dependency>
             <Dependency>libxfce4util</Dependency>
+            <Dependency>libxfce4ui</Dependency>
             <Dependency>libXext</Dependency>
             <Dependency>libglade</Dependency>
-            <Dependency>libXdamage</Dependency>-->
             <Dependency>libwnck2</Dependency>
-            <Dependency>libxfce4ui</Dependency>
-            <Dependency>icon-theme-hicolor</Dependency>
+            <Dependency>libXdamage</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -72,6 +69,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2013-10-10</Date>
+            <Version>4.10.1</Version>
+            <Comment>Cleanup.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
         <Update release="3">
             <Date>2013-08-22</Date>
             <Version>4.10.1</Version>

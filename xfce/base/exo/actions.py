@@ -10,8 +10,15 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+<<<<<<< HEAD
     autotools.configure("--libexecdir=/usr/lib/xfce4 \
+=======
+    autotools.configure("--prefix=/usr \
+                         --libexecdir=/usr/lib/xfce4 \
+                         --localstatedir=/var  \
+>>>>>>> 9de22661d9cb842ef5d137deafb795148cc692b0
                          --disable-static \
+                         --disable-gtk-doc \
                          --disable-debug")
 
 def build():

@@ -14,24 +14,24 @@
         <Description>Xfce4-settings is a configuration manager for Xfce desktop environment.</Description>
         <Archive sha1sum="d41bf4b0539ed9455a351db5cee8b03c8f114cb6" type="tarbz2">http://archive.xfce.org/src/xfce/xfce4-settings/4.10/xfce4-settings-4.10.1.tar.bz2</Archive>
         <BuildDependencies>
-      <!--      <Dependency>libXi-devel</Dependency>
+            <Dependency>libXi-devel</Dependency>
+            <Dependency>libxklavier-devel</Dependency>
             <Dependency>libXcursor-devel</Dependency>
             <Dependency>libXrandr-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
             <Dependency>xfconf-devel</Dependency>
             <Dependency>libxfce4util-devel</Dependency>
             <Dependency>libglade-devel</Dependency>
             <Dependency>gtk2-devel</Dependency>
             <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>exo-devel</Dependency>
+            <Dependency>libxfce4ui-devel</Dependency>
             <Dependency>libwnck2-devel</Dependency>
             <Dependency>cairo-devel</Dependency>
             <Dependency>pango-devel</Dependency>
-            <Dependency>fontconfig-devel</Dependency>-->
-            <Dependency>exo-devel</Dependency>
-            <Dependency>libnotify-devel</Dependency>
-            <Dependency>libxfce4ui-devel</Dependency>
-            <Dependency>libxklavier-devel</Dependency>
-            <Dependency>libcanberra-devel</Dependency>
             <Dependency>garcon-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch>xfce4-settings-xml.patch</Patch>
@@ -41,28 +41,25 @@
     <Package>
         <Name>xfce4-settings</Name>
         <RuntimeDependencies>
-       <!--    <Dependency>libXi</Dependency>
+            <Dependency>libXi</Dependency>
+            <Dependency>libxklavier</Dependency>
             <Dependency>libXcursor</Dependency>
             <Dependency>libXrandr</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>libcanberra</Dependency>
             <Dependency>xfconf</Dependency>
             <Dependency>libxfce4util</Dependency>
             <Dependency>libglade</Dependency>
             <Dependency>gtk2</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
-            <Dependency>fontconfig</Dependency>
-            <Dependency>libwnck2</Dependency>
-            <Dependency>cairo</Dependency>
-            <Dependency>pango</Dependency>--->
-
             <Dependency>exo</Dependency>
             <Dependency>libxfce4ui</Dependency>
-            <Dependency>libnotify</Dependency>
-            <Dependency>libxklavier</Dependency>
-            <Dependency>libcanberra</Dependency>
+            <Dependency>libwnck2</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
             <Dependency>garcon</Dependency>
-            <Dependency>icon-theme-gnome</Dependency>
+            <Dependency>fontconfig</Dependency>
         </RuntimeDependencies>
-
         <Files>
             <Path fileType="config">/etc</Path>
             <Path fileType="executable">/usr/bin</Path>
@@ -75,6 +72,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2013-10-10</Date>
+            <Version>4.10.1</Version>
+            <Comment>Rebuild,cleanup, set icon theme faenza and sweat gtk theme.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
         <Update release="4">
             <Date>2013-08-22</Date>
             <Version>4.10.1</Version>
