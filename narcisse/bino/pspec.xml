@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>bino</Name>
+        <Homepage>http://bino3d.org</Homepage>
+        <Packager>
+           <Name>Mathias Freire</Name>
+           <Email>mathiasfreire45@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>bino</Icon>
+        <IsA>app:gui</IsA>        
+        <Summary>3D video player.</Summary>
+        <Description>Bino is a video player with support for stereoscopic 3D video and support for multi-display video</Description>
+        <Archive sha1sum="c93ae0637d912a4dbf3ae38cd1a5a50b3067c208" type="tarxz">http://download.savannah.nongnu.org/releases/bino/bino-1.4.2.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>libass-devel</Dependency>
+            <Dependency>ffmpeg-devel</Dependency>
+	    <Dependency>mesa-glu-devel</Dependency>
+	    <Dependency releaseFrom="4">glew-devel</Dependency>
+	    <Dependency>openal-devel</Dependency>
+	    <Dependency>qt-devel</Dependency>
+	    <Dependency>libX11-devel</Dependency>	   
+        </BuildDependencies>	
+    </Source>
+    
+    <Package>
+        <Name>bino</Name>
+        <RuntimeDependencies>
+            <Dependency>libass</Dependency>
+            <Dependency>ffmpeg</Dependency>
+	    <Dependency>mesa-glu</Dependency>
+	    <Dependency>glew</Dependency>
+	    <Dependency>glewmx</Dependency>
+	    <Dependency>openal</Dependency>
+	    <Dependency>qt</Dependency>
+	    <Dependency>libX11</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>           
+            <Path fileType="data">/usr/share/applications</Path>     
+	    <Path fileType="doc">/usr/share/doc/bino</Path>
+	    <Path fileType="doc">/usr/share/man</Path>
+	    <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/icons/hicolor</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+         </Files>
+    </Package>
+
+    <History>         
+        <Update release="1">
+            <Date>2013-07-08</Date>
+                <Version>1.4.2</Version>
+                <Comment>First release.</Comment>
+                <Name>Mathias Freire</Name>
+                <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+    
+    
