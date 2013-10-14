@@ -1,0 +1,63 @@
+--- src/player_qt.cpp.orig	2011-05-10 09:31:04.000000000 +0200
++++ src/player_qt.cpp	2011-05-10 09:32:17.000000000 +0200
+@@ -1856,31 +1856,31 @@
+     _settings->beginGroup("Session");
+     if (!(_init_data.params.contrast >= -1.0f && _init_data.params.contrast <= +1.0f))
+     {
+-        _init_data.params.contrast = _settings->value("contrast", QString("0")).toFloat();
++        _init_data.params.contrast = _settings->value("contrast", QString("0")).toString().toFloat();
+     }
+     if (!(_init_data.params.brightness >= -1.0f && _init_data.params.brightness <= +1.0f))
+     {
+-        _init_data.params.brightness = _settings->value("brightness", QString("0")).toFloat();
++        _init_data.params.brightness = _settings->value("brightness", QString("0")).toString().toFloat();
+     }
+     if (!(_init_data.params.hue >= -1.0f && _init_data.params.hue <= +1.0f))
+     {
+-        _init_data.params.hue = _settings->value("hue", QString("0")).toFloat();
++        _init_data.params.hue = _settings->value("hue", QString("0")).toString().toFloat();
+     }
+     if (!(_init_data.params.saturation >= -1.0f && _init_data.params.saturation <= +1.0f))
+     {
+-        _init_data.params.saturation = _settings->value("saturation", QString("0")).toFloat();
++        _init_data.params.saturation = _settings->value("saturation", QString("0")).toString().toFloat();
+     }
+     if (!(_init_data.params.crosstalk_r >= 0.0f && _init_data.params.crosstalk_r <= 1.0f))
+     {
+-        _init_data.params.crosstalk_r = _settings->value("crosstalk_r", QString("0")).toFloat();
++        _init_data.params.crosstalk_r = _settings->value("crosstalk_r", QString("0")).toString().toFloat();
+     }
+     if (!(_init_data.params.crosstalk_g >= 0.0f && _init_data.params.crosstalk_g <= 1.0f))
+     {
+-        _init_data.params.crosstalk_g = _settings->value("crosstalk_g", QString("0")).toFloat();
++        _init_data.params.crosstalk_g = _settings->value("crosstalk_g", QString("0")).toString().toFloat();
+     }
+     if (!(_init_data.params.crosstalk_b >= 0.0f && _init_data.params.crosstalk_b <= 1.0f))
+     {
+-        _init_data.params.crosstalk_b = _settings->value("crosstalk_b", QString("0")).toFloat();
++        _init_data.params.crosstalk_b = _settings->value("crosstalk_b", QString("0")).toString().toFloat();
+     }
+     if (_init_data.params.subtitle_encoding.length() == 1 && _init_data.params.subtitle_encoding[0] == '\0')
+     {
+@@ -1896,7 +1896,7 @@
+     }
+     if (_init_data.params.subtitle_scale < 0.0f)
+     {
+-        _init_data.params.subtitle_scale = _settings->value("subtitle-scale", QString("-1")).toFloat();
++        _init_data.params.subtitle_scale = _settings->value("subtitle-scale", QString("-1")).toString().toFloat();
+     }
+     if (_init_data.params.subtitle_color > std::numeric_limits<uint32_t>::max())
+     {
+@@ -2349,9 +2349,9 @@
+         _init_data.audio_stream = std::max(0, std::min(_init_data.audio_stream, _player->get_media_input().audio_streams() - 1));
+         _init_data.subtitle_stream = QVariant(_settings->value("subtitle-stream", QVariant(_init_data.subtitle_stream)).toString()).toInt();
+         _init_data.subtitle_stream = std::max(-1, std::min(_init_data.subtitle_stream, _player->get_media_input().subtitle_streams() - 1));
+-        _init_data.params.parallax = QVariant(_settings->value("parallax", QVariant(_init_data.params.parallax)).toString()).toFloat();
+-        _init_data.params.ghostbust = QVariant(_settings->value("ghostbust", QVariant(_init_data.params.ghostbust)).toString()).toFloat();
+-        _init_data.params.subtitle_parallax = QVariant(_settings->value("subtitle-parallax", QVariant(_init_data.params.parallax)).toString()).toFloat();
++        _init_data.params.parallax = QVariant(_settings->value("parallax", QVariant(_init_data.params.parallax)).toString()).toString().toFloat();
++        _init_data.params.ghostbust = QVariant(_settings->value("ghostbust", QVariant(_init_data.params.ghostbust)).toString()).toString().toFloat();
++        _init_data.params.subtitle_parallax = QVariant(_settings->value("subtitle-parallax", QVariant(_init_data.params.parallax)).toString()).toString().toFloat();
+         _settings->endGroup();
+         // Get stereo mode
+         QString mode_fallback = QString(parameters::stereo_mode_to_string(
