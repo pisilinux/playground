@@ -21,7 +21,7 @@ WorkDir="finalterm-master"
 def setup():
     shelltools.makedirs("build")
     shelltools.cd("build")
-    cmaketools.configure(sourceDir = "..")
+    cmaketools.configure("-DCMAKE_INSTALL_PREFIX=/usr" ,sourceDir = "..")
                           
 
 def build():

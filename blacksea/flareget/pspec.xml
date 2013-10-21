@@ -3,7 +3,7 @@
 <PISI>
     <Source>
         <Name>flareget</Name>
-        <Homepage>http://flareget.com/</Homepage>
+        <Homepage>http://flareget.com</Homepage>
         <Packager>
             <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
@@ -14,7 +14,7 @@
         <IsA>app</IsA>
         <Summary>Download manager and accelerator</Summary>
         <Description>A full featured, advanced, multi-threaded, multisegment download manager and accelerator</Description>
-        <Archive sha1sum="9b3790739fd2ea49a32ba32bde2d5c14b3715079" type="targz">http://www.flareget.com/files/flareget/rpm/amd64/flareget_2.1-18_x86_64(stable)_rpm.tar.gz</Archive>
+        <Archive sha1sum="8ec66136df4e5de44c9bc1bf37a4d1e9c24958b2" type="targz">http://www.flareget.com/files/flareget/rpm/amd64/flareget_2.3-24_x86_64(stable)_rpm.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>rpm2targz</Dependency>
         </BuildDependencies>
@@ -29,15 +29,26 @@
 
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-	    <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
             <Path fileType="library">/usr/lib</Path>
-	    <Path fileType="library">/lib</Path>
+            <Path fileType="library">/lib</Path>
             <Path fileType="data">/usr/share</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/flareget">flareget.sh</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/flare-grab">flare-grab.sh</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2013-10-14</Date>
+            <Version>2.3.24</Version>
+            <Comment>version bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-09-07</Date>
             <Version>2.1.18</Version>

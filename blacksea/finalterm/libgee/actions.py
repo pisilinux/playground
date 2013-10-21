@@ -8,10 +8,10 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-WorkDir = "mednafen"
-
 def setup():
-    autotools.configure()
+    autotools.autoreconf("-vfi")
+    autotools.configure("--disable-static")
+
 
 def build():
     autotools.make()
@@ -19,4 +19,4 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "NEWS", "README", "TODO")
+    pisitools.dodoc("NEWS", "README", "AUTHORS", "COPYING")
