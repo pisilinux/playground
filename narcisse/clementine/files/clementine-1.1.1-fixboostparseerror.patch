@@ -1,0 +1,17 @@
+Index: src/core/mergedproxymodel.h
+===================================================================
+--- src/core/mergedproxymodel.h.orig	2012-10-11 13:16:39.000000000 +0200
++++ src/core/mergedproxymodel.h	2013-04-28 10:32:44.561601516 +0200
+@@ -20,10 +20,12 @@
+ 
+ #include <QAbstractProxyModel>
+ 
++#ifndef Q_MOC_RUN
+ #include <boost/multi_index_container.hpp>
+ #include <boost/multi_index/member.hpp>
+ #include <boost/multi_index/ordered_index.hpp>
+ #include <boost/multi_index/hashed_index.hpp>
++#endif
+ 
+ using boost::multi_index::multi_index_container;
+ using boost::multi_index::indexed_by;

@@ -17,7 +17,6 @@ def setup():
     # QTSINGLEAPPLICATION is builtin since we need to patch Qt just for this package and Gökçen has given OK
     # for using built-in qtsingleapplication.
     cmaketools.configure("-DUSE_SYSTEM_QXT=ON \
-                          -DMYGPO_EXPORT=/usr/include/mygpo-qt \
                           -Werror=OFF \
                           -DENABLE_LIBLASTFM=ON \
                           -DUSE_SYSTEM_QTSINGLEAPPLICATION=OFF \

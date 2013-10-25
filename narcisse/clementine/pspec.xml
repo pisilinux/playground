@@ -14,7 +14,7 @@
         <IsA>app:gui</IsA>
         <Summary>A cross-platform music player based on Amarok 1.4</Summary>
         <Description>Clementine is a modern music player and library organiser. Clementine is a port of Amarok 1.4, with some features rewritten to take advantage of Qt4.</Description>
-        <Archive sha1sum="1e8812052e6eceeb19ca41236094eaffdde77d17" type="targz">https://clementine-player.googlecode.com/files/clementine-1.2.0rc4.tar.gz</Archive>
+        <Archive sha1sum="a98a26ecfaeabe4406fdc06295b8270871b4e67f" type="targz">https://clementine-player.googlecode.com/files/clementine-1.2.0.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="src/translations/tr.po">tr.po</AdditionalFile>
             <AdditionalFile target="src/translations/tr_TR.po">tr_TR.po</AdditionalFile>
@@ -42,9 +42,11 @@
             <Dependency>libimobiledevice-devel</Dependency>
             <Dependency>libchromaprint-devel</Dependency>
             <Dependency>google-sparsehash</Dependency>
+	    <Dependency>qca2-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">clementine-1.0.1-translation-test-delete.patch</Patch>
+	    <Patch level="0">clementine-1.1.1-fixboostparseerror.patch</Patch>
 	    <!--<Patch level="1">fix_glib-2.35.0_build.patch</Patch>-->
         </Patches>
     </Source>
@@ -63,6 +65,7 @@
             <Dependency>libgpod</Dependency>
             <Dependency versionFrom="0.90">libcdio</Dependency>
             <Dependency>libplist</Dependency>
+	    <Dependency>libmygpo-qt</Dependency>
             <Dependency>libqjson</Dependency>
             <Dependency>protobuf</Dependency>
             <Dependency>gstreamer</Dependency>
@@ -74,6 +77,7 @@
             <Dependency>libimobiledevice</Dependency>
             <Dependency>qt-sql-sqlite</Dependency>
             <Dependency>libchromaprint</Dependency>
+	    <Dependency>qca2</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -88,7 +92,14 @@
     </Package>
 
     <History>
-        <Update release="3">
+        <Update release="4">
+            <Date>2013-10-26</Date>
+            <Version>1.2.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+       <Update release="3">
             <Date>2013-09-20</Date>
             <Version>1.2.0_rc4</Version>
             <Comment>V. bump</Comment>
