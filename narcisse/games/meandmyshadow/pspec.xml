@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>meandmyshadow</Name>
+        <Homepage>http://meandmyshadow.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Packager>
+        <License>GPL-v3</License>
+        <IsA>app:gui</IsA>
+       <Summary>2D arcade puzzle solving game.</Summary>
+       <Description>Me and My Shadow is a free libre puzzle/platform game in which you try to reach the exit by solving puzzles. Spikes, moving blocks, fragile blocks and much more stand between you and the exit. </Description>
+       <Archive sha1sum="38b4a7ea388227deeb67704b03a3483abcd5da5e" type="targz">mirrors://sourceforge/meandmyshadow/0.4/meandmyshadow-0.4-src.tar.gz</Archive>
+       <BuildDependencies>
+	  <Dependency>curl-devel</Dependency>
+	  <Dependency>mesa-devel</Dependency>
+          <Dependency>libsdl-devel</Dependency> 
+	  <Dependency>sdl-ttf-devel</Dependency>
+	  <Dependency>sdl-mixer-devel</Dependency> 
+	  <Dependency>sdl-image-devel</Dependency> 
+	  <Dependency>sdl-gfx-devel</Dependency> 
+	  <Dependency>libarchive-devel</Dependency>  
+       </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>meandmyshadow</Name>
+        <RuntimeDependencies>
+          <Dependency>curl</Dependency>
+	  <Dependency>mesa</Dependency>
+          <Dependency>libsdl</Dependency>
+	  <Dependency>sdl-ttf</Dependency>
+	  <Dependency>sdl-mixer</Dependency> 
+	  <Dependency>sdl-image</Dependency> 
+	  <Dependency>sdl-gfx</Dependency> 
+	  <Dependency>libarchive</Dependency>
+       </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>	    
+	    <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+	   <Update release="1">
+            <Date>2013-10-26</Date>
+            <Version>0.4</Version>
+            <Comment>First Release</Comment>
+	    <Name>Mathias Freire</Name>   
+            <Email>mathiasfreire45@gmail.com</Email>             
+        </Update>
+    </History>
+</PISI>
+ 
+ 
