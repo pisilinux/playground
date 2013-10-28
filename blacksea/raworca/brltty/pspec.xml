@@ -6,7 +6,7 @@
         <Homepage>http://mielke.cc/brltty/</Homepage>
         <Packager>
             <Name>PisiLinux Community</Name>
-            <Email>admin@pisilinux.org</Email>
+            <Email>admins@pisilinux.org</Email>
         </Packager>
         <License>GPLv1</License>
         <IsA>app</IsA>
@@ -14,18 +14,18 @@
         <Description>Braille display driver for Linux</Description>
         <Archive sha1sum="df5aa180cf9213174e34f1f9086650f47e947319" type="targz">http://mielke.cc/brltty/releases/brltty-4.5.tar.gz</Archive>
         <BuildDependencies>
-	  <!--       <Dependency>atk-devel</Dependency>
-	  <Dependency>at-spi2-core-devel</Dependency> -->
+	    <Dependency>atk-devel</Dependency>
+	    <Dependency>at-spi2-core-devel</Dependency>
    	    <Dependency>libXaw-devel</Dependency>
 	    <Dependency>icu4c-devel</Dependency>
 	    <Dependency>tcl-devel</Dependency>
         </BuildDependencies>
 
-	<Patches>
+<!--<Patches>
             <Patch level="1">brltty-4.5-fix-ldflags.patch</Patch>
 	    <Patch level="1">brltty-4.5-fix-mk4build-cross.patch</Patch>
-	    <Patch level="1">brltty-4.5-udev.patch</Patch>
-        </Patches>
+            <Patch level="1">brltty-4.5-udev.patch</Patch>
+        </Patches>-->
 
 	</Source>
 
