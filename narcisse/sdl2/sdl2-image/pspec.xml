@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sdl2-image</Name>
+        <Homepage>http://www.libsdl.org/projects/SDL_image/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>SDL image file loading library 2.0 series</Summary>
+        <Description>SDL2_image is an image file loader for SDL2.</Description>
+        <Archive sha1sum="20b1b0db9dd540d6d5e40c7da8a39c6a81248865" type="targz">http://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libsdl2-devel</Dependency>
+            <Dependency>tiff-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+	    <Dependency>webp-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">bigendian_undefined_s.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>sdl2-image</Name>
+        <RuntimeDependencies>
+            <Dependency>libsdl</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+	    <Dependency>webp</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>sdl2-image-devel</Name>
+        <Summary>Development files for sdl2-image</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">sdl-image</Dependency>
+            <Dependency>libsdl-devel</Dependency>
+            <Dependency>tiff-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+	    <Dependency>webp-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>sdl2-image-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for sdl2-image</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>libsdl2-32bit</Dependency>
+            <Dependency>libpng-32bit</Dependency>
+            <Dependency>libjpeg-turbo-32bit</Dependency>
+            <Dependency>tiff-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">sdl2-image</Dependency>
+            <Dependency>libsdl2-32bit</Dependency>
+            <Dependency>libpng-32bit</Dependency>
+            <Dependency>libjpeg-turbo-32bit</Dependency>
+            <Dependency>tiff-32bit</Dependency>
+	    <Dependency>zlib-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2012-10-28</Date>
+            <Version>2.0.0</Version>
+            <Comment>First release</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
