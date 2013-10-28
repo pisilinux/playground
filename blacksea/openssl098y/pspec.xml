@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>openssl098y</Name>
+        <Homepage>https://www.openssl.org/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>The Open Source toolkit for Secure Sockets Layer and Transport Layer Security (0.9.8 branch)</Summary>
+        <Description>The Open Source toolkit for Secure Sockets Layer and Transport Layer Security (0.9.8 branch)</Description>
+        <Archive sha1sum="32ec994d626555774548c82e48c5d220bec903c4" type="targz">https://www.openssl.org/source/openssl-0.9.8y.tar.gz</Archive>
+        <AdditionalFiles>
+            <AdditionalFile target="ca-dir.patch">ca-dir.patch</AdditionalFile>
+            <AdditionalFile target="no-rpath.patch">no-rpath.patch</AdditionalFile>
+        </AdditionalFiles>
+    </Source>
+
+    <Package>
+        <Name>openssl098y</Name>
+        <RuntimeDependencies>
+            <Dependency>openssl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+
+        </Files>
+     </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-09-24</Date>
+            <Version>0.9.8y</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
