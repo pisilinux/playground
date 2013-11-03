@@ -17,7 +17,7 @@ def setup():
     shelltools.cd("..")
     shelltools.makedirs("cmake-make")
     shelltools.cd("cmake-make") 
-    shelltools.system("cmake ../blender-2.68a \
+    shelltools.system("cmake ../blender-2.69 \
                       -DCMAKE_INSTALL_PREFIX=/usr \
                       -DCMAKE_BUILD_TYPE=Release \
                       -DCMAKE_SKIP_RPATH=ON \
