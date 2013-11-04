@@ -38,24 +38,6 @@ def build():
 def install():
     shelltools.cd("../cmake-make/")
     cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
-    
+
     pisitools.domove("/usr/bin/blender", "/usr/bin", "blender-bin")
 
-    #pisitools.insinto("/usr/bin/", "bin/blender","blender-bin")
-    #pisitools.insinto("/usr/bin/", "bin/blender-thumbnailer.py")
-    #pisitools.insinto("/usr/share/man/man1", "bin/blender.1")
-    #pisitools.insinto("/usr/share/doc/", "bin/*.txt")
-    #pisitools.insinto("/usr/share/doc/", "bin/*.html")
-    #pisitools.insinto("/usr/share/pixmaps/", "bin/blender.svg")
-    #pisitools.insinto("/usr/share/blender", "bin/2.68/datafiles/locale/")
-    #pisitools.insinto("/usr/share/blender/", "bin/2.68/scripts")
-
-    #shelltools.cd("../") 
-    #shelltools.cd("blender-2.68a/release/")
-
-    ## Install miscellaneous files
-    #pisitools.insinto("/usr/share/blender/", "scripts/*")
-    #pisitools.insinto("/usr/share/blender/", "datafiles/colormanagement/")
-
-    ##Install icon files
-    #pisitools.insinto("/usr/share/icons/hicolor/", "freedesktop/icons/*")
