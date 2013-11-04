@@ -1,16 +1,19 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>pspp</Name>
         <Homepage>http://www.gnu.org/software/pspp/pspp.html</Homepage>
         <Packager>
-            <Name>Ayhan YALÇINSOY</Name>
-            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
         </Packager>
-        <License>GPLv2+</License>
-        <PartOf>science.mathematics</PartOf>
+        <License>GPLv2</License>
+        <PartOf>science</PartOf>
         <IsA>app:gui</IsA>
         <Summary>İstatistik analiz programı</Summary>
         <Description>İstatistik analiz programı</Description>
+        <Archive sha1sum="069fae733b10ce07afa8f68b101aea455c406d64" type="targz">http://ftp.cc.uoc.gr/mirrors/gnu/pspp/pspp-0.8.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gsl-devel</Dependency>
             <Dependency>gtk2-devel</Dependency>
@@ -18,39 +21,86 @@
             <Dependency>libglade-devel</Dependency>
             <Dependency>plotutils-devel</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="069fae733b10ce07afa8f68b101aea455c406d64" type="targz">/home/PisiLinux10/İndirilenler/pspp-0.8.1.tar.gz</Archive>
         <Patches>
-<!-- <Patch level="1">automake-tr.patch</Patch> -->
-<!-- 		  <Patch level="1">makefile.patch</Patch> -->
+<!--             <Patch level="0">makefile.patch</Patch> -->
 <!--             <Patch level="1">pspp-0001-stdio-don-t-assume-gets-any-more.patch</Patch> -->
-<!-- 		  <Patch level="0">turkish.patch</Patch> -->
+<!--             <Patch level="0">turkish.patch</Patch> -->
         </Patches>
     </Source>
+
     <Package>
         <Name>pspp</Name>
-        <Files>
-            <Path fileType="all">/</Path>
-        </Files>
-        <AdditionalFiles>
-            <AdditionalFile target="/usr/share/pspp/pspp.desktop" permission="0644" group="root" owner="root">pspp.desktop</AdditionalFile>
-	    <AdditionalFile owner="root" permission="0644" target="/usr/share/locale/tr/LC_MESSAGES/pspp.mo">pspp.mo</AdditionalFile>
-        </AdditionalFiles>
         <RuntimeDependencies>
             <Dependency>gsl</Dependency>
-	    <Dependency>gtk2</Dependency>
-	    <Dependency>libglade</Dependency> 
-	    <Dependency>plotutils</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libglade</Dependency>
+            <Dependency>plotutils</Dependency>
+	    <Dependency>gtksourceview</Dependency>
         </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/pspp</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/pspp</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+        <AdditionalFiles>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/pspp/splash.png">splash.png</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/locale/tr/LC_MESSAGES/pspp.mo">pspp.mo</AdditionalFile>
+        </AdditionalFiles>
     </Package>
+
+    <Package>
+        <Name>pspp-docs</Name>
+        <IsA>data:doc</IsA>
+        <Summary>Documents for PSPP</Summary>
+        <RuntimeDependencies>
+            <Dependency>pspp</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/info</Path>
+        </Files>
+    </Package>
+
     <History>
-        <Update release="1">
+      <Update release="1">
             <Date>2013-09-28</Date>
             <Version>0.8.1</Version>
             <Comment>update</Comment>
             <Name>Ayhan YALÇINSOY</Name>
             <Email>ayhanyalcinsoy@pisilinux.org</Email>
         </Update>
+      <Update release="4">
+            <Date>2013-06-18</Date>
+            <Version>0.7.9</Version>
+            <Comment>fixed patch</Comment>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@gmail.com</Email>
+        </Update>
+      <Update release="3">
+            <Date>2013-03-16</Date>
+            <Version>0.7.9</Version>
+            <Comment>fixed patch</Comment>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-03-16</Date>
+            <Version>0.7.9</Version>
+            <Comment>update</Comment>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2010-03-20</Date>
+            <Version>0.6.2</Version>
+            <Comment>First release</Comment>
+            <Name>Türker Sezer</Name>
+            <Email>turkersezer@tsdesign.info</Email>
+        </Update>
     </History>
 </PISI>
-
-<!-- By PiSiDo 2.0.0 -->
