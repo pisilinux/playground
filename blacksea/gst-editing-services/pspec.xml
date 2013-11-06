@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gst-editing-services</Name>
+        <Homepage>http://gstreamer.freedesktop.org/modules/gst-editing-services.html</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>app</IsA>
+        <Summary>GStreamer editing services</Summary>
+        <Description>GStreamer editing services</Description>
+        <Archive sha1sum="eec12626d1545a225a4d402781cf00334093111b" type="tarxz">/media/4472267504CA2C93/pisilinux/bumplar/gst-editing-services.1.1.90.1.1774.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>gtk-doc</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>gstreamer-next-devel</Dependency>
+            <Dependency>gst-plugins-base-next-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">pisilinux.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>gst-editing-services</Name>
+        <RuntimeDependencies>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>gst-plugins-base</Dependency>
+            <Dependency>gstreamer-next</Dependency>
+            <Dependency>gst-plugins-base-next</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            -->
+        </Files>
+        <!--
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/gst-editing-services.desktop">gst-editing-services.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/gst-editing-services.png">gst-editing-services.png</AdditionalFile>
+        </AdditionalFiles>
+        -->
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-11-02</Date>
+            <Version>1.1.90.1.1774</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
