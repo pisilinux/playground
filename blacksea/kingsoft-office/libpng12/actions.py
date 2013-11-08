@@ -9,9 +9,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    options = '--disable-static \
-               --bindir=/usr/bin/libpng12 \
-               --includedir=/usr/include/libpng12'
+    options = '--prefix=/usr'
 
     if get.buildTYPE() == "emul32":
         options += " --libdir=/usr/lib32"
@@ -24,13 +22,12 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-
-   # remove devel files add maybe after
+   
+    #remove conflict files
     pisitools.removeDir("/usr/share/man")
-    pisitools.removeDir("/usr/bin")
-    pisitools.removeDir("/usr/include")
-  # pisitools.removeDir("/usr/lib/pkgconfig")                        
-  # pisitools.removeDir("/usr/lib32/pkgconfig") 
+    pisitools.remove("/usr/include/pngconf.h")
+    pisitools.remove("/usr/include/png.h")
+    pisitools.remove("/usr/bin/libpng-config")
     
     if get.buildTYPE() == "emul32":
         pisitools.remove("/usr/lib32/libpng.la")

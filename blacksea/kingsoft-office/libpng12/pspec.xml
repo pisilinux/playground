@@ -19,8 +19,6 @@
         </BuildDependencies>
         <Patches> 
             <Patch level="1">apng.patch</Patch>
-            <Patch level="1">pngconf-setjmp.patch</Patch>
-            <Patch level="1">constantize.patch</Patch>
         </Patches>
     </Source>
 
@@ -38,7 +36,7 @@
         </Files>
     </Package>
 
-<!--<Package>
+    <Package>
         <Name>libpng12-devel</Name>
         <PartOf>library</PartOf>
         <Summary>Development files for libpng12</Summary>
@@ -46,13 +44,13 @@
             <Dependency release="current">libpng12</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/bin/libpng12</Path>
-            <Path fileType="header">/usr/include/libpng12</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
             <Path fileType="data">/usr/lib/pkgconfig</Path>
             <Path fileType="data">/usr/lib32/pkgconfig</Path>
             <Path fileType="man">/usr/share/man</Path>
         </Files>
-    </Package>-->
+    </Package>
 
     <Package>
         <Name>libpng12-32bit</Name>
