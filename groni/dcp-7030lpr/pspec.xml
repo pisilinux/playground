@@ -1,0 +1,43 @@
+<?xml version="1.0" ?> 
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>brdcp7030lpr-2.0.2</Name>
+        <Homepage>http://solutions.brother.com/linux</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <Summary>lpr Driver for brother-dcp7030</Summary>
+        <Description>LPR Driver for Brother-DCP-7030</Description>
+        <License>as-is</License>
+        <IsA>data</IsA>
+        <IsA>app:console</IsA>
+        <Archive sha1sum="fbc40e446ed1462bcb111a0bbbf2b9775ba12c24">http://www.brother.com/pub/bsc/linux/dlf/brdcp7030lpr-2.0.2-1.i386.rpm</Archive>
+        <BuildDependencies>
+            <Dependency>rpm2targz</Dependency>
+            <Dependency>tar</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>brdcp7030lpr-2.0.2</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/local/Brother/inf</Path>
+            <Path fileType="executable">/usr/local/Brother/lpd</Path>
+            <Path fileType="folder">/var/spool/lpd</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>11-05-2013</Date>
+            <Version>2.0.2</Version>
+            <Comment>Add brdcp7030lpr-2.0.2</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>	
+</PISI>
