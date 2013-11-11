@@ -20,5 +20,3 @@ def install():
       pisitools.insinto("/usr/bin/","./usr/bin/*")
       pisitools.insinto("/usr/share/","./usr/share/*")
       pisitools.insinto("/opt/","./opt/*")
-      pisitools.dosym("usr/lib32/libpng15.so.15.17.0", "usr/lib32/libpng12.so")
-      pisitools.dosym("usr/lib32/libpng15.so.15.17.0", "usr/lib32/libpng12.so.0")
