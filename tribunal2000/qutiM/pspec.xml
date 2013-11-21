@@ -1,0 +1,41 @@
+<PISI>
+    <Source>
+        <Name>qutiM</Name>
+        <Homepage>http://qutim.org/</Homepage>
+        <Packager>
+            <Name>Richard de Bruin</Name>
+            <Email>richdb@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <PartOf>network.mail</PartOf>
+        <Summary>qutIM is free and open-source multiprotocol instant messenger</Summary>
+        <Description>qutIM is free and open-source multiprotocol (ICQ, Jabber, Mail.Ru, IRC, VKontakte) instant messenger.</Description>
+        <BuildDependencies>
+            <Dependency>jreen-devel</Dependency>
+            <Dependency>libpurple-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="99ceb2cfb641c90b52ab0c33817989209093c6c2" type="tarbz2">/home/richard/Downloads/qutim-0.3.1.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>qutiM</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-21</Date>
+            <Version>0.3.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Richard de Bruin</Name>
+            <Email>richdb@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
