@@ -3,21 +3,19 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt
 
-from pisi.actionsapi import autotools
+from pisi.actionsapi import pythonmodules
 from pisi.actionsapi import get
 #from pisi.actionsapi import pisitools
 
 # if pisi can't find source directory, see /var/pisi/fife/work/ and:
-# WorkDir="fife-"+ get.srcVERSION() +"/sub_project_dir/"
-
-def setup():
-    autotools.configure()
+#WorkDir="fife-"+ get.srcVERSION() 
 
 def build():
-    autotools.make()
+    pythonmodules.compile()
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    pythonmodules.install()
+
 
 # Take a look at the source folder for these file as documentation.
 #    pisitools.dodoc("AUTHORS", "BUGS", "ChangeLog", "COPYING", "README")
