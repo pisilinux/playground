@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>Rstudio</Name>
+        <Homepage>www.rstudio.com</Homepage>
+        <Packager>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@gmail.com</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <PartOf>science.mathematics</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>RStudio is a company dedicated to providing software, education, and services for the R statistical computing environment.</Summary>
+        <Description>RStudio is a company dedicated to providing software, education, and services for the R statistical computing environment.</Description>
+        <BuildDependencies>
+            <Dependency>boost</Dependency>
+            <Dependency>cmake</Dependency>
+            <Dependency>openssl</Dependency>
+            <Dependency>pam</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="d80e1e75deba584d9f85fcea64597dd84e356528" type="targz">/home/PisiLinux/İndirilenler/rstudio-rstudio-v0.97.551-0-gca19c52.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>Rstudio</Name>
+        <RuntimeDependencies>
+            <Dependency>R</Dependency>
+            <Dependency>boost-libs</Dependency>
+            <Dependency>gwt</Dependency>
+            <Dependency>hunspell</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>qtwebkit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-20</Date>
+            <Version>0.97.551</Version>
+            <Comment>First Package</Comment>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
