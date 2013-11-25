@@ -1,0 +1,14 @@
+--- config/baseconfig.mk.OSmanOS	2013-11-25 15:54:47.000000000 +0200
++++ config/baseconfig.mk	        2013-11-25 15:55:51.362019866 +0200
+@@ -1,7 +1,7 @@
+-includedir := $(includedir)/$(MOZ_APP_NAME)-$(MOZ_APP_VERSION)
+-idldir = $(datadir)/idl/$(MOZ_APP_NAME)-$(MOZ_APP_VERSION)
+-installdir = $(libdir)/$(MOZ_APP_NAME)-$(MOZ_APP_VERSION)
+-sdkdir = $(libdir)/$(MOZ_APP_NAME)-devel-$(MOZ_APP_VERSION)
++includedir := $(includedir)/$(MOZ_APP_NAME)
++idldir = $(datadir)/idl/$(MOZ_APP_NAME)
++installdir = $(libdir)/$(MOZ_APP_NAME)
++sdkdir = $(libdir)/$(MOZ_APP_NAME)-devel
+ MOZILLA_SRCDIR = $(topsrcdir)/mozilla
+ MOZDEPTH = $(DEPTH)/mozilla
+ DIST = $(MOZDEPTH)/dist
