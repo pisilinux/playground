@@ -1,0 +1,43 @@
+<PISI>
+    <Source>
+        <Name>Bluefish</Name>
+        <Homepage>http://bluefish.openoffice.nl/index.html</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>programming.environment</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Bluefish Editor</Summary>
+        <Description>Bluefish is a powerful editor targeted towards programmers and webdevelopers, with many options to write websites, scripts and programming code. Bluefish supports many programming and markup languages. See features for an extensive overview, take a look at the screenshots, or download it right away. Bluefish is an open source development project, released under the GNU GPL licence.
+
+Bluefish is a multi-platform application that runs on most desktop operating systems including Linux, FreeBSD, MacOS-X, Windows, OpenBSD and Solaris.</Description>
+        <BuildDependencies>
+            <Dependency>enchant</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>gvfs</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>pcre++-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="b65310617b5fd525a8c57f7681e023f6f4496378" type="tarbz2">http://sourceforge.net/projects/bluefish/files/bluefish/2.2.4/bluefish-2.2.4.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>Bluefish</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-30</Date>
+            <Version>2.2.4</Version>
+            <Comment>Initial Release</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
