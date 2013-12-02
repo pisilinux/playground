@@ -1,0 +1,41 @@
+<PISI>
+    <Source>
+        <Name>xfce4-whiskermenu-plugin</Name>
+        <Homepage>http://gottcode.org/xfce4-whiskermenu-plugin/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>desktop.xfce</PartOf>
+        <Summary>Alternate Xfce Menu - Whisker Menu</Summary>
+        <Description>Whisker Menu is an alternate application launcher for Xfce. When you open it you are shown a list of applications you have marked as favorites. You can browse through all of your installed applications by clicking on the category buttons on the side. Top level categories make browsing fast, and simple to switch between. Additionally, Whisker Menu keeps a list of the last ten applications that you’ve launched from it.
+
+Favorites are easy to add and reorder. When browsing through your applications, right-click on any of them and select “Add to Favorites”. Simply drag and drop your favorites list to arrange them to suit your needs. You can remove them at any time from another right-click option.
+
+If you’re not sure exactly where a program is listed, instead of browsing through each category you can simply enter a search term. The search field is focused when opening the menu, so you can just start typing. Application descriptions as well as names are searched, which allows you to find a program by using a general word (such as “browser” to find all web browsers installed on your computer).</Description>
+        <BuildDependencies>
+            <Dependency>exo-devel</Dependency>
+            <Dependency>garcon-devel</Dependency>
+            <Dependency>xfce4-panel-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="5bf5cd3f10e3cbaf5f330c2ac3bcef04929a6556" type="tarbz2">/home/ganesh/pisi_packages/xfce4-whiskermenu-plugin/xfce4-whiskermenu-plugin-1.2.1-src.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>xfce4-whiskermenu-plugin</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-28</Date>
+            <Version>1.2.1</Version>
+            <Comment>Whisker Menu Plugin for XFCE4</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

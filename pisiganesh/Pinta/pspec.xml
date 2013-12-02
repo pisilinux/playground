@@ -1,0 +1,38 @@
+<PISI>
+    <Source>
+        <Name>Pinta</Name>
+        <Homepage>www.pinta-project.com/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>MIT License</License>
+        <PartOf>multimedia.graphics</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Pinta: Painting Made Simple</Summary>
+        <Description>Pinta is a free, open source drawing/editing program modeled after Paint.NET. Its goal is to provide users with a simple yet powerful way to draw and manipulate images on Linux, Mac, and Windows.</Description>
+        <BuildDependencies>
+            <Dependency>gtk-sharp-devel</Dependency>
+            <Dependency>mono-addins</Dependency>
+            <Dependency>mono-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="4ffb4ba8a4a5a2f1cdcfcb337d603afbb629b798" type="targz">http://sourceforge.net/projects/pinta.mirror/files/Pinta%201.4/pinta-1.4.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>Pinta</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-29</Date>
+            <Version>1.4</Version>
+            <Comment>First Release</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

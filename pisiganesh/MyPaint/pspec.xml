@@ -1,0 +1,49 @@
+<PISI>
+    <Source>
+        <Name>MyPaint</Name>
+        <Homepage>http://mypaint.intilinux.com/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <PartOf>multimedia.graphics</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>MyPaint is a fast and easy open-source graphics application for digital painters</Summary>
+        <Description>MyPaint is a fast and easy open-source graphics application for digital painters. It lets you focus on the art instead of the program. You work on your canvas with minimum distractions, bringing up the interface only when you need it.</Description>
+        <BuildDependencies>
+            <Dependency>gtk+extra-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>json-c-devel</Dependency>
+            <Dependency>lcms2-devel</Dependency>
+            <Dependency>libpng-devel</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>python-cairo</Dependency>
+            <Dependency>python-numpy</Dependency>
+            <Dependency>python-pygobject-devel</Dependency>
+            <Dependency>swig</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="9e4f0bc2cee6c369f1a40d7c24435b7c26cc3795" type="tarbz2">http://sourceforge.net/projects/mypaint.mirror/files/mypaint-1.1.0.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>MyPaint</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/mypaint.desktop" permission="0644" group="root" owner="root">mypaint.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/pixmaps/mypaint.svg" permission="0644" group="root" owner="root">mypaint.svg</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-29</Date>
+            <Version>1.1.0</Version>
+            <Comment>Initial Release</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

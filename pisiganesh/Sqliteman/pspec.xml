@@ -1,0 +1,37 @@
+<PISI>
+    <Source>
+        <Name>Sqliteman</Name>
+        <Homepage>http://sqliteman.com/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPL v2</License>
+        <PartOf>programming.environment</PartOf>
+        <Summary>Sqlite Databases Made Easy</Summary>
+        <Description>The best developer's and/or admin's GUI tool for Sqlite3 in the world. No joking here (or just a bit only) - it contains the most complete feature set of all tools available.</Description>
+        <BuildDependencies>
+            <Dependency>cmake</Dependency>
+            <Dependency>qscintilla2-devel</Dependency>
+            <Dependency>qt</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="ed8e8bd40dfac2bdc106b5e94182602fd6d6bfeb" type="targz">http://sourceforge.net/projects/sqliteman/files/sqliteman/1.2.2/sqliteman-1.2.2.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>Sqlitemanager</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-26</Date>
+            <Version>1.2.2</Version>
+            <Comment>Sqlite Databases Made Easy</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

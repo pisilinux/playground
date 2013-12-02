@@ -1,0 +1,39 @@
+<PISI>
+    <Source>
+        <Name>RoboJournal</Name>
+        <Homepage>http://sourceforge.net/projects/robojournal/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Free journal software for everyone</Summary>
+        <Description>RoboJournal is a cross-platform journal/diary tool written in Qt/C++. Right now, RoboJournal only supports MySQL but support for SQLite (and possibly Postgres) will be added in future releases. RoboJournal runs on Windows and Linux.</Description>
+        <BuildDependencies>
+            <Dependency>mysql-lib</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="4baa09c44ee646c40c70b877fafec30c81972f7b" type="targz">http://sourceforge.net/projects/robojournal/files/Source/robojournal-0.4.2.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>RoboJournal</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-30</Date>
+            <Version>0.4.2</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

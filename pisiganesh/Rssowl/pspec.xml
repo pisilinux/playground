@@ -1,0 +1,37 @@
+<PISI>
+    <Source>
+        <Name>Rssowl</Name>
+        <Homepage>http://www.rssowl.org/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>Eclipse Public License</License>
+        <PartOf>network.rss</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>RSSOwl is a free and powerful news feed reader.</Summary>
+        <Description>RSSOwl is a free and powerful news feed reader. RSSOwl lets you gather, organize and search news in a convenient, easy to use interface with endless flexibility.</Description>
+        <Archive sha1sum="6c20b38ed4cea73d8f945d90f59119f4045b3708" type="zip">http://sourceforge.net/projects/rssowl/files/rssowl%202/2.2.0/rssowl-2.2.linux.x86_64.zip</Archive>
+    </Source>
+    <Package>
+        <Name>Rssowl</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/rssowl.desktop" permission="0644" group="root" owner="root">rssowl.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/pixmaps/rssowl.xpm" permission="0644" group="root" owner="root">rssowl.xpm</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-01</Date>
+            <Version>2.2</Version>
+            <Comment>Initial Release</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

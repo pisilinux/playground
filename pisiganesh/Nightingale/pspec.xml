@@ -1,0 +1,37 @@
+<PISI>
+    <Source>
+        <Name>Nightingale</Name>
+        <Homepage>http://getnightingale.com/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>multimedia</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Audio Player</Summary>
+        <Description>A beautiful interface with a wide range of supported audio formats, all with multi-platform support!</Description>
+        <Archive sha1sum="4099a659a640dc5b0d45e2b555cb511694c417ba" type="tarbz2">http://sourceforge.net/projects/ngale/files/1.12.0-Release/Nightingale_1.12-2432_linux-x86_64.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>Nightingale</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/Nightingale.desktop" permission="0644" group="root" owner="root">Nightingale.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/pixmaps/Nightingale.xpm" permission="0644" group="root" owner="root">Nightingale.xpm</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-30</Date>
+            <Version>1.12.2432</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
