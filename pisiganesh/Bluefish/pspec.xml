@@ -26,7 +26,11 @@ Bluefish is a multi-platform application that runs on most desktop operating sys
     <Package>
         <Name>Bluefish</Name>
         <Files>
-            <Path fileType="all">/</Path>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
         </Files>
     </Package>
     <History>
