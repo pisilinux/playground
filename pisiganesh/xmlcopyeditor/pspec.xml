@@ -1,0 +1,62 @@
+<PISI>
+    <Source>
+        <Name>xmlcopyeditor</Name>
+        <Homepage>http://xml-copy-editor.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>programming</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>XML Copy Editor is a fast, free, validating XML editor</Summary>
+        <Description>DTD/XML Schema/RELAX NG validation
+XSLT
+XPath
+Pretty-printing
+Syntax highlighting
+Folding
+Tag completion
+Tag locking
+Tag-free editing
+Spelling and style check
+Built-in support for XHTML, XSL, DocBook and TEI
+Lossless import and export of Microsoft Word documents (Windows only)</Description>
+        <BuildDependencies>
+            <Dependency>aspell-devel</Dependency>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>libpcre-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>wxWidgets-devel</Dependency>
+            <Dependency>xerces-c-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="1d9dddcb016de94f99573c2e9d8d4c5a2fdda142" type="targz">http://sourceforge.net/projects/xml-copy-editor/files/xmlcopyeditor-linux/1.2.0.11/xmlcopyeditor-1.2.0.11.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>xmlcopyeditor</Name>
+        <RuntimeDependencies>
+            <Dependency>aspell</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>wxWidgets</Dependency>
+            <Dependency>xerces-c</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="doc">/usr/share/xmlcopyeditor/help/*</Path>
+            <Path fileType="localedata">/usr/share/xmlcopyeditor/po/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-28</Date>
+            <Version>1.2.0.11</Version>
+            <Comment>XML Copy Editor is a fast, free, validating XML editor.</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
