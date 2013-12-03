@@ -1,0 +1,36 @@
+<PISI>
+    <Source>
+        <Name>automake</Name>
+        <Homepage>http://www.gnu.org/software/automake/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <PartOf>system</PartOf>
+        <Summary>Automake is a tool for automatically generating Makefile.in files compliant with the GNU Coding Standards. Automake requires the use of Autoconf.</Summary>
+        <Description>Automake is a tool for automatically generating Makefile.in files compliant with the GNU Coding Standards. Automake requires the use of Autoconf.</Description>
+        <Archive sha1sum="44e76494adf6555e27071004c160a6a925a7ee77" type="targz">http://ftp.gnu.org/pub/gnu/automake/automake-1.7.2.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>automake</Name>
+        <RuntimeDependencies>
+            <Dependency>autoconf</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-03</Date>
+            <Version>1.7.2</Version>
+            <Comment>-</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
