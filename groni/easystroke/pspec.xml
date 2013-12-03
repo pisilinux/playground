@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>easystroke</Name>
+        <Homepage>http://sourceforge.net/projects/easystroke/</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:gui</IsA>
+        <Summary>A gesture-recognition application for X11</Summary>
+        <Description>Easystroke is a gesture-recognition application for X11. Gestures or strokes are movements that you make with you mouse (or your pen, finger etc.) while holding down a specific mouse button. Easystroke will execute certain actions if it recognizes the stroke; currently easystroke can emulate key presses, execute shell commands, hold down modifiers and emulate a scroll wheel. The program was designed with Tablet PCs in mind and can be used effectively even without access to a keyboard. Easystroke tries to provide an intuitive and efficient user interface, while at the same time being highly configurable and offering many advanced features.</Description>
+        <Archive sha1sum="5e0ad987272ddeb432e706fdcc10cb6c5a0ce484" type="targz">http://sourceforge.net/projects/easystroke/files/easystroke/0.6.0/easystroke-0.6.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>glibmm-devel</Dependency>
+            <Dependency>gtkmm-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libXfixes-devel</Dependency>
+            <Dependency>libXi-devel</Dependency>
+            <Dependency>libXtst-devel</Dependency>
+            <Dependency>xorg-server-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>easystroke</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>boost</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>cairomm</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>glibmm</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>gtkmm</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>libXfixes</Dependency>
+            <Dependency>libXi</Dependency>
+            <Dependency>libXtst</Dependency>
+            <Dependency>libsigc++</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>pangomm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable" permanent="0">/usr/bin/easystroke</Path>
+            <Path fileType="data" permanent="0">/usr/share/applications/easystroke.desktop</Path>
+            <Path fileType="doc" permanent="0">/usr/share/doc/easystroke/LICENSE</Path>
+            <Path fileType="data" permanent="0">/usr/share/icons/hicolor/scalable/apps/easystroke.svg</Path>
+            <Path fileType="localedata" permanent="0">/usr/share/locale/*</Path>
+        </Files>
+
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-03</Date>
+            <Version>0.6.0</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
