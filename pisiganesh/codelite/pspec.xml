@@ -1,0 +1,60 @@
+<PISI>
+    <Source>
+        <Name>codelite</Name>
+        <Homepage>http://codelite.org/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>programming.environment</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>CodeLite is an open-source, cross platform IDE for the C/C++ programming languages.</Summary>
+        <Description>CodeLite is an open-source, cross platform IDE for the C/C++ programming languages. CodeLite is known to work on various OSs including:
+
+    Windows XP SP3
+    Windows 7 and 8
+    Debian / Ubuntu - visit our repository for a complete list of supported distros
+    Fedora / OpenSUSE
+    Mac OSX 10.5.8</Description>
+        <BuildDependencies>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>libssh-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>wxWidgets-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="12d26d0e7bb4ba4612c14716523372957197c706" type="targz">http://sourceforge.net/projects/codelite/files/Releases/codelite-5.3/codelite-5.3-gtk.src.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>codelite</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libssh</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>wxWidgets</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="library">/usr/lib64/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-03</Date>
+            <Version>5.3</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
