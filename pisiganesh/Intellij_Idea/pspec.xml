@@ -1,0 +1,45 @@
+<PISI>
+    <Source>
+        <Name>Intellij_Idea</Name>
+        <Homepage>http://www.jetbrains.com/idea/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>Apache 2.0 license</License>
+        <PartOf>programming.environment</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>IntelliJ IDEA — The Best Java and Polyglot IDE</Summary>
+        <Description>IntelliJ IDEA 12.1
+------------------------
+JavaFX 2.0
+Android UI designer
+Play framework 2.0
+Spring frameworks
+Java 8
+Faster compiler</Description>
+        <Archive sha1sum="da63de547958eb6c4640cbeebfcf1b9c3816f0d7" type="targz">http://download.jetbrains.com/idea/ideaIC-13.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>Intellij_Idea</Name>
+        <Files>
+            <Path fileType="data">/opt/*</Path>
+            <Path fileType="data">/usr/*</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/idea.desktop" permission="0644" group="root" owner="root">idea.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/pixmaps/idea.png" permission="0644" group="root" owner="root">idea.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-04</Date>
+            <Version>13.0</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
