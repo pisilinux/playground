@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>vorbisgain</Name>
+        <Homepage>http://sjeng.org/vorbisgain.html</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>A utility that computes the ReplayGain values for Ogg Vorbis files.</Summary>
+        <Description>VorbisGain is a utility that uses a psychoacoustic method to correct the volume of an Ogg Vorbis file to a predefined standardized loudness.</Description>
+        <Archive sha1sum="bd79764a83a8ee327df85c538ec798a6d3f240be" type="targz">http://sjeng.org/ftp/vorbis/vorbisgain-0.37.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libogg-devel</Dependency>
+         <Dependency>libvorbis-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>vorbisgain</Name>
+        <RuntimeDependencies>
+         <Dependency>libogg</Dependency>
+         <Dependency>libvorbis</Dependency>
+        </RuntimeDependencies>
+        <Files>
+         <Path fileType="executable">/usr/bin</Path>
+         <Path fileType="man">/usr/share/man</Path>
+         <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-03</Date>
+            <Version>0.37</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
