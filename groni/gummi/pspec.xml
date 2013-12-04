@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gummi</Name>
+        <Homepage>http://gummi.midnightcoding.org/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:gui</IsA>
+        <Summary>Simple LaTeX editor.</Summary>
+        <Description>LaTeX editor for the Linux platform, written in C/GTK+. It was designed with simplicity in mind.</Description>
+        <Archive sha1sum="dc7cc00518f925629574990d13982ae050515e0b" type="targz">http://dev.midnightcoding.org/attachments/download/301/gummi-0.6.5.tar.gz</Archive>
+        <BuildDependencies>
+        <Dependency>gtk2-devel</Dependency>
+        <Dependency>gtksourceview-devel</Dependency>
+        <Dependency>poppler-devel</Dependency>
+        <Dependency>poppler-glib-devel</Dependency>
+        <Dependency>gtkspell-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gummi</Name>
+      <RuntimeDependencies>
+        <Dependency>gtk2</Dependency>
+        <Dependency>gtksourceview</Dependency>
+        <Dependency>poppler</Dependency>
+        <Dependency>poppler-glib</Dependency>
+        <Dependency>gtkspell</Dependency>
+        <Dependency>texlive-core</Dependency>
+      </RuntimeDependencies>
+      <Files>
+        <Path fileType="executable">/usr/bin</Path>
+        <Path fileType="localedata">/usr/share/locale</Path>
+        <Path fileType="man">/usr/share/man</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
+        <Path fileType="data">/usr/share/applications</Path>
+        <Path fileType="data">/usr/share/pixmaps</Path>
+        <Path fileType="data">/usr/share/gummi</Path>
+        <Path fileType="executable">/usr/lib/gummi</Path>
+      </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-04</Date>
+            <Version>0.6.5</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
