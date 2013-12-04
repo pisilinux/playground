@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>Firefox_Nightly</Name>
+        <Homepage>http://nightly.mozilla.org/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>network</PartOf>
+        <IsA>app:web</IsA>
+        <Summary>http://nightly.mozilla.org/</Summary>
+        <Description>http://nightly.mozilla.org/</Description>
+        <Archive sha1sum="bb7caa2aade86bf090bc83198b056673c97ea239" type="tarbz2">/home/ganesh/pisi_packages/firefox_nightly/firefox-28.0a1.en-US.linux-x86_64.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>Firefox_Nightly</Name>
+        <Files>
+            <Path fileType="data">/opt/*</Path>
+            <Path fileType="data">/usr/*</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/firefox_nightly.desktop" permission="0644" group="root" owner="root">firefox_nightly.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/pixmaps/firefox_nightly.png" permission="0644" group="root" owner="root">firefox_nightly.png</AdditionalFile>
+        </AdditionalFiles>
+        <RuntimeDependencies>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>libXrender</Dependency>
+            <Dependency>libXt</Dependency>
+            <Dependency>pango</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-04</Date>
+            <Version>28.0</Version>
+            <Comment>Australis UI</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
