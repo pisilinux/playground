@@ -1,0 +1,49 @@
+<PISI>
+    <Source>
+        <Name>coquillo</Name>
+        <Homepage>http://qt-apps.org</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <PartOf>multimedia.misc</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Coquillo is a multi-platform metadata editor / tagger for various audio file formats. It is based on Qt 4 and TagLib.</Summary>
+        <Description>Coquillo is a multi-platform metadata editor / tagger for various audio file formats. It is based on Qt 4 and TagLib.
+
+Basic support for most common file formats including MP3, Ogg, FLAC and MusePack. Supports cover art embedded in MP3, Ogg/Vorbis and FLAC files.
+
+Current features:
+- CDDB read support.
+- Integrated FreeDB web search.
+- Resolve tags from filenames.
+- Generate filenames from tags.
+- Process multiple files at once.
+- Bookmark often used locations.</Description>
+        <Archive sha1sum="344a16e6cc0d8526fc8f4d5459270b701ba3ebad" type="targz">http://cs.joensuu.fi/~sjuvonen/coquillo/1.12/coquillo-1.12-src.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>coquillo</Name>
+        <RuntimeDependencies>
+            <Dependency>phonon</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>taglib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-05</Date>
+            <Version>1.12</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
