@@ -1,0 +1,54 @@
+<PISI>
+    <Source>
+        <Name>handbrake</Name>
+        <Homepage>http://handbrake.fr/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>multimedia.converter</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>The open source video transcoder</Summary>
+        <Description>HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs.
+
+Reasons you’ll love HandBrake:
+
+    Convert video from nearly any format
+    Free and Open Source
+    Multi-Platform (Windows, Mac and Linux)</Description>
+        <Archive sha1sum="64414bdc425115545f7dd735c7d1e30b8b005056" type="tarbz2">http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>handbrake</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gst-plugins-base</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libass</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>libsamplerate</Dependency>
+            <Dependency>libtheora</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>webkit-gtk3</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-06</Date>
+            <Version>0.9.9</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
