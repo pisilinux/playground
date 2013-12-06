@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kaption</Name>
+        <Homepage>https://github.com/fdimuccio/kaption</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A KDE utility similar to Jing or Skitch not yet as powerful as them</Summary>
+        <Description>A KDE utility similar to Jing or Skitch not yet as powerful as them ;) Nice, but what is it? It's an app that sit in the systray, left clicking the icon you can capture a screen region to draw arrows, boxes and text on it, than you can save the result.</Description>
+        <Archive sha1sum="9fdfed4b3e9fb5a296c14b294f0c20714d288466" type="zip">https://github.com/fdimuccio/kaption/archive/master.zip</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kaption</Name>
+        <RuntimeDependencies>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>    
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications/kde4/</Path>
+            <Path fileType="data">/usr/share/config.kcfg/</Path>
+            <Path fileType="data">/usr/share/kde4/apps/kaption/</Path>
+            <Path fileType="data">/usr/share/locale/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-05</Date>
+            <Version>0.0.9</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
