@@ -1,0 +1,45 @@
+<PISI>
+    <Source>
+        <Name>ProjectLibre</Name>
+        <Homepage>http://www.projectlibre.org/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>CPL-1.0</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Open source Project Management Tool</Summary>
+        <Description>- Microsoft Project replacement
+- Gantt Chart
+- New and updated version of OpenProj with hundreds of updates/bug fixes
+- Earned Value Costing
+- PERT Charts
+- Project Management software
+- RBS Chart
+- New version of OpenProj</Description>
+        <Archive sha1sum="a67f704e520a20e5415cdbe9901dd785186b8264" type="targz">http://sourceforge.net/projects/projectlibre/files/ProjectLibre/1.5.7/projectlibre-1.5.7.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>ProjectLibre</Name>
+        <Files>
+            <Path fileType="data">/opt/*</Path>
+            <Path fileType="data">/usr/*</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/ProjectLibre.desktop" permission="0644" group="root" owner="root">ProjectLibre.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/pixmaps/ProjectLibre.gif" permission="0644" group="root" owner="root">ProjectLibre.gif</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-06</Date>
+            <Version>1.5.7</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
