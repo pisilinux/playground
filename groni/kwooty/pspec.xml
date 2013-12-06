@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kwooty</Name>
+        <Homepage>http://kwooty.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Kwooty is a NZB usenet binary downloader for KDE 4.</Summary>
+        <Description>Kwooty is a NZB usenet binary downloader for KDE 4. Features : automatic file verification - repairing with par2 files, automatic archive extraction (Rar, Zip and 7z archive formats supported), built-in YEnc and UUEncode file decoders, ...</Description>
+        <Archive sha1sum="b65a6538606985f61313554c536047e9a8db261e" type="targz">http://sourceforge.net/projects/kwooty/files/kwooty-1.1.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>automoc4</Dependency>
+            <Dependency>cmake</Dependency>
+            <Dependency>kde-workspace-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+        </BuildDependencies>
+     </Source>
+
+    <Package>
+        <Name>kwooty</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>kde-workspace</Dependency>
+            <Dependency>p7zip</Dependency>
+            <Dependency>par2cmdline</Dependency>
+            <Dependency>unrar</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/applications/kde4/*</Path>
+            <Path fileType="config">/usr/share/config.kcfg/*</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*</Path>
+            <Path fileType="data">/usr/share/kde4/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-06</Date>
+            <Version>1.1.0</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
