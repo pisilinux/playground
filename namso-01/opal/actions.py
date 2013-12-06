@@ -10,11 +10,25 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    pisitools.cxxflags.add("-fpermissive")
-    autotools.configure("--prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-zrtp")
+    autotools.configure("\
+                         --disable-libavcodec-stackalign-hack \
+                         --disable-localgsm \
+                         --disable-localilbc \
+                         --disable-localspeex \
+                         --disable-localspeexdsp \
+                         --disable-msrp \
+                         --disable-samples \
+                         --disable-spandsp \
+                         --disable-static \
+                         --disable-zrtp \
+                         --enable-aec \
+                         --enable-default-to-full-capabilties \
+                         --enable-shared \
+                         --enable-versioncheck \
+                         ")
 
 def build():
-    autotools.make("V=1")
+    autotools.make()
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
