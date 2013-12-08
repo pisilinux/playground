@@ -19,10 +19,11 @@
             <Dependency>gtk2-devel</Dependency>
             <Dependency>cairo-devel</Dependency>
             <Dependency>gdk-pixbuf-devel</Dependency>
+	    <Dependency>itstool</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">lightdm-1.1.9-mdv-config.patch</Patch>
-            <Patch level="1">ipna.patch</Patch>
+	  <Patch level="1">lightdm-default-config.patch</Patch>
+<!--	  <Patch level="1">ipna.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -45,6 +46,7 @@
             <Path fileType="library">/usr/lib/liblightdm-gobject-1.so</Path>
             <Path fileType="library">/usr/lib/liblightdm-gobject-1.so.0</Path>
             <Path fileType="library">/usr/lib/liblightdm-qt-2.so.0.0.0</Path>
+            <Path fileType="library">/usr/lib</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="doc">/usr/share/doc</Path>
@@ -52,11 +54,13 @@
             <Path fileType="doc">/usr/share/help</Path>
             <Path fileType="data">/usr/share/vala</Path>
             <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="data">/usr/share/display-managers</Path>
             <Path fileType="data">/usr/share/lightdm-example-gtk-greeter</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm">lightdm.pam</AdditionalFile>
-            <AdditionalFile owner="root" permission="0755" target="/etc/lightdm/xsession">xsession</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0755" target="/etc/lightdm/xsession">xsession</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0755" target="/usr/share/display-managers/lightdm.desktop">lightdm.desktop</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
@@ -90,6 +94,13 @@
     </Package>
 
     <History>
+      <Update release="3">
+            <Date>2013-12-06</Date>
+            <Version>1.9.5</Version>
+            <Comment>First release.</Comment>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2013-02-03</Date>
             <Version>1.5.0</Version>

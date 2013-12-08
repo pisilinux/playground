@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libbsd</Name>
+        <Homepage>http://libbsd.freedesktop.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>library</IsA>
+        <Summary>provides useful functions commonly found on BSD systems</Summary>
+        <Description>This library provides useful functions commonly found on BSD systems, and lacking on others like GNU systems, thus making it easier to port projects with strong BSD origins, without needing to embed the same code over and over again on each project.</Description>
+        <Archive sha1sum="cb294a6123fb1dd173369144adfcaccb278db310" type="targz">http://libbsd.freedesktop.org/releases/libbsd-0.3.0.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libbsd</Name>
+        <RuntimeDependencies>
+            <Dependency>glibc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/lib/*</Path>
+            <Path fileType="data">/usr/include/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="man">/usr/share/man/*</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-06</Date>
+            <Version>0.6.0</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
