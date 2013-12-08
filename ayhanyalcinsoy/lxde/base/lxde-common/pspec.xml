@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>lxde-common</Name>
+        <Homepage>http://wiki.lxde.org/en/LXDE_Common</Homepage>
+        <Packager>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+	<PartOf>desktop.lxde.base</PartOf>
+        <Summary>LXDE Session default configuration files and nuoveXT2 iconset</Summary>
+        <Description>lxde-common provides LXDE Session default configuration files and nuoveXT2 iconset.</Description>
+        <Archive sha1sum="27ce9bcaf109ded61aa0c691a8dc6059a04a6d08" type="targz">mirrors://sourceforge/lxde/lxde-common-0.5.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gtk2-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+	    <!--<Patch level="1">01_default-config.patch</Patch>-->
+	    <Patch level="1">lxde-common-0.5.5-pisilinux-desktop.patch</Patch>
+	    <Patch level="1">02-desktop-background.patch</Patch>
+            <Patch level="1">13_ensure-menu-prefix.patch</Patch>
+            <Patch level="1">desktop.patch</Patch>
+	    <Patch level="1">lxde-common-0.5.5-fix-default-pcmanfm.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>lxde-common</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk2</Dependency>
+            <Dependency>lxpanel</Dependency>
+            <Dependency>lxsession</Dependency>
+            <Dependency>libfm</Dependency>
+            <Dependency>pcmanfm</Dependency>
+            <Dependency>openbox</Dependency>
+            <Dependency>icon-theme-elemantary</Dependency>
+            <Dependency>polkit-gnome</Dependency>
+            <Dependency>gtk-theme-mediterranean-others</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+        <AdditionalFiles>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/lxde-lock-screen.desktop">data/lxde-lock-screen.desktop</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/lxde/wallpapers/lxde-pisilinux.png">data/lxde-pisilinux.png</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/lxde/wallpapers/pisilinux-blue.png">data/pisilinux-blue.png</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/lxde/images/lxde_pisilinux2012_menu.png">data/pisilinux-2012_menu.png</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/lxde/images/pisilinuxLogo.png">data/pisilinuxLogo.png</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/lxpanel/images/background-pisilinux.png">data/background-pisilinux.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2013-10-20</Date>
+            <Version>0.5.5</Version>
+            <Comment>change default theme</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-10-11</Date>
+            <Version>0.5.5</Version>
+            <Comment>rebuild</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-08-14</Date>
+            <Version>0.5.5</Version>
+            <Comment>rebuild</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-10-15</Date>
+            <Version>0.5.5</Version>
+            <Comment>First release</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
