@@ -54,12 +54,13 @@
             <Path fileType="doc">/usr/share/help</Path>
             <Path fileType="data">/usr/share/vala</Path>
             <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="data">/usr/share/display-managers</Path>
             <Path fileType="data">/usr/share/lightdm-example-gtk-greeter</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm">lightdm.pam</AdditionalFile>
 	    <AdditionalFile owner="root" permission="0755" target="/etc/lightdm/xsession">xsession</AdditionalFile>
-	    <AdditionalFile owner="root" permission="0755" target="/usr/share/display-managers">lightdm.desktop</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0755" target="/usr/share/display-managers/lightdm.desktop">lightdm.desktop</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
