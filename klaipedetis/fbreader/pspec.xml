@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>fbreader</Name>
+        <Homepage>www.fbreader.org</Homepage>
+        <Packager>
+            <Name>klaipedetis</Name>
+            <Email>r.shabashov@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>fbreader</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>fbreader is ebook readet</Summary>
+        <Description>Fbreader is pdf, epub books reader and converter</Description>
+        <Archive sha1sum="7e6f0acbac5d8111fcda14a576ae4fdc93eef292" type="targz">http://fbreader.org/files/desktop/fbreader-sources-0.99.4.tgz</Archive>
+        <!--
+        <BuildDependencies>
+            <Dependency>Dep1-devel</Dependency>
+            <Dependency>Dep2-devel</Dependency>
+            <Dependency>Dep3-devel</Dependency>
+            <Dependency versionFrom="">Dep4-devel</Dependency>
+        </BuildDependencies>
+        -->
+        <!--
+        <Patches>
+            <Patch>fbreader.patch</Patch>
+            <Patch level="1">fbreader.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>fbreader</Name>
+        <!--
+        <RuntimeDependencies>
+            <Dependency>libunibreak</Dependency>
+            <Dependency>bribidi</Dependency>
+            <Dependency>Dep3</Dependency>
+            <Dependency versionFrom="">Dep4</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="all">/</Path>
+            <!--
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            -->
+        </Files>
+        <!--
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/fbreader.desktop">fbreader.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/fbreader.png">fbreader.png</AdditionalFile>
+        </AdditionalFiles>
+        -->
+        <!--
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+        -->
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-09</Date>
+            <Version>0.99.4.tgz</Version>
+            <Comment>First release</Comment>
+            <Name>klaipedetis</Name>
+            <Email>r.shabashov@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
