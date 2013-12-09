@@ -1,0 +1,35 @@
+diff -Nuar hplip-3.13.11.OSmanOS/ip/xfax.c hplip-3.13.11/ip/xfax.c
+--- hplip-3.13.11.OSmanOS/ip/xfax.c     2013-10-31 13:46:51.000000000 +0200
++++ hplip-3.13.11/ip/xfax.c     2013-12-08 20:52:36.367016334 +0200
+@@ -1680,19 +1680,6 @@
+                  & ((1u<<n_bits) - 1u);                                      \
+ }
+ 
+-#if 0
+-
+-#define BITS_LOAD(g, num_bits, par_result) {                                 \
+-    int n_bits = (int)(num_bits);                                            \
+-                                                                             \
+-    par_result = g->gb_cache;                                                \
+-                                                                             \
+-    asm ("extract %1,%2,%0"                                                  \
+-        : "=d" (par_result)                                                  \
+-        : "dI" (g->gb_cache_cnt - n_bits), "dI" (n_bits), "0" (par_result)); \
+-}
+-
+-#endif
+ 
+ 
+ 
+diff -Nuar hplip-3.13.11.OSmanOS/scan/sane/common.h hplip-3.13.11/scan/sane/common.h
+--- hplip-3.13.11.OSmanOS/scan/sane/common.h    2013-10-31 13:45:07.000000000 +0200
++++ hplip-3.13.11/scan/sane/common.h    2013-12-08 20:53:21.336017034 +0200
+@@ -53,8 +53,6 @@
+ 
+ #define BACKEND_NAME hpaio
+ 
+-#define BREAKPOINT __asm( "int3" )
+-
+ #define OK 1
+ #define ERROR 0
+ #define MAX_LIST_SIZE 32

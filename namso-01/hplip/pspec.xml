@@ -1,0 +1,212 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>hplip</Name>
+        <Homepage>http://hplip.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <License>MIT</License>
+        <Summary>HP Linux Imaging and Printing System</Summary>
+        <Description>HP Linux Imaging and Printing (HPLIP) System includes printer and scanner drivers and related service tools.</Description>
+        <Archive sha1sum="240dcaf52c75a23cd5ab6a4426364245e7c2474e" type="targz">http://sourceforge.net/projects/hplip/files/hplip/3.13.11/hplip-3.13.11.tar.gz</Archive>
+        <AdditionalFiles>
+            <!-- PPD patcher -->
+            <AdditionalFile permission="0755" target="patch-ppds">patch-ppds.sh</AdditionalFile>
+            <AdditionalFile permission="0755" target="copy-deviceids">fedora/copy-deviceids.py</AdditionalFile>
+
+            <!-- PPD patches -->
+            <AdditionalFile target="ppd-patches/001-hplip-deviceIDs-ppd.patch">fedora/hplip-deviceIDs-ppd.patch</AdditionalFile>
+            <AdditionalFile target="ppd-patches/002-hplip-ppd-ImageableArea.patch">fedora/hplip-ppd-ImageableArea.patch</AdditionalFile>
+        </AdditionalFiles>
+        <BuildDependencies>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>foomatic-db</Dependency>
+            <Dependency>net-snmp-devel</Dependency>
+            <Dependency>sane-backends-devel</Dependency>
+            <Dependency>cups-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <!-- Fedora patches -->
+            <!-- The pstotiff filter is rubbish so replace it (launchpad #528394).-->
+            <Patch level="1">fedora/hplip-pstotiff-is-rubbish.patch</Patch>
+            <!-- Fix compilation.-->
+            <Patch level="1">fedora/hplip-strstr-const.patch</Patch>
+            <!--  Make utils.checkPyQtImport() look for the gui sub-package (bug #243273). -->
+            <Patch level="1">fedora/hplip-ui-optional.patch</Patch>
+            <!-- Make sure to avoid handwritten asm. -->
+            <Patch level="1">fedora/hplip-no-asm.patch</Patch>
+            <!--# Corrected several IEEE 1284 Device IDs using foomatic data.
+            # Color LaserJet CM1312nfi (bug #581005)
+            # Color LaserJet 3800 (bug #581935)
+            # Color LaserJet 2840 (bug #582215)
+            # Color LaserJet CP1518ni (bug #613689)
+            # Color LaserJet 2600n (bug #613712)
+            # Color LaserJet 2500/3700/4550/4600/4650/4700/5550/CP1515n/CP2025n
+            #                CP3525/CP4520 Series/CM2320nf (bug #659040)
+            # Color LaserJet CP2025dn (bug #651509)
+            # Color LaserJet CM4730 MFP (bug #658831)
+            # Color LaserJet CM3530 MFP (bug #659381)
+            # LaserJet 4050 Series/4100 Series/2100 Series/4350/5100 Series/8000 Series
+            #          P3005/P3010 Series/P4014/P4515 (bug #659039)
+            # LaserJet Professional P1606dn (bug #708472)
+            # LaserJet Professional M1212nf MFP (bug #742490)
+            # LaserJet M1536dnf MFP (bug #743915)
+            # LaserJet M1522nf MFP (bug #745498)
+            # LaserJet M1319f MFP (bug #746614)
+            # LaserJet M1120 MFP (bug #754139)
+            # LaserJet P1007 (bug #585272)
+            # LaserJet P1505 (bug #680951)
+            # LaserJet P2035 (Ubuntu #917703)
+            # PSC 1600 series (bug #743821)
+            # Officejet 6300 series (bug #689378)
+            # LaserJet Professional P1102w (bug #795958)
+            # Color LaserJet CM4540 MFP (bug #968177)
+            # Color LaserJet cp4005 (bug #980976)-->
+            <Patch level="1">fedora/hplip-deviceIDs-drv.patch</Patch>
+            <!--# Don't add printer queue, just check plugin.
+            # Move udev rules from /etc/ to /usr/lib/ (bug #748208).-->
+            <Patch level="1">fedora/hplip-udev-rules.patch</Patch>
+            <!--# Retry when connecting to device fails (bug #532112).-->
+            <Patch level="1">fedora/hplip-retry-open.patch</Patch>
+            <!--# Mark SNMP quirks in PPD for HP OfficeJet Pro 8500 (bug #581825).-->
+            <Patch level="1">fedora/hplip-snmp-quirks.patch</Patch>
+            <!--# Fixed bogus low ink warnings from hpijs driver (bug #643643).-->
+            <Patch level="1">fedora/hplip-hpijs-marker-supply.patch</Patch>
+            <!--# Clear old printer-state-reasons we used to manage (bug #510926).-->
+            <Patch level="1">fedora/hplip-clear-old-state-reasons.patch</Patch>
+            <!--# Avoid busy loop in hpcups when backend has exited (bug #525944).-->
+            <Patch level="1">fedora/hplip-hpcups-sigpipe.patch</Patch>
+            <!--# CUPS filters should use TMPDIR when available (bug #865603).-->
+            <Patch level="1">fedora/hplip-logdir.patch</Patch>
+            <!--# Fixed Device ID parsing code in hpijs's dj9xxvip.c (bug #510926).-->
+            <Patch level="1">fedora/hplip-bad-low-ink-warning.patch</Patch>
+            <!-- PisiLinuX patches -->
+            <Patch level="1">pisilinux/desktop-i18n.patch</Patch>
+            <Patch level="0">pisilinux/desktop-i18n-1.patch</Patch>
+            <Patch level="1">pisilinux/add-pisilinux-support.patch</Patch>
+
+            <!-- Suppress module warnings when the command is run as root -->
+            <Patch level="1">pisilinux/suppress-module-warnings.patch</Patch>
+
+            <!-- Consume session parameter from systray as it avoids startup -->
+            <Patch level="1">pisilinux/hp-systray-consume-session-param.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>hplip</Name>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <IsA>driver</IsA>
+        <RuntimeDependencies>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>net-snmp</Dependency>
+            <Dependency>foomatic-db</Dependency>
+            <Dependency>sane-backends</Dependency>
+            <Dependency>cups</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/etc/sane.d/dll.d</Path>
+            <Path fileType="config">/etc/hp/hplip.conf</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/lib/cups/backend</Path>
+            <Path fileType="executable">/usr/lib/cups/filter</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/var/lib/hp</Path>
+            <Path fileType="data">/usr/share/cups</Path>
+            <Path fileType="data">/usr/share/hplip</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/PolicyKit</Path>
+            <Path fileType="data">/usr/share/hplip/prnt/plugins</Path>
+            <Path fileType="data">/var/log/hp</Path>
+            <Path fileType="data">/lib/udev/rules.d</Path>
+            <Path fileType="config">/etc/cron.daily/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/hpcups-update-ppds">fedora/hpcups-update-ppds.sh</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/sane.d/dll.d/hpaio">hpaio</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/hplip/data/localization/hplip_tr.qm">hplip_tr.qm</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>hplip-gui</Name>
+        <Icon>hplip</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>A set of useful utilities written in Qt for managing HP devices</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">hplip</Dependency>
+            <Dependency>python-reportlab</Dependency>
+            <Dependency>python-pygobject</Dependency>
+            <Dependency>python-qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/hp-toolbox</Path>
+            <Path fileType="executable">/usr/bin/hp-systray</Path>
+            <Path fileType="executable">/usr/bin/hp-print</Path>
+            <Path fileType="data">/usr/share/hplip/toolbox.py</Path>
+            <Path fileType="data">/usr/share/hplip/systray.py</Path>
+            <Path fileType="data">/usr/share/hplip/print.py</Path>
+
+            <Path fileType="data">/etc/xdg/autostart</Path>
+            <Path fileType="data">/usr/share/applications/*.desktop</Path>
+            <Path fileType="data">/usr/share/hplip/data/images</Path>
+            <Path fileType="data">/usr/share/hplip/plugins</Path>
+            <Path fileType="data">/usr/share/hplip/ui4</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/hplip.png">hplip.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>hplip-docs</Name>
+        <IsA>data:doc</IsA>
+        <Summary>Documentation files for HPLIP</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">hplip</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2013-12-08</Date>
+            <Version>3.13.11</Version>
+            <Comment>Version bump</Comment>            
+            <Name>Osman Erkan</Name>
+            <Email>Osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-04-26</Date>
+            <Version>3.13.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-03-03</Date>
+            <Version>3.13.2</Version>
+            <Comment>V.Bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-12-14</Date>
+            <Version>3.12.11</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

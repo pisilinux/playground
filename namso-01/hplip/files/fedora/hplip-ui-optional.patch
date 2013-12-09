@@ -1,0 +1,17 @@
+diff -Nuar hplip-3.13.11.OSmanOS/base/utils.py hplip-3.13.11/base/utils.py
+--- hplip-3.13.11.OSmanOS/base/utils.py 2013-10-31 13:46:54.000000000 +0200
++++ hplip-3.13.11/base/utils.py 2013-12-08 10:07:49.618872851 +0200
+@@ -717,6 +717,13 @@
+     except ImportError:
+         if os.getenv('DISPLAY') and os.getenv('STARTED_FROM_MENU'):
+             no_qt_message_gtk()
++            
++        # hplip-gui sub-package (Fedora)
++        try:
++            import ui
++        except ImportError:
++            log.error("hplip-gui not installed.  GUI not available. Exiting.")
++            return False
+ 
+         log.error("PyQt not installed. GUI not available. Exiting.")
+         return False
