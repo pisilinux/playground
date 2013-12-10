@@ -1,0 +1,47 @@
+<PISI>
+    <Source>
+        <Name>zenity</Name>
+        <Homepage>http://www.gnome.org/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <PartOf>desktop</PartOf>
+        <IsA>library</IsA>
+        <Summary>Zenity is a rewrite of gdialog</Summary>
+        <Description>Zenity is a rewrite of gdialog</Description>
+        <BuildDependencies>
+            <Dependency>itstool</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="af083691820970ef1e79590df35ea5c59a7491f3" type="tarxz">http://ftp.acc.umu.se/pub/GNOME/sources/zenity/3.8/zenity-3.8.0.tar.xz</Archive>
+    </Source>
+    <Package>
+        <Name>zenity</Name>
+        <RuntimeDependencies>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>itstool</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>pango</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="info">/usr/share/help/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="man">/usr/share/man/*</Path>
+            <Path fileType="data">/usr/share/zenity/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-04</Date>
+            <Version>3.8.0</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
