@@ -1,0 +1,104 @@
+--- gcstar/lib/gcstar/GCLang/TR/GCModels/GCcoins.pm	2013-09-08 21:14:54.256000028 +0300
++++ gcstar/lib/gcstar/GCLang/TR/GCModels/GCcoins.pm	2013-08-30 23:34:48.738310768 +0300
+@@ -0,0 +1,101 @@
++{
++    package GCLang::TR::GCModels::GCcoins;
++
++    use utf8;
++###################################################
++#
++#  Copyright 2005-2010 Christian Jodar
++#
++#  This file is part of GCstar.
++#
++#  GCstar is free software; you can redistribute it and/or modify
++#  it under the terms of the GNU General Public License as published by
++#  the Free Software Foundation; either version 2 of the License, or
++#  (at your option) any later version.
++#
++#  GCstar is distributed in the hope that it will be useful,
++#  but WITHOUT ANY WARRANTY; without even the implied warranty of
++#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++#  GNU General Public License for more details.
++#
++#  You should have received a copy of the GNU General Public License
++#  along with GCstar; if not, write to the Free Software
++#  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
++#
++###################################################
++    
++    use strict;
++    use base 'Exporter';
++
++    our @EXPORT = qw(%lang);
++
++    our %lang = (
++    
++        CollectionDescription => 'Para Arşivi',
++        Items => 'Madeni Paralar',
++        NewItem => 'Yeni para',
++
++        Name => 'Adı',
++        Country => 'Ülke',
++        Year => 'Yıl',
++        Currency => 'Birim',
++        Value => 'Değer',
++        Picture => 'Ana Resmi',
++        Diameter => 'Çap',
++        Metal => 'Metal',
++        Edge => 'Köşe',
++        Edge1 => 'Köşe 1',
++        Edge2 => 'Köşe 2',
++        Edge3 => 'Köşe 3',
++        Edge4 => 'Köşe 4',
++        Head => 'Baş',
++        Tail => 'Kuyruk',
++        Comments => 'Yorumlar',
++        History => 'Geçmiş',
++        Website => 'Web sitesi',
++        Estimate => 'Tahmin',
++        References => 'İlgi',
++        Type => 'Tür',
++        Coin => 'Para',
++        Banknote => 'Kağıt para',
++
++        Main => 'Ana',
++        Description => 'Tanım',
++        Other => 'Diğer bilgiler',
++        Pictures => 'Resimler',
++    
++        Condition => 'Koşul (PCGS)',
++        Grade1  => 'BS-1',
++        Grade2  => 'FR-2',
++        Grade3  => 'AG-3',
++        Grade4  => 'G-4',
++        Grade6  => 'G-6',
++        Grade8  => 'VG-8',
++        Grade10 => 'VG-10',
++        Grade12 => 'F-12',
++        Grade15 => 'F-15',
++        Grade20 => 'VF-20',
++        Grade25 => 'VF-25',
++        Grade30 => 'VF-30',
++        Grade35 => 'VF-35',
++        Grade40 => 'XF-40',
++        Grade45 => 'XF-45',
++        Grade50 => 'AU-50',
++        Grade53 => 'AU-53',
++        Grade55 => 'AU-55',
++        Grade58 => 'AU-58',
++        Grade60 => 'MS-60',
++        Grade61 => 'MS-61',
++        Grade62 => 'MS-62',
++        Grade63 => 'MS-63',
++        Grade64 => 'MS-64',
++        Grade65 => 'MS-65',
++        Grade66 => 'MS-66',
++        Grade67 => 'MS-67',
++        Grade68 => 'MS-68',
++        Grade69 => 'MS-69',
++        Grade70 => 'MS-70',
++     );
++}
++
++1;

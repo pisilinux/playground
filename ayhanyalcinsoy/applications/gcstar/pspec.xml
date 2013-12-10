@@ -1,0 +1,150 @@
+<PISI>
+    <Source>
+        <Name>gcstar</Name>
+        <Homepage>www.gcstar.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>GCstar is a free open source application for managing your collections.</Summary>
+        <Description>GCstar is a free open source application for managing your collections. Detailed information on each item can be automatically retrieved from the internet and you can store additional data, such as the location or who you've lent it to. You may also search and filter your collection by many criteria.</Description>
+        <Archive sha1sum="8ab3d685471ae262df0a4172d33ad7f5beccc3b3" type="targz">http://download.gna.org/gcstar/gcstar-1.7.0.tar.gz</Archive>	
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Gtk2</Dependency>
+	    <Dependency>perl-Date-Calc</Dependency>
+	    <Dependency>perl-HTTP-Cookies</Dependency>
+	    <Dependency>perl-DateTime-Format-Strptime</Dependency>
+	    <Dependency>perl-Digest-MD5</Dependency>
+	    <Dependency>perl-FindBin-libs</Dependency>
+	    <Dependency>perl-GD</Dependency>
+	    <Dependency>perl-GD-TextUtil</Dependency>
+	    <Dependency>perl-HTTP-Cookies</Dependency>
+	    <Dependency>perl-MP3-Info</Dependency>
+	    <Dependency>perl-MP3-Tag</Dependency>
+	    <Dependency>perl-Net-FreeDB</Dependency>
+	    <Dependency>perl-Ogg-Vorbis-Header-PurePerl</Dependency>
+	    <Dependency>perl-CDDB-File</Dependency>
+	    <Dependency>perl-Class-Load</Dependency>
+	    <Dependency>perl-Module-Implementation</Dependency>
+	    <Dependency>perl-Module-Runtime</Dependency>
+	    <Dependency>perl-Test-Output</Dependency>
+	    <Dependency>perl-Try-Tiny</Dependency>
+	    <Dependency>perl-Data-OptList</Dependency>
+	    <Dependency>perl-Date-Calc</Dependency>
+	    <Dependency>perl-DateTime</Dependency>
+	    <Dependency>perl-DateTime-Locale</Dependency>
+	    <Dependency>perl-DateTime-TimeZone</Dependency>
+	    <Dependency>perl-Dist-CheckConflicts</Dependency>
+	    <Dependency>perl-GD-Graph</Dependency>
+	    <Dependency>perl-Package-DeprecationManager</Dependency>
+	    <Dependency>perl-Package-Stash</Dependency>
+	    <Dependency>perl-Params-Validate</Dependency>
+	    <Dependency>perl-Sub-Install</Dependency>
+	    <Dependency>perl-Sub-Exporter</Dependency>
+	    <Dependency>perl-Test-Fatal</Dependency>
+	</BuildDependencies>
+        <Patches>
+            <Patch level="1">gcstar01.patch</Patch>
+            <Patch level="1">desktop.patch</Patch>
+	    <Patch level="1">5.patch</Patch>
+	    <Patch level="1">share.patch</Patch>
+	    <Patch level="1">GCstar-tr.patch</Patch>
+	    <Patch level="1">GCboardgames_tr.patch</Patch>
+	    <Patch level="1">GCbooks_tr.patch</Patch>
+	    <Patch level="1">GCcoins_tr.patch</Patch>
+	    <Patch level="1">GCcomics_tr.patch</Patch>
+	    <Patch level="1">GCfilms_tr.patch</Patch>
+	    <Patch level="1">GCgames_tr.patch</Patch>
+	    <Patch level="1">GCgeneric_tr.patch</Patch>
+	    <Patch level="1">GCmusics_tr.patch</Patch>
+	    <Patch level="1">GCsoftware_tr.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>gcstar</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Gtk2</Dependency>
+	    <Dependency>perl-Date-Calc</Dependency>
+	    <Dependency>perl-HTTP-Cookies</Dependency>
+	    <Dependency>perl-DateTime-Format-Strptime</Dependency>
+	    <Dependency>perl-Digest-MD5</Dependency>
+	    <Dependency>perl-FindBin-libs</Dependency>
+	    <Dependency>perl-GD</Dependency>
+	    <Dependency>perl-GD-TextUtil</Dependency>
+	    <Dependency>perl-HTTP-Cookies</Dependency>
+	    <Dependency>perl-MP3-Info</Dependency>
+	    <Dependency>perl-MP3-Tag</Dependency>
+	    <Dependency>perl-Net-FreeDB</Dependency>
+	    <Dependency>perl-Ogg-Vorbis-Header-PurePerl</Dependency>
+	    <Dependency>perl-CDDB-File</Dependency>
+	    <Dependency>perl-Class-Load</Dependency>
+	    <Dependency>perl-Module-Implementation</Dependency>
+	    <Dependency>perl-Module-Runtime</Dependency>
+	    <Dependency>perl-Test-Output</Dependency>
+	    <Dependency>perl-Try-Tiny</Dependency>
+	    <Dependency>perl-Data-OptList</Dependency>
+	    <Dependency>perl-Date-Calc</Dependency>
+	    <Dependency>perl-DateTime</Dependency>
+	    <Dependency>perl-DateTime-Locale</Dependency>
+	    <Dependency>perl-DateTime-TimeZone</Dependency>
+	    <Dependency>perl-Dist-CheckConflicts</Dependency>
+	    <Dependency>perl-GD-Graph</Dependency>
+	    <Dependency>perl-Package-DeprecationManager</Dependency>
+	    <Dependency>perl-Package-Stash</Dependency>
+	    <Dependency>perl-Params-Validate</Dependency>
+	    <Dependency>perl-Sub-Install</Dependency>
+	    <Dependency>perl-Sub-Exporter</Dependency>
+	    <Dependency>perl-Test-Fatal</Dependency>	    
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+			<Path fileType="library">/usr/lib/gcstar</Path>
+            <Path fileType="data">/usr/share/gcstar</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="man">/usr/share/man</Path>
+			<Path fileType="data">/usr/share/doc</Path>
+			<Path fileType="library">/usr/lib/lib</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+			<Path fileType="data">/usr/lib/GCBookmarks.pm</Path>
+			<Path fileType="data">/usr/lib/GCBorrowings.pm</Path>
+			<Path fileType="data">/usr/lib/GCCommandLine.pm</Path>
+			<Path fileType="data">/usr/lib/GCData.pm</Path>
+			<Path fileType="data">/usr/lib/GCDialogs.pm</Path>
+			<Path fileType="data">/usr/lib/GCDisplay.pm</Path>
+			<Path fileType="data">/usr/lib/GCExport.pm</Path>
+			<Path fileType="data">/usr/lib/GCExportImport.pm</Path>
+			<Path fileType="data">/usr/lib/GCExtract.pm</Path>
+			<Path fileType="data">/usr/lib/GCGenres.pm</Path>
+			<Path fileType="data">/usr/lib/GCImport.pm</Path>
+			<Path fileType="data">/usr/lib/GCLang.pm</Path>
+			<Path fileType="data">/usr/lib/GCMail.pm</Path>
+			<Path fileType="data">/usr/lib/GCMainWindow.pm</Path>
+			<Path fileType="data">/usr/lib/GCMenu.pm</Path>
+			<Path fileType="data">/usr/lib/GCModel.pm</Path>
+			<Path fileType="data">/usr/lib/GCOptions.pm</Path>
+			<Path fileType="data">/usr/lib/GCPanel.pm</Path>
+			<Path fileType="data">/usr/lib/GCPlugins.pm</Path>
+			<Path fileType="data">/usr/lib/GCSplash.pm</Path>
+			<Path fileType="data">/usr/lib/GCStats.pm</Path>
+			<Path fileType="data">/usr/lib/GCStyle.pm</Path>
+			<Path fileType="data">/usr/lib/GCUpdater.pm</Path>
+			<Path fileType="data">/usr/lib/GCUtils.pm</Path>
+			<Path fileType="data">/usr/lib/GCWidgets.pm</Path>
+	    </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2013-03-19</Date>
+            <Version>1.7.0.1</Version>
+            <Comment>First release</Comment>
+            <Name>Ayhan YALÃ‡INSOY</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

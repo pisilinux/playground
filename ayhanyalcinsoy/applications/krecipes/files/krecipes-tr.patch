@@ -1,0 +1,4372 @@
+--- /dev/null	2013-03-15 09:46:02.435797926 +0200
++++ po/tr/krecipes.po	2013-03-15 11:58:41.211495112 +0200
+@@ -0,0 +1,4369 @@
++# translation of krecipes.po to Turkish
++# Copyright (C) YEAR This_file_is_part_of_KDE
++# This file is distributed under the same license as the PACKAGE package.
++#
++# Serdar Soytetir <tulliana@gmail.com>, 2008, 2009.
++# Hasan Kiran <sunder67@hotmail.com>, 2013.
++# Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>, 2013.
++msgid ""
++msgstr ""
++"Project-Id-Version: krecipes\n"
++"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
++"POT-Creation-Date: 2012-12-13 02:21+0100\n"
++"PO-Revision-Date: 2013-03-15 11:58+0200\n"
++"Last-Translator: Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>\n"
++"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
++"Language: tr\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"Plural-Forms: nplurals=1; plural=0;\n"
++"X-Generator: Lokalize 1.4\n"
++
++msgctxt "NAME OF TRANSLATORS"
++msgid "Your names"
++msgstr "Serdar Soytetir, Ayhan YALÇINSOY"
++
++msgctxt "EMAIL OF TRANSLATORS"
++msgid "Your emails"
++msgstr "tulliana@gmail.com, ayhanyalcinsoy@gmail.com"
++
++#: actionshandlers/categoryactionshandler.cpp:148
++#: actionshandlers/krecategoryactionshandler.cpp:152
++msgid ""
++"Are you sure you want to delete this category and all its subcategories?"
++msgstr "Bu sınıfı ve alt sınıflarını silmek istediğinizden emin misiniz?"
++
++#: actionshandlers/categoryactionshandler.cpp:158
++#: actionshandlers/headeractionshandler.cpp:66
++#: actionshandlers/ingredientactionshandler.cpp:65
++#: actionshandlers/kreauthoractionshandler.cpp:70
++#: actionshandlers/krecategoryactionshandler.cpp:161
++#: actionshandlers/prepmethodactionshandler.cpp:65
++#: actionshandlers/recipeactionshandler.cpp:250
++#: actionshandlers/recipeactionshandler.cpp:261
++#: actionshandlers/unitactionshandler.cpp:133 krecipesview.cpp:696
++msgid "Recipes"
++msgstr "Tarifler"
++
++#: actionshandlers/categoryactionshandler.cpp:173
++#: actionshandlers/krecategoryactionshandler.cpp:175
++#, kde-format
++msgid "Category name cannot be longer than 1 character."
++msgid_plural "Category name cannot be longer than %1 characters."
++msgstr[0] "Kategori adı %1 karakterden daha uzun olamaz."
++
++#: actionshandlers/categoryactionshandler.cpp:203
++#: actionshandlers/krecategoryactionshandler.cpp:207
++msgid ""
++"This category already exists. Continuing will merge these two categories "
++"into one. Are you sure?"
++msgstr ""
++"Bu kategori zaten var.  Devam ederseniz kategoriler birleştirilecek. Emin "
++"misiniz?"
++
++#: actionshandlers/headeractionshandler.cpp:39
++msgid "New Header"
++msgstr "Yeni Başlık"
++
++#: actionshandlers/headeractionshandler.cpp:80
++#, kde-format
++msgid "Header cannot be longer than 1 character."
++msgid_plural "Header cannot be longer than %1 characters."
++msgstr[0] "Başlık ismi %1 karakterden uzun olamaz."
++
++#: actionshandlers/headeractionshandler.cpp:103
++#: actionshandlers/prepmethodactionshandler.cpp:101
++msgid ""
++"This header already exists.  Continuing will merge these two headers into "
++"one.  Are you sure?"
++msgstr ""
++"Bu başlık halihazırda var. Devam etmek bu iki başlığı birleştirir. Devam "
++"etmek istiyor musunuz?"
++
++#: actionshandlers/ingredientactionshandler.cpp:38
++msgid "New Ingredient"
++msgstr "Yeni İçindekiler Ögesi"
++
++#: actionshandlers/ingredientactionshandler.cpp:68
++#: actionshandlers/prepmethodactionshandler.cpp:67
++#: actionshandlers/unitactionshandler.cpp:154
++msgid "You are about to permanently delete recipes from your database."
++msgstr "Tarifleri veritabanınızdan kalıcı olarak silmek üzeresiniz."
++
++#: actionshandlers/ingredientactionshandler.cpp:80
++#: widgets/ingredientinputwidget.cpp:249
++#, kde-format
++msgid "Ingredient name cannot be longer than 1 character."
++msgid_plural "Ingredient name cannot be longer than %1 characters."
++msgstr[0] "İçindekiler ögesinin adı %1 karakterden daha uzun olamaz."
++
++#: actionshandlers/ingredientactionshandler.cpp:102
++msgid ""
++"This ingredient already exists. Continuing will merge these two ingredients "
++"into one. Are you sure?"
++msgstr ""
++"Bu malzeme zaten var.  Devam ederseniz bu iki malzeme birleştirilecek.  Emin "
++"misiniz?"
++
++#: actionshandlers/kreauthoractionshandler.cpp:32
++msgid "New Author"
++msgstr "Yeni Yazar"
++
++#: actionshandlers/kreauthoractionshandler.cpp:61
++msgid "Are you sure you want to delete this author?"
++msgstr "Bu yazarı silmek istediğinizden emin misiniz?"
++
++#: actionshandlers/kreauthoractionshandler.cpp:85
++#, kde-format
++msgid "Author name cannot be longer than 1 character."
++msgid_plural "Author name cannot be longer than %1 characters."
++msgstr[0] "Yazar adı %1 karakterden daha uzun olamaz."
++
++#: actionshandlers/kreauthoractionshandler.cpp:115
++msgid ""
++"This author already exists. Continuing will merge these two authors into "
++"one. Are you sure?"
++msgstr ""
++"Bu yazar zaten var.  Devam ederseniz bu ikisi birleştirilecek. Emin misiniz?"
++
++#: actionshandlers/prepmethodactionshandler.cpp:38
++msgid "New Preparation Method"
++msgstr "Yeni Hazırlama Yöntemi"
++
++#: actionshandlers/prepmethodactionshandler.cpp:79
++#: widgets/ingredientinputwidget.cpp:271
++#, kde-format
++msgid "Preparation method cannot be longer than 1 character."
++msgid_plural "Preparation method cannot be longer than %1 characters."
++msgstr[0] "Hazırlama usulü %1 karakterden uzun olamaz."
++
++#: actionshandlers/propertyactionshandler.cpp:60
++msgid "Are you sure you want to delete this property?"
++msgstr "Bu özelliği silmek istediğinizden emin misiniz?"
++
++#: actionshandlers/propertyactionshandler.cpp:74
++#, kde-format
++msgid "Property name cannot be longer than 1 character."
++msgid_plural "Property name cannot be longer than %1 characters."
++msgstr[0] "Özellik adı %1 karakterden daha uzun olamaz."
++
++#: actionshandlers/propertyactionshandler.cpp:93
++msgid ""
++"This property already exists.  Continuing will merge these two properties "
++"into one.  Are you sure?"
++msgstr ""
++"Bu özellik zaten var. Devam etmek bu iki özelliği birleştirir. Emin misiniz?"
++
++#: actionshandlers/recipeactionshandler.cpp:229
++msgid "Please select only one recipe."
++msgstr "Lütfen sadece bir tarif seçin."
++
++#: actionshandlers/recipeactionshandler.cpp:229
++#: actionshandlers/recipeactionshandler.cpp:235 krecipesview.cpp:517
++msgid "Edit Recipe"
++msgstr "Tarifi Düzenle"
++
++#: actionshandlers/recipeactionshandler.cpp:235
++#: actionshandlers/recipeactionshandler.cpp:267
++#: actionshandlers/recipeactionshandler.cpp:293
++msgid "No recipes selected."
++msgstr "Hiç tarif seilmedi."
++
++#: actionshandlers/recipeactionshandler.cpp:252 krecipesview.cpp:694
++#: krecipesview.cpp:696
++msgid "Export Recipe"
++msgstr "Tarifi Dışarıya Aktar"
++
++#: actionshandlers/recipeactionshandler.cpp:258
++msgid ""
++"No recipes are currently selected.\n"
++"Would you like to export all recipes in the current view?"
++msgstr ""
++"Seçilmiş bir tarif yok.\n"
++"Mevcut görünümdeki tüm tarifleri dışarı aktarmak istiyor musunuz?"
++
++#: actionshandlers/recipeactionshandler.cpp:261
++msgid "Export Recipes"
++msgstr "Tarifleri Dışarıya Aktar"
++
++#: actionshandlers/recipeactionshandler.cpp:267 pref.cpp:487
++msgid "Export"
++msgstr "Dışarıya Aktar"
++
++#: actionshandlers/recipeactionshandler.cpp:283
++msgid ""
++"No recipes are currently selected.\n"
++"Would you like to print all recipes in the current view?"
++msgstr ""
++"Seçilmiş bir tarif yok.\n"
++"Mevcut görünümdeki tüm tarifleri yazdırmak istiyor musunuz?"
++
++#: actionshandlers/recipeactionshandler.cpp:293
++msgid "Print"
++msgstr "Yazdır"
++
++#: actionshandlers/recipeactionshandler.cpp:391
++msgid "Compressed Krecipes format"
++msgstr "Sıkıştırılmış Krecipes biçimi"
++
++#: actionshandlers/recipeactionshandler.cpp:392
++msgid "Web page"
++msgstr "Web sayfasıWeb sayfası:"
++
++#: actionshandlers/recipeactionshandler.cpp:393 pref.cpp:492
++msgid "Plain Text"
++msgstr "Düz Metin"
++
++#: actionshandlers/recipeactionshandler.cpp:394
++msgid "Web Book"
++msgstr "Web Kitabı"
++
++#: actionshandlers/recipeactionshandler.cpp:435 krecipes.cpp:691
++#, kde-format
++msgid "File \"%1\" exists.  Are you sure you want to overwrite it?"
++msgstr ""
++" \"%1\" isimli bir dosya zaten var. Üzerine yazmak istediğinizden emin "
++"misiniz?"
++
++#: actionshandlers/recipeactionshandler.cpp:435
++msgctxt "@title:window"
++msgid "Saving recipe"
++msgstr "Tarif kaydediliyor"
++
++#: actionshandlers/recipeactionshandler.cpp:439
++msgctxt "@info:progress"
++msgid "Saving recipes..."
++msgstr "Tarifler kaydediliyor..."
++
++#: actionshandlers/unitactionshandler.cpp:69
++msgid "Rename Unit"
++msgstr "Birimi Yeniden Adlandır"
++
++#: actionshandlers/unitactionshandler.cpp:139 dialogs/setupdisplay.cpp:126
++#: exporters/htmlexporter.cpp:389 exporters/xsltexporter.cpp:54
++#: krecipesview.cpp:376 krecipesview.cpp:479
++msgid "Properties"
++msgstr "Özellikler"
++
++#: actionshandlers/unitactionshandler.cpp:145
++msgid "Ingredient Weights"
++msgstr "İçindekiler Ögelerinin Ağırlıkları"
++
++#: actionshandlers/unitactionshandler.cpp:167
++#: widgets/ingredientinputwidget.cpp:256
++#, kde-format
++msgid "Unit name cannot be longer than 1 character."
++msgid_plural "Unit name cannot be longer than %1 characters."
++msgstr[0] "Birim ismi %1 karakterden uzun olamaz."
++
++#: actionshandlers/unitactionshandler.cpp:205
++msgid ""
++"This unit already exists.  Continuing will merge these two units into one.  "
++"Are you sure?"
++msgstr "Bu birim zaten var.Devam ederseniz birleştirilecekler. Emin misiniz?"
++
++#: backends/MySQL/mysqlrecipedb.cpp:526 backends/SQLite/literecipedb.cpp:767
++msgctxt "Overall rating"
++msgid "Overall"
++msgstr "Tümü"
++
++#: backends/MySQL/mysqlrecipedb.cpp:527
++#: backends/PostgreSQL/psqlrecipedb.cpp:436
++#: backends/SQLite/literecipedb.cpp:768
++msgid "Taste"
++msgstr "Tat"
++
++#: backends/MySQL/mysqlrecipedb.cpp:528
++#: backends/PostgreSQL/psqlrecipedb.cpp:437
++#: backends/SQLite/literecipedb.cpp:769
++msgid "Appearance"
++msgstr "Görünüm"
++
++#: backends/MySQL/mysqlrecipedb.cpp:529
++#: backends/PostgreSQL/psqlrecipedb.cpp:438
++#: backends/SQLite/literecipedb.cpp:770
++msgid "Originality"
++msgstr "Özgünlük"
++
++#: backends/MySQL/mysqlrecipedb.cpp:530
++#: backends/PostgreSQL/psqlrecipedb.cpp:439
++#: backends/SQLite/literecipedb.cpp:771
++msgid "Ease of Preparation"
++msgstr "Hazırlama Kolaylığı"
++
++#: backends/PostgreSQL/psqlrecipedb.cpp:435
++msgctxt "Overall Rating"
++msgid "Overall"
++msgstr "Tümü"
++
++#: backends/qsqlrecipedb.cpp:88
++#, kde-format
++msgid ""
++"The Qt database plugin (%1) is not installed.  This plugin is required for "
++"using this database backend."
++msgstr ""
++"Qt veritabanı eklentisi (%1) kurulu değil. Bu eklenti veritabanı arkaucunun "
++"kullanımı için gereklidir."
++
++#: backends/qsqlrecipedb.cpp:130 backends/qsqlrecipedb.cpp:145
++#, kde-format
++msgid "Krecipes could not open the \"%1\" database."
++msgstr "Krecipes \"%1\" veritabanını açamıyor."
++
++#: backends/qsqlrecipedb.cpp:133 backends/qsqlrecipedb.cpp:148
++#, kde-format
++msgid ""
++"Krecipes could not open the database using the driver '%2' (with username: "
++"\"%1\"). You may not have the necessary permissions, or the server may be "
++"down."
++msgstr ""
++"Krecipes '%2' sürücüsünü (kullanıcı adı: \"%1\" ile) kullanarak veritabanını "
++"açamadı. Gerekli izinlere sahip olmayabilirsiniz veya sunucuyla bağlantınız "
++"kopmuş olabilir."
++
++#: backends/qsqlrecipedb.cpp:141
++#, kde-format
++msgid "Database message: %1"
++msgstr "Veritabanı iletisi: %1"
++
++#: backends/qsqlrecipedb.cpp:157
++msgid ""
++"This database was created with a newer version of Krecipes and cannot be "
++"opened."
++msgstr ""
++"Bu veritabanı Krecipes uygulamasının yeni sürümü ile oluşturulmuş. Bu yüzden "
++"açılamadı."
++
++#: backends/qsqlrecipedb.cpp:166
++msgid "Failed to fix database structure."
++msgstr "Veritabanı yapısı düzeltilemedi."
++
++#: backends/qsqlrecipedb.cpp:1842
++#, kde-format
++msgid "In ingredient '%1': weight [%2/%3%4]"
++msgstr "'%1' malzemesinde: ağırlık [%2/%3%4]"
++
++#: backends/qsqlrecipedb.cpp:1892
++#, kde-format
++msgid "In ingredient '%1': property \"%2\" [%3/%4]"
++msgstr "'%1' malzemesinde: özellik \"%2\" [%3/%4]"
++
++#: backends/qsqlrecipedb.cpp:2058
++msgctxt "@info"
++msgid ""
++"<p>The database was created with a previous version of Krecipes. Would you "
++"like Krecipes to update this database to work with this version of "
++"Krecipes?  Depending on the number of recipes and amount of data, this could "
++"take some time.</p><warning><p>After updating, this database will no longer "
++"be compatible with previous versions of Krecipes.</p><p>Cancelling this "
++"operation may result in corrupting the database.</p></warning>"
++msgstr ""
++
++#: backends/qsqlrecipedb.cpp:2068
++msgid "Porting database structure..."
++msgstr "Veritabanı yapısı geçişi yapılıyor..."
++
++#: backends/qsqlrecipedb.cpp:2155
++msgctxt "@info:progress"
++msgid "Loading category list"
++msgstr "Kategori listesi yükleniyor"
++
++#: backends/recipedb.cpp:309
++#| msgid "Creating complete backup"
++msgctxt "@info:progress"
++msgid "Creating complete backup"
++msgstr "Tam yedek oluşturuluyor"
++
++#: backends/recipedb.cpp:310 backends/recipedb.cpp:482
++msgid ""
++"Depending on the number of recipes and amount of data, this could take some "
++"time."
++msgstr "Tarif sayısı ve veri miktarına bağlı olarak bu biraz zaman alabilir."
++
++#: backends/recipedb.cpp:331 backends/recipedb.cpp:489
++#, kde-format
++msgid ""
++"Unable to find or run the program '%1'.  Either it is not installed on your "
++"system or it is not in $PATH."
++msgstr ""
++
++#: backends/recipedb.cpp:356
++#, kde-format
++#| msgid "Backup failed."
++msgid ""
++"Backup failed.\n"
++"%1"
++msgstr ""
++"Yedekleme başarısız oldu.\n"
++"%1"
++
++#: backends/recipedb.cpp:445
++msgid ""
++"This backup was created with a newer version of Krecipes and cannot be "
++"restored."
++msgstr ""
++"Bu yedek Krecipes uygulamasının yeni sürümüyle oluşturulmuş. Bu yüzden geri "
++"yüklenemedi."
++
++#: backends/recipedb.cpp:454
++msgid "This file is not a Krecipes backup file or has become corrupt."
++msgstr "Bu bir Krecipes yedekleme dosyası değil ya da dosya bozuk."
++
++#: backends/recipedb.cpp:459
++#, kde-format
++msgid ""
++"This backup was created using the \"%1\" backend.  It can only be restored "
++"into a database using this backend."
++msgstr ""
++"Bu yedek \"%1\" arkaucu kullanılarak oluşturulmuş. Sadece bu arkauç "
++"kullanılarak geri yüklenebilir."
++
++#: backends/recipedb.cpp:481
++msgctxt "@info:progress"
++msgid "Restoring backup"
++msgstr "Yedek geri yükleniyor"
++
++#: backends/recipedb.cpp:536 krecipes.cpp:720
++msgid "Restore Failed"
++msgstr "Geri Yükleme Başarısız Oldu"
++
++#: backends/recipedb.cpp:919
++msgid "Nutrient Import"
++msgstr "İçeriye Gıda Aktar"
++
++#: backends/recipedb.cpp:919
++msgid "Importing USDA nutrient data"
++msgstr "USDA verisi aktarılıyor"
++
++#: convert_sqlite3.cpp:83 convert_sqlite3.cpp:91
++#, kde-format
++msgid ""
++"Unable to find or run the program '%1'.  Either it is not installed on your "
++"system or it is not in $PATH. Do you want to configure other path for this "
++"command?"
++msgstr ""
++
++#: convert_sqlite3.cpp:100
++#, kde-format
++msgid ""
++"Conversion process failed. Probably the file %1 is not an SQLite 2 database."
++msgstr ""
++"Dönüştürme işlemi başarısız oldu. Muhtemelen %1 dosyası bir SQLite 2 "
++"veritabanı değil."
++
++#: convert_sqlite3.cpp:131
++#, c-format, kde-format
++msgid ""
++"Unable to backup SQLite 2 database, aborting. A successfully converted "
++"SQLite 3 file is available at %1.new."
++msgstr ""
++
++#: convert_sqlite3.cpp:137
++#, kde-format
++msgid ""
++"Unable to copy the new SQLite 3 database to %1.You may manually move %1.new "
++"to %1"
++msgstr ""
++
++#: convert_sqlite3.cpp:141
++#, kde-format
++msgid "Conversion successful! SQLite 2 database backed up to %1"
++msgstr ""
++
++#: dialogs/advancedsearchdialog.cpp:71
++#| msgid "Search using the following criteria:"
++msgctxt "@label"
++msgid "Search using the following criteria:"
++msgstr "Bu ölçüte göre ara:"
++
++#: dialogs/advancedsearchdialog.cpp:98
++msgctxt "@action:button Recipe title"
++msgid "Title >>"
++msgstr "Başlık >>"
++
++#: dialogs/advancedsearchdialog.cpp:110 dialogs/advancedsearchdialog.cpp:343
++#| msgid "Require All Words"
++msgctxt "@option:check"
++msgid "Require All Words"
++msgstr "Gerekli Tüm Sözcükler"
++
++#: dialogs/advancedsearchdialog.cpp:114 dialogs/advancedsearchdialog.cpp:347
++msgctxt "@label:textbox"
++msgid "Keywords:"
++msgstr "Anahtar sözcükler:"
++
++#: dialogs/advancedsearchdialog.cpp:127
++#| msgid "Ingredients"
++msgctxt "@action:button"
++msgid "Ingredients >>"
++msgstr "Malzemeler >>"
++
++#: dialogs/advancedsearchdialog.cpp:138
++#| msgid "Enter categories: (e.g. Desserts Pastas \"Main Dishes\")"
++msgctxt "@info"
++msgid "Enter ingredients: (e.g. chicken pasta \"white wine\")"
++msgstr "Malzemeleri gir: (tavuk, makarna \"beyaz şarap\" gibi.)"
++
++#: dialogs/advancedsearchdialog.cpp:145
++#| msgid "Uses all:"
++msgctxt "@label:textbox"
++msgid "Uses all:"
++msgstr "Tümünü kullanır:"
++
++#: dialogs/advancedsearchdialog.cpp:149
++#| msgid "Uses any of:"
++msgctxt "@label:textbox"
++msgid "Uses any of:"
++msgstr "Herhangi birini kullanır:"
++
++#: dialogs/advancedsearchdialog.cpp:153
++#, fuzzy
++#| msgid "Without:"
++msgctxt "@label:textbox"
++msgid "Without:"
++msgstr "Katılmayan:"
++
++#: dialogs/advancedsearchdialog.cpp:164
++msgctxt "@action:button"
++msgid "Categories >>"
++msgstr "Kategoriler >>"
++
++#: dialogs/advancedsearchdialog.cpp:175
++#| msgid "Enter categories: (e.g. Desserts Pastas \"Main Dishes\")"
++msgctxt "@info"
++msgid "Enter categories: (e.g. Desserts Pastas \"Main Dishes\")"
++msgstr "Sınıfları gir: (Tatlılar, \"Ana Yemekler\" gibi.)"
++
++#: dialogs/advancedsearchdialog.cpp:182
++#| msgid "Uses all:"
++msgctxt "@label:textbox"
++msgid "In all:"
++msgstr "Hepsinde:"
++
++#: dialogs/advancedsearchdialog.cpp:186
++#| msgid "Uses any of:"
++msgctxt "@label:textbox"
++msgid "In any of:"
++msgstr "Herhangi birinde:"
++
++#: dialogs/advancedsearchdialog.cpp:190
++#| msgid "Not in:"
++msgctxt "@label:textbox"
++msgid "Not in:"
++msgstr "İçinde değil:"
++
++#: dialogs/advancedsearchdialog.cpp:201
++msgctxt "@action:button"
++msgid "Authors >>"
++msgstr "Yazarlar >>"
++
++#: dialogs/advancedsearchdialog.cpp:212
++#| msgid "Enter author name (e.g. Smith or \"Jane Doe\")"
++msgctxt "@info"
++msgid "Enter author name (e.g. Smith or \"Jane Doe\")"
++msgstr "Yazar adını girin (Serdar ya da \"Ümit Usta\" gibi)"
++
++#: dialogs/advancedsearchdialog.cpp:219
++#| msgid "Uses any of:"
++msgctxt "@label:textbox"
++msgid "By any of:"
++msgstr "Herhangi biriyle:"
++
++#: dialogs/advancedsearchdialog.cpp:223
++#| msgid "Uses all:"
++msgctxt "@label:textbox"
++msgid "By all:"
++msgstr "Tümüyle:"
++
++#: dialogs/advancedsearchdialog.cpp:227
++#| msgid "Not in:"
++msgctxt "@label:textbox"
++msgid "Not by:"
++msgstr "Hiçbiriyle:"
++
++#: dialogs/advancedsearchdialog.cpp:238
++msgctxt "@action:button"
++msgid "Yield >>"
++msgstr ""
++
++#: dialogs/advancedsearchdialog.cpp:252 dialogs/advancedsearchdialog.cpp:300
++msgctxt "@option:check"
++msgid "Enabled"
++msgstr "Etkin"
++
++#: dialogs/advancedsearchdialog.cpp:265
++msgctxt "@item:inlistbox"
++msgid "Yields at least:"
++msgstr ""
++
++#: dialogs/advancedsearchdialog.cpp:266
++#| msgid "Ready in at most:"
++msgctxt "@item:inlistbox"
++msgid "Yields at most:"
++msgstr ""
++
++#: dialogs/advancedsearchdialog.cpp:267
++#| msgid "Ready in about:"
++msgctxt "@item:inlistbox"
++msgid "Yields about:"
++msgstr ""
++
++#: dialogs/advancedsearchdialog.cpp:286
++#| msgid "Preparation Time"
++msgctxt "@action:button"
++msgid "Preparation Time >>"
++msgstr "Hazırlık Süresi"
++
++#: dialogs/advancedsearchdialog.cpp:312
++#, fuzzy
++#| msgid "Ready in at most:"
++msgctxt "@item:inlistbox"
++msgid "Ready in at most:"
++msgstr "En fazla hazır olma süresi:"
++
++#: dialogs/advancedsearchdialog.cpp:313
++#, fuzzy
++#| msgid "Ready in about:"
++msgctxt "@item:inlistbox"
++msgid "Ready in about:"
++msgstr "Yaklaşık hazır olma süresi:"
++
++#: dialogs/advancedsearchdialog.cpp:331
++msgctxt "@action:button"
++msgid "Instructions >>"
++msgstr "Yönergeler >>"
++
++#: dialogs/advancedsearchdialog.cpp:361
++#, fuzzy
++#| msgid "Meta Data"
++msgctxt "@label"
++msgid "Meta Data >>"
++msgstr "Meta Data"
++
++#: dialogs/advancedsearchdialog.cpp:373
++msgctxt "@label Recipe created date"
++msgid "Created:"
++msgstr "Oluşturulma Zamanı:"
++
++#: dialogs/advancedsearchdialog.cpp:384
++msgctxt "@label Recipe modified date"
++msgid "Modified:"
++msgstr "Değiştirilme Zamanı:"
++
++#: dialogs/advancedsearchdialog.cpp:395
++msgctxt "@label Recipe last accessed date"
++msgid "Last Accessed:"
++msgstr "Son Erişim Zamanı:"
++
++#: dialogs/advancedsearchdialog.cpp:414
++msgctxt "@action:button"
++msgid "Ratings >>"
++msgstr "Beğeniler >>"
++
++#: dialogs/advancedsearchdialog.cpp:425
++msgctxt "@option:radio"
++msgid "By average:"
++msgstr "Ortalama olarak:"
++
++#: dialogs/advancedsearchdialog.cpp:442
++msgctxt "@label"
++msgid "stars"
++msgstr "yıldızlar"
++
++#: dialogs/advancedsearchdialog.cpp:448
++msgctxt "@option:radio"
++msgid "By criteria:"
++msgstr "Ölçüte göre:"
++
++#: dialogs/advancedsearchdialog.cpp:494
++msgctxt "@title:column"
++msgid "Criterion"
++msgstr "Ölçüt"
++
++#: dialogs/advancedsearchdialog.cpp:495 dialogs/advancedsearchdialog.cpp:497
++#: dialogs/editratingdialog.cpp:117 dialogs/editratingdialog.cpp:168
++msgctxt "@title:column"
++msgid "Stars"
++msgstr "Yıldızlar"
++
++#: dialogs/advancedsearchdialog.cpp:496 dialogs/editratingdialog.cpp:116
++#: dialogs/editratingdialog.cpp:167
++#| msgid "Criteria"
++msgctxt "@title:column"
++msgid "Criteria"
++msgstr "Ölçüt"
++
++#: dialogs/advancedsearchdialog.cpp:518
++msgctxt "@action:button Clear search criteria"
++msgid "C&lear"
++msgstr "&Temizle"
++
++#: dialogs/advancedsearchdialog.cpp:526
++msgctxt "@action:button Search recipes"
++msgid "&Search"
++msgstr "&Ara"
++
++#: dialogs/advancedsearchdialog.cpp:549
++msgctxt "@title:column Recipe title"
++msgid "Title"
++msgstr "Başlık"
++
++#: dialogs/advancedsearchdialog.cpp:930
++msgctxt "@item:inlistbox"
++msgid "No matching recipes found"
++msgstr "Hiç eşleşen tarif bulunamadı"
++
++#: dialogs/authorsdialog.cpp:45 dialogs/categorieseditordialog.cpp:45
++#: dialogs/ingredientgroupsdialog.cpp:40 dialogs/ingredientsdialog.cpp:64
++#: dialogs/prepmethodsdialog.cpp:44 dialogs/propertiesdialog.cpp:54
++#: dialogs/unitsdialog.cpp:54
++#| msgid "Create ..."
++msgctxt "@action:button"
++msgid "Create..."
++msgstr "Oluştur..."
++
++#: dialogs/authorsdialog.cpp:50 dialogs/categorieseditordialog.cpp:50
++#: dialogs/ingredientgroupsdialog.cpp:45 dialogs/ingredientsdialog.cpp:69
++#: dialogs/prepmethodsdialog.cpp:49 dialogs/propertiesdialog.cpp:58
++#: dialogs/selectrecipedialog.cpp:108 dialogs/unitsdialog.cpp:59
++msgctxt "@action:button"
++msgid "Delete"
++msgstr "Sil"
++
++#: dialogs/borderdialog.cpp:34
++#| msgid "Choose Border"
++msgctxt "@title:window"
++msgid "Choose Border"
++msgstr "Kenarlık Seç"
++
++#: dialogs/borderdialog.cpp:130
++#| msgid "Requested Border"
++msgctxt "@title:group"
++msgid "Requested Border"
++msgstr "Gerekli Kenarlık"
++
++#: dialogs/borderdialog.cpp:131
++msgctxt "@label:textbox Border style"
++msgid "Style:"
++msgstr "Biçim:"
++
++#: dialogs/borderdialog.cpp:132
++msgctxt "@label:textbox Border color"
++msgid "Color:"
++msgstr "Renk:"
++
++#: dialogs/borderdialog.cpp:133
++msgctxt "@label:textbox Border width"
++msgid "Width:"
++msgstr "Genişlik:"
++
++#: dialogs/borderdialog.cpp:205
++msgctxt "@item:inlistbox Border type none"
++msgid "None"
++msgstr "Hiçbiri"
++
++#: dialogs/borderdialog.cpp:206
++#| msgctxt "See http://krecipes.sourceforge.net/bordertypes.png for an example"
++#| msgid "Dotted"
++msgctxt ""
++"@item:inlistbox See http://krecipes.sourceforge.net/bordertypes.png for an "
++"example"
++msgid "Dotted"
++msgstr "Noktalı"
++
++#: dialogs/borderdialog.cpp:207
++#| msgctxt "See http://krecipes.sourceforge.net/bordertypes.png for an example"
++#| msgid "Dashed"
++msgctxt ""
++"@item:inlistbox See http://krecipes.sourceforge.net/bordertypes.png for an "
++"example"
++msgid "Dashed"
++msgstr "Kesikli"
++
++#: dialogs/borderdialog.cpp:208
++#| msgctxt "See http://krecipes.sourceforge.net/bordertypes.png for an example"
++#| msgid "Solid"
++msgctxt ""
++"@item:inlistbox See http://krecipes.sourceforge.net/bordertypes.png for an "
++"example"
++msgid "Solid"
++msgstr "Katı"
++
++#: dialogs/borderdialog.cpp:209
++#| msgctxt "See http://krecipes.sourceforge.net/bordertypes.png for an example"
++#| msgid "Double"
++msgctxt ""
++"@item:inlistbox See http://krecipes.sourceforge.net/bordertypes.png for an "
++"example"
++msgid "Double"
++msgstr "Çift"
++
++#: dialogs/borderdialog.cpp:210
++msgctxt ""
++"@item:inlistbox See http://krecipes.sourceforge.net/bordertypes.png for an "
++"example"
++msgid "Groove"
++msgstr ""
++
++#: dialogs/borderdialog.cpp:211
++msgctxt ""
++"@item:inlistbox See http://krecipes.sourceforge.net/bordertypes.png for an "
++"example"
++msgid "Ridge"
++msgstr ""
++
++#: dialogs/borderdialog.cpp:212
++msgctxt ""
++"@item:inlistbox See http://krecipes.sourceforge.net/bordertypes.png for an "
++"example"
++msgid "Inset"
++msgstr ""
++
++#: dialogs/borderdialog.cpp:213
++msgctxt ""
++"@item:inlistbox See http://krecipes.sourceforge.net/bordertypes.png for an "
++"example"
++msgid "Outset"
++msgstr ""
++
++#: dialogs/borderdialog.cpp:228
++msgid "Border Preview"
++msgstr "Kenarlık Önizlemesi"
++
++#: dialogs/conversiondialog.cpp:33
++msgctxt "@title:window"
++msgid "Measurement Converter"
++msgstr "Ölçü Birimi Dönüştürücü"
++
++#: dialogs/conversiondialog.cpp:37
++msgctxt "@action:button"
++msgid "Convert"
++msgstr "Dönüştür"
++
++#: dialogs/conversiondialog.cpp:58
++#| msgid "--Ingredient (optional)--"
++msgctxt "@item:inlistbox"
++msgid "--Ingredient (optional)--"
++msgstr "--Malzemeler (isteğe bağlı)--"
++
++#: dialogs/conversiondialog.cpp:61
++msgctxt "@item:inlistbox"
++msgid "-No Preparation-"
++msgstr "-Hazırlama Yok-"
++
++#: dialogs/conversiondialog.cpp:96
++msgctxt "@label"
++msgid "Convert"
++msgstr "Dönüştür"
++
++#: dialogs/conversiondialog.cpp:97
++msgctxt "@label Convert to"
++msgid "To"
++msgstr ""
++
++#: dialogs/conversiondialog.cpp:99
++msgctxt "@label Result of an unit conversion"
++msgid "<b>Result:</b>"
++msgstr "<b>Sonuç:</b>"
++
++#: dialogs/conversiondialog.cpp:134
++msgctxt "@label:textbox"
++msgid "<b>Result:</b>"
++msgstr "<b>Sonuç:</b>"
++
++#: dialogs/conversiondialog.cpp:138
++#| msgid "<b>Approximated result:</b>"
++msgctxt "@label:textbox"
++msgid "<b>Approximated result:</b>"
++msgstr "<b>Yaklaşık sonuç:</b>"
++
++#: dialogs/conversiondialog.cpp:142 dialogs/conversiondialog.cpp:146
++#: dialogs/conversiondialog.cpp:150 dialogs/conversiondialog.cpp:154
++#: dialogs/conversiondialog.cpp:158
++msgctxt "@label:textbox"
++msgid "<b>Error:</b>"
++msgstr "<b>Hata:</b>"
++
++#: dialogs/conversiondialog.cpp:143
++#| msgid "Missing unit conversion"
++msgctxt "@info"
++msgid "Missing unit conversion"
++msgstr "Eksik birim dönüşümü"
++
++#: dialogs/conversiondialog.cpp:147
++#| msgid "No ingredient weight available"
++msgctxt "@info"
++msgid "No ingredient weight available"
++msgstr "Kullanılabilir malzeme ağırlığı yok"
++
++#: dialogs/conversiondialog.cpp:151
++#| msgid "No ingredient weight available"
++msgctxt "@info"
++msgid "No ingredient weight available for this method of preparation"
++msgstr "Bu hazırlık yöntemi için kullanılabilir malzeme ağırlığı yok"
++
++#: dialogs/conversiondialog.cpp:155
++#| msgid "Ingredient required for conversion"
++msgctxt "@info"
++msgid "Ingredient required for conversion"
++msgstr "Dönütürme için gerekli malzeme"
++
++#: dialogs/conversiondialog.cpp:159
++msgctxt "@info"
++msgid "Impossible unit conversion based on unit types"
++msgstr ""
++
++#: dialogs/createcategorydialog.cpp:25
++msgctxt "@title:window"
++msgid "New Category"
++msgstr "Yeni Kategori"
++
++#: dialogs/createcategorydialog.cpp:36
++msgctxt "@title:group"
++msgid "New Category"
++msgstr "Yeni Kategori"
++
++#: dialogs/createcategorydialog.cpp:39
++msgctxt "@label:textbox Category name"
++msgid "Name:"
++msgstr "İsim:"
++
++#: dialogs/createcategorydialog.cpp:42
++msgctxt "@label:textbox"
++msgid "Subcategory of:"
++msgstr "Bunun alt kategorisi:"
++
++#: dialogs/createcategorydialog.cpp:59
++msgctxt "@item:inlistbox No category"
++msgid "**NONE**"
++msgstr "**HİÇBİRİ**"
++
++#: dialogs/createingredientweightdialog.cpp:32
++#| msgid "Add Ingredient Weight"
++msgctxt "@title:window"
++msgid "Add Ingredient Weight"
++msgstr "Malzeme Ağırlığı Ekle"
++
++#: dialogs/createingredientweightdialog.cpp:74
++msgctxt "@item"
++msgid "-No Preparation-"
++msgstr "-Hazırlama Yok-"
++
++#: dialogs/createingredientweightdialog.cpp:94
++#| msgid "New Ingredient Weight"
++msgctxt "@title:group"
++msgid "New Ingredient Weight"
++msgstr "Yeni Malzeme Ağırlığı"
++
++#: dialogs/createingredientweightdialog.cpp:95
++#, fuzzy
++#| msgid "Amount:"
++msgctxt "@label:textbox"
++msgid "Per Amount:"
++msgstr "Miktar:"
++
++#: dialogs/createingredientweightdialog.cpp:96
++#| msgid "Weight:"
++msgctxt "@label:textbox"
++msgid "Weight:"
++msgstr "Ağırlık:"
++
++#: dialogs/createingredientweightdialog.cpp:102
++#: dialogs/createingredientweightdialog.cpp:109
++msgctxt "@info"
++msgid "Amount field contains invalid input."
++msgstr "Miktar alanı geçersiz girdi içeriyor."
++
++#: dialogs/createingredientweightdialog.cpp:103
++#: dialogs/createingredientweightdialog.cpp:110
++msgctxt "@title:window"
++msgid "Invalid input"
++msgstr "Geçersiz girdi"
++
++#: dialogs/createpropertydialog.cpp:22
++msgctxt "@title:window"
++msgid "New Property"
++msgstr "Yeni Özellik"
++
++#: dialogs/createpropertydialog.cpp:34
++msgctxt "@title:group"
++msgid "New Property"
++msgstr "Yeni Özellik"
++
++#: dialogs/createpropertydialog.cpp:38
++#| msgid "Property name:"
++msgctxt "@label:textbox"
++msgid "Property name:"
++msgstr "Özellik adı:"
++
++#: dialogs/createpropertydialog.cpp:42
++msgctxt "@label:textbox"
++msgid "Units:"
++msgstr "Birimler:"
++
++#: dialogs/createunitconversiondialog.cpp:74
++msgctxt "@title:window"
++msgid "Unit Conversion"
++msgstr "Birim Dönüşümü"
++
++#: dialogs/createunitconversiondialog.cpp:75
++msgctxt "@title:group"
++msgid "New Unit Conversion"
++msgstr "Yeni Birim Dönüşümü"
++
++#: dialogs/createunitdialog.cpp:27
++msgctxt "@title:window"
++msgid "New Unit"
++msgstr "Yeni Birim"
++
++#: dialogs/createunitdialog.cpp:27
++msgctxt "@title:window"
++msgid "Unit"
++msgstr "Birim"
++
++#: dialogs/createunitdialog.cpp:37
++msgctxt "@title:group"
++msgid "New Unit"
++msgstr "Yeni Birim"
++
++#: dialogs/createunitdialog.cpp:37
++msgctxt "@title:group"
++msgid "Unit"
++msgstr "Birim"
++
++#: dialogs/createunitdialog.cpp:41
++msgctxt "@label:textbox Single unit name"
++msgid "Singular:"
++msgstr "Tekil:"
++
++#: dialogs/createunitdialog.cpp:45
++#| msgctxt "@label:textbox Single unit abbreviation"
++#| msgid "Abbreviation:"
++msgctxt "@label:textbox Single unit abbreviation"
++msgid "Singular Abbreviation:"
++msgstr "Tekil Kısaltma:"
++
++#: dialogs/createunitdialog.cpp:49
++msgctxt "@label:textbox Plural unit name"
++msgid "Plural:"
++msgstr "Çoğul:"
++
++#: dialogs/createunitdialog.cpp:53
++#| msgctxt "@label:textbox Plural unit abbreviation"
++#| msgid "Abbreviation:"
++msgctxt "@label:textbox Plural unit abbreviation"
++msgid "Plural Abbreviation:"
++msgstr "Çoğul Kısaltma:"
++
++#: dialogs/createunitdialog.cpp:56 widgets/unitlistview.cpp:80
++msgctxt "@item:inlistbox Unit type other"
++msgid "Other"
++msgstr "Diğer"
++
++#: dialogs/createunitdialog.cpp:57 widgets/unitlistview.cpp:81
++msgctxt "@item:inlistbox Unit type mass"
++msgid "Mass"
++msgstr "Kütle"
++
++#: dialogs/createunitdialog.cpp:58 widgets/unitlistview.cpp:82
++msgctxt "@item:inlistbox Unit type volume"
++msgid "Volume"
++msgstr "Hacim"
++
++#: dialogs/createunitdialog.cpp:62
++msgctxt "@label:textbox Unit Type"
++msgid "Type:"
++msgstr "Tip:"
++
++#: dialogs/dbimportdialog.cpp:40
++#| msgid "Database Import"
++msgctxt "@title:window"
++msgid "Database Import"
++msgstr "Veritabanını İçeriye Aktar"
++
++#: dialogs/dbimportdialog.cpp:78
++msgctxt "@label:textbox"
++msgid "Database file:"
++msgstr "Veritabanı dosyası:"
++
++#: dialogs/dbimportdialog.cpp:151
++msgctxt "@title:group"
++msgid "Database"
++msgstr "Veritabanı"
++
++#: dialogs/dbimportdialog.cpp:155
++msgctxt "@label:textbox"
++msgid "Server:"
++msgstr "Sunucu:"
++
++#: dialogs/dbimportdialog.cpp:156
++msgctxt "@label:textbox Database username"
++msgid "Username:"
++msgstr "Kullanıcı adı:"
++
++#: dialogs/dbimportdialog.cpp:157
++msgctxt "@label:textbox"
++msgid "Password:"
++msgstr "Parola:"
++
++#: dialogs/dbimportdialog.cpp:158
++msgctxt "@label:textbox"
++msgid "Database name:"
++msgstr "Veritabanı adı:"
++
++#: dialogs/dbimportdialog.cpp:159
++#, fuzzy
++#| msgid "Port:"
++msgctxt "@label:textbox"
++msgid "Port:"
++msgstr "Port:"
++
++#: dialogs/dbimportdialog.cpp:160
++msgctxt "@label:textbox Default port"
++msgid "Default"
++msgstr "Öntanımlı"
++
++#: dialogs/dependanciesdialog.cpp:53
++msgctxt "@title:window"
++msgid "Element with Dependencies"
++msgstr "Bağımlılıkları ile öge"
++
++#: dialogs/dependanciesdialog.cpp:65
++msgctxt "@info"
++msgid ""
++"<warning>The following will have to be removed also, since currently they "
++"use the element you have chosen to be removed.</warning>"
++msgstr ""
++
++#: dialogs/dependanciesdialog.cpp:68
++msgctxt "@info"
++msgid ""
++"<warning>The following currently use the element you have chosen to be "
++"removed.</warning>"
++msgstr ""
++
++#: dialogs/dependanciesdialog.cpp:104
++#| msgid "Are you sure you wish to proceed?"
++msgctxt "@info"
++msgid "Are you sure you wish to proceed?"
++msgstr "Devam etmek istediğinizden emin misiniz?"
++
++#: dialogs/dietviewdialog.cpp:24
++#, fuzzy
++#| msgid "View Diet"
++msgctxt "@title:window"
++msgid "View Diet"
++msgstr "Diyeti Göster"
++
++#: dialogs/dietviewdialog.cpp:33
++msgctxt "@action:button"
++msgid "Create &Shopping List"
++msgstr "Alışveriş Listesi &Oluştur"
++
++#: dialogs/dietviewdialog.cpp:59 dialogs/dietviewdialog.cpp:78
++msgid "Diet"
++msgstr "Diyet"
++
++#: dialogs/dietviewdialog.cpp:98
++#, kde-format
++msgid "Day %1"
++msgstr "Gün %1"
++
++#: dialogs/dietwizarddialog.cpp:59
++msgctxt "@label:slider"
++msgid "Number of Days"
++msgstr "Gün Sayısı"
++
++#: dialogs/dietwizarddialog.cpp:78
++#| msgid "Meals per Day"
++msgctxt "@label:slider"
++msgid "Meals per Day"
++msgstr "Günlük Öğün Sayısı"
++
++#: dialogs/dietwizarddialog.cpp:106
++msgctxt "@action:button"
++msgid "Create the diet"
++msgstr "Diyet oluştur"
++
++#: dialogs/dietwizarddialog.cpp:110
++msgctxt "@action:button Clear Diet"
++msgid "Clear"
++msgstr "Temizle"
++
++#: dialogs/dietwizarddialog.cpp:116 dialogs/dietwizarddialog.cpp:170
++#, kde-format
++#| msgid "Meal 1"
++msgctxt "@title:tab"
++msgid "Meal 1"
++msgid_plural "Meal %1"
++msgstr[0] "Öğün %1"
++
++#: dialogs/dietwizarddialog.cpp:165 dialogs/dietwizarddialog.cpp:187
++#, kde-format
++msgid "- %1 -"
++msgstr "- %1 -"
++
++#: dialogs/dietwizarddialog.cpp:191
++#, kde-format
++msgid "- 1 week -"
++msgid_plural "- %1 weeks -"
++msgstr[0] "- %1 hafta -"
++
++#: dialogs/dietwizarddialog.cpp:246
++msgctxt "@info"
++msgid ""
++"Given the constraints, a full diet list could not be constructed. Either the "
++"recipe list is too short or the constraints are too demanding. "
++msgstr ""
++
++#: dialogs/dietwizarddialog.cpp:340
++#| msgid "No. of dishes: "
++msgctxt "@label:spinbox"
++msgid "No. of dishes: "
++msgstr "Yemek sayısı:"
++
++#: dialogs/dietwizarddialog.cpp:348
++msgctxt "@action:button"
++msgid "Previous Dish"
++msgstr "Önceki Tabak"
++
++#: dialogs/dietwizarddialog.cpp:351
++msgctxt "@action:button"
++msgid "Next Dish"
++msgstr "Sonraki Tabak"
++
++#: dialogs/dietwizarddialog.cpp:359
++msgid "1st Course"
++msgstr "1. Kurs"
++
++#: dialogs/dietwizarddialog.cpp:362
++msgid "2nd Course"
++msgstr "2. Kurs"
++
++#: dialogs/dietwizarddialog.cpp:365
++msgid "Dessert"
++msgstr "Tatlı"
++
++#: dialogs/dietwizarddialog.cpp:400
++#, kde-format
++msgctxt "Dish number %1"
++msgid "Dish %1"
++msgstr "Tabak %1"
++
++#: dialogs/dietwizarddialog.cpp:473
++msgctxt "@label:listbox"
++msgid "Dish Characteristics"
++msgstr "Tabak Nitelikleri"
++
++#: dialogs/dietwizarddialog.cpp:485
++msgctxt "@option:check"
++msgid "Enable Category Filtering"
++msgstr "Kategori Filtrelemesini Etkinleştir"
++
++#: dialogs/editpropertiesdialog.cpp:127 dialogs/editpropertiesdialog.cpp:252
++#| msgid "USDA Ingredient"
++msgctxt "@title:column"
++msgid "USDA Ingredient"
++msgstr "USDA Malzemeler"
++
++#: dialogs/editpropertiesdialog.cpp:167 dialogs/editpropertiesdialog.cpp:258
++#: dialogs/selectpropertydialog.cpp:56 widgets/propertylistview.cpp:130
++#: widgets/propertylistview.cpp:164
++msgctxt "@title:column"
++msgid "Property"
++msgstr "Özellik"
++
++#: dialogs/editpropertiesdialog.cpp:168 dialogs/editpropertiesdialog.cpp:259
++#: dialogs/ingredientparserdialog.cpp:67
++#: dialogs/ingredientparserdialog.cpp:116 dialogs/recipeinputdialog.cpp:347
++#: dialogs/refineshoppinglistdialog.cpp:91
++#: dialogs/refineshoppinglistdialog.cpp:124
++#| msgid "Amount"
++msgctxt "@title:column"
++msgid "Amount"
++msgstr "Miktar"
++
++#: dialogs/editpropertiesdialog.cpp:169 dialogs/editpropertiesdialog.cpp:260
++#: dialogs/ingredientparserdialog.cpp:68
++#: dialogs/ingredientparserdialog.cpp:117
++#: dialogs/refineshoppinglistdialog.cpp:92
++#: dialogs/refineshoppinglistdialog.cpp:125 dialogs/selectunitdialog.cpp:41
++msgctxt "@title:column"
++msgid "Unit"
++msgstr "Birim"
++
++#: dialogs/editpropertiesdialog.cpp:202 dialogs/editpropertiesdialog.cpp:264
++#| msgid "Weight"
++msgctxt "@title:column"
++msgid "Weight"
++msgstr "Ağırlık"
++
++#: dialogs/editpropertiesdialog.cpp:203 dialogs/editpropertiesdialog.cpp:265
++#, fuzzy
++#| msgid "Amount"
++msgctxt "@title:column"
++msgid "Per Amount"
++msgstr "Toplam"
++
++#: dialogs/editpropertiesdialog.cpp:250
++msgctxt "@title:window"
++msgid "Property Information"
++msgstr "Özellik Bilgileri"
++
++#: dialogs/editpropertiesdialog.cpp:251
++#, kde-format
++msgctxt "@label"
++msgid "Property Information for <b>%1</b>"
++msgstr "<b>%1</b> için özellik bilgileri"
++
++#: dialogs/editpropertiesdialog.cpp:254
++msgctxt "@action:button Load USDA data"
++msgid "Load"
++msgstr "Yükle"
++
++#: dialogs/editpropertiesdialog.cpp:255
++msgctxt "@title:group"
++msgid "Properties"
++msgstr "Özellikler"
++
++#: dialogs/editpropertiesdialog.cpp:256 dialogs/editpropertiesdialog.cpp:262
++#: dialogs/editratingdialog.cpp:165
++msgctxt "@action:button"
++msgid "Add"
++msgstr "Ekle"
++
++#: dialogs/editpropertiesdialog.cpp:257 dialogs/editpropertiesdialog.cpp:263
++#| msgid "Remove"
++msgctxt "@action:button"
++msgid "Remove"
++msgstr "Kaldır"
++
++#: dialogs/editpropertiesdialog.cpp:261
++#| msgid "Weights"
++msgctxt "@title:group"
++msgid "Weights"
++msgstr "Ağırlıklar"
++
++#: dialogs/editpropertiesdialog.cpp:291
++msgctxt "@info"
++msgid ""
++"Recipes may require this information for nutrient analysis. Are you sure you "
++"want to delete this entry?"
++msgstr ""
++
++#: dialogs/editpropertiesdialog.cpp:310 dialogs/editpropertiesdialog.cpp:342
++#: dialogs/ingredientmatcherdialog.cpp:159
++#| msgid "Enter amount"
++msgctxt "@title:window"
++msgid "Enter amount"
++msgstr "Miktarı girin"
++
++#: dialogs/editpropertiesdialog.cpp:314 dialogs/editpropertiesdialog.cpp:346
++#: dialogs/ingredientmatcherdialog.cpp:163
++#| msgid "Amount"
++msgctxt "@title:group"
++msgid "Amount"
++msgstr "Miktar"
++
++#: dialogs/editpropertiesdialog.cpp:436
++msgctxt "@title:window"
++msgid "Property Exists"
++msgstr "Özellik Var"
++
++#: dialogs/editpropertiesdialog.cpp:436
++#, fuzzy
++#| msgid ""
++#| "The property you tried to add already exists in the ingredient with the "
++#| "same per units."
++msgctxt "@info"
++msgid ""
++"The property you tried to add already exists in the ingredient with the same "
++"per units."
++msgstr "Malzemeye eklemek istediğiniz özellik zaten var."
++
++#: dialogs/editpropertiesdialog.cpp:656
++msgctxt "@info"
++msgid "Please select an ingredient in the USDA ingredient list"
++msgstr "Lütfen USDA malzeme listesinde bir malzeme seçin"
++
++#: dialogs/editratingdialog.cpp:55 dialogs/editratingdialog.cpp:68
++msgctxt "@title:window"
++msgid "Rating"
++msgstr "Beğeni"
++
++#: dialogs/editratingdialog.cpp:139 dialogs/editratingdialog.cpp:166
++msgctxt "@action:button"
++msgid "&Delete"
++msgstr "&Sil"
++
++#: dialogs/editratingdialog.cpp:163
++#| msgid "Criteria:"
++msgctxt "@label:textbox"
++msgid "Criteria:"
++msgstr "Ölçüt:"
++
++#: dialogs/editratingdialog.cpp:164
++msgctxt "@label:textbox"
++msgid "Stars:"
++msgstr "Yıldızlar:"
++
++#: dialogs/editratingdialog.cpp:169
++msgctxt "@label:textbox"
++msgid "Comments:"
++msgstr "Yorumlar:"
++
++#: dialogs/editratingdialog.cpp:170
++#| msgid "Category:"
++msgctxt "@label:textbox"
++msgid "Rater:"
++msgstr ""
++
++#: dialogs/ingredientmatcherdialog.cpp:88
++#| msgid "Ingredient (required?)"
++msgctxt "@title:column"
++msgid "Ingredient (required?)"
++msgstr "Malzemeler (gerekiyor mu?)"
++
++#: dialogs/ingredientmatcherdialog.cpp:89
++#| msgid "Amount Available"
++msgctxt "@title:column"
++msgid "Amount Available"
++msgstr "Kullanılabilir Miktar"
++
++#: dialogs/ingredientmatcherdialog.cpp:102
++#| msgid "Missing ingredients allowed:"
++msgctxt ""
++"@label:spinbox Number of missing ingredients allowed when doing a search by "
++"ingredients"
++msgid "Missing ingredients allowed:"
++msgstr "İzin verilen eksik malzemeler:"
++
++#: dialogs/ingredientmatcherdialog.cpp:106
++#| msgctxt "Any amount of ingredients missing"
++#| msgid "Any"
++msgctxt ""
++"@item Any amount of ingredients missing when doing a search by ingredients"
++msgid "Any"
++msgstr "Herhangi biri"
++
++#: dialogs/ingredientmatcherdialog.cpp:109
++#| msgid "Matching Recipes"
++msgctxt "@title"
++msgid "Matching Recipes"
++msgstr "Eşleşen Tarifler"
++
++#: dialogs/ingredientmatcherdialog.cpp:112
++msgctxt "@title:column Recipe Title"
++msgid "Title"
++msgstr "Başlık"
++
++#: dialogs/ingredientmatcherdialog.cpp:119
++#| msgid "Missing Ingredients"
++msgctxt "@title:column Missing ingredients in a search result"
++msgid "Missing Ingredients"
++msgstr "Eksik Malzemeler"
++
++#: dialogs/ingredientmatcherdialog.cpp:130
++#| msgid "Find matching recipes"
++msgctxt "@action:button"
++msgid "Find matching recipes"
++msgstr "Eşleşen tarifleri bul"
++
++#: dialogs/ingredientmatcherdialog.cpp:136
++msgctxt "@action:button Clear search criteria"
++msgid "Clear"
++msgstr "Temizle"
++
++#: dialogs/ingredientmatcherdialog.cpp:345
++#, kde-format
++#| msgid "You are missing 1 ingredient for:"
++#| msgid_plural "You are missing %1 ingredients for:"
++msgctxt "@label:textbox"
++msgid "You are missing 1 ingredient for:"
++msgid_plural "You are missing %1 ingredients for:"
++msgstr[0] "Şu tarif için %1 malzemeleri eksik:"
++
++#: dialogs/ingredientmatcherdialog.h:57 exporters/htmlexporter.cpp:308
++#: exporters/htmlexporter.cpp:331 exporters/xsltexporter.cpp:56
++#: widgets/inglistviewitem.cpp:28 widgets/inglistviewitem.cpp:40
++#: widgets/ingredientinputwidget.cpp:98
++msgid "OR"
++msgstr "YA DA"
++
++#: dialogs/ingredientparserdialog.cpp:42
++#| msgid "Ingredient Parser"
++msgctxt "@title:window"
++msgid "Ingredient Parser"
++msgstr "Malzeme Ayrıştırıcı"
++
++#: dialogs/ingredientparserdialog.cpp:66
++#: dialogs/ingredientparserdialog.cpp:115 dialogs/recipeinputdialog.cpp:346
++#: widgets/ingredientlistview.cpp:107 widgets/ingredientlistview.cpp:132
++#| msgid "Ingredient"
++msgctxt "@title:column"
++msgid "Ingredient"
++msgstr "Malzemeler"
++
++#: dialogs/ingredientparserdialog.cpp:69
++#: dialogs/ingredientparserdialog.cpp:118 dialogs/recipeinputdialog.cpp:350
++#: widgets/prepmethodlistview.cpp:52
++msgctxt "@title:column"
++msgid "Preparation Method"
++msgstr "Hazırlama Yöntemi"
++
++#: dialogs/ingredientparserdialog.cpp:88
++#| msgid "Set &Header"
++msgctxt "@action:button"
++msgid "Set &Header"
++msgstr "Başlığı Aya&rla"
++
++#: dialogs/ingredientparserdialog.cpp:89
++msgctxt "@info:whatsthis"
++msgid ""
++"If an ingredient header is detected as an ingredient, select it and click "
++"this button so that Krecipes will recognize it as a header.  All the "
++"ingredients below the header will be included within that group.\n"
++"\n"
++"Alternatively, if you select multiple ingredients and click this button, "
++"those ingredients will be grouped together."
++msgstr ""
++
++#: dialogs/ingredientparserdialog.cpp:94
++msgctxt "@item:inmenu"
++msgid "&Delete"
++msgstr "&Sil"
++
++#: dialogs/ingredientparserdialog.cpp:95
++#| msgid "Set &Header"
++msgctxt "@item:inmenu"
++msgid "Set &Header"
++msgstr "Başlığı Aya&rla"
++
++#: dialogs/ingredientparserdialog.cpp:108
++msgctxt "@info"
++msgid ""
++"<para>To use: Paste a list of ingredient below, click <interface>Parse Text</"
++"interface>, and then you may correct any incorrectly parsed ingredients.</"
++"para><para><warning>Fields will be truncated if longer than the database "
++"allows</warning></para>"
++msgstr ""
++
++#: dialogs/ingredientparserdialog.cpp:112
++msgctxt "@title"
++msgid "Ingredients as understood by Krecipes:"
++msgstr ""
++
++#: dialogs/ingredientparserdialog.cpp:114
++#| msgid "Parse Text"
++msgctxt "@action:button"
++msgid "Parse Text"
++msgstr "Metni Ayrıştır"
++
++#: dialogs/ingredientsdialog.cpp:75
++#| msgid "Property Information"
++msgctxt "@action:button"
++msgid "Property Information"
++msgstr "Özellik Bilgileri"
++
++#: dialogs/ingredientsdialog.cpp:82 dialogs/recipeinputdialog.cpp:430
++#| msgid "Ingredients"
++msgctxt "@title:tab"
++msgid "Ingredients"
++msgstr "Malzemeler"
++
++#: dialogs/ingredientsdialog.cpp:85
++#| msgid "Headers"
++msgctxt "@title:tab"
++msgid "Headers"
++msgstr "Başlıklar"
++
++#: dialogs/ingredientsdialog.cpp:136
++#| msgid "No ingredient selected."
++msgctxt "@info"
++msgid "No ingredient selected."
++msgstr "Seçilen malzeme yok."
++
++#: dialogs/pagesetupdialog.cpp:53
++msgid "Page Setup"
++msgstr "Sayfa Düzeni"
++
++#: dialogs/pagesetupdialog.cpp:62
++msgid "Items Shown"
++msgstr "Gösterilen Ögeler"
++
++#: dialogs/pagesetupdialog.cpp:65
++msgid "Show Items"
++msgstr "Ögeleri göster"
++
++#: dialogs/pagesetupdialog.cpp:70
++msgid ""
++"<i>Usage: Select a template along the left, and right-click any element to "
++"edit the look of that element.</i>"
++msgstr ""
++
++#: dialogs/pagesetupdialog.cpp:89
++msgid "Save and Close"
++msgstr "Kaydet ve KapatAyarları kaydet ve kapat"
++
++#: dialogs/pagesetupdialog.cpp:91
++msgid "&Cancel"
++msgstr "İ&ptal"
++
++#: dialogs/pagesetupdialog.cpp:140
++msgid ""
++"The recipe view layout has been modified.\n"
++"Do you want to save it?"
++msgstr ""
++"Tarif görünüm düzeni değiştirildi.\n"
++"Kaydetmek istiyor musunuz?"
++
++#: dialogs/pagesetupdialog.cpp:140 dialogs/pagesetupdialog.cpp:218
++msgid "Save Layout?"
++msgstr "Düzen Kaydedilsin mi?"
++
++#: dialogs/pagesetupdialog.cpp:194
++msgid "Krecipes style or template file"
++msgstr "Krecipes biçim ya da şablon dosyası"
++
++#: dialogs/pagesetupdialog.cpp:194
++msgid "Select Layout"
++msgstr "Düzeni Seç"
++
++#: dialogs/pagesetupdialog.cpp:218
++msgid ""
++"This layout has been modified.\n"
++"Do you want to save it?"
++msgstr ""
++"Bu yapılandırma değiştirildi.\n"
++"Kaydetmek ister misiniz?"
++
++#: dialogs/pagesetupdialog.cpp:244
++msgid ""
++"Unable to save the layout because you do not have sufficient permissions to "
++"modify this file.\n"
++"Would you like to instead save the current layout to a new file?"
++msgstr ""
++"Yapılandırma kaydedilemedi çünkü sizin bu dosyayı düzenleme yetkiniz yok.\n"
++"Yapılandırmayı yeni bir dosyaya kaydetmek ister misiniz?"
++
++#: dialogs/pagesetupdialog.cpp:265
++msgid ""
++"You have selected a file that you do not have the permissions to write to.\n"
++"Would you like to select another file?"
++msgstr ""
++"Yazma yetkinizin olmadığı bir dosya seçtiniz.\n"
++"Başka bir dosya seçmek ister misiniz?"
++
++#: dialogs/recipeimportdialog.cpp:34
++#| msgid "Import Recipes"
++msgctxt "@title:window"
++msgid "Import Recipes"
++msgstr "Tarifleri İçe Aktar"
++
++#: dialogs/recipeimportdialog.cpp:44
++msgctxt "@title:column"
++msgid "Recipes"
++msgstr "Tarifler"
++
++#: dialogs/recipeimportdialog.cpp:67
++#, kde-format
++msgctxt "@item:inlistbox All items"
++msgid "All (%1)"
++msgstr "Tümü (%1)"
++
++#: dialogs/recipeimportdialog.cpp:102 dialogs/recipeimportdialog.cpp:103
++msgctxt "@item"
++msgid "Uncategorized"
++msgstr "Kategorilendirilmemiş"
++
++#: dialogs/recipeinputdialog.cpp:172
++#| msgid "Select photo"
++msgctxt "@info:tooltip"
++msgid "Select photo"
++msgstr "Fotoğraf Seçin"
++
++#: dialogs/recipeinputdialog.cpp:176
++msgctxt "action:button"
++msgid "Save photo as..."
++msgstr "Fotoğrafı farklı kaydet..."
++
++#: dialogs/recipeinputdialog.cpp:180
++msgctxt "@info:tooltip"
++msgid "Clear photo"
++msgstr "Fotoğrafı temizle"
++
++#: dialogs/recipeinputdialog.cpp:193
++msgctxt "@label"
++msgid "Recipe Name"
++msgstr "Tarif Adı"
++
++#: dialogs/recipeinputdialog.cpp:209
++msgctxt "@label"
++msgid "Authors"
++msgstr "Yazarlar"
++
++#: dialogs/recipeinputdialog.cpp:226
++msgctxt "@label"
++msgid "Categories"
++msgstr "Kategoriler"
++
++#: dialogs/recipeinputdialog.cpp:247
++msgctxt ""
++"@label How much food you will produce with a given cooking recipe (e.g. 2 "
++"servings or 3 bottles)"
++msgid "Yield"
++msgstr ""
++
++#: dialogs/recipeinputdialog.cpp:251
++#| msgid "Amount"
++msgctxt "@label The amount for yield"
++msgid "Amount"
++msgstr "Miktar"
++
++#: dialogs/recipeinputdialog.cpp:254
++msgctxt "@label The type of yield (e.g. servings, bottles..."
++msgid "Type"
++msgstr "Tür"
++
++#: dialogs/recipeinputdialog.cpp:266
++msgctxt "@label"
++msgid "Preparation Time"
++msgstr "Hazırlanma Süresi"
++
++#: dialogs/recipeinputdialog.cpp:338
++#| msgid "Add ingredient"
++msgctxt "@info:tooltip"
++msgid "Add ingredient"
++msgstr "Malzeme ekle"
++
++#: dialogs/recipeinputdialog.cpp:339
++#| msgid "Move ingredient up"
++msgctxt "@info:tooltip"
++msgid "Move ingredient up"
++msgstr "Malzemeyi yukarı taşı"
++
++#: dialogs/recipeinputdialog.cpp:340
++#| msgid "Move ingredient down"
++msgctxt "@info:tooltip"
++msgid "Move ingredient down"
++msgstr "Malzemeyi aşağı taşı"
++
++#: dialogs/recipeinputdialog.cpp:341
++#| msgid "Remove ingredient"
++msgctxt "@info:tooltip"
++msgid "Remove ingredient"
++msgstr "Malzemeleri sil"
++
++#: dialogs/recipeinputdialog.cpp:342
++#| msgid "Paste Ingredients"
++msgctxt "@info:tooltip"
++msgid "Paste Ingredients"
++msgstr "Malzemeleri Ez"
++
++#: dialogs/recipeinputdialog.cpp:349 widgets/propertylistview.cpp:131
++msgctxt "@title:column"
++msgid "Units"
++msgstr "Birimler"
++
++#: dialogs/recipeinputdialog.cpp:365
++#| msgid "Property Status:"
++msgctxt "@label"
++msgid "Property Status:"
++msgstr "Özellik Durumu:"
++
++#: dialogs/recipeinputdialog.cpp:369
++msgctxt "@action:button"
++msgid "Details..."
++msgstr "Ayrıntılar..."
++
++#: dialogs/recipeinputdialog.cpp:380
++msgctxt "@action:inmenu Updates the loaded information"
++msgid "Update"
++msgstr "Güncelle"
++
++#: dialogs/recipeinputdialog.cpp:387
++#| msgid "Property details"
++msgctxt "@title:window "
++msgid "Property details"
++msgstr "Özellik ayrıntıları"
++
++#: dialogs/recipeinputdialog.cpp:421
++#, fuzzy
++#| msgid "Add Rating..."
++msgctxt "@action:button"
++msgid "Add Rating..."
++msgstr "Beğeni Ekle..."
++
++#: dialogs/recipeinputdialog.cpp:429
++msgctxt "@title:tab"
++msgid "Recipe"
++msgstr "Tarif"
++
++#: dialogs/recipeinputdialog.cpp:431
++msgctxt "@title:tab"
++msgid "Instructions"
++msgstr "Yönergeler"
++
++#: dialogs/recipeinputdialog.cpp:432
++msgctxt "@title:tab"
++msgid "Ratings"
++msgstr "Beğeniler"
++
++#: dialogs/recipeinputdialog.cpp:452
++msgctxt "@action:button"
++msgid "Save recipe"
++msgstr "Tarifi kaydet"
++
++#: dialogs/recipeinputdialog.cpp:453
++msgctxt "@info:tooltip"
++msgid "Save recipe"
++msgstr "Tarifi kaydet"
++
++#: dialogs/recipeinputdialog.cpp:455
++msgctxt "@action:button"
++msgid "Show recipe"
++msgstr "Tarif göster"
++
++#: dialogs/recipeinputdialog.cpp:456
++msgctxt "@info:tooltip"
++msgid "Show recipe"
++msgstr "Tarif göster"
++
++#: dialogs/recipeinputdialog.cpp:458 dialogs/recipeviewdialog.cpp:62
++msgctxt "@action:button"
++msgid "Close"
++msgstr "Kapat"
++
++#: dialogs/recipeinputdialog.cpp:459 dialogs/recipeviewdialog.cpp:63
++msgctxt "@info:tooltip"
++msgid "Close"
++msgstr "Kapat"
++
++#: dialogs/recipeinputdialog.cpp:461
++msgctxt "@action:button"
++msgid "Resize recipe"
++msgstr "Tarifi yeniden boyutlandır"
++
++#: dialogs/recipeinputdialog.cpp:462
++msgctxt "@info:tooltip"
++msgid "Resize recipe"
++msgstr "Tarifi yeniden boyutlandır"
++
++#: dialogs/recipeinputdialog.cpp:685 dialogs/recipeinputdialog.cpp:727
++msgid "Images"
++msgstr "Resimler"
++
++#: dialogs/recipeinputdialog.cpp:729
++msgctxt "@title:window"
++msgid "Save photo as..."
++msgstr "Fotoğrafı farklı kaydet..."
++
++#: dialogs/recipeinputdialog.cpp:737
++#| msgid "The file already exists, do you want to overwrite it?"
++msgctxt "@info"
++msgid "The file already exists, do you want to overwrite it?"
++msgstr "Dosya zaten var, üzerine yazmak ister misiniz?"
++
++#: dialogs/recipeinputdialog.cpp:744
++#, kde-format
++#| msgid "The photo cannot be saved in %1"
++msgctxt "@info"
++msgid "The photo cannot be saved in %1"
++msgstr "Fotoğraf %1 konumuna kaydedilemedi"
++
++#: dialogs/recipeinputdialog.cpp:1027
++#, kde-format
++#| msgid "Unit name cannot be longer than 1 character."
++#| msgid_plural "Unit name cannot be longer than %1 characters."
++msgctxt "@info"
++msgid "Unit name cannot be longer than 1 character."
++msgid_plural "Unit name cannot be longer than %1 characters."
++msgstr[0] "Birim ismi %1 karakterden uzun olamaz."
++
++#: dialogs/recipeinputdialog.cpp:1066
++#, kde-format
++msgctxt "@info"
++msgid "Preparation method cannot be longer than 1 character."
++msgid_plural "Preparation method cannot be longer than %1 characters."
++msgstr[0] "Hazırlama usulü %1 karakterden uzun olamaz."
++
++#: dialogs/recipeinputdialog.cpp:1116
++#, kde-format
++#| msgid "Recipe title cannot be longer than 1 character."
++#| msgid_plural "Recipe title cannot be longer than %1 characters."
++msgctxt "@info"
++msgid "Recipe title cannot be longer than 1 character."
++msgid_plural "Recipe title cannot be longer than %1 characters."
++msgstr[0] "Tarif başlığı %1 karakterden uzun olamaz."
++
++#: dialogs/recipeinputdialog.cpp:1116
++msgid "Unable to save recipe"
++msgstr "Tarif kaydedilemedi"
++
++#: dialogs/recipeinputdialog.cpp:1156
++#| msgid "Write the recipe instructions here"
++msgctxt "@label:textbox"
++msgid "Write the recipe instructions here"
++msgstr "Tarif talimatlarını buraya yazın"
++
++#: dialogs/recipeinputdialog.cpp:1158
++#| msgid "Write the recipe title here"
++msgctxt "@label:textbox"
++msgid "Write the recipe title here"
++msgstr "Tarif başlığını buraya yazın"
++
++#: dialogs/recipeinputdialog.cpp:1264
++#| msgid ""
++#| "This recipe contains unsaved changes.\n"
++#| "Would you like to save it before closing?"
++msgctxt "@info"
++msgid ""
++"This recipe contains unsaved changes.\n"
++"Would you like to save it before closing?"
++msgstr ""
++"Bu tarif kaydedilmemiş değişiklikler içeriyor.\n"
++"Çıkmadan önce kaydetmek ister misiniz?"
++
++#: dialogs/recipeinputdialog.cpp:1264 dialogs/recipeinputdialog.cpp:1289
++#: dialogs/recipeinputdialog.cpp:1299
++msgctxt "@title:window"
++msgid "Unsaved changes"
++msgstr "Kaydedilmemiş değişiklikler"
++
++#: dialogs/recipeinputdialog.cpp:1289
++#| msgid ""
++#| "You need to save the recipe before displaying it. Would you like to save "
++#| "it now?"
++msgctxt "@info"
++msgid ""
++"You need to save the recipe before displaying it. Would you like to save it "
++"now?"
++msgstr ""
++"Göstermeden önce tarifi kaydetmelisiniz. Şimdi kaydetmek ister misiniz?"
++
++#: dialogs/recipeinputdialog.cpp:1299
++#| msgid ""
++#| "This recipe has changes that will not be displayed unless the recipe is "
++#| "saved. Would you like to save it now?"
++msgctxt "@info"
++msgid ""
++"This recipe has changes that will not be displayed unless the recipe is "
++"saved. Would you like to save it now?"
++msgstr ""
++"Bu tarifte kaydedilmemiş değişiklikler var ve kaydedilmezse tarifte yer "
++"almayacak. Şimdi kaydetmek ister misiniz?"
++
++#: dialogs/recipeinputdialog.cpp:1559
++#, kde-format
++msgctxt "@info"
++msgid ""
++"<b>%1:</b> No nutrient information available. <a href=\"ingredient#"
++"%2\">Provide nutrient information.</a>"
++msgstr ""
++"<b>%1:</b> Malzeme bilgisi kullanılabilir değil. <a href=\"ingredient#"
++"%2\">Malzeme bilgisi temin edin.</a>"
++
++#: dialogs/recipeinputdialog.cpp:1580
++#, kde-format
++msgctxt "@info"
++msgid "<b>%3:</b> Unit conversion missing for conversion from '%1' to '%2'"
++msgstr ""
++
++#: dialogs/recipeinputdialog.cpp:1581
++msgid "-No unit-"
++msgstr "-Birim yok-"
++
++#: dialogs/recipeinputdialog.cpp:1595 dialogs/recipeinputdialog.cpp:1598
++#: dialogs/recipeinputdialog.cpp:1601 dialogs/recipeinputdialog.cpp:1604
++msgctxt "@info"
++msgid "-No unit-"
++msgstr "-Birim yok-"
++
++#: dialogs/recipeinputdialog.cpp:1609
++#, kde-format
++msgctxt "@info"
++msgid ""
++"<b>%1:</b> Either <a href=\"ingredient#%3\">enter an appropriate ingredient "
++"weight entry</a>, or provide conversion information to perform one of the "
++"following conversions: %2"
++msgstr ""
++
++#: dialogs/recipeinputdialog.cpp:1621
++#, kde-format
++msgctxt "@info"
++msgid ""
++"<b>%1:</b> No ingredient weight entries. <a href=\"ingredient#%2\">Provide "
++"ingredient weight.</a>"
++msgstr ""
++"<b>%1:</b>Malzeme ağırlık girdileri yok. <a href=\"ingredient#%2\">Malzeme "
++"ağırlıklarını temin edin.</a>"
++
++#: dialogs/recipeinputdialog.cpp:1628
++#, kde-format
++msgctxt "@info"
++msgid ""
++"<b>%1:</b> There is no ingredient weight entry for when no preparation "
++"method is specified. <a href=\"ingredient#%2\">Provide ingredient weight.</a>"
++msgstr ""
++
++#: dialogs/recipeinputdialog.cpp:1634
++#, kde-format
++msgctxt "@info"
++msgid ""
++"<b>%1:</b> There is no ingredient weight entry for when prepared in any of "
++"the following manners: %2<a href=\"ingredient#%3\">Provide ingredient weight."
++"</a>"
++msgstr ""
++
++#: dialogs/recipeinputdialog.cpp:1643
++#, kde-format
++msgctxt "@info"
++msgid ""
++"<b>%1:</b> There is no ingredient weight entry for when prepared in any of "
++"the following manners (defaulting to a weight entry without a preparation "
++"method specified): %2<a href=\"ingredient#%3\">Provide ingredient weight.</a>"
++msgstr ""
++
++#: dialogs/recipeinputdialog.cpp:1667
++#| msgid "Complete"
++msgctxt "@info Property information for a recipe is complete"
++msgid "Complete"
++msgstr "Tamamla"
++
++#: dialogs/recipeinputdialog.cpp:1674
++msgctxt "@info Property information for a recipe is complete, but..."
++msgid "Complete, but approximations made"
++msgstr ""
++
++#: dialogs/recipeinputdialog.cpp:1682
++#| msgid "Incomplete"
++msgctxt "@info Property information for a recipe is incomplete"
++msgid "Incomplete"
++msgstr "Tamamlanmamış"
++
++#: dialogs/recipeinputdialog.cpp:1697
++msgctxt "@info"
++msgid ""
++"The nutrient information for this recipe is incomplete because the following "
++"information is missing:"
++msgstr ""
++
++#: dialogs/recipeinputdialog.cpp:1708
++msgctxt "@info"
++msgid ""
++"The following approximations will be made when determining nutrient "
++"information:"
++msgstr ""
++
++#: dialogs/recipeviewdialog.cpp:113
++#| msgid "Opening recipes, please wait..."
++msgctxt "@title:window"
++msgid "Loading recipes, please wait..."
++msgstr "Tarifler yükleniyor, lütfen bekleyinz..."
++
++#: dialogs/refineshoppinglistdialog.cpp:37
++#| msgid "Refine Shopping List"
++msgctxt "@title:window"
++msgid "Refine Shopping List"
++msgstr "Alışveriş Listesini Düzenle"
++
++#: dialogs/refineshoppinglistdialog.cpp:45
++#| msgctxt "action:button Finished refining shopping list"
++#| msgid "&Done"
++msgctxt "@action:button Finished refining shopping list"
++msgid "&Done"
++msgstr "&Tamam"
++
++#: dialogs/refineshoppinglistdialog.cpp:90
++#: dialogs/refineshoppinglistdialog.cpp:123
++#| msgid "Refine Shopping List"
++msgctxt "@title:column"
++msgid "Ingredients in Shopping List"
++msgstr "Alışveriş Listesindeki Malzemeler"
++
++#: dialogs/refineshoppinglistdialog.cpp:121
++msgctxt "@info"
++msgid ""
++"On the right are the ingredients needed for the recipes you selected.  You "
++"may now add additional ingredients, remove ingredients you do not need, or "
++"modify the amounts of existing ingredients."
++msgstr ""
++
++#: dialogs/refineshoppinglistdialog.cpp:122
++#| msgid "Ingredients"
++msgctxt "@title:column"
++msgid "Ingredients"
++msgstr "Malzemeler"
++
++#: dialogs/resizerecipedialog.cpp:30
++#| msgid "Resize Recipe"
++msgctxt "@title:window"
++msgid "Resize Recipe"
++msgstr "Tarifi Yeniden Boyutlandır"
++
++#: dialogs/resizerecipedialog.cpp:74
++#, fuzzy
++#| msgid "Unable to save recipe"
++msgctxt "@info"
++msgid "Unable to scale a recipe with zero yield"
++msgstr "Tarif kaydedilemedi"
++
++#: dialogs/resizerecipedialog.cpp:84 dialogs/resizerecipedialog.cpp:92
++msgctxt "@info"
++msgid "Invalid input"
++msgstr "Geçersiz girdi"
++
++#. i18n: ectx: property (text), widget (QRadioButton, m_yieldButton)
++#: dialogs/resizerecipedialog.ui:20
++#| msgid "Scale by factor"
++msgid "&Scale by yield"
++msgstr ""
++
++#. i18n: ectx: property (text), widget (QLabel, label_2)
++#: dialogs/resizerecipedialog.ui:49
++#| msgid "New Header"
++msgid "&New yield"
++msgstr "Ye&ni Kazanç"
++
++#. i18n: ectx: property (text), widget (QLabel, label)
++#: dialogs/resizerecipedialog.ui:59
++#, fuzzy
++#| msgctxt "@label Recipe created date"
++#| msgid "Created:"
++msgid "Current &yield:"
++msgstr "Oluşturulma Zamanı:"
++
++#. i18n: ectx: property (text), widget (QRadioButton, m_factorButton)
++#: dialogs/resizerecipedialog.ui:75
++#, fuzzy
++#| msgid "Scale by factor"
++msgid "Scale b&y factor"
++msgstr "Katsayı ile ölçekle"
++
++#. i18n: ectx: property (text), widget (QLabel, label_3)
++#: dialogs/resizerecipedialog.ui:94
++#| msgid "Factor (i.e. 1/2 to half, 3 to triple):"
++msgid "&Factor (e.g. 1/2 to half, 3 to triple):"
++msgstr "Katsayı·(ör. yarım için·1/2, üç kat için·3):"
++
++#: dialogs/selectauthorsdialog.cpp:36
++msgctxt "@title:window"
++msgid "Authors"
++msgstr "Yazarlar"
++
++#: dialogs/selectauthorsdialog.cpp:74 dialogs/selectpropertydialog.cpp:54
++#: dialogs/selectunitdialog.cpp:39 dialogs/shoppinglistdialog.cpp:120
++#: widgets/authorlistview.cpp:57 widgets/authorlistview.cpp:117
++#: widgets/categorylistview.cpp:319 widgets/categorylistview.cpp:383
++#: widgets/headerlistview.cpp:60 widgets/ingredientlistview.cpp:111
++#: widgets/ingredientlistview.cpp:136 widgets/kreauthorlistwidget.cpp:36
++#: widgets/krecategorieslistwidget.cpp:42 widgets/prepmethodlistview.cpp:56
++#: widgets/propertylistview.cpp:135 widgets/unitlistview.cpp:70
++#| msgid "Id"
++msgctxt "@title:column"
++msgid "Id"
++msgstr "Kimlik"
++
++#: dialogs/selectauthorsdialog.cpp:74 widgets/authorlistview.cpp:53
++#: widgets/authorlistview.cpp:113 widgets/kreauthorlistwidget.cpp:36
++msgctxt "@title:column"
++msgid "Author"
++msgstr "Yazar"
++
++#: dialogs/selectauthorsdialog.cpp:143
++#, kde-format
++msgctxt "@info"
++msgid "Author name cannot be longer than 1 character."
++msgid_plural "Author name cannot be longer than %1 characters."
++msgstr[0] "Yazar adı %1 karakterden daha uzun olamaz."
++
++#: dialogs/selectcategoriesdialog.cpp:32
++msgctxt "@title:window"
++msgid "Categories"
++msgstr "Kategoriler"
++
++#: dialogs/selectcategoriesdialog.cpp:46
++msgctxt "@action:button"
++msgid "&New Category..."
++msgstr "&Yeni Kategori..."
++
++#: dialogs/selectcategoriesdialog.cpp:89
++#, kde-format
++msgctxt "@info"
++msgid "Category name cannot be longer than 1 character."
++msgid_plural "Category name cannot be longer than %1 characters."
++msgstr[0] "Kategori adı %1 karakterden daha uzun olamaz."
++
++#: dialogs/selectpropertydialog.cpp:34
++#| msgid "Choose Property"
++msgctxt "@title:window"
++msgid "Choose Property"
++msgstr "Özellik Seç"
++
++#: dialogs/selectpropertydialog.cpp:43
++#| msgid "Choose Property"
++msgctxt "@title:group"
++msgid "Choose Property"
++msgstr "Özellik Seç"
++
++#: dialogs/selectpropertydialog.cpp:65
++msgctxt "@label:textbox"
++msgid "Per units:"
++msgstr "Her birim:"
++
++#: dialogs/selectpropertydialog.cpp:143 dialogs/selectunitdialog.cpp:73
++msgctxt "@item"
++msgid "-No unit-"
++msgstr "-Birim yok-"
++
++#: dialogs/selectrecipedialog.cpp:81 widgets/krelistview.cpp:55
++msgctxt "@label:textbox Search recipes"
++msgid "Search:"
++msgstr "Ara:"
++
++#: dialogs/selectrecipedialog.cpp:100
++msgctxt "@action:button"
++msgid "Show Recipe(s)"
++msgstr "Tarif(ler)i Göster"
++
++#: dialogs/selectrecipedialog.cpp:104
++msgctxt "@action:button"
++msgid "Edit Recipe"
++msgstr "Tarifi Düzenle"
++
++#: dialogs/selectrecipedialog.cpp:113
++msgctxt "@title:tab Basic search"
++msgid "Basic"
++msgstr "Temel"
++
++#: dialogs/selectrecipedialog.cpp:116
++#| msgctxt "Advanced search"
++#| msgid "Advanced"
++msgctxt "@title:tab Advanced search"
++msgid "Advanced"
++msgstr "Gelişmiş"
++
++#: dialogs/selectunitdialog.cpp:25
++msgctxt "@title:window"
++msgid "Choose Unit"
++msgstr "Birim Seç"
++
++#: dialogs/selectunitdialog.cpp:31
++msgctxt "@title:group"
++msgid "Choose Unit"
++msgstr "Birim Seç"
++
++#: dialogs/setupdisplay.cpp:69
++msgid "Recipe Title"
++msgstr "Tarif Başlığı"
++
++#: dialogs/setupdisplay.cpp:71
++msgid "serving"
++msgstr "sunum"
++
++#: dialogs/setupdisplay.cpp:72
++msgid "Category 1, Category 2, ..."
++msgstr "Kategori1 , Kategori 2, ..."
++
++#: dialogs/setupdisplay.cpp:73 dialogs/setupdisplay.cpp:120
++#: exporters/htmlexporter.cpp:197 exporters/xsltexporter.cpp:44
++msgid "Instructions"
++msgstr "Yönergeler"
++
++#: dialogs/setupdisplay.cpp:76
++msgid "Author 1, Author 2, ..."
++msgstr "Yazar 1, Yazar 2, ..."
++
++#: dialogs/setupdisplay.cpp:79
++msgid "Ingredient 1"
++msgstr "İçindekiler Ögesi 1"
++
++#: dialogs/setupdisplay.cpp:82
++msgid "Ingredient 2"
++msgstr "İçindekiler Ögesi 2"
++
++#. i18n: ectx: property (text), widget (QLabel, raterName)
++#: dialogs/setupdisplay.cpp:90 widgets/ratingdisplaywidget.ui:92
++msgid "Rater"
++msgstr ""
++
++#: dialogs/setupdisplay.cpp:91
++msgid "Comment"
++msgstr "Açıklama"
++
++#: dialogs/setupdisplay.cpp:93
++msgid "Criteria 1"
++msgstr "Ölçüt 2"
++
++#: dialogs/setupdisplay.cpp:97
++msgid "Criteria 2"
++msgstr "Ölçüt 2"
++
++#: dialogs/setupdisplay.cpp:102
++msgid "Property 1"
++msgstr "Özellik 1"
++
++#: dialogs/setupdisplay.cpp:104
++msgid "Property 2"
++msgstr "Özellik 2"
++
++#: dialogs/setupdisplay.cpp:118
++msgctxt "Background color"
++msgid "Background"
++msgstr "Arkaplan"
++
++#: dialogs/setupdisplay.cpp:119
++msgctxt "Recipe title"
++msgid "Title"
++msgstr "Başlık"
++
++#: dialogs/setupdisplay.cpp:121 exporters/htmlexporter.cpp:208
++msgid "Preparation Time"
++msgstr "Hazırlanma Süresi"
++
++#: dialogs/setupdisplay.cpp:122
++msgid "Photo"
++msgstr "Fotoğraf"
++
++#: dialogs/setupdisplay.cpp:123 exporters/htmlexporter.cpp:233
++#: exporters/xsltexporter.cpp:49 krecipesview.cpp:380 krecipesview.cpp:511
++msgid "Authors"
++msgstr "Yazarlar"
++
++#: dialogs/setupdisplay.cpp:124 exporters/htmlexporter.cpp:247
++#: exporters/xsltexporter.cpp:46 krecipesview.cpp:379 krecipesview.cpp:503
++msgid "Categories"
++msgstr "Kategoriler"
++
++#: dialogs/setupdisplay.cpp:125 exporters/htmlexporter.cpp:342
++#: exporters/xsltexporter.cpp:52 krecipesview.cpp:375 krecipesview.cpp:471
++msgid "Ingredients"
++msgstr "İçindekiler"
++
++#: dialogs/setupdisplay.cpp:127 exporters/htmlexporter.cpp:396
++#: exporters/plaintextexporter.cpp:135 exporters/xsltexporter.cpp:55
++msgid "Ratings"
++msgstr "Beğeniler"
++
++#: dialogs/setupdisplay.cpp:128 exporters/htmlexporter.cpp:202
++#: exporters/xsltexporter.cpp:47
++msgid "Yield"
++msgstr ""
++
++#: dialogs/setupdisplay.cpp:225
++#, kde-format
++msgid "\"%1\" at line %2, column %3.  This may not be a Krecipes layout file."
++msgstr ""
++"Satır %2, sütun %3 üzerinde \"%1\". Bu bir Krecipes yerleşim dosyası "
++"olmayabilir."
++
++#: dialogs/setupdisplay.cpp:437
++msgid "Background Color..."
++msgstr "Arkaplan Rengi..."
++
++#: dialogs/setupdisplay.cpp:440
++msgid "Text Color..."
++msgstr "Metin Rengi..."
++
++#: dialogs/setupdisplay.cpp:443
++msgid "Font..."
++msgstr "Yazı Tipi..."
++
++#: dialogs/setupdisplay.cpp:446
++msgid "Show"
++msgstr "&Göste."
++
++#: dialogs/setupdisplay.cpp:455 dialogs/setupdisplay.cpp:588
++msgctxt "Align center"
++msgid "Center"
++msgstr "Orta"
++
++#: dialogs/setupdisplay.cpp:457 dialogs/setupdisplay.cpp:590
++msgctxt "Align left"
++msgid "Left"
++msgstr "Sol"
++
++#: dialogs/setupdisplay.cpp:459 dialogs/setupdisplay.cpp:592
++msgctxt "Align right"
++msgid "Right"
++msgstr "Sağ"
++
++#: dialogs/setupdisplay.cpp:472
++msgid "Alignment"
++msgstr "Yerleşim"
++
++#: dialogs/setupdisplay.cpp:478
++msgid "Border..."
++msgstr " Kenalık...r"
++
++#: dialogs/setupdisplay.cpp:481
++msgid "Columns..."
++msgstr "&Sütunla...r"
++
++#: dialogs/setupdisplay.cpp:522
++msgid "Select the number of columns to use:"
++msgstr "Kullanılacak sütunların sayısını seçin:"
++
++#: dialogs/shoppinglistdialog.cpp:71
++#| msgid "Full recipe list"
++msgctxt "@title"
++msgid "Full recipe list"
++msgstr "Tam tarif listesi"
++
++#: dialogs/shoppinglistdialog.cpp:106
++msgctxt "@title"
++msgid "Shopping List"
++msgstr "Alışveriş Listesi"
++
++#: dialogs/shoppinglistdialog.cpp:116
++msgctxt "@title:column"
++msgid "Recipe Title"
++msgstr "Tarif Başlığı"
++
++#: dialogs/shoppinglistdialog.cpp:135
++msgctxt "@action:button"
++msgid "&OK"
++msgstr "&Tamam"
++
++#: dialogs/shoppinglistdialog.cpp:142
++msgctxt "@action:button Clear list"
++msgid "Clear"
++msgstr "Temizle"
++
++#: dialogs/shoppinglistviewdialog.cpp:30
++msgctxt "@title:window"
++msgid "Shopping List"
++msgstr "Alışveriş Listesi"
++
++#: dialogs/shoppinglistviewdialog.cpp:67 dialogs/shoppinglistviewdialog.cpp:69
++#: krecipesview.cpp:374 krecipesview.cpp:446
++msgid "Shopping List"
++msgstr "Alışveriş Listesi"
++
++#: dialogs/similarcategoriesdialog.cpp:179
++msgctxt "@title:window"
++msgid "Similar Categories"
++msgstr "Benzer Kategoriler"
++
++#: dialogs/similarcategoriesdialog.cpp:180
++#, fuzzy
++#| msgid "Threshold:"
++msgctxt "@label:textbox"
++msgid "Threshold:"
++msgstr "Eşik:"
++
++#: dialogs/similarcategoriesdialog.cpp:181
++msgctxt "@label:textbox"
++msgid "Category:"
++msgstr "Kategori:"
++
++#: dialogs/similarcategoriesdialog.cpp:184
++msgctxt "@action:button Search a recipe category in database"
++msgid "Search"
++msgstr "Ara"
++
++#: dialogs/similarcategoriesdialog.cpp:185
++msgctxt "@label:textbox"
++msgid "Similar Categories:"
++msgstr "Benzer Kategoriler:"
++
++#: dialogs/similarcategoriesdialog.cpp:188
++#| msgid "Categories to Merge:"
++msgctxt "@label:textbox"
++msgid "Categories to Merge:"
++msgstr "Birleştirilecek Sınıflar:"
++
++#: dialogs/similarcategoriesdialog.cpp:189
++msgctxt "@action:button"
++msgid "Merge"
++msgstr "Birleştir"
++
++#: dialogs/similarcategoriesdialog.cpp:190
++msgctxt "@action:button"
++msgid "Cancel"
++msgstr "İptal"
++
++#: dialogs/similarcategoriesdialog.cpp:192
++#: dialogs/similarcategoriesdialog.cpp:194 widgets/categorylistview.cpp:312
++#: widgets/categorylistview.cpp:379
++msgctxt "@title:column"
++msgid "Category"
++msgstr "Kategori"
++
++#: dialogs/similarcategoriesdialog.cpp:320
++#| msgid "Please select only one category."
++msgctxt "@info"
++msgid "Please select only one category."
++msgstr "Lütfen sadece bir sınıf seçin."
++
++#: dialogs/similarcategoriesdialog.cpp:349
++msgctxt "@info"
++msgid "No recipes selected."
++msgstr "Hiç tarif seçilmedi."
++
++#: dialogs/similarcategoriesdialog.cpp:349
++msgctxt "@title"
++msgid "Edit Recipe"
++msgstr "Tarifi Düzenle"
++
++#: dialogs/similarcategoriesdialog.cpp:380
++#| msgid "No categories selected to merge."
++msgctxt "@info"
++msgid "No categories selected to merge."
++msgstr "Birleştirilmek için hiç sınıf seçilmedi."
++
++#: dialogs/unitsdialog.cpp:65
++msgctxt "@title:tab"
++msgid "Units"
++msgstr "Birimler"
++
++#: dialogs/unitsdialog.cpp:68
++#| msgid "Mass Conversions"
++msgctxt "@title:tab"
++msgid "Mass Conversions"
++msgstr "Toplu Dönüşümler"
++
++#: dialogs/unitsdialog.cpp:71
++#| msgid "Volume Conversions"
++msgctxt "@title:tab"
++msgid "Volume Conversions"
++msgstr "Hacim Dönüşümleri"
++
++#: dialogs/unitsdialog.cpp:187
++#| msgid "Finding Unit Ratios"
++msgctxt "@title:window"
++msgid "Finding Unit Ratios"
++msgstr "Birim Oranları Bulmak"
++
++#: exporters/htmlexporter.cpp:132
++msgid "Krecipes Recipes"
++msgstr "Krecipes Tarifleri"
++
++#: exporters/htmlexporter.cpp:431 exporters/xsltexporter.cpp:45
++msgid "Overall Rating"
++msgstr "Toplam Beğeni"
++
++#: exporters/plaintextexporter.cpp:76
++#, kde-format
++msgid "Authors: %1"
++msgstr "Yazarlar: %1"
++
++#: exporters/plaintextexporter.cpp:81
++#, kde-format
++msgid "Categories: %1"
++msgstr "Kategoriler:%1"
++
++#: exporters/plaintextexporter.cpp:86
++#, kde-format
++#| msgid "Ready in about:"
++msgid "Yields: %1"
++msgstr ""
++
++#: exporters/plaintextexporter.cpp:91
++#, kde-format
++msgid "Preparation Time: %1"
++msgstr "Hazırlanma Süresi: %1"
++
++#: exporters/plaintextexporter.cpp:110 exporters/plaintextexporter.cpp:120
++msgid "or"
++msgstr "ya da"
++
++#: exporters/plaintextexporter.cpp:148
++#, kde-format
++msgid "1 star"
++msgid_plural "%1 stars"
++msgstr[0] "%1 yıldız"
++
++#: exporters/recipemlexporter.cpp:139
++msgctxt "Total preparation time"
++msgid "Total"
++msgstr "Toplam"
++
++#: exporters/xsltexporter.cpp:48
++msgid "Prep"
++msgstr ""
++
++#: exporters/xsltexporter.cpp:50
++msgid "Amount"
++msgstr "Toplam"
++
++#: exporters/xsltexporter.cpp:51
++msgid "Ingredient"
++msgstr "İçindekiler ögesi"
++
++#: exporters/xsltexporter.cpp:53
++msgid "Preparation"
++msgstr "Hazırlama"
++
++#: exporters/xsltexporter.cpp:57
++msgid "reviews"
++msgstr "gözden geçirmelerGözden Geçirmeler"
++
++#: exporters/xsltexporter.cpp:226
++msgid ""
++"<html><b>Error:</b> Problem with KreML exporter.  Please export the recipe "
++"you are trying to view as KreML and attach it to a bug report to a Krecipes "
++"developer.</html>"
++msgstr ""
++
++#: exporters/xsltexporter.cpp:233
++#, kde-format
++msgid ""
++"<html><b>Error:</b> Bad template: %1.  Use \"Settings->Page Setup...\" to "
++"select a new template.</html>"
++msgstr ""
++
++#: importers/baseimporter.cpp:95 importers/baseimporter.cpp:118
++msgid "Importing selected recipes"
++msgstr "Seçilen tarifler içeriye aktarılıyor"
++
++#: importers/baseimporter.cpp:121
++msgid "%v/%m Recipes"
++msgstr "%v/%m Tarif"
++
++#: importers/baseimporter.cpp:210
++msgid "All recipes up unto this point have been successfully imported."
++msgstr "Şu ana kadar tüm tarifler başarıyla aktarıldı."
++
++#: importers/baseimporter.cpp:219
++#, kde-format
++msgid "Importing recipe: %1"
++msgstr "İçeriye aktarılan tarif: %1"
++
++#: importers/baseimporter.cpp:369
++#, kde-format
++msgid ""
++"<!doc>Import of recipes from the file <b>\"%1\"</b> <b>failed</b> due to the "
++"following error(s):"
++msgstr ""
++
++#: importers/baseimporter.cpp:376
++#, kde-format
++msgid "The file <b>%1</b> generated the following warning(s):"
++msgstr "<b>%1</b> dosyası şu uyarılarla oluşturuldu:"
++
++#: importers/kreimporter.cpp:48
++msgid "Archive does not contain a valid Krecipes file"
++msgstr "Arşiv geçerli bir Krecipes dosyası içermiyor"
++
++#: importers/kreimporter.cpp:69
++#, kde-format
++msgid "\"%1\" at line %2, column %3"
++msgstr "\"%1\"·satırında·%2,·kolon·%3"
++
++#: importers/kreimporter.cpp:76
++msgid "This file does not appear to be a *.kreml file"
++msgstr "Bu dosya bir *.kreml dosyası gibi görünmüyor"
++
++#: importers/mmfimporter.cpp:69 importers/mxpimporter.cpp:55
++#: importers/rezkonvimporter.cpp:51
++msgid "No recipes found in this file."
++msgstr "Bu dosyada tarif bulunamadı."
++
++#: importers/mmfimporter.cpp:72 importers/mx2importer.cpp:85
++#: importers/mxpimporter.cpp:58 importers/nycgenericimporter.cpp:46
++#: importers/recipemlimporter.cpp:61 importers/rezkonvimporter.cpp:54
++msgid "Unable to open file."
++msgstr "Dosya açılamadı."
++
++#: importers/mmfimporter.cpp:141
++#, kde-format
++msgid ""
++"While loading recipe <b>%1</b> an ingredient line was found after the "
++"directions. While this is valid, it most commonly indicates an incorrectly "
++"formatted recipe."
++msgstr ""
++"<b>%1</b> yüklenirken bir malzeme satırı bulundu.Geçerli olmasına rağmen "
++"tarifi yanlış formatlanmış hale getiriyor."
++
++#: importers/mmfimporter.cpp:310 importers/mx2importer.cpp:100
++#: importers/mxpimporter.cpp:103 importers/mxpimporter.cpp:253
++msgid "servings"
++msgstr "porsiyonlar"
++
++#: importers/mx2importer.cpp:54
++#, kde-format
++msgid "\"%1\" at line %2, column %3.  This may not be a *.mx2 file."
++msgstr ""
++"\"%1\"·,·%2,·satırında·%3.sütününda··Bu büyük olasılıkla bir *.mx2·dosyası "
++"değil."
++
++#: importers/mx2importer.cpp:62
++msgid "This file does not appear to be a *.mx2 file"
++msgstr "Bu dosya bir *.mx2 dosyası gibi görünmüyor"
++
++#: importers/mxpimporter.cpp:87
++#, kde-format
++msgid ""
++"While loading recipe \"%1\" the field \"Recipe By:\" is either missing or "
++"could not be detected."
++msgstr "\"%1\" tarifini yüklerken  \"Recipe·By:\" alanı bulunmadı ya da yok."
++
++#: importers/mxpimporter.cpp:107
++#, kde-format
++msgid ""
++"While loading recipe \"%1\" the field \"Serving Size:\" is either missing or "
++"could not be detected."
++msgstr "\"%1\" tarifini yüklerken \"Serving·Size:\" alanı bulunmadı ya da yok."
++
++#: importers/mxpimporter.cpp:118
++#, kde-format
++msgid ""
++"While loading recipe \"%1\" the field \"Preparation Time:\" is either "
++"missing or could not be detected."
++msgstr ""
++"\"%1\" tarifi yüklenirken \"Preparation·Time:\" alanı bulunmadı ya da yok."
++
++#: importers/mxpimporter.cpp:162
++#, kde-format
++msgid ""
++"While loading recipe \"%1\" the field \"Categories:\" is either missing or "
++"could not be detected."
++msgstr "\"%1\" tarifini yüklerken \"Categories:\" alanı bulunamadı ya da yok."
++
++#: importers/mxpimporter.cpp:190
++#, kde-format
++msgid "While loading recipe \"%1\" Invalid amount \"%2\" in the line \"%3\""
++msgstr "\"%1\" tarifini yüklerken \"%3\" satırında Geçersiz adet \"%2\""
++
++#: importers/mxpimporter.cpp:354
++msgid ""
++"MasterCook's Generic Export format is currently not supported.  Please write "
++"to jkivlighn@gmail.com to request support for this format."
++msgstr ""
++
++#: importers/mxpimporter.cpp:360
++msgid ""
++"MasterCook Mac's Export format is currently not supported.  Please write to "
++"jkivlighn@gmail.com to request support for this format."
++msgstr ""
++
++#: importers/nycgenericimporter.cpp:41
++msgid "File does not appear to be a valid NYC export."
++msgstr "Bu dosya geçerli bir NYC dışa  aktarımı değil."
++
++#: importers/recipemlimporter.cpp:33
++#, kde-format
++msgid "\"%1\" at line %2, column %3.  This may not be a RecipeML file."
++msgstr "\"%1\"·satır·%2,·kolon·%3.··Bu bir RecipeML dosyası değil."
++
++#: importers/recipemlimporter.cpp:40
++msgid "This file does not appear to be a valid RecipeML archive."
++msgstr "Bu dosya geçerli bir RecipeML arşivi değil."
++
++#: krecipes.cpp:120
++msgid ""
++"Gathering recipe data from file.\n"
++"Please wait..."
++msgstr ""
++"Dosyadan tarife ait veriler alınıyor.\n"
++"Lütfen bekleyin..."
++
++#: krecipes.cpp:193
++msgctxt "@action:inmenu Reload Recipe"
++msgid "Reloa&d"
++msgstr "&Yeniden Yükle"
++
++#: krecipes.cpp:200
++msgid "&Edit Recipe"
++msgstr "&Tarifi Düzenle"
++
++#: krecipes.cpp:207
++msgid "&Measurement Converter"
++msgstr "&Ölçü Birimi Dönüştürücü"
++
++#: krecipes.cpp:218
++msgid "&Merge Similar Categories..."
++msgstr "&Benzer Kategorileri Birleştir..."
++
++#: krecipes.cpp:225
++msgid "&Merge Similar Ingredients..."
++msgstr "Benzer İçindekiler &Ögelerini Birleştir..."
++
++#: krecipes.cpp:233
++msgid "&New Recipe"
++msgstr "&Yeni Tarif"
++
++#: krecipes.cpp:246
++msgid "Import from File..."
++msgstr "Dosyadan İçeriye Aktar..."
++
++#: krecipes.cpp:253
++msgid "Import from Database..."
++msgstr "Veritabanından İçeriye Aktar...&Veritabanından..."
++
++#: krecipes.cpp:259
++msgid "Export..."
++msgstr "Dışarıya Aktar..."
++
++#: krecipes.cpp:266
++msgid "&Copy to Clipboard"
++msgstr "&Panoya kopyala"
++
++#: krecipes.cpp:274
++msgid "Page Setup..."
++msgstr "Sayfa Düzeni...Sayfa düzeni"
++
++#: krecipes.cpp:280
++msgid "Print Setup..."
++msgstr "Yazdırma Ayarları..."
++
++#: krecipes.cpp:286
++msgid "Backup..."
++msgstr "Yedekle..."
++
++#: krecipes.cpp:292
++msgid "Restore..."
++msgstr "Geri Yükle..."
++
++#: krecipes.cpp:298
++msgid "Add to Shopping List"
++msgstr "Alışveriş Listesine Ekle"
++
++#: krecipes.cpp:305
++msgid "Remove From Category"
++msgstr "Kategoriden Sil"
++
++#: krecipes.cpp:312
++msgid "Delete"
++msgstr "Sil"
++
++#: krecipes.cpp:319
++msgid "Show Recipe(s)"
++msgstr "Tarif(ler)i göster"
++
++#: krecipes.cpp:326
++msgid "Categorize"
++msgstr "Kategorilendir"
++
++#: krecipes.cpp:333
++msgid "Expand All"
++msgstr "Tümünü Genişlet"
++
++#: krecipes.cpp:339
++msgid "Collapse All"
++msgstr "Tümünü Topla"
++
++#: krecipes.cpp:346
++msgctxt "@action:button Create new data item"
++msgid "Create New"
++msgstr "Yeni Oluştur"
++
++#: krecipes.cpp:353
++msgid "Rename"
++msgstr "Yeniden Adlandır"
++
++#: krecipes.cpp:361
++msgid "Cut"
++msgstr "Kes"
++
++#: krecipes.cpp:369
++msgid "Paste"
++msgstr "Yapıştır"
++
++#: krecipes.cpp:376
++msgid "Paste as Subcategory"
++msgstr "Alt Kategori olarak Yapıştır"
++
++#: krecipes.cpp:506
++msgid "MasterCook Export format"
++msgstr ""
++
++#: krecipes.cpp:507
++msgid "\"Now You're Cooking\" Generic Export format"
++msgstr ""
++
++#: krecipes.cpp:512
++msgid "Import from file"
++msgstr "Dosyadan içeriye aktar"
++
++#: krecipes.cpp:537
++#, kde-format
++msgid ""
++"Filter \"%1\" not recognized.\n"
++"Please select one of the provided filters."
++msgstr ""
++"\"%1\" filtresi tanınmıyor.\n"
++"Varolan filtrelerden birini seçin."
++
++#: krecipes.cpp:539
++msgid "Unrecognized Filter"
++msgstr "Bilinmeyen Filtre"
++
++#: krecipes.cpp:571
++msgid ""
++"<p>NOTE: We recommend that all recipes generating warnings be checked to "
++"ensure that they were properly imported, and no loss of recipe data has "
++"occurred.</p>"
++msgstr ""
++
++#: krecipes.cpp:576
++msgid "Import Warnings"
++msgstr "Uyarıları İçeriye Aktar"
++
++#: krecipes.cpp:649 krecipes.cpp:668
++msgid ""
++"The recipe print and view layouts use the same file for their style, meaning "
++"changing one view's look changes them both.  If this is not the behavior you "
++"desire, load one style and save it under a different name."
++msgstr ""
++
++#: krecipes.cpp:673
++msgid "Print Setup"
++msgstr "Yazdırma Ayarları"
++
++#: krecipes.cpp:687
++msgid "Save Backup As..."
++msgstr "Yedek Dosyasını Farklı Kaydet...Yedek dosyasını kaydet:"
++
++#: krecipes.cpp:700
++msgid "Backup Failed"
++msgstr "YyedeklemeBbaşarısı Oldu."
++
++#: krecipes.cpp:707
++msgid "Krecipes Backup File"
++msgstr "Krecipes Yedekleme Dosyası"
++
++#: krecipes.cpp:708
++msgid "Restore Backup"
++msgstr "Yedeği Geri Yükle"
++
++#: krecipes.cpp:711
++msgid ""
++"<b>Restoring this file will erase ALL data currently in the database.</"
++"b><br /><br />If you want to keep the recipes in your database, click "
++"\"Cancel\" and first export your recipes.  These can then be imported once "
++"the restore is complete.<br /><br />Are you sure you want to proceed?"
++msgstr ""
++
++#: krecipes.cpp:718
++msgid "Restore successful."
++msgstr "Geri yükleme başarılı oldu."
++
++#: krecipes.cpp:782
++msgid ""
++"A recipe contains unsaved changes.\n"
++"Do you want to save the changes before exiting?"
++msgstr ""
++"Bir tarif kaydedilmemiş değişikliklere sahip.\n"
++"Çıkmadan önce değişiklikleri kaydetmek ister misiniz?"
++
++#: krecipes.cpp:784
++msgid "Unsaved Changes"
++msgstr "Kaydedilmemiş Değişiklikler"
++
++#. i18n: ectx: Menu (file)
++#: krecipesui.rc:4
++msgid "&File"
++msgstr "&Dosya"
++
++#. i18n: ectx: Menu (edit)
++#: krecipesui.rc:12
++msgid "&Edit"
++msgstr "&Düzen"
++
++#. i18n: ectx: Menu (tools)
++#: krecipesui.rc:22
++msgid "&Tools"
++msgstr "A&raçlar"
++
++#: krecipesview.cpp:101 krecipesview.cpp:373 krecipesview.cpp:440
++msgid "Find/Edit Recipes"
++msgstr "Tarifleri Bul/Düzenle"
++
++#: krecipesview.cpp:126
++msgid "Data..."
++msgstr "Veri..."
++
++#: krecipesview.cpp:332
++msgid ""
++"\n"
++"You are using SQLite; this error is often caused by using an SQLite 2 "
++"database with Krecipes supporting SQLite 3, if this is the case you could "
++"run the SQLite converter.\n"
++"What do you want to do?"
++msgstr ""
++
++#: krecipesview.cpp:337
++msgid "Run the setup assistant"
++msgstr "Kurulum yardımcısını çalıştır"
++
++#: krecipesview.cpp:338
++msgid "Run the SQLite converter"
++msgstr "SQLite dönüştürücüyü çalıştır"
++
++#: krecipesview.cpp:354
++msgid ""
++"\n"
++"Would you like to run the setup wizard again? Otherwise, the application "
++"will be closed."
++msgstr ""
++"\n"
++"Kurulum sihirbazını yeniden çalıştırmak ister misiniz?Yoksa uygulama "
++"kapanacak."
++
++#: krecipesview.cpp:377 krecipesview.cpp:487 pref.cpp:411
++msgid "Units"
++msgstr "Birimler"
++
++#: krecipesview.cpp:378 krecipesview.cpp:495
++msgid "Preparation Methods"
++msgstr "Hazırlama Yöntemleri"
++
++#: krecipesview.cpp:381 krecipesview.cpp:454
++msgid "Diet Helper"
++msgstr "Diyet Yardımcısı"
++
++#: krecipesview.cpp:382 krecipesview.cpp:462
++msgid "Ingredient Matcher"
++msgstr "Malzeme Eşleyici"
++
++#: krecipesview.cpp:522
++msgid "View Recipe"
++msgstr "Tarifi Göster"
++
++#: krecipesview.cpp:768
++msgid ""
++"A recipe contains unsaved changes.\n"
++"Do you want to save changes made to this recipe before editing another "
++"recipe?"
++msgstr ""
++
++#: krecipesview.cpp:770 krecipesview.cpp:857
++msgid "Unsaved changes"
++msgstr "Kaydedilmemiş değişiklikler"
++
++#: krecipesview.cpp:788
++#, kde-format
++msgid "Are you sure you want to permanently remove the recipe, %1?"
++msgstr ""
++
++#: krecipesview.cpp:789 krecipesview.cpp:837
++msgid "Confirm remove"
++msgstr "Silmeyi DoğrulaSilmeyi Onayla"
++
++#: krecipesview.cpp:815 widgets/recipelistview.cpp:149
++msgctxt "Recipe created"
++msgid "Created:"
++msgstr "Oluşturulma Zamanı:"
++
++#: krecipesview.cpp:816 widgets/recipelistview.cpp:150
++msgctxt "Recipe modified"
++msgid "Modified:"
++msgstr "Değiştirilme Zamanı:"
++
++#: krecipesview.cpp:817 widgets/recipelistview.cpp:151
++msgctxt "Recipe last accessed"
++msgid "Last Accessed:"
++msgstr "Son Erişim Zamanı:"
++
++#: krecipesview.cpp:836
++#| msgid "Are you sure you want to delete this property?"
++msgid "Are you sure you want to permanently remove the selected recipes?"
++msgstr "Seçilen tarifi kalıcı olarak silmek istediğinizden emin misiniz?"
++
++#: krecipesview.cpp:855
++msgid ""
++"A recipe contains unsaved changes.\n"
++"Do you want to save changes made to this recipe before creating a new recipe?"
++msgstr ""
++
++#: krecipesview.cpp:1001
++msgid "Unable to setup database"
++msgstr "Veritabanı ayarlanamadı"
++
++#: krecipesview.cpp:1184
++msgid "Unable to open database"
++msgstr "Veritabanı açılamadı"
++
++#: krecipesview.cpp:1214
++#, kde-format
++msgid "The configured database type (%1) is unsupported."
++msgstr "Yapılandırılan veritabanı tipi (%1) desteklenmiyor."
++
++#: krecipesview.cpp:1214
++msgid ""
++"Unsupported database type. Database must be either MySQL, SQLite, or "
++"PostgreSQL."
++msgstr ""
++"Desteklenmeyen veritabanı tipi. Veritabanı MySQL, SQLite ya da PostgreSQL "
++"olmalıdır."
++
++#: main.cpp:32
++msgid "Convert the current SQLite 2.x database to SQLite 3 and exit"
++msgstr "Şimdiki SQLite 2.x veritabanını SQLite 3 biçimine dönüştür ve çık"
++
++#: main.cpp:36
++msgid "Krecipes"
++msgstr "Krecipes"
++
++#: main.cpp:36
++msgid "The KDE Cookbook"
++msgstr "KDE Yemek Kitabı"
++
++#: main.cpp:36
++msgid ""
++"(C) 2003 Unai Garro\n"
++"(C) 2004-2006 Jason Kivlighn"
++msgstr ""
++"(C) 2003 Unai Garro\n"
++"(C) 2004-2006 Jason Kivlighn"
++
++#: main.cpp:36
++msgid ""
++"This product is RecipeML compatible.\n"
++"You can get more information about this file format in:\n"
++"http://www.formatdata.com/recipeml"
++msgstr ""
++
++#: main.cpp:37
++msgid "Unai Garro"
++msgstr "Unai Garro"
++
++#: main.cpp:38
++msgid "Jason Kivlighn"
++msgstr "Jason Kivlighn"
++
++#: main.cpp:39
++msgid "Cyril Bosselut"
++msgstr "Cyril Bosselut"
++
++#: main.cpp:41
++msgid "Colleen Beamer"
++msgstr "Colleen Beamer"
++
++#: main.cpp:41
++msgid "Testing, bug reports, suggestions"
++msgstr "Testler, hata bildirimleri, öneriler"
++
++#: main.cpp:42
++msgid "Robert Wadley"
++msgstr "Robert Wadley"
++
++#: main.cpp:42
++msgid "Icons and artwork"
++msgstr "Simgeler ve sanatsal işler"
++
++#: main.cpp:43
++msgid "Daniel Sauvé"
++msgstr "Daniel Sauvé"
++
++#: main.cpp:43 main.cpp:45
++msgid "Porting to KDE4"
++msgstr "KDE4 geçişi"
++
++#: main.cpp:45
++msgid "Laurent Montel"
++msgstr "Laurent Montel"
++
++#: main.cpp:46
++msgid "José Manuel Santamaría Lema"
++msgstr "José Manuel Santamaría Lema"
++
++#: main.cpp:46
++msgid "Porting to KDE4, current maintainer"
++msgstr "KDE4 geçişi, projeyi yürüten"
++
++#: main.cpp:47
++msgid "Martin Engelmann"
++msgstr "Martin Engelmann"
++
++#: main.cpp:47
++#| msgid "Porting to KDE4"
++msgid "Porting to KDE4, developer"
++msgstr "KDE4 geçişi, geliştirici"
++
++#: main.cpp:49
++msgid "Patrick Spendrin"
++msgstr "Patrick Spendrin"
++
++#: main.cpp:49
++msgid "Patches to make Krecipes work under Windows"
++msgstr ""
++
++#: main.cpp:50
++msgid "Mike Ferguson"
++msgstr "Mike Ferguson"
++
++#: main.cpp:50
++msgid "Help with bugs, patches"
++msgstr ""
++
++#: main.cpp:51
++msgid "Warren Severin"
++msgstr "Warren Severin"
++
++#: main.cpp:51
++msgid "Code to export recipes to *.mx2 files"
++msgstr ""
++
++#: main.cpp:53
++msgid "Eduardo Robles Elvira"
++msgstr "Eduardo Robles Elvira"
++
++#: main.cpp:54 main.cpp:57
++msgid "He advised using WebKit to fix printing support during Akademy-es 2010."
++msgstr ""
++
++#: main.cpp:56
++msgid "José Millán Soto"
++msgstr "José Millán Soto"
++
++#: main.cpp:60
++msgid "INSERT YOUR NAME HERE"
++msgstr "Serdar Soytetir, Ayhan YALÇINSOY"
++
++#: main.cpp:60
++msgid "INSERT YOUR EMAIL ADDRESS"
++msgstr "tulliana@gmail.com, ayhanyalcinsoy@gmail.com"
++
++#: mmdata.h:25
++msgid "bunch"
++msgstr "demet"
++
++#: mmdata.h:25
++msgid "bunches"
++msgstr "demet"
++
++#: mmdata.h:26
++msgid "cup"
++msgstr "fincan"
++
++#: mmdata.h:26
++msgid "cups"
++msgstr "fincan"
++
++#: mmdata.h:27
++msgid "cubic cm"
++msgstr "cm küp"
++
++#: mmdata.h:28
++msgid "centigram"
++msgstr "santigram"
++
++#: mmdata.h:28
++msgid "centigrams"
++msgstr "santigram"
++
++#: mmdata.h:29
++msgid "centiliter"
++msgstr "santilitre"
++
++#: mmdata.h:29
++msgid "centiliters"
++msgstr "santilitre"
++
++#: mmdata.h:30
++msgid "can"
++msgstr "kutu"
++
++#: mmdata.h:30
++msgid "cans"
++msgstr "kutu"
++
++#: mmdata.h:31
++msgid "carton"
++msgstr "karton kutu"
++
++#: mmdata.h:31
++msgid "cartons"
++msgstr "karton kutu"
++
++#: mmdata.h:32
++msgid "decigram"
++msgstr "desigram"
++
++#: mmdata.h:32
++msgid "decigrams"
++msgstr "desigram"
++
++#: mmdata.h:33
++msgid "deciliter"
++msgstr "desilitre"
++
++#: mmdata.h:33
++msgid "deciliters"
++msgstr "desilitre"
++
++#: mmdata.h:34
++msgid "drop"
++msgstr "damla"
++
++#: mmdata.h:34
++msgid "drops"
++msgstr "damla"
++
++#: mmdata.h:35
++msgid "dash"
++msgstr "tire"
++
++#: mmdata.h:35
++msgid "dashes"
++msgstr "tire"
++
++#: mmdata.h:36
++msgid "each"
++msgstr "her"
++
++#: mmdata.h:37
++msgid "kilogram"
++msgstr "kilogram"
++
++#: mmdata.h:37
++msgid "kilograms"
++msgstr "kilogram"
++
++#: mmdata.h:38
++msgid "fluid ounce"
++msgstr "sıvı ons"
++
++#: mmdata.h:38
++msgid "fluid ounces"
++msgstr "sıvı ons"
++
++#: mmdata.h:39
++msgid "gram"
++msgstr "gram"
++
++#: mmdata.h:39
++msgid "grams"
++msgstr "gram"
++
++#: mmdata.h:40
++msgid "gallon"
++msgstr "galon"
++
++#: mmdata.h:40
++msgid "gallons"
++msgstr "galon"
++
++#: mmdata.h:41
++msgid "liter"
++msgstr "litre"
++
++#: mmdata.h:41
++msgid "liters"
++msgstr "litre"
++
++#: mmdata.h:42
++msgid "pound"
++msgstr "pound"
++
++#: mmdata.h:42
++msgid "pounds"
++msgstr "pound"
++
++#: mmdata.h:43
++msgid "large"
++msgstr "büyük"
++
++#: mmdata.h:44
++msgid "medium"
++msgstr "orta"
++
++#: mmdata.h:45
++msgid "milligram"
++msgstr "miligram"
++
++#: mmdata.h:45
++msgid "milligrams"
++msgstr "miligram"
++
++#: mmdata.h:46
++msgid "milliliter"
++msgstr "mililitre"
++
++#: mmdata.h:46
++msgid "milliliters"
++msgstr "mililitre"
++
++#: mmdata.h:47 mmdata.h:48
++msgid "package"
++msgstr "paket"
++
++#: mmdata.h:47 mmdata.h:48
++msgid "packages"
++msgstr "paket"
++
++#: mmdata.h:49
++msgid "pinch"
++msgstr "tutam"
++
++#: mmdata.h:49
++msgid "pinches"
++msgstr "tutam"
++
++#: mmdata.h:50
++msgid "pint"
++msgstr "yarım litre"
++
++#: mmdata.h:50
++msgid "pints"
++msgstr "yarım litre"
++
++#: mmdata.h:51
++msgid "ounce"
++msgstr "ons"
++
++#: mmdata.h:51
++msgid "ounces"
++msgstr "ons"
++
++#: mmdata.h:52
++msgid "quart"
++msgstr "çeyrek galon"
++
++#: mmdata.h:52
++msgid "quarts"
++msgstr "çeyrek galon"
++
++#: mmdata.h:53
++msgid "slice"
++msgstr "dilim"
++
++#: mmdata.h:53
++msgid "slices"
++msgstr "dilim"
++
++#: mmdata.h:54
++msgid "small"
++msgstr "küçük"
++
++#: mmdata.h:55 mmdata.h:57
++msgid "teaspoon"
++msgstr "çay kaşığı"
++
++#: mmdata.h:55 mmdata.h:57
++msgid "teaspoons"
++msgstr "çay kaşığı"
++
++#: mmdata.h:56 mmdata.h:58
++msgid "tablespoon"
++msgstr "yemek kaşığı"
++
++#: mmdata.h:56 mmdata.h:58
++msgid "tablespoons"
++msgstr "yemek kaşığı"
++
++#: mmdata.h:59
++msgid "per serving"
++msgstr ""
++
++#: pref.cpp:53
++msgid "Configure"
++msgstr "Yapılandır"
++
++#: pref.cpp:62
++#| msgid "Database Type"
++msgid "Database System"
++msgstr "Veritabanı Sistemi"
++
++#: pref.cpp:64
++#, kde-format
++#| msgid "Database Server Options (%1)"
++msgid "Database Management System Options (%1)"
++msgstr "Veritabanı Yönetim Sistemi Seçenekleri (%1)"
++
++#: pref.cpp:71
++msgid "Formatting"
++msgstr "Biçimlendiriliyor"
++
++#: pref.cpp:73
++msgid "Customize Formatting"
++msgstr "Biçimlendirmeyi Özelleştir"
++
++#: pref.cpp:80
++msgid "Import/Export"
++msgstr "İçeriye/Dışarıya Aktar"
++
++#: pref.cpp:82
++msgid "Recipe Import and Export Options"
++msgstr "İçeriye ve Dışarıya Tarif Aktarma Seçenekleri"
++
++#: pref.cpp:90
++msgid "Performance"
++msgstr "Başarım"
++
++#: pref.cpp:91
++msgid "Performance Options"
++msgstr "Başarım Seçenekleri"
++
++#: pref.cpp:100
++msgid "Spell checking"
++msgstr "Yazım denetimi"
++
++#: pref.cpp:101
++msgid "Spell checking Options"
++msgstr "Yazım Denetimi Seçenekleri"
++
++#: pref.cpp:137 pref.cpp:207 setupassistant.cpp:509
++msgid "Server:"
++msgstr "Sunucu:"
++
++#: pref.cpp:140 pref.cpp:210 setupassistant.cpp:232 setupassistant.cpp:360
++#: setupassistant.cpp:465
++msgctxt "@label:textbox Database Username"
++msgid "Username:"
++msgstr "Kullanıcı adı:"
++
++#: pref.cpp:144 pref.cpp:214 setupassistant.cpp:236 setupassistant.cpp:364
++#: setupassistant.cpp:472
++msgid "Password:"
++msgstr "Parola:"
++
++#: pref.cpp:148 pref.cpp:218
++msgctxt "Default Port"
++msgid "Default"
++msgstr "Öntanımlı"
++
++#: pref.cpp:149 pref.cpp:219 setupassistant.cpp:520
++msgid "Port:"
++msgstr "Port:"
++
++#: pref.cpp:152 pref.cpp:222 setupassistant.cpp:479
++msgid "Database name:"
++msgstr "Veritabanı adı:"
++
++#: pref.cpp:158 pref.cpp:229 pref.cpp:286
++msgctxt "@title:group Backup options"
++msgid "Backup"
++msgstr "Yedekle"
++
++#: pref.cpp:162
++msgid "Select MySQL dump command"
++msgstr "MySQL dump komutunu seçin"
++
++#: pref.cpp:163 pref.cpp:167 pref.cpp:233 pref.cpp:237 pref.cpp:293
++#, kde-format
++msgid "Path to '%1':"
++msgstr "'%1' yolu:"
++
++#: pref.cpp:166
++msgid "Select MySQL command"
++msgstr "MySQL komutunu seçin"
++
++#: pref.cpp:181 pref.cpp:183 pref.cpp:251 pref.cpp:253 pref.cpp:321
++#: pref.cpp:323 pref.cpp:325
++msgid "All files"
++msgstr "Tüm dosyalar"
++
++#: pref.cpp:232
++msgid "Select PostgreSQL dump command"
++msgstr "PostgreSQL dump komutunu seçin"
++
++#: pref.cpp:236
++msgid "Select PostgreSQL command"
++msgstr "PostgreSQL komutunu seçin"
++
++#: pref.cpp:275 setupassistant.cpp:611
++msgid "Database file:"
++msgstr "Veritabanı dosyası:"
++
++#: pref.cpp:292
++msgid "Select SQLite command"
++msgstr "SQLite  komutunu seçin"
++
++#: pref.cpp:299
++msgid "SQLite converter"
++msgstr "SQLite dönüştürücü"
++
++#: pref.cpp:305
++msgid "Select old SQLite version command"
++msgstr "SQLite eski sürüm komutunu seçin"
++
++#: pref.cpp:306
++msgid "Path to SQLite old version command:"
++msgstr "SQLite eski sürüm komutunun yolu:"
++
++#: pref.cpp:309
++msgid "Select new SQLite version command"
++msgstr "SQLite yeni sürüm komutunu seçin"
++
++#: pref.cpp:310
++msgid "Path to SQLite new version command:"
++msgstr "SQLite yeni sürüm komutunu seçin"
++
++#: pref.cpp:318 setupassistant.cpp:641
++msgid "Select SQLite database file"
++msgstr "SQLite veritabanı dosyasını seç"
++
++#: pref.cpp:361
++msgid "Re-run wizard on next startup"
++msgstr "Sonraki başlangıçta sihirbazı yeniden çalıştır"
++
++#: pref.cpp:367
++msgid ""
++"Note: Krecipes must be restarted for most server preferences to take effect."
++msgstr ""
++
++#: pref.cpp:412
++msgid "Use abbreviations"
++msgstr "Kısaltmaları kullan"
++
++#: pref.cpp:448
++msgid "Number Format"
++msgstr "Rakam Biçimi"
++
++#: pref.cpp:449
++msgctxt "@option:radio Display fraction"
++msgid "Fraction"
++msgstr "Kesirli"
++
++#: pref.cpp:450
++msgctxt "@option:radio Display decimal"
++msgid "Decimal"
++msgstr "Ondalık"
++
++#: pref.cpp:470
++msgid "Import"
++msgstr "İçeri Aktar"
++
++#: pref.cpp:472
++msgid "Overwrite recipes with same title"
++msgstr "Aynı başlığı taşıyan tariflerin üzerine yaz"
++
++#: pref.cpp:477
++msgid "Ask which recipes to import"
++msgstr "Hangi tarfilerin içeriye aktarılacağını sor"
++
++#: pref.cpp:489
++msgid "'Copy to Clipboard' format:"
++msgstr "'Panoya Kopyala' biçimi:Panoya Kopyala"
++
++#: pref.cpp:519
++msgid ""
++"When this is enabled, the importer will show every recipe in the file(s) and "
++"allow you to select which recipes you want imported.\n"
++" \t\t\t\t\t\t\t\t\tDisable this to always import every recipe, which allows "
++"for faster and less memory-intensive imports."
++msgstr ""
++
++#: pref.cpp:554
++msgid "Search as you type"
++msgstr "Yazıldığı gibi ara"
++
++#: pref.cpp:557
++msgid ""
++"In most instances these options do not need to be changed.  However, "
++"limiting the amount of items displayed at once will <b>allow Krecipes to "
++"better perform when the database is loaded with many thousands of recipes</"
++"b>."
++msgstr ""
++
++#: pref.cpp:563
++msgid "Number of categories to display at once:"
++msgstr "Bir defada gösterilecek kategori sayısı:"
++
++#: pref.cpp:566
++msgctxt "Unlimited categories"
++msgid "Unlimited"
++msgstr "Sınırsız"
++
++#: pref.cpp:573
++msgid "Number of elements to display at once:"
++msgstr "Bir defada gösterilecek öge sayısı:"
++
++#: pref.cpp:576
++msgctxt "Unlimited elements"
++msgid "Unlimited"
++msgstr "Sınırsız"
++
++#: setupassistant.cpp:43
++msgid "Welcome to Krecipes"
++msgstr "Krecipes Uygulamasına Hoş GeldinizHoşgeldiniz (%h)"
++
++#: setupassistant.cpp:47
++msgid "Database Type"
++msgstr "Veritabanı TipiVeritabanı"
++
++#: setupassistant.cpp:51
++msgid "Database Management System Settings"
++msgstr "Veritabanı Yönetim Sistemi Ayarları"
++
++#: setupassistant.cpp:55 setupassistant.cpp:59
++msgid "Database Permissions"
++msgstr "Veritabanı İzinleri"
++
++#: setupassistant.cpp:63
++msgid "Server Settings"
++msgstr "Sunucu Ayarları"
++
++#: setupassistant.cpp:67
++msgid "Initialize Database"
++msgstr "Veritabanını Başlat"
++
++#: setupassistant.cpp:71
++msgid "Finish & Save Settings"
++msgstr "Bitir ve Ayarları Kaydet"
++
++#: setupassistant.cpp:90
++msgid ""
++"There is currently no localized ingredient data for this locale.\n"
++"Would you like to load the English ingredients instead?"
++msgstr ""
++
++#: setupassistant.cpp:146
++msgid ""
++"<p><b><font size=\"+1\">Thank you very much for choosing Krecipes.</font></"
++"b></p><p>It looks like this is the first time you are using it. This wizard "
++"will help you with the initial setup so that you can start using it quickly."
++"</p><p>Welcome, and enjoy cooking!</p>"
++msgstr ""
++
++#: setupassistant.cpp:179
++msgid ""
++"<p>This dialog will allow you to specify a MySQL account that has the "
++"necessary permissions to access the Krecipes MySQL database.</p><p><b><font "
++"size=\"+1\">Most users that use Krecipes and MySQL for the first time can "
++"just leave the default parameters and press 'Next'.</font></b></p> <p>If you "
++"set a MySQL root password before, or you have already permissions as normal "
++"user, click on the appropriate option. Otherwise the account 'root' will be "
++"used, with no password.</p><p>[For security reasons, we strongly encourage "
++"you to setup a MySQL root password if you have not done so yet. Just type as "
++"root: mysqladmin password <i>your_password</i>]</p>"
++msgstr ""
++
++#: setupassistant.cpp:198 setupassistant.cpp:325
++msgid "I have already set the necessary permissions"
++msgstr "Gereken izinleri zaten ayarladım"
++
++#: setupassistant.cpp:215
++msgid "I have already set a MySQL root/admin account"
++msgstr "Bir MySQL root/admin hesabını zaten oluşturdum"
++
++#: setupassistant.cpp:227
++msgid "MySQL Administrator Account"
++msgstr "MySQL Yönetici Hesabı"
++
++#: setupassistant.cpp:306
++msgid ""
++"<p>This dialog will allow you to specify a PostgreSQL account that has the "
++"necessary permissions to access the Krecipes PostgreSQL database.  This "
++"account may either be a <b>PostgreSQL superuser</b> or have the ability to "
++"both <b>create new PostgreSQL users and databases</b>.</p><p>If no superuser "
++"or privileged account is given, the account 'postgres' will be attempted, "
++"with no password.  If this is insufficient for your PostgreSQL setup, you "
++"<b>must</b> select the appropriate option below to enter the information of "
++"a privileged PostgreSQL account.</p>"
++msgstr ""
++
++#: setupassistant.cpp:342
++msgid "I have already set a superuser or privileged account"
++msgstr ""
++"Zaten yetkili kullanıcı veya ayrıcalıklı kullanıcı hesabı ayarlarına sahibim "
++
++#: setupassistant.cpp:355
++msgid "PostgreSQL Superuser or Privileged Account"
++msgstr "PostgreSQL Yöneticisi veya Hakları olan Hesap"
++
++#: setupassistant.cpp:435
++msgid ""
++"<p>In this dialog you can adjust the database server settings.</"
++"p><p><b>Warning: Passwords are stored in plain text and could potentially be "
++"compromised.  We recommend that you create a username and password "
++"combination solely for use by Krecipes.</b></p>"
++msgstr ""
++
++#: setupassistant.cpp:489
++msgid "The server is remote"
++msgstr "Sunucu uzak sunucudur"
++
++#: setupassistant.cpp:501
++msgid "Server / Client Settings"
++msgstr "Sunucu / İstemci Ayarları"
++
++#: setupassistant.cpp:514
++msgid "Client:"
++msgstr "İstemci:İstemci"
++
++#: setupassistant.cpp:519
++msgctxt "@label:textbox Default Port"
++msgid "Default"
++msgstr "Öntanımlı"
++
++#: setupassistant.cpp:597
++msgid "In this dialog you can adjust SQLite settings."
++msgstr "Bu iletişim penceresinde SQLite ayarlarını yapabilirsiniz."
++
++#: setupassistant.cpp:619
++msgid "Open file dialog"
++msgstr "Dosya aç penceresi"
++
++#: setupassistant.cpp:671
++msgid ""
++"Congratulations; all the necessary configuration setup is done. Press "
++"'Finish' to continue, and enjoy cooking!"
++msgstr ""
++"Tebrikler; tüm gerekli yapılandırma ayarları tamamlandı. Devam etmek için "
++"'Bitir' düğmesine bas ve aşçılığın tadını çıkarın!"
++
++#: setupassistant.cpp:768
++msgid ""
++"<p>Krecipes comes with some delicious default recipes and useful data.</"
++"p><p>Would you like to initialize your database with those? Note that this "
++"will erase all your previous recipes if you have any.</p>"
++msgstr ""
++
++#: setupassistant.cpp:793
++msgid "Yes please, initialize the database with the examples"
++msgstr "Evet,lütfen. Veritabanını örnek tariflerle başlat"
++
++#: setupassistant.cpp:802
++msgid ""
++"<p>Krecipes can import nutrient data from the USDA's nutrient database for "
++"over 400 foods.  A total of 43 food properties are included for each food, "
++"such as energy, fat, vitamin C, etc.</p><p>Would you like to import this "
++"data now?  Note that this operation is safe to use on an existing database, "
++"and no data loss will occur.  This operation may take several minutes.</p>"
++msgstr ""
++
++#: setupassistant.cpp:816
++msgid "Yes please, load the database with nutrient data for 400+ foods."
++msgstr "Evet lütfen 400+ gıda için besin verisi ile veritabanını yükle."
++
++#: setupassistant.cpp:864
++msgid ""
++"Choose the type of database that you want to use. Most users will want to "
++"choose a simple local database here. However, you can also use remote "
++"servers by means of a MySQL or PostgreSQL database."
++msgstr ""
++
++#: setupassistant.cpp:881
++msgid "Simple Local File (SQLite)"
++msgstr "Basit Yerel Dosya (SQLite)"
++
++#: setupassistant.cpp:884
++msgid "Local or Remote MySQL Database"
++msgstr "Yerel ya da Uzak MySQL Veritabanı"
++
++#: setupassistant.cpp:887
++msgid "Local or Remote PostgreSQL Database"
++msgstr "Yerel ya da Uzak PostgreSQL Veritabanı"
++
++#: widgets/categorycombobox.cpp:36 widgets/categorycombobox.cpp:63
++msgid "All Categories"
++msgstr "Tüm KategorilerTüm kategorileri genişlet"
++
++#: widgets/dblistviewbase.cpp:33
++msgctxt "Previous item"
++msgid "<< Previous"
++msgstr "<< Önceki"
++
++#: widgets/dblistviewbase.cpp:49
++#| msgctxt "Next item"
++#| msgid "Next"
++msgctxt "Next item"
++msgid "Next >>"
++msgstr "Sonraki >>"
++
++#: widgets/headerlistview.cpp:55
++#| msgid "Header"
++msgctxt "@title:column"
++msgid "Header"
++msgstr "Başlık"
++
++#: widgets/ingredientinputwidget.cpp:48 widgets/ingredientinputwidget.cpp:59
++msgid "Ingredient:"
++msgstr "İçindekiler:"
++
++#: widgets/ingredientinputwidget.cpp:52
++msgctxt "Ingredient grouping name"
++msgid "Header:"
++msgstr "Başlık:Başlık 2"
++
++#: widgets/ingredientinputwidget.cpp:76
++msgid "Amount:"
++msgstr "Miktar:"
++
++#: widgets/ingredientinputwidget.cpp:83
++msgid "Unit:"
++msgstr "Birim:"
++
++#: widgets/ingredientinputwidget.cpp:91
++msgid "Preparation Method:"
++msgstr "Hazırlama Yöntemi:"
++
++#: widgets/ingredientinputwidget.cpp:239
++msgid "Please enter an ingredient"
++msgstr "Lütfen bir içindekiler ögesi girin"
++
++#: widgets/ingredientinputwidget.cpp:286
++msgid "Amount field contains invalid input."
++msgstr "Miktar alanı geçersiz girdi içeriyor."
++
++#: widgets/ingredientinputwidget.cpp:287
++msgid "Invalid input"
++msgstr "Geçersiz girdi"
++
++#: widgets/kdateedit.cpp:368
++msgctxt "the day after today"
++msgid "tomorrow"
++msgstr "yarın"
++
++#: widgets/kdateedit.cpp:369
++msgctxt "this day"
++msgid "today"
++msgstr "bugün"
++
++#: widgets/kdateedit.cpp:370
++msgctxt "the day before today"
++msgid "yesterday"
++msgstr "dün"
++
++#: widgets/kdatepickerpopup.cpp:96
++msgctxt "@option today"
++msgid "&Today"
++msgstr "&Bugün"
++
++#: widgets/kdatepickerpopup.cpp:97
++msgctxt "@option tomorrow"
++msgid "To&morrow"
++msgstr "&Yarın"
++
++#: widgets/kdatepickerpopup.cpp:98
++msgctxt "@option next week"
++msgid "Next &Week"
++msgstr "Gelecek &Hafta"
++
++#: widgets/kdatepickerpopup.cpp:99
++msgctxt "@option next month"
++msgid "Next M&onth"
++msgstr "Gelecek A&y"
++
++#: widgets/kdatepickerpopup.cpp:107
++msgctxt "@option do not specify a date"
++msgid "No Date"
++msgstr "Gün Yok"
++
++#: widgets/krecategorieslistwidget.cpp:42
++msgctxt "@title:column"
++msgid "Categories"
++msgstr "Kategoriler"
++
++#: widgets/kregenericlistwidget.cpp:95
++msgctxt "@label:textbox"
++msgid "Type here the text to search"
++msgstr "Aramak istediğiniz metni buraya yazın"
++
++#: widgets/kregenericlistwidget.cpp:99
++msgctxt "@label:textbox"
++msgid "Type here the text to search in the current page"
++msgstr "Mevcut sayfada aramak için metni buraya yazın"
++
++#. i18n: ectx: property (toolTip), widget (KPushButton, m_previousButton)
++#: widgets/kregenericlistwidget.ui:46
++msgid "Previous Page"
++msgstr "Önceki Sayfa"
++
++#. i18n: ectx: property (toolTip), widget (KPushButton, m_nextButton)
++#: widgets/kregenericlistwidget.ui:62
++msgid "Next Page"
++msgstr "Sonraki Sayfa"
++
++#: widgets/kremenu.cpp:130
++msgctxt "@action:button Up to top menu"
++msgid "Up..."
++msgstr "Yukarı..."
++
++#: widgets/propertylistview.cpp:163
++msgctxt "@title:column"
++msgid "Enabled"
++msgstr "Etkin"
++
++#: widgets/propertylistview.cpp:165
++#| msgid "Min. Value"
++msgctxt "@title:column"
++msgid "Min. Value"
++msgstr "En Düşük Değer"
++
++#: widgets/propertylistview.cpp:166
++#| msgid "Max. Value"
++msgctxt "@title:column"
++msgid "Max. Value"
++msgstr "En Yüksek Değer"
++
++#. i18n: ectx: property (text), widget (K3ListView, criteriaListView)
++#: widgets/ratingdisplaywidget.ui:115
++msgid "Criteria"
++msgstr "Ölçüt"
++
++#. i18n: ectx: property (text), widget (K3ListView, criteriaListView)
++#: widgets/ratingdisplaywidget.ui:126
++msgid "Stars"
++msgstr "Yıldızlar"
++
++#. i18n: ectx: property (text), widget (QLabel, comment)
++#: widgets/ratingdisplaywidget.ui:146
++msgid "Comments"
++msgstr "Açıklamalar"
++
++#. i18n: ectx: property (text), widget (KPushButton, buttonRemove)
++#: widgets/ratingdisplaywidget.ui:177
++msgid "Remove"
++msgstr "Sil"
++
++#. i18n: ectx: property (text), widget (KPushButton, buttonEdit)
++#: widgets/ratingdisplaywidget.ui:187
++msgid "Edit..."
++msgstr "Düzenle..."
++
++#: widgets/recipelistview.cpp:32
++msgid "Uncategorized"
++msgstr "Kategorilendirilmemiş"
++
++#: widgets/recipelistview.cpp:101
++msgid "Recipe"
++msgstr "Tarif"
++
++#: widgets/recipelistview.cpp:236
++msgctxt "@info:progress"
++msgid "Loading recipes"
++msgstr "Tarifler yükleniyor"
++
++#: widgets/unitlistview.cpp:62
++msgctxt "@title:column Unit name"
++msgid "Unit"
++msgstr "Birim"
++
++#: widgets/unitlistview.cpp:63
++msgctxt "@title:column Unit abbreviation"
++msgid "Abbreviation"
++msgstr "Kısaltma"
++
++#: widgets/unitlistview.cpp:64
++msgctxt "@title:column Unit plural"
++msgid "Plural"
++msgstr "Çoğul"
++
++#: widgets/unitlistview.cpp:65
++msgctxt "@title:column unit plural abbreviation"
++msgid "Abbreviation"
++msgstr "Kısaltma"
++
++#: widgets/unitlistview.cpp:66
++msgctxt "@title:column Unit type"
++msgid "Type"
++msgstr "Tip"
++
++#: widgets/unitlistview.h:104
++msgctxt "Unit type other"
++msgid "Other"
++msgstr "Diğer"
++
++#: widgets/unitlistview.h:105
++msgctxt "Unit type mass"
++msgid "Mass"
++msgstr "Kütle"
++
++#: widgets/unitlistview.h:106
++msgctxt "Unit type volume"
++msgid "Volume"
++msgstr "Hacim"
++
++#: widgets/weightinput.cpp:23
++msgid "-No Preparation-"
++msgstr "-Hazırlama Yok-"
++
++#~ msgid "QSqlRecipeDB: Opening Database..."
++#~ msgstr "QSqlRecipeDB: Veritabanı Açılıyor..."
++
++#~ msgid "Failing to open database. Trying to create it"
++#~ msgstr "Veritabanı açılmaıyor. Yeniden oluşturulmaya çalışılıyor."
++
++#~ msgid "Failing to open database. Exiting\n"
++#~ msgstr "Veritabanı açılmaıyor. Çıkılıyor.\n"
++
++#~ msgid "KreML version %1"
++#~ msgstr "KreML sürüm %1"
++
++#~ msgctxt "Exiting Krecipes"
++#~ msgid "Exiting"
++#~ msgstr "Çıkılıyor"
++
++#~ msgid "Code error. No DB support has been included. Exiting"
++#~ msgstr "Kod hatası. Hiç veritabanı desteği içerilmiyor. Çıkılıyor"
++
++#~ msgid "Code error. No DB support was built in. Exiting"
++#~ msgstr "Kod hatası. Dahili veritabanı desteği yok. Çıkılıyor"
++
++#~ msgid "DB started correctly\n"
++#~ msgstr "Veritabanı doğru bir şekilde başladı\n"
++
++#~ msgid "Author"
++#~ msgstr "Yazar"
++
++#~ msgid "Category"
++#~ msgstr "Kategori"
++
++#~ msgid "Preparation Method"
++#~ msgstr "Hazırlama Yöntemi"
++
++#~ msgid "Property"
++#~ msgstr "Özellik"
++
++#~ msgid "ISO A3"
++#~ msgstr "ISO A3"
++
++#~ msgid "ISO A4"
++#~ msgstr "ISO A4"
++
++#~ msgid "ISO A5"
++#~ msgstr "ISO A5"
++
++#~ msgid "US Letter"
++#~ msgstr "Mektup"
++
++#~ msgid "US Legal"
++#~ msgstr "Amerikan Resmi"
++
++#~ msgid "Screen"
++#~ msgstr "Ekran"
++
++#~ msgctxt "Custom paper size for printing"
++#~ msgid "Custom"
++#~ msgstr "Özel"
++
++#~ msgid "ISO B5"
++#~ msgstr "ISO B5"
++
++#~ msgid "US Executive"
++#~ msgstr "US Executive"
++
++#~ msgid "ISO A0"
++#~ msgstr "ISO A0"
++
++#~ msgid "ISO A1"
++#~ msgstr "ISO A1"
++
++#~ msgid "ISO A2"
++#~ msgstr "ISO A2"
++
++#~ msgid "ISO A6"
++#~ msgstr "ISO A6"
++
++#~ msgid "ISO A7"
++#~ msgstr "ISO A7"
++
++#~ msgid "ISO A8"
++#~ msgstr "ISO A8"
++
++#~ msgid "ISO A9"
++#~ msgstr "ISO A9"
++
++#~ msgid "ISO B0"
++#~ msgstr "ISO B0"
++
++#~ msgid "ISO B1"
++#~ msgstr "ISO B1"
++
++#~ msgid "ISO B10"
++#~ msgstr "ISO B10"
++
++#~ msgid "ISO B2"
++#~ msgstr "ISO B2"
++
++#~ msgid "ISO B3"
++#~ msgstr "ISO B3"
++
++#~ msgid "ISO B4"
++#~ msgstr "ISO B4"
++
++#~ msgid "ISO B6"
++#~ msgstr "ISO B6"
++
++#~ msgid "ISO C5"
++#~ msgstr "ISO C5"
++
++#~ msgid "US Common 10"
++#~ msgstr "US Common 10"
++
++#~ msgid "ISO DL"
++#~ msgstr "ISO DL"
++
++#~ msgid "US Folio"
++#~ msgstr "US Folio"
++
++#~ msgid "US Ledger"
++#~ msgstr "US Ledger"
++
++#~ msgid "US Tabloid"
++#~ msgstr "US Tabloid"
++
++#~ msgid "Top margin"
++#~ msgstr "Üst boşlukÜst Boşluk"
++
++#~ msgid "Bottom margin"
++#~ msgstr "Alt boşluk"
++
++#~ msgid "Page Layout..."
++#~ msgstr "Sayfa Düzeni..."
++
++#~ msgid "Remove Tabulator"
++#~ msgstr "Sekmeleyici Kaldır"
++
++#~ msgid "Rezkonvtest"
++#~ msgstr "Rezkonvtest"
++
++#~ msgid "Recipemltest"
++#~ msgstr "Recipemltest"
++
++#~ msgid "Mxptest"
++#~ msgstr "Mxptest"
++
++#~ msgid "Mx2test"
++#~ msgstr "Mx2test"
++
++#~ msgid "Mmftest"
++#~ msgstr "Mmftest"
++
++#~ msgid "Kretest"
++#~ msgstr "Kretest"
++
++#~ msgid "Nyctest"
++#~ msgstr "Nyctest"
++
++#, fuzzy
++#~| msgid "Print Preview"
++#~ msgctxt "@title:window"
++#~ msgid "Print Preview"
++#~ msgstr "Yazdırma Önizlemesi"
++
++#, fuzzy
++#~| msgid "Print Setup"
++#~ msgctxt "@action:button"
++#~ msgid "Print Setup"
++#~ msgstr "Yazdırma Ayarları"
++
++#, fuzzy
++#~| msgid "Print Setup"
++#~ msgctxt "@title:window"
++#~ msgid "Print Setup"
++#~ msgstr "Yazdırma Ayarları"
++
++#~ msgid "Alt+L"
++#~ msgstr "Alt+T"
++
++#, fuzzy
++#~| msgid "Amount"
++#~ msgctxt "@label"
++#~ msgid "Amount"
++#~ msgstr "Toplam"
++
++#, fuzzy
++#~| msgid "Ingredient list"
++#~ msgctxt "@title"
++#~ msgid "Ingredient list"
++#~ msgstr "İçindekiler listesi"
++
++#, fuzzy
++#~| msgid "Header list"
++#~ msgctxt "@title"
++#~ msgid "Header list"
++#~ msgstr "Başlık listesiBaşlık"
++
++#, fuzzy
++#~| msgid "Meal %1"
++#~ msgctxt "@title:tab"
++#~ msgid "Meal %1"
++#~ msgstr "Öğün %1"
++
++#, fuzzy
++#~| msgid "Properties"
++#~ msgctxt "@label"
++#~ msgid "Properties"
++#~ msgstr "Özellikler"
++
++#, fuzzy
++#~| msgid "Close"
++#~ msgctxt "@action:buton"
++#~ msgid "Close"
++#~ msgstr "Kapat"
++
++#~ msgctxt "Database username"
++#~ msgid "Username:"
++#~ msgstr "Kullanıcı adı:"
++
++#~ msgctxt "Default port"
++#~ msgid "Default"
++#~ msgstr "Öntanımlı"
++
++#~ msgctxt "Search recipes"
++#~ msgid "Search:"
++#~ msgstr "Ara:"
++
++#~ msgid "<<"
++#~ msgstr "<<"
++
++#~ msgid ">>"
++#~ msgstr ">>"
++
++#~ msgid "Modification Date:"
++#~ msgstr "Değiştirilme Tarihi:"
++
++#~ msgid "Size:"
++#~ msgstr "Boyut:"
++
++#~ msgid "%1 (%2)"
++#~ msgstr "%1 (%2)"
++
++#~ msgid "Sh&ow recipe(s)"
++#~ msgstr "Tarifi(ler)i &göster"
++
++#~ msgid "E&xport"
++#~ msgstr "&Dışarı Aktar&Dışarı Aktar"
++
++#~ msgid "&Remove From Category"
++#~ msgstr "&Kategoriden Sil"
++
++#~ msgid "&Add to Shopping List"
++#~ msgstr "&Alışveriş Listesine Ekle"
++
++#~ msgid "Ca&tegorize..."
++#~ msgstr "&Kategorilendir..."
++
++#~ msgid "&Expand All"
++#~ msgstr "Tümünü &Genişlet"
++
++#~ msgid "&Collapse All"
++#~ msgstr "Tümünü &Topla"
++
++#~ msgid "&Create"
++#~ msgstr "&Oluştur"
++
++#~ msgid "&Rename"
++#~ msgstr "Ye&niden adlandır"
++
++#~ msgid ""
++#~ "This preparation method already exists.  Continuing will merge these two "
++#~ "into one.  Are you sure?"
++#~ msgstr ""
++#~ "Bu hazırlama usulü zaten var.Devam ederseniz bu ikisi birleştirilecek. "
++#~ "Emin misiniz?"
++
++#~ msgid "Open Recipe(s)"
++#~ msgstr "Tarif(ler)i Aç"
++
++#~ msgid "&Open"
++#~ msgstr "&Aç"
++
++#~ msgid "calendar-today"
++#~ msgstr "takvim-bugün"
++
++#~ msgid "&Yesterday"
++#~ msgstr "&Dün"
++
++#~ msgid "Krecipes Preferences"
++#~ msgstr "Krecipes TercihleriTe&rcihler"
++
++#~ msgid "+"
++#~ msgstr "+"
++
++#~ msgid "- %1 weeks -"
++#~ msgstr "- %1 hafta -"
++
++#~ msgid "Check spelling"
++#~ msgstr "Yazım denetimi yap"
++
++#~ msgid "Clear search"
++#~ msgstr "Aramayı tTemizle"
