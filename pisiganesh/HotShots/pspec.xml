@@ -1,0 +1,60 @@
+<PISI>
+    <Source>
+        <Name>HotShots</Name>
+        <Homepage>http://thehive.xbee.net/index.php?module=pages&amp;func=display&amp;pageid=31</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>desktop.misc</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Hotshots is a screenshot tool with some editing features</Summary>
+        <Description>Presentation
+Hotshots is a screenshot tool with some editing features. It is particularly suitable for writing documentation (as used in the following chapters) but you can use it to highlight some details on a map image or what ever you want.
+Because HotShots is written with Qt, it runs on Windows and Linux (MacOSX isn't tested yet).
+Why this name, Hotshots ? Firstly, I'm a fan of Jim Abrahams's film and my second choice was Screen'n Shot but I'm not sure the pun will be perenne.
+Current Features
+
+    Grab current screen, all monitors (in case of multi-monitors configuration), current window or a part of the desktop.
+    Save the screenshot in multiple formats (PNG, JPG, BMP, ...).
+    Automatically save the screenshot to clipboard, disk or launch the editor tool.
+    Automatically scale the screenshot to a given size.
+    Use “system” shortcuts to take a screenshot.
+    Add automatically some “post-effects” to the screenshot (drop shadow, rotation, border, …).
+    Add annotation items (text, arrows, rectable, ...) to the snapshot.
+    Can be minimized to system tray and work in background.
+    Can be launch at system start-up (Windows).
+    Export edited image in multiple formats (PNG, JPG, BMP ...).
+    Save/Restore edited image in proprietary format.
+    Send image directly to printer or to web service.</Description>
+        <BuildDependencies>
+            <Dependency>libqxt-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="4a3d0bce41b5e4013cb42f2f27ca2d7ed17b5cfa" type="zip">http://sourceforge.net/projects/hotshots/files/2.0.0/HotShots-2.0.0-src.zip</Archive>
+    </Source>
+    <Package>
+        <Name>HotShots</Name>
+        <RuntimeDependencies>
+            <Dependency>libqxt</Dependency>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="localedata">/usr/share/hotshots/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-11</Date>
+            <Version>2.0.0</Version>
+            <Comment>Initial Release</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
