@@ -1,0 +1,38 @@
+<PISI>
+    <Source>
+        <Name>pngcrush</Name>
+        <Homepage>http://pmt.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>executable</IsA>
+        <Summary>Open source project to develop tools for use in creating and manipulating PNG</Summary>
+        <Description>This is an open source project to develop tools for use in creating and manipulating PNG (Portable Network Graphics), MNG (Multiple-image Network Graphics), and JNG (JPEG Network Graphics) files.</Description>
+        <BuildDependencies>
+            <Dependency>glibc-devel</Dependency>
+            <Dependency>libpng-devel</Dependency>
+            <Dependency>zlib-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="ccc2a4c678da44673087dd63c98fafca68b1670d" type="targz">http://sourceforge.net/projects/pmt/files/pngcrush/1.7.69/pngcrush-1.7.69.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>pngcrush</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="info">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-11</Date>
+            <Version>1.7.69</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

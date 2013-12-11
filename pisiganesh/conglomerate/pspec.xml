@@ -1,0 +1,63 @@
+<PISI>
+    <Source>
+        <Name>conglomerate</Name>
+        <Homepage>http://www.conglomerate.org/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Conglomerate aims to be an XML editor that everyone can use.</Summary>
+        <Description>In particular, our primary goal is to create the ultimate editor for DocBook and similar formats.
+
+It aims to hide the jargon and complexity of XML and present the information in your documents in a way that makes sense.
+
+You ought to be able to create documents that are organised in a way that makes sense for you, rather than what your word processor wants. For instance, if you are writing a recipe book you'll want to think about "Ingredients" and "Preparation Instructions" rather than "Sections" and "Lists". You can then use your document to generate high-quality output in a variety of formats (such as HTML pages, PDF files, traditional word-processor files etc). You may also be able to do things that are almost impossible in a traditional word-processor, such as "Give me a list of all recipes that serve 8 people that are safe for those with an allergy to nuts"</Description>
+        <BuildDependencies>
+            <Dependency>enchant-devel</Dependency>
+            <Dependency>gconf-devel</Dependency>
+            <Dependency>libbonobo-devel</Dependency>
+            <Dependency>libbonoboui-devel</Dependency>
+            <Dependency>libglade-devel</Dependency>
+            <Dependency>libgnomeprintui-devel</Dependency>
+            <Dependency>libgnomeui-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="26174924865f095452c59b595f99a31737c9ece5" type="targz">http://sourceforge.net/projects/conglomerate/files/Conglomerate%20XML%20Editor/0.9.1/conglomerate-0.9.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>conglomerate</Name>
+        <RuntimeDependencies>
+            <Dependency>gconf</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gnome-vfs</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libart_lgpl</Dependency>
+            <Dependency>libglade</Dependency>
+            <Dependency>libgnome</Dependency>
+            <Dependency>libgnomeprint</Dependency>
+            <Dependency>libgnomeprintui</Dependency>
+            <Dependency>libgnomeui</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>pango</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/*</Path>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-11</Date>
+            <Version>0.9.1</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
