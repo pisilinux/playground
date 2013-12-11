@@ -13,7 +13,7 @@
         <BuildDependencies>
             <Dependency>kernel-module-headers</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="fd13ba69f60900ad87c843ad06ad22efe08cd57b" type="targz">https://github.com/Bumblebee-Project/bbswitch/archive/v0.7.tar.gz</Archive>
+        <Archive sha1sum="e282ee682d794e3962baa4dead01917c42571e78" type="targz">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
         <Patches>
         </Patches>
     </Source>
@@ -29,7 +29,15 @@
         <AdditionalFile owner="root" permission="0644" target="/etc/modprobe.d/bbswitch.conf">bbswitch.conf</AdditionalFile>
         <AdditionalFile owner="root" permission="0644" target="/etc/debmod.d/kmod-bbswitch.conf">kmod-bbswitch.conf</AdditionalFile>
     </Package>
+    
     <History>
+        <Update release="4">
+            <Date>2013-12-11</Date>
+            <Version>0.8</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
         <Update release="3">
             <Date>2013-05-30</Date>
             <Version>0.7</Version>
