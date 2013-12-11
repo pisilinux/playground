@@ -1,0 +1,35 @@
+<PISI>
+    <Source>
+        <Name>smplayer-skins</Name>
+        <Homepage>http://smplayer.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>themes</IsA>
+        <Summary>Smplayer themes</Summary>
+        <Description>Smplayer themes</Description>
+        <Archive sha1sum="7ab2f12873c9ac863af5461672ffa96aa00da6bc" type="tarbz2">http://sourceforge.net/projects/smplayer/files/SMPlayer-skins/20130605/smplayer-skins-20130605.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>smplayer-skins</Name>
+        <RuntimeDependencies>
+            <Dependency>smplayer</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-11</Date>
+            <Version>2013.06.05</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
