@@ -1,0 +1,40 @@
+<PISI>
+    <Source>
+        <Name>pencil</Name>
+        <Homepage>http://pencil.evolus.vn/Default.html</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>multimedia.graphics</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>For making diagrams and GUI prototyping</Summary>
+        <Description>The Pencil Project's unique mission is to build a free and opensource tool for making diagrams and GUI prototyping that everyone can use.
+
+Pencil will always be free as it is released under the GPL version 2 and is available for virtually all platforms that Firefox 3 can run. 
+
+http://pencil.evolus.vn/WikiIndex.html
+
+http://pencil.evolus.vn/wiki/devguide/Introduction.html</Description>
+        <Archive sha1sum="518b358acdc552d2615a2464036dcff978dcd58f" type="targz">http://evoluspencil.googlecode.com/files/pencil-2.0.5.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>pencil</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-11</Date>
+            <Version>2.0.5</Version>
+            <Comment>Initial Release</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
