@@ -1,0 +1,36 @@
+<PISI>
+    <Source>
+        <Name>ctemplate</Name>
+        <Homepage>http://code.google.com/p/ctemplate/</Homepage>
+        <Packager>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>New BSD License</License>
+        <PartOf>desktop</PartOf>
+        <IsA>library</IsA>
+        <Summary>CTemplate is a simple but powerful template language for C++</Summary>
+        <Description>CTemplate is a simple but powerful template language for C++. It emphasizes separating logic from presentation: it is impossible to embed application logic in this template language.</Description>
+        <Archive sha1sum="b00a35291bc5c5bb8493a68bbf76d6a9cfa5c117" type="targz">http://ctemplate.googlecode.com/files/ctemplate-2.2.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>ctemplate</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="header">/usr/include/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-04</Date>
+            <Version>2.2</Version>
+            <Comment>Initial Release</Comment>
+            <Name>Ganesh</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
