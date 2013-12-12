@@ -1,0 +1,63 @@
+<PISI>
+    <Source>
+        <Name>taskcoach</Name>
+        <Homepage>http://taskcoach.org/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Task Coach is a simple open source todo manager</Summary>
+        <Description>Task Coach for the desktop
+
+The desktop version of Task Coach (Windows, Mac, Linux, BSD) has the following features:
+
+    Creating, editing, and deleting tasks and subtasks.
+    Tasks have a subject, description, priority, start date, due date, a completion date and an optional reminder. Tasks can recur on a daily, weekly or monthly basis.
+    Tasks can be viewed as a list or as a tree.
+    Tasks can be sorted by all task attributes, e.g. subject, budget, budget left, due date, etc.
+    Several filters to e.g. hide completed tasks or view only tasks that are due today.
+    Tasks can be created by dragging an e-mail message from a mail user agent (Outlook, Thunderbird, Claws Mail, Apple Mail) onto a task viewer.
+    Attachments can be added to tasks, notes, and categories by dragging and dropping files, e-mail messages, or URL's onto a task, note or category.
+    Task status depends on its subtask and vice versa. E.g. if you mark the last uncompleted subtask as completed, the parent task is automatically marked as completed too.
+    Tasks and notes can be assigned to user-defined categories.
+    Settings are persistent and saved automatically. The last opened file is loaded automatically when starting Task Coach.
+    Tracking time spent on tasks. Tasks can have a budget. Time spent can be viewed by individual effort period, by day, by week, and by month.
+    The Task Coach file format (.tsk) is XML.
+    Tasks, notes, effort, and categories can be exported to HTML and CSV (comma separated format). Effort can be exported to iCalendar/ICS format as well.
+    Tasks, effort, notes, and categories can be printed. When printing, Task Coach prints the information that is visible in the current view, including any filters and sort order.
+    Task Coach can be run from a removable medium.
+    Tasks and notes can be synchronized via a Funambol server such as My Funambol.</Description>
+        <Archive sha1sum="57fb35637c59cf696f9b2aae09acd6c1ad2d3a79" type="targz">http://sourceforge.net/projects/taskcoach/files/taskcoach/Release-1.3.34/TaskCoach-1.3.34.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>taskcoach</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/applications/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="data">/usr/share/pixmaps/*</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/taskcoach.desktop" permission="0644" group="root" owner="root">taskcoach.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/pixmaps/taskcoach.png" permission="0644" group="root" owner="root">taskcoach.png</AdditionalFile>
+        </AdditionalFiles>
+        <RuntimeDependencies>
+            <Dependency>wxPython</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-13</Date>
+            <Version>1.3.34</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
