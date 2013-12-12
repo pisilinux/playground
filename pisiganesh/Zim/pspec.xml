@@ -1,0 +1,48 @@
+<PISI>
+    <Source>
+        <Name>Zim</Name>
+        <Homepage>http://zim-wiki.org/index.html</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>editor</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Zim is a graphical text editor used to maintain a collection of wiki pages</Summary>
+        <Description>Zim is a graphical text editor used to maintain a collection of wiki pages. Each page can contain links to other pages, simple formatting and images. Pages are stored in a folder structure, like in an outliner, and can have attachments. Creating a new page is as easy as linking to a nonexistent page. All data is stored in plain text files with wiki formatting. Various plugins provide additional functionality, like a task list manager, an equation editor, a tray icon, and support for version control.
+
+Zim can be used to:
+
+    Keep an archive of notes
+    Take notes during meetings or lectures
+    Organize task lists
+    Draft blog entries and emails
+    Do brainstorming
+
+Zim handles several types of markup, like headings, bullet lists and of course bold, italic and highlighted. This markup is saved as wiki text so you can easily edit it with other editors. Because of the autosave feature you can switch between pages and follow links while editing without worries.</Description>
+        <Archive sha1sum="f6abef969687ca09467031def1ddbcb611cb9f92" type="targz">http://zim-wiki.org/downloads/zim-0.60.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>Zim</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="man">/usr/share/man/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-13</Date>
+            <Version>0.60</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
