@@ -1,0 +1,51 @@
+<PISI>
+    <Source>
+        <Name>xournal</Name>
+        <Homepage>http://xournal.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Xournal is an application for notetaking, sketching</Summary>
+        <Description>Xournal aims to provide superior graphical quality (subpixel resolution) and overall functionality; however it lacks the collaborative features of Jarnal. Since Xournal is still in its early development stages, it may not be fully stable, and some features have not been implemented yet.</Description>
+        <Archive sha1sum="d2556bf21bef2df99bef0a6d1cb251d5e0f12d3f" type="targz">http://sourceforge.net/projects/xournal/files/xournal/0.4.7/xournal-0.4.7.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>xournal</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/applications/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="doc">/usr/share/xournal/html-doc/*</Path>
+            <Path fileType="data">/usr/share/xournal/pixmaps/*</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/xournal.desktop" permission="0644" group="root" owner="root">xournal.desktop</AdditionalFile>
+        </AdditionalFiles>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libart_lgpl</Dependency>
+            <Dependency>libgnomecanvas</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>poppler-glib</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-13</Date>
+            <Version>0.4.7</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
