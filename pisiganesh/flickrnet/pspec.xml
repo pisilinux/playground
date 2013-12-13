@@ -1,0 +1,40 @@
+<PISI>
+    <Source>
+        <Name>flickrnet</Name>
+        <Homepage>http://flickrnet.codeplex.com/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <Summary>The Flickr.Net API Library is a .Net Library for accessing the Flickr API.</Summary>
+        <Description>The Flickr.Net API Library is a .Net Library for accessing the Flickr API. It is written entirely in C# it can be accessed from the following frameworks:
+
+    .Net Framework 2.0 and above.
+    .Net Compact Framework 2.0 SP1 and above.
+    Silverlight 3.0 and above.
+    Windows 7 Phone
+    Mono
+    Monotouch for iPhone</Description>
+        <Archive sha1sum="291dd5b860b872565f6eb211f9f00183adc45f3e" type="tarxz">https://www.archlinux.org/packages/extra/any/flickrnet/download</Archive>
+    </Source>
+    <Package>
+        <Name>flickrnet</Name>
+        <Files>
+            <Path fileType="executable">/usr/lib/mono/*</Path>
+            <Path fileType="config">/usr/lib/pkgconfig/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-11</Date>
+            <Version>3.7.0</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

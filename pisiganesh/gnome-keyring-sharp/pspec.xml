@@ -1,0 +1,38 @@
+<PISI>
+    <Source>
+        <Name>gnome-keyring-sharp</Name>
+        <Homepage>https://github.com/mono/gnome-keyring-sharp</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>Copyright (c) 2005 Novell</License>
+        <License>Inc</License>
+        <IsA>library</IsA>
+        <Summary>-</Summary>
+        <Description>-</Description>
+        <BuildDependencies>
+            <Dependency>ndesk-dbus</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="b8aad5b62f2a443b72290688027701d1fad06ff1" type="targz">http://ftp.de.debian.org/debian/pool/main/g/gnome-keyring-sharp/gnome-keyring-sharp_1.0.0.orig.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>gnome-keyring-sharp</Name>
+        <Files>
+            <Path fileType="executable">/usr/lib/mono/*</Path>
+            <Path fileType="doc">/usr/lib/monodoc/*</Path>
+            <Path fileType="config">/usr/lib/pkgconfig/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-11</Date>
+            <Version>1.0.0</Version>
+            <Comment>Intitial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

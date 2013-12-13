@@ -1,0 +1,60 @@
+<PISI>
+    <Source>
+        <Name>simplescan</Name>
+        <Homepage>https://launchpad.net/simple-scan</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>multimedia.misc</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>A really easy way to scan both documents and photos</Summary>
+        <Description>"Simple Scan
+A really easy way to scan both documents and photos. You can crop out the bad parts of a photo and rotate it if it is the wrong way round. You can print your scans, export them to pdf, or save them in a range of image formats."
+
+Techie-friendly package description:
+"Simple Scan is an easy-to-use application, designed to let users connect their scanner and quickly have the image/document in an appropriate format.
+Simple Scan is basically a frontend for SANE - which is the same backend as XSANE uses. This means that all existing scanners will work and the interface is well tested."</Description>
+        <BuildDependencies>
+            <Dependency>colord-devel</Dependency>
+            <Dependency>colord-kde</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>itstool</Dependency>
+            <Dependency>sane-backends</Dependency>
+            <Dependency>sane-backends-devel</Dependency>
+            <Dependency>sane-frontends</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="b6c9e645c30e382854ae52493af9c8bb1c01d7fd" type="tarxz">https://launchpad.net/simple-scan/3.11/3.11.1.1/+download/simple-scan-3.11.1.1.tar.xz</Archive>
+    </Source>
+    <Package>
+        <Name>simplescan</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>colord</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>sane-backends</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="info">/usr/share/help/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="man">/usr/share/man/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-12</Date>
+            <Version>3.11.1.1</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
