@@ -1,0 +1,36 @@
+<PISI>
+    <Source>
+        <Name>python-elib.intl</Name>
+        <Homepage>https://github.com/dieterv/elib.intl</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>library</IsA>
+        <Summary>Enhanced internationalization (I18N) for Python</Summary>
+        <Description>Enhanced internationalization (I18N) for Python</Description>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="48533e76a5a9cf58ce4b3daeb85c6e6a7d311590" type="targz">http://ftp.de.debian.org/debian/pool/main/e/elib.intl/elib.intl_0.0.3~git20110809.orig.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>python-elib.intl</Name>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-13</Date>
+            <Version>0.0.3</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
