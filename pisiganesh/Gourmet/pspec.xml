@@ -1,0 +1,45 @@
+<PISI>
+    <Source>
+        <Name>Gourmet</Name>
+        <Homepage>http://thinkle.github.io/gourmet/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Gourmet Recipe Manager is a recipe-organizer</Summary>
+        <Description>Gourmet Recipe Manager is a recipe-organizer available for Linux and Windows that allows you to collect, search, organize, and browse your recipes. Gourmet can also generate shopping lists and calculate nutritional information. It imports Mealmaster, MasterCook and KRecipe files and exports PDFs, webpages and other formats. Gourmet is free software and uses Python, GTK+ and SQLAlchemy.</Description>
+        <Archive sha1sum="748e83e37761207e1d88e59e22311fa78dcef404" type="targz">https://github.com/thinkle/gourmet/archive/0.16.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>Gourmet</Name>
+        <RuntimeDependencies>
+            <Dependency>python3</Dependency>
+            <Dependency>python-elib.intl</Dependency>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>python-imaging</Dependency>
+            <Dependency>python-sqlalchemy</Dependency>
+	    <Dependency>python-beautifulsoup</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="library">/usr/lib/python2.7/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-13</Date>
+            <Version>0.16.0</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
