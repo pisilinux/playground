@@ -1,0 +1,81 @@
+<PISI>
+    <Source>
+        <Name>krecipes</Name>
+        <Homepage>http://krecipes.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Manage Your Recipes</Summary>
+        <Description>Krecipes is a new Open Source project for an exciting world that is almost forgotten in the Tux world: COOKING (yummy! ;-)
+
+The goal of this projects WAS (note that we're talking about 2003) to create a KDE Recipe Tool that:
+
+    Can manage a recipe database with an easy to use interface
+    Allows creation/removal of new ingredients and units
+    Helps with diets, calculating amount of calories, vitamines, carbohydrates... per recipe
+    Creates shopping lists, and daily suggestions for a given diet type
+    Is based on MySQL (1) so it could be possible to generate a KSN(2)
+    Should be as flexible as possible to have the possibility to extend it in future.
+
+Now those goals have been pushed even further, so we have support for other databases like SQLite and PostgreSQL and it includes many other new features. The KSN stuff is still not available, but not too far away. Just wait :)
+
+    The project has initially started with MySQL, but QSQL provides sufficient flexibility to hopefully port this project for other databases.
+    KSN: Krecipe Servers Network ;-)
+
+Krecipes Features
+
+For a complete look into Krecipes, check out the complete Handbook, written by Colleen Beamer. It covers usage on all aspects of Krecipes and also includes many screenshots of Krecipes in action.
+    Recipes Search
+
+Simply type in the a part of a recipe name and all those recipes are instantly available to view, edit, or print.
+
+If you'd like to fine-tune your search, the advanced search also allows you to search by title as well as any combination of categories, ingredients, preparation time, authors, servings, or instruction text.
+    Edit Recipes
+
+Using the three input tabs, you will fill in the details of your recipes. On the first tab is the title, authors, categories, preparation time, and yield. On the next you may input ingredients, and on the last is the instructions.
+    Shopping List
+
+Add recipes to your shopping list. When you are done, Krecipes will list all the ingredients necessary, combining units for you automatically, and give you a list ready to print.
+    Diet Helper
+
+Plan out your meals for a day, a few days, or even weeks. Give Krecipes information on what you'd like each of your meals to contain, limit the amount of particular nutrient property (fat, energy, etc.), and Krecipes will do the rest.
+    Advanced Database Management
+
+Krecipes takes full advantage of the power of relational databases. Categories, ingredients, units, etc. are stored as separate identities which are linked to recipes when used. You can rename one of these in one place, and all recipes using that element are automatically updated.
+
+When importing recipes from an external source, you may find many misspellings and strange capitalization. Simply rename these elements in the "Data" panel to correct all your recipes. For example, you may have the categories "Vegtables" and "Vegatables". Rename "Vegtables" to "Vegatables" and the merge feature will put all the recipes under these two categories into the right category.</Description>
+        <Archive sha1sum="fc232c9125e555d8c1cbbbf5020311ed6f278b39" type="targz">http://sourceforge.net/projects/krecipes/files/krecipes/2.0-beta2/krecipes-2.0-beta2.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>krecipes</Name>
+        <RuntimeDependencies>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>qimageblitz</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>qt-webkit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-13</Date>
+            <Version>2.0</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
