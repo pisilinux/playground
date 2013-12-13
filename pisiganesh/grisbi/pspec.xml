@@ -1,0 +1,44 @@
+<PISI>
+    <Source>
+        <Name>grisbi</Name>
+        <Homepage>http://www.grisbi.org/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>A personal financial management program</Summary>
+        <Description>Grisbi is a very functional personal financial management program with a reasonable set of homefinance features.</Description>
+        <Archive sha1sum="b026d2ca12026ba0eb770918f54a64330ae53b41" type="tarbz2">http://sourceforge.net/projects/grisbi/files/grisbi%20unstable/0.9.93/grisbi-0.9.93.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>grisbi</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libofx</Dependency>
+            <Dependency>pango</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="man">/usr/share/man/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-13</Date>
+            <Version>0.9.93</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
