@@ -1,0 +1,10 @@
+--- Qb/Plugins/Bin/parser/parser.y.old	2013-05-21 01:14:00.000000000 +0300
++++ Qb/Plugins/Bin/parser/parser.y	2013-10-29 22:52:37.754796057 +0200
+@@ -26,6 +26,7 @@
+ 
+ extern int yylex(void);
+ void yyerror(Pipeline *pipelineDescription, const char *s);
++extern int yyparse(Pipeline *pipelineDescription);
+ }
+ 
+ %union {
