@@ -1,0 +1,51 @@
+<PISI>
+    <Source>
+        <Name>fbreader</Name>
+        <Homepage>http://fbreader.org/content/fbreader-beta-linux-desktop</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <PartOf>office.misc</PartOf>
+        <Summary>FBReader is a free and open source e-book reader for GNU/Linux, Microsoft Windows, and other platforms.</Summary>
+        <Description>>Supported formats include EPUB, FictionBook, HTML, plucker, PalmDoc, zTxt, TCR, CHM, RTF, OEB, non-DRM'ed mobipocket, and plain-text.</Description>
+        <BuildDependencies>
+            <Dependency>bzip2</Dependency>
+            <Dependency>curl-devel</Dependency>
+            <Dependency>fribidi-devel</Dependency>
+            <Dependency>libXft-devel</Dependency>
+            <Dependency>libunibreak-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="7e6f0acbac5d8111fcda14a576ae4fdc93eef292" type="targz">/home/groni/Downloads/fbreader-sources-0.99.4.tgz</Archive>
+    </Source>
+    <Package>
+        <Name>fbreader</Name>
+        <RuntimeDependencies>
+            <Dependency>bzip2</Dependency>
+            <Dependency>curl</Dependency>
+            <Dependency>fribidi</Dependency>
+            <Dependency>libXft</Dependency>
+            <Dependency>libunibreak</Dependency>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>\
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-14</Date>
+            <Version>0.99</Version>
+            <Comment>First Release</Comment>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
