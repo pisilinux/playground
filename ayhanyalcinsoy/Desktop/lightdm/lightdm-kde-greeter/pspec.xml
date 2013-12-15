@@ -1,0 +1,42 @@
+<PISI>
+    <Source>
+        <Name>lightdm-kde-greeter</Name>
+        <Homepage>https://projects.kde.org/projects/playground/base/lightdm</Homepage>
+        <Packager>
+            <Name>Kamil Atlı</Name>
+            <Email>suvarice@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>desktop.kde</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>KDE greeter for LightDM</Summary>
+        <Description>KDE greeter for LightDM</Description>
+        <BuildDependencies>
+            <Dependency>automoc4</Dependency>
+            <Dependency>cmake</Dependency>
+            <Dependency>kde-runtime-devel</Dependency>
+            <Dependency>qt</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="43c7bcfa2311133c5a053bece577217cbf12e53e" type="tarxz">https://launchpad.net/lightdm/1.9/1.9.5/+download/lightdm-1.9.5.tar.xz</Archive>
+    </Source>
+    <Package>
+        <Name>lightdm-kde-greeter</Name>
+        <RuntimeDependencies>
+            <Dependency>kde-runtime</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-15</Date>
+            <Version>1.9.5</Version>
+            <Comment>first release</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvarice@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
