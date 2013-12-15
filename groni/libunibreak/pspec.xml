@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libunibreak</Name>
+        <Homepage>http://vimgadgets.sourceforge.net/libunibreak//</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>An implementation of the line breaking algorithm</Summary>
+        <Description>An implementation of the line breaking algorithm as described in Unicode 5.2.0 Standard Annex 14, Revision 24</Description>
+        <Archive sha1sum="fd0f70f9de049f5a129d9992d937a0f6a01af7b7" type="targz">http://sourceforge.net/projects/vimgadgets/files/libunibreak/1.1/libunibreak-1.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>glibc</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libunibreak</Name>
+        <RuntimeDependencies>
+            <Dependency>glibc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+			<Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libunibreak-devel</Name>
+        <RuntimeDependencies>
+         <Dependency>libunibreak</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package> 
+    <History>
+        <Update release="1">
+            <Date>2013-12-14</Date>
+            <Version>1.1</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
