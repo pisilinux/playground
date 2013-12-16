@@ -1,0 +1,44 @@
+<PISI>
+    <Source>
+        <Name>qrencode</Name>
+        <Homepage>http://fukuchi.org/works/qrencode/index.html.en</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>Copyright (C) 2006-2012 Kentaro Fukuchi</License>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Libqrencode is a C library for encoding data in a QR Code symbol</Summary>
+        <Description>Libqrencode is a C library for encoding data in a QR Code symbol, a kind of 2D symbology that can be scanned by handy terminals such as a mobile phone with CCD. The capacity of QR Code is up to 7000 digits or 4000 characters, and is highly robust.</Description>
+        <Archive sha1sum="a5056cf2fdc699ecf1d3c0cbea7b50993b0bf54e" type="tarbz2">http://fukuchi.org/works/qrencode/qrencode-3.4.3.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>qrencode</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="man">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>qrencode-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>qrencode</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+        </Files>
+    </Package>
+   <History>
+        <Update release="1">
+            <Date>2013-12-14</Date>
+            <Version>3.4.3</Version>
+            <Comment>Initial Release</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
