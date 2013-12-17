@@ -1,0 +1,42 @@
+<PISI>
+    <Source>
+        <Name>heimdall</Name>
+        <Homepage>http://glassechidna.com.au/heimdall/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>Copyright (c) 2010-2013 Benjamin Dobell</License>
+        <License>Glass Echidna</License>
+        <IsA>app:gui</IsA>
+        <Summary>Heimdall is a cross-platform open-source tool suite used to flash Samsung firmware</Summary>
+        <Description>Heimdall is a cross-platform open-source tool suite used to flash samsung firmware (aka ROMs) onto Samsung mobile devices.</Description>
+        <BuildDependencies>
+            <Dependency>qt</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="d3a01f6cef24124953d3d806cb2165cf55081530" type="targz">https://bitbucket.org/benjamin_dobell/heimdall/downloads/heimdall-suite-1.4.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>heimdall</Name>
+        <RuntimeDependencies>
+            <Dependency>libusbx</Dependency>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="library">/usr/lib/libpit-1.4.a</Path>
+            <Path fileType="config">/usr/lib/udev/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-13</Date>
+            <Version>1.4.0</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
