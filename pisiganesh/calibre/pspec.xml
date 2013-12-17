@@ -1,0 +1,69 @@
+<PISI>
+    <Source>
+        <Name>calibre</Name>
+        <Homepage>http://calibre-ebook.com/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>calibre is a free and open source e-book library management application</Summary>
+        <Description>calibre is a free and open source e-book library management application developed by users of e-books for users of e-books. It has a cornucopia of features divided into the following main categories:
+
+    Library Management
+    E-book conversion
+    Syncing to e-book reader devices
+    Downloading news from the web and converting it into e-book form
+    Comprehensive e-book viewer
+    Content server for online access to your book collection</Description>
+        <Archive sha1sum="fcc33bd8caece2cb230dc23390c5a5d24f71e07c" type="tarbz2">http://sourceforge.net/projects/calibre/files/1.15.0/calibre-1.15.0-x86_64.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>calibre</Name>
+        <Files>
+            <Path fileType="all">/</Path>
+            <Path fileType="data">/opt/calibre/*</Path>
+            <Path fileType="executable">/opt/calibre/bin/*</Path>
+            <Path fileType="library">/opt/calibre/lib/*</Path>
+            <Path fileType="data">/opt/calibre/resources/*</Path>
+            <Path fileType="data">/usr/*</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/calibre.desktop" permission="0644" group="root" owner="root">calibre.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/pixmaps/calibre.png" permission="0644" group="root" owner="root">calibre.png</AdditionalFile>
+        </AdditionalFiles>
+        <RuntimeDependencies>
+            <Dependency>chmlib</Dependency>
+            <Dependency>libmtp</Dependency>
+            <Dependency>libwmf</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>podofo</Dependency>
+            <Dependency>poppler</Dependency>
+            <Dependency>psutils</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>python-beautifulsoup</Dependency>
+            <Dependency>python-cssutils</Dependency>
+            <Dependency>python-dateutil</Dependency>
+            <Dependency>python-dns</Dependency>
+            <Dependency>python-icu</Dependency>
+            <Dependency>python-imaging</Dependency>
+            <Dependency>python-mechanize</Dependency>
+            <Dependency>python-qt</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>xdg-utils</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-13</Date>
+            <Version>1.15.0</Version>
+            <Comment>-</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
