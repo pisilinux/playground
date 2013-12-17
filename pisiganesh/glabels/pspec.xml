@@ -1,0 +1,53 @@
+<PISI>
+    <Source>
+        <Name>glabels</Name>
+        <Homepage>http://www.glabels.org/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <IsA>app:gui</IsA>
+        <Summary>gLabels is a program for creating labels and business cards for the GNOME desktop environment</Summary>
+        <Description>gLabels is a program for creating labels and business cards for the GNOME desktop environment. It is designed to work with various laser/ink-jet peel-off label and business card sheets that you'll find at most office supply stores. gLabels is free software and is distributed under the terms of the GNU General Public License (GPL).</Description>
+        <BuildDependencies>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>iec16022-devel</Dependency>
+            <Dependency>itstool</Dependency>
+            <Dependency>librsvg-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>qrencode-devel</Dependency>
+            <Dependency>zint-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="2e4e93c321e05e1ce54477a5987b7b00fadbe71c" type="tarxz">http://ftp.gnome.org/pub/GNOME/sources/glabels/3.2/glabels-3.2.0.tar.xz</Archive>
+    </Source>
+    <Package>
+        <Name>glabels</Name>
+        <RuntimeDependencies>
+            <Dependency>iec16022</Dependency>
+            <Dependency>qrencode</Dependency>
+            <Dependency>zint</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="header">/usr/include/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="doc">/usr/share/gtk-doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="man">/usr/share/man/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-14</Date>
+            <Version>3.2.0</Version>
+            <Comment>Initial Release</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

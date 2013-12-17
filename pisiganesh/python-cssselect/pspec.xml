@@ -1,0 +1,39 @@
+<PISI>
+    <Source>
+        <Name>python-cssselect</Name>
+        <Homepage>https://pypi.python.org/pypi/cssselect</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>Copyright (c) 2007-2012 Ian Bicking and contributors</License>
+        <IsA>library</IsA>
+        <Summary>cssselect parses CSS3 Selectors and translates them to XPath 1.0</Summary>
+        <Description>cssselect parses CSS3 Selectors and translates them to XPath 1.0</Description>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="90a0738604ffc7b1e33d4e86347f45206530a4b0" type="targz">https://pypi.python.org/packages/source/c/cssselect/cssselect-0.9.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>python-cssselect</Name>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="doc">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-17</Date>
+            <Version>0.9.1</Version>
+            <Comment>initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

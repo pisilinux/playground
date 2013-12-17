@@ -1,0 +1,43 @@
+<PISI>
+    <Source>
+        <Name>python-netifaces</Name>
+        <Homepage>http://alastairs-place.net/projects/netifaces/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>MIT</License>
+        <License>Copyright (c) 2007</License>
+        <License>2008 Alastair Houghton</License>
+        <IsA>library</IsA>
+        <Summary>Portable access to network interfaces from Python</Summary>
+        <Description>Historically it has been difficult to straightforwardly get the network address(es) of the machine on which your Python scripts are running without compromising the portability of your script.
+
+As a result, when I needed to do this for the first time, I thought it would be best to write a Python module that would work on (at least) Mac OS X and Linux, and maybe other UNIX-like systems too. netifaces is the result.</Description>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="a483338e1cb75dd572109467d523e152088c026d" type="targz">http://alastairs-place.net/projects/netifaces/netifaces-0.8.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>python-netifaces</Name>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="doc">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-17</Date>
+            <Version>0.8</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

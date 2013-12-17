@@ -1,0 +1,43 @@
+<PISI>
+    <Source>
+        <Name>iec16022</Name>
+        <Homepage>http://datenfreihafen.org/projects/iec16022.html</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>2005-2008 Stefan Schmidt</License>
+        <IsA>library</IsA>
+        <Summary>With iec16022 you can produce 2D barcodes often also referenced as DataMatrix</Summary>
+        <Description>With iec16022 you can produce 2D barcodes often also referenced as DataMatrix</Description>
+        <Archive sha1sum="c711e716570c9105f2436fa8dd75bc818e8f8933" type="targz">http://datenfreihafen.org/~stefan/iec16022/iec16022-0.2.4.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>iec16022</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="man">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>iec16022-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>iec16022</Dependency>
+        </RuntimeDependencies>	
+        <Files>
+            <Path fileType="header">/usr/include/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-14</Date>
+            <Version>0.2.4</Version>
+            <Comment>Initial Release</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

@@ -1,0 +1,49 @@
+<PISI>
+    <Source>
+        <Name>zint</Name>
+        <Homepage>http://sourceforge.net/projects/zint</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>BSD</License>
+        <License>GPLv3</License>
+        <PartOf>multimedia.graphics</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Barcode Generator</Summary>
+        <Description>A barcode encoding library supporting over 50 symbologies including Code 128, Data Matrix, USPS OneCode, EAN-128, UPC/EAN, ITF, QR Code, Code 16k, PDF417, MicroPDF417, LOGMARS, Maxicode, GS1 DataBar, Aztec, Composite Symbols and more.
+
+After some time of inactivity this project is now back to life! This is the one and original ZINT barcode generator, the reference in open source barcodes.
+
+ZINT is licensed under the terms of the GPL v3. Only the contained backend (aka ZINT shared library) is licensed under BSD 3.</Description>
+        <Archive sha1sum="300732d03c77ccf1031c485a20f09b51495ef5a3" type="targz">http://sourceforge.net/projects/zint/files/zint/2.4.3/zint-2.4.3.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>zint</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>zint-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>zint</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="config">/usr/share/*</Path>
+        </Files>
+    </Package>    
+    <History>
+        <Update release="1">
+            <Date>2013-12-14</Date>
+            <Version>2.4.3</Version>
+            <Comment>Initial Release</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
