@@ -1,0 +1,52 @@
+<PISI>
+    <Source>
+        <Name>cantata</Name>
+        <Homepage>http://code.google.com/p/cantata/</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPL3</License>
+        <PartOf>multimedia.sound</PartOf>
+        <Summary>A KDE client for the music player daemon (MPD)</Summary>
+        <Description>Cantata is a graphical client for MPD</Description>
+        <BuildDependencies>
+            <Dependency>automoc4</Dependency>
+            <Dependency>cmake</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="7b321abf45cd2c71e86418a41c413391ad04ff6d" type="tarbz2">http://cantata.googlecode.com/files/cantata-1.1.3.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>cantata</Name>
+        <RuntimeDependencies>
+			<Dependency>libcddb</Dependency>
+			<Dependency>libmpd</Dependency>
+			<Dependency>kde-runtime</Dependency>
+            <Dependency>cdparanoia</Dependency>
+            <Dependency>ffmepg</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>libmtp</Dependency>
+            <Dependency>mpg123</Dependency>
+            <Dependency>musicbrainz5</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>taglib-extras</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/cantata</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="locale">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-16</Date>
+            <Version>1.2.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
