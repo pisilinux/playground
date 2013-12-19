@@ -1,0 +1,46 @@
+<PISI>
+    <Source>
+        <Name>wxHexEditor</Name>
+        <Homepage>http://www.wxhexeditor.org/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>programming.tool</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>wxHexEditor is another Free Hex Editor, build because there is no good hex editor for Linux system, specially for big files.</Summary>
+        <Description>wxHexEditor is not an ordinary hex editor, but could work as low level disk editor too.
+If you have problems with your HDD or partition, you can recover your data from HDD or from partition via editing sectors in raw hex.
+You can edit your partition tables or you could recover files from File System by hand with help of wxHexEditor.
+Or you might want to analyze your big binary files, partitions, devices... If you need a good reverse engineer tool like a good hex editor, you welcome.
+wxHexEditor could edit HDD/SDD disk devices or partitions in raw up to exabyte sizes.</Description>
+        <BuildDependencies>
+            <Dependency>wxGTK-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="d98ec91ff7d2f767c53af8b50fcb9abe22b08078" type="tarbz2">http://sourceforge.net/projects/wxhexeditor/files/wxHexEditor/v0.22%20Beta/wxHexEditor-v0.22-src.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>wxHexEditor</Name>
+        <RuntimeDependencies>
+            <Dependency>wxBase</Dependency>
+            <Dependency>wxGTK</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/local/bin/*</Path>
+            <Path fileType="data">/usr/local/share/*</Path>
+            <Path fileType="localedata">/usr/local/share/locale/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-19</Date>
+            <Version>0.22</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
