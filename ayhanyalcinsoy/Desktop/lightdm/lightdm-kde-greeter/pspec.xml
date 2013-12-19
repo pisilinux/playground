@@ -15,14 +15,16 @@
             <Dependency>automoc4</Dependency>
             <Dependency>cmake</Dependency>
             <Dependency>kde-runtime-devel</Dependency>
-            <Dependency>qt</Dependency>
+            <Dependency>qt-devel</Dependency>
+	    <Dependency>libxklavier-devel</Dependency>
         </BuildDependencies>
         <Archive sha1sum="43c7bcfa2311133c5a053bece577217cbf12e53e" type="tarxz">https://launchpad.net/lightdm/1.9/1.9.5/+download/lightdm-1.9.5.tar.xz</Archive>
     </Source>
     <Package>
         <Name>lightdm-kde-greeter</Name>
         <RuntimeDependencies>
-            <Dependency>kde-runtime</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>libxklavier</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="all">/</Path>

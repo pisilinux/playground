@@ -1,0 +1,11 @@
+diff -Nuar cantata-1.2.0.OSmanOS/support/CMakeLists.txt cantata-1.2.0/support/CMakeLists.txt
+--- cantata-1.2.0.OSmanOS/support/CMakeLists.txt        2013-12-14 17:57:50.000000000 +0200
++++ cantata-1.2.0/support/CMakeLists.txt                2013-12-17 19:47:27.167138296 +0200
+@@ -15,6 +15,7 @@
+ endif (NOT WIN32)
+ 
+ if (ENABLE_KDE_SUPPORT )
++    include_directories( ${KDE4_INCLUDES} )
+     # macro_ensure_version("4.7.0" ${KDE_VERSION} KDE_VERSION_47)
+     # if (NOT KDE_VERSION_47)
+         set(SUPPORT_SRCS ${SUPPORT_SRCS} kmessagewidget.cpp )
