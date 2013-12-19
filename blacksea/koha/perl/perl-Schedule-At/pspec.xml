@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-Schedule-At</Name>
+        <Homepage>http://search.cpan.org/dist/Schedule-At</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Artistic</License>
+        <License>GPLv1</License>
+        <IsA>library</IsA>
+        <Summary>OS independent interface to the Unix 'at' command</Summary>
+        <Description>perl-Schedule-At is a Perl module which provides an interface to 'at' command.</Description>
+        <Archive sha1sum="89b5d488534e370c0095122ac4c96a0664794ecc" type="targz">mirrors://cpan/authors/id/J/JO/JOSERODR/Schedule-At-1.15.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>at</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-Schedule-At</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>at</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2013-08-29</Date>
+            <Version>1.15</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Burak Fazıl Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-04-11</Date>
+            <Version>1.11</Version>
+            <Comment>Initial release.</Comment>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

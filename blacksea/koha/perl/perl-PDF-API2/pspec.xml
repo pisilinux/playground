@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-PDF-API2</Name>
+        <Homepage>http://search.cpan.org/dist/PDF-API2</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>Facilitates the creation and modification of PDF files</Summary>
+        <Description>perl-PDF-API2 is a Perl module which facilitates the creation and modification of PDF files.</Description>
+        <Archive sha1sum="c2879d6412b1e0e58b79fe2f7894d39ed1422b68" type="targz">mirrors://cpan/authors/id/S/SS/SSIMMS/PDF-API2-2.020.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Font-TTF</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-PDF-API2</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Font-TTF</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2013-08-29</Date>
+            <Version>2.020</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Burak Fazıl Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-04-10</Date>
+            <Version>2.019</Version>
+            <Comment>Initial release.</Comment>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
