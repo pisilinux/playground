@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-CPAN-Meta-YAML</Name>
+        <Homepage>http://search.cpan.org/dist/CPAN-Meta-YAML</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Artistic-2</License>
+        <License>GPLv1</License>
+        <IsA>library</IsA>
+        <Summary>Read and write a subset of YAML for CPAN Meta files</Summary>
+        <Description>perl-CPAN-Meta-YAML is a Perl module which reads and writes a suubset of YAML for CPAN Meta files</Description>
+        <Archive sha1sum="d8efdbce2a39ac3831ce7cbb8242859a8da9e308" type="targz">mirrors://cpan/authors/id/D/DA/DAGOLDEN/CPAN-Meta-YAML-0.007.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-CPAN-Meta-YAML</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+      <Update release="2">
+            <Date>2013-08-29</Date>
+            <Version>0.007</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Burak Fazıl Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+      </Update>
+      <Update release="1">
+            <Date>2011-04-10</Date>
+            <Version>0.003</Version>
+            <Comment>Initial release.</Comment>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

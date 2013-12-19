@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-Authen-CAS-Client</Name>
+        <Homepage>http://search.cpan.org/dist/Authen-CAS-Client/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>Provides an easy-to-use interface for authentication using JA-SIG's Central Authentication Service</Summary>
+        <Description>Authen::CAS::Client is an implementation of a client for use with JA-SIG's Central Authentication Service.</Description>
+        <Archive sha1sum="48e1571d35f0c5f722fdc72264b7189336d710f0" type="targz">http://mirror.teklinks.com/CPAN/authors/id/P/PR/PRAVUS/Authen-CAS-Client-0.06.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Test-MockObject</Dependency>
+            <Dependency>perl-libwww</Dependency>
+            <Dependency>perl-XML-LibXML</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-Authen-CAS-Client</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-libwww</Dependency>
+            <Dependency>perl-XML-LibXML</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    <History>
+      <Update release="2">
+            <Date>2013-08-29</Date>
+            <Version>0.06</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Burak Fazıl Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+      </Update>
+      <Update release="1">
+            <Date>2011-04-10</Date>
+            <Version>1.1.1</Version>
+            <Comment>Initial package for Corporate2</Comment>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

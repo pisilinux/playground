@@ -1,0 +1,31 @@
+diff -Nuar idzebra-2.0.55.orig/index/mod_grs_regx.c idzebra-2.0.55/index/mod_grs_regx.c
+--- idzebra-2.0.55.orig/index/mod_grs_regx.c	2013-01-08 11:26:06.000000000 +0200
++++ idzebra-2.0.55/index/mod_grs_regx.c	2013-11-10 01:16:45.054944234 +0200
+@@ -1301,8 +1301,13 @@
+     {
+     	const char *err = Tcl_GetVar(spec->tcl_interp, "errorInfo", 0);
+ 	yaz_log(YLOG_FATAL, "Tcl error, line=%d, \"%s\"\n%s",
+-	    spec->tcl_interp->errorLine,
++#if (TCL_MAJOR_VERSION >= 8 && TCL_MINOR_VERSION >= 5)
++            Tcl_GetErrorline(spec->tcl_interp),
++            Tcl_GetStringResult(spec->tcl_interp),
++#else
++            spec->tcl_interp->errorline,
+ 	    spec->tcl_interp->result,
++#endif        
+ 	    err ? err : "[NO ERRORINFO]");
+     }
+ }
+diff -Nuar idzebra-2.0.55.orig/index/zebrasrv.c idzebra-2.0.55/index/zebrasrv.c
+--- idzebra-2.0.55.orig/index/zebrasrv.c	2013-01-21 13:37:17.000000000 +0200
++++ idzebra-2.0.55/index/zebrasrv.c	2013-11-10 01:09:24.243901153 +0200
+@@ -247,7 +247,8 @@
+         case Z_Term_general:
+             term->which = Z_Term_general;
+             term->u.general = odr_malloc(r->stream, sizeof(*term->u.general));
+-            term->u.general->size = term->u.general->len = len;
++            //term->u.general->size =
++            term->u.general->len = len;
+             term->u.general->buf = odr_malloc(r->stream, len);
+             memcpy(term->u.general->buf, outbuf, len);
+             break;

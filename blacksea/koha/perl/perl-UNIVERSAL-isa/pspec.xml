@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-UNIVERSAL-isa</Name>
+        <Homepage>http://search.cpan.org/dist/UNIVERSAL-isa</Homepage>
+        <Packager>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Packager>
+        <License>Artistic</License>
+        <License>GPLv1</License>
+        <IsA>library</IsA>
+        <Summary> Attempt to recover from people calling UNIVERSAL::isa as a function</Summary>
+        <Description>UNIVERSAL is base class for ALL classes in Object Oriented Perl. UNIVERSAL::isa (isa stands for "is a") is method which can tell You if object is blessed in package or inherits from package..</Description>
+        <Archive sha1sum="802367d5f02979c98bd509d079eb8e890eadf0d1" type="targz">http://mirror.teklinks.com/CPAN/authors/id/C/CH/CHROMATIC/UNIVERSAL-isa-1.20120726.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-UNIVERSAL-isa</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+      <Update release="2">
+            <Date>2013-08-29</Date>
+            <Version>1_20120726</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Burak Fazıl Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+      </Update>
+      <Update release="1">
+            <Date>2011-04-09</Date>
+            <Version>1.03</Version>
+            <Comment>Initial release.</Comment>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

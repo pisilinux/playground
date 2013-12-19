@@ -1,0 +1,255 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>koha</Name>
+        <Homepage>http://www.koha-community.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Artistic-2</License>
+        <License>GPLv1</License>
+        <IsA>library</IsA>
+        <Summary>KOHA Integrated Library System</Summary>
+        <Description>Koha is the first free and open source software library automation package.</Description>
+        <Archive sha1sum="e3efb7c88b7c92eaa13a8952a564c190f2d46cd6" type="targz">http://download.koha-community.org/koha-3.08.19.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency> 
+            <Dependency>GraphicsMagick</Dependency>
+            <Dependency>at</Dependency>
+            <Dependency>perl-Algorithm-CheckDigits</Dependency>
+            <Dependency>perl-Authen-CAS-Client</Dependency>
+            <Dependency>perl-Biblio-EndnoteStyle</Dependency>
+            <Dependency>perl-Business-ISBN</Dependency>
+            <Dependency>perl-CGI-Session</Dependency>
+            <Dependency>perl-CGI-Session-Serialize-yaml</Dependency>
+            
+            <Dependency>perl-Class-Factory-Util</Dependency>
+            <Dependency>perl-Data-ICal</Dependency> -->
+            <Dependency>perl-Date-Calc</Dependency>
+            <Dependency>perl-Date-Manip</Dependency>
+
+
+            <Dependency>perl-XML-Dumper</Dependency>
+            <Dependency>perl-XML-RSS</Dependency>
+            <Dependency>perl-DBD-mysql</Dependency>
+            <Dependency>perl-YAML-Syck</Dependency>
+            <Dependency>perl-YAML</Dependency>-->
+            
+            <Dependency>perl-AutoLoader</Dependency>
+            <Dependency>perl-Business-ISBN-Data</Dependency>
+            <Dependency>perl-Cache-Memcached</Dependency>
+            <Dependency>perl-CGI-Session-Driver-memcached</Dependency>
+            <Dependency>perl-Class-Accessor-Chained</Dependency>
+            <Dependency>perl-Class-Adapter</Dependency>
+            <Dependency>perl-Class-ReturnValue</Dependency>
+            <Dependency>perl-CPAN-Meta</Dependency>
+            <Dependency>perl-CPAN-Meta-YAML</Dependency>
+          <!--  <Dependency>perl-Date-Leapyear</Dependency>
+            <Dependency>perl-DateTime-Format-Mail</Dependency>
+            <Dependency>perl-DateTime-Format-W3CDTF</Dependency>
+            <Dependency>perl-DBD-SQLite2</Dependency>
+            <Dependency>perl-DublinCore-Record</Dependency>
+            <Dependency>perl-GD-Barcode</Dependency>
+            <Dependency>perl-HTTP-OAI</Dependency>
+            <Dependency>perl-IO-Tty</Dependency>
+            <Dependency>perl-Lingua-PT-Stemmer</Dependency>
+            <Dependency>perl-Lingua-Stem</Dependency>
+            <Dependency>perl-Lingua-Stem-Fr</Dependency>
+            <Dependency>perl-Lingua-Stem-It</Dependency>
+            <Dependency>perl-Lingua-Stem-Ru</Dependency>
+            <Dependency>perl-Lingua-Stem-Snowball</Dependency>
+            <Dependency>perl-Lingua-Stem-Snowball-Da</Dependency>
+            <Dependency>perl-Locale-Currency-Format</Dependency>
+            <Dependency>perl-Mail-Sendmail</Dependency>
+            <Dependency>perl-MARC-Charset</Dependency>
+            <Dependency>perl-MARC-Crosswalk-DublinCore</Dependency>
+            <Dependency>perl-MARC-Record</Dependency>
+            <Dependency>perl-MARC-XML</Dependency>
+            <Dependency>perl-Memoize-Memcached</Dependency>
+            <Dependency>perl-Module-Install</Dependency>
+            <Dependency>perl-Module-Metadata</Dependency>
+            <Dependency>perl-Module-ScanDeps</Dependency>
+            <Dependency>perl-Net-Server</Dependency>
+            <Dependency>perl-Net-Z3950-ZOOM</Dependency>
+            <Dependency>perl-Number-Format</Dependency>
+            <Dependency>perl-PAR-Dist</Dependency>
+            <Dependency>perl-Parse-CPAN-Meta</Dependency>
+            <Dependency>perl-PDF-API2</Dependency>
+            <Dependency>perl-PDF-API2-Simple</Dependency>
+            <Dependency>perl-PDF-Reuse</Dependency>
+            <Dependency>perl-PDF-Reuse-Barcode</Dependency>
+            <Dependency>perl-PDF-Table</Dependency>
+            <Dependency>perl-Perl-OSType</Dependency>
+            <Dependency>perl-POE</Dependency>
+            <Dependency>perl-Schedule-At</Dependency>
+            <Dependency>perl-SMS-Send</Dependency>
+            <Dependency>perl-Snowball-Norwegian</Dependency>
+            <Dependency>perl-Snowball-Swedish</Dependency>
+            <Dependency>perl-String-CRC32</Dependency>
+            <Dependency>perl-Test-Manifest</Dependency>
+            <Dependency>perl-Test-MockObject</Dependency>
+            <Dependency>perl-Text-CSV-Encoded</Dependency>
+            <Dependency>perl-Text-German</Dependency>
+            <Dependency>perl-Text-PDF</Dependency>
+            <Dependency>perl-Text-vFile-asData</Dependency>
+            <Dependency>perl-UNIVERSAL-can</Dependency>
+            <Dependency>perl-UNIVERSAL-isa</Dependency>
+            <Dependency>perl-UNIVERSAL-require</Dependency>
+            <Dependency>perl-Unicode-Normalize</Dependency>
+            <Dependency>perl-version-new</Dependency>
+            <Dependency>perl-Version-Requirements</Dependency>
+
+            <Dependency>perl-Email-Date</Dependency>
+            <Dependency>perl-HTML-Scrubber</Dependency>
+            <Dependency>perl-HTML-Template-Pro</Dependency>
+            <Dependency>perl-Locale-PO</Dependency>
+            <Dependency>perl-MIME-Lite</Dependency>
+            <Dependency>perl-ldap</Dependency>
+            <Dependency>perl-Template-Toolkit</Dependency>
+            <Dependency>perl-Text-Iconv</Dependency>
+            <Dependency>perl-XML-LibXSLT</Dependency>
+            <Dependency>perl-XML-SAX-Writer</Dependency>
+            <Dependency>perl-XML-Simple</Dependency>
+
+        </BuildDependencies>
+  <!--      <Patches>
+            <Patch>001-fix-password-comparison.patch</Patch>
+	  </Patches> -->
+    </Source>
+
+    <Package>
+        <Name>koha</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>apache</Dependency>
+            <Dependency>GraphicsMagick</Dependency>
+	    <!--  <Dependency>zebra</Dependency> -->
+            <Dependency>at</Dependency>
+            <Dependency>perl-Algorithm-CheckDigits</Dependency>
+            <Dependency>perl-Authen-CAS-Client</Dependency>
+            <Dependency>perl-AutoLoader</Dependency>
+            <Dependency>perl-Biblio-EndnoteStyle</Dependency>
+            <Dependency>perl-Business-ISBN</Dependency>
+            <Dependency>perl-Business-ISBN-Data</Dependency>
+            <Dependency>perl-Cache-Memcached</Dependency>
+            <Dependency>perl-CGI-Session</Dependency>
+            <Dependency>perl-CGI-Session-Driver-memcached</Dependency>
+            <Dependency>perl-CGI-Session-Serialize-yaml</Dependency>
+            <Dependency>perl-Class-Accessor-Chained</Dependency>
+            <Dependency>perl-Class-Adapter</Dependency>
+            <Dependency>perl-Class-Factory-Util</Dependency>
+            <Dependency>perl-Class-ReturnValue</Dependency>
+            <Dependency>perl-CPAN-Meta</Dependency>
+            <Dependency>perl-CPAN-Meta-YAML</Dependency>
+            <Dependency>perl-Data-ICal</Dependency>
+	    <Dependency>perl-Date-ICal</Dependency>
+            <Dependency>perl-Date-Leapyear</Dependency>
+            <Dependency>perl-DateTime-Format-Mail</Dependency>
+            <Dependency>perl-DateTime-Format-W3CDTF</Dependency>
+            <Dependency>perl-DBD-SQLite2</Dependency>
+            <Dependency>perl-DublinCore-Record</Dependency>
+            <Dependency>perl-GD-Barcode</Dependency>
+            <Dependency>perl-HTTP-OAI</Dependency>
+            <Dependency>perl-IO-Tty</Dependency>
+            <Dependency>perl-Lingua-PT-Stemmer</Dependency>
+            <Dependency>perl-Lingua-Stem</Dependency>
+            <Dependency>perl-Lingua-Stem-Fr</Dependency>
+            <Dependency>perl-Lingua-Stem-It</Dependency>
+            <Dependency>perl-Lingua-Stem-Ru</Dependency>
+            <Dependency>perl-Lingua-Stem-Snowball</Dependency>
+            <Dependency>perl-Lingua-Stem-Snowball-Da</Dependency>
+            <Dependency>perl-Locale-Currency-Format</Dependency>
+            <Dependency>perl-Mail-Sendmail</Dependency>
+            <Dependency>perl-MARC-Charset</Dependency>
+            <Dependency>perl-MARC-Crosswalk-DublinCore</Dependency>
+            <Dependency>perl-MARC-Record</Dependency>
+            <Dependency>perl-MARC-XML</Dependency>
+            <Dependency>perl-Memoize-Memcached</Dependency>
+            <Dependency>perl-Module-Install</Dependency>
+            <Dependency>perl-Module-Metadata</Dependency>
+            <Dependency>perl-Module-ScanDeps</Dependency>
+            <Dependency>perl-Net-Server</Dependency>
+            <Dependency>perl-Net-Z3950-ZOOM</Dependency>
+            <Dependency>perl-Number-Format</Dependency>
+            <Dependency>perl-PAR-Dist</Dependency>
+            <Dependency>perl-Parse-CPAN-Meta</Dependency>
+            <Dependency>perl-PDF-API2</Dependency>
+            <Dependency>perl-PDF-API2-Simple</Dependency>
+            <Dependency>perl-PDF-Reuse</Dependency>
+            <Dependency>perl-PDF-Reuse-Barcode</Dependency>
+            <Dependency>perl-PDF-Table</Dependency>
+            <Dependency>perl-Perl-OSType</Dependency>
+            <Dependency>perl-POE</Dependency>
+            <Dependency>perl-Schedule-At</Dependency>
+            <Dependency>perl-SMS-Send</Dependency>
+            <Dependency>perl-Snowball-Norwegian</Dependency>
+            <Dependency>perl-Snowball-Swedish</Dependency>
+            <Dependency>perl-String-CRC32</Dependency>
+            <Dependency>perl-Test-Manifest</Dependency>
+            <Dependency>perl-Test-MockObject</Dependency>
+            <Dependency>perl-Text-CSV-Encoded</Dependency>
+            <Dependency>perl-Text-German</Dependency>
+            <Dependency>perl-Text-PDF</Dependency>
+            <Dependency>perl-Text-vFile-asData</Dependency>
+            <Dependency>perl-UNIVERSAL-can</Dependency>
+            <Dependency>perl-UNIVERSAL-isa</Dependency>
+            <Dependency>perl-UNIVERSAL-require</Dependency>
+            <Dependency>perl-Unicode-Normalize</Dependency>
+            <Dependency>perl-version-new</Dependency>
+            <Dependency>perl-Version-Requirements</Dependency>
+            <Dependency>perl-XML-Dumper</Dependency>
+            <Dependency>perl-XML-RSS</Dependency>
+            <Dependency>perl-HTML-Template-Pro</Dependency>
+            <Dependency>perl-DBD-mysql</Dependency>
+            <Dependency>perl-Date-Calc</Dependency>
+            <Dependency>perl-Date-Manip</Dependency>
+            <Dependency>perl-Email-Date</Dependency>
+            <Dependency>perl-HTML-Scrubber</Dependency>
+            <Dependency>perl-Locale-PO</Dependency>
+            <Dependency>perl-MIME-Lite</Dependency>
+            <Dependency>perl-ldap</Dependency>
+            <Dependency>perl-Template-Toolkit</Dependency>
+            <Dependency>perl-Text-Iconv</Dependency>
+            <Dependency>perl-XML-LibXSLT</Dependency>
+            <Dependency>perl-XML-SAX-Writer</Dependency>
+            <Dependency>perl-XML-Simple</Dependency>
+            <Dependency>perl-YAML-Syck</Dependency>
+            <Dependency>perl-YAML</Dependency>
+            <Dependency>mysql-client</Dependency>
+            <Dependency>mysql-server</Dependency>
+            <Dependency>postfix</Dependency>
+            <Dependency>perl-Unix-Syslog</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share/koha</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/var/lib</Path>
+            <Path fileType="data">/var/log</Path>
+            <Path fileType="data">/var/run/koha</Path>
+            <Path fileType="data">/var/lock/koha</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/99koha">99koha</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/apache2/vhosts.d/99koha-httpd.conf">99apache</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/koha/misc/translator/po/tr-TR-pref.po">tr-TR-pref.po</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/koha/misc/translator/po/tr-TR-i-opac-t-prog-v-3002000.po">tr-TR-i-opac-t-prog-v-3002000.po</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/koha/misc/translator/po/tr-TR-i-staff-t-prog-v-3002000.po">tr-TR-i-staff-t-prog-v-3002000.po</AdditionalFile>
+            <AdditionalFile owner="root" permission="0600" target="/etc/cron.d/koha">koha.cron</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-16</Date>
+            <Version>3.8.19</Version>
+            <Comment>Firs Release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

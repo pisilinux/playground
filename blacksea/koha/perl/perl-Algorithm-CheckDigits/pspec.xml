@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-Algorithm-CheckDigits</Name>
+        <Homepage>http://search.cpan.org/dist/Algorithm-CheckDigits/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>Perl extension to generate and test check digits</Summary>
+        <Description>This library provides several modules to compute or validate check digits.</Description>
+        <Archive sha1sum="71c89bc30d730caef96d3a55407e6145309773d1" type="targz">http://mirror.teklinks.com/CPAN/authors/id/M/MA/MAMAWE/Algorithm-CheckDigits-v1.3.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Probe-Perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-Algorithm-CheckDigits</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Probe-Perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    <History>
+      <Update release="2">
+            <Date>2013-08-29</Date>
+            <Version>1.3.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Burak Fazıl Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+      </Update>
+      <Update release="1">
+            <Date>2011-04-10</Date>
+            <Version>1.1.1</Version>
+            <Comment>Initial package for Corporate2</Comment>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
