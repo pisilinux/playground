@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mediainfo</Name>
+        <Homepage>http://mediaarea.net/en/MediaInfo</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>MediaInfo supplies technical and tag information about mediafiles</Summary>
+        <Description>MediaInfo supplies technical and tag information about a video or audio file. It is free software (free of charge and free access to source code: GPL or LGPL licence)</Description>
+        <Archive sha1sum="1159351788d5e37c99a536f44f3ea39e1801becb" type="tarbz2">http://mediaarea.net/download/source/mediainfo/0.7.65/mediainfo_0.7.65.tar.bz2</Archive>
+        <BuildDependencies>
+           <Dependency>libzen-devel</Dependency>
+           <Dependency>libmediainfo-devel</Dependency>
+           <Dependency>wxGTK-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>mediainfo</Name>
+        <RuntimeDependencies>
+            <Dependency>wxGTK</Dependency>
+            <Dependency>wxBase</Dependency>
+            <Dependency>libzen</Dependency>
+            <Dependency>libmediainfo</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/pixmaps/</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/128x128/apps/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/mediainfo.desktop">mediainfo.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-20</Date>
+            <Version>0.7.65</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
