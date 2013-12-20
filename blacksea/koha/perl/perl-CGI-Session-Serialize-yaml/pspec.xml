@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-CGI-Session-Serialize-yaml</Name>
+        <Homepage>http://search.cpan.org/dist/CGI-Session-Serialize-yaml</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Artistic</License>
+        <License>GPLv1</License>
+        <IsA>library</IsA>
+        <Summary>Serializer for CGI::Session</Summary>
+        <Description>Add YAML and YAML::Syck support to CGI::Session's serializers.</Description>
+        <Archive sha1sum="5202e7297f0a01608a15838bb6d0fb4c0ca1488e" type="targz">mirrors://cpan/authors/id/R/RS/RSAVAGE/CGI-Session-Serialize-yaml-4.26.tgz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Test-Pod</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-CGI-Session-Serialize-yaml</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-CGI-Session</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2011-04-10</Date>
+            <Version>4.26</Version>
+            <Comment>Initial release.</Comment>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

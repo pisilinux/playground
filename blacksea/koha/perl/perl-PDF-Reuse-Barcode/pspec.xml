@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-PDF-Reuse-Barcode</Name>
+        <Homepage>http://search.cpan.org/dist/PDF-Reuse-Barcode</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Artistic</License>
+        <License>GPLv1</License>
+        <IsA>library</IsA>
+        <Summary>Create barcodes for PDF documents with PDF::Reuse</Summary>
+        <Description>This is a sub-module to PDF::Reuse. It creates barcode "images" to be used in PDF documents. It uses GD::Barcode and its sub-modules: GD::Barcode::Code39, COOP2of5, EAN13 and so on to calculate the barcode pattern.</Description>
+        <Archive sha1sum="d9ca9cd47b8c2a5510d0bc9a1adc913b700d3829" type="targz">mirrors://cpan/authors/id/L/LA/LARSLUND/PDF-Reuse-Barcode-0.06.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Barcode-Code128</Dependency>
+            <Dependency>perl-GD-Barcode</Dependency>
+            <Dependency>perl-Text-PDF</Dependency>
+            <Dependency>perl-PDF-Reuse</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-PDF-Reuse-Barcode</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Barcode-Code128</Dependency>
+            <Dependency>perl-GD-Barcode</Dependency>
+            <Dependency>perl-Text-PDF</Dependency>
+            <Dependency>perl-PDF-Reuse</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2011-04-11</Date>
+            <Version>0.06</Version>
+            <Comment>Initial release.</Comment>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

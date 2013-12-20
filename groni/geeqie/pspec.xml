@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>geeqie</Name>
+        <Homepage>http://sourceforge.net/projects/geeqie/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A lightweight image browser and viewer (fork of GQview)</Summary>
+        <Description>Geeqie is a lightweight Gtk+ based image viewer for Unix like operating systems.</Description>
+        <Archive sha1sum="77167479e91e03d9512535a146c5d2d77941257f" type="targz">http://sourceforge.net/projects/geeqie/files/geeqie/geeqie-1.1/geeqie-1.1.tar.gz/download</Archive>
+        <BuildDependencies>
+            <Dependency>exiv2-devel</Dependency>
+            <Dependency>tiff-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>lcms-devel</Dependency>
+            <Dependency>lirc-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>geeqie</Name>
+        <RuntimeDependencies>
+            <Dependency>exiv2-libs</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>lcms</Dependency>
+            <Dependency>lirc</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/geeqie</Path>
+            <Path fileType="library">/usr/lib/geeqie/*</Path>
+            <Path fileType="data">/usr/share/applications/geeqie.desktop</Path>
+            <Path fileType="doc">/usr/share/doc/geeqie/*</Path>
+            <Path fileType="data">/usr/share/geeqie/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="man">/usr/share/man/man1/geeqie.1</Path>
+            <Path fileType="data">/usr/share/pixmaps/geeqie.png</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-19</Date>
+            <Version>1.1</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

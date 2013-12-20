@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-Module-Metadata</Name>
+        <Homepage>http://search.cpan.org/dist/Module-Metadata</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Artistic</License>
+        <License>GPLv1</License>
+        <IsA>library</IsA>
+        <Summary>Gather package and POD information from perl module files</Summary>
+        <Description>perl-Module-Metadata is a Perl module which gathers package and POD information from perl module files</Description>
+        <Archive sha1sum="3a73bf9b194428c67fa73bc927155d0f676c233f" type="targz">mirrors://cpan/authors/id/E/ET/ETHER/Module-Metadata-1.000016.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-Module-Metadata</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2013-08-29</Date>
+            <Version>1.000016</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Burak Fazıl Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-04-10</Date>
+            <Version>1.000004</Version>
+            <Comment>Initial release.</Comment>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

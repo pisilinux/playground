@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-Net-Server</Name>
+        <Homepage>http://search.cpan.org/dist/Net-Server</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Artistic</License>
+        <License>GPLv1</License>
+        <IsA>library</IsA>
+        <Summary>Extensible, general Perl server engine</Summary>
+        <Description>"Net::Server" combines the good properties from "Net::Daemon" (0.34), "NetServer::Generic" (1.03), and "Net::FTPServer" (1.0), and also from various concepts in the Apache Webserver.</Description>
+        <Archive sha1sum="e2cd92dc275371c50e3baca43f90e8bef1cdda7e" type="targz">mirrors://cpan/authors/id/R/RH/RHANDOM/Net-Server-2.007.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-Net-Server</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2013-08-29</Date>
+            <Version>2.007</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Burak Fazıl Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-04-10</Date>
+            <Version>0.99</Version>
+            <Comment>Initial release.</Comment>
+            <Name>Samed Beyribey</Name>
+            <Email>samed.beyribey@linux.org.tr</Email>
+        </Update>
+    </History>
+</PISI>

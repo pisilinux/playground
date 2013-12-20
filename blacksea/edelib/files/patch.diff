@@ -1,0 +1,10 @@
+--- Jamconfig.in.orig	2012-05-18 15:51:03.000000000 +0300
++++ Jamconfig.in	2013-12-18 02:01:44.967412519 +0200
+@@ -58,6 +58,7 @@
+ FLTK_CXXFLAGS  ?= "$(FLTK_CFLAGS)" ;
+ FLTK_LIBS      ?= "@FLTK_LIBS@" ;
+ FLTK_LIBS_FULL ?= "@FLTK_LIBS_FULL@" ;
++LIBS    += "-lstdc++ $(FLTK_LIBS)" ;
+ 
+ # dbus
+ DBUS_CFLAGS ?= "@DBUS_CFLAGS@" ;
