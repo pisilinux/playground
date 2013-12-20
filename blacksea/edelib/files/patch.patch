@@ -1,0 +1,11 @@
+-- edelib-2.0.orig/Jamconfig.in 2012-05-18 09:51:03.000000000 -0300
++++ edelib-2.0/Jamconfig.in 2012-05-24 11:01:10.103158057 -0300
+@@ -59,6 +59,8 @@
+FLTK_LIBS      ?= "@FLTK_LIBS@" ;
+FLTK_LIBS_FULL ?= "@FLTK_LIBS_FULL@" ;
+
++LIBS    += "-lstdc++ $(FLTK_LIBS)" ;
++
+# dbus
+DBUS_CFLAGS ?= "@DBUS_CFLAGS@" ;
+DBUS_LIBS   ?= "@DBUS_LIBS@" ; 
