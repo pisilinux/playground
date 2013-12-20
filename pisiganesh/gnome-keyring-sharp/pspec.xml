@@ -12,6 +12,7 @@
         <Summary>gnome-keyring-sharp is a fully managed implementation of libgnome-keyring</Summary>
         <Description>gnome-keyring-sharp is a fully managed implementation of libgnome-keyring</Description>
         <BuildDependencies>
+            <Dependency>mono-devel</Dependency>
             <Dependency>ndesk-dbus</Dependency>
         </BuildDependencies>
         <Archive sha1sum="b8aad5b62f2a443b72290688027701d1fad06ff1" type="targz">http://ftp.de.debian.org/debian/pool/main/g/gnome-keyring-sharp/gnome-keyring-sharp_1.0.0.orig.tar.gz</Archive>
@@ -19,9 +20,9 @@
     <Package>
         <Name>gnome-keyring-sharp</Name>
         <Files>
-            <Path fileType="executable">/usr/lib/mono/*</Path>
-            <Path fileType="doc">/usr/lib/monodoc/*</Path>
-            <Path fileType="config">/usr/lib/pkgconfig/*</Path>
+            <Path fileType="executable">/usr/lib/mono</Path>
+            <Path fileType="doc">/usr/lib/monodoc</Path>
+            <Path fileType="config">/usr/lib/pkgconfig</Path>
         </Files>
     </Package>
     <History>

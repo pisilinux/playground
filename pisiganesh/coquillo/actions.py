@@ -28,7 +28,7 @@ def install():
 # You can use these as variables, they will replace GUI values before build.
 # Package Name : coquillo
 # Version : 1.12
-# Summary : Coquillo is a multi-platform metadata editor / tagger for various audio file formats. It is based on Qt 4 and TagLib.
+# Summary : Coquillo is a multi-platform metadata editor / tagger for various audio file formats. It is based on Qt4 and TagLib.
 
 # For more information, you can look at the Actions API
 # from the Help menu and toolbar.
