@@ -48,6 +48,11 @@ Plan out your meals for a day, a few days, or even weeks. Give Krecipes informat
 Krecipes takes full advantage of the power of relational databases. Categories, ingredients, units, etc. are stored as separate identities which are linked to recipes when used. You can rename one of these in one place, and all recipes using that element are automatically updated.
 
 When importing recipes from an external source, you may find many misspellings and strange capitalization. Simply rename these elements in the "Data" panel to correct all your recipes. For example, you may have the categories "Vegtables" and "Vegatables". Rename "Vegtables" to "Vegatables" and the merge feature will put all the recipes under these two categories into the right category.</Description>
+        <BuildDependencies>
+            <Dependency>qimageblitz-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+            <Dependency>sqlite-devel</Dependency>
+        </BuildDependencies>
         <Archive sha1sum="fc232c9125e555d8c1cbbbf5020311ed6f278b39" type="targz">http://sourceforge.net/projects/krecipes/files/krecipes/2.0-beta2/krecipes-2.0-beta2.tar.gz</Archive>
     </Source>
     <Package>
@@ -61,10 +66,10 @@ When importing recipes from an external source, you may find many misspellings a
         </RuntimeDependencies>
         <Files>
             <Path fileType="all">/</Path>
-            <Path fileType="executable">/usr/bin/*</Path>
-            <Path fileType="data">/usr/share/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
         </Files>
     </Package>
     <History>

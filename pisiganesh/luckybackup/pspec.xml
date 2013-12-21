@@ -8,6 +8,7 @@
         </Packager>
         <License>GPL v3</License>
         <PartOf>system</PartOf>
+        <IsA>app:gui</IsA>
         <Summary>A powerful, fast and reliable backup &amp; sync tool</Summary>
         <Description>The main goal of luckyBackup, as its name states, is the creation of backups of your data.</Description>
         <BuildDependencies>
@@ -21,10 +22,10 @@
             <Dependency>qt</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/bin/*</Path>
-            <Path fileType="data">/usr/share/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="doc">/usr/share/man/*</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/man</Path>
         </Files>
     </Package>
     <History>

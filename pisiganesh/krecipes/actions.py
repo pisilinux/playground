@@ -10,7 +10,7 @@ from pisi.actionsapi import kde4
 # WorkDir="krecipes-"+ get.srcVERSION() +"/sub_project_dir/"
 
 def setup():
-    kde4.configure()
+    kde4.configure("--prefix=/usr")
 
 def build():
     kde4.make()
