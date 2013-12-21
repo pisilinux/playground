@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>fraqtive</Name>
+        <Homepage>http://fraqtive.mimec.org/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <PartOf>science</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Fraktale berechnen und darstellt</Summary>
+        <Description>Fraqtive ermöglicht das Generieren und Betrachten von Fraktalen wie etwa Mandelbrotmännchen.</Description>
+        <BuildDependencies>
+            <Dependency>mesa-glu-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="524ac07dbc0e583e193640da74e2b4aba7d20838" type="tarbz2">http://sourceforge.net/projects/fraqtive/files/latest/download?source=pdlp</Archive>
+    </Source>
+    <Package>
+        <Name>fraqtive</Name>
+        <RuntimeDependencies>
+            <Dependency>icon-theme-hicolor</Dependency>
+            <Dependency>mesa-glu</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>xdg-utils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="executable">/usr/bin</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-21</Date>
+            <Version>0.4.6</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Update>
+    </History>
+</PISI>

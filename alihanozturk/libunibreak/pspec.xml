@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libunibreak</Name>
+        <Homepage>http://sourceforge.net/projects/vimgadgets/files/libunibreak/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Packager>
+        <License>custom:zlib/libpng</License>
+        <PartOf>x11.driver</PartOf>
+        <IsA>library</IsA>
+        <Summary>line breaking library (development files)</Summary>
+        <Description>line breaking library (development files)
+ libunibreak is an implementation of the Unicode line breaking algorithm
+ described at http://www.unicode.org/reports/tr14/tr14-19.html</Description>
+        <Archive sha1sum="fd0f70f9de049f5a129d9992d937a0f6a01af7b7" type="targz">http://sourceforge.net/projects/vimgadgets/files/libunibreak/1.1/libunibreak-1.1.tar.gz/download</Archive>
+    </Source>
+    <Package>
+        <Name>libunibreak</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-24</Date>
+            <Version>1.1</Version>
+            <Comment>first release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Update>
+    </History>
+</PISI>

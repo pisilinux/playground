@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>nootka</Name>
+        <Homepage>http://nootka.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>multimedia</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>A crossplatform tool for learning classical score notation. Mostly for guitarists but also very good for ear training.</Summary>
+        <Description>A crossplatform tool for learning classical score notation. Mostly for guitarists but also very good for ear training.</Description>
+        <BuildDependencies>
+            <Dependency>fftw3-devel</Dependency>
+            <Dependency>libvorbis-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>soundtouch-devel</Dependency>
+            <Dependency>alsa-lib-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="73ee05af6adb9314c9358a800ea19078dbcc4170" type="tarbz2">http://sourceforge.net/projects/nootka/files/Nootka-0.8.95/nootka-0.8.95-beta-source.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>nootka</Name>
+        <RuntimeDependencies>
+            <Dependency>fftw3</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>soundtouch</Dependency>
+            <Dependency>alsa-lib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-25</Date>
+            <Version>0.8.95</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Update>
+    </History>
+</PISI>
