@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>HomeBank</Name>
+        <Homepage>http://homebank.free.fr/</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Free, easy, personal accounting for everyone</Summary>
+        <Description>«HomeBank» is free software that will assist you to manage your personal accounting. It is designed to easy to use and be able to analyse your personal finance in detail using powerful filtering tools and graphs. If you are looking for a completely free and easy way to manage your personal accounting then «HomeBank» should be the software of choice.</Description>
+        <BuildDependencies>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>libofx-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="0d896a95963a5748216b98062b4e15aa5c94bb85" type="targz">http://homebank.free.fr/public/homebank-4.5.4.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>HomeBank</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libofx</Dependency>
+            <Dependency>pango</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/share/homebank</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-09</Date>
+            <Version>4.5.4</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

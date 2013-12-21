@@ -6,22 +6,17 @@
 from pisi.actionsapi import autotools
 from pisi.actionsapi import get
 #from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
 
-# if pisi can't find source directory, see /var/pisi/handbrake/work/ and:
-# WorkDir="handbrake-"+ get.srcVERSION() +"/sub_project_dir/"
-
-WorkDir = "HandBrake-0.9.9"
+# if pisi can't find source directory, see /var/pisi/HomeBank/work/ and:
+# WorkDir="HomeBank-"+ get.srcVERSION() +"/sub_project_dir/"
 
 def setup():
-    shelltools.system("./configure --prefix=/usr --force")
+    autotools.configure("--prefix=/usr")
 
 def build():
-    shelltools.cd("build")
-    shelltools.system("gmake")
+    autotools.make()
 
 def install():
-    shelltools.cd("build")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
 # Take a look at the source folder for these file as documentation.
@@ -29,12 +24,12 @@ def install():
 
 # If there is no install rule for a runnable binary, you can 
 # install it to binary directory.
-#    pisitools.dobin("handbrake")
+#    pisitools.dobin("HomeBank")
 
 # You can use these as variables, they will replace GUI values before build.
-# Package Name : handbrake
-# Version : 0.9.9
-# Summary : The open source video transcoder
+# Package Name : HomeBank
+# Version : 4.5.4
+# Summary : Free, easy, personal accounting for everyone
 
 # For more information, you can look at the Actions API
 # from the Help menu and toolbar.

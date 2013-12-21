@@ -17,27 +17,47 @@ Reasons you’ll love HandBrake:
     Convert video from nearly any format
     Free and Open Source
     Multi-Platform (Windows, Mac and Linux)</Description>
+        <BuildDependencies>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>dbus-glib-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>gst-plugins-base-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libass-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>libogg-devel</Dependency>
+            <Dependency>libsamplerate-devel</Dependency>
+            <Dependency>libtheora-devel</Dependency>
+            <Dependency>libvorbis-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>webkit-gtk2-devel</Dependency>
+            <Dependency>webkit-gtk3-devel</Dependency>
+        </BuildDependencies>
         <Archive sha1sum="64414bdc425115545f7dd735c7d1e30b8b005056" type="tarbz2">http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9.tar.bz2</Archive>
     </Source>
     <Package>
         <Name>handbrake</Name>
         <RuntimeDependencies>
             <Dependency>cairo</Dependency>
+            <Dependency>dbus-glib</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
             <Dependency>gst-plugins-base</Dependency>
             <Dependency>gstreamer</Dependency>
             <Dependency>gtk3</Dependency>
             <Dependency>libass</Dependency>
             <Dependency>libnotify</Dependency>
+            <Dependency>libogg</Dependency>
             <Dependency>libsamplerate</Dependency>
             <Dependency>libtheora</Dependency>
             <Dependency>libvorbis</Dependency>
             <Dependency>pango</Dependency>
+            <Dependency>webkit-gtk2</Dependency>
             <Dependency>webkit-gtk3</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/bin/*</Path>
-            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>
