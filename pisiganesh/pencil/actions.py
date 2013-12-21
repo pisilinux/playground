@@ -30,8 +30,5 @@ def install():
     pisitools.insinto("/usr/share/pencil/","usr/share/pencil/update.rdf.tpl.xml")
 
     
-    
+# By PiSiDo 2.0.0
 
-    
-# By PiSiDo 2.0.0
-# By PiSiDo 2.0.0

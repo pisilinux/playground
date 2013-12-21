@@ -27,13 +27,22 @@
     </Source>
     <Package>
         <Name>MyPaint</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>lcms2</Dependency>
+            <Dependency>pango</Dependency>
+        </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/bin/*</Path>
-            <Path fileType="header">/include/*</Path>
-            <Path fileType="library">/lib/*</Path>
-            <Path fileType="data">/lib/pkgconfig/*</Path>
-            <Path fileType="data">/share/*</Path>
-            <Path fileType="localedata">/share/locale/*</Path>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="header">/include</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="data">/lib/pkgconfig</Path>
+            <Path fileType="data">/share</Path>
+            <Path fileType="localedata">/share/locale</Path>
         </Files>
     </Package>
     <History>
