@@ -1,0 +1,12 @@
+diff -ru gpart-0.1h.orig/src/gm_ntfs.h gpart-0.1h/src/gm_ntfs.h
+--- gpart-0.1h.orig/src/gm_ntfs.h	2001-01-29 21:33:58.000000000 +0100
++++ gpart-0.1h/src/gm_ntfs.h	2012-02-26 14:25:57.202524217 +0100
+@@ -29,7 +29,7 @@
+ /* 'NTFS' in little endian */
+ #define NTFS_SUPER_MAGIC	0x5346544E
+ 
+-#if defined(i386) || defined(__i386__) || defined(__alpha__)
++#if defined(i386) || defined(__i386__) || defined(__alpha__) || defined(__arm__)
+ 
+ /* unsigned integral types */
+ #ifndef NTFS_INTEGRAL_TYPES
