@@ -10,7 +10,7 @@ from pisi.actionsapi import kde4
 # WorkDir="Sqlitemanager-"+ get.srcVERSION() +"/sub_project_dir/"
 
 def setup():
-    kde4.configure()
+    kde4.configure("PREFIX=/usr")
 
 def build():
     kde4.make()
