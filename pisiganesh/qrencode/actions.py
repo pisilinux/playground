@@ -11,7 +11,7 @@ from pisi.actionsapi import get
 # WorkDir="qrencode-"+ get.srcVERSION() +"/sub_project_dir/"
 
 def setup():
-    autotools.configure()
+    autotools.configure("--prefix=/usr")
 
 def build():
     autotools.make()

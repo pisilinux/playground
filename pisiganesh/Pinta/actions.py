@@ -14,7 +14,7 @@ from pisi.actionsapi import shelltools
 shelltools.export("XDG_CONFIG_HOME", get.workDIR())
 
 def setup():
-    autotools.configure()
+    autotools.configure("--prefix=/usr")
 
 def build():
     autotools.make()

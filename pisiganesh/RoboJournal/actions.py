@@ -13,7 +13,7 @@ def setup():
     qt4.configure()
 
 def build():
-    qt4.make()
+    qt4.make("PREFIX=/usr")
 
 def install():
     qt4.install()

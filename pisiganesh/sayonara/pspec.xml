@@ -7,7 +7,8 @@
             <Email>iyer.gb.linux@gmail.com</Email>
         </Packager>
         <License>GNU GPL v3</License>
-        <PartOf>multimedia</PartOf>
+        <PartOf>multimedia.sound</PartOf>
+        <IsA>app:gui</IsA>
         <Summary>Sayonara is a small, clear and fast audio player for Linux</Summary>
         <Description>Sayonara is a small, clear and fast audio player for Linux written in C++, supported by the Qt framework. It uses Gstreamer as audio backend.
 
@@ -27,13 +28,14 @@ One of Sayonara's goals are intuitive and easy usablility never leading to the i
         <Name>sayonara</Name>
         <RuntimeDependencies>
             <Dependency>gstreamer</Dependency>
+            <Dependency>libnotify</Dependency>
             <Dependency>qt</Dependency>
             <Dependency>taglib</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/bin/*</Path>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>
