@@ -11,7 +11,7 @@ from pisi.actionsapi import pisitools
 # WorkDir="pngcrush-"+ get.srcVERSION() +"/sub_project_dir/"
 
 def build():
-    autotools.make()
+    autotools.make("PREFIX=/usr")
 
 def install():
     pisitools.dodir("/usr")

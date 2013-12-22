@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pogo</Name>
+        <Homepage>https://launchpad.net/pogo</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Probably the simplest and fastest audio player for Linux.</Summary>
+        <Description>Pogo's elementary-inspired design uses the screen-space very efficiently. It is especially well-suited for people who organize their music by albums on the harddrive. The main interface components are a directory tree and a playlist that groups albums in an innovative way.Supported file formats include Ogg Vorbis, MP3, FLAC, Musepack, Wavpack, and MPEG-4 AAC. Pogo is a fork of Decibel Audio Player.</Description>
+        <Archive sha1sum="a44435264d4f32ca6540f4482885ca47977fc2bb" type="targz">https://launchpad.net/pogo/trunk/0.8.2/+download/pogo-0.8.2.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>pogo</Name>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>gst-python</Dependency>
+            <Dependency>python-mutagen</Dependency>
+            <Dependency>python-imaging</Dependency>
+            <Dependency>notify-python</Dependency>
+            <Dependency>gst-plugins-base</Dependency>
+            <Dependency>gst-plugins-good</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-22</Date>
+            <Version>0.8.2</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

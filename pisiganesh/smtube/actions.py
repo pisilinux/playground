@@ -11,7 +11,7 @@ from pisi.actionsapi import get
 # WorkDir="smtube-"+ get.srcVERSION() +"/sub_project_dir/"
 
 def build():
-    autotools.make()
+    autotools.make("PREFIX=/usr")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
