@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>samsung-tools</Name>
+        <Homepage>https://launchpad.net/samsung-tools</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>hardware</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>'Samsung Tools' is the successor of 'Samsung Scripts' provided by the 'Linux On My Samsung' project.</Summary>
+        <Description>It enables control in a friendly way of the devices available on Samsung laptops (bluetooth, wireless, webcam, backlight, CPU fan, special keys) and the control of various aspects related to power management, like the CPU undervolting (when a PHC-enabled kernel is available).</Description>
+        <BuildDependencies>
+            <Dependency>keybinder-devel</Dependency>
+            <Dependency>python-gtk-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="592c8d1aaba9add61d7d4363d7e7e1098eecc921" type="targz">https://launchpad.net/samsung-tools/trunk/2.3/+download/samsung-tools-2.3.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>samsung-tools</Name>
+        <RuntimeDependencies>
+            <Dependency>dbus-python</Dependency>
+            <Dependency>keybinder</Dependency>
+            <Dependency>pm-utils</Dependency>
+            <Dependency>python-Notifier</Dependency>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>rfkill</Dependency>
+            <Dependency>vbetool</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-24</Date>
+            <Version>2.3</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Update>
+    </History>
+</PISI>

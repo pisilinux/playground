@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>al-anvar</Name>
+        <Homepage>http://al-anvar.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Open source freeware software for study Quran ( koran ) and research</Summary>
+        <Description>Al-anvar is an open source freeware dedicated for Quranic study and research. Some of its features are: Advanced search , Commenting tool , Indexing and Grouping , Add-ons for different translations and commentaries in many languages , Online and offline recitation</Description>
+        <BuildDependencies>
+            <Dependency>phonon-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="d3d29dc9f94e3a9ac1556dda5c3c94c7696cadd9" type="targz">http://sourceforge.net/projects/al-anvar/files/0.6.0/src-al-anvar-0.6.0.tar.gz/download</Archive>
+    </Source>
+    <Package>
+        <Name>al-anvar</Name>
+        <RuntimeDependencies>
+            <Dependency>phonon</Dependency>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-02</Date>
+            <Version>0.6.0</Version>
+            <Comment>First Release.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Update>
+    </History>
+</PISI>

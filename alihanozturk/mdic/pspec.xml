@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mdic</Name>
+        <Homepage>http://mdic.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>office.dictionary</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>A Qt-based program to access multilingual dictionaries and Google Translate.</Summary>
+        <Description>MDic is a free/open source multilingual dictionary for GNU/Linux</Description>
+        <BuildDependencies>
+            <Dependency>aspell-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="d8f49b5f125b4bea19ac1108c0aa1be87a3c8cd9" type="targz">http://sourceforge.net/projects/mdic/files/MDic/0.8.1/mdic-0.8.1.tar.gz/download</Archive>
+        <Patches>
+            <Patch level="1">desktop.patch</Patch>
+        </Patches>
+    </Source>
+    <Package>
+        <Name>mdic</Name>
+        <RuntimeDependencies>
+            <Dependency>aspell</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>mdicconv</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/mdic/dictionaries/Babylon_English.m2">Babylon_English.m2</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/mdic/dictionaries/Babylon_English_French.m2">Babylon_English_French.m2</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/mdic/dictionaries/Generic_English_Persian.m2">Generic_English_Persian.m2</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/mdic/dictionaries/hFarsi_Advanced_English-Persian.m2">hFarsi_Advanced_English-Persian.m2</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/mdic/dictionaries/longman.m2">longman.m2</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/mdic/dictionaries/OurStat_Persian_English.m2">OurStat_Persian_English.m2</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-28</Date>
+            <Version>0.8.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Update>
+    </History>
+</PISI>

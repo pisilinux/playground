@@ -1,0 +1,13 @@
+diff -ru gpart-0.1h/src/l64seek.c gpart-0.1h-new/src/l64seek.c
+gpart-0.1h/src/l64seek.c	2000-12-14 08:54:11.000000000 +1000
++++ gpart-0.1h-new/src/l64seek.c	2006-10-28 21:37:36.000000000 +1000
+@@ -26,7 +26,11 @@static int	 osptr = -1;
+ 
+ #if defined(__linux__) && defined(__i386__)
+-_syscall5(int,_llseek,uint,fd,ulong,hi,ulong,lo,loff_t *,res,uint,wh)
++#include <sys/syscall.h>
++static int _llseek(uint fd, ulong hi, ulong lo, loff_t *res, uint wh)
++{
++	return syscall(SYS__llseek, fd, hi, lo, res, wh);
++}
+ #endif
