@@ -17,19 +17,13 @@
             <Dependency>python-devel</Dependency>
             <Dependency>python-qt-devel</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="9f80262887d3d852775aa506a3f203fb193ea074" type="targz">/home/alihan/İndirilenler/indywiki-0.9.9.1.tar.gz</Archive>
+        <Archive sha1sum="9f80262887d3d852775aa506a3f203fb193ea074" type="targz">http://sourceforge.net/projects/indywiki/files/indywiki/0.9.9.1/indywiki-0.9.9.1.tar.gz/download</Archive>
         <Patches>
             <Patch level="1">do-nothing-on-bg-colour-cancel.patch</Patch>
             <Patch level="1">non-native.patch</Patch>
         </Patches>
     </Source>
-    <Package><AdditionalFiles><AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/indywiki.desktop">indywiki.desktop</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/indywiki.png">indywiki.png</AdditionalFile>
-        </AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/indywiki.desktop">indywiki.desktop</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/indywiki.png">indywiki.png</AdditionalFile>
-        </AdditionalFiles>
+    <Package>
         <Name>indywiki</Name>
         <RuntimeDependencies>
             <Dependency>python</Dependency>

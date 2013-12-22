@@ -17,4 +17,3 @@ def install():
     pythonmodules.install()
 
     pisitools.dodoc("AUTHORS", "GPL", "LICENSE", "README.txt", "TODO.txt")
-# By PiSiDo 2.0.0
