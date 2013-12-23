@@ -23,13 +23,16 @@
     <Package>
         <Name>ProjectLibre</Name>
         <Files>
-            <Path fileType="data">/opt/*</Path>
-            <Path fileType="data">/usr/*</Path>
+            <Path fileType="data">/opt</Path>
+            <Path fileType="data">/usr</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile target="/usr/share/applications/ProjectLibre.desktop" permission="0644" group="root" owner="root">ProjectLibre.desktop</AdditionalFile>
             <AdditionalFile target="/usr/share/pixmaps/ProjectLibre.gif" permission="0644" group="root" owner="root">ProjectLibre.gif</AdditionalFile>
         </AdditionalFiles>
+        <RuntimeDependencies>
+            <Dependency>sun-jre</Dependency>
+        </RuntimeDependencies>
     </Package>
     <History>
         <Update release="1">

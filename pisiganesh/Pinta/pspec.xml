@@ -20,11 +20,15 @@
     </Source>
     <Package>
         <Name>Pinta</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk-sharp</Dependency>
+            <Dependency>mono</Dependency>
+        </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/bin/*</Path>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="data">/usr/share/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
         </Files>
     </Package>
     <History>
