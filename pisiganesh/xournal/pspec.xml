@@ -11,16 +11,19 @@
         <IsA>app:gui</IsA>
         <Summary>Xournal is an application for notetaking, sketching</Summary>
         <Description>Xournal aims to provide superior graphical quality (subpixel resolution) and overall functionality; however it lacks the collaborative features of Jarnal. Since Xournal is still in its early development stages, it may not be fully stable, and some features have not been implemented yet.</Description>
+        <BuildDependencies>
+            <Dependency>poppler-glib-devel</Dependency>
+        </BuildDependencies>
         <Archive sha1sum="d2556bf21bef2df99bef0a6d1cb251d5e0f12d3f" type="targz">http://sourceforge.net/projects/xournal/files/xournal/0.4.7/xournal-0.4.7.tar.gz</Archive>
     </Source>
     <Package>
         <Name>xournal</Name>
         <Files>
-            <Path fileType="executable">/usr/bin/*</Path>
-            <Path fileType="data">/usr/share/applications/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="doc">/usr/share/xournal/html-doc/*</Path>
-            <Path fileType="data">/usr/share/xournal/pixmaps/*</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/xournal/html-doc</Path>
+            <Path fileType="data">/usr/share/xournal/pixmaps</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile target="/usr/share/applications/xournal.desktop" permission="0644" group="root" owner="root">xournal.desktop</AdditionalFile>
