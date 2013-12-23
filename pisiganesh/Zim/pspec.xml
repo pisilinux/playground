@@ -21,17 +21,23 @@ Zim can be used to:
     Do brainstorming
 
 Zim handles several types of markup, like headings, bullet lists and of course bold, italic and highlighted. This markup is saved as wiki text so you can easily edit it with other editors. Because of the autosave feature you can switch between pages and follow links while editing without worries.</Description>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+        </BuildDependencies>
         <Archive sha1sum="f6abef969687ca09467031def1ddbcb611cb9f92" type="targz">http://zim-wiki.org/downloads/zim-0.60.tar.gz</Archive>
     </Source>
     <Package>
         <Name>Zim</Name>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+        </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/bin/*</Path>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="data">/usr/share/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="man">/usr/share/man/*</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
         </Files>
     </Package>
     <History>

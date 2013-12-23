@@ -6,7 +6,6 @@
 from pisi.actionsapi import autotools
 from pisi.actionsapi import get
 #from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
 
 # if pisi can't find source directory, see /var/pisi/viewnior/work/ and:
 # WorkDir="viewnior-"+ get.srcVERSION() +"/sub_project_dir/"

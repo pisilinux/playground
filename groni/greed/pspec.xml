@@ -1,0 +1,48 @@
+<?xml version="1.0" ?> 
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>greed</Name>
+        <Homepage>http://www.catb.org/esr/greed</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <Summary>Puzzle game where you eat squares before being boxed in</Summary>
+        <Description>Greed is a puzzle game where you erase items in a grid, trying not to get boxed in.</Description>
+        <License>BSD-3</License>
+        <Archive sha1sum="6c8249e8fa56cff814ba0af473dc00e12f2ead95" type="targz">http://www.catb.org/~esr/greed/greed-3.9.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>ncurses-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <!-- Move high score file -->
+            <Patch level="1">hs.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>greed</Name>
+        <RuntimeDependencies>
+            <Dependency>ncurses</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/var/games</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2013-12-23</Date>
+            <Version>3.9</Version>
+            <Comment>First Release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+    	
+</PISI>
+
