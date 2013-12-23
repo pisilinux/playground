@@ -1,0 +1,44 @@
+<?xml version="1.0" ?> 
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dropbear</Name>
+        <Homepage>http://matt.ucc.asn.au/dropbear/dropbear.html</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <Summary>dropbear (small SSH server and client)</Summary>
+        <Description> Dropbear is a small SSH server and client that allows a small memory footprint, useful in embedded applications.</Description>
+        <License>MIT</License>
+        <Archive sha1sum="1d0abb6c46206a2c95b26a6f454844855f585403" type="tarbz2">http://matt.ucc.asn.au/dropbear/releases/dropbear-2013.62.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>pam</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>dropbear</Name>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="config">/etc/dropbear</Path>
+            <Path fileType="data">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc/dropbear</Path>
+        </Files>
+    </Package>
+    
+    <History> 
+        <Update release="1">
+            <Date>2013-12-23</Date>
+            <Version>2013.62</Version>
+            <Comment>First Release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
