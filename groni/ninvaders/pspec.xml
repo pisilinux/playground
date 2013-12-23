@@ -1,0 +1,40 @@
+<?xml version="1.0" ?> 
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ninvaders</Name>
+        <Homepage>http://ninvaders.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <Summary>A space invaders-like game using ncurses</Summary>
+        <Description>A space invaders-like game using ncurses. Right now you are earth's only hope to save it from alien invaders from space. Make your job, and make it good, mankind believes in you...</Description>
+        <License>GPLv2+</License>
+        <Archive sha1sum="5ab825694b108cbfa988377ca216188fa9a76e89" type="targz">http://sourceforge.net/projects/ninvaders/files/ninvaders/0.1.1/ninvaders-0.1.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>ncurses-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ninvaders</Name>
+        <RuntimeDependencies>
+            <Dependency>ncurses</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>12-23-2013</Date>
+            <Version>0.1.1</Version>
+            <Comment>New Release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>	
+</PISI>
