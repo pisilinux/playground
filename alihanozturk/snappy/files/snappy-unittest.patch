@@ -1,77 +1,106 @@
-diff --git a/Makefile.am b/Makefile.am
-index 41ac1b0..0f5ad10 100644
---- a/Makefile.am
-+++ b/Makefile.am
-@@ -10,7 +10,6 @@
+--- a/snappy_unittest.cc
++++ b/snappy_unittest.cc
+@@ -57,6 +57,8 @@ DEFINE_bool(liblzf, false,
+             "(http://www.goof.com/pcg/marc/liblzf.html)");
+ DEFINE_bool(fastlz, false,
+             "Run FastLZ compression (http://www.fastlz.org/");
++DEFINE_bool(csnappy, false,
++            "Run csnappy compression (https://github.com/zeevt/csnappy/)");
+ DEFINE_bool(snappy, true, "Run snappy compression");
  
- # Unit tests and benchmarks.
- snappy_unittest_CPPFLAGS = $(gflags_CFLAGS) $(GTEST_CPPFLAGS)
--snappy_unittest_CXXFLAGS = $(GTEST_CPPFLAGS)
- snappy_unittest_SOURCES = snappy_unittest.cc snappy-test.cc
- snappy_unittest_LDFLAGS = $(GTEST_LDFLAGS)
- snappy_unittest_LDADD = libsnappy.la $(gflags_LIBS) $(GTEST_LIBS)
-diff --git a/Makefile.in b/Makefile.in
-index e363379..a5930ed 100644
---- a/Makefile.in
-+++ b/Makefile.in
-@@ -98,9 +98,8 @@
- snappy_unittest_DEPENDENCIES = libsnappy.la $(am__DEPENDENCIES_1) \
- 	$(am__DEPENDENCIES_1)
- snappy_unittest_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
--	$(LIBTOOLFLAGS) --mode=link $(CXXLD) \
--	$(snappy_unittest_CXXFLAGS) $(CXXFLAGS) \
--	$(snappy_unittest_LDFLAGS) $(LDFLAGS) -o $@
-+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-+	$(CXXFLAGS) $(snappy_unittest_LDFLAGS) $(LDFLAGS) -o $@
- DEFAULT_INCLUDES = -I.@am__isrc@
- depcomp = $(SHELL) $(top_srcdir)/depcomp
- am__depfiles_maybe = depfiles
-@@ -276,7 +275,6 @@
  
- # Unit tests and benchmarks.
- snappy_unittest_CPPFLAGS = $(gflags_CFLAGS) $(GTEST_CPPFLAGS)
--snappy_unittest_CXXFLAGS = $(GTEST_CPPFLAGS)
- snappy_unittest_SOURCES = snappy_unittest.cc snappy-test.cc
- snappy_unittest_LDFLAGS = $(GTEST_LDFLAGS)
- snappy_unittest_LDADD = libsnappy.la $(gflags_LIBS) $(GTEST_LIBS)
-@@ -420,32 +418,32 @@
- @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
+@@ -121,11 +123,11 @@ typedef string DataEndingAtUnreadablePage;
+ #endif
  
- snappy_unittest-snappy_unittest.o: snappy_unittest.cc
--@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(snappy_unittest_CXXFLAGS) $(CXXFLAGS) -MT snappy_unittest-snappy_unittest.o -MD -MP -MF $(DEPDIR)/snappy_unittest-snappy_unittest.Tpo -c -o snappy_unittest-snappy_unittest.o `test -f 'snappy_unittest.cc' || echo '$(srcdir)/'`snappy_unittest.cc
-+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT snappy_unittest-snappy_unittest.o -MD -MP -MF $(DEPDIR)/snappy_unittest-snappy_unittest.Tpo -c -o snappy_unittest-snappy_unittest.o `test -f 'snappy_unittest.cc' || echo '$(srcdir)/'`snappy_unittest.cc
- @am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/snappy_unittest-snappy_unittest.Tpo $(DEPDIR)/snappy_unittest-snappy_unittest.Po
- @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='snappy_unittest.cc' object='snappy_unittest-snappy_unittest.o' libtool=no @AMDEPBACKSLASH@
- @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
--@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(snappy_unittest_CXXFLAGS) $(CXXFLAGS) -c -o snappy_unittest-snappy_unittest.o `test -f 'snappy_unittest.cc' || echo '$(srcdir)/'`snappy_unittest.cc
-+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o snappy_unittest-snappy_unittest.o `test -f 'snappy_unittest.cc' || echo '$(srcdir)/'`snappy_unittest.cc
+ enum CompressorType {
+-  ZLIB, LZO, LIBLZF, QUICKLZ, FASTLZ, SNAPPY
++  ZLIB, LZO, LIBLZF, QUICKLZ, FASTLZ, CSNAPPY, SNAPPY,
+ };
  
- snappy_unittest-snappy_unittest.obj: snappy_unittest.cc
--@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(snappy_unittest_CXXFLAGS) $(CXXFLAGS) -MT snappy_unittest-snappy_unittest.obj -MD -MP -MF $(DEPDIR)/snappy_unittest-snappy_unittest.Tpo -c -o snappy_unittest-snappy_unittest.obj `if test -f 'snappy_unittest.cc'; then $(CYGPATH_W) 'snappy_unittest.cc'; else $(CYGPATH_W) '$(srcdir)/snappy_unittest.cc'; fi`
-+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT snappy_unittest-snappy_unittest.obj -MD -MP -MF $(DEPDIR)/snappy_unittest-snappy_unittest.Tpo -c -o snappy_unittest-snappy_unittest.obj `if test -f 'snappy_unittest.cc'; then $(CYGPATH_W) 'snappy_unittest.cc'; else $(CYGPATH_W) '$(srcdir)/snappy_unittest.cc'; fi`
- @am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/snappy_unittest-snappy_unittest.Tpo $(DEPDIR)/snappy_unittest-snappy_unittest.Po
- @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='snappy_unittest.cc' object='snappy_unittest-snappy_unittest.obj' libtool=no @AMDEPBACKSLASH@
- @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
--@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(snappy_unittest_CXXFLAGS) $(CXXFLAGS) -c -o snappy_unittest-snappy_unittest.obj `if test -f 'snappy_unittest.cc'; then $(CYGPATH_W) 'snappy_unittest.cc'; else $(CYGPATH_W) '$(srcdir)/snappy_unittest.cc'; fi`
-+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o snappy_unittest-snappy_unittest.obj `if test -f 'snappy_unittest.cc'; then $(CYGPATH_W) 'snappy_unittest.cc'; else $(CYGPATH_W) '$(srcdir)/snappy_unittest.cc'; fi`
+ const char* names[] = {
+-  "ZLIB", "LZO", "LIBLZF", "QUICKLZ", "FASTLZ", "SNAPPY"
++  "ZLIB", "LZO", "LIBLZF", "QUICKLZ", "FASTLZ", "CSNAPPY", "SNAPPY",
+ };
  
- snappy_unittest-snappy-test.o: snappy-test.cc
--@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(snappy_unittest_CXXFLAGS) $(CXXFLAGS) -MT snappy_unittest-snappy-test.o -MD -MP -MF $(DEPDIR)/snappy_unittest-snappy-test.Tpo -c -o snappy_unittest-snappy-test.o `test -f 'snappy-test.cc' || echo '$(srcdir)/'`snappy-test.cc
-+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT snappy_unittest-snappy-test.o -MD -MP -MF $(DEPDIR)/snappy_unittest-snappy-test.Tpo -c -o snappy_unittest-snappy-test.o `test -f 'snappy-test.cc' || echo '$(srcdir)/'`snappy-test.cc
- @am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/snappy_unittest-snappy-test.Tpo $(DEPDIR)/snappy_unittest-snappy-test.Po
- @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='snappy-test.cc' object='snappy_unittest-snappy-test.o' libtool=no @AMDEPBACKSLASH@
- @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
--@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(snappy_unittest_CXXFLAGS) $(CXXFLAGS) -c -o snappy_unittest-snappy-test.o `test -f 'snappy-test.cc' || echo '$(srcdir)/'`snappy-test.cc
-+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o snappy_unittest-snappy-test.o `test -f 'snappy-test.cc' || echo '$(srcdir)/'`snappy-test.cc
+ static size_t MinimumRequiredOutputSpace(size_t input_size,
+@@ -156,6 +158,12 @@ static size_t MinimumRequiredOutputSpace(size_t input_size,
+       return max(static_cast<int>(ceil(input_size * 1.05)), 66);
+ #endif  // FASTLZ_VERSION
  
- snappy_unittest-snappy-test.obj: snappy-test.cc
--@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(snappy_unittest_CXXFLAGS) $(CXXFLAGS) -MT snappy_unittest-snappy-test.obj -MD -MP -MF $(DEPDIR)/snappy_unittest-snappy-test.Tpo -c -o snappy_unittest-snappy-test.obj `if test -f 'snappy-test.cc'; then $(CYGPATH_W) 'snappy-test.cc'; else $(CYGPATH_W) '$(srcdir)/snappy-test.cc'; fi`
-+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT snappy_unittest-snappy-test.obj -MD -MP -MF $(DEPDIR)/snappy_unittest-snappy-test.Tpo -c -o snappy_unittest-snappy-test.obj `if test -f 'snappy-test.cc'; then $(CYGPATH_W) 'snappy-test.cc'; else $(CYGPATH_W) '$(srcdir)/snappy-test.cc'; fi`
- @am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/snappy_unittest-snappy-test.Tpo $(DEPDIR)/snappy_unittest-snappy-test.Po
- @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='snappy-test.cc' object='snappy_unittest-snappy-test.obj' libtool=no @AMDEPBACKSLASH@
- @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
--@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(snappy_unittest_CXXFLAGS) $(CXXFLAGS) -c -o snappy_unittest-snappy-test.obj `if test -f 'snappy-test.cc'; then $(CYGPATH_W) 'snappy-test.cc'; else $(CYGPATH_W) '$(srcdir)/snappy-test.cc'; fi`
-+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(snappy_unittest_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o snappy_unittest-snappy-test.obj `if test -f 'snappy-test.cc'; then $(CYGPATH_W) 'snappy-test.cc'; else $(CYGPATH_W) '$(srcdir)/snappy-test.cc'; fi`
++#ifdef CSNAPPY_VERSION
++    case CSNAPPY:
++      return static_cast<size_t>(csnappy_max_compressed_length(
++                                  static_cast<uint32_t>(input_size)));
++#endif // CSNAPPY_VERSION
++
+     case SNAPPY:
+       return snappy::MaxCompressedLength(input_size);
  
- mostlyclean-libtool:
- 	-rm -f *.lo
+@@ -266,6 +274,24 @@ static bool Compress(const char* input, size_t input_size, CompressorType comp,
+     }
+ #endif  // FASTLZ_VERSION
+ 
++#ifdef CSNAPPY_VERSION
++    case CSNAPPY: {
++      uint32_t destlen;
++      char* mem = new char[CSNAPPY_WORKMEM_BYTES];
++      csnappy_compress(input, input_size,
++                      string_as_array(compressed),
++                      &destlen,
++                      mem,
++                      CSNAPPY_WORKMEM_BYTES_POWER_OF_TWO);
++      delete[] mem;
++      CHECK_LE(destlen, csnappy_max_compressed_length(input_size));
++      if (!compressed_is_preallocated) {
++        compressed->resize(destlen);
++      }
++      break;
++    }
++#endif // CSNAPPY_VERSION
++
+     case SNAPPY: {
+       size_t destlen;
+       snappy::RawCompress(input, input_size,
+@@ -364,9 +390,23 @@ static bool Uncompress(const string& compressed, CompressorType comp,
+     }
+ #endif  // FASTLZ_VERSION
+ 
++#ifdef CSNAPPY_VERSION
++    case CSNAPPY: {
++      int ret = csnappy_decompress(
++          compressed.data(),
++          (uint32_t)compressed.size(),
++          string_as_array(output),
++          (uint32_t)size);
++      CHECK_EQ(ret, CSNAPPY_E_OK);
++      break;
++    }
++#endif // CSNAPPY_VERSION
++
+     case SNAPPY: {
+-      snappy::RawUncompress(compressed.data(), compressed.size(),
+-                            string_as_array(output));
++      bool ret = snappy::RawUncompress(compressed.data(),
++                                       compressed.size(),
++                                       string_as_array(output));
++      CHECK_EQ(ret, true);
+       break;
+     }
+ 
+@@ -464,7 +504,7 @@ static void Measure(const char* data,
+   string urate = (uncomp_rate >= 0)
+                  ? StringPrintf("%.1f", uncomp_rate)
+                  : string("?");
+-  printf("%-7s [b %dM] bytes %6d -> %6d %4.1f%%  "
++  printf("%-8s [b %dM] bytes %6d -> %6d %4.1f%%  "
+          "comp %5.1f MB/s  uncomp %5s MB/s\n",
+          x.c_str(),
+          block_size/(1<<20),
+@@ -1013,6 +1053,7 @@ static void MeasureFile(const char* fname) {
+     if (FLAGS_liblzf)   Measure(input, len, LIBLZF, repeats, 1024<<10);
+     if (FLAGS_quicklz)  Measure(input, len, QUICKLZ, repeats, 1024<<10);
+     if (FLAGS_fastlz)   Measure(input, len, FASTLZ, repeats, 1024<<10);
++    if (FLAGS_csnappy)  Measure(input, len, CSNAPPY, repeats, 1024<<10);
+     if (FLAGS_snappy)    Measure(input, len, SNAPPY, repeats, 4096<<10);
+ 
+     // For block-size based measurements
