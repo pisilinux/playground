@@ -8,11 +8,15 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-WorkDir = "projectlibre-1.5.7"
+
+#WorkDir = "projectlibre-1.5.8"
+
 
 def install():
     shelltools.cd("..")
+    shelltools.move("projectlibre-%s" % get.srcVERSION(),"projectlibre")
     pisitools.dodir("/opt")
-    pisitools.insinto("/opt","projectlibre-1.5.7")
+    pisitools.insinto("/opt","projectlibre")
     
 # By PiSiDo 2.0.0
+
