@@ -15,6 +15,7 @@
             <Dependency>gcc</Dependency>
             <Dependency>glibc-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
+            <Dependency>lzo-devel</Dependency>
         </BuildDependencies>
         <Archive sha1sum="2988f1227622d79c1e520d4317e299b61d042852" type="targz">http://snappy.googlecode.com/files/snappy-1.1.1.tar.gz</Archive>
         <Patches>
@@ -24,12 +25,16 @@
     <Package>
         <Name>snappy</Name>
         <RuntimeDependencies>
+            <Dependency>lzo</Dependency>
             <Dependency>gcc</Dependency>
             <Dependency>glibc</Dependency>
             <Dependency>zlib</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="all">/</Path>
+        <Path fileType="header">/usr/include</Path>
+        <Path fileType="library">/usr/lib</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
+        <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>
