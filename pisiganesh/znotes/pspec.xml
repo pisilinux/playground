@@ -1,0 +1,43 @@
+<PISI>
+    <Source>
+        <Name>znotes</Name>
+        <Homepage>https://github.com/proton/zNotes</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <PartOf>desktop</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>zNotes is lightweigh crossplatform application for notes management</Summary>
+        <Description>zNotes is lightweigh crossplatform application for notes management</Description>
+        <BuildDependencies>
+            <Dependency>qt</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="0fb9d531e11e0b4b074f530fcb4f79488df3196a" type="targz">http://qt-apps.org/CONTENT/content-files/113117-znotes-0.4.5.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">qtlocalpeer.patch</Patch>
+        </Patches>
+    </Source>
+    <Package>
+        <Name>znotes</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/znotes</Path>
+            <Path fileType="data">/usr/share/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-24</Date>
+            <Version>0.4.5</Version>
+            <Comment>Initial Build</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
