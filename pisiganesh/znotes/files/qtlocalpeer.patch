@@ -1,0 +1,12 @@
+--- orig/single_inst/qtlocalpeer.cpp	2009-12-16 11:43:33.000000000 +0100
++++ qtsingleapplication-2.6_1-opensource/src/qtlocalpeer.cpp	2010-01-14 10:45:07.872654595 +0100
+@@ -56,7 +56,9 @@
+ static PProcessIdToSessionId pProcessIdToSessionId = 0;
+ #endif
+ #if defined(Q_OS_UNIX)
++#include <sys/types.h>
+ #include <time.h>
++#include <unistd.h>
+ #endif
+ 
+ namespace QtLP_Private {
