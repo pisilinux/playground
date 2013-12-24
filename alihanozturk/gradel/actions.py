@@ -8,8 +8,12 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
-def install():
+def build():
     shelltools.export("HOME",get.workDIR())
     WorkDir="gradel-0.12.1"
-    shelltools.system("./compile.sh")
-    shelltools.system("./install.sh")
+    shelltools.system("sh ./compile.sh")
+
+def install():
+    shelltools.system("sh ./install.sh")
+    
+    pisitools.dodoc("INSTALL", "README", "COPYING")

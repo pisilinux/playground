@@ -29,8 +29,13 @@
             <Dependency>gambas3-runtime</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="all">/</Path>
+        <Path fileType="executable">/usr/bin</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
+        <Path fileType="data">/usr/share</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/gradel.desktop">gradel.desktop</AdditionalFile>
+        </AdditionalFiles>
     </Package>
     <History>
         <Update release="1">
