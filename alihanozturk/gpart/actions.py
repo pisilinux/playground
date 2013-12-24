@@ -4,11 +4,15 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt
 
-from pisi.actionsapi import cmaketools
+from pisi.actionsapi import autotools
 from pisi.actionsapi import get
 
 def build():
-    cmaketools.make()
+    autotools.make()
 
 def install():
-    cmaketools.install()
+    autotools.install("--prefix=/usr/local \
+                       --bindir=%s/usr/local/bin \
+                       --libdir=%s/usr/local/lib \
+                       --mandir=%s/usr/local/man \
+                       --sharedir=%s/usr/local/share" % get.installDIR())
