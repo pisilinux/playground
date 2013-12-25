@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>vegastrike</Name>
+        <Homepage>http://vegastrike.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>vegastrike</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Open Source 3D Action-Space-Simulator</Summary>
+        <Description>Vega Strike is an Open Source 3D Action-Space-Sim that lets you trade, fight, and explore in a vast universe</Description>
+        <Archive sha1sum="6314a0fc05cf66053e20272916976c0c16dcf048" type="tarbz2">http://downloads.sourceforge.net/sourceforge/vegastrike/vegastrike-src-0.5.1.r1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gcc</Dependency>
+            <Dependency>freeglut-devel</Dependency>
+            <Dependency>freetype-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>libvorbis-devel</Dependency>
+            <Dependency>openal-devel</Dependency>
+            <Dependency>python-devel</Dependency>
+            <Dependency>libsdl-devel</Dependency>
+            <Dependency>vegastrike-data</Dependency>
+            <Dependency>sdl-gfx-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">patch-basemaker-cstring-include.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>vegastrike</Name>
+        <RuntimeDependencies>
+            <Dependency>freeglut</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>gcc</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>openal</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>vegastrike-data</Dependency>
+            <Dependency>sdl-gfx</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/vegastrike.desktop">vegastrike.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/vssetup.desktop">vssetup.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/vegastrike.png">vegastrike.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/vegastrike">vegastrike</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/vssetup">vssetup</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-25</Date>
+            <Version>0.5.1</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Update>
+    </History>
+</PISI>
