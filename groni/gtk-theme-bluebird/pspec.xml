@@ -1,0 +1,39 @@
+<?xml version="1.0" ?> 
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gtk-theme-bluebird</Name>
+        <Homepage>http://shimmerproject.org/project/bluebird/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <Summary>GTK Theme Suite - Bluebird</Summary>
+        <Description>GTK Theme Suite - Bluebird</Description>
+        <License>GPLv2</License>
+        <ISA>data</ISA>
+        <Archive sha1sum="a51635de9c51317fe3a6530e6779d44defd049e8" type="targz">https://github.com/shimmerproject/Bluebird/archive/v0.9.tar.gz</Archive>
+    </Source>
+    
+    <Package>
+        <Name>gtk-theme-bluebird</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk2-engine-murrine</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/themes</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2013-12-26</Date>
+            <Version>0.9</Version>
+            <Comment>First Release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+
