@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>vegastrike-data</Name>
+        <Homepage>http://vegastrike.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>data</IsA>
+        <Summary>Data package for VegaStrike</Summary>
+        <Description>Vega Strike data</Description>
+        <Archive sha1sum="792d3d2f0f5eaa355c2afb1913ac84a7280d6ddd" type="tarbz2">http://downloads.sourceforge.net/vegastrike/vegastrike-data-0.5.1.r1.tar.bz2</Archive>
+        <Archive sha1sum="c936f8e45258dfd3d92ad76ad358db13302e67ec" type="tarbz2">http://downloads.sourceforge.net/vegastrike/vegastrike-extra-0.5.1.r1.tar.bz2</Archive>
+        <Archive sha1sum="8dd7637182bcae98c913f21f7a247bc1b63c780d" type="tar">http://downloads.sourceforge.net/vegastrike/vegastrike-music-0.5.1.r1.tar</Archive>
+        <Archive sha1sum="9628bfbdf0cdb487a6adc1a97e0bae4e49d0ac0f" type="tar">http://downloads.sourceforge.net/vegastrike/vegastrike-speech-0.5.1.r1.tar</Archive>
+        <BuildDependencies>
+            <Dependency>desktop-file-utils</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>vegastrike-data</Name>
+        <RuntimeDependencies>
+            <Dependency>desktop-file-utils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/vegastrike</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-25</Date>
+            <Version>0.5.1</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Update>
+    </History>
+</PISI>
