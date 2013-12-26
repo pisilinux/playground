@@ -6,7 +6,7 @@
         <Homepage>http://sourceforge.net/projects/vimgadgets/files/libunibreak/</Homepage>
         <Packager>
             <Name>Alihan Öztürk</Name>
-            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+            <Email>alihan@pisilinux.org</Email>
         </Packager>
         <License>custom:zlib/libpng</License>
         <PartOf>x11.driver</PartOf>
@@ -21,8 +21,16 @@
         <Name>libunibreak</Name>
         <Files>
             <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>libunibreak-devel</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">libunibreak</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
             <Path fileType="header">/usr/include</Path>
-            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>
@@ -31,7 +39,7 @@
             <Version>1.1</Version>
             <Comment>first release</Comment>
             <Name>Alihan Öztürk</Name>
-            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+            <Email>alihan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

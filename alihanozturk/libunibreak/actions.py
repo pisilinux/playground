@@ -8,7 +8,10 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.configure()
+    autotools.configure("--prefix=/usr \
+                         --exec_prefix=/usr \
+                         --libdir=/usr/lib \
+                         --includedir=/usr/include")
 
 def build():
     autotools.make()
