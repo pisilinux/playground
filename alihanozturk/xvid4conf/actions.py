@@ -5,16 +5,18 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt
 
 from pisi.actionsapi import autotools
+from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.configure("--prefix=/usr \
-                         --exec_prefix=/usr \
-                         --libdir=/usr/lib \
-                         --includedir=/usr/include")
+    shelltools.system("sh ./autogen.sh")
+    autotools.configure("--prefix=/usr")
 
 def build():
     autotools.make()
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    
+    pisitools.dodoc("README", "AUTHORS", "COPYING", "NEWS")

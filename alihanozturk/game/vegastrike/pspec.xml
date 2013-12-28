@@ -6,7 +6,7 @@
         <Homepage>http://vegastrike.sourceforge.net/</Homepage>
         <Packager>
             <Name>Alihan Öztürk</Name>
-            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+            <Email>alihan@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
         <Icon>vegastrike</Icon>
@@ -46,7 +46,10 @@
             <Dependency>sdl-gfx</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="all">/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/vegastrike.desktop">vegastrike.desktop</AdditionalFile>
@@ -63,7 +66,7 @@
             <Version>0.5.1</Version>
             <Comment>First release</Comment>
             <Name>Alihan Öztürk</Name>
-            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+            <Email>alihan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

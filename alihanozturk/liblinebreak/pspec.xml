@@ -6,7 +6,7 @@
         <Homepage>http://vimgadgets.sourceforge.net/liblinebreak/</Homepage>
         <Packager>
             <Name>Alihan Öztürk</Name>
-            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+            <Email>alihan@pisilinux.org</Email>
         </Packager>
         <License>custom:zlib/libpng</License>
         <PartOf>x11.library</PartOf>
@@ -24,8 +24,16 @@
             <Dependency>glibc</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="header">/usr/include</Path>
             <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>liblinebreak-devel</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">liblinebreak</Dependency>
+        </RuntimeDependencies>
+        <Files>
+        <Path fileType="header">/usr/include</Path>
         </Files>
     </Package>
     <History>
@@ -34,7 +42,7 @@
             <Version>2.1.2</Version>
             <Comment>First release</Comment>
             <Name>Alihan Öztürk</Name>
-            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+            <Email>alihan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

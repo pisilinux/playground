@@ -14,7 +14,8 @@ def setup():
     shelltools.makedirs("build")
     shelltools.cd("build")
 
-    cmaketools.configure("-DSYSCONF_INSTALL_DIR=/etc \
+    cmaketools.configure("-DQT5_BUILD=OFF \
+                          -DCMAKE_INSTALL_LIBDIR:PATH=lib \
                           -DCMAKE_INSTALL_PREFIX=/usr", sourceDir="..")
 
 def build():

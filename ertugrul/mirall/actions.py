@@ -16,7 +16,7 @@ def setup():
 
     cmaketools.configure("-DCMAKE_INSTALL_PREFIX=/usr  \
                           -DCMAKE_INSTALL_SYSCONFDIR=/etc \
-			   -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+                          -DCMAKE_INSTALL_LIBDIR=/usr/lib \
                           -DCSYNC_INCLUDE_PATH=/usr/include/ocsync",sourceDir="..")
 
 def build():
