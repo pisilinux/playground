@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>glpeces</Name>
+        <Homepage>http://pecesjocdetangr.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <PartOf>game.puzzle</PartOf>
+        <Summary>Tangram (puzzle) game clone</Summary>
+        <Description>The Tangram is an ancient Chinese puzzle game where the player has to arrange a set of figures with 7 polygonal pieces. Peces allows playing 33 different modalities of tangram and it includes more than 4600 figures to solve. It is especially designed to use in education.</Description>
+        <Archive sha1sum="0d9a31de7a0b28de25200164479e5c39e5a9e004" type="targz">http://sourceforge.net/projects/pecesjocdetangr/files/version%205.0%20%28March%2C%202012%29/glpeces-5.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>glpeces</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="data">/usr/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-28</Date>
+            <Version>5.0</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
