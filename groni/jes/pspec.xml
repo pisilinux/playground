@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>jes</Name>
+        <Homepage>http://www.jes-eur.de/?Startseite</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPL</License>
+        <IsA>app:gui</IsA>
+        <Summary>Software for German cash basis accounting</Summary>
+        <Description>Jes is a Java based software for cash basis accounting. Formelly known as "OpenOffice.org EÜR". It's designed with an very easy usability - which gives you the ability to reorganize your cash for bookkeeping in German finance system.</Description>
+        <Archive sha1sum="6a892f9bfeaeb41a7eb1d7a1dc9d817fed752877" type="zip">https://dl.dropboxusercontent.com/u/2628626/jes/jes_10021.zip</Archive>
+    </Source>
+
+    <Package>
+        <Name>jes</Name>
+
+        <RuntimeDependencies>
+            <Dependency>sun-jre</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+            <Path fileType="data">/usr/</Path>
+            <Path fileType="executable">/usr/bin/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/share/jes/jes.sh">jes.sh</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/jes.desktop">jes.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/doc/jes/jes-help.html">jes-help.html</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/doc/jes/jes-dokumentation-und-faq.pdf">jes-dokumentation-und-faq.pdf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-28</Date>
+            <Version>0.00.21</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
