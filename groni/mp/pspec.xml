@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mp</Name>
+        <Homepage>http://triptico.com/software/mp.html</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <PartOf>editor</PartOf>
+        <Summary>A text editor for programmers</Summary>
+        <Description> A text editor for programmers including the following features:Fully scriptable using a C-like scripting language. Unlimited undo levels.Complete Unicode support. Multiple files can be edited at the same time and blocks copied and pasted among them. Syntax highlighting for many popular languages / file formats: C, C++, Perl, Shell Scripts, Ruby, Php, Python, HTML and much more</Description>
+        <Archive sha1sum="71609e96f0d9b56d36f85d81523f9ac2c20485b8" type="targz">http://triptico.com/download/mp/mp-5.2.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>mp</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="data">/usr/share/applications/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="man">/usr/share/man/*</Path>
+            <Path fileType="data">/usr/share/mp-5/*</Path>
+            <Path fileType="data">/usr/share/pixmaps/*</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/applications/mp.desktop" permission="0755" group="root" owner="root">mp.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/pixmaps/mp.png" permission="0644" group="root" owner="root">mp.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-29</Date>
+            <Version>5.2.7</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
