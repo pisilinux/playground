@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>hevea</Name>
+        <Homepage>http://pauillac.inria.fr/~maranget/hevea</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>OPL</License>
+        <IsA>app:console</IsA>
+        <Summary>LaTeX to HTML converter</Summary>
+        <Description>Hevea is a quite complete and fast LATEX to HTML translator.</Description>
+        <Archive sha1sum="a8be42a5ea7ef584443277661aba146e1baaa9f2" type="targz">http://pauillac.inria.fr/~maranget/hevea/old/hevea-2.00.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>ocaml</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>hevea</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/lib/hevea</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="config">/etc/env.d</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/99hevea">99hevea</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2012-11-21</Date>
+            <Version>2.00</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

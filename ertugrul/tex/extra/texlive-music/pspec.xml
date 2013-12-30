@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>texlive-music</Name>
+        <Homepage>http://www.tug.org/texlive</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>data:doc</IsA>
+        <Summary>TeXLive Music typesetting</Summary>
+        <Description>texlive-music contains TeXLive Music typesettings.</Description>
+        <Archive sha1sum="bd0769c99f5d85acb2658da1aae64828bb58afed" type="targz">http://source.pisilinux.org/1.0/texlive-music-20110314.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>texlive-core</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>texlive-music</Name>
+        <RuntimeDependencies>
+            <Dependency>texlive-core</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/var/lib/texmf</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/var/lib/texmf/pardus/texlive-music.maps">texlive-music.maps</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2011-03-15</Date>
+            <Version>0.0_20110314</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
