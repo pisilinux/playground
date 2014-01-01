@@ -13,34 +13,28 @@
         <Summary>GCompris, 2-10 yaş arası çocuklar için farklı etkinlikler sunan eğitim amaçlı bir programdır.</Summary>
         <Description>GCompris, 2-10 yaş arası çocuklar için bir çok etkinliği kapsayan eğitim amaçlı bir yazılım paketidir. Bazı etkinlikler, eğitim amaçlı oyunlardan oluşmaktadır.</Description>
         <BuildDependencies>
-            <Dependency>gettext-devel</Dependency>
-            <Dependency>gnet-devel</Dependency>
-            <Dependency>gnucap</Dependency>
-            <Dependency>gstreamer-devel</Dependency>
-            <Dependency>intltool</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
             <Dependency>librsvg-devel</Dependency>
-            <Dependency>pysqlite</Dependency>
-            <Dependency>python-gtk-devel</Dependency>
-            <Dependency>texi2html</Dependency>
-            <Dependency>texinfo</Dependency>
-            <Dependency>python-cairo-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
         </BuildDependencies>
         <Archive sha1sum="c67d4e04a25a622c04a22c797e7eab03347ef8df" type="tarbz2">http://gcompris.net/download/gcompris-13.11.tar.bz2</Archive>
     </Source>
     <Package>
         <Name>gcompris</Name>
         <RuntimeDependencies>
-            <Dependency>gettext</Dependency>
-            <Dependency>python-cairo</Dependency>
-            <Dependency>gnet</Dependency>
-            <Dependency>gnucap</Dependency>
-            <Dependency>gstreamer</Dependency>
-            <Dependency>intltool</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
             <Dependency>librsvg</Dependency>
-            <Dependency>pysqlite</Dependency>
-            <Dependency>python-gtk</Dependency>
-            <Dependency>texi2html</Dependency>
-            <Dependency>texinfo</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
