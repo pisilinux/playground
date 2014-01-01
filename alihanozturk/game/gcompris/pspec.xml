@@ -13,6 +13,8 @@
         <Summary>GCompris, 2-10 yaş arası çocuklar için farklı etkinlikler sunan eğitim amaçlı bir programdır.</Summary>
         <Description>GCompris, 2-10 yaş arası çocuklar için bir çok etkinliği kapsayan eğitim amaçlı bir yazılım paketidir. Bazı etkinlikler, eğitim amaçlı oyunlardan oluşmaktadır.</Description>
         <BuildDependencies>
+            <Dependency>python-gtk-devel</Dependency>
+            <Dependency>python-cairo-devel</Dependency>
             <Dependency>atk-devel</Dependency>
             <Dependency>gtk2-devel</Dependency>
             <Dependency>cairo-devel</Dependency>
@@ -27,6 +29,8 @@
     <Package>
         <Name>gcompris</Name>
         <RuntimeDependencies>
+            <Dependency>python-cairo</Dependency>
+            <Dependency>python-gtk</Dependency>
             <Dependency>atk</Dependency>
             <Dependency>gtk2</Dependency>
             <Dependency>cairo</Dependency>
