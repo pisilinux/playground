@@ -22,9 +22,8 @@
 	    <Dependency>itstool</Dependency>
         </BuildDependencies>
         <Patches>
-	  <Patch level="1">lightdm-default-config.patch</Patch>
-<!--	  <Patch level="1">ipna.patch</Patch> -->
-        </Patches>
+	    <Patch level="1">lightdm-default-config.patch</Patch>
+	</Patches>
     </Source>
 
     <Package>
@@ -37,15 +36,15 @@
             <Path fileType="config">/etc</Path>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="executable">/usr/sbin</Path>
-            <Path fileType="library">/usr/lib/girepository-1.0</Path>
-            <Path fileType="library">/usr/lib/liblightdm-gobject-0*</Path>
-            <Path fileType="library">/usr/lib/liblightdm-qt-0.so*</Path>
-            <Path fileType="library">/usr/lib/liblightdm-qt-2.so</Path>
-            <Path fileType="library">/usr/lib/liblightdm-gobject-1.so.0.0.0</Path>
-            <Path fileType="library">/usr/lib/liblightdm-qt-2.so.0</Path>
-            <Path fileType="library">/usr/lib/liblightdm-gobject-1.so</Path>
-            <Path fileType="library">/usr/lib/liblightdm-gobject-1.so.0</Path>
-            <Path fileType="library">/usr/lib/liblightdm-qt-2.so.0.0.0</Path>
+<!--             <Path fileType="library">/usr/lib/girepository-1.0</Path> -->
+<!--             <Path fileType="library">/usr/lib/liblightdm-gobject-0*</Path> -->
+<!--             <Path fileType="library">/usr/lib/liblightdm-qt-0.so*</Path> -->
+<!--             <Path fileType="library">/usr/lib/liblightdm-qt-2.so</Path> -->
+<!--             <Path fileType="library">/usr/lib/liblightdm-gobject-1.so.0.0.0</Path> -->
+<!--             <Path fileType="library">/usr/lib/liblightdm-qt-2.so.0</Path> -->
+<!--             <Path fileType="library">/usr/lib/liblightdm-gobject-1.so</Path> -->
+<!--             <Path fileType="library">/usr/lib/liblightdm-gobject-1.so.0</Path> -->
+<!--             <Path fileType="library">/usr/lib/liblightdm-qt-2.so.0.0.0</Path> -->
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="man">/usr/share/man</Path>
@@ -53,13 +52,29 @@
             <Path fileType="doc">/usr/share/gtk-doc</Path>
             <Path fileType="doc">/usr/share/help</Path>
             <Path fileType="data">/usr/share/vala</Path>
-            <Path fileType="data">/usr/share/gir-1.0</Path>
-            <Path fileType="data">/usr/share/display-managers</Path>
-            <Path fileType="data">/usr/share/lightdm-example-gtk-greeter</Path>
+	    <Path fileType="data">/usr/share/gir-1.0</Path>
+	    <Path fileType="data">/usr/share/display-managers</Path>
+            <Path fileType="config">/usr/share/polkit-1/rules.d/</Path>
+	    <Path fileType="service">/usr/lib/systemd/system</Path>
+	    <Path fileType="library">/var/lib/lightdm</Path>
+	    <Path fileType="log">/var/log/lightdm</Path>
+	    <Path fileType="session">/usr/share/lightdm</Path>
+	    <Path fileType="data">/usr/share</Path>
+	    <Path fileType="session">/apparmor.d/lightdm-guest-session</Path>
+	    <Path fileType="config">/etc/lightdm/keys.conf</Path>
+	    <Path fileType="config">/etc/lightdm/lightdm.conf</Path>
+	    <Path fileType="config">/etc/lightdm/users.conf</Path>
+	    <Path fileType="config">/etc/lightdm/Xsession</Path>
+	    <Path fileType="session">/etc/pam.d/lightdm</Path>
+	    <Path fileType="session">/etc/pam.d/lightdm-autologin</Path>
+	    <Path fileType="session">/etc/pam.d/lightdm-greeter</Path>
+	    
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm">lightdm.pam</AdditionalFile>
-	    <AdditionalFile owner="root" permission="0755" target="/etc/lightdm/xsession">xsession</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm">lightdm-autologin.pam</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0755" target="/etc/lightdm/Xsession">Xsession</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/lib/systemd/system/lightdm.service">lightdm.service</AdditionalFile>
 	    <AdditionalFile owner="root" permission="0755" target="/usr/share/display-managers/lightdm.desktop">lightdm.desktop</AdditionalFile>
         </AdditionalFiles>
     </Package>

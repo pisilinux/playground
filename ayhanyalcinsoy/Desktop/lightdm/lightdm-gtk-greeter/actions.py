@@ -11,9 +11,8 @@ from pisi.actionsapi import get
 
 shelltools.export("HOME", get.workDIR())
 def setup():
-    autotools.autoreconf("-vfi")
-    autotools.configure("--disable-gtk-doc\
-                         --disable-static")
+    #autotools.autoreconf("-vfi")
+    autotools.configure(" ")
 
 def build():
     autotools.make()
