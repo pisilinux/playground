@@ -12,7 +12,11 @@
         <IsA>data:doc</IsA>
         <Summary>Essential part of TeXLive</Summary>
         <Description>texlive-core is the essential part of TeXLive. It corresponds to the "medium" scheme of TexLive</Description>
-        <Archive sha1sum="68f64b7ab6b54700de7917522dc391d2fd96c16b" type="zip">http://source.pisilinux.org/1.0/texlive-core-2012.29661-src.zip</Archive>
+        <Archive sha1sum="68f64b7ab6b54700de7917522dc391d2fd96c16b" type="zip">http://mirrors.kernel.org/archlinux/other/texlive/texlive-core-2013.31589-src.zip</Archive>
+        <AdditionalFiles>
+            <AdditionalFile permission="0644" target="texmf.cnf">texmf.cnf</AdditionalFile>
+            <AdditionalFile permission="0644" target="09-texlive-fonts.conf">09-texlive-fonts.conf</AdditionalFile>
+        </AdditionalFiles>
         <BuildDependencies>
             <Dependency>texlive-bin</Dependency>
         </BuildDependencies>
@@ -27,6 +31,7 @@
             <Dependency>ghostscript</Dependency>
         </RuntimeDependencies>
         <Files>
+            <Path fileType="config">/etc</Path>
             <Path fileType="data">/usr/share/texmf-dist</Path>
             <!--Path fileType="executable">/usr/bin</Path-->
             <Path fileType="data">/var/lib/texmf</Path>

@@ -73,61 +73,23 @@ def build():
     autotools.make()
 
 def install():
-    #folders = ["/usr/share",
-    #           "/etc/texmf/web2c",
-    #           "/etc/texmf/chktex",
-    #           "/etc/texmf/dvips/config",
-    #           "/etc/texmf/dvipdfm/config",
-    #           "/etc/texmf/dvipdfmx",
-    #           "/etc/texmf/tex/generic/config",
-    #           "/etc/texmf/ttf2pk",
-    #           "/etc/texmf/xdvi",
-    #           "/etc/fonts/conf.avail"]
-
-    #for dirs in folders:
-    #    pisitools.dodir(dirs)
-        
-    #pisitools.insinto("/etc/fonts/conf.avail/", "09-texlive-fonts.conf")
-    
-    # copy config files to $TEXMFSYSCONFIG tree (defined in texmf.cnf)
-    #config_files = [ "/usr/share/texmf/chktex/chktexrc",
-    #                 "/usr/share/texmf/web2c/mktex.cnf",
-    #                 "/usr/share/texmf/web2c/updmap.cfg",
-    #                 "/usr/share/texmf/web2c/fmtutil.cnf",
-    #                 "/usr/share/texmf/dvips/config/config.ps",
-    #                 "/usr/share/texmf/dvipdfmx/dvipdfmx.cfg",
-    #                 "/usr/share/texmf/tex/generic/config/pdftexconfig.tex",
-    #                 "/usr/share/texmf/tex/generic/config/language.dat",
-    #                 "/usr/share/texmf/tex/generic/config/language.def",
-    #                 "/usr/share/texmf/ttf2pk/ttf2pk.cfg",
-    #                 "/usr/share/texmf/xdvi/XDvi"]
-
-    #for share_file in config_files:
-    #    etc_file = share_file.replace("/usr/share", "/etc")
-    #    shelltools.copy("%s/%s" % (get.installDIR(), share_file) , "%s/%s" % (get.installDIR(), etc_file))
-    
     #make install
     shelltools.cd("%s/source/build" % get.workDIR()) 
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    
+
     ## symlink engines by hand.
     pisitools.dosym("/usr/bin/eptex","/usr/bin/platex")
     pisitools.dosym("/usr/bin/euptex","/usr/bin/uplatex")
     pisitools.dosym("/usr/bin/xetex","/usr/bin/xelatex")
-    
+
     #pdftex
     pdftex_symlinks_create=["amstex","cslatex","csplain","eplain","etex","jadetex","latex","mex","mllatex","mltex","pdfetex",
                      "pdfcslatex","pdfcsplain","pdfjadetex","pdflatex","pdfmex","pdfxmltex","texsis","utf8mex","xmltex"] 
-    
+
     for symlink in pdftex_symlinks_create:
         pisitools.dosym("/usr/bin/pdftex", "/usr/bin/%s" % symlink)
-    
-    #luatex is disabled too
-    #luatex_symlinks_create=["dviluatex","dvilualatex","lualatex"]
-    
-    #for symlink in luatex_symlinks_create:
-    #    pisitools.dosym("/usr/bin/luatex", "/usr/bin/%s" % symlink)
-    
+
+
     # remove symlinks to scripts that are not in texlive-bin or texlive-core:
     symlinks_to_remove = ["authorindex",
                           "ebong",
@@ -159,4 +121,4 @@ def install():
                           "tlmgr"]
 
     for symlink in symlinks_to_remove:
-        pisitools.remove("/usr/bin/%s" % symlink)     
+        pisitools.remove("/usr/bin/%s" % symlink)

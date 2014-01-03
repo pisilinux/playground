@@ -13,17 +13,16 @@
         <Summary>Tex Live binaries</Summary>
         <Description>Texlive binaries that are an essential part of TeXLive component.</Description>
         <Archive sha1sum="7e576931c443818b82432860c934ab67739200da" type="tarxz">http://mirrors.kernel.org/archlinux/other/texlive/texlive-bin-source-2013.30973.tar.xz</Archive>
-        <AdditionalFiles>
+        <!--<AdditionalFiles>
             <AdditionalFile permission="0644" target="texmf.cnf">texmf.cnf</AdditionalFile>
             <AdditionalFile permission="0644" target="09-texlive-fonts.conf">09-texlive-fonts.conf</AdditionalFile>
-        </AdditionalFiles>
+        </AdditionalFiles>-->
         <BuildDependencies>
             <Dependency>clisp-devel</Dependency>
             <Dependency>gd-devel</Dependency>
             <Dependency>libsigsegv-devel</Dependency>
             <Dependency>libXaw-devel</Dependency>
             <Dependency>poppler-devel</Dependency>
-        <!--<Dependency>silgraphite-devel</Dependency>-->
             <Dependency>t1lib-devel</Dependency>
             <Dependency>fontconfig-devel</Dependency>
             <Dependency>icu4c-devel</Dependency>
@@ -53,7 +52,7 @@
         </RuntimeDependencies>
         <Files>
             <!--Change this after after next upgrade to config-->
-            <Path fileType="data">/etc</Path>
+            <!--<Path fileType="data">/etc</Path>-->
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="library">/var/lib</Path>
