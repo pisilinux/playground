@@ -11,8 +11,10 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    autotools.configure("--disable-tests \
-                         --enable-introspection \
+    autotools.configure("--with-greeter-user=lightdm\
+                         --with-greeter-session=lightdm-kde-greeter\
+                         --enable-introspection\
+                         --disable-tests\
                          --disable-static")
 
 def build():

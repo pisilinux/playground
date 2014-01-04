@@ -23,6 +23,7 @@ def build():
         shelltools.unlinkDir("%s/%s" %(get.workDIR() , folder))
 
 def install():
+    #install
     pisitools.dodir("/usr/share")
 
     wanteddirs = []
@@ -53,3 +54,53 @@ def install():
     pisitools.remove("/usr/share/texmf-dist/tex/plain/config/omega.ini")
     pisitools.remove("/usr/share/texmf-dist/tex/plain/config/aleph.ini")
     pisitools.removeDir("/usr/share/texmf-dist/scripts/context/stubs/mswin/")
+    
+    # install texmf tree
+    folders = ["/usr/share",
+               "/etc/texmf/web2c",
+               "/etc/texmf/chktex",
+               "/etc/texmf/dvips/config",
+               "/etc/texmf/dvipdfm/config",
+               "/etc/texmf/dvipdfmx",
+               "/etc/texmf/tex/generic/config",
+               "/etc/texmf/ttf2pk",
+               "/etc/texmf/xdvi",
+               "/etc/fonts/conf.avail"]
+
+    for dirs in folders:
+        pisitools.dodir(dirs)
+
+    #pisitools.insinto("/usr/share", "texmf")
+    pisitools.insinto("/etc/fonts/conf.avail/", "09-texlive-fonts.conf")
+
+    # replace upstream texmf.cnf with ours
+    pisitools.remove("/usr/share/texmf-dist/web2c/texmf.cnf")
+    pisitools.insinto("/etc/texmf/web2c/", "texmf.cnf")
+
+    # the location of texmf.cnf is hard-wired to be under /usr/share/texmf/web2c
+    # we make a symlink from /etc/texmf/web2c/texmf.cnf to the latter
+    pisitools.dosym("/etc/texmf/web2c/texmf.cnf", "/usr/share/texmf-dist/web2c/texmf.cnf")
+    
+    # copy config files to $TEXMFSYSCONFIG tree (defined in texmf.cnf)
+    config_files = [ "/usr/share/texmf-dist/chktex/chktexrc",
+                     "/usr/share/texmf-dist/web2c/mktex.cnf",
+                     "/usr/share/texmf-dist/web2c/updmap.cfg",
+                     "/usr/share/texmf-dist/web2c/fmtutil.cnf",
+                     "/usr/share/texmf-dist/dvips/config/config.ps",
+                     "/usr/share/texmf-dist/dvipdfmx/dvipdfmx.cfg",
+                     "/usr/share/texmf-dist/tex/generic/config/pdftexconfig.tex",
+                     "/usr/share/texmf-dist/tex/generic/config/language.dat",
+                     "/usr/share/texmf-dist/tex/generic/config/language.def",
+                     "/usr/share/texmf-dist/ttf2pk/ttf2pk.cfg",
+                     "/usr/share/texmf-dist/xdvi/XDvi"]
+
+    for share_file in config_files:
+        etc_file = share_file.replace("/usr/share/texmf-dist", "/etc/texmf")
+        shelltools.copy("%s/%s" % (get.installDIR(), share_file) , "%s/%s" % (get.installDIR(), etc_file))
+
+    # clean updmap.cfg
+    pisitools.dosed("%s/etc/texmf/web2c/updmap.cfg" % get.installDIR(), "^(Map|MixedMap).*$")
+    pisitools.dosed("%s/etc/texmf/web2c/updmap.cfg" % get.installDIR(), "^#! (Map|MixedMap).*$")
+    
+    # remove aleph from fmtutil.cnf
+    pisitools.dosed("%s/usr/share/texmf-dist/web2c/fmtutil.cnf" % get.installDIR(), "^.*aleph.*$")

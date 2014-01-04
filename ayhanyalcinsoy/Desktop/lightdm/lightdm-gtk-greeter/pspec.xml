@@ -5,8 +5,8 @@
         <Name>lightdm-gtk-greeter</Name>
         <Homepage>http://www.sharpley.org.uk</Homepage>
         <Packager>
-            <Name>Ertan Güven</Name>
-            <Email>ertan@pisilinux.org</Email>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
         <IsA>app:gui</IsA>
@@ -14,24 +14,22 @@
         <Description>Login screen using the LightDM framework.</Description>
         <Archive sha1sum="7cddf09fa123f57afcc4c7692c8f9ca058a0e99a" type="targz">https://launchpadlibrarian.net/150554222/lightdm-gtk-greeter-1.6.1.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>qt-devel</Dependency>
-            <Dependency>kdelibs-devel</Dependency>
             <Dependency>lightdm-devel</Dependency>
-        </BuildDependencies>
+	    </BuildDependencies>
     </Source>
 
     <Package>
         <Name>lightdm-gtk-greeter</Name>
         <RuntimeDependencies>
-            <Dependency>qt</Dependency>
-            <Dependency>kdelibs</Dependency>
-            <Dependency>lightdm</Dependency>
+	  <Dependency>lightdm</Dependency>
+	  <Dependency>cairo</Dependency>
+	  <Dependency>gdk-pixbuf</Dependency>
         </RuntimeDependencies>
         <Files>
-			<Path fileType="executable">/usr/sbin/lightdm-gtk-greeter</Path>
-			<Path fileType="localedata">/usr/share/locale</Path>
-			<Path fileType="config">/etc</Path>
-			<Path fileType="data">/usr/share</Path>
+	<Path fileType="executable">/usr/sbin/lightdm-gtk-greeter</Path>
+	<Path fileType="localedata">/usr/share/locale</Path>
+	<Path fileType="config">/etc/lightdm</Path>
+	<Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
 
