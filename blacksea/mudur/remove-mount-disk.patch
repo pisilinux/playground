@@ -1,0 +1,13 @@
+diff -Nuar mudur.orig/bin/mudur.py mudur/bin/mudur.py
+--- mudur.orig/bin/mudur.py	2012-10-24 17:43:41.000000000 +0300
++++ mudur/bin/mudur.py	2014-01-05 16:06:42.709540100 +0200
+@@ -1155,7 +1155,8 @@
+         "/tmp/quilt.*",
+         "/tmp/ssh-*",
+         "/tmp/.*-unix",
+-        "/tmp/.X*-lock"
++        "/tmp/.X*-lock",
++        "/run/media/*"
+     )
+ 
+     # Remove directories
