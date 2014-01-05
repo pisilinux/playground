@@ -63,17 +63,19 @@
     </Package>
 
     <Package>
-        <Name>jre7-openjdk-headless</Name>
+        <Name>openjdk7-src</Name>
+        <Summary>Free Java environment based on OpenJDK 7.0 with IcedTea7 replacing binary plugs - sources</Summary>
         <RuntimeDependencies>
             <!--<Dependency>gnupg</Dependency>-->
         </RuntimeDependencies>
         <Files>
-            <Path fileType="doc">/usr/share/doc/jre7-openjdk-headless</Path>
+            <Path fileType="data">/usr/lib/jvm/java-7-openjdk/src.zip</Path>
         </Files>
     </Package>
 
     <Package>
         <Name>jdk7-openjdk</Name>
+        <Summary>Free Java environment based on OpenJDK 7.0 with IcedTea7 replacing binary plugs - SDK</Summary>
         <RuntimeDependencies>
             <!--<Dependency>gnupg</Dependency>-->
         </RuntimeDependencies>
@@ -170,11 +172,12 @@
 
     <Package>
         <Name>openjdk7-doc</Name>
+        <Summary>Free Java environment based on OpenJDK 7.0 with IcedTea7 replacing binary plugs - documentation</Summary>
         <RuntimeDependencies>
             <!--<Dependency>gnupg</Dependency>-->
         </RuntimeDependencies>
         <Files>
-            <Path fileType="doc">/usr/share/doc/openjdk7-doc</Path>
+            <Path fileType="doc">/usr/share/doc/openjdk7-doc/</Path>
         </Files>
     </Package>
 
