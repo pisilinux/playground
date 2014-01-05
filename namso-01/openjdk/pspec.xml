@@ -24,6 +24,10 @@
             <Dependency>ant</Dependency>
             <Dependency>rhino</Dependency>
             <Dependency>xdg-utils</Dependency>
+            <Dependency>nss-devel</Dependency>
+            <Dependency>cups-devel</Dependency>
+            <Dependency>libXt-devel</Dependency>
+            <Dependency>lcms2-devel</Dependency>
             <Dependency>giflib-devel</Dependency>
             <Dependency>libXtst-devel</Dependency>
             <Dependency>alsa-lib-devel</Dependency>
@@ -51,17 +55,127 @@
             <!--<Dependency>gnupg</Dependency>-->
         </RuntimeDependencies>
         <Files>
-            <!--<Path fileType="executable">/usr/bin</Path>
-            <Path fileType="executable">/usr/libexec</Path>
-            <Path fileType="config">/etc</Path>
-            <Path fileType="localedata">/usr/share/locale</Path>
-            <Path fileType="info">/usr/share/info</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
-            <Path fileType="man">/usr/share/man</Path>-->
+            <Path fileType="doc">/usr/share/doc/openjdk</Path>
         </Files>
         <AdditionalFiles>
             <!--<AdditionalFile owner="root" permission="0644" target="/etc/openjdk/openjdk.conf">openjdk.conf</AdditionalFile>-->
         </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>jre7-openjdk-headless</Name>
+        <RuntimeDependencies>
+            <!--<Dependency>gnupg</Dependency>-->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc/jre7-openjdk-headless</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>jdk7-openjdk</Name>
+        <RuntimeDependencies>
+            <!--<Dependency>gnupg</Dependency>-->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/jar</Path>
+            <Path fileType="executable">/usr/bin/xjc</Path>
+            <Path fileType="executable">/usr/bin/apt</Path>
+            <Path fileType="executable">/usr/bin/jdb</Path>
+            <Path fileType="executable">/usr/bin/jps</Path>
+            <Path fileType="executable">/usr/bin/jmap</Path>
+            <Path fileType="executable">/usr/bin/idlj</Path>
+            <Path fileType="executable">/usr/bin/jcmd</Path>
+            <Path fileType="executable">/usr/bin/jhat</Path>
+            <Path fileType="executable">/usr/bin/rmic</Path>
+            <Path fileType="executable">/usr/bin/javac</Path>
+            <Path fileType="executable">/usr/bin/javah</Path>
+            <Path fileType="executable">/usr/bin/javap</Path>
+            <Path fileType="executable">/usr/bin/jinfo</Path>
+            <Path fileType="executable">/usr/bin/wsgen</Path>
+            <Path fileType="executable">/usr/bin/jstat</Path>
+            <Path fileType="executable">/usr/bin/jstack</Path>
+            <Path fileType="executable">/usr/bin/jstatd</Path>
+            <Path fileType="executable">/usr/bin/javadoc</Path>
+            <Path fileType="executable">/usr/bin/extcheck</Path>
+            <Path fileType="executable">/usr/bin/jconsole</Path>
+            <Path fileType="executable">/usr/bin/wsimport</Path>
+            <Path fileType="executable">/usr/bin/jarsigner</Path>
+            <Path fileType="executable">/usr/bin/jsadebugd</Path>
+            <Path fileType="executable">/usr/bin/schemagen</Path>
+            <Path fileType="executable">/usr/bin/serialver</Path>
+            <Path fileType="executable">/usr/bin/jrunscript</Path>
+            <Path fileType="executable">/usr/bin/appletviewer</Path>
+            <Path fileType="executable">/usr/bin/native2ascii</Path>
+            <Path fileType="data">/usr/share/applications/jconsole.desktop</Path>
+            <Path fileType="header">/usr/lib/jvm/java-7-openjdk/include/jni.h</Path>
+            <Path fileType="header">/usr/lib/jvm/java-7-openjdk/include/jawt.h</Path>
+            <Path fileType="header">/usr/lib/jvm/java-7-openjdk/include/jvmti.h</Path>
+            <Path fileType="header">/usr/lib/jvm/java-7-openjdk/include/jvmticmlr.h</Path>
+            <Path fileType="header">/usr/lib/jvm/java-7-openjdk/include/linux/jni_md.h</Path>
+            <Path fileType="header">/usr/lib/jvm/java-7-openjdk/include/jdwpTransport.h</Path>
+            <Path fileType="header">/usr/lib/jvm/java-7-openjdk/include/linux/jawt_md.h</Path>
+            <Path fileType="header">/usr/lib/jvm/java-7-openjdk/include/classfile_constants.h</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/apt</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jar</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jdb</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jps</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/xjc</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/rmic</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/rmid</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/idlj</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/orbd</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/java</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jhat</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jmap</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jcmd</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/javac</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/javah</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/javap</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jinfo</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jstat</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/wsgen</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jstatd</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jstack</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/pack200</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/javadoc</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/keytool</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/wsimport</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/extcheck</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jconsole</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/tnameserv</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/unpack200</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/schemagen</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/serialver</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jarsigner</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jsadebugd</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/jrunscript</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/policytool</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/servertool</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/rmiregistry</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/java-rmi.cgi</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/native2ascii</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/bin/appletviewer</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/jexec</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/ct.sym</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/dt.jar</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/ir.idl</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/orb.idl</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/tools.jar</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/sa-jdi.jar</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/jconsole.jar</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/amd64/jli/libjli.so</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>openjdk7-doc</Name>
+        <RuntimeDependencies>
+            <!--<Dependency>gnupg</Dependency>-->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc/openjdk7-doc</Path>
+        </Files>
     </Package>
 
     <History>
