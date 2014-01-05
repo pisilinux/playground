@@ -45,4 +45,4 @@ def check():
 def install():
     autotools.rawInstall('DESTDIR=%s' % get.installDIR())
 
-    pisitools.dodoc("AUTHORS", "THANKS", "COPYING", "README", "NEWS", "TODO")
+    pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "HACKING", "README", "NEWS")
