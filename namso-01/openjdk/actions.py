@@ -57,6 +57,8 @@ def install():
     
     pisitools.insinto("/usr/lib/jvm/java-7-openjdk/include/", "openjdk.build/include/*")
     pisitools.insinto("/usr/share/applications/", "jconsole.desktop")
+    pisitools.insinto("/usr/share/man/ja/", "openjdk.build/j2sdk-image/man/ja_JP.UTF-8/*")
+    pisitools.insinto("/usr/share/man/man1/", "openjdk.build/j2sdk-image/man/man1/*")
     
     #files for openjdk7-src
     pisitools.insinto("/usr/lib/jvm/java-7-openjdk/", "openjdk.build/j2sdk-image/src.zip")
