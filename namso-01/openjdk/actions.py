@@ -34,7 +34,7 @@ def setup():
                             --with-langtools-src-zip=3c8eb52a32ea.tar.gz \
                             --with-abs-install-dir=/usr/lib/jvm/java-7-openjdk \
                             --with-pkgversion='PisiLinux build 7.u45_2.4.3-1' \
-                           " % get.makeJOBS())
+                           " % get.makeJOBS().replace("-j", ""))
 
 def build():
     autotools.make()
