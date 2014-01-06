@@ -92,9 +92,6 @@ def install():
     pisitools.insinto("/etc/java-7-openjdk/management/", "openjdk.build/j2sdk-image/jre/lib/management/management.properties")
     pisitools.insinto("/etc/java-7-openjdk/management/", "openjdk.build/j2sdk-image/jre/lib/management/jmxremote.password.template", "jmxremote.password")
     pisitools.insinto("/etc/java-7-openjdk/management/", "openjdk.build/j2sdk-image/jre/lib/management/snmp.acl.template", "snmp.acl")
-        
-    pisitools.insinto("/etc/java-7-openjdk/", "openjdk.build/j2sdk-image/jre/lib/fontconfig.Ubuntu.properties.src", "fontconfig.properties")    
-    pisitools.insinto("/etc/java-7-openjdk/", "openjdk.build/j2sdk-image/jre/lib/fontconfig.Ubuntu.bfc", "fontconfig.bfc")
     
     pisitools.insinto("/etc/java-7-openjdk/security/", "openjdk.build/j2sdk-image/jre/lib/security/java.policy")
     pisitools.insinto("/etc/java-7-openjdk/security/", "openjdk.build/j2sdk-image/jre/lib/security/java.security")
@@ -106,6 +103,14 @@ def install():
     
     pisitools.insinto("/usr/lib/jvm/java-7-openjdk/jre/", "openjdk.build/j2sdk-image/jre/bin/*")
     pisitools.insinto("/usr/bin/", "openjdk.build/j2sdk-image/jre/bin/*")
+    
+    pisitools.insinto("/usr/lib/jvm/java-7-openjdk/jre/lib/", "openjdk.build/j2re-image/lib/*")
+        
+    pisitools.insinto("/etc/java-7-openjdk/", "openjdk.build/j2sdk-image/jre/lib/fontconfig.Ubuntu.properties.src", "fontconfig.properties")    
+    pisitools.insinto("/etc/java-7-openjdk/", "openjdk.build/j2sdk-image/jre/lib/fontconfig.Ubuntu.bfc", "fontconfig.bfc")
+    
+    pisitools.doman("openjdk.build/j2re-image/man/man1/*")
+    pisitools.insinto("/usr/share/man/ja/man1", "openjdk.build/j2re-image/man/ja_JP.UTF-8/man1/*.1")
     
     
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "HACKING", "README", "NEWS")
