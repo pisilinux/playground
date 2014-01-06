@@ -50,16 +50,55 @@
     </Source>
 
     <Package>
-        <Name>openjdk</Name>
+        <Name>jre7-openjdk</Name>
+        <Summary>Free Java environment based on OpenJDK 7.0 with IcedTea7 replacing binary plugs - Full Java runtime environment - needed for executing Java GUI and Webstart programs</Summary>
         <RuntimeDependencies>
             <!--<Dependency>gnupg</Dependency>-->
         </RuntimeDependencies>
         <Files>
             <Path fileType="doc">/usr/share/doc/openjdk</Path>
+            <Path fileType="executable">/usr/bin/policytool</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/</Path>
+            <Path fileType="man">/usr/share/man/man1/policytool.1</Path>
+            <Path fileType="man">/usr/share/man/ja/man1/policytool.1</Path>
+            <Path fileType="data">/usr/share/applications/policytool.desktop</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/jre/bin/policytool</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/jre/lib/*/libmawt.so</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/jre/lib/*/libjsoundalsa.so</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/jre/lib/*/libpulse-java.so</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/jre/lib/*/libsplashscreen.so</Path>
         </Files>
-        <AdditionalFiles>
-            <!--<AdditionalFile owner="root" permission="0644" target="/etc/openjdk/openjdk.conf">openjdk.conf</AdditionalFile>-->
-        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>jre7-openjdk-headless</Name>
+        <Summary>Free Java environment based on OpenJDK 7.0 with IcedTea7 replacing binary plugs - Minimal Java runtime - needed for executing non GUI Java programs</Summary>
+        <RuntimeDependencies>
+            <!--<Dependency>gnupg</Dependency>-->
+        </RuntimeDependencies>
+        <Files>            
+            <Path fileType="config">/etc/java-7-openjdk/</Path>
+            <Path fileType="executable">/usr/bin/orbd</Path>
+            <Path fileType="executable">/usr/bin/rmid</Path>
+            <Path fileType="executable">/usr/bin/java</Path>
+            <Path fileType="executable">/usr/bin/pack200</Path>
+            <Path fileType="executable">/usr/bin/keytool</Path>
+            <Path fileType="executable">/usr/bin/tnameserv</Path>
+            <Path fileType="executable">/usr/bin/unpack200</Path>
+            <Path fileType="executable">/usr/bin/servertool</Path>
+            <Path fileType="executable">/usr/bin/rmiregistry</Path>
+            <Path fileType="doc">/usr/share/doc/jre7-openjdk-headless</Path>
+            <Path fileType="executable">/usr/lib/jvm/java-7-openjdk/jre/java</Path>
+            <Path fileType="executable">/usr/lib/jvm/java-7-openjdk/jre/orbd</Path>
+            <Path fileType="executable">/usr/lib/jvm/java-7-openjdk/jre/rmid</Path>
+            <Path fileType="executable">/usr/lib/jvm/java-7-openjdk/jre/keytool</Path>
+            <Path fileType="executable">/usr/lib/jvm/java-7-openjdk/jre/pack200</Path>
+            <Path fileType="executable">/usr/lib/jvm/java-7-openjdk/jre/tnameserv</Path>
+            <Path fileType="executable">/usr/lib/jvm/java-7-openjdk/jre/unpack200</Path>
+            <Path fileType="executable">/usr/lib/jvm/java-7-openjdk/jre/servertool</Path>
+            <Path fileType="executable">/usr/lib/jvm/java-7-openjdk/jre/policytool</Path>
+            <Path fileType="executable">/usr/lib/jvm/java-7-openjdk/jre/rmiregistry</Path>
+        </Files>
     </Package>
 
     <Package>
@@ -80,6 +119,8 @@
             <!--<Dependency>gnupg</Dependency>-->
         </RuntimeDependencies>
         <Files>
+            <Path fileType="man">/usr/share/man/man1/</Path>
+            <Path fileType="man">/usr/share/man/ja/man1/</Path>
             <Path fileType="executable">/usr/bin/jar</Path>
             <Path fileType="executable">/usr/bin/xjc</Path>
             <Path fileType="executable">/usr/bin/apt</Path>
@@ -166,7 +207,7 @@
             <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/tools.jar</Path>
             <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/sa-jdi.jar</Path>
             <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/jconsole.jar</Path>
-            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/amd64/jli/libjli.so</Path>
+            <Path fileType="library">/usr/lib/jvm/java-7-openjdk/lib/*/jli/libjli.so</Path>
         </Files>
     </Package>
 

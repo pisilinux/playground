@@ -15,7 +15,9 @@ shelltools.export("HOTSPOT_BUILD_JOBS", get.makeJOBS())
 shelltools.export("LC_ALL", "C")
 
 bindir = "/usr/bin"
+jre7lib = "/usr/lib/jvm/java-7-openjdk/jre/lib/amd64/"
 jvmbindir = "/usr/lib/jvm/java-7-openjdk/bin/"
+jreheadless = "/etc/java-7-openjdk/"
 
 def setup():
     autotools.rawConfigure("\
@@ -65,5 +67,45 @@ def install():
     
     #files for openjdk7-doc
     pisitools.insinto("/usr/share/doc/openjdk7-doc/", "openjdk.build/docs/*")
+    
+    #for files jre7-openjdk
+    pisitools.dobin("openjdk.build/j2re-image/bin/policytool")
+    pisitools.insinto("/usr/share/applications/", "policytool.desktop")
+    pisitools.insinto("usr/lib/jvm/java-7-openjdk/jre/bin/", "openjdk.build/j2re-image/bin/policytool")
+    for files in ["openjdk.build/j2re-image/lib/amd64/libjsoundalsa.so", "openjdk.build/j2re-image/lib/amd64/libpulse-java.so", "openjdk.build/j2re-image/lib/amd64/libsplashscreen.so", "openjdk.build/j2re-image/lib/amd64/xawt/libmawt.so"]:
+        pisitools.insinto(jre7lib, files)
+        
+    pisitools.dodoc("openjdk.build/j2re-image/THIRD_PARTY_README", "openjdk.build/j2re-image/LICENSE")
+    pisitools.doman("openjdk.build/j2re-image/man/man1/policytool.1")
+    pisitools.insinto("/usr/share/man/ja/man1/", "openjdk.build/j2re-image/man/ja_JP.UTF-8/man1/policytool.1")
+    pisitools.insinto("/usr/share/icons/hicolor/16x16/apps/", "openjdk/jdk/src/solaris/classes/sun/awt/X11/java-icon16.png", "java.png")
+    pisitools.insinto("/usr/share/icons/hicolor/24x24/apps/", "openjdk/jdk/src/solaris/classes/sun/awt/X11/java-icon24.png", "java.png")
+    pisitools.insinto("/usr/share/icons/hicolor/32x32/apps/", "openjdk/jdk/src/solaris/classes/sun/awt/X11/java-icon32.png", "java.png")
+    pisitools.insinto("/usr/share/icons/hicolor/48x48/apps/", "openjdk/jdk/src/solaris/classes/sun/awt/X11/java-icon48.png", "java.png")
+    
+    #for files jre7-openjdk-headless
+    for files in ["openjdk.build/j2sdk-image/jre/lib/calendars.properties", "openjdk.build/j2sdk-image/jre/lib/content-types.properties", "openjdk.build/j2sdk-image/jre/lib/flavormap.properties", "openjdk.build/j2sdk-image/jre/lib/amd64/jvm.cfg", "openjdk.build/j2sdk-image/jre/lib/logging.properties", "openjdk.build/j2sdk-image/jre/lib/net.properties", "openjdk.build/j2sdk-image/jre/lib/psfont.properties.ja", "openjdk.build/j2sdk-image/jre/lib/psfontj2d.properties", "openjdk.build/j2sdk-image/jre/lib/tz.properties", "openjdk.build/j2sdk-image/jre/lib/sound.properties"]:
+        pisitools.insinto(jreheadless, files)
+    
+    pisitools.insinto("/etc/java-7-openjdk/cursors/", "openjdk.build/j2sdk-image/jre/lib/images/cursors/cursors.properties")
+    pisitools.insinto("/etc/java-7-openjdk/management/", "openjdk.build/j2sdk-image/jre/lib/management/jmxremote.access")
+    pisitools.insinto("/etc/java-7-openjdk/management/", "openjdk.build/j2sdk-image/jre/lib/management/management.properties")
+    pisitools.insinto("/etc/java-7-openjdk/management/", "openjdk.build/j2sdk-image/jre/lib/management/jmxremote.password.template", "jmxremote.password")
+    pisitools.insinto("/etc/java-7-openjdk/management/", "openjdk.build/j2sdk-image/jre/lib/management/snmp.acl.template", "snmp.acl")
+        
+    pisitools.insinto("/etc/java-7-openjdk/", "openjdk.build/j2sdk-image/jre/lib/fontconfig.Ubuntu.properties.src", "fontconfig.properties")    
+    pisitools.insinto("/etc/java-7-openjdk/", "openjdk.build/j2sdk-image/jre/lib/fontconfig.Ubuntu.bfc", "fontconfig.bfc")
+    
+    pisitools.insinto("/etc/java-7-openjdk/security/", "openjdk.build/j2sdk-image/jre/lib/security/java.policy")
+    pisitools.insinto("/etc/java-7-openjdk/security/", "openjdk.build/j2sdk-image/jre/lib/security/java.security")
+    pisitools.insinto("/etc/java-7-openjdk/security/", "openjdk.build/j2sdk-image/jre/lib/security/nss.cfg")
+    
+    pisitools.insinto("/usr/share/doc/jre7-openjdk-headless", "openjdk.build/j2sdk-image/jre/LICENSE")
+    pisitools.insinto("/usr/share/doc/jre7-openjdk-headless", "openjdk.build/j2sdk-image/jre/THIRD_PARTY_README")
+    pisitools.insinto("/usr/share/doc/jre7-openjdk-headless", "openjdk.build/j2sdk-image/jre/ASSEMBLY_EXCEPTION")
+    
+    pisitools.insinto("/usr/lib/jvm/java-7-openjdk/jre/", "openjdk.build/j2sdk-image/jre/bin/*")
+    pisitools.insinto("/usr/bin/", "openjdk.build/j2sdk-image/jre/bin/*")
+    
     
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "HACKING", "README", "NEWS")
