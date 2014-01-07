@@ -18,6 +18,5 @@ def build():
 
 def install():
     cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
-    pisitools.removeDir("/usr/share/icons")
 
     pisitools.dodoc("ChangeLog", "COPYING", "NEWS", "README")
