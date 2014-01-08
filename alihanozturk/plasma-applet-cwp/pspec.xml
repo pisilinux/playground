@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>plasma-applet-cwp</Name>
+        <Homepage>http://kde-look.org/content/show.php?content=98925</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>Customizable weather plasmoid</Summary>
+        <Description>Cwp is another weather plasmoid. It aims to be highly customizable, but a little harder to setup than other weather plasmoids.</Description>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>cmake</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="817f04c221160b257f33e3b7b59ae781d5563414" type="tarbz2">http://kde-apps.org/CONTENT/content-files/98925-cwp-1.9.1.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>plasma-applet-cwp</Name>
+        <RuntimeDependencies>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/kde4</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-01-08</Date>
+            <Version>1.9.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
