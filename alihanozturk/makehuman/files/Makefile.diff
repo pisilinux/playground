@@ -2,7 +2,7 @@ Index: Makefile.Linux
 ===================================================================
 --- Makefile.Linux	(revision 3818)
 +++ Makefile.Linux	(working copy)
-@@ -3,11 +3,9 @@
+@@ 2,11 +2,9 @@
  DEPS = $(addsuffix .d,$(basename $(CSRCS) $(CCSRCS) ))
  OBJS = $(addsuffix .o,$(basename $(CSRCS) $(CCSRCS) ))
  
@@ -16,7 +16,7 @@ Index: Makefile.Linux
  EXTRADEFINES  =
  INCLUDEPATH   = -I/usr/include/SDL/ -I/usr/include/python$(PYTHONVER)/ -I/usr/X11R6/include -I./include
  
-@@ -16,19 +14,19 @@
+@@ 15,19 +15,19 @@
  	
  %.o : %.c
  	@echo "compiling C file $< to $@ ..."

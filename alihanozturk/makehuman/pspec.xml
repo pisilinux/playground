@@ -12,7 +12,9 @@
         <Summary>Parametrical modeling program for creating human bodies</Summary>
         <Description>MakeHuman is a free program that runs under the Windows, Linux and Mac operating systems.</Description>
         <BuildDependencies>
+            <Dependency>libpng-devel</Dependency>
             <Dependency>glew-devel</Dependency>
+            <Dependency>pnglite-devel</Dependency>
             <Dependency>subversion</Dependency>
             <Dependency>libglade-devel</Dependency>
             <Dependency>libsdl-devel</Dependency>
@@ -20,9 +22,9 @@
             <Dependency>python-devel</Dependency>
             <Dependency>sdl-image-devel</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="a93c7ecbcb0a459d67f9e7302af3f3e9eaf7aacb" type="targz">/home/alihan/İndirilenler/makehuman.tar.gz</Archive>
+        <Archive sha1sum="d5b1d20fd070f68fbc1fa9b2b535879778c569e0" type="tarbz2">/home/alihan/İndirilenler/makehuman-1.0a7-python27-amd64.tbz2</Archive>
         <Patches>
-<!--             <Patch level="1">Makefile.diff</Patch> -->
+<!--              <Patch level="2">Makefile.diff</Patch> -->
         </Patches>
     </Source>
     <Package>
