@@ -13,29 +13,29 @@
         <Icon>jdownloader</Icon>
         <Summary>jDownloader tüm işletim sistemi platformlarında çalışabilen, açık kaynak olarak geliştirilen ücretsiz bir dosya indirme yöneticisidir.</Summary>
         <Description>jDownloader tüm işletim sistemi platformlarında çalışabilen, açık kaynak olarak geliştirilen ücretsiz bir dosya indirme yöneticisidir. Tamamen Java ile yaratılmış olan bu işlevsel yazılım Rapidshare.com, Megaupload.com, Megashares.comvb. dosya barındırma sitelerinden yapıcağınız dosya indirme işlemlerini basitleştirmek ve hızlandırmak için üretilmiş bir araç.</Description>
-        <Archive type="targz" sha1sum="aa3c2752e60d1b239a2c353bbc3a790fbf89e5a7">https://launchpad.net/~jd-team/+archive/jdownloader/+files/jdownloader_0.1.orig.tar.gz</Archive>,
-        <Patches>
-            <Patch level="0">jdownload-desktop.patch</Patch>
-        </Patches>
+        <Archive type="targz" sha1sum="94b6e3a45f64b1b4fa514e4b22b83d18a9c47573">https://launchpad.net/~jd-team/+archive/jdownloader/+files/jdownloader-installer_0.5.orig.tar.gz</Archive>,
     </Source>
 
     <Package>
         <Name>jdownloader</Name>
         <RuntimeDependencies>
-            <Dependency>sun-jre</Dependency>
             <Dependency>wget</Dependency>
+            <Dependency>sun-jre</Dependency>
         </RuntimeDependencies>
         <Files>
+            <Path fileType="man">/usr/share/man</Path>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/applications</Path>
         </Files>
     </Package>
 
     <History>
         <Update release="1">
-            <Date>2013-07-14</Date>
-            <Version>0.1</Version>
-            <Comment>v_up</Comment>
+            <Date>2014-01-09</Date>
+            <Version>0.5</Version>
+            <Comment>First Release</Comment>
             <Name>Osman Erkan</Name>
             <Email>osman.erkan@pisilinux.org</Email>
         </Update>
