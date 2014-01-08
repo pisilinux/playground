@@ -5,6 +5,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt
 
 from pisi.actionsapi import cmaketools
+from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
@@ -16,3 +17,4 @@ def build():
 
 def install():
     cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
+    pisitools.dosym("copyFromUserToSystem.sh", "/usr/bin/copyFromUserToSystem.sh")
