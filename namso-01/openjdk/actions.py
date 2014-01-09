@@ -101,7 +101,7 @@ def install():
     pisitools.insinto("/usr/share/doc/jre7-openjdk-headless", "openjdk.build/j2sdk-image/jre/THIRD_PARTY_README")
     pisitools.insinto("/usr/share/doc/jre7-openjdk-headless", "openjdk.build/j2sdk-image/jre/ASSEMBLY_EXCEPTION")
     
-    pisitools.insinto("/usr/lib/jvm/java-7-openjdk/jre/", "openjdk.build/j2sdk-image/jre/bin/*")
+    pisitools.insinto("/usr/lib/jvm/java-7-openjdk/jre/bin/", "openjdk.build/j2sdk-image/jre/bin/*")
     pisitools.insinto("/usr/bin/", "openjdk.build/j2sdk-image/jre/bin/*")
     
     pisitools.insinto("/usr/lib/jvm/java-7-openjdk/jre/lib/", "openjdk.build/j2re-image/lib/*")
