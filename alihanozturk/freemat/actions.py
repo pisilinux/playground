@@ -9,8 +9,6 @@ from pisi.actionsapi import cmaketools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-WorkDir = "FreeMat-4.2-Source"
-
 def setup():
     pisitools.cxxflags.add("-fpermissive")
     shelltools.system("find -type f -name '*.moc.cpp' -exec rm -rf {} \;")
@@ -20,7 +18,7 @@ def setup():
     cmaketools.configure("-DCMAKE_INSTALL_PREFIX=/usr \
                           -DUSE_LLVM=OFF \
                           -DFORCE_BUNDLED_UMFPACK=ON \
-                          -DFFI_INCLUDE_DIR=/usr/lib/libffi-`pacman -Q libffi | cut -f2 -d\ |cut -f1 -d-`/include/ \
+                          -DFFI_INCLUDE_DIR=/usr/lib/libffi-'pacman -Q libffi | cut -f2 -d\ |cut -f1 -d-'/include/ \
                           -DPYTHON_EXECUTABLE=/usr/bin/python2.7")
 
 def build():
@@ -28,5 +26,5 @@ def build():
 
 def install():
     cmaketools.install("DESTDIR=%s" % get.installDIR())
-    pisitools.insinto("/usr/share/pixmaps/", "images/freemat-2.xpm", "FreeMat.xpm")
+    
     pisitools.remove("/usr/bin/blas.ini")

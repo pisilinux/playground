@@ -5,118 +5,61 @@
         <Name>FreeMat</Name>
         <Homepage>http://freemat.sourceforge.net</Homepage>
         <Packager>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
-        <Icon>FreeMat</Icon>
+        <Icon>freemat</Icon>
         <IsA>app:gui</IsA>
         <Summary>A free environment for rapid engineering and scientific processing</Summary>
         <Description>FreeMat is a free environment for rapid engineering and scientific prototyping and data processing. It is similar to commercial systems such as MATLAB from Mathworks, and IDL from Research Systems, but is Open Source.</Description>
         <Archive sha1sum="8553c64f7671ef42faa299c7326354ac2de0e063" type="targz">http://sourceforge.net/projects/freemat/files/FreeMat4/FreeMat-4.2-Source.tar.gz/download</Archive>
         <BuildDependencies>
-            <Dependency>mesa-devel</Dependency>
-            <Dependency>mesa-glu-devel</Dependency>
-            <Dependency>cmake</Dependency>
-            <Dependency>pcre++-devel</Dependency>
-            <Dependency>llvm-clang-devel</Dependency>
-            <Dependency>llvm</Dependency>
-            <Dependency>llvm-ocaml</Dependency>
-            <Dependency>gluon-devel</Dependency>
             <Dependency>qt-devel</Dependency>
-            <Dependency>atlas-devel</Dependency>
-            <Dependency>portaudio-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
             <Dependency>fftw3-devel</Dependency>
             <Dependency>arpack-devel</Dependency>
+            <Dependency>mesa-glu-devel</Dependency>
+            <Dependency>portaudio-devel</Dependency>
             <Dependency>qt-webkit-devel</Dependency>
+            <Dependency>portaudio-devel</Dependency>
             <Dependency>SuiteSparse-devel</Dependency>
-            <Dependency>python-devel</Dependency>
-            <Dependency>gcc</Dependency>
-            <Dependency>libffi-devel</Dependency>
-            <Dependency>ncurses-devel</Dependency>
-            <Dependency>lapack-devel</Dependency>
-            <Dependency>libXpm-devel</Dependency>
-            <Dependency>libXp</Dependency>
-            <Dependency>libXext-devel</Dependency>
-            <Dependency>coreutils</Dependency>
-            <Dependency>libgcc</Dependency>
-            <Dependency>libstdc++</Dependency>
-            <Dependency>zlib-devel</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch level="1">freemat-llvm31.patch</Patch> -->
+            <Patch>FreeMat-4.1_use_llvm.patch</Patch>
         </Patches>
     </Source>
 
     <Package>
         <Name>FreeMat</Name>
         <RuntimeDependencies>
-            <Dependency>mesa</Dependency>
             <Dependency>qt</Dependency>
-            <Dependency>gcc</Dependency>
-            <Dependency>pcre++</Dependency>
-            <Dependency>llvm-clang</Dependency>
-            <Dependency>llvm</Dependency>
-            <Dependency>gluon</Dependency>
-            <Dependency>portaudio</Dependency>
-            <Dependency>qt-webkit</Dependency>
+            <Dependency>mesa</Dependency>
             <Dependency>fftw3</Dependency>
             <Dependency>arpack</Dependency>
-            <Dependency>atlas</Dependency>
-            <Dependency>SuiteSparse</Dependency>
-            <Dependency>python</Dependency>
-            <Dependency>libffi</Dependency>
-            <Dependency>ncurses</Dependency>
-            <Dependency>lapack</Dependency>
-            <Dependency>libXpm</Dependency>
-            <Dependency>libXext</Dependency>
+            <Dependency>mesa-glu</Dependency>
+            <Dependency>portaudio</Dependency>
+            <Dependency>qt-webkit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
             <Path fileType="data">/usr/share/FreeMat-4.2</Path>
             <Path fileType="data">/usr/share/applications</Path>
-            <Path fileType="data">/usr/share/pixmaps</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/FreeMat.desktop">FreeMat.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/freemat.png">freemat.png</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
     <History>
-        <Update release="5">
-            <Date>2011-02-02</Date>
-            <Version>4.2</Version>
-            <Comment>First Release Pisilinux</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
-        <Update release="4">
-            <Date>2011-02-02</Date>
-            <Version>4.0.1</Version>
-            <Comment>Build for Pardus Corporate 2.</Comment>
-            <Name>Çağlar Kilimci</Name>
-            <Email>ckilimci@pardus.org.tr</Email>
-        </Update>
-        <Update release="3">
-            <Date>2010-12-27</Date>
-            <Version>4.0.1</Version>
-            <Comment>Package takeover, build for Pardus 2011.</Comment>
-            <Name>Çağlar Kilimci</Name>
-            <Email>ckilimci@pardus.org.tr</Email>
-        </Update>
-        <Update release="2">
-            <Date>2010-05-13</Date>
-            <Version>4.0.1</Version>
-            <Comment>Write strict dependency to new version of kdepimlibs,qt,kdebase,kdebase-runtime,kdebase-workspace,kdelibs,kdelibs-devel,kdepimlibs-devel</Comment>
-            <Name>Onur Küçük</Name>
-            <Email>onur@pardus.org.tr</Email>
-        </Update>
         <Update release="1">
-            <Date>2009-11-17</Date>
-            <Version>4.0.1</Version>
+            <Date>2014-01-09</Date>
+            <Version>4.2</Version>
             <Comment>First release.</Comment>
-            <Name>Serdar Dalgıç</Name>
-            <Email>dalgic.srdr@gmail.com</Email>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>
