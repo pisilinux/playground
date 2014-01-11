@@ -9,7 +9,7 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 
 def setup():
-    autotools.configure("CONF_PIDFILE=/run/bumblebeed.pid\
+    autotools.configure("CONF_PIDFILE=/run/bumblebee/bumblebeed.pid\
                          CONF_DRIVER_MODULE_NVIDIA=nvidia \
                          CONF_LDPATH_NVIDIA=/usr/lib:/usr/lib32 \
                          CONF_MODPATH_NVIDIA=/usr/lib/nvidia-current/modules,/usr/lib/xorg/modules/volatile \

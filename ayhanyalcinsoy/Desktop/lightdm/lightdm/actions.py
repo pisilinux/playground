@@ -12,7 +12,7 @@ shelltools.export("HOME", get.workDIR())
 
 def setup():
     autotools.configure("--with-greeter-user=lightdm\
-                         --with-greeter-session=lightdm-kde-greeter\
+                         --with-greeter-session=lightdm-gtk-greeter\
                          --enable-introspection\
                          --disable-tests\
                          --disable-static")

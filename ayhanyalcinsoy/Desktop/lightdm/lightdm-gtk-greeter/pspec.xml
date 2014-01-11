@@ -12,9 +12,10 @@
         <IsA>app:gui</IsA>
         <Summary>Login screen using the LightDM framework.</Summary>
         <Description>Login screen using the LightDM framework.</Description>
-        <Archive sha1sum="7cddf09fa123f57afcc4c7692c8f9ca058a0e99a" type="targz">https://launchpadlibrarian.net/150554222/lightdm-gtk-greeter-1.6.1.tar.gz</Archive>
+        <Archive sha1sum="17591ffd8aea73527835ceb8d3baa0c93c250aea" type="targz">https://launchpad.net/lightdm-gtk-greeter/1.7/1.7.0/+download/lightdm-gtk-greeter-1.7.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>lightdm-devel</Dependency>
+	    <Dependency>gtk3-devel</Dependency>
 	    </BuildDependencies>
     </Source>
 
@@ -24,6 +25,7 @@
 	  <Dependency>lightdm</Dependency>
 	  <Dependency>cairo</Dependency>
 	  <Dependency>gdk-pixbuf</Dependency>
+	  <Dependency>gtk3</Dependency>
         </RuntimeDependencies>
         <Files>
 	<Path fileType="executable">/usr/sbin/lightdm-gtk-greeter</Path>
@@ -34,6 +36,13 @@
     </Package>
 
     <History>
+      <Update release="3">
+            <Date>2014-01-10</Date>
+            <Version>1.7.0</Version>
+            <Comment>First release</Comment>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@gmail.com</Email>
+        </Update>
 <Update release="2">
             <Date>2013-12-06</Date>
             <Version>1.6.1</Version>
