@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>icon-theme-nitrux</Name>
+        <Homepage>http://nitrux.in/software</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>data</IsA>
+        <Summary>Nitrux Look for KDE</Summary>
+        <Description>Nitrux Look for KDE</Description>
+        <Archive sha1sum="21ee30eaeb9741ecae2586b5e72b9c3576128858" type="targz">https://launchpad.net/~nitrux/+archive/nitrux-artwork/+files/nitrux-icon-theme-kde_3.2.0.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>icon-theme-nitrux</Name>
+         <Files>
+            <Path fileType="data">/usr/share/icons</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-01-14</Date>
+            <Version>3.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+
+</PISI>
