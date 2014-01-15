@@ -20,9 +20,6 @@
         you must gather the resources you need to raise a military force capable of dominating your enemies.</Description>        
         <Archive sha1sum="3084d8e6f6a7c38186cc3cfe25990c6c310bf950" type="tarxz">http://releases.wildfiregames.com/0ad-0.0.15-alpha-unix-build.tar.xz</Archive>
         <Archive sha1sum="92bc2f740f948ba0d5a7a21e5268624a3210d5d0" type="tarxz">http://releases.wildfiregames.com/0ad-0.0.15-alpha-unix-data.tar.xz</Archive>
-        <AdditionalFiles>
-<!--             <AdditionalFile target="build/resources/0ad-editor.desktop" permission="0644">0ad-editor.desktop</AdditionalFile> -->
-        </AdditionalFiles>
         <BuildDependencies>
             <Dependency>tiff-devel</Dependency>
             <Dependency>enet-devel</Dependency>
@@ -40,7 +37,7 @@
             <Dependency>binutils</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">desktop.patch</Patch>
+             <Patch level="1">desktop.patch</Patch>
         </Patches>
     </Source>
 
@@ -65,16 +62,16 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="library">/usr/lib/0ad</Path>
+            <Path fileType="data">/usr/lib</Path>
+            <Path fileType="data">/usr/share/0ad</Path>
             <Path fileType="data">/usr/share/pixmaps</Path>
             <Path fileType="data">/usr/share/applications</Path>
-            <Path fileType="data">/usr/share/0ad</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
-            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="doc">/usr/share/doc/0ad</Path>
         </Files>
         <AdditionalFiles>
-<!--             <AdditionalFile owner="root" permission="0755" target="/usr/bin/0ad">0ad</AdditionalFile> -->
-<!--             <AdditionalFile owner="root" permission="0755" target="/usr/bin/0ad-editor">0ad-editor</AdditionalFile> -->
+             <AdditionalFile target="/usr/bin/0ad" owner="root" permission="0755">0ad</AdditionalFile>
+             <AdditionalFile target="/usr/share/applications/0ad.deskop" owner="root" permission="0644">0ad.desktop</AdditionalFile>
+             <AdditionalFile target="/usr/share/pixmaps/0ad.png" owner="root" permission="0644">0ad.png</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
