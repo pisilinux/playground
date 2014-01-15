@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>vegastrike-music</Name>
+        <Homepage>http://vegastrike.sourceforge.net</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>data</IsA>
+        <Summary>Data package for VegaStrike</Summary>
+        <Description>Vega Strike data music</Description>
+        <Archive sha1sum="8dd7637182bcae98c913f21f7a247bc1b63c780d" type="tar">http://downloads.sourceforge.net/vegastrike/vegastrike-music-0.5.1.r1.tar</Archive>
+    </Source>
+
+    <Package>
+        <Name>vegastrike-music</Name>
+        <Files>
+            <Path fileType="data">/usr/share/vegastrike</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-25</Date>
+            <Version>0.5.1</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan.ozturk@fenerbahce.com.tr</Email>
+        </Update>
+    </History>
+</PISI>
