@@ -9,13 +9,13 @@
             <Email>alihan@pisilinux.org</Email>
         </Packager>
         <License>GPLv3</License>
-        <PartOf>office</PartOf>
         <IsA>app:gui</IsA>
         <Summary>Open source freeware software for study Quran ( koran ) and research</Summary>
         <Description>Al-anvar is an open source freeware dedicated for Quranic study and research. Some of its features are: Advanced search , Commenting tool , Indexing and Grouping , Add-ons for different translations and commentaries in many languages , Online and offline recitation</Description>
         <BuildDependencies>
             <Dependency>phonon-devel</Dependency>
             <Dependency>qt-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
         </BuildDependencies>
         <Archive sha1sum="d3d29dc9f94e3a9ac1556dda5c3c94c7696cadd9" type="targz">http://sourceforge.net/projects/al-anvar/files/0.6.0/src-al-anvar-0.6.0.tar.gz/download</Archive>
     </Source>
@@ -24,13 +24,25 @@
         <RuntimeDependencies>
             <Dependency>phonon</Dependency>
             <Dependency>qt</Dependency>
+            <Dependency>qt-webkit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/share/app-install</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/fonts</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
         </Files>
     </Package>
     <History>
+         <Update release="2">
+            <Date>2014-01-20</Date>
+            <Version>0.6.0</Version>
+            <Comment>some fixes</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2013-12-02</Date>
             <Version>0.6.0</Version>
