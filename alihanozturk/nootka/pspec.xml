@@ -19,6 +19,7 @@
             <Dependency>qt-devel</Dependency>
             <Dependency>soundtouch-devel</Dependency>
             <Dependency>alsa-lib-devel</Dependency>
+            <Dependency>pulseaudio-libs-devel</Dependency>
         </BuildDependencies>
         <Archive sha1sum="73ee05af6adb9314c9358a800ea19078dbcc4170" type="tarbz2">http://sourceforge.net/projects/nootka/files/Nootka-0.8.95/nootka-0.8.95-beta-source.tar.bz2</Archive>
     </Source>
@@ -30,13 +31,30 @@
             <Dependency>qt</Dependency>
             <Dependency>soundtouch</Dependency>
             <Dependency>alsa-lib</Dependency>
+            <Dependency>pulseaudio-libs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/mime</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/nootka</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/nootka.desktop">nootka.desktop</AdditionalFile>
+        </AdditionalFiles>
     </Package>
     <History>
+        <Update release="2">
+            <Date>2014-01-20</Date>
+            <Version>0.8.95</Version>
+            <Comment>some fixes</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2013-11-25</Date>
             <Version>0.8.95</Version>
