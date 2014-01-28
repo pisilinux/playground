@@ -13,8 +13,7 @@ shelltools.export('HOME', get.workDIR())
 
 def setup():
     shelltools.system("sed -i -e 's/gnome-icon-theme//' configure.ac configure")
-    autotools.autoreconf("--force \
-                          --install")
+    autotools.autoreconf("-vif")
     autotools.configure("--prefix=/usr \
                          --libexecdir=/usr/lib/$_pkgalias \
                          --sysconfdir=/etc \
