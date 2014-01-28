@@ -14,6 +14,7 @@
         <Description>Evince is a document viewer for multiple document formats. The goal of evince is to replace the multiple document viewers that exist on the GNOME Desktop with a single simple application.</Description>
         <BuildDependencies>
             <Dependency>atk-devel</Dependency>
+            <Dependency>libgxps-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
             <Dependency>tiff-devel</Dependency>
             <Dependency>cairo-devel</Dependency>
@@ -24,12 +25,13 @@
             <Dependency>poppler-glib-devel</Dependency>
             <Dependency>itstool</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="0433a4e382d614fb4f9727ba52bf705c2fc8d867" type="tarxz">http://ftp.gnome.org/pub/GNOME/sources/evince/3.11/evince-3.11.3.tar.xz</Archive>
+        <Archive sha1sum="0433a4e382d614fb4f9727ba52bf705c2fc8d867" type="tarxz">/home/alihan/İndirilenler/evince-3.11.3.tar.xz</Archive>
     </Source>
     <Package>
         <Name>evince-gtk</Name>
         <RuntimeDependencies>
             <Dependency>atk</Dependency>
+            <Dependency>libgxps</Dependency>
             <Dependency>gtk3</Dependency>
             <Dependency>tiff</Dependency>
             <Dependency>cairo</Dependency>

@@ -29,11 +29,11 @@ def setup():
                          --enable-comics \
                          --disable-dvi \
                          --disable-ps \
-                         --disable-xps \
                          --disable-djvu \
                          --disable-gtk-doc \
                          --without-keyring \
                          --with-smclient=xsmp")
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     autotools.make()
