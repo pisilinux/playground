@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mdadm</Name>
+        <Homepage>http://www.kernel.org/pub/linux/utils/raid/mdadm</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Utility to control Linux MD devices (software RAID arrays)</Summary>
+        <Description>mdadm is used to create, manage, and monitor Linux MD (software RAID) devices.</Description>
+        <Archive sha1sum="a2b85093a4f196de5d7a298194443847e903e3ba" type="tarxz">https://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-3.3.tar.xz</Archive>
+        <Patches>
+<!--             <Patch>mdadm-3.2.x-udevdir.patch</Patch> -->
+<!--             <Patch level="1">mdadm-3.2.1-mdassemble.patch</Patch> -->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>mdadm</Name>
+        <Files>
+            <Path fileType="executable">/sbin/mdadm</Path>
+            <Path fileType="executable">/sbin/mdmon</Path>
+            <Path fileType="data">/lib/udev/rules.d</Path>
+            <Path fileType="data">/lib/systemd/system</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="config">/etc</Path>
+        </Files>
+        <AdditionalFiles>
+            <!-- Add a cron job to run a weekly repair of the array to correct bad sectors -->
+            <AdditionalFile owner="root" permission="0755" target="/etc/cron.weekly/raid-check">scripts/raid-check</AdditionalFile>
+
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/mdadm">mdadm.confd</AdditionalFile>
+
+            <!-- Udev rules file for device assembly. This is different than the mdadm rules file shipped with udev -->
+            <AdditionalFile owner="root" permission="0644" target="/lib/udev/rules.d/65-md-incremental.rules">mdadm.rules</AdditionalFile>
+
+            <AdditionalFile owner="root" permission="0644" target="/lib/systemd/system/mdadm.service">mdadm.service</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>mdadm-static</Name>
+        <Files>
+            <Path fileType="executable">/sbin/mdadm.static</Path>
+            <Path fileType="executable">/sbin/mdassemble.static</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2014-01-31</Date>
+            <Version>3.3</Version>
+            <Comment>Ver. bump, rebuild</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-11-14</Date>
+            <Version>3.2.6</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
