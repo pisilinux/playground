@@ -8,6 +8,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
+    autotools.autoreconf("-fi")
     autotools.configure("--prefix=/usr \
                          --disable-sse2")
     
@@ -16,8 +17,8 @@ def setup():
 def build():
     autotools.make()
     
-def check():
-    autotools.make("check")
+#def check():
+    #autotools.make("check")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
