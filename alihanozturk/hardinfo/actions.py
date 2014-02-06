@@ -23,6 +23,6 @@ def install():
     
     pisitools.removeDir("/usr/local/")
     
-    pisitools.insinto("/usr/share/pixmaps", "pixmaps/logo.png", "hardinfo")
+    pisitools.insinto("/usr/share/pixmaps", "pixmaps/logo.png", "hardinfo.png")
     
     pisitools.dodoc("LICENSE", "TODO")
