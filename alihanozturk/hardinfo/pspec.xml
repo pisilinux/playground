@@ -10,16 +10,16 @@
         <IsA>app:gui</IsA>
         <Summary>A system information and benchmark tool.</Summary>
         <Description>HardInfo can gather information about your system's hardware and operating system, perform benchmarks, and generate printable reports either in HTML or in plain text formats.</Description>
+        <Archive sha1sum="983f0445aa60e02156bc5a5eaedeffb30b8e4d64" type="tarbz2">http://sourceforge.net/projects/hardinfo.berlios/files/hardinfo-0.5.1.tar.bz2/download</Archive>
         <BuildDependencies>
-            <Dependency>gtk2-devel</Dependency>
-            <Dependency>libsoup-devel</Dependency>
             <Dependency>atk-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
             <Dependency>cairo-devel</Dependency>
             <Dependency>pango-devel</Dependency>
+            <Dependency>libsoup-devel</Dependency>
             <Dependency>fontconfig-devel</Dependency>
             <Dependency>gdk-pixbuf-devel</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="983f0445aa60e02156bc5a5eaedeffb30b8e4d64" type="tarbz2">http://sourceforge.net/projects/hardinfo.berlios/files/hardinfo-0.5.1.tar.bz2/download</Archive>
         <Patches>
             <Patch level="1">fixsensors.patch</Patch>
         </Patches>        
@@ -27,20 +27,20 @@
     <Package>
         <Name>hardinfo</Name>
         <RuntimeDependencies>
-            <Dependency>gtk2</Dependency>
-            <Dependency>libsoup</Dependency>
             <Dependency>atk</Dependency>
+            <Dependency>gtk2</Dependency>
             <Dependency>cairo</Dependency>
             <Dependency>pango</Dependency>
+            <Dependency>libsoup</Dependency>
             <Dependency>fontconfig</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
-            <Path fileType="local">/usr/local</Path>
-            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="data">/usr/share/hardinfo</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="local">/usr/share/doc/hardinfo</Path>
             <Path fileType="data">/usr/share/hardinfo/pixmaps</Path>
         </Files>
     </Package>
