@@ -9,6 +9,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
+    pisitools.dosed("hardinfo.desktop", "/usr/share/hardinfo/pixmaps/logo.png", "hardinfo")
     pisitools.dosed("hardinfo.desktop", "Categories=System;", "Categories=System;Settings;HardwareSettings;")
     shelltools.system("sed -i -e 's|/usr/lib64|/usr/lib|' configure")
     autotools.configure("--prefix=/usr")
@@ -21,5 +22,7 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
     
     pisitools.removeDir("/usr/local/")
+    
+    pisitools.insinto("/usr/share/pixmaps", "pixmaps/logo.png", "hardinfo")
     
     pisitools.dodoc("LICENSE", "TODO")
