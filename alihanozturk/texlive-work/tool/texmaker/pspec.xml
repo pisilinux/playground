@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>texmaker</Name>
+        <Homepage>http://www.xm1math.net/texmaker</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>texmaker</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>A free LaTeX editor</Summary>
+        <Description>Texmaker is a free LaTeX editor, that integrates many tools needed to develop documents with LaTeX, in just one application.</Description>
+        <Archive sha1sum="25d1536002d8e54a669f2d45a8ba45e1a7eb3d24" type="tarbz2">http://www.xm1math.net/texmaker/texmaker-4.1.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+            <Dependency>poppler-devel</Dependency>
+            <Dependency>poppler-qt-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+<!--             <Patch level="1">desktop.patch</Patch> -->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>texmaker</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>qt-webkit</Dependency>
+            <Dependency>poppler-qt</Dependency>
+            <Dependency>texlive-core</Dependency>
+            <Dependency>ghostscript</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/texmaker</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/texmaker.png">texmaker.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2014-02-06</Date>
+            <Version>4.1.1</Version>
+            <Comment>Version bump and new texlive</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-01-04</Date>
+            <Version>3.2.1</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

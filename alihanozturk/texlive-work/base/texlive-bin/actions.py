@@ -18,6 +18,7 @@ WorkDir = "."
 def setup():
     if get.ARCH() == "x86_64":
         shelltools.export("CFLAGS", "%s -fPIC" % get.CFLAGS())
+        shelltools.export("CXXFLAGS", "%s -fPIC" % get.CXXFLAGS())
 
     shelltools.cd("/%s/source/" % get.workDIR())
 
@@ -61,6 +62,8 @@ def setup():
                          --disable-luatex \
                          --with-clisp-runtime=default \
                          --enable-xindy --disable-xindy-rules --disable-xindy-docs")
+    
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     shelltools.cd("%s/source/build" % get.workDIR())
