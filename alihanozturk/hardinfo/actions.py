@@ -9,7 +9,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    pisitools.dosed("hardinfo.desktop", "Categories=System;", "Categories=System;Filesystem;")
+    pisitools.dosed("hardinfo.desktop", "Categories=System;", "Categories=System;Settings;HardwareSettings;")
     shelltools.system("sed -i -e 's|/usr/lib64|/usr/lib|' configure")
     autotools.configure("--prefix=/usr")
     shelltools.system("sed -i -e 's|lib64|lib|' binreloc.c")
