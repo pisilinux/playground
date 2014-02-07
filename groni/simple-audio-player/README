@@ -1,0 +1,56 @@
+SimpleAudioPlayer Readme
+
+-------------------
+    Install:
+-------------------
+Type: sudo ./setup -i <nocd> <norecord> <noequalizer> <nobrowser> <nolyrics>
+
+Optional:
+  nocd		compile without audiocd support
+  norecord	compile without record internet radio support
+  noequalizer	compile without equalizer support
+  nobrowser	skip compile SimpleAudioBrowser
+  nolyrics	no support for lyrics download
+
+  Examples:
+  setup -i
+  Installs SimpleAudioPlayer with all options.
+
+  setup -i nocd
+  Installs SimpleAudioPlayer without audiocd support.
+
+
+--------------
+  Uninstall:
+--------------
+Type: sudo ./setup -u
+
+
+Limitations:
+----------------
+- The equalizer is only available when using the xine-backend for playback.
+
+
+==========================
+  Compile manually:
+==========================
+Some definitions affect the program characteristics:
+
+  audiocd	audiocd support
+  record	record radiostreams
+  equalizer	equalizer
+  browser	browser
+  lyrics=	lyrics
+  
+Example: Compile with all options:
+- cmake -Daudiocd=1 -Drecord=1 -Dequalizer=1 -Dbrowser=1 -Dlyrics=1
+- make
+
+
+==========================
+  Requirements
+==========================
+To recording radio streams, streamripper must be installed.
+To play audio cd, the package kio_audiocd (openSuse) or simular must be
+installed. Its implement the protocol audiocd:/
+
