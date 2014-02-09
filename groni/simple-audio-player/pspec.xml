@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>simple-audio-player</Name>
+        <Homepage>http://kde-apps.org/content/show.php/SimpleAudioPlayer?content=133147</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Two small programs are available:Simple Audio Player and Simple Audio Browser</Summary>
+        <Description>Two small programs are available:SimpleAudioPlayers main task is quick and easy open some music files selected by a filemanager.It uses very little memory.</Description>
+        <Archive sha1sum="deabb8bc6b52250d5515b0910b391553244f06d7" type="tarbz2">http://kde-apps.org/CONTENT/content-files/133147-simpleaudioplayer.tar.bz2</Archive>
+     </Source>
+
+    <Package>
+        <Name>simple-audio-player</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>phonon</Dependency>
+            <Dependency>taglib</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>audiocd-kio</Dependency>
+            <Dependency>streamripper</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="applications">/usr/share/applications</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="config">/usr/share/kde4/apps/simpleaudioplayer</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="icons">/usr/share/icons/hicolor</Path>
+            <Path fileType="doc">/usr/share/doc/kde4/html</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-02-07</Date>
+            <Version>1.10.2</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
