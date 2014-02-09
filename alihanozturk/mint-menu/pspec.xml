@@ -1,0 +1,55 @@
+<PISI>
+    <Source>
+        <Name>mint-menu</Name>
+        <Homepage>http://packages.linuxmint.com/pool/main/m/mintmenu</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Linux Mint Menu for MATE</Summary>
+        <Description>Linux Mint Menu for MATE</Description>
+        <BuildDependencies>
+            <Dependency>artwork-pisilinux-release</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>keybinder-devel</Dependency>
+            <Dependency>mate-panel-devel</Dependency>
+            <Dependency>python-devel</Dependency>
+            <Dependency>python-xlib</Dependency>
+            <Dependency>xdg-utils</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="189d716cfe934ed37d0355809ea07332401c818c" type="targz">/home/alihan/İndirilenler/mintmenu_5.5.0.tar.gz</Archive>
+        <Patches>
+<!--             <Patch level="2">arch-patch.diff</Patch> -->
+            <Patch level="2">execute_fix.diff</Patch>
+        </Patches>
+    </Source>
+    <Package>
+        <Name>mint-menu</Name>
+        <RuntimeDependencies>
+            <Dependency>artwork-pisilinux-release</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>keybinder</Dependency>
+            <Dependency>mate-panel</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>python-xlib</Dependency>
+            <Dependency>xdg-utils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/linuxmint/mintMenu/removescript">removescript</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-02-09</Date>
+            <Version>5.5.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
