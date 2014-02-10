@@ -12,11 +12,11 @@
         <IsA>app:console</IsA>
         <Summary>MariaDB is a drop-in replacement for MySQL</Summary>
         <Description>MariaDB strives to be the logical choice for database professionals looking for a robust, scalable, and reliable SQL server.</Description>
-        <Archive sha1sum="49fb26cd08c56e1fda42d728eaae9e49ecd5c30d" type="targz">ftp://ftp.ulak.net.tr/pub/MariaDB/mariadb-5.5.33a/kvm-tarbake-jaunty-x86/mariadb-5.5.33a.tar.gz</Archive>
+        <Archive sha1sum="9b0c062c96edb07724ddf9b0235c7662065496a4" type="targz">ftp://ftp.ulak.net.tr/pub/MariaDB/mariadb-5.5.35/kvm-tarbake-jaunty-x86/mariadb-5.5.35.tar.gz</Archive>
         <BuildDependencies>
+            <Dependency>zlib</Dependency>
             <Dependency>cmake</Dependency>
             <Dependency>openssl</Dependency>
-            <Dependency>zlib</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -53,7 +53,7 @@
     <History>
         <Update release="1">
             <Date>2013-10-27</Date>
-            <Version>5.5.33a</Version>
+            <Version>5.5.35</Version>
             <Comment>First release</Comment>
             <Name>Aydın Demirel</Name>
             <Email>aydin.demirel@pisilinux.org</Email>
