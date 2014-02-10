@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>tano</Name>
+        <Homepage>http://projects.tano.si/tano</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>Tano is an open-source cross-platform IP TV player.</Summary>
+        <Description>Tano is an open-source cross-platform IP TV player. It features full IP TV playback with EPG and recorder. Project started because of a need of a simple IP TV player on Linux providing EPG. Now after more than three years of development, Tano reached its stable release.</Description>
+        <Archive sha1sum="2f0e2d403e398257afe89bf268cb1b0d5c5e29de" type="targz">https://github.com/ntadej/tano/archive/1.2.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>vlc-qt</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>tano</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>vlc-qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="application">/usr/share/applications</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="icon">/usr/share/tano/icons</Path>
+            <Path fileType="icon">/usr/share/icons</Path>
+            <Path fileType="localedata">/usr/share/tano</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-02-09</Date>
+            <Version>1.2.1</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
