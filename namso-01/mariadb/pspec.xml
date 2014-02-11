@@ -13,27 +13,22 @@
         <Summary>MariaDB is a drop-in replacement for MySQL</Summary>
         <Description>MariaDB strives to be the logical choice for database professionals looking for a robust, scalable, and reliable SQL server.</Description>
         <Archive sha1sum="9b0c062c96edb07724ddf9b0235c7662065496a4" type="targz">ftp://ftp.ulak.net.tr/pub/MariaDB/mariadb-5.5.35/kvm-tarbake-jaunty-x86/mariadb-5.5.35.tar.gz</Archive>
-        <BuildDependencies>
-            <Dependency>zlib</Dependency>
-            <Dependency>cmake</Dependency>
-            <Dependency>openssl</Dependency>
-        </BuildDependencies>
     </Source>
 
     <Package>
         <Name>mariadb</Name>
         <Files>
-            <Path fileType="config">/etc/mysql</Path>
-            <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="man">/usr/share/man</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="data">/usr/data</Path>
-            <Path fileType="data">/usr/mysql-test</Path>
+            <Path fileType="data">/run/mysqld</Path>
+            <Path fileType="config">/etc/mysql</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
             <Path fileType="data">/usr/sql-bench</Path>
             <Path fileType="data">/var/lib/mysql</Path>
-            <Path fileType="data">/run/mysqld</Path>
-            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/mysql-test</Path>
             <Path fileType="data">/usr/share/mysql</Path>
+            <Path fileType="library">/usr/lib/mysql</Path>
             <Path fileType="data">/lib/systemd/system</Path>
         </Files>
         <AdditionalFiles>
@@ -44,15 +39,50 @@
             <COMAR script="package.py">System.Package</COMAR>
         </Provides>
     </Package>
+    
     <Package>
-        <Name>mariadb-devel</Name>
+        <Name>mariadb-clients</Name>
+        <Summary>MariaDB client tools.</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">mariadb</Dependency>
+        </RuntimeDependencies>
         <Files>
-            <Path fileType="header">/usr/include</Path>
+            <Path fileType="executable">/usr/bin/mysql</Path>
+            <Path fileType="man">/usr/share/man/man1/mysql</Path>
+            <Path fileType="executable">/usr/bin/mysqlshow</Path>
+            <Path fileType="executable">/usr/bin/mysqldump</Path>
+            <Path fileType="executable">/usr/bin/mysqladmin</Path>
+            <Path fileType="executable">/usr/bin/mysqlcheck</Path>
+            <Path fileType="executable">/usr/bin/mysqlimport</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqlshow</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqldump</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqladmin</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqlcheck</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqlimport</Path>
         </Files>
     </Package>
+    
+    <Package>
+        <Name>libmariadbclient</Name>
+        <Summary>MariaDB client libraries.</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">mariadb</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/mysql</Path>
+            <Path fileType="library">/usr/lib/libmysqld*</Path>
+            <Path fileType="executable">/usr/bin/mysql_config</Path>
+            <Path fileType="library">/usr/lib/libmysqlclient*</Path>
+            <Path fileType="library">/usr/lib/libmysqlservices.a</Path>
+            <Path fileType="man">/usr/share/man/man1/mysql_config.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysqltest_embedded.1</Path>
+            <Path fileType="man">/usr/share/man/man1/mysql_client_test_embedded.1</Path>
+        </Files>
+    </Package>
+    
     <History>
         <Update release="1">
-            <Date>2013-10-27</Date>
+            <Date>2014-02-11</Date>
             <Version>5.5.35</Version>
             <Comment>First release</Comment>
             <Name>Aydın Demirel</Name>
