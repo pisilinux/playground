@@ -39,7 +39,7 @@ ldirs = ("/usr/lib/libreoffice/help/%s",
          "/usr/lib/libreoffice/share/extensions/nlpsolver/help/%s",
          "/usr/lib/libreoffice/share/extensions/wiki-publisher/help/%s")
 
-def setup():    
+def setup():
     vars = {"lang": langs,
             "jobs": psutil.NUM_CPUS,
             "etar": get.workDIR()}
@@ -48,6 +48,7 @@ def setup():
     autotools.autoconf()
     # avoid running autogen.sh on make
     shelltools.touch("autogen.lastrun")
+
     autotools.rawConfigure('--with-vendor="PisiLinux" \
                        --with-ant-home="/usr/share/ant" \
                        --with-jdk-home="/opt/sun-jdk" \
@@ -56,6 +57,7 @@ def setup():
                        --enable-release-build \
                        --enable-verbose \
                        --disable-dependency-tracking \
+                       --disable-rpath \
                        --disable-crashdump \
                        --disable-ccache \
                        --disable-epm \
@@ -110,15 +112,17 @@ def setup():
                        --with-system-nss \
                        --without-system-orcus \
                        --without-system-mdds \
+                       --without-system-firebird \
+                       --without-system-libabw \
+                       --without-system-libcmis \
+                       --without-system-cppunit \
+                       --without-system-libebook \
+                       --without-system-libetonyek \
+                       --without-system-libfreehand \
                        --without-system-libmwaw \
                        --without-system-libodfgen \
                        --without-system-hsqldb \
                        --without-myspell-dicts \
-                       --without-system-libebook \
-                       --without-system-cppunit \
-                       --without-system-libetonyek \
-                       --without-system-libfreehand \
-                       --without-system-firebird \
                        --without-system-npapi-headers \
                        --with-external-dict-dir=/usr/share/hunspell \
                        --with-external-hyph-dir=/usr/share/hyphen \
@@ -126,12 +130,13 @@ def setup():
                        --with-alloc=system \
                        --without-system-sane \
                        --without-system-boost\
+                       --without-system-servlet-api \
                        --without-system-vigra \
                        --without-sun-templates \
                        --disable-fetch-external \
                        --with-parallelism=%(jobs)s \
                        --with-external-tar="%(etar)s"' % vars)
-
+    
 def build():
     autotools.make()
 
