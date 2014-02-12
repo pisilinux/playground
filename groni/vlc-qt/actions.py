@@ -11,7 +11,7 @@ def setup():
     kde4.configure()
 
 def build():
-    kde4.make("--DCMAKE_INSTALL_PREFIX=prefix")
+    kde4.make()
 
 def install():
     kde4.install()
