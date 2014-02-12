@@ -14,6 +14,13 @@
         <Description>Two small programs are available:SimpleAudioPlayers main task is quick and easy open some music files selected by a filemanager.It uses very little memory.</Description>
         <Archive sha1sum="deabb8bc6b52250d5515b0910b391553244f06d7" type="tarbz2">http://kde-apps.org/CONTENT/content-files/133147-simpleaudioplayer.tar.bz2</Archive>
      </Source>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>taglib-extras-devel</Dependency>
+            <Dependency>phonon-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+        </BuildDependencies>
 
     <Package>
         <Name>simple-audio-player</Name>
@@ -21,6 +28,7 @@
             <Dependency>qt</Dependency>
             <Dependency>phonon</Dependency>
             <Dependency>taglib</Dependency>
+            <Dependency>taglib-extras</Dependency>
             <Dependency>kdelibs</Dependency>
             <Dependency>audiocd-kio</Dependency>
             <Dependency>streamripper</Dependency>
