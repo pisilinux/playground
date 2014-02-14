@@ -50,92 +50,82 @@ def setup():
     shelltools.touch("autogen.lastrun")
 
     autotools.rawConfigure('--with-vendor="PisiLinux" \
-                       --with-ant-home="/usr/share/ant" \
-                       --with-jdk-home="/opt/sun-jdk" \
-                       --prefix=/usr --exec-prefix=/usr --sysconfdir=/etc \
-                       --libdir=/usr/lib --mandir=/usr/share/man \
-                       --enable-release-build \
-                       --enable-verbose \
-                       --disable-dependency-tracking \
-                       --disable-rpath \
-                       --disable-crashdump \
-                       --disable-ccache \
-                       --disable-epm \
-                       --disable-online-update \
-                       --disable-pch \
-                       --with-system-jars \
-                       --with-system-libs \
-                       --with-system-mythes \
-                       --with-system-headers \
-                       --with-lang="%(lang)s" \
-                       --enable-graphite \
-                       --enable-cups \
-                       --enable-dbus \
-                       --enable-evolution2 \
-                       --enable-gio \
-                       --disable-gnome-vfs \
-                       --disable-kde \
-                       --enable-kde4 \
-                       --enable-largefile \
-                       --enable-lockdown \
-                       --enable-opengl \
-                       --enable-odk \
-                       --enable-randr \
-                       --enable-randr-link \
-                       --enable-mergelibs \
-                       --enable-extension-integration \
-                       --enable-scripting-beanshell \
-                       --enable-scripting-javascript \
-                       --enable-ext-wiki-publisher \
-                       --enable-ext-nlpsolver \
-                       --disable-python \
-                       --enable-cairo-canvas \
-                       --with-system-cairo \
-                       --without-fonts \
-                       --without-afms \
-                       --without-ppds \
-                       --with-system-libexttextcat \
-                       --without-system-jfreereport \
-                       --without-system-apache-commons \
-                       --with-helppack-integration \
-                       --with-system-beanshell \
-                       --with-system-clucene \
-                       --with-system-graphite \
-                       --with-system-libcmis \
-                       --with-system-libwpg \
-                       --with-system-libwps \
-                       --with-system-libvisio \
-                       --with-system-redland \
-                       --with-system-ucpp \
-                       --with-system-dicts \
-                       --with-system-libexttextcat \
-                       --with-system-nss \
-                       --without-system-orcus \
-                       --without-system-mdds \
-                       --without-system-firebird \
-                       --without-system-libabw \
-                       --without-system-libcmis \
-                       --without-system-cppunit \
-                       --without-system-libebook \
-                       --without-system-libetonyek \
-                       --without-system-libfreehand \
-                       --without-system-libmwaw \
-                       --without-system-libodfgen \
-                       --without-system-hsqldb \
-                       --without-myspell-dicts \
-                       --without-system-npapi-headers \
-                       --with-external-dict-dir=/usr/share/hunspell \
-                       --with-external-hyph-dir=/usr/share/hyphen \
-                       --with-external-thes-dir=/usr/share/mythes \
-                       --with-alloc=system \
-                       --without-system-sane \
-                       --without-system-boost\
-                       --without-system-servlet-api \
-                       --without-system-vigra \
-                       --without-sun-templates \
-                       --disable-fetch-external \
-                       --with-parallelism=%(jobs)s \
-                       --with-external-tar="%(etar)s"' % vars)
+                            --enable-split-app-modules \
+                            --with-ant-home="/usr/share/ant" \
+                            --with-jdk-home="/opt/sun-jdk" \
+                            --with-parallelism=%(jobs)s \
+                            --with-external-tar="%(etar)s" \
+                            --disable-fetch-external \
+                            --disable-verbose \
+                            --enable-release-build \
+                            --prefix=/usr --exec-prefix=/usr --sysconfdir=/etc \
+                            --libdir=/usr/lib --mandir=/usr/share/man \
+                            --with-lang="%(lang)s" \
+                            --enable-crashdump \
+                            --enable-avahi \
+                            --enable-dbus \
+                            --enable-evolution2\
+                            --enable-gio\
+                            --disable-gnome-vfs\
+                            --disable-kde\
+                            --enable-kde4\
+                            --enable-gtk3 \
+                            --enable-lockdown\
+                            --enable-opencl \
+                            --enable-opengl \
+                            --enable-openssl \
+                            --enable-odk\
+                            --enable-orcus \
+                            --enable-python=system \
+                            --enable-scripting-beanshell \
+                            --enable-scripting-javascript \
+                            --enable-telepathy \
+                            --enable-ext-wiki-publisher \
+                            --enable-ext-nlpsolver \
+                            --without-fonts\
+                            --without-afms\
+                            --without-system-libwps\
+                            --without-system-libcdr \
+                            --without-system-mdds\
+                            --without-myspell-dicts \
+                            --with-system-libvisio \
+                            --without-system-sane \
+                            --without-system-libcmis \
+                            --without-system-libmspub \
+                            --without-system-libexttextcat \
+                            --without-system-orcus \
+                            --without-system-liblangtag \
+                            --without-system-jfreereport \
+                            --without-system-apache-commons \
+                            --without-system-libodfgen \
+                            --without-system-libmwaw \
+                            --without-system-libetonyek \
+                            --without-system-libfreehand \
+                            --without-system-firebird \
+                            --without-system-libatomic-ops \
+                            --without-system-libebook \
+                            --without-system-libabw \
+                            --with-system-dicts \
+                            --with-external-dict-dir=/usr/share/hunspell \
+                            --with-external-hyph-dir=/usr/share/hyphen \
+                            --with-external-thes-dir=/usr/share/mythes \
+                            --with-system-beanshell \
+                            --with-system-cppunit\
+                            --with-system-graphite\
+                            --with-system-libwpg \
+                            --with-system-libwps \
+                            --with-system-redland\
+                            --without-system-npapi-headers \
+                            --without-system-boost \
+                            --with-system-cairo \
+                            --with-system-libs \
+                            --with-system-mythes \
+                            --with-system-headers \
+                            --without-system-hsqldb \
+                            --with-alloc=system\
+                            --with-system-clucene \
+                            --disable-dependency-tracking \
+                            --enable-hardlink-deliver' % vars)
     
 def build():
     autotools.make()
