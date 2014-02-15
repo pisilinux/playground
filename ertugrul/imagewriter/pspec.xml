@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>imagewriter</Name>
+        <Homepage>https://github.com/opensuse/imagewriter</Homepage>
+        <Packager>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>imagewriter</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Utility for writing raw disk images, hybrid isos to USB keys</Summary>
+        <Description>Utility for writing raw disk images, hybrid isos to USB keys</Description>
+        <Archive sha1sum="5c73d02d7a7d34040cba05d5af5f62533d4ccdf3" type="tarxz">files:////home/ertugrul/imagewriter-20140215.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>udisks</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <!--
+            <Patch level="1"></Patch>
+            -->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>imagewriter</Name>
+        <RuntimeDependencies>
+        </RuntimeDependencies>
+        <Conflicts>
+            <Package releaseTo="29">sleep</Package>
+        </Conflicts>
+        <Files>
+            <Path fileType="data">/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-02-15</Date>
+            <Version>0_20140215</Version>
+            <Comment>First release</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmailcom</Email>
+        </Update>
+    </History>
+</PISI>
