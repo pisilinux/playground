@@ -15,24 +15,20 @@
         <Description>Utility for writing raw disk images, hybrid isos to USB keys</Description>
         <Archive sha1sum="5c73d02d7a7d34040cba05d5af5f62533d4ccdf3" type="tarxz">files:////home/ertugrul/imagewriter-20140215.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>udisks</Dependency>
+            <Dependency>udisks-devel</Dependency>
+	    <Dependency>qt-devel</Dependency>
         </BuildDependencies>
-        <Patches>
-            <!--
-            <Patch level="1"></Patch>
-            -->
-        </Patches>
     </Source>
 
     <Package>
         <Name>imagewriter</Name>
         <RuntimeDependencies>
+            <Dependency>udisks</Dependency>
+	    <Dependency>qt</Dependency>
         </RuntimeDependencies>
-        <Conflicts>
-            <Package releaseTo="29">sleep</Package>
-        </Conflicts>
         <Files>
-            <Path fileType="data">/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
 
