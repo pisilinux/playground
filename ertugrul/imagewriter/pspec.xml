@@ -16,8 +16,11 @@
         <Archive sha1sum="5c73d02d7a7d34040cba05d5af5f62533d4ccdf3" type="tarxz">http://source.pisilinux.org/1.0/imagewriter-20140215.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>udisks-devel</Dependency>
-	    <Dependency>qt-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">desktop.patch</Patch>
+         </Patches>
     </Source>
 
     <Package>
