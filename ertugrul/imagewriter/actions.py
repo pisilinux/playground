@@ -21,3 +21,5 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.dodoc("COPYING")
+    
+    pisitools.insinto("/usr/share/pixmaps/", "icons/64x64/imagewriter.png")
