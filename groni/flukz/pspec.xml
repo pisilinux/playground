@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>flukz</Name>
+        <Homepage>http://flukz.org/wiki/doku.php?id=flukz</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Flukz is an editor of shoot'em up video games</Summary>
+        <Description>Game levels can be created, edited and saved online. </Description>
+        <Archive sha1sum="0086b2d51d2bd2e98f2f575763154b476ace3404" type="targz">http://download.tuxfamily.org/flukz/flukz0.3.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>flukz</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-02-17</Date>
+            <Version>0.3</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
