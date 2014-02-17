@@ -12,13 +12,12 @@
         <IsA>app:gui</IsA>
         <Summary>The ownCloud client software</Summary>
         <Description>a lightweight utility to synchronize files between multiple systems</Description>
-        <Archive sha1sum="11cad82091b5d7ce8abcfac9e9128b4ee55b343c" type="tarbz2">hhttp://download.owncloud.com/desktop/stable/mirall-1.5.0.tar.bz2</Archive>
+        <Archive sha1sum="02f6cd001a987cf8e450f490604bb3613bfeb265" type="tarbz2">https://download.owncloud.com/desktop/stable/mirall-1.5.1.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>qt-devel</Dependency>
-            <Dependency>ocsync-devel</Dependency>
             <Dependency>qt-webkit-devel</Dependency>
             <Dependency>qtkeychain-devel</Dependency>
-	    <Dependency>neon-devel</Dependency>
+            <Dependency>neon-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -26,7 +25,6 @@
         <Name>mirall</Name>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
-            <Dependency>ocsync</Dependency>
             <Dependency>qt-webkit</Dependency>
             <Dependency>qtkeychain</Dependency>
             <Dependency>neon</Dependency>
@@ -52,8 +50,8 @@
     
     <History>
         <Update release="1">
-            <Date>2013-12-26</Date>
-            <Version>1.5.0</Version>
+            <Date>2014-02-16</Date>
+            <Version>1.5.1</Version>
             <Comment>First release.</Comment>
             <Name>Ertuğrul Erata</Name>
             <Email>ertugrulerata@gmail.com</Email>
