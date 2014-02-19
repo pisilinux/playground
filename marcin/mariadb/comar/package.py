@@ -7,10 +7,10 @@ DATADIR = "/var/lib/mysql"
 DATADIRMODE = 0700
 
 def postInstall(fromVersion, fromRelease, toVersion, toRelease):
-    if toRelease and toRelease in [str(r) for r in range(1,2)] and (not fromRelease or fromRelease == "1"):
+    if toRelease == "2":
         os.system("rm -rf %s" % DATADIR)
-        if os.path.exists("/etc/mysql/my.cnf.newconfig"):
-            if os.path.exists("/etc/mysql/my.cnf"): os.remove("/etc/mysql/my.cnf")
+        if os.path.isfile("/etc/mysql/my.cnf.newconfig"):
+            if os.path.isfile("/etc/mysql/my.cnf"): os.remove("/etc/mysql/my.cnf")
             shutil.copy2("/etc/mysql/my.cnf.newconfig", "/etc/mysql/my.cnf")
             os.remove("/etc/mysql/my.cnf.newconfig")
 
