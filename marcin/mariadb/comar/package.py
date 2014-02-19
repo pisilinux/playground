@@ -3,7 +3,7 @@
 import os
 import shutil
 
-DATADIR = "/var/log/mysql"
+DATADIR = "/var/lib/mysql"
 DATADIRMODE = 0700
 
 def postInstall(fromVersion, fromRelease, toVersion, toRelease):
