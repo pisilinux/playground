@@ -20,18 +20,19 @@ def setup():
 
     options = '\
                -Dwerror= \
-               -Dlinux_link_gsettings=1 -Dlinux_link_libpci=1 -Dlinux_link_libspeechd=1 -Dlinux_link_pulseaudio=1 -Dlinux_strip_binary=1 -Dproprietary_codecs=1 -Dlogging_like_official_build=1 \
+               -Dlinux_link_gsettings=1 -Dlinux_link_libpci=1 -Dlinux_link_libspeechd=1 -Dlibspeechd_h_prefix=speech-dispatcher/ \
+               -Dlinux_link_pulseaudio=1 -Dlinux_strip_binary=1 -Dproprietary_codecs=1 -Dlogging_like_official_build=1 \
                -Dlinux_sandbox_path=/usr/lib/chromium-browser/chromium-sandbox \
                -Dlinux_sandbox_chrome_path=/usr/lib/chromium-browser/chromium-browser \
                -Dgoogle_api_key=AIzaSyBINKL31ZYd8W5byPuwTXYK6cEyoceGh6Y \
                -Dgoogle_default_client_id=879512332529.apps.googleusercontent.com \
                -Dgoogle_default_client_secret=RmQPJJeL1cNJ8iETnoVD4X17 \
-               -Drelease_extra_cflags=-Wno-unused-local-typedefs \
-               -Dlibspeechd_h_prefix=speech-dispatcher \
                -Dffmpeg_branding=Chrome \
-               -Duse_system_bzip2=1 -Duse_system_flac=1 -Duse_system_harfbuzz=1 -Duse_system_icu=1 -Duse_system_libevent=1 -Duse_system_libjpeg=1 -Duse_system_libpng=1 -Duse_system_opus=1 -Duse_system_snappy=1 -Duse_system_xdg_utils=1 -Duse_system_yasm=1 -Ddisable_sse2=1 -Ddisable_glibc=1 \
-               -Duse_system_ffmpeg=0 -Duse_system_libxml=0 -Duse_system_ssl=0 -Duse_system_zlib=0 -Duse_gconf=0 -Dlinux_use_gold_binary=0 -Dlinux_use_gold_flags=0 \
-               -Dtarget_arch="%s"' % ARCH
+               -Duse_system_bzip2=1 -Duse_system_flac=1 -Duse_system_harfbuzz=1 -Duse_system_icu=1 -Duse_system_libevent=1 \
+               -Duse_system_libjpeg=1 -Duse_system_libpng=1 -Duse_system_opus=1 \
+               -Duse_system_snappy=1 -Duse_system_xdg_utils=1 -Duse_system_yasm=1 -Ddisable_sse2=1 -Ddisable_glibc=1 \
+               -Duse_system_ffmpeg=0 -Duse_system_libxml=1 -Duse_system_ssl=0 -Duse_system_zlib=0 -Duse_gconf=0 -Dlinux_use_gold_binary=0 \
+               -Dlinux_use_gold_flags=0 -Dtarget_arch="%s"' % ARCH
 
     # We add -fno-ipa-cp to CFLAGS. See: http://crbug.com/41887
 #    shelltools.system("build/gyp_chromium -f make build/all.gyp --depth=. \
@@ -41,6 +42,7 @@ def setup():
     shelltools.system('build/gyp_chromium -f make --depth=. %s' % options)
 
 def build():
+    pisitools.flags.add("-fno-stack-protector", "-Wno-unused-local-typedefs")
     autotools.make("chrome chrome_sandbox BUILDTYPE=Release V=1")
 
 def install():
