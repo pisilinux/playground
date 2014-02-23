@@ -21,7 +21,7 @@
             <Dependency>udisks-devel</Dependency>
             <Dependency>xterm</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="603f5a278fdaebacf4674099348bc7edc20efdd0" type="tarbz2">https://www.dropbox.com/s/f00gso7hg7ib81l/isodumper-0.20.tar.bz2</Archive>
+        <Archive sha1sum="2c3c8379c3ed57dce3397e8045f2ad69427ced13" type="zip">https://github.com/papoteur-mga/isodumper/archive/master.zip</Archive>
     </Source>
     <Package>
         <Name>isodumper</Name>
@@ -49,6 +49,9 @@
             <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/isodumper/header.png">header.png</AdditionalFile>
+        </AdditionalFiles>
     </Package>
     <History>
         <Update release="1">
