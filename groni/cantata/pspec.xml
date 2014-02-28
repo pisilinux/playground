@@ -12,27 +12,26 @@
         <Description>Cantata is a graphical client for MPD</Description>
         <Archive sha1sum="d29439868b9db3ee842defdca646a6564dc0ceef" type="tarxz">http://source.pisilinux.org/1.0/cantata.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>mpd</Dependency>
-            <Dependency>mpg123-devel</Dependency>
             <Dependency>qt-devel</Dependency>
-            <Dependency>taglib-devel</Dependency>
-            <Dependency>taglib-extras-devel</Dependency>
-            <Dependency>kdelibs-devel</Dependency>
-            <Dependency>musicbrainz5-devel</Dependency>
-            <Dependency>libqjson-devel</Dependency>
+            <Dependency>speex-devel</Dependency>
             <Dependency>libmtp-devel</Dependency>
-            <Dependency>libcddb-devel</Dependency>
-            <Dependency>perl-URI</Dependency>
-            <Dependency>kde-runtime-devel</Dependency>
+            <Dependency>mpg123-devel</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>ffmpeg-devel</Dependency>
+            <Dependency>libqjson-devel</Dependency>
+            <Dependency>taglib-extras-devel</Dependency>
         </BuildDependencies>
     </Source>
     <Package>
         <Name>cantata</Name>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
+            <Dependency>speex</Dependency>
+            <Dependency>libmtp</Dependency>
+            <Dependency>mpg123</Dependency>
             <Dependency>taglib</Dependency>
-            <Dependency>kdelibs</Dependency>
-            <Dependency>musicbrainz5</Dependency>
+            <Dependency>ffmpeg</Dependency>
+            <Dependency>libqjson</Dependency>
             <Dependency>taglib-extras</Dependency>
         </RuntimeDependencies>
         <Files>
