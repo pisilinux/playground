@@ -14,6 +14,8 @@
         <BuildDependencies>
             <Dependency>texinfo</Dependency>
             <Dependency>zlib-devel</Dependency>
+            <Dependency>junit</Dependency>
+            
         </BuildDependencies>
     </Source>
     
@@ -28,10 +30,13 @@
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="data">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/ca-certificates-java/ca-certificates-java.jar</Path>
+            <Path fileType="conf">/etc/default</Path>
+            <Path fileType="data">/etc/ca-certificates/update.d</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile target="/usr/bin/init-jks-keystore" permission="0644" owner="root">init-jks-keystore</AdditionalFile>
-            <AdditionalFile target="/etc/ca-certificates/update.d/jks-keystore" permission="0644" owner="root">jks-keystore.hook</AdditionalFile>
+            <AdditionalFile target="/etc/ca-certificates/update.d/jks-keystore" permission="0755" owner="root">jks-keystore.hook</AdditionalFile>
         </AdditionalFiles>
     </Package>
     
