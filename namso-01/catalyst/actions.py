@@ -35,7 +35,12 @@ def setup():
     #shelltools.cd("common/lib/modules/fglrx/build_mod")
     shelltools.copy("arch/%s/lib/modules/fglrx/build_mod/libfglrx_ip.a" %(arch), "common/lib/modules/fglrx/build_mod/")
     shelltools.copy("common/lib/modules/fglrx/build_mod/2.6.x/Makefile", "common/lib/modules/fglrx/build_mod/")
-    shelltools.system("make -C common/lib/modules/fglrx/build_mod CFLAGS_MODULE ")
+    CFLAGS_MODULE="-DMODULE -DATI -DFGL -DPAGE_ATTR_FIX=$PAGE_ATTR_FIX -DCOMPAT_ALLOC_USER_SPACE=$COMPAT_ALLOC_USER_SPACE"
+    shelltools.cd("common/lib/modules/fglrx/build_mod")
+    shelltools.system('make -C /usr/lib/modules/%s/build SUBDIRS="pwd" ARCH=%s \
+                       MODFLAGS="$CFLAGS_MODULE" \
+                       CFLAGS_MODULE="$CFLAGS_MODULE" \
+                       PAGE_ATTR_FIX=$PAGE_ATTR_FIX COMPAT_ALLOC_USER_SPACE=$COMPAT_ALLOC_USER_SPACE modules' % KDIR, arch)
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
