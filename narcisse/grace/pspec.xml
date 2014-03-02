@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>grace</Name>
+        <Homepage>http://plasma-gate.weizmann.ac.il/Grace/</Homepage>
+        <Packager>
+           <Name>Mathias Freire</Name>
+           <Email>mathiasfreire45@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>        
+        <IsA>app:gui</IsA>        
+        <Summary>A 2D-Plot-Program for Visualisation of Scientific Data</Summary>
+        <Description>Grace is a WYSIWYG 2D plotting tool for the X Window System and Motif.</Description>
+	<Archive sha1sum="0bd9cd6e76c97210658098f3533b5cf6c037d0bd" type="targz">ftp://plasma-gate.weizmann.ac.il/pub/grace/src/stable/grace-5.1.23.tar.gz</Archive>
+	<BuildDependencies>
+	  <Dependency>openmotif-devel</Dependency>
+	  <Dependency>libpng-devel</Dependency>
+	  <Dependency>libjpeg-turbo-devel</Dependency>
+	  <Dependency>t1lib-devel</Dependency>
+	</BuildDependencies>
+	<Patches>
+	  <Patch>xmgrace-help.patch</Patch>
+	  <Patch>xmgrace-null.patch</Patch>
+	</Patches>
+    </Source>
+    
+    <Package>
+        <Name>grace</Name> 
+	<RuntimeDependencies>
+	  <Dependency>openmotif</Dependency>
+	  <Dependency>libpng</Dependency>
+	  <Dependency>libjpeg-turbo</Dependency>
+	  <Dependency>t1lib</Dependency>
+	</RuntimeDependencies>  
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/lib</Path>
+	    <Path fileType="data">/usr/share</Path>	
+	    <Path fileType="doc">/usr/lib/grace/doc</Path>
+	    <Path fileType="doc">/usr/share/doc</Path>
+         </Files>
+	 <AdditionalFiles>
+	   <AdditionalFile target="/usr/share/applications/grace.desktop" permission="0644" owner="root">xmgrace.desktop</AdditionalFile>
+	   <AdditionalFile target="/usr/share/pixmaps/grace.png" permission="0644" owner="root">xmgrace.png</AdditionalFile>
+	 </AdditionalFiles>
+    </Package>
+
+    <History>         
+        <Update release="1">
+            <Date>2014-03-02</Date>
+                <Version>5.1.23</Version>
+                <Comment>First release.</Comment>
+                <Name>Mathias Freire</Name>
+                <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+    
+    
