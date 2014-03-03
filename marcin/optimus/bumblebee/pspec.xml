@@ -23,6 +23,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
+            <Path fileType="config">/usr/lib/tmpfiles.d/bumblebee.conf</Path>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="executable">/usr/sbin</Path>
             <Path fileType="data">/lib/udev/rules.d</Path>
@@ -33,6 +34,9 @@
             <COMAR script="service.py">System.Service</COMAR>
             <COMAR script="package.py">System.Package</COMAR>
         </Provides>
+        <AdditionalFiles>
+             <AdditionalFile owner="root" permission="0644" target="/usr/lib/tmpfiles.d/bumblebee.conf">tmpfiles.conf</AdditionalFile>
+        </AdditionalFiles>
     </Package>
     <History>
         <Update release="3">
