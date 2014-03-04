@@ -15,6 +15,7 @@ DAEMON = "/usr/sbin/bumblebeed"
 
 @synchronized
 def start():
+    os.system("modprobe bbswitch load_state=0 unload_state=1")
     startService(command=DAEMON,
                  args="--daemon",
                  detach=True)
