@@ -18,6 +18,6 @@ def build():
     autotools.make("KDIR=/lib/modules/%s/build" % KDIR)
 
 def install():
-    pisitools.insinto("/lib/modules/%s/extra/bbswitch" % KDIR, "bbswitch.ko")
+    pisitools.insinto("/lib/modules/%s/extra" % KDIR, "bbswitch.ko")
 
     pisitools.dodoc("NEWS", "README*")
