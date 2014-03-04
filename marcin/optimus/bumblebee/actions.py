@@ -12,7 +12,7 @@ def setup():
     autotools.configure("\
                          CONF_DRIVER_MODULE_NVIDIA=nvidia \
                          CONF_LDPATH_NVIDIA=/usr/lib:/usr/lib32 \
-                         CONF_MODPATH_NVIDIA=/usr/lib/nvidia-current/modules,/usr/lib/xorg/modules/volatile \
+                         CONF_MODPATH_NVIDIA= /usr/lib/nvidia-current/modules/drivers,/usr/lib/xorg/modules/drivers \
                          --with-udev-rules=/lib/udev/rules.d/ \
                          --without-pidfile \
                          ")
