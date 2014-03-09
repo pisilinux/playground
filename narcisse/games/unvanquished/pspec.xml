@@ -12,7 +12,7 @@
         <IsA>app:gui</IsA>
        <Summary>Sci-fi RTS and FPS game.</Summary>
        <Description>Unvanquished is a fork of Tremulous, powered by the Daemon engine. It is a free, open-source first-person strategy shooter, pitting technologically advanced human soldiers against hordes of highly adaptable aliens.</Description>
-       <Archive sha1sum="a9fd8416f711cf56ed75d9437fa8fa4fcb6487e1" type="tarxz">http://unvanquished.net/downloads/sources/stripped/unvanquished-0.20.0.tar.xz</Archive>
+       <Archive sha1sum="db16504b934c406b8c7075c122621403cf7c3d73" type="tarxz">http://www.unvanquished.net/downloads/sources/stripped/unvanquished-0.25.0.tar.xz</Archive>
        <BuildDependencies>
 	  <Dependency>curl-devel</Dependency>
 	  <Dependency>freetype-devel</Dependency>
@@ -30,7 +30,8 @@
 	  <Dependency>libtheora-devel</Dependency>
 	  <Dependency>mesa-devel</Dependency>
 	  <Dependency>nettle-devel</Dependency>
-	  <Dependency>libopus-devel</Dependency> 
+	  <Dependency>libopus-devel</Dependency>
+	  <Dependency>libopusfile-devel</Dependency> 
        </BuildDependencies>
     </Source>
 
@@ -55,6 +56,7 @@
 	  <Dependency>mesa</Dependency>
 	  <Dependency>nettle</Dependency>
 	  <Dependency>libopus</Dependency>
+	  <Dependency>libopusfile</Dependency> 
        </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -67,12 +69,20 @@
         </Files>
 	<AdditionalFiles>
 	   <AdditionalFile target="/usr/bin/unvanquished" permission="0755" owner="root">unvanquished</AdditionalFile>
+	   <AdditionalFile target="/usr/bin/unvanquished-server" permission="0755" owner="root">unvanquished-server</AdditionalFile>
 	   <AdditionalFile target="/usr/share/applications/unvanquished.desktop" permission="0644" owner="root">unvanquished.desktop</AdditionalFile>
 	   <AdditionalFile target="/usr/share/icons/hicolor/128x128/apps/unvanquished.png" permission="0644" owner="root">unvanquished.png</AdditionalFile>
 	</AdditionalFiles>
     </Package>
     
     <History>
+      <Update release="2">
+            <Date>2014-03-02</Date>
+            <Version>0.25.0</Version>
+            <Comment>Version bump</Comment>
+	    <Name>Mathias Freire</Name>   
+            <Email>mathiasfreire45@gmail.com</Email>             
+        </Update>
 	   <Update release="1">
             <Date>2013-10-28</Date>
             <Version>0.20.0</Version>

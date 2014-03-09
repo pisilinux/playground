@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>qt5</Name>
+        <Homepage>http://qt.digia.com/</Homepage>
+        <Packager>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Packager>
+        <Summary>Cross platform application and UI framework</Summary>
+        <Description>Cross platform application and UI development framework</Description>
+        <License>LGPLv2.1-linking-exception</License>
+        <Archive sha1sum="cc68265c62321670bd40e29bdd484ea881bd6af3" type="tarxz">http://download.qt-project.org/official_releases/qt/5.2/5.2.1/single/qt-everywhere-opensource-src-5.2.1.tar.xz</Archive>
+
+        <BuildDependencies>
+            <Dependency>mariadb-lib</Dependency>
+            <Dependency>cups-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>tiff-devel</Dependency>
+            <Dependency>libSM-devel</Dependency>
+            <Dependency>libICE-devel</Dependency>
+            <Dependency>libmng-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>alsa-lib-devel</Dependency>
+            <Dependency>firebird-devel</Dependency>
+            <Dependency>unixODBC-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+            <Dependency>postgresql-server</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>firebird-superserver</Dependency>
+            <Dependency>gst-plugins-base-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>qt5</Name>
+        <Files>
+            <Path fileType="library">/usr/lib/lib*.so*</Path>
+            <Path fileType="library">/usr/lib/lib*.a</Path>
+            <Path fileType="library">/usr/lib/qt5/imports</Path>
+            <Path fileType="library">/usr/lib/qt5/qml</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins</Path>
+            <Path fileType="executable">/usr/lib/qt5</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency>tiff</Dependency>
+            <Dependency>webp</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>gtk2++</Dependency>
+            <Dependency>libSM</Dependency>
+            <Dependency>libXi</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>icu4c</Dependency>
+            <Dependency>libICE</Dependency>
+            <Dependency>openal</Dependency>
+            <Dependency>libdrm</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>unixODBC</Dependency>
+            <Dependency>DirectFB</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>mariadb-lib</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>postgresql-lib</Dependency>
+            <Dependency>gst-plugins-bad</Dependency>
+            <Dependency>pulseaudio-libs</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>gst-plugins-base</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    
+    <Package>
+        <Name>qt5-devel</Name>
+        <Summary>Development files for Qt 5</Summary>
+        <Description>Development files for Qt 5</Description>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+            <Path fileType="data">/usr/lib/qt5/mkspecs</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    
+    <Package>
+        <Name>qt5-demos</Name>
+        <Summary>Demonstration programs for Qt 5</Summary>
+        <Description>Demonstration programs for Qt 5</Description>
+        <Files>
+            <Path fileType="executable">/usr/lib/qt5/examples</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5</Dependency>
+            <Dependency>mesa</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    
+    <Package>
+        <Name>qt5-translations</Name>
+        <Summary>Localised translations for Qt 5</Summary>
+        <Description>Localised translations for Qt 5</Description>
+        <Files>
+            <Path fileType="localedata">/usr/share/qt5/translations</Path>
+            <Path fileType="data">/usr/share/qt5/phrasebooks</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    
+    <Package>
+        <Name>qt5-docs</Name>
+        <Summary>API Documentation for Qt 5</Summary>
+        <Description>API Documentation for Qt 5</Description>
+        <Files>
+            <Path fileType="doc">/usr/share/doc/qt5</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5-devel</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-03-03</Date>
+            <Version>5.2.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
