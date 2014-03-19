@@ -18,5 +18,5 @@ def setup():
 def install():
       pisitools.insinto("/etc/","./etc/*")
       pisitools.insinto("/opt/","./opt/*")
-      pisitools.dosym("/lib/ld-2.17.so", "/lib/ld-lsb-x86-64.so.2")
-      pisitools.dosym("/lib/ld-2.17.so", "/lib/ld-lsb-x86-64.so.3")
+      pisitools.dosym("/lib/ld-2.18.so", "/lib/ld-lsb-x86-64.so.2")
+      pisitools.dosym("/lib/ld-2.18.so", "/lib/ld-lsb-x86-64.so.3")
