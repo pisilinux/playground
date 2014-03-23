@@ -5,14 +5,14 @@
         <Name>lightdm</Name>
         <Homepage>https://launchpad.net/lightdm</Homepage>
         <Packager>
-            <Name>Ertan Güven</Name>
-            <Email>ertan@pisilinux.org</Email>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admin@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
         <IsA>app:gui</IsA>
         <Summary>A lightweight display manager</Summary>
         <Description>LightDM is a lightweight,cross-desktop display manager. Its main features are a well-defined greeter API allowing multiple GUIs, support for all display manager use cases, with plugins where appropriate, low code complexity, and fast performance. Due to its cross-platform nature greeters can be written in several toolkits, including HTML/CSS/Javascript.</Description>
-        <Archive sha1sum="43c7bcfa2311133c5a053bece577217cbf12e53e" type="tarxz">https://launchpadlibrarian.net/158304195/lightdm-1.9.5.tar.xz</Archive>
+        <Archive sha1sum="5b52649de316e1811a80b9a0ab216734f91d4347" type="tarxz">https://launchpad.net/lightdm/1.8/1.8.5/+download/lightdm-1.8.5.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt-devel</Dependency>
             <Dependency>libxklavier-devel</Dependency>
@@ -28,6 +28,12 @@
 
     <Package>
         <Name>lightdm</Name>
+	<Conflicts>
+            <Package>lxdm</Package>
+            <Package>kdm</Package>
+            <Package>gdm</Package>
+            <Package>slim</Package>
+        </Conflicts>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
             <Dependency>libxklavier</Dependency>
@@ -68,14 +74,15 @@
 	    <Path fileType="session">/etc/pam.d/lightdm</Path>
 	    <Path fileType="session">/etc/pam.d/lightdm-autologin</Path>
 	    <Path fileType="session">/etc/pam.d/lightdm-greeter</Path>
-	    
+	    <Path fileType="data">/etc/conf.d/xdm</Path>
         </Files>
         <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm">lightdm.pam</AdditionalFile>
-	    <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm">lightdm-autologin.pam</AdditionalFile>
-	    <AdditionalFile owner="root" permission="0755" target="/etc/lightdm/Xsession">Xsession</AdditionalFile>
-	    <AdditionalFile owner="root" permission="0644" target="/usr/lib/systemd/system/lightdm.service">lightdm.service</AdditionalFile>
-	    <AdditionalFile owner="root" permission="0755" target="/usr/share/display-managers/lightdm.desktop">lightdm.desktop</AdditionalFile>
+<!--             <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm">lightdm.pam</AdditionalFile> -->
+<!-- 	    <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm">lightdm-autologin.pam</AdditionalFile> -->
+<!-- 	    <AdditionalFile owner="root" permission="0644" target="/etc/lightdm/Xsession">Xsession</AdditionalFile> -->
+<!-- 	    <AdditionalFile owner="root" permission="0644" target="/usr/lib/systemd/system/lightdm.service">lightdm.service</AdditionalFile> -->
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/display-managers/lightdm.desktop">lightdm.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/xdm">xdm</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
@@ -109,6 +116,13 @@
     </Package>
 
     <History>
+      <Update release="4">
+            <Date>2013-12-06</Date>
+            <Version>1.8.5</Version>
+            <Comment>First release.</Comment>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@gmail.com</Email>
+        </Update>
       <Update release="3">
             <Date>2013-12-06</Date>
             <Version>1.9.5</Version>
