@@ -1,0 +1,12 @@
+--- coreutils-8.22/gnulib-tests/test-xvasprintf.c.str_fmt~	2014-02-14 13:20:01.439634735 -0500
++++ coreutils-8.22/gnulib-tests/test-xvasprintf.c	2014-02-14 13:20:50.029745175 -0500
+@@ -103,8 +103,7 @@ test_xasprintf (void)
+     /* Silence gcc warning about zero-length format string,
+        and about "format not a string literal and no format"
+        (whatever that means) .  */
+-    const char *empty = "";
+-    result = xasprintf (empty, empty);
++    result = xasprintf ("", "");
+     ASSERT (result != NULL);
+     ASSERT (strcmp (result, "") == 0);
+     free (result);
