@@ -1,0 +1,12 @@
+--- coreutils-8.9/src/md5sum.c.manpages~	2011-01-01 22:19:23.000000000 +0100
++++ coreutils-8.9/src/md5sum.c	2011-01-09 07:11:29.975777377 +0100
+@@ -179,6 +179,9 @@ With no FILE, or when FILE is -, read st
+         fputs (_("\
+   -t, --text           read in text mode (default)\n\
+ "), stdout);
++  fputs (_("\
++  Note: There is no difference between binary and text mode option on GNU system.\n\
++"), stdout);
+       fputs (_("\
+ \n\
+ The following four options are useful only when verifying checksums:\n\

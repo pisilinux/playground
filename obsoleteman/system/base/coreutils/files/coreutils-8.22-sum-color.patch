@@ -1,0 +1,146 @@
+From: Florent Monnier <blue_prawn () mageia.org>
+Date: dim. sept. 22 23:41:21 CEST 2013
+Subject: add --color option to md5sum and shaXsum
+
+* add --color option to md5sum and shaXsum
+  takes action only if stdout is a tty.
+diff -Naur coreutils-8.21/src/md5sum.c coreutils-8.21-sum-color/src/md5sum.c
+--- coreutils-8.21/src/md5sum.c	2013-01-31 01:46:24.000000000 +0100
++++ coreutils-8.21-sum-color/src/md5sum.c	2013-09-22 23:31:05.430161354 +0200
+@@ -20,6 +20,8 @@
+ 
+ #include <getopt.h>
+ #include <sys/types.h>
++#include <stdio.h>
++#include <unistd.h>
+ 
+ #include "system.h"
+ 
+@@ -136,7 +138,8 @@
+   STATUS_OPTION = CHAR_MAX + 1,
+   QUIET_OPTION,
+   STRICT_OPTION,
+-  TAG_OPTION
++  TAG_OPTION,
++  COLOR_OPTION
+ };
+ 
+ static struct option const long_options[] =
+@@ -146,6 +149,7 @@
+   { "quiet", no_argument, NULL, QUIET_OPTION },
+   { "status", no_argument, NULL, STATUS_OPTION },
+   { "text", no_argument, NULL, 't' },
++  { "color", no_argument, NULL, COLOR_OPTION },
+   { "warn", no_argument, NULL, 'w' },
+   { "strict", no_argument, NULL, STRICT_OPTION },
+   { "tag", no_argument, NULL, TAG_OPTION },
+@@ -154,6 +158,39 @@
+   { NULL, 0, NULL, 0 }
+ };
+ 
++/* BEGIN COLOR */
++
++#define CODCOL_BRIGHT "0"
++
++struct color {
++  int r;
++  int g;
++  int b;
++  const char *code;
++};
++
++static struct color const colors[] =
++{
++  {255,   0,   0, "31"},
++  {  0, 255,   0, "32"},
++  {255, 255,   0, "33"},
++  {  0,   0, 255, "34"},
++  {255,   0, 255, "35"},
++  {  0, 255, 255, "36"},
++};
++
++unsigned int square_dist(
++    const struct color *c1,
++    const struct color *c2)
++{
++  int xd = c2->r - c1->r;
++  int yd = c2->g - c1->g;
++  int zd = c2->b - c1->b;
++  return (xd * xd + yd * yd + zd * zd);
++}
++
++/* END COLOR */
++
+ void
+ usage (int status)
+ {
+@@ -184,6 +184,9 @@
+       fputs (_("\
+       --tag            create a BSD-style checksum\n\
+ "), stdout);
++      fputs (_("\
++      --color          print with colors\n\
++"), stdout);
+       if (O_BINARY)
+         fputs (_("\
+   -t, --text           read in text mode (default if reading tty stdin)\n\
+@@ -689,6 +695,7 @@
+   /* Make sure bin_buffer is properly aligned. */
+   unsigned char *bin_buffer = ptr_align (bin_buffer_unaligned, DIGEST_ALIGN);
+   bool do_check = false;
++  bool do_color = false;
+   int opt;
+   bool ok = true;
+   int binary = -1;
+@@ -741,6 +748,9 @@
+         prefix_tag = true;
+         binary = 1;
+         break;
++      case COLOR_OPTION:
++        do_color = true;
++        break;
+       case_GETOPT_HELP_CHAR;
+       case_GETOPT_VERSION_CHAR (PROGRAM_NAME, AUTHORS);
+       default:
+@@ -834,15 +844,38 @@
+                   fputs (") = ", stdout);
+                 }
+ 
+-              size_t i;
++              size_t i, j, k;
+ 
+               /* Output a leading backslash if the file name contains
+                  a newline or backslash.  */
+               if (!prefix_tag && needs_escape)
+                 putchar ('\\');
+ 
+-              for (i = 0; i < (digest_hex_bytes / 2); ++i)
+-                printf ("%02x", bin_buffer[i]);
++              /* START COLOR */
++
++              if (!do_color || !isatty (fileno(stdout))) {
++                for (i = 0; i < (digest_hex_bytes / 2); ++i)
++                  printf ("%02x", bin_buffer[i]);
++              } else {
++                for (i = 0, j = 0; i < (digest_hex_bytes / (2*3)); ++i) {
++                  struct color c;
++                  unsigned int m, n, col;
++                  c.r = bin_buffer[j++];
++                  c.g = bin_buffer[j++];
++                  c.b = bin_buffer[j++];
++                  for (k = 0, n = 0, m = 195076; k < 6; ++k) {
++                    unsigned int n = square_dist(&colors[k], &c);
++                    if (n < m) { m = n; col = k; }
++                  }
++                  printf ("\x1B[%s;1m%02x%02x%02x\x1B[0m",
++                          colors[col].code, c.r, c.g, c.b);
++                }
++                for (; j < (digest_hex_bytes / 2); ++j)
++                  printf ("\x1B[%s;1m%02x\x1B[0m",
++                          CODCOL_BRIGHT, bin_buffer[j]);
++              }
++
++              /* FINISH COLOR */
+ 
+               if (!prefix_tag)
+                 {
