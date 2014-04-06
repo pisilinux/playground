@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kprayertime</Name>
+        <Homepage>http://kde-look.org/content/show.php/KPrayertime4+Islamic+Prayer+Times?content=117387</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A KDE plasmoid that displays the Islamic prayer times for the day</Summary>
+        <Description>A KDE plasmoid / applet that displays the Islamic prayer times for the day. It provides times according to all the main calculation systems. For KDE4 use the default link, for KDE3 please go to the 'all files' section.</Description>
+        <Archive sha1sum="81c16170ddb8cc5b4061ecfcd886bd20c244cd1b" type="targz">/home/alihan/Downloads/kprayertime4.01.src.tar.gz</Archive>
+    </Source>
+    
+    <Package>
+        <Name>kprayertime</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/kde4</Path>
+            <Path fileType="data">/usr/share/sounds</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2014-04-06</Date>
+            <Version>4.01</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
