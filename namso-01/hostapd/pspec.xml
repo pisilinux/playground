@@ -1,0 +1,47 @@
+<PISI>
+    <Source>
+        <Name>hostapd</Name>
+        <Homepage>http://w1.fi/hostapd/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>custom</License>
+        <IsA>app:gui</IsA>
+        <Summary>IEEE 802.11 AP, IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator</Summary>
+        <Description>IEEE 802.11 AP, IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator</Description>
+        <Archive sha1sum="5c1a1ead3ccf89bceb035bd6b5a6e516d44f4b2b" type="targz">http://w1.fi/releases/hostapd-2.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libnl-devel</Dependency>
+        </BuildDependencies>
+        <AdditionalFiles>
+            <AdditionalFile target="hostapd/.config">config</AdditionalFile>
+        </AdditionalFiles>
+    </Source>
+    
+    <Package>
+        <Name>hostapd</Name>
+        <RuntimeDependencies>
+            <Dependency>libnl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="executable">/usr/bin</Path>
+        </Files>
+        <Provides>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2014-03-14</Date>
+            <Version>2.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
