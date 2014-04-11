@@ -74,7 +74,7 @@ def install():
     pisitools.insinto("%s/xorg/modules" % Libdir, "%s/usr/X11R6/lib*/modules/*" % XDir)
     
     # libGl library name changed to fglrx-libGl since 1.15
-    pisitools.domove("%s/fglrx/fglrx-libGL.so.1.2" % Libdir, "%s/fglrx" % Libdir, "libGL.so.1.2")
+    pisitools.domove("%s/fglrx/fglrx-libGL.so.1.2" % Libdir, "%s/fglrx" % Libdir, "libGL.so.1.2.0")
 
     pisitools.domove("%s/fglrx/modules/dri" % Libdir, "%s/xorg/modules/" % Libdir)
 
@@ -131,7 +131,7 @@ def install():
     pisitools.removeDir("/usr/share/icons")
 
     # Fix file permissions
-    exec_file_suffixes = (".sh", ".so", ".so.1.2")
+    exec_file_suffixes = (".sh", ".so", ".so.1.2.0")
     exec_dir_suffixes = ("/bin", "/sbin", "/lib")
 
     import os
