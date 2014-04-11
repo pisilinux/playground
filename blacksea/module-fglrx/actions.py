@@ -53,7 +53,8 @@ def install():
     # Controlcenter libraries
     # The other files under /usr/share are common files like icon,man,doc ,etc ..
     DIRS = {
-            "common/etc":                       "/",
+            "common/etc/ati":                       "/etc",
+            "common/etc/security":                  "/etc",
             "arch/%s/etc/OpenCL/*" % Target:     "/etc/OpenCL",
             "arch/%s/usr/X11R6/lib*/*" % Target:    Libdir,
             "arch/%s/usr/lib*/*" % Target:          Libdir,
@@ -63,7 +64,9 @@ def install():
     # Emul32 package don't need files that belongs to /usr/share
     if get.buildTYPE() == "emul32":
         del DIRS["common/usr/share"]
-        del DIRS["common/etc"]
+        del DIRS["common/etc/ati"]
+        del DIRS["common/etc/security"]
+        del DIRS["arch/%s/etc/OpenCL/*" % Target]
 
     for source, target in DIRS.items():
         pisitools.insinto(target, source)
