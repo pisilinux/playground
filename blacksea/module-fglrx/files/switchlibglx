@@ -1,0 +1,122 @@
+#!/bin/bash
+#  switchlibglx   
+#
+#  Copyright (c) 2011 Advanced Micro Devices, Inc.
+#
+#  Purpose:
+#    For switch between AMD and Intel graphic driver library.
+#
+#  Usage:
+#  switchlibglx   amd|intel|query
+#    amd:   switches to the AMD version of libglx.so .
+#    intel: switches to the open-source version of libglx.so .
+#    query: checks, which version is currently active and prints either "amd"*
+#    or "intel" or "unknown" on the standard output.
+#    must be root to execute this script
+
+ARCH=`uname -m`
+LIB_DIR=/usr/lib/xorg/modules/extensions/
+E_ERR=1       
+LIBGLX_FILE="libglx.so"
+AMD_LIB="fglrx/fglrx-libglx.so"
+RENAMED_ORI_LIB="FGL.renamed.libglx.so"
+
+if [ -e "/usr/X11R6/bin/Xorg" ]; then
+  LIB_DIR=/usr/X11R6/lib/modules/extensions/
+fi
+
+if [ "$ARCH" = "x86_64" ]; then 
+  if [ -d "/usr/lib" -a ! -d "/usr/lib64" ]; then
+    LIB_DIR=/usr/lib/xorg/modules/extensions/
+  else
+    LIB_DIR=/usr/lib64/xorg/modules/extensions/
+  fi
+  if [ -e "/usr/X11R6/bin/Xorg" ]; then
+     LIB_DIR=/usr/X11R6/lib64/modules/extensions/
+  fi
+fi
+
+# Check if root
+if [ "`whoami`" != "root" ]; then
+  echo "Must be root to run this script." 1>&2
+  exit $E_ERR
+fi
+
+# One parameter
+if [ $# -ne 1 ]; then
+  echo "Usage: `basename $0` amd|intel|query " 1>&2
+  echo "Please choose one parameter " 1>&2
+  exit $E_ERR
+fi
+
+# Query the current active version
+# Check the libglx file's current link, return current version
+# standard output: 
+#	amd  --- points to /fglrx/libglx.so
+#    	intel --- points to FGL.renamed.*
+#       unknown --- points to other file or invalid link or file not exist
+# standard error: 
+# 	E_ERR --- file exist, but is not a link file
+query_current_version ()
+{
+  if [ -L "$1" -a -e "$1" ]; then
+         
+    #file is a valid symlink, check that it points to either FGL.renamed* 
+    #or a file in /fglrx/ folder
+
+    link_result=`readlink -f "$1"`
+    filename_check=`basename $link_result | grep '^FGL.renamed.libglx.so'`
+    dirname_check=`echo $link_result | grep '/fglrx/fglrx-libglx.so'`
+
+      if [ -n "$filename_check" ]; then
+	echo "intel"
+      elif [ -n "$dirname_check" ]; then
+	echo "amd"
+      else
+	# points to unknown file
+	echo "unknown"
+      fi    
+   elif [ -e "$1"  ]; then
+     #libglx.so is a regular file
+     echo "File $1 exist, but it is not a link file." 1>&2
+     exit $E_ERR  
+   else
+     # File libglx.so* not exist or empty link, set unknown
+     echo "unknown"
+   fi
+}
+
+# If file not exist, exit error
+check_file () 
+{
+  if [ ! -e "$1" ]
+  then 
+    echo "library file $1 not exist, can't switch" 1>&2
+    exit $E_ERR
+  fi
+}
+
+   libglx_file="$LIB_DIR$LIBGLX_FILE"
+
+# Switch to right library
+case "$1" in
+  "amd" ) 
+	      check_file "$LIB_DIR$AMD_LIB"
+	      ln -sf "$AMD_LIB" $libglx_file 
+  ;;
+  "intel" ) 
+	      check_file "$LIB_DIR$RENAMED_ORI_LIB"
+	      ln -sf "$RENAMED_ORI_LIB" $libglx_file
+  ;;
+  "query" )
+	      query_current_version $libglx_file
+  ;;
+  *  )       # other than amd|intel|query parameter report an error 
+              echo "Usage: `basename $0` amd|intel|query" 1>&2
+	      exit $E_ERR
+  ;;  
+esac
+
+
+#  A zero return value from the script upon exit indicates success.
+exit 0

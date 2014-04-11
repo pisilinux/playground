@@ -1,0 +1,217 @@
+#!/bin/bash
+#  switchlibGL
+#
+#  Copyright (c) 2011 Advanced Micro Devices, Inc.
+#
+#  Purpose:
+#    For switch between AMD and Intel graphic driver library.
+#
+#  Usage:
+#  switchlibGL   amd|intel|query
+#    amd:   switches to the AMD version of libGL.
+#    intel: switches to the open-source version of libGL .
+#    query: checks, which version is currently active and prints either "amd"
+#    or "intel" or "unknown" on the standard output.
+#    must be root to execute this script
+
+ARCH=`uname -m`
+LIB_DIR=/usr/lib/
+AMD_DIR=/usr/lib/
+E_ERR=1
+LIBGL_FILE_1_2="libGL.so.1.2"
+AMD_LIB="fglrx/fglrx-libGL.so.1.2"
+MESA_LIB="FGL.renamed.libGL.so.1.2"
+
+if [ "$ARCH" = "x86_64" ]; then
+    # x86_64 has lib32 and lib64 two librarys.
+    if [ -d "/usr/lib" -a ! -d "/usr/lib64" ]; then
+        LIB_DIR32=/usr/lib/i386-linux-gnu/
+        if [ ! -f ${LIB_DIR32}/${AMD_LIB} -a \
+             -f /usr/lib32/${AMD_LIB} ]; then
+            LIB_DIR32=/usr/lib32/
+        fi
+        LIB_DIR64=/usr/lib/
+    elif [ -d "/usr/lib" -a -d "/usr/lib64" ]; then
+        LIB_DIR32=/usr/lib/
+        LIB_DIR64=/usr/lib64/
+    else
+        echo "Can't find 32 and 64-bit library directories." 1>&2
+        exit $E_ERR
+    fi
+    AMD_DIR32=$LIB_DIR32
+    AMD_DIR64=$LIB_DIR64
+    if [ -e "/usr/X11R6/bin/Xorg" ]; then
+        AMD_DIR32=/usr/X11R6/lib/
+        AMD_DIR64=/usr/X11R6/lib64/
+    fi
+    # Check if Mesa libGL is in /usr/lib*/mesa or /usr/lib/*linux-gnu/mesa (Ubuntu).
+    if [ -f ${LIB_DIR64}/mesa/FGL.renamed.libGL.so.1.2 -a \
+         -f ${LIB_DIR32}/mesa/FGL.renamed.libGL.so.1.2 ]; then
+        MESA_LIB="mesa/FGL.renamed.libGL.so.1.2"
+    elif [ -f ${LIB_DIR}/x86_64-linux-gnu/mesa/FGL.renamed.libGL.so.1.2 -a \
+         -f ${LIB_DIR}/i386-linux-gnu/mesa/FGL.renamed.libGL.so.1.2 ];then
+        MESA_LIB_64="x86_64-linux-gnu/mesa/FGL.renamed.libGL.so.1.2"
+        MESA_LIB_32="i386-linux-gnu/mesa/FGL.renamed.libGL.so.1.2"
+    # ubuntu 12.10 specific
+    elif [ -f ${LIB_DIR64}/x86_64-linux-gnu/mesa/FGL.renamed.libGL.so.1.2.0 ]; then
+        MESA_LIB="x86_64-linux-gnu/mesa/FGL.renamed.libGL.so.1.2.0"
+    # ubuntu 12.04 specific
+    elif [ -f ${LIB_DIR64}/x86_64-linux-gnu/mesa/FGL.renamed.libGL.so.1.2 ]; then
+        MESA_LIB="x86_64-linux-gnu/mesa/FGL.renamed.libGL.so.1.2"
+    elif [ -f ${LIB_DIR64}/FGL.renamed.libGL.so.1.2.0 ]; then
+        MESA_LIB="FGL.renamed.libGL.so.1.2.0"
+    fi
+else
+    if [ -e "/usr/X11R6/bin/Xorg" ]; then
+        AMD_DIR=/usr/X11R6/lib/
+    fi
+
+    # Check if Mesa libGL is in /usr/lib/mesa or /usr/lib/i386-linux-gnu/mesa (Ubuntu).
+    if [ -f ${LIB_DIR}/mesa/FGL.renamed.libGL.so.1.2 ]; then
+        MESA_LIB="mesa/FGL.renamed.libGL.so.1.2"
+    elif [ -f ${LIB_DIR}/i386-linux-gnu/mesa/FGL.renamed.libGL.so.1.2 ];then
+        MESA_LIB="i386-linux-gnu/mesa/FGL.renamed.libGL.so.1.2"
+    # ubuntu 12.10 specific
+    elif [ -f ${LIB_DIR}/i386-linux-gnu/mesa/FGL.renamed.libGL.so.1.2.0 ]; then
+        MESA_LIB="i386-linux-gnu/mesa/FGL.renamed.libGL.so.1.2.0"
+    elif [ -f ${LIB_DIR}/FGL.renamed.libGL.so.1.2.0 ]; then
+        MESA_LIB="FGL.renamed.libGL.so.1.2.0"
+    fi
+fi
+
+# Check if root
+if [ "`whoami`" != "root" ]; then
+  echo "Must be root to run this script." 1>&2
+  exit $E_ERR
+fi
+
+# One parameter
+if [ $# -ne 1 ]; then
+  echo "Usage: `basename $0` amd|intel|query " 1>&2
+  echo "Please choose one parameter " 1>&2
+  exit $E_ERR
+fi
+
+
+# Query the current active version
+# Check the libGL file's current link, return current version
+# standard output:
+#       amd  --- points to fglrx/libGL.so.1.2
+#       intel --- points to FGL.renamed.* or mesa/libGL.so.1.2
+#       unknown --- points to other file or invalid link or file not exist
+#       error --libGL file exist, but is not a link file
+query_current_version ()
+{
+    if [ -L "$1" -a -e "$1" ]; then
+        # file is a valid symlink, check that it points to either
+        # the AMD or the Mesa version
+        local link_target="`readlink -f "$1"`"
+        local file_name="`basename "$link_target"`"
+
+        case "$file_name" in
+            "fglrx-libGL.so.1.2")  echo "amd" ;;
+            "FGL.renamed.libGL.so.1.2") echo "intel" ;;
+            # ubuntu 12.10 specific
+            "FGL.renamed.libGL.so.1.2.0") echo "intel" ;;
+            *)           echo "unknown" ;;
+        esac
+    elif [ -e "$1" ]; then
+        # libGL.so is a regular file
+        echo "error"
+    else
+        # File libGL.so* not exist or empty link, set unknown
+        echo "unknown"
+    fi
+}
+
+check_file ()
+{
+if [ ! -e "$1" ]
+then
+  echo "library file $1 not exist, can't switch" 1>&2
+  exit $E_ERR
+fi
+}
+
+# Setup symbolic link, in the following way
+# libGL.so     -> libGL.so.1
+# libGL.so.1   -> libGL.so.1.2
+# libGL.so.1.2 -> fglrx/fglrx-libGL.so.1.2
+set_link ()
+{
+ln -sf libGL.so.1 "$1""libGL.so"
+ln -sf libGL.so.1.2 "$1""libGL.so.1"
+ln -sf "$2" "$1""libGL.so.1.2"
+}
+
+# Switch to right mode
+case "$1" in
+  "amd" )
+        if [ $ARCH = "x86_64" ]; then
+            check_file "$AMD_DIR64$AMD_LIB"
+            check_file "$AMD_DIR32$AMD_LIB"
+            set_link "$LIB_DIR64" "$AMD_DIR64$AMD_LIB"
+            set_link "$LIB_DIR32" "$AMD_DIR32$AMD_LIB"
+        else
+            #only /usr/lib
+            check_file "$AMD_DIR$AMD_LIB"
+            set_link "$LIB_DIR"  "$AMD_DIR$AMD_LIB"
+        fi
+  ;;
+  "intel" )
+        if [ $ARCH = "x86_64" ]; then
+            if [ -f ${LIB_DIR}/${MESA_LIB_64}  -a \
+                 -f ${LIB_DIR}/${MESA_LIB_32}  ]; then
+                check_file "$LIB_DIR$MESA_LIB_64"
+                check_file "$LIB_DIR$MESA_LIB_32"
+                set_link "$LIB_DIR64" "$LIB_DIR$MESA_LIB_64"
+                set_link "$LIB_DIR32" "$LIB_DIR$MESA_LIB_32"
+            elif [ -f ${LIB_DIR64}/${MESA_LIB} -a \
+                   -f ${LIB_DIR32}/${MESA_LIB} ]; then
+                check_file "$LIB_DIR64$MESA_LIB"
+                check_file "$LIB_DIR32$MESA_LIB"
+                set_link "$LIB_DIR64" "$LIB_DIR64$MESA_LIB"
+                set_link "$LIB_DIR32" "$LIB_DIR32$MESA_LIB"
+            # some 64bit systems may have no 32bit mesa lib
+            elif [ -f ${LIB_DIR64}/${MESA_LIB} ]; then
+                check_file "$LIB_DIR64$MESA_LIB"
+                set_link "$LIB_DIR64" "$LIB_DIR64$MESA_LIB"
+            fi
+        else
+            check_file "$LIB_DIR$MESA_LIB"
+            set_link "$LIB_DIR" "$LIB_DIR$MESA_LIB"
+        fi
+  ;;
+  "query" )
+        if [ $ARCH = "x86_64" ]; then
+
+        # In x86_64 architecture, there may be no 32 bit mesa library file,
+        # if we check both 32/64bit libGL file, an error would happen,
+        # so just check the 64bit file, return amd or intel otherwise return unknown, 
+        # for a regular libGL file, return error
+            libGL_file="$LIB_DIR64$LIBGL_FILE_1_2"
+            current=`query_current_version $libGL_file`
+            if [ "$current" = "error" ]; then
+                echo "libGL.so is a regular file." 1>&2
+                exit $E_ERR
+            fi
+            echo "$current"
+        else
+            libGL_file="$LIB_DIR$LIBGL_FILE_1_2"
+            current=`query_current_version $libGL_file`
+
+            if [ "$current" = "error" ]; then
+                echo "libGL.so is a regular file." 1>&2
+                exit $E_ERR
+            else
+                echo "$current"
+            fi
+        fi
+  ;;
+
+  * ) echo "Usage: `basename $0` amd|intel|query" 1>&2; exit $E_ERR;;
+  # other than amd|intel|query parameter report an error
+esac
+
+#  A zero return value from the script upon exit indicates success.
+exit 0
