@@ -11,8 +11,6 @@ from pisi.actionsapi import shelltools
 
 def setup():
     pisitools.dosed("gui/mdmsetup.desktop.in.in", "gksu", "xdg-su -c")
-    
-    
     shelltools.system(" ./autogen.sh  --with-prefetch \
                     --prefix=/usr \
                     --with-console-kit=yes \
@@ -41,11 +39,14 @@ def install():
     pisitools.removeDir("/usr/share/xsessions/")
     pisitools.removeDir("/etc/dm/")
     
-    #remove conflict files
-    pisitools.removeDir("/usr/share/pixmaps/")
+    #move conflict files
+    pisitools.domove("/usr/share/pixmaps","/usr/share/mdm")
     
     #move .desktop files
     pisitools.domove("/usr/share/mdm/applications/*.desktop","/usr/share/applications")
+    pisitools.remove("/usr/share/applications/mdmflexiserver.desktop")
+    pisitools.removeDir("/usr/share/mdm/applications/")
+    
            
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "NEWS", "README")
