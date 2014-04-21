@@ -9,7 +9,6 @@ from pisi.actionsapi import shelltools
 
 BuildDir = "usr/share/mdm/themes/"
 datadir = "/usr/share/mdm/themes"
-docdir = "debian"
 
 
 def install():
@@ -19,6 +18,6 @@ def install():
         pisitools.insinto(datadir, dir)
         
     shelltools.cd("../../../..")   
-    shelltools.cd(docdir)   
+    shelltools.cd("debian")   
 
     pisitools.dodoc("changelog", "copyright")

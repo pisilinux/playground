@@ -8,7 +8,7 @@
             <Name>PisiLinux Community</Name>
             <Email>admin@pisilinux.org</Email>
         </Packager>
-        <License>GPLv1</License>
+        <License>GPLv3</License>
         <IsA>data</IsA>
         <Summary>MDM display manager themes</Summary>
         <Description>Themes for MDM from LinuxMint</Description>
@@ -109,8 +109,11 @@
             <Dependency>mdm</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="doc">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
         </Files>
+         <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/doc/mdm-themes/COPYING">COPYING</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <History>
