@@ -55,8 +55,8 @@
             <Dependency>libart_lgpl</Dependency>
             <Dependency>webkit-gtk2</Dependency>
             <Dependency>libgnomecanvas</Dependency>
-            <Dependency>libglade</Dependency>
             <Dependency>gnome-common</Dependency>
+            <Dependency>mdm-Arc-Noble-Userlist</Dependency>
         </RuntimeDependencies>
         
         <Files>
@@ -79,6 +79,7 @@
             <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/mdm-autologin">mdm-autologin</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/xdm">xdm</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/mdm/distro.conf">defaults.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/mdm/custom.conf">custom.conf</AdditionalFile>
         </AdditionalFiles>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
