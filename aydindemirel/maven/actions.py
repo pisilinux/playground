@@ -30,4 +30,5 @@ def install():
     shelltools.system("mv %s/usr/share/java/maven-%s/conf/* %s/usr/share/java/maven/conf/" % (get.installDIR(), get.srcVERSION(), get.installDIR()))
     shelltools.system("mv %s/usr/share/java/maven-%s/bin/m2.conf %s/usr/share/java/maven/bin" % (get.installDIR(), get.srcVERSION(), get.installDIR()))
     shelltools.system("rm -rf %s/usr/share/java/maven-%s" % (get.installDIR(), get.srcVERSION()))
+    shelltools.system("echo 'export M2_HOME=/usr/share/java/maven' >> /etc/profile.d")
 
