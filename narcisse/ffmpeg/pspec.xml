@@ -1,0 +1,211 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ffmpeg</Name>
+        <Homepage>http://ffmpeg.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>GPLv3</License>
+        <License>LGPLv2</License>
+        <License>LGPLv3</License>
+        <IsA>app:console</IsA>
+        <Summary>A command-line tool to record, convert and stream audio and video</Summary>
+        <Description>FFmpeg is a complete solution to record, convert and stream audio and video.</Description>
+        <Archive sha1sum="889a3a802e2ae9de2758e55c0ccae168d6b3301a" type="tarbz2">http://ffmpeg.org/releases/ffmpeg-2.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gsm-devel</Dependency>
+            <Dependency>celt-devel</Dependency>
+            <Dependency>faac-devel</Dependency>
+            <Dependency>lame-devel</Dependency>
+            <Dependency>x264-devel</Dependency>
+            <Dependency>x265-devel</Dependency>
+            <Dependency>xvid-devel</Dependency>
+            <Dependency>speex-devel</Dependency>
+            <Dependency>libva-devel</Dependency>
+            <Dependency>libXv-devel</Dependency>
+            <Dependency>gnutls-devel</Dependency>
+            <Dependency>libnut-devel</Dependency>
+            <Dependency>libsdl-devel</Dependency>
+            <Dependency>libv4l-devel</Dependency>
+            <Dependency>libvpx-devel</Dependency>
+            <Dependency>libass-devel</Dependency>
+            <Dependency>libopus-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>alsa-lib-devel</Dependency>
+            <Dependency>libvdpau-devel</Dependency>
+            <Dependency>openjpeg-devel</Dependency>
+            <Dependency>rtmpdump-devel</Dependency>
+            <Dependency>libbluray-devel</Dependency>
+            <Dependency>libdc1394-devel</Dependency>
+            <Dependency>libtheora-devel</Dependency>
+            <Dependency>libvorbis-devel</Dependency>
+            <Dependency>libXfixes-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>libmodplug-devel</Dependency>
+            <Dependency>libcrystalhd-devel</Dependency>
+            <Dependency>libvo-aacenc-devel</Dependency>
+            <Dependency>opencore-amr-devel</Dependency>
+            <Dependency>schroedinger-devel</Dependency>
+            <Dependency>libvo-amrwbenc-devel</Dependency>
+            <Dependency>pulseaudio-libs-devel</Dependency>
+            <Dependency>libcdio-paranoia-devel</Dependency>
+            <Dependency>jack-audio-connection-kit-devel</Dependency>
+            <!-- below deps should be checked whether needed-->
+            <Dependency>texi2html</Dependency>
+            <Dependency>xvid-devel</Dependency>
+            <Dependency>imlib2-devel</Dependency>
+            <Dependency>libass-devel</Dependency>
+            <Dependency>libcdio-devel</Dependency>
+            <Dependency>openjpeg-devel</Dependency>
+            <Dependency>libraw1394-devel</Dependency>
+            <Dependency>frei0r-plugins-devel</Dependency>
+	    <Dependency>libfdk-aac-devel</Dependency>
+	    <Dependency>twolame-devel</Dependency>
+	    <Dependency>webp-devel</Dependency>
+	    <Dependency>wavpack-devel</Dependency>
+	    <Dependency>mesa-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+	  <!--<Patch level="0">freetype.patch</Patch>-->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>ffmpeg</Name>
+        <RuntimeDependencies>
+            <Dependency>gsm</Dependency>
+            <Dependency>celt</Dependency>
+            <Dependency>faac</Dependency>
+            <Dependency>lame</Dependency>
+            <Dependency>x264</Dependency>
+            <Dependency>x265</Dependency>
+            <Dependency>xvid</Dependency>
+            <Dependency>speex</Dependency>
+            <Dependency>libva</Dependency>
+            <Dependency>libXv</Dependency>
+            <Dependency>gnutls</Dependency>
+            <Dependency>libnut</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>libv4l</Dependency>
+            <Dependency>libvpx</Dependency>
+            <Dependency>libass</Dependency>
+            <Dependency>libopus</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>libvdpau</Dependency>
+            <Dependency>openjpeg</Dependency>
+            <Dependency>rtmpdump</Dependency>
+            <Dependency>libbluray</Dependency>
+            <Dependency>libdc1394</Dependency>
+            <Dependency>libtheora</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>libXfixes</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>libmodplug</Dependency>
+            <Dependency>libcrystalhd</Dependency>
+            <Dependency>libvo-aacenc</Dependency>
+            <Dependency>opencore-amr</Dependency>
+            <Dependency>schroedinger</Dependency>
+            <Dependency>libvo-amrwbenc</Dependency>
+            <Dependency>pulseaudio-libs</Dependency>
+            <Dependency>libcdio-paranoia</Dependency>
+            <Dependency>jack-audio-connection-kit</Dependency>
+	    <Dependency>libfdk-aac</Dependency>
+	    <Dependency>twolame</Dependency>
+	    <Dependency>webp</Dependency>
+	    <Dependency>wavpack</Dependency>
+	    <Dependency>mesa</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/ffmpeg</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>ffmpeg-devel</Name>
+        <Summary>Development files for ffmpeg</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">ffmpeg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+
+    <History>
+      <Update release="9">
+            <Date>2014-04-27</Date>
+            <Version>2.2</Version>
+            <Comment>Added libfdk-aac codec and others</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+        <Update release="8">
+            <Date>2014-04-05</Date>
+            <Version>2.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2013-11-27</Date>
+            <Version>2.1.1</Version>
+            <Comment>fix dep</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvarice@gmail.com</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-11-24</Date>
+            <Version>2.1.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-07-28</Date>
+            <Version>1.2.1</Version>
+            <Comment>missing dep.</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-07-06</Date>
+            <Version>1.2.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-01-25</Date>
+            <Version>1.1.1</Version>
+            <Comment>Fixed.</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="2" type="security">
+            <Date>2013-01-26</Date>
+            <Version>1.1.1</Version>
+            <Comment>Version bump to 1.1.1</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1" type="security">
+            <Date>2012-09-29</Date>
+            <Version>1.0</Version>
+            <Comment>First release</Comment>
+            <Name>Erdem Artan</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
