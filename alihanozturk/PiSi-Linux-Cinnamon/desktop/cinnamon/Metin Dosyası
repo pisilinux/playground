@@ -1,0 +1,771 @@
+ 
+pisilinux1 cinnamon # checkelf *pisi
+
+Package: cinnamon
+-----------------
+
+Unused direct dependency analysis
+---------------------------------
+/tmp/checkelf-ocbpIL/usr/lib/cinnamon/cinnamon/cinnamon-hotplug-sniffer
+   /lib/libpthread.so.0
+/tmp/checkelf-ocbpIL/usr/lib/cinnamon/libcinnamon.so
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgconf-2.so.4
+   /usr/lib/libsoup-2.4.so.1
+   /usr/lib/libdbus-glib-1.so.2
+   /usr/lib/libdbus-1.so.3
+   /usr/lib/libEGL.so.1
+   /usr/lib/libXrandr.so.2
+   /usr/lib/libjson-glib-1.0.so.0
+   /usr/lib/libXext.so.6
+   /usr/lib/libXdamage.so.1
+   /usr/lib/libXcomposite.so.1
+   /usr/lib/libXi.so.6
+   /usr/lib/libcairo-gobject.so.2
+/tmp/checkelf-ocbpIL/usr/bin/cinnamon
+   /lib/libpthread.so.0
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+gnome-common                   gjs                            gjs                           
+                               atk                            atk                           
+                               mesa                           mesa                          
+                               gtk3                           gtk3                          
+                               cogl                           cogl                          
+                               cairo                          cairo                         
+                               libXi                          libXi                         
+                               gconf                          gconf                         
+                               pango                          pango                         
+                               muffin                         muffin                        
+                               clutter                        clutter                       
+                               libsoup                        libsoup                       
+                               libXext                        libXext                       
+                               libcroco                       libcroco                      
+                               json-glib                      json-glib                     
+                               libXrandr                      libXrandr                     
+                               gstreamer                      gstreamer                     
+                               libXfixes                      libXfixes                     
+                               gdk-pixbuf                     gdk-pixbuf                    
+                               libXdamage                     libXdamage                    
+                               gnome-menus                    gnome-menus                   
+                               libcanberra                    libcanberra                   
+                               libXcomposite                  libXcomposite                 
+                               NetworkManager                 NetworkManager                
+                               gnome3-desktop                 gnome3-desktop                
+                               gnome-bluetooth                gnome-bluetooth               
+                               pulseaudio-libs                pulseaudio-libs               
+                               libgnome-keyring               libgnome-keyring              
+                               startup-notification           startup-notification          
+                               gobject-introspection          gobject-introspection         
+
+Package: cinnamon-control-center
+--------------------------------
+
+Unused direct dependency analysis
+---------------------------------
+/tmp/checkelf-L2A7pe/usr/lib/cinnamon-control-center-1/panels/libscreen.so
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libnotify.so.4
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libm.so.6
+   /lib/libpthread.so.0
+/tmp/checkelf-L2A7pe/usr/lib/cinnamon-control-center-1/panels/libnetwork.so
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libnotify.so.4
+   /usr/lib/libdbus-1.so.3
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libm.so.6
+/tmp/checkelf-L2A7pe/usr/lib/cinnamon-control-center-1/panels/libpower.so
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libnotify.so.4
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libm.so.6
+   /lib/libpthread.so.0
+/tmp/checkelf-L2A7pe/usr/lib/cinnamon-control-center-1/panels/libcolor.so
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libnotify.so.4
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libm.so.6
+   /lib/libpthread.so.0
+/tmp/checkelf-L2A7pe/usr/bin/cinnamon-control-center
+   /lib/libpthread.so.0
+/tmp/checkelf-L2A7pe/usr/lib/libcinnamon-control-center.so.1.0.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libnotify.so.4
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /lib/libm.so.6
+   /lib/libpthread.so.0
+/tmp/checkelf-L2A7pe/usr/lib/cinnamon-control-center-1/panels/libuniversal-access.so
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libnotify.so.4
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libm.so.6
+   /lib/libpthread.so.0
+/tmp/checkelf-L2A7pe/usr/bin/cinnamon-sound-applet
+   /lib/libpthread.so.0
+/tmp/checkelf-L2A7pe/usr/lib/cinnamon-control-center-1/panels/libdisplay.so
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libnotify.so.4
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libm.so.6
+   /lib/libpthread.so.0
+/tmp/checkelf-L2A7pe/usr/lib/cinnamon-control-center-1/panels/libsoundnua.so
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libnotify.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+/tmp/checkelf-L2A7pe/usr/lib/cinnamon-control-center-1/panels/libregion.so
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libm.so.6
+   /lib/libpthread.so.0
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+atk                            atk                                                          
+gtk3                           gtk3                                                         
+cairo                          cairo                                                        
+pango                          pango                                                        
+colord                         colord                                                       
+upower                         upower                                                       
+libnotify                      libnotify                                                    
+gdk-pixbuf                     fontconfig                                                   
+fontconfig                     gdk-pixbuf                                                   
+gnome-menus                    gnome-menus                                                  
+libxklavier                    libxklavier                                                  
+libgnomekbd                    libgnomekbd                                                  
+libcanberra                    libcanberra                                                  
+NetworkManager                 NetworkManager                                               
+pulseaudio-libs                pulseaudio-libs                                              
+cinnamon-desktop               libcanberra-gtk3                                             
+libcanberra-gtk3               cinnamon-desktop                                             
+network-manager-applet         network-manager-applet                                       
+cinnamon-settings-daemon                                                                    
+
+Package: cinnamon-control-center-devel
+--------------------------------------
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+cinnamon-control-center        gtk3-devel                     gtk3-devel                    
+
+Package: cinnamon-desktop
+-------------------------
+
+Unused direct dependency analysis
+---------------------------------
+/tmp/checkelf-MHJZPU/usr/lib/cinnamon-desktop/cinnamon-rr-debug
+   /lib/libpthread.so.0
+/tmp/checkelf-MHJZPU/usr/lib/libcinnamon-desktop.so.4.0.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+atk                            atk                                                          
+gtk3                           gtk3                                                         
+cairo                          cairo                                                        
+pango                          pango                                                        
+libXext                        libXext                                                      
+libXrandr                      libXrandr                                                    
+libxkbfile                     libxkbfile                                                   
+gdk-pixbuf                     gdk-pixbuf                                                   
+
+Package: cinnamon-desktop-devel
+-------------------------------
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+cinnamon-desktop               gtk3-devel                     gtk3-devel                    
+                               libxkbfile-devel               libxkbfile-devel              
+
+Package: cinnamon-settings-daemon
+---------------------------------
+
+Unused direct dependency analysis
+---------------------------------
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-printer
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-a11y-keyboard
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libpower.so
+   /lib/libpthread.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libscreensaver-proxy.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libgtk-3.so.0
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /usr/lib/libX11.so.6
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libsmartcard.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libgtk-3.so.0
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /usr/lib/libX11.so.6
+   /usr/lib/nss/libnssutil3.so
+   /usr/lib/nss/libsmime3.so
+   /usr/lib/nss/libssl3.so
+   /usr/lib/nss/libsoftokn3.so
+   /usr/lib/libplds4.so
+   /lib/libdl.so.2
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libxrandr.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-xsettings
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-mouse
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libmedia-keys.so
+   /lib/libpthread.so.0
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/liborientation.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-print-notifications
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libhousekeeping.so
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libX11.so.6
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-power
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/liba11y-settings.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libgtk-3.so.0
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /usr/lib/libX11.so.6
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libkeyboard.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libmouse.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/cinnamon-fallback-mount-helper
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-a11y-settings
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libsound.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libgtk-3.so.0
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /usr/lib/libX11.so.6
+   /usr/lib/libgudev-1.0.so.0
+   /usr/lib/libpulse-mainloop-glib.so.0
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-background
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libcolor.so
+   /lib/libpthread.so.0
+   /usr/lib/libgtk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libX11.so.6
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libxsettings.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-sound
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libbackground.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libgtk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-media-keys
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-locate-pointer
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libprint-notifications.so
+   /usr/lib/libgssapi_krb5.so.2
+   /usr/lib/libkrb5.so.3
+   /usr/lib/libk5crypto.so.3
+   /lib/libcom_err.so.2
+   /lib/libpthread.so.0
+   /lib/libm.so.6
+   /lib/libcrypt.so.1
+   /lib/libz.so.1
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libgtk-3.so.0
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /usr/lib/libX11.so.6
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libcursor.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/liba11y-keyboard.so
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon-3.0/libclipboard.so
+   /usr/lib/libnotify.so.4
+   /usr/lib/libcinnamon-desktop.so.4
+   /usr/lib/libgtk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-screensaver-proxy
+   /lib/libpthread.so.0
+/tmp/checkelf-Yq9FDD/usr/lib/cinnamon-settings-daemon/csd-test-input-helper
+   /lib/libpthread.so.0
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+nss                            nss                            libxklavier                   
+atk                            atk                                                          
+gtk3                           cups                                                         
+cups                           gtk3                                                         
+lcms2                          lcms2                                                        
+cairo                          cairo                                                        
+libXi                          libXi                                                        
+pango                          pango                                                        
+colord                         colord                                                       
+upower                         upower                                                       
+libXext                        libXext                                                      
+libnotify                      libnotify                                                    
+libXfixes                      libXfixes                                                    
+gdk-pixbuf                     fontconfig                                                   
+fontconfig                     gdk-pixbuf                                                   
+libcanberra                    libxklavier                                                  
+libgnomekbd                    libgnomekbd                                                  
+mit-kerberos                   libcanberra                                                  
+pulseaudio-libs                mit-kerberos                                                 
+cinnamon-desktop               pulseaudio-libs                                              
+libcanberra-gtk3               cinnamon-desktop                                             
+                               libcanberra-gtk3                                             
+
+Package: cinnamon-settings-daemon-devel
+---------------------------------------
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+cinnamon-settings-daemon                                                                    
+
+Package: cinnamon-translations
+------------------------------
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+nemo                                                                                        
+cinnamon-desktop                                                                            
+cinnamon-control-center                                                                     
+
+Package: cjs-internals
+----------------------
+
+Unused direct dependency analysis
+---------------------------------
+/tmp/checkelf-sGyW_p/usr/lib/cjs-1.0/gettextNative.so
+   /usr/lib/libgirepository-1.0.so.1
+   /usr/lib/libffi.so.6
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libgobject-2.0.so.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libpthread.so.0
+   /lib/libdl.so.2
+/tmp/checkelf-sGyW_p/usr/lib/cjs-1.0/system.so
+   /usr/lib/libgirepository-1.0.so.1
+   /usr/lib/libffi.so.6
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libgobject-2.0.so.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libpthread.so.0
+   /lib/libdl.so.2
+/tmp/checkelf-sGyW_p/usr/lib/cjs-1.0/langNative.so
+   /usr/lib/libgirepository-1.0.so.1
+   /usr/lib/libffi.so.6
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libgobject-2.0.so.0
+   /usr/lib/libglib-2.0.so.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libpthread.so.0
+   /lib/libdl.so.2
+/tmp/checkelf-sGyW_p/usr/lib/libcjs-dbus.so.0.0.0
+   /usr/lib/libgirepository-1.0.so.1
+   /usr/lib/libffi.so.6
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libmozjs185.so.1.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libpthread.so.0
+   /lib/libdl.so.2
+/tmp/checkelf-sGyW_p/usr/lib/cjs-1.0/debugger.so
+   /usr/lib/libgirepository-1.0.so.1
+   /usr/lib/libffi.so.6
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libgobject-2.0.so.0
+   /usr/lib/libglib-2.0.so.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libpthread.so.0
+   /lib/libdl.so.2
+/tmp/checkelf-sGyW_p/usr/lib/libcjs.so.0.0.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libdl.so.2
+   /usr/lib/libstdc++.so.6
+   /lib/libm.so.6
+   /usr/lib/libgcc_s.so.1
+/tmp/checkelf-sGyW_p/usr/bin/cjs-console
+   /lib/libpthread.so.0
+/tmp/checkelf-sGyW_p/usr/lib/cjs-1.0/mainloop.so
+   /usr/lib/libgirepository-1.0.so.1
+   /usr/lib/libffi.so.6
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libpthread.so.0
+   /lib/libdl.so.2
+/tmp/checkelf-sGyW_p/usr/lib/cjs-1.0/cairoNative.so
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libgirepository-1.0.so.1
+   /usr/lib/libffi.so.6
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libgobject-2.0.so.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libpthread.so.0
+   /lib/libdl.so.2
+/tmp/checkelf-sGyW_p/usr/lib/cjs-1.0/formatNative.so
+   /usr/lib/libgirepository-1.0.so.1
+   /usr/lib/libffi.so.6
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libgobject-2.0.so.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libpthread.so.0
+   /lib/libdl.so.2
+/tmp/checkelf-sGyW_p/usr/lib/cjs-1.0/dbusNative.so
+   /usr/lib/libgirepository-1.0.so.1
+   /usr/lib/libffi.so.6
+   /usr/lib/libdbus-glib-1.so.2
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libpthread.so.0
+   /lib/libdl.so.2
+/tmp/checkelf-sGyW_p/usr/lib/cjs-1.0/console.so
+   /usr/lib/libgirepository-1.0.so.1
+   /usr/lib/libffi.so.6
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libgthread-2.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libgobject-2.0.so.0
+   /usr/lib/libplds4.so
+   /usr/lib/libplc4.so
+   /usr/lib/libnspr4.so
+   /lib/libpthread.so.0
+   /lib/libdl.so.2
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+gnome-common                   cairo                          cairo                         
+                               gobject-introspection          gobject-introspection         
+
+Package: cjs-internals-devel
+----------------------------
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+cjs-internals                  js185-devel                    js185-devel                   
+
+Package: muffin
+---------------
+
+Unused direct dependency analysis
+---------------------------------
+/tmp/checkelf-ZcwESs/usr/lib/libmuffin.so.0.0.0
+   /usr/lib/libcogl-pango.so.12
+   /usr/lib/libjson-glib-1.0.so.0
+   /usr/lib/libXi.so.6
+   /usr/lib/libEGL.so.1
+   /usr/lib/libcairo-gobject.so.2
+/tmp/checkelf-ZcwESs/usr/bin/muffin
+   /lib/libpthread.so.0
+/tmp/checkelf-ZcwESs/usr/lib/muffin/plugins/default.so
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcogl-pango.so.12
+   /usr/lib/libcogl.so.12
+   /usr/lib/libgmodule-2.0.so.0
+   /usr/lib/libEGL.so.1
+   /usr/lib/libXrandr.so.2
+   /usr/lib/libjson-glib-1.0.so.0
+   /usr/lib/libgio-2.0.so.0
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libX11.so.6
+   /usr/lib/libXext.so.6
+   /usr/lib/libXdamage.so.1
+   /usr/lib/libXfixes.so.3
+   /usr/lib/libXcomposite.so.1
+   /usr/lib/libXi.so.6
+   /lib/libpthread.so.0
+/tmp/checkelf-ZcwESs/usr/bin/muffin-theme-viewer
+   /lib/libpthread.so.0
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+gtk3                           atk                            atk                           
+cogl                           mesa                           mesa                          
+cairo                          gtk3                           libXi                         
+gconf                          cogl                           libSM                         
+pango                          cairo                          libICE                        
+zenity                         libSM                          libXext                       
+clutter                        libXi                          libXrandr                     
+libXcursor                     pango                          json-glib                     
+libXxf86vm                     libICE                         libXfixes                     
+libcanberra-gtk3               clutter                        gdk-pixbuf                    
+startup-notification           libXext                        libXrender                    
+gsettings-desktop-schemas3     json-glib                      libXdamage                    
+gobject-introspection (devel)  libXrandr                      libcanberra                   
+                               libXfixes                      libXinerama                   
+                               libXrender                     libXcomposite                 
+                               libXcursor                     gobject-introspection         
+                               libXdamage                                                   
+                               gdk-pixbuf                                                   
+                               libXinerama                                                  
+                               libcanberra                                                  
+                               libXcomposite                                                
+                               libcanberra-gtk3                                             
+                               startup-notification                                         
+                               gobject-introspection                                        
+
+Package: muffin-devel
+---------------------
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+muffin                         gtk3-devel                     gtk3-devel                    
+                               clutter-devel                  clutter-devel                 
+                               gsettings-desktop-schemas3-devel gsettings-desktop-schemas3-devel
+
+Package: nemo
+-------------
+
+Unused direct dependency analysis
+---------------------------------
+/tmp/checkelf-25biwy/usr/lib/nemo/nemo-convert-metadata
+   /lib/libpthread.so.0
+/tmp/checkelf-25biwy/usr/lib/libnemo-extension.so.1.4.0
+   /usr/lib/libgdk-3.so.0
+   /usr/lib/libpangocairo-1.0.so.0
+   /usr/lib/libpango-1.0.so.0
+   /usr/lib/libatk-1.0.so.0
+   /usr/lib/libcairo-gobject.so.2
+   /usr/lib/libcairo.so.2
+   /usr/lib/libgdk_pixbuf-2.0.so.0
+   /lib/libm.so.6
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+atk                            atk                            libnotify                     
+gtk3                           gtk3                                                         
+cairo                          cairo                                                        
+pango                          pango                                                        
+exempi                         exempi                                                       
+libexif                        libexif                                                      
+gdk-pixbuf                     libnotify                                                    
+gnome-common                   gdk-pixbuf                                                   
+cinnamon-desktop               cinnamon-desktop                                             
+
+Package: nemo-devel
+-------------------
+
+Written dependencies           Detected dependencies          Missing dependencies
+----------------------------------------------------------------------------------
+nemo                           gtk3-devel                     gtk3-devel 

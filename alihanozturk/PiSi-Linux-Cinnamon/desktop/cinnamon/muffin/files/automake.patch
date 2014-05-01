@@ -1,0 +1,20 @@
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -1,5 +1,6 @@
+ # Flag build for parallelism; see https://savannah.gnu.org/patch/?6905
+ .AUTOPARALLEL:
++AUTOMAKE_OPTIONS = subdir-objects
+ 
+ lib_LTLIBRARIES = libmuffin.la
+ 
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,8 @@
+ 
+ SUBDIRS=src po doc
+ 
++ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
++
+ EXTRA_DIST = HACKING MAINTAINERS rationales.txt
+ 
+ DISTCLEANFILES = intltool-extract intltool-merge intltool-update po/stamp-it po/.intltool-merge-cache

@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cinnamon-desktop</Name>
+        <Homepage>http://cinnamon.linuxmint.com/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>The cinnamon-desktop package contains an internal library (libcinnamondesktop) used to implement some portions of the CINNAMON desktop</Summary>
+        <Description>The cinnamon-desktop package contains an internal library (libcinnamondesktop) used to implement some portions of the CINNAMON desktop, and also some data files and other shared components of the CINNAMON user environment.</Description>
+        <Archive sha1sum="76108c4eed1d1ebbb3184cbe15fdc36dc8cd7c4c" type="targz">http://leigh123linux.fedorapeople.org/pub/cinnamon-desktop/source/cinnamon-desktop-2.0.4.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>            
+            <Dependency>libxkbfile-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>libgnomekbd-devel</Dependency>
+            <Dependency>libxkbcommon-devel</Dependency>
+            <Dependency>gsettings-desktop-schemas-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cinnamon-desktop</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>libXrandr</Dependency>            
+            <Dependency>libxkbfile</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gnome-themes-standard</Dependency>
+            <Dependency>cinnamon-menus</Dependency>
+            <Dependency>gnome-backgrounds</Dependency>
+            <Dependency>libgnomekbd</Dependency>
+            <Dependency>libxkbcommon</Dependency>
+            <Dependency>gsettings-desktop-schemas</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>cinnamon-desktop-devel</Name>
+        <Summary>cinnamon-desktop için geliştirm dosyaları</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">cinnamon-desktop</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libxkbfile-devel</Dependency>
+            <Dependency>startup-notification-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="header">/usr/include/cinnamon-desktop/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2014-04-11</Date>
+            <Version>2.0.4</Version>
+            <Comment>Some fix and rebuild</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-12-12</Date>
+            <Version>2.0.4</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
