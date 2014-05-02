@@ -19,7 +19,6 @@ def setup():
                          --disable-tslib \
                          --disable-physics \
                          --enable-xine \
-                         --enable-i-really-know-what-i-am-doing-and-that-this-will-probably-break-things-and-i-will-fix-them-myself-and-send-patches-aaa \
                          --enable-fb \
                          --enable-doc \
                          --enable-xinput22 \
