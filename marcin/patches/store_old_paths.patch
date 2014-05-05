@@ -1,6 +1,6 @@
 diff -aur pisi~/atomicoperations.py pisi/atomicoperations.py
 --- pisi~/atomicoperations.py	2011-05-26 19:17:29.000000000 +0200
-+++ pisi/atomicoperations.py	2014-04-27 15:10:35.663249143 +0200
++++ pisi/atomicoperations.py	2014-05-05 20:26:29.443251098 +0200
 @@ -137,6 +137,7 @@
          self.filesdb = pisi.db.filesdb.FilesDB()
          self.installdb = pisi.db.installdb.InstallDB()
@@ -16,7 +16,7 @@ diff -aur pisi~/atomicoperations.py pisi/atomicoperations.py
 +                if ctx.get_option('store_lib_info') and pkg_version > iversion:
 +                    self.store_old_paths = os.path.join(ctx.config.old_paths_cache_dir(), pkg.name)
 +                    ctx.ui.info(_('Storing old paths info'))
-+                    open(self.store_old_paths, "w").write("Version: %s\n" % pkg.version)
++                    open(self.store_old_paths, "w").write("Version: %s\n" % iversion_s)
  
                  pkg_release = int(pkg.release)
                  irelease = int(irelease_s)
