@@ -9,6 +9,8 @@ from pisi.actionsapi import get
 
 def setup():
     autotools.configure()
+    
+    pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 
 def build():
     autotools.make()
@@ -16,4 +18,4 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.dodoc("AUTHORS", "BUGS", "ChangeLog", "COPYING", "README")
+    #pisitools.dodoc("AUTHORS", "BUGS", "ChangeLog", "COPYING", "README")

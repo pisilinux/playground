@@ -29,18 +29,22 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
-            <Path fileType="doc">/usr/share/doc/libodfgen</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
         </Files>
     </Package>
     
     <Package>
         <Name>libodfgen-devel</Name>
+        <Summary>Development files for libodfgen</Summary>
         <RuntimeDependencies>
-            <Dependency version="current">libodfgen</Dependency>
+            <Dependency>libodfgen</Dependency>
+            <Dependency>libwpd-devel</Dependency>
+            <Dependency>libwpg-devel</Dependency>
+            <Dependency>libetonyek-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
-            <Path fileType="header">/usr/include/libodfgen</Path>
+            <Path fileType="header">/usr/include</Path>
         </Files>
     </Package>
     
