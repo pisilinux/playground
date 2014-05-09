@@ -1,0 +1,1012 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>calligra</Name>
+        <Homepage>http://www.calligra-suite.org</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>LGPL</License>
+        <License>FDL1.2</License>
+        <IsA>app:gui</IsA>
+        <Summary>An integrated office suite for KDE</Summary>
+        <Description>Calligra is a free, integrated office suite for KDE. The application suite consists of a word-processor, a spreadsheet application, a presentation creator and viewer application, an organizer and more.</Description>
+        <Archive sha1sum="32ed745898eb9bf5b99d76bd2bea4dbdc0522dcb" type="tarxz">mirrors://kde/stable/calligra-2.7.5/calligra-2.7.5.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>doxygen</Dependency>
+            <Dependency>eigen</Dependency>
+            <Dependency>exiv2-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>glew-devel</Dependency>
+            <Dependency>freeglut</Dependency>
+            <Dependency>freeglut-devel</Dependency>
+            <Dependency>gmm</Dependency>
+            <Dependency>GraphicsMagick-devel</Dependency>
+            <Dependency>gsl-devel</Dependency>
+            <Dependency>attica-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+            <Dependency>kdepimlibs-devel</Dependency>
+            <Dependency>libwpd-devel</Dependency>
+            <Dependency>libwpg-devel</Dependency>
+            <Dependency>libwps-devel</Dependency>
+            <Dependency>phonon-devel</Dependency>
+            <Dependency>openexr-devel</Dependency>
+            <Dependency>poppler-qt-devel</Dependency>
+            <Dependency>qca2-devel</Dependency>
+            <Dependency>qimageblitz-devel</Dependency>
+            <Dependency>libpqxx-devel</Dependency>
+            <Dependency>mariadb-lib</Dependency>
+            <Dependency>giflib-devel</Dependency>
+            <Dependency>fftw3-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>lcms-devel</Dependency>
+            <Dependency>soprano-devel</Dependency>
+            <Dependency>pstoedit</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>openjpeg-devel</Dependency>
+            <Dependency>tiff-devel</Dependency>
+            <Dependency>libgsf-devel</Dependency>
+            <Dependency>ilmbase-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>mesa-glu-devel</Dependency>
+            <Dependency>shared-mime-info</Dependency>
+            <Dependency>dcmtk-devel</Dependency>
+            <Dependency>icu4c-devel</Dependency>
+            <Dependency>lcms2-devel</Dependency>
+            <Dependency>libvisio-devel</Dependency>
+            <Dependency>OpenGTL-devel</Dependency>
+            <Dependency>qimageblitz-devel</Dependency>
+            <Dependency>okular-devel</Dependency>
+            <Dependency>opencolorio-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>calligra-devel</Name>
+        <IsA>library</IsA>
+        <Summary>calligra için geliştirme dosyaları</Summary>
+        <Files>
+            <Path fileType="header">/usr/include/</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-braindump</Name>
+        <Icon>braindump</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Notes and idea gathering</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>qt-webkit</Dependency>
+            <Dependency version="current">calligra-libs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/braindump</Path>
+            <Path fileType="library">/usr/lib/kde4/stateshape.so</Path>
+            <Path fileType="library">/usr/lib/kde4/webshape.so*</Path>
+            <Path fileType="library">/usr/lib/libbraindumpcore.so*</Path>
+            <Path fileType="data">/usr/share/applications/kde4/braindump.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/apps/braindump/braindumpui.rc</Path>
+            <Path fileType="data">/usr/share/kde4/apps/braindump/braindumpview.rc</Path>
+            <Path fileType="data">/usr/share/kde4/apps/braindump/icons/hicolor/22x22/actions/zoom-pixels.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/stateshape/states/</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/braindump.png</Path>            
+            <Path fileType="data">/usr/share/icons/hicolor/22x22/actions/stateshape.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/22x22/actions/statetool.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/scalable/apps/braindump.svgz</Path>
+            <Path fileType="data">/usr/share/kde4/services/stateshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/webshape.desktop</Path>
+            <Path fileType="data">/usr/share/applications/kde4/calligra.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/braindump_extensions.desktop</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-filters</Name>
+        <Icon>filters</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Filters for the Calligra office suite</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>qca2</Dependency>
+            <Dependency>libwpg</Dependency>
+            <Dependency>libwpd</Dependency>
+            <Dependency>libwps</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency version="current">calligra-libs</Dependency>
+            <Dependency version="current">calligra-words</Dependency>
+            <Dependency version="current">calligra-karbon</Dependency>
+            <Dependency version="current">calligra-sheets</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/kde4/Filterkpr2odf.so</Path>
+            <Path fileType="library">/usr/lib/kde4/applixspreadimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/applixwordimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/asciiimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/csvexport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/csvimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/dbaseimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/docximport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/excelimporttodoc.so</Path>
+            <Path fileType="library">/usr/lib/kde4/exportMobi.so</Path>
+            <Path fileType="library">/usr/lib/kde4/exportepub2.so</Path>
+            <Path fileType="library">/usr/lib/kde4/exporthtml.so</Path>
+            <Path fileType="library">/usr/lib/kde4/gnumericexport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/gnumericimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadhtmlexport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadhtmlimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadlatexexport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/mswordodf_import.so</Path>
+            <Path fileType="library">/usr/lib/kde4/opencalcexport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/opencalcimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/powerpointimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/pptximport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/qproimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/rtfimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/wmfexport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/wmfimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/wpdimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/wpgimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/wpsimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/xlsximport.so</Path>
+            <Path fileType="library">/usr/lib/libRtfReader.so*</Path>
+            <Path fileType="library">/usr/lib/libkowv2.so*</Path>
+            <Path fileType="library">/usr/lib/libmsooxml.so*</Path>
+            <Path fileType="data">/usr/share/kde4/services/Filterkpr2odf.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/karbon_*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kpresenter_powerpoint_import.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kpresenter_pptx_import.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/sheets_excel_thumbnail.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/sheets_xlsx_thumbnail.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/stage_*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/words_*.desktop</Path>
+            <Path fileType="data">/usr/share/mime/packages/msooxml-all.xml</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-flow</Name>
+        <Icon>flow</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Flowchart and Diagram Editing</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>libwpd</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>libvisio</Dependency>
+            <Dependency version="current">calligra-libs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/calligraflow</Path>
+	    <Path fileType="library">/usr/lib/kde4/vsdximport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/flowdockersplugin.so</Path>
+            <Path fileType="library">/usr/lib/kde4/flowpart.so</Path>
+            <Path fileType="library">/usr/lib/libflowprivate.so*</Path>
+            <Path fileType="library">/usr/lib/libkdeinit4_calligraflow.so</Path>
+            <Path fileType="data">/usr/share/applications/kde4/flow.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/apps/flow/</Path>
+            <Path fileType="data">/usr/share/kde4/config/flow_stencils.knsrc</Path>
+            <Path fileType="data">/usr/share/kde4/config/flowrc</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligraflow.*</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/scalable/apps/calligraflow.svgz</Path>
+            <Path fileType="data">/usr/share/kde4/services/flowdockersplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/flowpart.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/flow_dock.desktop</Path>	    
+            <Path fileType="data">/usr/share/kde4/services/flow_vsdx_thumbnail.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/flow_vsdx_import.desktop</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-handbook</Name>
+        <Icon>handbook</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Documentation for Calligra</Summary>
+        <Files>
+	    <Path fileType="doc">/usr/share/doc/</Path>
+	    <Path fileType="doc">/usr/share/doc/kde4/html/en/calligra/common</Path>
+	    <Path fileType="doc">/usr/share/doc/kde4/html/en/calligra/index.cache.bz2</Path>
+	    <Path fileType="doc">/usr/share/doc/kde4/html/en/calligra/index.docbook</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>calligra-karbon</Name>
+        <Icon>karbon</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Create scalable vector drawings</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>poppler</Dependency>
+            <Dependency version="current">calligra-libs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/karbon</Path>
+            <Path fileType="library">/usr/lib/kde4/karbon*.so</Path>
+            <Path fileType="library">/usr/lib/libkarbon*.so*</Path>
+            <Path fileType="library">/usr/lib/libkdeinit4_karbon.so</Path>
+            <Path fileType="data">/usr/share/applications/kde4/karbon.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/palettes/</Path>
+            <Path fileType="data">/usr/share/kde4/apps/cmake/modules/FindCalligraLibs.cmake</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/calligraphy.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/gradient.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/pattern.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/tool_imageeffects.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/karbon/</Path>
+            <Path fileType="data">/usr/share/kde4/config/karbonrc</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligrakarbon.*</Path>
+            <Path fileType="data">/usr/share/kde4/services/karbonfiltereffects.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/karbonpart.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/karbontools.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/karbon_module.desktop</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-kexi</Name>
+        <Icon>kexi</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Develop desktop database applications</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>icu4c</Dependency>
+            <Dependency>marble</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>mariadb-lib</Dependency>
+            <Dependency>qt-webkit</Dependency>
+            <Dependency version="current">calligra-libs</Dependency>
+            <Dependency version="current">calligra-sheets</Dependency>
+            <Dependency>marble</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/kexi</Path>
+            <Path fileType="executable">/usr/bin/kexi_sqlite3_dump</Path>
+            <Path fileType="library">/usr/lib/kde4/kexi*.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kformdesigner*.so</Path>
+            <Path fileType="library">/usr/lib/kde4/krossmodulekexidb.so</Path>
+            <Path fileType="library">/usr/lib/libkexi*.so*</Path>
+            <Path fileType="library">/usr/lib/libkformdesigner.so*</Path>
+            <Path fileType="data">/usr/share/applications/kde4/kexi.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/apps/kexi/</Path>
+            <Path fileType="data">/usr/share/kde4/config/kexirc</Path>
+            <Path fileType="doc">/usr/share/doc/kde4/html/en/kexi/</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligrakexi.*</Path>
+            <Path fileType="data">/usr/share/kde4/services/kexi/*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kformdesigner/kformdesigner*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/kexihandler.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/keximigration_driver.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/widgetfactory.desktop</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-krita</Name>
+        <Icon>krita</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Edit and paint images</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>glew</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>lcms2</Dependency>
+            <Dependency>fftw3</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>ilmbase</Dependency>
+            <Dependency>openjpeg</Dependency>
+            <Dependency>mesa-glu</Dependency>
+            <Dependency>libkdcraw</Dependency>
+            <Dependency>exiv2-libs</Dependency>
+            <Dependency>poppler-qt</Dependency>
+            <Dependency>opencolorio</Dependency>
+            <Dependency>openexr-libs</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency version="current">calligra-libs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/krita</Path>
+            <Path fileType="library">/usr/lib/kde4/krita*.so</Path>
+            <Path fileType="data">/usr/share/kde4/apps/color-schemes</Path>
+            <Path fileType="library">/usr/lib/libkdeinit4_krita.so</Path>
+            <Path fileType="library">/usr/lib/libkrita*.so*</Path>
+            <Path fileType="data">/usr/share/applications/kde4/krita*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/128x128/actions/template_DIN_A3_landscape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/128x128/actions/template_DIN_A4_portrait.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/128x128/actions/template_ratio_1610.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/128x128/actions/template_ratio_2391.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/128x128/actions/template_ratio_43.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/krita/</Path>
+            <Path fileType="data">/usr/share/kde4/apps/kritaplugins/</Path>
+            <Path fileType="data">/usr/share/color/icc/krita/README</Path>
+            <Path fileType="data">/usr/share/color/icc/krita/WideGamut.icm</Path>
+            <Path fileType="data">/usr/share/color/icc/krita/krita25_lcms-builtin-sRGB_g100-truegamma.icc</Path>
+            <Path fileType="data">/usr/share/color/icc/krita/lcmslabi.icm</Path>
+            <Path fileType="data">/usr/share/color/icc/krita/lcmsxyzi.icm</Path>
+            <Path fileType="data">/usr/share/color/icc/krita/sRGB.icm</Path>
+            <Path fileType="data">/usr/share/color/icc/krita/scRGB.icm</Path>
+            <Path fileType="data">/usr/share/kde4/config/kritabrushes.knsrc</Path>
+            <Path fileType="data">/usr/share/kde4/config/kritagradients.knsrc</Path>
+            <Path fileType="data">/usr/share/kde4/config/kritaiccprofiles.knsrc</Path>
+            <Path fileType="data">/usr/share/kde4/config/kritapatterns.knsrc</Path>
+            <Path fileType="data">/usr/share/kde4/config/kritapresets.knsrc</Path>
+            <Path fileType="data">/usr/share/kde4/config/kritarc</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligrakrita*</Path>
+            <Path fileType="data">/usr/share/mime/packages/krita.xml</Path>
+            <Path fileType="data">/usr/share/kde4/services/krita*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/krita*.desktop</Path>
+            <Path fileType="data">/usr/share/mime/packages/krita_ora.xml</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>calligra-libs</Name>
+        <IsA>library</IsA>
+        <Summary>calligra runtime libraries</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>qca2</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>soprano</Dependency>
+            <Dependency>ilmbase</Dependency>
+            <Dependency>libspnav</Dependency>
+            <Dependency>kdepimlibs</Dependency>
+            <Dependency>kactivities</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/kde4/kodocinfopropspage.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kopabackgroundtool.so</Path>
+            <Path fileType="library">/usr/lib/libcalligradb.so*</Path>
+            <Path fileType="library">/usr/lib/libkowidgetutils.so*</Path>
+            <Path fileType="library">/usr/lib/libkordf.so*</Path>
+            <Path fileType="library">/usr/lib/libcalligrakdchart.so*</Path>
+            <Path fileType="library">/usr/lib/libbasicflakes.so*</Path>
+            <Path fileType="library">/usr/lib/libodftraverse.so*</Path>
+            <Path fileType="library">/usr/lib/kde4/basicflakesplugin.so</Path>
+            <Path fileType="library">/usr/lib/kde4/spacenavigator.so</Path>
+            <Path fileType="library">/usr/share/kde4/services/spacenavigator.desktop</Path>
+            <Path fileType="library">/usr/lib/libflake.so*</Path>
+            <Path fileType="library">/usr/lib/libkochart.so*</Path>
+            <Path fileType="library">/usr/lib/libkokross.so*</Path>
+            <Path fileType="library">/usr/lib/libkomain.so*</Path>
+            <Path fileType="library">/usr/lib/libkoodf.so*</Path>
+            <Path fileType="library">/usr/lib/libkopageapp.so*</Path>
+            <Path fileType="library">/usr/lib/libkoplugin.so*</Path>
+            <Path fileType="library">/usr/lib/libkoproperty.so*</Path>
+            <Path fileType="library">/usr/lib/libkoreport.so*</Path>
+            <Path fileType="library">/usr/lib/libkotext.so*</Path>
+            <Path fileType="library">/usr/lib/libkowidgets.so*</Path>
+            <Path fileType="library">/usr/lib/libkundo2.so*</Path>
+            <Path fileType="library">/usr/lib/libpigmentcms.so*</Path>
+            <Path fileType="library">/usr/lib/libcalligrakdgantt.so*</Path>
+            <Path fileType="library">/usr/lib/libtextlayout.so*</Path>
+            <Path fileType="library">/usr/lib/libvectorimage.so*</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/calligra_shell.rc</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/styles/markers.xml</Path>
+            <Path fileType="data">/usr/share/kde4/apps/koproperty/icons/hicolor/16x16/actions/button_no.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/curve-connector.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/lines-connector.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-align-horizontal-center-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-align-horizontal-left-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-align-horizontal-right-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-align-vertical-bottom-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-align-vertical-bottom-top-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-align-vertical-center-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-align-vertical-top-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-group-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-order-back-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-order-front-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-order-lower-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-order-raise-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/object-ungroup-calligra.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/standard-connector.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/straight-connector.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/16x16/actions/table.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/22x22/actions/table.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/32x32/actions/insert-endnote.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/32x32/actions/insert-footnote.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/32x32/actions/shape-choose.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/32x32/actions/table.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/32x32/actions/x-shape-connection.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/32x32/actions/x-shape-formula.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/32x32/actions/x-shape-image.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/32x32/actions/x-shape-text.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/48x48/actions/table.png</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/scalable/actions/table.svgz</Path>
+            <Path fileType="data">/usr/share/kde4/services/basicflakesplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kexi*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kodocinfopropspage.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kopabackgroundtool.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/calligra*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/filtereffect.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/flake.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/flakedevice.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/flakeshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/flaketool.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/inlinetextobject.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/kochart.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/kofilter.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/kofilterwrapper.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/koplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/koreport_itemplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/pigment.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/pigmentextension.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/presentationeventaction.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/scripteventaction.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/texteditingplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/textvariableplugin.desktop</Path>
+            <Path fileType="data">/usr/share/templates/.source/Illustration.odg</Path>
+            <Path fileType="data">/usr/share/templates/.source/Presentation.odp</Path>
+            <Path fileType="data">/usr/share/templates/.source/SpreadSheet.ods</Path>
+            <Path fileType="data">/usr/share/templates/.source/TextDocument.odt</Path>
+            <Path fileType="data">/usr/share/templates/Illustration.desktop</Path>
+            <Path fileType="data">/usr/share/templates/Presentation.desktop</Path>
+            <Path fileType="data">/usr/share/templates/SpreadSheet.desktop</Path>
+            <Path fileType="data">/usr/share/templates/TextDocument.desktop</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-plan</Name>
+        <Icon>plan</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Calligra Project Management Component</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>kdepimlibs</Dependency>
+            <Dependency version="current">calligra-libs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/calligraplan</Path>
+            <Path fileType="executable">/usr/bin/calligraplanwork</Path>
+            <Path fileType="library">/usr/lib/kde4/kplatorcpsscheduler.so</Path>
+            <Path fileType="library">/usr/lib/kde4/krossmoduleplan.so</Path>
+            <Path fileType="library">/usr/lib/kde4/planicalexport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/plankplatoimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/planpart.so</Path>
+            <Path fileType="library">/usr/lib/kde4/plantjscheduler.so</Path>
+            <Path fileType="library">/usr/lib/kde4/planworkpart.so</Path>
+            <Path fileType="library">/usr/lib/libkdeinit4_calligraplan.so</Path>
+            <Path fileType="library">/usr/lib/libkdeinit4_calligraplanwork.so</Path>
+            <Path fileType="library">/usr/lib/libkdgantt.so*</Path>
+            <Path fileType="library">/usr/lib/libkplatokernel.so*</Path>
+            <Path fileType="library">/usr/lib/libkplatomodels.so*</Path>
+            <Path fileType="library">/usr/lib/libkplatoui.so*</Path>
+            <Path fileType="library">/usr/lib/libplanprivate.so*</Path>
+            <Path fileType="library">/usr/lib/libplanworkapp.so*</Path>
+            <Path fileType="library">/usr/lib/libplanworkfactory.so*</Path>
+            <Path fileType="library">/usr/lib/librcps_plan.so*</Path>
+            <Path fileType="library">/usr/lib/kde4/planmpxjimport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/planconvert/PlanConvert.jar</Path>
+            <Path fileType="data">/usr/share/applications/kde4/plan.desktop</Path>
+            <Path fileType="data">/usr/share/applications/kde4/planwork.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/apps/plan/</Path>
+            <Path fileType="data">/usr/share/kde4/apps/planwork/icons/hicolor/*/actions/template_empty*</Path>
+            <Path fileType="data">/usr/share/kde4/apps/planwork/planwork.rc</Path>
+            <Path fileType="data">/usr/share/kde4/apps/planwork/planwork_mainwindow.rc</Path>
+            <Path fileType="data">/usr/share/kde4/apps/planwork/planwork_readonly.rc</Path>
+            <Path fileType="data">/usr/share/kde4/apps/planwork/templates/Simple/.directory</Path>
+            <Path fileType="data">/usr/share/kde4/apps/planwork/templates/Simple/.source/Empty.planworkt</Path>
+            <Path fileType="data">/usr/share/kde4/apps/planwork/templates/Simple/Empty.desktop</Path>
+            <Path fileType="data">/usr/share/config.kcfg/plansettings.kcfg</Path>
+            <Path fileType="data">/usr/share/config.kcfg/planworksettings.kcfg</Path>
+            <Path fileType="data">/usr/share/kde4/config/planrc</Path>
+            <Path fileType="data">/usr/share/kde4/config/planworkrc</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligraplan.*</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligraplanwork.*</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/mimetypes/application-x-vnd.kde.*</Path>
+            <Path fileType="data">/usr/share/mime/packages/calligra_planner_mpp.xml</Path>
+            <Path fileType="data">/usr/share/kde4/services/krossmoduleplan.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/plan*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/plan_schedulerplugin.desktop</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-plugins</Name>
+        <Icon>tools</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Plugins for the Calligra office suite</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>lcms2</Dependency>
+            <Dependency>phonon</Dependency>
+            <Dependency>marble</Dependency>
+            <Dependency>ilmbase</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>qt-webkit</Dependency>
+            <Dependency version="current">calligra-libs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/kde4/artistictextshape.so</Path>
+            <Path fileType="library">/usr/lib/kde4/autocorrect.so</Path>
+            <Path fileType="library">/usr/lib/kde4/calligradockers.so</Path>
+            <Path fileType="library">/usr/lib/kde4/calligragoogledocs.so</Path>
+            <Path fileType="library">/usr/lib/kde4/changecase.so</Path>
+            <Path fileType="library">/usr/lib/kde4/chartshape.so</Path>
+            <Path fileType="library">/usr/lib/kde4/defaulttools.so</Path>
+            <Path fileType="library">/usr/lib/kde4/formulashape.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kolcmsengine.so</Path>
+            <Path fileType="library">/usr/lib/kde4/koreport_barcodeplugin.so</Path>
+            <Path fileType="library">/usr/lib/kde4/koreport_chartplugin.so</Path>
+            <Path fileType="library">/usr/lib/kde4/koreport_mapsplugin.so</Path>
+            <Path fileType="library">/usr/lib/kde4/koreport_webplugin.so</Path>
+            <Path fileType="library">/usr/lib/kde4/musicshape.so</Path>
+            <Path fileType="library">/usr/lib/kde4/pathshapes.so</Path>
+            <Path fileType="library">/usr/lib/kde4/pictureshape.so</Path>
+            <Path fileType="library">/usr/lib/kde4/pluginshape.so</Path>
+            <Path fileType="library">/usr/lib/kde4/spellcheck.so</Path>
+            <Path fileType="library">/usr/lib/kde4/textshape.so</Path>
+            <Path fileType="library">/usr/lib/kde4/textvariables.so</Path>
+            <Path fileType="library">/usr/lib/kde4/thesaurustool.so</Path>
+            <Path fileType="library">/usr/lib/kde4/threedshape.so</Path>
+            <Path fileType="library">/usr/lib/kde4/vectorshape.so</Path>
+            <Path fileType="library">/usr/lib/kde4/videoshape.so</Path>
+            <Path fileType="library">/usr/lib/libchartshapelib.so*</Path>
+            <Path fileType="library">/usr/lib/libkdchart.so*</Path>
+            <Path fileType="library">/usr/lib/libkformulalib.so*</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/autocorrect/autocorrect.xml</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/autocorrect/en_US.xml</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/cursor_connect.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/cursor_rotate.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/cursor_shear.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/abs.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/bevelled.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/brackets.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/cap_butt.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/cap_round.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/cap_square.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/enclosed.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/escape-direction-all.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/escape-direction-down.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/escape-direction-horizontal.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/escape-direction-left.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/escape-direction-right.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/escape-direction-up.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/escape-direction-vertical.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/frac.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/gsub.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/gsubup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/gsup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/int.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/join_bevel.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/join_miter.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/join_round.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/lsub.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/lsup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/matrix.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/multiline.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/onetwomatrix.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/over.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/paren.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/prod.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/report_barcode_element.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/report_map_element.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/report_web_element.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/root.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/rsub.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/rsubup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/rsup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/sqrt.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/sum.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/under.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/16x16/actions/vector.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/abs.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/bevelled.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/brackets.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/enclosed.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/formulashape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/frac.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/gsub.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/gsubup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/gsup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/inscol.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/insrow.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/int.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/lsub.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/lsup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/matrix.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/multiline.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-cross.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-dottednote.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-doublecross.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-doubleflat.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-flat.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-natural.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-note-128th.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-note-16th.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-note-32nd.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-note-64th.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-note-breve.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-note-eighth.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-note-half.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-note-quarter.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-note-whole.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-rest-128th.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-rest-16th.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-rest-32nd.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-rest-64th.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-rest-breve.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-rest-eighth.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-rest-half.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-rest-quarter.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-rest-whole.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/music-tiednote.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/onetwomatrix.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/over.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/paren.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/prod.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/remcol.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/remrow.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/report_barcode_element.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/report_map_element.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/report_web_element.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/root.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/rsub.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/rsubup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/rsup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/sqrt.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/sum.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/tool-text.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/tool_references.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/under.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/22x22/actions/vector.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/abs.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/bevelled.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/brackets.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/enclosed.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/frac.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/gsub.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/gsubup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/gsup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/int.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/lsub.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/lsup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/matrix.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/multiline.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/onetwomatrix.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/over.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/paren.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/prod.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/report_barcode_element.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/root.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/rsub.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/rsubup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/rsup.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/sqrt.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/sum.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/under.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/32x32/actions/vector.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/callout-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/circular-arrow-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/cross-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/divine-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/edit-table-cell-merge.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/edit-table-cell-split.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/ellipse-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/flower-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/gearhead-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/hexagon-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/pentagon-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/polygon-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/rectangle-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/smiley-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/spiral-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/22x22/actions/star-shape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/thesaurus/thesaurus.txt</Path>
+            <Path fileType="data">/usr/share/kde4/apps/formulashape/fonts/Arev.ttf</Path>
+            <Path fileType="data">/usr/share/kde4/apps/formulashape/fonts/ArevBI.ttf</Path>
+            <Path fileType="data">/usr/share/kde4/apps/formulashape/fonts/ArevBd.ttf</Path>
+            <Path fileType="data">/usr/share/kde4/apps/formulashape/fonts/ArevIt.ttf</Path>
+            <Path fileType="data">/usr/share/kde4/apps/formulashape/fonts/cmex10.ttf</Path>
+            <Path fileType="data">/usr/share/kde4/apps/musicshape/fonts/Emmentaler-14.ttf</Path>
+            <Path fileType="data">/usr/share/kde4/apps/sheets/kpartplugins/googledocs-sheets.rc</Path>
+            <Path fileType="data">/usr/share/kde4/apps/stage/kpartplugins/googledocs-stage.rc</Path>
+            <Path fileType="data">/usr/share/kde4/apps/words/kpartplugins/googledocs-words.rc</Path>
+            <Path fileType="data">/usr/share/color/icc/pigment/CMY.icm</Path>
+            <Path fileType="data">/usr/share/color/icc/pigment/fogra27l.icm</Path>
+            <Path fileType="data">/usr/share/kde4/services/artistictextshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/autocorrect.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/calligradockers.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/changecase.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/chartshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/defaulttools.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/formulashape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kchartpart.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kformulapart.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kolcmsengine.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/koreport_barcodeplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/koreport_chartplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/koreport_mapsplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/koreport_webplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/musicshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/pathshapes.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/pictureshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/pluginshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/spellcheck.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/textshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/textvariables.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/thesaurustool.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/threedshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/vectorshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/videoshape.desktop</Path>
+            <Path fileType="data">/usr/share/mime/packages/calligra_svm.xml</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-sheets</Name>
+        <Icon>shhets</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Write spreadsheet documents</Summary>
+        <RuntimeDependencies>
+            <Dependency version="current">calligra-libs</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>gsl</Dependency>
+            <Dependency>kdelibs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/calligrasheets</Path>
+            <Path fileType="library">/usr/lib/kde4/calligrasheetspart.so</Path>
+            <Path fileType="library">/usr/lib/kde4/krossmodulesheets.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspread_plugin_tool_calendar.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadbitopsmodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadconversionmodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreaddatabasemodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreaddatetimemodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadengineeringmodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadfinancialmodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadinformationmodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadlogicmodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadmathmodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadreferencemodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadstatisticalmodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadtextmodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kspreadtrigonometrymodule.so</Path>
+            <Path fileType="library">/usr/lib/kde4/sheetssolver.so</Path>
+            <Path fileType="library">/usr/lib/kde4/spreadsheetshape-deferred.so</Path>
+            <Path fileType="library">/usr/lib/kde4/spreadsheetshape.so</Path>
+            <Path fileType="library">/usr/lib/libcalligrasheetscommon.so*</Path>
+            <Path fileType="library">/usr/lib/libcalligrasheetsodf.so*</Path>
+            <Path fileType="library">/usr/lib/libkdeinit4_calligrasheets.so</Path>
+            <Path fileType="data">/usr/share/applications/kde4/sheets.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/hicolor/*/actions/spreadsheetshape.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/sheets/</Path>
+            <Path fileType="data">/usr/share/config.kcfg/sheets.kcfg</Path>
+            <Path fileType="data">/usr/share/kde4/config/sheetsrc</Path>
+            <Path fileType="doc">/usr/share/doc/kde4/html/en/sheets/</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligrasheets.*</Path>
+            <Path fileType="data">/usr/share/kde4/services/krossmodulesheets.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kspread_plugin_tool_calendar.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kspread*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/sheetspart.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/spreadsheetshape-deferred.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/spreadsheetshape.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/sheets_plugin.desktop</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-stage</Name>
+        <Icon>stage</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Write presentation documents</Summary>
+        <RuntimeDependencies>
+            <Dependency version="current">calligra-libs</Dependency>
+            <Dependency>qt-webkit</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>phonon</Dependency>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/calligrastage</Path>
+            <Path fileType="library">/usr/lib/kde4/calligrastageeventactions.so</Path>
+            <Path fileType="library">/usr/lib/kde4/calligrastagepart.so</Path>
+            <Path fileType="library">/usr/lib/kde4/calligrastagetoolanimation.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kpr_pageeffect*.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kpr_shapeanimation_example.so</Path>
+            <Path fileType="library">/usr/lib/kde4/kprvariables.so</Path>
+            <Path fileType="library">/usr/lib/libcalligrastageprivate.so*</Path>
+            <Path fileType="library">/usr/lib/libkdeinit4_calligrastage.so</Path>
+            <Path fileType="data">/usr/share/applications/kde4/stage.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/apps/calligra/icons/oxygen/16x16/actions/animation-stage.png</Path>
+            <Path fileType="data">/usr/share/kde4/apps/stage/</Path>
+            <Path fileType="data">/usr/share/kde4/config/stagerc</Path>
+            <Path fileType="doc">/usr/share/doc/kde4/html/en/stage/</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligrastage.*</Path>            
+            <Path fileType="data">/usr/share/icons/hicolor/16x16/actions/pen.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/16x16/actions/black.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/16x16/actions/highlight.png</Path>
+            <Path fileType="data">/usr/share/kde4/services/calligrastageeventactions.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/calligrastagetoolanimation.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kpr_pageeffect*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kpr_shapeanimation_example.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/kprvariables.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/stagepart.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/kpr_pageeffect.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/kpr_shapeanimation.desktop</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-tools</Name>
+        <Icon>tools</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Tools for the Calligra office suite</Summary>
+        <RuntimeDependencies>
+            <Dependency version="current">calligra-libs</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>okular</Dependency>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/calligra</Path>
+            <Path fileType="executable">/usr/bin/calligraconverter</Path>
+            <Path fileType="executable">/usr/bin/cstester</Path>
+            <Path fileType="executable">/usr/bin/cstrunner</Path>
+            <Path fileType="executable">/usr/bin/visualimagecompare</Path>
+            <Path fileType="library">/usr/lib/kde4/calligradocinfopropspage.so</Path>
+            <Path fileType="library">/usr/lib/kde4/calligraimagethumbnail.so</Path>
+            <Path fileType="library">/usr/lib/kde4/calligrathumbnail.so</Path>
+            <Path fileType="library">/usr/lib/kde4/okularGenerator_odp.so</Path>
+            <Path fileType="data">/usr/share/kde4/services/calligradocinfopropspage.desktop</Path>
+            <Path fileType="data">/usr/share/applications/kde4/okularApplication_odp.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/ServiceMenus/flow_print.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/ServiceMenus/karbon_print.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/ServiceMenus/krita_print.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/ServiceMenus/sheets_print.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/ServiceMenus/stage_print.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/ServiceMenus/words_print.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/calligra_odg_thumbnail.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/libokularGenerator_odp.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/okularOdp.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/sheets_ods_thumbnail.desktop</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>calligra-words</Name>
+        <Icon>words</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Word Processor</Summary>
+        <RuntimeDependencies>
+            <Dependency version="current">calligra-libs</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/calligraauthor</Path>
+            <Path fileType="executable">/usr/bin/calligrawords</Path>
+            <Path fileType="library">/usr/lib/kde4/asciiexport.so</Path>
+            <Path fileType="library">/usr/lib/kde4/authorpart.so</Path>
+            <Path fileType="library">/usr/lib/kde4/wordspart.so</Path>
+            <Path fileType="library">/usr/lib/libkdeinit4_calligraauthor.so</Path>
+            <Path fileType="library">/usr/lib/libkdeinit4_calligrawords.so</Path>
+            <Path fileType="library">/usr/lib/libwordsprivate.so*</Path>
+            <Path fileType="data">/usr/share/applications/kde4/author.desktop</Path>
+            <Path fileType="data">/usr/share/applications/kde4/words.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/apps/author/author.rc</Path>
+            <Path fileType="data">/usr/share/kde4/apps/author/author_readonly.rc</Path>
+            <Path fileType="data">/usr/share/kde4/apps/words/</Path>
+            <Path fileType="data">/usr/share/kde4/config/authorrc</Path>
+            <Path fileType="data">/usr/share/kde4/config/wordsrc</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligrawords.*</Path>            
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligraauthor.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/22x22/actions/tool_pagelayout.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/scalable/apps/calligrawords.svgz</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/scalable/apps/calligraauthor.svgz</Path>
+            <Path fileType="data">/usr/share/kde4/services/authorpart.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/wordspart.desktop</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="14">
+            <Date>2014-03-08</Date>
+            <Version>2.7.5</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="13">
+            <Date>2013-12-04</Date>
+            <Version>2.7.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="12">
+            <Date>2013-11-20</Date>
+            <Version>2.7.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="11">
+            <Date>2013-10-14</Date>
+            <Version>2.7.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="10">
+            <Date>2013-10-10</Date>
+            <Version>2.7.2</Version>
+            <Comment>Rebuil for new poppler.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2013-09-21</Date>
+            <Version>2.7.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>>Aydın Demirel</Name>
+            <Email>aydin.demirel@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2013-08-02</Date>
+            <Version>2.7.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2013-04-15</Date>
+            <Version>2.6.3</Version>
+            <Comment>Version bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-03-14</Date>
+            <Version>2.6.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-02-24</Date>
+            <Version>2.6.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-02-09</Date>
+            <Version>2.6.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-02-03</Date>
+            <Version>2.5.94</Version>
+            <Comment>Version bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-01-19</Date>
+            <Version>2.5.4</Version>
+            <Comment>dep +</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-01-08</Date>
+            <Version>2.5.4</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
