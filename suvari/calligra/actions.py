@@ -4,13 +4,13 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/licenses/gpl.txt
 
-from pisi.actionsapi import shelltools
+#from pisi.actionsapi import shelltools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import kde4
 from pisi.actionsapi import get
 import os
 
-shelltools.export("HOME", get.workDIR())
+#shelltools.export("HOME", get.workDIR())
 
 def setup():
     kde4.configure("-DIHAVEPATCHEDQT=1 \
@@ -19,8 +19,10 @@ def setup():
 		    -DBUILD_active=OFF \
 		    -DBUILD_cstester:BOOL=OFF \
 		    -DKDE4_BUILD_TESTS=OFF \
+		    -DKDE4_BUILD_TESTS=OFF \
 		    -DBUILD_mobile=OFF \
-		    -DCMAKE_INSTALL_PREFIX=/usr ")
+		    -DCMAKE_INSTALL_PREFIX=/usr \
+		    -Wno-dev")
 
 def build():
     kde4.make()
