@@ -22,13 +22,11 @@
             <Dependency>exiv2-devel</Dependency>
             <Dependency>fontconfig-devel</Dependency>
             <Dependency>glew-devel</Dependency>
-<!--             <Dependency>freeglut</Dependency> -->
+            <Dependency>freeglut</Dependency>
             <Dependency>freeglut-devel</Dependency>
             <Dependency>gmm</Dependency>
             <Dependency>GraphicsMagick-devel</Dependency>
             <Dependency>gsl-devel</Dependency>
-            <Dependency>libodfgen-devel</Dependency>
-            <Dependency>libetonyek-devel</Dependency>
             <Dependency>attica-devel</Dependency>
             <Dependency>qt-devel</Dependency>
             <Dependency>qt-webkit-devel</Dependency>
@@ -44,14 +42,11 @@
             <Dependency>qimageblitz-devel</Dependency>
             <Dependency>libpqxx-devel</Dependency>
             <Dependency>mariadb-lib</Dependency>
-            <Dependency>mariadb-client</Dependency>
             <Dependency>giflib-devel</Dependency>
             <Dependency>fftw3-devel</Dependency>
             <Dependency>libxslt-devel</Dependency>
             <Dependency>lcms-devel</Dependency>
-            <Dependency>soprano-devel</Dependency>
-<!--             <Dependency>pstoedit</Dependency> -->
-            <Dependency>pstoedit-devel</Dependency>
+            <Dependency>pstoedit</Dependency>
             <Dependency>libjpeg-turbo-devel</Dependency>
             <Dependency>openjpeg-devel</Dependency>
             <Dependency>tiff-devel</Dependency>
@@ -68,7 +63,52 @@
             <Dependency>qimageblitz-devel</Dependency>
             <Dependency>okular-devel</Dependency>
             <Dependency>opencolorio-devel</Dependency>
+            <Dependency>marble-devel</Dependency>
+            <Dependency>libspnav-devel</Dependency>
+            <Dependency>libkdcraw-devel</Dependency>
+            <Dependency>libetonyek-devel</Dependency>
+            <Dependency>libodfgen-devel</Dependency>
         </BuildDependencies>
+        <Files>
+            <Path fileType="data"></Path>  
+            <Path fileType="data">/usr/share/kde4/services/calligra_shape*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/karbon_viewplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/sheets_viewplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/plan_viewplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/servicetypes/karbon_dock.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/calligra*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/sheetsscripting.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/karbonrefinepathplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/karbonwhirlpinchplugin.desktop</Path>
+            <Path fileType="data">/usr/share/applications/kde4/calligrawords_ascii.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/flow_wpg_thumbnail.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/karbonflattenpathplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/braindump*.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/karbonroundcornersplugin.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/sheetssolver.desktop</Path>
+            <Path fileType="data">/usr/share/appdata/krita.appdata.xml</Path>
+            <Path fileType="data">/usr/share/icons/oxygen/32x32/actions/insert-tableofcontents.png</Path>
+            <Path fileType="library">/usr/lib/libkomsooxml.so.13</Path>
+            <Path fileType="library">/usr/lib/libkoodfreader.so.13.0.0</Path>
+            <Path fileType="library">/usr/lib/libkformula.so.13.0.0</Path>
+            <Path fileType="library">/usr/lib/libkoodf2.so.13</Path>
+            <Path fileType="library">/usr/lib/libkovectorimage.so.13</Path>
+            <Path fileType="library">/usr/lib/libkomsooxml.so</Path>
+            <Path fileType="library">/usr/lib/libkoodf2.so.13.0.0</Path>
+            <Path fileType="library">/usr/lib/libkformula.so</Path>
+            <Path fileType="library">/usr/lib/libkovectorimage.so.13.0.0</Path>
+            <Path fileType="library">/usr/lib/libkovectorimage.so</Path>
+            <Path fileType="library">/usr/lib/libkotextlayout.so.13</Path>
+            <Path fileType="library">/usr/lib/libkomsooxml.so.13.0.0</Path>
+            <Path fileType="library">/usr/lib/libkformula.so.13</Path>
+            <Path fileType="library">/usr/lib/libkoodfreader.so.13</Path>
+            <Path fileType="library">/usr/lib/libkotextlayout.so.13.0.0</Path>
+            <Path fileType="library">/usr/lib/libkoodfreader.so</Path>
+            <Path fileType="library">/usr/lib/libkotextlayout.so</Path>
+            <Path fileType="library">/usr/lib/libkoodf2.so</Path>
+            <Path fileType="library">/usr/lib/kde4/calligra*.so</Path>
+            <Path fileType="library">/usr/lib/kde4/braindump*.so</Path>
+        </Files>    
     </Source>
 
     <Package>
@@ -124,9 +164,6 @@
             <Dependency>libwpd</Dependency>
             <Dependency>libwps</Dependency>
             <Dependency>kdelibs</Dependency>
-            <Dependency>libodfgen</Dependency>
-            <Dependency>libetonyek</Dependency>
-            <Dependency>libvisio</Dependency>
             <Dependency version="current">calligra-libs</Dependency>
             <Dependency version="current">calligra-words</Dependency>
             <Dependency version="current">calligra-karbon</Dependency>
@@ -166,6 +203,7 @@
             <Path fileType="library">/usr/lib/libRtfReader.so*</Path>
             <Path fileType="library">/usr/lib/libkowv2.so*</Path>
             <Path fileType="library">/usr/lib/libmsooxml.so*</Path>
+            <Path fileType="library">/usr/lib/kde4/calligra_filter*.so</Path>
             <Path fileType="data">/usr/share/kde4/services/Filterkpr2odf.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/karbon_*.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/kpresenter_powerpoint_import.desktop</Path>
@@ -175,6 +213,7 @@
             <Path fileType="data">/usr/share/kde4/services/stage_*.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/words_*.desktop</Path>
             <Path fileType="data">/usr/share/mime/packages/msooxml-all.xml</Path>
+            <Path fileType="data">/usr/share/kde4/services/calligra_filter*.desktop</Path>
         </Files>
     </Package>
 
@@ -189,8 +228,6 @@
             <Dependency>kdelibs</Dependency>
             <Dependency>libvisio</Dependency>
             <Dependency version="current">calligra-libs</Dependency>
-            <Dependency version="current">calligra-words</Dependency>
-            <Dependency version="current">calligra-karbon</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin/calligraflow</Path>
@@ -235,10 +272,7 @@
             <Dependency>qt</Dependency>
             <Dependency>kdelibs</Dependency>
             <Dependency>poppler</Dependency>
-            <Dependency>pstoedit</Dependency>
             <Dependency version="current">calligra-libs</Dependency>
-            <Dependency version="current">calligra-filters</Dependency>
-            <Dependency version="current">calligra-extras</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin/karbon</Path>
@@ -269,18 +303,14 @@
         <Summary>Develop desktop database applications</Summary>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
-            <Dependency>glew</Dependency>
-            <Dependency>fftw3</Dependency>
-            <Dependency>libpqxx</Dependency>
             <Dependency>icu4c</Dependency>
             <Dependency>marble</Dependency>
             <Dependency>kdelibs</Dependency>
             <Dependency>mariadb-lib</Dependency>
-            <Dependency>mariadb-client</Dependency>
             <Dependency>qt-webkit</Dependency>
             <Dependency version="current">calligra-libs</Dependency>
-            <Dependency version="current">calligra-plugins</Dependency>
             <Dependency version="current">calligra-sheets</Dependency>
+            <Dependency>marble</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin/kexi</Path>
@@ -326,10 +356,12 @@
             <Dependency>openexr-libs</Dependency>
             <Dependency>libjpeg-turbo</Dependency>
             <Dependency version="current">calligra-libs</Dependency>
-            <Dependency version="current">calligra-plugins</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin/krita</Path>
+            <Path fileType="executable">/usr/bin/kritasketch</Path>
+            <Path fileType="executable">/usr/bin/kritagemini</Path>
+            <Path fileType="executable">/usr/bin/gmicparser</Path>
             <Path fileType="library">/usr/lib/kde4/krita*.so</Path>
             <Path fileType="data">/usr/share/kde4/apps/color-schemes</Path>
             <Path fileType="library">/usr/lib/libkdeinit4_krita.so</Path>
@@ -360,6 +392,10 @@
             <Path fileType="data">/usr/share/kde4/services/krita*.desktop</Path>
             <Path fileType="data">/usr/share/kde4/servicetypes/krita*.desktop</Path>
             <Path fileType="data">/usr/share/mime/packages/krita_ora.xml</Path>
+            <Path fileType="data">/usr/share/kde4/apps/kritasketch/*</Path>
+            <Path fileType="data">/usr/share/kde4/apps/kritagemini/*</Path>
+            <Path fileType="data">/usr/lib/calligra/imports/org/krita/*</Path>
+            <Path fileType="data">/usr/share/kde4/config/krita*</Path>
         </Files>
     </Package>
     
@@ -371,7 +407,6 @@
             <Dependency>qt</Dependency>
             <Dependency>qca2</Dependency>
             <Dependency>kdelibs</Dependency>
-            <Dependency>soprano</Dependency>
             <Dependency>ilmbase</Dependency>
             <Dependency>libspnav</Dependency>
             <Dependency>kdepimlibs</Dependency>
@@ -481,7 +516,6 @@
             <Dependency>kdelibs</Dependency>
             <Dependency>kdepimlibs</Dependency>
             <Dependency version="current">calligra-libs</Dependency>
-            <Dependency version="current">calligra-words</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin/calligraplan</Path>
@@ -541,11 +575,8 @@
             <Dependency>marble</Dependency>
             <Dependency>ilmbase</Dependency>
             <Dependency>kdelibs</Dependency>
-            <Dependency>libspnav</Dependency>
-            <Dependency>marble</Dependency>
             <Dependency>qt-webkit</Dependency>
             <Dependency version="current">calligra-libs</Dependency>
-            <Dependency version="current">calligra-filters</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib/kde4/artistictextshape.so</Path>
@@ -766,14 +797,11 @@
 
     <Package>
         <Name>calligra-sheets</Name>
-        <Icon>sheets</Icon>
+        <Icon>shhets</Icon>
         <IsA>app:gui</IsA>
         <Summary>Write spreadsheet documents</Summary>
         <RuntimeDependencies>
             <Dependency version="current">calligra-libs</Dependency>
-            <Dependency version="current">calligra-filters</Dependency>
-            <Dependency version="current">calligra-plugins</Dependency>
-            <Dependency version="current">calligra-extras</Dependency>
             <Dependency>qt</Dependency>
             <Dependency>gsl</Dependency>
             <Dependency>kdelibs</Dependency>
@@ -826,7 +854,6 @@
         <Summary>Write presentation documents</Summary>
         <RuntimeDependencies>
             <Dependency version="current">calligra-libs</Dependency>
-            <Dependency version="current">calligra-plugins</Dependency>
             <Dependency>qt-webkit</Dependency>
             <Dependency>kdelibs</Dependency>
             <Dependency>phonon</Dependency>
@@ -863,22 +890,16 @@
     </Package>
 
     <Package>
-        <Name>calligra-extras</Name>
+        <Name>calligra-tools</Name>
         <Icon>tools</Icon>
         <IsA>app:gui</IsA>
-        <Summary>Calligra suite extras</Summary>
+        <Summary>Tools for the Calligra office suite</Summary>
         <RuntimeDependencies>
             <Dependency version="current">calligra-libs</Dependency>
             <Dependency>kdelibs</Dependency>
             <Dependency>okular</Dependency>
             <Dependency>qt</Dependency>
         </RuntimeDependencies>
-        <Replaces>
-            <Package>calligra-tools</Package>
-        </Replaces>
-        <Conflicts>
-            <Package>calligra-tools</Package>
-        </Conflicts> 
         <Files>
             <Path fileType="executable">/usr/bin/calligra</Path>
             <Path fileType="executable">/usr/bin/calligraconverter</Path>
@@ -911,10 +932,7 @@
         <Summary>Word Processor</Summary>
         <RuntimeDependencies>
             <Dependency version="current">calligra-libs</Dependency>
-            <Dependency version="current">calligra-plugins</Dependency>
-            <Dependency version="current">calligra-extras</Dependency>
             <Dependency>kdelibs</Dependency>
-            <Dependency>okular</Dependency>
             <Dependency>qt</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -944,14 +962,14 @@
     </Package>
 
     <History>
-      <Update release="15">
-            <Date>2014-03-08</Date>
+        <Update release="15">
+            <Date>2014-05-10</Date>
             <Version>2.8.2</Version>
-            <Comment>Version bump</Comment>
-            <Name>Kamil Atlı</Name>
-            <Email>suvarice@gmail.com</Email>
-        </Update>  
-      <Update release="14">
+            <Comment>Version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="14">
             <Date>2014-03-08</Date>
             <Version>2.7.5</Version>
             <Comment>Rebuild</Comment>
