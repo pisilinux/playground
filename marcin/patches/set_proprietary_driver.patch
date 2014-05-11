@@ -1,0 +1,76 @@
+diff -aur yali~/context.py yali/context.py
+--- yali~/context.py	2014-02-23 10:00:25.000000000 +0100
++++ yali/context.py	2014-05-11 20:19:15.463202805 +0200
+@@ -64,3 +64,5 @@
+ mountCount = {}
+ 
+ collections = None
++
++driverName = None 
+diff -aur yali~/gui/ScrInstall.py yali/gui/ScrInstall.py
+--- yali~/gui/ScrInstall.py	2014-02-23 10:00:25.000000000 +0100
++++ yali/gui/ScrInstall.py	2014-05-11 20:38:49.049865633 +0200
+@@ -232,8 +232,11 @@
+         #Write InitramfsConf
+         yali.postinstall.writeInitramfsConf()
+ 
+-        #set resume param in /etc/default/grub
+-        yali.postinstall.setGrubResume()
++        #set resume and blacklist params in /etc/default/grub
++        yali.postinstall.setGrubDefaults()
++
++        #set proper libGL if needed
++        if ctx.driverName: yali.postinstall.setLibGL(ctx.driverName)
+ 
+         # run dbus in chroot
+         yali.util.start_dbus()
+diff -aur yali~/gui/ScrSummary.py yali/gui/ScrSummary.py
+--- yali~/gui/ScrSummary.py	2014-02-23 10:00:25.000000000 +0100
++++ yali/gui/ScrSummary.py	2014-05-11 20:30:11.593200659 +0200
+@@ -301,4 +301,6 @@
+                 ctx.blacklistedKernelModules.append(panda.get_blacklisted_module())
+                 ctx.logger.debug("These driver packages will be installed: %s" % neededDriverPackages)
+ 
++                if panda.driver_name in ["nvidia-current", "nvidia96", "nvidia173", "nvidia304", "fglrx"]: ctx.driverName = panda.driver_name
++
+         return list(packages)
+diff -aur yali~/postinstall.py yali/postinstall.py
+--- yali~/postinstall.py	2014-02-23 10:00:25.000000000 +0100
++++ yali/postinstall.py	2014-05-11 20:35:38.793199588 +0200
+@@ -220,7 +220,7 @@
+             except IOError, msg:
+                 raise yali.Error("Unexpected error: %s" % msg)
+ 
+-def setGrubResume():
++def setGrubDefaults():
+     swapDevices = ctx.storage.storageset.swapDevices
+ 
+     if not swapDevices:
+@@ -231,14 +231,18 @@
+     grub_default_file_new = os.path.join(ctx.consts.target_dir, "etc/default/grub.tmp")
+     grub_default_file_bak = os.path.join(ctx.consts.target_dir, "etc/default/grub.bak")
+     if not os.path.exists(os.path.dirname(grub_default_file)):
+-        raise yali.Error("setGrubResume cannnot access %s path" % grub_default_file)
++        raise yali.Error("setGrubDefaults cannnot access %s path" % grub_default_file)
+ 
+     grub_tmp = open(grub_default_file_new, "w")
+     with open(grub_default_file) as grub_default:
+         for line in grub_default:
+             if "GRUB_CMDLINE_LINUX_DEFAULT=" in line:
+                 ctx.logger.info("Adding resume=%s to %s" % (swapDevices[0].path, grub_default_file))
+-                grub_tmp.write(re.sub("(.*?)([\'\"])\s*$", "\\1 resume=%s\\2\n" % swapDevices[0].path, line))
++                new_line = re.sub("(.*?)([\'\"])\s*$", "\\1 resume=%s\\2\n" % swapDevices[0].path, line)
++                if ctx.blacklistedKernelModules:
++                    ctx.logger.info("Adding blackilst=%s to %s" % ("blacklist=%s" % ",".join(ctx.blacklistedKernelModules), grub_default_file))
++                    new_line = re.sub("(.*?)([\'\"])\s*$", "\\1 blacklist=%s\\2\n" % ",".join(ctx.blacklistedKernelModules), new_line)
++                grub_tmp.write(new_line)
+             else:
+                 grub_tmp.write(line)
+ 
+@@ -315,3 +319,6 @@
+     else:
+         ctx.logger.info("Bootloader installation succesed")
+         return True
++
++def setLibGL(name):
++    util.chroot("alternatives --set libGL /usr/lib/%s/libGL.so.1.2.0" % name)
