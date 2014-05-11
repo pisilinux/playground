@@ -1,0 +1,47 @@
+diff -aur yali~/gui/ScrInstall.py yali/gui/ScrInstall.py
+--- yali~/gui/ScrInstall.py	2014-02-23 10:00:25.000000000 +0100
++++ yali/gui/ScrInstall.py	2014-05-11 11:23:05.803308043 +0200
+@@ -232,8 +232,8 @@
+         #Write InitramfsConf
+         yali.postinstall.writeInitramfsConf()
+ 
+-        #set resume param in /etc/default/grub
+-        yali.postinstall.setGrubResume()
++        #set resume and blacklist params in /etc/default/grub
++        yali.postinstall.setGrubDefaults()
+ 
+         # run dbus in chroot
+         yali.util.start_dbus()
+diff -aur yali~/postinstall.py yali/postinstall.py
+--- yali~/postinstall.py	2014-02-23 10:00:25.000000000 +0100
++++ yali/postinstall.py	2014-05-11 11:24:36.343307748 +0200
+@@ -220,7 +220,7 @@
+             except IOError, msg:
+                 raise yali.Error("Unexpected error: %s" % msg)
+ 
+-def setGrubResume():
++def setGrubDefaults():
+     swapDevices = ctx.storage.storageset.swapDevices
+ 
+     if not swapDevices:
+@@ -231,14 +231,18 @@
+     grub_default_file_new = os.path.join(ctx.consts.target_dir, "etc/default/grub.tmp")
+     grub_default_file_bak = os.path.join(ctx.consts.target_dir, "etc/default/grub.bak")
+     if not os.path.exists(os.path.dirname(grub_default_file)):
+-        raise yali.Error("setGrubResume cannnot access %s path" % grub_default_file)
++        raise yali.Error("setGrubDefaults cannnot access %s path" % grub_default_file)
+ 
+     grub_tmp = open(grub_default_file_new, "w")
+     with open(grub_default_file) as grub_default:
+         for line in grub_default:
+             if "GRUB_CMDLINE_LINUX_DEFAULT=" in line:
+                 ctx.logger.info("Adding resume=%s to %s" % (swapDevices[0].path, grub_default_file))
+-                grub_tmp.write(re.sub("(.*?)([\'\"])\s*$", "\\1 resume=%s\\2\n" % swapDevices[0].path, line))
++                new_line = re.sub("(.*?)([\'\"])\s*$", "\\1 resume=%s\\2\n" % swapDevices[0].path, line)
++                if ctx.blacklistedKernelModules:
++                    ctx.logger.info("Adding blackilst=%s to %s" % ("blacklist=%s" % ",".join(ctx.blacklistedKernelModules), grub_default_file))
++                    new_line = re.sub("(.*?)([\'\"])\s*$", "\\1 blacklist=%s\\2\n" % ",".join(ctx.blacklistedKernelModules), new_line)
++                grub_tmp.write(new_line)
+             else:
+                 grub_tmp.write(line)
+ 
