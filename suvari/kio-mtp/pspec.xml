@@ -7,15 +7,14 @@
             <Email>suvarice@gmail.com</Email>
         </Packager>
         <License>GPLv2</License>
-        <PartOf>hardware.misc</PartOf>
         <IsA>library</IsA>
         <Summary>Provides KIO Access to MTP devices</Summary>
         <Description>Provides KIO Access to MTP devices using the mtp:/// protocol</Description>
-        <BuildDependencies>
-            <Dependency>kdelibs-devel</Dependency>
-            <Dependency>libmtp-devel</Dependency>
-        </BuildDependencies>
         <Archive sha1sum="83ea9ebf64ad8ddc10d271550e2944188ff40670" type="tarxz">https://launchpad.net/ubuntu/+archive/primary/+files/kio-mtp_0.75%2Bgit20140304.orig.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>libmtp-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+        </BuildDependencies>
     </Source>
     <Package>
         <Name>kio-mtp</Name>
@@ -26,16 +25,10 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
-            <Path fileType="library">/usr/lib/kde4/kio_mtp.so</Path>
-            <Path fileType="data">/usr/share/apps/konqueror/dirtree/remote/mtp-network.desktop</Path>
-            <Path fileType="data">/usr/share/apps/remoteview/mtp-network.desktop</Path>
-            <Path fileType="data">/usr/share/apps/solid/actions/solid_mtp.desktop</Path>
-            <Path fileType="data">/usr/share/kde4/services/mtp.protocol</Path>
             <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/apps</Path>
+            <Path fileType="data">/usr/share/kde4</Path>
             <Path fileType="data">/usr/share/locale</Path>
-            <Path fileType="data">/usr/share/kde4/apps/remoteview/mtp-network.desktop</Path>
-            <Path fileType="data">/usr/share/kde4/apps/konqueror/dirtree/remote/mtp-network.desktop</Path>
-            <Path fileType="data">/usr/share/kde4/apps/solid/actions/solid_mtp.desktop</Path>
         </Files>
     </Package>
     <History>
@@ -48,5 +41,3 @@
         </Update>
     </History>
 </PISI>
-
-<!-- By PiSiDo 2.0.0 -->
