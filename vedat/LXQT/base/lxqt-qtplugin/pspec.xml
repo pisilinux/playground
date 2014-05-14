@@ -1,0 +1,40 @@
+<PISI>
+    <Source>
+        <Name>lxqt-qtplugin</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.core</PartOf>
+        <IsA>app</IsA>
+        <Summary>LXQt platform integration for Qt</Summary>
+        <Description>LXDE-Qt platform integration plugin for Qt</Description>
+        <Archive sha1sum="5b63e6944964e7f68bc090253c05bd4f35910139" type="zip">https://github.com/vdemir/lxqt-qtplugin/archive/master.zip</Archive>
+        <BuildDependencies>
+            <Dependency>liblxqt-devel</Dependency>
+	    <Dependency>libqtxdg-devel</Dependency>
+        </BuildDependencies>
+            </Source>
+    <Package>
+        <Name>lxqt-qtplugin</Name>
+        <RuntimeDependencies>
+            <Dependency>libqtxdg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.7.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
+

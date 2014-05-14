@@ -1,0 +1,49 @@
+<PISI>
+    <Source>
+        <Name>libsysstat</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.base</PartOf>
+        <IsA>library</IsA>
+        <Summary>Library used to query system info and statistics</Summary>
+        <Description>Library to query system statistics (net, resource usage, ...)</Description>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="5d0b7eb28d8409f28393be4fe83c8352f23c27a4" type="zip">https://github.com/vdemir/libsysstat/archive/master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>libsysstat</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="data">/usr/share/</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>libsysstat-devel</Name>
+        <Summary>Development headers for libsysstat</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libsysstat</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.1.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

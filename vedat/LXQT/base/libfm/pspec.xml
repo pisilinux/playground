@@ -1,0 +1,54 @@
+<PISI>
+    <Source>
+        <Name>libfm</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.base</PartOf>
+        <IsA>library</IsA>
+        <Summary>Core library of PCManFM file manager</Summary>
+        <Description>libfm is a Core library of PCManFM file manager</Description>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+	    <Dependency>menu-cache-devel</Dependency>
+	    <Dependency>libexif-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="bbe96b564cefc46c0bb72ad85f5dce4f4d56eca7" type="zip">https://github.com/vdemir/libfm/archive/master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>libfm</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="sysdir">/etc</Path> 
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share</Path>
+        </Files>
+	<RuntimeDependencies>
+	    <Dependency>lxmenu-data</Dependency>
+            <Dependency>gvfs</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    <Package>
+        <Name>libfm-devel</Name>
+        <Summary>Development headers for libfm</Summary>
+        <RuntimeDependencies>
+            <Dependency>libfm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-04-25</Date>
+            <Version>1.2.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

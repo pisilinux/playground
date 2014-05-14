@@ -1,0 +1,38 @@
+<PISI>
+    <Source>
+        <Name>lxqt-config-randr</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.tools</PartOf>
+        <IsA>app</IsA>
+        <Summary>Simple monitor configuration</Summary>
+        <Description>Clone of Randr of System Settings KDE, based solely on Qt libraries</Description>
+        <Archive sha1sum="491093719de5e56033dcb0067f8c36096479d4bc" type="zip">https://github.com/vdemir/lxqt-config-randr/archive/master.zip</Archive>
+        <BuildDependencies>
+            <Dependency>libqtxdg-devel</Dependency>
+        </BuildDependencies>
+          </Source>
+    <Package>
+        <Name>lxqt-config-randr</Name>
+        <RuntimeDependencies>
+            <Dependency>libqtxdg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.7.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

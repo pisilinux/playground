@@ -1,0 +1,39 @@
+<PISI>
+    <Source>
+        <Name>lxqt-notificationd</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.core</PartOf>
+        <IsA>app</IsA>
+        <Summary>LXQt notification daemon and library.</Summary>
+        <Description>Notification daemon</Description>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="095d4cb949b022d0d47508d8a4e89819d99f2dfb" type="zip">https://github.com/vdemir/lxqt-notificationd/archive/master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>lxqt-notificationd</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.7.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
+

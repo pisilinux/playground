@@ -1,0 +1,33 @@
+<PISI>
+    <Source>
+        <Name>lxqt-common</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.core</PartOf>
+        <IsA>data</IsA>
+        <Summary>Common data to run a LXQt session.</Summary>
+        <Description>Common data file required for running an lxde-qt session</Description>
+        <Archive sha1sum="40b074a09ada1090e6d63b7286a6db63662f4b41" type="zip">https://github.com/vdemir/lxqt-common/archive/master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>lxqt-common</Name>
+        <Files>
+	    <Path fileType="sysdir">/etc</Path>
+	    <Path fileType="binary">/usr/bin</Path>
+	    <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.7.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

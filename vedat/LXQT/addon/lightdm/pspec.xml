@@ -1,0 +1,53 @@
+<PISI>
+    <Source>
+        <Name>lightdm</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt</PartOf>
+        <IsA>app</IsA>
+        <Summary>LightDM Qt client library</Summary>
+        <Description>LightDM Qt client library</Description>
+        <BuildDependencies>
+            <Dependency>liblxqt</Dependency>
+	    <Dependency>itstool</Dependency>
+	    <Dependency>libxklavier-devel</Dependency>
+	    <Dependency>xorg-server-xephyr</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="70ee94b90016302d29dc34e2bca5355a830983ca" type="tarxz">https://launchpad.net/lightdm/1.11/1.11.0/+download/lightdm-1.11.0.tar.xz</Archive>
+    </Source>
+    <Package>
+        <Name>lightdm</Name>
+        <Files>
+	    <Path fileType="sysdir">/etc</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="data">/usr/share</Path>
+	    <Path fileType="data">/usr/sbin</Path>
+	    <Path fileType="data">/usr/libexec</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>lightdm-devel</Name>
+        <Summary>Development headers for lightdm</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">lightdm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>1.11.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,63 @@
+<PISI>
+    <Source>
+        <Name>menu-cache</Name>
+        <Homepage>http://lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.base</PartOf>
+        <IsA>app</IsA>
+        <Summary>freedesktop.org desktop menus for LXDE</Summary>
+        <Description>Library used to read freedesktop.org menus</Description>
+        <Archive sha1sum="af55c4cc0ffc1d4d7f0dc53ef250685f418ef148" type="zip">https://github.com/vdemir/menu-cache/archive/master.zip</Archive>
+	<BuildDependencies>
+            <Dependency>cmake</Dependency>
+            <Dependency>qt-devel</Dependency>
+	    <Dependency>gettext-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>menu-cache</Name>
+        <RuntimeDependencies>
+            <Dependency>gettext</Dependency>
+	    <Dependency>gtk-doc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="executable">/usr/libexec</Path>
+	    <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>menu-cache-devel</Name>
+        <Summary>Development headers for menu-cache</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">menu-cache</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>libmenu-cache</Name>
+        <Summary>Library for menu-cache</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">menu-cache</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.5.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
+

@@ -1,0 +1,40 @@
+<PISI>
+    <Source>
+        <Name>sddm</Name>
+        <Homepage>https://github.com/sddm/sddm</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>desktop.lxde</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>QML based X11 display manager</Summary>
+        <Description>QML based X11 display manager</Description>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="5b06640c3fe56e341ced0f759b15e2f92ab1adfb" type="zip">https://github.com/vdemir/sddm/archive/master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>sddm</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share</Path>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="sysdir">/etc</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-06</Date>
+            <Version>0.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

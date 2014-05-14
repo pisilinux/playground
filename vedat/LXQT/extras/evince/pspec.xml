@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>evince</Name>
+        <Homepage>http://projects.gnome.org/evince/</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPLV2</License>
+        <PartOf>desktop.lxde</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Document Viewer</Summary>
+        <Description>Evince is a document viewer capable of displaying multiple and single page document formats like PDF and Postscript.</Description>
+        <BuildDependencies>
+            <Dependency>ghostscript-devel</Dependency>
+            <Dependency>poppler-devel</Dependency>
+	    <Dependency>gnome-common</Dependency>
+	    <Dependency>yelp-tools</Dependency>
+	    <Dependency>webkit-gtk3</Dependency>
+	    <Dependency>gst-plugins-base-next</Dependency>
+	    <Dependency>geoclue</Dependency>
+	    <Dependency>libsecret-devel</Dependency>
+	    <Dependency>m4</Dependency>
+	    <Dependency>nautilus-devel</Dependency>
+	    <Dependency>poppler-glib-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="04a9c1f02697d965abf43d81afceaa22c2c4df6c" type="zip">https://github.com/GNOME/evince/archive/master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>evince</Name>
+        <RuntimeDependencies>
+            <Dependency>ghostscript</Dependency>
+            <Dependency>poppler</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-04</Date>
+            <Version>0.8</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

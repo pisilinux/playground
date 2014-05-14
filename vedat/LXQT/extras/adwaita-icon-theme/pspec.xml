@@ -1,0 +1,42 @@
+<PISI>
+    <Source>
+        <Name>adwaita-icon-theme</Name>
+        <Homepage>http://www.gnome.org/</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPLV2</License>
+        <PartOf>desktop.lxqt</PartOf>
+        <IsA>app</IsA>
+        <Summary>Standard Icons</Summary>
+        <Description>Evince is a document viewer capable of displaying multiple and single page document formats like PDF and Postscript.</Description>
+        <BuildDependencies>
+            <Dependency>ghostscript-devel</Dependency>
+            <Dependency>poppler-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="d8f80aabd548efd171506b19213d13263bc5cbe1" type="zip">https://github.com/GNOME/adwaita-icon-theme/archive/master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>adwaita-icon-theme</Name>
+        <Files>
+	    <Path fileType="data">/usr/share/</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency>ghostscript</Dependency>
+            <Dependency>poppler</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-04</Date>
+            <Version>0.8</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,41 @@
+<PISI>
+    <Source>
+        <Name>compton-conf</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>desktop.lxqt.tools</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>GUI configuration tool for compton X composite manager.</Summary>
+        <Description>GUI configuration tool for compton X composite manager.</Description>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+	    <Dependency>libconfig-devel</Dependency>
+	    <Dependency>pkgconfig</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="922dab343f41ca6fd0cefa89fc5d88104cf33eae" type="zip">https://github.com/vdemir/compton-conf/archive/master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>compton-conf</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+	    <Dependency>libconfig</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-06</Date>
+            <Version>0.1.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
