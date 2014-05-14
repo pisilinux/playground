@@ -1,0 +1,25 @@
+/* desktop mode */
+.nemo-desktop.nemo-canvas-item {
+	color: @bg_color;
+	text-shadow: 1 1 alpha (#000000, 0.8);
+}
+
+.nemo-desktop.nemo-canvas-item:active {
+	background-image: none;
+	background-color: alpha (@bg_color, 0.84);
+
+	color: @fg_color;
+}
+
+.nemo-desktop.nemo-canvas-item:selected {
+	background-image: none;
+	background-color: alpha (@selected_bg_color, 0.84);
+
+	color: @selected_fg_color;
+}
+
+.nemo-desktop.nemo-canvas-item:active,
+.nemo-desktop.nemo-canvas-item:prelight,
+.nemo-desktop.nemo-canvas-item:selected {
+	text-shadow: none;
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cinnamon-session</Name>
+        <Homepage>https://github.com/linuxmint/cinnamon-session</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Cinnamon session manager</Summary>
+        <Description>The Cinnamon Session Handler.</Description>
+        <Archive sha1sum="91f1b36af4e7df454fdd3bdb250df3d61b0ee29e" type="targz">http://leigh123linux.fedorapeople.org/pub/cinnamon-session/source/cinnamon-session-2.0.6.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>libSM-devel</Dependency>
+            <Dependency>libICE-devel</Dependency>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>pangox-compat-devel</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>upower-devel</Dependency>
+            <Dependency>libXtst-devel</Dependency>
+            <Dependency>gio-sharp-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+            <Dependency>libXcomposite-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">cinnamon-session-upower.patch</Patch>
+            <Patch level="1">remove_sessionmigration.patch</Patch>
+            <Patch level="1">revert_clutter_xinput.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>cinnamon-session</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>gconf</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libSM</Dependency>
+            <Dependency>libICE</Dependency>
+            <Dependency>upower</Dependency>
+            <Dependency>libXtst</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libXrender</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>libXcomposite</Dependency>
+            <Dependency>cinnamon-desktop</Dependency>
+            <Dependency>dconf</Dependency>
+            <Dependency>polkit-qt_1</Dependency>
+            <Dependency>cinnamon-settings-daemon</Dependency>
+            <Dependency>cinnamon-control-center</Dependency>
+            <Dependency>gio-sharp</Dependency>
+            <Dependency>pangox-compat</Dependency>
+            <Dependency>polkit-gnome</Dependency>
+            <Dependency>gnome-session</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/cinnamon-session</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2014-04-20</Date>
+            <Version>2.0.6</Version>
+            <Comment>Version bump</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-12-12</Date>
+            <Version>2.0.5</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cjs-internals</Name>
+        <Homepage>http://cinnamon.linuxmint.com/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>LGPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Javascript Bindings for Cinnamon</Summary>
+        <Description>Cjs allows using Cinnamon libraries from Javascript. It's based on the Spidermonkey Javascript engine from Mozilla and the GObject introspection framework.</Description>
+        <Archive sha1sum="67b965f8d22ba99fd2434f197d45272c73511d4f" type="targz">http://leigh123linux.fedorapeople.org/pub/cjs/source/cjs-2.0.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>js185-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cjs-internals</Name>
+        <RuntimeDependencies>
+            <Dependency>js185</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="data">/usr/share/cjs-1.0</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>cjs-internals-devel</Name>
+        <Summary>cjs-internals için geliştirme dosyaları</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">cjs-internals</Dependency>
+            <Dependency>js185-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2014-04-11</Date>
+            <Version>2.0.0</Version>
+            <Comment>Some Fix</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-12-12</Date>
+            <Version>2.0.0</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
