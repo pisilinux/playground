@@ -1,0 +1,79 @@
+# HG changeset patch
+# Parent 6b8575b98c63d50bd0f8346222143586245430e0
+disable utmp handling since this is handled in the Xstartup/Xreset scripts
+
+diff --git a/src/session-child.c b/src/session-child.c
+--- a/src/session-child.c
++++ b/src/session-child.c
+@@ -13,8 +13,10 @@
+ #include <grp.h>
+ #include <glib.h>
+ #include <security/pam_appl.h>
++#if 0
+ #include <utmp.h>
+ #include <utmpx.h>
++#endif
+ #include <sys/mman.h>
+ 
+ #include "configuration.h"
+@@ -197,6 +199,7 @@ read_xauth (void)
+     return x_authority_new (x_authority_family, x_authority_address, x_authority_address_length, x_authority_number, x_authority_name, x_authority_data, x_authority_data_length);
+ }
+ 
++#if 0
+ /* GNU provides this but we can't rely on that so let's make our own version */
+ static void
+ updwtmpx (const gchar *wtmp_file, struct utmpx *ut)
+@@ -219,6 +222,7 @@ updwtmpx (const gchar *wtmp_file, struct
+   
+     updwtmp (wtmp_file, &u);
+ }
++#endif
+ 
+ int
+ session_child_run (int argc, char **argv)
+@@ -363,6 +367,7 @@ session_child_run (int argc, char **argv
+         /* Write record to btmp database */
+         if (authentication_result == PAM_AUTH_ERR)
+         {
++#if 0
+             struct utmpx ut;
+             struct timeval tv;
+ 
+@@ -386,6 +391,7 @@ session_child_run (int argc, char **argv
+             ut.ut_tv.tv_usec = tv.tv_usec;
+ 
+             updwtmpx ("/var/log/btmp", &ut);
++#endif
+         }
+ 
+         /* Check account is valid */
+@@ -669,6 +675,7 @@ session_child_run (int argc, char **argv
+     /* Wait for the command to complete (blocks) */
+     if (child_pid > 0)
+     {
++#if 0
+         /* Log to utmp */
+         if (g_strcmp0 (pam_getenv (pam_handle, "XDG_SESSION_CLASS"), "greeter") != 0)
+         {
+@@ -701,10 +708,10 @@ session_child_run (int argc, char **argv
+             endutxent ();
+             updwtmpx ("/var/log/wtmp", &ut);
+         }
+-
++#endif
+         waitpid (child_pid, &return_code, 0);
+         child_pid = 0;
+-
++#if 0
+         /* Log to utmp */
+         if (g_strcmp0 (pam_getenv (pam_handle, "XDG_SESSION_CLASS"), "greeter") != 0)
+         {
+@@ -737,6 +744,7 @@ session_child_run (int argc, char **argv
+             endutxent ();
+             updwtmpx ("/var/log/wtmp", &ut);
+         }
++#endif
+     }
+ 
+     /* Remove X authority */

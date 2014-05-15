@@ -1,6 +1,6 @@
 <PISI>
     <Source>
-        <Name>menu-cache</Name>
+        <Name>lxqt-menu-cache</Name>
         <Homepage>http://lxde.org</Homepage>
         <Packager>
             <Name>Vedat Demir</Name>
@@ -16,13 +16,13 @@
             <Dependency>cmake</Dependency>
             <Dependency>qt-devel</Dependency>
 	    <Dependency>gettext-devel</Dependency>
+	    <Dependency>gtk-doc</Dependency>
         </BuildDependencies>
     </Source>
     <Package>
-        <Name>menu-cache</Name>
+        <Name>lxqt-menu-cache</Name>
         <RuntimeDependencies>
             <Dependency>gettext</Dependency>
-	    <Dependency>gtk-doc</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="executable">/usr/libexec</Path>
@@ -30,10 +30,10 @@
         </Files>
     </Package>
     <Package>
-        <Name>menu-cache-devel</Name>
-        <Summary>Development headers for menu-cache</Summary>
+        <Name>lxqt-menu-cache-devel</Name>
+        <Summary>Development headers for lxqt-menu-cache</Summary>
         <RuntimeDependencies>
-            <Dependency release="current">menu-cache</Dependency>
+            <Dependency release="current">lxqt-menu-cache</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -41,9 +41,9 @@
     </Package>
     <Package>
         <Name>libmenu-cache</Name>
-        <Summary>Library for menu-cache</Summary>
+        <Summary>Library for lxqt-menu-cache</Summary>
         <RuntimeDependencies>
-            <Dependency release="current">menu-cache</Dependency>
+            <Dependency release="current">lxqt-menu-cache</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib/</Path>

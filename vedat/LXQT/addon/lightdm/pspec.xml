@@ -17,10 +17,24 @@
 	    <Dependency>itstool</Dependency>
 	    <Dependency>libxklavier-devel</Dependency>
 	    <Dependency>xorg-server-xephyr</Dependency>
-        </BuildDependencies>       
+        </BuildDependencies>
+	<Patches>
+            <Patch level="1">lightdm-use-run-dir.patch</Patch>
+            <Patch level="1">lightdm-disable-utmp-handling.patch</Patch>
+            <Patch level="1">lightdm-xauthlocalhostname-support.patch</Patch>
+        </Patches>
     </Source>
     <Package>
         <Name>lightdm</Name>
+	<Conflicts>
+            <Package>kdm</Package>
+            <Package>gdm</Package>
+            <Package>slim</Package>
+        </Conflicts>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/display-managers/lightdm.desktop">lightdm.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/xdm">xdm</AdditionalFile>
+        </AdditionalFiles>
         <Files>
 	    <Path fileType="sysdir">/etc</Path>
 	    <Path fileType="executable">/usr/bin</Path>
@@ -58,6 +72,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include/lightdm-qt-3</Path>
+	</Files>
     </Package>
     <History>
         <Update release="1">

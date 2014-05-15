@@ -1,6 +1,6 @@
 <PISI>
     <Source>
-        <Name>libfm</Name>
+        <Name>libfm-qt</Name>
         <Homepage>http://www.lxde.org</Homepage>
         <Packager>
             <Name>Vedat Demir</Name>
@@ -19,7 +19,7 @@
         </BuildDependencies>
     </Source>
     <Package>
-        <Name>libfm</Name>
+        <Name>libfm-qt</Name>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="sysdir">/etc</Path> 
@@ -32,10 +32,10 @@
         </RuntimeDependencies>
     </Package>
     <Package>
-        <Name>libfm-devel</Name>
-        <Summary>Development headers for libfm</Summary>
+        <Name>libfm-qt-devel</Name>
+        <Summary>Development headers for libfm-qt</Summary>
         <RuntimeDependencies>
-            <Dependency>libfm</Dependency>
+            <Dependency>libfm-qt</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>

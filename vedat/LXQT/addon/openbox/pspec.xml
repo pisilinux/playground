@@ -1,6 +1,6 @@
 <PISI>
     <Source>
-        <Name>openbox</Name>
+        <Name>openbox3</Name>
         <Homepage>http://openbox.org</Homepage>
         <Packager>
             <Name>Pisi Linux Admins</Name>
@@ -32,7 +32,7 @@
     </Source>
 
     <Package>
-        <Name>openbox</Name>
+        <Name>openbox3</Name>
         <RuntimeDependencies>
             <Dependency>pango</Dependency>
             <Dependency>libSM</Dependency>
@@ -46,6 +46,7 @@
             <Dependency>libXrender</Dependency>
             <Dependency>libXinerama</Dependency>
             <Dependency>startup-notification</Dependency>
+	    <Dependency>pcmanfm-qt</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -62,10 +63,10 @@
     </Package>
 
     <Package>
-        <Name>openbox-devel</Name>
+        <Name>openbox3-devel</Name>
         <Summary>Development headers for openbox</Summary>
         <RuntimeDependencies>
-            <Dependency release="current">openbox</Dependency>
+            <Dependency release="2">openbox3</Dependency>
             <Dependency>pango-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
             <Dependency>libXft-devel</Dependency>
@@ -76,7 +77,6 @@
             <Path fileType="data">/usr/lib/pkgconfig</Path>
         </Files>
     </Package>
-
     <History>
         <Update release="2">
             <Date>2014-04-21</Date>

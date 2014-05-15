@@ -9,11 +9,13 @@ from pisi.actionsapi import get
 
 def setup():
     autotools.configure("--prefix=/usr \
+                         --disable-static \
                          --enable-liblightdm-gobject \
                          --disable-gtk-doc \
                          --disable-tests \
                          --enable-liblightdm-qt \
                          --with-greeter-session=lxqt-lightdm-greeter \
+                         --with-greeter-user=lightdm \
                          --with-user-session=lxqt-session")
 
 def build():
