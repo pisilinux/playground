@@ -11,11 +11,11 @@
         <IsA>app</IsA>
         <Summary>Standard Icons</Summary>
         <Description>Evince is a document viewer capable of displaying multiple and single page document formats like PDF and Postscript.</Description>
+	<Archive sha1sum="7229d923f1b0f964dbd3a6ee2c345ec6dc979ee0" type="zip">https://content.wuala.com/contents/vedat/sources/adwaita-icon-theme-master.zip</Archive>
         <BuildDependencies>
             <Dependency>ghostscript-devel</Dependency>
             <Dependency>poppler-devel</Dependency>
-        </BuildDependencies>
-        <Archive sha1sum="d8f80aabd548efd171506b19213d13263bc5cbe1" type="zip">https://github.com/GNOME/adwaita-icon-theme/archive/master.zip</Archive>
+        </BuildDependencies>       
     </Source>
     <Package>
         <Name>adwaita-icon-theme</Name>
@@ -26,9 +26,6 @@
             <Dependency>ghostscript</Dependency>
             <Dependency>poppler</Dependency>
         </RuntimeDependencies>
-        <Files>
-            <Path fileType="all">/</Path>
-        </Files>
     </Package>
     <History>
         <Update release="1">

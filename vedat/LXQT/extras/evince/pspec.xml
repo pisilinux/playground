@@ -11,7 +11,8 @@
         <IsA>app:gui</IsA>
         <Summary>Document Viewer</Summary>
         <Description>Evince is a document viewer capable of displaying multiple and single page document formats like PDF and Postscript.</Description>
-        <BuildDependencies>
+	<Archive sha1sum="21e95411f2180b9480c2c18d2ee0b99e2ea4f76b" type="zip">https://content.wuala.com/contents/vedat/sources/evince-master.zip</Archive>
+	<BuildDependencies>
             <Dependency>ghostscript-devel</Dependency>
             <Dependency>poppler-devel</Dependency>
 	    <Dependency>gnome-common</Dependency>
@@ -23,9 +24,9 @@
 	    <Dependency>m4</Dependency>
 	    <Dependency>nautilus-devel</Dependency>
 	    <Dependency>poppler-glib-devel</Dependency>
-        </BuildDependencies>
-        <Archive sha1sum="04a9c1f02697d965abf43d81afceaa22c2c4df6c" type="zip">https://github.com/GNOME/evince/archive/master.zip</Archive>
-    </Source>
+	    <Dependency>adwaita-icon-theme</Dependency>
+        </BuildDependencies>     
+    </Source>      
     <Package>
         <Name>evince</Name>
         <RuntimeDependencies>
@@ -33,7 +34,11 @@
             <Dependency>poppler</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="all">/</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share</Path>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="library">/usr/libexec</Path>
+	    <Path fileType="header">/usr/include</Path>
         </Files>
     </Package>
     <History>
@@ -46,5 +51,3 @@
         </Update>
     </History>
 </PISI>
-
-<!-- By PiSiDo 2.0.0 -->

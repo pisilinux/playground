@@ -11,7 +11,8 @@
         <IsA>app:gui</IsA>
         <Summary>LXQt power management daemon.</Summary>
         <Description>Daemon use for power management and auto-suspend.</Description>
-        <Archive sha1sum="adc51fdf2a4bc22b5913ee21f4bca9e2f4c4322a" type="zip">https://github.com/vdemir/lxqt-powermanagement/archive/master.zip</Archive>
+        <Archive sha1sum="49ebaef1bbe7d80f1b296555dd00a81d55d7e674" type="zip">https://github.com/vdemir/lxqt-powermanagement/archive/master.zip</Archive>
+	<Archive sha1sum="49ebaef1bbe7d80f1b296555dd00a81d55d7e674" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-powermanagement-master.zip</Archive>
         <BuildDependencies>
             <Dependency>liblxqt-devel</Dependency>
             <Dependency>qt-devel</Dependency>
@@ -19,10 +20,6 @@
             <Dependency>upower-devel</Dependency>
 	    <Dependency>libqtxdg-devel</Dependency>
         </BuildDependencies>
-                <Patches>
-            <Patch level="0">Qt4toqt.patch</Patch>
-            <Patch level="0">Qt4toqt2.patch</Patch>
-        </Patches>
     </Source>
     <Package>
         <Name>lxqt-powermanagement</Name>

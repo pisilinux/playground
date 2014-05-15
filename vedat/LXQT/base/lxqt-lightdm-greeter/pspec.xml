@@ -7,14 +7,16 @@
             <Email>v.demir@mail.com</Email>
         </Packager>
         <License>GPL2</License>
-        <PartOf>desktop.lxde.components</PartOf>
+        <PartOf>desktop.lxqt.components</PartOf>
         <IsA>app</IsA>
         <Summary>lxde-qt front-end for lightdm</Summary>
         <Description>lxde-qt front-end for lightdm</Description>
         <BuildDependencies>
             <Dependency>liblxqt</Dependency>
+	    <Dependency>liblightdm-qt</Dependency>
+	    <Dependency>lightdm-qt-devel</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="45eae806c25cf1568bde32b73c16fa6814cbe3d6" type="zip">https://github.com/vdemir/lxqt-lightdm-greeter/archive/master.zip</Archive>
+        <Archive sha1sum="cc44b2ba1fda8a1efdf488b9832686f55b42175a" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-lightdm-greeter-master.zip</Archive>
     </Source>
     <Package>
         <Name>lxqt-lightdm-greeter</Name>
