@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xcfa</Name>
+        <Homepage>http://www.xcfa.tuxfamily.org/static2/xcfa</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>XCFA. This stands for X Convert File Audio</Summary>
+        <Description>XCFA is a tool to extract the contens of Audio-CDs and convert musical audio files conversion to FLAC, WAV, OGG, M4A, MPC, MP3, WavPack and many other formats.</Description>
+        <Archive sha1sum="bf31d7c253f097cd22e497c9e65fe2d884626f44" type="targz">http://download.tuxfamily.org/xcfaudio/xcfa_download/src/xcfa-4.3.8.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>xcfa</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk2</Dependency>
+            <Dependency>taglib</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>vte</Dependency>
+            <Dependency>curl</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="application">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man/man1</Path>
+            <Path fileType="pixmaps">/usr/share/pixmaps</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-05-15</Date>
+            <Version>4.3.8</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
