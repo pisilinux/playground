@@ -1,0 +1,36 @@
+<PISI>
+    <Source>
+        <Name>qt-gtk-engine</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.components</PartOf>
+        <IsA>app</IsA>
+        <Summary>Theming Gtk+3 programs with Qt styles</Summary>
+        <Description>Theming Gtk+3 programs with Qt styles</Description>	
+        <Archive sha1sum="32915e54ba65c021963f8c5544d85b944a508c58" type="zip">https://content.wuala.com/contents/vedat/sources/qt-gtk-engine-master.zip</Archive>
+        <BuildDependencies>
+	     <Dependency>gtk3-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>qt-gtk-engine</Name>
+         <Files>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
+

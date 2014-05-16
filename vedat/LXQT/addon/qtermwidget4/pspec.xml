@@ -1,0 +1,49 @@
+<PISI>
+    <Source>
+        <Name>qtermwidget4</Name>
+        <Homepage>https://github.com/qterminal/qtermwidget</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <PartOf>desktop.lxqt</PartOf>
+        <IsA>app:console</IsA>
+        <Summary>QTermWidget is an opensource project originally based on KDE4 Konsole application</Summary>
+        <Description>QTermWidget is an opensource project originally based on KDE4 Konsole application, but it took its own direction later.</Description>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="e7f9a4931bbaa144447c7d2344b8669a65c734b0" type="zip">https://content.wuala.com/contents/vedat/sources/qtermwidget-master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>qtermwidget4</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="data">/usr/share/</Path>
+	    <Path fileType="library">/usr/lib/</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>qtermwidget4-devel</Name>
+        <Summary>Development headers for qtermwidget4</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">qtermwidget4</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-07</Date>
+            <Version>0.4</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

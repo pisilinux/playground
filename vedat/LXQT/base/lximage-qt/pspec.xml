@@ -1,0 +1,37 @@
+<PISI>
+    <Source>
+        <Name>lximage-qt</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.base</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Image viewer and screenshot tool.</Summary>
+        <Description>Image viewer and screenshot tool.</Description>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+	    <Dependency>libexif-devel</Dependency>
+	    <Dependency>pcmanfm-qt</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="65152335008a689c347dd0dceb610ad04592f194" type="zip">https://content.wuala.com/contents/vedat/sources/lximage-qt-master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>lximage-qt</Name>
+        <Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-04-25</Date>
+            <Version>0.2.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

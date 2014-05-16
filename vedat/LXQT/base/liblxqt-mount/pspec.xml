@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>liblxqt-mount</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.base</PartOf>
+        <IsA>library</IsA>
+        <Summary>Common base library for LXQt components.</Summary>
+        <Description>Core utility library for all LXDE-Qt components</Description>
+        <Archive sha1sum="8ce6a23b4e4efcb8242141605ff2284ae0f39a27" type="zip">https://content.wuala.com/contents/vedat/sources/liblxqt-mount-master.zip</Archive>
+        <BuildDependencies>
+            <Dependency>liblxqt-devel</Dependency>
+	    <Dependency>libqtxdg-devel</Dependency>
+            <Dependency>libXfixes-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+	    <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>liblxqt-mount</Name>
+        <Files>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="data">/usr/share/</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>liblxqt-mount-devel</Name>
+        <Summary>Development headers for liblxqt-mount</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">liblxqt-mount</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-04-25</Date>
+            <Version>0.7.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

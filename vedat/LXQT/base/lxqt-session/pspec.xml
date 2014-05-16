@@ -1,0 +1,44 @@
+<PISI>
+    <Source>
+        <Name>lxqt-session</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.core</PartOf>
+        <IsA>app</IsA>
+        <Summary>LXQt session</Summary>
+        <Description>An alternative session manager ported from the original razor-session</Description>
+	<Archive sha1sum="0e070b9d5c65163419ce6a229a35a6b4c9ba1c23" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-session-master.zip</Archive>
+        <BuildDependencies>
+            <Dependency>liblxqt-devel</Dependency>
+	    <Dependency>libqtxdg-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>lxqt-session</Name>
+        <RuntimeDependencies>
+            <Dependency>libqtxdg</Dependency>
+	    <Dependency>liblxqt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="data">/usr/share/</Path>
+        </Files>
+	<AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/lxqt-config-session.desktop">lxqt-config-session.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-01</Date>
+            <Version>0.7.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>

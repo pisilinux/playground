@@ -1,0 +1,41 @@
+<PISI>
+    <Source>
+        <Name>lxqt-config</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.tools</PartOf>
+        <IsA>library</IsA>
+        <Summary>LXQt system configuration.</Summary>
+        <Description>LXDE-Qt system configurations (control center)</Description>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+	    <Dependency>libXcursor-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="f7159432ba0e5149be50ec97a4a9e1e08ff5a192" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-config-master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>lxqt-config</Name>
+        <Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="config">/etc</Path>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="data">/usr/share/lxqt</Path>
+	    <Path fileType="data">/usr/share/cmake/qtxdg</Path>
+	    <Path fileType="data">/usr/share/applications</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-04-25</Date>
+            <Version>0.7.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
+

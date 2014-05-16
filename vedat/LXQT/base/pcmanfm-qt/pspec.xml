@@ -1,0 +1,63 @@
+<PISI>
+    <Source>
+        <Name>pcmanfm-qt</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>The LXQt file manager, Qt port of PCManFM</Summary>
+        <Description>File manager and desktop icon manager (Qt port of PCManFM and libfm)</Description>
+	<Archive sha1sum="ee44cc4251c3245530033a8058572d6eea150908" type="zip">https://content.wuala.com/contents/vedat/sources/pcmanfm-qt-master.zip</Archive>
+        <BuildDependencies>
+            <Dependency version="1.2.0">libfm-devel</Dependency>
+            <Dependency>liblxqt-devel</Dependency>
+            <Dependency>menu-cache-devel</Dependency>
+	    <Dependency>libqtxdg-devel</Dependency>
+	    <Dependency>evince-devel</Dependency>
+	    <Dependency>qt-devel</Dependency>
+	    <Dependency>cmake</Dependency>
+	    <Dependency>pkgconfig</Dependency>
+	    <Dependency>cairo-devel</Dependency>
+	    <Dependency>libtool</Dependency>
+	    <Dependency>gettext-devel</Dependency>
+	    <Dependency>intltool</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>pcmanfm-qt</Name>
+        <RuntimeDependencies>
+            <Dependency>gksu</Dependency>
+	    <Dependency>evince</Dependency>
+	    <Dependency>xarchiver</Dependency>
+            <Dependency>qterminal</Dependency>
+	    <Dependency>libqtxdg</Dependency>
+	    <Dependency>lxmenu-data</Dependency>
+	    <Dependency>glib2</Dependency>
+            <Dependency>menu-cache</Dependency>
+	    <Dependency>gvfs</Dependency>
+	    <Dependency>polkit-gnome</Dependency>
+	    <Dependency version="1.2.0">libfm</Dependency>
+	    <Dependency>icon-theme-oxygen-png</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share/</Path>
+	    <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.7.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat  Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
