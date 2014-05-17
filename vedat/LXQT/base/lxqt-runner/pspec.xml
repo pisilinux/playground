@@ -4,14 +4,14 @@
         <Homepage>http://www.lxde.org</Homepage>
         <Packager>
             <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
+            <Email>vedat@pisilinux.org</Email>
         </Packager>
         <License>GPL2</License>
-        <PartOf>desktop.lxqt.core</PartOf>
+        <PartOf>desktop.lxqt.base</PartOf>
         <IsA>app</IsA>
         <Summary>The LXQt application launcher</Summary>
         <Description>Tool used to launch programs quickly by typing their names</Description>
-        <Archive sha1sum="cf7d220e2bc9c4485db98af145db8856ab368cc0" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-runner-master.zip</Archive>
+        <Archive sha1sum="2908ba2f60d8adf206d6a85481a90a50ad8de11c" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-runner-master.zip</Archive>
         <BuildDependencies>
             <Dependency>liblxqt-devel</Dependency>
 	    <Dependency>lxqt-globalkeys-devel</Dependency>
@@ -22,7 +22,7 @@
         <Name>lxqt-runner</Name>
 	<RuntimeDependencies>
             <Dependency>libqtxdg</Dependency>
-	    <Dependency>menu-cache</Dependency>
+	    <Dependency>lxqt-menu-cache</Dependency>
 	    <Dependency>libX11</Dependency>
 	    <Dependency>qt</Dependency>
 	    <Dependency>libXext</Dependency>
@@ -38,7 +38,7 @@
             <Version>0.7.0</Version>
             <Comment>First Release</Comment>
             <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
+            <Email>vedat@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

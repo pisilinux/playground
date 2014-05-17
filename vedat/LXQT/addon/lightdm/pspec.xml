@@ -17,23 +17,27 @@
 	    <Dependency>itstool</Dependency>
 	    <Dependency>libxklavier-devel</Dependency>
 	    <Dependency>xorg-server-xephyr</Dependency>
+	    <Dependency>gobject-introspection-devel</Dependency>
+	    <Dependency>gtk-doc</Dependency>
+	    <Dependency>qt-devel</Dependency>
+	    <Dependency>libxml2-devel</Dependency>
+	    <Dependency>accountsservice-devel</Dependency>
         </BuildDependencies>
 	<Patches>
-            <Patch level="1">lightdm-use-run-dir.patch</Patch>
-            <Patch level="1">lightdm-disable-utmp-handling.patch</Patch>
-            <Patch level="1">lightdm-xauthlocalhostname-support.patch</Patch>
-        </Patches>
+            <Patch level="1">lightdm-default-config.patch</Patch>
+	    <Patch level="1">lightdm-users-config.patch</Patch>
+	</Patches>
     </Source>
     <Package>
         <Name>lightdm</Name>
 	<Conflicts>
-            <Package>kdm</Package>
             <Package>gdm</Package>
             <Package>slim</Package>
         </Conflicts>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/display-managers/lightdm.desktop">lightdm.desktop</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/xdm">xdm</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/etc/lightdm/Xsession">Xsession</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm-autologin">lightdm-autologin.pam</AdditionalFile>
         </AdditionalFiles>
         <Files>
 	    <Path fileType="sysdir">/etc</Path>
