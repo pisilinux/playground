@@ -4,19 +4,23 @@
         <Homepage>http://www.lxde.org</Homepage>
         <Packager>
             <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
+            <Email>vedat@pisilinux.org</Email>
         </Packager>
         <License>GPL2</License>
         <PartOf>desktop.lxqt.base</PartOf>
         <IsA>library</IsA>
         <Summary>Common base library for LXQt components.</Summary>
         <Description>Core utility library for all LXDE-Qt components</Description>
-        <Archive sha1sum="31de356d7c4992c2381487a4707acda589c9f386" type="zip">https://content.wuala.com/contents/vedat/sources/liblxqt-master.zip</Archive>
+        <Archive sha1sum="b04183354781df1678af80dbedae0a972d95bc54" type="zip">https://content.wuala.com/contents/vedat/sources/liblxqt-master.zip</Archive>
         <BuildDependencies>
             <Dependency>cmake</Dependency>
+	    <Dependency>libstdc++</Dependency>
+	    <Dependency>libdbusmenu-qt-devel</Dependency>
+	    <Dependency>glibc-devel</Dependency>
             <Dependency>qt-devel</Dependency>
 	    <Dependency>libqtxdg-devel</Dependency>
 	    <Dependency>libX11-devel</Dependency>
+	    <Dependency>pkgconfig</Dependency>
         </BuildDependencies>
     </Source>
     <Package>
@@ -47,7 +51,7 @@
             <Version>0.7.0</Version>
             <Comment>First Release</Comment>
             <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
+            <Email>vedat@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

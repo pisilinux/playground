@@ -1,0 +1,45 @@
+<PISI>
+    <Source>
+        <Name>lightdm-gtk-greeter</Name>
+        <Homepage>http://www.sharpley.org.uk</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Login screen using the LightDM framework.</Summary>
+        <Description>Login screen using the LightDM framework.</Description>
+        <Archive sha1sum="96ede652591a650e159ef5ae4c9b577e38b91ee4" type="targz">https://content.wuala.com/contents/vedat/sources/lightdm-gtk-greeter-1.8.5.tar.gz</Archive>    
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+            <Dependency>lightdm-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>lightdm-gtk-greeter</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>lightdm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/sbin/lightdm-gtk-greeter</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-02-03</Date>
+            <Version>1.8.5</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
