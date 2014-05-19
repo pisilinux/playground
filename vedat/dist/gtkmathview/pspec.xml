@@ -66,7 +66,7 @@
     <Package>
         <Name>gtkmathview-libxml2-reader</Name>
         <RuntimeDependencies>
-            <Dependency>mathmlview-backend-gtk</Dependency>
+            <Dependency>mathview-backend-gtk</Dependency>
             <Dependency>mathview-core</Dependency>
 	    <Dependency>gtk+extra</Dependency>
 	</RuntimeDependencies>
@@ -92,9 +92,12 @@
     </Package>
     <Package>
         <Name>mathview-core</Name>
+	<RuntimeDependencies>
+            <Dependency>gtkmathview</Dependency>
+	</RuntimeDependencies>
         <Files>
-	    <Path fileType="library">/usr/lib/libmathview.so.0</Path>
 	    <Path fileType="library">/usr/lib/libmathview.so</Path>
+	    <Path fileType="library">/usr/lib/libmathview.so.0</Path>
 	    <Path fileType="library">/usr/lib/libmathview.so.0.8.0</Path>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="manfile">/usr/share/man</Path>
