@@ -54,7 +54,7 @@
     <Package>
         <Name>mathview-backend-gtk</Name>
         <RuntimeDependencies>
-            <Dependency>gtkmathview</Dependency>
+            <Dependency>mathview-core</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="library">/usr/lib/libmathview-backend-gtk.so</Path>
@@ -67,7 +67,8 @@
         <Name>gtkmathview-libxml2-reader</Name>
         <RuntimeDependencies>
             <Dependency>mathmlview-backend-gtk</Dependency>
-            <Dependency>gtkmathview</Dependency>
+            <Dependency>mathview-core</Dependency>
+	    <Dependency>gtk+extra</Dependency>
 	</RuntimeDependencies>
         <Files>
 	    <Path fileType="library">/usr/lib/libgtkmathview-libxml2-reader.so</Path>
@@ -77,10 +78,20 @@
         </Files>
     </Package>
     <Package>
-        <Name>mathview-core</Name>
+        <Name>mathview-frontend-libxml2-reader</Name>
         <RuntimeDependencies>
-            <Dependency>gtkmathview</Dependency>
-        </RuntimeDependencies>
+            <Dependency>libxml2</Dependency>
+            <Dependency>mathview-core</Dependency>
+	</RuntimeDependencies>
+        <Files>
+	    <Path fileType="library">/usr/lib/libmathview-frontend-libxml2-reader.so</Path>
+	    <Path fileType="library">/usr/lib/libmathview-frontend-libxml2-reader.so.0</Path>
+	    <Path fileType="library">/usr/lib/libmathview-frontend-libxml2-reader.so.0.8.0</Path>	    
+            <Path fileType="library">/usr/lib/pkgconfig/mathview-frontend-libxml2-reader.pc</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>mathview-core</Name>
         <Files>
 	    <Path fileType="library">/usr/lib/libmathview.so.0</Path>
 	    <Path fileType="library">/usr/lib/libmathview.so</Path>
