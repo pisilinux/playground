@@ -4,14 +4,17 @@
         <Homepage>http://www.lxde.org</Homepage>
         <Packager>
             <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
+            <Email>vedat@pisilinux.org</Email>
         </Packager>
         <License>GPL2</License>
         <PartOf>desktop.lxqt.core</PartOf>
         <IsA>data</IsA>
         <Summary>Common data to run a LXQt session.</Summary>
         <Description>Common data file required for running an lxde-qt session</Description>	
-	<Archive sha1sum="e6dfba10040a1a6c152402120831194e642a8a27" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-common-master.zip</Archive>
+	<Archive sha1sum="9e32211ce5add049392de40d8d18cc1131fc3be9" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-common-master.zip</Archive>
+	<BuildDependencies>
+            <Dependency>liblxqt-devel</Dependency>
+        </BuildDependencies>
     </Source>
     <Package>
         <Name>lxqt-common</Name>
@@ -27,7 +30,7 @@
             <Version>0.7.0</Version>
             <Comment>First Release</Comment>
             <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
+            <Email>vedat@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

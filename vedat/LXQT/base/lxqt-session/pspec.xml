@@ -4,17 +4,18 @@
         <Homepage>http://www.lxde.org</Homepage>
         <Packager>
             <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
+            <Email>vedat@pisilinux.org</Email>
         </Packager>
         <License>GPL2</License>
-        <PartOf>desktop.lxqt.core</PartOf>
+        <PartOf>desktop.lxqt.base</PartOf>
         <IsA>app</IsA>
         <Summary>LXQt session</Summary>
         <Description>An alternative session manager ported from the original razor-session</Description>
-	<Archive sha1sum="0e070b9d5c65163419ce6a229a35a6b4c9ba1c23" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-session-master.zip</Archive>
+	<Archive sha1sum="0c10a9883d89a05872af04f5506a6f90fbb0fad8" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-session-master.zip</Archive>
         <BuildDependencies>
             <Dependency>liblxqt-devel</Dependency>
 	    <Dependency>libqtxdg-devel</Dependency>
+	    <Dependency>openbox3-devel</Dependency>
         </BuildDependencies>
     </Source>
     <Package>
@@ -22,6 +23,7 @@
         <RuntimeDependencies>
             <Dependency>libqtxdg</Dependency>
 	    <Dependency>liblxqt</Dependency>
+	    <Dependency>openbox3</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="executable">/usr/bin</Path>
@@ -38,7 +40,7 @@
             <Version>0.7.0</Version>
             <Comment>First Release</Comment>
             <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
+            <Email>vedat@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

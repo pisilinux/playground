@@ -1,0 +1,25 @@
+--- qt-everywhere-opensource-src-4.8.5/configure	2013-10-10 00:40:17.000000000 +0200
++++ qt-everywhere-opensource-src-4.8.5/configure	2013-10-10 13:47:49.000000000 +0200
+@@ -3235,6 +3235,12 @@ if [ -z "${CFG_HOST_ARCH}" ]; then
+         fi
+         CFG_HOST_ARCH=powerpc
+         ;;
++    ppc64le:*:*|*:ppc64le:*|*:*:ppc64le)
++        if [ "$OPT_VERBOSE" = "yes" ]; then
++            echo "    64-bit PowerPC little endian (ppc64le)"
++        fi
++        CFG_HOST_ARCH=powerpc
++        ;;
+     *:*:s390*)
+     	if [ "$OPT_VERBOSE" = "yes" ]; then
+     	    echo "    IBM S/390 (s390)"
+@@ -3299,6 +3305,9 @@ if [ "$PLATFORM" != "$XPLATFORM" -a "$CF
+     arm*)
+         CFG_ARCH=arm
+         ;;
++    ppc64le)
++        CFG_ARCH=powerpc
++        ;;
+     *)
+         CFG_ARCH="$CFG_EMBEDDED"
+         ;;

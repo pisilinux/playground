@@ -9,15 +9,20 @@ from pisi.actionsapi import get
 
 def setup():
     autotools.configure("--prefix=/usr \
+                         --localstatedir=/var \
+                         --sysconfdir=/etc \
+                         --sbindir=/usr/bin \
+                         --libexecdir=/usr/lib/ \
                          --disable-static \
                          --enable-liblightdm-gobject \
-                         --disable-gtk-doc \
                          --disable-tests \
                          --enable-liblightdm-qt \
+                         --with-user-session=gnome \
+                         --with-greeter-user=root \
                          --with-greeter-session=lxqt-lightdm-greeter \
-                         --with-greeter-user=lightdm \
-                         --with-user-session=lxqt-session")
-
+                         --with-html-dir=/usr/share/doc/lightdm/html \
+                         ")
+##--with-greeter-user=lightdm
 def build():
     autotools.make()
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>python-ete</Name>
+        <Homepage>https://pythonhosted.org/ete2</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>library</IsA>
+        <Summary>FIXME</Summary>
+        <Description>FIXME.</Description>
+        <Archive sha1sum="b8f69e8b6d5ab30fd8e0a1678aaacb735eb9298e" type="targz">http://ete.cgenomics.org/releases/ete2/ete2-2.2rev1026.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python-qt</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>python-ete</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/python*</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2012-10-13</Date>
+            <Version>2.2_1026</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

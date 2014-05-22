@@ -4,18 +4,24 @@
         <Homepage>http://www.lxde.org</Homepage>
         <Packager>
             <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
+            <Email>vedat@pisilinux.org</Email>
         </Packager>
         <License>GPL2</License>
         <PartOf>desktop.lxqt.base</PartOf>
         <IsA>library</IsA>
         <Summary>Core library of PCManFM file manager</Summary>
         <Description>libfm is a Core library of PCManFM file manager</Description>
-	<Archive sha1sum="bbe96b564cefc46c0bb72ad85f5dce4f4d56eca7" type="zip">https://content.wuala.com/contents/vedat/sources/libfm-master.zip</Archive>
+	<Archive sha1sum="2242c37065c47813a4e092c64e5b3d2663da17f5" type="zip">https://content.wuala.com/contents/vedat/sources/libfm-master.zip</Archive>
         <BuildDependencies>
             <Dependency>qt-devel</Dependency>
-	    <Dependency>menu-cache-devel</Dependency>
 	    <Dependency>libexif-devel</Dependency>
+	    <Dependency>dbus-devel</Dependency>
+	    <Dependency>glib2-devel</Dependency>
+	    <Dependency>glibc-devel</Dependency>
+	    <Dependency>gst-plugins-base-devel</Dependency>
+	    <Dependency>gtk-doc</Dependency>
+	    <Dependency>libmenu-cache</Dependency>
+	    <Dependency>lxqt-menu-cache-devel</Dependency>
         </BuildDependencies>
     </Source>
     <Package>
@@ -27,9 +33,19 @@
             <Path fileType="doc">/usr/share</Path>
         </Files>
 	<RuntimeDependencies>
-	    <Dependency>lxmenu-data</Dependency>
+	    <Dependency>lxqtmenu-data</Dependency>
             <Dependency>gvfs</Dependency>
-        </RuntimeDependencies>
+	    <Dependency>kdelibs</Dependency>
+            <Dependency>QtCurve-KDE4</Dependency>
+	    <Dependency>homerun</Dependency>
+            <Dependency>automoc4</Dependency>
+	    <Dependency>curl-devel</Dependency>
+	    <Dependency>cursor-theme-oxygen-blue</Dependency>    
+	    <Dependency>qt-webkit</Dependency>
+            <Dependency>python-qt-webkit</Dependency>
+	    <Dependency>webkit-gtk3</Dependency>
+	    <Dependency>gst-plugins-base</Dependency>
+	 </RuntimeDependencies>
     </Package>
     <Package>
         <Name>libfm-qt-devel</Name>
@@ -48,7 +64,7 @@
             <Version>1.2.0</Version>
             <Comment>First Release</Comment>
             <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
+            <Email>vedat@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

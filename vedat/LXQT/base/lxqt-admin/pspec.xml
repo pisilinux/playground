@@ -1,0 +1,37 @@
+<PISI>
+    <Source>
+        <Name>lxqt-admin</Name>
+        <Homepage>https://github.com/lxde/lxqt-admin</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>desktop.lxqt.base</PartOf>
+        <IsA>app</IsA>
+        <Summary>LXQt system administration tool</Summary>
+        <Description>LXQt system administration tool</Description>
+        <BuildDependencies>
+            <Dependency>liboobs-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="74d6896d77afe26bc0e84480d18371cf9e01114e" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-admin-master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>lxqt-admin</Name>
+        <RuntimeDependencies>
+            <Dependency>liboobs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-22</Date>
+            <Version>0.1.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
