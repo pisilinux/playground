@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mediadownloader</Name>
+        <Homepage>http://marcobavagnoli.wordpress.com/about/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>Mediadownloader is an opensource software that lets you search, watch and download items with Google Image and YouTube.</Summary>
+        <Description>It grabs video streams while browsing with firefox (only linux). Videos can be converted automatically using ffmpeg.</Description>
+        <Archive sha1sum="ed094d7c7de948d35c457794077d18a0acc50bc0" type="targz">http://sourceforge.net/projects/googleimagedown/files/project/1.5.2/mediadownloader_1.5.2-src.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>phonon-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+            <Dependency>libXtst-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>mediadownloader</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>qt-webkit</Dependency>
+            <Dependency>libXtst</Dependency>
+            <Dependency>phonon</Dependency>
+            <Dependency>phonon-backend-gstreamer</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>ffmpeg</Dependency>
+            <Dependency>lame</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="application">/usr/share/applications</Path>
+            <Path fileType="icon">/usr/share/icons</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-05-22</Date>
+            <Version>1.5.2</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
