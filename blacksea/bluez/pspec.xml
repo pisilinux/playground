@@ -14,7 +14,7 @@
         <IsA>app:console</IsA>
         <Summary>Official Linux Bluetooth protocol stack</Summary>
         <Description>bluez contains the tools and libraries that provides support for the core Bluetooth layers and protocols.</Description>
-        <Archive sha1sum="6c100687242c777ef0077373224cfb703fcc7b18" type="tarxz">https://www.kernel.org/pub/linux/bluetooth/bluez-5.19.tar.xz</Archive>
+        <Archive sha1sum="5d5121b7c4afba5b4b55c1e1db2ef5d77a362a43" type="tarxz">https://www.kernel.org/pub/linux/bluetooth/bluez-5.18.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>cups-devel</Dependency>
             <Dependency>libnl-devel</Dependency>
@@ -25,7 +25,11 @@
             <Dependency>gst-plugins-base-devel</Dependency>
             <Dependency>libical-devel</Dependency>
         </BuildDependencies>
-    </Source>
+        <Patches>
+            <!-- Fedora Patches --> 
+            <Patch level="1">bluez-5.18-obexd_without_systemd-1.patch</Patch>
+    </Patches>
+            </Source>
 
     <Package>
         <Name>bluez</Name>
@@ -92,7 +96,7 @@
     <History>
         <Update release="4">
             <Date>2014-05-21</Date>
-            <Version>5.19</Version>
+            <Version>5.18</Version>
             <Comment>Rebuild Unused</Comment>
             <Name>Varol Maksutoğlu</Name>
             <Email>waroi@pisilinux.org</Email>

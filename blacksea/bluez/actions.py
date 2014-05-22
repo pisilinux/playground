@@ -10,10 +10,13 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-vfi")
-    autotools.configure("--disable-systemd \
-                         --enable-sixaxis \
-                         --enable-library")
+    autotools.autoreconf("-fi")
+    autotools.configure("\
+                         --prefix=/usr         \
+                        --sysconfdir=/etc     \
+                        --localstatedir=/var  \
+                        --enable-library      \
+                        --disable-systemd")
     
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
     

@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libbluedevil</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <IsA>library</IsA>
+        <Summary>Qt based Bluetooth library</Summary>
+        <Description>libbluedevil is a Qt based library written in C++ to handle all Bluetooth functionality.</Description>
+        <Archive sha1sum="727c25ec6840d67976ba14e268c80436d0676d24" type="tarxz">http://download.kde.org/unstable/libbluedevil/2.0-rc1/src/libbluedevil-2.0-rc1.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libbluedevil</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libbluedevil-devel</Name>
+        <Summary>Development files for libbluedevil</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libbluedevil</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2013-08-27</Date>
+            <Version>1.9.2</Version>
+            <Comment>R.Bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-12-30</Date>
+            <Version>1.9.2</Version>
+            <Comment>First release</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
