@@ -11,7 +11,10 @@
         <IsA>data</IsA>
         <Summary>Common data to run a LXQt session.</Summary>
         <Description>Common data file required for running an lxde-qt session</Description>	
-	<Archive sha1sum="e6dfba10040a1a6c152402120831194e642a8a27" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-common-master.zip</Archive>
+	<Archive sha1sum="9e32211ce5add049392de40d8d18cc1131fc3be9" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-common-master.zip</Archive>
+	<BuildDependencies>
+            <Dependency>liblxqt-devel</Dependency>
+        </BuildDependencies>
     </Source>
     <Package>
         <Name>lxqt-common</Name>
