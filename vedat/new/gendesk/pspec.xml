@@ -1,0 +1,37 @@
+<PISI>
+    <Source>
+        <Name>gendesk</Name>
+        <Homepage>http://roboticoverlords.org/gendesk/</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>MIT</License>
+        <PartOf>util</PartOf>
+        <IsA>util</IsA>
+        <Summary>Desktop File Generator</Summary>
+        <Description>Utility to generate .desktop files and download icons</Description>
+        <BuildDependencies>
+            <Dependency>go</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="ab901b4c427a79426b5145a15fc0fde19c39adbb" type="tarxz">http://roboticoverlords.org/gendesk/gendesk-0.6.1.tar.xz</Archive>
+    </Source>
+    <Package>
+        <Name>gendesk</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-04-17</Date>
+            <Version>0.6.1</Version>
+            <Comment>first release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
