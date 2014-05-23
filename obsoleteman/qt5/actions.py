@@ -18,12 +18,8 @@ qtbase = qt5.prefix
 absoluteWorkDir = "%s/%s" % (get.workDIR(), WorkDir)
 
 def setup():
-    #pisitools.flags.add("-I/usr/include/gtk-2.0/gdk")
-    #make sure we don't use them
-    
-    
-    #for d in ('libjpeg', 'freetype', 'libpng', 'zlib', "xcb", "sqlite"):
-        #shelltools.unlinkDir("qtbase/src/3rdparty/%s" % d)
+    for d in ('libjpeg', 'freetype', 'libpng', 'zlib', "xcb", "sqlite"):
+        shelltools.unlinkDir("qtbase/src/3rdparty/%s" % d)
 
     filteredCFLAGS = get.CFLAGS().replace("-g3", "-g")
     filteredCXXFLAGS = get.CXXFLAGS().replace("-g3", "-g")
@@ -103,7 +99,11 @@ def setup():
                    -translationdir /usr/share/qt5/translations \
                    -sysconfdir /etc \
                    -system-sqlite \
-                   -c++11 \
+                   -system-harfbuzz \
+                   -system-libjpeg \
+                   -system-libpng \
+                   -system-zlib \
+                   -nomake tests \
                    -openssl-linked \
                    -nomake examples \
                    -nomake tools \
@@ -111,7 +111,6 @@ def setup():
                    -no-rpath \
                    -no-strip \
                    -dbus-linked \
-                   -no-sse2 \
                    -no-openvg \
                    -confirm-license \
                    -reduce-relocations  \
@@ -130,19 +129,6 @@ def install():
         return
     
     qt5.install("INSTALL_ROOT=%s" % get.installDIR())
-
-
-    ##Remove phonon, we use KDE's phonon but we have to build Qt with Phonon support for webkit and some other stuff
-    #pisitools.remove("%s/libphonon*" % qt5.libdir)
-    #pisitools.removeDir("%s/phonon" % qt5.includedir)
-    #if shelltools.isDirectory("%s/%s/phonon_backend" % (get.installDIR(), qt5.plugindir)):
-        #pisitools.removeDir("%s/phonon_backend" % qt5.plugindir)
-    #pisitools.remove("%s/pkgconfig/phonon*" % qt5.libdir)
-    ## Phonon 4.5 provides libphononwidgets.so file
-    #pisitools.remove("%s/designer/libphononwidgets.so" % qt5.plugindir)
-
-    ##Remove lost /usr/tests directory
-    #pisitools.removeDir("usr/tests")
 
     # Turkish translations
     #shelltools.export("LD_LIBRARY_PATH", "%s%s" % (get.installDIR(), qt5.libdir))
@@ -164,6 +150,4 @@ def install():
             if name.endswith(".prl"):
                 pisitools.dosed(os.path.join(root, name), "^QMAKE_PRL_BUILD_DIR.*", "")
 
-    ## Remove useless image directory, images of HTML docs are in doc/html/images
-    #pisitools.removeDir("%s/src" % qt5.docdir)
     pisitools.dodoc("LGPL_EXCEPTION.txt", "LICENSE.*")

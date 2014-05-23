@@ -35,7 +35,6 @@
         </BuildDependencies>
         <Patches>
             <!-- Fedora Patches --> 
-<!--             <Patch level="1">qtbase-multilib_optflags.patch</Patch> -->
             <Patch level="0">qtbase-opensource-src-5.2.0-enable_ft_lcdfilter.patch</Patch>
             <Patch level="0">qt-everywhere-opensource-src-4.8.5-QTBUG-35459.patch</Patch>
             <!-- Pisilinux Patches --> 
@@ -52,7 +51,6 @@
             <Path fileType="library">/usr/lib/qt5/qml</Path>
             <Path fileType="library">/usr/lib/qt5/plugins</Path>
             <Path fileType="executable">/usr/lib/qt5</Path>
-            <Path fileType="data">/usr/lib/*.prl</Path> <!-- fck -->
         </Files>
         <RuntimeDependencies>
             <Dependency>tiff</Dependency>
@@ -92,6 +90,7 @@
             <Path fileType="data">/usr/lib/pkgconfig</Path>
             <Path fileType="data">/usr/lib/cmake</Path>
             <Path fileType="data">/usr/lib/qt5/mkspecs</Path>
+            <Path fileType="data">/usr/lib/*.prl</Path>
         </Files>
         <RuntimeDependencies>
             <Dependency release="current">qt5</Dependency>
@@ -139,7 +138,7 @@
     <Package>
         <Name>qt5-webkit</Name>
         <RuntimeDependencies>
-            <Dependency version="current">qt</Dependency>
+            <Dependency version="current">qt5</Dependency>
             <Dependency>gstreamer</Dependency>
             <Dependency>libXrender</Dependency>
             <Dependency>gst-plugins-base</Dependency>
@@ -151,77 +150,79 @@
     
    <Package>
         <Name>qt5-webkit-devel</Name>
-        <Summary>Development files for Qt Webkit</Summary>
+        <Summary>Development files for Qt5 Webkit</Summary>
         <RuntimeDependencies>
-            <Dependency version="current">qt-devel</Dependency>
+            <Dependency version="current">qt5-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include/Qt/*WebKit*</Path>
             <Path fileType="header">/usr/include/Qt/*webkit*</Path>
             <Path fileType="header">/usr/include/QtWebKit</Path>
             <Path fileType="data">/usr/lib/pkgconfig/*WebKit*</Path>
+            <Path fileType="data">/usr/lib/libQt5WebKit.prl</Path>
+            <Path fileType="data">/usr/lib/libQt5WebKitWidgets.prl</Path>
         </Files>
     </Package>
     
         <Package>
         <Name>qt5-sql-mysql</Name>
         <RuntimeDependencies>
-            <Dependency version="current">qt</Dependency>
+            <Dependency version="current">qt5</Dependency>
             <Dependency>mariadb-lib</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/qt4/plugins/sqldrivers/libqsqlmysql.so</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins/sqldrivers/libqsqlmysql.so</Path>
         </Files>
     </Package>
 
     <Package>
         <Name>qt5-sql-postgresql</Name>
         <RuntimeDependencies>
-            <Dependency version="current">qt</Dependency>
+            <Dependency version="current">qt5</Dependency>
             <Dependency>postgresql-lib</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/qt4/plugins/sqldrivers/libqsqlpsql.so</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins/sqldrivers/libqsqlpsql.so</Path>
         </Files>
     </Package>
 
     <Package>
         <Name>qt5-sql-sqlite</Name>
         <RuntimeDependencies>
-            <Dependency version="current">qt</Dependency>
+            <Dependency version="current">qt5</Dependency>
             <Dependency>sqlite</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/qt4/plugins/sqldrivers/libqsqlite.so</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins/sqldrivers/libqsqlite.so</Path>
         </Files>
     </Package>
 
     <Package>
         <Name>qt5-sql-odbc</Name>
         <RuntimeDependencies>
-            <Dependency version="current">qt</Dependency>
+            <Dependency version="current">qt5</Dependency>
             <Dependency>unixODBC</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/qt4/plugins/sqldrivers/libqsqlodbc.so</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins/sqldrivers/libqsqlodbc.so</Path>
         </Files>
     </Package>
 
     <Package>
         <Name>qt5-sql-ibase</Name>
         <RuntimeDependencies>
-            <Dependency version="current">qt</Dependency>
+            <Dependency version="current">qt5</Dependency>
             <Dependency>firebird-client</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/qt4/plugins/sqldrivers/libqsqlibase.so</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins/sqldrivers/libqsqlibase.so</Path>
         </Files>
     </Package>
     
     <Package>
         <Name>qt5-32bit</Name>
         <PartOf>emul32</PartOf>
-        <Summary>32-bit shared libraries for qt</Summary>
+        <Summary>32-bit shared libraries for qt5</Summary>
         <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>mesa-32bit</Dependency>
@@ -263,7 +264,7 @@
             <Dependency>libXrender-32bit</Dependency>
             <Dependency>fontconfig-32bit</Dependency>
             <Dependency>libjpeg-turbo-32bit</Dependency>
-            <Dependency release="current">qt</Dependency>
+            <Dependency release="current">qt5</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32</Path>
@@ -273,7 +274,7 @@
     <Package>
         <Name>qt5-webkit-32bit</Name>
         <PartOf>emul32</PartOf>
-        <Summary>32-bit shared libraries for qt-webkit</Summary>
+        <Summary>32-bit shared libraries for qt5-webkit</Summary>
         <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>glib2-32bit</Dependency>
@@ -284,8 +285,8 @@
             <Dependency>gst-plugins-base-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
-            <Dependency release="current">qt-webkit</Dependency>
-            <Dependency>qt-32bit</Dependency>
+            <Dependency release="current">qt5-webkit</Dependency>
+            <Dependency>qt5-32bit</Dependency>
             <Dependency>glib2-32bit</Dependency>
             <Dependency>libX11-32bit</Dependency>
             <Dependency>sqlite-32bit</Dependency>
@@ -299,17 +300,10 @@
     </Package>
     
     <History>
-        <Update release="2">
+        <Update release="1">
             <Date>2014-05-22</Date>
             <Version>5.3.0</Version>
-            <Comment>Version bump.</Comment>
-            <Name>Yusuf Aydemir</Name>
-            <Email>yusuf.aydemir@pisilinux.org</Email>
-        </Update>
-        <Update release="1">
-            <Date>2014-03-03</Date>
-            <Version>5.2.1</Version>
-            <Comment>First release.</Comment>
+            <Comment>New cookie.</Comment>
             <Name>Yusuf Aydemir</Name>
             <Email>yusuf.aydemir@pisilinux.org</Email>
         </Update>
