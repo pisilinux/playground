@@ -17,9 +17,14 @@ WorkDir = "qt-everywhere-opensource-src-%s" % get.srcVERSION().replace('_','-').
 qtbase = qt5.prefix
 absoluteWorkDir = "%s/%s" % (get.workDIR(), WorkDir)
 
+#Temporary bindir to avoid qt4 conflicts
+bindirQt5="/usr/lib/qt5/bin"
+
 def setup():
-    for d in ('libjpeg', 'freetype', 'libpng', 'zlib', "xcb", "sqlite"):
-        shelltools.unlinkDir("qtbase/src/3rdparty/%s" % d)
+    checkdeletepath="%s/qtbase/src/3rdparty"  % absoluteWorkDir
+    for dir in ('libjpeg', 'freetype', 'libpng', 'zlib', "xcb", "sqlite"):
+        if os.path.exists(checkdeletepath+dir):
+            shelltools.unlinkDir(checkdeletepath+dir)
 
     filteredCFLAGS = get.CFLAGS().replace("-g3", "-g")
     filteredCXXFLAGS = get.CXXFLAGS().replace("-g3", "-g")
@@ -85,7 +90,7 @@ def setup():
                    -datadir %s \
                    -importdir %s \
                    -headerdir %s \
-                   -reduce-relocations" % (qt5.prefix, qt5.bindir, qt5.archdatadir, qt5.libdir, qt5.docdir, qt5.examplesdir, qt5.plugindir, qt5.translationdir, qt5.sysconfdir, qt5.datadir, qt5.importdir, qt5.headerdir)
+                   -reduce-relocations" % (qt5.prefix, bindirQt5, qt5.archdatadir, qt5.libdir, qt5.docdir, qt5.examplesdir, qt5.plugindir, qt5.translationdir, qt5.sysconfdir, qt5.datadir, qt5.importdir, qt5.headerdir)
     else:
         pisitools.dosed("qtbase/mkspecs/linux-g++-64/qmake.conf", "-m64", "-m32")
         shelltools.export("LDFLAGS", "-m32 %s" % get.LDFLAGS())
