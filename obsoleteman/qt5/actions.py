@@ -133,8 +133,13 @@ def install():
         shelltools.move("%s32/usr/lib32" % get.installDIR(), "%s/usr" % get.installDIR())
         return
     
+    pisitools.dodir(qt5.bindir)
+    pisitools.dodir(qt5.libdir)
     qt5.install("INSTALL_ROOT=%s" % get.installDIR())
-
+    
+    for bin in shelltools.ls("%s/usr/lib/qt5/bin" % get.installDIR()):
+        pisitools.dosym("/usr/lib/qt5/bin/%s" % bin, "/usr/bin/%s-qt5" % bin)
+    
     # Turkish translations
     #shelltools.export("LD_LIBRARY_PATH", "%s%s" % (get.installDIR(), qt5.libdir))
     #shelltools.system("%s%s/lrelease l10n-tr/*.ts" % (get.installDIR(), qt5.bindir))

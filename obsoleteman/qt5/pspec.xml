@@ -57,7 +57,41 @@
             <Patch level="1">mkspecs.patch</Patch>
         </Patches>
     </Source>
-
+    
+    <Package>
+        <Name>qt5-devel</Name>
+        <Summary>Development files for Qt 5</Summary>
+        <Description>Development files for Qt 5</Description>
+        <Files>
+            <Path fileType="executable">/usr/lib/qt5/bin/qdbusxml2cpp</Path>
+            <Path fileType="executable">/usr/bin/qdbusxml2cpp*</Path>
+            <Path fileType="executable">/usr/lib/qt5/bin/qdbuscpp2xml</Path>
+            <Path fileType="executable">/usr/bin/qdbuscpp2xml*</Path>
+            <Path fileType="executable">/usr/lib/qt5/bin/moc</Path>
+            <Path fileType="executable">/usr/bin/moc*</Path>
+            <Path fileType="executable">/usr/lib/qt5/bin/qdoc</Path>
+            <Path fileType="executable">/usr/bin/qdoc*</Path>
+            <Path fileType="executable">/usr/lib/qt5/bin/qmake</Path>
+            <Path fileType="executable">/usr/bin/qmake*</Path>
+            <Path fileType="executable">/usr/lib/qt5/bin/rcc</Path>
+            <Path fileType="executable">/usr/bin/rcc*</Path>
+            <Path fileType="executable">/usr/lib/qt5/bin/qlalr</Path>
+            <Path fileType="executable">/usr/bin/qlalr*</Path>
+            <Path fileType="executable">/usr/lib/qt5/bin/uic</Path>
+            <Path fileType="executable">/usr/bin/uic*</Path>
+            <Path fileType="executable">/usr/lib/qt5/bin/syncqt*</Path>
+            <Path fileType="executable">/usr/bin/syncqt*</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+            <Path fileType="data">/usr/lib/qt5/mkspecs</Path>
+            <Path fileType="data">/usr/lib/*.prl</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5</Dependency>
+        </RuntimeDependencies>
+    </Package>
+    
     <Package>
         <Name>qt5</Name>
         <Files>
@@ -66,13 +100,15 @@
             <Path fileType="library">/usr/lib/qt5/imports</Path>
             <Path fileType="library">/usr/lib/qt5/qml</Path>
             <Path fileType="library">/usr/lib/qt5/plugins</Path>
-            <Path fileType="executable">/usr/lib/qt5</Path>
+            <Path fileType="executable">/usr/lib/qt5/bin/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/lib/qt5/libexec</Path>
         </Files>
         <RuntimeDependencies>
             <Dependency>tiff</Dependency>
             <Dependency>webp</Dependency>
             <Dependency>mesa</Dependency>
-            <Dependency>gtk2++</Dependency>
+            <Dependency>gtk2</Dependency>
             <Dependency>libSM</Dependency>
             <Dependency>libXi</Dependency>
             <Dependency>pango</Dependency>
@@ -95,24 +131,7 @@
             <Dependency>gst-plugins-base</Dependency>
         </RuntimeDependencies>
     </Package>
-    
-    <Package>
-        <Name>qt5-devel</Name>
-        <Summary>Development files for Qt 5</Summary>
-        <Description>Development files for Qt 5</Description>
-        <Files>
-            <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="header">/usr/include</Path>
-            <Path fileType="data">/usr/lib/pkgconfig</Path>
-            <Path fileType="data">/usr/lib/cmake</Path>
-            <Path fileType="data">/usr/lib/qt5/mkspecs</Path>
-            <Path fileType="data">/usr/lib/*.prl</Path>
-        </Files>
-        <RuntimeDependencies>
-            <Dependency release="current">qt5</Dependency>
-        </RuntimeDependencies>
-    </Package>
-    
+       
     <Package>
         <Name>qt5-demos</Name>
         <Summary>Demonstration programs for Qt 5</Summary>
@@ -161,6 +180,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib/*WebKit*</Path>
+            <Path fileType="library">/usr/lib/*libQt5WebKit*</Path>
         </Files>
     </Package>
     
