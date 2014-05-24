@@ -1,0 +1,39 @@
+<PISI>
+    <Source>
+        <Name>libdbi-drivers</Name>
+        <Homepage>http://libdbi.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <PartOf>multimedia.sound</PartOf>
+        <IsA>library</IsA>
+        <Summary>libdbi implements a database-independent abstraction layer in C, similar to the DBI/DBD layer in Perl.</Summary>
+        <Description>libdbi implements a database-independent abstraction layer in C, similar to the DBI/DBD layer in Perl.</Description>
+        <BuildDependencies>
+            <Dependency>libdbi</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="8472875d30c216540d48d591b442e40ba4f7df5d" type="binary">http://sourceforge.net/projects/libdbi-drivers/files/libdbi-drivers/libdbi-drivers-0.9.0/libdbi-drivers-0.9.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>libdbi-drivers</Name>
+        <RuntimeDependencies>
+            <Dependency>libdbi</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-24</Date>
+            <Version>0.9.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->

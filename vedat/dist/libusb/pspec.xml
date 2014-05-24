@@ -1,0 +1,39 @@
+<PISI>
+    <Source>
+        <Name>libusb</Name>
+        <Homepage>http://www.libusb.org/</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>hardware.mobile</PartOf>
+        <IsA>library</IsA>
+        <Summary>libusb is a C library that gives applications easy access to USB devices on many different operating systems.</Summary>
+        <Description>libusb is a C library that gives applications easy access to USB devices on many different operating systems.</Description>
+        <BuildDependencies>
+            <Dependency>usb-modeswitch</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="5f7bbf42a4d6e6b88d5e7666958c80f8455ee915" type="tarbz2">http://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.18/libusb-1.0.18.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>libusb</Name>
+        <RuntimeDependencies>
+            <Dependency>usb-modeswitch</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-23</Date>
+            <Version>1.0.18 </Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
