@@ -1,0 +1,13 @@
+Index: cinnamon-session/cinnamon-session/csm-manager.c
+===================================================================
+--- cinnamon-session.orig/cinnamon-session/csm-manager.c
++++ cinnamon-session/cinnamon-session/csm-manager.c
+@@ -166,7 +166,7 @@ struct CsmManagerPrivate
+         gboolean                dbus_disconnected : 1;
+ 
+         ca_context             *ca;
+-        gboolean               *logout_sound_is_playing;
++        gboolean               logout_sound_is_playing;
+ 
+ };
+ 

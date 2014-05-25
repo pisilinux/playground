@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cinnamon-settings-daemon</Name>
+        <Homepage>http://cinnamon.linuxmint.com/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <License>LGPLv2+</License>
+        <IsA>app:gui</IsA>
+        <Summary>The daemon sharing settings from CINNAMON to GTK+/KDE applications</Summary>
+        <Description>A daemon to share settings from CINNAMON to other applications. It also handles global keybindings, and many of desktop-wide settings.</Description>
+        <Archive sha1sum="047b4d8930c7aa7226e20360241c84b2f70579d0" type="targz">https://github.com/linuxmint/cinnamon-settings-daemon/archive/2.2.3.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>nss-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>cups-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>lcms2-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>libXi-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>colord-devel</Dependency>
+            <Dependency>upower-devel</Dependency>
+            <Dependency>mit-kerberos</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>libwacom-devel</Dependency>
+            <Dependency>libXfixes-devel</Dependency>
+            <Dependency>libcanberra-gtk3</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libgnomekbd-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>pulseaudio-libs-devel</Dependency>
+            <Dependency>xorg-input-wacom-devel</Dependency>
+            <Dependency>cinnamon-desktop-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">cinnamon-settings-daemon-2.2.2-optional.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>cinnamon-settings-daemon</Name>
+        <RuntimeDependencies>
+            <Dependency>nss</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>lcms2</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>libXi</Dependency>
+            <Dependency>colord</Dependency>
+            <Dependency>upower</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>libXfixes</Dependency>
+            <Dependency>libwacom</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libxklavier</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>libgnomekbd</Dependency>
+            <Dependency>pulseaudio-libs</Dependency>
+            <Dependency>libcanberra-gtk3</Dependency>
+            <Dependency>cinnamon-desktop</Dependency>
+            <Dependency>alsa-plugins-pulseaudio</Dependency>
+            <Dependency>xorg-input-wacom</Dependency>
+            <Dependency>librsvg</Dependency>
+            <Dependency>ibus</Dependency>
+            <Dependency>libXtst</Dependency>
+            <Dependency>pulseaudio</Dependency>
+            <Dependency>polkit-gnome</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="data">/usr/share/polkit-1</Path>
+            <Path fileType="config">/etc/dbus-1/system.d</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/applications/</Path>
+            <Path fileType="config">/etc/cinnamon-settings-daemon/</Path>
+            <Path fileType="data">/usr/share/cinnamon-settings-daemon*</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>cinnamon-settings-daemon-devel</Name>
+        <Summary>cinnamon-settings-daemon için geliştirme dosyaları</Summary>
+        <RuntimeDependencies>
+          <Dependency release="current">cinnamon-settings-daemon</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2014-05-16</Date>
+            <Version>2.2.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2014-04-11</Date>
+            <Version>2.0.8</Version>
+            <Comment>Some fix</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-12-12</Date>
+            <Version>2.0.8</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

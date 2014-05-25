@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cinnamon-bluetooth</Name>
+        <Homepage>http://cinnamon.linuxmint.com/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Cinnamon bluetooth</Summary>
+        <Description>Cinnamon bluetooth</Description>
+        <Archive sha1sum="90f1c9ef70bff434292a2d44842003b38d58785d" type="targz">https://github.com/linuxmint/cinnamon-bluetooth/archive/3.8.4.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>cinnamon-control-center-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cinnamon-bluetooth</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libtool</Dependency>
+            <Dependency>rfkill</Dependency>
+            <Dependency>gnome-bluetooth</Dependency>
+            <Dependency>cinnamon-control-center</Dependency>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>gnome-bluetooth</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/cinnamon</Path>
+            <Path fileType="data">/usr/share/cinnamon-bluetooth</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2014-05-12</Date>
+            <Version>3.8.4</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-04-18</Date>
+            <Version>3.8.3</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
