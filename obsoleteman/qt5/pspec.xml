@@ -67,23 +67,14 @@
         <Description>Development files for Qt 5</Description>
         <Files>
             <Path fileType="executable">/usr/lib/qt5/bin/qdbusxml2cpp</Path>
-            <Path fileType="executable">/usr/bin/qdbusxml2cpp*</Path>
             <Path fileType="executable">/usr/lib/qt5/bin/qdbuscpp2xml</Path>
-            <Path fileType="executable">/usr/bin/qdbuscpp2xml*</Path>
             <Path fileType="executable">/usr/lib/qt5/bin/moc</Path>
-            <Path fileType="executable">/usr/bin/moc*</Path>
             <Path fileType="executable">/usr/lib/qt5/bin/qdoc</Path>
-            <Path fileType="executable">/usr/bin/qdoc*</Path>
             <Path fileType="executable">/usr/lib/qt5/bin/qmake</Path>
-            <Path fileType="executable">/usr/bin/qmake*</Path>
             <Path fileType="executable">/usr/lib/qt5/bin/rcc</Path>
-            <Path fileType="executable">/usr/bin/rcc*</Path>
             <Path fileType="executable">/usr/lib/qt5/bin/qlalr</Path>
-            <Path fileType="executable">/usr/bin/qlalr*</Path>
             <Path fileType="executable">/usr/lib/qt5/bin/uic</Path>
-            <Path fileType="executable">/usr/bin/uic*</Path>
             <Path fileType="executable">/usr/lib/qt5/bin/syncqt*</Path>
-            <Path fileType="executable">/usr/bin/syncqt*</Path>
             <Path fileType="header">/usr/include</Path>
             <Path fileType="data">/usr/lib/pkgconfig</Path>
             <Path fileType="data">/usr/lib/cmake</Path>
@@ -144,7 +135,6 @@
             <Path fileType="library">/usr/lib/qt5/qml</Path>
             <Path fileType="library">/usr/lib/qt5/plugins</Path>
             <Path fileType="executable">/usr/lib/qt5/bin/</Path>
-            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="executable">/usr/lib/qt5/libexec</Path>
         </Files>
         <RuntimeDependencies>
@@ -195,23 +185,71 @@
         <Description>Localised translations for Qt 5</Description>
         <Files>
             <Path fileType="localedata">/usr/share/qt5/translations</Path>
-            <Path fileType="data">/usr/share/qt5/phrasebooks</Path>
         </Files>
         <RuntimeDependencies>
             <Dependency release="current">qt5</Dependency>
         </RuntimeDependencies>
     </Package>
+    
+    <Package>
+        <Name>qt5-designer</Name>
+        <Icon>designer5</Icon>
+        <RuntimeDependencies>
+            <Dependency version="current">qt5</Dependency>
+            <Dependency version="current">qt5-webkit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/lib/qt5/bin/designer</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins/designer</Path>
+            <Path fileType="data">/usr/share/applications/designer5.desktop</Path>
+            <Path fileType="data">/usr/share/pixmaps/designer5.png</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/designer5.desktop">data/designer.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/designer5.png">data/designer.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
 
     <Package>
-        <Name>qt5-docs</Name>
-        <Summary>API Documentation for Qt 5</Summary>
-        <Description>API Documentation for Qt 5</Description>
-        <Files>
-            <Path fileType="doc">/usr/share/doc/qt5</Path>
-        </Files>
+        <Name>qt5-linguist</Name>
+        <Icon>linguist5</Icon>
         <RuntimeDependencies>
-            <Dependency release="current">qt5-devel</Dependency>
+            <Dependency version="current">qt5</Dependency>
         </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/lib/qt5/bin/linguist</Path>
+            <Path fileType="data">/usr/share/qt5/phrasebooks</Path>
+            <Path fileType="data">/usr/share/applications/linguist5.desktop</Path>
+            <Path fileType="data">/usr/share/pixmaps/linguist5.png</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/linguist5.desktop">data/linguist.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/linguist5.png">data/linguist.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    
+    <Package>
+        <Name>qt5-docs</Name>
+        <Icon>assistant5</Icon>
+        <Summary>Development documents of Qt5 and Qt5 Assistant tool</Summary>
+        <RuntimeDependencies>
+            <Dependency version="current">qt5</Dependency>
+            <Dependency version="current">qt5-webkit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/lib/qt5/bin/assistant</Path>
+            <Path fileType="data">/usr/share/applications/assistant5.desktop</Path>
+            <Path fileType="data">/usr/share/pixmaps/assistant5.png</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/doc/qt5/qch</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/assistant5.desktop">data/assistant.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/assistant5.png">data/assistant.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/hicolor/128x128/apps/qt5-logo.png">data/hi128-app-qt5-logo.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/hicolor/48x48/apps/qt5-logo.png">data/hi48-app-qt5-logo.png</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <Package>
