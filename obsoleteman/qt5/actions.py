@@ -137,13 +137,14 @@ def install():
     pisitools.dodir(qt5.libdir)
     qt5.install("INSTALL_ROOT=%s" % get.installDIR())
     
-    for bin in shelltools.ls("%s/usr/lib/qt5/bin" % get.installDIR()):
-        pisitools.dosym("/usr/lib/qt5/bin/%s" % bin, "/usr/bin/%s-qt5" % bin)
+    #I hope qtchooser will manage this issue
+    #for bin in shelltools.ls("%s/usr/lib/qt5/bin" % get.installDIR()):
+        #pisitools.dosym("/usr/lib/qt5/bin/%s" % bin, "/usr/bin/%s-qt5" % bin)
     
-    # Turkish translations
-    #shelltools.export("LD_LIBRARY_PATH", "%s%s" % (get.installDIR(), qt5.libdir))
-    #shelltools.system("%s%s/lrelease l10n-tr/*.ts" % (get.installDIR(), qt5.bindir))
-    #pisitools.insinto(qt5.translationdir, "l10n-tr/*.qm")
+    # We should work on Turkish translations :)
+    shelltools.export("LD_LIBRARY_PATH", "%s%s" % (get.installDIR(), qt5.libdir))
+    shelltools.system("%s%s/lrelease l10n-tr/*.ts" % (get.installDIR(), bindirQt5))
+    pisitools.insinto(qt5.translationdir, "l10n-tr/*.qm")
 
     # Fix all occurances of WorkDir in pc files
     pisitools.dosed("%s%s/pkgconfig/*.pc" % (get.installDIR(), qt5.libdir), "%s/qt-x11-opensource-src-%s" % (get.workDIR(), get.srcVERSION()), qt5.prefix)
