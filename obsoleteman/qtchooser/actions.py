@@ -13,5 +13,8 @@ def build():
 
 def install():
     autotools.install()
+    
+    pisitools.dodir("/etc/xdg/qtchooser")
+    pisitools.dosym("qt4.conf", "/etc/xdg/qtchooser/default.conf")
 
     pisitools.dodoc("LICENSE.LGPL", "LGPL_EXCEPTION.txt")
