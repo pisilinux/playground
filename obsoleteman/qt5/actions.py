@@ -133,7 +133,6 @@ def install():
         shelltools.move("%s32/usr/lib32" % get.installDIR(), "%s/usr" % get.installDIR())
         return
     
-    pisitools.dodir(qt5.bindir)
     pisitools.dodir(qt5.libdir)
     qt5.install("INSTALL_ROOT=%s" % get.installDIR())
     

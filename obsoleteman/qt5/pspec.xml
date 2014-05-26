@@ -48,7 +48,42 @@
             <Dependency>unixODBC-devel</Dependency>
             <Dependency>libXrandr-devel</Dependency>
             <Dependency>libXrender-devel</Dependency>
-            <Dependency>qtchooser</Dependency>
+            <Dependency>qtchooser</Dependency> 
+            <!-- emul32 stuff -->
+            <Dependency>cups-32bit</Dependency>               
+            <Dependency>dbus-32bit</Dependency>               
+            <Dependency>gtk2-32bit</Dependency>               
+            <Dependency>mesa-32bit</Dependency>               
+            <Dependency>tiff-32bit</Dependency>               
+            <Dependency>zlib-32bit</Dependency>               
+            <Dependency>glib2-32bit</Dependency>              
+            <Dependency>icu4c-32bit</Dependency>              
+            <Dependency>libSM-32bit</Dependency>              
+            <Dependency>libXi-32bit</Dependency>              
+            <Dependency>pango-32bit</Dependency>              
+            <Dependency>jasper-32bit</Dependency>             
+            <Dependency>libICE-32bit</Dependency>             
+            <Dependency>libX11-32bit</Dependency>             
+            <Dependency>libdrm-32bit</Dependency>             
+            <Dependency>libpng-32bit</Dependency>             
+            <Dependency>libxcb-32bit</Dependency>             
+            <Dependency>sqlite-32bit</Dependency>             
+            <Dependency>libudev-32bit</Dependency>            
+            <Dependency>openssl-32bit</Dependency>            
+            <Dependency>alsa-lib-32bit</Dependency>           
+            <Dependency>freetype-32bit</Dependency>           
+            <Dependency>harfbuzz-32bit</Dependency>           
+            <Dependency>gstreamer-32bit</Dependency>          
+            <Dependency>fontconfig-32bit</Dependency>         
+            <Dependency>libXrender-32bit</Dependency>         
+            <Dependency>xcb-util-wm-32bit</Dependency>        
+            <Dependency>libxkbcommon-32bit</Dependency>       
+            <Dependency>libjpeg-turbo-32bit</Dependency>      
+            <Dependency>xcb-util-image-32bit</Dependency>     
+            <Dependency>pulseaudio-libs-32bit</Dependency>    
+            <Dependency>gst-plugins-base-32bit</Dependency>   
+            <Dependency>xcb-util-keysyms-32bit</Dependency>   
+            <Dependency>xcb-util-renderutil-32bit</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- Fedora Patches --> 
@@ -138,30 +173,34 @@
             <Path fileType="executable">/usr/lib/qt5/libexec</Path>
         </Files>
         <RuntimeDependencies>
-            <Dependency>tiff</Dependency>
-            <Dependency>webp</Dependency>
-            <Dependency>mesa</Dependency>
-            <Dependency>gtk2</Dependency>
-            <Dependency>libSM</Dependency>
-            <Dependency>libXi</Dependency>
-            <Dependency>pango</Dependency>
-            <Dependency>icu4c</Dependency>
-            <Dependency>libICE</Dependency>
-            <Dependency>openal</Dependency>
-            <Dependency>libdrm</Dependency>
-            <Dependency>libxslt</Dependency>
-            <Dependency>alsa-lib</Dependency>
-            <Dependency>unixODBC</Dependency>
-            <Dependency>DirectFB</Dependency>
-            <Dependency>gstreamer</Dependency>
+            <Dependency>cups</Dependency>               
+            <Dependency>gtk2</Dependency>               
+            <Dependency>mesa</Dependency>               
+            <Dependency>tiff</Dependency>               
+            <Dependency>webp</Dependency>               
+            <Dependency>icu4c</Dependency>              
+            <Dependency>libSM</Dependency>             
+            <Dependency>libXi</Dependency>              
+            <Dependency>pango</Dependency>              
+            <Dependency>jasper</Dependency>             
+            <Dependency>libICE</Dependency>             
+            <Dependency>libdrm</Dependency>             
+            <Dependency>openal</Dependency>             
+            <Dependency>DirectFB</Dependency>           
+            <Dependency>alsa-lib</Dependency>           
+            <Dependency>harfbuzz</Dependency>           
+            <Dependency>libmtdev</Dependency>           
+            <Dependency>gstreamer</Dependency>          
             <Dependency>fontconfig</Dependency>
-            <Dependency>mariadb-lib</Dependency>
-            <Dependency>libjpeg-turbo</Dependency>
-            <Dependency>postgresql-lib</Dependency>
-            <Dependency>gst-plugins-bad</Dependency>
-            <Dependency>pulseaudio-libs</Dependency>
-            <Dependency>glib2</Dependency>
-            <Dependency>gst-plugins-base</Dependency>
+            <Dependency>libXrender</Dependency>            
+            <Dependency>xcb-util-wm</Dependency>        
+            <Dependency>libxkbcommon</Dependency>       
+            <Dependency>libjpeg-turbo</Dependency>      
+            <Dependency>xcb-util-image</Dependency>     
+            <Dependency>pulseaudio-libs</Dependency>    
+            <Dependency>gst-plugins-base</Dependency>   
+            <Dependency>xcb-util-keysyms</Dependency>   
+            <Dependency>xcb-util-renderutil</Dependency>
             <Dependency>qtchooser</Dependency>
         </RuntimeDependencies>
     </Package>
@@ -176,6 +215,7 @@
         <RuntimeDependencies>
             <Dependency release="current">qt5</Dependency>
             <Dependency>mesa</Dependency>
+            <Dependency>qt5-webkit</Dependency>
         </RuntimeDependencies>
     </Package>
 
@@ -256,8 +296,14 @@
         <Name>qt5-webkit</Name>
         <RuntimeDependencies>
             <Dependency version="current">qt5</Dependency>
-            <Dependency>gstreamer</Dependency>
-            <Dependency>libXrender</Dependency>
+            <Dependency>mesa</Dependency>            
+            <Dependency>webp</Dependency>            
+            <Dependency>icu4c</Dependency>           
+            <Dependency>libxslt</Dependency>         
+            <Dependency>gstreamer</Dependency>       
+            <Dependency>libXrender</Dependency>      
+            <Dependency>libXcomposite</Dependency>   
+            <Dependency>libjpeg-turbo</Dependency>   
             <Dependency>gst-plugins-base</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -280,7 +326,7 @@
         </Files>
     </Package>
 
-        <Package>
+    <Package>
         <Name>qt5-sql-mysql</Name>
         <RuntimeDependencies>
             <Dependency version="current">qt5</Dependency>
@@ -306,7 +352,6 @@
         <Name>qt5-sql-sqlite</Name>
         <RuntimeDependencies>
             <Dependency version="current">qt5</Dependency>
-            <Dependency>sqlite</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib/qt5/plugins/sqldrivers/libqsqlite.so</Path>
@@ -340,51 +385,43 @@
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for qt5</Summary>
         <BuildType>emul32</BuildType>
-        <BuildDependencies>
-            <Dependency>mesa-32bit</Dependency>
-            <Dependency>tiff-32bit</Dependency>
-            <Dependency>dbus-32bit</Dependency>
-            <Dependency>zlib-32bit</Dependency>
-            <Dependency>glib2-32bit</Dependency>
-            <Dependency>libSM-32bit</Dependency>
-            <Dependency>libpng-32bit</Dependency>
-            <Dependency>libmng-32bit</Dependency>
-            <Dependency>libICE-32bit</Dependency>
-            <Dependency>libX11-32bit</Dependency>
-            <Dependency>sqlite-32bit</Dependency>
-            <Dependency>openssl-32bit</Dependency>
-            <Dependency>libXext-32bit</Dependency>
-            <Dependency>freetype-32bit</Dependency>
-            <Dependency>alsa-lib-32bit</Dependency>
-            <Dependency>libXrender-32bit</Dependency>
-            <Dependency>fontconfig-32bit</Dependency>
-            <Dependency>libjpeg-turbo-32bit</Dependency>
-            <Dependency>libxcb-32bit</Dependency>
-            <Dependency>xcb-util-32bit</Dependency>
-            <Dependency>xcb-util-image-32bit</Dependency>
-            <Dependency>xcb-util-keysyms-32bit</Dependency>
-            <Dependency>xcb-util-wm-32bit</Dependency>
-        </BuildDependencies>
         <RuntimeDependencies>
-            <Dependency>uClibc</Dependency>
-            <Dependency>mesa-32bit</Dependency>
-            <Dependency>tiff-32bit</Dependency>
-            <Dependency>dbus-32bit</Dependency>
-            <Dependency>zlib-32bit</Dependency>
-            <Dependency>libSM-32bit</Dependency>
-            <Dependency>glib2-32bit</Dependency>
-            <Dependency>libX11-32bit</Dependency>
-            <Dependency>libpng-32bit</Dependency>
-            <Dependency>libmng-32bit</Dependency>
-            <Dependency>libICE-32bit</Dependency>
-            <Dependency>sqlite-32bit</Dependency>
-            <Dependency>openssl-32bit</Dependency>
-            <Dependency>libXext-32bit</Dependency>
-            <Dependency>freetype-32bit</Dependency>
-            <Dependency>alsa-lib-32bit</Dependency>
-            <Dependency>libXrender-32bit</Dependency>
-            <Dependency>fontconfig-32bit</Dependency>
-            <Dependency>libjpeg-turbo-32bit</Dependency>
+            <Dependency>uClibc</Dependency>                   
+            <Dependency>qt5-devel</Dependency>                
+            <Dependency>cups-32bit</Dependency>               
+            <Dependency>dbus-32bit</Dependency>               
+            <Dependency>gtk2-32bit</Dependency>               
+            <Dependency>mesa-32bit</Dependency>               
+            <Dependency>tiff-32bit</Dependency>               
+            <Dependency>zlib-32bit</Dependency>               
+            <Dependency>glib2-32bit</Dependency>              
+            <Dependency>icu4c-32bit</Dependency>              
+            <Dependency>libSM-32bit</Dependency>              
+            <Dependency>libXi-32bit</Dependency>              
+            <Dependency>pango-32bit</Dependency>              
+            <Dependency>jasper-32bit</Dependency>             
+            <Dependency>libICE-32bit</Dependency>             
+            <Dependency>libX11-32bit</Dependency>             
+            <Dependency>libdrm-32bit</Dependency>             
+            <Dependency>libpng-32bit</Dependency>             
+            <Dependency>libxcb-32bit</Dependency>             
+            <Dependency>sqlite-32bit</Dependency>             
+            <Dependency>libudev-32bit</Dependency>            
+            <Dependency>openssl-32bit</Dependency>            
+            <Dependency>alsa-lib-32bit</Dependency>           
+            <Dependency>freetype-32bit</Dependency>           
+            <Dependency>harfbuzz-32bit</Dependency>           
+            <Dependency>gstreamer-32bit</Dependency>          
+            <Dependency>fontconfig-32bit</Dependency>         
+            <Dependency>libXrender-32bit</Dependency>         
+            <Dependency>xcb-util-wm-32bit</Dependency>        
+            <Dependency>libxkbcommon-32bit</Dependency>       
+            <Dependency>libjpeg-turbo-32bit</Dependency>      
+            <Dependency>xcb-util-image-32bit</Dependency>     
+            <Dependency>pulseaudio-libs-32bit</Dependency>    
+            <Dependency>gst-plugins-base-32bit</Dependency>   
+            <Dependency>xcb-util-keysyms-32bit</Dependency>   
+            <Dependency>xcb-util-renderutil-32bit</Dependency>
             <Dependency release="current">qt5</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -397,23 +434,23 @@
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for qt5-webkit</Summary>
         <BuildType>emul32</BuildType>
-        <BuildDependencies>
-            <Dependency>glib2-32bit</Dependency>
-            <Dependency>libX11-32bit</Dependency>
-            <Dependency>sqlite-32bit</Dependency>
-            <Dependency>gstreamer-32bit</Dependency>
-            <Dependency>libXrender-32bit</Dependency>
-            <Dependency>gst-plugins-base-32bit</Dependency>
-        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">qt5-webkit</Dependency>
-            <Dependency>qt5-32bit</Dependency>
-            <Dependency>glib2-32bit</Dependency>
-            <Dependency>libX11-32bit</Dependency>
-            <Dependency>sqlite-32bit</Dependency>
-            <Dependency>gstreamer-32bit</Dependency>
-            <Dependency>libXrender-32bit</Dependency>
-            <Dependency>gst-plugins-base-32bit</Dependency>
+            <Dependency>qt5-32bit</Dependency>              
+            <Dependency>mesa-32bit</Dependency>             
+            <Dependency>zlib-32bit</Dependency>             
+            <Dependency>glib2-32bit</Dependency>            
+            <Dependency>icu4c-32bit</Dependency>            
+            <Dependency>libX11-32bit</Dependency>           
+            <Dependency>libpng-32bit</Dependency>           
+            <Dependency>sqlite-32bit</Dependency>          
+            <Dependency>libxml2-32bit</Dependency>          
+            <Dependency>libxslt-32bit</Dependency>          
+            <Dependency>gstreamer-32bit</Dependency>        
+            <Dependency>libXrender-32bit</Dependency>       
+            <Dependency>libXcomposite-32bit</Dependency>    
+            <Dependency>libjpeg-turbo-32bit</Dependency>    
+            <Dependency>gst-plugins-base-32bit</Dependency> 
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32/*WebKit*</Path>
