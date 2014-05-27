@@ -1,0 +1,92 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cinnamon-screensaver</Name>
+        <Homepage>http://cinnamon.linuxmint.com/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>LGPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Cinnamon Screensaver</Summary>
+        <Description>cinnamon-screensaver is a screen saver and locker.</Description>
+        <Archive sha1sum="cf726db2d14653225a44f476640f260b79042628" type="targz">https://github.com/linuxmint/cinnamon-screensaver/archive/2.2.3.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libXxf86vm-devel</Dependency>
+            <Dependency>libgnomekbd-devel</Dependency>
+            <Dependency>libxklavier-devel</Dependency>
+            <Dependency>libXxf86misc-devel</Dependency>
+            <Dependency>cinnamon-desktop-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cinnamon-screensaver</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libgnomekbd</Dependency>
+            <Dependency>libxklavier</Dependency>
+            <Dependency>libXrandr</Dependency>
+            <Dependency>libXScrnSaver</Dependency>
+            <Dependency>libXxf86misc</Dependency>
+            <Dependency>libXxf86vm</Dependency>
+            <Dependency>cinnamon-translations</Dependency>
+            <Dependency>cinnamon-desktop</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+            <Dependency>icon-theme-gnome-symbolic</Dependency>
+            <Dependency>gnome-power-manager</Dependency>
+            <Dependency>gnome-keyring</Dependency>
+            <Dependency>gsettings-desktop-schemas</Dependency>
+            <Dependency>xmlto</Dependency>
+            <Dependency>libSM</Dependency>
+            <Dependency>libICE</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/xdg/autostart/</Path>
+            <Path fileType="config">/etc/pam.d/cinnamon-screensaver</Path>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="data">/usr/share/</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/cinnamon-screensaver">cinnamon-screensaver.pam</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2014-05-12</Date>
+            <Version>2.2.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2014-04-11</Date>
+            <Version>2.0.3</Version>
+            <Comment>Some Fix</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-12-12</Date>
+            <Version>2.0.3</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

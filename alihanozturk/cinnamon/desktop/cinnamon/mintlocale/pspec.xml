@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mintlocale</Name>
+        <Homepage>http://cinnamon.linuxmint.com</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <PartOf>desktop</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Language selection tool.</Summary>
+        <Description>Language selection tool.</Description>
+        <BuildDependencies>
+            <Dependency>desktop-file-utils</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="8e3cbb96b0cf88b62be15ffce595d65b13d7d8f2" type="targz">http://leigh123linux.fedorapeople.org/pub/mintlocale/source/mintlocale-1.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>mintlocale</Name>
+        <RuntimeDependencies>
+            <Dependency>accountsservice</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-04-22</Date>
+            <Version>1.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
