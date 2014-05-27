@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>omnitux</Name> 
+        <Homepage>http://omnitux.sourceforge.net/</Homepage> 
+        <Packager>
+            <Name>Pisi Linux Community</Name> 
+            <Email>admins@pisilinux.org</Email> 
+        </Packager>
+        <License>GPLv2</License> 
+        <Icon>omnitux</Icon> 
+        <IsA>app:gui</IsA>
+        <PartOf>game.kids</PartOf>
+        <Summary>Educationsoftware for children visiting nursery school and elementary school</Summary> 
+        <Description>The project aims to provide various educational activities around multimedia elements (images, sounds, texts).</Description> 
+        <Archive sha1sum="8bcae7f77bbc3116a6633ed60c2f6c7fe0e89ff5" type="tarbz2">http://heanet.dl.sourceforge.net/project/omnitux/omnitux/v1.2.1/light/omnitux-light-1.2.1.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>omnitux</Name> 
+        <RuntimeDependencies>
+            <Dependency>pygame</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path> 
+            <Path fileType="data">/usr/share/applications/</Path>
+            <Path fileType="data">/usr/share/pixmaps/</Path> 
+            <Path fileType="data">/usr/share/omnitux/</Path>
+        </Files>
+        <AdditionalFiles>	  
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/omnitux">omnitux</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/omnitux.desktop">omnitux.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/omnitux.png">omnitux.png</AdditionalFile>
+            </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-05-27</Date> 
+            <Version>1.1</Version> 
+            <Comment>First release</Comment> 
+            <Name>Stefan Gronewold(groni)</Name> 
+            <Email>groni@pisilinux.org</Email> 
+        </Update>
+    </History>
+</PISI>
