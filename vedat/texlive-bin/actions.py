@@ -16,6 +16,7 @@ import os
 WorkDir = "."
 
 def setup():
+    
     shelltools.makedirs("%s/source/build" % get.workDIR())
     shelltools.cd("%s/source/build" % get.workDIR())
     shelltools.sym("../configure", "configure")
@@ -37,6 +38,7 @@ def setup():
                          --disable-xdvik \
                          --disable-dump-share \
                          --disable-aleph \
+                         --disable-web2c \
                          --enable-shared \
                          --disable-static \
                          --with-system-zlib \
@@ -60,30 +62,28 @@ def setup():
                          --enable-xindy \
                          --disable-xindy-rules \
                          --with-system-graphite2 \
-                         --disable-web2c \
+                         --with-system-cairo \
                          --disable-dependency-tracking \
                          --disable-mktexmf-default \
                          --enable-build-in-source-tree \
                          --disable-tex \
                          --disable-mktexfmt-default \
                          --disable-texlive \
+                         --disable-seetexk \
                          --disable-xindy-docs ")
-#--prefix=/usr  \
- #                        --libdir=/usr/lib \
-  #                       --sysconfdir=/etc \
-   #                      --includedir=/usr/include \
-    #                     --datarootdir=/usr/share \
-#                         --datadir=/usr/share \
-     #                    --mandir=/usr/share/man \
+
 
 def build():
-    #shelltools.cd("%s/source/build" % get.workDIR())
+  
     shelltools.cd("%s/source/build/" % get.workDIR())
-    #autotools.make("prefix=%s/source/build/usr texmf=/usr/share/texmf install"  % get.workDIR())
     autotools.make()
-    
+ 
 def install():
-    #autotools.install("prefix=%s/source/build/usr texmf=%s/usr/share/texmf" % (get.workDIR(), get.installDIR()))
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    pisitools.insinto("%s/source/build/biber" "%s/usr/bin/biber" % (get.workDIR(), get.installDIR()))
-    pisitools.insinto("%s/source/utils/biber/TeXLive/*.pm" "%s/usr/share/tlpkg/TeXLive" % (get.workDIR(), get.installDIR()))
+  
+    shelltools.cd("%s/source/build/" % get.workDIR())
+    autotools.install("prefix=%s/source/build/usr" % get.workDIR())
+    shelltools.move("%s/source/build/usr/bin" % get.workDIR(), "%s/usr" % get.installDIR())
+    shelltools.move("%s/source/build/usr/lib" % get.workDIR(), "%s/usr" % get.installDIR())
+    shelltools.move("%s/source/build/usr/include" % get.workDIR(), "%s/usr" % get.installDIR())
+    pisitools.insinto("%s/usr/bin/biber" % get.installDIR(), "%s/source/biber" % get.workDIR())
+    pisitools.insinto("%s/usr/share/tlpkg/TeXLive" % get.installDIR(), "%s/source/utils/biber/TeXLive/*.pm" % get.workDIR())
