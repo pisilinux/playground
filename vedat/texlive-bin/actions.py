@@ -85,5 +85,5 @@ def install():
     shelltools.move("%s/source/build/usr/bin" % get.workDIR(), "%s/usr" % get.installDIR())
     shelltools.move("%s/source/build/usr/lib" % get.workDIR(), "%s/usr" % get.installDIR())
     shelltools.move("%s/source/build/usr/include" % get.workDIR(), "%s/usr" % get.installDIR())
-    pisitools.insinto("%s/usr/bin/biber" % get.installDIR(), "%s/source/biber" % get.workDIR())
+    pisitools.insinto("%s/usr/bin/biber" % get.installDIR(), "%s/biber" % get.workDIR())
     pisitools.insinto("%s/usr/share/tlpkg/TeXLive" % get.installDIR(), "%s/source/utils/biber/TeXLive/*.pm" % get.workDIR())
