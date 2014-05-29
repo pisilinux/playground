@@ -70,7 +70,9 @@ def setup():
                          --disable-mktexfmt-default \
                          --disable-texlive \
                          --disable-seetexk \
-                         --disable-xindy-docs ")
+                         --disable-xindy-docs \
+                         --enable-xindy \
+                         --disable-xindy-rules")
 
 
 def build():
@@ -87,3 +89,9 @@ def install():
     shelltools.move("%s/source/build/usr/include" % get.workDIR(), "%s/usr" % get.installDIR())
     pisitools.insinto("%s/usr/bin/biber" % get.installDIR(), "%s/biber" % get.workDIR())
     pisitools.insinto("%s/usr/share/tlpkg/TeXLive" % get.installDIR(), "%s/source/utils/biber/TeXLive/*.pm" % get.workDIR())
+# 
+    pisitools.remove("/var/pisi/texlive-bin-0.0_20140527-5/install/usr/share/tlpkg/TeXLive/TLUtils.pm")
+    pisitools.remove("/var/pisi/texlive-bin-0.0_20140527-5/install/usr/share/tlpkg/TeXLive/TLConfig.pm")
+    pisitools.remove("/var/pisi/texlive-bin-0.0_20140527-5/install/usr/bin/biber/biber")
+    pisitools.removeDir("/var/pisi/texlive-bin-0.0_20140527-5/install/usr/bin/biber")
+    pisitools.removeDir("/var/pisi/texlive-bin-0.0_20140527-5/install/usr/share/tlpkg/TeXLive")
