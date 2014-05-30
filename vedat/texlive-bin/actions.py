@@ -16,11 +16,11 @@ import os
 WorkDir = "."
 
 def setup():
+    
     shelltools.makedirs("%s/source/build" % get.workDIR())
     shelltools.cd("%s/source/build" % get.workDIR())
     shelltools.sym("../configure", "configure")
     autotools.configure("--disable-native-texlive-build \
-                         --with-banner-add=/PisiLinux \
                          --disable-multiplatform \
                          --disable-chktex \
                          --disable-dialog \
@@ -37,8 +37,16 @@ def setup():
                          --disable-xdvik \
                          --disable-dump-share \
                          --disable-aleph \
-                         --enable-shared \
                          --disable-static \
+                         --disable-web2c \
+                         --disable-xindy-rules \
+                         --disable-dependency-tracking \
+                         --disable-mktexmf-default \
+                         --disable-xindy-rules \
+                         --enable-xindy-docs \
+                         --enable-shared \
+                         --enable-build-in-source-tree \
+                         --enable-xindy \
                          --with-system-zlib \
                          --with-system-zziplib \
                          --with-system-pnglib \
@@ -50,40 +58,33 @@ def setup():
                          --with-system-freetype2 \
                          --with-system-pixman \
                          --with-system-icu \
+                         --with-system-graphite2 \
+                         --with-system-cairo \
+                         --with-system-harfbuzz \
                          --with-freetype2-libdir=/usr/lib \
                          --with-freetype2-include=/usr/include/freetype2 \
                          --with-xdvi-x-toolkit=xaw \
-                         --disable-dump-share \
-                         --disable-aleph \
-                         --disable-luatex \
-                         --with-clisp-runtime=default \
-                         --enable-xindy \
-                         --disable-xindy-rules \
-                         --with-system-graphite2 \
-                         --disable-web2c \
-                         --disable-dependency-tracking \
-                         --disable-mktexmf-default \
-                         --enable-build-in-source-tree \
-                         --disable-tex \
-                         --disable-mktexfmt-default \
-                         --disable-texlive \
-                         --disable-xindy-docs ")
-#--prefix=/usr  \
- #                        --libdir=/usr/lib \
-  #                       --sysconfdir=/etc \
-   #                      --includedir=/usr/include \
-    #                     --datarootdir=/usr/share \
-#                         --datadir=/usr/share \
-     #                    --mandir=/usr/share/man \
+                         --with-banner-add=/PisiLinux \
+                         --with-clisp-runtime=default ")
+
 
 def build():
-    #shelltools.cd("%s/source/build" % get.workDIR())
+  
     shelltools.cd("%s/source/build/" % get.workDIR())
-    #autotools.make("prefix=%s/source/build/usr texmf=/usr/share/texmf install"  % get.workDIR())
     autotools.make()
-    
+ 
 def install():
-    #autotools.install("prefix=%s/source/build/usr texmf=%s/usr/share/texmf" % (get.workDIR(), get.installDIR()))
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    pisitools.insinto("%s/source/build/biber" "%s/usr/bin/biber" % (get.workDIR(), get.installDIR()))
-    pisitools.insinto("%s/source/utils/biber/TeXLive/*.pm" "%s/usr/share/tlpkg/TeXLive" % (get.workDIR(), get.installDIR()))
+  
+    shelltools.cd("%s/source/build/" % get.workDIR())
+    autotools.install("prefix=%s/source/build/usr" % get.workDIR())
+
+    pisitools.dodir("/usr/share/tlpkg/TeXLive")
+
+    shelltools.move("%s/source/build/usr/bin" % get.workDIR(), "%s/usr" % get.installDIR()) 
+    shelltools.move("%s/source/build/usr/lib" % get.workDIR(), "%s/usr" % get.installDIR())
+    shelltools.move("%s/source/build/usr/include" % get.workDIR(), "%s/usr" % get.installDIR())
+    shelltools.move("%s/source/build/usr/share/texmf-dist" % get.workDIR(), "%s/usr/share" % get.installDIR())
+    shelltools.move("%s/source/utils/biber/TeXLive/*.pm" % get.workDIR(), "%s/usr/share/tlpkg/TeXLive" % get.installDIR())
+
+
+    #pisitools.insinto("/usr/bin/", "%s/biber" % get.workDIR())
