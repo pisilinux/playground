@@ -22,8 +22,8 @@ def setup():
     pythonmodules.run("configure-ng.py -q /usr/bin/qmake")
 
     shelltools.cd("../build_python3/%s" % WorkDir)
-    pisitools.dosed("configure.py", "  check_license()", "# check_license()")
-    pythonmodules.run("configure.py  --verbose -q /usr/bin/qmake", pyVer = "3")
+    pisitools.dosed("configure-ng.py", "  check_license()", "# check_license()")
+    pythonmodules.run("configure-ng.py  --verbose -q /usr/bin/qmake --sip-incdir=/usr/include/python3.4", pyVer = "3")
 
 def build():
     autotools.make()
