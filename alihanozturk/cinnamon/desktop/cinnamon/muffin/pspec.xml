@@ -33,8 +33,9 @@
             <Dependency>gobject-introspection-devel</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch level="1">automake.patch</Patch> -->
-<!--             <Patch level="1">revert_ibus.patch</Patch> -->
+            <Patch level="1">automake.patch</Patch>
+            <Patch level="1">revert_ibus.patch</Patch>
+            <Patch level="1">remove_muffin_binary.patch</Patch>
         </Patches>
     </Source>
 
@@ -79,6 +80,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/libexec</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="executable">/usr/bin</Path>

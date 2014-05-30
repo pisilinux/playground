@@ -29,11 +29,6 @@
             <Dependency>libXrender-devel</Dependency>
             <Dependency>libXcomposite-devel</Dependency>
         </BuildDependencies>
-        <Patches>
-            <Patch level="1">timeout.patch</Patch>
-            <Patch level="1">cinnamon-session-2.2.0-automagic-upower.patch</Patch>
-            <Patch level="1">cinnamon-session-2.2.0-64bit-portability.patch</Patch>
-        </Patches>
     </Source>
 
     <Package>
@@ -66,6 +61,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/libexec</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="executable">/usr/bin</Path>

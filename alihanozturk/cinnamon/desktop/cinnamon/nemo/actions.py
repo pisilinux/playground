@@ -12,11 +12,10 @@ from pisi.actionsapi import get
 def setup():
     shelltools.system("sed -i -e '/AC_SUBST(DISABLE_DEPRECATED_CFLAGS)/d' configure.in")
     shelltools.system("NOCONFIGURE=1 ./autogen.sh")
-    autotools.configure("--libexecdir=/usr/lib/nemo \
-                         --disable-static \
-                         --disable-schemas-compile \
-                         --disable-update-mimedb \
-                         --enable-gtk-doc")
+    autotools.configure("--disable-schemas-compile \
+                         --enable-gtk-doc \
+                         --disable-more-warnings \
+                         --disable-update-mimedb")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 

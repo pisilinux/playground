@@ -1,0 +1,12 @@
+Index: nemo-2.0.1/src/nemo-view.c
+===================================================================
+--- nemo-2.0.1.orig/src/nemo-view.c
++++ nemo-2.0.1/src/nemo-view.c
+@@ -700,6 +700,7 @@ nemo_view_get_default_zoom_level (NemoVi
+     }
+ 
+     NEMO_VIEW_CLASS (G_OBJECT_GET_CLASS (view))->get_default_zoom_level (view);
++    return 0;
+ }
+ 
+ const char *
