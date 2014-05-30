@@ -50,59 +50,64 @@ def setup():
     # avoid running autogen.sh on make
     shelltools.touch("autogen.lastrun")
     autotools.rawConfigure('--with-vendor="PisiLinux" \
-                       --with-ant-home="/usr/share/ant" \
-                       --with-jdk-home="/usr/lib/jvm/java-7-openjdk" \
+                       --with-ant-home="/usr/share/ant" \                       
                        --prefix=/usr --exec-prefix=/usr --sysconfdir=/etc \
                        --libdir=/usr/lib --mandir=/usr/share/man \
                        --enable-release-build \
-                       --enable-verbose \
-                       --disable-dependency-tracking \
-                       --disable-rpath \
-                       --disable-crashdump \
-                       --disable-ccache \
-                       --disable-epm \
-                       --disable-online-update \
-                       --disable-pch \
-                       --with-system-jars \
+                       --disable-verbose \
+                       --disable-dependency-tracking \                     
+                       --enable-crashdump \                                                                  
                        --with-system-libs \
                        --with-system-headers \
-                       --with-lang="%(lang)s" \
-                       --enable-graphite \
-                       --enable-cups \
+                       --with-lang="%(lang)s" \                       
                        --enable-dbus \
                        --enable-evolution2 \
                        --enable-gio \
                        --disable-gnome-vfs \
                        --disable-kde \
-                       --enable-kde4 \
-                       --enable-largefile \
+                       --enable-kde4 \                     
                        --enable-lockdown \
                        --enable-opengl \
-                       --enable-odk \
-                       --enable-randr \
-                       --enable-randr-link \
-                       --enable-extension-integration \
+                       --enable-odk \                       
                        --enable-scripting-beanshell \
                        --enable-scripting-javascript \
                        --enable-ext-wiki-publisher \
                        --enable-ext-nlpsolver \
-                       --disable-python \
-                       --enable-cairo-canvas \
-                       --without-system-icu \
+                       --enable-python=system \                     
+                       --with-system-icu \
                        --with-system-cairo \
-                       --without-ppds --without-sun-templates --without-afms --without-fonts --without-system-apache-commons --without-system-mythes --without-system-libcmis \
-                       --without-system-libexttextcat --without-system-jfreereport  --without-system-libcdr --without-system-libwpg --without-system-libwpd --without-system-libwps \
-                       --without-system-redland --without-system-clucene --without-system-libvisio \
+                       --with-system-mythes \
+                       --with-system-libcdr \
+                       --with-system-libwpg \
+                       --with-system-libwps \
+                       --with-system-redland \
+                       --with-system-clucene \
+                       --with-system-libmspub \
+                       --with-system-cppunit \
+                       --with-system-mdds \
+                       --with-system-libodfgen \
+                       --with-system-libetonyek \
+                       --with-system-libatomic_ops \
+                       --enable-split-app-modules \
+                       --enable-avahi \
+                       --enable-gtk3 \
+                       --enable-gstreamer \
+                       --disable-gstreamer-0-10 \
+                       --enable-opencl \
+                       --enable-openssl \
+                       --enable-orcus \
+                       --disable-telepathy \
+                       --without-ppds --without-afms --without-fonts --without-system-apache-commons --without-system-libcmis \
+                       --without-system-libexttextcat --without-system-jfreereport \
+                       --with-system-libvisio \
                        --with-helppack-integration \
                        --with-system-beanshell \
                        --with-system-graphite \
-                       --with-system-dicts \
-                       --with-system-nss \
-                       --without-system-lcms2 \
-                       --without-system-libmspub --without-system-liblangtag --without-system-boost --without-system-harfbuzz --without-system-cppunit --without-system-orcus \
-                       --without-system-mdds --without-system-ucpp --without-system-hsqldb --without-system-libodfgen --without-system-libmwaw --without-system-libetonyek \
-                       --without-system-libfreehand --without-system-libebook --without-system-firebird --without-system-libabw --without-system-libatomic_ops --without-system-libeot \
-                       --without-system-libodfgen --without-myspell-dicts --without-system-npapi-headers --without-system-sane --without-system-servlet-api --without-system-vigra \
+                       --with-system-dicts \                      
+                       --without-system-liblangtag --without-system-boost --without-system-orcus \
+                       --without-system-hsqldb --without-system-libmwaw \
+                       --without-system-libfreehand --without-system-libebook --without-system-firebird --without-system-libabw \
+                       --without-myspell-dicts --without-system-npapi-headers \
                        --with-external-dict-dir=/usr/share/hunspell \
                        --with-external-hyph-dir=/usr/share/hyphen \
                        --with-external-thes-dir=/usr/share/mythes \
