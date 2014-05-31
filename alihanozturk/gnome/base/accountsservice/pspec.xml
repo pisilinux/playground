@@ -12,13 +12,17 @@
         <IsA>library</IsA>
         <Summary>D-Bus Service to Manipulate User Account Information</Summary>
         <Description>accountsservice server provides a set of D-Bus interfaces for querying and manipulating user account information.</Description>
-        <Archive sha1sum="915cf5df1ce04a2dfc6026ba58734f9cb77a3cae" type="tarxz">http://www.freedesktop.org/software/accountsservice/accountsservice-0.6.35.tar.xz</Archive>
+        <Archive sha1sum="46a349032c9af2e554755bbb01e0ffcf6269fac3" type="tarxz">http://www.freedesktop.org/software/accountsservice/accountsservice-0.6.37.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>intltool</Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>
         <Name>accountsservice</Name>
         <Files>
             <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/libexec</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="data">/usr/share/dbus-1</Path>
             <Path fileType="data">/usr/share/gtk-doc</Path>
@@ -44,6 +48,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2014-05-31</Date>
+            <Version>0.6.37</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2013-11-08</Date>
             <Version>0.6.35</Version>
