@@ -20,9 +20,18 @@
     <Package>
         <Name>python-six</Name>
         <Files>
-            <Path fileType="all">/</Path>
+            <Path fileType="library">/usr/lib/python2*</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
         </Files>
     </Package>
+
+    <Package>
+        <Name>python3-six</Name>
+        <Files>
+            <Path fileType="library">/usr/lib/python3*</Path>
+        </Files>
+    </Package>
+
     <History>
         <Update release="1">
             <Date>2014-05-31</Date>
