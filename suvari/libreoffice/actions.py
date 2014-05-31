@@ -74,7 +74,7 @@ def setup():
                        --enable-ext-wiki-publisher \
                        --enable-ext-nlpsolver \
                        --enable-python=system \                     
-                       --with-system-icu \
+                       --without-system-icu \
                        --with-system-cairo \
                        --with-system-mythes \
                        --with-system-libcdr \
@@ -104,7 +104,7 @@ def setup():
                        --with-system-beanshell \
                        --with-system-graphite \
                        --with-system-dicts \                      
-                       --without-system-liblangtag --without-system-boost --without-system-orcus \
+                       --without-system-liblangtag --without-system-harfbuzz --without-system-boost --without-system-orcus \
                        --without-system-hsqldb --without-system-libmwaw \
                        --without-system-libfreehand --without-system-libebook --without-system-firebird --without-system-libabw \
                        --without-myspell-dicts --without-system-npapi-headers \
