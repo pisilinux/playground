@@ -13,9 +13,7 @@ shelltools.export("HOME", get.workDIR())
 
 def setup():
     autotools.autoreconf("-fiv")
-    autotools.configure("\
-                         --libexecdir=/usr/lib/GConf \
-                         --disable-static \
+    autotools.configure("--disable-static \
                          --disable-silent-rules \
                          --enable-defaults-service \
                          --with-gtk=3.0 \

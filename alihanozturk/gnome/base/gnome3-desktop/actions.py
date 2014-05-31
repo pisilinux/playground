@@ -11,7 +11,6 @@ from pisi.actionsapi import get
 
 def setup():
     autotools.configure("--disable-static \
-                         --libexecdir=/usr/lib/gnome-desktop-3.0 \
                          --with-gnome-distributor=PisiLinux")
 
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")

@@ -9,12 +9,21 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
+    autotools.autoreconf("-fi")
+    shelltools.system("intltoolize -f")
     autotools.configure("--enable-split-authentication \
                          --enable-profiling \
-                         --libexecdir=/usr/lib/gdm \
                          --enable-console-helper \
-                         --with-plymouth \
                          --disable-scrollkeeper \
+                         --with-default-pam-config=pisilinux
+                         --with-console-kit \
+                         --without-systemd \
+                         --with-plymouth \
+                         --with-at-spi-registryd-directory=/usr/libexec \
+                         --with-dbus-services=/usr/share/dbus-1/services \
+                         --with-gnome-settings-daemon-directory=/usr/libexec \
+                         --with-check-accelerated-directory=/usr/libexec \
+                         --with-authentication-agent-directory=/usr/libexec \
                          --with-run-dir=/run/gdm ")
 
     pisitools.dosed("libtool", "( -shared )", " -Wl,-O1,--as-needed\\1")
