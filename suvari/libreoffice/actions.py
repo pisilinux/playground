@@ -43,37 +43,37 @@ def setup():
     vars = {"lang": langs,
             "jobs": psutil.NUM_CPUS,
             "etar": get.workDIR()}
-    
+
     shelltools.system("ulimit -c unlimited")
     autotools.aclocal("-I m4")
     autotools.autoconf()
     # avoid running autogen.sh on make
     shelltools.touch("autogen.lastrun")
     autotools.rawConfigure('--with-vendor="PisiLinux" \
-                       --with-ant-home="/usr/share/ant" \                       
+                       --with-ant-home="/usr/share/ant" \
                        --prefix=/usr --exec-prefix=/usr --sysconfdir=/etc \
                        --libdir=/usr/lib --mandir=/usr/share/man \
                        --enable-release-build \
                        --disable-verbose \
-                       --disable-dependency-tracking \                     
-                       --enable-crashdump \                                                                  
+                       --disable-dependency-tracking \
+                       --enable-crashdump \
                        --with-system-libs \
                        --with-system-headers \
-                       --with-lang="%(lang)s" \                       
+                       --with-lang="%(lang)s" \
                        --enable-dbus \
                        --enable-evolution2 \
                        --enable-gio \
                        --disable-gnome-vfs \
                        --disable-kde \
-                       --enable-kde4 \                     
+                       --enable-kde4 \
                        --enable-lockdown \
                        --enable-opengl \
-                       --enable-odk \                       
+                       --enable-odk \
                        --enable-scripting-beanshell \
                        --enable-scripting-javascript \
                        --enable-ext-wiki-publisher \
                        --enable-ext-nlpsolver \
-                       --enable-python=system \                     
+                       --enable-python=system \
                        --without-system-icu \
                        --with-system-cairo \
                        --with-system-mythes \
@@ -103,7 +103,7 @@ def setup():
                        --with-helppack-integration \
                        --with-system-beanshell \
                        --with-system-graphite \
-                       --with-system-dicts \                      
+                       --with-system-dicts \
                        --without-system-liblangtag --without-system-harfbuzz --without-system-boost --without-system-orcus \
                        --without-system-hsqldb --without-system-libmwaw \
                        --without-system-libfreehand --without-system-libebook --without-system-firebird --without-system-libabw \
@@ -115,18 +115,18 @@ def setup():
                        --disable-fetch-external \
                        --with-parallelism=%(jobs)s \
                        --with-external-tar="%(etar)s"' % vars)
-    
+
 def build():
     autotools.make()
     pisitools.dosed("workdir/CustomTarget/sysui/share/oxygenoffice/startcenter.desktop", "GenericName\[tr\]=Ofis", "GenericName[tr]=Ofis Uygulamaları")
-    
+
 def check():
     autotools.make("unitcheck")
     autotools.make("slowcheck")
 
 def install():
     autotools.rawInstall("DESTDIR=%s distro-pack-install -o build -o check" % get.installDIR())
-    
+
     #kill rpath bombs, strip unstripped shared libararies
     shelltools.system("strip --strip-unneeded %s/usr/lib/libreoffice/program/librdf-lo.so.0" % get.installDIR())
     shelltools.system("strip --strip-unneeded %s/usr/lib/libreoffice/program/librasqal-lo.so.3" % get.installDIR())   
