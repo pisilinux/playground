@@ -12,4 +12,3 @@ def build():
 
 def install():
     pythonmodules.install()
-# By PiSiDo 2.0.0
