@@ -16,7 +16,6 @@
         <Archive sha1sum="9c2d9bed3e260628c3778d24171a9f2d09c80f28" type="tarxz">http://download.documentfoundation.org/libreoffice/src/4.2.4/libreoffice-4.2.4.2.tar.xz</Archive>
         <Archive sha1sum="a0fbe4d143969e9e9ca628782083f8525ffb69e5" type="tarxz">http://download.documentfoundation.org/libreoffice/src/4.2.4/libreoffice-help-4.2.4.2.tar.xz</Archive>
         <Archive sha1sum="6c1849e270189b88b40583890820d915b4998fb9" type="tarxz">http://download.documentfoundation.org/libreoffice/src/4.2.4/libreoffice-translations-4.2.4.2.tar.xz</Archive>
-        
 <!--         <Archive sha1sum="9c0ae2843bccaa793bab4ad40f609a1139b0237b" type="binary">http://dev-www.libreoffice.org/src/libeot-0.01.tar.bz2</Archive> -->
         <Archive sha1sum="da45b1a6287f854f1b62095a3aad9060647dafef" type="binary">http://dev-www.libreoffice.org/src/libabw-0.0.2.tar.bz2</Archive>
         <Archive sha1sum="c2df36f19370c2d96b3b85d009fc124c89cdd6c8" type="binary">http://dev-www.libreoffice.org/src/libmwaw-0.2.0.tar.bz2</Archive>
@@ -73,9 +72,10 @@
         <Archive sha1sum="9408c7ebfba2e64065bc09016192e8513ba949a0" type="binary">http://dev-www.libreoffice.org/src/3c219630e4302863a9a83d0efde889db-commons-logging-1.1.1-src.tar.gz</Archive>
         <Archive sha1sum="5c604f102e0716597b3d2659ac3e77f80a02f22d" type="binary">http://dev-www.libreoffice.org/src/2c9b0f83ed5890af02c0df1c1776f39b-commons-httpclient-3.1-src.tar.gz</Archive>
         <Archive sha1sum="6de440b71668f1a65a9344cdaf7a437291416781" type="binary">http://dev-www.libreoffice.org/src/9e96ed4c1d99c0d14ac03c140f9f346c-icu4c-52_1-src.tgz</Archive>
-        <BuildDependencies>            
+        <BuildDependencies>
             <Dependency>ant</Dependency>
             <Dependency>junit</Dependency>
+            <Dependency>python3</Dependency>
             <Dependency>doxygen</Dependency>
             <Dependency>valgrind</Dependency>
             <Dependency>qt-devel</Dependency>
@@ -84,6 +84,7 @@
             <Dependency>xdg-utils</Dependency>
             <Dependency>atk-devel</Dependency>
             <Dependency>vigra-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
             <Dependency>beanshell</Dependency>
             <Dependency>neon-devel</Dependency>
             <Dependency>cups-devel</Dependency>
@@ -93,6 +94,8 @@
             <Dependency>mesa-devel</Dependency>
             <Dependency>cairo-devel</Dependency>
             <Dependency>libSM-devel</Dependency>
+            <Dependency>avahi-devel</Dependency>
+            <Dependency>avahi-libs</Dependency>
             <Dependency>libXt-devel</Dependency>
             <Dependency>gconf-devel</Dependency>
             <Dependency>pango-devel</Dependency>
@@ -110,7 +113,7 @@
             <Dependency>mythes-devel</Dependency>
             <Dependency>python-psutil</Dependency>
             <Dependency>libxslt-devel</Dependency>
-            <Dependency>lpsolve-devel</Dependency>    
+            <Dependency>lpsolve-devel</Dependency>
             <Dependency>redland-devel</Dependency>
             <Dependency>libXext-devel</Dependency>
             <Dependency>poppler-devel</Dependency>
@@ -139,18 +142,20 @@
             <Dependency>sane-backends-devel</Dependency>
             <Dependency>shared-mime-info</Dependency>
             <Dependency>gdk-pixbuf-devel</Dependency>
-            <Dependency>desktop-file-utils</Dependency>    
+            <Dependency>desktop-file-utils</Dependency>
             <Dependency>perl-Archive-Zip</Dependency>
             <Dependency>icon-theme-hicolor</Dependency>
             <Dependency>libexttextcat-devel</Dependency>
             <Dependency>libXinerama-devel</Dependency>
+            <Dependency>gstreamer-next-devel</Dependency>
             <Dependency>libjpeg-turbo-devel</Dependency>
-            <Dependency>gst-plugins-base-devel</Dependency>    
+            <Dependency>gst-plugins-base-devel</Dependency>
+            <Dependency>gst-plugins-base-next-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">libreoffice-4.2.0.4-curl-config.patch</Patch>
-            <Patch level="1">icu53.diff</Patch>
-            <Patch level="1">icu53_crashfix.diff</Patch>
+<!--             <Patch level="1">icu53.diff</Patch> -->
+<!--             <Patch level="1">icu53_crashfix.diff</Patch> -->
             <Patch level="1">openoffice.org-2.4.0.ooo86080.unopkg.bodge.patch</Patch>
             <Patch level="1">openoffice.org-3.0.0.ooo88341.sc.verticalboxes.patch</Patch>
             <Patch level="1">openoffice.org-2.0.2.rh188467.printingdefaults.patch</Patch>
