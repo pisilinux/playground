@@ -11,7 +11,6 @@ from pisi.actionsapi import get
 def setup():
     autotools.autoreconf("-fi")
     autotools.configure("--disable-static \
-                         --libexecdir=/usr/lib/gnome-settings-daemon \
                          --enable-profiling \
                          --enable-packagekit")
 

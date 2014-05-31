@@ -20,8 +20,7 @@ def setup():
                          --enable-kerberos \
                          --enable-owncloud \
                          --enable-telepathy \
-                         --enable-windows-live \
-                         --libexec=/usr/lib/gnome-online-accounts")
+                         --enable-windows-live")
     
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 

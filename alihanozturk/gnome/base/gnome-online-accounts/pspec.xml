@@ -12,7 +12,7 @@
         <IsA>app:gui</IsA>
         <Summary>Provide online accounts information</Summary>
         <Description>The GNOME Online Accounts package contains a framework used to access the user's online accounts.</Description>
-        <Archive sha1sum="462ef8a6ecc10f383be5b00c4ff363e553da616f" type="tarxz">mirrors://gnome/gnome-online-accounts/3.10/gnome-online-accounts-3.10.2.tar.xz</Archive>
+        <Archive sha1sum="6cf447122d0e8c78f78f7be675182a62e112d811" type="tarxz">mirrors://gnome/gnome-online-accounts/3.12/gnome-online-accounts-3.12.2.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>vim</Dependency>
             <Dependency>atk-devel</Dependency>
@@ -49,6 +49,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/libexec</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="data">/usr/share/icons</Path>
@@ -74,6 +75,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2014-06-01</Date>
+            <Version>3.12.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="8">
             <Date>2014-01-31</Date>
             <Version>3.10.2</Version>

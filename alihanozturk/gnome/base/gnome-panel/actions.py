@@ -10,8 +10,7 @@ from pisi.actionsapi import get
 from pisi.actionsapi import shelltools
 
 def setup():
-    autotools.configure("--disable-static \
-                         --libexecdir=/usr/lib/gnome-panel")
+    autotools.configure("--disable-static")
 
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
