@@ -64,7 +64,7 @@
         <Archive sha1sum="5ecb895ffc1eff2c381fa78d2197d0c57422b3df" type="binary">http://dev-www.libreoffice.org/src/f94d9870737518e3b597f9265f4e9803-libserializer-1.1.6.zip</Archive>
         <Archive sha1sum="a637c0c3ad3be32d6814972e1c45e547c5f6359d" type="binary">http://dev-www.libreoffice.org/src/8ce2fcd72becf06c41f7201d15373ed9-librepository-1.1.6.zip</Archive>
         <Archive sha1sum="e255eeea1d82715bd750af63f3cde3aeed835bc6" type="binary">http://dev-www.libreoffice.org/src/36271d3fa0d9dec1632029b6d7aac925-liblangtag-0.5.1.tar.bz2</Archive>
-        <Archive sha1sum="622b507ed6d2796dc75f624a97eb71ade451b737" type="binary">http://dev-www.libreoffice.org/src/ae330b9493bd4503ac390106ff6060d7-libexttextcat-3.4.3.tar.bz2</Archive>     
+        <Archive sha1sum="622b507ed6d2796dc75f624a97eb71ade451b737" type="binary">http://dev-www.libreoffice.org/src/ae330b9493bd4503ac390106ff6060d7-libexttextcat-3.4.3.tar.bz2</Archive>
 <!--         <Archive sha1sum="76d6788e747e78abb5abf8eaad78d3342da5f2a4" type="binary">http://dev-www.libreoffice.org/src/48d647fbd8ef8889e5a7f422c1bfda94-clucene-core-2.3.3.4.tar.gz</Archive> -->
         <Archive sha1sum="61ec8be8c2cf8f4c4272545666f936dd9f7e2a29" type="binary">http://dev-www.libreoffice.org/src/625ff5f2f968dd908bca43c9469d6e6b-commons-lang-2.4-src.tar.gz</Archive>
         <Archive sha1sum="7f73dde3c56bc41aa2871babcc05dcab5ac7ffad" type="binary">http://dev-www.libreoffice.org/src/2e482c7567908d334785ce7d69ddfff7-commons-codec-1.6-src.tar.gz</Archive>
@@ -81,6 +81,7 @@
             <Dependency>qt-devel</Dependency>
             <Dependency>gdb-devel</Dependency>
             <Dependency>nss-devel</Dependency>
+            <Dependency>xsd-devel</Dependency>
             <Dependency>xdg-utils</Dependency>
             <Dependency>atk-devel</Dependency>
             <Dependency>vigra-devel</Dependency>
@@ -466,7 +467,7 @@
     </Package>
 
     <Package>
-        <Name>libreoffice-writer</Name>        
+        <Name>libreoffice-writer</Name>
         <Summary>Word Processor Application for LibreOffice.</Summary>
         <RuntimeDependencies>
             <Dependency>icu4c</Dependency>
