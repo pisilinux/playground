@@ -14,10 +14,8 @@ def setup():
     shelltools.system("sed -i -e 's@{ACLOCAL_FLAGS}@{ACLOCAL_FLAGS} -I m4@g' Makefile.am")
     shelltools.echo("AC_CONFIG_MACRO_DIR([m4])", "configure.ac")
     shelltools.system("./autogen.sh")
-    autotools.configure("--libexecdir=/usr/lib/cinnamon-settings-daemon \
-                         --disable-static \
+    autotools.configure("--disable-static \
                          --disable-schemas-compile \
-                         --enable-color \
                          --enable-polkit \
                          --disable-systemd \
                          --with-dbus-services=/usr/share/dbus-1/services")

@@ -12,8 +12,7 @@ from pisi.actionsapi import get
 def setup():
     autotools.autoreconf("-vif")
     shelltools.system("NOCONFIGURE=1 ./autogen.sh")
-    autotools.configure("--libexecdir=/usr/lib/cinnamon-session \
-                         --enable-docbook-docs \
+    autotools.configure("--enable-docbook-docs \
                          --disable-systemd")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")

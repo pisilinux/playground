@@ -14,8 +14,6 @@ def setup():
     shelltools.echo("AC_CONFIG_MACRO_DIR([m4])", "configure.ac")
     shelltools.system("NOCONFIGURE=1 ./autogen.sh")
     autotools.configure("--localstatedir=/var \
-                         --libexecdir=/usr/lib/muffin \
-                         --sysconfdir=/etc \
                          --disable-static \
                          --disable-schemas-compile")
     

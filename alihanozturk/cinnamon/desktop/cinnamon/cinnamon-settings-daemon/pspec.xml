@@ -20,6 +20,7 @@
             <Dependency>cups-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
             <Dependency>lcms2-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
             <Dependency>cairo-devel</Dependency>
             <Dependency>libXi-devel</Dependency>
             <Dependency>pango-devel</Dependency>
@@ -41,9 +42,6 @@
             <Dependency>xorg-input-wacom-devel</Dependency>
             <Dependency>cinnamon-desktop-devel</Dependency>
         </BuildDependencies>
-        <Patches>
-            <Patch level="1">cinnamon-settings-daemon-2.2.2-optional.patch</Patch>
-        </Patches>
     </Source>
 
     <Package>
@@ -53,6 +51,7 @@
             <Dependency>gtk3</Dependency>
             <Dependency>cups</Dependency>
             <Dependency>lcms2</Dependency>
+            <Dependency>pango</Dependency>
             <Dependency>cairo</Dependency>
             <Dependency>libXi</Dependency>
             <Dependency>colord</Dependency>
@@ -79,6 +78,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/libexec</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="data">/usr/share/icons</Path>

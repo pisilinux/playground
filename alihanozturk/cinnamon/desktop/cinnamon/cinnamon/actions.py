@@ -16,12 +16,11 @@ def setup():
     autotools.autoreconf("-vif")
     shelltools.system("NOCONFIGURE=1 ./autogen.sh")
     autotools.configure("--localstatedir=/var \
-                         --libexecdir=/usr/lib/cinnamon \
-                         --sysconfdir=/etc \
                          --disable-static \
                          --disable-rpath \
                          --disable-schemas-compile \
                          --enable-compile-warnings=yes \
+                         --enable-introspection=yes \
                          --with-ca-certificates=/etc/ssl/certs/ca-certificates.crt")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
