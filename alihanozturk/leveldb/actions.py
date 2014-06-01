@@ -5,15 +5,19 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import get
 
 def build():
     autotools.make()
-    
+
 def check():
     autotools.make("check")
 
 def install():
-    autotools.install()
-    
-    pisitools.dodoc("README", "TODO", "NEWS", "AUTHORS")
+    pisitools.dolib_so("libleveldb.so.1.15")
+    pisitools.dosym("libleveldb.so.1.15", "/usr/lib/libleveldb.so.1")
+    pisitools.dosym("libleveldb.so.1.15", "/usr/lib/libleveldb.so")
+
+    pisitools.insinto("/usr/include", "include/*")
+    pisitools.insinto("/usr/include", "helpers/memenv/memenv.h")
+
+    pisitools.dodoc("README", "LICENSE", "NEWS", "AUTHORS")
