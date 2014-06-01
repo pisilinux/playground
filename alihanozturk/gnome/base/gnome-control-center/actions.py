@@ -13,7 +13,6 @@ def setup():
     autotools.autoreconf("-fi")
     autotools.configure("--disable-static \
                          --disable-update-mimedb \
-                         --libexecdir=/usr/lib/gnome-control-center \
                          --with-libsocialweb=no")
 
     pisitools.dosed("libtool", "( -shared )", " -Wl,-O1,--as-needed\\1")
