@@ -1,0 +1,90 @@
+# HG changeset patch
+# User Phil Thompson <phil@riverbankcomputing.com>
+# Date 1401630727 -3600
+#      Sun Jun 01 14:52:07 2014 +0100
+# Branch 4.16-maint
+# Node ID d9229cce7220be17f92fafaaafbf28d3d9697042
+# Parent  2a310fa9719ad1b1731f27eb7e80ef9a6bda6982
+Fixed a regression in the creating of the build file when generating individual
+source files.
+
+diff -r 2a310fa9719a -r d9229cce7220 sipgen/gencode.c
+--- a/sipgen/gencode.c	Mon May 26 11:36:04 2014 +0100
++++ b/sipgen/gencode.c	Sun Jun 01 14:52:07 2014 +0100
+@@ -282,6 +282,7 @@
+ static virtErrorHandler *getVirtErrorHandler(sipSpec *pt, overDef *od,
+         classDef *cd, moduleDef *mod);
+ static int hasOptionalArgs(overDef *od);
++static int emptyIfaceFile(sipSpec *pt, ifaceFileDef *iff);
+ 
+ 
+ /*
+@@ -429,6 +430,9 @@
+             if (iff->type == exception_iface)
+                 continue;
+ 
++            if (emptyIfaceFile(pt, iff))
++                continue;
++
+             if (iff->api_range != NULL)
+                 prcode(fp, " sip%s%F_%d%s", mname, iff->fqcname, iff->api_range->index, srcSuffix);
+             else
+@@ -3673,6 +3677,26 @@
+ 
+ 
+ /*
++ * See if an interface file has any content.
++ */
++static int emptyIfaceFile(sipSpec *pt, ifaceFileDef *iff)
++{
++    classDef *cd;
++    mappedTypeDef *mtd;
++
++    for (cd = pt->classes; cd != NULL; cd = cd->next)
++        if (!isProtectedClass(cd) && !isExternal(cd) && cd->iff == iff)
++            return FALSE;
++
++    for (mtd = pt->mappedtypes; mtd != NULL; mtd = mtd->next)
++        if (mtd->iff == iff)
++            return FALSE;
++
++    return TRUE;
++}
++
++
++/*
+  * Generate the C/C++ code for an interface.
+  */
+ static void generateIfaceCpp(sipSpec *pt, ifaceFileDef *iff, int need_postinc,
+@@ -3684,30 +3708,12 @@
+     classDef *cd;
+     mappedTypeDef *mtd;
+     FILE *fp;
+-    int empty;
+ 
+     /*
+      * Check that there will be something in the file so that we don't get
+      * warning messages from ranlib.
+      */
+-    empty = TRUE;
+-
+-    for (cd = pt->classes; cd != NULL; cd = cd->next)
+-        if (!isProtectedClass(cd) && !isExternal(cd) && cd->iff == iff)
+-        {
+-            empty = FALSE;
+-            break;
+-        }
+-
+-    if (empty)
+-        for (mtd = pt->mappedtypes; mtd != NULL; mtd = mtd->next)
+-            if (mtd->iff == iff)
+-            {
+-                empty = FALSE;
+-                break;
+-            }
+-
+-    if (empty)
++    if (emptyIfaceFile(pt, iff))
+         return;
+ 
+     if (master == NULL)
