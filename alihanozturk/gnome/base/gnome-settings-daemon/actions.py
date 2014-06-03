@@ -13,7 +13,7 @@ def setup():
     autotools.configure("--disable-static \
                          --enable-profiling \
                          --enable-packagekit")
-
+    
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
