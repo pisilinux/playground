@@ -38,9 +38,9 @@ def setup():
     shelltools.export("CXXFLAGS", filteredCXXFLAGS)
     #check that dosed commands without releated patches
 
-    if not get.buildTYPE() == "emul32":
+    #if not get.buildTYPE() == "emul32":
         #-no-pch makes build ccache-friendly
-        options = "-v \
+    options = "-v \
                    -prefix /usr \
                    -libdir /usr/lib \
                    -bindir /usr/bin \
@@ -87,46 +87,7 @@ def setup():
 
                    #-no-sql-oci \
                    
-    else:
-        pisitools.dosed("qtbase/mkspecs/linux-g++-64/qmake.conf", "-m64", "-m32")
-        shelltools.export("LDFLAGS", "-m32 %s" % get.LDFLAGS())
-        options = "-no-pch \
-                   -v \
-                   -prefix /usr \
-                   -libdir /usr/lib32 \
-                   -plugindir /usr/lib32/qt5/plugins \
-                   -importdir /usr/lib32/qt5/imports \
-                   -datadir /usr/share/qt5 \
-                   -translationdir /usr/share/qt5/translations \
-                   -sysconfdir /etc \
-                   -system-sqlite \
-                   -system-harfbuzz \
-                   -system-libjpeg \
-                   -system-libpng \
-                   -system-zlib \
-                   -nomake tests \
-                   -openssl-linked \
-                   -nomake examples \
-                   -nomake tools \
-                   -optimized-qmake \
-                   -no-rpath \
-                   -no-strip \
-                   -no-mtdev \
-                   -no-sql-db2 \
-                   -no-sql-oci \
-                   -no-sql-odbc \
-                   -no-sql-ibase \
-                   -no-sql-psql \
-                   -no-sql-sqlite \
-                   -no-sql-sqlite2 \
-                   -no-sql-tds \
-                   -no-sql-mysql \
-                   -dbus-linked \
-                   -no-openvg \
-                   -confirm-license \
-                   -reduce-relocations  \
-                   -opensource "
-
+    
     autotools.rawConfigure(options)
 
 def build():
@@ -177,8 +138,3 @@ def install():
     # pisitools.removeDir("/usr/share/doc/qt5/src")
     
     pisitools.dodoc("LGPL_EXCEPTION.txt", "LICENSE.*")
-
-
-
-
-
