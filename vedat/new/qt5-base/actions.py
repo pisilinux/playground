@@ -140,7 +140,48 @@ def build():
     autotools.make()
 
 def install():
-    autotools.install()
+    autotools.rawInstall("INSTALL_ROOT=%s" % get.installDIR())
+    
+    #Remove phonon, we use KDE's phonon but we have to build Qt with Phonon support for webkit and some other stuff
+    #pisitools.remove("usr/lib/libphonon*")
+    #pisitools.removeDir("usr/include/phonon")
+    #if shelltools.isDirectory("%s/usr/lib/phonon_backend" % get.installDIR()):
+    #    pisitools.removeDir("usr/lib/qt5/plugins/phonon_backend")
+    #pisitools.remove("usr/lib/pkgconfig/phonon*")
+    # Phonon 4.5 provides libphononwidgets.so file
+    #pisitools.remove("usr/lib/qt5/plugins/designer/libphononwidgets.so")
+
+    #Remove lost /usr/tests directory
+    #pisitools.removeDir("usr/tests")
+
+    # Turkish translations
+    #shelltools.export("LD_LIBRARY_PATH", "%susr/lib" % get.installDIR())
+    #shelltools.system("%susr/bin/lrelease l10n-tr/*.ts" % get.installDIR())
+    #pisitools.insinto(/usr/share/qt5/translations, "l10n-tr/*.qm")
+    # We should work on Turkish translations :)
+    shelltools.export("LD_LIBRARY_PATH", "%s/usr/lib" % get.installDIR())
+    # shelltools.system("%s/usr/bin/lrelease l10n-tr/*.ts" % get.installDIR())
+    # pisitools.insinto("/usr/share/qt5/translations", "l10n-tr/*.qm")
+
+    # Fix all occurances of WorkDir in pc files
+    pisitools.dosed("%s/usr/lib/pkgconfig/*.pc" % get.installDIR(), "%s/qt-x11-opensource-src-%s" % (get.workDIR(), get.srcVERSION()), usr)
+   
+    mkspecPath = "/usr/lib/qt5/mkspecs"
+
+    for root, dirs, files in os.walk("%s/usr/lib/qt5" % get.installDIR()):
+        # Remove unnecessary spec files..
+        if root.endswith(mkspecPath):
+            for dir in dirs:
+                if not dir.startswith("linux") and dir not in ["common","qws","features","default"]:
+                    pisitools.removeDir(os.path.join(mkspecPath,dir))
+        for name in files:
+            if name.endswith(".prl"):
+                pisitools.dosed(os.path.join(root, name), "^QMAKE_PRL_BUILD_DIR.*", "")
+
+    # Remove useless image directory, images of HTML docs are in doc/html/images
+    
+    pisitools.removeDir("/usr/share/doc/qt5/src")
+    
     pisitools.dodoc("LGPL_EXCEPTION.txt", "LICENSE.*")
 
 
