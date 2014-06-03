@@ -10,9 +10,8 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system('./autogen.sh --prefix=/usr \
-                       --sysconfdir=/etc \
-                       --localstatedir=/var')
+    shelltools.system("./autogen.sh")
+    autotools.configure("--localstatedir=/var")
 
 def build():
     autotools.make()
