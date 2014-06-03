@@ -11,7 +11,7 @@
         <Summary>Cross platform application and UI framework</Summary>
         <Description>Cross platform application and UI development framework</Description>
         <License>LGPLv2.1-linking-exception</License>
-        <Archive sha1sum="bdda9ff75da8172cb430a11b42de166c11a3f49c" type="tarxz">http://download.qt-project.org/official_releases/qt/5.3/5.3.0/single/qt-everywhere-opensource-src-5.3.0.tar.xz</Archive>
+        <Archive sha1sum="d4344110677cceb5f39819d1ea490ef397f5e4be" type="tarxz">http://download.qt-project.org/official_releases/qt/5.3/5.3.0/submodules/qtbase-opensource-src-5.3.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>alsa-lib-devel</Dependency>
             <Dependency>at-spi2-core-devel</Dependency>
@@ -48,7 +48,7 @@
             <Dependency>unixODBC-devel</Dependency>
             <Dependency>libXrandr-devel</Dependency>
             <Dependency>libXrender-devel</Dependency>
-            <Dependency>qtchooser</Dependency> 
+            <Dependency>unixODBC-devel</Dependency>
             <!-- emul32 stuff -->
             <Dependency>cups-32bit</Dependency>               
             <Dependency>dbus-32bit</Dependency>               
@@ -87,12 +87,12 @@
         </BuildDependencies>
         <Patches>
             <!-- Fedora Patches --> 
-            <Patch level="0">qtbase-opensource-src-5.2.0-enable_ft_lcdfilter.patch</Patch>
-            <Patch level="0">qt-everywhere-opensource-src-4.8.5-QTBUG-35459.patch</Patch>
+            <!--<Patch level="0">qtbase-opensource-src-5.2.0-enable_ft_lcdfilter.patch</Patch>--> 
+            <!--<Patch level="0">qt-everywhere-opensource-src-4.8.5-QTBUG-35459.patch</Patch>-->
             <!-- Turkish Translations -->
             <Patch compressionType="bz2">turkish.patch.bz2</Patch>
             <!-- Pisilinux Patches --> 
-            <Patch level="1">mkspecs.patch</Patch>
+            <!--<Patch level="1">mkspecs.patch</Patch>-->
         </Patches>
     </Source>
 
