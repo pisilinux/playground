@@ -164,7 +164,7 @@ def install():
     # pisitools.insinto("/usr/share/qt5/translations", "l10n-tr/*.qm")
 
     # Fix all occurances of WorkDir in pc files
-    pisitools.dosed("%s/usr/lib/pkgconfig/*.pc" % get.installDIR(), "%s/qt-x11-opensource-src-%s" % (get.workDIR(), get.srcVERSION()), usr)
+    # pisitools.dosed("%s/usr/lib/pkgconfig/*.pc" % get.installDIR(), "%s/qt-x11-opensource-src-%s" % (get.workDIR(), get.srcVERSION()), usr)
    
     mkspecPath = "/usr/lib/qt5/mkspecs"
 
@@ -180,7 +180,7 @@ def install():
 
     # Remove useless image directory, images of HTML docs are in doc/html/images
     
-    pisitools.removeDir("/usr/share/doc/qt5/src")
+    # pisitools.removeDir("/usr/share/doc/qt5/src")
     
     pisitools.dodoc("LGPL_EXCEPTION.txt", "LICENSE.*")
 
