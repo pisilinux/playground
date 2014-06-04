@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>musicbrainz-picard</Name>
+        <Homepage>http://musicbrainz.org/doc/MusicBrainz_Picard</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>MusicBrainz Picard is a cross-platform (Linux/Mac OS X/Windows) application written in Python and is the official MusicBrainz tagger. </Summary>
+        <Description>Picard supports the majority of audio file formats, is capable of using audio fingerprints (AcoustIDs), performing CD lookups and disc ID submissions, and it has excellent Unicode support. Additionally, there are several plugins available that extend Picard's features. </Description>
+        <Archive sha1sum="323e22adef321a8fb80d617eb86a880f7d546fca" type="targz">http://ftp.musicbrainz.org/pub/musicbrainz/picard/picard-1.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>musicbrainz-devel</Dependency>
+            <Dependency>python-devel</Dependency>
+            <Dependency>python-qt-devel</Dependency>
+            <Dependency>python-mutagen</Dependency>
+            <Dependency>libdiscid-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>musicbrainz-picard</Name>
+        <RuntimeDependencies>
+            <Dependency>musicbrainz</Dependency>
+            <Dependency>libchromaprint</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>python-qt</Dependency>
+            <Dependency>python-mutagen</Dependency>
+            <Dependency>libdiscid</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/python2.7</Path>
+            <Path fileType="icons">/usr/share/icons/highcolor</Path>
+            <Path fileType="application">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-06-04</Date>
+            <Version>1.2</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
