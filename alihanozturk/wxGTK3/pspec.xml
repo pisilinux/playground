@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>wxGTK3</Name>
+        <Homepage>http://www.wxwidgets.org/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>wxWinLL-3</License>
+        <License>GPLv2</License>
+        <License>LGPLv2</License>
+        <License>wxWinFDL-3</License>
+        <IsA>library</IsA>
+        <Summary>GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit</Summary>
+        <Description>wxWidgets/GTK3 is the GTK3 port of the C++ cross-platform wxWidgets GUI library, offering classes for all common GUI controls as well as a comprehensive set of helper classes for most common application tasks, ranging from networking to HTML display and image manipulation.</Description>
+        <Archive sha1sum="756a9c54d1f411e262f03bacb78ccef085a9880a" type="tarbz2">http://sourceforge.net/projects/wxwindows/files/3.0.0/wxWidgets-3.0.0.tar.bz2/download</Archive>
+        <BuildDependencies>
+            <Dependency>gst-plugins-base-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>libSM-devel</Dependency>
+            <Dependency>libXinerama-devel</Dependency>
+            <Dependency>libXxf86vm-devel</Dependency>
+            <Dependency>libsdl-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>tiff-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>wxGTK3</Name>
+        <RuntimeDependencies>
+            <Dependency>gst-plugins-base</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>libSM</Dependency>
+            <Dependency>libXinerama</Dependency>
+            <Dependency>libXxf86vm</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency release="current">wxBase3</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/libwx_gtk*</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>wxGTK3-devel</Name>
+        <Summary>wxGTK3-devel is the development files for wxGTK3</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">wxBase3-devel</Dependency>
+            <Dependency release="current">wxGTK3</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/wx-config</Path>
+            <Path fileType="data">/usr/lib/wx</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>wxBase3</Name>
+        <Summary>wxBase3 is the GUI independent part of wxWidgets</Summary>
+        <RuntimeDependencies>
+            <Dependency>libunwind</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="library">/usr/lib/libwx_base*</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>wxBase3-devel</Name>
+        <Summary>wxBase3-devel is the development files for wxBase3</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">wxGTK3</Dependency>
+            <Dependency release="current">wxBase3</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/wxrc*</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-05-29</Date>
+            <Version>3.0.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

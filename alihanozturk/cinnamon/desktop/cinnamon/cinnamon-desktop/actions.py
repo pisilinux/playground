@@ -12,7 +12,7 @@ from pisi.actionsapi import get
 def setup():
     autotools.autoreconf("-vif")
     shelltools.system("./autogen.sh")
-    autotools.configure("--libexecdir=/usr/lib/cinnamon-desktop \
+    autotools.configure("--disable-static \
                          --disable-schemas-compile")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")

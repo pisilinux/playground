@@ -23,6 +23,7 @@
             <Dependency>exempi-devel</Dependency>
             <Dependency>gnome-common</Dependency>
             <Dependency>libnotify-devel</Dependency>
+            <Dependency>gobject-introspection</Dependency>
             <Dependency>gtk-doc</Dependency>
             <Dependency>docbook-xsl</Dependency>
             <Dependency>intltool</Dependency>
@@ -31,7 +32,8 @@
             <Dependency>cinnamon-desktop-devel</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch level="1">adwaita_style.patch</Patch> -->
+            <Patch level="1">nemo-2.0.1-view-no-return.patch</Patch>
+            <Patch level="1">nemo-2.2.0-void-return-no-return.patch</Patch>
         </Patches>
     </Source>
 
@@ -59,6 +61,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/libexec</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="doc">/usr/share/gtk-doc</Path>
             <Path fileType="data">/usr/share/man</Path>

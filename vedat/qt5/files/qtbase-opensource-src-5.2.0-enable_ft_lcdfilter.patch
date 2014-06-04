@@ -1,0 +1,11 @@
+--- qtbase/src/gui/text/qfontengine_ft.cpp.orig	2014-05-15 20:12:15.000000000 +0300
++++ qtbase/src/gui/text/qfontengine_ft.cpp	2014-05-23 00:18:46.006624471 +0300
+@@ -70,7 +70,7 @@
+ #include FT_CONFIG_OPTIONS_H
+ #endif
+ 
+-#if defined(FT_LCD_FILTER_H) && defined(FT_CONFIG_OPTION_SUBPIXEL_RENDERING)
++#if defined(FT_LCD_FILTER_H)
+ #define QT_USE_FREETYPE_LCDFILTER
+ #endif
+ 

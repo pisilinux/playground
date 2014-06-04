@@ -37,7 +37,7 @@ volume-sound-file='/usr/share/cinnamon-control-center/sounds/volume.oga'
 [org.cinnamon.desktop.interface]
 cursor-theme='jimmac'
 gtk-key-theme='Default'
-gtk-theme='Mint-X'
+gtk-theme='Adwaita'
 icon-theme='Mint-X'
 menus-have-icons=true
 toolkit-accessibility=false
@@ -50,6 +50,11 @@ ask-for-away-message=false
 input-sources-switcher='alt-shift'
 
 [org.cinnamon.desktop.background]
+primary-color="#000000"
+secondary-color="#000000"
+color-shading-type="solid"
+picture-uri='file:///usr/share/themes/Adwaita/backgrounds/pisi.jpg'
+picture-options="stretched"
 show-desktop-icons=true
 
 [org.nemo.desktop]
@@ -67,10 +72,12 @@ thumbnail-limit=10485760
 [org.cinnamon.desktop.wm.preferences]
 button-layout='menu:minimize,maximize,close'
 titlebar-font="Sans Bold 10"
+titlebar-uses-system-font=false
 
 [org.cinnamon.settings-daemon.plugins.xsettings]
-hinting="slight"
+hinting='slight'
 menus-have-icons=true
+buttons-have-icons=true
 
 [org.cinnamon.settings-daemon.plugins.power]
 lock-on-suspend=true

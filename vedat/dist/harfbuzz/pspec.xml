@@ -1,0 +1,153 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>harfbuzz</Name>
+        <Homepage>http://www.freedesktop.org/software/harfbuzz</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>OpenType text shaping engine.</Summary>
+        <Description>The Harfbuzz package contains an OpenType text shaping engine.</Description>
+        <Archive sha1sum="fbb4e533f0f838c456fbe37751ec2dbf95c8e182" type="tarbz2">http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-0.9.29.tar.bz2</Archive>
+        <AdditionalFiles>
+            <!--<AdditionalFile permission="0644" target="../../work-emul32/remove-graphite.patch">remove-graphite.patch</AdditionalFile>-->
+        </AdditionalFiles>
+        <BuildDependencies>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>pkgconfig</Dependency>
+	    <Dependency>fontconfig-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>gtk-doc
+            <Dependency>icu4c-devel</Dependency>
+	    <Dependency>gobject-introspection-devel</Dependency>
+	    <Dependency>gtk-doc</Dependency>
+	    <Dependency>freetype-devel</Dependency>
+	    <Dependency>graphite2-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>harfbuzz</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>icu4c</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/gtk-doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share/gir-1.0/</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>harfbuzz-devel</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">harfbuzz</Dependency>
+            <Dependency>icu4c-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/harfbuzz</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>harfbuzz-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for harfbuzz</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>freetype-32bit</Dependency>
+            <Dependency>fontconfig-32bit</Dependency>
+            <Dependency>icu4c-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">harfbuzz</Dependency>
+            <Dependency>freetype-32bit</Dependency>
+            <Dependency>icu4c-32bit</Dependency>
+            <Dependency>glib2-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="10">
+            <Date>2014-06-01</Date>
+            <Version>0.9.29</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2014-05-17</Date>
+            <Version>0.9.26</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2014-02-26</Date>
+            <Version>0.9.26</Version>
+            <Comment>Delete Unused Deps.</Comment>
+            <Name>Varol Maksutoğlu</Name>
+            <Email>waroi@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2014-02-25</Date>
+            <Version>0.9.26</Version>
+            <Comment>Rebuild Unused</Comment>
+            <Name>Varol Maksutoğlu</Name>
+            <Email>waroi@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-02-22</Date>
+            <Version>0.9.26</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-10-14</Date>
+            <Version>0.9.19</Version>
+            <Comment>Rebuild for icu4c</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>      
+        <Update release="4">
+            <Date>2013-07-26</Date>
+            <Version>0.9.19</Version>
+            <Comment>Version bump. Fix build emul32</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-06-30</Date>
+            <Version>0.9.18</Version>
+            <Comment>V.Bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-01-22</Date>
+            <Version>0.9.9</Version>
+            <Comment>Add emul32</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-12-24</Date>
+            <Version>0.9.9</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

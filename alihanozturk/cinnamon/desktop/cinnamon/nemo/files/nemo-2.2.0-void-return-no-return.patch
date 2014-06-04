@@ -1,0 +1,32 @@
+Index: nemo-2.2.0/libnemo-private/nemo-action.c
+===================================================================
+--- nemo-2.2.0.orig/libnemo-private/nemo-action.c
++++ nemo-2.2.0/libnemo-private/nemo-action.c
+@@ -1085,7 +1085,7 @@ nemo_action_get_label (NemoAction *actio
+     const gchar *orig_label = nemo_action_get_orig_label (action);
+ 
+     if (orig_label == NULL)
+-        return;
++        return NULL;
+ 
+     action->escape_underscores = TRUE;
+ 
+@@ -1352,4 +1352,4 @@ nemo_action_get_visibility (NemoAction *
+ out:
+ 
+     return selection_type_show && extension_type_show && condition_type_show;
+-}
+\ No newline at end of file
++}
+Index: nemo-2.2.0/libnemo-private/nemo-monitor.c
+===================================================================
+--- nemo-2.2.0.orig/libnemo-private/nemo-monitor.c
++++ nemo-2.2.0/libnemo-private/nemo-monitor.c
+@@ -78,6 +78,7 @@ schedule_call_consume_changes (void)
+       call_consume_changes_idle_id =
+           g_idle_add (call_consume_changes_idle_cb, NULL);
+   }
++  return 0;
+ }
+ 
+ static void

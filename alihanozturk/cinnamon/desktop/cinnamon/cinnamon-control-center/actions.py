@@ -15,8 +15,6 @@ def setup():
     autotools.configure("--disable-static \
                          --enable-documentation \
                          --disable-systemd \
-                         --enable-color \
-                         --enable-wacom \
                          --disable-update-mimedb")
     
     pisitools.dosed("libtool", "( -shared )", " -Wl,-O1,--as-needed\\1")

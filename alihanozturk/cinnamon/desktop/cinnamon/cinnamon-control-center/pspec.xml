@@ -12,7 +12,7 @@
         <IsA>app:gui</IsA>
         <Summary>Utilities to configure the Cinnamon desktop</Summary>
         <Description>This package contains configuration utilities for the Cinnamon desktop, which allow to configure accessibility options, desktop fonts, keyboard and mouse properties, sound setup, desktop theme and background, user interface properties, screen resolution, and other settings.</Description>
-        <Archive sha1sum="574f0a130df7dc44b02d8cb3afaa4192b8b868eb" type="targz">https://github.com/linuxmint/cinnamon-control-center/archive/2.2.8.tar.gz</Archive>
+        <Archive sha1sum="bbbb1e3ed10f80e13add25505edbd73718123688" type="targz">https://github.com/linuxmint/cinnamon-control-center/archive/2.2.9.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>intltool</Dependency>
             <Dependency>gnome-common</Dependency>
@@ -56,10 +56,6 @@
             <Dependency>cinnamon-menus-devel</Dependency>
             <Dependency>libsocialweb-devel</Dependency>
         </BuildDependencies>
-        <Patches>
-            <Patch level="1">cinnamon-control-center-2.2.5-nm-applet.patch</Patch>
-            <Patch level="1">cinnamon-control-center-2.2.5-optional.patch</Patch>
-        </Patches>
     </Source>
 
     <Package>
@@ -142,8 +138,8 @@
     
     <History>
         <Update release="3">
-            <Date>2014-05-23</Date>
-            <Version>2.2.8</Version>
+            <Date>2014-05-28</Date>
+            <Version>2.2.9</Version>
             <Comment>Verison bump.</Comment>
             <Name>Alihan Öztürk</Name>
             <Email>alihan@pisilinux.org</Email>
