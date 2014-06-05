@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>liblinebreak</Name>
+        <Homepage>http://vimgadgets.sourceforge.net/liblinebreak/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>custom:zlib/libpng</License>
+        <PartOf>x11.library</PartOf>
+        <IsA>library</IsA>
+        <Summary>An implementation of the line breaking algorithm as described in Unicode 5.2.0 Standard Annex 14, Revision 24</Summary>
+        <Description>An implementation of the line breaking algorithm as described in Unicode 5.2.0 Standard Annex 14, Revision 24</Description>
+        <BuildDependencies>
+            <Dependency>glibc-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="ee73de967b20b525f45c9ad7a929fab708253853" type="targz">http://sourceforge.net/projects/vimgadgets/files/liblinebreak/2.1/liblinebreak-2.1.tar.gz/download</Archive>
+    </Source>
+    <Package>
+        <Name>liblinebreak</Name>
+        <RuntimeDependencies>
+            <Dependency>glibc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>liblinebreak-devel</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">liblinebreak</Dependency>
+        </RuntimeDependencies>
+        <Files>
+        <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-24</Date>
+            <Version>2.1.2</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

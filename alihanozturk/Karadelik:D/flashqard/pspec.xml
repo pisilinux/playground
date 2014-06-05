@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>flashqard</Name>
+        <Homepage>http://flashqard-project.org/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <PartOf>science</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>FlashQard is an educational software to improve your learning process.</Summary>
+        <Description>FlashQard is an educational software to improve your learning process. It is designed to help you learn not only a new language but anything that can be learnt!</Description>
+        <Archive sha1sum="6855e5f09d169f0a6250ebaf8ed9600d9494928b" type="targz">http://downloads.sourceforge.net/flashqard/flashqard-0.15.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>icon-theme-hicolor</Dependency>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>flashqard</Name>
+        <RuntimeDependencies>
+            <Dependency>cmake</Dependency>
+            <Dependency>gcc</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>qt-webkit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-22</Date>
+            <Version>0.15.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kfritz</Name>
+        <Homepage>http://www.joachim-wilke.de/kfritz.htm?lang=en</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>desktop.kde</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>A KDE program for users of AVMs Fritz!Box to get call signaling and other functions.</Summary>
+        <Description>A KDE program for users of AVMs Fritz!Box to get call signaling and other functions.</Description>
+        <BuildDependencies>
+            <Dependency>automoc4</Dependency>
+            <Dependency>cmake</Dependency>
+            <Dependency>commoncpp2-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="27b2e5ff653a87742b4d46cd127d16927c6f7f4f" type="targz">http://www.joachim-wilke.de/downloads/kfritz/kfritz_0.0.13.orig.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>kfritz</Name>
+        <RuntimeDependencies>
+            <Dependency>cmake</Dependency>
+            <Dependency>commoncpp2</Dependency>
+            <Dependency>kdelibs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/config.kcfg</Path>
+            <Path fileType="data">/usr/share/kde4</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-12-03</Date>
+            <Version>0.0.13</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

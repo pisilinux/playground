@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>plasma-applet-networkmanager</Name>
+        <Homepage>https://projects.kde.org/projects/playground/network/plasma-nm</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Plasma applet written in QML for managing network connections</Summary>
+        <Description>Plasma applet written in QML for managing network connections</Description>
+        <BuildDependencies>
+            <Dependency>automoc4</Dependency>
+            <Dependency>kde-workspace-devel</Dependency>
+            <Dependency>mobile-broadband-provider-info</Dependency>
+            <Dependency>openconnect-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="dd7fe1ff2946e12ab49d324966a09df4802cedb5" type="tarxz">http://download.kde.org/unstable/plasma-nm/plasma-nm-0.9.3.3.tar.xz</Archive>
+    </Source>
+    <Package>
+        <Name>plasma-applet-networkmanager</Name>
+        <RuntimeDependencies>
+            <Dependency>openconnect</Dependency>
+            <Dependency>libmm-qt</Dependency>
+            <Dependency>kde-workspace</Dependency>
+            <Dependency>libnm-qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/kde4</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-03-08</Date>
+            <Version>0.9.3.3</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

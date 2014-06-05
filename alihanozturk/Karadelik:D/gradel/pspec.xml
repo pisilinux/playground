@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gradel</Name>
+        <Homepage>http://gradel.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPL</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>GradeL, Gradebook for Linux, (rhymes with "cradle") is a desktop gradebook program for teachers.</Summary>
+        <Description>GradeL, Gradebook for Linux, (rhymes with "cradle") is a desktop gradebook application for teachers. This program includes features necessary for tracking student performance and attendance.</Description>
+        <BuildDependencies>
+            <Dependency>gambas3-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="a114984a2928c014b54857874753f32ba0a706a2" type="targz">http://sourceforge.net/projects/gradel/files/gradel/0.12.1/gradel-0.12.1-src.tar.gz/download</Archive>
+    </Source>
+    <Package>
+        <Name>gradel</Name>
+        <RuntimeDependencies>
+            <Dependency>gambas3-gb-form</Dependency>
+            <Dependency>gambas3-gb-net</Dependency>
+            <Dependency>gambas3-gb-net-curl</Dependency>
+            <Dependency>gambas3-gb-qt4</Dependency>
+            <Dependency>gambas3-gb-qt4-ext</Dependency>
+            <Dependency>gambas3-runtime</Dependency>
+        </RuntimeDependencies>
+        <Files>
+        <Path fileType="executable">/usr/bin</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
+        <Path fileType="data">/usr/share</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/gradel.desktop">gradel.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2013-11-28</Date>
+            <Version>0.12.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
