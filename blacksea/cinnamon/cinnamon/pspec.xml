@@ -1,0 +1,149 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cinnamon</Name>
+        <Homepage>http://cinnamon.linuxmint.com/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Gnome Shell çatallaması gnome2 görünümlü Cinnamon masaüstü</Summary>
+        <Description>Cinnamon, Gnome Shell çatallaması gnome2 görünümlü Cinnamon masaüstü.</Description>
+        <Archive sha1sum="1086a42f70665d4eb205c1ab6d47c4d364284178" type="targz">http://leigh123linux.fedorapeople.org/pub/cinnamon/source/Cinnamon-2.2.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>intltool</Dependency>
+            <Dependency>gjs-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>cogl-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>libXi-devel</Dependency>
+            <Dependency>pixman-devel</Dependency>
+            <Dependency>gconf-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>muffin-devel</Dependency>
+            <Dependency>clutter-devel</Dependency>
+            <Dependency>libsoup-devel</Dependency>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libcroco-devel</Dependency>
+            <Dependency>json-glib-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>libXfixes-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libXdamage-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>cjs-internals-devel</Dependency>
+            <Dependency>libXcomposite-devel</Dependency>
+            <Dependency>NetworkManager-devel</Dependency>
+            <Dependency>pulseaudio-libs-devel</Dependency>
+            <Dependency>libgnome-keyring-devel</Dependency>
+            <Dependency>startup-notification-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+    <!--        <Patch level="1">background.patch</Patch>
+          <Patch level="1">set_wheel.patch</Patch>
+          <Patch level="1">upower_calender_fix.patch</Patch>
+          <Patch level="1">autostart.patch</Patch>
+          <Patch level="1">cinnamon-desktop-editor.patch</Patch>
+          <Patch level="1">compile_fix.patch</Patch>
+          <Patch level="1">disable_xinput.patch</Patch>
+          <Patch level="1">input_keybindings.patch</Patch>
+          <Patch level="1">keyboard_applet.patch</Patch>
+         <Patch level="1">replace_gksu.patch</Patch>
+          <Patch level="1">cinnamon-settings-apps.patch</Patch>
+          <Patch level="1">remove_bluetootoh.patch</Patch> -->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>cinnamon</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>cogl</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>nemo</Dependency>
+            <Dependency>libXi</Dependency>
+            <Dependency>gconf</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>muffin</Dependency>
+            <Dependency>clutter</Dependency>
+            <Dependency>libsoup</Dependency>
+            <Dependency>caribou</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>libcroco</Dependency>
+            <Dependency>json-glib</Dependency>
+            <Dependency>libevdev</Dependency>
+            <Dependency>libXrandr</Dependency>
+            <Dependency>libXfixes</Dependency>
+            <Dependency>libXdamage</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>libxkbcommon</Dependency>
+            <Dependency>cjs-internals</Dependency>
+            <Dependency>libXcomposite</Dependency>
+            <Dependency>NetworkManager</Dependency>
+            <Dependency>gstreamer-next</Dependency>
+            <Dependency>cinnamon-menus</Dependency>
+            <Dependency>gnome-bluetooth</Dependency>
+            <Dependency>pulseaudio-libs</Dependency>
+            <Dependency>libgnome-keyring</Dependency>
+            <Dependency>cinnamon-desktop</Dependency>
+            <Dependency>startup-notification</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>cinnamon-control-center</Dependency>
+            <Dependency>cinnamon-screensaver</Dependency>
+            <Dependency>cinnamon-session</Dependency>
+            <Dependency>cinnamon-settings-daemon</Dependency>
+            <Dependency>cinnamon-translations</Dependency>
+            <Dependency>network-manager-applet</Dependency>
+            <Dependency>gsettings-desktop-schemas</Dependency>
+            <Dependency>accountsservice</Dependency>
+            <Dependency>gnome-terminal</Dependency>
+            <Dependency>clutter-gtk</Dependency>
+            <Dependency>polkit-gnome</Dependency>
+            <Dependency>python-inotify</Dependency>
+            <Dependency>python-pam</Dependency>
+            <Dependency>python-lxml</Dependency>
+            <Dependency>python-pillow</Dependency>
+            <Dependency>python-pexpect</Dependency>
+            <Dependency>notify-python</Dependency>
+            <Dependency>notification-daemon</Dependency>
+	    <Dependency>icon-theme-gnome</Dependency>
+            <Dependency>icon-theme-gnome-symbolic</Dependency>
+            <Dependency>gnome-themes-standard</Dependency>
+            <Dependency>gnome-color-manager</Dependency>
+            <Dependency>webkit-gtk2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="data">/usr/share/</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="config">/etc/xdg/menus</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/polkit-cinnamon-authentication-agent-1.desktop">polkit-cinnamon-authentication-agent-1.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/cinnamon-pisilinux.gschema.override">cinnamon-pisilinux.gschema.override</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/polkit-1/actions/org.cinnamon.settings-users.policy">org.cinnamon.settings-users.policy</AdditionalFile>
+        <!--    <AdditionalFile owner="root" permission="0644" target="/usr/share/themes/Adwaita/backgrounds/pisi.png">pisi.png</AdditionalFile>-->
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-05-01</Date>
+            <Version>2.2.5</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

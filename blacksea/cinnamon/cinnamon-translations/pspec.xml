@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cinnamon-translations</Name>
+        <Homepage>http://cinnamon.linuxmint.com/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>LGPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Cinnamon localization package</Summary>
+        <Description>Cinnamon localization package.</Description>
+        <Archive sha1sum="261c061d076b65f33a588ff05b54d6d101a19631" type="targz">http://leigh123linux.fedorapeople.org/pub/cinnamon-translations/source/cinnamon-translations-2.2.0.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>cinnamon-translations</Name>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/cinnamon/locale</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-12</Date>
+            <Version>2.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
