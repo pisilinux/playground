@@ -16,6 +16,12 @@
         <Description>Calligra is a free, integrated office suite for KDE. The application suite consists of a word-processor, a spreadsheet application, a presentation creator and viewer application, an organizer and more.</Description>
         <Archive sha1sum="956cc2b42a7be7d59d686dfa646a0ddc119179ef" type="tarxz">mirrors://kde/stable/calligra-2.8.3/calligra-2.8.3.tar.xz</Archive>
         <BuildDependencies>
+            <Dependency>docbook-xsl</Dependency>
+            <Dependency>libspnav-devel</Dependency>
+            <Dependency>pstoedit-devel</Dependency>
+            <Dependency>marble-devel</Dependency>
+            <Dependency>digikam-devel</Dependency>
+            <Dependency>kactivities-devel</Dependency>
             <Dependency>boost-devel</Dependency>
             <Dependency>doxygen</Dependency>
             <Dependency>eigen</Dependency>
@@ -45,7 +51,7 @@
             <Dependency>giflib-devel</Dependency>
             <Dependency>fftw3-devel</Dependency>
             <Dependency>libxslt-devel</Dependency>
-            <Dependency>lcms-devel</Dependency>
+            <Dependency>lcms2-devel</Dependency>
             <Dependency>soprano-devel</Dependency>
             <Dependency>pstoedit</Dependency>
             <Dependency>libjpeg-turbo-devel</Dependency>
@@ -60,7 +66,7 @@
             <Dependency>icu4c-devel</Dependency>
             <Dependency>lcms2-devel</Dependency>
             <Dependency>libvisio-devel</Dependency>
-            <Dependency>OpenGTL-devel</Dependency>
+<!--             <Dependency>OpenGTL-devel</Dependency> -->
             <Dependency>qimageblitz-devel</Dependency>
             <Dependency>okular-devel</Dependency>
             <Dependency>opencolorio-devel</Dependency>
@@ -97,7 +103,7 @@
             <Path fileType="data">/usr/share/kde4/apps/braindump/braindumpview.rc</Path>
             <Path fileType="data">/usr/share/kde4/apps/braindump/icons/hicolor/22x22/actions/zoom-pixels.png</Path>
             <Path fileType="data">/usr/share/kde4/apps/stateshape/states/</Path>
-            <Path fileType="data">/usr/share/icons/hicolor/*/apps/braindump.png</Path>            
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/braindump.png</Path>
             <Path fileType="data">/usr/share/icons/hicolor/22x22/actions/stateshape.png</Path>
             <Path fileType="data">/usr/share/icons/hicolor/22x22/actions/statetool.png</Path>
             <Path fileType="data">/usr/share/icons/hicolor/scalable/apps/braindump.svgz</Path>
@@ -198,7 +204,7 @@
             <Path fileType="data">/usr/share/icons/hicolor/scalable/apps/calligraflow.svgz</Path>
             <Path fileType="data">/usr/share/kde4/services/flowdockersplugin.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/flowpart.desktop</Path>
-            <Path fileType="data">/usr/share/kde4/servicetypes/flow_dock.desktop</Path>	    
+            <Path fileType="data">/usr/share/kde4/servicetypes/flow_dock.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/flow_vsdx_thumbnail.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/flow_vsdx_import.desktop</Path>
         </Files>
@@ -216,7 +222,7 @@
 	    <Path fileType="doc">/usr/share/doc/kde4/html/en/calligra/index.docbook</Path>
         </Files>
     </Package>
-    
+
     <Package>
         <Name>calligra-karbon</Name>
         <Icon>karbon</Icon>
@@ -345,7 +351,7 @@
             <Path fileType="data">/usr/share/mime/packages/krita_ora.xml</Path>
         </Files>
     </Package>
-    
+
     <Package>
         <Name>calligra-libs</Name>
         <IsA>library</IsA>
@@ -822,7 +828,7 @@
             <Path fileType="data">/usr/share/kde4/apps/stage/</Path>
             <Path fileType="data">/usr/share/kde4/config/stagerc</Path>
             <Path fileType="doc">/usr/share/doc/kde4/html/en/stage/</Path>
-            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligrastage.*</Path>            
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligrastage.*</Path>
             <Path fileType="data">/usr/share/icons/hicolor/16x16/actions/pen.png</Path>
             <Path fileType="data">/usr/share/icons/hicolor/16x16/actions/black.png</Path>
             <Path fileType="data">/usr/share/icons/hicolor/16x16/actions/highlight.png</Path>
@@ -899,7 +905,7 @@
             <Path fileType="data">/usr/share/kde4/apps/words/</Path>
             <Path fileType="data">/usr/share/kde4/config/authorrc</Path>
             <Path fileType="data">/usr/share/kde4/config/wordsrc</Path>
-            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligrawords.*</Path>            
+            <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligrawords.*</Path>
             <Path fileType="data">/usr/share/icons/hicolor/*/apps/calligraauthor.png</Path>
             <Path fileType="data">/usr/share/icons/hicolor/22x22/actions/tool_pagelayout.png</Path>
             <Path fileType="data">/usr/share/icons/hicolor/scalable/apps/calligrawords.svgz</Path>
