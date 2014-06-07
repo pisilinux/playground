@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gnome-keyring-sharp</Name>
+        <Homepage>http://www.mono-project.com/Libraries#Gnome-KeyRing-Sharp</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>NWL</License>
+        <IsA>library</IsA>
+        <Summary>A fully managed implementation of libgnome-keyring.</Summary>
+        <Description>This library provides access to the Gnome Keyring for managed applications.</Description>
+        <Archive sha1sum="36d8cc9e3a24288554132bf1d0385cd69f7d804b" type="targz">http://www.go-mono.com/archive/gnome-keyring-sharp/gnome-keyring-sharp-1.0.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gtk-sharp-devel</Dependency>
+            <Dependency>libgnome-keyring-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">gnome-keyring-sharp-1.0.1-monodoc-dir.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>gnome-keyring-sharp</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk-sharp</Dependency>
+            <Dependency>libgnome-keyring</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/libgnome-keyring-sharp-glue.so</Path>
+            <Path fileType="library">/usr/lib/mono</Path>
+            <Path fileType="library">/usr/lib/monodoc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>gnome-keyring-sharp-devel</Name>
+        <Summary>Development files for gnome-keyring-sharp</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">gnome-keyring-sharp</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2014-06-07</Date>
+            <Version>1.0.2</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
