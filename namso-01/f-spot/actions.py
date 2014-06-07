@@ -20,7 +20,7 @@ def setup():
                          --disable-schemas-install \
                          --enable-release \
                          --with-gnome-screensaver=/usr \
-                         --with-gnome-screensaver-privlibexecdir=/usr/lib/gnome-screensaver \
+                         --with-gnome-screensaver-privlibexecdir=/usr/libexec/gnome-screensaver \
                          --with-vendor-build-id=PisiLinux")
 
     #pisitools.dosed("libtool", " -shared ", " -Wl,--as-needed -shared ")

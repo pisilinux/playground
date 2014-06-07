@@ -14,7 +14,6 @@ def setup():
     shelltools.export("MONO_SHARED_DIR", get.workDIR())
     shelltools.system("MCS=/usr/bin/dmcs")
     autotools.configure("--prefix=/usr \
-                         --localstatedir=/var \
                          --disable-static \
                          --disable-scrollkeeper \
                          --disable-schemas-install \
@@ -23,7 +22,7 @@ def setup():
                          --with-gnome-screensaver-privlibexecdir=/usr/libexec/gnome-screensaver \
                          --with-vendor-build-id=PisiLinux")
     
-    pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
+    #pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 
 def build():
     shelltools.export("MONO_SHARED_DIR", get.workDIR())
@@ -32,5 +31,5 @@ def build():
 def install():
     shelltools.export("MONO_SHARED_DIR", get.workDIR())
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    
+        
     pisitools.dodoc("README", "NEWS", "TODO", "AUTHORS", "ChangeLog")
