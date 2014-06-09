@@ -4,18 +4,19 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/licenses/gpl.txt
 
+from pisi.actionsapi import get
+from pisi.actionsapi import libtools
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
-from pisi.actionsapi import get
-from pisi.actionsapi import libtools
 from pisi.actionsapi import texlivemodules
-
-import os
 
 WorkDir = "."
 
 def setup():
+    # texmf-dist -> texmf
+    pisitools.dosed(".", "(\/texmf)-dist", "\\1", filePattern="Makefile.am")
+
     pisitools.dosed("source/texk/tex4htk/t4ht.c", "SELFAUTOPARENT", "TEXMFROOT")
     #pisitools.dosed("source/texk/xdvik/configure","-lXp", " ")
     shelltools.makedirs("source/build")
@@ -68,9 +69,6 @@ def install():
     shelltools.cd("source/build")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.domove("/usr/share/texmf-dist/*","/usr/share/texmf")
-    pisitools.removeDir("/usr/share/texmf-dist")
-
 
     bibtexextra_scripts=["bibexport", "listbib" ,"multibibliography", "urlbst"]
 
@@ -106,8 +104,28 @@ def install():
 
     science_scripts=["ulqda"]
 
-    for s in bibtexextra_scripts, core_scripts,
-    htmlxml_scripts ,langcjk_scripts, langcyrillic_scripts,
-    langextra_scripts, langgreek_scripts, latexextra_scripts, music_scripts,
-    pictures_scripts, pstricks_scripts,
-    science_scripts:
+    # remove unneeded files and symlinks
+    dirs = []
+    for g in [bibtexextra_scripts, core_scripts, htmlxml_scripts, \
+              langcjk_scripts, langcyrillic_scripts, langextra_scripts, \
+              langgreek_scripts, latexextra_scripts, music_scripts, \
+              pictures_scripts, pstricks_scripts, science_scripts, \
+              ["tlmgr"]]:
+        for s in g:
+            if shelltools.isLink("%s/usr/bin/%s" % (get.installDIR(), s)):
+                realpath = shelltools.realPath("%s/usr/bin/%s" % (get.installDIR(), s))
+                dirname = shelltools.dirName(realpath)
+                if not dirname in dirs: dirs.append(dirname)
+                if not dirname == "%s/usr/bin" % get.installDIR():
+                    if shelltools.isFile(realpath): shelltools.unlink(realpath)
+                pisitools.remove("/usr/bin/%s" % s)
+
+    # remove empty dirs
+    while dirs:
+        tmpdirs = dirs[:]
+        for d in tmpdirs:
+            if not shelltools.ls(d):
+                shelltools.unlinkDir(d)
+                dirname = shelltools.dirName(d)
+                if not dirname in dirs: dirs.append(dirname)
+            dirs.remove(d)
