@@ -11,11 +11,12 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import texlivemodules
 
-import os
-
 WorkDir = "."
 
 def setup():
+    # texmf-dist -> texmf
+    pisitools.dosed(".", "(\/texmf)-dist", "\\1", filePattern="Makefile.am")
+
     pisitools.dosed("source/texk/tex4htk/t4ht.c", "SELFAUTOPARENT", "TEXMFROOT")
     #pisitools.dosed("source/texk/xdvik/configure","-lXp", " ")
     shelltools.makedirs("source/build")
@@ -66,7 +67,7 @@ def install():
     shelltools.copy("source/utils/biber/TeXLive/*.pm", "%s/usr/share/tlpkg/TeXLive" % get.installDIR())
 
     shelltools.cd("source/build")
-    autotools.rawInstall('DESTDIR=%s texmf="%s/usr/share/texmf"' % ((get.installDIR(), ) * 2))
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
 
     bibtexextra_scripts=["bibexport", "listbib" ,"multibibliography", "urlbst"]
