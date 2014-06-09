@@ -14,6 +14,9 @@
         <Summary>Maxthon for PisiLinux</Summary>
         <Description>A browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier.</Description>
 	<Archive sha1sum="95e4e7aaa90b1e4e2f8ae1c69d2464e62f385858" type="targz">http://dl.maxthon.com/linux/tars/maxthon-browser-stable-1.0.1.10-x86_64.tgz</Archive>
+        <BuildDependencies>
+            <Dependency>libgcrypt15</Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>
