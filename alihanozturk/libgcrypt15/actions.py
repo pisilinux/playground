@@ -7,19 +7,10 @@
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
-from pisi.actionsapi import shelltools
 
 def setup():
-    options = "--disable-static \
-               --enable-noexecstack"
-
-    if get.buildTYPE() == "emul32":
-        shelltools.export("CFLAGS", "%s -m32" % get.CFLAGS())
-
-        # Use 32-bit assembler, another option is to use --disable-asm option
-        pisitools.dosed("mpi/config.links", "path=\"amd64\"", "path=\"i586 i386\"")
-
-    autotools.configure(options)
+    autotools.configure("--disable-static \
+                         --enable-noexecstack")
 
 def build():
     autotools.make()
@@ -30,19 +21,7 @@ def check():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    if get.buildTYPE() == "emul32": return
-
-    pisitools.dodir("/etc/gcrypt")
-   
-    pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING*", "NEWS", "README", "THANKS", "TODO")
-    
-    pisitools.removeDir("/etc/gcrypt")
     pisitools.removeDir("/usr/bin")
     pisitools.removeDir("/usr/include")
-    pisitools.removeDir("/usr/lib32")
     pisitools.removeDir("/usr/share")
-    pisitools.remove("/usr/lib/libgcrypt.so")
-    pisitools.remove("/usr/lib/libgcrypt.so.11")
-    
-    pisitools.dosym("/usr/lib/libgcrypt.so.11.8.2", "/opt/maxthon/libgcrypt.so.11")
-    
+
