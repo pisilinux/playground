@@ -10,10 +10,9 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-vif")
+    #autotools.autoreconf("-vif")
     shelltools.system("./autogen.sh")
-    autotools.configure("--disable-static \
-                         --disable-schemas-compile")
+    autotools.configure("--disable-static")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
     

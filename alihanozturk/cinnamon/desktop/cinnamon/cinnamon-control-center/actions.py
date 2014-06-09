@@ -10,11 +10,10 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-vfi")
+    #autotools.autoreconf("-vfi")
     shelltools.system("./autogen.sh")
     autotools.configure("--disable-static \
                          --enable-documentation \
-                         --disable-systemd \
                          --disable-update-mimedb")
     
     pisitools.dosed("libtool", "( -shared )", " -Wl,-O1,--as-needed\\1")
