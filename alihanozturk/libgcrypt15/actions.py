@@ -33,5 +33,16 @@ def install():
     if get.buildTYPE() == "emul32": return
 
     pisitools.dodir("/etc/gcrypt")
-
+   
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING*", "NEWS", "README", "THANKS", "TODO")
+    
+    pisitools.removeDir("/etc/gcrypt")
+    pisitools.removeDir("/usr/bin")
+    pisitools.removeDir("/usr/include")
+    pisitools.removeDir("/usr/lib32")
+    pisitools.removeDir("/usr/share")
+    pisitools.remove("/usr/lib/libgcrypt.so")
+    pisitools.remove("/usr/lib/libgcrypt.so.11")
+    
+    pisitools.dosym("/usr/lib/libgcrypt.so.11.8.2", "/opt/maxthon/libgcrypt.so.11")
+    
