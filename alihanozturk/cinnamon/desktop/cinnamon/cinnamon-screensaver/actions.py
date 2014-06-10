@@ -10,19 +10,18 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    #autotools.autoreconf("-vif")
+    autotools.autoreconf("-vif")
     shelltools.echo("ACLOCAL_AMFLAGS = -I m4", "Makefile.am")
     shelltools.echo("AC_CONFIG_MACRO_DIR([m4])", "configure.ac")
     shelltools.system("./autogen.sh")
     autotools.configure("--sysconfdir=/etc \
-                         --disable-static \
                          --with-mit-ext \
                          --with-xf86gamma-ext \
                          --enable-locking \
                          --enable-docbook-docs \
                          --with-pam-prefix=/etc \
                          --with-console-kit=yes \
-                         --with-systemd=no")
+                         --without-systemd")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 

@@ -10,10 +10,15 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    #autotools.autoreconf("-vif")
+    autotools.autoreconf("-vif")
     shelltools.system("./autogen.sh")
-    autotools.configure("--enable-docbook-docs \
-                         --with-console-kit=yes")
+    autotools.configure("--disable-option-checking \
+                         --enable-gconf
+                         --disable-systemd
+                         --enable-docbook-docs \
+                         --with-console-kit=yes \
+                         --enable-polkit \
+                         --enable-pam")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 
