@@ -11,17 +11,15 @@ from pisi.actionsapi import get
 
 def setup():
     shelltools.system("sed -i -e 's:import PAM:import pam:' files/usr/lib/cinnamon-settings/modules/cs_user.py")
-    shelltools.system("sed -i -e 's|/usr/bin/cinnamon-control-center|/usr/lib/cinnamon-control-center-1/panels|' files/usr/bin/cinnamon-settings")
-    shelltools.system("sed -i -e 's/gksu/pkexec/' files/usr/bin/cinnamon-settings-users")
-    #autotools.autoreconf("-vif")
+    #shelltools.system("sed -i -e 's|/usr/bin/cinnamon-control-center|/usr/lib/cinnamon-control-center-1/panels|' files/usr/bin/cinnamon-settings")
+    #shelltools.system("sed -i -e 's/gksu/pkexec/' files/usr/bin/cinnamon-settings-users")
+    autotools.autoreconf("-vif")
     shelltools.system("./autogen.sh")
     autotools.configure("--localstatedir=/var \
                          --disable-static \
                          --disable-rpath \
                          --enable-compile-warnings=yes \
-                         --enable-introspection=yes \
-                         --with-console-kit=yes \
-                         --with-session-tracking=polkit")
+                         --enable-introspection=yes")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 
