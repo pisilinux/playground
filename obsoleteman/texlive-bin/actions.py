@@ -15,7 +15,7 @@ WorkDir = "."
 
 def setup():
     # texmf-dist -> texmf
-    pisitools.dosed(".", "(\/?texmf)-dist\/", "\\1\/", filePattern="(Makefile.*|configure|texmf.cnf|.+\.cnf|.+\.pl|.+\.pm)")
+    pisitools.dosed(".", "(\/?texmf)-dist\/", "\\1/", filePattern="(Makefile.*|configure|texmf.cnf|.+\.cnf|.+\.pl|.+\.pm)")
 
     pisitools.dosed("source/texk/tex4htk/t4ht.c", "SELFAUTOPARENT", "TEXMFROOT")
     #pisitools.dosed("source/texk/xdvik/configure","-lXp", " ")
@@ -129,3 +129,19 @@ def install():
                 dirname = shelltools.dirName(d)
                 if not dirname in dirs: dirs.append(dirname)
             dirs.remove(d)
+
+    pdftexsymlinks=["amstex", "cslatex", "csplain", "eplain", "etex", "jadetex", "latex", "mex", "mllatex", "mltex"
+          ,"pdfetex", "pdfcslatex", "pdfcsplain", "pdfjadetex", "pdflatex", "pdfmex", "pdfxmltex", "texsis", "utf8mex", "xmltex"]
+
+    for symlink in pdftexsymlinks:
+        pisitools.dosym("pdftex", "/usr/bin/%s" % symlink)
+
+    luatexsymlinks=["dvilualatex", "dviluatex", "lualatex"]
+
+    for symlink in luatexsymlinks:
+        pisitools.dosym("pdftex", "/usr/bin/%s" % symlink)
+
+
+    pisitools.dosym("eptex", "/usr/bin/platex")
+    pisitools.dosym("euptex", "/usr/bin/uplatex")
+    pisitools.dosym("xetex", "/usr/bin/xelatex")
