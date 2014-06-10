@@ -1,0 +1,178 @@
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="robots" content="index,follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="0.11.1 (2b48ae40ea1b)" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<link rel="icon" href="/source/default/img/icon.png" type="image/png" />
+<link rel="stylesheet" type="text/css" media="all"
+    title="Default" href="/source/default/style.css" />
+<link rel="alternate stylesheet" type="text/css" media="all"
+    title="Paper White" href="/source/default/print.css" />
+<link rel="stylesheet" type="text/css" href="/source/default/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="/source/default/jquery.tooltip.css" />
+
+<link rel="search" href="/source/opensearch"
+    type="application/opensearchdescription+xml"
+    title="OpenGrok Search for current project(s)" />
+<script type="text/javascript" src="/source/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/source/jquery.tooltip-1.3.pack.js"></script>
+
+<script type="text/javascript" src="/source/utils.js"></script>
+<title>Cross Reference: /swig/CCache/debian/patches/11_utimes.diff</title>
+</head>
+<body>
+<script type="text/javascript">/* <![CDATA[ */
+    document.hash = 'null';document.rev = '';document.link = '/source/xref/swig/CCache/debian/patches/11_utimes.diff';document.annotate = false;
+    document.domReady.push(function() {domReadyMast();});
+    document.pageReady.push(function() { pageReadyMast();});
+/* ]]> */</script>
+<div id="page">
+    <div id="whole_header">
+        <form action="/source/search">
+<div id="header">
+<a href="/source/" class="cslogo">
+    <span style="color: #5a2c00; letter-spacing: -2px;">{</span><span 
+        style="color: #0f3368; vertical-align: middle;">Code</span>
+    <span style="color: #222222; vertical-align: middle;">Search</span>
+</a>
+<span id="partner">
+    <a href="http://www.metager.de"><span id="partner_metager"></span></a>
+</span>
+
+
+
+    <div id="pagetitle"><span id="filename"
+                    >Cross Reference: 11_utimes.diff</span></div>
+</div>
+<div id="Masthead">
+    <tt><a href="/source/xref/">xref</a>: /<a href="/source/xref/swig/">swig</a>/<a href="/source/xref/swig/CCache/">CCache</a>/<a href="/source/xref/swig/CCache/debian/">debian</a>/<a href="/source/xref/swig/CCache/debian/patches/">patches</a>/<a href="/source/xref/swig/CCache/debian/patches/11_utimes.diff">11_utimes.diff</a></tt>
+</div>
+<div id="bar">
+    <ul>
+        <li><a href="/source/"><span id="home"></span>Home</a></li><li><a href="/source/history/swig/CCache/debian/patches/11_utimes.diff"><span id="history"></span>History</a></li><li><a href="#" onclick="javascript:get_annotations(); return false;"
+            ><span class="annotate"></span>Annotate</a></li><li><a href="#" onclick="javascript:lntoggle();return false;"
+            title="Show or hide line numbers (might be slower if file has more than 10 000 lines)."><span id="line"></span>Line#</a></li><li><a
+            href="#" onclick="javascript:lsttoggle();return false;"
+            title="Show or hide symbol list."><span id="defbox"></span>Navigate</a></li><li><a href="/source/raw/swig/CCache/debian/patches/11_utimes.diff"><span id="download"></span>Download</a></li><li><input type="text" id="search" name="q" class="q" />
+            <input type="submit" value="Search" class="submit" /></li><li><input type="checkbox" name="path" value="/swig/CCache/debian/patches/" /> only in <b>11_utimes.diff</b></li>
+        
+    </ul>
+    <input type="hidden" name="project" value="swig" />
+</div>
+        </form>
+    </div>
+<div id="content">
+<script type="text/javascript">/* <![CDATA[ */
+document.pageReady.push(function() { pageReadyList();});
+/* ]]> */</script>
+
+<div id="src">
+    <pre><a class="l" name="1" href="#1">1</a>--- <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>	2004-09-13 03:38:30.000000000 -0700
+<a class="l" name="2" href="#2">2</a>+++ <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>	2006-06-09 16:29:16.695117780 -0700
+<a class="l" name="3" href="#3">3</a>@@ -481,8 +481,13 @@
+<a class="l" name="4" href="#4">4</a> 
+<a class="l" name="5" href="#5">5</a> 	/* update timestamps for LRU cleanup
+<a class="l" name="6" href="#6">6</a> 	   also gives output_file a sensible mtime when hard-linking (for make) */
+<a class="l" name="7" href="#7">7</a>+#ifdef HAVE_UTIMES
+<a class="l" name="8" href="#8">8</a>+       utimes(hashname, NULL);
+<a class="l" name="9" href="#9">9</a>+	utimes(stderr_file, NULL);
+<a class="hl" name="10" href="#10">10</a>+#else
+<a class="l" name="11" href="#11">11</a> 	utime(hashname, NULL);
+<a class="l" name="12" href="#12">12</a> 	utime(stderr_file, NULL);
+<a class="l" name="13" href="#13">13</a>+#endif
+<a class="l" name="14" href="#14">14</a> 
+<a class="l" name="15" href="#15">15</a> 	if (strcmp(output_file, "<a href="/source/s?path=/dev/null&amp;project=swig">/dev/null</a>") == 0) {
+<a class="l" name="16" href="#16">16</a> 		ret = 0;
+<a class="l" name="17" href="#17">17</a>--- <a href="/source/s?path=ccache.h&amp;project=swig">ccache.h</a>	2004-09-13 03:38:30.000000000 -0700
+<a class="l" name="18" href="#18">18</a>+++ <a href="/source/s?path=ccache.h&amp;project=swig">ccache.h</a>	2006-06-09 16:28:16.601658626 -0700
+<a class="l" name="19" href="#19">19</a>@@ -22,6 +22,9 @@
+<a class="hl" name="20" href="#20">20</a> #ifdef HAVE_PWD_H
+<a class="l" name="21" href="#21">21</a> #include &lt;<a href="/source/s?path=pwd.h&amp;project=swig">pwd.h</a>&gt;
+<a class="l" name="22" href="#22">22</a> #endif
+<a class="l" name="23" href="#23">23</a>+#ifdef HAVE_SYS_TIME_H
+<a class="l" name="24" href="#24">24</a>+#include &lt;<a href="/source/s?path=sys/time.h&amp;project=swig">sys/time.h</a>&gt;
+<a class="l" name="25" href="#25">25</a>+#endif
+<a class="l" name="26" href="#26">26</a> 
+<a class="l" name="27" href="#27">27</a> #define STATUS_NOTFOUND 3
+<a class="l" name="28" href="#28">28</a> #define STATUS_FATAL 4
+<a class="l" name="29" href="#29">29</a>--- <a href="/source/s?path=config.h.in&amp;project=swig">config.h.in</a>	2003-09-27 21:48:17.000000000 -0700
+<a class="hl" name="30" href="#30">30</a>+++ <a href="/source/s?path=config.h.in&amp;project=swig">config.h.in</a>	2006-06-09 16:25:43.000000000 -0700
+<a class="l" name="31" href="#31">31</a>@@ -19,6 +19,9 @@
+<a class="l" name="32" href="#32">32</a> /* Define to 1 if you have the `gethostname' function. */
+<a class="l" name="33" href="#33">33</a> #undef HAVE_GETHOSTNAME
+<a class="l" name="34" href="#34">34</a> 
+<a class="l" name="35" href="#35">35</a>+/* Define to 1 if you have the `getpwuid' function. */
+<a class="l" name="36" href="#36">36</a>+#undef HAVE_GETPWUID
+<a class="l" name="37" href="#37">37</a>+
+<a class="l" name="38" href="#38">38</a> /* Define to 1 if you have the &lt;<a href="/source/s?path=inttypes.h&amp;project=swig">inttypes.h</a>&gt; header file. */
+<a class="l" name="39" href="#39">39</a> #undef HAVE_INTTYPES_H
+<a class="hl" name="40" href="#40">40</a> 
+<a class="l" name="41" href="#41">41</a>@@ -31,6 +34,9 @@
+<a class="l" name="42" href="#42">42</a> /* Define to 1 if you have the &lt;<a href="/source/s?path=ndir.h&amp;project=swig">ndir.h</a>&gt; header file, and it defines `DIR'. */
+<a class="l" name="43" href="#43">43</a> #undef HAVE_NDIR_H
+<a class="l" name="44" href="#44">44</a> 
+<a class="l" name="45" href="#45">45</a>+/* Define to 1 if you have the &lt;<a href="/source/s?path=pwd.h&amp;project=swig">pwd.h</a>&gt; header file. */
+<a class="l" name="46" href="#46">46</a>+#undef HAVE_PWD_H
+<a class="l" name="47" href="#47">47</a>+
+<a class="l" name="48" href="#48">48</a> /* Define to 1 if you have the `realpath' function. */
+<a class="l" name="49" href="#49">49</a> #undef HAVE_REALPATH
+<a class="hl" name="50" href="#50">50</a> 
+<a class="l" name="51" href="#51">51</a>@@ -60,6 +66,9 @@
+<a class="l" name="52" href="#52">52</a> /* Define to 1 if you have the &lt;<a href="/source/s?path=sys/stat.h&amp;project=swig">sys/stat.h</a>&gt; header file. */
+<a class="l" name="53" href="#53">53</a> #undef HAVE_SYS_STAT_H
+<a class="l" name="54" href="#54">54</a> 
+<a class="l" name="55" href="#55">55</a>+/* Define to 1 if you have the &lt;<a href="/source/s?path=sys/time.h&amp;project=swig">sys/time.h</a>&gt; header file. */
+<a class="l" name="56" href="#56">56</a>+#undef HAVE_SYS_TIME_H
+<a class="l" name="57" href="#57">57</a>+
+<a class="l" name="58" href="#58">58</a> /* Define to 1 if you have the &lt;<a href="/source/s?path=sys/types.h&amp;project=swig">sys/types.h</a>&gt; header file. */
+<a class="l" name="59" href="#59">59</a> #undef HAVE_SYS_TYPES_H
+<a class="hl" name="60" href="#60">60</a> 
+<a class="l" name="61" href="#61">61</a>@@ -69,6 +78,9 @@
+<a class="l" name="62" href="#62">62</a> /* Define to 1 if you have the &lt;<a href="/source/s?path=unistd.h&amp;project=swig">unistd.h</a>&gt; header file. */
+<a class="l" name="63" href="#63">63</a> #undef HAVE_UNISTD_H
+<a class="l" name="64" href="#64">64</a> 
+<a class="l" name="65" href="#65">65</a>+/* Define to 1 if you have the `utimes' function. */
+<a class="l" name="66" href="#66">66</a>+#undef HAVE_UTIMES
+<a class="l" name="67" href="#67">67</a>+
+<a class="l" name="68" href="#68">68</a> /* Define to 1 if you have the `vasprintf' function. */
+<a class="l" name="69" href="#69">69</a> #undef HAVE_VASPRINTF
+<a class="hl" name="70" href="#70">70</a> 
+<a class="l" name="71" href="#71">71</a>--- <a href="/source/s?path=configure.in&amp;project=swig">configure.in</a>	2004-09-13 03:38:30.000000000 -0700
+<a class="l" name="72" href="#72">72</a>+++ <a href="/source/s?path=configure.in&amp;project=swig">configure.in</a>	2006-06-09 16:25:15.541288184 -0700
+<a class="l" name="73" href="#73">73</a>@@ -27,10 +27,11 @@
+<a class="l" name="74" href="#74">74</a> AC_HEADER_TIME
+<a class="l" name="75" href="#75">75</a> AC_HEADER_SYS_WAIT
+<a class="l" name="76" href="#76">76</a> 
+<a class="l" name="77" href="#77">77</a>-AC_CHECK_HEADERS(<a href="/source/s?path=ctype.h&amp;project=swig">ctype.h</a> <a href="/source/s?path=strings.h&amp;project=swig">strings.h</a> <a href="/source/s?path=stdlib.h&amp;project=swig">stdlib.h</a> <a href="/source/s?path=string.h&amp;project=swig">string.h</a> <a href="/source/s?path=pwd.h&amp;project=swig">pwd.h</a>)
+<a class="l" name="78" href="#78">78</a>+AC_CHECK_HEADERS(<a href="/source/s?path=ctype.h&amp;project=swig">ctype.h</a> <a href="/source/s?path=strings.h&amp;project=swig">strings.h</a> <a href="/source/s?path=stdlib.h&amp;project=swig">stdlib.h</a> <a href="/source/s?path=string.h&amp;project=swig">string.h</a> <a href="/source/s?path=pwd.h&amp;project=swig">pwd.h</a> <a href="/source/s?path=sys/time.h&amp;project=swig">sys/time.h</a>)
+<a class="l" name="79" href="#79">79</a> 
+<a class="hl" name="80" href="#80">80</a> AC_CHECK_FUNCS(realpath snprintf vsnprintf vasprintf asprintf mkstemp)
+<a class="l" name="81" href="#81">81</a> AC_CHECK_FUNCS(gethostname getpwuid)
+<a class="l" name="82" href="#82">82</a>+AC_CHECK_FUNCS(utimes)
+<a class="l" name="83" href="#83">83</a> 
+<a class="l" name="84" href="#84">84</a> AC_CACHE_CHECK([for compar_fn_t in <a href="/source/s?path=stdlib.h&amp;project=swig">stdlib.h</a>],ccache_cv_COMPAR_FN_T, [
+<a class="l" name="85" href="#85">85</a>     AC_TRY_COMPILE(
+<a class="l" name="86" href="#86">86</a></pre>
+</div>
+    <div id="footer">
+<p><a href="http://opengrok.github.com/OpenGrok/"
+ title="Served by OpenGrok"><span id="fti"></span></a></p>
+<p>
+    <a href="http://www.rrzn.uni-hannover.de"><span id="partner_rrzn"></span></a>
+    <a href="http://www.uni-hannover.de"><span id="partner_luh"></span></a>
+</p>
+<p><a href="http://www.metager.de/impressum.html">Impressum (legal notice)</a></p>
+    
+    </div>
+    </div>
+</div>
+</body>
+</html>
+

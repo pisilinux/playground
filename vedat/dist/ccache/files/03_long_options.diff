@@ -1,0 +1,226 @@
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="robots" content="index,follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="0.11.1 (2b48ae40ea1b)" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<link rel="icon" href="/source/default/img/icon.png" type="image/png" />
+<link rel="stylesheet" type="text/css" media="all"
+    title="Default" href="/source/default/style.css" />
+<link rel="alternate stylesheet" type="text/css" media="all"
+    title="Paper White" href="/source/default/print.css" />
+<link rel="stylesheet" type="text/css" href="/source/default/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="/source/default/jquery.tooltip.css" />
+
+<link rel="search" href="/source/opensearch"
+    type="application/opensearchdescription+xml"
+    title="OpenGrok Search for current project(s)" />
+<script type="text/javascript" src="/source/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/source/jquery.tooltip-1.3.pack.js"></script>
+
+<script type="text/javascript" src="/source/utils.js"></script>
+<title>Cross Reference: /swig/CCache/debian/patches/03_long_options.diff</title>
+</head>
+<body>
+<script type="text/javascript">/* <![CDATA[ */
+    document.hash = 'null';document.rev = '';document.link = '/source/xref/swig/CCache/debian/patches/03_long_options.diff';document.annotate = false;
+    document.domReady.push(function() {domReadyMast();});
+    document.pageReady.push(function() { pageReadyMast();});
+/* ]]> */</script>
+<div id="page">
+    <div id="whole_header">
+        <form action="/source/search">
+<div id="header">
+<a href="/source/" class="cslogo">
+    <span style="color: #5a2c00; letter-spacing: -2px;">{</span><span 
+        style="color: #0f3368; vertical-align: middle;">Code</span>
+    <span style="color: #222222; vertical-align: middle;">Search</span>
+</a>
+<span id="partner">
+    <a href="http://www.metager.de"><span id="partner_metager"></span></a>
+</span>
+
+
+
+    <div id="pagetitle"><span id="filename"
+                    >Cross Reference: 03_long_options.diff</span></div>
+</div>
+<div id="Masthead">
+    <tt><a href="/source/xref/">xref</a>: /<a href="/source/xref/swig/">swig</a>/<a href="/source/xref/swig/CCache/">CCache</a>/<a href="/source/xref/swig/CCache/debian/">debian</a>/<a href="/source/xref/swig/CCache/debian/patches/">patches</a>/<a href="/source/xref/swig/CCache/debian/patches/03_long_options.diff">03_long_options.diff</a></tt>
+</div>
+<div id="bar">
+    <ul>
+        <li><a href="/source/"><span id="home"></span>Home</a></li><li><a href="/source/history/swig/CCache/debian/patches/03_long_options.diff"><span id="history"></span>History</a></li><li><a href="#" onclick="javascript:get_annotations(); return false;"
+            ><span class="annotate"></span>Annotate</a></li><li><a href="#" onclick="javascript:lntoggle();return false;"
+            title="Show or hide line numbers (might be slower if file has more than 10 000 lines)."><span id="line"></span>Line#</a></li><li><a
+            href="#" onclick="javascript:lsttoggle();return false;"
+            title="Show or hide symbol list."><span id="defbox"></span>Navigate</a></li><li><a href="/source/raw/swig/CCache/debian/patches/03_long_options.diff"><span id="download"></span>Download</a></li><li><input type="text" id="search" name="q" class="q" />
+            <input type="submit" value="Search" class="submit" /></li><li><input type="checkbox" name="path" value="/swig/CCache/debian/patches/" /> only in <b>03_long_options.diff</b></li>
+        
+    </ul>
+    <input type="hidden" name="project" value="swig" />
+</div>
+        </form>
+    </div>
+<div id="content">
+<script type="text/javascript">/* <![CDATA[ */
+document.pageReady.push(function() { pageReadyList();});
+/* ]]> */</script>
+
+<div id="src">
+    <pre><a class="l" name="1" href="#1">1</a>Index: <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>
+<a class="l" name="2" href="#2">2</a>===================================================================
+<a class="l" name="3" href="#3">3</a>--- <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>	(r&#233;vision 7695)
+<a class="l" name="4" href="#4">4</a>+++ <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>	(copie de travail)
+<a class="l" name="5" href="#5">5</a>@@ -22,6 +22,7 @@
+<a class="l" name="6" href="#6">6</a> */
+<a class="l" name="7" href="#7">7</a> 
+<a class="l" name="8" href="#8">8</a> #include "<a href="/source/s?path=ccache.h&amp;project=swig">ccache.h</a>"
+<a class="l" name="9" href="#9">9</a>+#include &lt;<a href="/source/s?path=getopt.h&amp;project=swig">getopt.h</a>&gt;
+<a class="hl" name="10" href="#10">10</a> 
+<a class="l" name="11" href="#11">11</a> /* the base cache directory */
+<a class="l" name="12" href="#12">12</a> char *cache_dir = NULL;
+<a class="l" name="13" href="#13">13</a>@@ -885,14 +886,14 @@
+<a class="l" name="14" href="#14">14</a> 	printf("\tcompiler [compile options]    (via symbolic link)\n");
+<a class="l" name="15" href="#15">15</a> 	printf("\nOptions:\n");
+<a class="l" name="16" href="#16">16</a> 
+<a class="l" name="17" href="#17">17</a>-	printf("-s                      show statistics summary\n");
+<a class="l" name="18" href="#18">18</a>-	printf("-z                      zero statistics\n");
+<a class="l" name="19" href="#19">19</a>-	printf("-c                      run a cache cleanup\n");
+<a class="hl" name="20" href="#20">20</a>-	printf("-C                      clear the cache completely\n");
+<a class="l" name="21" href="#21">21</a>-	printf("-F &lt;maxfiles&gt;           set maximum files in cache\n");
+<a class="l" name="22" href="#22">22</a>-	printf("-M &lt;maxsize&gt;            set maximum size of cache (use G, M or K)\n");
+<a class="l" name="23" href="#23">23</a>-	printf("-h                      this help page\n");
+<a class="l" name="24" href="#24">24</a>-	printf("-V                      print version number\n");
+<a class="l" name="25" href="#25">25</a>+	printf("-s, --show-stats         show statistics summary\n");
+<a class="l" name="26" href="#26">26</a>+	printf("-z, --zero-stats         zero statistics\n");
+<a class="l" name="27" href="#27">27</a>+	printf("-c, --cleanup            run a cache cleanup\n");
+<a class="l" name="28" href="#28">28</a>+	printf("-C, --clear              clear the cache completely\n");
+<a class="l" name="29" href="#29">29</a>+	printf("-F &lt;n&gt;, --max-files=&lt;n&gt;  set maximum files in cache\n");
+<a class="hl" name="30" href="#30">30</a>+	printf("-M &lt;n&gt;, --max-size=&lt;n&gt;   set maximum size of cache (use G, M or K)\n");
+<a class="l" name="31" href="#31">31</a>+	printf("-h, --help               this help page\n");
+<a class="l" name="32" href="#32">32</a>+	printf("-V, --version            print version number\n");
+<a class="l" name="33" href="#33">33</a> }
+<a class="l" name="34" href="#34">34</a> 
+<a class="l" name="35" href="#35">35</a> /* the main program when not doing a compile */
+<a class="l" name="36" href="#36">36</a>@@ -901,7 +902,21 @@
+<a class="l" name="37" href="#37">37</a> 	int c;
+<a class="l" name="38" href="#38">38</a> 	size_t v;
+<a class="l" name="39" href="#39">39</a> 
+<a class="hl" name="40" href="#40">40</a>-	while ((c = getopt(argc, argv, "hszcCF:M:V")) != -1) {
+<a class="l" name="41" href="#41">41</a>+	static struct option long_options[] =
+<a class="l" name="42" href="#42">42</a>+        {
+<a class="l" name="43" href="#43">43</a>+		{"show-stats", no_argument,       0, 's'},
+<a class="l" name="44" href="#44">44</a>+		{"zero-stats", no_argument,       0, 'z'},
+<a class="l" name="45" href="#45">45</a>+		{"cleanup",    no_argument,       0, 'c'},
+<a class="l" name="46" href="#46">46</a>+		{"clear",      no_argument,       0, 'C'},
+<a class="l" name="47" href="#47">47</a>+		{"max-files",  required_argument, 0, 'F'},
+<a class="l" name="48" href="#48">48</a>+		{"max-size",   required_argument, 0, 'M'},
+<a class="l" name="49" href="#49">49</a>+		{"help",       no_argument,       0, 'h'},
+<a class="hl" name="50" href="#50">50</a>+		{"version",    no_argument,       0, 'V'},
+<a class="l" name="51" href="#51">51</a>+		{0, 0, 0, 0}
+<a class="l" name="52" href="#52">52</a>+        };
+<a class="l" name="53" href="#53">53</a>+	int option_index = 0;
+<a class="l" name="54" href="#54">54</a>+
+<a class="l" name="55" href="#55">55</a>+	while ((c = getopt_long(argc, argv, "hszcCF:M:V", long_options, &amp;option_index)) != -1) {
+<a class="l" name="56" href="#56">56</a> 		switch (c) {
+<a class="l" name="57" href="#57">57</a> 		case 'V':
+<a class="l" name="58" href="#58">58</a> 			printf("ccache version %s\n", CCACHE_VERSION);
+<a class="l" name="59" href="#59">59</a>Index: ccache.1
+<a class="hl" name="60" href="#60">60</a>===================================================================
+<a class="l" name="61" href="#61">61</a>--- ccache.1	(r&#233;vision 7695)
+<a class="l" name="62" href="#62">62</a>+++ ccache.1	(copie de travail)
+<a class="l" name="63" href="#63">63</a>@@ -23,14 +23,14 @@
+<a class="l" name="64" href="#64">64</a> .nf 
+<a class="l" name="65" href="#65">65</a>  
+<a class="l" name="66" href="#66">66</a> 
+<a class="l" name="67" href="#67">67</a>--s                      show statistics summary
+<a class="l" name="68" href="#68">68</a>--z                      zero statistics
+<a class="l" name="69" href="#69">69</a>--c                      run a cache cleanup
+<a class="hl" name="70" href="#70">70</a>--C                      clear the cache completely
+<a class="l" name="71" href="#71">71</a>--F &lt;maxfiles&gt;           set maximum files in cache
+<a class="l" name="72" href="#72">72</a>--M &lt;maxsize&gt;            set maximum size of cache (use G, M or K)
+<a class="l" name="73" href="#73">73</a>--h                      this help page
+<a class="l" name="74" href="#74">74</a>--V                      print version number
+<a class="l" name="75" href="#75">75</a>+\-s, \-\-show-stats        show statistics summary
+<a class="l" name="76" href="#76">76</a>+\-z, \-\-zero-stats        zero statistics
+<a class="l" name="77" href="#77">77</a>+\-c, \-\-cleanup           run a cache cleanup
+<a class="l" name="78" href="#78">78</a>+\-C, \-\-clear             clear the cache completely
+<a class="l" name="79" href="#79">79</a>+\-F &lt;n&gt;, \-\-max-files=&lt;n&gt; set maximum files in cache
+<a class="hl" name="80" href="#80">80</a>+\-M &lt;n&gt;, \-\-max-size=&lt;n&gt;  set maximum size of cache (use G, M or K)
+<a class="l" name="81" href="#81">81</a>+\-h, \-\-help              this help page
+<a class="l" name="82" href="#82">82</a>+\-V, \-\-version           print version number
+<a class="l" name="83" href="#83">83</a> 
+<a class="l" name="84" href="#84">84</a> .fi 
+<a class="l" name="85" href="#85">85</a>  
+<a class="l" name="86" href="#86">86</a>@@ -43,22 +43,22 @@
+<a class="l" name="87" href="#87">87</a> normal compiler options apply and you should refer to your compilers
+<a class="l" name="88" href="#88">88</a> documentation\&amp;.
+<a class="l" name="89" href="#89">89</a> .PP 
+<a class="hl" name="90" href="#90">90</a><a href="/source/s?path=-.IP&amp;project=swig">-.IP</a> "\fB-h\fP" 
+<a class="l" name="91" href="#91">91</a>+.IP "\fB-h, --help\fP"
+<a class="l" name="92" href="#92">92</a> Print a options summary page
+<a class="l" name="93" href="#93">93</a> .IP 
+<a class="l" name="94" href="#94">94</a><a href="/source/s?path=-.IP&amp;project=swig">-.IP</a> "\fB-s\fP" 
+<a class="l" name="95" href="#95">95</a>+.IP "\fB-s, --show-stats\fP"
+<a class="l" name="96" href="#96">96</a> Print the current statistics summary for the cache\&amp;. The
+<a class="l" name="97" href="#97">97</a> statistics are stored spread across the subdirectories of the
+<a class="l" name="98" href="#98">98</a> cache\&amp;. Using "ccache -s" adds up the statistics across all
+<a class="l" name="99" href="#99">99</a> subdirectories and prints the totals\&amp;.
+<a class="hl" name="100" href="#100">100</a> .IP 
+<a class="l" name="101" href="#101">101</a><a href="/source/s?path=-.IP&amp;project=swig">-.IP</a> "\fB-z\fP" 
+<a class="l" name="102" href="#102">102</a>+.IP "\fB-z, --zero-stats\fP"
+<a class="l" name="103" href="#103">103</a> Zero the cache statistics\&amp;. 
+<a class="l" name="104" href="#104">104</a> .IP 
+<a class="l" name="105" href="#105">105</a><a href="/source/s?path=-.IP&amp;project=swig">-.IP</a> "\fB-V\fP" 
+<a class="l" name="106" href="#106">106</a>+.IP "\fB-V, --version\fP" 
+<a class="l" name="107" href="#107">107</a> Print the ccache version number
+<a class="l" name="108" href="#108">108</a> .IP 
+<a class="l" name="109" href="#109">109</a><a href="/source/s?path=-.IP&amp;project=swig">-.IP</a> "\fB-c\fP" 
+<a class="hl" name="110" href="#110">110</a>+.IP "\fB-c, --cleanup\fP" 
+<a class="l" name="111" href="#111">111</a> Clean the cache and re-calculate the cache file count and
+<a class="l" name="112" href="#112">112</a> size totals\&amp;. Normally the -c option should not be necessary as ccache
+<a class="l" name="113" href="#113">113</a> keeps the cache below the specified limits at runtime and keeps
+<a class="l" name="114" href="#114">114</a>@@ -66,16 +66,16 @@
+<a class="l" name="115" href="#115">115</a> if you manually modify the cache contents or believe that the cache
+<a class="l" name="116" href="#116">116</a> size statistics may be inaccurate\&amp;.
+<a class="l" name="117" href="#117">117</a> .IP 
+<a class="l" name="118" href="#118">118</a><a href="/source/s?path=-.IP&amp;project=swig">-.IP</a> "\fB-C\fP" 
+<a class="l" name="119" href="#119">119</a>+.IP "\fB-C, --clear\fP" 
+<a class="hl" name="120" href="#120">120</a> Clear the entire cache, removing all cached files\&amp;.
+<a class="l" name="121" href="#121">121</a> .IP 
+<a class="l" name="122" href="#122">122</a><a href="/source/s?path=-.IP&amp;project=swig">-.IP</a> "\fB-F maxfiles\fP" 
+<a class="l" name="123" href="#123">123</a>+.IP "\fB-F &lt;maxfiles&gt;, --max-files=&lt;maxfiles&gt;\fP" 
+<a class="l" name="124" href="#124">124</a> This sets the maximum number of files allowed in
+<a class="l" name="125" href="#125">125</a> the cache\&amp;. The value is stored inside the cache directory and applies
+<a class="l" name="126" href="#126">126</a> to all future compiles\&amp;. Due to the way the value is stored the actual
+<a class="l" name="127" href="#127">127</a> value used is always rounded down to the nearest multiple of 16\&amp;.
+<a class="l" name="128" href="#128">128</a> .IP 
+<a class="l" name="129" href="#129">129</a><a href="/source/s?path=-.IP&amp;project=swig">-.IP</a> "\fB-M maxsize\fP" 
+<a class="hl" name="130" href="#130">130</a>+.IP "\fB-M &lt;maxsize&gt;, --max-size=&lt;maxsize&gt;\fP" 
+<a class="l" name="131" href="#131">131</a> This sets the maximum cache size\&amp;. You can specify
+<a class="l" name="132" href="#132">132</a> a value in gigabytes, megabytes or kilobytes by appending a G, M or K
+<a class="l" name="133" href="#133">133</a> to the value\&amp;. The default is gigabytes\&amp;. The actual value stored is
+<a class="l" name="134" href="#134">134</a></pre>
+</div>
+    <div id="footer">
+<p><a href="http://opengrok.github.com/OpenGrok/"
+ title="Served by OpenGrok"><span id="fti"></span></a></p>
+<p>
+    <a href="http://www.rrzn.uni-hannover.de"><span id="partner_rrzn"></span></a>
+    <a href="http://www.uni-hannover.de"><span id="partner_luh"></span></a>
+</p>
+<p><a href="http://www.metager.de/impressum.html">Impressum (legal notice)</a></p>
+    
+    </div>
+    </div>
+</div>
+</body>
+</html>
+
