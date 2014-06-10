@@ -16,10 +16,13 @@ def setup():
     autotools.autoreconf("-vif")
     shelltools.system("./autogen.sh")
     autotools.configure("--localstatedir=/var \
+                         --disable-option-checking \
                          --disable-static \
                          --disable-rpath \
                          --enable-compile-warnings=yes \
-                         --enable-introspection=yes")
+                         --enable-introspection=yes \
+                         --with-console-kit=yes \
+                         --with-session-tracking=polkit")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 
