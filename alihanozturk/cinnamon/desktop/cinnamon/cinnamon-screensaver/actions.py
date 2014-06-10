@@ -21,7 +21,8 @@ def setup():
                          --enable-locking \
                          --enable-docbook-docs \
                          --with-pam-prefix=/etc \
-                         --with-console-kit=yes")
+                         --with-console-kit=yes \
+                         --with-systemd=no")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 
