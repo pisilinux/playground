@@ -1,0 +1,112 @@
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>f-spot</Name>
+        <Homepage>http://f-spot.org/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>F-Spot GNOME masaüstü ortamı için kişisel fotoğraf yönetimi sağlamak amacıyla tasarlanmış bir görüntü düzenleme uygulamasıdır.</Summary>
+        <Description>F-Spot GNOME masaüstü ortamı için kişisel fotoğraf yönetimi sağlamak amacıyla tasarlanmış bir görüntü düzenleme uygulamasıdır. F-Spot kullanımı basit, ama gelişmiş özellikleri destekleyen bir arayüze sahip olmayı hedeflemektedir .</Description>.
+        <Archive sha1sum="911bb33aa10edeec594af92de216727f47c4b1fc" type="targz">mirrors://gnome/f-spot/0.8/f-spot-0.8.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>mono-devel</Dependency>
+            <Dependency>lcms-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>gnome-keyring</Dependency>
+            <Dependency>libgnome-devel</Dependency>
+            <Dependency>libunique-devel</Dependency>
+            <Dependency>gnome-doc-utils</Dependency>
+            <Dependency>gtk-sharp-devel</Dependency>
+            <Dependency>flickrnet-devel</Dependency>
+            <Dependency>ndesk-dbus-glib</Dependency>
+            <Dependency>libgnomeui-devel</Dependency>
+            <Dependency>gnome-sharp-devel</Dependency>
+            <Dependency>mono-addins-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>gnome-keyring-sharp-devel</Dependency>
+            <!--<Dependency>gtk3-devel</Dependency>
+            <Dependency>lcms2-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>exempi-devel</Dependency>
+            <Dependency>librsvg-devel</Dependency>
+            <Dependency>libpeas-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>icon-theme-gnome</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>gnome3-desktop-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>-->
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">mono-2.8.patch</Patch>
+            <Patch level="1">flickrnet-3.0.patch</Patch>
+            <Patch level="1">0004-Fix-build-error-with-recent_gtk-sharp.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>f-spot</Name>
+        <RuntimeDependencies>
+            <!--<Dependency>atk</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>lcms2</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>exempi</Dependency>
+            <Dependency>libexif</Dependency>
+            <Dependency>librsvg</Dependency>
+            <Dependency>libpeas</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>gnome3-desktop</Dependency>
+            <Dependency>gobject-introspection</Dependency>-->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/GConf</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/f-spot</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>f-spot-docs</Name>
+        <IsA>data:doc</IsA>
+        <Summary>f-spot reference documents</Summary>
+        <Files>
+            <Path fileType="data">/usr/share/help</Path>
+            <Path fileType="doc">/usr/share/gtk-doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>f-spot-devel</Name>
+        <Summary>Development files for f-spot</Summary>
+        <RuntimeDependencies>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency release="current">f-spot</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-06-07</Date>
+            <Version>0.8.2</Version>
+            <Comment>First Release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

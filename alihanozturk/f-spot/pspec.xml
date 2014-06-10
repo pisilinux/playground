@@ -1,0 +1,97 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>f-spot</Name>
+        <Homepage>http://www.gnome.org/projects/f-spot/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A personal photo management program for GNOME.</Summary>
+        <Description>F-Spot simplifies digital photography by providing intuitive tools to help you share, touch-up, find and organize your images.</Description>
+        <Archive sha1sum="258e30a11ac24f963a47ead19c3d14bf755816e5" type="tarbz2">http://ftp.gnome.org/pub/GNOME/sources/f-spot/0.8/f-spot-0.8.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>intltool</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>mono-devel</Dependency>
+            <Dependency>lcms-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>gnome-keyring</Dependency>
+            <Dependency>libgnome-devel</Dependency>
+            <Dependency>libunique-devel</Dependency>
+            <Dependency>gnome-doc-utils</Dependency>
+            <Dependency>gtk-sharp-devel</Dependency>
+            <Dependency>flickrnet-devel</Dependency>
+            <Dependency>ndesk-dbus-glib</Dependency>
+            <Dependency>libgnomeui-devel</Dependency>
+            <Dependency>gnome-sharp-devel</Dependency>
+            <Dependency>mono-addins-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>gnome-keyring-sharp-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">0004-Fix-build-error-with-recent_gtk-sharp.patch</Patch>
+            <Patch level="1">f-spot-dotnet4.patch</Patch>
+            <Patch level="1">flickrnet-3.0.patch</Patch>
+            <Patch level="1">mono-2.8.patch</Patch>
+            <Patch level="1">0001-simplify-f-spot-import.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>f-spot</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk2</Dependency>
+            <Dependency>lcms</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/f-spot</Path>
+            <Path fileType="library">/usr/lib/f-spot/gio-sharp.dll</Path>
+            <Path fileType="library">/usr/lib/f-spot/libfspot.so.0</Path>
+            <Path fileType="library">/usr/lib/f-spot/gio-sharp.dll.config</Path>
+            <Path fileType="library">/usr/lib/f-spot/unique-sharp.dll</Path>
+            <Path fileType="library">/usr/lib/f-spot/gkeyfile-sharp.dll</Path>
+            <Path fileType="library">/usr/lib/f-spot/gtk-sharp-beans.dll.config</Path>
+            <Path fileType="library">/usr/lib/f-spot/unique-sharp.dll.config</Path>
+            <Path fileType="library">/usr/lib/f-spot/libfspot.so.0.0.0</Path>
+            <Path fileType="library">/usr/lib/f-spot/gtk-sharp-beans.dll</Path>
+            <Path fileType="library">/usr/lib/f-spot/libfspot.so</Path>
+            <Path fileType="library">/usr/lib/f-spot/Extensions</Path>
+            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/gnome</Path>
+            <Path fileType="data">/usr/share/f-spot</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>f-spot-devel</Name>
+        <Summary>Development files for f-spot</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">f-spot</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2014-06-07</Date>
+            <Version>0.8.2</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
