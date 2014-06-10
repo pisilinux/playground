@@ -17,7 +17,6 @@ def setup():
     shelltools.system("./autogen.sh")
     autotools.configure("--localstatedir=/var \
                          --disable-option-checking \
-                         --disable-static \
                          --disable-rpath \
                          --enable-compile-warnings=yes \
                          --enable-introspection=yes \
