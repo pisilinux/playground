@@ -17,6 +17,7 @@ def setup():
                          --disable-systemd
                          --enable-docbook-docs \
                          --with-console-kit=yes \
+                         --enable-polkit \
                          --enable-pam")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
