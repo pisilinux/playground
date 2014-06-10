@@ -5,20 +5,15 @@
 # See the file http://www.gnu.org/licenses/gpl.txt
 
 from pisi.actionsapi import get
-from pisi.actionsapi import libtools
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
-from pisi.actionsapi import texlivemodules
 
 WorkDir = "."
 
 def setup():
-    # texmf-dist -> texmf
-    pisitools.dosed(".", "(\/?texmf)-dist\/", "\\1/", filePattern="(Makefile.*|configure|texmf.cnf|.+\.cnf|.+\.pl|.+\.pm)")
-
     pisitools.dosed("source/texk/tex4htk/t4ht.c", "SELFAUTOPARENT", "TEXMFROOT")
-    #pisitools.dosed("source/texk/xdvik/configure","-lXp", " ")
+
     shelltools.makedirs("source/build")
     shelltools.cd("source/build")
     shelltools.sym("../configure", "configure")
@@ -68,7 +63,6 @@ def install():
 
     shelltools.cd("source/build")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-
 
     bibtexextra_scripts=["bibexport", "listbib" ,"multibibliography", "urlbst"]
 
@@ -145,3 +139,5 @@ def install():
     pisitools.dosym("eptex", "/usr/bin/platex")
     pisitools.dosym("euptex", "/usr/bin/uplatex")
     pisitools.dosym("xetex", "/usr/bin/xelatex")
+
+    pisitools.removeDir("/usr/share/texmf-dist")
