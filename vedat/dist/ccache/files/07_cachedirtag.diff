@@ -1,0 +1,168 @@
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="robots" content="index,follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="0.11.1 (2b48ae40ea1b)" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<link rel="icon" href="/source/default/img/icon.png" type="image/png" />
+<link rel="stylesheet" type="text/css" media="all"
+    title="Default" href="/source/default/style.css" />
+<link rel="alternate stylesheet" type="text/css" media="all"
+    title="Paper White" href="/source/default/print.css" />
+<link rel="stylesheet" type="text/css" href="/source/default/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="/source/default/jquery.tooltip.css" />
+
+<link rel="search" href="/source/opensearch"
+    type="application/opensearchdescription+xml"
+    title="OpenGrok Search for current project(s)" />
+<script type="text/javascript" src="/source/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/source/jquery.tooltip-1.3.pack.js"></script>
+
+<script type="text/javascript" src="/source/utils.js"></script>
+<title>Cross Reference: /swig/CCache/debian/patches/07_cachedirtag.diff</title>
+</head>
+<body>
+<script type="text/javascript">/* <![CDATA[ */
+    document.hash = 'null';document.rev = '';document.link = '/source/xref/swig/CCache/debian/patches/07_cachedirtag.diff';document.annotate = false;
+    document.domReady.push(function() {domReadyMast();});
+    document.pageReady.push(function() { pageReadyMast();});
+/* ]]> */</script>
+<div id="page">
+    <div id="whole_header">
+        <form action="/source/search">
+<div id="header">
+<a href="/source/" class="cslogo">
+    <span style="color: #5a2c00; letter-spacing: -2px;">{</span><span 
+        style="color: #0f3368; vertical-align: middle;">Code</span>
+    <span style="color: #222222; vertical-align: middle;">Search</span>
+</a>
+<span id="partner">
+    <a href="http://www.metager.de"><span id="partner_metager"></span></a>
+</span>
+
+
+
+    <div id="pagetitle"><span id="filename"
+                    >Cross Reference: 07_cachedirtag.diff</span></div>
+</div>
+<div id="Masthead">
+    <tt><a href="/source/xref/">xref</a>: /<a href="/source/xref/swig/">swig</a>/<a href="/source/xref/swig/CCache/">CCache</a>/<a href="/source/xref/swig/CCache/debian/">debian</a>/<a href="/source/xref/swig/CCache/debian/patches/">patches</a>/<a href="/source/xref/swig/CCache/debian/patches/07_cachedirtag.diff">07_cachedirtag.diff</a></tt>
+</div>
+<div id="bar">
+    <ul>
+        <li><a href="/source/"><span id="home"></span>Home</a></li><li><a href="/source/history/swig/CCache/debian/patches/07_cachedirtag.diff"><span id="history"></span>History</a></li><li><a href="#" onclick="javascript:get_annotations(); return false;"
+            ><span class="annotate"></span>Annotate</a></li><li><a href="#" onclick="javascript:lntoggle();return false;"
+            title="Show or hide line numbers (might be slower if file has more than 10 000 lines)."><span id="line"></span>Line#</a></li><li><a
+            href="#" onclick="javascript:lsttoggle();return false;"
+            title="Show or hide symbol list."><span id="defbox"></span>Navigate</a></li><li><a href="/source/raw/swig/CCache/debian/patches/07_cachedirtag.diff"><span id="download"></span>Download</a></li><li><input type="text" id="search" name="q" class="q" />
+            <input type="submit" value="Search" class="submit" /></li><li><input type="checkbox" name="path" value="/swig/CCache/debian/patches/" /> only in <b>07_cachedirtag.diff</b></li>
+        
+    </ul>
+    <input type="hidden" name="project" value="swig" />
+</div>
+        </form>
+    </div>
+<div id="content">
+<script type="text/javascript">/* <![CDATA[ */
+document.pageReady.push(function() { pageReadyList();});
+/* ]]> */</script>
+
+<div id="src">
+    <pre><a class="l" name="1" href="#1">1</a>Index: <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>
+<a class="l" name="2" href="#2">2</a>===================================================================
+<a class="l" name="3" href="#3">3</a>--- <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>	(r&#233;vision 7695)
+<a class="l" name="4" href="#4">4</a>+++ <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>	(copie de travail)
+<a class="l" name="5" href="#5">5</a>@@ -1029,6 +1029,14 @@
+<a class="l" name="6" href="#6">6</a> 		exit(1);
+<a class="l" name="7" href="#7">7</a> 	}
+<a class="l" name="8" href="#8">8</a> 
+<a class="l" name="9" href="#9">9</a>+	if (!getenv("CCACHE_READONLY")) {
+<a class="hl" name="10" href="#10">10</a>+		if (create_cachedirtag(cache_dir) != 0) {
+<a class="l" name="11" href="#11">11</a>+			fprintf(stderr,"ccache: failed to create %<a href="/source/s?path=s/CACHEDIR.TAG&amp;project=swig">s/CACHEDIR.TAG</a> (%s)\n",
+<a class="l" name="12" href="#12">12</a>+				cache_dir, strerror(errno));
+<a class="l" name="13" href="#13">13</a>+			exit(1);
+<a class="l" name="14" href="#14">14</a>+		}
+<a class="l" name="15" href="#15">15</a>+	}
+<a class="l" name="16" href="#16">16</a>+
+<a class="l" name="17" href="#17">17</a> 	ccache(argc, argv);
+<a class="l" name="18" href="#18">18</a> 	return 1;
+<a class="l" name="19" href="#19">19</a> }
+<a class="hl" name="20" href="#20">20</a>Index: <a href="/source/s?path=ccache.h&amp;project=swig">ccache.h</a>
+<a class="l" name="21" href="#21">21</a>===================================================================
+<a class="l" name="22" href="#22">22</a>--- <a href="/source/s?path=ccache.h&amp;project=swig">ccache.h</a>	(r&#233;vision 7695)
+<a class="l" name="23" href="#23">23</a>+++ <a href="/source/s?path=ccache.h&amp;project=swig">ccache.h</a>	(copie de travail)
+<a class="l" name="24" href="#24">24</a>@@ -81,6 +81,7 @@
+<a class="l" name="25" href="#25">25</a> int copy_file(const char *src, const char *dest);
+<a class="l" name="26" href="#26">26</a> 
+<a class="l" name="27" href="#27">27</a> int create_dir(const char *dir);
+<a class="l" name="28" href="#28">28</a>+int create_cachedirtag(const char *dir);
+<a class="l" name="29" href="#29">29</a> void x_asprintf(char **ptr, const char *format, ...);
+<a class="hl" name="30" href="#30">30</a> char *x_strdup(const char *s);
+<a class="l" name="31" href="#31">31</a> void *x_realloc(void *ptr, size_t size);
+<a class="l" name="32" href="#32">32</a>Index: <a href="/source/s?path=util.c&amp;project=swig">util.c</a>
+<a class="l" name="33" href="#33">33</a>===================================================================
+<a class="l" name="34" href="#34">34</a>--- <a href="/source/s?path=util.c&amp;project=swig">util.c</a>	(r&#233;vision 7695)
+<a class="l" name="35" href="#35">35</a>+++ <a href="/source/s?path=util.c&amp;project=swig">util.c</a>	(copie de travail)
+<a class="l" name="36" href="#36">36</a>@@ -138,6 +138,39 @@
+<a class="l" name="37" href="#37">37</a> 	return 0;
+<a class="l" name="38" href="#38">38</a> }
+<a class="l" name="39" href="#39">39</a> 
+<a class="hl" name="40" href="#40">40</a>+char const CACHEDIR_TAG[] =
+<a class="l" name="41" href="#41">41</a>+	"Signature: 8a477f597d28d172789f06886806bc55\n"
+<a class="l" name="42" href="#42">42</a>+	"# This file is a cache directory tag created by ccache.\n"
+<a class="l" name="43" href="#43">43</a>+	"# For information about cache directory tags, see:\n"
+<a class="l" name="44" href="#44">44</a>+	"#	<a href="http://www.brynosaurus.com/cachedir/\n">http://www.brynosaurus.com/cachedir/\n</a>";
+<a class="l" name="45" href="#45">45</a>+
+<a class="l" name="46" href="#46">46</a>+int create_cachedirtag(const char *dir)
+<a class="l" name="47" href="#47">47</a>+{
+<a class="l" name="48" href="#48">48</a>+	char *filename;
+<a class="l" name="49" href="#49">49</a>+	struct stat st;
+<a class="hl" name="50" href="#50">50</a>+	FILE *f;
+<a class="l" name="51" href="#51">51</a>+	x_asprintf(&amp;filename, "%<a href="/source/s?path=s/CACHEDIR.TAG&amp;project=swig">s/CACHEDIR.TAG</a>", dir);
+<a class="l" name="52" href="#52">52</a>+	if (stat(filename, &amp;st) == 0) {
+<a class="l" name="53" href="#53">53</a>+		if (S_ISREG(<a href="/source/s?path=st.st_mode&amp;project=swig">st.st_mode</a>)) {
+<a class="l" name="54" href="#54">54</a>+			goto success;
+<a class="l" name="55" href="#55">55</a>+		}
+<a class="l" name="56" href="#56">56</a>+		errno = EEXIST;
+<a class="l" name="57" href="#57">57</a>+		goto error;
+<a class="l" name="58" href="#58">58</a>+	}
+<a class="l" name="59" href="#59">59</a>+	f = fopen(filename, "w");
+<a class="hl" name="60" href="#60">60</a>+	if (!f) goto error;
+<a class="l" name="61" href="#61">61</a>+	if (fwrite(CACHEDIR_TAG, sizeof(CACHEDIR_TAG)-1, 1, f) != 1) {
+<a class="l" name="62" href="#62">62</a>+		goto error;
+<a class="l" name="63" href="#63">63</a>+	}
+<a class="l" name="64" href="#64">64</a>+	if (fclose(f)) goto error;
+<a class="l" name="65" href="#65">65</a>+success:
+<a class="l" name="66" href="#66">66</a>+	free(filename);
+<a class="l" name="67" href="#67">67</a>+	return 0;
+<a class="l" name="68" href="#68">68</a>+error:
+<a class="l" name="69" href="#69">69</a>+	free(filename);
+<a class="hl" name="70" href="#70">70</a>+	return 1;
+<a class="l" name="71" href="#71">71</a>+}
+<a class="l" name="72" href="#72">72</a>+
+<a class="l" name="73" href="#73">73</a> /*
+<a class="l" name="74" href="#74">74</a>   this is like asprintf() but dies if the malloc fails
+<a class="l" name="75" href="#75">75</a>   note that we use vsnprintf in a rather poor way to make this more portable
+<a class="l" name="76" href="#76">76</a></pre>
+</div>
+    <div id="footer">
+<p><a href="http://opengrok.github.com/OpenGrok/"
+ title="Served by OpenGrok"><span id="fti"></span></a></p>
+<p>
+    <a href="http://www.rrzn.uni-hannover.de"><span id="partner_rrzn"></span></a>
+    <a href="http://www.uni-hannover.de"><span id="partner_luh"></span></a>
+</p>
+<p><a href="http://www.metager.de/impressum.html">Impressum (legal notice)</a></p>
+    
+    </div>
+    </div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>baloo</Name>
+        <Homepage>https://projects.kde.org/projects/kde/kdelibs/baloo</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>LGPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A framework for searching and managing metadata</Summary>
+        <Description>A framework for searching and managing metadata</Description>
+        <Archive type="tarxz" sha1sum="9ba97e33ad91da722f361d8fd4eb65d88e73956c">mirrors://kde/stable/4.13.1/src/baloo-4.13.1.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+	    <Dependency>automoc4</Dependency>
+	    <Dependency>boost-devel</Dependency>
+	    <Dependency>pkgconfig</Dependency>
+            <Dependency>phonon-devel</Dependency>
+            <Dependency>akonadi-devel</Dependency>
+	    <Dependency>libqjson-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+	    <Dependency>kde-runtime-devel</Dependency>
+            <Dependency>xapian-core-devel</Dependency>
+            <Dependency>kfilemetadata-devel</Dependency>
+            <Dependency versionFrom="4.13.1">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.13.1">kdepimlibs-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>baloo</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+	    <Dependency>boost</Dependency>
+	    <Dependency>akonadi</Dependency>
+            <Dependency>libqjson</Dependency>
+	    <Dependency>kde-runtime</Dependency>
+            <Dependency>xapian-core</Dependency>
+            <Dependency>kfilemetadata</Dependency>
+            <Dependency versionFrom="4.13.1">kdelibs</Dependency>
+            <Dependency versionFrom="4.13.1">kdepimlibs</Dependency> 
+        </RuntimeDependencies>
+        <Replaces>
+            <Package>nepomuk-core</Package>
+        </Replaces>
+        <Conflicts>
+            <Package>nepomuk-core</Package>
+        </Conflicts> 
+        <Files>
+            <Path fileType="library">/usr/lib</Path>            
+            <Path fileType="config">/etc/dbus-1</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/kde4</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/akonadi</Path>
+            <Path fileType="data">/usr/share/polkit-1</Path>
+            <Path fileType="data">/usr/share/autostart</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>baloo-devel</Name>
+        <Summary>Development files for baloo</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">baloo</Dependency>
+        </RuntimeDependencies>
+        <Replaces>
+            <Package>nepomuk-core-devel</Package>
+        </Replaces>
+        <Conflicts>
+            <Package>nepomuk-core-devel</Package>
+        </Conflicts> 
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2014-05-14</Date>
+            <Version>4.13.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-05-03</Date>
+            <Version>4.13.0</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

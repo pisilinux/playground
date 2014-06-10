@@ -1,0 +1,1119 @@
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="robots" content="index,follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="0.11.1 (2b48ae40ea1b)" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<link rel="icon" href="/source/default/img/icon.png" type="image/png" />
+<link rel="stylesheet" type="text/css" media="all"
+    title="Default" href="/source/default/style.css" />
+<link rel="alternate stylesheet" type="text/css" media="all"
+    title="Paper White" href="/source/default/print.css" />
+<link rel="stylesheet" type="text/css" href="/source/default/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="/source/default/jquery.tooltip.css" />
+
+<link rel="search" href="/source/opensearch"
+    type="application/opensearchdescription+xml"
+    title="OpenGrok Search for current project(s)" />
+<script type="text/javascript" src="/source/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/source/jquery.tooltip-1.3.pack.js"></script>
+
+<script type="text/javascript" src="/source/utils.js"></script>
+<title>Cross Reference: /swig/CCache/debian/patches/02_ccache-compressed.diff</title>
+</head>
+<body>
+<script type="text/javascript">/* <![CDATA[ */
+    document.hash = 'null';document.rev = '';document.link = '/source/xref/swig/CCache/debian/patches/02_ccache-compressed.diff';document.annotate = false;
+    document.domReady.push(function() {domReadyMast();});
+    document.pageReady.push(function() { pageReadyMast();});
+/* ]]> */</script>
+<div id="page">
+    <div id="whole_header">
+        <form action="/source/search">
+<div id="header">
+<a href="/source/" class="cslogo">
+    <span style="color: #5a2c00; letter-spacing: -2px;">{</span><span 
+        style="color: #0f3368; vertical-align: middle;">Code</span>
+    <span style="color: #222222; vertical-align: middle;">Search</span>
+</a>
+<span id="partner">
+    <a href="http://www.metager.de"><span id="partner_metager"></span></a>
+</span>
+
+
+
+    <div id="pagetitle"><span id="filename"
+                    >Cross Reference: 02_ccache-compressed.diff</span></div>
+</div>
+<div id="Masthead">
+    <tt><a href="/source/xref/">xref</a>: /<a href="/source/xref/swig/">swig</a>/<a href="/source/xref/swig/CCache/">CCache</a>/<a href="/source/xref/swig/CCache/debian/">debian</a>/<a href="/source/xref/swig/CCache/debian/patches/">patches</a>/<a href="/source/xref/swig/CCache/debian/patches/02_ccache-compressed.diff">02_ccache-compressed.diff</a></tt>
+</div>
+<div id="bar">
+    <ul>
+        <li><a href="/source/"><span id="home"></span>Home</a></li><li><a href="/source/history/swig/CCache/debian/patches/02_ccache-compressed.diff"><span id="history"></span>History</a></li><li><a href="#" onclick="javascript:get_annotations(); return false;"
+            ><span class="annotate"></span>Annotate</a></li><li><a href="#" onclick="javascript:lntoggle();return false;"
+            title="Show or hide line numbers (might be slower if file has more than 10 000 lines)."><span id="line"></span>Line#</a></li><li><a
+            href="#" onclick="javascript:lsttoggle();return false;"
+            title="Show or hide symbol list."><span id="defbox"></span>Navigate</a></li><li><a href="/source/raw/swig/CCache/debian/patches/02_ccache-compressed.diff"><span id="download"></span>Download</a></li><li><input type="text" id="search" name="q" class="q" />
+            <input type="submit" value="Search" class="submit" /></li><li><input type="checkbox" name="path" value="/swig/CCache/debian/patches/" /> only in <b>02_ccache-compressed.diff</b></li>
+        
+    </ul>
+    <input type="hidden" name="project" value="swig" />
+</div>
+        </form>
+    </div>
+<div id="content">
+<script type="text/javascript">/* <![CDATA[ */
+document.pageReady.push(function() { pageReadyList();});
+/* ]]> */</script>
+
+<div id="src">
+    <pre><a class="l" name="1" href="#1">1</a>Index: ccache.1
+<a class="l" name="2" href="#2">2</a>===================================================================
+<a class="l" name="3" href="#3">3</a>RCS file: <a href="/source/s?path=/home/cvsroot/lars/ccache/ccache.1&amp;project=swig">/home/cvsroot/lars/ccache/ccache.1</a>,v
+<a class="l" name="4" href="#4">4</a>retrieving revision 1.1.1.1.2.1
+<a class="l" name="5" href="#5">5</a>retrieving revision 1.6
+<a class="l" name="6" href="#6">6</a>diff -u -r1.1.1.1.2.1 -r1.6
+<a class="l" name="7" href="#7">7</a>--- ccache.1	21 Nov 2004 17:55:36 -0000	1.1.1.1.2.1
+<a class="l" name="8" href="#8">8</a>+++ ccache.1	21 Nov 2004 18:19:28 -0000	1.6
+<a class="l" name="9" href="#9">9</a>@@ -210,7 +210,8 @@
+<a class="hl" name="10" href="#10">10</a> CCACHE_HARDLINK then ccache will attempt to use hard links from the
+<a class="l" name="11" href="#11">11</a> cache directory when creating the compiler output rather than using a
+<a class="l" name="12" href="#12">12</a> file copy\&amp;. Using hard links is faster, but can confuse programs like
+<a class="l" name="13" href="#13">13</a>-\&amp;'make\&amp;' that rely on modification times\&amp;.
+<a class="l" name="14" href="#14">14</a>+\&amp;'make\&amp;' that rely on modification times\&amp;. Hard links are never made for
+<a class="l" name="15" href="#15">15</a>+compressed cache files\&amp;.
+<a class="l" name="16" href="#16">16</a> .IP 
+<a class="l" name="17" href="#17">17</a> .IP "\fBCCACHE_RECACHE\fP" 
+<a class="l" name="18" href="#18">18</a> This forces ccache to not use any cached
+<a class="l" name="19" href="#19">19</a>@@ -257,6 +258,11 @@
+<a class="hl" name="20" href="#20">20</a> the default\&amp;. On HP-UX set this environment variable to "i" if you use
+<a class="l" name="21" href="#21">21</a> the aCC compiler\&amp;.
+<a class="l" name="22" href="#22">22</a> .IP 
+<a class="l" name="23" href="#23">23</a>+.IP "\fBCCACHE_NOCOMPRESS\fP" 
+<a class="l" name="24" href="#24">24</a>+If you set the environment variable
+<a class="l" name="25" href="#25">25</a>+CCACHE_NOCOMPRESS then there is no compression used on files that go
+<a class="l" name="26" href="#26">26</a>+into the cache\&amp;.
+<a class="l" name="27" href="#27">27</a>+.IP 
+<a class="l" name="28" href="#28">28</a> .PP 
+<a class="l" name="29" href="#29">29</a> .SH "CACHE SIZE MANAGEMENT" 
+<a class="hl" name="30" href="#30">30</a> .PP 
+<a class="l" name="31" href="#31">31</a>@@ -269,6 +275,14 @@
+<a class="l" name="32" href="#32">32</a> below the numbers you specified in order to avoid doing the cache
+<a class="l" name="33" href="#33">33</a> clean operation too often\&amp;.
+<a class="l" name="34" href="#34">34</a> .PP 
+<a class="l" name="35" href="#35">35</a>+.SH "CACHE COMPRESSION" 
+<a class="l" name="36" href="#36">36</a>+.PP 
+<a class="l" name="37" href="#37">37</a>+By default ccache will compress all files it puts into the cache
+<a class="l" name="38" href="#38">38</a>+using the zlib compression\&amp;. While this involves a negligible
+<a class="l" name="39" href="#39">39</a>+performance slowdown, it significantly increases the number of files
+<a class="hl" name="40" href="#40">40</a>+that fit in the cache\&amp;. You can turn off compression setting the
+<a class="l" name="41" href="#41">41</a>+CCACHE_NOCOMPRESS environment variable\&amp;.
+<a class="l" name="42" href="#42">42</a>+.PP 
+<a class="l" name="43" href="#43">43</a> .SH "HOW IT WORKS" 
+<a class="l" name="44" href="#44">44</a> .PP 
+<a class="l" name="45" href="#45">45</a> The basic idea is to detect when you are compiling exactly the same
+<a class="l" name="46" href="#46">46</a>Index: <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>
+<a class="l" name="47" href="#47">47</a>===================================================================
+<a class="l" name="48" href="#48">48</a>RCS file: <a href="/source/s?path=/home/cvsroot/lars/ccache/ccache.c&amp;project=swig">/home/cvsroot/lars/ccache/ccache.c</a>,v
+<a class="l" name="49" href="#49">49</a>retrieving revision 1.1.1.1.2.1
+<a class="hl" name="50" href="#50">50</a>retrieving revision 1.9
+<a class="l" name="51" href="#51">51</a>diff -u -r1.1.1.1.2.1 -r1.9
+<a class="l" name="52" href="#52">52</a>--- <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>	21 Nov 2004 17:55:36 -0000	1.1.1.1.2.1
+<a class="l" name="53" href="#53">53</a>+++ <a href="/source/s?path=ccache.c&amp;project=swig">ccache.c</a>	21 Nov 2004 18:19:28 -0000	1.9
+<a class="l" name="54" href="#54">54</a>@@ -199,7 +199,7 @@
+<a class="l" name="55" href="#55">55</a> 		fd = open(tmp_stderr, O_RDONLY | O_BINARY);
+<a class="l" name="56" href="#56">56</a> 		if (fd != -1) {
+<a class="l" name="57" href="#57">57</a> 			if (strcmp(output_file, "<a href="/source/s?path=/dev/null&amp;project=swig">/dev/null</a>") == 0 ||
+<a class="l" name="58" href="#58">58</a>-			    rename(tmp_hashname, output_file) == 0 || errno == ENOENT) {
+<a class="l" name="59" href="#59">59</a>+			    move_file(tmp_hashname, output_file) == 0 || errno == ENOENT) {
+<a class="hl" name="60" href="#60">60</a> 				if (cpp_stderr) {
+<a class="l" name="61" href="#61">61</a> 					/* we might have some stderr from cpp */
+<a class="l" name="62" href="#62">62</a> 					int fd2 = open(cpp_stderr, O_RDONLY | O_BINARY);
+<a class="l" name="63" href="#63">63</a>@@ -231,14 +231,25 @@
+<a class="l" name="64" href="#64">64</a> 	x_asprintf(&amp;path_stderr, "%<a href="/source/s?path=s.stderr&amp;project=swig">s.stderr</a>", hashname);
+<a class="l" name="65" href="#65">65</a> 
+<a class="l" name="66" href="#66">66</a> 	if (stat(tmp_stderr, &amp;st1) != 0 ||
+<a class="l" name="67" href="#67">67</a>-	    stat(tmp_hashname, &amp;st2) != 0 ||
+<a class="l" name="68" href="#68">68</a>-	    rename(tmp_hashname, hashname) != 0 ||
+<a class="l" name="69" href="#69">69</a>-	    rename(tmp_stderr, path_stderr) != 0) {
+<a class="hl" name="70" href="#70">70</a>+		stat(tmp_hashname, &amp;st2) != 0 ||
+<a class="l" name="71" href="#71">71</a>+		move_file(tmp_hashname, hashname) != 0 ||
+<a class="l" name="72" href="#72">72</a>+		move_file(tmp_stderr, path_stderr) != 0) {
+<a class="l" name="73" href="#73">73</a> 		cc_log("failed to rename tmp files - %s\n", strerror(errno));
+<a class="l" name="74" href="#74">74</a> 		stats_update(STATS_ERROR);
+<a class="l" name="75" href="#75">75</a> 		failed();
+<a class="l" name="76" href="#76">76</a> 	}
+<a class="l" name="77" href="#77">77</a> 
+<a class="l" name="78" href="#78">78</a>+#if ENABLE_ZLIB
+<a class="l" name="79" href="#79">79</a>+	/* do an extra stat on the cache files for
+<a class="hl" name="80" href="#80">80</a>+	   the size statistics */
+<a class="l" name="81" href="#81">81</a>+	if (stat(path_stderr, &amp;st1) != 0 ||
+<a class="l" name="82" href="#82">82</a>+		stat(hashname, &amp;st2) != 0) {
+<a class="l" name="83" href="#83">83</a>+		cc_log("failed to stat cache files - %s\n", strerror(errno));
+<a class="l" name="84" href="#84">84</a>+		stats_update(STATS_ERROR);
+<a class="l" name="85" href="#85">85</a>+		failed();
+<a class="l" name="86" href="#86">86</a>+    }
+<a class="l" name="87" href="#87">87</a>+#endif
+<a class="l" name="88" href="#88">88</a>+
+<a class="l" name="89" href="#89">89</a> 	cc_log("Placed %s into cache\n", output_file);
+<a class="hl" name="90" href="#90">90</a> 	stats_tocache(file_size(&amp;st1) + file_size(&amp;st2));
+<a class="l" name="91" href="#91">91</a> 
+<a class="l" name="92" href="#92">92</a>@@ -474,7 +485,13 @@
+<a class="l" name="93" href="#93">93</a> 	}
+<a class="l" name="94" href="#94">94</a> 
+<a class="l" name="95" href="#95">95</a> 	/* the user might be disabling cache hits */
+<a class="l" name="96" href="#96">96</a>+#ifndef ENABLE_ZLIB
+<a class="l" name="97" href="#97">97</a>+	/* if the cache file is compressed we must recache */
+<a class="l" name="98" href="#98">98</a>+	if ((first &amp;&amp; getenv("CCACHE_RECACHE")) ||
+<a class="l" name="99" href="#99">99</a>+		test_if_compressed(hashname) == 1) {
+<a class="hl" name="100" href="#100">100</a>+#else
+<a class="l" name="101" href="#101">101</a> 	if (first &amp;&amp; getenv("CCACHE_RECACHE")) {
+<a class="l" name="102" href="#102">102</a>+#endif
+<a class="l" name="103" href="#103">103</a> 		close(fd_stderr);
+<a class="l" name="104" href="#104">104</a> 		unlink(stderr_file);
+<a class="l" name="105" href="#105">105</a> 		free(stderr_file);
+<a class="l" name="106" href="#106">106</a>@@ -487,7 +504,9 @@
+<a class="l" name="107" href="#107">107</a> 		ret = 0;
+<a class="l" name="108" href="#108">108</a> 	} else {
+<a class="l" name="109" href="#109">109</a> 		unlink(output_file);
+<a class="hl" name="110" href="#110">110</a>-		if (getenv("CCACHE_HARDLINK")) {
+<a class="l" name="111" href="#111">111</a>+		/* only make a hardlink if the cache file is uncompressed */
+<a class="l" name="112" href="#112">112</a>+		if (getenv("CCACHE_HARDLINK") &amp;&amp;
+<a class="l" name="113" href="#113">113</a>+			test_if_compressed(hashname) == 0) {
+<a class="l" name="114" href="#114">114</a> 			ret = link(hashname, output_file);
+<a class="l" name="115" href="#115">115</a> 		} else {
+<a class="l" name="116" href="#116">116</a> 			ret = copy_file(hashname, output_file);
+<a class="l" name="117" href="#117">117</a>Index: <a href="/source/s?path=ccache.h&amp;project=swig">ccache.h</a>
+<a class="l" name="118" href="#118">118</a>===================================================================
+<a class="l" name="119" href="#119">119</a>RCS file: <a href="/source/s?path=/home/cvsroot/lars/ccache/ccache.h&amp;project=swig">/home/cvsroot/lars/ccache/ccache.h</a>,v
+<a class="hl" name="120" href="#120">120</a>retrieving revision 1.1.1.1.2.1
+<a class="l" name="121" href="#121">121</a>retrieving revision 1.7
+<a class="l" name="122" href="#122">122</a>diff -u -r1.1.1.1.2.1 -r1.7
+<a class="l" name="123" href="#123">123</a>--- <a href="/source/s?path=ccache.h&amp;project=swig">ccache.h</a>	21 Nov 2004 17:55:36 -0000	1.1.1.1.2.1
+<a class="l" name="124" href="#124">124</a>+++ <a href="/source/s?path=ccache.h&amp;project=swig">ccache.h</a>	21 Nov 2004 18:19:28 -0000	1.7
+<a class="l" name="125" href="#125">125</a>@@ -23,6 +23,10 @@
+<a class="l" name="126" href="#126">126</a> #include &lt;<a href="/source/s?path=pwd.h&amp;project=swig">pwd.h</a>&gt;
+<a class="l" name="127" href="#127">127</a> #endif
+<a class="l" name="128" href="#128">128</a> 
+<a class="l" name="129" href="#129">129</a>+#ifdef ENABLE_ZLIB
+<a class="hl" name="130" href="#130">130</a>+#include &lt;<a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>&gt;
+<a class="l" name="131" href="#131">131</a>+#endif
+<a class="l" name="132" href="#132">132</a>+
+<a class="l" name="133" href="#133">133</a> #define STATUS_NOTFOUND 3
+<a class="l" name="134" href="#134">134</a> #define STATUS_FATAL 4
+<a class="l" name="135" href="#135">135</a> #define STATUS_NOCACHE 5
+<a class="l" name="136" href="#136">136</a>@@ -36,6 +40,13 @@
+<a class="l" name="137" href="#137">137</a> #define DEFAULT_MAXSIZE (1000*1000)
+<a class="l" name="138" href="#138">138</a> #endif
+<a class="l" name="139" href="#139">139</a> 
+<a class="hl" name="140" href="#140">140</a>+/* file copy mode */
+<a class="l" name="141" href="#141">141</a>+#ifdef ENABLE_ZLIB
+<a class="l" name="142" href="#142">142</a>+#define COPY_UNCOMPRESSED 0
+<a class="l" name="143" href="#143">143</a>+#define COPY_FROM_CACHE 1
+<a class="l" name="144" href="#144">144</a>+#define COPY_TO_CACHE 2
+<a class="l" name="145" href="#145">145</a>+#endif
+<a class="l" name="146" href="#146">146</a>+
+<a class="l" name="147" href="#147">147</a> enum stats {
+<a class="l" name="148" href="#148">148</a> 	STATS_NONE=0,
+<a class="l" name="149" href="#149">149</a> 	STATS_STDOUT,
+<a class="hl" name="150" href="#150">150</a>@@ -79,6 +90,8 @@
+<a class="l" name="151" href="#151">151</a> 
+<a class="l" name="152" href="#152">152</a> void copy_fd(int fd_in, int fd_out);
+<a class="l" name="153" href="#153">153</a> int copy_file(const char *src, const char *dest);
+<a class="l" name="154" href="#154">154</a>+int move_file(const char *src, const char *dest);
+<a class="l" name="155" href="#155">155</a>+int test_if_compressed(const char *filename);
+<a class="l" name="156" href="#156">156</a> 
+<a class="l" name="157" href="#157">157</a> int create_dir(const char *dir);
+<a class="l" name="158" href="#158">158</a> void x_asprintf(char **ptr, const char *format, ...);
+<a class="l" name="159" href="#159">159</a>Index: <a href="/source/s?path=ccache.yo&amp;project=swig">ccache.yo</a>
+<a class="hl" name="160" href="#160">160</a>===================================================================
+<a class="l" name="161" href="#161">161</a>RCS file: <a href="/source/s?path=/home/cvsroot/lars/ccache/ccache.yo&amp;project=swig">/home/cvsroot/lars/ccache/ccache.yo</a>,v
+<a class="l" name="162" href="#162">162</a>retrieving revision 1.1.1.1.2.1
+<a class="l" name="163" href="#163">163</a>retrieving revision 1.5
+<a class="l" name="164" href="#164">164</a>diff -u -r1.1.1.1.2.1 -r1.5
+<a class="l" name="165" href="#165">165</a>--- <a href="/source/s?path=ccache.yo&amp;project=swig">ccache.yo</a>	21 Nov 2004 17:55:36 -0000	1.1.1.1.2.1
+<a class="l" name="166" href="#166">166</a>+++ <a href="/source/s?path=ccache.yo&amp;project=swig">ccache.yo</a>	21 Nov 2004 18:19:28 -0000	1.5
+<a class="l" name="167" href="#167">167</a>@@ -169,6 +169,11 @@
+<a class="l" name="168" href="#168">168</a> this optimisation, in which case this option could allow ccache to be
+<a class="l" name="169" href="#169">169</a> used.
+<a class="hl" name="170" href="#170">170</a> 
+<a class="l" name="171" href="#171">171</a>+dit(bf(CCACHE_NOCOMPRESS)) If you set the environment variable
+<a class="l" name="172" href="#172">172</a>+CCACHE_NOCOMPRESS then there is no compression used on files that go
+<a class="l" name="173" href="#173">173</a>+into the cache. However, this setting has no effect on how files are
+<a class="l" name="174" href="#174">174</a>+retrieved from the cache, compressed results will still be usable.
+<a class="l" name="175" href="#175">175</a>+
+<a class="l" name="176" href="#176">176</a> dit(bf(CCACHE_NOSTATS)) If you set the environment variable
+<a class="l" name="177" href="#177">177</a> CCACHE_NOSTATS then ccache will not update the statistics files on
+<a class="l" name="178" href="#178">178</a> each compile.
+<a class="l" name="179" href="#179">179</a>@@ -181,7 +186,8 @@
+<a class="hl" name="180" href="#180">180</a> CCACHE_HARDLINK then ccache will attempt to use hard links from the
+<a class="l" name="181" href="#181">181</a> cache directory when creating the compiler output rather than using a
+<a class="l" name="182" href="#182">182</a> file copy. Using hard links is faster, but can confuse programs like
+<a class="l" name="183" href="#183">183</a>-'make' that rely on modification times.
+<a class="l" name="184" href="#184">184</a>+'make' that rely on modification times. Hard links are never made for
+<a class="l" name="185" href="#185">185</a>+compressed cache files.
+<a class="l" name="186" href="#186">186</a> 
+<a class="l" name="187" href="#187">187</a> dit(bf(CCACHE_RECACHE)) This forces ccache to not use any cached
+<a class="l" name="188" href="#188">188</a> results, even if it finds them. New results are still cached, but
+<a class="l" name="189" href="#189">189</a>@@ -236,6 +242,14 @@
+<a class="hl" name="190" href="#190">190</a> below the numbers you specified in order to avoid doing the cache
+<a class="l" name="191" href="#191">191</a> clean operation too often.
+<a class="l" name="192" href="#192">192</a> 
+<a class="l" name="193" href="#193">193</a>+manpagesection(CACHE COMPRESSION)
+<a class="l" name="194" href="#194">194</a>+
+<a class="l" name="195" href="#195">195</a>+By default ccache will compress all files it puts into the cache
+<a class="l" name="196" href="#196">196</a>+using the zlib compression. While this involves a negligible
+<a class="l" name="197" href="#197">197</a>+performance slowdown, it significantly increases the number of files
+<a class="l" name="198" href="#198">198</a>+that fit in the cache. You can turn off compression setting the
+<a class="l" name="199" href="#199">199</a>+CCACHE_NOCOMPRESS environment variable.
+<a class="hl" name="200" href="#200">200</a>+
+<a class="l" name="201" href="#201">201</a> manpagesection(HOW IT WORKS)
+<a class="l" name="202" href="#202">202</a> 
+<a class="l" name="203" href="#203">203</a> The basic idea is to detect when you are compiling exactly the same
+<a class="l" name="204" href="#204">204</a>@@ -294,6 +308,8 @@
+<a class="l" name="205" href="#205">205</a>   cache. This tells the filesystem to inherit group ownership for new
+<a class="l" name="206" href="#206">206</a>   directories. The command "chmod g+s `find $CCACHE_DIR -type d`" might
+<a class="l" name="207" href="#207">207</a>   be useful for this.
+<a class="l" name="208" href="#208">208</a>+  it() Set bf(CCACHE_NOCOMPRESS) for all users, if there are users with
+<a class="l" name="209" href="#209">209</a>+  versions of ccache that do not support compression.
+<a class="hl" name="210" href="#210">210</a> )
+<a class="l" name="211" href="#211">211</a> 
+<a class="l" name="212" href="#212">212</a> manpagesection(HISTORY)
+<a class="l" name="213" href="#213">213</a>Index: <a href="/source/s?path=config.h.in&amp;project=swig">config.h.in</a>
+<a class="l" name="214" href="#214">214</a>===================================================================
+<a class="l" name="215" href="#215">215</a>RCS file: <a href="/source/s?path=/home/cvsroot/lars/ccache/config.h.in&amp;project=swig">/home/cvsroot/lars/ccache/config.h.in</a>,v
+<a class="l" name="216" href="#216">216</a>retrieving revision 1.1.1.1
+<a class="l" name="217" href="#217">217</a>retrieving revision 1.2
+<a class="l" name="218" href="#218">218</a>diff -u -r1.1.1.1 -r1.2
+<a class="l" name="219" href="#219">219</a>--- <a href="/source/s?path=config.h.in&amp;project=swig">config.h.in</a>	30 Apr 2004 13:13:41 -0000	1.1.1.1
+<a class="hl" name="220" href="#220">220</a>+++ <a href="/source/s?path=config.h.in&amp;project=swig">config.h.in</a>	4 May 2004 20:49:26 -0000	1.2
+<a class="l" name="221" href="#221">221</a>@@ -98,3 +98,6 @@
+<a class="l" name="222" href="#222">222</a> 
+<a class="l" name="223" href="#223">223</a> /* Define _GNU_SOURCE so that we get all necessary prototypes */
+<a class="l" name="224" href="#224">224</a> #undef _GNU_SOURCE
+<a class="l" name="225" href="#225">225</a>+
+<a class="l" name="226" href="#226">226</a>+/* Define to 1 if you like to have zlib compression for the ccache. */
+<a class="l" name="227" href="#227">227</a>+#undef ENABLE_ZLIB
+<a class="l" name="228" href="#228">228</a>Index: configure
+<a class="l" name="229" href="#229">229</a>===================================================================
+<a class="hl" name="230" href="#230">230</a>RCS file: <a href="/source/s?path=/home/cvsroot/lars/ccache/configure&amp;project=swig">/home/cvsroot/lars/ccache/configure</a>,v
+<a class="l" name="231" href="#231">231</a>retrieving revision 1.1.1.1.2.1
+<a class="l" name="232" href="#232">232</a>diff -u -r1.1.1.1.2.1 configure
+<a class="l" name="233" href="#233">233</a>--- configure	21 Nov 2004 17:55:36 -0000	1.1.1.1.2.1
+<a class="l" name="234" href="#234">234</a>+++ configure	21 Nov 2004 18:24:42 -0000
+<a class="l" name="235" href="#235">235</a>@@ -836,6 +836,11 @@
+<a class="l" name="236" href="#236">236</a> 
+<a class="l" name="237" href="#237">237</a>   cat &lt;&lt;\_ACEOF
+<a class="l" name="238" href="#238">238</a> 
+<a class="l" name="239" href="#239">239</a>+Optional Features:
+<a class="hl" name="240" href="#240">240</a>+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+<a class="l" name="241" href="#241">241</a>+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+<a class="l" name="242" href="#242">242</a>+  --enable-zlib           enable zlib support for ccache compression
+<a class="l" name="243" href="#243">243</a>+
+<a class="l" name="244" href="#244">244</a> Some influential environment variables:
+<a class="l" name="245" href="#245">245</a>   CC          C compiler command
+<a class="l" name="246" href="#246">246</a>   CFLAGS      C compiler flags
+<a class="l" name="247" href="#247">247</a>@@ -936,7 +941,7 @@
+<a class="l" name="248" href="#248">248</a>     else
+<a class="l" name="249" href="#249">249</a>       echo "$as_me: WARNING: no configuration information is in $ac_dir" &gt;&amp;2
+<a class="hl" name="250" href="#250">250</a>     fi
+<a class="l" name="251" href="#251">251</a>-    cd "$ac_popdir"
+<a class="l" name="252" href="#252">252</a>+    cd $ac_popdir
+<a class="l" name="253" href="#253">253</a>   done
+<a class="l" name="254" href="#254">254</a> fi
+<a class="l" name="255" href="#255">255</a> 
+<a class="l" name="256" href="#256">256</a>@@ -1859,7 +1864,8 @@
+<a class="l" name="257" href="#257">257</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="258" href="#258">258</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="259" href="#259">259</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="260" href="#260">260</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="261" href="#261">261</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="262" href="#262">262</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="263" href="#263">263</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="264" href="#264">264</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="265" href="#265">265</a>   ac_status=$?
+<a class="l" name="266" href="#266">266</a>@@ -1917,7 +1923,8 @@
+<a class="l" name="267" href="#267">267</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="268" href="#268">268</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="269" href="#269">269</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="270" href="#270">270</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="271" href="#271">271</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="272" href="#272">272</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="273" href="#273">273</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="274" href="#274">274</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="275" href="#275">275</a>   ac_status=$?
+<a class="l" name="276" href="#276">276</a>@@ -2033,7 +2040,8 @@
+<a class="l" name="277" href="#277">277</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="278" href="#278">278</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="279" href="#279">279</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="280" href="#280">280</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="281" href="#281">281</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="282" href="#282">282</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="283" href="#283">283</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="284" href="#284">284</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="285" href="#285">285</a>   ac_status=$?
+<a class="l" name="286" href="#286">286</a>@@ -2087,7 +2095,8 @@
+<a class="l" name="287" href="#287">287</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="288" href="#288">288</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="289" href="#289">289</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="290" href="#290">290</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="291" href="#291">291</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="292" href="#292">292</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="293" href="#293">293</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="294" href="#294">294</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="295" href="#295">295</a>   ac_status=$?
+<a class="l" name="296" href="#296">296</a>@@ -2132,7 +2141,8 @@
+<a class="l" name="297" href="#297">297</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="298" href="#298">298</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="299" href="#299">299</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="300" href="#300">300</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="301" href="#301">301</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="302" href="#302">302</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="303" href="#303">303</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="304" href="#304">304</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="305" href="#305">305</a>   ac_status=$?
+<a class="l" name="306" href="#306">306</a>@@ -2176,7 +2186,8 @@
+<a class="l" name="307" href="#307">307</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="308" href="#308">308</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="309" href="#309">309</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="310" href="#310">310</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="311" href="#311">311</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="312" href="#312">312</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="313" href="#313">313</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="314" href="#314">314</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="315" href="#315">315</a>   ac_status=$?
+<a class="l" name="316" href="#316">316</a>@@ -2609,7 +2620,8 @@
+<a class="l" name="317" href="#317">317</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="318" href="#318">318</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="319" href="#319">319</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="320" href="#320">320</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="321" href="#321">321</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="322" href="#322">322</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="323" href="#323">323</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="324" href="#324">324</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="325" href="#325">325</a>   ac_status=$?
+<a class="l" name="326" href="#326">326</a>@@ -2681,7 +2693,8 @@
+<a class="l" name="327" href="#327">327</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="328" href="#328">328</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="329" href="#329">329</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="330" href="#330">330</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="331" href="#331">331</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="332" href="#332">332</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="333" href="#333">333</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="334" href="#334">334</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="335" href="#335">335</a>   ac_status=$?
+<a class="l" name="336" href="#336">336</a>@@ -2735,7 +2748,8 @@
+<a class="l" name="337" href="#337">337</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="338" href="#338">338</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="339" href="#339">339</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="340" href="#340">340</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="341" href="#341">341</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="342" href="#342">342</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="343" href="#343">343</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="344" href="#344">344</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="345" href="#345">345</a>   ac_status=$?
+<a class="l" name="346" href="#346">346</a>@@ -2806,7 +2820,8 @@
+<a class="l" name="347" href="#347">347</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="348" href="#348">348</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="349" href="#349">349</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="350" href="#350">350</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="351" href="#351">351</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="352" href="#352">352</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="353" href="#353">353</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="354" href="#354">354</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="355" href="#355">355</a>   ac_status=$?
+<a class="l" name="356" href="#356">356</a>@@ -2860,7 +2875,8 @@
+<a class="l" name="357" href="#357">357</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="358" href="#358">358</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="359" href="#359">359</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="360" href="#360">360</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="361" href="#361">361</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="362" href="#362">362</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="363" href="#363">363</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="364" href="#364">364</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="365" href="#365">365</a>   ac_status=$?
+<a class="l" name="366" href="#366">366</a>@@ -2927,7 +2943,8 @@
+<a class="l" name="367" href="#367">367</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="368" href="#368">368</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="369" href="#369">369</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="370" href="#370">370</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="371" href="#371">371</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="372" href="#372">372</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="373" href="#373">373</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="374" href="#374">374</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="375" href="#375">375</a>   ac_status=$?
+<a class="l" name="376" href="#376">376</a>@@ -2997,7 +3014,8 @@
+<a class="l" name="377" href="#377">377</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="378" href="#378">378</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="379" href="#379">379</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="380" href="#380">380</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="381" href="#381">381</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="382" href="#382">382</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="383" href="#383">383</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="384" href="#384">384</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="385" href="#385">385</a>   ac_status=$?
+<a class="l" name="386" href="#386">386</a>@@ -3078,7 +3096,8 @@
+<a class="l" name="387" href="#387">387</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="388" href="#388">388</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="389" href="#389">389</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="390" href="#390">390</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="391" href="#391">391</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="392" href="#392">392</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="393" href="#393">393</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="394" href="#394">394</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="395" href="#395">395</a>   ac_status=$?
+<a class="l" name="396" href="#396">396</a>@@ -3248,7 +3267,8 @@
+<a class="l" name="397" href="#397">397</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="398" href="#398">398</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="399" href="#399">399</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="400" href="#400">400</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="401" href="#401">401</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="402" href="#402">402</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="403" href="#403">403</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="404" href="#404">404</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="405" href="#405">405</a>   ac_status=$?
+<a class="l" name="406" href="#406">406</a>@@ -3319,7 +3339,8 @@
+<a class="l" name="407" href="#407">407</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="408" href="#408">408</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="409" href="#409">409</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="410" href="#410">410</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="411" href="#411">411</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="412" href="#412">412</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="413" href="#413">413</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="414" href="#414">414</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="415" href="#415">415</a>   ac_status=$?
+<a class="l" name="416" href="#416">416</a>@@ -3509,7 +3530,8 @@
+<a class="l" name="417" href="#417">417</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="418" href="#418">418</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="419" href="#419">419</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="420" href="#420">420</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="421" href="#421">421</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="422" href="#422">422</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="423" href="#423">423</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="424" href="#424">424</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="425" href="#425">425</a>   ac_status=$?
+<a class="l" name="426" href="#426">426</a>@@ -3611,7 +3633,8 @@
+<a class="l" name="427" href="#427">427</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="428" href="#428">428</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="429" href="#429">429</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="430" href="#430">430</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="431" href="#431">431</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="432" href="#432">432</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="433" href="#433">433</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="434" href="#434">434</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="435" href="#435">435</a>   ac_status=$?
+<a class="l" name="436" href="#436">436</a>@@ -3676,7 +3699,8 @@
+<a class="l" name="437" href="#437">437</a>   cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="438" href="#438">438</a>   echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="439" href="#439">439</a>   (exit $ac_status); } &amp;&amp;
+<a class="hl" name="440" href="#440">440</a>-	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="441" href="#441">441</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="442" href="#442">442</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="443" href="#443">443</a>   { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="444" href="#444">444</a>   (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="445" href="#445">445</a>   ac_status=$?
+<a class="l" name="446" href="#446">446</a>@@ -3775,6 +3799,229 @@
+<a class="l" name="447" href="#447">447</a> 
+<a class="l" name="448" href="#448">448</a> fi
+<a class="l" name="449" href="#449">449</a> 
+<a class="hl" name="450" href="#450">450</a>+# Check whether --enable-zlib or --disable-zlib was given.
+<a class="l" name="451" href="#451">451</a>+if test "${enable_zlib+set}" = set; then
+<a class="l" name="452" href="#452">452</a>+  enableval="$enable_zlib"
+<a class="l" name="453" href="#453">453</a>+
+<a class="l" name="454" href="#454">454</a>+else
+<a class="l" name="455" href="#455">455</a>+  enable_zlib=yes
+<a class="l" name="456" href="#456">456</a>+fi;
+<a class="l" name="457" href="#457">457</a>+
+<a class="l" name="458" href="#458">458</a>+if test x"$enable_zlib" = x"yes"; then
+<a class="l" name="459" href="#459">459</a>+    if test "${ac_cv_header_zlib_h+set}" = set; then
+<a class="hl" name="460" href="#460">460</a>+  echo "$as_me:$LINENO: checking for <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>" &gt;&amp;5
+<a class="l" name="461" href="#461">461</a>+echo $ECHO_N "checking for <a href="/source/s?path=zlib.h...&amp;project=swig">zlib.h...</a> $ECHO_C" &gt;&amp;6
+<a class="l" name="462" href="#462">462</a>+if test "${ac_cv_header_zlib_h+set}" = set; then
+<a class="l" name="463" href="#463">463</a>+  echo $ECHO_N "(cached) $ECHO_C" &gt;&amp;6
+<a class="l" name="464" href="#464">464</a>+fi
+<a class="l" name="465" href="#465">465</a>+echo "$as_me:$LINENO: result: $ac_cv_header_zlib_h" &gt;&amp;5
+<a class="l" name="466" href="#466">466</a>+echo "${ECHO_T}$ac_cv_header_zlib_h" &gt;&amp;6
+<a class="l" name="467" href="#467">467</a>+else
+<a class="l" name="468" href="#468">468</a>+  # Is the header compilable?
+<a class="l" name="469" href="#469">469</a>+echo "$as_me:$LINENO: checking <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a> usability" &gt;&amp;5
+<a class="hl" name="470" href="#470">470</a>+echo $ECHO_N "checking <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a> usability... $ECHO_C" &gt;&amp;6
+<a class="l" name="471" href="#471">471</a>+cat &gt;conftest.$ac_ext &lt;&lt;_ACEOF
+<a class="l" name="472" href="#472">472</a>+/* <a href="/source/s?path=confdefs.h.&amp;project=swig">confdefs.h.</a>  */
+<a class="l" name="473" href="#473">473</a>+_ACEOF
+<a class="l" name="474" href="#474">474</a>+cat <a href="/source/s?path=confdefs.h&amp;project=swig">confdefs.h</a> &gt;&gt;conftest.$ac_ext
+<a class="l" name="475" href="#475">475</a>+cat &gt;&gt;conftest.$ac_ext &lt;&lt;_ACEOF
+<a class="l" name="476" href="#476">476</a>+/* end <a href="/source/s?path=confdefs.h.&amp;project=swig">confdefs.h.</a>  */
+<a class="l" name="477" href="#477">477</a>+$ac_includes_default
+<a class="l" name="478" href="#478">478</a>+#include &lt;<a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>&gt;
+<a class="l" name="479" href="#479">479</a>+_ACEOF
+<a class="hl" name="480" href="#480">480</a>+rm -f conftest.$ac_objext
+<a class="l" name="481" href="#481">481</a>+if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") &gt;&amp;5
+<a class="l" name="482" href="#482">482</a>+  (eval $ac_compile) 2&gt;<a href="/source/s?path=conftest.er1&amp;project=swig">conftest.er1</a>
+<a class="l" name="483" href="#483">483</a>+  ac_status=$?
+<a class="l" name="484" href="#484">484</a>+  grep -v '^ *+' <a href="/source/s?path=conftest.er1&amp;project=swig">conftest.er1</a> &gt;<a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>
+<a class="l" name="485" href="#485">485</a>+  rm -f <a href="/source/s?path=conftest.er1&amp;project=swig">conftest.er1</a>
+<a class="l" name="486" href="#486">486</a>+  cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="487" href="#487">487</a>+  echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="488" href="#488">488</a>+  (exit $ac_status); } &amp;&amp;
+<a class="l" name="489" href="#489">489</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="hl" name="490" href="#490">490</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="491" href="#491">491</a>+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="492" href="#492">492</a>+  (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="493" href="#493">493</a>+  ac_status=$?
+<a class="l" name="494" href="#494">494</a>+  echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="495" href="#495">495</a>+  (exit $ac_status); }; } &amp;&amp;
+<a class="l" name="496" href="#496">496</a>+	 { ac_try='test -s conftest.$ac_objext'
+<a class="l" name="497" href="#497">497</a>+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="498" href="#498">498</a>+  (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="499" href="#499">499</a>+  ac_status=$?
+<a class="hl" name="500" href="#500">500</a>+  echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="501" href="#501">501</a>+  (exit $ac_status); }; }; then
+<a class="l" name="502" href="#502">502</a>+  ac_header_compiler=yes
+<a class="l" name="503" href="#503">503</a>+else
+<a class="l" name="504" href="#504">504</a>+  echo "$as_me: failed program was:" &gt;&amp;5
+<a class="l" name="505" href="#505">505</a>+sed 's/^/| /' conftest.$ac_ext &gt;&amp;5
+<a class="l" name="506" href="#506">506</a>+
+<a class="l" name="507" href="#507">507</a>+ac_header_compiler=no
+<a class="l" name="508" href="#508">508</a>+fi
+<a class="l" name="509" href="#509">509</a>+rm -f <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> conftest.$ac_objext conftest.$ac_ext
+<a class="hl" name="510" href="#510">510</a>+echo "$as_me:$LINENO: result: $ac_header_compiler" &gt;&amp;5
+<a class="l" name="511" href="#511">511</a>+echo "${ECHO_T}$ac_header_compiler" &gt;&amp;6
+<a class="l" name="512" href="#512">512</a>+
+<a class="l" name="513" href="#513">513</a>+# Is the header present?
+<a class="l" name="514" href="#514">514</a>+echo "$as_me:$LINENO: checking <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a> presence" &gt;&amp;5
+<a class="l" name="515" href="#515">515</a>+echo $ECHO_N "checking <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a> presence... $ECHO_C" &gt;&amp;6
+<a class="l" name="516" href="#516">516</a>+cat &gt;conftest.$ac_ext &lt;&lt;_ACEOF
+<a class="l" name="517" href="#517">517</a>+/* <a href="/source/s?path=confdefs.h.&amp;project=swig">confdefs.h.</a>  */
+<a class="l" name="518" href="#518">518</a>+_ACEOF
+<a class="l" name="519" href="#519">519</a>+cat <a href="/source/s?path=confdefs.h&amp;project=swig">confdefs.h</a> &gt;&gt;conftest.$ac_ext
+<a class="hl" name="520" href="#520">520</a>+cat &gt;&gt;conftest.$ac_ext &lt;&lt;_ACEOF
+<a class="l" name="521" href="#521">521</a>+/* end <a href="/source/s?path=confdefs.h.&amp;project=swig">confdefs.h.</a>  */
+<a class="l" name="522" href="#522">522</a>+#include &lt;<a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>&gt;
+<a class="l" name="523" href="#523">523</a>+_ACEOF
+<a class="l" name="524" href="#524">524</a>+if { (eval echo "$as_me:$LINENO: \"$ac_cpp conftest.$ac_ext\"") &gt;&amp;5
+<a class="l" name="525" href="#525">525</a>+  (eval $ac_cpp conftest.$ac_ext) 2&gt;<a href="/source/s?path=conftest.er1&amp;project=swig">conftest.er1</a>
+<a class="l" name="526" href="#526">526</a>+  ac_status=$?
+<a class="l" name="527" href="#527">527</a>+  grep -v '^ *+' <a href="/source/s?path=conftest.er1&amp;project=swig">conftest.er1</a> &gt;<a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>
+<a class="l" name="528" href="#528">528</a>+  rm -f <a href="/source/s?path=conftest.er1&amp;project=swig">conftest.er1</a>
+<a class="l" name="529" href="#529">529</a>+  cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="hl" name="530" href="#530">530</a>+  echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="531" href="#531">531</a>+  (exit $ac_status); } &gt;<a href="/source/s?path=/dev/null&amp;project=swig">/dev/null</a>; then
+<a class="l" name="532" href="#532">532</a>+  if test -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>; then
+<a class="l" name="533" href="#533">533</a>+    ac_cpp_err=$ac_c_preproc_warn_flag
+<a class="l" name="534" href="#534">534</a>+    ac_cpp_err=$ac_cpp_err$ac_c_werror_flag
+<a class="l" name="535" href="#535">535</a>+  else
+<a class="l" name="536" href="#536">536</a>+    ac_cpp_err=
+<a class="l" name="537" href="#537">537</a>+  fi
+<a class="l" name="538" href="#538">538</a>+else
+<a class="l" name="539" href="#539">539</a>+  ac_cpp_err=yes
+<a class="hl" name="540" href="#540">540</a>+fi
+<a class="l" name="541" href="#541">541</a>+if test -z "$ac_cpp_err"; then
+<a class="l" name="542" href="#542">542</a>+  ac_header_preproc=yes
+<a class="l" name="543" href="#543">543</a>+else
+<a class="l" name="544" href="#544">544</a>+  echo "$as_me: failed program was:" &gt;&amp;5
+<a class="l" name="545" href="#545">545</a>+sed 's/^/| /' conftest.$ac_ext &gt;&amp;5
+<a class="l" name="546" href="#546">546</a>+
+<a class="l" name="547" href="#547">547</a>+  ac_header_preproc=no
+<a class="l" name="548" href="#548">548</a>+fi
+<a class="l" name="549" href="#549">549</a>+rm -f <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> conftest.$ac_ext
+<a class="hl" name="550" href="#550">550</a>+echo "$as_me:$LINENO: result: $ac_header_preproc" &gt;&amp;5
+<a class="l" name="551" href="#551">551</a>+echo "${ECHO_T}$ac_header_preproc" &gt;&amp;6
+<a class="l" name="552" href="#552">552</a>+
+<a class="l" name="553" href="#553">553</a>+# So?  What about this header?
+<a class="l" name="554" href="#554">554</a>+case $ac_header_compiler:$ac_header_preproc:$ac_c_preproc_warn_flag in
+<a class="l" name="555" href="#555">555</a>+  yes:no: )
+<a class="l" name="556" href="#556">556</a>+    { echo "$as_me:$LINENO: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: accepted by the compiler, rejected by the preprocessor!" &gt;&amp;5
+<a class="l" name="557" href="#557">557</a>+echo "$as_me: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: accepted by the compiler, rejected by the preprocessor!" &gt;&amp;2;}
+<a class="l" name="558" href="#558">558</a>+    { echo "$as_me:$LINENO: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: proceeding with the compiler's result" &gt;&amp;5
+<a class="l" name="559" href="#559">559</a>+echo "$as_me: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: proceeding with the compiler's result" &gt;&amp;2;}
+<a class="hl" name="560" href="#560">560</a>+    ac_header_preproc=yes
+<a class="l" name="561" href="#561">561</a>+    ;;
+<a class="l" name="562" href="#562">562</a>+  no:yes:* )
+<a class="l" name="563" href="#563">563</a>+    { echo "$as_me:$LINENO: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: present but cannot be compiled" &gt;&amp;5
+<a class="l" name="564" href="#564">564</a>+echo "$as_me: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: present but cannot be compiled" &gt;&amp;2;}
+<a class="l" name="565" href="#565">565</a>+    { echo "$as_me:$LINENO: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>:     check for missing prerequisite headers?" &gt;&amp;5
+<a class="l" name="566" href="#566">566</a>+echo "$as_me: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>:     check for missing prerequisite headers?" &gt;&amp;2;}
+<a class="l" name="567" href="#567">567</a>+    { echo "$as_me:$LINENO: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: see the Autoconf documentation" &gt;&amp;5
+<a class="l" name="568" href="#568">568</a>+echo "$as_me: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: see the Autoconf documentation" &gt;&amp;2;}
+<a class="l" name="569" href="#569">569</a>+    { echo "$as_me:$LINENO: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>:     section \"Present But Cannot Be Compiled\"" &gt;&amp;5
+<a class="hl" name="570" href="#570">570</a>+echo "$as_me: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>:     section \"Present But Cannot Be Compiled\"" &gt;&amp;2;}
+<a class="l" name="571" href="#571">571</a>+    { echo "$as_me:$LINENO: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: proceeding with the preprocessor's result" &gt;&amp;5
+<a class="l" name="572" href="#572">572</a>+echo "$as_me: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: proceeding with the preprocessor's result" &gt;&amp;2;}
+<a class="l" name="573" href="#573">573</a>+    { echo "$as_me:$LINENO: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: in the future, the compiler will take precedence" &gt;&amp;5
+<a class="l" name="574" href="#574">574</a>+echo "$as_me: WARNING: <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>: in the future, the compiler will take precedence" &gt;&amp;2;}
+<a class="l" name="575" href="#575">575</a>+    (
+<a class="l" name="576" href="#576">576</a>+      cat &lt;&lt;\_ASBOX
+<a class="l" name="577" href="#577">577</a>+## ------------------------------------------ ##
+<a class="l" name="578" href="#578">578</a>+## Report this to the AC_PACKAGE_NAME lists.  ##
+<a class="l" name="579" href="#579">579</a>+## ------------------------------------------ ##
+<a class="hl" name="580" href="#580">580</a>+_ASBOX
+<a class="l" name="581" href="#581">581</a>+    ) |
+<a class="l" name="582" href="#582">582</a>+      sed "s/^/$as_me: WARNING:     /" &gt;&amp;2
+<a class="l" name="583" href="#583">583</a>+    ;;
+<a class="l" name="584" href="#584">584</a>+esac
+<a class="l" name="585" href="#585">585</a>+echo "$as_me:$LINENO: checking for <a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>" &gt;&amp;5
+<a class="l" name="586" href="#586">586</a>+echo $ECHO_N "checking for <a href="/source/s?path=zlib.h...&amp;project=swig">zlib.h...</a> $ECHO_C" &gt;&amp;6
+<a class="l" name="587" href="#587">587</a>+if test "${ac_cv_header_zlib_h+set}" = set; then
+<a class="l" name="588" href="#588">588</a>+  echo $ECHO_N "(cached) $ECHO_C" &gt;&amp;6
+<a class="l" name="589" href="#589">589</a>+else
+<a class="hl" name="590" href="#590">590</a>+  ac_cv_header_zlib_h=$ac_header_preproc
+<a class="l" name="591" href="#591">591</a>+fi
+<a class="l" name="592" href="#592">592</a>+echo "$as_me:$LINENO: result: $ac_cv_header_zlib_h" &gt;&amp;5
+<a class="l" name="593" href="#593">593</a>+echo "${ECHO_T}$ac_cv_header_zlib_h" &gt;&amp;6
+<a class="l" name="594" href="#594">594</a>+
+<a class="l" name="595" href="#595">595</a>+fi
+<a class="l" name="596" href="#596">596</a>+if test $ac_cv_header_zlib_h = yes; then
+<a class="l" name="597" href="#597">597</a>+  echo "$as_me:$LINENO: checking for gzdopen in -lz" &gt;&amp;5
+<a class="l" name="598" href="#598">598</a>+echo $ECHO_N "checking for gzdopen in -lz... $ECHO_C" &gt;&amp;6
+<a class="l" name="599" href="#599">599</a>+if test "${ac_cv_lib_z_gzdopen+set}" = set; then
+<a class="hl" name="600" href="#600">600</a>+  echo $ECHO_N "(cached) $ECHO_C" &gt;&amp;6
+<a class="l" name="601" href="#601">601</a>+else
+<a class="l" name="602" href="#602">602</a>+  ac_check_lib_save_LIBS=$LIBS
+<a class="l" name="603" href="#603">603</a>+LIBS="-lz  $LIBS"
+<a class="l" name="604" href="#604">604</a>+cat &gt;conftest.$ac_ext &lt;&lt;_ACEOF
+<a class="l" name="605" href="#605">605</a>+/* <a href="/source/s?path=confdefs.h.&amp;project=swig">confdefs.h.</a>  */
+<a class="l" name="606" href="#606">606</a>+_ACEOF
+<a class="l" name="607" href="#607">607</a>+cat <a href="/source/s?path=confdefs.h&amp;project=swig">confdefs.h</a> &gt;&gt;conftest.$ac_ext
+<a class="l" name="608" href="#608">608</a>+cat &gt;&gt;conftest.$ac_ext &lt;&lt;_ACEOF
+<a class="l" name="609" href="#609">609</a>+/* end <a href="/source/s?path=confdefs.h.&amp;project=swig">confdefs.h.</a>  */
+<a class="hl" name="610" href="#610">610</a>+
+<a class="l" name="611" href="#611">611</a>+/* Override any gcc2 internal prototype to avoid an error.  */
+<a class="l" name="612" href="#612">612</a>+#ifdef __cplusplus
+<a class="l" name="613" href="#613">613</a>+extern "C"
+<a class="l" name="614" href="#614">614</a>+#endif
+<a class="l" name="615" href="#615">615</a>+/* We use char because int might match the return type of a gcc2
+<a class="l" name="616" href="#616">616</a>+   builtin and then its argument prototype would still apply.  */
+<a class="l" name="617" href="#617">617</a>+char gzdopen ();
+<a class="l" name="618" href="#618">618</a>+int
+<a class="l" name="619" href="#619">619</a>+main ()
+<a class="hl" name="620" href="#620">620</a>+{
+<a class="l" name="621" href="#621">621</a>+gzdopen ();
+<a class="l" name="622" href="#622">622</a>+  ;
+<a class="l" name="623" href="#623">623</a>+  return 0;
+<a class="l" name="624" href="#624">624</a>+}
+<a class="l" name="625" href="#625">625</a>+_ACEOF
+<a class="l" name="626" href="#626">626</a>+rm -f conftest.$ac_objext conftest$ac_exeext
+<a class="l" name="627" href="#627">627</a>+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") &gt;&amp;5
+<a class="l" name="628" href="#628">628</a>+  (eval $ac_link) 2&gt;<a href="/source/s?path=conftest.er1&amp;project=swig">conftest.er1</a>
+<a class="l" name="629" href="#629">629</a>+  ac_status=$?
+<a class="hl" name="630" href="#630">630</a>+  grep -v '^ *+' <a href="/source/s?path=conftest.er1&amp;project=swig">conftest.er1</a> &gt;<a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>
+<a class="l" name="631" href="#631">631</a>+  rm -f <a href="/source/s?path=conftest.er1&amp;project=swig">conftest.er1</a>
+<a class="l" name="632" href="#632">632</a>+  cat <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> &gt;&amp;5
+<a class="l" name="633" href="#633">633</a>+  echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="634" href="#634">634</a>+  (exit $ac_status); } &amp;&amp;
+<a class="l" name="635" href="#635">635</a>+	 { ac_try='test -z "$ac_c_werror_flag"
+<a class="l" name="636" href="#636">636</a>+			 || test ! -s <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a>'
+<a class="l" name="637" href="#637">637</a>+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="638" href="#638">638</a>+  (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="639" href="#639">639</a>+  ac_status=$?
+<a class="hl" name="640" href="#640">640</a>+  echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="641" href="#641">641</a>+  (exit $ac_status); }; } &amp;&amp;
+<a class="l" name="642" href="#642">642</a>+	 { ac_try='test -s conftest$ac_exeext'
+<a class="l" name="643" href="#643">643</a>+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") &gt;&amp;5
+<a class="l" name="644" href="#644">644</a>+  (eval $ac_try) 2&gt;&amp;5
+<a class="l" name="645" href="#645">645</a>+  ac_status=$?
+<a class="l" name="646" href="#646">646</a>+  echo "$as_me:$LINENO: \$? = $ac_status" &gt;&amp;5
+<a class="l" name="647" href="#647">647</a>+  (exit $ac_status); }; }; then
+<a class="l" name="648" href="#648">648</a>+  ac_cv_lib_z_gzdopen=yes
+<a class="l" name="649" href="#649">649</a>+else
+<a class="hl" name="650" href="#650">650</a>+  echo "$as_me: failed program was:" &gt;&amp;5
+<a class="l" name="651" href="#651">651</a>+sed 's/^/| /' conftest.$ac_ext &gt;&amp;5
+<a class="l" name="652" href="#652">652</a>+
+<a class="l" name="653" href="#653">653</a>+ac_cv_lib_z_gzdopen=no
+<a class="l" name="654" href="#654">654</a>+fi
+<a class="l" name="655" href="#655">655</a>+rm -f <a href="/source/s?path=conftest.err&amp;project=swig">conftest.err</a> conftest.$ac_objext \
+<a class="l" name="656" href="#656">656</a>+      conftest$ac_exeext conftest.$ac_ext
+<a class="l" name="657" href="#657">657</a>+LIBS=$ac_check_lib_save_LIBS
+<a class="l" name="658" href="#658">658</a>+fi
+<a class="l" name="659" href="#659">659</a>+echo "$as_me:$LINENO: result: $ac_cv_lib_z_gzdopen" &gt;&amp;5
+<a class="hl" name="660" href="#660">660</a>+echo "${ECHO_T}$ac_cv_lib_z_gzdopen" &gt;&amp;6
+<a class="l" name="661" href="#661">661</a>+if test $ac_cv_lib_z_gzdopen = yes; then
+<a class="l" name="662" href="#662">662</a>+  LIBS="-lz $LIBS"; cat &gt;&gt;<a href="/source/s?path=confdefs.h&amp;project=swig">confdefs.h</a> &lt;&lt;\_ACEOF
+<a class="l" name="663" href="#663">663</a>+#define ENABLE_ZLIB 1
+<a class="l" name="664" href="#664">664</a>+_ACEOF
+<a class="l" name="665" href="#665">665</a>+
+<a class="l" name="666" href="#666">666</a>+fi
+<a class="l" name="667" href="#667">667</a>+
+<a class="l" name="668" href="#668">668</a>+fi
+<a class="l" name="669" href="#669">669</a>+
+<a class="hl" name="670" href="#670">670</a>+
+<a class="l" name="671" href="#671">671</a>+fi
+<a class="l" name="672" href="#672">672</a>+
+<a class="l" name="673" href="#673">673</a>           ac_config_files="$ac_config_files Makefile"
+<a class="l" name="674" href="#674">674</a> 
+<a class="l" name="675" href="#675">675</a> cat &gt;confcache &lt;&lt;\_ACEOF
+<a class="l" name="676" href="#676">676</a>@@ -4568,6 +4815,11 @@
+<a class="l" name="677" href="#677">677</a>   *) ac_INSTALL=$ac_top_builddir$INSTALL ;;
+<a class="l" name="678" href="#678">678</a>   esac
+<a class="l" name="679" href="#679">679</a> 
+<a class="hl" name="680" href="#680">680</a>+  if test x"$ac_file" != x-; then
+<a class="l" name="681" href="#681">681</a>+    { echo "$as_me:$LINENO: creating $ac_file" &gt;&amp;5
+<a class="l" name="682" href="#682">682</a>+echo "$as_me: creating $ac_file" &gt;&amp;6;}
+<a class="l" name="683" href="#683">683</a>+    rm -f "$ac_file"
+<a class="l" name="684" href="#684">684</a>+  fi
+<a class="l" name="685" href="#685">685</a>   # Let's still pretend it is `configure' which instantiates (<a href="/source/s?path=i.e.&amp;project=swig">i.e.</a>, don't
+<a class="l" name="686" href="#686">686</a>   # use $as_me), people would be surprised to read:
+<a class="l" name="687" href="#687">687</a>   #    /* <a href="/source/s?path=config.h.&amp;project=swig">config.h.</a>  Generated by <a href="/source/s?path=config.status.&amp;project=swig">config.status.</a>  */
+<a class="l" name="688" href="#688">688</a>@@ -4606,12 +4858,6 @@
+<a class="l" name="689" href="#689">689</a> 	 fi;;
+<a class="hl" name="690" href="#690">690</a>       esac
+<a class="l" name="691" href="#691">691</a>     done` || { (exit 1); exit 1; }
+<a class="l" name="692" href="#692">692</a>-
+<a class="l" name="693" href="#693">693</a>-  if test x"$ac_file" != x-; then
+<a class="l" name="694" href="#694">694</a>-    { echo "$as_me:$LINENO: creating $ac_file" &gt;&amp;5
+<a class="l" name="695" href="#695">695</a>-echo "$as_me: creating $ac_file" &gt;&amp;6;}
+<a class="l" name="696" href="#696">696</a>-    rm -f "$ac_file"
+<a class="l" name="697" href="#697">697</a>-  fi
+<a class="l" name="698" href="#698">698</a> _ACEOF
+<a class="l" name="699" href="#699">699</a> cat &gt;&gt;$CONFIG_STATUS &lt;&lt;_ACEOF
+<a class="hl" name="700" href="#700">700</a>   sed "$ac_vpsub
+<a class="l" name="701" href="#701">701</a>Index: <a href="/source/s?path=configure.in&amp;project=swig">configure.in</a>
+<a class="l" name="702" href="#702">702</a>===================================================================
+<a class="l" name="703" href="#703">703</a>RCS file: <a href="/source/s?path=/home/cvsroot/lars/ccache/configure.in&amp;project=swig">/home/cvsroot/lars/ccache/configure.in</a>,v
+<a class="l" name="704" href="#704">704</a>retrieving revision 1.1.1.1.2.1
+<a class="l" name="705" href="#705">705</a>retrieving revision 1.4
+<a class="l" name="706" href="#706">706</a>diff -u -r1.1.1.1.2.1 -r1.4
+<a class="l" name="707" href="#707">707</a>--- <a href="/source/s?path=configure.in&amp;project=swig">configure.in</a>	21 Nov 2004 17:55:36 -0000	1.1.1.1.2.1
+<a class="l" name="708" href="#708">708</a>+++ <a href="/source/s?path=configure.in&amp;project=swig">configure.in</a>	21 Nov 2004 18:19:28 -0000	1.4
+<a class="l" name="709" href="#709">709</a>@@ -68,5 +68,14 @@
+<a class="hl" name="710" href="#710">710</a>     AC_DEFINE(HAVE_C99_VSNPRINTF, 1, [ ])
+<a class="l" name="711" href="#711">711</a> fi
+<a class="l" name="712" href="#712">712</a> 
+<a class="l" name="713" href="#713">713</a>+dnl Check for zlib.
+<a class="l" name="714" href="#714">714</a>+AC_ARG_ENABLE([zlib],
+<a class="l" name="715" href="#715">715</a>+              AS_HELP_STRING([--enable-zlib], [enable zlib support for ccache compression]),,
+<a class="l" name="716" href="#716">716</a>+              [enable_zlib=yes])
+<a class="l" name="717" href="#717">717</a>+
+<a class="l" name="718" href="#718">718</a>+if test x"$enable_zlib" = x"yes"; then
+<a class="l" name="719" href="#719">719</a>+    AC_CHECK_HEADER(<a href="/source/s?path=zlib.h&amp;project=swig">zlib.h</a>, AC_CHECK_LIB(z, gzdopen, LIBS="-lz $LIBS"; AC_DEFINE(ENABLE_ZLIB)))
+<a class="hl" name="720" href="#720">720</a>+fi
+<a class="l" name="721" href="#721">721</a>+
+<a class="l" name="722" href="#722">722</a> AC_CONFIG_FILES([Makefile])
+<a class="l" name="723" href="#723">723</a> AC_OUTPUT
+<a class="l" name="724" href="#724">724</a>Index: <a href="/source/s?path=util.c&amp;project=swig">util.c</a>
+<a class="l" name="725" href="#725">725</a>===================================================================
+<a class="l" name="726" href="#726">726</a>RCS file: <a href="/source/s?path=/home/cvsroot/lars/ccache/util.c&amp;project=swig">/home/cvsroot/lars/ccache/util.c</a>,v
+<a class="l" name="727" href="#727">727</a>retrieving revision 1.1.1.1.2.1
+<a class="l" name="728" href="#728">728</a>retrieving revision 1.11
+<a class="l" name="729" href="#729">729</a>diff -u -r1.1.1.1.2.1 -r1.11
+<a class="hl" name="730" href="#730">730</a>--- <a href="/source/s?path=util.c&amp;project=swig">util.c</a>	21 Nov 2004 17:55:36 -0000	1.1.1.1.2.1
+<a class="l" name="731" href="#731">731</a>+++ <a href="/source/s?path=util.c&amp;project=swig">util.c</a>	21 Nov 2004 18:19:28 -0000	1.11
+<a class="l" name="732" href="#732">732</a>@@ -44,6 +44,7 @@
+<a class="l" name="733" href="#733">733</a> 	exit(1);
+<a class="l" name="734" href="#734">734</a> }
+<a class="l" name="735" href="#735">735</a> 
+<a class="l" name="736" href="#736">736</a>+#ifndef ENABLE_ZLIB
+<a class="l" name="737" href="#737">737</a> /* copy all data from one file descriptor to another */
+<a class="l" name="738" href="#738">738</a> void copy_fd(int fd_in, int fd_out)
+<a class="l" name="739" href="#739">739</a> {
+<a class="hl" name="740" href="#740">740</a>@@ -57,6 +58,11 @@
+<a class="l" name="741" href="#741">741</a> 	}
+<a class="l" name="742" href="#742">742</a> }
+<a class="l" name="743" href="#743">743</a> 
+<a class="l" name="744" href="#744">744</a>+/* move a file using rename */
+<a class="l" name="745" href="#745">745</a>+int move_file(const char *src, const char *dest) {
+<a class="l" name="746" href="#746">746</a>+	return rename(src, dest);
+<a class="l" name="747" href="#747">747</a>+}
+<a class="l" name="748" href="#748">748</a>+
+<a class="l" name="749" href="#749">749</a> /* copy a file - used when hard links don't work 
+<a class="hl" name="750" href="#750">750</a>    the copy is done via a temporary file and atomic rename
+<a class="l" name="751" href="#751">751</a> */
+<a class="l" name="752" href="#752">752</a>@@ -120,6 +126,174 @@
+<a class="l" name="753" href="#753">753</a> 	return 0;
+<a class="l" name="754" href="#754">754</a> }
+<a class="l" name="755" href="#755">755</a> 
+<a class="l" name="756" href="#756">756</a>+#else /* ENABLE_ZLIB */
+<a class="l" name="757" href="#757">757</a>+
+<a class="l" name="758" href="#758">758</a>+/* copy all data from one file descriptor to another
+<a class="l" name="759" href="#759">759</a>+   possibly decompressing it
+<a class="hl" name="760" href="#760">760</a>+*/
+<a class="l" name="761" href="#761">761</a>+void copy_fd(int fd_in, int fd_out) {
+<a class="l" name="762" href="#762">762</a>+	char buf[10240];
+<a class="l" name="763" href="#763">763</a>+	int n;
+<a class="l" name="764" href="#764">764</a>+	gzFile gz_in;
+<a class="l" name="765" href="#765">765</a>+
+<a class="l" name="766" href="#766">766</a>+	gz_in = gzdopen(dup(fd_in), "rb");
+<a class="l" name="767" href="#767">767</a>+
+<a class="l" name="768" href="#768">768</a>+	if (!gz_in) {
+<a class="l" name="769" href="#769">769</a>+		fatal("Failed to copy fd");
+<a class="hl" name="770" href="#770">770</a>+	}
+<a class="l" name="771" href="#771">771</a>+
+<a class="l" name="772" href="#772">772</a>+	while ((n = gzread(gz_in, buf, sizeof(buf))) &gt; 0) {
+<a class="l" name="773" href="#773">773</a>+		if (write(fd_out, buf, n) != n) {
+<a class="l" name="774" href="#774">774</a>+			fatal("Failed to copy fd");
+<a class="l" name="775" href="#775">775</a>+		}
+<a class="l" name="776" href="#776">776</a>+	}
+<a class="l" name="777" href="#777">777</a>+}
+<a class="l" name="778" href="#778">778</a>+
+<a class="l" name="779" href="#779">779</a>+static int _copy_file(const char *src, const char *dest, int mode) {
+<a class="hl" name="780" href="#780">780</a>+	int fd_in, fd_out;
+<a class="l" name="781" href="#781">781</a>+	gzFile gz_in, gz_out = NULL;
+<a class="l" name="782" href="#782">782</a>+	char buf[10240];
+<a class="l" name="783" href="#783">783</a>+	int n, ret;
+<a class="l" name="784" href="#784">784</a>+	char *tmp_name;
+<a class="l" name="785" href="#785">785</a>+	mode_t mask;
+<a class="l" name="786" href="#786">786</a>+	struct stat st;
+<a class="l" name="787" href="#787">787</a>+
+<a class="l" name="788" href="#788">788</a>+	x_asprintf(&amp;tmp_name, "%<a href="/source/s?path=s.XXXXXX&amp;project=swig">s.XXXXXX</a>", dest);
+<a class="l" name="789" href="#789">789</a>+
+<a class="hl" name="790" href="#790">790</a>+	if (getenv("CCACHE_NOCOMPRESS")) {
+<a class="l" name="791" href="#791">791</a>+		mode = COPY_UNCOMPRESSED;
+<a class="l" name="792" href="#792">792</a>+	}
+<a class="l" name="793" href="#793">793</a>+
+<a class="l" name="794" href="#794">794</a>+	/* open source file */
+<a class="l" name="795" href="#795">795</a>+	fd_in = open(src, O_RDONLY);
+<a class="l" name="796" href="#796">796</a>+	if (fd_in == -1) {
+<a class="l" name="797" href="#797">797</a>+		return -1;
+<a class="l" name="798" href="#798">798</a>+	}
+<a class="l" name="799" href="#799">799</a>+
+<a class="hl" name="800" href="#800">800</a>+	gz_in = gzdopen(fd_in, "rb");
+<a class="l" name="801" href="#801">801</a>+	if (!gz_in) {
+<a class="l" name="802" href="#802">802</a>+		close(fd_in);
+<a class="l" name="803" href="#803">803</a>+		return -1;
+<a class="l" name="804" href="#804">804</a>+	}
+<a class="l" name="805" href="#805">805</a>+
+<a class="l" name="806" href="#806">806</a>+	/* open destination file */
+<a class="l" name="807" href="#807">807</a>+	fd_out = mkstemp(tmp_name);
+<a class="l" name="808" href="#808">808</a>+	if (fd_out == -1) {
+<a class="l" name="809" href="#809">809</a>+		gzclose(gz_in);
+<a class="hl" name="810" href="#810">810</a>+		free(tmp_name);
+<a class="l" name="811" href="#811">811</a>+		return -1;
+<a class="l" name="812" href="#812">812</a>+	}
+<a class="l" name="813" href="#813">813</a>+
+<a class="l" name="814" href="#814">814</a>+	if (mode == COPY_TO_CACHE) {
+<a class="l" name="815" href="#815">815</a>+		/* The gzip file format occupies at least 20 bytes. So
+<a class="l" name="816" href="#816">816</a>+		   it will always occupy an entire filesystem block,
+<a class="l" name="817" href="#817">817</a>+		   even for empty files.
+<a class="l" name="818" href="#818">818</a>+		   Since most stderr files will be empty, we turn off
+<a class="l" name="819" href="#819">819</a>+		   compression in this case to save space.
+<a class="hl" name="820" href="#820">820</a>+		*/
+<a class="l" name="821" href="#821">821</a>+		if (fstat(fd_in, &amp;st) != 0) {
+<a class="l" name="822" href="#822">822</a>+			gzclose(gz_in);
+<a class="l" name="823" href="#823">823</a>+			close(fd_out);
+<a class="l" name="824" href="#824">824</a>+			free(tmp_name);
+<a class="l" name="825" href="#825">825</a>+			return -1;
+<a class="l" name="826" href="#826">826</a>+		}
+<a class="l" name="827" href="#827">827</a>+		if (file_size(&amp;st) == 0) {
+<a class="l" name="828" href="#828">828</a>+			mode = COPY_UNCOMPRESSED;
+<a class="l" name="829" href="#829">829</a>+		}
+<a class="hl" name="830" href="#830">830</a>+	}
+<a class="l" name="831" href="#831">831</a>+
+<a class="l" name="832" href="#832">832</a>+	if (mode == COPY_TO_CACHE) {
+<a class="l" name="833" href="#833">833</a>+		gz_out = gzdopen(dup(fd_out), "wb");
+<a class="l" name="834" href="#834">834</a>+		if (!gz_out) {
+<a class="l" name="835" href="#835">835</a>+			gzclose(gz_in);
+<a class="l" name="836" href="#836">836</a>+			close(fd_out);
+<a class="l" name="837" href="#837">837</a>+			free(tmp_name);
+<a class="l" name="838" href="#838">838</a>+			return -1;
+<a class="l" name="839" href="#839">839</a>+		}
+<a class="hl" name="840" href="#840">840</a>+	}
+<a class="l" name="841" href="#841">841</a>+
+<a class="l" name="842" href="#842">842</a>+	while ((n = gzread(gz_in, buf, sizeof(buf))) &gt; 0) {
+<a class="l" name="843" href="#843">843</a>+		if (mode == COPY_TO_CACHE) {
+<a class="l" name="844" href="#844">844</a>+			ret = gzwrite(gz_out, buf, n);
+<a class="l" name="845" href="#845">845</a>+		} else {
+<a class="l" name="846" href="#846">846</a>+			ret = write(fd_out, buf, n);
+<a class="l" name="847" href="#847">847</a>+		}
+<a class="l" name="848" href="#848">848</a>+		if (ret != n) {
+<a class="l" name="849" href="#849">849</a>+			gzclose(gz_in);
+<a class="hl" name="850" href="#850">850</a>+			if (gz_out) {
+<a class="l" name="851" href="#851">851</a>+				gzclose(gz_out);
+<a class="l" name="852" href="#852">852</a>+			}
+<a class="l" name="853" href="#853">853</a>+			close(fd_out);
+<a class="l" name="854" href="#854">854</a>+			unlink(tmp_name);
+<a class="l" name="855" href="#855">855</a>+			free(tmp_name);
+<a class="l" name="856" href="#856">856</a>+			return -1;
+<a class="l" name="857" href="#857">857</a>+		}
+<a class="l" name="858" href="#858">858</a>+	}
+<a class="l" name="859" href="#859">859</a>+
+<a class="hl" name="860" href="#860">860</a>+	gzclose(gz_in);
+<a class="l" name="861" href="#861">861</a>+	if (gz_out) {
+<a class="l" name="862" href="#862">862</a>+		gzclose(gz_out);
+<a class="l" name="863" href="#863">863</a>+	}
+<a class="l" name="864" href="#864">864</a>+
+<a class="l" name="865" href="#865">865</a>+	/* get perms right on the tmp file */
+<a class="l" name="866" href="#866">866</a>+	mask = umask(0);
+<a class="l" name="867" href="#867">867</a>+	fchmod(fd_out, 0666 &amp; ~mask);
+<a class="l" name="868" href="#868">868</a>+	umask(mask);
+<a class="l" name="869" href="#869">869</a>+
+<a class="hl" name="870" href="#870">870</a>+	/* the close can fail on NFS if out of space */
+<a class="l" name="871" href="#871">871</a>+	if (close(fd_out) == -1) {
+<a class="l" name="872" href="#872">872</a>+		unlink(tmp_name);
+<a class="l" name="873" href="#873">873</a>+		free(tmp_name);
+<a class="l" name="874" href="#874">874</a>+		return -1;
+<a class="l" name="875" href="#875">875</a>+	}
+<a class="l" name="876" href="#876">876</a>+
+<a class="l" name="877" href="#877">877</a>+	unlink(dest);
+<a class="l" name="878" href="#878">878</a>+
+<a class="l" name="879" href="#879">879</a>+	if (rename(tmp_name, dest) == -1) {
+<a class="hl" name="880" href="#880">880</a>+		unlink(tmp_name);
+<a class="l" name="881" href="#881">881</a>+		free(tmp_name);
+<a class="l" name="882" href="#882">882</a>+		return -1;
+<a class="l" name="883" href="#883">883</a>+	}
+<a class="l" name="884" href="#884">884</a>+
+<a class="l" name="885" href="#885">885</a>+	free(tmp_name);
+<a class="l" name="886" href="#886">886</a>+
+<a class="l" name="887" href="#887">887</a>+	return 0;
+<a class="l" name="888" href="#888">888</a>+}
+<a class="l" name="889" href="#889">889</a>+
+<a class="hl" name="890" href="#890">890</a>+/* move a file to the cache, compressing it */
+<a class="l" name="891" href="#891">891</a>+int move_file(const char *src, const char *dest) {
+<a class="l" name="892" href="#892">892</a>+	int ret;
+<a class="l" name="893" href="#893">893</a>+
+<a class="l" name="894" href="#894">894</a>+	ret = _copy_file(src, dest, COPY_TO_CACHE);
+<a class="l" name="895" href="#895">895</a>+	if (ret != -1) unlink(src);
+<a class="l" name="896" href="#896">896</a>+	return ret;
+<a class="l" name="897" href="#897">897</a>+}
+<a class="l" name="898" href="#898">898</a>+
+<a class="l" name="899" href="#899">899</a>+/* copy a file from the cache, decompressing it */
+<a class="hl" name="900" href="#900">900</a>+int copy_file(const char *src, const char *dest) {
+<a class="l" name="901" href="#901">901</a>+	return _copy_file(src, dest, COPY_FROM_CACHE);
+<a class="l" name="902" href="#902">902</a>+}
+<a class="l" name="903" href="#903">903</a>+#endif /* ENABLE_ZLIB */
+<a class="l" name="904" href="#904">904</a>+
+<a class="l" name="905" href="#905">905</a>+/* test if a file is zlib compressed */
+<a class="l" name="906" href="#906">906</a>+int test_if_compressed(const char *filename) {
+<a class="l" name="907" href="#907">907</a>+	FILE *f;
+<a class="l" name="908" href="#908">908</a>+
+<a class="l" name="909" href="#909">909</a>+	f = fopen(filename, "rb");
+<a class="hl" name="910" href="#910">910</a>+	if (!f) {
+<a class="l" name="911" href="#911">911</a>+		return 0;
+<a class="l" name="912" href="#912">912</a>+	}
+<a class="l" name="913" href="#913">913</a>+
+<a class="l" name="914" href="#914">914</a>+	/* test if file starts with 1F8B, which is zlib's
+<a class="l" name="915" href="#915">915</a>+	 * magic number */
+<a class="l" name="916" href="#916">916</a>+	if ((fgetc(f) != 0x1f) || (fgetc(f) != 0x8b)) {
+<a class="l" name="917" href="#917">917</a>+		fclose(f);
+<a class="l" name="918" href="#918">918</a>+		return 0;
+<a class="l" name="919" href="#919">919</a>+	}
+<a class="hl" name="920" href="#920">920</a>+	
+<a class="l" name="921" href="#921">921</a>+	fclose(f);
+<a class="l" name="922" href="#922">922</a>+	return 1;
+<a class="l" name="923" href="#923">923</a>+}
+<a class="l" name="924" href="#924">924</a> 
+<a class="l" name="925" href="#925">925</a> /* make sure a directory exists */
+<a class="l" name="926" href="#926">926</a> int create_dir(const char *dir)
+<a class="l" name="927" href="#927">927</a>Index: <a href="/source/s?path=manage-cache.sh&amp;project=swig">manage-cache.sh</a>
+<a class="l" name="928" href="#928">928</a>===================================================================
+<a class="l" name="929" href="#929">929</a>RCS file: <a href="/source/s?path=manage-cache.sh&amp;project=swig">manage-cache.sh</a>
+<a class="hl" name="930" href="#930">930</a>diff -N <a href="/source/s?path=manage-cache.sh&amp;project=swig">manage-cache.sh</a>
+<a class="l" name="931" href="#931">931</a>--- <a href="/source/s?path=manage-cache.sh&amp;project=swig">manage-cache.sh</a>	1 Jan 1970 00:00:00 -0000
+<a class="l" name="932" href="#932">932</a>+++ <a href="/source/s?path=manage-cache.sh-cache.sh&amp;project=swig">manage-cache.sh-cache.sh</a>	12 May 2004 19:22:20 -0000	1.1
+<a class="l" name="933" href="#933">933</a>@@ -0,0 +1,68 @@
+<a class="l" name="934" href="#934">934</a>+#!<a href="/source/s?path=/bin/bash&amp;project=swig">/bin/bash</a>
+<a class="l" name="935" href="#935">935</a>+#
+<a class="l" name="936" href="#936">936</a>+# 2004-05-12 lars@gustaebel.de
+<a class="l" name="937" href="#937">937</a>+
+<a class="l" name="938" href="#938">938</a>+CCACHE_DIR=${CCACHE_DIR:-$HOME/.ccache}
+<a class="l" name="939" href="#939">939</a>+
+<a class="hl" name="940" href="#940">940</a>+echo "Do you want to compress or decompress the ccache in $CCACHE_DIR?"
+<a class="l" name="941" href="#941">941</a>+read -p "Type c or d: " mode
+<a class="l" name="942" href="#942">942</a>+
+<a class="l" name="943" href="#943">943</a>+if [ "$mode" != "c" ] &amp;&amp; [ "$mode" != "d" ]
+<a class="l" name="944" href="#944">944</a>+then
+<a class="l" name="945" href="#945">945</a>+    exit 1
+<a class="l" name="946" href="#946">946</a>+fi
+<a class="l" name="947" href="#947">947</a>+
+<a class="l" name="948" href="#948">948</a>+is_compressed() {
+<a class="l" name="949" href="#949">949</a>+    test "$(head -c 2 $1)" = $'\x1f\x8b'
+<a class="hl" name="950" href="#950">950</a>+    return $?
+<a class="l" name="951" href="#951">951</a>+}
+<a class="l" name="952" href="#952">952</a>+
+<a class="l" name="953" href="#953">953</a>+tmpfile=$(mktemp)
+<a class="l" name="954" href="#954">954</a>+
+<a class="l" name="955" href="#955">955</a>+for dir in 0 1 2 3 4 5 6 7 8 9 a b c d e f
+<a class="l" name="956" href="#956">956</a>+do
+<a class="l" name="957" href="#957">957</a>+    # process ccache subdir
+<a class="l" name="958" href="#958">958</a>+    echo -n "$dir "
+<a class="l" name="959" href="#959">959</a>+
+<a class="hl" name="960" href="#960">960</a>+    # find cache files
+<a class="l" name="961" href="#961">961</a>+    find $CCACHE_DIR/$dir -type f -name '*-*' |
+<a class="l" name="962" href="#962">962</a>+    sort &gt; $tmpfile
+<a class="l" name="963" href="#963">963</a>+
+<a class="l" name="964" href="#964">964</a>+    oldsize=$(cat $CCACHE_DIR/$<a href="/source/s?path=dir/stats&amp;project=swig">dir/stats</a> | cut -d ' ' -f 13)
+<a class="l" name="965" href="#965">965</a>+    newsize=0
+<a class="l" name="966" href="#966">966</a>+
+<a class="l" name="967" href="#967">967</a>+    while read file
+<a class="l" name="968" href="#968">968</a>+    do
+<a class="l" name="969" href="#969">969</a>+        # empty files will be ignored since compressing
+<a class="hl" name="970" href="#970">970</a>+        # them makes them bigger
+<a class="l" name="971" href="#971">971</a>+        test $(stat -c %s $file) -eq 0 &amp;&amp; continue
+<a class="l" name="972" href="#972">972</a>+
+<a class="l" name="973" href="#973">973</a>+        if [ $mode = c ]
+<a class="l" name="974" href="#974">974</a>+        then
+<a class="l" name="975" href="#975">975</a>+            if ! is_compressed $file
+<a class="l" name="976" href="#976">976</a>+            then
+<a class="l" name="977" href="#977">977</a>+                gzip $file
+<a class="l" name="978" href="#978">978</a>+                mv $<a href="/source/s?path=file.gz&amp;project=swig">file.gz</a> $file
+<a class="l" name="979" href="#979">979</a>+            fi
+<a class="hl" name="980" href="#980">980</a>+        else
+<a class="l" name="981" href="#981">981</a>+            if is_compressed $file
+<a class="l" name="982" href="#982">982</a>+            then
+<a class="l" name="983" href="#983">983</a>+                mv $file $<a href="/source/s?path=file.gz&amp;project=swig">file.gz</a>
+<a class="l" name="984" href="#984">984</a>+                gzip -d $<a href="/source/s?path=file.gz&amp;project=swig">file.gz</a>
+<a class="l" name="985" href="#985">985</a>+            fi
+<a class="l" name="986" href="#986">986</a>+        fi
+<a class="l" name="987" href="#987">987</a>+
+<a class="l" name="988" href="#988">988</a>+        # calculate new size statistic for this subdir
+<a class="l" name="989" href="#989">989</a>+        let newsize=$newsize+$(stat -c "%B*%b" $file)/1024
+<a class="hl" name="990" href="#990">990</a>+    done &lt; $tmpfile
+<a class="l" name="991" href="#991">991</a>+
+<a class="l" name="992" href="#992">992</a>+    # update statistic file
+<a class="l" name="993" href="#993">993</a>+    read -a numbers &lt; $CCACHE_DIR/$<a href="/source/s?path=dir/stats&amp;project=swig">dir/stats</a>
+<a class="l" name="994" href="#994">994</a>+    numbers[12]=$newsize
+<a class="l" name="995" href="#995">995</a>+    echo "${numbers[*]} " &gt; $CCACHE_DIR/$<a href="/source/s?path=dir/stats&amp;project=swig">dir/stats</a>
+<a class="l" name="996" href="#996">996</a>+done
+<a class="l" name="997" href="#997">997</a>+echo
+<a class="l" name="998" href="#998">998</a>+
+<a class="l" name="999" href="#999">999</a>+# clean up
+<a class="hl" name="1000" href="#1000">1000</a>+rm $tmpfile
+<a class="l" name="1001" href="#1001">1001</a>+
+<a class="l" name="1002" href="#1002">1002</a>Index: <a href="/source/s?path=Makefile.in&amp;project=swig">Makefile.in</a>
+<a class="l" name="1003" href="#1003">1003</a>===================================================================
+<a class="l" name="1004" href="#1004">1004</a>RCS file: <a href="/source/s?path=/home/cvsroot/lars/ccache/Makefile.in&amp;project=swig">/home/cvsroot/lars/ccache/Makefile.in</a>,v
+<a class="l" name="1005" href="#1005">1005</a>retrieving revision 1.1.1.1.2.1
+<a class="l" name="1006" href="#1006">1006</a>retrieving revision 1.12
+<a class="l" name="1007" href="#1007">1007</a>diff -u -r1.1.1.1.2.1 -r1.12
+<a class="l" name="1008" href="#1008">1008</a>--- <a href="/source/s?path=Makefile.in&amp;project=swig">Makefile.in</a>	21 Nov 2004 17:55:36 -0000	1.1.1.1.2.1
+<a class="l" name="1009" href="#1009">1009</a>+++ <a href="/source/s?path=Makefile.in&amp;project=swig">Makefile.in</a>	21 Nov 2004 18:19:28 -0000	1.12
+<a class="hl" name="1010" href="#1010">1010</a>@@ -11,6 +11,7 @@
+<a class="l" name="1011" href="#1011">1011</a> CFLAGS=@CFLAGS@ -I.
+<a class="l" name="1012" href="#1012">1012</a> EXEEXT=@EXEEXT@
+<a class="l" name="1013" href="#1013">1013</a> 
+<a class="l" name="1014" href="#1014">1014</a>+LIBS= @LIBS@
+<a class="l" name="1015" href="#1015">1015</a> OBJS= <a href="/source/s?path=ccache.o&amp;project=swig">ccache.o</a> <a href="/source/s?path=mdfour.o&amp;project=swig">mdfour.o</a> <a href="/source/s?path=hash.o&amp;project=swig">hash.o</a> <a href="/source/s?path=execute.o&amp;project=swig">execute.o</a> <a href="/source/s?path=util.o&amp;project=swig">util.o</a> <a href="/source/s?path=args.o&amp;project=swig">args.o</a> <a href="/source/s?path=stats.o&amp;project=swig">stats.o</a> \
+<a class="l" name="1016" href="#1016">1016</a> 	<a href="/source/s?path=cleanup.o&amp;project=swig">cleanup.o</a> <a href="/source/s?path=snprintf.o&amp;project=swig">snprintf.o</a> <a href="/source/s?path=unify.o&amp;project=swig">unify.o</a>
+<a class="l" name="1017" href="#1017">1017</a> HEADERS = <a href="/source/s?path=ccache.h&amp;project=swig">ccache.h</a> <a href="/source/s?path=mdfour.h&amp;project=swig">mdfour.h</a>
+<a class="l" name="1018" href="#1018">1018</a>@@ -20,7 +21,7 @@
+<a class="l" name="1019" href="#1019">1019</a> docs: ccache.1 <a href="/source/s?path=web/ccache-man.html&amp;project=swig">web/ccache-man.html</a>
+<a class="hl" name="1020" href="#1020">1020</a> 
+<a class="l" name="1021" href="#1021">1021</a> ccache$(EXEEXT): $(OBJS) $(HEADERS)
+<a class="l" name="1022" href="#1022">1022</a>-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+<a class="l" name="1023" href="#1023">1023</a>+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS)
+<a class="l" name="1024" href="#1024">1024</a> 
+<a class="l" name="1025" href="#1025">1025</a> ccache.1: <a href="/source/s?path=ccache.yo&amp;project=swig">ccache.yo</a>
+<a class="l" name="1026" href="#1026">1026</a> 	-yodl2man -o ccache.1 <a href="/source/s?path=ccache.yo&amp;project=swig">ccache.yo</a>
+<a class="l" name="1027" href="#1027">1027</a></pre>
+</div>
+    <div id="footer">
+<p><a href="http://opengrok.github.com/OpenGrok/"
+ title="Served by OpenGrok"><span id="fti"></span></a></p>
+<p>
+    <a href="http://www.rrzn.uni-hannover.de"><span id="partner_rrzn"></span></a>
+    <a href="http://www.uni-hannover.de"><span id="partner_luh"></span></a>
+</p>
+<p><a href="http://www.metager.de/impressum.html">Impressum (legal notice)</a></p>
+    
+    </div>
+    </div>
+</div>
+</body>
+</html>
+

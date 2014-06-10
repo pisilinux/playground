@@ -1,0 +1,138 @@
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="robots" content="index,follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="0.11.1 (2b48ae40ea1b)" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<link rel="icon" href="/source/default/img/icon.png" type="image/png" />
+<link rel="stylesheet" type="text/css" media="all"
+    title="Default" href="/source/default/style.css" />
+<link rel="alternate stylesheet" type="text/css" media="all"
+    title="Paper White" href="/source/default/print.css" />
+<link rel="stylesheet" type="text/css" href="/source/default/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="/source/default/jquery.tooltip.css" />
+
+<link rel="search" href="/source/opensearch"
+    type="application/opensearchdescription+xml"
+    title="OpenGrok Search for current project(s)" />
+<script type="text/javascript" src="/source/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/source/jquery.tooltip-1.3.pack.js"></script>
+
+<script type="text/javascript" src="/source/utils.js"></script>
+<title>Cross Reference: /swig/CCache/debian/patches/05_nfs_fix.diff</title>
+</head>
+<body>
+<script type="text/javascript">/* <![CDATA[ */
+    document.hash = 'null';document.rev = '';document.link = '/source/xref/swig/CCache/debian/patches/05_nfs_fix.diff';document.annotate = false;
+    document.domReady.push(function() {domReadyMast();});
+    document.pageReady.push(function() { pageReadyMast();});
+/* ]]> */</script>
+<div id="page">
+    <div id="whole_header">
+        <form action="/source/search">
+<div id="header">
+<a href="/source/" class="cslogo">
+    <span style="color: #5a2c00; letter-spacing: -2px;">{</span><span 
+        style="color: #0f3368; vertical-align: middle;">Code</span>
+    <span style="color: #222222; vertical-align: middle;">Search</span>
+</a>
+<span id="partner">
+    <a href="http://www.metager.de"><span id="partner_metager"></span></a>
+</span>
+
+
+
+    <div id="pagetitle"><span id="filename"
+                    >Cross Reference: 05_nfs_fix.diff</span></div>
+</div>
+<div id="Masthead">
+    <tt><a href="/source/xref/">xref</a>: /<a href="/source/xref/swig/">swig</a>/<a href="/source/xref/swig/CCache/">CCache</a>/<a href="/source/xref/swig/CCache/debian/">debian</a>/<a href="/source/xref/swig/CCache/debian/patches/">patches</a>/<a href="/source/xref/swig/CCache/debian/patches/05_nfs_fix.diff">05_nfs_fix.diff</a></tt>
+</div>
+<div id="bar">
+    <ul>
+        <li><a href="/source/"><span id="home"></span>Home</a></li><li><a href="/source/history/swig/CCache/debian/patches/05_nfs_fix.diff"><span id="history"></span>History</a></li><li><a href="#" onclick="javascript:get_annotations(); return false;"
+            ><span class="annotate"></span>Annotate</a></li><li><a href="#" onclick="javascript:lntoggle();return false;"
+            title="Show or hide line numbers (might be slower if file has more than 10 000 lines)."><span id="line"></span>Line#</a></li><li><a
+            href="#" onclick="javascript:lsttoggle();return false;"
+            title="Show or hide symbol list."><span id="defbox"></span>Navigate</a></li><li><a href="/source/raw/swig/CCache/debian/patches/05_nfs_fix.diff"><span id="download"></span>Download</a></li><li><input type="text" id="search" name="q" class="q" />
+            <input type="submit" value="Search" class="submit" /></li><li><input type="checkbox" name="path" value="/swig/CCache/debian/patches/" /> only in <b>05_nfs_fix.diff</b></li>
+        
+    </ul>
+    <input type="hidden" name="project" value="swig" />
+</div>
+        </form>
+    </div>
+<div id="content">
+<script type="text/javascript">/* <![CDATA[ */
+document.pageReady.push(function() { pageReadyList();});
+/* ]]> */</script>
+
+<div id="src">
+    <pre><a class="l" name="1" href="#1">1</a>--- <a href="/source/s?path=ccache.1.orig&amp;project=swig">ccache.1.orig</a>	2007-05-20 17:30:57.000000000 +1200
+<a class="l" name="2" href="#2">2</a>+++ ccache.1	2007-05-20 17:31:27.000000000 +1200
+<a class="l" name="3" href="#3">3</a>@@ -367,12 +367,6 @@
+<a class="l" name="4" href="#4">4</a> .IP o 
+<a class="l" name="5" href="#5">5</a> ccache avoids a double call to cpp on a cache miss
+<a class="l" name="6" href="#6">6</a> .PP 
+<a class="l" name="7" href="#7">7</a><a href="/source/s?path=-.SH&amp;project=swig">-.SH</a> "BUGS" 
+<a class="l" name="8" href="#8">8</a><a href="/source/s?path=-.PP&amp;project=swig">-.PP</a> 
+<a class="l" name="9" href="#9">9</a>-When the cache is stored on an NFS filesystem, the filesystem must be
+<a class="hl" name="10" href="#10">10</a>-exported with the \fBno_subtree_check\fP option to make renames between
+<a class="l" name="11" href="#11">11</a>-directories reliable\&amp;.
+<a class="l" name="12" href="#12">12</a><a href="/source/s?path=-.PP&amp;project=swig">-.PP</a> 
+<a class="l" name="13" href="#13">13</a> .SH "CREDITS" 
+<a class="l" name="14" href="#14">14</a> .PP 
+<a class="l" name="15" href="#15">15</a> Thanks to the following people for their contributions to ccache
+<a class="l" name="16" href="#16">16</a>--- <a href="/source/s?path=util.c.patched&amp;project=swig">util.c.patched</a>	2007-05-20 18:19:11.000000000 +1200
+<a class="l" name="17" href="#17">17</a>+++ <a href="/source/s?path=util.c&amp;project=swig">util.c</a>	2007-05-20 18:20:55.000000000 +1200
+<a class="l" name="18" href="#18">18</a>@@ -58,9 +58,26 @@
+<a class="l" name="19" href="#19">19</a> 	}
+<a class="hl" name="20" href="#20">20</a> }
+<a class="l" name="21" href="#21">21</a> 
+<a class="l" name="22" href="#22">22</a>+static int safe_rename(const char* oldpath, const char* newpath)
+<a class="l" name="23" href="#23">23</a>+{
+<a class="l" name="24" href="#24">24</a>+    /* safe_rename is for creating entries in the cache.
+<a class="l" name="25" href="#25">25</a>+
+<a class="l" name="26" href="#26">26</a>+       Works like rename(), but it never overwrites an existing
+<a class="l" name="27" href="#27">27</a>+       cache entry. This avoids corruption on NFS. */
+<a class="l" name="28" href="#28">28</a>+    int status = link( oldpath, newpath );
+<a class="l" name="29" href="#29">29</a>+    if( status == 0 || errno == EEXIST )
+<a class="hl" name="30" href="#30">30</a>+    {
+<a class="l" name="31" href="#31">31</a>+	return unlink( oldpath );
+<a class="l" name="32" href="#32">32</a>+    }
+<a class="l" name="33" href="#33">33</a>+    else
+<a class="l" name="34" href="#34">34</a>+    {
+<a class="l" name="35" href="#35">35</a>+	return -1;
+<a class="l" name="36" href="#36">36</a>+    }
+<a class="l" name="37" href="#37">37</a>+}
+<a class="l" name="38" href="#38">38</a>+ 
+<a class="l" name="39" href="#39">39</a> /* move a file using rename */
+<a class="hl" name="40" href="#40">40</a> int move_file(const char *src, const char *dest) {
+<a class="l" name="41" href="#41">41</a>-	return rename(src, dest);
+<a class="l" name="42" href="#42">42</a>+	return safe_rename(src, dest);
+<a class="l" name="43" href="#43">43</a> }
+<a class="l" name="44" href="#44">44</a> 
+<a class="l" name="45" href="#45">45</a> /* copy a file - used when hard links don't work 
+<a class="l" name="46" href="#46">46</a></pre>
+</div>
+    <div id="footer">
+<p><a href="http://opengrok.github.com/OpenGrok/"
+ title="Served by OpenGrok"><span id="fti"></span></a></p>
+<p>
+    <a href="http://www.rrzn.uni-hannover.de"><span id="partner_rrzn"></span></a>
+    <a href="http://www.uni-hannover.de"><span id="partner_luh"></span></a>
+</p>
+<p><a href="http://www.metager.de/impressum.html">Impressum (legal notice)</a></p>
+    
+    </div>
+    </div>
+</div>
+</body>
+</html>
+
