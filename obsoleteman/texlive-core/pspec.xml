@@ -28,12 +28,12 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share/texmf-dist</Path>
-            <!--Path fileType="executable">/usr/bin</Path-->
+            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="data">/var/lib/texmf</Path>
-            <!--Path fileType="data">/etc/texmf</Path-->
+            <Path fileType="configure">/etc/texmf</Path>
         </Files>
         <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/var/lib/texmf/pardus/texlive-core.maps">arch/texlive-core.maps</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/var/lib/texmf/pisilinux/installedpacks/texlive-core.maps">arch/texlive-core.maps</AdditionalFile>
         </AdditionalFiles>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
