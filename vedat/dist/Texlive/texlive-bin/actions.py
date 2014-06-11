@@ -16,9 +16,20 @@ import os
 WorkDir = "."
 
 def setup():
+    shelltools.export("CFLAGS", "%s -fPIC" % get.CFLAGS())
+    shelltools.export("CXXFLAGS", "%s -fPIC" % get.CXXFLAGS())
     
+    #shelltools.system("tar -xzvf biber-linux_x86_64.tar.gz")
+    
+    for tar_file in shelltools.ls(get.workDIR()):
+        if tar_file.endswith("gz"):
+            shelltools.system("tar -xzvf %s" % tar_file)
+
+    shelltools.system('sed -i -e "s/SELFAUTOPARENT/TEXMFROOT/" source/texk/tex4htk/t4ht.c')
+    shelltools.system("sed -i -e 's|-lXp ||' source/texk/xdvik/configure")
     shelltools.makedirs("%s/source/build" % get.workDIR())
     shelltools.cd("%s/source/build" % get.workDIR())
+    
     shelltools.sym("../configure", "configure")
     autotools.configure("--prefix=/usr \
                          --sysconfdir=/etc \
@@ -69,13 +80,15 @@ def build():
 def install():
         
     #shelltools.chmod("%s/biber" % get.workDIR())
+    shelltools.system('sed -i -e "s|^prefix =.\+$|prefix = /usr|" -e "s|^mandir =.\+$|mandir = \usr/share/man|" -e "s|^datadir =.\+$|datadir = \/usr/share/texmf|" -e "s|^docdir =.\+$|docdir = \/usr/share/doc/xindy|"')
     shelltools.cd("%s/source/build/" % get.workDIR())
-    autotools.rawInstall("prefix=/usr DESTDIR=%s" % get.installDIR())
-
+    autotools.rawInstall("prefix=/usr texmf=%s/usr/share/texmf DESTDIR=%s" % (get.installDIR(), get.installDIR()))
+    pisitools.removeDir("/usr/{texmf,share/texmf-dist}")
     pisitools.dodir("/usr/share/tlpkg/TeXLive")
+    shelltools.move("%s/biber" % get.workDIR(), "%s/usr/bin" % get.installDIR()) 
     shelltools.move("%s/source/utils/biber/TeXLive/*.pm" % get.workDIR(), "%s/usr/share/tlpkg/TeXLive" % get.installDIR())
     
-    
+    pisitools.dodir("/usr/bin")
     # install texmf tree
     folders = ["/usr/share",
 	       "/etc/texmf/chktex",
