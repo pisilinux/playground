@@ -13,8 +13,8 @@ def setup():
     autotools.autoreconf("-vif")
     shelltools.system("./autogen.sh")
     autotools.configure("--disable-option-checking \
-                         --enable-gconf
-                         --disable-systemd
+                         --enable-gconf \
+                         --disable-systemd \
                          --enable-docbook-docs \
                          --with-console-kit=yes \
                          --enable-polkit \
