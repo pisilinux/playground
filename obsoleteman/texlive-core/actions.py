@@ -58,8 +58,7 @@ def install():
     #pisitools.dosym("/etc/texmf/web2c/texmf.cnf", "/usr/share/texmf-dist/web2c/texmf.cnf")
 
     # fix sandbox violations
-#    pisitools.dosed("texmf-dist/scripts/texlive/texlinks.sh", "src=\$2", r'src="%s/$2"' % get.installDIR())
-    pisitools.dosed("texmf-dist/scripts/texlive/texlinks.sh", '"\$symlinkdir', r'"%s/$ymlinkdir' % get.installDIR())
+    pisitools.dosed("texmf-dist/scripts/texlive/texlinks.sh", '"\$symlinkdir', r'"%s/$symlinkdir' % get.installDIR())
 
     # create symlinks
     pisitools.dodir("/usr/bin")
