@@ -12,7 +12,12 @@ from pisi.actionsapi import get
 def setup():
     autotools.autoreconf("-vif")
     shelltools.system("./autogen.sh")
-    autotools.configure()
+    autotools.configure("--prefix=/usr \
+                         --sysconfdir=/etc \
+                         --sbindir=/sbin \
+                         --datadir=/usr/share \
+                         --localstatedir=/var \
+                         --disable-schemas-compile")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
     

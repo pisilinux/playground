@@ -12,13 +12,18 @@ from pisi.actionsapi import get
 def setup():
     autotools.autoreconf("-vif")
     shelltools.system("./autogen.sh")
-    autotools.configure("--disable-option-checking \
+    autotools.configure("--prefix=/usr \
+                         --sbindir=/sbin \
+                         --localstatedir=/var \
+                         --datadir=/usr/share \
+                         --disable-option-checking \
                          --enable-gconf \
                          --disable-systemd \
                          --enable-docbook-docs \
                          --with-console-kit=yes \
                          --enable-polkit \
-                         --enable-pam")
+                         --enable-pam \
+                         --disable-schemas-compile")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 

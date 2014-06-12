@@ -18,6 +18,7 @@ def setup():
                          --with-mit-ext \
                          --with-xf86gamma-ext \
                          --enable-locking \
+                         --disable-schemas-compile \
                          --enable-docbook-docs \
                          --with-pam-prefix=/etc \
                          --with-console-kit=yes \

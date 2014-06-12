@@ -12,7 +12,8 @@ from pisi.actionsapi import get
 def setup():
     shelltools.system("sed -i -e '/AC_SUBST(DISABLE_DEPRECATED_CFLAGS)/d' configure.in")
     shelltools.system("./autogen.sh")
-    autotools.configure("--enable-gtk-doc \
+    autotools.configure("--disable-schemas-compile \
+                         --enable-gtk-doc \
                          --disable-more-warnings \
                          --disable-update-mimedb")
     
