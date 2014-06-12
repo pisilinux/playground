@@ -58,11 +58,11 @@ def install():
     #pisitools.dosym("/etc/texmf/web2c/texmf.cnf", "/usr/share/texmf-dist/web2c/texmf.cnf")
 
     # fix sandbox violations
-    pisitools.dosed("texmf-dist/scripts/texlive/texlinks.sh", '"\$symlinkdir', r'"%s/$symlinkdir' % get.installDIR())
+    #pisitools.dosed("texmf-dist/scripts/texlive/texlinks.sh", '"\$symlinkdir', r'"%s/$symlinkdir' % get.installDIR())
 
     # create symlinks
     pisitools.dodir("/usr/bin")
-    shelltools.system("texmf-dist/scripts/texlive/texlinks.sh -f %s/usr/share/texmf-dist/web2c/fmtutil.cnf %s/usr/bin" % ((get.installDIR(), ) * 2))
+    #shelltools.system("texmf-dist/scripts/texlive/texlinks.sh -f %s/usr/share/texmf-dist/web2c/fmtutil.cnf %s/usr/bin" % ((get.installDIR(), ) * 2))
 
     # remove upstream updmap.cfg: it contains too many maps
     pisitools.remove("/usr/share/texmf-dist/web2c/updmap.cfg")
