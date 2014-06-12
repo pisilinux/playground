@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mpv</Name>
+        <Homepage>http://mpv.io</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>mplayer2</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>mpv is a movie player based on MPlayer and mplayer2. </Summary>
+        <Description> It supports a wide variety of video file formats, audio and video codecs, and subtitle types.</Description>
+        <Archive sha1sum="86880f992a4418cfa8ce0b80b5305572a6105bfa" type="targz">https://github.com/mpv-player/mpv/archive/v0.3.10.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>wayland-cursor</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+            <Dependency>docutils</Dependency>
+            <Dependency>pkgconfig</Dependency>
+	    <Dependency>libass-devel</Dependency>
+            <Dependency>ncurses-devel</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+	    <Dependency>libXext-devel</Dependency>
+	    <Dependency>libXinerama-devel</Dependency>
+            <Dependency>libXv-devel</Dependency>
+            <Dependency>libXxf86vm-devel</Dependency>
+            <Dependency>alsa-lib-devel</Dependency>
+	    <Dependency>libcdio-devel</Dependency>
+	    <Dependency>libdvdread-devel</Dependency>
+            <Dependency>libdvdnav-devel</Dependency>
+            <Dependency>lua-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+	    <Dependency>pulseaudio</Dependency>
+            <Dependency>libXScrnSaver-devel</Dependency>
+            <Dependency>libva-devel</Dependency>
+            <Dependency>libvdpau-devel</Dependency>
+	    <Dependency>wayland-devel</Dependency>
+	    <Dependency>mesa</Dependency>
+            <Dependency>libxkbcommon-devel</Dependency>
+            <Dependency>libbluray-devel</Dependency>
+            <Dependency>ffmpeg-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>mpv</Name>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+            <Dependency>perl</Dependency>
+	    <Dependency>libass</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>libX11</Dependency>
+	    <Dependency>libXext</Dependency>
+	    <Dependency>libXinerama</Dependency>
+            <Dependency>libXv</Dependency>
+            <Dependency>libXxf86vm</Dependency>
+            <Dependency>alsa-lib</Dependency>
+	    <Dependency>libcdio</Dependency>
+	    <Dependency>libdvdread</Dependency>
+            <Dependency>libdvdnav</Dependency>
+            <Dependency>lua</Dependency>
+            <Dependency>libXScrnSaver</Dependency>
+            <Dependency>libva</Dependency>
+            <Dependency>libvdpau</Dependency>
+	    <Dependency>wayland</Dependency>
+            <Dependency>libxkbcommon</Dependency>
+            <Dependency>libbluray</Dependency>
+            <Dependency>ffmpeg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc/mpv</Path>
+            <Path fileType="config">/etc/mencoder.conf</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/applications</Path>
+            <Path fileType="info">/usr/share/icons</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/pixmaps</Path>
+        </Files>
+	<AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/mpv.desktop">mpv.desktop</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/mpv.png">mpv.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/mpv/input.conf">input.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/mpv/example.conf">example.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-06-12</Date>
+            <Version>0.3.10</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
