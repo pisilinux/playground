@@ -19,6 +19,7 @@ def setup():
                          --disable-option-checking \
                          --disable-rpath \
                          --enable-compile-warnings=yes \
+                         --disable-schemas-compile \
                          --enable-introspection=yes \
                          --with-console-kit=yes \
                          --with-session-tracking=polkit")
