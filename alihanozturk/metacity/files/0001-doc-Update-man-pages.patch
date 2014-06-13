@@ -1,0 +1,94 @@
+From 90dc810b9f501136c6f1cf94bc4f4c1f626412b9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
+Date: Thu, 16 May 2013 15:37:43 +0200
+Subject: [PATCH] doc: Update man pages
+
+Metacity is not the fastest moving project, however there were
+a view additions in the last nine years, document those.
+---
+ doc/man/metacity-message.1 | 13 +++++++++++--
+ doc/man/metacity.1         | 16 ++++++++++++++--
+ 2 files changed, 25 insertions(+), 4 deletions(-)
+
+diff --git a/doc/man/metacity-message.1 b/doc/man/metacity-message.1
+index 80041f5..13839f8 100644
+--- a/doc/man/metacity-message.1
++++ b/doc/man/metacity-message.1
+@@ -12,7 +12,7 @@
+ .\" > Right I know. any licenses that is DFSG-free, I'm ok with whatever,
+ .\" > since I have contributed that for Debian. so GPL is no problem for me.
+ .\" -----
+-.TH METACITY\-MESSAGE 1 "28 August 2002"
++.TH METACITY\-MESSAGE 1 "16 May 2013"
+ .\" Please adjust this date whenever revising the manpage.
+ .\"
+ .\" Some roff macros, for reference:
+@@ -29,7 +29,7 @@
+ METACITY\-MESSAGE \- a command to send a message to Metacity
+ .SH SYNOPSIS
+ .B METACITY\-MESSAGE
+-[restart|reload\-theme|enable\-keybindings|disable\-keybindings]
++[restart|reload\-theme|enable\-keybindings|disable\-keybindings|enable\-mouse\-button\-modifiers|disable\-mouse\-button\-modifiers|toggle\-verbose]
+ .SH DESCRIPTION
+ This manual page documents briefly the
+ .B metacity\-message\fP.
+@@ -53,6 +53,15 @@ Enable all of keybindings which is specified on gsettings database.
+ .TP
+ .B disable-keybindings
+ Disable all of keybindings which is specified on gsettings database.
++.TP
++.B enable-mouse-button-modifiers
++Enable move/resize operations while pressing a modifier key
++.TP
++.B disable-mouse-button-modifiers
++Disable move/resize operations while pressing a modifier key
++.TP
++.B toggle-verbose
++Turn debug messages on or off
+ .SH SEE ALSO
+ .BR metacity (1)
+ .SH AUTHOR
+diff --git a/doc/man/metacity.1 b/doc/man/metacity.1
+index 0a4c347..eaf75b5 100644
+--- a/doc/man/metacity.1
++++ b/doc/man/metacity.1
+@@ -2,7 +2,7 @@
+ .\" First parameter, NAME, should be all caps
+ .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+ .\" other parameters are allowed: see man(7), man(1)
+-.TH METACITY 1 "11 February 2006"
++.TH METACITY 1 "16 May 2013"
+ .\" Please adjust this date whenever revising the manpage.
+ .\"
+ .\" Some roff macros, for reference:
+@@ -19,7 +19,7 @@
+ METACITY \- minimal GTK2 Window Manager
+ .SH SYNOPSIS
+ .B metacity
+-[\-\-display=\fIDISPLAY\fP] [\-\-replace] [\-\-sm\-client\-id=\fIID\fP] [\-\-sm\-disable] [\-\-sm\-save\-file=\fIFILENAME\fP] [\-\-version] [\-\-help]
++[\-\-display=\fIDISPLAY\fP] [\-\-replace] [\-\-sm\-client\-id=\fIID\fP] [\-\-sm\-disable] [\-\-sm\-save\-file=\fIFILENAME\fP] [\-\-sync] [\-\-composite] [\-\-no-composite] [\-\-no-force-fullscreen] [\-\-version] [\-\-help]
+ .SH DESCRIPTION
+ This manual page documents briefly
+ .B metacity\fP.
+@@ -45,6 +45,18 @@ Disable the session management.
+ .B \-\-sm\-save\-file=FILENAME
+ Load a session from \fIFILENAME\fP.
+ .TP
++.B \-\-sync
++Make X calls synchronous
++.TP
++.B \-\-composite
++Turn compositing on
++.TP
++.B \-\-no-composite
++Turn compositing off
++.TP
++.B \-\-no-force-fullscreen
++Don't make fullscreen windows that are maximized and have no decorations
++.TP
+ .B \-\-version
+ Print the version number.
+ .TP
+-- 
+1.8.2.1
+

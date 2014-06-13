@@ -24,6 +24,20 @@
             <Patch level="1">fix_compositing_startup.patch</Patch>
             <Patch level="1">fix_force_quit.patch</Patch>
             <Patch level="1">fix_shadows.patch</Patch>
+            <Patch level="1">stop-spamming-xsession-errors.patch</Patch>
+            <Patch level="1">metacity-2.28-xioerror-unknown-display.patch</Patch>
+            <Patch level="1">metacity-2.28-empty-keybindings.patch</Patch>
+            <Patch level="1">fresh-tooltips.patch</Patch>
+            <Patch level="1">dnd-keynav.patch</Patch>
+            <Patch level="1">Stop-confusing-GDK-s-grab-tracking.patch</Patch>
+<!--             <Patch level="1">Exclude-the-current-application-from-no_focus_window.patch</Patch> -->
+            <Patch level="1">Dont-focus-ancestor-window-on-a-different-workspac.patch</Patch>
+<!--             <Patch level="1">Apply-new_windows_always_on_top-to-newly-raised-acti.patch</Patch> -->
+            <Patch level="1">Allow-breaking-out-from-maximization-during-mouse.patch</Patch>
+            <Patch level="1">Add-nofocuswindows-preference-to-list-windows-that.patch</Patch>
+            <Patch level="1">Add-a-newwindowsalwaysontop-preference.patch</Patch>
+            <Patch level="1">0001-doc-Update-man-pages.patch</Patch>
+            <Patch level="1">For-mouse-and-sloppy-focus-return-to-mouse-mode-on.patch</Patch>
         </Patches>
     </Source>
     
@@ -76,6 +90,7 @@
         <Summary>Developments for metacity</Summary>
         <RuntimeDependencies>
             <Dependency release="current">metacity</Dependency>
+            <Dependency>gtk2-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
