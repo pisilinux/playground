@@ -107,7 +107,6 @@
             <Dependency>clutter-gtk</Dependency>
             <Dependency>librsvg</Dependency>
             <Dependency>mesa-utils</Dependency>
-            <Dependency>metacity</Dependency>
             <Dependency>polkit-gnome</Dependency>
             <Dependency>python-pam</Dependency>
             <Dependency>python-inotify</Dependency>
@@ -125,21 +124,18 @@
             <Dependency>libgnomekbd</Dependency>
             <Dependency>gstreamer</Dependency>
             <Dependency>gst-plugins-base</Dependency>
+            <Dependency>gst-plugins-base-next</Dependency>
             <Dependency>caribou</Dependency>
             <Dependency>upower</Dependency>
             <Dependency>gksu</Dependency>
             <Dependency>gnome-settings-daemon</Dependency>
-            <Dependency>gnome-panel</Dependency>
             <Dependency>gnome-terminal</Dependency>
             <Dependency>libpeas</Dependency>
-            <Dependency>mutter</Dependency>
             <Dependency>desktop-file-utils</Dependency>
             <Dependency>xdg-utils</Dependency>
-            <Dependency>js185</Dependency>
             <Dependency>pixman</Dependency>
             <Dependency>bluez</Dependency>
             <Dependency>webkit-gtk2</Dependency>
-            <Dependency>ca-certificates</Dependency>
             <Dependency>pulseaudio</Dependency>
             <Dependency>at-spi2-atk</Dependency>
             <Dependency>at-spi2-core</Dependency>
@@ -154,6 +150,7 @@
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/polkit-cinnamon-authentication-agent-1.desktop">polkit-cinnamon-authentication-agent-1.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/xdg/autostart/polkit-cinnamon-authentication-agent-1.desktop">polkit-cinnamon-authentication-agent-1.desktop</AdditionalFile>
 <!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/cinnamon-pisilinux.gschema.override">cinnamon-pisilinux.gschema.override</AdditionalFile> -->
 <!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/themes/Adwaita/backgrounds/pisi.jpg">pisi.jpg</AdditionalFile> -->
         </AdditionalFiles>

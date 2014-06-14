@@ -47,9 +47,15 @@
             <Dependency>gsettings-desktop-schemas</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="data">/usr/share/</Path>
-            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib/girepository-1.0</Path>
+            <Path fileType="library">/usr/lib/libcinnamon-desktop.so</Path>
+            <Path fileType="library">/usr/lib/libcinnamon-desktop.so.4</Path>
+            <Path fileType="library">/usr/lib/libcinnamon-desktop.so.4.0.0</Path>
             <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="doc">/usr/share/libcinnamon-desktop</Path>
         </Files>
     </Package>
 
@@ -63,6 +69,7 @@
             <Dependency>startup-notification-devel</Dependency>
         </RuntimeDependencies>
         <Files>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
             <Path fileType="header">/usr/include/cinnamon-desktop/</Path>
         </Files>
