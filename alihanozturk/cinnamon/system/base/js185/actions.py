@@ -20,6 +20,3 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    
-    shelltools.sym("/usr/lib/libmozjs185.so.1.0.0", "/usr/lib/libmozjs185.so.1.0")
-    shelltools.sym("/usr/lib/libmozjs185.so.1.0", "/usr/lib/libmozjs185.so")

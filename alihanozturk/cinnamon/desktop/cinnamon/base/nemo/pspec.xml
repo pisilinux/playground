@@ -60,8 +60,10 @@
             <Dependency>gobject-introspection</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib</Path>
-            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="library">/usr/lib/libnemo-extension.so</Path>
+            <Path fileType="library">/usr/lib/libnemo-extension.so.1</Path>
+            <Path fileType="library">/usr/lib/libnemo-extension.so.1.4.0</Path>
+            <Path fileType="executable">/usr/libexec</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="doc">/usr/share/gtk-doc</Path>
             <Path fileType="data">/usr/share/man</Path>
@@ -80,6 +82,7 @@
             <Path fileType="data">/usr/share/mime</Path>
             <Path fileType="data">/usr/share/gtksourceview-2.0/</Path>
             <Path fileType="library">/usr/share/gtksourceview-3.0</Path>
+            <Path fileType="data">/usr/lib/girepository-1.0</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/nemo-fedora.gschema.override">nemo-fedora.gschema.override</AdditionalFile>
@@ -100,7 +103,6 @@
             <Path fileType="data">/usr/share/gir-1.0</Path>
             <Path fileType="header">/usr/include/nemo</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
-            <Path fileType="data">/usr/lib/girepository-1.0</Path>
         </Files>
     </Package>
     

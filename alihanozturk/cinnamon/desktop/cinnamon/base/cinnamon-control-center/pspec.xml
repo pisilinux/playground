@@ -108,7 +108,10 @@
             <Dependency>libmm-glib</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib/cinnamon-control-center-1/panels</Path>
+            <Path fileType="library">/usr/lib/libcinnamon-control-center.so</Path>
+            <Path fileType="library">/usr/lib/libcinnamon-control-center.so.1</Path>
+            <Path fileType="library">/usr/lib/libcinnamon-control-center.so.1.0.0</Path>
             <Path fileType="data">/usr/share/doc</Path>
             <Path fileType="executable">/usr/bin/</Path>
             <Path fileType="config">/etc/xdg/menus</Path>
@@ -130,7 +133,6 @@
             <Dependency release="current">cinnamon-control-center</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="data">/usr/share/gir-1.0</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
             <Path fileType="header">/usr/include/cinnamon-control-center-1/</Path>
         </Files>

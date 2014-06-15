@@ -49,7 +49,7 @@
             <Dependency>gobject-introspection-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">background.patch</Patch>
+<!--             <Patch level="1">background.patch</Patch> -->
 <!--             <Patch level="1">upower_calender_fix.patch</Patch> -->
             <Patch level="1">set_wheel.patch</Patch>
             <Patch level="1">autostart.patch</Patch>
@@ -62,11 +62,13 @@
         <Name>cinnamon</Name>
         <RuntimeDependencies>
             <Dependency>atk</Dependency>
+            <Dependency>gjs</Dependency>
             <Dependency>mesa</Dependency>
             <Dependency>gtk3</Dependency>
             <Dependency>cogl</Dependency>
-            <Dependency>cairo</Dependency>
             <Dependency>nemo</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>js185</Dependency>
             <Dependency>libXi</Dependency>
             <Dependency>gconf</Dependency>
             <Dependency>pango</Dependency>
@@ -104,6 +106,7 @@
             <Dependency>accountsservice</Dependency>
             <Dependency>clutter-gtk</Dependency>
             <Dependency>librsvg</Dependency>
+            <Dependency>mesa-utils</Dependency>
             <Dependency>polkit-gnome</Dependency>
             <Dependency>python-pam</Dependency>
             <Dependency>python-inotify</Dependency>
@@ -121,21 +124,18 @@
             <Dependency>libgnomekbd</Dependency>
             <Dependency>gstreamer</Dependency>
             <Dependency>gst-plugins-base</Dependency>
+            <Dependency>gst-plugins-base-next</Dependency>
             <Dependency>caribou</Dependency>
             <Dependency>upower</Dependency>
             <Dependency>gksu</Dependency>
             <Dependency>gnome-settings-daemon</Dependency>
-            <Dependency>gnome-panel</Dependency>
             <Dependency>gnome-terminal</Dependency>
             <Dependency>libpeas</Dependency>
-            <Dependency>mutter</Dependency>
             <Dependency>desktop-file-utils</Dependency>
             <Dependency>xdg-utils</Dependency>
-            <Dependency>js185</Dependency>
             <Dependency>pixman</Dependency>
             <Dependency>bluez</Dependency>
             <Dependency>webkit-gtk2</Dependency>
-            <Dependency>ca-certificates</Dependency>
             <Dependency>pulseaudio</Dependency>
             <Dependency>at-spi2-atk</Dependency>
             <Dependency>at-spi2-core</Dependency>
@@ -150,6 +150,7 @@
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/polkit-cinnamon-authentication-agent-1.desktop">polkit-cinnamon-authentication-agent-1.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/xdg/autostart/polkit-cinnamon-authentication-agent-1.desktop">polkit-cinnamon-authentication-agent-1.desktop</AdditionalFile>
 <!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/cinnamon-pisilinux.gschema.override">cinnamon-pisilinux.gschema.override</AdditionalFile> -->
 <!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/themes/Adwaita/backgrounds/pisi.jpg">pisi.jpg</AdditionalFile> -->
         </AdditionalFiles>

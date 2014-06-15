@@ -13,8 +13,10 @@ def setup():
     autotools.autoreconf("-fi")
     shelltools.echo("AC_CONFIG_MACRO_DIR([m4])", "configure.ac")
     shelltools.system("./autogen.sh")
-    autotools.configure("--localstatedir=/var \
+    autotools.configure("--prefix=/usr \
+                         --localstatedir=/var \
                          --disable-static \
+                         --disable-schemas-compile \
                          --enable-sm \
                          --enable-startup-notification")
     

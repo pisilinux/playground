@@ -10,7 +10,7 @@ def postInstall(fromVersion, fromRelease, toVersion, toRelease):
 
     updmap_file = "/etc/texmf/web2c/updmap.cfg"
     updmap_local_file = "/etc/texmf/web2c/updmap-local.cfg"
-    updmap_share_file = "/usr/share/texmf/web2c/updmap-hdr.cfg"
+    updmap_share_file = "/usr/share/texmf-dist/web2c/updmap-hdr.cfg"
     temp_file = "/tmp/updmap.cfg.temp"
 
     print "texlive: saving updmap.cfg as %s" % temp_file
@@ -24,7 +24,7 @@ def postInstall(fromVersion, fromRelease, toVersion, toRelease):
 
     # In bash: cat *.maps >> updmap.cfg
     # In python:ugly lines below ...
-    for map_file in glob.glob("/var/lib/texmf/pardus/*.maps"):
+    for map_file in glob.glob("/var/lib/texmf/pisilinux/installedpacks/*.maps"):
         print "texlive: adding %s to updmap.cfg" % map_file
         fin = open(map_file, "r")
         updmap_hdr = fin.read()

@@ -79,7 +79,11 @@
             <Dependency>gnome-doc-utils</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib/muffin/plugins</Path>
+            <Path fileType="library">/usr/lib/muffin/Meta-Muffin.0.typelib</Path>
+            <Path fileType="library">/usr/lib/libmuffin.so</Path>
+            <Path fileType="library">/usr/lib/libmuffin.so.0</Path>
+            <Path fileType="library">/usr/lib/libmuffin.so.0.0.0</Path>
             <Path fileType="library">/usr/libexec</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="doc">/usr/share/doc</Path>
@@ -104,6 +108,7 @@
         <Files>
             <Path fileType="header">/usr/include</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="library">/usr/lib/muffin/Meta-Muffin.0.gir</Path>
         </Files>
     </Package>
 
