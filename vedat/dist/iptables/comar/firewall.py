@@ -247,7 +247,7 @@ def execRule(rule):
         Executes IPTables rule
     """
     rule = rule.split()
-    rule.insert(0, "/sbin/iptables")
+    rule.insert(0, "/usr/sbin/iptables")
     subprocess.call(rule)
 
 def createConnection(package, device):

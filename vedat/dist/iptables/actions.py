@@ -10,13 +10,12 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.configure("--sbindir=/sbin \
-                         --libexecdir=/usr/lib \
-                         --without-kernel \
+    autotools.configure("--prefix=/usr \
+                         --sbindir=/usr/sbin \
+                         --libexecdir=/usr/libexec \
                          --enable-devel \
                          --enable-libipq \
-                         --enable-shared \
-                         --enable-static")
+                         --enable-shared ")
 
 def build():
     autotools.make("V=1")
@@ -30,3 +29,4 @@ def install():
 
     pisitools.dodir("/var/lib/iptables")
     pisitools.dodir("/etc/iptables")
+    
