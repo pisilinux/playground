@@ -10,18 +10,16 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.configure("--prefix=/usr \
-                         --sbindir=/usr/sbin \
-                         --libexecdir=/usr/libexec \
+    autotools.configure("--sbindir=/sbin \
+                         --libexecdir=/usr/lib \
                          --without-kernel \
                          --enable-devel \
                          --enable-libipq \
-                         --enable-dependency-tracking \
-                         --with-pkgconfigdir=/usr/lib/pkgconfig ")
+                         --enable-shared \
+                         --enable-static")
 
 def build():
-    #autotools.make("V=1")
-    autotools.make()
+    autotools.make("V=1")
 
 def install():
     autotools.rawInstall('DESTDIR="%s"' % get.installDIR())

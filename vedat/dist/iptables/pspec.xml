@@ -12,10 +12,9 @@
         <IsA>app:console</IsA>
         <Summary>Firewall, NAT and packet mangling tools</Summary>
         <Description>Contains iptables firewall, NAT and packet mangling tools.</Description>
-        <Archive sha1sum="3ae6ca42802908c231ee07eacea73f1ac5e05196" type="tarbz2">ftp://ftp.netfilter.org/pub/iptables/snapshot/iptables-20140615.tar.bz2</Archive>
+        <Archive sha1sum="85d4160537546a23a7e42bc26dd7ee62a0ede4c8" type="tarbz2">ftp://ftp.netfilter.org/pub/iptables/iptables-1.4.21.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>libnfnetlink-devel</Dependency>
-	    <Dependency>libnetfilter_conntrack-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- these got in
@@ -30,11 +29,10 @@
         <Name>iptables</Name>
         <RuntimeDependencies>
             <Dependency>libnfnetlink</Dependency>
-	    <Dependency>libnetfilter_conntrack</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/sbin</Path>
             <Path fileType="library">/lib</Path>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="man">/usr/share/man</Path>
@@ -63,13 +61,6 @@
     </Package>
 
     <History>
-        <Update release="4">
-            <Date>2013-11-23</Date>
-            <Version>20140615</Version>
-            <Comment>Version bump</Comment>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
-        </Update>  
 	<Update release="3">
             <Date>2013-11-23</Date>
             <Version>1.4.21</Version>
