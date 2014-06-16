@@ -14,6 +14,7 @@ def setup():
                          --sbindir=/usr/sbin \
                          --libexecdir=/usr/libexec \
                          --enable-devel \
+                         --without-kernel \
                          --enable-libipq \
                          --enable-shared ")
 
