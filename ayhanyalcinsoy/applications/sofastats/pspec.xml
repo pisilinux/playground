@@ -12,7 +12,7 @@
         <IsA>app:gui</IsA>
         <Summary>SOFA is a statistics, analysis, and reporting program.</Summary>
         <Description>SOFA - Statistics Open For All The user-friendly, open-source statistics, analysis, and reporting package.</Description>
-        <Archive sha1sum="0b0c3d83019d796c279005ef55c4832ca6f0e4ba" type="targz">http://sourceforge.net/projects/sofastatistics/files/sofastatistics/1.3.2/sofastats-1.3.2.tar.gz</Archive>
+        <Archive sha1sum="d347741e88137687f0c8210a807b506dd4f906f7" type="targz">http://skylink.dl.sourceforge.net/project/sofastatistics/sofastatistics/1.4.3/sofastats-1.4.3.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python-devel</Dependency>
             <Dependency>wxPython-devel</Dependency>
@@ -33,11 +33,16 @@
 	    <Dependency>python-webkit-gtk</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="library">/usr/lib</Path>
-            <Path fileType="man">/usr/share/man</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
-        </Files>
+           <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/sofastats/</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+	   </Files>
+	<AdditionalFiles>
+<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/sofa.ico">sofa.ico</AdditionalFile> -->
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/sofa.png">sofa.png</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/sofa.desktop">sofa.desktop</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <Package>
@@ -55,7 +60,7 @@
     <History>
         <Update release="1">
             <Date>2013-03-18</Date>
-            <Version>1.3.2</Version>
+            <Version>1.4.3</Version>
             <Comment>First release</Comment>
             <Name>Ayhan YALÇINSOY</Name>
             <Email>ayhanyalcinsoyn@pisilinux.org</Email>
