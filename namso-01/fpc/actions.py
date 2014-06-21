@@ -13,12 +13,23 @@ NoStrip = ["/usr/share/fpcsrc"]
 
 WorkDir = "."
 
+fpcdir = "/usr/lib/fpc/2.64"
+docdir = "/usr/share/doc/fpc-2.64"
+
+builddocdir = "%s/usr/share/doc/fpc-2.64" % get.workDIR()
+buildlibdir = "%s/usr/lib" % get.workDIR()
+buildmandir = "%s/usr/share" % get.workDIR()
+buildbindir = "%s/usr/bin" % get.workDIR()
+buildexamplesdir = "%s/usr/share/doc/fpc-2.64/examples" % get.workDIR()
+
 version = get.srcVERSION().split("_")[0]
 sourceDir = "%s/%s" % (get.workDIR(), get.srcDIR())
 ppc = "ppcx64" if get.ARCH() == "x86_64" else "ppc386"
 
-shelltools.export("GDBLIBDIR", "/var/pisi/fpc-2.6.4-4/work/gdb-7.5.1/gdb/")
-shelltools.export("LIBGDBFILE", "/var/pisi/fpc-2.6.4-4/work/gdb-7.5.1/gdb/libgdb.a")
+shelltools.export("GDBLIBDIR", "%s/gdb-7.5.1/gdb/" % get.workDIR())
+shelltools.export("LIBGDBFILE", "%s/gdb-7.5.1/gdb/libgdb.a" % get.workDIR())
+
+INSTALLOPS = ""
 
 def setup():
     shelltools.cd("gdb-7.5.1")
@@ -35,20 +46,43 @@ def build():
     autotools.make("-C gdb libgdb.a")
     shelltools.system("cp libdecnumber/libdecnumber.a gdb/")
     shelltools.cd("..")
-    shelltools.cd("fpcbuild-2.6.4")
-    shelltools.cd("fpcsrc/compiler")
+    shelltools.cd("fpcbuild-2.6.4/fpcsrc")
+    shelltools.cd("compiler")
+    shelltools.system("fpcmake -Tall")
+    shelltools.cd("..")
+    shelltools.cd("ide")
+    shelltools.system("fpcmake -Tall")
+    shelltools.cd("..")
+    shelltools.cd("packages")
+    shelltools.system("fpcmake -Tall")
+    shelltools.cd("..")
+    shelltools.cd("rtl")
+    shelltools.system("fpcmake -Tall")
+    shelltools.cd("..")
+    shelltools.cd("utils")
     shelltools.system("fpcmake -Tall")
     shelltools.cd("..")
     shelltools.cd("..")
-    autotools.make("NOGDB=1")
+    shelltools.cd("fpcdocs")
+    shelltools.system("fpcmake -Tall")
+    shelltools.cd("..")
+    autotools.make("build NOGDB=1")
 
 def install():    
     shelltools.cd("fpcbuild-2.6.4")
     
     pisitools.insinto("/etc/", "install/amiga/fpc.cfg")
     pisitools.insinto("/etc/", "fpcsrc/utils/fpcmkcfg/fppkg.cfg")
+        
+    pisitools.insinto("/usr/lib/fpc/2.6.4/msg/", "fpcsrc/compiler/msg/*.msg")
+    pisitools.doman("install/man/man1/*")
+    pisitools.doman("install/man/man5/*")
     
-    autotools.rawInstall("PREFIX=%s/usr -C install -j1", get.installDIR())
+    #for files in ["fpcsrc/utils/bin2obj", "fpcsrc/utils/data2inc", "fpcsrc/utils/delp", "fpcsrc/utils/grab_vcsa", "fpcsrc/utils/postw32", "fpcsrc/utils/ppdep", "fpcsrc/utils/ptop", "fpcsrc/utils/rmcvsdir", "fpcsrc/utils/rstconv" \
+                 #"fpcsrc/compiler/ppcx64", "", "", "", "", "", "", "", ""]
+        #pisitools.dobin("files")
+    
+    #autotools.rawInstall("PREFIX=%s/usr -C install -j1", get.installDIR())
     
     #pisitools.dosym("../lib/fpc/%s/%s" % (version, ppc), "/usr/bin/%s" % ppc)
     
