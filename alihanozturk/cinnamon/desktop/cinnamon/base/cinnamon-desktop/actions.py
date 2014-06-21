@@ -10,8 +10,8 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-vif")
     shelltools.system("./autogen.sh")
+    autotools.autoreconf("-vif")
     autotools.configure("--prefix=/usr \
                          --sysconfdir=/etc \
                          --sbindir=/sbin \

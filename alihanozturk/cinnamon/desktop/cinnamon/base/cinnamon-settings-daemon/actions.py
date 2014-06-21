@@ -10,10 +10,10 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-vif")
     shelltools.system("sed -i -e 's@{ACLOCAL_FLAGS}@{ACLOCAL_FLAGS} -I m4@g' Makefile.am")
     shelltools.echo("AC_CONFIG_MACRO_DIR([m4])", "configure.ac")
     shelltools.system("./autogen.sh")
+    autotools.autoreconf("-vif")
     autotools.configure("--sbindir=/sbin \
                          --disable-static \
                          --disable-schemas-compile \
@@ -21,7 +21,7 @@ def setup():
                          --disable-systemd \
                          --enable-profiling \
                          --with-console-kit=yes \
-                         --with-dbus-sys=no \
+                         --without-dbus-sys \
                          --with-dbus-services=/usr/share/dbus-1/services")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")

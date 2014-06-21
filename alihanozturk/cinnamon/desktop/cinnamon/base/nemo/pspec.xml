@@ -82,13 +82,12 @@
             <Path fileType="data">/usr/share/mime</Path>
             <Path fileType="data">/usr/share/gtksourceview-2.0/</Path>
             <Path fileType="library">/usr/share/gtksourceview-3.0</Path>
-            <Path fileType="data">/usr/lib/girepository-1.0</Path>
         </Files>
         <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/nemo-fedora.gschema.override">nemo-fedora.gschema.override</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/nemo/themes/Adwaita-Nemo/gtk-3.0/apps/nemo.css">nemo.css</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/nemo/themes/Adwaita-Nemo/gtk-3.0/gtk-dark.css">gtk-dark.css</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/nemo/themes/Adwaita-Nemo/gtk-3.0/gtk.css">gtk.css</AdditionalFile>
+<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/nemo-fedora.gschema.override">nemo-fedora.gschema.override</AdditionalFile> -->
+<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/nemo/themes/Adwaita-Nemo/gtk-3.0/apps/nemo.css">nemo.css</AdditionalFile> -->
+<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/nemo/themes/Adwaita-Nemo/gtk-3.0/gtk-dark.css">gtk-dark.css</AdditionalFile> -->
+<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/nemo/themes/Adwaita-Nemo/gtk-3.0/gtk.css">gtk.css</AdditionalFile> -->
         </AdditionalFiles>
     </Package>
 
@@ -100,6 +99,7 @@
             <Dependency>gtk3-devel</Dependency>
         </RuntimeDependencies>
         <Files>
+            <Path fileType="data">/usr/lib/girepository-1.0</Path>
             <Path fileType="data">/usr/share/gir-1.0</Path>
             <Path fileType="header">/usr/include/nemo</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>

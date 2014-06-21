@@ -10,8 +10,8 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-vfi")
     shelltools.system("./autogen.sh")
+    autotools.autoreconf("-vfi")
     autotools.configure("--disable-static \
                          --enable-documentation \
                          --disable-systemd \
