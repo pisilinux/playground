@@ -17,17 +17,25 @@ version = get.srcVERSION().split("_")[0]
 sourceDir = "%s/%s" % (get.workDIR(), get.srcDIR())
 ppc = "ppcx64" if get.ARCH() == "x86_64" else "ppc386"
 
+shelltools.export("GDBLIBDIR", "/var/pisi/fpc-2.6.4-4/work/gdb-7.5.1/gdb/")
+shelltools.export("LIBGDBFILE", "/var/pisi/fpc-2.6.4-4/work/gdb-7.5.1/gdb/libgdb.a")
 
+def setup():
+    shelltools.cd("gdb-7.5.1")
+    autotools.configure("--prefix=/usr \
+                         --disable-nls \
+                         --without-python \
+                         --disable-werror \
+                         --disable-tui")
+    
+    
 def build():
     shelltools.cd("gdb-7.5.1")
-    autotools.configure("--prefix=/usr --disable-nls --without-python --disable-werror --disable-tui")
     autotools.make()
     autotools.make("-C gdb libgdb.a")
     shelltools.system("cp libdecnumber/libdecnumber.a gdb/")
     shelltools.cd("..")
     shelltools.cd("fpcbuild-2.6.4")
-    shelltools.export("GDBLIBDIR", "/var/pisi/fpc-2.6.4-4/work/gdb-7.5.1/gdb/")
-    shelltools.export("LIBGDBFILE", "/var/pisi/fpc-2.6.4-4/work/gdb-7.5.1/gdb/libgdb.a")
     shelltools.cd("fpcsrc/compiler")
     shelltools.system("fpcmake -Tall")
     shelltools.cd("..")
@@ -40,7 +48,7 @@ def install():
     pisitools.insinto("/etc/", "install/amiga/fpc.cfg")
     pisitools.insinto("/etc/", "fpcsrc/utils/fpcmkcfg/fppkg.cfg")
     
-    autotools.rawInstall("INSTALL_PREFIX=%s/usr", get.installDIR())
+    autotools.rawInstall("PREFIX=%s/usr -C install -j1", get.installDIR())
     
     #pisitools.dosym("../lib/fpc/%s/%s" % (version, ppc), "/usr/bin/%s" % ppc)
     
