@@ -8,7 +8,9 @@ from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 
 def setup():
-    autotools.configure()
+    autotools.configure("--prefix=/usr \
+                --sysconfdir=/etc \
+                --without-libreadline-prefix")
 
 def build():
     autotools.make()

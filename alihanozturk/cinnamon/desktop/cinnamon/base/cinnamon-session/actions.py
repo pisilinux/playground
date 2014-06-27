@@ -10,13 +10,12 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-vif")
     shelltools.system("./autogen.sh")
+    autotools.autoreconf("-vif")
     autotools.configure("--prefix=/usr \
                          --sbindir=/sbin \
                          --localstatedir=/var \
                          --datadir=/usr/share \
-                         --disable-option-checking \
                          --enable-gconf \
                          --disable-systemd \
                          --enable-docbook-docs \

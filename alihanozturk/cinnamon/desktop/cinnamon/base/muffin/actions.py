@@ -10,9 +10,9 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-fi")
     shelltools.echo("AC_CONFIG_MACRO_DIR([m4])", "configure.ac")
     shelltools.system("./autogen.sh")
+    autotools.autoreconf("-fi")
     autotools.configure("--prefix=/usr \
                          --localstatedir=/var \
                          --disable-static \
@@ -27,5 +27,7 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    pisitools.insinto("/usr/share/gir-1.0", "usr/lib/muffin/*.gir")
+    pisitools.insinto("/usr/lib/girepository-1.0", "usr/lib/muffin/*.typelib")
 
     pisitools.dodoc("COPYING", "NEWS", "README")
