@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libseccomp</Name>
+        <Homepage>http://libseccomp.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>The libseccomp library provides and easy to use, platform independent, interface to the Linux Kernel's syscall filtering mechanism: seccomp. </Summary>
+        <Description>The libseccomp API is designed to abstract away the underlying BPF based syscall filter language and present a more conventional function-call based filtering interface that should be familiar to, and easily adopted by application developers.</Description>
+        <Archive sha1sum="cc135ab6c95723cfbba034feb9630446de475341" type="targz">http://distfiles.exherbo.org/distfiles/libseccomp-2.1.1.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libseccomp</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>libseccomp-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>libseccomp</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+     </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-06-28</Date>
+            <Version>2.1.1</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
