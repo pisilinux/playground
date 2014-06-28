@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-SVN-Core</Name>
+        <Homepage>http://search.cpan.org/~mschwern/Alien-SVN-v1.7.3.1</Homepage>
+        <Packager>
+            <Name>Aydın Demirel</Name>
+            <Email>aydin.demirel@pisilinux.org</Email>
+        </Packager>
+        <License>ASF</License>
+        <IsA>library</IsA>
+        <Summary>Core module of the subversion perl bindings.</Summary>
+        <Description>SVN::Core implements higher level functions of fundamental subversion functions.</Description>
+        <Archive sha1sum="d8168f2777b7159ae219c185277f8cd7ca58e7ee" type="targz">mirrors://cpan/authors/id/M/MS/MSCHWERN/Alien-SVN-v1.7.3.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>subversion</Dependency>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-SVN-Core</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/perl</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2011-11-27</Date>
+            <Version>1.7.3</Version>
+            <Comment>First release</Comment>
+            <Name>Aydın Demirel</Name>
+            <Email>aydin.demirel@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
