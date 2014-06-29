@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>handbrake</Name>
+        <Homepage>http://handbrake.fr/</Homepage>
+        <Packager>
+            <Name>Aydın Demirel</Name>
+            <Email>aydin.demirel@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>The open source video transcoder</Summary>
+        <Description>HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs.</Description>
+        <Archive sha1sum="64414bdc425115545f7dd735c7d1e30b8b005056" type="tarbz2">http://downloads.sourceforge.net/project/handbrake/0.9.9/HandBrake-0.9.9.tar.bz2</Archive>
+        <BuildDependencies>
+            <!--<Dependency>libpcap-devel</Dependency>-->
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>handbrake</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/local/share</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-01-12</Date>
+            <Version>0.9.9</Version>
+            <Comment>First release</Comment>
+            <Name>Aydın Demirel</Name>
+            <Email>aydin.demirel@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libnih</Name>
+        <Homepage>https://launchpad.net/libnih</Homepage>
+        <Packager>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Small library for C application development</Summary>
+        <Description>small library for C application development containing functions that, despite its name, are not implemented elsewhere in the standard library set</Description>
+        <Archive sha1sum="db1f3e46a47f8a58f8179ca56f304d1550f41eb0" type="targz">https://launchpad.net/libnih/1.0/1.0.3/+download/libnih-1.0.3.tar.gz</Archive>
+        <BuildDependencies>
+            <!--<Dependency versionFrom=""></Dependency>
+	  <Dependency></Dependency>-->
+        </BuildDependencies>
+        <Patches>
+            <!--
+            <Patch level="1"></Patch>
+            -->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libnih</Name>
+        <RuntimeDependencies>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>libnih-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>libnih</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/share/aclocal/libnih.m4</Path>
+        </Files>
+     </Package>
+
+
+    <History>
+        <Update release="1">
+            <Date>2014-06-28</Date>
+            <Version>1.0.3</Version>
+            <Comment>First release</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
