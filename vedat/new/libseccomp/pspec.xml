@@ -20,10 +20,19 @@
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
-            <Path fileType="header">/usr/include</Path>
             <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
+    <Package>
+        <Name>libseccomp-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>libseccomp</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+     </Package>
 
     <History>
         <Update release="1">
