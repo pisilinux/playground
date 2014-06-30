@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cgmanager</Name>
+        <Homepage>https://github.com/cgmanager/cgmanager</Homepage>
+        <Packager>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Control Group manager</Summary>
+        <Description>Another daemon for managing control groups</Description>
+        <Archive sha1sum="bd71f20846d4b892a40b828456d25bedce200818" type="targz">https://github.com/cgmanager/cgmanager/archive/v0.25.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libnih-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>cgmanager</Name>
+        <RuntimeDependencies>
+            <Dependency>libnih</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+	    <Path fileType="man">/usr/share/cgmanager</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>cgmanager-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>cgmanager</Dependency>
+            <Dependency>libnih-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+     </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-06-28</Date>
+            <Version>0.25</Version>
+            <Comment>First release</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
