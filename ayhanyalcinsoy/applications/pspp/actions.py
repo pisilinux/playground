@@ -8,11 +8,11 @@ from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 
 def setup():
+    pisitools.dosed("src/ui/gui/gen-dot-desktop.sh", "Math;", "")
     autotools.configure("--prefix=/usr \
                 --sysconfdir=/etc \
                 --without-libreadline-prefix")
-    pisitools.dosed("/usr/share/applications/pspp.desktop", "Categories=GTK;Education;Science;Math;", "Categories=Education;Science;")
-
+    
 def build():
     autotools.make()
 
