@@ -11,6 +11,7 @@ def setup():
     autotools.configure("--prefix=/usr \
                 --sysconfdir=/etc \
                 --without-libreadline-prefix")
+    pisitools.dosed("/usr/share/applications/pspp.desktop", "Categories=GTK;Education;Science;Math;", "Categories=Education;Science;")
 
 def build():
     autotools.make()
