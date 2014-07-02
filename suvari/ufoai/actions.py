@@ -28,7 +28,6 @@ def setup():
                        --enable-cgame-campaign \
                        --enable-cgame-multiplayer \
                        --enable-cgame-skirmish \
-                       --enable-cgame-staticcampaign \
                        --enable-game \
                        --enable-memory \
                        --enable-testall \
