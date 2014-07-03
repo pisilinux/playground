@@ -10,15 +10,14 @@ from pisi.actionsapi import get
 from pisi.actionsapi import shelltools
 
 def build():
-    scons.make('CC="%s" \
-                CCFLAGS="%s" \
-                LINK="%s" \
-                LINKFLAGS="%s" \
-                shared=1 '
-                % (get.CC(), get.CFLAGS(), get.CC(), get.LDFLAGS()))
+    scons.make("-j1 fife-shared fife-python \
+                --lib-dir=/usr/lib \
+                --prefix=/usr \
+                --python-prefix=/usr/lib/python2.7/site-packages/")
 
 def install():
     scons.install()
 
     pisitools.dohtml("doc/*")
     pisitools.dodoc("COPYRIGHT", "README*")
+

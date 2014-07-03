@@ -11,9 +11,9 @@
         <IsA>library</IsA>
         <Summary>Flexible Isometric Free Engine is a cross platform game creation framework</Summary>
         <Description>Flexible Isometric Free Engine is a cross platform game creation framework</Description>
-        <Archive sha1sum="9ca344b7af269fd55af91c68ab30777ec897b6c4" type="targz">http://downloads.sourceforge.net/project/fife/active/src/fife_0.3.5.tar.gz </Archive>
+        <Archive sha1sum="9ca344b7af269fd55af91c68ab30777ec897b6c4" type="targz">http://downloads.sourceforge.net/project/fife/active/src/fife_0.3.5.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>guichan</Dependency>
+            <Dependency>libguichan-devel</Dependency>
             <Dependency>mesa-devel</Dependency>
             <Dependency>libvorbis-devel</Dependency>
             <Dependency>libXcursor-devel</Dependency>
@@ -24,6 +24,10 @@
             <Dependency>sdl-ttf-devel</Dependency>
             <Dependency>tinyxml-devel</Dependency>
             <Dependency>scons</Dependency>
+	    <Dependency>libpng-devel</Dependency>
+	    <Dependency>libglade-devel</Dependency>
+	    <Dependency>libsdl2-devel</Dependency>
+	    <Dependency>swig</Dependency>
         </BuildDependencies>
     </Source>
     <Package>
@@ -40,7 +44,7 @@
             <Path fileType="man">/usr/share/man</Path>
         </Files>
         <RuntimeDependencies>
-            <Dependency>guichan</Dependency>
+            <Dependency>libguichan</Dependency>
             <Dependency>mesa</Dependency>
             <Dependency>libvorbis</Dependency>
             <Dependency>libXcursor</Dependency>
@@ -50,6 +54,7 @@
             <Dependency>sdl-image</Dependency>
             <Dependency>sdl-ttf</Dependency>
             <Dependency>tinyxml</Dependency>
+            <Dependency>libsdl2</Dependency>
         </RuntimeDependencies>
     </Package>
     <History>
@@ -62,4 +67,3 @@
         </Update>
     </History>
 </PISI>
-
