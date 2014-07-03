@@ -10,7 +10,7 @@ from pisi.actionsapi import get
 from pisi.actionsapi import shelltools
 
 def build():
-    scons.make("-j1 fife-shared fife-python \
+    scons.make("-j1 install-shared install-python install-dev \
                 --lib-dir=/usr/lib \
                 --prefix=/usr \
                 --python-prefix=/usr/lib/python2.7/site-packages/")
