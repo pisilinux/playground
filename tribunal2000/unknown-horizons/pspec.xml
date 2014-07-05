@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>unknown-horizons</Name>
+        <Homepage>http://www.unknown-horizons.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>unknown-horizons</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Colonization-management strategy game</Summary>
+        <Description>Open source real-time economy simulation game with strategy elements in an isometric 2D engine.</Description>
+        <Archive sha1sum="8855f036ad8f056036cf9c585066af16660b8d08" type="zip">https://github.com/unknown-horizons/unknown-horizons/releases/download/2013.3/unknown-horizons-2013.3.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>fife</Dependency>
+            <Dependency>python-devel</Dependency>
+	    <Dependency>python-imaging</Dependency>
+	    <Dependency>python-PyYAML</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>unknown-horizons</Name>
+        <RuntimeDependencies>
+            <Dependency>fife</Dependency>
+            <Dependency>python</Dependency>
+	    <Dependency>python-imaging</Dependency>
+	    <Dependency>python-PyYAML</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc/unknown-horizons</Path>
+            <Path fileType="data">/usr/share/unknown-horizons</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/unknown-horizons.desktop">unknown-horizons.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/unknown-horizons.png">unknown-horizons.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/unknown-horizons">unknown-horizons</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-07-05</Date>
+            <Version>2013.3</Version>
+            <Comment>First release</Comment>
+            <Name>Nikolay Semenov</Name>
+            <Email>tribunal@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
