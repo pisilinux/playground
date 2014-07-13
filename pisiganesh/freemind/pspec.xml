@@ -3,7 +3,7 @@
         <Name>freemind</Name>
         <Homepage>http://freemind.sourceforge.net/wiki/index.php/Main_Page</Homepage>
         <Packager>
-            <Name>ganesh</Name>
+            <Name>Ganesh Iyer</Name>
             <Email>iyer.gb.linux@gmail.com</Email>
         </Packager>
         <License>GPLv2</License>
@@ -15,9 +15,10 @@
 So you want to write a completely new metaphysics? Why don't you use FreeMind? You have a tool at hand that remarkably resembles the tray slips of Robert Pirsig, described in his sequel to Zen and the Art of Motorcycle Maintenance called Lila. Do you want to refactor your essays in a similar way you would refactor software? Or do you want to keep personal knowledge base, which is easy to manage? Why don't you try FreeMind? Do you want to prioritize, know where you are, where you've been and where you are heading, as Stephen Covey would advise you? Have you tried FreeMind to keep track of all the things that are needed for that?</Description>
         <BuildDependencies>
             <Dependency>ant</Dependency>
-            <Dependency>sun-jdk</Dependency>
+            <Dependency>jdk7-openjdk</Dependency>
         </BuildDependencies>
         <Archive sha1sum="c968891601c2d04147cb893c6ca908d7f6c7e007" type="targz">http://sourceforge.net/projects/freemind/files/freemind/1.0.0/freemind-src-1.0.0.tar.gz</Archive>
+        <Archive sha1sum="8a1aef0ad49f53d22e5a40ce3f73ae75fa7daa8e" type="targz">http://sourceforge.net/projects/freemind/files/freemind/1.0.1/freemind-src-1.0.1.tar.gz</Archive>
     </Source>
     <Package>
         <Name>freemind</Name>
@@ -32,10 +33,17 @@ So you want to write a completely new metaphysics? Why don't you use FreeMind? Y
             <AdditionalFile target="/usr/share/pixmaps/freemind.svg" permission="0644" group="root" owner="root">freemind.svg</AdditionalFile>
         </AdditionalFiles>
         <RuntimeDependencies>
-            <Dependency>sun-jre</Dependency>
+            <Dependency>jre7-openjdk</Dependency>
         </RuntimeDependencies>
     </Package>
     <History>
+        <Update release="2">
+            <Date>2014-07-13</Date>
+            <Version>1.0.1</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2013-11-29</Date>
             <Version>1.0.0</Version>
