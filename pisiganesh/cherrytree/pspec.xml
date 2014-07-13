@@ -42,23 +42,35 @@ A hierarchical note taking application</Summary>
             <Dependency>desktop-file-utils</Dependency>
         </BuildDependencies>
         <Archive sha1sum="617e68519af737795bcf290db3a84c8a1ee8c403" type="tarxz">http://www.giuspen.com/software/cherrytree-0.31.5.tar.xz</Archive>
+        <Archive sha1sum="0a5fd34324bae637e22b7e96adcc1828e936dd39" type="tarxz">http://www.giuspen.com/software/cherrytree-0.33.4.tar.xz</Archive>
     </Source>
     <Package>
         <Name>cherrytree</Name>
-        <RuntimeDependencies>
-            <Dependency>python-enchant</Dependency>
-            <Dependency>python-gtk</Dependency>
-            <Dependency>python-gtksourceview</Dependency>
-            <Dependency>python3</Dependency>
-        </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="data">/usr/share</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="man">/usr/share/man</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/cherrytree/cherrytree.desktop" permission="0644" group="root" owner="root">cherrytree.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/cherrytree/cherrytree.svg" permission="0644" group="root" owner="root">cherrytree.svg</AdditionalFile>
+        </AdditionalFiles>
+        <RuntimeDependencies>
+            <Dependency>python-enchant</Dependency>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>python-gtksourceview</Dependency>
+            <Dependency>python3</Dependency>
+        </RuntimeDependencies>
     </Package>
     <History>
+        <Update release="2">
+            <Date>2014-07-13</Date>
+            <Version>0.33.4</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2013-12-13</Date>
             <Version>0.31.5</Version>
