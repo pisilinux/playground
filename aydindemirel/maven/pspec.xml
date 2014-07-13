@@ -26,9 +26,13 @@
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="conf">/etc/maven</Path>
+            <Path fileType="conf">/etc/profile.d</Path>
             <Path fileType="data">/usr/share/*</Path>
             <Path fileType="library">/usr/share/java/maven</Path>
         </Files>
+    <AdditionalFiles>
+		    <AdditionalFile target="/etc/profile.d/50-maven.sh" owner="root" group="root" permission="0644">50-maven.sh</AdditionalFile>
+	</AdditionalFiles>
     </Package>
     <History>
         <Update release="1">
