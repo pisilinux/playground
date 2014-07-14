@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>Homerun</Name>
+        <Homepage>https://projects.kde.org/projects/playground/base/homerun</Homepage>
+        <Packager>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>desktop</PartOf>
+        <IsA>app</IsA>
+        <Summary>An application launcher for KDE Plasma desktop</Summary>
+        <Description>Homerun is a fullscreen launcher with content organized in tabs. A tab is composed of several "sources". A source can provide one or more sections to a tab. Homerun comes with a few built-in sources, but custom sources can be written using libhomerun.</Description>
+        <BuildDependencies>
+            <Dependency>kde-baseapps-devel</Dependency>
+            <Dependency>kde-runtime-devel</Dependency>
+            <Dependency>kde-workspace-devel</Dependency>
+            <Dependency>kdelibs-devel</Dependency>
+            <Dependency>kdevplatform-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="99ad75589a9810fcba56ef3fe4ffe965d10750b0" type="tarxz">http://download.kde.org/stable/homerun/src/homerun-1.2.5.tar.xz</Archive>
+    </Source>
+    <Package>
+        <Name>Homerun</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>kdelibs</Dependency>
+            <Dependency>kde-baseapps</Dependency>
+            <Dependency>kde-workspace</Dependency>
+        </RuntimeDependencies>	
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="header">/usr/include/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-07-13</Date>
+            <Version>1.2.5</Version>
+            <Comment>Homerun is a fullscreen launcher with content organized in tabs.</Comment>
+            <Name>Ganesh Iyer</Name>
+            <Email>iyer.gb.linux@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
