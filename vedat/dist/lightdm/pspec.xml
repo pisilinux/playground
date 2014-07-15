@@ -1,0 +1,107 @@
+<PISI>
+    <Source>
+        <Name>lightdm</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt</PartOf>
+        <IsA>app</IsA>
+        <Summary>LightDM Qt client library</Summary>
+        <Description>LightDM Qt client library</Description>
+	<Archive sha1sum="2889a01939569a4b4d0845dd4ea87af52b9fb346" type="tarxz">https://launchpad.net/lightdm/1.11/1.11.4/+download/lightdm-1.11.4.tar.xz</Archive>
+        <BuildDependencies>
+	    <Dependency>itstool</Dependency>
+	    <Dependency>libxklavier-devel</Dependency>
+	    <Dependency>xorg-server-xephyr</Dependency>
+	    <Dependency>gobject-introspection-devel</Dependency>
+	    <Dependency>gtk-doc</Dependency>
+	    <Dependency>qt-devel</Dependency>
+	    <Dependency>libxml2-devel</Dependency>
+	    <Dependency>accountsservice-devel</Dependency>
+        </BuildDependencies>
+	<Patches>
+            <Patch level="1">lightdm-default-config.patch</Patch>
+            <!--<Patch level="1">e/disable-utmp-handling.patch</Patch>
+	    <Patch level="1">lightdm-users-config.patch</Patch>-->
+	</Patches>
+    </Source>
+    <Package>
+        <Name>lightdm</Name>
+	<Conflicts>
+            <Package>gdm</Package>
+            <Package>slim</Package>
+        </Conflicts>
+        <AdditionalFiles>
+            <AdditionalFile permission="0644" target="/usr/lib/systemd/system/lightdm.service">e/lightdm.service</AdditionalFile>
+            <AdditionalFile permission="0755" target="/usr/bin/lightdm-wrapper">e/lightdm-wrapper</AdditionalFile>
+            <AdditionalFile permission="0644" target="/etc/lightdm/lightdm.conf">e/lightdm.conf</AdditionalFile>
+	    <!--<AdditionalFile owner="root" permission="0644" target="/etc/lightdm/Xsession">Xsession</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm-autologin">lightdm-autologin.pam</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/display-managers/lightdm.desktop">lightdm.desktop</AdditionalFile>-->
+        </AdditionalFiles>
+        <Files>
+	    <Path fileType="sysdir">/etc</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share</Path>
+	    <Path fileType="data">/usr/sbin</Path>
+	    <Path fileType="data">/usr/libexec</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>lightdm-devel</Name>
+        <Summary>Development headers for lightdm</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">lightdm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>liblightdm-qt</Name>
+        <Summary>Development headers for lightdm</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">lightdm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>lightdm-qt-devel</Name>
+        <Summary>Development headers for lightdm</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">lightdm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/lightdm-qt-3</Path>
+	</Files>
+    </Package>
+    <History>
+        <Update release="3">
+            <Date>2014-07-14</Date>
+            <Version>1.11.4</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2014-05-02</Date>
+            <Version>1.11.3</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>1.11.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
