@@ -16,11 +16,14 @@ def setup():
                          --enable-debug \
                          --enable-udisks \
                          --enable-demo")
+    
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     autotools.make()
 
 def install():
+    pisitools.dosed("data/libfm.conf", "xarchiver", "file-roller")
     autotools.install()
     pisitools.dodoc("AUTHORS", "COPYING", "TODO")
 
