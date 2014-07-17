@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>libgee</Name>
+        <Homepage>http://live.gnome.org/Libgee</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Gobject collection library.</Summary>
+        <Description>Libgee is an utility library providing GObject-based interfaces and classes for commonly used data structures.</Description>
+        <BuildDependencies>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="ca6531c8ba45cc865f2ce7b93a8b3f96e1c1505e" type="tarxz">http://ftp.gnome.org/pub/GNOME/sources/libgee/0.14/libgee-0.14.0.tar.xz</Archive>
+    </Source>
+    
+    <Package>
+        <Name>libgee</Name>
+        <RuntimeDependencies>
+            <Dependency>vala</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>libgee-devel</Name>
+        <Summary>Development files for libgee</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libgee</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2014-05-22</Date>
+            <Version>0.14.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
