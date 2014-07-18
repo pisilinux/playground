@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.solusos.com/standard/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>lightdm-gtk-greeter</Name>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <Summary>Customisable GTK+ Greeter for LightDM</Summary>
+        <Description>Customisable GTK+ Greeter for LightDM</Description>
+        <License>GPLv2+</License>
+        <Archive sha1sum="96ede652591a650e159ef5ae4c9b577e38b91ee4" type="targz">https://launchpad.net/lightdm-gtk-greeter/1.8/1.8.5/+download/lightdm-gtk-greeter-1.8.5.tar.gz</Archive>
+
+        <BuildDependencies>
+            <Dependency>gtk3-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>lightdm-gtk-greeter</Name>
+        <Files>
+            <Path fileType="config">/etc/lightdm</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile permission="0644" target="/etc/lightdm/lightdm-gtk-greeter.conf">lightdm-gtk-greeter.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="8">
+            <Date>2014-07-17</Date>
+            <Version>1.8.5</Version>
+            <Comment>First release</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+    </History>
+
+</PISI>
+

@@ -1,0 +1,31 @@
+diff -up lightdm-1.9.9/src/greeter.c.FD_leak lightdm-1.9.9/src/greeter.c
+--- lightdm-1.9.9/src/greeter.c.FD_leak	2014-02-23 18:03:55.000000000 -0600
++++ lightdm-1.9.9/src/greeter.c	2014-03-11 08:26:37.667341382 -0500
+@@ -969,9 +969,15 @@ greeter_finalize (GObject *object)
+         g_object_unref (self->priv->authentication_session);
+     }
+     if (self->priv->to_greeter_channel)
++    {
++        close(g_io_channel_unix_get_fd(self->priv->to_greeter_channel));
+         g_io_channel_unref (self->priv->to_greeter_channel);
++    }
+     if (self->priv->from_greeter_channel)
++    {
++        close(g_io_channel_unix_get_fd(self->priv->from_greeter_channel)); 
+         g_io_channel_unref (self->priv->from_greeter_channel);
++    }
+     if (self->priv->from_greeter_watch)
+         g_source_remove (self->priv->from_greeter_watch);
+ 
+diff -up lightdm-1.9.9/src/session.c.FD_leak lightdm-1.9.9/src/session.c
+--- lightdm-1.9.9/src/session.c.FD_leak	2014-03-05 21:35:03.000000000 -0600
++++ lightdm-1.9.9/src/session.c	2014-03-11 08:26:37.667341382 -0500
+@@ -450,6 +450,8 @@ session_watch_cb (GPid pid, gint status,
+     if (session->priv->is_guest)
+         guest_account_cleanup (session->priv->username);
+ 
++    close(session->priv->to_child_input);
++    close(session->priv->from_child_output);
+     /* Drop our reference on the child process, it has terminated */
+     g_object_unref (session);
+ }
