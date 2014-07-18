@@ -20,8 +20,9 @@
             <Dependency>mutter-devel</Dependency>
             <Dependency>pulseaudio-libs-devel</Dependency>
             <Dependency>upower-devel</Dependency>
+            <Dependency>libgee06-devel</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="65828d2aefc9987927e70fcc318d7756f32f0529" type="tarxz">https://github.com/evolve-os/budgie-desktop/releases/download/v2/budgie-desktop-2.tar.xz</Archive>
+        <Archive sha1sum="f2f8433b5c983ac651f0cf6b997455e1350cbe5d" type="tarxz">https://github.com/evolve-os/budgie-desktop/releases/download/v4/budgie-desktop-4.tar.xz</Archive>
     </Source>
     <Package>
         <Name>budgie-dekstop</Name>
@@ -31,6 +32,7 @@
             <Dependency>gnome-settings-daemon</Dependency>
             <Dependency>clutter</Dependency>
             <Dependency>cairo</Dependency>
+            <Dependency>libgee06</Dependency>
             <Dependency>gtk3</Dependency>
             <Dependency>libpeas</Dependency>
             <Dependency>libwnck3</Dependency>
@@ -44,6 +46,13 @@
         </Files>
     </Package>
     <History>
+        <Update release="2">
+            <Date>2014-07-17</Date>
+            <Version>4.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2014-05-22</Date>
             <Version>2.0</Version>
@@ -53,5 +62,3 @@
         </Update>
     </History>
 </PISI>
-
-<!-- By PiSiDo 2.0.0 -->
