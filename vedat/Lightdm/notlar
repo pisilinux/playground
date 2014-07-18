@@ -1,0 +1,5 @@
+XDM
+For XDM, you will need to have the ~/.xsession file in your home folder. If you do not have one, create it. XDM reads this file as a script. See the XDM documentation for more information. The final line in your ~/.xsession file should read:
+
+exec startlxde
+If you are starting X with startx, the same line would go in your ~/.xinitrc file. 
