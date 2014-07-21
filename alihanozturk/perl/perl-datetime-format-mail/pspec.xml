@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-datetime-format-mail</Name>
+        <Homepage>http://search.cpan.org/dist/DateTime-Format-Mail/</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>perl</License>
+        <IsA>library</IsA>
+        <Summary>DateTime::Format::Mail - Convert between DateTime and RFC2822/822 formats</Summary>
+        <Description>RFCs 2822 and 822 specify date formats to be used by email. This module parses and emits such dates.</Description>
+        <Archive sha1sum="64bf3c24bce84e37463dddeac99dce3516c738ba" type="targz">http://search.cpan.org/CPAN/authors/id/B/BO/BOOK/DateTime-Format-Mail-0.401.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-DateTime</Dependency>
+            <Dependency>perl-Params-Validate</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-datetime-format-mail</Name>
+        <RuntimeDependencies>
+          <Dependency>perl</Dependency>
+            <Dependency>perl-DateTime</Dependency>
+            <Dependency>perl-Params-Validate</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-07-21</Date>
+            <Version>0.401</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
