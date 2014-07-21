@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>Perl-Text-CSV-Encoded</Name>
+        <Homepage>http://search.cpan.org/~makamaka/Text-CSV-Encoded-0.22/lib/Text/CSV/Encoded.pm</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>perl</License>
+        <IsA>library</IsA>
+        <Summary>Text::CSV::Encoded - Encoding aware Text::CSV.</Summary>
+        <Description>This module inherits Text::CSV and is aware of input/output encodings.</Description>
+        <Archive sha1sum="def5445daa21e354f47de9f1a99bba4c0e187dba" type="targz">http://search.cpan.org/CPAN/authors/id/M/MA/MAKAMAKA/Text-CSV-Encoded-0.22.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-Text-CSV</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>Perl-Text-CSV-Encoded</Name>
+        <RuntimeDependencies>
+          <Dependency>perl</Dependency>
+            <Dependency>perl-Text-CSV</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-07-21</Date>
+            <Version>0.22</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
