@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-XML-RSS</Name>
+        <Homepage>http://search.cpan.org/dist/XML-RSS/lib/XML/RSS.pm</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>perl</License>
+        <IsA>library</IsA>
+        <Summary>XML::RSS - creates and updates RSS files</Summary>
+        <Description>This module provides a basic framework for creating and maintaining RDF Site Summary (RSS) files.</Description>
+        <Archive sha1sum="dcc1bd3d77234432c27e16516b72ad8221653167" type="targz">http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-RSS-1.55.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-DateTime</Dependency>
+            <Dependency>perl-Test-Manifest</Dependency>
+            <Dependency>perl-DateTime-Format-Mail</Dependency>
+            <Dependency>perl-DateTime-Format-W3CDTF</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-XML-RSS</Name>
+        <RuntimeDependencies>
+          <Dependency>perl</Dependency>
+            <Dependency>perl-DateTime</Dependency>
+            <Dependency>perl-Test-Manifest</Dependency>
+            <Dependency>perl-DateTime-Format-Mail</Dependency>
+            <Dependency>perl-DateTime-Format-W3CDTF</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-07-21</Date>
+            <Version>1.55</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
