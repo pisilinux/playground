@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-cgi-session</Name>
+        <Homepage>http://search.cpan.org/dist/CGI-Session/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>Perl</License>
+        <IsA>library</IsA>
+        <Summary>Perl/CPAN Module CGI::Session : Session management in CGI  applications</Summary>
+        <Description>CGI-Session is a Perl5 library that provides an easy, reliable and modular session management system across HTTP requests.</Description>
+        <Archive sha1sum="82dd630a11f2a0b01ea710c33225858718d99187" type="targz">http://www.cpan.org/authors/id/M/MA/MARKSTOS/CGI-Session-4.48.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-cgi-session</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-07-22</Date>
+            <Version>4.48</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
