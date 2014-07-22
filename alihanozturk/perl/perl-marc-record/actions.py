@@ -17,4 +17,4 @@ def build():
 def install():
     perlmodules.install()
 
-    pisitools.dodoc("MANIFEST", "ChangeLog", "README", "COPYING")
+    pisitools.dodoc("README", "MANIFEST", "Changes")
