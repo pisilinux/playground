@@ -1,0 +1,40 @@
+<PISI>
+    <Source>
+        <Name>lxqt-lightdm-greeter</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.components</PartOf>
+        <IsA>app</IsA>
+        <Summary>lxde-qt front-end for lightdm</Summary>
+        <Description>lxde-qt front-end for lightdm</Description>
+        <BuildDependencies>
+	  <!--<Dependency>liblxqt</Dependency>-->
+	    <Dependency>lightdm</Dependency>
+	    <Dependency>liblightdm-qt</Dependency>
+	    <Dependency>lightdm-qt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="cc44b2ba1fda8a1efdf488b9832686f55b42175a" type="zip">https://content.wuala.com/contents/vedat/sources/lxqt-lightdm-greeter-master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>lxqt-lightdm-greeter</Name>
+        <Files>
+	    <Path fileType="sysdir">/etc</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>v.demir@mail.com</Email>
+        </Update>
+    </History>
+</PISI>
+

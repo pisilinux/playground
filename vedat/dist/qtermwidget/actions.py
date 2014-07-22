@@ -18,13 +18,12 @@ def install():
 
 #    pisitools.dobin("src/test")
 #    pisitools.rename("/usr/bin/test", "consoleq")
-
-    #pisitools.remove("/usr/include/qtermwidget4/qtermwidget.h")
-    #pisitools.insinto("/usr/include/qtermwidget4", "lib/*.h")
-    #pisitools.insinto("/usr/lib/pkgconfig", "qtermwidget4.pc")
-    pisitools.domove("/usr/lib64/*", "/usr/lib")
-    pisitools.removeDir("/usr/lib64/")
-
+    pisitools.dodir("/usr/include/qtermwidget")
+    pisitools.remove("/usr/include/qtermwidget4/qtermwidget.h")
+    pisitools.insinto("/usr/include/qtermwidget4", "lib/*.h")
+    pisitools.insinto("/usr/include/qtermwidget", "lib/*.h")
+    pisitools.insinto("/usr/lib/pkgconfig", "qtermwidget4.pc")
+    pisitools.rename("/usr/lib/pkgconfig/qtermwidget4.pc", "qtermwidget.pc")
     pisitools.dodoc("AUTHORS", "README", "COPYING")
 
 """

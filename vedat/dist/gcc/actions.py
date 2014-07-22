@@ -11,8 +11,6 @@ from pisi.actionsapi import get
 
 import os
 
-WorkDir="%s-4.10-20140713" % get.srcNAME()
-
 snapshot = False
 
 if snapshot:
@@ -63,7 +61,7 @@ def setup():
     shelltools.makedirs("build")
     shelltools.cd("build")
 
-    shelltools.system('.././gcc-4.10-20140713/configure \
+    shelltools.system('.././gcc-%s/configure \
                        --prefix=/usr \
                        --bindir=/usr/bin \
                        --libdir=/usr/lib \
@@ -94,7 +92,7 @@ def setup():
                        --enable-checking=release \
                        --build=%s \
                                %s \
-                               %s ' % ( get.HOST(), opt_arch, opt_multilib))
+                               %s ' % ( verMajor , get.HOST(), opt_arch, opt_multilib))
       
 def build():
     exportFlags()

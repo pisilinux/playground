@@ -10,7 +10,7 @@
         <IsA>app:gui</IsA>
         <Summary>Login screen using the LightDM framework.</Summary>
         <Description>Login screen using the LightDM framework.</Description>
-        <Archive sha1sum="96ede652591a650e159ef5ae4c9b577e38b91ee4" type="targz">https://launchpad.net/lightdm-gtk-greeter/1.8/1.8.5/+download/lightdm-gtk-greeter-1.8.5.tar.gz</Archive>    
+        <Archive sha1sum="96ede652591a650e159ef5ae4c9b577e38b91ee4" type="targz">https://content.wuala.com/contents/vedat/sources/lightdm-gtk-greeter-1.8.5.tar.gz</Archive>    
         <BuildDependencies>
             <Dependency>qt-devel</Dependency>
             <Dependency>kdelibs-devel</Dependency>
@@ -25,15 +25,15 @@
             <Dependency>kdelibs</Dependency>
             <Dependency>lightdm</Dependency>
         </RuntimeDependencies>
-	<AdditionalFiles>
-            <AdditionalFile permission="0644" target="/etc/lightdm/lightdm-gtk-greeter.conf">lightdm-gtk-greeter.conf</AdditionalFile>
-        </AdditionalFiles>
         <Files>
             <Path fileType="executable">/usr/sbin/lightdm-gtk-greeter</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="config">/etc</Path>
             <Path fileType="data">/usr/share</Path>
         </Files>
+	<AdditionalFiles>
+            <AdditionalFile permission="0644" target="/etc/lightdm/lightdm-gtk-greeter.conf">lightdm-gtk-greeter.conf</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <History>

@@ -23,9 +23,7 @@
 	    <Dependency>accountsservice-devel</Dependency>
         </BuildDependencies>
 	<Patches>
-            <Patch level="1">lightdm-default-config.patch</Patch>
-            <!--<Patch level="1">e/disable-utmp-handling.patch</Patch>
-	    <Patch level="1">lightdm-users-config.patch</Patch>-->
+	  <!--<Patch level="1">lightdm-default-config.patch</Patch>-->
 	</Patches>
     </Source>
     <Package>
@@ -35,13 +33,7 @@
             <Package>slim</Package>
         </Conflicts>
         <AdditionalFiles>
-            <AdditionalFile permission="0644" target="/usr/lib/systemd/system/lightdm.service">e/lightdm.service</AdditionalFile>
-            <AdditionalFile permission="0755" target="/usr/bin/lightdm-wrapper">e/lightdm-wrapper</AdditionalFile>
-            <AdditionalFile permission="0644" target="/etc/lightdm/lightdm.conf">e/lightdm.conf</AdditionalFile>
-	    <!--<AdditionalFile owner="root" permission="0644" target="/etc/lightdm/Xsession">Xsession</AdditionalFile>
-	    <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/lightdm-autologin">lightdm-autologin.pam</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/display-managers/lightdm.desktop">lightdm.desktop</AdditionalFile>-->
-        </AdditionalFiles>
+	</AdditionalFiles>
         <Files>
 	    <Path fileType="sysdir">/etc</Path>
 	    <Path fileType="executable">/usr/bin</Path>
@@ -82,16 +74,9 @@
 	</Files>
     </Package>
     <History>
-        <Update release="3">
-            <Date>2014-07-14</Date>
-            <Version>1.11.4</Version>
-            <Comment>Version Bump.</Comment>
-            <Name>Vedat Demir</Name>
-            <Email>v.demir@mail.com</Email>
-        </Update>
         <Update release="2">
             <Date>2014-05-02</Date>
-            <Version>1.11.3</Version>
+            <Version>1.11.4</Version>
             <Comment>Version Bump.</Comment>
             <Name>Vedat Demir</Name>
             <Email>v.demir@mail.com</Email>

@@ -22,7 +22,7 @@ def setup():
     #     to the 64bit files that was compiled in the first step (files in the work)
     #
     # More info can be obtained here: http://wiki.winehq.org/Wine64
-    shelltools.export("CPPFLAGS", "-D_FORTIFY_SOURCE=0")
+    #shelltools.export("CPPFLAGS", "-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0")
     autotools.autoreconf("-vif")
     options = "--without-capi \
                --with-curses \
@@ -31,7 +31,37 @@ def setup():
                --with-dbus \
                --with-opengl \
                --with-alsa \
-               --with-x"
+               --with-x \
+               --with-alsa \
+               --with-cms \
+               --with-coreaudio \
+               --with-cups \
+               --with-curses \
+               --with-fontconfig \
+               --with-freetype \
+               --with-glu \
+               --with-gnutls \
+               --with-gphoto \
+               --with-gsm \
+               --with-jpeg \
+               --with-ldap \
+               --with-mpg123 \
+               --with-opengl \
+               --with-oss \
+               --with-png \
+               --with-pthread \
+               --with-sane \
+               --with-xcomposite \
+               --with-xcursor \
+               --with-xinerama \
+               --with-xinput \
+               --with-xml \
+               --with-xrandr \
+               --with-xrender \
+               --with-xshape \
+               --with-xshm \
+               --with-xslt \
+               --with-xxf86vm "
 
     if get.buildTYPE() == "emul32":
         options += " --with-wine64=%s/work/wine-%s" % (get.pkgDIR(), get.srcVERSION())

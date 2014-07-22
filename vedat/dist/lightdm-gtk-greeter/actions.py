@@ -15,7 +15,6 @@ def setup():
                          --disable-static \
                          --enable-liblightdm-gobject \
                          --disable-gtk-doc \
-                         --disable-tests \
                          --enable-liblightdm-qt")
 def build():
     autotools.make()

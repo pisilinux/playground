@@ -31,7 +31,7 @@ def setup():
     autotools.configure("--enable-largefile \
                          --enable-install-program=arch \
                          --enable-no-install-program=faillog,hostname,login,lastlog,uptime \
-                         --libexecdir=/usr/libexec")
+                         --libexecdir=/usr/lib")
 
 def build():
     autotools.make()

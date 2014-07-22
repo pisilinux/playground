@@ -75,6 +75,9 @@
         <IsA>app:gui</IsA>
         <RuntimeDependencies>
             <Dependency version="current">wine-32bit</Dependency>
+            <Dependency version="current">wine-mono</Dependency>
+            <Dependency version="current">wine-gecko</Dependency>
+            <Dependency version="current">winetricks</Dependency>
             <Dependency>lcms2</Dependency>
             <Dependency>libSM</Dependency>
             <Dependency>mpg123</Dependency>
@@ -165,9 +168,6 @@
     <Package>
         <Name>wine-gecko</Name>
         <Summary>gecko for wine</Summary>
-        <RuntimeDependencies>
-            <Dependency version="current">wine</Dependency>
-        </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share/wine/gecko/wine_gecko-2.24-x86_64.msi</Path>
             <Path fileType="data">/usr/share/wine/gecko/wine_gecko-2.24-x86.msi</Path>
@@ -177,9 +177,6 @@
     <Package>
         <Name>wine-mono</Name>
         <Summary>gecko for wine</Summary>
-        <RuntimeDependencies>
-            <Dependency version="current">wine</Dependency>
-        </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share/wine/mono/wine-mono-4.5.2.msi</Path>
         </Files>
@@ -188,9 +185,6 @@
     <Package>
         <Name>winetricks</Name>
         <Summary>winetricks is a helper script to download and install various redistributable runtime libraries needed to run some programs in Wine.</Summary>
-        <RuntimeDependencies>
-            <Dependency version="current">wine</Dependency>
-        </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin/winetricks</Path>
             <Path fileType="data">/usr/share/applications/winetricks.desktop</Path>
