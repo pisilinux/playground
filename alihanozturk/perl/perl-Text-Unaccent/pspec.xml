@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-Text-Unaccent</Name>
+        <Homepage>http://search.cpan.org/~ldachary/Text-Unaccent-1.08/Unaccent.pm</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>perl</License>
+        <IsA>library</IsA>
+        <Summary>Text::Unaccent - Remove accents from a string</Summary>
+        <Description>Text::Unaccent is a module that remove accents from a string. unac_string converts the input string from the specified charset to UTF-16 and call unac_string_utf16 to return the unaccented equivalent. The conversion from and to UTF-16 is done with iconv(1).</Description>
+        <Archive sha1sum="47697145e1deb448753b1b9cdff13ff8bf7fd28d" type="targz">http://search.cpan.org/CPAN/authors/id/L/LD/LDACHARY/Text-Unaccent-1.08.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-Text-Unaccent</Name>
+        <RuntimeDependencies>
+          <Dependency>perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-07-21</Date>
+            <Version>1.08</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
