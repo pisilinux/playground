@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-Cache-FastMmap</Name>
+        <Homepage>http://search.cpan.org/~robm/Cache-FastMmap-1.40/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>Perl</License>
+        <IsA>library</IsA>
+        <Summary>A shared memory cache through an mmap'ed file. It's core is written in C for performance.</Summary>
+        <Description>It uses fcntl locking to ensure multiple processes can safely access the cache at the same time. It uses a basic LRU algorithm to keep the most used entries in the cache.</Description>
+        <Archive sha1sum="473093ea59d82aa0b89bf4081e3eb9e4e9f0dfba" type="targz">http://search.cpan.org/CPAN/authors/id/R/RO/ROBM/Cache-FastMmap-1.40.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-Cache-FastMmap</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-07-23</Date>
+            <Version>1.40</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
