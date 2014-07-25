@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-class-mix</Name>
+        <Homepage>http://search.cpan.org/dist/Class-Mix</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>Perl</License>
+        <IsA>library</IsA>
+        <Summary>Dynamic class mixing.</Summary>
+        <Description>The "mix_class" function provided by this module dynamically generates `anonymous' classes with specified inheritance.</Description>
+        <Archive sha1sum="27df147d66264f9a888157c6eca3f1f2d67c05ff" type="targz">http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Class-Mix-0.005.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-params-classify</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-class-mix</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-params-classify</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-07-25</Date>
+            <Version>0.005</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

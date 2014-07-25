@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-crypt-eksblowfish</Name>
+        <Homepage>http://search.cpan.org/dist/Crypt-Eksblowfish</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>Perl</License>
+        <IsA>library</IsA>
+        <Summary>The Eksblowfish block cipher.</Summary>
+        <Description>Eksblowfish is a variant of the Blowfish cipher, modified to make the key setup very expensive.</Description>
+        <Archive sha1sum="04dd3a163cfc4df0276841f192cffd26513bebae" type="targz">http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-0.009.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-class-mix</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-crypt-eksblowfish</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-class-mix</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-07-25</Date>
+            <Version>0.009</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
