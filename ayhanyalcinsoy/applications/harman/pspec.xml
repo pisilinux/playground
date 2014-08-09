@@ -1,0 +1,44 @@
+<PISI>
+    <Source>
+        <Name>harman</Name>
+        <Homepage>www.harman</Homepage>
+        <Packager>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>office</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Pdf böl, parçala, birlleştir.</Summary>
+        <Description>Pdf böl, parçala, birlleştir.</Description>
+        <Archive sha1sum="c3d0fa696115a0827a36c6abd0e2c44a839efa78" type="targz">/home/PisiLinux/İndirilenler/harman-0.8.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>harman</Name>
+        <RuntimeDependencies>
+            <Dependency>pyPdf</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/harman</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/harman</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="data">/usr/share/doc/harman</Path>
+	    <Path fileType="data">/usr/share/applications</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-08-09</Date>
+            <Version>0.8</Version>
+            <Comment>first relaese</Comment>
+            <Name>Ayhan YALÇINSOY</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+
