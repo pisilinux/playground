@@ -1,3 +1,5 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>cherrytree</Name>
@@ -9,40 +11,12 @@
         <License>GPLv3+</License>
         <PartOf>office</PartOf>
         <IsA>app:gui</IsA>
-        <Summary>Cherrytree
-
-cherrytree
-A hierarchical note taking application</Summary>
-        <Description>Features :
-
-- Rich text (foreground color, background color, bold, italic, underline, strikethrough, small, h1, h2, h3, subscript, superscript, monospace)
-- syntax highlighting (only when the rich text is disabled in the current node)
-- images handling: insertion in the text, edit (resize/rotate), save as png file
-- lists handling (bulleted, numbered, to-do and switch between them, multiline with shift+enter)
-- simple tables handling (cells with plain text), cut/copy/paste row, import/export as csv file
-- codeboxes handling: boxes of automatically highlighted text into normal rich text
-- alignment of text, images, tables and codeboxes (left/center/right)
-- hyperlinks (links to webpages, links to nodes/nodes + anchors, links to files, links to folders)
-- spell check (using pygtkspellcheck and pyenchant)
-- intra application copy/paste: supported single images, single codeboxes, single tables and a compound selection of rich text, images, codeboxes and tables
-- cross application copy/paste (tested with openoffice and gmail): supported single images, single codeboxes, single tables and a compound selection of rich text, images, codeboxes and tables
-- copying a list of files from the file manager and pasting in cherrytree will create a list of links to files, images are recognized and inserted in the text
-- print &amp; save as pdf file of a selection / node / node and subnodes / the whole tree
-- export to html of a selection / node / node and subnodes / the whole tree
-- export to plain text of a selection / node / node and subnodes / the whole tree
-- toc generation for a node / node and subnodes / the whole tree, based on headers h1, h2 and h3
-- find a node, find in current node, find in all nodes
-- replace in node names, replace in current node, replace in all nodes
-- iteration of the latest find, iteration of the latest replace, iteration of the latest applied text formatting
-- import from basket, cherrytree, gnote, keepnote, keynote, knowit, mempad, notecase, tomboy, treepad lite, tuxcards, zim
-- export to cherrytree file of a selection / node / node and subnodes / the whole tree
-- password protection (using http://www.7-zip.org/)
-- tree nodes drag and drop</Description>
+        <Summary>Cherrytree A hierarchical note taking application</Summary>
+        <Description>A hierarchical note taking application, featuring rich text and syntax highlighting, storing data in a single xml or sqlite file.</Description>
         <BuildDependencies>
             <Dependency>desktop-file-utils</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="617e68519af737795bcf290db3a84c8a1ee8c403" type="tarxz">http://www.giuspen.com/software/cherrytree-0.31.5.tar.xz</Archive>
-        <Archive sha1sum="0a5fd34324bae637e22b7e96adcc1828e936dd39" type="tarxz">http://www.giuspen.com/software/cherrytree-0.33.4.tar.xz</Archive>
+           <Archive sha1sum="0a5fd34324bae637e22b7e96adcc1828e936dd39" type="tarxz">http://www.giuspen.com/software/cherrytree-0.33.4.tar.xz</Archive>
     </Source>
     <Package>
         <Name>cherrytree</Name>
@@ -54,7 +28,7 @@ A hierarchical note taking application</Summary>
         </Files>
         <AdditionalFiles>
             <AdditionalFile target="/usr/share/cherrytree/cherrytree.desktop" permission="0644" group="root" owner="root">cherrytree.desktop</AdditionalFile>
-            <AdditionalFile target="/usr/share/cherrytree/cherrytree.svg" permission="0644" group="root" owner="root">cherrytree.svg</AdditionalFile>
+            <AdditionalFile target="/usr/share/cherrytree/cherrytree.svg" permission="0644" group="root" owner="root">cherrytree.png</AdditionalFile>
         </AdditionalFiles>
         <RuntimeDependencies>
             <Dependency>python-enchant</Dependency>
@@ -74,11 +48,9 @@ A hierarchical note taking application</Summary>
         <Update release="1">
             <Date>2013-12-13</Date>
             <Version>0.31.5</Version>
-            <Comment>Initial Build</Comment>
+            <Comment>First release</Comment>
             <Name>Ganesh Iyer</Name>
             <Email>iyer.gb.linux@gmail.com</Email>
         </Update>
     </History>
 </PISI>
-
-<!-- By PiSiDo 2.0.0 -->
