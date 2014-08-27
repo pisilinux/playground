@@ -13,9 +13,13 @@
         <Summary>XCFA. This stands for X Convert File Audio</Summary>
         <Description>XCFA is a tool to extract the contens of Audio-CDs and convert musical audio files conversion to FLAC, WAV, OGG, M4A, MPC, MP3, WavPack and many other formats.</Description>
         <Archive sha1sum="bf31d7c253f097cd22e497c9e65fe2d884626f44" type="targz">http://download.tuxfamily.org/xcfaudio/xcfa_download/src/xcfa-4.3.8.tar.gz</Archive>
-    </Source>
+        <BuildDependencies>
+            <Dependency>alsa-lib-devel</Dependency>
+            <Dependency>vte-devel</Dependency>
+        </BuildDependencies>
+      </Source>
 
-    <Package>
+        <Package>
         <Name>xcfa</Name>
         <RuntimeDependencies>
             <Dependency>gtk2</Dependency>
