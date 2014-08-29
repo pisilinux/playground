@@ -8,13 +8,11 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-#WorkDir = "idea-IC-133.193"
-WorkDir = "idea-IC-135.909"
+WorkDir = "idea-IC-133.193"
 
 def install():
     shelltools.cd("..")
     pisitools.dodir("/opt")
-#   pisitools.insinto("/opt","idea-IC-133.193")
-    pisitools.insinto("/opt","idea-IC-135.909")
+    pisitools.insinto("/opt","idea-IC-133.193")
     
 # By PiSiDo 2.0.0

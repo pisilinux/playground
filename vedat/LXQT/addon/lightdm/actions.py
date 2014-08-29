@@ -15,13 +15,14 @@ def setup():
                          --libexecdir=/usr/lib/ \
                          --disable-static \
                          --enable-liblightdm-gobject \
+                         --disable-tests \
                          --enable-liblightdm-qt \
-                         --with-user-session=kde \
+                         --with-user-session=gnome \
                          --with-greeter-user=root \
                          --with-greeter-session=lxqt-lightdm-greeter \
                          --with-html-dir=/usr/share/doc/lightdm/html \
                          ")
-##--with-greeter-user=lightdm --disable-tests \
+##--with-greeter-user=lightdm
 def build():
     autotools.make()
 

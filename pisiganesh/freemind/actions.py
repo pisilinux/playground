@@ -15,7 +15,7 @@ def setup():
     shelltools.system("chmod +x check_for_duplicate_resources.sh")
 
 def build():
-    #shelltools.export("JAVA_HOME","/opt/sun-jdk")
+    shelltools.export("JAVA_HOME","/opt/sun-jdk")
     shelltools.system("ant")
 
 def install():

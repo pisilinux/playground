@@ -5,7 +5,7 @@
         <Name>lxpanel</Name>
         <Homepage>http://wiki.lxde.org/en/LXPanel</Homepage>
         <Packager>
-            <Name>PisiLinux Community</Name>
+            <Name>Aydan Taşdemir</Name>
             <Email>admins@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
@@ -13,19 +13,20 @@
         <PartOf>desktop.lxde.base</PartOf>
         <Summary>Lightweight X11 desktop panel for LXDE</Summary>
         <Description>lxpanel is a lightweight X11 desktop panel for LXDE.</Description>
-        <Archive sha1sum="78e9332af8abe039f75b5bfb1865a4e5bc3f11c2" type="targz">mirrors://sourceforge/lxde/LXPanel (desktop panel)/LXPanel 0.6.2/lxpanel-0.6.2.tar.gz</Archive>
+        <Archive sha1sum="3b2fb945a6c8c096b93311ae38624dadf8cebbfc" type="targz">mirrors://sourceforge/lxde/LXPanel (desktop panel)/LXPanel 0.6.1/lxpanel-0.6.1.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>atk-devel</Dependency>
-            <Dependency>cairo-devel</Dependency>
-            <Dependency>pango-devel</Dependency>
-            <Dependency>fontconfig</Dependency>      
             <Dependency>gtk2-devel</Dependency>
-            <Dependency>alsa-lib-devel</Dependency>
             <Dependency>lxmenu-data</Dependency>
             <Dependency versionFrom="0.5.1">lxde-menu-cache-devel</Dependency>
             <Dependency>gdk-pixbuf-devel</Dependency>
             <Dependency>libwnck2-devel</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">lxpanel-0.5.1-sandbox.patch</Patch>
+            <Patch level="1">default-config.patch</Patch>
+            <Patch level="1">lxpanel-0.5.6-format-string.patch</Patch>
+            <Patch level="1">lxpanel-0.5.9-mga-battery-monitor.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -36,10 +37,11 @@
             <Dependency>pango</Dependency>
             <Dependency>fontconfig</Dependency>            
             <Dependency>gtk2</Dependency>
+            <Dependency>libXmu</Dependency>
+            <Dependency>libXpm</Dependency>
             <Dependency>lxmenu-data</Dependency>
             <Dependency versionFrom="0.5.1">lxde-menu-cache</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
-            <Dependency>alsa-lib</Dependency>
             <Dependency>libwnck2</Dependency>
             <Dependency>network-manager-applet</Dependency>
         </RuntimeDependencies>
@@ -73,27 +75,6 @@
     </Package>
 
     <History>
-       <Update release="7">
-            <Date>2014-06-04</Date>
-            <Version>0.6.2</Version>
-            <Comment>Version bump</Comment>
-            <Name>Varol Maksutoğlu</Name>
-            <Email>waroi@pisilinux.org</Email>
-       </Update>
-       <Update release="6">
-            <Date>2014-02-19</Date>
-            <Version>0.6.1</Version>
-            <Comment>Rebuild Unused</Comment>
-            <Name>Varol Maksutoğlu</Name>
-            <Email>waroi@pisilinux.org</Email>
-       </Update>
-       <Update release="5">
-            <Date>2014-01-06</Date>
-            <Version>0.6.1</Version>
-            <Comment>Rebuild</Comment>
-            <Name>Burak Fazıl Ertürk</Name>
-            <Email>burakerturk@pisilinux.org</Email>
-         </Update> 
         <Update release="4">
             <Date>2013-10-11</Date>
             <Version>0.6.1</Version>

@@ -11,32 +11,31 @@
         <License>LGPLv2.1</License>
         <Summary>The GIMP Toolkit version 3</Summary>
         <Description>GTK+ is a multi-platform toolkit for creating graphical user interfaces. Offering a complete set of widgets, GTK+ is suitable for projects ranging from small one-off projects to complete application suites.</Description>
-        <Archive sha1sum="b5a11bd33f09d383169cca44bc7af8b52684e44a" type="tarxz">mirrors://gnome/gtk+/3.13/gtk+-3.13.5.tar.xz</Archive>
+        <Archive sha1sum="b3bd754863325f963e5539fb8fbf3c4303b8bdc7" type="tarxz">http://ftp.gnome.org/mirror/gnome.org/sources/gtk+/3.13/gtk+-3.13.1.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>at-spi2-atk-devel</Dependency>
             <Dependency>atk-devel</Dependency>
+            <Dependency>cups-devel</Dependency>
+            <Dependency>at-spi2-atk-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>librest-devel</Dependency>
+            <Dependency>json-glib-devel</Dependency>
+            <Dependency>libXi-devel</Dependency>
             <Dependency>cairo-devel</Dependency>
             <Dependency>colord-devel</Dependency>
-            <Dependency>cups-devel</Dependency>
-            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>libXfixes-devel</Dependency>
             <Dependency>gdk-pixbuf-devel</Dependency>
-            <Dependency>json-glib-devel</Dependency>
-            <Dependency>librest-devel</Dependency>
-            <Dependency>libXcomposite-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
             <Dependency>libXcursor-devel</Dependency>
             <Dependency>libXdamage-devel</Dependency>
-            <Dependency>libXext-devel</Dependency>
-            <Dependency>libXfixes-devel</Dependency>
-            <Dependency>libXi-devel</Dependency>
             <Dependency>libXinerama-devel</Dependency>
-            <Dependency>libXrandr-devel</Dependency>
-            <Dependency>pango-devel</Dependency>
-            <Dependency>librest-32bit</Dependency>
-            <Dependency>json-glib-32bit</Dependency>
+            <Dependency>libXcomposite-devel</Dependency>
+            <Dependency version="1.0.0">json-glib-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">071_fix-installation-of-HTML-images.patch</Patch>
-	    <!--<Patch level="1">073_treeview_almost_fixed.patch</Patch>-->
+            <Patch level="1">073_treeview_almost_fixed.patch</Patch>
         </Patches>
     </Source>
 
@@ -63,6 +62,7 @@
             <Dependency>libXcomposite</Dependency>
             <Dependency>dejavu-fonts</Dependency>
             <Dependency>gtk-theme-mediterranean</Dependency>
+            <Dependency version="1.0.0">json-glib</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
@@ -192,8 +192,8 @@
 
     <History>
         <Update release="10">
-            <Date>2014-07-22</Date>
-            <Version>3.13.5</Version>
+            <Date>2014-04-12</Date>
+            <Version>3.13.1</Version>
             <Comment>Version Bump</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

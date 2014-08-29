@@ -10,10 +10,10 @@ from pisi.actionsapi import shelltools
 
 def setup():
     shelltools.system("intltoolize --force --copy --automake")
-    autotools.configure("--with-plugins=all \
-                         --enable-man")
-    
-    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
+    autotools.configure("--disable-alsa \
+                        --with-x \
+                        --with-plugins=all \
+                        --enable-man")
 
 def build():
     autotools.make()

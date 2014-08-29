@@ -8,13 +8,13 @@ from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 
 def setup():
-    pisitools.dosed("src/ui/gui/gen-dot-desktop.sh", "Math;", "")
     autotools.configure("--prefix=/usr \
-			 --sysconfdir=/etc \
-			 --without-libreadline-prefix")
-    
+                --sysconfdir=/etc \
+                --without-libreadline-prefix")
+
 def build():
     autotools.make()
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR()) 
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+

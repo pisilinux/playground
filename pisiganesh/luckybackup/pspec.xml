@@ -3,7 +3,7 @@
         <Name>luckybackup</Name>
         <Homepage>http://luckybackup.sourceforge.net/</Homepage>
         <Packager>
-            <Name>Ganesh Iyer</Name>
+            <Name>Ganesh</Name>
             <Email>iyer.gb.linux@gmail.com</Email>
         </Packager>
         <License>GPL v3</License>
@@ -12,21 +12,14 @@
         <Summary>A powerful, fast and reliable backup &amp; sync tool</Summary>
         <Description>The main goal of luckyBackup, as its name states, is the creation of backups of your data.</Description>
         <BuildDependencies>
-            <Dependency>glibc</Dependency>
-            <Dependency>glibc-devel</Dependency>
-            <Dependency>libgcc</Dependency>
-            <Dependency>librsync-devel</Dependency>
-            <Dependency>libstdc++</Dependency>
-            <Dependency>qt-devel</Dependency>
+            <Dependency>qt</Dependency>
         </BuildDependencies>
         <Archive sha1sum="7a436c29a636e359991cd131a5a966e3d4755372" type="targz">http://sourceforge.net/projects/luckybackup/files/0.4.7/source/luckybackup-0.4.7.tar.gz</Archive>
-        <Archive sha1sum="067e5ea0ce23944942d3ff0bf7e1133370872ee4" type="targz">http://sourceforge.net/projects/luckybackup/files/0.4.8/source/luckybackup-0.4.8.tar.gz</Archive>
     </Source>
     <Package>
         <Name>luckybackup</Name>
         <RuntimeDependencies>
             <Dependency>qt</Dependency>
-            <Dependency>rsync</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -36,13 +29,6 @@
         </Files>
     </Package>
     <History>
-        <Update release="2">
-            <Date>2014-07-13</Date>
-            <Version>0.4.8</Version>
-            <Comment>Version Bump</Comment>
-            <Name>Ganesh Iyer</Name>
-            <Email>iyer.gb.linux@gmail.com</Email>
-        </Update>
         <Update release="1">
             <Date>2013-11-28</Date>
             <Version>0.4.7</Version>
