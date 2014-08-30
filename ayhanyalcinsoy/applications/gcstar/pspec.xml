@@ -10,7 +10,8 @@
         <IsA>app:gui</IsA>
         <Summary>GCstar is a free open source application for managing your collections.</Summary>
         <Description>GCstar is a free open source application for managing your collections. Detailed information on each item can be automatically retrieved from the internet and you can store additional data, such as the location or who you've lent it to. You may also search and filter your collection by many criteria.</Description>
-        <Archive sha1sum="8ab3d685471ae262df0a4172d33ad7f5beccc3b3" type="targz">http://download.gna.org/gcstar/gcstar-1.7.0.tar.gz</Archive>	
+<!--         <Archive sha1sum="8ab3d685471ae262df0a4172d33ad7f5beccc3b3" type="targz">http://download.gna.org/gcstar/gcstar-1.7.0.tar.gz</Archive>	 -->
+	     <Archive sha1sum="ddb443243c1ae482f4e7de9e6a5fdaf41a4f9652" type="targz">https://dl.dropboxusercontent.com/u/71120717/gcstar-1.7.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>perl</Dependency>
             <Dependency>perl-Gtk2</Dependency>
@@ -46,22 +47,6 @@
 	    <Dependency>perl-Sub-Exporter</Dependency>
 	    <Dependency>perl-Test-Fatal</Dependency>
 	</BuildDependencies>
-        <Patches>
-            <Patch level="1">gcstar01.patch</Patch>
-            <Patch level="1">desktop.patch</Patch>
-	    <Patch level="1">5.patch</Patch>
-	    <Patch level="1">share.patch</Patch>
-	    <Patch level="1">GCstar-tr.patch</Patch>
-	    <Patch level="1">GCboardgames_tr.patch</Patch>
-	    <Patch level="1">GCbooks_tr.patch</Patch>
-	    <Patch level="1">GCcoins_tr.patch</Patch>
-	    <Patch level="1">GCcomics_tr.patch</Patch>
-	    <Patch level="1">GCfilms_tr.patch</Patch>
-	    <Patch level="1">GCgames_tr.patch</Patch>
-	    <Patch level="1">GCgeneric_tr.patch</Patch>
-	    <Patch level="1">GCmusics_tr.patch</Patch>
-	    <Patch level="1">GCsoftware_tr.patch</Patch>
-        </Patches>
     </Source>
     
     <Package>
@@ -103,14 +88,15 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-			<Path fileType="library">/usr/lib/gcstar</Path>
+	    <Path fileType="library">/usr/lib/gcstar</Path>
             <Path fileType="data">/usr/share/gcstar</Path>
             <Path fileType="data">/usr/share/icons</Path>
-            <Path fileType="man">/usr/share/man</Path>
-			<Path fileType="data">/usr/share/doc</Path>
-			<Path fileType="library">/usr/lib/lib</Path>
+            <Path fileType="man">/usr/man/man1</Path>
+	    <Path fileType="man">/usr/share/man</Path>
+	    <Path fileType="data">/usr/share/doc</Path>
+	    <Path fileType="library">/usr/lib/lib</Path>
             <Path fileType="data">/usr/share/applications</Path>
-			<Path fileType="data">/usr/lib/GCBookmarks.pm</Path>
+	    <Path fileType="data">/usr/lib/GCBookmarks.pm</Path>
 			<Path fileType="data">/usr/lib/GCBorrowings.pm</Path>
 			<Path fileType="data">/usr/lib/GCCommandLine.pm</Path>
 			<Path fileType="data">/usr/lib/GCData.pm</Path>
