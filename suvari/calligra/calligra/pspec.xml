@@ -14,7 +14,7 @@
         <IsA>app:gui</IsA>
         <Summary>An integrated office suite for KDE</Summary>
         <Description>Calligra is a free, integrated office suite for KDE. The application suite consists of a word-processor, a spreadsheet application, a presentation creator and viewer application, an organizer and more.</Description>
-        <Archive sha1sum="956cc2b42a7be7d59d686dfa646a0ddc119179ef" type="tarxz">mirrors://kde/stable/calligra-2.8.3/calligra-2.8.3.tar.xz</Archive>
+        <Archive sha1sum="14f944e7a562a087a0f579f40e2135144f41db6e" type="tarxz">mirrors://kde/stable/calligra-2.8.5/calligra-2.8.5.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>libvc-devel</Dependency>
             <Dependency>docbook-xsl</Dependency>
@@ -27,7 +27,7 @@
             <Dependency>doxygen</Dependency>
             <Dependency>eigen</Dependency>
             <Dependency>libXi-devel</Dependency>
-            <Dependency>openexr-devel-</Dependency>
+            <Dependency>openexr-devel</Dependency>
             <Dependency>libodfgen-devel</Dependency>
             <Dependency>exiv2-devel</Dependency>
             <Dependency>fontconfig-devel</Dependency>
@@ -46,7 +46,6 @@
             <Dependency>libwpg-devel</Dependency>
             <Dependency>libwps-devel</Dependency>
             <Dependency>phonon-devel</Dependency>
-            <Dependency>openexr-devel</Dependency>
             <Dependency>poppler-qt-devel</Dependency>
             <Dependency>qca2-devel</Dependency>
             <Dependency>qimageblitz-devel</Dependency>
@@ -72,8 +71,12 @@
             <Dependency>qimageblitz-devel</Dependency>
             <Dependency>okular-devel</Dependency>
             <Dependency>opencolorio-devel</Dependency>
+            <Dependency>libkdcraw-devel</Dependency>
         </BuildDependencies>
     </Source>
+        <Patches>
+            <Patch>0001-switch-to-librevenge-based-import-libs.patch</Patch>
+        </Patches>
 
     <Package>
         <Name>calligra-devel</Name>
@@ -531,6 +534,7 @@
             <Path fileType="library">/usr/lib/libkowv2.s*</Path>
             <Path fileType="library">/usr/lib/libRtfReader.s*</Path>
             <Path fileType="library">/usr/lib/libkoodfreader.s*</Path>
+            <Path fileType="library">/usr/lib/kde4/calligra_filter_eps2svgai.so</Path>
             <Path fileType="library">/usr/lib/kde4/calligra_filter_xfig2odg.so</Path>
             <Path fileType="library">/usr/lib/kde4/calligra_filter_pdf2svg.so</Path>
             <Path fileType="library">/usr/lib/kde4/calligra_filter_odt2mobi.so</Path>
@@ -574,6 +578,7 @@
             <Path fileType="data">/usr/share/applications/kde4/calligrawords_ascii.desktop</Path>
             <Path fileType="data">/usr/share/mime/packages/msooxml-all.xml</Path>
             <Path fileType="data">/usr/share/mime/packages/calligra_planner_mpp.xml</Path>
+            <Path fileType="data">/usr/share/kde4/services/calligra_filter_eps2svgai.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/calligra_filter_svg2karbon.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/words_docx_thumbnail.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/calligra_filter_vsdx2odg.desktop</Path>
@@ -632,6 +637,9 @@
             <Path fileType="data">/usr/share/kde4/services/calligra_filter_wpd2odt.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/sheets_excel_thumbnail.desktop</Path>
             <Path fileType="data">/usr/share/kde4/services/calligra_filter_odt2mobi.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/calligra_filter_kpr2odp.desktop</Path>
+            <Path fileType="data">/usr/share/kde4/services/stage_kpr_thumbnail.desktop</Path>
+            <Path fileType="data">/usr/lib/kde4/calligra_filter_kpr2odp.so</Path>
         </Files>
     </Package>
 
@@ -933,6 +941,7 @@
             <Dependency>kdelibs</Dependency>
             <Dependency>kdepimlibs</Dependency>
             <Dependency version="current">calligra-libs</Dependency>
+            <Dependency version="current">calligra-plugins</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin/calligraplan</Path>
@@ -1048,6 +1057,20 @@
     </Package>
 
     <History>
+        <Update release="17">
+            <Date>2014-08-30</Date>
+            <Version>2.8.5</Version>
+            <Comment>Patched, fixed crash.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="16">
+            <Date>2014-08-28</Date>
+            <Version>2.8.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
         <Update release="15">
             <Date>2014-06-06</Date>
             <Version>2.8.3</Version>
