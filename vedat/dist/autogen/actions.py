@@ -12,7 +12,10 @@ from pisi.actionsapi import get
 #shelltools.export("HOME", get.workDIR())
 
 def setup():
-    autotools.configure("--with-libguile-libs")
+    autotools.configure(" --disable-static \
+                          --enable-shared \
+                          --with-libguile=/usr/lib/guile/ \
+                          --with-guile-ver=2.0.11")
 
 def build():
     autotools.make()
