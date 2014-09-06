@@ -63,9 +63,9 @@ def setup():
                 -Duse_system_libxslt=1  \
                 -Duse_system_minizip=1  \
                 -Duse_system_nspr=1  \
-                -Duse_system_re2=1  \
                 -Duse_system_speex=1 \
                 -Duse_system_zlib=1 \
+                -Duse_system_yasm=1 \
                 -Dicu_use_data_file_flag=0 \
                 -Duse_gconf=0 \
                 -Ddisable_glibc=1 \
@@ -73,7 +73,6 @@ def setup():
                 -Ddisable_nacl=1 \
                 -Ddisable_pnacl=1 \
                 -Ddisable_newlib_untar=1 \
-                -Duse_system_yasm=1 \
                 -Dlinux_use_tcmalloc=1 \
                 -Dusb_ids_path=/usr/share/misc/usb.ids \
                 -Dlinux_sandbox_path=/usr/lib/chromium-browser/chromium-sandbox \
