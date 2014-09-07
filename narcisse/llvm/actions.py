@@ -27,7 +27,7 @@ def setup():
         shelltools.move("projects/libcxx-3.5.0.src", "projects/libcxx")
         
     shelltools.system("rm -f tools/lldb/scripts/Python/modules/readline/Makefile")
-    shelltools.move("makefile+", "tools/lldb/scripts/Python/modules/readline/Makefile")
+    shelltools.move("Makefile_", "tools/lldb/scripts/Python/modules/readline/Makefile")
 
     pisitools.dosed("utils/llvm-build/llvm-build", "python", "python2.7")
     pisitools.dosed("bindings/ocaml/Makefile.ocaml", '\$\(PROJ_libdir\)', libdir)
