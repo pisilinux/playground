@@ -24,6 +24,7 @@ def setup():
                 -Ddisable_glibc=1 \
                 -Ddisable_nacl=1 \
                 -Ddisable_newlib_untar=1 \
+                -DGOOGLE_PROTOBUF_NO_RTTI \
                 -Ddisable_pnacl=1 \
                 -Ddisable_sse2=1 \
                 -Dffmpeg_branding=Chrome \
@@ -36,12 +37,11 @@ def setup():
                 -Dlinux_link_libpci=1 \
                 -Dlinux_link_libspeechd=1 \
                 -Dlinux_link_pulseaudio=1 \
-                -Dlinux_sandbox_chrome_path=/usr/lib/chromium-browser/chromium-browser \
-                -Dlinux_sandbox_path=/usr/lib/chromium-browser/chromium-sandbox \
                 -Dlinux_strip_binary=1 \
                 -Dlinux_use_gold_binary=0 \
                 -Dlinux_use_gold_flags=0 \
-                -Dlinux_use_tcmalloc=1 \-Duse_system_bzip2=1 \
+                -Dlinux_use_tcmalloc=1 \
+                -Duse_system_bzip2=1 \
                 -Dlogging_like_official_build=1 \
                 -Dno_strict_aliasing=1 \
                 -Dproprietary_codecs=1 \
@@ -73,6 +73,8 @@ def setup():
                 -Duse_system_zlib=1 \
                 -Dwerror= '
 
+                #-Dlinux_sandbox_chrome_path=/usr/lib/chromium-browser/chromium-browser \
+                #-Dlinux_sandbox_path=/usr/lib/chromium-browser/chromium-sandbox \
 #We add -fno-ipa-cp to CFLAGS. See: http://crbug.com/41887
 #shelltools.system("build/gyp_chromium -f make build/all.gyp --depth=. \ %s" % options)
 
