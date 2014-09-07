@@ -17,11 +17,6 @@
             <Dependency>libmtp</Dependency>
             <Dependency>qt</Dependency>
         </BuildDependencies>
-        <RuntimeDependencies>
-             <Dependency>mercurial</Dependency>
-             <Dependency>libusb1-devel</Dependency>
-             <Dependency>golang</Dependency>
-             <Dependency>go-mtpfs</Dependency>
         <Patches>
             <Patch level="1">debian/01-ftbfs_64bit.patch</Patch>
         </Patches>
@@ -29,6 +24,12 @@
 
     <Package>
         <Name>qlix</Name>
+        <RuntimeDependencies>
+             <Dependency>mercurial</Dependency>
+             <Dependency>libusb1-devel</Dependency>
+             <Dependency>golang</Dependency>
+             <Dependency>go-mtpfs</Dependency>
+        </RuntimeDependencies>
         <IsA>app:gui</IsA>
         <Files>
             <Path fileType="config">/etc</Path>
