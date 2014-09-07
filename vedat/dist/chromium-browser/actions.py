@@ -21,50 +21,56 @@ def setup():
     shelltools.system("export -n CFLAGS CXXFLAGS")
     
     options = '\
+                -Dclang=0 \
+                -Ddisable_fatal_linker_warnings=1 \
                 -Ddisable_glibc=1 \
                 -Ddisable_nacl=1 \
                 -Ddisable_newlib_untar=1 \
                 -Ddisable_pnacl=1 \
                 -Ddisable_sse2=1 \
+                -Dffmpeg_branding="Chrome" \
                 -Dffmpeg_branding=Chrome \
                 -Dgoogle_api_key=AIzaSyBINKL31ZYd8W5byPuwTXYK6cEyoceGh6Y \
                 -Dgoogle_default_client_id=879512332529.apps.googleusercontent.com \
                 -Dgoogle_default_client_secret=RmQPJJeL1cNJ8iETnoVD4X17 \
-                -Dicu_use_data_file_flag=0 \
+                -Dhost_clang=0 \
                 -Dlibspeechd_h_prefix=speech-dispatcher/ \
+                -Dlinux_link_gnome_keyring=0 \
                 -Dlinux_link_gsettings=1 \
                 -Dlinux_link_libpci=1 \
                 -Dlinux_link_libspeechd=1 \
                 -Dlinux_link_pulseaudio=1 \
-                -Dlinux_sandbox_chrome_path=/usr/lib/chromium-browser/chromium-browser \
-                -Dlinux_sandbox_path=/usr/lib/chromium-browser/chromium-sandbox \
                 -Dlinux_strip_binary=1 \
+                -Dlinux_use_bundled_binutils=0 \
+                -Dlinux_use_bundled_gold=0 \
                 -Dlinux_use_gold_binary=0 \
                 -Dlinux_use_gold_flags=0 \
-                -Dlinux_use_tcmalloc=1 \-Duse_system_bzip2=1 \
+                -Dlinux_use_tcmalloc=1 \
+                -Duse_system_bzip2=1 \
                 -Dlogging_like_official_build=1 \
                 -Dno_strict_aliasing=1 \
                 -Dproprietary_codecs=1 \
                 -Dpython_ver=3.4 \
-                -Drelease_extra_cflags=" -Wno-unused-local-typedefs" \
                 -Dtarget_arch=x64 \
                 -Dusb_ids_path=/usr/share/misc/usb.ids \
                 -Duse_gconf=0 \
                 -Duse_system_bzip2=1 \
-                -Duse_system_ffmpeg=0 \
+                -Duse_system_ffmpeg=1 \
                 -Duse_system_flac=1 \
                 -Duse_system_harfbuzz=1 \
-                -Duse_system_icu=1 \
+                -Duse_system_icu=1 -Dicu_use_data_file_flag=0 \
                 -Duse_system_jsoncpp=1 \
                 -Duse_system_libevent=1 \
                 -Duse_system_libjpeg=1 \
                 -Duse_system_libpng=1 \
+                -Duse_system_libwebp=1 \
                 -Duse_system_libxml=1 \
                 -Duse_system_libxslt=1 \
                 -Duse_system_minizip=1 \
                 -Duse_system_nspr=1 \
                 -Duse_system_opus=1 \
                 -Duse_system_re2=0  \
+                -Duse_system_re2=0 \
                 -Duse_system_snappy=1 \
                 -Duse_system_speex=1 \
                 -Duse_system_ssl=0 \
@@ -83,7 +89,7 @@ def build():
     shelltools.system("export -n CFLAGS CXXFLAGS")
     pisitools.flags.add("-fno-stack-protector","-fno-ipa-cp")
     #pisitools.flags.add("-fno-stack-protector")
-    autotools.make("chrome chrome_sandbox BUILDTYPE=Release V=1")
+    autotools.make("BUILDTYPE=Release V=1")
 
 def install():
     shelltools.cd("out/Release")
