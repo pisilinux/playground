@@ -1,0 +1,60 @@
+--- a/drivers/staging/unisys/channels/channel.c   2014-09-04 17:43:55.325647088 +0300
++++ b/drivers/staging/unisys/channels/channel.c       2014-09-04 18:10:31.652689836 +0300
+@@ -15,7 +15,7 @@
+ 
+ #include <linux/kernel.h>
+ #ifdef CONFIG_MODVERSIONS
+-#include <config/modversions.h>
++// #include <config/modversions.h>
+ #endif
+ #include <linux/module.h>
+ #include <linux/init.h>                /* for module_init and module_exit */
+
+--- a/drivers/staging/unisys/channels/chanstub.c  2014-09-04 18:15:03.310697111 +0300
++++ b/drivers/staging/unisys/channels/chanstub.c      2014-09-04 18:34:48.336728845 +0300
+@@ -16,7 +16,7 @@
+ #define EXPORT_SYMTAB
+ #include <linux/kernel.h>
+ #ifdef CONFIG_MODVERSIONS
+-#include <config/modversions.h>
++/* #include <config/modversions.h> */
+ #endif
+ #include <linux/module.h>
+ #include <linux/init.h>                /* for module_init and module_exit */
+
+--- a/drivers/staging/unisys/uislib/uislib.c    2014-09-04 18:36:35.540731716 +0300
++++ b/drivers/staging/unisys/uislib/uislib.c        2014-09-04 19:10:29.683786189 +0300
+@@ -20,7 +20,7 @@
+ #include <linux/kernel.h>
+ #include <linux/highmem.h>
+ #ifdef CONFIG_MODVERSIONS
+-#include <config/modversions.h>
++/* #include <config/modversions.h> */
+ #endif
+ #include <linux/module.h>
+ #include <linux/debugfs.h>
+
+--- a/drivers/staging/unisys/virthba/virthba.c   2014-09-04 19:13:15.891790640 +0300
++++ b/drivers/staging/unisys/virthba/virthba.c       2014-09-04 19:40:55.629835086 +0300
+@@ -30,7 +30,7 @@
+ 
+ #include <linux/kernel.h>
+ #ifdef CONFIG_MODVERSIONS
+-#include <config/modversions.h>
++/* #include <config/modversions.h> */
+ #endif
+ 
+ #include "uniklog.h"
+ 
+--- a/drivers/staging/unisys/virtpci/virtpci.c   2014-09-04 19:13:15.892790640 +0300
++++ b/drivers/staging/unisys/virtpci/virtpci.c       2014-09-04 19:42:41.914837932 +0300
+@@ -19,7 +19,7 @@
+ 
+ #include <linux/kernel.h>
+ #ifdef CONFIG_MODVERSIONS
+-#include <config/modversions.h>
++/* #include <config/modversions.h> */
+ #endif
+ #include "uniklog.h"
+ #include "diagnostics/appos_subsystems.h"
+
