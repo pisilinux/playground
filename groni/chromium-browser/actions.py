@@ -22,7 +22,7 @@ def setup():
     
     options = '\
                 -Dwerror= \
-                -Dpython_ver=3.4 \
+                -Dpython_ver=2.7 \
                 -Dgoogle_api_key=AIzaSyBINKL31ZYd8W5byPuwTXYK6cEyoceGh6Y \
                 -Dgoogle_default_client_id=879512332529.apps.googleusercontent.com \
                 -Dgoogle_default_client_secret=RmQPJJeL1cNJ8iETnoVD4X17 \
@@ -54,6 +54,7 @@ def setup():
                 -Duse_system_xdg_utils=1 \
                 -Duse_system_yasm=1 \
                 -Duse_system_zlib=0 \
+<<<<<<< HEAD
                 -Duse_system_libxslt=1  \
                 -Duse_system_minizip=1  \
                 -Duse_system_nspr=1  \
@@ -65,6 +66,11 @@ def setup():
                 -Ddisable_nacl=1 \
                 -Ddisable_pnacl=1 \
                 -Ddisable_newlib_untar=1 \
+=======
+                -Duse_gconf=0 \
+                -Ddisable_glibc=1 \
+                -Ddisable_sse2=1 \
+>>>>>>> parent of 59bdc85... chromium-browser:add dep
                 -Dlinux_use_tcmalloc=1 \
                 -Dusb_ids_path=/usr/share/misc/usb.ids \
                 -Dlinux_sandbox_path=/usr/lib/chromium-browser/chromium-sandbox \
