@@ -16,7 +16,7 @@
         <IsA>library</IsA>
         <Summary>OpenGL Extension Wrangler Library</Summary>
         <Description>OpenGL Extension Wrangler Library (GLEW) is a cross-platform C/C++ extension loading library. GLEW provides efficient run-time mechanisms for determining which OpenGL extensions are supported on the target platform. OpenGL core and extension functionality is exposed in a single header file.</Description>
-        <Archive sha1sum="9291f5c5afefd482c7f3e91ffb3cd4716c6c9ffe" type="targz">mirrors://sourceforge/glew/1.9.0/glew-1.9.0.tgz</Archive>
+        <Archive sha1sum="f41b45ca4a630ad1d00b8b87c5f493781a380300" type="targz">mirrors://sourceforge/glew/1.10.0/glew-1.10.0.tgz</Archive>
         <BuildDependencies>
             <Dependency>freeglut-devel</Dependency>
             <Dependency>mesa-devel</Dependency>
@@ -136,14 +136,42 @@
     </Package>
 
     <History>
-        <Update release="4">
-            <Date>2013-10-13</Date>
-            <Version>1.9.0</Version>
-            <Comment>Add mx support</Comment>
+      <Update release="8">
+            <Date>2014-05-16</Date>
+            <Version>1.10.0</Version>
+            <Comment>Add glewmx</Comment>
             <Name>Mathias Freire</Name>
             <Email>mathiasfreire45@gmail.com</Email>
         </Update>
-       <Update release="3">
+        <Update release="7">
+            <Date>2014-05-16</Date>
+            <Version>1.10.0</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-03-07</Date>
+            <Version>1.10.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-11-06</Date>
+            <Version>1.9.0</Version>
+            <Comment>Fix deps.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-10-08</Date>
+            <Version>1.9.0</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
             <Date>2013-08-25</Date>
             <Version>1.9.0</Version>
             <Comment>Release bump.</Comment>
