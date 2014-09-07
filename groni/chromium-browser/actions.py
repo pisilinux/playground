@@ -54,18 +54,10 @@ def setup():
                 -Duse_system_xdg_utils=1 \
                 -Duse_system_yasm=1 \
                 -Duse_system_zlib=0 \
-                -Duse_system_bzip2=1 \
-                -Duse_system_harfbuzz=1 \
-                -Duse_system_icu=1 \
-                -Duse_system_jsoncpp=1  \
-                -Duse_system_libwebp=1  \
-                -Duse_system_libxml=1  \
                 -Duse_system_libxslt=1  \
                 -Duse_system_minizip=1  \
                 -Duse_system_nspr=1  \
                 -Duse_system_speex=1 \
-                -Duse_system_zlib=1 \
-                -Duse_system_yasm=1 \
                 -Dicu_use_data_file_flag=0 \
                 -Duse_gconf=0 \
                 -Ddisable_glibc=1 \
@@ -91,7 +83,7 @@ def build():
     shelltools.system("export -n CFLAGS CXXFLAGS")
     pisitools.flags.add("-fno-stack-protector","-fno-ipa-cp")
     #pisitools.flags.add("-fno-stack-protector")
-    autotools.make("chrome chrome_sandbox BUILDTYPE=Release V=1")
+    autotools.make("chromium-browser chromium-sandbox BUILDTYPE=Release V=1")
 
 def install():
     shelltools.cd("out/Release")
