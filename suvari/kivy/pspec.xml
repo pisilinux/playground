@@ -1,0 +1,45 @@
+<PISI>
+    <Source>
+        <Name>kivy</Name>
+        <Homepage>http://kivy.org/</Homepage>
+        <Packager>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <PartOf>programming.language.python</PartOf>
+        <IsA>library</IsA>
+        <Summary>A software library for rapid development of hardware-accelerated multitouch applications.</Summary>
+        <Description>Kivy - Open source Python library for rapid development of applications
+that make use of innovative user interfaces, such as multi-touch apps.</Description>
+        <Archive sha1sum="0dc2e7cf95c7f623cdc3403f275c3d021cb36a2d" type="targz">https://pypi.python.org/packages/source/K/Kivy/Kivy-1.8.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>cython</Dependency>
+            <Dependency>pygame</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>gstreamer-next-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>kivy</Name>
+        <RuntimeDependencies>
+            <Dependency>mesa</Dependency>
+            <Dependency>gstreamer-next</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/kivy-examples</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-09-08</Date>
+            <Version>1.8.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+

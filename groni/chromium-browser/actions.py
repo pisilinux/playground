@@ -54,9 +54,6 @@ def setup():
                 -Duse_system_xdg_utils=1 \
                 -Duse_system_yasm=1 \
                 -Duse_system_zlib=0 \
-                -Duse_gconf=0 \
-                -Ddisable_glibc=1 \
-                -Ddisable_sse2=1 \
                 -Dlinux_use_tcmalloc=1 \
                 -Dusb_ids_path=/usr/share/misc/usb.ids \
                 -Dlinux_sandbox_path=/usr/lib/chromium-browser/chromium-sandbox \
@@ -75,7 +72,7 @@ def build():
     shelltools.system("export -n CFLAGS CXXFLAGS")
     pisitools.flags.add("-fno-stack-protector","-fno-ipa-cp")
     #pisitools.flags.add("-fno-stack-protector")
-    autotools.make("chrome chrome_sandbox BUILDTYPE=Release V=1")
+    autotools.make("chromium-browser chromium-sandbox BUILDTYPE=Release V=1")
 
 def install():
     shelltools.cd("out/Release")
