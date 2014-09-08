@@ -11,9 +11,14 @@ from pisi.actionsapi import get
 #WorkDIR = "ninja-1.5.1" % get.srcVERSION()
 
 def build():
-    pythonmodules.compile("./bootstrap.py \
+    pythonmodules.configure("./bootstrap.py \
                           --emacs -Q --batch -f batch-byte-compile misc/ninja-mode.el \
                           --asciidoc doc/manual.asciidoc")
+
+def check():
+    pythonmodules.check("python2 ./configure.py --with-gtest=/usr/src/gtest\
+                        -./ninja ninja_test\
+                        -./ninja_test --gtest_filter=-SubprocessTest.SetWithLots")
 
 def install():
     pythonmodules.install("install -m755 -D ninja $pkdir/usr/bin/ninja"
