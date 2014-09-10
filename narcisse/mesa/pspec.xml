@@ -13,11 +13,12 @@
         <IsA>app:console</IsA>
         <Summary>Mesa graphics libraries and utilities</Summary>
         <Description>Mesa is an open-source implementation of the OpenGL specification - a system for rendering interactive 3D graphics.</Description>
-        <Archive sha1sum="483a2516c70d6045c4fe79f7aa4be8c51c7d3494" type="tarbz2">ftp://ftp.freedesktop.org/pub/mesa/10.2.6/MesaLib-10.2.6.tar.bz2</Archive>
+        <Archive sha1sum="06b8a25a2176fbacc70ac8c73d66687d371e3c33" type="tarbz2">ftp://ftp.freedesktop.org/pub/mesa/10.3/MesaLib-10.3.0-rc3.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>llvm</Dependency>
             <Dependency>xorg-proto</Dependency>
             <Dependency>libdrm-devel</Dependency>
+	    <Dependency>libclc-devel</Dependency>
             <Dependency>libXext-devel</Dependency>
             <Dependency>wayland-devel</Dependency>
             <Dependency>libvdpau-devel</Dependency>
@@ -33,6 +34,7 @@
         <RuntimeDependencies>
             <Dependency>llvm</Dependency>
             <Dependency>libdrm</Dependency>
+	    <Dependency>libclc</Dependency>
             <Dependency>libXext</Dependency>
             <Dependency>libXfixes</Dependency>
             <Dependency>libXdamage</Dependency>
@@ -75,6 +77,31 @@
             <Path fileType="header">/usr/include</Path>
             <Path fileType="data">/usr/lib/pkgconfig</Path>
             <Path fileType="data">/usr/lib32/pkgconfig</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>mesa-opencl</Name>
+        <Summary>mesa OpenCL libraries</Summary>
+        <RuntimeDependencies>
+            <Dependency>libclc</Dependency>
+            <Dependency release="current">mesa</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/OpenCL</Path>
+            <Path fileType="data">/usr/lib/libMesaOpenCL.so*</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>mesa-opencl-devel</Name>
+        <Summary>Development files for mesa-opencl</Summary>
+        <RuntimeDependencies>
+            <Dependency>libclc-devel</Dependency>
+            <Dependency release="current">mesa-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/KHR</Path>
         </Files>
     </Package>
 
@@ -126,6 +153,13 @@
         </Provides>
     </Package>
     <History>
+      <Update release="16">
+            <Date>2014-09-08</Date>
+            <Version>10.3.0_rc3</Version>
+            <Comment>Version bump to 10.3.0_rc3 and add OpenCL support</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="15">
             <Date>2014-08-31</Date>
             <Version>10.2.6</Version>

@@ -6,8 +6,10 @@
 from pisi.actionsapi import get
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 
 Libdir = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
+
 
 def setup():
     autotools.autoreconf("-vif")
@@ -34,14 +36,26 @@ def setup():
               --enable-gallium-llvm \
               --enable-shared-glapi \
               --enable-texture-float \
+              --enable-xvmc \
              "
 
     if get.buildTYPE() == "emul32":
         # compile with llvm doesn't work for now, test it later
+        
+             
         options += " --with-dri-driverdir=/usr/lib32/xorg/modules/dri \
                      --with-gallium-drivers=r600,nouveau,swrast \
+                     --with-clang-libdir=/usr/lib32 \
+                     --disable-asm \
                      --disable-gallium-llvm \
                      --enable-32-bit"
+                     
+    elif get.ARCH() == "x86_64":
+       
+        options += " --with-clang-libdir=/usr/lib \
+                     --enable-opencl \
+                     --enable-opencl-icd \
+                   "
 
     autotools.configure(options)
     pisitools.dosed("libtool","( -shared )", " -Wl,--as-needed\\1")
@@ -50,10 +64,12 @@ def build():
     autotools.make()
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())    
 
-    pisitools.domove("%s/libGL.so.1.2.0" % Libdir, "%s/mesa" % Libdir)
+    pisitools.domove("%s/libGL.so.1.2.0" % Libdir, "%s/mesa" % Libdir)    
     pisitools.dosym("libGL.so.1.2.0", "%s/libGL.so.1.2" % Libdir)
+    
+
 
     if get.buildTYPE() == "emul32":
         return
