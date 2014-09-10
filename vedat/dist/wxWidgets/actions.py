@@ -28,14 +28,6 @@ def setup():
                          --enable-graphics_ctx \
                          --enable-display \
                          --enable-joystick \
-                         --enable-gstreamer \
-                         --enable-webview \
-                         --enable-webkit \
-                         --enable-libnotify \
-                         --enable-opengl \
-                         --enable-sys \
-                         --enable-libtiff \
-                         --enable-tiff \
                          --disable-gtktest \
                          --disable-sdltest \
                          --disable-precomp-headers \
@@ -51,20 +43,15 @@ def setup():
                          --with-opengl \
                          --with-regex=sys \
                          --with-zlib=sys \
-                         --enable-compat28 \
-                         --with-gtkprint \
-                         --enable-gui \
                          --with-expat=sys")
 
 def build():
     autotools.make()
-    autotools.make("-C contrib")
     autotools.make("-C locale allmo")
 
 def install():
     autotools.install()
-    autotools.install("-C contrib")
 
     pisitools.dodoc("docs/*.txt", "docs/*.htm")
-    pisitools.rename("/usr/bin/wxrc-2.8", "wxrc")
-    pisitools.rename("/usr/bin/wx-config-2.8", "wxconfig")
+    #pisitools.rename("/usr/bin/wxrc-3.0", "wxrc")
+    pisitools.rename("/usr/bin/wx-config", "wxconfig")

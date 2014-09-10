@@ -15,10 +15,6 @@ NoStrip = ["/lib", "/boot"]
 shelltools.export("KBUILD_BUILD_USER", "pisilinux")
 shelltools.export("KBUILD_BUILD_HOST", "buildfarm")
 shelltools.export("PYTHONDONTWRITEBYTECODE", "1")
-shelltools.export("HOME", get.workDIR())
-
-shelltools.export("CC", "clang")
-
 
 cpupower_arch = get.ARCH().replace("i686", "i386")
 

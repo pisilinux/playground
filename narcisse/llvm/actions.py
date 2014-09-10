@@ -26,6 +26,8 @@ def setup():
         shelltools.move("projects/libcxxabi-3.5.0.src", "projects/libcxxabi")
         shelltools.move("projects/libcxx-3.5.0.src", "projects/libcxx")
         
+        
+    # dosed does nothing on internal makefile. Patch doesn't work. So I added this externally. Because without this change, build fails.        
     shelltools.system("rm -f tools/lldb/scripts/Python/modules/readline/Makefile")
     shelltools.move("Makefile_", "tools/lldb/scripts/Python/modules/readline/Makefile")
 
@@ -37,7 +39,7 @@ def setup():
     pisitools.dosed("tools/llvm-config/llvm-config.cpp", '(ActiveLibDir\s=\sActivePrefix\s\+\s\"\/lib)(.*)', r'\1/llvm\2')
     pisitools.dosed("autoconf/configure.ac", '\LLVM_LIBDIR="\$\{prefix\}/lib"', 'LLVM_LIBDIR="${prefix}/%s/llvm"' % lib)
     
-    pisitools.dosed("tools/lldb/scripts/Python/modules/readline/Makefile", '$(Verb) $(RM) "$(DESTDIR)$(prefix)/lib/$(LIBRARYNAME)$(SHLIBEXT)"', '$(Verb) $(RM) "$(DESTDIR)$(prefix)/lib/python2.7/site-packages/$(LIBRARYNAME)$(SHLIBEXT)"')
+#    pisitools.dosed("tools/lldb/scripts/Python/modules/readline/Makefile", '$(Verb) $(RM) "$(DESTDIR)$(prefix)/lib/$(LIBRARYNAME)$(SHLIBEXT)"', '$(Verb) $(RM) "$(DESTDIR)$(prefix)/lib/python2.7/site-packages/$(LIBRARYNAME)$(SHLIBEXT)"')
 
     pisitools.dosed("Makefile.rules", "\$\(RPATH\)\s-Wl,\$\(ExmplDir\)\s\$\(DynamicFlag\)", "$(DynamicFlag)")
     pisitools.dosed("Makefile.rules", "\$\(RPATH\)\s-Wl,\$\(ToolDir\)\s\$\(DynamicFlag\)", "$(DynamicFlag)")
@@ -46,6 +48,8 @@ def setup():
 
     pic_option = "enable" if get.ARCH() == "x86_64" else "disable"
     
+    
+    # Build fails with GCC, with clang it is ok.
     shelltools.export("CC", "clang")
     shelltools.export("CXX", "clang++")
 
