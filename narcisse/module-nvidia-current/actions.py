@@ -21,10 +21,12 @@ if get.buildTYPE() == 'emul32':
     arch = "x86"
     nvlibdir = "/usr/lib32/%s" % driver_dir_name
     libdir = "/usr/lib32"
+    xlibdir= "/usr/lib32/xorg"
 else:
     arch = get.ARCH().replace("i686", "x86")
     nvlibdir = "/usr/lib/%s" % driver_dir_name
     libdir = "/usr/lib"
+    xlibdir= "/usr/lib/xorg"
 
 def setup():
     shelltools.system("sh NVIDIA-Linux-%s-%s.run -x --target tmp"
@@ -94,7 +96,7 @@ def install():
     pisitools.dolib("libnvidia-compiler.so.%s" % version, libdir)
     pisitools.dosym("libnvidia-compiler.so.%s" % version, "%s/libnvidia-compiler.so.1" % libdir)
 
-    # OpenGL cpre library
+    # OpenGL core library
     for lib in ("glcore", "tls"):
         pisitools.dolib("libnvidia-%s.so.%s" % (lib, version), libdir)
 
@@ -104,6 +106,7 @@ def install():
 
     # X modules
     pisitools.dolib("nvidia_drv.so", "%s/modules/drivers" % nvlibdir)
+    pisitools.dosym("%s/modules/drivers/nvidia_drv.so" % nvlibdir, "%s/modules/drivers/nvidia_drv.so" % xlibdir)
     pisitools.dolib("libglx.so.%s" % version, "%s/modules/extensions" % nvlibdir)
     pisitools.dosym("libglx.so.%s" % version, "%s/modules/extensions/libglx.so" % nvlibdir)
 
