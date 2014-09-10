@@ -47,13 +47,13 @@ def setup():
 
 def build():
     autotools.make()
-    #autotools.make("-C contrib")
+    autotools.make("-C contrib")
     autotools.make("-C locale allmo")
 
 def install():
     autotools.install()
-    #autotools.install("-C contrib")
+    autotools.install("-C contrib")
 
     pisitools.dodoc("docs/*.txt", "docs/*.htm")
-    #pisitools.rename("/usr/bin/wxrc-3.0", "wxrc")
-    pisitools.rename("/usr/bin/wx-config", "wxconfig")
+    pisitools.rename("/usr/bin/wxrc-2.8", "wxrc")
+    pisitools.rename("/usr/bin/wx-config-2.8", "wxconfig")
