@@ -29,7 +29,7 @@ def setup():
         
     # dosed does nothing on internal makefile. Patch doesn't work. So I added this externally. Because without this change, build fails.        
     shelltools.system("rm -f tools/lldb/scripts/Python/modules/readline/Makefile")
-    shelltools.move("makefile+", "tools/lldb/scripts/Python/modules/readline/Makefile")
+    shelltools.move("Makefile_", "tools/lldb/scripts/Python/modules/readline/Makefile")
 
     pisitools.dosed("utils/llvm-build/llvm-build", "python", "python2.7")
     pisitools.dosed("bindings/ocaml/Makefile.ocaml", '\$\(PROJ_libdir\)', libdir)
@@ -39,7 +39,7 @@ def setup():
     pisitools.dosed("tools/llvm-config/llvm-config.cpp", '(ActiveLibDir\s=\sActivePrefix\s\+\s\"\/lib)(.*)', r'\1/llvm\2')
     pisitools.dosed("autoconf/configure.ac", '\LLVM_LIBDIR="\$\{prefix\}/lib"', 'LLVM_LIBDIR="${prefix}/%s/llvm"' % lib)
     
-    pisitools.dosed("tools/lldb/scripts/Python/modules/readline/Makefile", '$(Verb) $(RM) "$(DESTDIR)$(prefix)/lib/$(LIBRARYNAME)$(SHLIBEXT)"', '$(Verb) $(RM) "$(DESTDIR)$(prefix)/lib/python2.7/site-packages/$(LIBRARYNAME)$(SHLIBEXT)"')
+#    pisitools.dosed("tools/lldb/scripts/Python/modules/readline/Makefile", '$(Verb) $(RM) "$(DESTDIR)$(prefix)/lib/$(LIBRARYNAME)$(SHLIBEXT)"', '$(Verb) $(RM) "$(DESTDIR)$(prefix)/lib/python2.7/site-packages/$(LIBRARYNAME)$(SHLIBEXT)"')
 
     pisitools.dosed("Makefile.rules", "\$\(RPATH\)\s-Wl,\$\(ExmplDir\)\s\$\(DynamicFlag\)", "$(DynamicFlag)")
     pisitools.dosed("Makefile.rules", "\$\(RPATH\)\s-Wl,\$\(ToolDir\)\s\$\(DynamicFlag\)", "$(DynamicFlag)")
