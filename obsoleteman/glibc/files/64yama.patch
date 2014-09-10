@@ -1,0 +1,134 @@
+diff -Nuar glibc-2.20.orig/sysdeps/gnu/configure glibc-2.20/sysdeps/gnu/configure
+--- glibc-2.20.orig/sysdeps/gnu/configure	2014-09-07 11:09:09.000000000 +0300
++++ glibc-2.20/sysdeps/gnu/configure	2014-09-10 13:54:39.000000000 +0300
+@@ -6,20 +6,41 @@
+ # files.  I.e., when the installation prefix is "/usr" we have to place
+ # shared library objects and the configuration files on the root partition
+ # in /lib and /etc.
+-test -n "$libc_cv_slibdir" ||
+ case "$prefix" in
+ /usr | /usr/)
+-  libc_cv_slibdir=/lib
+-  libc_cv_rtlddir=/lib
+-  if test "$libdir" = '${exec_prefix}/lib'; then
+-    libdir='${exec_prefix}/lib';
+-    # Locale data can be shared between 32-bit and 64-bit libraries.
+-    libc_cv_localedir='${exec_prefix}/lib/locale'
++  # 64-bit libraries on bi-arch platforms go in /lib too.
++  # Allow earlier configure scripts to handle libc_cv_slibdir,
++  # libc_cv_rtlddir, libdir, and libc_cv_localedir.
++  test -n "$libc_cv_slibdir" || \
++  case $machine in
++  sparc/sparc64 | x86_64* | powerpc/powerpc64 | s390/s390-64)
++    libc_cv_slibdir=/lib
++    case $machine in
++    s390/s390-64)
++      libc_cv_rtlddir=/lib
++      ;;
++    esac
++    if test "$libdir" = '${exec_prefix}/lib'; then
++      libdir='${exec_prefix}/lib';
++      # Locale data can be shared between 32bit and 64bit libraries
++      libc_cv_localedir='${exec_prefix}/lib/locale'
++    fi
++    ;;
++  *)
++    libc_cv_slibdir=/lib
++    ;;
++  esac
++  # Use lib32 dirs in x86 on multi arch
++  if test "$multi_arch" = "yes"; then
++    case $machine in
++      *86)
++        libc_cv_slibdir="/lib32";
++        libdir='${exec_prefix}/lib32'
++      ;;
++      *)
++      ;;
++    esac
+   fi
+-  ;;
+-esac
+-case "$prefix" in
+-/usr | /usr/)
+   # Allow the user to override the path with --sysconfdir.
+   if test "$sysconfdir" = '${prefix}/etc'; then
+     libc_cv_sysconfdir=/etc
+diff -Nuar glibc-2.20.orig/sysdeps/gnu/configure.ac glibc-2.20/sysdeps/gnu/configure.ac
+--- glibc-2.20.orig/sysdeps/gnu/configure.ac	2014-09-07 11:09:09.000000000 +0300
++++ glibc-2.20/sysdeps/gnu/configure.ac	2014-09-10 13:54:39.000000000 +0300
+@@ -6,9 +6,41 @@
+ # files.  I.e., when the installation prefix is "/usr" we have to place
+ # shared library objects and the configuration files on the root partition
+ # in /lib and /etc.
+-LIBC_SLIBDIR_RTLDDIR([lib], [lib])
+ case "$prefix" in
+ /usr | /usr/)
++  # 64-bit libraries on bi-arch platforms go in /lib too.
++  # Allow earlier configure scripts to handle libc_cv_slibdir,
++  # libc_cv_rtlddir, libdir, and libc_cv_localedir.
++  test -n "$libc_cv_slibdir" || \
++  case $machine in
++  sparc/sparc64 | x86_64* | powerpc/powerpc64 | s390/s390-64)
++    libc_cv_slibdir=/lib
++    case $machine in
++    s390/s390-64)
++      libc_cv_rtlddir=/lib
++      ;;
++    esac
++    if test "$libdir" = '${exec_prefix}/lib'; then
++      libdir='${exec_prefix}/lib';
++      # Locale data can be shared between 32bit and 64bit libraries
++      libc_cv_localedir='${exec_prefix}/lib/locale'
++    fi
++    ;;
++  *)
++    libc_cv_slibdir=/lib
++    ;;
++  esac
++  # Use lib32 dirs in x86 on multi arch
++  if test "$multi_arch" = "yes"; then
++    case $machine in
++      *86)
++        libc_cv_slibdir="/lib32";
++        libdir='${exec_prefix}/lib32'
++      ;;
++      *)
++      ;;
++    esac
++  fi
+   # Allow the user to override the path with --sysconfdir.
+   if test "$sysconfdir" = '${prefix}/etc'; then
+     libc_cv_sysconfdir=/etc
+diff -Nuar glibc-2.20.orig/sysdeps/unix/sysv/linux/ldd-rewrite.sed glibc-2.20/sysdeps/unix/sysv/linux/ldd-rewrite.sed
+--- glibc-2.20.orig/sysdeps/unix/sysv/linux/ldd-rewrite.sed	2014-09-07 11:09:09.000000000 +0300
++++ glibc-2.20/sysdeps/unix/sysv/linux/ldd-rewrite.sed	2014-09-10 13:54:39.000000000 +0300
+@@ -1,11 +1,3 @@
+-/Maybe extra code for non-ELF binaries/a\
+-  file=$1\
+-  # Run the ldd stub.\
+-  lddlibc4 "$file"\
+-  # Test the result.\
+-  if test $? -lt 3; then\
+-    return 0;\
+-  fi\
+-  # In case of an error punt.
+ /LD_TRACE_LOADED_OBJECTS=1/a\
+ add_env="$add_env LD_LIBRARY_VERSION=\\$verify_out"
++s_^\(RTLDLIST=\)\(.*lib\)\(\|64\)\(/[^/]*\)\(-x86-64\)\(\.so\.[0-9.]*\)[   ]*$_\1"\2\4\5\6 \232\4\6"_
+diff -Nuar glibc-2.20.orig/sysdeps/unix/sysv/linux/x86_64/ldconfig.h glibc-2.20/sysdeps/unix/sysv/linux/x86_64/ldconfig.h
+--- glibc-2.20.orig/sysdeps/unix/sysv/linux/x86_64/ldconfig.h	2014-09-07 11:09:09.000000000 +0300
++++ glibc-2.20/sysdeps/unix/sysv/linux/x86_64/ldconfig.h	2014-09-10 13:54:39.000000000 +0300
+@@ -18,9 +18,9 @@
+ #include <sysdeps/generic/ldconfig.h>
+ 
+ #define SYSDEP_KNOWN_INTERPRETER_NAMES \
+-  { "/lib/ld-linux.so.2", FLAG_ELF_LIBC6 }, \
+-  { "/libx32/ld-linux-x32.so.2", FLAG_ELF_LIBC6 }, \
+-  { "/lib64/ld-linux-x86-64.so.2", FLAG_ELF_LIBC6 },
++   { "/lib/ld-linux-x86-64.so.2", FLAG_ELF_LIBC6 }, \
++   { "/lib/ld-linux.so.2", FLAG_ELF_LIBC6 },\
++   { "/libx32/ld-linux-x32.so.2", FLAG_ELF_LIBC6 },
+ #define SYSDEP_KNOWN_LIBRARY_NAMES \
+   { "libc.so.6", FLAG_ELF_LIBC6 },	\
+   { "libm.so.6", FLAG_ELF_LIBC6 },
