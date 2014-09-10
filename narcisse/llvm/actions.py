@@ -26,8 +26,10 @@ def setup():
         shelltools.move("projects/libcxxabi-3.5.0.src", "projects/libcxxabi")
         shelltools.move("projects/libcxx-3.5.0.src", "projects/libcxx")
         
+        
+    # dosed does nothing on internal makefile. Patch doesn't work. So I added this externally. Because without this change, build fails.        
     shelltools.system("rm -f tools/lldb/scripts/Python/modules/readline/Makefile")
-    shelltools.move("Makefile_", "tools/lldb/scripts/Python/modules/readline/Makefile")
+    shelltools.move("makefile+", "tools/lldb/scripts/Python/modules/readline/Makefile")
 
     pisitools.dosed("utils/llvm-build/llvm-build", "python", "python2.7")
     pisitools.dosed("bindings/ocaml/Makefile.ocaml", '\$\(PROJ_libdir\)', libdir)
@@ -46,6 +48,8 @@ def setup():
 
     pic_option = "enable" if get.ARCH() == "x86_64" else "disable"
     
+    
+    # Build fails with GCC, with clang it is ok.
     shelltools.export("CC", "clang")
     shelltools.export("CXX", "clang++")
 
