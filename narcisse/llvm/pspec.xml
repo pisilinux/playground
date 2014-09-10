@@ -11,22 +11,31 @@
         <License>NCSA</License>
         <Summary>The Low Level Virtual Machine</Summary>
         <Description>The LLVM Project is a collection of modular and reusable compiler and toolchain technologies. Despite its name, LLVM has little to do with traditional virtual machines, though it does provide helpful libraries that can be used to build them.</Description>
-        <Archive sha1sum="3711baa6f5ef9df07418ce76039fc3848a7bde7c" type="targz">http://llvm.org/releases/3.4.1/llvm-3.4.1.src.tar.gz</Archive>
-        <Archive sha1sum="ecd38fa89e837e6cb8305b8d05e88baecb0bda55" type="targz" target="llvm-3.4.1.src/tools">http://llvm.org/releases/3.4.1/cfe-3.4.1.src.tar.gz</Archive>
-        <Archive sha1sum="56afa36c2ddd11a53f1e199152b04dfb9347d93a" type="targz" target="llvm-3.4.1.src/tools">http://llvm.org/releases/3.4/clang-tools-extra-3.4.src.tar.gz</Archive>
-        <Archive sha1sum="d644b1e4f306f7ad35df0a134d14a1123cd9f082" type="targz" target="llvm-3.4.1.src/projects">http://llvm.org/releases/3.4/compiler-rt-3.4.src.tar.gz</Archive>
+        <Archive sha1sum="58d817ac2ff573386941e7735d30702fe71267d5" type="tarxz">http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz</Archive>
+        <Archive sha1sum="834cee2ed8dc6638a486d8d886b6dce3db675ffa" type="tarxz" target="llvm-3.5.0.src/tools">http://llvm.org/releases/3.5.0/cfe-3.5.0.src.tar.xz</Archive>
+        <Archive sha1sum="74a84493e3313c180490a4affbb92d61ee4f0d21" type="tarxz" target="llvm-3.5.0.src/tools">http://llvm.org/releases/3.5.0/clang-tools-extra-3.5.0.src.tar.xz</Archive>
+	<Archive sha1sum="22ef35f23e47651d9841e7c98aa2ad81a9670044" type="tarxz" target="llvm-3.5.0.src/tools">http://llvm.org/releases/3.5.0/lldb-3.5.0.src.tar.xz</Archive>
+        <Archive sha1sum="61f3e78088ce4a0787835036f2d3c61ede11e928" type="tarxz" target="llvm-3.5.0.src/projects">http://llvm.org/releases/3.5.0/compiler-rt-3.5.0.src.tar.xz</Archive>
+	<Archive sha1sum="31ffde04899449ae754a39c3b4e331a73a51a831" type="tarxz" target="llvm-3.5.0.src/projects">http://llvm.org/releases/3.5.0/libcxxabi-3.5.0.src.tar.xz</Archive>
+	<Archive sha1sum="c98beed86ae1adf9ab7132aeae8fd3b0893ea995" type="tarxz" target="llvm-3.5.0.src/projects">http://llvm.org/releases/3.5.0/libcxx-3.5.0.src.tar.xz</Archive>
 
         <BuildDependencies>
             <Dependency>ocaml</Dependency>
             <Dependency>tcl-devel</Dependency>
             <Dependency>libstdc++</Dependency>
             <Dependency>libffi-devel</Dependency>
+	    <Dependency>libedit-devel</Dependency>
             <!-- Use new plugin-api.h header file from binutils to enable LLVM gold plugin -->
             <Dependency>binutils</Dependency>
+	    <Dependency>swig</Dependency>
         </BuildDependencies>
         <Patches>         
-            <Patch level="0">llvm-3.4-provide-cmake-modules.patch</Patch>
+	  <!--<Patch level="0">llvm-3.4-provide-cmake-modules.patch</Patch>-->
+	  
         </Patches>
+	<AdditionalFiles>
+	  <AdditionalFile target="Makefile_">Makefile</AdditionalFile>
+	</AdditionalFiles>
     </Source>
 
     <Package>
@@ -38,11 +47,13 @@
             <Dependency>libffi</Dependency>
             <Dependency>libgcc</Dependency>
             <Dependency>libxml2</Dependency>
+	    <Dependency>libedit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="executable">/usr/bin/llvm-config</Path>
             <Path fileType="header">/usr/include/llvm*</Path>
+	    <Path fileType="header">/usr/include/c++/v1</Path>
             <Path fileType="library">/usr/lib/llvm</Path>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="data">/etc/ld.so.conf.d</Path>
@@ -102,7 +113,7 @@
             <Path fileType="library">/usr/lib/clang/libclang.so</Path>
             <Path fileType="man">/usr/share/man/man1/clang.1</Path>
         </Files>
-    </Package>
+    </Package>    
 
     <Package>
         <Name>llvm-clang-devel</Name>
@@ -115,7 +126,36 @@
             <Path fileType="header">/usr/include/clang-c</Path>
         </Files>
     </Package>
-
+    
+    <Package>
+        <Name>lldb</Name>
+        <Summary>Next generation high-performance debugger</Summary>
+        <Description>LLDB is a next generation, high-performance debugger. It is built as a set of reusable components which highly leverage existing libraries in the larger LLVM Project, such as the Clang expression parser and LLVM disassembler.</Description>
+        <RuntimeDependencies>
+            <Dependency release="current">llvm</Dependency>
+	    <Dependency>swig</Dependency>
+            <Dependency>libgcc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/lldb*</Path>
+            <Path fileType="library">/usr/lib/llvm/liblldb*.so</Path>
+            <Path fileType="man">/usr/share/man/man1/lldb.1.gz</Path>
+	    <Path fileType="man">/usr/share/doc/lldb</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>lldb-devel</Name>
+        <Summary>Development files of lldb</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">lldb</Dependency>
+	    <Dependency release="current">llvm</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/lldb</Path>
+        </Files>
+    </Package>
+    
     <Package>
         <Name>llvm-docs</Name>
         <PartOf>system.doc</PartOf>
@@ -148,6 +188,13 @@
     </Package>
 
     <History>
+      <Update release="7">
+            <Date>2014-09-08</Date>
+            <Version>3.5.0</Version>
+            <Comment>Version bump and add LLDB</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2014-05-11</Date>
             <Version>3.4.1</Version>

@@ -17,11 +17,19 @@ lib = "lib32" if get.buildTYPE() == "emul32" else "lib"
 
 def setup():
     if not shelltools.isDirectory("tools/clang"):
-        pisitools.dosed("tools/cfe-3.4.1.src/lib/Driver/ToolChains.cpp", '"ld"', '"ld.gold"')
+        pisitools.dosed("tools/cfe-3.5.0.src/lib/Driver/ToolChains.cpp", '"ld"', '"ld.gold"')
         shelltools.move("tools/cfe-%s.src" % get.srcVERSION(), "tools/clang")
-        shelltools.move("tools/clang-tools-extra-3.4", "tools/clang/extra")
+        shelltools.move("tools/lldb-%s.src" % get.srcVERSION(), "tools/lldb")
+        shelltools.move("tools/clang-tools-extra-3.5.0.src", "tools/clang/extra")
     if not shelltools.isDirectory("projects/compiler-rt"):
-        shelltools.move("projects/compiler-rt-3.4", "projects/compiler-rt")
+        shelltools.move("projects/compiler-rt-3.5.0.src", "projects/compiler-rt")
+        shelltools.move("projects/libcxxabi-3.5.0.src", "projects/libcxxabi")
+        shelltools.move("projects/libcxx-3.5.0.src", "projects/libcxx")
+        
+        
+    # dosed does nothing on internal makefile. Patch doesn't work. So I added this externally. Because without this change, build fails.        
+    shelltools.system("rm -f tools/lldb/scripts/Python/modules/readline/Makefile")
+    shelltools.move("makefile+", "tools/lldb/scripts/Python/modules/readline/Makefile")
 
     pisitools.dosed("utils/llvm-build/llvm-build", "python", "python2.7")
     pisitools.dosed("bindings/ocaml/Makefile.ocaml", '\$\(PROJ_libdir\)', libdir)
@@ -30,6 +38,8 @@ def setup():
     pisitools.dosed("Makefile.config.in", "\$\(PROJ_prefix\)/docs/llvm", "$(PROJ_prefix)/share/doc/llvm")
     pisitools.dosed("tools/llvm-config/llvm-config.cpp", '(ActiveLibDir\s=\sActivePrefix\s\+\s\"\/lib)(.*)', r'\1/llvm\2')
     pisitools.dosed("autoconf/configure.ac", '\LLVM_LIBDIR="\$\{prefix\}/lib"', 'LLVM_LIBDIR="${prefix}/%s/llvm"' % lib)
+    
+    pisitools.dosed("tools/lldb/scripts/Python/modules/readline/Makefile", '$(Verb) $(RM) "$(DESTDIR)$(prefix)/lib/$(LIBRARYNAME)$(SHLIBEXT)"', '$(Verb) $(RM) "$(DESTDIR)$(prefix)/lib/python2.7/site-packages/$(LIBRARYNAME)$(SHLIBEXT)"')
 
     pisitools.dosed("Makefile.rules", "\$\(RPATH\)\s-Wl,\$\(ExmplDir\)\s\$\(DynamicFlag\)", "$(DynamicFlag)")
     pisitools.dosed("Makefile.rules", "\$\(RPATH\)\s-Wl,\$\(ToolDir\)\s\$\(DynamicFlag\)", "$(DynamicFlag)")
@@ -37,6 +47,11 @@ def setup():
     shelltools.export("CPPFLAGS","%s %s" % (get.CXXFLAGS(),pkgconfig.getLibraryCFLAGS("libffi")))
 
     pic_option = "enable" if get.ARCH() == "x86_64" else "disable"
+    
+    
+    # Build fails with GCC, with clang it is ok.
+    shelltools.export("CC", "clang")
+    shelltools.export("CXX", "clang++")
 
     options = "--libdir=%s \
                --datadir=/usr/share/llvm \
