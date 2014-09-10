@@ -28,6 +28,14 @@ def setup():
                          --enable-graphics_ctx \
                          --enable-display \
                          --enable-joystick \
+                         --enable-gstreamer \
+                         --enable-webview \
+                         --enable-webkit \
+                         --enable-libnotify \
+                         --enable-opengl \
+                         --enable-sys \
+                         --enable-libtiff \
+                         --enable-tiff \
                          --disable-gtktest \
                          --disable-sdltest \
                          --disable-precomp-headers \
@@ -43,6 +51,9 @@ def setup():
                          --with-opengl \
                          --with-regex=sys \
                          --with-zlib=sys \
+                         --enable-compat28 \
+                         --with-gtkprint \
+                         --enable-gui \
                          --with-expat=sys")
 
 def build():
