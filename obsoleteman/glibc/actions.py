@@ -13,7 +13,9 @@ import os
 
 WorkDir = "glibc-2.20"
 
-#defaultflags = "-O3 -g -fasynchronous-unwind-tables -mtune=generic -march=x86-64" if get.ARCH() == "x86_64" else "-mtune=generic -march=i686"
+arch = "x86-64" if get.ARCH() == "x86_64" and not get.buildTYPE() == "emul32" else "i686"
+defaultflags = "-O3 -g -fasynchronous-unwind-tables -mtune=generic -march=%s" % arch
+if get.buildTYPE() == "emul32": defaultflags += " -m32"
 # this is getting ridiculous, also gdb3 breaks resulting binary
 #sysflags = get.CFLAGS().replace("-fstack-protector", "").replace("-D_FORTIFY_SOURCE=2", "").replace("-funwind-tables", "").replace("-fasynchronous-unwind-tables", "")
 #sysflags = "-mtune=generic -march=x86-64" if get.ARCH() == "x86_64" else "-mtune=generic -march=i686"
@@ -34,11 +36,11 @@ def setup():
     shelltools.export("LANG","C")
     shelltools.export("LC_ALL","C")
 
-    #shelltools.export("CC", "gcc %s " % defaultflags)
-    #shelltools.export("CXX", "g++ %s " % defaultflags)
+    shelltools.export("CC", "gcc %s " % defaultflags)
+    shelltools.export("CXX", "g++ %s " % defaultflags)
 
-    #shelltools.export("CFLAGS", defaultflags)
-    #shelltools.export("CXXFLAGS", defaultflags)
+    shelltools.export("CFLAGS", defaultflags)
+    shelltools.export("CXXFLAGS", defaultflags)
 
     shelltools.makedirs("build")
     shelltools.cd("build")
@@ -46,7 +48,7 @@ def setup():
                --mandir=/usr/share/man \
                --infodir=/usr/share/info \
                --libexecdir=/usr/lib/misc \
-               --with-bugurl=https://bugs.pisilinux.org/ \
+               --with-bugurl=https://bugs.pisilinux.org \
                --enable-add-ons \
                --enable-bind-now \
                --enable-kernel=2.6.32 \
@@ -56,27 +58,44 @@ def setup():
                --disable-profile \
                --enable-obsolete-rpc \
                --enable-lock-elision \
+               --enable-multi-arch \
                --with-tls"
+    if get.buildTYPE() == "emul32":
+        options += "\
+                    --enable-multi-arch i686-pc-linux-gnu \
+                   "
 
     shelltools.system("../configure %s" % options)
 
 def build():
+    shelltools.cd("build")
     if get.buildTYPE() == "emul32":
         shelltools.echo("configparms","build-programs=no")
-        
         shelltools.echo("configparms", "slibdir=/lib32")
         shelltools.echo("configparms", "rtlddir=/lib32")
+        shelltools.echo("configparms", "bindir=/tmp32")
+        shelltools.echo("configparms", "sbindir=/tmp32")
+        shelltools.echo("configparms", "rootsbindir=/tmp32")
+        shelltools.echo("configparms", "datarootdir=/tmp32")
+
+        autotools.make()
+
+        pisitools.dosed("configparms", "=no", "=yes")
+        shelltools.echo("configparms", "CC += -fstack-protector-strong -D_FORTIFY_SOURCE=2")
+        shelltools.echo("configparms", "CXX += -fstack-protector-strong -D_FORTIFY_SOURCE=2")
 
     else:
-        shelltools.cd("build")
         shelltools.echo("configparms", "slibdir=/lib")
         shelltools.echo("configparms", "rtlddir=/lib")
+
     autotools.make()
 
 def install():
     shelltools.cd("build")
 
     autotools.rawInstall("install_root=%s" % get.installDIR())
+    if get.buildTYPE() == "emul32":
+        pisitools.removeDir("/tmp32")
 
     # Remove our options section from crt stuff
     #removePisiLinuxSection("%s/usr/%s/" % (get.installDIR(), cfg["libdir"]))
