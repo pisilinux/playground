@@ -13,9 +13,9 @@
         <Description>Qlix is a user interface that allows users to manage Media Transfer Protocol (MTP) devices such as Microsoft's Zune .</Description>
         <Archive sha1sum="6358bdec011cef74e6144d2991b60410405df96a" type="targz">http://downloads.sourceforge.net/project/qlix.berlios/qlix_0.2.6.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>taglib</Dependency>
-            <Dependency>libmtp</Dependency>
-            <Dependency>qt</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>libmtp-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">debian/01-ftbfs_64bit.patch</Patch>
@@ -26,7 +26,7 @@
         <Name>qlix</Name>
         <RuntimeDependencies>
              <Dependency>mercurial</Dependency>
-             <Dependency>libusb1-devel</Dependency>
+             <Dependency>libusbx-devel</Dependency>
              <Dependency>golang</Dependency>
              <Dependency>go-mtpfs</Dependency>
         </RuntimeDependencies>
