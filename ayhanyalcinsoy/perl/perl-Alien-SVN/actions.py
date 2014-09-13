@@ -4,17 +4,22 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/licenses/gpl.txt
 
-from pisi.actionsapi import autotools
+from pisi.actionsapi import perlmodules
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
+WorkDir=""
+
 def setup():
-    autotools.configure()
+    perlmodules.configure()
 
 def build():
-    autotools.make()
+    perlmodules.make()
+
+# FIXME: test fails
+def check():
+    perlmodules.make("test")
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    perlmodules.install()
 
-    pisitools.dodoc("README.in", "CHANGELOG", "README")
