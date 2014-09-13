@@ -7,8 +7,10 @@
 from pisi.actionsapi import perlmodules
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
+from pisi.actionsapi import shelltools
 
 WorkDir=""
+shelltools.export("HOME", get.workDIR())
 
 def setup():
     perlmodules.configure()
