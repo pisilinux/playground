@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Basepack of plugins for gstreamer</Summary>
         <Description>GStreamer base plugins are a well-groomed and well-maintained collection of GStreamer plugins and elements, spanning the range of possible types of elements one would want to write for GStreamer. It also contains helper libraries and base classes useful for writing elements. A wide range of video and audio decoders, encoders, and filters are included.</Description>
-        <Archive sha1sum="6c7c4bad34897032058f9b96c10bc7caac72ed99" type="tarxz">http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.4.0.tar.xz</Archive>
+        <Archive sha1sum="0818947329495d15ba64373fd891b7ae6ed887d7" type="tarxz">http://ftp.gnome.org/pub/gnome/sources/gst-plugins-base/1.4/gst-plugins-base-1.4.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gstreamer-next-devel</Dependency>
             <Dependency>cdparanoia</Dependency>
@@ -65,6 +65,46 @@
             <Path fileType="data">/usr/share/gst-plugins-base/1.0</Path>
         </Files>
     </Package>
+    
+    <Package>
+        <Name>gst-plugins-base-next-32bit</Name>
+	<Summary>32 bit shared libraries for gst-plugins-base</Summary>
+	<PartOf>emul32</PartOf>
+	<BuildType>emul32</BuildType>
+	<BuildDependencies>
+	    <Dependency>gstreamer-next-32bit</Dependency>
+            <Dependency>pango-32bit</Dependency>
+            <Dependency>cairo-32bit</Dependency>
+            <Dependency>libXv-32bit</Dependency>
+            <Dependency>libogg-32bit</Dependency>
+            <Dependency>libXext-32bit</Dependency>
+            <Dependency>alsa-lib-32bit</Dependency>
+            <Dependency>libvorbis-32bit</Dependency>
+            <Dependency>libvisual-32bit</Dependency>
+            <Dependency>libtheora-32bit</Dependency>
+            <Dependency>orc-32bit</Dependency>
+            <Dependency>libSM-32bit</Dependency>
+            <Dependency>libICE-32bit</Dependency>
+	</BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency>gstreamer-next-32bit</Dependency>
+            <Dependency>pango-32bit</Dependency>
+            <Dependency>cairo-32bit</Dependency>
+            <Dependency>libXv-32bit</Dependency>
+            <Dependency>libogg-32bit</Dependency>
+            <Dependency>libXext-32bit</Dependency>
+            <Dependency>alsa-lib-32bit</Dependency>
+            <Dependency>libvorbis-32bit</Dependency>
+            <Dependency>libvisual-32bit</Dependency>
+            <Dependency>libtheora-32bit</Dependency>
+            <Dependency>orc-32bit</Dependency>
+            <Dependency>libSM-32bit</Dependency>
+            <Dependency>libICE-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
 
     <Package>
         <Name>gst-plugins-base-next-devel</Name>
@@ -82,6 +122,13 @@
     </Package>
 
     <History>
+      <Update release="7">
+            <Date>2014-09-15</Date>
+            <Version>1.4.1</Version>
+            <Comment>Version bumpand add 32 bit</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2014-08-22</Date>
             <Version>1.4.0</Version>

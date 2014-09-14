@@ -13,10 +13,24 @@ shelltools.export("HOME", get.workDIR())
 
 def setup():
     autotools.autoreconf("-vfi")
-    autotools.configure("--disable-static \
-                         --enable-experimental \
-                         --with-package-name='PisiLinux gstreamer-plugins-base package' \
-                         --with-package-origin='http://www.pisilinux.org'")
+    
+    options = "\
+               --disable-static \
+               --enable-experimental \
+               --with-package-name='PisiLinux gstreamer-plugins-base package' \
+               --with-package-origin='http://www.pisilinux.org' \
+               "
+               
+    if get.buildTYPE() == "emul32":
+        options += " --bindir=/usr/bin32 \
+                     --libdir=/usr/lib32 \
+                     --disable-introspection \
+                     --disable-cdparanoia \
+                     "
+
+        shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
+    
+    autotools.configure(options)
     
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
@@ -28,6 +42,9 @@ def build():
 #    autotools.make("-C tests/check check")
 
 def install():
-    autotools.install()
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    
+    if get.buildTYPE() == "emul32":
+        pisitools.removeDir("/usr/bin32")
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "README")
