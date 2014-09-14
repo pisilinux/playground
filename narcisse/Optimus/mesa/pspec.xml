@@ -13,9 +13,10 @@
         <IsA>app:console</IsA>
         <Summary>Mesa graphics libraries and utilities</Summary>
         <Description>Mesa is an open-source implementation of the OpenGL specification - a system for rendering interactive 3D graphics.</Description>
-        <Archive sha1sum="483a2516c70d6045c4fe79f7aa4be8c51c7d3494" type="tarbz2">ftp://ftp.freedesktop.org/pub/mesa/10.2.6/MesaLib-10.2.6.tar.bz2</Archive>
+        <Archive sha1sum="06b8a25a2176fbacc70ac8c73d66687d371e3c33" type="tarbz2">ftp://ftp.freedesktop.org/pub/mesa/10.3/MesaLib-10.3.0-rc3.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>llvm</Dependency>
+	    <Dependency>libclc-devel</Dependency>
             <Dependency>xorg-proto</Dependency>
             <Dependency>libdrm-devel</Dependency>
             <Dependency>libXext-devel</Dependency>
@@ -32,6 +33,7 @@
         <Name>mesa</Name>
         <RuntimeDependencies>
             <Dependency>llvm</Dependency>
+	    <Dependency>libclc</Dependency>
             <Dependency>libdrm</Dependency>
             <Dependency>libXext</Dependency>
             <Dependency>libXfixes</Dependency>
@@ -56,6 +58,92 @@
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
         </Provides>
+    </Package>
+    
+    <Package>
+        <Name>mesa-dri-intel</Name>
+	<Summary>Mesa DRI modules for Intel graphics chipset</Summary>
+        <RuntimeDependencies>
+	    <Dependency release="current">mesa</Dependency>
+	    <Dependency release="current">mesa-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/xorg/modules/dri/i915_dri.so</Path>
+	    <Path fileType="library">/usr/lib/xorg/modules/dri/i965_dri.so</Path>
+	    <Path fileType="library">/usr/lib32/xorg/modules/dri/i915_dri.so</Path>
+	    <Path fileType="library">/usr/lib32/xorg/modules/dri/i965_dri.so</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>mesa-dri-swrast</Name>
+	<Summary>Mesa DRI modules for software rasterizing</Summary>
+        <RuntimeDependencies>
+	    <Dependency release="current">mesa</Dependency>
+	    <Dependency release="current">mesa-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/xorg/modules/dri/kms_swrast_dri.so</Path>
+	    <Path fileType="library">/usr/lib/xorg/modules/dri/swrast_dri.so</Path>
+	    <Path fileType="library">/usr/lib32/xorg/modules/dri/kms_swrast_dri.so</Path>
+	    <Path fileType="library">/usr/lib32/xorg/modules/dri/swrast_dri.so</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>mesa-dri-nouveau</Name>
+	<Summary>Mesa Nouveau DRI modules for NVidia graphics cards</Summary>
+        <RuntimeDependencies>
+	    <Dependency release="current">mesa</Dependency>
+	    <Dependency release="current">mesa-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/xorg/modules/dri/nouveau_dri.so</Path>
+	    <Path fileType="library">/usr/lib/xorg/modules/dri/nouveau_vieux_dri.so</Path>
+	    <Path fileType="library">/usr/lib32/xorg/modules/dri/nouveau_dri.so</Path>
+	    <Path fileType="library">/usr/lib32/xorg/modules/dri/nouveau_vieux_dri.so</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>mesa-dri-radeon</Name>
+	<Summary>Mesa DRI modules for AMD/ATI Radeon cards - including R200, R600</Summary>
+        <RuntimeDependencies>
+	    <Dependency release="current">mesa</Dependency>
+	    <Dependency release="current">mesa-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/xorg/modules/dri/r200_dri.so</Path>
+	    <Path fileType="library">/usr/lib/xorg/modules/dri/r600_dri.so</Path>
+	    <Path fileType="library">/usr/lib/xorg/modules/dri/radeon_dri.so</Path>
+	    <Path fileType="library">/usr/lib32/xorg/modules/dri/r200_dri.so</Path>
+	    <Path fileType="library">/usr/lib32/xorg/modules/dri/r600_dri.so</Path>
+	    <Path fileType="library">/usr/lib32/xorg/modules/dri/radeon_dri.so</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>mesa-dri-vmware</Name>
+	<Summary>Mesa DRI modules for VMware software rasterizing.</Summary>
+        <RuntimeDependencies>
+	    <Dependency release="current">mesa</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/xorg/modules/dri/vmwgfx_dri.so</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>mesa-opencl</Name>
+	<Summary>Mesa OpenCL libraries</Summary>
+        <RuntimeDependencies>
+	    <Dependency release="current">mesa</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc/OpenCL</Path>
+            <Path fileType="library">/usr/lib/libMesaOpenCL.*</Path>
+	    <Path fileType="header">/usr/include/KHR</Path>
+        </Files>
     </Package>
 
     <Package>
@@ -126,6 +214,13 @@
         </Provides>
     </Package>
     <History>
+      <Update release="16">
+            <Date>2014-09-15</Date>
+            <Version>10.3.0_rc3</Version>
+            <Comment>Version bump, split package, add some features.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="15">
             <Date>2014-08-31</Date>
             <Version>10.2.6</Version>
