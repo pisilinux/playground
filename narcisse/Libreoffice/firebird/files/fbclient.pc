@@ -1,0 +1,10 @@
+prefix=/opt/firebird
+exec_prefix=${prefix}
+libdir=/opt/firebird/lib
+includedir=/usr/include/firebird
+
+Name: fbclient
+Description: Firebird client library
+Version: 2.5.3
+Cflags: -I${includedir}
+Libs: -L${libdir} -lfbclient
