@@ -19,8 +19,6 @@ def setup():
                --disable-static \
                "
 
-    autotools.configure(options)
-    
     if get.buildTYPE() == "emul32":
         options += " --bindir=/usr/bin32 \
                      --libexecdir=/usr/libexec32 \
