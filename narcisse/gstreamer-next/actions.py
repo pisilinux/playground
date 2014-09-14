@@ -24,6 +24,7 @@ def setup():
     if get.buildTYPE() == "emul32":
         options += " --bindir=/usr/bin32 \
                      --libexecdir=/usr/libexec32 \
+                     --libdir=/usr/lib32 \
                      --disable-introspection"
 
         shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
