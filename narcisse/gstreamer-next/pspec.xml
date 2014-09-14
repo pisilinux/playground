@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>GStreamer streaming media framework runtime</Summary>
         <Description>GStreamer is a streaming media framework, based on graphs of filters which operate on media data. Applications using this library can do anything from real-time sound processing to playing videos, and just about anything else media-related.</Description>
-        <Archive sha1sum="e95aaa6cc8e63ddb6e636b3aca7c9cb80baab544" type="tarxz">http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.4.0.tar.xz</Archive>
+        <Archive sha1sum="738b693ada79efe46cc379f666778d4b45ec7b41" type="tarxz">http://ftp.gnome.org/pub/gnome/sources/gstreamer/1.4/gstreamer-1.4.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>check</Dependency>
             <Dependency>valgrind</Dependency>
@@ -43,7 +43,7 @@
 
     <Package>
         <Name>gstreamer-next-devel</Name>
-        <Summary>Development files for gstreamer</Summary>
+        <Summary>Development files for gstreamer-next</Summary>
         <RuntimeDependencies>
             <Dependency release="current">gstreamer-next</Dependency>
         </RuntimeDependencies>
@@ -54,8 +54,32 @@
             <Path fileType="data">/usr/share/aclocal</Path>
         </Files>
     </Package>
+    
+     <Package>
+        <Name>gstreamer-next-32bit</Name>
+        <Summary>32 bit shared libraries for gstreamer-next</Summary>
+	<PartOf>emul32</PartOf>
+	<BuildType>emul32</BuildType>
+	<BuildDependencies>
+	  <Dependency>libxml2-32bit</Dependency>
+	  <Dependency>ghostscript-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">gstreamer-next</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
 
     <History>
+      <Update release="7">
+            <Date>2014-09-15</Date>
+            <Version>1.4.1</Version>
+            <Comment>Version bump and add 32 bit</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2014-08-22</Date>
             <Version>1.4.0</Version>
