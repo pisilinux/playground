@@ -9,7 +9,7 @@ from pisi.actionsapi import pisitools
 
 def setup():
     autotools.configure()
-
+   
 def build():
     autotools.make()
 
