@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>caja-dropbox</Name>
+        <Homepage>http://www.mate-desktop.org</Homepage>
+        <Packager>
+            <Name>Richard de Bruin</Name>
+            <Email>richdb@pisilinux,org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>accessories-text-editor</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Caja-Dropbox</Summary>
+        <Description>This is Caja-Dropbox, a fork of Nautilus Dropbox for MATE Desktop</Description>
+        <Archive sha1sum="616ef634f2a5ba479dd2402d8527fcd5cf9950b0" type="tarxz">http://pub.mate-desktop.org/releases/1.8/caja-dropbox-1.8.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>mate-common</Dependency>
+            <Dependency>caja-devel</Dependency>
+            <Dependency>caja-extensions-devel</Dependency>
+            <Dependency>docutils</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>caja-dropbox</Name>
+        <RuntimeDependencies>
+            <Dependency>caja</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>python-gtk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/omf</Path>
+            <Path fileType="data">/usr/share/help</Path>
+            <Path fileType="data">/usr/share/mate</Path>
+            <Path fileType="data">/usr/share/pluma</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="executable">/usr/libexec/</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="icons">/usr/share/icons</Path>
+            <Path fileType="icons">/usr/share/caja-dropbox/emblems</Path>
+        </Files>
+    </Package>      
+    
+    <History>
+        <Update release="1">
+            <Date>2014-09-17</Date>
+            <Version>1.8.0</Version>
+            <Comment>First release</Comment>
+            <Name>Richard de Bruin</Name>
+            <Email>richdb@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
