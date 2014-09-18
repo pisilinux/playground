@@ -1,0 +1,59 @@
+--- native_client/build/download_toolchains.py	2013-09-20 17:28:08.000000000 +0200
++++ native_client/build/download_toolchains.py	2013-09-23 18:17:31.760826152 +0200
+@@ -241,11 +241,13 @@
+     filepath = os.path.join(download_dir, '.'.join([filepath, ext]))
+     filepaths.append(filepath)
+     # If we did not need to synchronize, then we are done
+-    if pynacl.download_utils.SyncURL(url, filepath, stamp_dir=stamp_dir,
+-                                     min_time=min_time, hash_val=hash_val,
+-                                     stamp_index=index,
+-                                     keep=keep, verbose=verbose):
+-      need_sync = True
++    # if pynacl.download_utils.SyncURL(url, filepath, stamp_dir=stamp_dir,
++    #                                  min_time=min_time, hash_val=hash_val,
++    #                                  stamp_index=index,
++    #                                  keep=keep, verbose=verbose):
++    need_sync = True
++    verbose = True
++    keep = True
+     index += 1
+ 
+   if not need_sync:
+--- native_client/build/package_version/package_version.py	2014-05-14 15:03:04.589703693 +0200
++++ native_client/build/package_version/package_version.py	2014-05-14 15:03:04.589703693 +0200
+@@ -253,16 +253,16 @@
+ 
+       logging.info('Downloading package archive: %s (%d/%d)' %
+                    (archive_desc.name, index+1, num_archives))
+-      try:
+-        downloader(archive_desc.url, local_archive_file)
+-      except Exception as e:
+-        raise IOError('Could not download URL (%s): %s' %
+-                      (archive_desc.url, e))
+-
+-      verified_hash = archive_info.GetArchiveHash(local_archive_file)
+-      if verified_hash != archive_desc.hash:
+-        raise IOError('Package hash check failed: %s != %s' %
+-                      (verified_hash, archive_desc.hash))
++      #try:
++      #  downloader(archive_desc.url, local_archive_file)
++      #except Exception as e:
++      #  raise IOError('Could not download URL (%s): %s' %
++      #                (archive_desc.url, e))
++
++      #verified_hash = archive_info.GetArchiveHash(local_archive_file)
++      #if verified_hash != archive_desc.hash:
++      #  raise IOError('Package hash check failed: %s != %s' %
++      #                (verified_hash, archive_desc.hash))
+ 
+       downloaded_files.append(local_archive_file)
+ 
+@@ -734,7 +734,7 @@
+ def _DoSyncCmd(arguments):
+   # TODO(dyen): remove this section eventually.
+   # Before syncing, remove any old toolchain files temporarily.
+-  RemoveOldToolchainFiles(arguments.dest_dir)
++  #RemoveOldToolchainFiles(arguments.dest_dir)
+ 
+   for package_target, package_name in arguments.package_target_packages:
+     if arguments.sync__revision is None:
