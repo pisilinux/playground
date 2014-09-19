@@ -88,16 +88,13 @@ def setup():
                        --without-system-apache-commons \
                        --without-system-libexttextcat \
                        --without-system-jfreereport \
-                       --without-system-icu \
                        --without-system-liblangtag \
-                       --without-system-harfbuzz \
                        --without-system-boost \
                        --without-system-orcus \
                        --without-system-hsqldb \
                        --without-system-libmwaw \
                        --without-system-libfreehand \
                        --without-system-libebook \
-                       --without-system-firebird \
                        --without-system-libabw \
                        --without-myspell-dicts \
                        --without-system-npapi-headers \
@@ -117,6 +114,10 @@ def setup():
                        --with-system-libmspub \
                        --with-system-cppunit \
                        --with-system-mdds \
+                       --with-system-glm \
+                       --with-system-icu \
+                       --with-system-firebird \
+                       --with-system-harfbuzz \
                        --with-system-libodfgen \
                        --with-system-libetonyek \
                        --with-system-libatomic_ops \
