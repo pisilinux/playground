@@ -26,6 +26,9 @@ def setup():
     autotools.configure("--prefix=/opt/firebird \
                          --disable-static \
                          --with-editline \
+                         --with-fbbin=/opt/firebird/bin-classic \
+                         --with-fbsbin=/opt/firebird/bin-classic \
+                         --with-fbplugins=/opt/firebird/plugins-classic \
                          --with-gnu-ld \
                          --with-system-editline \
                          --with-system-icu \
