@@ -25,7 +25,6 @@ def setup():
     autotools.autoreconf("-fi")
     autotools.configure("--prefix=/opt/firebird \
                          --disable-static \
-                         --enable-superserver \
                          --with-editline \
                          --with-gnu-ld \
                          --with-system-editline \
