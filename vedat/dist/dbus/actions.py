@@ -23,7 +23,13 @@ def setup():
                --disable-static \
                --disable-tests \
                --disable-asserts \
+               --disable-checks \
+               --disable-tests \
+               --disable-embedded-tests \
+               --disable-modular-tests \
                --disable-doxygen-docs \
+               --disable-libaudit \
+               --disable-systemd \
                --disable-xml-docs"
 
     if get.buildTYPE() == "emul32":
