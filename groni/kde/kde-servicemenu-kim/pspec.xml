@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde-servicemenu-kim</Name>
+        <Homepage>http://bouveyron.free.fr/kim/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>Service-menus for image processing</Summary>
+        <Description>Kim is a kde service menu which allows to resize, convert, rotate, (...) your images without to use a graphical application like Gimp ! This service menu can be considered as a frontend of ImageMagick.</Description>
+        <Archive sha1sum="1bbc85543c46c04420adb0491683c79d2ff1d142" type="targz">http://bouveyron.free.fr/kim/release/kim4-0.9.5.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>kde-servicemenu-kim</Name>
+        <RuntimeDependencies>
+            <Dependency>bash</Dependency>
+            <Dependency>coreutils</Dependency>
+            <Dependency>firefox</Dependency>
+            <Dependency>grep</Dependency>
+            <Dependency>imagemagick</Dependency>
+            <Dependency>kde-workspace</Dependency>
+            <Dependency>mjpegtools</Dependency>
+            <Dependency>sed</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/</Path>
+            <Path fileType="data">/usr/share/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="header">/usr/include/</Path>
+            <Path fileType="info">/usr/share/info/</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="localedata">/usr/share/locale/</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-12-05</Date>
+            <Version>0.9.5</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
