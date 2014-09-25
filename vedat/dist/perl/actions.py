@@ -71,7 +71,7 @@ def build():
     autotools.make()
 
 def check():
-    autotools.make("-j1 test")
+    autotools.make("-j2 test")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())

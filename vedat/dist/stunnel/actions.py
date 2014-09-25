@@ -9,7 +9,11 @@ from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 
 def setup():
-    autotools.configure()
+    autotools.configure("--with-ssl=/usr \
+                         --enable-ipv6 \
+                         --enable-libwrap \
+                         --disable-fips \
+                         ")
 
 def build():
     autotools.make()

@@ -12,12 +12,11 @@
         <IsA>app:gui</IsA>
         <Summary>TLS/SSL - Port Wrapper</Summary>
         <Description>The stunnel package contains a program that allows you to encrypt arbitrary TCP connections inside SSL (Secure Sockets Layer) so you can easily communicate with clients over secure channels.</Description>
-        <Archive sha1sum="0e5e495e05b8d14deadd294166b211f87a667b24" type="targz">http://www.namesdir.com/mirrors/stunnel/archive/4.x/stunnel-4.56.tar.gz</Archive>
+        <Archive sha1sum="0895d6c34e4c296c38f86922f4e9ff4f25f6371b" type="targz">https://www.stunnel.org/downloads/stunnel-5.04.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>openssl-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="0">makefile.patch</Patch>
         </Patches>
     </Source>
     <Package>
@@ -31,9 +30,17 @@
             <Path fileType="man">/usr/share/man/man8</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="config">/etc/stunnel</Path>
+            <Path fileType="config">/var/lib/stunnel</Path>
         </Files>
     </Package>
     <History>
+        <Update release="5">
+            <Date>2014-09-21</Date>
+            <Version>5.04</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
         <Update release="4">
             <Date>2014-03-09</Date>
             <Version>4.56</Version>
