@@ -1,0 +1,646 @@
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- ViewVC :: http://www.viewvc.org/ -->
+<head>
+<title>[gentoo-x86] Contents of /media-gfx/blender/files/08-blender-2.71-gflags.patch</title>
+<meta name="generator" content="ViewVC 1.1.20" />
+<link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="/static/styles.css" type="text/css" />
+
+</head>
+<body>
+<div class="vc_navheader">
+<table><tr>
+<td><strong><a href="/cgi-bin/viewvc.cgi"><span class="pathdiv">/</span></a><a href="/cgi-bin/viewvc.cgi/gentoo-x86/">[gentoo-x86]</a><span class="pathdiv">/</span><a href="/cgi-bin/viewvc.cgi/gentoo-x86/media-gfx/">media-gfx</a><span class="pathdiv">/</span><a href="/cgi-bin/viewvc.cgi/gentoo-x86/media-gfx/blender/">blender</a><span class="pathdiv">/</span><a href="/cgi-bin/viewvc.cgi/gentoo-x86/media-gfx/blender/files/">files</a><span class="pathdiv">/</span><a href="/cgi-bin/viewvc.cgi/gentoo-x86/media-gfx/blender/files/08-blender-2.71-gflags.patch?view=log">08-blender-2.71-gflags.patch</a></strong></td>
+<td style="text-align: right;">
+</td>
+</tr></table>
+</form>
+</div>
+<div style="float: right; padding: 5px;"><a href="http://www.gentoo.org/" title="Gentoo Linux"><img src="/static/images/gentoo-new.gif" alt="Gentoo" width="182" height="59" /></a></div>
+<h1>Contents of /media-gfx/blender/files/08-blender-2.71-gflags.patch</h1>
+
+<p style="margin:0;">
+
+<a href="/cgi-bin/viewvc.cgi/gentoo-x86/media-gfx/blender/files/"><img src="/static/images/back_small.png" class="vc_icon" alt="Parent Directory" /> Parent Directory</a>
+
+| <a href="/cgi-bin/viewvc.cgi/gentoo-x86/media-gfx/blender/files/08-blender-2.71-gflags.patch?view=log"><img src="/static/images/log.png" class="vc_icon" alt="Revision Log" /> Revision Log</a>
+
+
+
+
+</p>
+
+<hr />
+<div class="vc_summary">
+Revision <strong>1.1</strong> -
+(<a href="/cgi-bin/viewvc.cgi/gentoo-x86/media-gfx/blender/files/08-blender-2.71-gflags.patch?annotate=1.1"><strong>show annotations</strong></a>)
+(<a href="/cgi-bin/viewvc.cgi/gentoo-x86/media-gfx/blender/files/08-blender-2.71-gflags.patch?revision=1.1"><strong>download</strong></a>)
+
+
+<br /><em>Wed Jul 16 15:31:42 2014 UTC</em>
+(2 months, 1 week ago)
+by <em>hasufell</em>
+
+
+<br />Branch: <strong>MAIN</strong>
+
+
+<br />CVS Tags: <strong>HEAD</strong>
+
+
+
+
+
+
+
+
+
+
+
+
+<pre class="vc_log">fix opencolorio dep wrt #515606, fix building with gflags-2.1.1 and adjust dep wrt #517134, add epatch_user
+
+(Portage version: 2.2.10/cvs/Linux x86_64, signed Manifest commit with key BDEED020)
+
+</pre>
+
+</div>
+
+
+
+
+
+
+<div id="vc_file">
+<table cellspacing="0" cellpadding="0">
+
+
+
+
+
+
+
+
+<tr class="vc_row_odd" id="l1">
+<td class="vc_file_line_number">1</td>
+
+<td class="vc_file_line_text">--- ./CMakeLists.txt    2014-07-15 17:30:36.608718963 -0400</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l2">
+<td class="vc_file_line_number">2</td>
+
+<td class="vc_file_line_text">+++ ./CMakeLists.txt    2014-07-15 17:25:24.940615350 -0400</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l3">
+<td class="vc_file_line_number">3</td>
+
+<td class="vc_file_line_text">@@ -116,6 +116,7 @@</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l4">
+<td class="vc_file_line_number">4</td>
+
+<td class="vc_file_line_text"> # Check for some modules</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l5">
+<td class="vc_file_line_number">5</td>
+
+<td class="vc_file_line_text"> if(UNIX)</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l6">
+<td class="vc_file_line_number">6</td>
+
+<td class="vc_file_line_text">   find_package(PkgConfig)</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l7">
+<td class="vc_file_line_number">7</td>
+
+<td class="vc_file_line_text">+  find_package(gflags REQUIRED)</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l8">
+<td class="vc_file_line_number">8</td>
+
+<td class="vc_file_line_text">   pkg_check_modules(_PC_EIGEN3 eigen3)</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l9">
+<td class="vc_file_line_number">9</td>
+
+<td class="vc_file_line_text">   pkg_check_modules(_PC_GFLAGS libgflags)</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l10">
+<td class="vc_file_line_number">10</td>
+
+<td class="vc_file_line_text">   pkg_check_modules(_PC_GLOG libglog)</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l11">
+<td class="vc_file_line_number">11</td>
+
+<td class="vc_file_line_text">--- extern/libmv/CMakeLists.txt 2014-07-15 17:30:36.565719500 -0400</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l12">
+<td class="vc_file_line_number">12</td>
+
+<td class="vc_file_line_text">+++ extern/libmv/CMakeLists.txt 2014-07-15 17:25:06.388847279 -0400</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l13">
+<td class="vc_file_line_number">13</td>
+
+<td class="vc_file_line_text">@@ -208,7 +208,7 @@</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l14">
+<td class="vc_file_line_number">14</td>
+
+<td class="vc_file_line_text"> </td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l15">
+<td class="vc_file_line_number">15</td>
+
+<td class="vc_file_line_text"> include_directories(${_PC_GFLAGS_INCLUDE_DIRS} ${_PC_GLOG_INCLUDE_DIRS})</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l16">
+<td class="vc_file_line_number">16</td>
+
+<td class="vc_file_line_text"> blender_add_lib(extern_libmv &quot;${SRC}&quot; &quot;${INC}&quot; &quot;${INC_SYS}&quot;)</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l17">
+<td class="vc_file_line_number">17</td>
+
+<td class="vc_file_line_text">-target_link_libraries(extern_libmv ${_PC_GFLAGS_LIBRARIES} ${_PC_GLOG_LIBRARIES})</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l18">
+<td class="vc_file_line_number">18</td>
+
+<td class="vc_file_line_text">+target_link_libraries(extern_libmv ${gflags_LIBRARIES} ${_PC_GLOG_LIBRARIES})</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l19">
+<td class="vc_file_line_number">19</td>
+
+<td class="vc_file_line_text"> </td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l20">
+<td class="vc_file_line_number">20</td>
+
+<td class="vc_file_line_text"></td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l21">
+<td class="vc_file_line_number">21</td>
+
+<td class="vc_file_line_text"> if(WITH_LIBMV)</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l22">
+<td class="vc_file_line_number">22</td>
+
+<td class="vc_file_line_text">--- extern/libmv/libmv-capi.cc  2014-06-25 16:43:52.000000000 -0400</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l23">
+<td class="vc_file_line_number">23</td>
+
+<td class="vc_file_line_text">+++ extern/libmv/libmv-capi.cc  2014-07-15 09:29:04.332922116 -0400</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l24">
+<td class="vc_file_line_number">24</td>
+
+<td class="vc_file_line_text">@@ -112,18 +112,18 @@</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l25">
+<td class="vc_file_line_number">25</td>
+
+<td class="vc_file_line_text">                 google::GLOG_FATAL);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l26">
+<td class="vc_file_line_number">26</td>
+
+<td class="vc_file_line_text"> </td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l27">
+<td class="vc_file_line_number">27</td>
+
+<td class="vc_file_line_text">        google::InitGoogleLogging(argv0);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l28">
+<td class="vc_file_line_number">28</td>
+
+<td class="vc_file_line_text">-       google::SetCommandLineOption(&quot;logtostderr&quot;, &quot;1&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l29">
+<td class="vc_file_line_number">29</td>
+
+<td class="vc_file_line_text">-       google::SetCommandLineOption(&quot;v&quot;, &quot;0&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l30">
+<td class="vc_file_line_number">30</td>
+
+<td class="vc_file_line_text">-       google::SetCommandLineOption(&quot;stderrthreshold&quot;, severity_fatal);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l31">
+<td class="vc_file_line_number">31</td>
+
+<td class="vc_file_line_text">-       google::SetCommandLineOption(&quot;minloglevel&quot;, severity_fatal);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l32">
+<td class="vc_file_line_number">32</td>
+
+<td class="vc_file_line_text">+       gflags::SetCommandLineOption(&quot;logtostderr&quot;, &quot;1&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l33">
+<td class="vc_file_line_number">33</td>
+
+<td class="vc_file_line_text">+       gflags::SetCommandLineOption(&quot;v&quot;, &quot;0&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l34">
+<td class="vc_file_line_number">34</td>
+
+<td class="vc_file_line_text">+       gflags::SetCommandLineOption(&quot;stderrthreshold&quot;, severity_fatal);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l35">
+<td class="vc_file_line_number">35</td>
+
+<td class="vc_file_line_text">+       gflags::SetCommandLineOption(&quot;minloglevel&quot;, severity_fatal);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l36">
+<td class="vc_file_line_number">36</td>
+
+<td class="vc_file_line_text"> }</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l37">
+<td class="vc_file_line_number">37</td>
+
+<td class="vc_file_line_text"> </td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l38">
+<td class="vc_file_line_number">38</td>
+
+<td class="vc_file_line_text"> void libmv_startDebugLogging(void)</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l39">
+<td class="vc_file_line_number">39</td>
+
+<td class="vc_file_line_text"> {</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l40">
+<td class="vc_file_line_number">40</td>
+
+<td class="vc_file_line_text">-       google::SetCommandLineOption(&quot;logtostderr&quot;, &quot;1&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l41">
+<td class="vc_file_line_number">41</td>
+
+<td class="vc_file_line_text">-       google::SetCommandLineOption(&quot;v&quot;, &quot;2&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l42">
+<td class="vc_file_line_number">42</td>
+
+<td class="vc_file_line_text">-       google::SetCommandLineOption(&quot;stderrthreshold&quot;, &quot;1&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l43">
+<td class="vc_file_line_number">43</td>
+
+<td class="vc_file_line_text">-       google::SetCommandLineOption(&quot;minloglevel&quot;, &quot;0&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l44">
+<td class="vc_file_line_number">44</td>
+
+<td class="vc_file_line_text">+       gflags::SetCommandLineOption(&quot;logtostderr&quot;, &quot;1&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l45">
+<td class="vc_file_line_number">45</td>
+
+<td class="vc_file_line_text">+       gflags::SetCommandLineOption(&quot;v&quot;, &quot;2&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l46">
+<td class="vc_file_line_number">46</td>
+
+<td class="vc_file_line_text">+       gflags::SetCommandLineOption(&quot;stderrthreshold&quot;, &quot;1&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l47">
+<td class="vc_file_line_number">47</td>
+
+<td class="vc_file_line_text">+       gflags::SetCommandLineOption(&quot;minloglevel&quot;, &quot;0&quot;);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l48">
+<td class="vc_file_line_number">48</td>
+
+<td class="vc_file_line_text"> }</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l49">
+<td class="vc_file_line_number">49</td>
+
+<td class="vc_file_line_text"> </td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l50">
+<td class="vc_file_line_number">50</td>
+
+<td class="vc_file_line_text"> void libmv_setLoggingVerbosity(int verbosity)</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l51">
+<td class="vc_file_line_number">51</td>
+
+<td class="vc_file_line_text">@@ -131,7 +131,7 @@</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l52">
+<td class="vc_file_line_number">52</td>
+
+<td class="vc_file_line_text">        char val[10];</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l53">
+<td class="vc_file_line_number">53</td>
+
+<td class="vc_file_line_text">        snprintf(val, sizeof(val), &quot;%d&quot;, verbosity);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l54">
+<td class="vc_file_line_number">54</td>
+
+<td class="vc_file_line_text"> </td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l55">
+<td class="vc_file_line_number">55</td>
+
+<td class="vc_file_line_text">-       google::SetCommandLineOption(&quot;v&quot;, val);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l56">
+<td class="vc_file_line_number">56</td>
+
+<td class="vc_file_line_text">+       gflags::SetCommandLineOption(&quot;v&quot;, val);</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l57">
+<td class="vc_file_line_number">57</td>
+
+<td class="vc_file_line_text"> }</td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l58">
+<td class="vc_file_line_number">58</td>
+
+<td class="vc_file_line_text"> </td>
+</tr>
+
+
+
+
+<tr class="vc_row_odd" id="l59">
+<td class="vc_file_line_number">59</td>
+
+<td class="vc_file_line_text"> /* ************ Planar tracker ************ */</td>
+</tr>
+
+
+</table>
+</div>
+
+
+
+
+
+<hr />
+<table>
+<tr>
+<td>&nbsp;</td>
+<td style="text-align: right;"><strong><a href="/static/help_rootview.html">ViewVC Help</a></strong></td>
+</tr>
+<tr>
+<td>Powered by <a href="http://viewvc.tigris.org/">ViewVC 1.1.20</a></td>
+<td style="text-align: right;">&nbsp;</td>
+</tr>
+</table>
+</body>
+</html>
+

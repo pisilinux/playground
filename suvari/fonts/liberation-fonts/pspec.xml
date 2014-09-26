@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>liberation-fonts</Name>
+        <Homepage>https://fedorahosted.org/liberation-fonts/</Homepage>
+        <Packager>
+            <Name>Sezai Yeniay</Name>
+            <Email>sezaiyeniay@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>data:font</IsA>
+        <Summary>Font collection similar to ones found in Microsoft Windows</Summary>
+        <Description>A set of fonts similar to Microsoft Windows fonts. There are three sets: Sans (a substitute for Arial, Albany, Helvetica, Nimbus Sans L, and Bitstream Vera Sans), Serif (a substitute for Times New Roman, Thorndale, Nimbus Roman, and Bitstream Vera Serif) and Mono (a substitute for Courier New, Cumberland, Courier, Nimbus Mono L, and Bitstream Vera Sans Mono).</Description>
+        <Archive sha1sum="84b40d7f8bb0cd085dd70b3abed197133d761557" type="targz">http://dev-www.libreoffice.org/src/5c781723a0d9ed6188960defba8e91cf-liberation-fonts-ttf-2.00.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>fontforge</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>liberation-fonts</Name>
+        <Files>
+            <Path fileType="data">/usr/share/fonts</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2014-09-26</Date>
+            <Version>2.00.1</Version>
+            <Comment>version bump</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvarice@gmail.com</Email>
+        </Update>
+        <Update release="3">
+            <Date>2014-03-09</Date>
+            <Version>2.00.0</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvarice@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-03-16</Date>
+            <Version>2.00.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>Sezai Yeniay</Name>
+            <Email>sezaiyeniay@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-09-21</Date>
+            <Version>1.05.3.20100621</Version>
+            <Comment>First release</Comment>
+            <Name>Sezai Yeniay</Name>
+            <Email>sezaiyeniay@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
