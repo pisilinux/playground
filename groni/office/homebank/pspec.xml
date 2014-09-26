@@ -1,19 +1,19 @@
- <?xml version="1.0" ?>
+<?xml version="1.0" ?>
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>homebank</Name>
         <Homepage>http://homebank.free.fr</Homepage>
         <Packager>
-            <Name>PisiLinux Community</Name>
-            <Email>admins@pisilinux.org</Email>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
         <Icon>homebank</Icon>
         <IsA>app:gui</IsA>
         <Summary>Free, easy, personal accounting for everyone</Summary>
         <Description>«HomeBank» is free software that will assist you to manage your personal accounting.</Description>
-        <Archive sha1sum="0d896a95963a5748216b98062b4e15aa5c94bb85" type="targz">http://homebank.free.fr/public/homebank-4.5.4.tar.gz</Archive>
+        <Archive sha1sum="9393f947fca17cbdb31a2bc7fa03f99ced1c6e68" type="targz">http://homebank.free.fr/public/homebank-4.6.3.tar.gz</Archive>
         <BuildDependencies>
 			<Dependency>cairo-devel</Dependency>
             <Dependency>libX11-devel</Dependency>
@@ -117,6 +117,13 @@
     </Package>
 
     <History>
+        <Update release="2">
+            <Date>2014-09-26</Date>
+            <Version>4.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>01.11.2013</Date>
             <Version>4.5.4</Version>
@@ -126,4 +133,3 @@
         </Update>
     </History>
 </PISI>
-
