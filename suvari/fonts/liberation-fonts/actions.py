@@ -6,7 +6,7 @@
 
 from pisi.actionsapi import pisitools
 
-WorkDir = "liberation-fonts-ttf-2.00.0"
+WorkDir = "liberation-fonts-ttf-2.00.1"
 
 
 def install():
