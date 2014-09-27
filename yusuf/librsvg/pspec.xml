@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>librsvg</Name>
+        <Homepage>http://librsvg.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>Scalable Vector Graphics (SVG) rendering library</Summary>
+        <Description>librsvg is a component used within software applications to enable support for SVG-format scalable vector graphics.</Description>
+        <Archive sha1sum="2762cfa3a4e9c9ee845c7f23a824dbd13583ebf0" type="tarbz2">mirrors://gnome/librsvg/2.32/librsvg-2.32.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gtk2</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libgsf</Dependency>
+            <Dependency>libcroco</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gtk-doc</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">beb01bfb68607bc03adbfd3f238419b238d20fb6.patch</Patch>
+            <!-- Store node type separately in RsvgNode, CVE-2011-3146
+            See https://bugzilla.gnome.org/show_bug.cgi?id=658014 for details -->
+            <Patch level="1">CVE-2011-3146.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>librsvg</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk2</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libgsf</Dependency>
+            <Dependency>libcroco</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/share/themes</Path>
+            <Path fileType="man">/usr/share/man/man1</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-04-22</Date>
+            <Version>2.32.1</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ktux</Name>
+        <Homepage>http://www.kde.org/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Tux screensaver</Summary>
+        <Description>A neat Tux-in-a-spaceship screensaver for the KScreenSaver</Description>
+        <Archive sha1sum="6012c3ada2dd4096c435bf45222021c9ec989b2f" type="tarxz">mirrors://kde/stable/4.11.2/src/ktux-4.11.2.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4.11.2">kdelibs-devel</Dependency>
+        </BuildDependencies>        
+    </Source>
+    <Package>
+        <Name>ktux</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="4.11.2">kdelibs</Dependency>
+        </RuntimeDependencies>
+        <Replaces>
+            <Package>kdetoys</Package>
+        </Replaces>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/doc</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2013-10-02</Date>
+            <Version>4.11.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-09-03</Date>
+            <Version>4.11.1</Version>
+            <Comment>First release</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

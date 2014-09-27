@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>fox</Name>
+        <Homepage>http://www.fox-toolkit.org/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <Icon>fox</Icon>
+        <IsA>app</IsA>
+        <Summary> C++ based toolkit for developing graphical user interfaces</Summary>
+        <Description>FOX is a C++ based toolkit for developing graphical user interfaces easily and effectively</Description>
+        <Archive sha1sum="056a55ba7b4404af61d4256eafdf8fd0503c6fea" type="targz">ftp://ftp.fox-toolkit.org/pub/fox-1.6.49.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libXcursor-devel</Dependency>
+            <Dependency>libXft-devel</Dependency>
+            <Dependency>libXi-devel</Dependency>
+            <Dependency>libpng-devel</Dependency>
+	    <Dependency>mesa-devel</Dependency>
+	    <Dependency>mesa-glu-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>fox</Name>
+        <RuntimeDependencies>
+            <Dependency>libXcursor</Dependency>
+            <Dependency>libXft</Dependency>
+            <Dependency>libXi</Dependency>
+            <Dependency>libpng</Dependency>
+	    <Dependency>mesa</Dependency>
+	    <Dependency>mesa-glu-devel</Dependency>
+        </RuntimeDependencies>
+
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-08-17</Date>
+            <Version>1.6.49</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

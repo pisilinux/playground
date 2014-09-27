@@ -1,0 +1,13 @@
+Index: qlix-0.2.6/widgets/QMtpDevice.cpp
+===================================================================
+--- qlix-0.2.6.orig/widgets/QMtpDevice.cpp
++++ qlix-0.2.6/widgets/QMtpDevice.cpp
+@@ -225,7 +225,7 @@ void QMtpDevice::findAndRetrieveDeviceIc
+   MTP::Folder* rootFolder = _device->RootFolder();
+   count_t fileCount = rootFolder->FileCount();
+ 
+-  QString iconPath = QString("/tmp/QlixDeviceIcon-%1").arg( (int) this); 
++  QString iconPath = QString("/tmp/QlixDeviceIcon-%1").arg( (long) this); 
+   MTP::File* iconFile= NULL;
+   for (count_t i = 0; i < fileCount; i++)
+   {

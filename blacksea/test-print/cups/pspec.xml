@@ -1,0 +1,183 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cups</Name>
+        <Homepage>http://www.cups.org/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>service</IsA>
+        <Summary>Common Unix Printing System</Summary>
+        <Description>cups provides a portable printing layer for *nix-based operating systems.</Description>
+        <Archive sha1sum="04940471e4f99bcb45dd8a93477676ba1f213fc6" type="tarbz2">http://www.cups.org/software/1.6.3/cups-1.6.3-source.tar.bz2</Archive>
+        <Archive sha1sum="062beea95c6f8dda0a5e7eed51604e22806ffad3" type="tar" target="cups-1.6.3">http://source.pisilinux.org/1.0/cups-tr.tar</Archive>
+        <BuildDependencies>
+            <Dependency>libpaper-devel</Dependency>
+            <Dependency>gnutls-devel</Dependency>
+            <Dependency>mit-kerberos</Dependency>
+            <Dependency>cups-filters</Dependency>
+            <Dependency>avahi-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <!-- Gentoo patches -->
+            <Patch level="0">gentoo/cups-1.6.0-fix-install-perms.patch</Patch>
+            <Patch level="1">gentoo/cups-1.6.2-statedir.patch</Patch>
+            <Patch level="1">fedora/cups-avahi-address.patch</Patch>
+            <Patch level="1">ubuntu/cups-dbus-utf8.patch</Patch>    
+            <Patch level="1">fedora/cups-enum-all.patch</Patch>
+            <Patch level="1">fedora/cups-no-export-ssllibs.patch</Patch>
+            <Patch level="1">fedora/cups-no-gzip-man.patch</Patch>
+            <Patch level="1">fedora/cups-res_init.patch</Patch>
+            <Patch level="1">ubuntu/cupsd-no-crash-on-avahi-threaded-poll-shutdown.patch</Patch>
+            <Patch level="1">ubuntu/get-ppd-file-for-statically-configured-ipp-shared-queues.patch</Patch>
+            <Patch level="1">ubuntu/ppd-poll-with-client-conf.patch</Patch>
+            <Patch level="1">arch/cups-no-gcry.patch</Patch>
+       </Patches>
+    </Source>
+
+    <Package>
+        <Name>cups</Name>
+        <RuntimeDependencies>
+            <Dependency>mit-kerberos</Dependency>
+            <Dependency>avahi-libs</Dependency>
+            <Dependency>libpaper</Dependency>
+            <Dependency>gnutls</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/cups/*conf</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/var/cache/cups/rss</Path>
+            <Path fileType="data">/var/spool/cups/tmp</Path>
+            <Path fileType="data">/run/cups/certs</Path>
+            <Path fileType="data">/var/log/cups</Path>
+            <Path fileType="data">/etc</Path>
+            <Path fileType="data">/lib/udev/rules.d</Path>
+            <Path fileType="data">/lib/systemd/system</Path>
+            <Path fileType="data">/usr/share/cups</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/cups">cups.pam</AdditionalFile>
+            <!-- logrotate file for CUPS logs -->
+            <AdditionalFile owner="root" permission="0644" target="/etc/logrotate.d/cups">cups.logrotate</AdditionalFile>
+
+            <!-- conf file for CUPS service for loading parallel port printer driver if desired -->
+            <!--AdditionalFile owner="root" permission="0644" target="/etc/conf.d/cups">cups.confd</AdditionalFile-->
+
+            <!-- Default client.conf file from Ubuntu -->
+            <!--AdditionalFile owner="root" permission="0644" target="/etc/cups/client.conf">client.conf</AdditionalFile-->
+
+            <!-- php extension file -->
+            <!--AdditionalFile owner="root" permission="0644" target="/etc/php/ext/cups.ini">cups.php.ini</AdditionalFile-->
+
+            <!-- Generic textonly ppd from Fedora which is also used by Ubuntu -->
+            <!--AdditionalFile owner="root" permission="0644" target="/usr/share/cups/model/textonly.ppd">fedora/textonly.ppd</AdditionalFile-->
+
+            <!-- Udev rules for ACL management -->
+            <!--AdditionalFile owner="root" permission="0644" target="/lib/udev/rules.d/70-cups-libusb.rules">cups-libusb.rules</AdditionalFile-->
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="service.py">System.Service</COMAR>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>cups-php</Name>
+        <Summary>CUPS API for PHP programming language</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">cups</Dependency>
+            <Dependency>php-cli</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/php/modules</Path>
+            <Path fileType="data">/etc/php/ext/cups.ini</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>cups-devel</Name>
+        <Summary>Development files for cups</Summary>
+        <RuntimeDependencies>
+            <Dependency>gnutls-devel</Dependency>
+            <Dependency release="current">cups</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="executable">/usr/bin/cups-config</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>cups-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for cups</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>zlib-32bit</Dependency>
+            <Dependency>libusbx-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">cups</Dependency>
+            <Dependency>zlib-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/cups-config-32bit</Path>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="6">
+            <Date>2013-07-13</Date>
+            <Version>1.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-07-13</Date>
+            <Version>1.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-05-19</Date>
+            <Version>1.6.1</Version>
+            <Comment>Lib64 path correction.</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-03-13</Date>
+            <Version>1.6.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>ertan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2012-10-18</Date>
+            <Version>1.5.4</Version>
+            <Comment>Fixed</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-10-18</Date>
+            <Version>1.5.4</Version>
+            <Comment>First release</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
