@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xfce-whiskermenu-plugin</Name>
+        <Homepage>http://gottcode.org/xfce4-whiskermenu-plugin/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app</IsA>
+        <Summary>Alternate Xfce menu</Summary>
+        <Description>Alternate Xfce menu</Description>
+        <Archive sha1sum="6d4d6f6497c10e115ca5a8d7b7b8bc7e911084b9" type="tarbz2">http://gottcode.org/xfce4-whiskermenu-plugin/xfce4-whiskermenu-plugin-1.1.1-src.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>garcon-devel</Dependency>
+            <Dependency>xfconf-devel</Dependency>
+            <Dependency>libxfce4ui-devel</Dependency>
+            <Dependency>xfce4-panel-devel</Dependency>
+            <Dependency>exo-devel</Dependency>
+            <Dependency>libxfce4util-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>xfce-whiskermenu-plugin</Name>
+        <RuntimeDependencies>
+            <Dependency>garcon</Dependency>
+            <Dependency>xfconf</Dependency>
+            <Dependency>libxfce4ui</Dependency>
+            <Dependency>xfce4-panel</Dependency>
+            <Dependency>exo</Dependency>
+            <Dependency>libxfce4util</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>cairo</Dependency>
+        </RuntimeDependencies>
+
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib/xfce4/panel/plugins</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2013-09-14</Date>
+            <Version>1.1.1</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

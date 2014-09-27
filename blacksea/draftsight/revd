@@ -1,0 +1,64 @@
+ revdep-rebuild
+
+Checking reverse dependencies...
+
+Collecting system binaries and libraries... done.
+  (/root/.revdep-rebuild.1_files)
+
+Collecting complete LD_LIBRARY_PATH... done.
+  (/root/.revdep-rebuild.2_ldpath)
+
+Checking dynamic linking consistency...
+  broken /opt/dassault-systemes/draftsight/bin/AecArchBase.tx (requires libAecScheduleData.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)      
+  broken /opt/dassault-systemes/draftsight/bin/AecScheduleData.tx (requires libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)                          
+  broken /opt/dassault-systemes/draftsight/bin/AecAreaCalculationBase.tx (requires libAecArchBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libAecScheduleData.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)                                                                                                                     
+  broken /opt/dassault-systemes/draftsight/bin/AecArchDACHBase.tx (requires libAecStructureBase.so.1 libAecArchBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libAecScheduleData.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)                                                                                                   
+  broken /opt/dassault-systemes/draftsight/bin/AecSchedule.tx (requires libAecArchBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libAecScheduleData.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)                                                                                                                                
+  broken /opt/dassault-systemes/draftsight/bin/AecStructureBase.tx (requires libAecArchBase.so.1 libAecScheduleData.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAeccNetwork.so.1 (requires libAecCivilBase.so.1 libAeccvBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libAeccLand.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAecCivilBase.so.1 (requires libAeccLand.so.1 libAeccvBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAecUIStructureBase.so.1 (requires libAecStructureBase.so.1 libAecSchedule.so.1 libAecUIBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libAecArchBase.so.1 libAecScheduleData.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAeccvBase.so.1 (requires libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAeccPlanProd.so.1 (requires libAecCivilBase.so.1 libAeccvBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libAeccLand.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAecUISchedule.so.1 (requires libAecSchedule.so.1 libAecUIBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libAecArchBase.so.1 libAecScheduleData.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAeccSurvey.so.1 (requires libAeccLand.so.1 libAeccvBase.so.1 libAecCivilBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAeccUiLand.so.1 (requires libAeccLand.so.1 libAeccvBase.so.1 libAecCivilBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libTD_3DSolidHistory.so.1 (requires libTD_DynBlocks.so.1 libTD_Db.so.1 libTD_Ge.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_Gi.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAeccRoadway.so.1 (requires libAeccLand.so.1 libAeccvBase.so.1 libAecBase.so.1 libAecCivilBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAeccLand.so.1 (requires libAeccvBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAecUIBase.so.1 (requires libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/dassault-systemes/draftsight/lib/libAecUIArchBase.so.1 (requires libAecUIBase.so.1 libAecArchBase.so.1 libAecBase.so.1 libAecGeometry.so.1 libTD_Db.so.1 libTD_Gs.so.1 libTD_Ge.so.1 libTD_Gi.so.1 libTD_DbRoot.so.1 libTD_Root.so.1 libTD_Alloc.so.1 libAecScheduleData.so.1 libTD_SpatialIndex.so.1 libfxsisl.so.1)
+  broken /opt/sun-jre/lib/amd64/fxavcodecplugin-52.so (requires libgstreamer-lite.so libavcodec.so.52 libavformat.so.52)
+  broken /opt/sun-jre/lib/amd64/fxavcodecplugin-53.so (requires libgstreamer-lite.so libavcodec.so.53 libavformat.so.53)
+  broken /opt/sun-jdk/jre/lib/amd64/fxavcodecplugin-52.so (requires libgstreamer-lite.so libavcodec.so.52 libavformat.so.52)
+  broken /opt/sun-jdk/jre/lib/amd64/fxavcodecplugin-53.so (requires libgstreamer-lite.so libavcodec.so.53 libavformat.so.53)
+ done.
+  (/root/.revdep-rebuild.3_rebuild)
+
+Determining package names consistency...
+ done.
+  (/root/.revdep-rebuild.4_names)
+draftsight paketi içinde opt/dassault-systemes/draftsight/bin/AecArchBase.tx dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/bin/AecArchDACHBase.tx dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/bin/AecAreaCalculationBase.tx dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/bin/AecScheduleData.tx dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/bin/AecSchedule.tx dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/bin/AecStructureBase.tx dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAecCivilBase.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAeccLand.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAeccNetwork.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAeccPlanProd.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAeccRoadway.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAeccSurvey.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAeccUiLand.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAeccvBase.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAecUIArchBase.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAecUIBase.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAecUISchedule.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libAecUIStructureBase.so.1 dosyası var.
+draftsight paketi içinde opt/dassault-systemes/draftsight/lib/libTD_3DSolidHistory.so.1 dosyası var.
+sun-jre paketi içinde opt/sun-jdk/jre/lib/amd64/fxavcodecplugin-52.so dosyası var.
+sun-jre paketi içinde opt/sun-jdk/jre/lib/amd64/fxavcodecplugin-53.so dosyası var.
+sun-jre paketi içinde opt/sun-jre/lib/amd64/fxavcodecplugin-52.so dosyası var.
+sun-jre paketi içinde opt/sun-jre/lib/amd64/fxavcodecplugin-53.so dosyası var.
+

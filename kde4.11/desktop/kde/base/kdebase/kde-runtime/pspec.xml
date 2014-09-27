@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde-runtime</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>KDE4 Runtime Requirements</Summary>
+        <Description>kde-runtime contains KDE4 base runtime applications and data files needed at runtime by other KDE applications. In this package, core applications and libraries like Nepomuk server, kcmshell4, kwalletd, kio libraries and kdesu are included.</Description>
+        <Archive type="tarxz" sha1sum="b896ef9d8fe770720dc16ae3eae33538e4e699da">mirrors://kde/stable/4.11.2/src/kde-runtime-4.11.2.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="4.11.2">kdelibs-devel</Dependency>
+            <Dependency versionFrom="4.11.2">kdepimlibs-devel</Dependency>
+            <Dependency>phonon-devel</Dependency>
+            <Dependency>shared-desktop-ontologies</Dependency>
+            <Dependency>redland-devel</Dependency>
+            <Dependency>qt-webkit-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>pulseaudio-libs-devel</Dependency>
+            <Dependency>clucene-devel</Dependency>
+            <Dependency>ntrack-qt4-devel</Dependency>
+            <Dependency>samba-devel</Dependency>
+            <Dependency>libstreams-devel</Dependency>
+            <Dependency>libstreamanalyzer-devel</Dependency>
+            <Dependency>strigi-devel</Dependency>
+            <Dependency>exiv2-devel</Dependency>
+            <Dependency>openexr-devel</Dependency>
+            <Dependency>libXcursor-devel</Dependency>
+            <Dependency>attica-devel</Dependency>
+            <Dependency>soprano-devel</Dependency>
+            <Dependency>alsa-lib-devel</Dependency>
+            <Dependency>libssh-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>xine-lib-devel</Dependency>
+            <Dependency>openslp-devel</Dependency>
+            <Dependency>NetworkManager-devel</Dependency>
+            <Dependency>webp-devel</Dependency>            
+        </BuildDependencies>
+        <Patches>
+            <!-- Pisi Linux patches -->
+            <Patch level="1">pisilinux/pisiwallpaper.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>kde-runtime</Name>
+        <IsA>app:gui</IsA>
+        <RuntimeDependencies>
+            <Dependency versionFrom="4.11.2">kdelibs</Dependency>
+            <Dependency versionFrom="4.11.2">kdepimlibs</Dependency>
+            <Dependency>phonon</Dependency>
+            <Dependency>shared-desktop-ontologies</Dependency>
+            <Dependency>redland</Dependency>
+            <Dependency>qt-webkit</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>pulseaudio-libs</Dependency>
+            <Dependency>ntrack-qt4</Dependency>
+            <Dependency>clucene</Dependency>
+            <Dependency>xine-lib</Dependency>
+            <Dependency>samba</Dependency>
+            <Dependency>icon-theme-hicolor</Dependency>
+            <Dependency>libXcursor</Dependency>
+            <Dependency>attica</Dependency>
+            <Dependency>libssh</Dependency>
+            <Dependency>soprano</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>exiv2-libs</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>openexr-libs</Dependency>
+            <Dependency>libstreams</Dependency>
+            <Dependency>libstreamanalyzer</Dependency>
+            <Dependency>strigi-libs</Dependency>
+            <Dependency>openslp</Dependency>
+            <Dependency>NetworkManager</Dependency>
+            <!-- KHelpCenter uses htdig for indexing-->
+            <Dependency>htdig</Dependency>
+            <Dependency>nepomuk-core</Dependency>
+            <Dependency>kactivities</Dependency>
+            <Dependency>kdepimlibs</Dependency>
+            <Dependency>qt</Dependency>
+            <Dependency>webp</Dependency>
+            <Dependency>rarian</Dependency>
+            <Dependency>libkgapi</Dependency>
+            <Dependency>libkolab</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/autostart</Path>
+            <Path fileType="data">/usr/share/config.kcfg</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/desktop-directories</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/kde4</Path>
+            <Path fileType="data">/usr/share/mime</Path>
+            <Path fileType="data">/usr/share/ontology</Path>
+            <Path fileType="data">/usr/share/polkit-1</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/lib/kde4/libexec/installdbgsymbols.py" permission="0755" owner="root">pisilinux/installdbgsymbols.py</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>kde-runtime-doc</Name>
+        <IsA>data:doc</IsA>
+        <Summary>Documentation of kde-runtime package</Summary>
+        <Description>kde-runtime-doc contains documentation of applications and libraries included in kde-runtime package.</Description>
+        <RuntimeDependencies>
+            <Dependency release="current">kde-runtime</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>kde-runtime-devel</Name>
+        <IsA>library</IsA>
+        <Summary>Development files for kde-runtime package</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">kde-runtime</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>kde-sounds</Name>
+        <IsA>data</IsA>
+        <Summary>KDE4 System Sounds</Summary>
+        <Description>kdebase-sounds contains default KDE4 system sounds.</Description>
+        <RuntimeDependencies>
+            <Dependency release="current">kde-runtime</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/sounds</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>kde-emoticons</Name>
+        <IsA>data</IsA>
+        <Summary>KDE4 Emoticons</Summary>
+        <Description>kdebase-emoticonts contains default KDE4 emoticons.</Description>
+        <RuntimeDependencies>
+            <Dependency release="current">kde-runtime</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/emoticons</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="10">
+            <Date>2013-10-02</Date>
+            <Version>4.11.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Update>
+        <Update release="9">
+            <Date>2013-09-07</Date>
+            <Version>4.11.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2013-08-27</Date>
+            <Version>4.10.5</Version>
+            <Comment>set default wallpaper.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>      
+        <Update release="7">
+            <Date>2013-07-02</Date>
+            <Version>4.10.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-06-10</Date>
+            <Version>4.10.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-05-06</Date>
+            <Version>4.10.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-04-03</Date>
+            <Version>4.10.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-03-06</Date>
+            <Version>4.10.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>      
+        <Update release="2">
+            <Date>2013-02-15</Date>
+            <Version>4.10.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>      
+        <Update release="1">
+            <Date>2013-01-19</Date>
+            <Version>4.9.98</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>       
+    </History>
+</PISI>
