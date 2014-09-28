@@ -37,6 +37,9 @@ def setup():
 def build():
     autotools.make()
 
+def check():
+    autotools.make("check")
+
 def install():
     if get.buildTYPE() == "emul32":
         pisitools.insinto("/usr/lib32", "poppler/.libs/libpoppler.so*")

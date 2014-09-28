@@ -12,9 +12,14 @@ def setup():
     autotools.configure("--prefix=/usr  \
                          --sysconfdir=/etc \
                          --sbindir=/usr/bin \
+                         --docdir=/usr/share/doc/cups-filters \
                          --with-rcdir=no \
                          --localstatedir=/run \
+                         --with-fontdir='fonts/conf.avail' \
+                         --with-pdftops=pdftops \
+                         --enable-imagefilters \
                          --enable-avahi \
+                         --enable-dbus \
                          --with-browseremoteprotocols=DNSSD,CUPS \
                          --with-test-font-path=/usr/share/fonts/dejavu/DejaVuSans.ttf")
 
