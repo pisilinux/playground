@@ -8,7 +8,8 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 
 def setup():
-    autotools.configure("--disable-static --disable-scrollkeeper")
+    autotools.configure("--disable-static \
+                         --with-xml-catalog=/etc/xml/catalog ")
 
 def build():
     autotools.make()
