@@ -8,7 +8,7 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-WorkDir="jbigkit"
+#WorkDir="jbigkit"
 
 def build():
     autotools.make("CC=%s CFLAGS='%s'" % (get.CC(), get.CFLAGS()))
