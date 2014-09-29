@@ -8,7 +8,7 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-WorkDir = "libfm-%s" % (get.srcVERSION())
+WorkDir = ""
 
 def setup():
     autotools.configure("--disable-static \
