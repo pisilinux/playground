@@ -46,6 +46,8 @@ def setup():
                          --disable-rpath \
                          --with-system-et \
                          --with-system-ss \
+                         --with-system-verto \
+                         --with-ldap \
                          --enable-dns-for-realm")
 
     # Fix krb5-config script to remove rpaths and CFLAGS

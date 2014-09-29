@@ -13,10 +13,14 @@
         <IsA>app:console</IsA>
         <Summary>MIT Kerberos Library</Summary>
         <Description>Kerberos is a network authentication protocol. It is designed to provide strong authentication for client/server applications by using secret-key cryptography.</Description>
-        <Archive sha1sum="ed1d315e9466145b209cc98c7c6325f576592767" type="targz">https://dl.dropboxusercontent.com/s/94a5cn3jm3k9qor/krb5-1.12.1.tar.gz</Archive>
+        <Archive sha1sum="cfe0630c0eca87f73cd70e759f8f50827798c424" type="targz">https://github.com/krb5/krb5/archive/krb5-1.12.2-final.tar.gz</Archive>
 
         <BuildDependencies>
             <Dependency>keyutils</Dependency>
+            <Dependency>openldap-client</Dependency>
+            <Dependency>openldap-32bit</Dependency>
+            <Dependency>libedit-devel</Dependency>
+            <Dependency>libevent-devel</Dependency>
             <!-- FIXME: openldap-client requires mit-kerberos too -->
             <!-- disable for now for the circualr dep
             <Dependency>openldap-client</Dependency>
@@ -34,6 +38,9 @@
         <Name>mit-kerberos</Name>
         <RuntimeDependencies>
             <Dependency>keyutils</Dependency>
+            <Dependency>e2fsprogs</Dependency>
+            <Dependency>libedit</Dependency>
+            <Dependency>libevent</Dependency>
             <!-- FIXME: This introduces a circular dep
             <Dependency>openldap-client</Dependency>
             -->
@@ -56,6 +63,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2014-09-29</Date>
+            <Version>1.12.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
         <Update release="4">
             <Date>2014-05-17</Date>
             <Version>1.12.1</Version>
