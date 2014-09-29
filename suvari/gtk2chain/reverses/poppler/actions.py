@@ -9,31 +9,36 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 
-shelltools.export("HOME", get.workDIR())
 
 def setup():
     options = "--disable-static \
-               --disable-poppler-qt \
                --disable-gtk-doc-html \
-               --disable-zlib \
+               --enable-zlib \
                --disable-gtk-test \
                --enable-poppler-qt4 \
+               --disable-poppler-qt5 \
                --enable-cairo-output \
                --enable-xpdf-headers \
                --enable-libjpeg \
-               --enable-libopenjpeg"
+               --enable-libopenjpeg \
+               --enable-poppler-glib \
+               --with-testdatadir=%s/%s/test" % (get.workDIR(), get.srcDIR())
 
     if get.buildTYPE() == "emul32":
         options += " --libdir=/usr/lib32 \
                      --disable-utils \
                      --disable-gtk-test \
                      --disable-poppler-cpp \
+                     --disable-poppler-qt5 \
                      --disable-poppler-qt4"
 
     autotools.configure(options)
 
 def build():
     autotools.make()
+
+def check():
+    autotools.make("check")
 
 def install():
     if get.buildTYPE() == "emul32":
