@@ -1,0 +1,26 @@
+From 4dafb6cecb673cd3c83a467be479e3b78a276402 Mon Sep 17 00:00:00 2001
+From: Hrvoje Senjan <hrvoje.senjan@gmail.com>
+Date: Tue, 17 Jun 2014 20:26:57 +0200
+Subject: [PATCH 1/1] Let Kdelibs4Migration searches in .kde4 first, it's
+ possible that some users have ancient unused config in .kde
+
+---
+ src/lib/util/kdelibs4migration.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/lib/util/kdelibs4migration.cpp b/src/lib/util/kdelibs4migration.cpp
+index e1ec678..e6f1ad6 100644
+--- a/src/lib/util/kdelibs4migration.cpp
++++ b/src/lib/util/kdelibs4migration.cpp
+@@ -39,7 +39,7 @@ Kdelibs4Migration::Kdelibs4Migration()
+     } else {
+         QDir homeDir = QDir::home();
+         QVector<QString> testSubdirs;
+-        testSubdirs << QStringLiteral(".kde") << QStringLiteral(".kde4");
++        testSubdirs << QStringLiteral(".kde4") << QStringLiteral(".kde");
+         Q_FOREACH (const QString &testSubdir, testSubdirs) {
+             if (homeDir.exists(testSubdir)) {
+                 //qDebug() << "Using" << testSubdir << "as the location of the old config file";
+-- 
+1.9.3
+
