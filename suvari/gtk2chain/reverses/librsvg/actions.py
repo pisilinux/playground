@@ -8,20 +8,18 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-
 def setup():
-    pisitools.dosed("configure.in", "gdk-pixbuf-query-loaders-[2346]+\s", "")
+    options = "--disable-static \
+               --enable-pixbuf-loader \
+               --disable-tools \
+               --enable-gtk-doc \
+               --enable-vala "
+
     if get.buildTYPE() == "emul32":
-        pisitools.dosed("configure.in", "(gdk-pixbuf-query-loaders)([\s\]])", r"\1-32\2")
+        options += " --libdir=/usr/lib32 \
+                     --enable-introspection  "
 
-    autotools.autoreconf("-if")
-    autotools.configure("--disable-gtk-doc \
-                         --enable-pixbuf-loader=yes \
-                         --disable-static --disable-vala")
-
-    pisitools.dosed("libtool", "^(hardcode_libdir_flag_spec=).*", '\\1""')
-    pisitools.dosed("libtool", "^(runpath_var=)LD_RUN_PATH", "\\1DIE_RPATH_DIE")
-    pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
+    autotools.configure(options)
 
 def build():
     autotools.make()
