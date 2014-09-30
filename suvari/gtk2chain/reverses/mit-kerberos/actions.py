@@ -42,7 +42,6 @@ def setup():
                          --without-hesiod \
                          --enable-shared \
                          --enable-kdc-lookaside-cache \
-                         --without-system-verto \
                          --disable-rpath \
                          --with-system-et \
                          --with-system-ss \
