@@ -9,8 +9,6 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    pisitools.dosed("src/Makefile.am", "^(NULL =.*)", r"AUTOMAKE_OPTIONS = subdir-objects\n\1")
-    autotools.autoreconf("-vif")
     autotools.configure("--prefix=/usr --sysconfdir=/etc")
 
 def build():
@@ -18,5 +16,8 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    
+    #install Pisi Linux default theme
+    pisitools.insinto("/usr/share/lxdm/themes", "lxdm-pisilinux-theme")
 
     pisitools.dodoc("COPYING", "AUTHORS", "TODO", "README", "ChangeLog", "NEWS")
