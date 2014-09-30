@@ -14,8 +14,6 @@ cfgsettings = """-DDEFAULT_PATH_VALUE=\'\"/usr/local/sbin:/usr/local/bin:/usr/sb
                  -DSTANDARD_UTILS_PATH=\'\"/bin:/usr/bin:/sbin:/usr/sbin\"\' \
                  -DSYS_BASHRC=\'\"/etc/bash/bashrc\"\' \
                  -DNON_INTERACTIVE_LOGIN_SHELLS \
-                 -DSYS_BASH_LOGOUT=\'\"/etc/bash/bash_logout\"\' \
-                 -DSYSLOG_HISTORY \
                  -DSSH_SOURCE_BASHRC"""
                  #-DSYS_BASH_LOGOUT=\'\"/etc/bash/bash_logout\"\' \
 
@@ -25,10 +23,9 @@ def setup():
     shelltools.export("CFLAGS", "%s -D_GNU_SOURCE -DRECYCLES_PIDS %s " % (get.CFLAGS(), cfgsettings))
 
     autotools.autoconf()
-    autotools.configure("--with-installed-readline=. \
-                         --enable-readline \
-                         --with-bash-malloc \
+    autotools.configure("--without-installed-readline \
                          --disable-profiling \
+                         --without-gnu-malloc \
                          --disable-rpath \
                          --with-curses")
 
