@@ -29,7 +29,6 @@ def setup():
                --without-java \
                --enable-acl \
                --enable-ssl=yes \
-               --enable-openssl \
                --enable-libpaper \
                --enable-libusb=yes \
                --enable-debug \
