@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>krunner</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>QT application integration framework for KDE</Summary>
+        <Description>Framework Integration is a set of plugins responsible for better integration of Qt applications when running on a KDE Plasma workspace.</Description>
+        <Archive sha1sum="9f06f47d7e4da99f1eae04088c373d3ea1054dd1" type="tarxz">mirrors://kde/stable/frameworks/5.2.0/portingAids/krunner-5.2.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>	    
+	    <Dependency versionFrom="5.2.0">kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.2.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.2.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.2.0">kio-devel</Dependency>
+	    <Dependency versionFrom="5.2.0">kservice-devel</Dependency>
+	    <Dependency versionFrom="5.2.0">plasma-framework-devel</Dependency>
+	    <Dependency versionFrom="5.2.0">solid-devel</Dependency>	   
+	    <Dependency versionFrom="5.2.0">threadweaver-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>krunner</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>	    
+	    <Dependency versionFrom="5.2.0">kconfig</Dependency>
+	    <Dependency versionFrom="5.2.0">kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.2.0">ki18n</Dependency>
+	    <Dependency versionFrom="5.2.0">kio</Dependency>
+	    <Dependency versionFrom="5.2.0">kservice</Dependency>
+	    <Dependency versionFrom="5.2.0">plasma-framework</Dependency>
+	    <Dependency versionFrom="5.2.0">solid</Dependency>	   
+	    <Dependency versionFrom="5.2.0">threadweaver</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>krunner-devel</Name>
+	<Summary>Development files for krunner</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-devel</Dependency>
+            <Dependency release="current">krunner</Dependency>	    
+	    <Dependency versionFrom="5.2.0">plasma-framework-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>        
+    </History>
+</PISI>

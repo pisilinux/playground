@@ -15,8 +15,11 @@ def setup():
                  --with-libjasper \
                  --with-x11 \
                  --with-included-loaders=png \
+                 --with-libpng \
+                 --with-libtiff \
+                 --with-libjpeg \
               "
-
+              
     options += "\
                  --bindir=/_emul32/bin \
                  --disable-introspection \

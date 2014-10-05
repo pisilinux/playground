@@ -42,10 +42,11 @@ def setup():
                          --without-hesiod \
                          --enable-shared \
                          --enable-kdc-lookaside-cache \
-                         --without-system-verto \
                          --disable-rpath \
                          --with-system-et \
                          --with-system-ss \
+                         --with-system-verto \
+                         --with-ldap \
                          --enable-dns-for-realm")
 
     # Fix krb5-config script to remove rpaths and CFLAGS

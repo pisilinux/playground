@@ -17,7 +17,11 @@ def setup():
     autotools.configure("--disable-static \
                          --sysconfdir=/etc \
                          --with-included-modules=basic-fc \
-                         --%sable-introspection" % ("dis" if get.buildTYPE()=="emul32" else "en"))
+                         --with-cairo \
+                         --x-includes=/usr/include/X11 \
+                         --x-libraries=/usr/lib \
+                         --with-cairo \
+                         --enable-introspection")
 
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 

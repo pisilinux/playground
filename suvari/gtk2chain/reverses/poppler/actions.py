@@ -29,7 +29,6 @@ def setup():
                      --disable-utils \
                      --disable-gtk-test \
                      --disable-poppler-cpp \
-                     --disable-poppler-qt5 \
                      --disable-poppler-qt4"
 
     autotools.configure(options)
