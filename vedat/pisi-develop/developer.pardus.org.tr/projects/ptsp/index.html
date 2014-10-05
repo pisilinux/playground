@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/projects/ptsp/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PTSP</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Projects" href="../index.html" />
+    <link rel="next" title="Events" href="../../events/index.html" />
+    <link rel="prev" title="Sysinfo" href="../sysinfo/index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Projects</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">PTSP</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">PTSP</a><ul>
+<li><a class="reference external" href="#client-side-packages">Client-side Packages</a></li>
+<li><a class="reference external" href="#server-side-packages">Server-side Packages</a></li>
+<li><a class="reference external" href="#installation">Installation</a></li>
+<li><a class="reference external" href="#creating-rootfs">Creating Rootfs</a></li>
+<li><a class="reference external" href="#preparing-server">Preparing Server</a></li>
+<li><a class="reference external" href="#running-server">Running Server</a></li>
+<li><a class="reference external" href="#features">Features</a></li>
+<li><a class="reference external" href="#requirements">Requirements</a></li>
+<li><a class="reference external" href="#bugs">Bugs</a></li>
+<li><a class="reference external" href="#tasks">Tasks</a></li>
+<li><a class="reference external" href="#source-code">Source Code</a></li>
+<li><a class="reference external" href="#developed-by">Developed by</a></li>
+<li><a class="reference external" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="ptsp">
+<span id="ptsp-index"></span><h1>PTSP<a class="headerlink" href="#ptsp" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Metin Akdere</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PTSP</strong> is an abbreviation for Pardus Terminal Server Project which aims to boot
+thin clients over the network without needing any extra hardware or software on
+the client-side. It helps you to reduce your maintainence and administration costs
+in such environments where you need same type of workspace.</p>
+<p>Although some other variations of terminal server projects exist out there in the
+community, the main reason of creating <strong>PTSP</strong> is to ease the management of the
+packages which are used to create rootfs. For instance <a class="reference external" href="http://www.ltsp.org/">LTSP</a> is another
+distribution that is used on the thin-client machines. It has its own packaging
+system with a <a class="reference external" href="http://www.perl.org/">Perl</a> based management tool. The created rootfs by ltsp admin tool
+is not Pardus. Updating the packages, and keeping up with the distribution is not
+an easy task. The management and configuration scripts are hacky. With <a class="reference external" href="../pisi/index-2.html">Pisi</a>,
+<a class="reference external" href="https://svn.pardus.org.tr/uludag/trunk/mudur/">Mudur</a>, <a class="reference external" href="https://svn.pardus.org.tr/uludag/trunk/coolplug/">Coolplug</a>, <a class="reference external" href="https://svn.pardus.org.tr/uludag/trunk/zorg/">Zorg</a> and <a class="reference external" href="../comar/index-2.html">COMAR</a> tools Pardus has all the infrastructure to create
+an automatically bootable rootfs with its own packages.</p>
+<div class="section" id="client-side-packages">
+<h2>Client-side Packages<a class="headerlink" href="#client-side-packages" title="Permalink to this headline">¶</a></h2>
+<p>Following packages will be working on the thin-clients and must be installed to the rootfs:</p>
+<ul class="simple">
+<li><strong>lbuscd</strong>: lbus thin client daemon.</li>
+<li><strong>ltspfsd</strong>: ltspfs daemon.</li>
+<li><strong>ptsp-client</strong>: Contains remote X connection service and udev rules for the client rootfs.</li>
+</ul>
+</div>
+<div class="section" id="server-side-packages">
+<h2>Server-side Packages<a class="headerlink" href="#server-side-packages" title="Permalink to this headline">¶</a></h2>
+<p>Following packages will be working on the terminal server and must be installed to the server:</p>
+<ul class="simple">
+<li><strong>lbussd</strong>: lbus server daemon.</li>
+<li><strong>ltspfs</strong>: Fuse file system.</li>
+<li><strong>ptsp-server</strong>: Contains kernel and initramfs which will be served over tftp, ptsp-client-rootfs,</li>
+</ul>
+<p>lbussd daemon.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Creating a working PTSP workspace consists of three main steps:</p>
+<ul class="simple">
+<li>Creating the rootfs which is a scaled-down version of the distrubition</li>
+<li>Preparing the server in order to serve thin clients</li>
+<li>Starting-up the server</li>
+</ul>
+</div>
+<div class="section" id="creating-rootfs">
+<h2>Creating Rootfs<a class="headerlink" href="#creating-rootfs" title="Permalink to this headline">¶</a></h2>
+<p>Rootfs will contain system.base component which includes minimal system environment, x11.driver
+component to have a working graphical workspace and kernel as usual. After
+creating the rootfs, we are archiving it in <em>&#8220;tar.bz2&#8221;</em> format and this will be
+the source archive of our ptsp-server package.</p>
+<p>Rootfs is created with the help of a script called <em>&#8220;build-client.py&#8221;</em>, placed at the root of
+<a class="reference external" href="http://websvn.pardus.org.tr/uludag/trunk/ptsp/">ptsp</a> Addition to this script,
+required packages listed above also live under this URL.</p>
+<p>Following is an example for creating a rootfs in the current working directory, using Corporate2 packages repo</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#python build-client.py -o ptsp-client-rootfs/ -r http://paketler.pardus.org.tr/corporate2/pisi-index.xml.bz2</span>
+</pre></div>
+</div>
+<p>List of options for creating rootfs:</p>
+<div class="highlight-python"><pre>Usage: build-client.py [option ...]
+Following options are available:
+
+-h, --help            display this help and exit
+-o, --output          create the ptsp client rootfs into the given output path
+-r, --repository      ptsp client rootfs packages will be installed from this repository
+-a, --additional      install the given additional packages to ptsp client rootfs</pre>
+</div>
+</div>
+<div class="section" id="preparing-server">
+<h2>Preparing Server<a class="headerlink" href="#preparing-server" title="Permalink to this headline">¶</a></h2>
+<p>First of all install <em>&#8220;dhcp&#8221;</em>, <em>&#8220;tftp&#8221;</em>, <em>&#8220;perl-X11-Protocol&#8221;</em>, <em>&#8220;xdg-user-dirs&#8221;</em>, <em>&#8220;ptsp-server&#8221;</em> packages on the server. As all these packages are dependent on <em>&#8220;ptsp-server&#8221;</em>, installing only this will cause all others to be installed. After installing required packages, apply following settings on the server:</p>
+<ol class="arabic">
+<li><p class="first"><strong>Configuring DHCP Server</strong></p>
+<blockquote>
+<p>With <em>&#8220;dhcp&#8221;</em> package, you will be running your own dhcp server. In order to distribute IP addresses for your clients, removing comments in the <strong>/etc/dhcp/dhcpd.conf</strong> file and then starting your dhcp service with &#8220;<em>service dhcpd start</em>&#8221; command will be enough for now on. If you have two network cards (&#8220;<em>ie. two ethernet cards; one for the internet , the other for the LAN</em>&#8220;), you must tell dhcp service on which interface it must be listening for dhcp requests by assigning the name of the interface to the <strong>DHCPD_IFACE</strong> in the <strong>/etc/conf.d/dhcpd</strong> configuration file.</p>
+</blockquote>
+</li>
+<li><p class="first"><strong>Configuring Display Manager</strong></p>
+<p>Programs that seem to run on thin clients actually don&#8217;t run on the clients; they run on the server completely and only their output is sent to the clients over Xdmcp protocol which uses UDP port 177. On the server we must enable Xdmcp request-listening by changing <em>&#8220;[Xdmcp]&#8221;</em> section to <em>&#8220;Enable=true&#8221;</em>. X session must be restarted for these changes to take place.</p>
+</li>
+<li><p class="first"><strong>Configuring NFS Server</strong></p>
+<blockquote>
+<p>Clients mount their rootfs which we have created earlier over NFS. In order to achieve this, we define the directory which will be exported in the <strong>/etc/exports</strong> file. Add the following line to your own configuration (Notice that after ip block definiton we don&#8217;t leave any whitespaces which may cause your settings to be unrecognized.):</p>
+<div class="highlight-python"><pre>/opt/ptsp       10.0.0.0/255.255.255.0(ro, no_root_squash)</pre>
+</div>
+</blockquote>
+</li>
+<li><p class="first"><strong>Editing /etc/hosts File</strong></p>
+<blockquote>
+<p>For every IP address obtained by thin clients from the DHCP server, a hostname must be defined in the <strong>/etc/hosts</strong> file on the server, in order to make USB devices work on thin clients. Moreover, hostnames that will be assigned to the clients together with the range of IP addresses defined in <strong>/etc/dhcp/dhcpd.conf</strong> must be added here (&#8220;<em>ie. /etc/dhcp/dhcpd.conf: range 10.0.0.2 -  10.0.0.10&#8221;</em>). On the client-side no extra operation is necessary; they add automatically their own IP address and hostname couple. An example for <strong>/etc/hosts</strong> file on the server:</p>
+<div class="highlight-python"><pre>10.0.0.2        thin2
+10.0.0.3        thin3
+10.0.0.4        thin4
+10.0.0.5        thin5</pre>
+</div>
+</blockquote>
+</li>
+<li><p class="first"><strong>Loading Fuse Kernel Module</strong></p>
+<blockquote>
+<p>On the server <strong>fuse</strong> kernel module must be loaded. In order to load, type &#8220;<em>modprobe fuse</em>&#8221; on the command line. If you wish this to be done everytime your server boots, add <strong>fuse</strong> to the end of <strong>/etc/modules.autoload.d/kernel-2.6</strong> file.</p>
+<ul class="simple">
+<li>Note : Since Pardus-2009 release <strong>fuse</strong> module comes automatically loaded, you don&#8217;t need to this if you use 2009 or newer version of Pardus.</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first"><strong>Setting Up Sound Server</strong></p>
+<blockquote>
+<p>With the help of <strong>pulseaudio</strong> package, we are able to have a working sound system on the clients. Actually, multimedia program runs on the server and with <strong>pulseaudio</strong>, sound output of the program is sent to thin client over the network, so it is possible to hear sound output as we are running the program locally on thin client.</p>
+<p>Open <strong>/opt/ptsp/etc/pulse/system.pa</strong> configuration file and remove comments in the following lines:</p>
+<div class="highlight-python"><pre>[...]
+load-module module-esound-protocol-tcp
+load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;10.0.0.0/16
+load-module module-zeroconf-publish
+[...]</pre>
+</div>
+</blockquote>
+</li>
+<li><p class="first"><strong>Don&#8217;t Let Firefox Cache PixMaps</strong></p>
+<p>Especially on thin clients which lack high memory, when user browse the web pages that contain too many or relatively big-sized images with Firefox, we could come up with situations like alll of X sessions are terminated. The reason of that is Firefox which runs on the server tries to cache images on the X and this causes thin client memory be stuck with this. As a result, this circumstance leads to call of <em>&#8220;OOM killer&#8221;</em> and on the client X process is killed by thin client kernel. Related sources with the bug:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.francisrobichaud.com/index.php/2008/07/08/optimizing-mozilla-and-pixmap-management-in-x">http://www.francisrobichaud.com/index.php/2008/07/08/optimizing-mozilla-and-pixmap-management-in-x</a></li>
+<li><a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=296818">https://bugzilla.mozilla.org/show_bug.cgi?id=296818</a></li>
+</ul>
+<p>In order to prevent this to happen, type following comman command on the server:</p>
+<div class="highlight-python"><pre>$echo "MOZ_DISABLE_IMAGE_OPTIMIZE=1" &gt; /etc/env.d/11MozillaFirefoxPixmap</pre>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="running-server">
+<h2>Running Server<a class="headerlink" href="#running-server" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Before we run the server, make sure <strong>ptsp-server</strong> and <strong>dhcp server</strong> has the 10.0.0.1 IP address.</p>
+</li>
+<li><p class="first">Our thin clients connect to the X server using <em>&#8220;SERVER</em>&#8221; parameter in <em>&#8220;/opt/ptsp/etc/pts-client.conf&#8221;</em> (which is client-rootfs), so if you plan to change your server&#8217;s IP address, consider changing here as well. Also, apply the same changes in the <strong>pulseaudio</strong> config file to make it broadcast to the relevant network.</p>
+</li>
+<li><p class="first">Till now, we have been working on configuring our thin client workspace environment. Now, everything is ready and lets start running our server and make clients boot:</p>
+<blockquote>
+<ul class="simple">
+<li>Start <strong>dhcp</strong>, <strong>tftp</strong>, <strong>portmap</strong> and <strong>nfs_utils</strong> services by typing <em>&#8220;service &lt;service_name&gt; start&#8221;</em></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Easy to set up a thin client workspace environment.</li>
+<li>Lowered management load.</li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>On the server, you need to install <em>&#8220;dhcp&#8221;</em>, <em>&#8220;tftp&#8221;</em>, <em>&#8220;ltspfs&#8221;</em>, <em>&#8220;perl-X11-Protocol&#8221;</em>, <em>&#8220;xdg-user-dirs&#8221;</em> and <em>&#8220;ptsp-server&#8221;</em> packages. As <em>&#8220;ptsp-server&#8221;</em> package depends rest of all, installing just that package will be enough.</li>
+<li>On thin clients you don&#8217;t need to install any extra software. In your BIOS settings, just setup your thin clients to boot from LAN (default they might be so).</li>
+</ul>
+</div>
+<div class="section" id="bugs">
+<h2>Bugs<a class="headerlink" href="#bugs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/buglist.cgi?bug_severity=normal&amp;classification=Pardus%20Teknolojileri%20%2F%20Pardus%20Technologies&amp;query_format=advanced&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;product=PTSP">Normal Priority Bug Reports</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/buglist.cgi?bug_severity=low&amp;classification=Pardus%20Teknolojileri%20%2F%20Pardus%20Technologies&amp;query_format=advanced&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;product=PTSP">Wish Reports</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/buglist.cgi?bug_severity=newfeature&amp;classification=Pardus%20Teknolojileri%20%2F%20Pardus%20Technologies&amp;query_format=advanced&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;product=PTSP">Feature Requests</a></li>
+</ul>
+</div>
+<div class="section" id="tasks">
+<h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://proje.pardus.org.tr:50030/projects/ptsp/issues?set_filter=1&amp;tracker_id=4">Open Tasks</a></li>
+</ul>
+</div>
+<div class="section" id="source-code">
+<h2>Source Code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
+<p>You can <a class="reference external" href="http://websvn.pardus.org.tr/uludag/trunk/ptsp/">browse</a>
+source code from <a class="reference external" href="http://websvn.pardus.org.tr/uludag/trunk/ptsp/">WebSVN</a>.</p>
+<p>Or you can get the current version from Pardus SVN using following commands:</p>
+<div class="highlight-python"><pre>$ svn co https://svn.pardus.org.tr/uludag/trunk/ptsp</pre>
+</div>
+</div>
+<div class="section" id="developed-by">
+<h2>Developed by<a class="headerlink" href="#developed-by" title="Permalink to this headline">¶</a></h2>
+<p><strong>Curent Developers</strong></p>
+<ul class="simple">
+<li>Metin Akdere &lt;metin_at_pardus.org.tr&gt;</li>
+</ul>
+<p><strong>Previous Developers &amp; Contributors</strong></p>
+<ul class="simple">
+<li>Faik Uygur &lt;faik_at_pardus.org.tr&gt;</li>
+</ul>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>PTSP is distributed under the terms of the
+<a class="reference external" href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License (GPL), Version 2</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/projects/ptsp/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:01 GMT -->
+</html>

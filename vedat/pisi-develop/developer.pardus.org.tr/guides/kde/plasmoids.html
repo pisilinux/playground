@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/kde/plasmoids.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plasmoids</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="KDE 4 Programming Howto" href="index.html" />
+    <link rel="next" title="reStructuredText Howto" href="../rest/index.html" />
+    <link rel="prev" title="KDE 4 Applications" href="kde4-applications.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">KDE 4 Programming Howto</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Plasmoids</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Plasmoids</a><ul>
+<li><a class="reference external" href="#hello-world-plasmoid-with-using-widgets">Hello World Plasmoid with using Widgets</a></li>
+<li><a class="reference external" href="#installing-a-plasmoid">Installing a Plasmoid</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="plasmoids">
+<h1>Plasmoids<a class="headerlink" href="#plasmoids" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="hello-world-plasmoid-with-using-widgets">
+<h2>Hello World Plasmoid with using Widgets<a class="headerlink" href="#hello-world-plasmoid-with-using-widgets" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://techbase.kde.org/Development/Tutorials/Plasma/Python/GettingStarted">http://techbase.kde.org/Development/Tutorials/Plasma/Python/GettingStarted</a></p>
+</div>
+<p>A plasma package tree looks like:</p>
+<div class="highlight-python"><pre>$ tree hello-world/
+hello-world/
+|-- contents
+|   `-- code
+|       `-- main.py
+`-- metadata.desktop</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">contents</span></tt> may include <tt class="docutils literal"><span class="pre">ui</span></tt> directory if you need but <tt class="docutils literal"><span class="pre">code</span></tt> directory
+and <tt class="docutils literal"><span class="pre">metadata.desktop</span></tt> file is mandatory. For yet another <em>Hello World</em> example <tt class="docutils literal"><span class="pre">metadata.desktop</span></tt> looks like:</p>
+<div class="highlight-python"><pre>[Desktop Entry]
+Encoding=UTF-8
+Name=Hello World
+Name[tr]=Merhaba Dünya
+Name[x-test]=xxHello Worldxx
+Type=Service
+ServiceTypes=Plasma/Applet
+X-Plasma-API=python
+X-Plasma-MainScript=code/main.py
+Icon=applications-toys
+
+X-KDE-PluginInfo-Author=Panthera Pardus
+X-KDE-PluginInfo-Email=info@pardus.org.tr
+X-KDE-PluginInfo-Name=hello-world
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://www.pardus.org.tr
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true</pre>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">For more information about <tt class="docutils literal"><span class="pre">X-KDE-PluginInfo-Category</span></tt> you may visit <a class="footnote-reference" href="#id4" id="id1">[1]</a></p>
+</div>
+<p><tt class="docutils literal"><span class="pre">X-Plasma-MainScript</span></tt> shows main plasmoid file, this file must have a <tt class="docutils literal"><span class="pre">CreateApplet</span></tt> method like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">CreateApplet</span><span class="p">(</span><span class="n">parent</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HelloWorldApplet</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which returns a <tt class="docutils literal"><span class="pre">plasmascript.Applet</span></tt> from <tt class="docutils literal"><span class="pre">PyKDE4.Plasma</span></tt> and this applet may produce like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Plasma Libs</span>
+<span class="kn">from</span> <span class="nn">PyKDE4.plasma</span> <span class="kn">import</span> <span class="n">Plasma</span>
+<span class="kn">from</span> <span class="nn">PyKDE4</span> <span class="kn">import</span> <span class="n">plasmascript</span>
+
+<span class="c"># Qt Core</span>
+<span class="kn">from</span> <span class="nn">PyQt4.Qt</span> <span class="kn">import</span> <span class="n">Qt</span><span class="p">,</span> <span class="n">QGraphicsLinearLayout</span>
+
+<span class="k">class</span> <span class="nc">HelloWorldApplet</span><span class="p">(</span><span class="n">plasmascript</span><span class="o">.</span><span class="n">Applet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Our main applet derived from plasmascript.Applet &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">plasmascript</span><span class="o">.</span><span class="n">Applet</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Const method for initializing the applet &quot;&quot;&quot;</span>
+
+        <span class="c"># Configuration interface support comes with plasma</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setHasConfigurationInterface</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+
+        <span class="c"># Aspect ratio defined in Plasma</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setAspectRatioMode</span><span class="p">(</span><span class="n">Plasma</span><span class="o">.</span><span class="n">IgnoreAspectRatio</span><span class="p">)</span>
+
+        <span class="c"># Theme is a const variable holds Applet Theme</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theme</span> <span class="o">=</span> <span class="n">Plasma</span><span class="o">.</span><span class="n">Svg</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c"># It gets default plasma theme&#39;s background</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theme</span><span class="o">.</span><span class="n">setImagePath</span><span class="p">(</span><span class="s">&quot;widgets/background&quot;</span><span class="p">)</span>
+
+        <span class="c"># Resize current theme as applet size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theme</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+        <span class="c"># Update the size of Plasmoid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">constraintsEvent</span><span class="p">(</span><span class="n">Plasma</span><span class="o">.</span><span class="n">SizeConstraint</span><span class="p">)</span>
+
+        <span class="c"># We need a layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">QGraphicsLinearLayout</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">applet</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
+
+        <span class="c"># A label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">Plasma</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">applet</span><span class="p">)</span>
+
+        <span class="c"># to say hello world !</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;Hello World !&quot;</span><span class="p">)</span>
+
+        <span class="c"># and centered</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+
+        <span class="c"># add it to current layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
+
+        <span class="c"># resize the applet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mf">125</span><span class="p">,</span> <span class="mf">125</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">constraintsEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">constraints</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">constraints</span> <span class="o">&amp;</span> <span class="n">Plasma</span><span class="o">.</span><span class="n">SizeConstraint</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">theme</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">CreateApplet</span><span class="p">(</span><span class="n">parent</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HelloWorldApplet</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-a-plasmoid">
+<h2>Installing a Plasmoid<a class="headerlink" href="#installing-a-plasmoid" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can check-out the above example from <a class="footnote-reference" href="#id5" id="id2">[2]</a></p>
+</div>
+<p>Plasma applets can be packaged in zip files and installed using the <tt class="docutils literal"><span class="pre">plasmapkg</span></tt> command line tool.
+The directory structure which we have used for our project matches that need in the zip file.
+All we have to do is zip it update. Run the following command from inside the hello-world directory:</p>
+<div class="highlight-python"><pre>$ zip -r ../hello-world.zip .</pre>
+</div>
+<p>This will create the hello-world.zip file in the directory just above the hello-world directory.
+Go to this directory in the shell and run this <tt class="docutils literal"><span class="pre">plasmapkg</span></tt> command to install our little hello-world applet:</p>
+<div class="highlight-python"><pre>$ plasmapkg -i hello-world.zip</pre>
+</div>
+<p>This installs the applet into your home directory. Now we can run it. When developing applets it is more
+convenient to use the <tt class="docutils literal"><span class="pre">plasmoidviewer</span></tt>. This is a little utility which displays an applet in a window instead
+of you having to use your desktop. This command below will run our applet:</p>
+<div class="highlight-python"><pre>$ plasmoidviewer hello-world</pre>
+</div>
+<p>To uninstall our applet we use <tt class="docutils literal"><span class="pre">plasmapkg</span></tt> again with its <tt class="docutils literal"><span class="pre">-r</span></tt> option:</p>
+<div class="highlight-python"><pre>$ plasmapkg -r hello-world</pre>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Instead of these steps you may use <a class="footnote-reference" href="#id6" id="id3">[3]</a> <tt class="docutils literal"><span class="pre">mkplasma</span> <span class="pre">hello-world</span></tt> (not in directory)</p>
+</div>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://techbase.kde.org/Projects/Plasma/PIG">http://techbase.kde.org/Projects/Plasma/PIG</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/kde4/tutorial/hello-world">http://svn.pardus.org.tr/uludag/trunk/kde4/tutorial/hello-world</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td><a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/kde4/service-manager/plasmoid/systemservices/contents/code/mkplasma">http://svn.pardus.org.tr/uludag/trunk/kde4/service-manager/plasmoid/systemservices/contents/code/mkplasma</a></td></tr>
+</tbody>
+</table>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Gökmen Göksel</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/kde/plasmoids.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

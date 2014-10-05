@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/testing_process/development_release_test_process.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Development Version Test Process</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Testing Process" href="index.html" />
+    <link rel="next" title="Shipping Release Test Process" href="shipping_release_test_process.html" />
+    <link rel="prev" title="Testing Process" href="index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Releasing</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Testing Process</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Development Version Test Process</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Development Version Test Process</a><ul>
+<li><a class="reference external" href="#who-should-use-development-releases">Who should use development releases?</a></li>
+<li><a class="reference external" href="#nightly-releases">Nightly Releases</a></li>
+<li><a class="reference external" href="#installing-nightly-releases">Installing Nightly Releases</a><ul>
+<li><a class="reference external" href="#downloading-nightly-releases">Downloading Nightly Releases</a></li>
+<li><a class="reference external" href="#test-nightly-releases-without-disturbing-the-system">Test Nightly Releases Without Disturbing the System</a></li>
+<li><a class="reference external" href="#minimal-nightly-tests">Minimal Nightly Tests</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#pisi-update-from-a-nigthly-release">Pisi Update from a Nigthly Release</a></li>
+<li><a class="reference external" href="#upgrade-from-a-previous-pardus-release">Upgrade from a Previous Pardus Release</a></li>
+<li><a class="reference external" href="#testing-nightly-release">Testing Nightly Release</a></li>
+<li><a class="reference external" href="#report-bugs">Report Bugs</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="development-version-test-process">
+<span id="development-test-process"></span><h1>Development Version Test Process<a class="headerlink" href="#development-version-test-process" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Last Modified Date:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>Development releases are the current development line of Pardus and contains the
+latest build of all Pardus packages updated on a daily basis.</p>
+<p>Pardus development releases are live and installable  <a class="reference external" href="http://ftp.pardus.org.tr/pub/ISO/Nightly/">nightly builds</a>.</p>
+<div class="section" id="who-should-use-development-releases">
+<h2>Who should use development releases?<a class="headerlink" href="#who-should-use-development-releases" title="Permalink to this headline">¶</a></h2>
+<p>The development releases should not be used by end users as daily workstation.
+Because these releases are the test releases of main development branch of Pardus
+and many changes are not heavily tested before updates or releases realized, and
+packages can break without warning. It is also possible that bugs in development
+releases could cause data loss.</p>
+<p>Still, testing development releases is a very valuable activity and affect
+Pardus development directly and make a far reaching impact to Pardus stable
+version.The test results can not only fix the bugs but also can give a new feature
+or can increase the usability of an application.</p>
+<p>Testing the latest release as soon as it is released is can also be enthusiastic.
+Testing development releases is a great way to contribute to Pardus
+development. You can install and try it if you have a spare system or use a
+virtual machine.</p>
+<p>You can also keep a nightly release and install updates regularly, and so can help
+test the release as it is developed.</p>
+</div>
+<div class="section" id="nightly-releases">
+<h2>Nightly Releases<a class="headerlink" href="#nightly-releases" title="Permalink to this headline">¶</a></h2>
+<p>After the <a class="reference external" href="../bootstrapping.html">bootstrapping</a> of the newly release, the nightly builds are started to
+create automatically from the <a class="reference external" href="../repository_concepts/sourcecode_repository.html#devel-folder">devel branch</a> of the packages. These are built
+automatically, therefore they will sometimes be beyond the size of a single CD,
+and sometimes may not work at all.</p>
+<p>If there is an error occured during the compilation of the packages by <a class="reference external" href="../preparing_buildfarm.html">buildfarm</a>,
+the images may not be built on a given night; in this case, the last three days
+images will remain available.</p>
+<p>Testing nightly builds is very valuable to ensure that the quality of the stable
+releases is high.</p>
+</div>
+<div class="section" id="installing-nightly-releases">
+<h2>Installing Nightly Releases<a class="headerlink" href="#installing-nightly-releases" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="downloading-nightly-releases">
+<h3>Downloading Nightly Releases<a class="headerlink" href="#downloading-nightly-releases" title="Permalink to this headline">¶</a></h3>
+<p>You can find nightly releases from <a class="reference external" href="http://ftp.pardus.org.tr/pub/ISO/Nightly/">here</a>, this tree includes Live, Installable
+and Minimal nightly builds.</p>
+</div>
+<div class="section" id="test-nightly-releases-without-disturbing-the-system">
+<h3>Test Nightly Releases Without Disturbing the System<a class="headerlink" href="#test-nightly-releases-without-disturbing-the-system" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Test the Live versions from DVD or USB.</dt>
+<dd><ul class="first last simple">
+<li>Burning ISOs</li>
+<li>Create and use USB</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Use virtual machine</p>
+</li>
+<li><p class="first">Install to a separate partition.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="minimal-nightly-tests">
+<h3>Minimal Nightly Tests<a class="headerlink" href="#minimal-nightly-tests" title="Permalink to this headline">¶</a></h3>
+<p>Minimal nightly builds are very valuable for installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) tests.
+This minimal version is only includes packages those are only needed for <a class="reference external" href="../../../projects/yali/index.html">YALI</a>.
+Therefore installation time is very short and you can reproduce the bugs more
+rapidly.</p>
+<p>You can ofcourse also use normal full nightly release in order to test
+installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>).</p>
+</div>
+</div>
+<div class="section" id="pisi-update-from-a-nigthly-release">
+<h2>Pisi Update from a Nigthly Release<a class="headerlink" href="#pisi-update-from-a-nigthly-release" title="Permalink to this headline">¶</a></h2>
+<p>Keeping a nightly release and updating it regularly and testing it is also
+possible. You can list the updated packages after updating the system with
+<strong>pisi hs</strong> command. It lists the last package changes on system.</p>
+<p>And you can test the updated packages applying the package <a class="reference external" href="http://cekirdek.pardus.org.tr/~semen/testcases/turkish/">test cases</a> to,
+relevant updated packages.</p>
+<p>Test cases are documented as <a class="reference external" href="../../packaging/package_components.html">component based</a>. You can find the component of a
+package with <strong>pisi info package-name</strong> command.</p>
+<p>Some test cases can be missing, please send an email to <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/testci">tester list</a> about
+this problem.</p>
+</div>
+<div class="section" id="upgrade-from-a-previous-pardus-release">
+<h2>Upgrade from a Previous Pardus Release<a class="headerlink" href="#upgrade-from-a-previous-pardus-release" title="Permalink to this headline">¶</a></h2>
+<p>If you are a courageous tester, you can try to upgrade your system to a new
+release but it is not fully recommended :)</p>
+<p>You may run into dependency problems which could take time to resolve. Your
+system may get totally into an unusable state.</p>
+<p>You can try to upgrade your system by to ways:</p>
+<ol class="arabic">
+<li><p class="first">Using graphical interface: Pardus has an upgrade manager, this application exists in previous release repositories as a pacakge and anyone can install and run this uplication in order to upgrade system to new Pardus release</p>
+</li>
+<li><dl class="first docutils">
+<dt>Using command line: If the upgrade manager has not still available you can also try to upgrade your system as a tester.</dt>
+<dd><dl class="first docutils">
+<dt>First you should disable your ancient repository and add new release repository:</dt>
+<dd><ol class="first last arabic">
+<li><p class="first">You can make it through package manager following Settings -&gt; Configure Package Manager -&gt; Repositories way</p>
+</li>
+<li><p class="first">You can make it via console with following commands:</p>
+<div class="highlight-python"><pre>pisi lr &lt;ancient repo&gt;
+pisi ar &lt;repo name&gt; &lt;new repo&gt;</pre>
+</div>
+</li>
+</ol>
+</dd>
+</dl>
+<p class="last">Then you can start to update your system, but be carefull because your system
+can totally be unusable.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="testing-nightly-release">
+<h2>Testing Nightly Release<a class="headerlink" href="#testing-nightly-release" title="Permalink to this headline">¶</a></h2>
+<p>Reading <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/testci">tester list</a> and <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/buildfarm">buildfarm list</a> and <a class="reference external" href="../../bugtracking/bug_and_feature_requests.html">reporting bugs</a> are the most
+important things that all testers should do. All latest changes and compile
+problems about package repositories are mailed to <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/buildfarm">buildfarm list</a>, daily reading
+of this list is key to staying on top of nightly builds. Discussion of changes
+and problems are occured on <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/testci">tester list</a> and <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/developer">developer list</a>, daily reading
+of these lists are also very important.</p>
+<p>You can also see the changes on nightly builds from changes files of <a class="reference external" href="http://ftp.pardus.org.tr/pub/ISO/Nightly/">nightly
+builds</a>.</p>
+<p>After experiencing with an error, you should report them to <a class="reference external" href="http://bugs.pardus.org.tr/">bugzilla</a>. You can
+use the assistance of <a class="reference external" href="../../bugtracking/bug_and_feature_requests.html">reporting bugs</a> document. Bugs reported on mail lists or
+IRC is not enough, because finding them in history is very difficult, please do
+not forget to file bugs to <a class="reference external" href="http://bugs.pardus.org.tr/">bugzilla</a>, bugs always be accessible to other testers
+and to the developers.</p>
+<p>Furthermore the below advices are very useful testing nightly releases:</p>
+<ol class="arabic simple">
+<li>While you are testing, you can learn more about your system, be familiar with bugs in subsystems or package. Testing is an opportunity to learn subsytem and package functioning and be accustomed with their documentations. The documentation can also have bugs, testing system according to documentation give you a chance to detect badly worded and out dated documentation. Reading documentation and learning how things work give you a valuable experience while participating in development process.</li>
+<li>Be accustomed with log files under /var/log/ path</li>
+<li>Take notes about the changes that you make on your system. This notes will be valuable when you experience with a problem, you can try to reproduce it in a more effective way.</li>
+<li>Do not remove at least one old kernel that works</li>
+<li>Update and reboot daily your system. It is difficult to track the startup bugs caused by and old update, daily update and reboot avoid this.</li>
+<li>Be accustomed with <a class="reference external" href="http://www.linuxselfhelp.com/gnu/grub/html_chapter/grub_13.html">grub errors</a> and useful <a class="reference external" href="http://www.troubleshooters.com/linux/grub/grub.htm">grub usage</a> for troubleshooting boot up errors.</li>
+<li>Do not use <strong>&#8211;ignore-dependency</strong>, <strong>&#8211;ignore-file-conflict</strong> or  <strong>&#8211;ignore-package-conflicts</strong> in order to work around dependency problems, file or package conflicts. Please do not report it immediately, because development tree can change very rapidly and these type of errors can be fixed by some developers in one or two days. If you see this error for several days, please report these problems to <a class="reference external" href="http://bugs.pardus.org.tr/">bugzilla</a> or <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/testci">tester list</a> unless you see a disscussion on <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/testci">tester list</a>, <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/developer">developer list</a>  or a message on <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/buildfarm">buildfarm list</a> about it.</li>
+</ol>
+</div>
+<div class="section" id="report-bugs">
+<h2>Report Bugs<a class="headerlink" href="#report-bugs" title="Permalink to this headline">¶</a></h2>
+<p>The build reports can be followed on <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/buildfarm">buildfarm list</a> and these reports include
+compile start and end warnings, compile errors of each package for each release
+and supported architecture. Before updating your system, please control this
+list in order to see updated or newly added packages and their problems.</p>
+<p>If you experince with a problem that not reported on <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/buildfarm">buildfarm list</a> about the
+last updated packages, please first control the <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/developer">developer list</a> and <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/testci">tester
+list</a>. If there exist a thread about the problem that you experienced, you can
+be sure the developers are aware of the problem.</p>
+<p>However, if your problem exsits longer than a few days and there is not any
+thread on e-mail lists, that means you experienced with a bug that not everyone
+is seeing. This is the time to file a bug report as a tester and make an
+influance.</p>
+<p>But, before you file a new bug report you should be sure that the bug
+that you find:</p>
+<ol class="arabic simple">
+<li>Does not have a duplicate See: <a class="reference external" href="../../bugtracking/finding_duplicates.html">Finding duplicates</a></li>
+<li>Does not be mentioned on e-mail lists</li>
+<li>Is suitable for <a class="reference external" href="../../bugtracking/bug_and_feature_requests.html">effective bug reporting document</a></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/testing_process/development_release_test_process.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/scons.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Scons</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="Shelltools" href="shelltools.html" />
+    <link rel="prev" title="Rubymodules" href="rubymodules.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Scons</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Scons</a><ul>
+<li><a class="reference external" href="#make">make</a></li>
+<li><a class="reference external" href="#install">install</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="scons"></span><h1>Scons<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="make">
+<h2>make<a class="headerlink" href="#make" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">make</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Setup the package with scons construction tool.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">scons</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;build=release </span><span class="se">\</span>
+<span class="s">            build_id=</span><span class="si">%s</span><span class="s"> </span><span class="se">\</span>
+<span class="s">            install_prefix=/usr </span><span class="se">\</span>
+<span class="s">            bindir=bin </span><span class="se">\</span>
+<span class="s">            buildlocale </span><span class="se">\</span>
+<span class="s">            datadir=share/widelands&quot;</span> <span class="o">%</span> <span class="n">geat</span><span class="o">.</span><span class="n">srcVERSION</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install">
+<h2>install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">install</span><span class="p">(</span><span class="n">parameters</span> <span class="o">=</span> <span class="s">&#39;install&#39;</span><span class="p">,</span> <span class="n">prefix</span> <span class="o">=</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">(),</span> <span class="n">argument</span><span class="o">=</span><span class="s">&#39;prefix&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Install the package with scons construction tool. The default variables for
+parameters is install, prefix is get.installDIR(), argument is prefix.</p>
+<p>It runs the &#8220;&#8216;scons %s=%s %s&#8217; % (argument, prefix, parameters)&#8221; for installation.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">scons</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s">&quot;PREFIX=&#39;</span><span class="si">%s</span><span class="s">/usr&#39; swig_install install&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+<span class="n">scons</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s">&quot;install prefix=/usr </span><span class="se">\</span>
+<span class="s">               install_root=</span><span class="si">%s</span><span class="s">/usr </span><span class="se">\</span>
+<span class="s">               qtdir=</span><span class="si">%s</span><span class="s"> </span><span class="se">\</span>
+<span class="s">               djconsole=1 </span><span class="se">\</span>
+<span class="s">               portmidi=0 </span><span class="se">\</span>
+<span class="s">               optimize=1 </span><span class="se">\</span>
+<span class="s">               script=1 </span><span class="se">\</span>
+<span class="s">               shoutcast=1 </span><span class="se">\</span>
+<span class="s">               tonal=1 </span><span class="se">\</span>
+<span class="s">               m4a=1 </span><span class="se">\</span>
+<span class="s">               ladspa=1 </span><span class="se">\</span>
+<span class="s">               ipod=1&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">(),</span> <span class="n">get</span><span class="o">.</span><span class="n">qtDIR</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/scons.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

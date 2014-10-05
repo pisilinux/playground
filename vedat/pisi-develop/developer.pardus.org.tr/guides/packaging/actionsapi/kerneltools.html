@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/kerneltools.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Kerneltools</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="Libtools" href="libtools.html" />
+    <link rel="prev" title="KDE" href="kde.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Kerneltools</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Kerneltools</a><ul>
+<li><a class="reference external" href="#configuration-part">Configuration Part</a><ul>
+<li><a class="reference external" href="#getkernelversion">getKernelVersion</a></li>
+<li><a class="reference external" href="#configure">Configure</a></li>
+<li><a class="reference external" href="#updatekconfig">updateKConfig()</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#building-and-installing-part">Building and Installing Part</a><ul>
+<li><a class="reference external" href="#dumpversion">dumpVersion</a></li>
+<li><a class="reference external" href="#build">build</a></li>
+<li><a class="reference external" href="#install">install</a></li>
+<li><a class="reference external" href="#installheaders">installHeaders</a></li>
+<li><a class="reference external" href="#installlibcheaders">installLibcHeaders</a></li>
+<li><a class="reference external" href="#installsource">installSource</a></li>
+<li><a class="reference external" href="#cleanmodulefiles">cleanModuleFiles</a></li>
+<li><a class="reference external" href="#mkinitramfs">mkinitramfs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="kerneltools"></span><h1>Kerneltools<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="configuration-part">
+<h2>Configuration Part<a class="headerlink" href="#configuration-part" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getkernelversion">
+<h3>getKernelVersion<a class="headerlink" href="#getkernelversion" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">getKernelVersion</span><span class="p">(</span><span class="n">flavour</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns the kernel version information to use with external module compilation
+This is something like 2.6.30_rc7-119 which will be appended to /lib/modules.
+If flavour==None, it will return the kernel version in the /etc/kernel/kernel
+file, else /etc/kernel/&lt;flavour&gt;. If it fails, it will return the running
+kernel version.</p>
+</div>
+<div class="section" id="configure">
+<h3>Configure<a class="headerlink" href="#configure" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">configure</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It first cleans the system form .orig files, then starts kernel configuration.</p>
+</div>
+<div class="section" id="updatekconfig">
+<h3>updateKConfig()<a class="headerlink" href="#updatekconfig" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">updateKConfig</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Call this to set newly added symbols to their defaults after sedding some
+Kernel Configuration parameters.</p>
+</div>
+</div>
+<div class="section" id="building-and-installing-part">
+<h2>Building and Installing Part<a class="headerlink" href="#building-and-installing-part" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dumpversion">
+<h3>dumpVersion<a class="headerlink" href="#dumpversion" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dumpVersion</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Writes the specific kernel version into /etc/kernel.</p>
+</div>
+<div class="section" id="build">
+<h3>build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">build</span><span class="p">(</span><span class="n">debugSymbols</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Builds the kernel with given debug symbols, the default debugSymbols is False.</p>
+</div>
+<div class="section" id="install">
+<h3>install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">install</span><span class="p">(</span><span class="n">installFirmwares</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It first controls whether loadable module support is available, then it
+installs the kernel image.</p>
+<p>If installFirmwares==False it removes firmwares.</p>
+</div>
+<div class="section" id="installheaders">
+<h3>installHeaders<a class="headerlink" href="#installheaders" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">installHeaders</span><span class="p">(</span><span class="n">extra</span><span class="o">=</span><span class="p">[])</span>
+</pre></div>
+</div>
+<p>Installs the additional kernel headers needed to build out-of-tree kernel modules.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">kerneltools</span><span class="o">.</span><span class="n">installHeaders</span><span class="p">(</span><span class="n">extra</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;drivers/media/dvb/dvb-core&quot;</span><span class="p">,</span>
+                                  <span class="s">&quot;drivers/media/dvb/frontends&quot;</span><span class="p">,</span>
+                                  <span class="s">&quot;drivers/media/video&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installlibcheaders">
+<h3>installLibcHeaders<a class="headerlink" href="#installlibcheaders" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>installLibcHeaders(excludes=[]):</pre>
+</div>
+<p>Installs the Linux-Libc-Headers exculuding the givens.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">kerneltools</span><span class="o">.</span><span class="n">installLibcHeaders</span><span class="p">(</span><span class="n">excludes</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;scsi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installsource">
+<h3>installSource<a class="headerlink" href="#installsource" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">installSource</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Installs the kernel source files.</p>
+</div>
+<div class="section" id="cleanmodulefiles">
+<h3>cleanModuleFiles<a class="headerlink" href="#cleanmodulefiles" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cleanModuleFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Cleans module.* files generated by depmod.</p>
+</div>
+<div class="section" id="mkinitramfs">
+<h3>mkinitramfs<a class="headerlink" href="#mkinitramfs" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mkinitramfs</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Create and install the initramfs image into the package.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/kerneltools.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/feature_freeze.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Feature Freeze</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Releasing" href="index.html" />
+    <link rel="next" title="Security Process" href="security_process.html" />
+    <link rel="prev" title="Generating Nightly Builds" href="generating_nightly_builds.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Releasing</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Feature Freeze</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Feature Freeze</a><ul>
+<li><a class="reference external" href="#expectations-of-feature-freeze">Expectations of Feature Freeze</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#code-complete">Code Complete</a></li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="feature-freeze"></span><h1>Feature Freeze<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Features can be requested for</p>
+<ol class="arabic simple">
+<li>Pardus related technologies. See <a class="reference external" href="../newfeature/index.html">feature request and tracking</a></li>
+<li>Packages</li>
+</ol>
+<p>Once the feature freeze time is reached, all new features for the release should
+be complete and ready for testing.</p>
+<p>New features are completed by feature freeze and tested during the test releases
+Alpha and Beta of Pardus.</p>
+<div class="section" id="expectations-of-feature-freeze">
+<h2>Expectations of Feature Freeze<a class="headerlink" href="#expectations-of-feature-freeze" title="Permalink to this headline">¶</a></h2>
+<p>Pardus has some expectations after feature freeze about what will be happening
+with your feature. These expectations are valuable for testing the feature, test
+how other pieces of the distribution interact with your feature, and test the
+overall stability and design of the distribution.</p>
+<p>After feature freeze some needed expectations:</p>
+<ol class="arabic simple">
+<li>Should implement something testable</li>
+<li>Should have the the feature significantly complete</li>
+<li>Should submit the fixed bugs with <a class="reference external" href="repository_concepts/version_control_system_rules.html#enter-the-bug-number-when-solving-a-bug-from-the-bug-tracking-system">version control system commit hooks</a></li>
+<li>Can not continue to add new enhancements</li>
+<li>Can not make the feature default if it is not already default before freeze</li>
+<li>Can not make changes that require other softwares to change.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="code-complete">
+<h1>Code Complete<a class="headerlink" href="#code-complete" title="Permalink to this headline">¶</a></h1>
+<p>A release is called code complete when the development team agrees that no entirely new source code will be added to this release. There may still be source code changes to fix major bugs. There may still be changes to documentation and data files, and to the code for test cases or utilities. New code may be added for a future release.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/feature_freeze.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

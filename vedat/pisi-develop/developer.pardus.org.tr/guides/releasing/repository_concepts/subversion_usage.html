@@ -1,0 +1,441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/repository_concepts/subversion_usage.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Subversion Usage</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Repository Concepts" href="index.html" />
+    <link rel="next" title="Rules for a correct version control system usage" href="version_control_system_rules.html" />
+    <link rel="prev" title="Software Repository (binary or package repository)" href="software_repository.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Releasing</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Repository Concepts</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Subversion Usage</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Subversion Usage</a><ul>
+<li><a class="reference external" href="#what-is-a-subversion-repository">What is a subversion repository?</a></li>
+<li><a class="reference external" href="#how-do-i-check-if-i-have-subversion-on-my-system">How do I check if I have subversion on my system?</a></li>
+<li><a class="reference external" href="#how-do-i-get-a-copy-of-a-directory-in-the-repository">How do I get a copy of a directory in the repository?</a></li>
+<li><a class="reference external" href="#how-do-i-know-if-my-local-copy-is-up-to-date-or-not">How do I know if my local copy is up-to-date or not?</a></li>
+<li><a class="reference external" href="#how-can-i-see-what-directories-exist-in-a-repository">How can I see what directories exist in a repository?</a></li>
+<li><a class="reference external" href="#what-does-the-capital-letters-beside-the-file-names-mean">What does the capital letters beside the file names mean?</a></li>
+<li><a class="reference external" href="#i-modified-some-files-what-shall-i-do-now">I modified some files, what shall I do now?</a></li>
+<li><a class="reference external" href="#i-added-a-new-file-but-there-s-a-question-mark-beside-it">I added a new file but there&#8217;s a question mark beside it!</a></li>
+<li><a class="reference external" href="#how-do-i-revert-my-local-modifications">How do I revert my local modifications?</a></li>
+<li><a class="reference external" href="#i-want-to-send-the-files-i-modified">I want to send the files I modified</a></li>
+<li><a class="reference external" href="#other-commands">Other commands</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="subversion-usage"></span><h1>Subversion Usage<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Ozan Çağlayan, Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>This document is not a detail subversion howto but it gives some tricks about
+subversion usage.</p>
+<p>If you want to learn more please see <cite>subversion book</cite>.</p>
+<div class="section" id="what-is-a-subversion-repository">
+<h2>What is a subversion repository?<a class="headerlink" href="#what-is-a-subversion-repository" title="Permalink to this headline">¶</a></h2>
+<p>A repository is a disk area on which the last version, all the versions prior to
+the last version and the changes between versions of the software package(s)
+every developer works on, information including their user, date and cause are
+stored which can be reached by several methods.</p>
+</div>
+<div class="section" id="how-do-i-check-if-i-have-subversion-on-my-system">
+<h2>How do I check if I have subversion on my system?<a class="headerlink" href="#how-do-i-check-if-i-have-subversion-on-my-system" title="Permalink to this headline">¶</a></h2>
+<p>As the quickest way to see if you have Subversion in your system or not, you can
+refer to the output of <em>svn &#8211;version</em> command .</p>
+<p>It&#8217;s a good sign if you see something like this:</p>
+<div class="highlight-python"><pre>user@machine ~ $ svn --version
+svn, version 1.6.12 (r955767)
+compiled Aug 24 2010, 10:27:44
+
+Copyright (C) 2000-2009 CollabNet.
+Subversion is open source software, see http://subversion.tigris.org/
+This product includes software developed by CollabNet (http://www.Collab.Net/).
+
+The following repository access (RA) modules are available:
+
+* ra_neon : Module for accessing a repository via WebDAV protocol using Neon.
+  - handles 'http' scheme
+  - handles 'https' scheme
+* ra_svn : Module for accessing a repository using the svn network protocol.
+  - with Cyrus SASL authentication
+  - handles 'svn' scheme
+* ra_local : Module for accessing a repository on local disk.
+  - handles 'file' scheme</pre>
+</div>
+</div>
+<div class="section" id="how-do-i-get-a-copy-of-a-directory-in-the-repository">
+<h2>How do I get a copy of a directory in the repository?<a class="headerlink" href="#how-do-i-get-a-copy-of-a-directory-in-the-repository" title="Permalink to this headline">¶</a></h2>
+<p>In order to create a copy(checkout) of the repository <em>svn co</em> command is used.
+Once the copy is created, no more processing is performed on this command copy.</p>
+<div class="highlight-python"><pre>user@machine ~ $ svn co http://svn.pardus.org.tr/uludag
+A    uludag/trunk
+A    uludag/trunk/PyNotify
+A    uludag/trunk/PyNotify/.project
+A    uludag/trunk/PyNotify/libPyNotify
+A    uludag/trunk/PyNotify/libPyNotify/genericDevice.py
+A    uludag/trunk/PyNotify/libPyNotify/genericActions.py
+A    uludag/trunk/PyNotify/libPyNotify/__init__.py
+A    uludag/trunk/PyNotify/libPyNotify/iconFinder.py
+A    uludag/trunk/PyNotify/icons
+..
+..</pre>
+</div>
+<p>You can treat the repository as if its an URI. By doing so, you can get any
+subdirectory in the repository without checking out the whole repository:</p>
+<div class="highlight-python"><pre>user@machine ~ $ svn co http://svn.pardus.org.tr/uludag/trunk/comar
+A    comar/belgeler
+A    comar/belgeler/comar-polkit.txt
+A    comar/belgeler/comar-python-types.txt
+A    comar/belgeler/PardusInitSystem.lyx
+A    comar/belgeler/Boot.Loader.txt
+A    comar/belgeler/ComarMimarisi.lyx
+A    comar/belgeler/comar-dbus.txt
+A    comar/belgeler/teknik-sunum.odp
+A    comar/belgeler/PardusAcilisSistemi.lyx
+A    comar/belgeler/temel-sunum.odp
+A    comar/betikler
+A    comar/betikler/pppoe.py
+..
+..</pre>
+</div>
+</div>
+<div class="section" id="how-do-i-know-if-my-local-copy-is-up-to-date-or-not">
+<h2>How do I know if my local copy is up-to-date or not?<a class="headerlink" href="#how-do-i-know-if-my-local-copy-is-up-to-date-or-not" title="Permalink to this headline">¶</a></h2>
+<p>You have to update the copy of the repository you have periodically with
+<em>svn update</em> command in order to know about the last changes and to track
+the last version.</p>
+<p>If you call the command alone, all the files and the subdirectories in the
+current working directory will be updated recursively:</p>
+<div class="highlight-python"><pre>user@machine trunk $ pwd
+/home/machine/pardus/uludag/trunk
+user@machine trunk $ svn update
+G    comar/mudur/bin/mudur.py
+U    comar/belgeler/comar-polkit.txt
+A    comar/belgeler/Boot.Loader.txt
+U    comar/comar/ChangeLog
+U    comar/comar/src/dbus.c
+U    comar/zorg/data/DriversDB
+U    comar/api/setup.py
+A    comar/api/examples/qt3
+A    comar/api/examples/qt3/mainform.ui
+A    comar/api/examples/qt3/app.py
+A    comar/api/examples/qt3/Makefile
+A    comar/api/examples/qt4
+A    comar/api/examples/qt4/mainform.ui
+A    comar/api/examples/qt4/app.py
+A    comar/api/examples/qt4/Makefile
+U    pisi/ChangeLog
+..
+..
+Updated to revision 20808.</pre>
+</div>
+<p>You can also append the file or the directory you want to update at the end of
+the command:</p>
+<div class="highlight-python"><pre>user@machine $ svn update buildfarm
+U    buildfarm/templates.py
+U    buildfarm/setup.py
+Updated to revision 20808.</pre>
+</div>
+</div>
+<div class="section" id="how-can-i-see-what-directories-exist-in-a-repository">
+<h2>How can I see what directories exist in a repository?<a class="headerlink" href="#how-can-i-see-what-directories-exist-in-a-repository" title="Permalink to this headline">¶</a></h2>
+<p>A single repository may contain more than one directory in it. The hierarchy of
+a repository is just like the inside of a directory on a disk. So, you can browse
+without having to copy all the repository to your disk and just get a view of the
+part you want to work on or have a look at. The list of directories and files in a
+repository is displayed using <em>svn ls repository_address</em> command:</p>
+<div class="highlight-python"><pre>user@machine ~ $ svn ls http://svn.pardus.org.tr/uludag
+branches/
+tags/
+trunk/
+
+user@machine ~ $ svn ls http://svn.pardus.org.tr/uludag/trunk
+CD-image/
+PolicyKit-kde/
+PyNotify/
+artwork/
+baselayout/
+.
+.
+.</pre>
+</div>
+</div>
+<div class="section" id="what-does-the-capital-letters-beside-the-file-names-mean">
+<h2>What does the capital letters beside the file names mean?<a class="headerlink" href="#what-does-the-capital-letters-beside-the-file-names-mean" title="Permalink to this headline">¶</a></h2>
+<p>While you are working with SVN and during processes such as updating and
+searching, as in the previous example, the signs by the files are to inform
+you about what kind of a change related with the next file is performed.</p>
+<p>One of the letters U, D, A, C or G may be found by files:</p>
+<div class="highlight-python"><pre>* A Added
+* D Deleted
+* U Updated
+* G Merged (the last update you got from the repository is merged with the file you are performing local changes)
+* C Conflicted (the last update you got from the repository is conflicted with the changes you performed localy)</pre>
+</div>
+</div>
+<div class="section" id="i-modified-some-files-what-shall-i-do-now">
+<h2>I modified some files, what shall I do now?<a class="headerlink" href="#i-modified-some-files-what-shall-i-do-now" title="Permalink to this headline">¶</a></h2>
+<p>Youu can use <em>svn status</em> when you want to see the local modifications you did
+on a working copy. This command can run with an URI you add to the end of it as
+all the other commands.</p>
+<p>Below its seen that a file is added to, a file is deleted from and two files are
+changed regarding the last updated copy of the repository:</p>
+<div class="highlight-python"><pre>user@machine $ svn status
+A COMARd/csl/degisiklik
+D COMARd/csl/loader.py
+M COMARd/COMARValue.py
+M comar-call/rpc.c
+
+user@machine $ svn status COMARd/csl/COMARValue.py
+M COMARd/COMARValue.py</pre>
+</div>
+<p>Also, you can learn what you particularly changed in changed files with
+<em>svn diff</em> command:</p>
+<div class="highlight-python"><pre>user@machine $ svn diff comar-call/rpc.c
+Index: comar-call/rpc.c
+===================================================================
+--- comar-call/rpc.c (revision 158)
++++ comar-call/rpc.c (working copy)
+@@ -146,6 +146,7 @@
+if (len == 0) break;
+  if (len == -1) {
+      puts("connection broken too soon");
++         //totally different change
+          break;
+    }
+printf("RECV[%s]\n\n", buf);</pre>
+</div>
+<p>Added part is showed with a &#8220;+&#8221; sign at the start of the line. Removed or
+changed part is signed with &#8220;-&#8220;.</p>
+</div>
+<div class="section" id="i-added-a-new-file-but-there-s-a-question-mark-beside-it">
+<h2>I added a new file but there&#8217;s a question mark beside it!<a class="headerlink" href="#i-added-a-new-file-but-there-s-a-question-mark-beside-it" title="Permalink to this headline">¶</a></h2>
+<p>While you are working on the copy of the repository when you would like to create
+a new file, you should inform your local copy about your intention to add that
+file to the repository with the help of <em>svn add</em> (it has sister commands such as
+<em>svn copy</em>, <em>svn del</em>  as well).</p>
+<p>Let&#8217;s explain why there&#8217;s such a need as follows:
+Let&#8217;s assume that you would like to compile and test an application which is in
+your local copy. In this case, some files that you don&#8217;t prefer to send to the
+main repository will be created in your work copy such as Makefiles and .m4 files
+which only you have any need for. In such cases, it will be very advantageous and
+convenient if the files added locally are not added to the repository as well,
+because when you change the source code of the software, recompile it and decide
+to send it to the repository at a proper time, you know that the other files are
+not going to the repository. With <em>svn add</em>, you add to the repository the files
+you want to add. <em>svn del</em> will not mentioned again.</p>
+<div class="highlight-python"><pre>user@machine $ svn status
+user@machine $ touch newscript.csl
+user@machine $ svn status
+? newscript.csl
+user@machine $ svn add newscript.csl
+A newscript.csl
+user@machine $ svn status
+A newscript.csl
+user@machine $</pre>
+</div>
+</div>
+<div class="section" id="how-do-i-revert-my-local-modifications">
+<h2>How do I revert my local modifications?<a class="headerlink" href="#how-do-i-revert-my-local-modifications" title="Permalink to this headline">¶</a></h2>
+<p>You can revert the modifications you made using <em>svn revert</em> command anytime you
+like:</p>
+<div class="highlight-python"><pre>user@machine $ svn status
+A COMARd/csl/thechange
+D COMARd/csl/loader.py
+M COMARd/COMARValue.py
+M comar-call/rpc.c
+
+user@machine $ svn revert comar-call/rpc.c
+Reverted 'comar-call/rpc.c'
+
+user@machine $ svn status
+A COMARd/csl/thechange
+D COMARd/csl/loader.py
+M COMARd/COMARValue.py</pre>
+</div>
+<p>Its also possible to revert all of the files to their original state recursively:</p>
+<div class="highlight-python"><pre>user@machine $ svn revert . -R
+Reverted 'COMARd/csl/thechange'
+Reverted 'COMARd/csl/loader.py'
+Reverted 'COMARd/COMARValue.py'
+
+user@machine $ svn status
+user@machine $</pre>
+</div>
+</div>
+<div class="section" id="i-want-to-send-the-files-i-modified">
+<h2>I want to send the files I modified<a class="headerlink" href="#i-want-to-send-the-files-i-modified" title="Permalink to this headline">¶</a></h2>
+<p>If you are sure of the last condition of the files you changed, you can use
+<em>svn commit</em>  to transmit your changes to the repository. By using this command
+as its true for all the rest you can send to the repository a single file,
+a single directory and what is under it or all the changes you made. When you
+run <em>svn commit</em>, svn using your preferred text editor opens a file for you with
+the changes you made listed in it in order to make sure others see what you
+changed and to enable your changes to be logged for backward tracking in the
+repository. To alter the text editor opened as the preferred one, you can make
+use of the environment variable EDITOR:</p>
+<div class="highlight-python"><pre>user@machine $ EDITOR="vi" svn commit
+user@machine $ EDITOR="mcedit" svn commit
+user@machine $ EDITOR="kwrite" svn commit</pre>
+</div>
+<p>As soon as you write the changes to the text editor, save what you wrote and
+close the editor, svn will commit the modifications in your local copy to the
+remote repository.</p>
+</div>
+<div class="section" id="other-commands">
+<h2>Other commands<a class="headerlink" href="#other-commands" title="Permalink to this headline">¶</a></h2>
+<p>You can run Subversion to learn Subversion commands as well. * svn help command_name*
+feeds you back with detailed information about command_name while svn help serves you
+with a list of commands you can use:</p>
+<div class="highlight-python"><pre>user@machine $ svn help
+usage: svn &lt;subcommand&gt; [options] [args]
+Subversion command-line client, version 1.5.3.
+Type 'svn help &lt;subcommand&gt;' for help on a specific subcommand.
+Type 'svn --version' to see the program version and RA modules
+or 'svn --version --quiet' to see just the version number.
+
+Most subcommands take file and/or directory arguments, recursing
+on the directories.  If no arguments are supplied to such a
+command, it recurses on the current directory (inclusive) by default.
+
+Available subcommands:
+add
+blame (praise, annotate, ann)
+cat
+changelist (cl)
+checkout (co)
+cleanup
+commit (ci)
+copy (cp)
+delete (del, remove, rm)
+diff (di)
+export
+help (?, h)
+import
+info
+list (ls)
+lock
+log
+merge
+mergeinfo
+mkdir
+move (mv, rename, ren)
+propdel (pdel, pd)
+propedit (pedit, pe)
+propget (pget, pg)
+proplist (plist, pl)
+propset (pset, ps)
+resolve
+resolved
+revert
+status (stat, st)
+switch (sw)
+unlock
+update (up)
+
+Subversion is a tool for version control.
+For additional information, see http://subversion.tigris.org/</pre>
+</div>
+<p>In order to have detailed information about a Subversion command, call <em>svn help</em>
+with the command name:</p>
+<div class="highlight-python"><pre>user@machine $ svn help add
+add: Put files and directories under version control, scheduling
+them for addition to repository.  They will be added in next commit.
+usage: add PATH...
+
+Valid options:
+  --targets ARG            : pass contents of file ARG as additional args
+  -N [--non-recursive]     : obsolete; try --depth=files or --depth=immediates
+  --depth ARG              : limit operation by depth ARG ('empty', 'files',
+                            'immediates', or 'infinity')
+  -q [--quiet]             : print nothing, or only summary information
+  --force                  : force operation to run
+  --no-ignore              : disregard default and svn:ignore property ignores
+  --auto-props             : enable automatic properties
+  --no-auto-props          : disable automatic properties
+  --parents                : add intermediate parents
+
+Global options:
+  --username ARG           : specify a username ARG
+  --password ARG           : specify a password ARG
+  --no-auth-cache          : do not cache authentication tokens
+  --non-interactive        : do no interactive prompting
+  --config-dir ARG         : read user configuration files from directory ARG</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/repository_concepts/subversion_usage.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/security_process.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Security Process</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Releasing" href="index.html" />
+    <link rel="next" title="Testing Process" href="testing_process/index.html" />
+    <link rel="prev" title="Feature Freeze" href="feature_freeze.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Releasing</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Security Process</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Security Process</a><ul>
+<li><a class="reference external" href="#constructive-notice-from-security-world">Constructive Notice from Security World</a></li>
+<li><a class="reference external" href="#how-the-process-works">How the process works?</a><ul>
+<li><a class="reference external" href="#vulnerabilities-from-vendor-sec">Vulnerabilities from Vendor-sec</a></li>
+<li><a class="reference external" href="#vulnerabilities-from-oss-security">Vulnerabilities from oss-security</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#how-the-security-update-takes-place">How the security update takes place?</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="security-process">
+<span id="security-team"></span><h1>Security Process<a class="headerlink" href="#security-process" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Eren Türkay, Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Last Modified Date:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.2</td>
+</tr>
+</tbody>
+</table>
+<p>Pardus Security team follow and close the security vulnerabilities of open source
+projects which are included in Pardus repositories. While doing this, it works in
+a cooperation with other distributions.  A standardized way is used in order to
+enable this cooperation to track mail lists like vendor-sec, oss-security and to
+catch the security bugs.</p>
+<p>This documentation will briefly explain this standardized way and how the
+Pardus Security team use it and how it works.</p>
+<div class="section" id="constructive-notice-from-security-world">
+<h2>Constructive Notice from Security World<a class="headerlink" href="#constructive-notice-from-security-world" title="Permalink to this headline">¶</a></h2>
+<p>In order to understand how Pardus Security team work, there should be known that
+the notions of security world, what e-mail lists are used and what are their aims.</p>
+<p>Different notions from Security world:</p>
+<p><strong>Vendor</strong>: The person/association/corporation that provides services. Example
+for vendors  <strong>Pardus, Redhat, Debian, Ubuntu, HP, Oracle</strong>.</p>
+<p><strong>Upstream</strong>: The person/association/corporation that is head of the development
+process. It is similar in open source world, the developer or a group of people
+that is head ofa development process.</p>
+<p><strong>Advisory:</strong> This is a manifesto which includes information about the security
+vulnerability of a specific software version and also its solution.</p>
+<p><a class="reference external" href="http://cve.mitre.org/cve/identifiers/index.html">CVE ID</a>: (CVEs, CVE names, CVE numbers) This is a specific number assigned for
+a security vulnerability. This number is find an acceptance in order to prevent
+security vulnerability to be seen in different forms and to cause a disorder and
+to enable corporations or people that are interested in security vulnerabilities
+to track it.
+CVE numbers are assigned like CVE-{YEAR}-{NUMBER}, ex: CVE-2010-4354. CVE numbers
+can be assigned by CNA (<em>CVE Numbering Authority</em>). The head of this authority is
+the MITRE organization but Debian, Ubuntu, FreeBSD can also assign CVE numbers.
+You can see all CNAs from <a class="reference external" href="http://cve.mitre.org/cve/cna.html">mitre CNA sayfası</a>.</p>
+<p><a class="reference external" href="http://oss-security.openwall.org/wiki/mailing-lists/vendor-sec">Vendor-sec</a>: This is a private e-mail list which consists of members like Linux
+distributions and private corporations (IBM, Oracle, Apple). The discussions
+about security vulnerabilities and when they will be opened to public, take place
+in this e-mail list.</p>
+<p><a class="reference external" href="http://oss-security.openwall.org/wiki/about">Oss-security</a>: This is a public discussion list for security vulnerabilities.
+The CVS number is requested in this e-mail list for the security vulnerabilities
+have already be public.</p>
+</div>
+<div class="section" id="how-the-process-works">
+<h2>How the process works?<a class="headerlink" href="#how-the-process-works" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="vulnerabilities-from-vendor-sec">
+<h3>Vulnerabilities from Vendor-sec<a class="headerlink" href="#vulnerabilities-from-vendor-sec" title="Permalink to this headline">¶</a></h3>
+<p>Explaining this process with an example will be more effective and simple:
+Assuming that XX project has a security vulnerability.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>The information about the vulnerability are send to <a class="reference external" href="http://oss-security.openwall.org/wiki/mailing-lists/vendor-sec">vendor-sec</a> e-mail list. There exists a detailed information about the vulnerability.</li>
+<li>The vulnerability is reviewed by MITRE. If it has not already been reported, its CVE number is given by MITRE or an other authority which have a permission to give CVE ID.</li>
+<li>After this assignment, the developer of XX project is informed about the vulnerability. This vulnerability is discussed privately on the XX project bugzilla. The patch which closes the vulnerability is send to <a class="reference external" href="http://oss-security.openwall.org/wiki/mailing-lists/vendor-sec">vendor-sec</a> list by the person contacted with related developer.</li>
+<li>After the vulnerability closed, the time of the public announce is set. This time is given in order to enable distributions to close and test the bugs. This time is generally 1 week, but if a distribution require more time, it can be extended. The important point in that process, any information can not be spread before the declared public announce time and commit the patches to public svn repositories.</li>
+</ol>
+</blockquote>
+<p>The above items are the process excluding Pardus Security team part. Pardus
+Security team is a <a class="reference external" href="http://oss-security.openwall.org/wiki/mailing-lists/vendor-sec">vendor-sec</a> member and obey the <a class="reference external" href="http://oss-security.openwall.org/wiki/mailing-lists/vendor-sec">vendor-sec</a> privacy rules.</p>
+<p>The Pardus Security team work is started from the below part:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>After the vulnerability is send to <a class="reference external" href="http://oss-security.openwall.org/wiki/mailing-lists/vendor-sec">vendor-sec</a> e-mail list, Pardus security team controls whether this vulnerability affects Pardus repositories. All Pardus distributions is controlled.</li>
+<li>If the vulnerability exists a private bug is reported to Pardus bugzilla.</li>
+<li>The bug is generally reported before the CVE-ID assignment, so after the assignment bug is updated. All informartion about the vulnerability (discussions on vendor-sec or other platforms) is reflected to bug report.</li>
+<li>The report is assigned to related package maintainer. The permission ro read the bug is gived only the developer and security team members. The necessary patch is added and date of the embargo is waited. During this period, any information is pumped out and can not be committed to public repositories.</li>
+<li>During the embargo period the bug resolved and the package maintainer and the security tester test whether the vulnerability is fixed or not. The aim of embargo period is for this. In other words, when the embargo period is finished, all of the distributions can take the bug fixed package to the public repositories rapidly and synchroneously.</li>
+<li>After the vulnerabilty is opened to public, the details about it published as PLSA.</li>
+<li>The private bug becomes public and the PLSA link is also gived. The state of the bug is marked as RESOLVED/FIXED.</li>
+<li>The written PLSA is also send to pardus-security e-mail list.</li>
+</ol>
+</blockquote>
+</div>
+<div class="section" id="vulnerabilities-from-oss-security">
+<h3>Vulnerabilities from oss-security<a class="headerlink" href="#vulnerabilities-from-oss-security" title="Permalink to this headline">¶</a></h3>
+<p>If the security bug has not come from <a class="reference external" href="http://oss-security.openwall.org/wiki/mailing-lists/vendor-sec">vendor-sec</a> and if they comes from public
+security lists like <a class="reference external" href="http://oss-security.openwall.org/wiki/about">oss-security</a>, the process will be a little different.
+The members of this list is generally consist of the distribution security team
+members or other people who are interested in security.</p>
+<p><a class="reference external" href="http://oss-security.openwall.org/wiki/about">oss-security</a> e-mail list is used for the public vulnerabilities which has not
+already a CVE-ID and discussions about them.</p>
+<p>All people can request a CVE-ID from <a class="reference external" href="http://oss-security.openwall.org/wiki/about">oss-security</a> list. Assigning a CVE-ID to a
+security vulnerability simples the tracking process. A CVE-ID can be requested
+for the fixed security vulnerabilities of an open source upstream project.
+This case can generally be happened when a ChangeLog or a NEWS document has an
+information about security for a specific software update. The mails like &#8220;Xxx
+project has release a new version, and this closes yyy vulnerability, please
+assign a CVE-ID?&#8221; are very common.</p>
+<p>The other goodness of this list, it enables to keep track of kernel and kernel
+family vulnerabilities. Eugene Teo from RedHat, has a strong interest for kernel
+vulnerabilities and request CVE-ID. Therefore the way to track kernel
+vulnerabilities becomes easier. While a kernel vulnerability exist, Eugene gives
+the link of its bug report as a reference. It is suggested to follow this report
+with a bug CC.</p>
+</div>
+</div>
+<div class="section" id="how-the-security-update-takes-place">
+<h2>How the security update takes place?<a class="headerlink" href="#how-the-security-update-takes-place" title="Permalink to this headline">¶</a></h2>
+<p>Pardus Security Team uses bugzilla in order to track the security vulnerabilities.
+There exists a main security bug report and also exists blockers for each Pardus
+distribution. Therefore distribution specific security vulnerabilities can be seen.</p>
+<p>The vulnerability reported to bugzilla with <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/">BugSPY</a> application. The script
+<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/bin/file-sec-bug.py">file-sec-bug</a>.
+can automatically file the security bug report to bugzilla. The script
+<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/security/data/CVE/list">check-todo-issues</a>
+can also be used in order to download all CVE database and send the related
+CVE-IDs automatically to bugzilla.</p>
+<p>There exists a template for vulnerability reports. This report consists of a
+summary and a information about the vulnerability.</p>
+<p>An example of a filed vulnerability report with <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/bin/file-sec-bug.py">file-sec-bug</a>:</p>
+<div class="highlight-python"><pre>php: unsafe unserialize() remote code execution flaw (CVE-2010-2225)
+
+DESCRIPTION
+===========
+A use-after-free vulnerability was discovered in the deserialization of
+SPLObjectStorage objects that can be abused for leaking arbitrary memory
+blocks or execute arbitrary code remotely.
+
+SOLUTION
+========
+There is no known solution yet.
+
+REFERENCES
+==========
+[1] http://this-is-reference.com/
+[2] http://www.php.net/foo-advisory.html
+
+NOTES
+=====
+The exploit shown in the advisory does not work with suhosin patch.
+However, it is possible for more sophisticated exploits to work with
+suhosin.</pre>
+</div>
+<p>The report can simply be filed with the command &#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/bin/file-sec-bug.py">file-sec-bug</a>.py &lt;file-name&gt;&#8221;
+the file name includes a text like above. This script will request; the
+assignee, CC list and privacy information.</p>
+<p>That has mentioned above the blocker bugs related to specific Pardus distribution
+will also be opened. They will also be private.</p>
+<p>For example the below blocker bug report will be filed for the above main bug report:</p>
+<div class="highlight-python"><pre>Summary: php: unsafe unserialize() remote code execution flaw (CVE-2010-2225) - Pardus 2009
+Blocks: #21345
+Details: Pardus 2009 is affected from bug #12345</pre>
+</div>
+<p>After reporting tahe bug, the bug also be documented under private repository.
+The reported bug should added under the title &#8220;In bugzilla, not fixed yet&#8221;.
+This tracker document provides a coordination between security, test and release
+manager. Thanks to this file all security vulnerebilities status can be seen and
+controlled from one point.</p>
+<p>After the vulnerability fixed and it should be committed with a description which
+includes &#8220;BUG:FIXED:bugID&#8221; information. This means that the given bugID bug is
+fixed. For example if a bug with ID #1337 is fixed for Pardus 2009 repositories,
+the commit description should include &#8220;BUG:FIXED:1337&#8221; information.</p>
+<p>After the package has taken to stable repository the package is taken from
+&#8220;In bugzilla, not fixed yet&#8221; to &#8220;Fixed but needs compiling&#8221; part in mentioned
+tracker document. After that the release manager will build the package and take
+it to &#8220;Compiled and waiting in testing&#8221; part in tracker document.</p>
+<p>After the tests finished the tested and problem free packages are taken to
+&#8220;Tested and ready for stable, waiting merging&#8221; part in tracker document.</p>
+<p>Then release amanger takes the packages to stable binary repositories. Release
+manager will also send a notification mail about security updated packages with
+&#8220;Security Fixes (&lt;date&gt;)&#8221; subject. He/She takes the announced packages from
+&#8220;Tested and ready for stable, waiting merging&#8221; to &#8220;Merged to stable but needs
+PLSA to write&#8221; part in tracker document.</p>
+<p>At this point the security supervisor will publish PLSAs and give bug report
+references in PLSAs. Also he/she gives the PLSA numbers and links to the related
+bug as a comment.</p>
+<p>The script &#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/bin/file-sec-bug.py">file-sec-bug</a>.py&#8221; is generally used for vulnerabilities which have not
+CVE-ID yet. If a bug has the CVE-ID, an other application <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/security">SecureSPY</a> can be used in
+order to download the CVE database and file the related ID&#8217;s to bug report.</p>
+<p>The script <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/security/bin/update">./bin/update -v</a>
+will update the <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/security/data/CVE/list">data/CVE/list</a>
+database. Using the diff command the newl added CVE-ID assignments can be found.
+After the CVE-ID update the
+./bin/<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/security/data/CVE/list">check-todo-issues</a>
+script can be used for the applications on CVE database. For the usage of this
+script: The <strong>ENTER</strong> key passes an other CVE-ID. The inputs are marked with TODO
+label by default. If the vulnerability is not related with a package in our
+repositories, its CVE-ID should be marked as &#8220;NOT-FOR-US&#8221; with <strong>N</strong> key. If
+it affects one of our repositories, it should be used <strong>B</strong> key in order to open
+a bug report for it. When the <strong>B</strong> key is pressed an interactive command prompt
+will guide. Thanks to this script, the vulnerability report will be performed
+according to template format mentioned above and the CVE-ID information is also
+included in this report. After this point the title should be changed on bug
+report.</p>
+<p>If there exist a bug report and a CVE-ID assigned, the bug ID should be gived
+for the related CVE-ID with &lt;#bugID&gt; format. The script will also add the CVE-ID
+and its description to the bug if they are not exist. If a bug hase more then one
+CVE-ID, the bug ID should also be added for all rlated CVE-IDs.</p>
+<p>If a mistake was made during this session, and a bug affected our repository was
+marked as <strong>N</strong> (NOT-FOR-US), the input &#8220;NOT-FOR-US&#8221; should be found in
+<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/security/data/CVE/list">data/CVE/list</a>
+file for the related CVE-ID and the information &#8220;NOT-FOR-US: fooo&#8221; should be
+replaced with &#8220;TODO: check&#8221; and the
+./bin/<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/security/data/CVE/list">check-todo-issues</a>
+script should be run. After this correction the CVE-ID will be again listed and
+the normal process will occur.</p>
+<p>You can find the details with running &#8220;./bin/check-todo-issues &#8211;help&#8221; and
+you can look the <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/bugspy/security/data/CVE/list">data/CVE/list</a>
+format.</p>
+<p>You can track PLSA&#8217;s from security <a class="reference external" href="http://security.pardus.org.tr/">website</a> and
+<a class="reference external" href="http://security.pardus.org.tr/en/rss/">rss</a>. You can also get an account from
+<a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/pardus-security">security mail list</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/security_process.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

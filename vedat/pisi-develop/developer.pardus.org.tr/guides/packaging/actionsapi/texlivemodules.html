@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/texlivemodules.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Texlivemodules</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="Package Naming Guideline" href="../package_naming_guidelines.html" />
+    <link rel="prev" title="Shelltools" href="shelltools.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Texlivemodules</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Texlivemodules</a><ul>
+<li><a class="reference external" href="#compile">compile</a></li>
+<li><a class="reference external" href="#install">install</a></li>
+<li><a class="reference external" href="#createsymlinksformat2engines">createSymlinksFormat2Engines</a></li>
+<li><a class="reference external" href="#addformat">addFormat</a></li>
+<li><a class="reference external" href="#movesources">moveSources</a></li>
+<li><a class="reference external" href="#buildformatfiles">buildFormatFiles</a></li>
+<li><a class="reference external" href="#generateconfigfiles">generateConfigFiles</a></li>
+<li><a class="reference external" href="#makelanguagesdefdatlines">makeLanguagesDefDatLines</a></li>
+<li><a class="reference external" href="#installdocfiles">installDocFiles</a></li>
+<li><a class="reference external" href="#installtexmffiles">installTexmfFiles</a></li>
+<li><a class="reference external" href="#installconfigfiles">installConfigFiles</a></li>
+<li><a class="reference external" href="#handleconfigfiles">handleConfigFiles</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="texlivemodules"></span><h1>Texlivemodules<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="compile">
+<h2>compile<a class="headerlink" href="#compile" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">compile</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Compiles texlive packages with given parameters. It first moves tlpobj sources,
+then it generatea configure files and builds format files.</p>
+</div>
+<div class="section" id="install">
+<h2>install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">install</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Installs texlive packages with given parameters. It fist creates symlinks for
+the formats. Then it installs doc, config and texmf files to the system.</p>
+</div>
+<div class="section" id="createsymlinksformat2engines">
+<h2>createSymlinksFormat2Engines<a class="headerlink" href="#createsymlinksformat2engines" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">createSymlinksFormat2Engines</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Creates symlinks for the engine names in /usr/texmf/fmtutil/format*.cnf files.</p>
+</div>
+<div class="section" id="addformat">
+<h2>addFormat<a class="headerlink" href="#addformat" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">addFormat</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Adds new formats created via new config files.</p>
+</div>
+<div class="section" id="movesources">
+<h2>moveSources<a class="headerlink" href="#movesources" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">moveSources</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Moves unneccessary sources under /usr/share/tlpkg/tlpobj/ files.</p>
+</div>
+<div class="section" id="buildformatfiles">
+<h2>buildFormatFiles<a class="headerlink" href="#buildformatfiles" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">buildFormatFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Builds format files with running fmutil.</p>
+</div>
+<div class="section" id="generateconfigfiles">
+<h2>generateConfigFiles<a class="headerlink" href="#generateconfigfiles" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">generateConfigFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Generates .cfg, -config, -config.ps, .def, .dat files.</p>
+</div>
+<div class="section" id="makelanguagesdefdatlines">
+<h2>makeLanguagesDefDatLines<a class="headerlink" href="#makelanguagesdefdatlines" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">makeLanguagesDefDatLines</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Add lines to .def and .dat files for each generated language.</p>
+</div>
+<div class="section" id="installdocfiles">
+<h2>installDocFiles<a class="headerlink" href="#installdocfiles" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">installDocFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Installs doc files of texlive packages.</p>
+</div>
+<div class="section" id="installtexmffiles">
+<h2>installTexmfFiles<a class="headerlink" href="#installtexmffiles" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">installTexmfFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Installs Installing texmf, texmf-dist, tlpkg, texmf-var directories.</p>
+</div>
+<div class="section" id="installconfigfiles">
+<h2>installConfigFiles<a class="headerlink" href="#installconfigfiles" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">installConfigFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Installs .cfg, -config, -config.ps, .def, .dat files.</p>
+</div>
+<div class="section" id="handleconfigfiles">
+<h2>handleConfigFiles<a class="headerlink" href="#handleconfigfiles" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">handleConfigFiles</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Handles files ends with cfg or cnf and create their symbolic links.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/texlivemodules.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/kde4.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>KDE4</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="KDE" href="kde.html" />
+    <link rel="prev" title="Get" href="get.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">KDE4</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">KDE4</a><ul>
+<li><a class="reference external" href="#default-parameters">Default Parameters</a><ul>
+<li><a class="reference external" href="#basename">basename</a></li>
+<li><a class="reference external" href="#prefix">prefix</a></li>
+<li><a class="reference external" href="#libdir">libdir</a></li>
+<li><a class="reference external" href="#bindir">bindir</a></li>
+<li><a class="reference external" href="#modulesdir">modulesdir</a></li>
+<li><a class="reference external" href="#libexecdir">libexecdir</a></li>
+<li><a class="reference external" href="#iconsdir">iconsdir</a></li>
+<li><a class="reference external" href="#applicationsdir">applicationsdir</a></li>
+<li><a class="reference external" href="#mandir">mandir</a></li>
+<li><a class="reference external" href="#sharedir">sharedir</a></li>
+<li><a class="reference external" href="#appsdir">appsdir</a></li>
+<li><a class="reference external" href="#configdir">configdir</a></li>
+<li><a class="reference external" href="#sysconfdir">sysconfdir</a></li>
+<li><a class="reference external" href="#servicesdir">servicesdir</a></li>
+<li><a class="reference external" href="#servicetypesdir">servicetypesdir</a></li>
+<li><a class="reference external" href="#includedir">includedir</a></li>
+<li><a class="reference external" href="#docdir">docdir</a></li>
+<li><a class="reference external" href="#htmldir">htmldir</a></li>
+<li><a class="reference external" href="#wallpapersdir">wallpapersdir</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#configure">configure</a></li>
+<li><a class="reference external" href="#make">make</a></li>
+<li><a class="reference external" href="#install">install</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="kde4"></span><h1>KDE4<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="default-parameters">
+<h2>Default Parameters<a class="headerlink" href="#default-parameters" title="Permalink to this headline">¶</a></h2>
+<p>You can see all of the default parameters from:
+<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/kde4.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/kde4.py</a></p>
+<div class="section" id="basename">
+<h3>basename<a class="headerlink" href="#basename" title="Permalink to this headline">¶</a></h3>
+<p>The base name is gived as &#8220;kde4&#8221;.</p>
+</div>
+<div class="section" id="prefix">
+<h3>prefix<a class="headerlink" href="#prefix" title="Permalink to this headline">¶</a></h3>
+<p>The default prefix is the default prefix of Pardus (see
+<a class="reference external" href="get.html#defaultprefixdir">link</a></p>
+</div>
+<div class="section" id="libdir">
+<h3>libdir<a class="headerlink" href="#libdir" title="Permalink to this headline">¶</a></h3>
+<p>The default library directory is the concatenation of the default prefix
+directory and /lib value.</p>
+</div>
+<div class="section" id="bindir">
+<h3>bindir<a class="headerlink" href="#bindir" title="Permalink to this headline">¶</a></h3>
+<p>The default binary directory is the concatenation of the default prefix
+directory and /bin value.</p>
+</div>
+<div class="section" id="modulesdir">
+<h3>modulesdir<a class="headerlink" href="#modulesdir" title="Permalink to this headline">¶</a></h3>
+<p>The default module directory is the concatenation of the default libdir
+directory and basename value.</p>
+</div>
+<div class="section" id="libexecdir">
+<h3>libexecdir<a class="headerlink" href="#libexecdir" title="Permalink to this headline">¶</a></h3>
+<p>The default libexec directory is the concatenation of the default modulesdir
+directory and /libexec value.</p>
+</div>
+<div class="section" id="iconsdir">
+<h3>iconsdir<a class="headerlink" href="#iconsdir" title="Permalink to this headline">¶</a></h3>
+<p>The default icon directory is the concatenation of the default prefix
+directory and /share/icons value.</p>
+</div>
+<div class="section" id="applicationsdir">
+<h3>applicationsdir<a class="headerlink" href="#applicationsdir" title="Permalink to this headline">¶</a></h3>
+<p>The default application directory is the concatenation of the default prefix
+directory, /share/applications/ and basename value.</p>
+</div>
+<div class="section" id="mandir">
+<h3>mandir<a class="headerlink" href="#mandir" title="Permalink to this headline">¶</a></h3>
+<p>The default man dirrectory is the default man directory of Pardus (see
+<a class="reference external" href="get.html#mandir">link</a>)</p>
+</div>
+<div class="section" id="sharedir">
+<h3>sharedir<a class="headerlink" href="#sharedir" title="Permalink to this headline">¶</a></h3>
+<p>The default share directory is the concatenation of the default prefix
+directory, /share/ and basename value.</p>
+</div>
+<div class="section" id="appsdir">
+<h3>appsdir<a class="headerlink" href="#appsdir" title="Permalink to this headline">¶</a></h3>
+<p>The default apps directory is the concatenation of the default sharedir
+directory and /apps value.</p>
+</div>
+<div class="section" id="configdir">
+<h3>configdir<a class="headerlink" href="#configdir" title="Permalink to this headline">¶</a></h3>
+<p>The default config directory is the concatenation of the default sharedir
+directory and /config value.</p>
+</div>
+<div class="section" id="sysconfdir">
+<h3>sysconfdir<a class="headerlink" href="#sysconfdir" title="Permalink to this headline">¶</a></h3>
+<p>This id /etc value</p>
+</div>
+<div class="section" id="servicesdir">
+<h3>servicesdir<a class="headerlink" href="#servicesdir" title="Permalink to this headline">¶</a></h3>
+<p>The default service directory is the concatenation of the default sharedir
+directory and /services value.</p>
+</div>
+<div class="section" id="servicetypesdir">
+<h3>servicetypesdir<a class="headerlink" href="#servicetypesdir" title="Permalink to this headline">¶</a></h3>
+<p>The default service types directory is the concatenation of the default sharedir
+directory and /servicetypes value.</p>
+</div>
+<div class="section" id="includedir">
+<h3>includedir<a class="headerlink" href="#includedir" title="Permalink to this headline">¶</a></h3>
+<p>The default include directory is the concatenation of the default prefix
+directory, /include/ and basename value.</p>
+</div>
+<div class="section" id="docdir">
+<h3>docdir<a class="headerlink" href="#docdir" title="Permalink to this headline">¶</a></h3>
+<p>The default doc directory is the concatenation of the default man directory of
+Pardus (see <a class="reference external" href="get.html#mandir">link</a>) and basename value.</p>
+</div>
+<div class="section" id="htmldir">
+<h3>htmldir<a class="headerlink" href="#htmldir" title="Permalink to this headline">¶</a></h3>
+<p>The default html directory is the concatenation of the default docdir
+directory and /html value.
+= &#8220;%s/html&#8221; % docdir</p>
+</div>
+<div class="section" id="wallpapersdir">
+<h3>wallpapersdir<a class="headerlink" href="#wallpapersdir" title="Permalink to this headline">¶</a></h3>
+<p>The default wallpaper directory is the concatenation of the default prefix
+directory and /share/wallpapers value.</p>
+</div>
+</div>
+<div class="section" id="configure">
+<h2>configure<a class="headerlink" href="#configure" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">configure</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Configures the kde4 packages according to the parameters given by the user and PISI&#8217;s
+default parameters.</p>
+<p>The default parameters:(You can see the assigned values from
+<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/kde4.py">here</a>)</p>
+<div class="highlight-python"><pre>-DDATA_INSTALL_DIR:PATH
+-DINCLUDE_INSTALL_DIR:PATH
+-DCONFIG_INSTALL_DIR:PATH
+-DLIBEXEC_INSTALL_DIR:PATH
+-DSYSCONF_INSTALL_DIR:PATH
+-DHTML_INSTALL_DIR:PATH
+-DMAN_INSTALL_DIR:PATH
+-DCMAKE_SKIP_RPATH:BOOL
+-DLIB_INSTALL_DIR:PATH</pre>
+</div>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">kde4</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="make">
+<h2>make<a class="headerlink" href="#make" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">make</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Builds the kde4 packages according to the parameters given by the user.</p>
+</div>
+<div class="section" id="install">
+<h2>install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">install</span><span class="p">(</span><span class="n">parameters</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">argument</span> <span class="o">=</span> <span class="s">&#39;install&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Install the kde4 packages according to the parameters given by the user.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/kde4.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

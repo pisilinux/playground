@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/howto_bug_triage.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Starting Bug Triage</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Bug Tracking Guide" href="index.html" />
+    <link rel="next" title="Finding Correct Product and Component" href="correct_component.html" />
+    <link rel="prev" title="Bug Requests" href="bug_and_feature_requests.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Bug Tracking Guide</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Starting Bug Triage</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Starting Bug Triage</a><ul>
+<li><a class="reference external" href="#choosing-bugs">Choosing Bugs</a></li>
+<li><a class="reference external" href="#understanding-bugzilla">Understanding Bugzilla</a></li>
+<li><a class="reference external" href="#bug-importance">Bug Importance</a><ul>
+<li><a class="reference external" href="#urgent">Urgent:</a></li>
+<li><a class="reference external" href="#high">High:</a></li>
+<li><a class="reference external" href="#normal">Normal:</a></li>
+<li><a class="reference external" href="#new-feature">New feature:</a></li>
+<li><a class="reference external" href="#low">Low:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#check-list-for-bugs-have-new-status">Check list for bugs have NEW status</a></li>
+<li><a class="reference external" href="#mark-as-triaged">Mark as triaged</a></li>
+<li><a class="reference external" href="#pursuance">Pursuance</a></li>
+<li><a class="reference external" href="#eol-bug-triage">EOL Bug Triage</a></li>
+<li><a class="reference external" href="#general-advice">General Advice</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#first-steps-to-contribute-triaging">First Steps to Contribute Triaging</a></li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="starting-bug-triage">
+<span id="howto-bug-triage"></span><h1>Starting Bug Triage<a class="headerlink" href="#starting-bug-triage" title="Permalink to this headline">¶</a></h1>
+<p><strong>Last Modified Date:</strong> 03-08-2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.2</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="choosing-bugs">
+<h2>Choosing Bugs<a class="headerlink" href="#choosing-bugs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Bug triage is done at product and component base. (See <a class="reference external" href="http://bugs.pardus.org.tr/describecomponents.cgi">http://bugs.pardus.org.tr/describecomponents.cgi</a>)</li>
+<li>Bug triage can be done excluding Community Services and Distribution Process classes.</li>
+<li>The prepared stock responses are so valuable in order to tackle bugs. (See <a class="reference external" href="stock_responses.html#stock-responses"><em>Bugzilla Stock Responses</em></a>)</li>
+</ul>
+</div>
+<div class="section" id="understanding-bugzilla">
+<h2>Understanding Bugzilla<a class="headerlink" href="#understanding-bugzilla" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<ul class="simple">
+<li>See <a class="reference external" href="bug_cycle.html">bug cycle</a></li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="bug-importance">
+<h2>Bug Importance<a class="headerlink" href="#bug-importance" title="Permalink to this headline">¶</a></h2>
+<p>We use four types of bug importances and give each a specific meaning and time interval:</p>
+<div class="section" id="urgent">
+<h3>Urgent:<a class="headerlink" href="#urgent" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="bug_and_feature_requests8cb1.html?highlight=crash#freeze-and-panics">Freeze, panics</a> and <a class="reference external" href="bug_and_feature_requests8cb1.html?highlight=crash#crashes">crashes</a> that reproducible on all type of systems and makes the whole system unusable and <strong>security</strong> related bugs. These bugs should fixed promptly.</p>
+</div>
+<div class="section" id="high">
+<h3>High:<a class="headerlink" href="#high" title="Permalink to this headline">¶</a></h3>
+<p>Bugs that are reproducible on all type of systems and makes the program unusable (packages which are totally unusable and have missing dependency, like being uninstallable or <a class="reference external" href="bug_and_feature_requests8cb1.html?highlight=crash#crashes">crashing</a> on startup, bugs cause that cause loss of user data). These bugs should be fixed in 1 months.</p>
+</div>
+<div class="section" id="normal">
+<h3>Normal:<a class="headerlink" href="#normal" title="Permalink to this headline">¶</a></h3>
+<p>Bugs that are reproducible on all type of systems and makes a part of the program unusable. These bugs are probably be fixed in 6 months.</p>
+</div>
+<div class="section" id="new-feature">
+<h3>New feature:<a class="headerlink" href="#new-feature" title="Permalink to this headline">¶</a></h3>
+<p>New feature requests. These requests will probably be done for the next release.</p>
+</div>
+<div class="section" id="low">
+<h3>Low:<a class="headerlink" href="#low" title="Permalink to this headline">¶</a></h3>
+<p>The others - a cosmetic problem, such as a misspelled word or misaligned text or an enhancement, bugs that are not reproducible on all systems. These bugs are not schduled to fix in the next 6 months. This is not the same as planning not to fix the bug; it means that we don&#8217;t know when we will fix it, if at all.</p>
+<p><strong>Notes:</strong>  Hardware specific bugs generally seemed as urgent, but it should be generally high. Because urgent severity is used when the entire distribution does not work, but a bug restricted to a specific hardware usually has a high severity.</p>
+</div>
+</div>
+<div class="section" id="check-list-for-bugs-have-new-status">
+<h2>Check list for bugs have NEW status<a class="headerlink" href="#check-list-for-bugs-have-new-status" title="Permalink to this headline">¶</a></h2>
+<p>This checklist is used for bugs which have <strong>NEW</strong> status.</p>
+<ol class="arabic">
+<li><p class="first">Does the bug report mention about a real bug?</p>
+<blockquote>
+<ul class="simple">
+<li>In some cases, users need some help about configuring or using software. These reports are not related with bug or feature request. These type of reports should be closed with RESOLVED/INVALID resolution, and a polite comment should be give in order to guide user to related forums or mail lists.</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Is the bug product and component right?</p>
+<blockquote>
+<ul class="simple">
+<li>To take technical assistance please see <a class="reference external" href="correct_component.html#correct-component"><em>Finding Correct Product and Component</em></a>.</li>
+<li>If the bug component is assigned to wrong, it should be changed.</li>
+<li>In some cases, it is not possible to find correct component, until the source code is examined. In such a situation, you can take help from assigned developer.</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Has the bug a duplicate?</p>
+<blockquote>
+<ul>
+<li><p class="first">If so, the less informed bug resolution should be set as <strong>RESOLVED/DUPLICATE</strong> with bug number of the most detailed report and <a class="reference external" href="stock_responses.html#duplicate-bugs">duplicate bug stock response</a> is gived as a comment.</p>
+</li>
+<li><p class="first">If it is not clear that a bug is a duplicate of another bug, please politeliy convince reporter with your comment.</p>
+</li>
+<li><p class="first">For additional help: <a class="reference external" href="finding_duplicates.html#finding-duplicates"><em>Finding Duplicate Bugs</em></a>.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Also:</dt>
+<dd><ul class="first last simple">
+<li>Observe <a class="reference external" href="http://bugs.pardus.org.tr/duplicates.cgi">Most frequently reported bugs</a>.</li>
+<li>Analyse the bugs assigned same component.</li>
+<li>Use advance search for the bugs assigned different components and try to find similarities.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Do the bugs depend each other?</p>
+<blockquote>
+<ul class="simple">
+<li>If a bug fix helps another bugs resolution, or vice versa, please explain it with comments on each bug.</li>
+<li>If you are sure about this dependence, add the number of the bug which should be fixed first to the other bug &#8220;Depends on&#8221; part.</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Are more then one bug is reported in one report?</p>
+<blockquote>
+<ul class="simple">
+<li>Please send <a class="reference external" href="stock_responses.html#more-than-one-issues-reported-in-one-bug">more than one issues on same bug stock response</a> as a comment.</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Is there enough information for developer to fix the bug?</p>
+<blockquote>
+<ul>
+<li><dl class="first docutils">
+<dt>If not,</dt>
+<dd><ul class="first last simple">
+<li>Request for more information from the reporter (please be polite). Leave the bug status as <strong>NEW</strong> and state <strong>NEEDINFO</strong> as a keyword.</li>
+<li>Please add your own idea to the comment. This idea generally comes into mind, while trying to reproduce the bug. Additionaly you can comment according to attachments.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Look <a class="reference external" href="bug_and_feature_requests.html#gather-information-for-specific-bugs">Gather information from specific Bugs</a> for necessary bug information:</dt>
+<dd><ul class="first last simple">
+<li>Are the steps for reproduce explained clearly?</li>
+<li>Were the relevant log files and outputs added to the report?</li>
+<li>If a crash occured, did the stack trace is added?</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Do the summary helps the bug?</p>
+<blockquote>
+<ul class="simple">
+<li>If the summary part is far away from the meaning of the bug or confusing, feel free to change it.</li>
+<li>Please try not to change the idea of the reporter.</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Which severity should I use?</p>
+<blockquote>
+<p>During bug triage process, it is very important to state bug severity. Most bugs assigned with severity <strong>Normal</strong>, but the severity of the bug should change related to different <a class="reference external" href="howto_bug_triage.html#bug-importance">bug importances</a>.</p>
+</blockquote>
+</li>
+<li><p class="first">Is the bug a blocker bug? (For release tracker bugs)</p>
+<blockquote>
+<p>Only ongoing releases has tracker bugs. If a bug is a tracker bug of one of the ongoing release it should be fixed before the release time. When it did not fix, it delays the release. Therefore the bug numbers which has a power to block the release should be set to &#8220;Depends on&#8221; part of release tracker bug.</p>
+</blockquote>
+</li>
+<li><p class="first">How to resolve bugs?</p>
+<blockquote>
+<p>Many bugs can be fixed unintentially or by upstream. If you realised that the bug is fixed by an update, mark it <strong>RESOLVED/FIXED</strong>.</p>
+<p>When a bug fixed by its maintainers, the bug will be marked as <strong>RESOLVED/FIXED</strong> autmatically via commit messages.</p>
+</blockquote>
+</li>
+<li><p class="first">How to handle bugs in multiple releases?</p>
+<blockquote>
+<p>If you experience that a already reported bug is also reproducible for an other Pardus release, explain it as comment.</p>
+</blockquote>
+</li>
+<li><p class="first">How to reproduce or isolate the cause of the bug?</p>
+<blockquote>
+<p>In order to reproduce the bug there are two usefull questions to answer:</p>
+<ul class="simple">
+<li>Is the bug due to a specific configuration or hardware?</li>
+<li>Has the bug already been fixed?</li>
+</ul>
+<ol class="arabic">
+<li><p class="first">If it is a non-reproducible bug for the reporter, like a crash or intermittent failure:</p>
+<ul class="simple">
+<li>Be sure the reporter system is up to date</li>
+<li>If the reporter system is not up to date, you can offer the reporter up to date. (Some non-reproducible bugs can be fixed by updates)</li>
+<li>Some specific configuration or hardware might be cause these type of bugs, so there is no guarantee than update will fix it. But running more recent code makes it more likely developers will track down the cause.</li>
+</ul>
+</li>
+<li><p class="first">If this is a reproducible bug for the original reporter, you can try to experience the bug yourself.</p>
+<blockquote>
+<ul>
+<li><p class="first">If it can be reproducible only for the release reaches its end of life, relove the bug as <strong>RESOLVED/INVALID</strong>.</p>
+</li>
+<li><p class="first">If the bug can be reproduced for the stable and test repository release at the same time, this is evidence that the bug is not due to a specific configuration or hardware.</p>
+</li>
+<li><p class="first">If the bug can be reproduced for the stable repository release but not for test repository release this is strong evidence that the bug has already been fixed. Give a bug comment that &#8220;this bug will be fixed after the package merges to stable&#8221;. You can resolve the bug as <strong>RESOLVED/FIXED</strong></p>
+</li>
+<li><dl class="first docutils">
+<dt>If the bug cannot be reproduced for the stable repository release, this is strong evidence that the bug is due to something different in the environment of the reporter.</dt>
+<dd><ul class="first last simple">
+<li>Make sure that the reporter system is up to date</li>
+<li>Make sure that you are using exactly the same method to reproduce the bug as the reporter.</li>
+<li>If you suspect user specific operation, ,ask the reporter to create a new Unix user and try to reproduce with that user.</li>
+<li>If you suspect machine specific operation, ask the reporter to try reproduction with reinstalling problematic package with moving any cached data or configuration files.</li>
+<li>If you suspect a hardware-specific problem, you might request a information about the relevant hardware</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p class="first">Has the bug already been reported to upstream?</p>
+<blockquote>
+<ul class="simple">
+<li>Search the bug in the upstream Bugzilla or mailing list, if they exist.</li>
+<li>If you find a report that has already reported to upstream, give <strong>UPSTREAM</strong> keyword and a link to Pardus bug report and leave the bug open.</li>
+</ul>
+<p>Upstream bug reporting systems:</p>
+<blockquote>
+<ul class="simple">
+<li><a class="reference external" href="https://bugs.kde.org/">KDE Bugzilla</a></li>
+<li><a class="reference external" href="https://bugzilla.kernel.org/">Linux Kernel Bugzilla</a></li>
+<li><a class="reference external" href="https://bugzilla.mozilla.org/">Mozilla Bugzilla</a>.</li>
+<li><a class="reference external" href="http://qa.openoffice.org/issues/query.cgi">OpenOffice IssueZilla</a></li>
+<li><a class="reference external" href="https://bugzilla.gnome.org/">Gnome Bugzilla</a></li>
+<li><a class="reference external" href="http://bugzilla.xfce.org/">Xfce Bugzilla</a></li>
+</ul>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="mark-as-triaged">
+<h2>Mark as triaged<a class="headerlink" href="#mark-as-triaged" title="Permalink to this headline">¶</a></h2>
+<p>If you finish triage, you should add <strong>TRIAGED</strong> keyword, in order to avoid retriage.</p>
+</div>
+<div class="section" id="pursuance">
+<h2>Pursuance<a class="headerlink" href="#pursuance" title="Permalink to this headline">¶</a></h2>
+<p>If you set a <strong>NEEDINFO</strong> keyword in a bug, you have to control the bug during 30 days if the reporter or other commenter give an additional information in order to reproduce the bug, you have to remove &#8220;NEEDINFO&#8221; keyword. If any user return the bug durin 30 days bug will automatically closed.</p>
+</div>
+<div class="section" id="eol-bug-triage">
+<h2>EOL Bug Triage<a class="headerlink" href="#eol-bug-triage" title="Permalink to this headline">¶</a></h2>
+<p>For bugs filed against Pardus releases that have reached their End of Life (EOL):</p>
+<blockquote>
+<ul class="simple">
+<li>If the bug appears to be occurring in a more recent (non-EOL) version, update the version number and leave the bug open,</li>
+<li>Otherwise, mark the bug <strong>CLOSED/WONTFIX</strong> and add the <a class="reference external" href="stock_responses.html#end-of-life-eol-product">EOL stock response</a>.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="general-advice">
+<h2>General Advice<a class="headerlink" href="#general-advice" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<ul class="simple">
+<li>Please be polite when triaging bugs; we need reporters in order to improve Pardus</li>
+<li>Please try to reproduce the bug before requesting additional infor mation. Avoid requesting information and re-testing that isn&#8217;t really necessary; this is obviously frustrating for them.</li>
+<li>Avoid marking a bug as a duplicate that isn&#8217;t really the same. If you don&#8217;t have the technical expertise to be certain, just add a comment with the other bug number, and say it&#8217;s a possible duplicate.</li>
+<li>If the developer has commented on the bug or filed it themselves. Let the bug to developer, if more information was needed, they probably would have requested it themselves.</li>
+<li>You can take help from <a class="reference external" href="http://lists.pardus.org.tr/mailman/listinfo/testci">test list</a></li>
+<li>Add yourself to the CC: list of bugs you triage.</li>
+<li>Please read carefully, and think before you click.</li>
+<li>Use <a class="reference external" href="stock_responses.html#stock-responses"><em>Bugzilla Stock Responses</em></a> as appropriate.</li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div class="section" id="first-steps-to-contribute-triaging">
+<h1>First Steps to Contribute Triaging<a class="headerlink" href="#first-steps-to-contribute-triaging" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>Track closely <a class="reference external" href="http://lists.pardus.org.tr/mailman/listinfo/bugzilla">bugzilla mail list</a> and read triaged bugs carefully.</li>
+<li>Take an account from Pardus <a class="reference external" href="http://bugs.pardus.org.tr/">bugzilla</a></li>
+<li>Read this document carefully :)</li>
+</ol>
+<p>#. Write comments little by little to the bugs on <a class="reference external" href="http://bugs.pardus.org.tr/">bugzilla</a> for triaging
+..  #. When you feel ready for triaging, please send a message to <a class="reference external" href="http://lists.pardus.org.tr/mailman/listinfo/testci">test list</a> with your triaged bug ids, the experienced triagers will review your triaged bugs and approve your triaging request (At this point, you will take permissions for changing bug status, severity etc. to deeply triage).</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/howto_bug_triage.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:20 GMT -->
+</html>

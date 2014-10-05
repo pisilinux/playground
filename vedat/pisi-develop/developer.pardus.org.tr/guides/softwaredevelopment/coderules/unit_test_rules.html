@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/softwaredevelopment/coderules/unit_test_rules.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Unit Test</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Code Rules" href="index.html" />
+    <link rel="next" title="Software Development Life Cycle" href="../developmentlifecycle/index.html" />
+    <link rel="prev" title="Docstring Rules" href="docstring_rules.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Software Development</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Code Rules</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Unit Test</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Unit Test</a><ul>
+<li><a class="reference external" href="#the-value-of-unit-tests">The Value of Unit Tests</a></li>
+<li><a class="reference external" href="#unit-test-structure">Unit Test Structure</a></li>
+<li><a class="reference external" href="#set-up-all-conditions-for-testing">Set Up All Conditions for Testing</a></li>
+<li><a class="reference external" href="#call-the-method-or-trigger-being-tested">Call the method (or Trigger) being tested</a></li>
+<li><a class="reference external" href="#verify-the-results-are-correct">Verify the results are correct</a></li>
+<li><a class="reference external" href="#clean-up-is-easy">Clean up (is Easy!)</a></li>
+<li><a class="reference external" href="#where-to-put-tests">Where to put tests?</a></li>
+<li><a class="reference external" href="#what-to-test">What to Test</a></li>
+<li><a class="reference external" href="#testing-unexpected-conditions">Testing Unexpected Conditions</a></li>
+<li><a class="reference external" href="#bad-input-values">Bad Input Values</a></li>
+<li><a class="reference external" href="#boundary-conditions">Boundary Conditions</a></li>
+<li><a class="reference external" href="#tips-for-writing-great-unit-tests">Tips for writing great unit tests</a></li>
+<li><a class="reference external" href="#pytest">Pytest</a></li>
+<li><a class="reference external" href="#test-organization">Test organization</a></li>
+<li><a class="reference external" href="#assertion-syntax">Assertion syntax</a></li>
+<li><a class="reference external" href="#dealing-with-exceptions">Dealing with exceptions</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <p id="unit-test-rules"><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Beyza Ermiş</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="unit-test">
+<h1>Unit Test<a class="headerlink" href="#unit-test" title="Permalink to this headline">¶</a></h1>
+<p>A unit test is code that exercises a specific portion of your codebase in a particular context. Typically, each unit test sends a specific input to a method and verifies that the method returns the expected value, or takes the expected action. Unit tests prove that the code you are testing does in fact do what you expect it to do.</p>
+<p>The Force.com platform requires that at least 75% of the Apex Code in an org be executed via unit tests in order to deploy the code to production. You shouldn’t consider 75% code coverage to be an end-goal though. Instead, you should strive to increase the state coverage of your unit tests. Code has many more possible states than it has lines of code. For example, the following method has 4,294,967,296 different states:</p>
+<blockquote>
+<em>double getFraction(Integer a){ return 1/a;}</em></blockquote>
+<p>Clearly, you wouldn’t want to test all of the different states for this program. Instead, you should probably test a few different inputs for this method, even if it means that you will have achieved 100% code coverage several times over.
+Three different states that you might consider testing are a &#8220;positive&#8221; input, a &#8220;negative&#8221; input and a &#8220;0&#8221; input. Testing with a positive input, and with a negative input will behave as expected. Testing with a &#8220;0&#8221; input however will yield a surprise &#8220;System.MathException&#8221;. This is just one example of why it makes sense to focus on testing the different states of your code instead of focusing on just the 75% code coverage requirement.</p>
+<p>You can see the cheatsheet: <a class="reference external" href="PardusUnitTestCheatSheet.html">http://developer.pardus.org.tr/guides/softwaredevelopment/coderules/PardusUnitTestCheatSheet.pdf</a></p>
+<div class="section" id="the-value-of-unit-tests">
+<h2>The Value of Unit Tests<a class="headerlink" href="#the-value-of-unit-tests" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>One of the most valuable benefits of unit tests is that they give you confidence that your code works as you expect it to work. Unit tests give you the confidence to do long-term development because with unit tests in place, you know that your foundation code is dependable. Unit tests give you the confidence to refactor your code to make it cleaner and more efficient.</li>
+<li>Unit tests also save you time because unit tests help prevent regressions from being introduced and released. Once a bug is found, you can write a unit test for it, you can fix the bug, and the bug can never make it to production again because the unit tests will catch it in the future.</li>
+<li>Another advantage is that unit tests provide excellent implicit documentation because they show exactly how the code is designed to be used.</li>
+</ul>
+</div>
+<div class="section" id="unit-test-structure">
+<h2>Unit Test Structure<a class="headerlink" href="#unit-test-structure" title="Permalink to this headline">¶</a></h2>
+<p>Let’s take a look at how unit tests are best structured. All unit tests should follow the same basic structure.</p>
+<dl class="docutils">
+<dt>A unit test should:</dt>
+<dd><ul class="first last simple">
+<li>Set up all conditions for testing.</li>
+<li>Call the method (or Trigger) being tested.</li>
+<li>Verify that the results are correct.</li>
+<li>Clean up modified records.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="set-up-all-conditions-for-testing">
+<h2>Set Up All Conditions for Testing<a class="headerlink" href="#set-up-all-conditions-for-testing" title="Permalink to this headline">¶</a></h2>
+<p>Typically, methods perform some sort of operation upon data. So in order to test your methods, you’ll need to set up the data required by the method. This might be <strong>as simple as</strong> declaring a few variables, or <strong>as complex as</strong> creating a number of records in the Force.com database. For example, if you have a trigger like this one that updates an Opportunity’s parent Account after the Opportunity is inserted:</p>
+<div class="highlight-python"><pre>*trigger updateParentAccountWithOpportunityName on Opportunity (after insert) {*
+
+     *// Create a Map from Account Ids to Opportunities.*
+
+     *Map&lt;Id, Opportunity&gt; accountIdOpportunityMap = new Map&lt;Id, Opportunity&gt;();*
+
+     for(Opportunity o&amp;nbsp;: Trigger.new){
+
+         *accountIdOpportunityMap.put(o.AccountId, o);*
+
+     }
+
+     *// Create a list of Accounts to Update.*
+
+     *List&lt;Account&gt; accounts = new List&lt;Account&gt;();*
+
+     for(Account a&amp;nbsp;: [SELECT Id, Most_Recently_Created_Opportunity_Name__c
+
+         *FROM Account*
+
+         *WHERE Id IN&amp;nbsp;:accountIdOpportunityMap.keySet()]){*
+
+         *a.Most_Recently_Created_Opportunity_Name__c = ((Opportunity) accountIdOpportunityMap.get(a.Id)).Name;*
+
+         *accounts.add(a);*
+     }
+
+     *update accounts;*
+ }</pre>
+</div>
+<p>Then, your setup code could look something like this:</p>
+<blockquote>
+<p><em>Account a = new Account(Name=&#8217;My Account&#8217;);</em></p>
+<p><em>insert a;</em></p>
+<p><em>Opportunity o = new Opportunity(AccountId=a.Id, Name=&#8217;My Opportunity&#8217;, StageName=&#8217;Prospecting&#8217;, CloseDate=Date.today());</em></p>
+</blockquote>
+<p>Your unit tests should always create their own test data to execute against. That way, you can be confident that your tests aren’t dependent upon the state of a particular environment and will be repeatable even if they are executed in a different environment from which they were written.</p>
+</div>
+<div class="section" id="call-the-method-or-trigger-being-tested">
+<h2>Call the method (or Trigger) being tested<a class="headerlink" href="#call-the-method-or-trigger-being-tested" title="Permalink to this headline">¶</a></h2>
+<p>Once you have set up the appropriate input data, you still need to execute your code. If you are testing a method, then you will call the method directly. In this case, we’re testing a Trigger, so we’ll need to perform the action that causes the trigger to execute.
+In our sample, that means that we will need to insert the Opportunity:</p>
+<blockquote>
+<em>insert o;</em></blockquote>
+</div>
+<div class="section" id="verify-the-results-are-correct">
+<h2>Verify the results are correct<a class="headerlink" href="#verify-the-results-are-correct" title="Permalink to this headline">¶</a></h2>
+<p>Verifying that your code works as you expect it to work is the most important part of unit testing. Unit tests that do not verify the results of the code aren’t true unit tests. A good way to tell if unit tests are properly verifying results is to look for liberal use of the <em>assert()</em> methods.</p>
+</div>
+<div class="section" id="clean-up-is-easy">
+<h2>Clean up (is Easy!)<a class="headerlink" href="#clean-up-is-easy" title="Permalink to this headline">¶</a></h2>
+<p>Cleaning up after unit tests is easy, because there’s nothing to do! Actions performed on records inside of a unit test are not committed to the database. This means that we can insert, delete, and modify records without having to write any code that will clean up our changes.</p>
+</div>
+<div class="section" id="where-to-put-tests">
+<h2>Where to put tests?<a class="headerlink" href="#where-to-put-tests" title="Permalink to this headline">¶</a></h2>
+<p>It makes sense to put unit tests for your classes in a separate class file as well. The most important reason for this is that by separating your class implementation and your unit tests, you will automatically be prevented from testing private methods and private properties. You shouldn’t test private methods and private properties because doing so will cause your unit tests to become a barrier to refactoring. With your classes and unit tests separated in to different files, you will always have the option to <strong>change the internal implementation of your classes</strong> should the need arise. If you ever do find yourself compelled to test a private or protected method, this is probably a strong indication that the method should be refactored in to its own stand-alone class.</p>
+</div>
+<div class="section" id="what-to-test">
+<h2>What to Test<a class="headerlink" href="#what-to-test" title="Permalink to this headline">¶</a></h2>
+<p>Broadly speaking, you should test your custom business logic. How thoroughly you test that business logic will probably vary between situations. On one end of the spectrum, you might choose to implement just a few tests that only cover the code paths that you believe are most likely to contain a bug. On the other end of the spectrum, you might choose to implement a large suite of unit tests that are incredibly thorough and test a wide variety of scenarios. Wherever a given project falls on that spectrum, you should be sure to write unit tests that verify your code behaves as expected in <strong>normal</strong> scenarios as well as in more <strong>unexpected</strong> scenarios, like boundary conditions or error conditions.</p>
+</div>
+<div class="section" id="testing-unexpected-conditions">
+<h2>Testing Unexpected Conditions<a class="headerlink" href="#testing-unexpected-conditions" title="Permalink to this headline">¶</a></h2>
+<p>There are many scenarios that your code shouldn’t encounter. However, you can’t trust that clients of your code will always do the right thing, so you have to make sure that the code will still handle these unexpected scenarios appropriately.</p>
+</div>
+<div class="section" id="bad-input-values">
+<h2>Bad Input Values<a class="headerlink" href="#bad-input-values" title="Permalink to this headline">¶</a></h2>
+<p>One potentially unexpected condition that the code might encounter is an unexpected value, like null, being passed to the push() method. You have a few implementation options for handling this scenario. Your code could ignore the null value, it could insert a special placeholder value, or it could not allow null values to be pushed on to the Stack at all.</p>
+</div>
+<div class="section" id="boundary-conditions">
+<h2>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h2>
+<p>Boundary conditions are another common source of bugs. Let’s verify that our StringStack implementation handles the overflow and underflow boundary conditions.
+EX: The Apex documentation indicates that a List can only contain 1,000 records. If a 1,001th object were to be added to our List-based Stack implementation, a System exception would be thrown.</p>
+</div>
+<div class="section" id="tips-for-writing-great-unit-tests">
+<h2>Tips for writing great unit tests<a class="headerlink" href="#tips-for-writing-great-unit-tests" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Make each test orthogonal (i.e., independent) to all the others:
+Any given behaviour should be specified in one and only one test. Otherwise if you later change that behaviour, you’ll have to change multiple tests. The corollaries of this rule include:</p>
+<blockquote>
+<ul class="simple">
+<li>Don’t make unnecessary assertions:
+Which specific behaviour are you testing? It’s counterproductive to Assert() anything that’s also asserted by another test: it just increases the frequency of pointless failures without improving unit test coverage one bit. This also applies to unnecessary Verify() calls – if it isn’t the core behaviour under test, then stop making observations about it! Sometimes, TDD folks express this by saying “have only one logical assertion per test”.
+Remember, unit tests are a design specification of how a certain behaviour should work, not a list of observations of everything the code happens to do.</li>
+<li>Test only one code unit at a time:
+Your architecture must support testing units (i.e., classes or very small groups of classes) independently, not all chained together. Otherwise, you have lots of overlap between tests, so changes to one unit can cascade outwards and cause failures everywhere.
+If you can’t do this, then your architecture is limiting your work’s quality – consider using Inversion of Control.</li>
+<li>Mock out all external services and state:
+Otherwise, behaviour in those external services overlaps multiple tests, and state data means that different unit tests can influence each other’s outcome.
+You’ve definitely taken a wrong turn if you have to run your tests in a specific order, or if they only work when your database or network connection is active.
+(By the way, sometimes your architecture might mean your code touches static variables during unit tests. Avoid this if you can, but if you can’t, at least make sure each test resets the relevant statics to a known state before it runs.)</li>
+<li>Avoid unnecessary preconditions:
+Avoid having common setup code that runs at the beginning of lots of unrelated tests. Otherwise, it’s unclear what assumptions each test relies on, and indicates that you’re not testing just a single unit.
+An exception: Sometimes I find it useful to have a common setup method shared by a very small number of unit tests (a handful at the most) but only if all those tests require all of those preconditions. This is related to the context-specification unit testing pattern, but still risks getting unmaintainable if you try to reuse the same setup code for a wide range of tests.</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Don’t unit-test configuration settings:</p>
+<blockquote>
+<p>By definition, your configuration settings aren’t part of any unit of code (that’s why you extracted the setting out of your unit’s code). Even if you could write a unit test that inspects your configuration, it merely forces you to specify the same configuration in an additional redundant location. Congratulations: it proves that you can copy and paste!</p>
+</blockquote>
+</li>
+<li><p class="first">Name your unit tests clearly and consistently:</p>
+<blockquote>
+<p>If you’re testing how ProductController’s Purchase action behaves when stock is zero, then maybe have a test fixture class called PurchasingTests with a unit test called ProductPurchaseAction_IfStockIsZero_RendersOutOfStockView(). This name describes the subject (ProductController’s Purchase action), the scenario (stock is zero), and the result (renders “out of stock” view). I don’t know whether there’s an existing name for this naming pattern, though I know others follow it. How about S/S/R?
+Avoid non-descriptive unit tests names such as Purchase() or OutOfStock(). Maintenance is hard if you don’t know what you’re trying to maintain.</p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="pytest">
+<h2>Pytest<a class="headerlink" href="#pytest" title="Permalink to this headline">¶</a></h2>
+<p>We-don&#8217;t-need-no-stinking-API unit test suite, is an alternative, more Pythonic way of writing your tests. The best part is, the overhead for creating unit tests is close to zero!
+Two rules:
+1. Prefix the names of your test functions/methods with <em>test_</em> and the names of your test classes with Test
+2. Save your test code in files that start with <em>test_</em></p>
+<p>That&#8217;s about it in terms of API complexity. If you just run py.test in the directory that contains your tests, the tool will search the current directory and its subdirectories for files that start with <em>test_</em>, then it will automagically invoke all the test functions/methods it finds in those files. There is no need to inherit your test class from a framework-specific class, as is the case with unittest.</p>
+<p>To run the tests in test_sort.py, simply invoke:</p>
+<p># py.test test_*.py</p>
+</div>
+<div class="section" id="test-organization">
+<h2>Test organization<a class="headerlink" href="#test-organization" title="Permalink to this headline">¶</a></h2>
+<p>The only requirement for a test file to be recognized as such by py.test is for the filename to start with <em>test_</em> (and even this can be customized), it is very easy to organize your tests in hierarchies and test suites by creating a directory tree and placing/grouping your test files in the appropriate directories. Then you can just run py.test with no arguments and let it find and execute all the test files for you. A carefully chosen naming scheme would certainly help you in this scenario.</p>
+<p>A feature of py.test which is a pleasant change from unittest is that the test execution order is guaranteed to be the same for each test run, and it is simply the order in which the test function/methods appear in a given test file. No alphanumerical sorting order to worry about.</p>
+</div>
+<div class="section" id="assertion-syntax">
+<h2>Assertion syntax<a class="headerlink" href="#assertion-syntax" title="Permalink to this headline">¶</a></h2>
+<p>There is no special assertion syntax in py.test. You can use the standard Python assert statements, and they will (again, magically) be interpreted by py.test so that more helpful error messages can be printed out. This is in marked contrast with unittest&#8217;s custom and somewhat clunky assertEqual/assertTrue/etc. mechanism.</p>
+<blockquote>
+<p><em>def test_custom_sort(self):</em></p>
+<blockquote>
+<p><em>def int_compare(x, y):</em></p>
+<blockquote>
+<p><em>x = int(x)</em></p>
+<p><em>y = int(y)</em></p>
+<p><em>return x - y</em></p>
+</blockquote>
+<p><em>self.alist.sort(int_compare)</em></p>
+<p><em>assert self.alist == [1, 2, 3, 4, 5]</em></p>
+<p><em>b = [&#8220;1&#8221;, &#8220;10&#8221;, &#8220;2&#8221;, &#8220;20&#8221;, &#8220;100&#8221;]</em></p>
+<p><em>b.sort()</em></p>
+<p><em>assert b == [&#8216;1&#8217;, &#8216;10&#8217;, &#8216;100&#8217;, &#8216;2&#8217;, &#8216;20&#8217;]</em></p>
+<p><em>b.sort(int_compare)</em></p>
+<p><em>assert b == [&#8216;1&#8217;, &#8216;2&#8217;, &#8216;10&#8217;, &#8216;20&#8217;, &#8216;100&#8217;]</em></p>
+</blockquote>
+</blockquote>
+</div>
+<div class="section" id="dealing-with-exceptions">
+<h2>Dealing with exceptions<a class="headerlink" href="#dealing-with-exceptions" title="Permalink to this headline">¶</a></h2>
+<p>The test_sort.py module contains an example of how exceptions can be handled with py.test:</p>
+<p><em>def test_sort_exception(self):</em></p>
+<blockquote>
+<p><em>import py.test</em></p>
+<p><em>py.test.raises(NameError, &#8220;self.alist.sort(int_compare)&#8221;)</em></p>
+<p><em>py.test.raises(ValueError, self.alist.remove, 6)</em></p>
+</blockquote>
+<p>We needed to import py.test in my test code, in order to be able to use the raises() function it provides. This function takes the expected exception type as the first parameter. The other parameters are either</p>
+<blockquote>
+<ul class="simple">
+<li>a string specifying the function or method call that is supposed to raise the exception, or</li>
+<li>the actual callable, followed by its arguments</li>
+</ul>
+</blockquote>
+<p>The more general form for the raises() function is:</p>
+<p><em>py.test.raises(Exception, &#8220;func(*args, **kwargs)&#8221;)</em>
+<em>py.test.raises(Exception, func, *args, **kwargs)</em></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/softwaredevelopment/coderules/unit_test_rules.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:51 GMT -->
+</html>

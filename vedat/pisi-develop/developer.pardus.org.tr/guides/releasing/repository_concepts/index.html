@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/repository_concepts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Repository Concepts</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Releasing" href="../index.html" />
+    <link rel="next" title="Source Code Repository" href="sourcecode_repository.html" />
+    <link rel="prev" title="Final Release" href="../official_releases/final_release.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Releasing</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Repository Concepts</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Repository Concepts</a><ul>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="repository-concepts"></span><h1>Repository Concepts<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Pardus has generally two different types of repository: source code repository and
+software repository.</p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="sourcecode_repository.html">Source Code Repository</a><ul>
+<li class="toctree-l2"><a class="reference external" href="sourcecode_repository.html#package-source-repository">Package Source Repository</a></li>
+<li class="toctree-l2"><a class="reference external" href="sourcecode_repository.html#core-projects-source-repository">Core Projects Source Repository</a></li>
+<li class="toctree-l2"><a class="reference external" href="sourcecode_repository.html#external-projects-source-repository">External Projects Source Repository</a></li>
+<li class="toctree-l2"><a class="reference external" href="sourcecode_repository.html#zg-rl-k-in-source-repository">Özgürlük İçin Source Repository</a></li>
+<li class="toctree-l2"><a class="reference external" href="sourcecode_repository.html#web-source-repository">Web Source Repository</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="software_repository.html">Software Repository (binary or package repository)</a><ul>
+<li class="toctree-l2"><a class="reference external" href="software_repository.html#devel-binary-repository">Devel Binary Repository</a></li>
+<li class="toctree-l2"><a class="reference external" href="software_repository.html#testing-binary-repository">Testing Binary Repository</a></li>
+<li class="toctree-l2"><a class="reference external" href="software_repository.html#stable-binary-repository">Stable Binary Repository</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="subversion_usage.html">Subversion Usage</a><ul>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#what-is-a-subversion-repository">What is a subversion repository?</a></li>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#how-do-i-check-if-i-have-subversion-on-my-system">How do I check if I have subversion on my system?</a></li>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#how-do-i-get-a-copy-of-a-directory-in-the-repository">How do I get a copy of a directory in the repository?</a></li>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#how-do-i-know-if-my-local-copy-is-up-to-date-or-not">How do I know if my local copy is up-to-date or not?</a></li>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#how-can-i-see-what-directories-exist-in-a-repository">How can I see what directories exist in a repository?</a></li>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#what-does-the-capital-letters-beside-the-file-names-mean">What does the capital letters beside the file names mean?</a></li>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#i-modified-some-files-what-shall-i-do-now">I modified some files, what shall I do now?</a></li>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#i-added-a-new-file-but-there-s-a-question-mark-beside-it">I added a new file but there&#8217;s a question mark beside it!</a></li>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#how-do-i-revert-my-local-modifications">How do I revert my local modifications?</a></li>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#i-want-to-send-the-files-i-modified">I want to send the files I modified</a></li>
+<li class="toctree-l2"><a class="reference external" href="subversion_usage.html#other-commands">Other commands</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="version_control_system_rules.html">Rules for a correct version control system usage</a><ul>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#always-work-with-an-up-to-date-local-copy">Always work with an up-to-date local copy</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#think-before-you-commit">Think before you commit</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#write-descriptive-commit-log-messages">Write descriptive commit log messages</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#abide-by-the-work-plans">Abide by the work plans</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#changes-affecting-other-components">Changes affecting other components</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#take-responsibility-for-the-changes-you-made">Take responsibility for the changes you made</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#respect-the-generally-accepted-principles">Respect the generally accepted principles</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#enter-the-bug-number-when-solving-a-bug-from-the-bug-tracking-system">Enter the bug number when solving a bug from the bug tracking system</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#update-the-files-for-which-you-are-responsible">Update the files for which you are responsible</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#do-not-add-the-automatically-created-files-to-the-repository">Do not add the automatically created files to the repository</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#perform-atomic-updates">Perform atomic updates</a></li>
+<li class="toctree-l2"><a class="reference external" href="version_control_system_rules.html#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/repository_concepts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

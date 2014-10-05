@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/stack_traces.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Stack Traces</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Bug Tracking Guide" href="index.html" />
+    <link rel="next" title="Bugzilla Stock Responses" href="stock_responses.html" />
+    <link rel="prev" title="Finding Duplicate Bugs" href="finding_duplicates.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Bug Tracking Guide</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Stack Traces</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Stack Traces</a><ul>
+<li><a class="reference external" href="#what-is-stack-trace-backtrace">What is Stack Trace(Backtrace)?</a></li>
+<li><a class="reference external" href="#what-looks-like-a-stack-trace">What looks like a Stack Trace?</a></li>
+<li><a class="reference external" href="#what-are-debug-symbols-and-what-they-do">What are debug symbols and what they do?</a></li>
+<li><a class="reference external" href="#what-are-debug-packages-and-how-do-i-access-them">What are debug packages and how do I access them?</a></li>
+<li><a class="reference external" href="#using-gdb-to-create-stack-trace">Using GDB to create stack trace:</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="stack-traces"></span><h1>Stack Traces<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.2</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="what-is-stack-trace-backtrace">
+<h2>What is Stack Trace(Backtrace)?<a class="headerlink" href="#what-is-stack-trace-backtrace" title="Permalink to this headline">¶</a></h2>
+<p>List of function calls lead to some point of the program and stack trace (backtrace) lists them. Stack traces can be taken with the assistance of  debugging tools like gdb tack traces from crashed applications so that developers can figure out what went wrong.</p>
+</div>
+<div class="section" id="what-looks-like-a-stack-trace">
+<h2>What looks like a Stack Trace?<a class="headerlink" href="#what-looks-like-a-stack-trace" title="Permalink to this headline">¶</a></h2>
+<p>A tipical stack trace is like below:</p>
+<div class="highlight-python"><pre>[New Thread 8192 (LWP 15167)]
+
+0x420ae169 in wait4 () from /lib/i686/libc.so.6
+.
+.
+.</pre>
+</div>
+<p>An other stack trace with debug symbols: We can see filenames and linenumbers of function calls.</p>
+<div class="highlight-python"><pre>0x000000350a6c577f in *__GI___poll (fds=0xe27460, nfds=9, timeout=-1) at ../sysdeps/unix/sysv/linux/poll.c:83
+83          return INLINE_SYSCALL (poll, 3, CHECK_N (fds, nfds), nfds, timeout);
+.
+.
+.</pre>
+</div>
+</div>
+<div class="section" id="what-are-debug-symbols-and-what-they-do">
+<h2>What are debug symbols and what they do?<a class="headerlink" href="#what-are-debug-symbols-and-what-they-do" title="Permalink to this headline">¶</a></h2>
+<p>When a program compiled with its debug symbols, additional informations added. These informations can generate a stack trace of the buggy functions called and can list the files and number lines that function exists.</p>
+</div>
+<div class="section" id="what-are-debug-packages-and-how-do-i-access-them">
+<h2>What are debug packages and how do I access them?<a class="headerlink" href="#what-are-debug-packages-and-how-do-i-access-them" title="Permalink to this headline">¶</a></h2>
+<p>Pardus has debug packages of each normal package. These packages are compiled automatically with specific debug symbols. Therefore you can easily install the debug package of the buggy software. You should install debug package which is suitable with its normal package version. In order to install and use the debug packages, you should use a Pardus release repository and related debug repository and install the buggy application debug package.</p>
+<p>Our repositories can be found <a class="reference external" href="http://packages.pardus.org.tr/pardus/">from there</a>.</p>
+<blockquote>
+<p>Example</p>
+<div class="highlight-python"><pre>Find package and related debug package version of buggy application:
+
+[test@computer ~] $ pisi info amarok
+Installed package:
+Name: amarok, version: 2.3.2, release: 43</pre>
+</div>
+</blockquote>
+<p>Every package has a debug package and you can easily install it like below:</p>
+<p>For amarok:</p>
+<div class="highlight-python"><pre>sudo pisi it http://packages.pardus.org.tr/pardus/2011/devel/x86_64-debug/amarok-dbginfo-2.3.2-43-p11-x86_64.pisi</pre>
+</div>
+</div>
+<div class="section" id="using-gdb-to-create-stack-trace">
+<h2>Using GDB to create stack trace:<a class="headerlink" href="#using-gdb-to-create-stack-trace" title="Permalink to this headline">¶</a></h2>
+<p>To run GDB:</p>
+<div class="highlight-python"><pre>gdb &lt;buggy application name&gt;</pre>
+</div>
+<p>Then write the below value to GDB command prompt:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">run</span>
+</pre></div>
+</div>
+<p>If you need some arguments you can use it like below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">run</span> <span class="o">--</span><span class="n">argument</span>
+</pre></div>
+</div>
+<p>After you run the program with GDB, you try to reproduce the crashe senario. After the program crash go back GDB terinal, the GDB prompt should be shown. If not, press CTRL+C keys and write the below command:</p>
+<div class="highlight-python"><pre>thread apply all bt full</pre>
+</div>
+<p>If any of them work, write &#8220;bt&#8221; command to GDB prompt.</p>
+<p>These commands will create an output, these outputs are the stack trace. Copy this output to a file and quit GDB.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/stack_traces.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:20 GMT -->
+</html>

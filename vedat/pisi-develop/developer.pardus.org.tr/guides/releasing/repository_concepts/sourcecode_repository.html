@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/repository_concepts/sourcecode_repository.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Source Code Repository</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Repository Concepts" href="index.html" />
+    <link rel="next" title="Software Repository (binary or package repository)" href="software_repository.html" />
+    <link rel="prev" title="Repository Concepts" href="index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Releasing</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Repository Concepts</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Source Code Repository</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Source Code Repository</a><ul>
+<li><a class="reference external" href="#package-source-repository">Package Source Repository</a><ul>
+<li><a class="reference external" href="#distribution-folder">distribution Folder</a><ul>
+<li><a class="reference external" href="#devel-folder">devel Folder</a></li>
+<li><a class="reference external" href="#testing-folder">testing Folder</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#playground-folder">playground Folder</a><ul>
+<li><a class="reference external" href="#review-folder">review Folder</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#tags-folder">tags Folder</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#core-projects-source-repository">Core Projects Source Repository</a><ul>
+<li><a class="reference external" href="#subversion-repository">Subversion Repository</a><ul>
+<li><a class="reference external" href="#trunk-folder">trunk Folder</a></li>
+<li><a class="reference external" href="#branches-folder">branches Folder</a></li>
+<li><a class="reference external" href="#id1">tags Folder</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#git-repository">Git Repository</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#external-projects-source-repository">External Projects Source Repository</a></li>
+<li><a class="reference external" href="#zg-rl-k-in-source-repository">Özgürlük İçin Source Repository</a></li>
+<li><a class="reference external" href="#web-source-repository">Web Source Repository</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="source-code-repository">
+<span id="sourcecode-repository"></span><h1>Source Code Repository<a class="headerlink" href="#source-code-repository" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit, Çağlar Kilimci</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.2</td>
+</tr>
+</tbody>
+</table>
+<p>Pardus developers may be located all around the world. We keep the source code in
+an internet-accessible version control system called Subversion <a class="reference external" href="http://subversion.tigris.org/">SVN</a>, in order
+to enable our developers to work together on Pardus Distribution.</p>
+<p>Pardus has source code repositories and use SVN for source of packages,
+technologies and web pages. See <a class="reference external" href="http://svn.pardus.org.tr/">Pardus svn web page</a>.</p>
+<p>Before explaining Pardus repositories structures, we need to explain first
+general <a class="reference external" href="http://svnbook.red-bean.com/nightly/en/svn.branchmerge.html">subversion branch maintainance</a>:</p>
+<p>The <strong>trunk</strong> is the main line of development in a SVN repository.</p>
+<p>A <strong>branch</strong> is a side-line of development created to make larger, experimental
+or disrupting work without annoying users of the trunk version. Also, branches
+can be used to create development lines for multiple versions of the same product,
+like having a place to backport bugfixes into a stable release.</p>
+<p>Finally, <strong>tags</strong> are markers to highlight notable revisions in the history of
+the repository..</p>
+<p>Special folder names can also be used as trunk, branch, or tags that can be more
+meaningful to use.</p>
+<div class="section" id="package-source-repository">
+<h2>Package Source Repository<a class="headerlink" href="#package-source-repository" title="Permalink to this headline">¶</a></h2>
+<p>Following table shows binary/farm/source mappings for package source repository:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="36%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Binary Repo</th>
+<th class="head">Farm</th>
+<th class="head">Source Repo</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>devel/i686</td>
+<td>devel/i686</td>
+<td>devel</td>
+</tr>
+<tr><td>devel/x86_64</td>
+<td>devel/x86_86</td>
+<td>devel</td>
+</tr>
+<tr><td>testing/i686</td>
+<td>testing/i686</td>
+<td>testing</td>
+</tr>
+<tr><td>testing/x86_64</td>
+<td>testing/x86_64</td>
+<td>testing</td>
+</tr>
+<tr><td>stable/i686</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>testing</td>
+</tr>
+<tr><td>stable/x86_64</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>testing</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="distribution-folder">
+<h3>distribution Folder<a class="headerlink" href="#distribution-folder" title="Permalink to this headline">¶</a></h3>
+<p>Each developed Pardus distribution has a special folder name in Pardus
+<a class="reference external" href="http://svn.pardus.org.tr/pardus/">Package source repository</a> and these folders are used as trunks. Each distribution
+on this <a class="reference external" href="http://svn.pardus.org.tr/pardus/">Package source repository</a> has a specific folder tree.</p>
+<div class="section" id="devel-folder">
+<h4>devel Folder<a class="headerlink" href="#devel-folder" title="Permalink to this headline">¶</a></h4>
+<p>The under development package source files are included in this folder. This means
+whenever a package maintainer changes some code on his/her packages, it should
+be committed a related devel repository folder.</p>
+<p>This folder may contain alfa, beta or latest unstable releases of packages.</p>
+</div>
+<div class="section" id="testing-folder">
+<h4>testing Folder<a class="headerlink" href="#testing-folder" title="Permalink to this headline">¶</a></h4>
+<p>This folder includes package source files which obtains their stable releases. In
+other words while devel folder can contain unstable packages testing can not.</p>
+<p>But some exceptions can also be exist, if you are not sure please ask Pardus
+<a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/pardus-devel">devel list</a>.</p>
+<p>These two folders also has a specific folder tree. In this tree, the folders are
+named with Pardus <a class="reference external" href="../../packaging/package_components.html">package components</a>.</p>
+</div>
+</div>
+<div class="section" id="playground-folder">
+<h3>playground Folder<a class="headerlink" href="#playground-folder" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://svn.pardus.org.tr/pardus/">Package source repository</a> includes also an other folder <a class="reference external" href="http://svn.pardus.org.tr/pardus/playground/">playground</a>. When
+a new package is wants to be added to Pardus repositories or a new release of
+a complicated package will be implemented, the package maintainer use subfolder
+of the <a class="reference external" href="http://svn.pardus.org.tr/pardus/playground/">playground</a> which is named with his/her name to commit the changes of
+packages.</p>
+<div class="section" id="review-folder">
+<h4>review Folder<a class="headerlink" href="#review-folder" title="Permalink to this headline">¶</a></h4>
+<p>The <a class="reference external" href="http://svn.pardus.org.tr/pardus/playground/">playground</a> has also a <a class="reference external" href="http://svn.pardus.org.tr/pardus/playground/review/">review</a> folder. This folder also has folders
+named as package components. Whenever a package is ready for <a class="reference external" href="../../packaging/package-review-process.html">package review</a>,
+the package maintainer should move packages from his/her named folder under
+<a class="reference external" href="http://svn.pardus.org.tr/pardus/playground/">playground</a> to package component named folder under <a class="reference external" href="http://svn.pardus.org.tr/pardus/playground/review/">review</a>.</p>
+</div>
+</div>
+<div class="section" id="tags-folder">
+<h3>tags Folder<a class="headerlink" href="#tags-folder" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://svn.pardus.org.tr/pardus/">Package source repository</a> includes also an other folder <a class="reference external" href="http://svn.pardus.org.tr/pardus/tags/">tags</a>. This folder
+includes distribution folders which reached their <a class="reference external" href="../end_of_life.html#subversion-tasks">end of life</a>.</p>
+</div>
+</div>
+<div class="section" id="core-projects-source-repository">
+<h2>Core Projects Source Repository<a class="headerlink" href="#core-projects-source-repository" title="Permalink to this headline">¶</a></h2>
+<p>There are two kind of source repositories; subversion and git based. For now,
+git repository is using for testing. Uludag repository, <a class="reference external" href="http://svn.pardus.org.tr/uludag/">core projects source
+repository</a>, is based on subversion.</p>
+<div class="section" id="subversion-repository">
+<h3>Subversion Repository<a class="headerlink" href="#subversion-repository" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://svn.pardus.org.tr/uludag/">core projects source repository</a> includes the projects which are included in at
+least one Pardus distribution.</p>
+<p>There exist also the <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/scripts/">developer scripts</a> and <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/doc/">developer docs</a> under this
+repository.</p>
+<p>This repository use general subversion branch maintainance as mentioned above:</p>
+<div class="section" id="trunk-folder">
+<h4>trunk Folder<a class="headerlink" href="#trunk-folder" title="Permalink to this headline">¶</a></h4>
+<p>This <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/">trunk</a> folder includes the maintained projects, scripts, and documents of Pardus
+distribution.</p>
+</div>
+<div class="section" id="branches-folder">
+<h4>branches Folder<a class="headerlink" href="#branches-folder" title="Permalink to this headline">¶</a></h4>
+<p>Some projects need branches in order to create development lines for multiple
+versions, therefore these projects can be branched under this <a class="reference external" href="http://svn.pardus.org.tr/uludag/branches/">branches</a>.</p>
+</div>
+<div class="section" id="id1">
+<h4>tags Folder<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="http://svn.pardus.org.tr/uludag/tags/">tags folder</a> is used for unmaintained projects or unmaintained versions of a
+project.</p>
+</div>
+</div>
+<div class="section" id="git-repository">
+<h3>Git Repository<a class="headerlink" href="#git-repository" title="Permalink to this headline">¶</a></h3>
+<p>Unlike <a class="reference external" href="http://svn.pardus.org.tr/uludag/">core projects source repository</a>, which all projects comes together in
+one path, every project has own git repository. For example:</p>
+<div class="highlight-python"><pre>https://git.pardus.org.tr/source/&lt;project-name&gt;.git</pre>
+</div>
+<p>Responsibility of repository is responsibility of project. The merge requests
+are applied by project leader.</p>
+<p>We do not need extra playground repositories because every developer have own
+git area, like:</p>
+<div class="highlight-python"><pre>https://git.pardus.org.tr/&lt;developer-name&gt;
+https://git.pardus.org.tr/&lt;developer-name&gt;/&lt;project-name&gt;.git</pre>
+</div>
+<p>Tagging is easier on git for its own properties. Also code review process can
+be handled with code review plug in on <a class="reference external" href="http://tracker.pardus.org.tr/">issue tracking system</a>.</p>
+</div>
+</div>
+<div class="section" id="external-projects-source-repository">
+<h2>External Projects Source Repository<a class="headerlink" href="#external-projects-source-repository" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://svn.pardus.org.tr/projeler/">external projects source repository</a> includes the projects of Pardus developers,
+but these projects are not related any Pardus distribution. In other words Pardus
+developers use this repository to commit their self open source projects. When a
+project in that repository is decided to take place in a Pardus distribution, it
+should be moved to <a class="reference external" href="http://svn.pardus.org.tr/uludag/">core projects source repository</a>.</p>
+</div>
+<div class="section" id="zg-rl-k-in-source-repository">
+<h2>Özgürlük İçin Source Repository<a class="headerlink" href="#zg-rl-k-in-source-repository" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://svn.pardus.org.tr/oi/">oi source repository</a> includes Özgürlük için projects and web page source codes.</p>
+<p>This repository has also the folders trunk and branches.</p>
+</div>
+<div class="section" id="web-source-repository">
+<h2>Web Source Repository<a class="headerlink" href="#web-source-repository" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://svn.pardus.org.tr/web/">web source repository</a> includes the web page contents and codes of Pardus web
+pages.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/repository_concepts/sourcecode_repository.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

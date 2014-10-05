@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/rest/howto-rst.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>reStructuredText</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="reStructuredText Howto" href="index.html" />
+    <link rel="next" title="Licensing" href="../licensing/index.html" />
+    <link rel="prev" title="reStructuredText Howto" href="index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">reStructuredText Howto</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">reStructuredText</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">reStructuredText</a><ul>
+<li><a class="reference external" href="#paragraphs">Paragraphs</a></li>
+<li><a class="reference external" href="#inline-markup">Inline markup</a></li>
+<li><a class="reference external" href="#lists-and-quotes">Lists and Quotes</a></li>
+<li><a class="reference external" href="#source-code">Source Code</a></li>
+<li><a class="reference external" href="#hyperlinks">Hyperlinks</a><ul>
+<li><a class="reference external" href="#external-links">External links</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#sections">Sections</a></li>
+<li><a class="reference external" href="#explicit-markup">Explicit Markup</a></li>
+<li><a class="reference external" href="#directives">Directives</a></li>
+<li><a class="reference external" href="#images">Images</a></li>
+<li><a class="reference external" href="#footnotes">Footnotes</a></li>
+<li><a class="reference external" href="#citations">Citations</a></li>
+<li><a class="reference external" href="#substitutions">Substitutions</a></li>
+<li><a class="reference external" href="#comments">Comments</a></li>
+<li><a class="reference external" href="#gotchas">Gotchas</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="restructuredtext">
+<h1>reStructuredText<a class="headerlink" href="#restructuredtext" title="Permalink to this headline">¶</a></h1>
+<p>This section is a brief introduction to reStructuredText (reST) concepts and
+syntax, intended to provide authors with enough information to author documents
+productively.  Since reST was designed to be a simple, unobtrusive markup
+language, this will not take too long.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li>The authoritative <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText User Documentation</a>.</li>
+<li><a class="reference external" href="http://skawina.eu.org/mikolaj/vst.html">Rst for Vim</a>.</li>
+</ul>
+</div>
+<div class="section" id="paragraphs">
+<h2>Paragraphs<a class="headerlink" href="#paragraphs" title="Permalink to this headline">¶</a></h2>
+<p>The paragraph is the most basic block in a reST document.  Paragraphs are simply
+chunks of text separated by one or more blank lines.  As in Python, indentation
+is significant in reST, so all lines of the same paragraph must be left-aligned
+to the same level of indentation.</p>
+</div>
+<div class="section" id="inline-markup">
+<h2>Inline markup<a class="headerlink" href="#inline-markup" title="Permalink to this headline">¶</a></h2>
+<p>The standard reST inline markup is quite simple: use</p>
+<ul class="simple">
+<li>one asterisk: <tt class="docutils literal"><span class="pre">*text*</span></tt> for emphasis (italics),</li>
+<li>two asterisks: <tt class="docutils literal"><span class="pre">**text**</span></tt> for strong emphasis (boldface), and</li>
+<li>backquotes: <tt class="docutils literal"><span class="pre">``text``</span></tt> for code samples.</li>
+</ul>
+<p>If asterisks or backquotes appear in running text and could be confused with
+inline markup delimiters, they have to be escaped with a backslash.</p>
+<p>Be aware of some restrictions of this markup:</p>
+<ul class="simple">
+<li>it may not be nested,</li>
+<li>content may not start or end with whitespace: <tt class="docutils literal"><span class="pre">*</span> <span class="pre">text*</span></tt> is wrong,</li>
+<li>it must be separated from surrounding text by non-word characters.  Use a
+backslash escaped space to work around that: <tt class="docutils literal"><span class="pre">thisis\</span> <span class="pre">*one*\</span> <span class="pre">word</span></tt>.</li>
+</ul>
+<p>These restrictions may be lifted in future versions of the docutils.</p>
+<p>reST also allows for custom &#8220;interpreted text roles&#8221;&#8217;, which signify that the
+enclosed text should be interpreted in a specific way.  Sphinx uses this to
+provide semantic markup and cross-referencing of identifiers, as described in
+the appropriate section.  The general syntax is <tt class="docutils literal"><span class="pre">:rolename:`content`</span></tt></p>
+</div>
+<div class="section" id="lists-and-quotes">
+<h2>Lists and Quotes<a class="headerlink" href="#lists-and-quotes" title="Permalink to this headline">¶</a></h2>
+<p>List markup is natural: just place an asterisk at the start of a paragraph and
+indent properly.  The same goes for numbered lists; they can also be
+autonumbered using a <tt class="docutils literal"><span class="pre">#</span></tt> sign:</p>
+<div class="highlight-python"><pre>* This is a bulleted list.
+* It has two items, the second
+  item uses two lines.
+
+1. This is a numbered list.
+2. It has two items too.
+
+#. This is a numbered list.
+#. It has two items too.</pre>
+</div>
+<p>Nested lists are possible, but be aware that they must be separated from the
+parent list items by blank lines:</p>
+<div class="highlight-python"><pre>* this is
+* a list
+
+  * with a nested list
+  * and some subitems
+
+* and here the parent list continues</pre>
+</div>
+<p>Definition lists are created as follows:</p>
+<div class="highlight-python"><pre>term (up to a line of text)
+   Definition of the term, which must be indented
+
+   and can even consist of multiple paragraphs
+
+next term
+   Description.</pre>
+</div>
+<p>Paragraphs are quoted by just indenting them more than the surrounding
+paragraphs.</p>
+</div>
+<div class="section" id="source-code">
+<h2>Source Code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
+<p>Literal code blocks are introduced by ending a paragraph with the special marker
+<tt class="docutils literal"><span class="pre">::</span></tt>.  The literal block must be indented (and, like all paragraphs, separated
+from the surrounding ones by blank lines):</p>
+<div class="highlight-python"><pre>This is a normal text paragraph. The next paragraph is a code sample::
+
+   It is not processed in any way, except
+   that the indentation is removed.
+
+   It can span multiple lines.
+
+This is a normal text paragraph again.</pre>
+</div>
+<p>The handling of the <tt class="docutils literal"><span class="pre">::</span></tt> marker is smart:</p>
+<ul class="simple">
+<li>If it occurs as a paragraph of its own, that paragraph is completely left
+out of the document.</li>
+<li>If it is preceded by whitespace, the marker is removed.</li>
+<li>If it is preceded by non-whitespace, the marker is replaced by a single
+colon.</li>
+</ul>
+<p>That way, the second sentence in the above example&#8217;s first paragraph would be
+rendered as &#8220;The next paragraph is a code sample:&#8221;.</p>
+</div>
+<div class="section" id="hyperlinks">
+<h2>Hyperlinks<a class="headerlink" href="#hyperlinks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="external-links">
+<h3>External links<a class="headerlink" href="#external-links" title="Permalink to this headline">¶</a></h3>
+<p>Use <tt class="docutils literal"><span class="pre">`Link</span> <span class="pre">text</span> <span class="pre">&lt;http://target&gt;`_</span></tt> for inline web links.  If the link text
+should be the web address, you don&#8217;t need special markup at all, the parser
+finds links and mail addresses in ordinary text.</p>
+</div>
+</div>
+<div class="section" id="sections">
+<h2>Sections<a class="headerlink" href="#sections" title="Permalink to this headline">¶</a></h2>
+<p>Section headers are created by underlining (and optionally overlining) the
+section title with a punctuation character, at least as long as the text:</p>
+<div class="highlight-python"><pre>=================
+This is a heading
+=================</pre>
+</div>
+<p>Normally, there are no heading levels assigned to certain characters as the
+structure is determined from the succession of headings.  However, for the
+Python documentation, this convention is used which you may follow:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">#</span></tt> with overline, for parts</li>
+<li><tt class="docutils literal"><span class="pre">*</span></tt> with overline, for chapters</li>
+<li><tt class="docutils literal"><span class="pre">=</span></tt>, for sections</li>
+<li><tt class="docutils literal"><span class="pre">-</span></tt>, for subsections</li>
+<li><tt class="docutils literal"><span class="pre">^</span></tt>, for subsubsections</li>
+<li><tt class="docutils literal"><span class="pre">&quot;</span></tt>, for paragraphs</li>
+</ul>
+<p>Of course, you are free to use your own marker characters (see the reST
+documentation), and use a deeper nesting level, but keep in mind that most
+target formats (HTML, LaTeX) have a limited supported nesting depth.</p>
+</div>
+<div class="section" id="explicit-markup">
+<h2>Explicit Markup<a class="headerlink" href="#explicit-markup" title="Permalink to this headline">¶</a></h2>
+<p>&#8220;Explicit markup&#8221; is used in reST for most constructs that need special
+handling, such as footnotes, specially-highlighted paragraphs, comments, and
+generic directives.</p>
+<p>An explicit markup block begins with a line starting with <tt class="docutils literal"><span class="pre">..</span></tt> followed by
+whitespace and is terminated by the next paragraph at the same level of
+indentation.  (There needs to be a blank line between explicit markup and normal
+paragraphs.  This may all sound a bit complicated, but it is intuitive enough
+when you write it.)</p>
+</div>
+<div class="section" id="directives">
+<h2>Directives<a class="headerlink" href="#directives" title="Permalink to this headline">¶</a></h2>
+<p>A directive is a generic block of explicit markup.  Besides roles, it is one of
+the extension mechanisms of reST, and Sphinx makes heavy use of it.</p>
+<p>Basically, a directive consists of a name, arguments, options and content. (Keep
+this terminology in mind, it is used in the next chapter describing custom
+directives.)  Looking at this example,</p>
+<div class="highlight-python"><pre>.. function:: foo(x)
+              foo(y, z)
+   :bar: no
+
+   Return a line of text input from the user.</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">function</span></tt> is the directive name.  It is given two arguments here, the
+remainder of the first line and the second line, as well as one option <tt class="docutils literal"><span class="pre">bar</span></tt>
+(as you can see, options are given in the lines immediately following the
+arguments and indicated by the colons).</p>
+<p>The directive content follows after a blank line and is indented relative to the
+directive start.</p>
+</div>
+<div class="section" id="images">
+<h2>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h2>
+<p>reST supports an image directive, used like so:</p>
+<div class="highlight-python"><pre>.. image:: gnu.png
+   (options)</pre>
+</div>
+<p>When used within Sphinx, the file name given (here <tt class="docutils literal"><span class="pre">gnu.png</span></tt>) must be relative
+to the source file, and Sphinx will automatically copy image files over to a
+subdirectory of the output directory on building (e.g. the <tt class="docutils literal"><span class="pre">_static</span></tt> directory
+for HTML output.)</p>
+<p>Interpretation of image size options (<tt class="docutils literal"><span class="pre">width</span></tt> and <tt class="docutils literal"><span class="pre">height</span></tt>) is as follows:
+if the size has no unit or the unit is pixels, the given size will only be
+respected for output channels that support pixels (i.e. not in LaTeX output).
+Other units (like <tt class="docutils literal"><span class="pre">pt</span></tt> for points) will be used for HTML and LaTeX output.</p>
+<p>Sphinx extends the standard docutils behavior by allowing an asterisk for the
+extension:</p>
+<div class="highlight-python"><pre>.. image:: gnu.*</pre>
+</div>
+<p>Sphinx then searches for all images matching the provided pattern and determines
+their type.  Each builder then chooses the best image out of these candidates.
+For instance, if the file name <tt class="docutils literal"><span class="pre">gnu.*</span></tt> was given and two files <tt class="docutils literal"><span class="pre">gnu.pdf</span></tt>
+and <tt class="docutils literal"><span class="pre">gnu.png</span></tt> existed in the source tree, the LaTeX builder would choose
+the former, while the HTML builder would prefer the latter.</p>
+<p>
+<span class="versionmodified">Changed in version 0.4: </span>Added the support for file names ending in an asterisk.</p>
+</div>
+<div class="section" id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
+<p>For footnotes, use <tt class="docutils literal"><span class="pre">[#name]_</span></tt> to mark the footnote location, and add the
+footnote body at the bottom of the document after a &#8220;Footnotes&#8221; rubric heading,
+like so:</p>
+<div class="highlight-python"><pre>Lorem ipsum [#f1]_ dolor sit amet ... [#f2]_
+
+.. rubric:: Footnotes
+
+.. [#f1] Text of the first footnote.
+.. [#f2] Text of the second footnote.</pre>
+</div>
+<p>You can also explicitly number the footnotes (<tt class="docutils literal"><span class="pre">[1]_</span></tt>) or use auto-numbered
+footnotes without names (<tt class="docutils literal"><span class="pre">[#]_</span></tt>).</p>
+</div>
+<div class="section" id="citations">
+<h2>Citations<a class="headerlink" href="#citations" title="Permalink to this headline">¶</a></h2>
+<p>Standard reST citations are supported, with the additional feature that they are
+&#8220;global&#8221;, i.e. all citations can be referenced from all files.  Use them like
+so:</p>
+<div class="highlight-python"><pre>Lorem ipsum [Ref]_ dolor sit amet.
+
+.. [Ref] Book or article reference, URL or whatever.</pre>
+</div>
+<p>Citation usage is similar to footnote usage, but with a label that is not
+numeric or begins with <tt class="docutils literal"><span class="pre">#</span></tt>.</p>
+</div>
+<div class="section" id="substitutions">
+<h2>Substitutions<a class="headerlink" href="#substitutions" title="Permalink to this headline">¶</a></h2>
+<p>reST supports &#8220;substitutions&#8221;, which are pieces of text and/or markup referred
+to in the text by <tt class="docutils literal"><span class="pre">|name|</span></tt>.  They are defined like footnotes with explicit
+markup blocks, like this:</p>
+<div class="highlight-python"><pre>.. |name| replace:: replacement *text*</pre>
+</div>
+<p>See the <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#substitution-definitions">reST reference for substitutions</a>
+for details.</p>
+</div>
+<div class="section" id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<p>Every explicit markup block which isn&#8217;t a valid markup construct (like the
+footnotes above) is regarded as a comment.  For example:</p>
+<div class="highlight-python"><pre>.. This is a comment.</pre>
+</div>
+<p>You can indent text after a comment start to form multiline comments:</p>
+<div class="highlight-python"><pre>..
+   This whole indented block
+   is a comment.
+
+   Still in the comment.</pre>
+</div>
+</div>
+<div class="section" id="gotchas">
+<h2>Gotchas<a class="headerlink" href="#gotchas" title="Permalink to this headline">¶</a></h2>
+<p>There are some problems one commonly runs into while authoring reST documents:</p>
+<ul class="simple">
+<li><strong>Separation of inline markup:</strong> As said above, inline markup spans must be
+separated from the surrounding text by non-word characters, you have to use
+a backslash-escaped space to get around that.</li>
+<li><strong>No nested inline markup:</strong> Something like <tt class="docutils literal"><span class="pre">*see</span> <span class="pre">:func:`foo`*</span></tt> is not
+possible.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/rest/howto-rst.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

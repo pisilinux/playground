@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/bootstrapping.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Bootstrapping</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Releasing" href="index.html" />
+    <link rel="next" title="Preparing Buildfarm" href="preparing_buildfarm.html" />
+    <link rel="prev" title="Rules for a correct version control system usage" href="repository_concepts/version_control_system_rules.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Releasing</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Bootstrapping</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Bootstrapping</a><ul>
+<li><a class="reference external" href="#bootstrap-steps">Bootstrap Steps</a></li>
+<li><a class="reference external" href="#preliminary-preparation-basic-concepts-and-tools-used">Preliminary Preparation – Basic Concepts and Tools Used</a><ul>
+<li><a class="reference external" href="#binutils">binutils</a><ul>
+<li><a class="reference external" href="#c-compiler-flags-cflags">C Compiler Flags (CFLAGS)</a></li>
+<li><a class="reference external" href="#linker-flags-ldflags">Linker Flags (LDFLAGS)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference external" href="#preparing-environment-necessary-for-compiling-the-system">Preparing Environment Necessary for Compiling the System</a></li>
+<li><a class="reference external" href="#compiling-binutils-gcc-and-glibc">Compiling Binutils, GCC and GlibC</a><ul>
+<li><a class="reference external" href="#gnu-binutils">GNU binutils</a></li>
+<li><a class="reference external" href="#gnu-library-c">GNU Library C</a></li>
+<li><a class="reference external" href="#gcc">GCC</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#compiling-of-zlib-ncurses-and-bash">Compiling of zlib, ncurses and bash</a></li>
+<li><a class="reference external" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="bootstrapping"></span><h1>Bootstrapping<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Onur Küçük, Neslihan Şirin</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>This document contains the bootstrap steps and methods carried out on the 32/64-bit processor architecture for Pardus releases. Some compilers and libraries such as gcc and glibc requires themselves. To compile and generate executables of these compilers and libraries we had to use older version of these tools with special parameters.</p>
+<div class="section" id="bootstrap-steps">
+<h2>Bootstrap Steps<a class="headerlink" href="#bootstrap-steps" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Gaining information about basic concepts and tools to be used for bootstrap process</li>
+<li>Compiling binutils, glibc and gcc software, which is the main core of the bootstrap system</li>
+<li>Installing main software on the new system necessary for using the newly-developed system</li>
+</ul>
+</div>
+<div class="section" id="preliminary-preparation-basic-concepts-and-tools-used">
+<h2>Preliminary Preparation – Basic Concepts and Tools Used<a class="headerlink" href="#preliminary-preparation-basic-concepts-and-tools-used" title="Permalink to this headline">¶</a></h2>
+<p>Before starting the bootstrap process, it is necessary to remember the basic concepts. The starting can be made with C language compiling model. The compilin process starts with the preprocessor. Preprocessor is the program which produces the output data (it produced) for another program. Preprocessor handles directives for source file #include, macro definition (#define) ve conditional inclusion (#if). After that, the assembly code produced by compiler are transmitted to the assembler, and the object codes created by the assembler and libraries to be used for functioning of the program are given to the linker. As a consequence of such linking, the executable code is obtained.</p>
+<p>To mention briefly the tools used for realizing the referred compiling model.</p>
+<div class="section" id="binutils">
+<h3>binutils<a class="headerlink" href="#binutils" title="Permalink to this headline">¶</a></h3>
+<p>Contains commands like as, ld, nm, objdump, ar, ranlib for compiling assembly code to the machine language, and for linking and manipulating the binary object files.</p>
+<dl class="docutils">
+<dt><strong>ar</strong></dt>
+<dd>The GNU ar program creates, modifies, and extracts from archives.</dd>
+<dt><strong>as</strong></dt>
+<dd>The portable GNU assembler. GNU as is really a family of assemblers. If you use (or have used) the GNU assembler on one architecture, you should find a fairly similar environment when you use it on another architecture.</dd>
+<dt><strong>ld</strong></dt>
+<dd>ld combines a number of object and archive files, relocates their data and ties up symbol references. Usually the last step in compiling a program is to run ld.</dd>
+<dt><strong>nm</strong></dt>
+<dd>List symbols from object files.</dd>
+<dt><strong>objdump</strong></dt>
+<dd>Display information from object files.</dd>
+<dt><strong>ranlib</strong></dt>
+<dd>Generates an index to the contents of an archive and stores it in the archive. The index lists each symbol defined by a member of an archive that is a relocatable object file.</dd>
+<dt><strong>pax-utils</strong></dt>
+<dd>The tool which can carry out various checks including security on ELF32/64 (executable and linkable format) files.</dd>
+<dt><strong>strace</strong></dt>
+<dd>The tool which indicates the system calls related with a process. A debugger tool which shows system calls received or called by this process, parameters appointed to these calls and returning values.</dd>
+</dl>
+<div class="section" id="c-compiler-flags-cflags">
+<h4>C Compiler Flags (CFLAGS)<a class="headerlink" href="#c-compiler-flags-cflags" title="Permalink to this headline">¶</a></h4>
+<p>The flags used by GCC and GNU Library C to manage some properties of the system during compiling transaction.</p>
+<dl class="docutils">
+<dt><strong>-D_FORTIFY_SOURCE=2</strong></dt>
+<dd>Used in case of security gap especially in places where string is used.</dd>
+<dt><strong>-O2</strong></dt>
+<dd>It opens the optimizations which do not exaggerate the software size and do not prevent debugging. It is better than -O2 –O, and generally as secured as it. Default optimization level for Pardus 2009 packets is -O2 as well.</dd>
+<dt><strong>-fomit-frame-pointer</strong></dt>
+<dd>It ensures gcc to skip frame pointer maintenance, which, in turn, helps the code be smaller and faster. Also it empties a register for following uses.</dd>
+<dt><strong>-fstack-protector</strong></dt>
+<dd>It changes position of the variables on the bulk, and prevents the variables used as buffer store from affecting the other variables in case of overrunning. It places a protection variable onto which a random value is appointed before function returning address. Upon completion of the function, this variable is checked to understand whether there is overrunning or not. Running of the program is stopped if there is a change. In this case, misuse of the memory overrunning errors which change the function returning address.</dd>
+<dt><strong>-march=&lt;architecture&gt;</strong></dt>
+<dd>It ensures gcc to do optimization for certain architecture. If you design software for yourself only, you can specify the architecture on which the software is to work and use all properties of such architecture.</dd>
+<dt><strong>-mtune=&lt;architecture&gt;</strong></dt>
+<dd>The –mcpu in former versions of gcc is similar to -march flag and has the same options. Besides, -mtune does not distort conformity with former architectures. Desired results can be achieved by means of using -mtune and -march flags together.</dd>
+<dt><strong>-pipe</strong></dt>
+<dd>It prevents gcc from generating temporary files while compiling. Instead, improvement at the time of compiling by directly transferring data to another function.</dd>
+</dl>
+</div>
+<div class="section" id="linker-flags-ldflags">
+<h4>Linker Flags (LDFLAGS)<a class="headerlink" href="#linker-flags-ldflags" title="Permalink to this headline">¶</a></h4>
+<p>The flags used by the linker for managing some properties of the system.</p>
+<dl class="docutils">
+<dt><strong>-Bsymbolic-functions</strong></dt>
+<dd>When creating a shared library, bind references to global function symbols to the definition within the shared library, if any. This option is only meaningful on ELF platforms which support shared libraries.</dd>
+<dt><strong>-Wl,&#8211;hash-style=gnu</strong></dt>
+<dd>Set the type of linker&#8217;s hash table(s). Style can be either &#8220;sysv&#8221; for classic ELF &#8220;.hash&#8221; section, &#8220;gnu&#8221; for new style GNU &#8220;.gnu.hash&#8221; section or &#8220;both&#8221; for both the classic ELF &#8220;.hash&#8221; and new style GNU &#8220;.gnu.hash&#8221; hash tables.  The default is &#8220;sysv&#8221;.</dd>
+<dt><strong>&#8211;as-needed</strong></dt>
+<dd>The &#8211;as-needed flag is passed to the GNU linker. The flag tells the linker to link in the produced binary only the libraries containing symbols actually used by the binary itself. This binary can be either a final executable or another library.</dd>
+<dt><strong>&#8211;sort-common</strong></dt>
+<dd>This option tells ld to sort the common symbols by size when it places them in the appropriate output sections. First come all the one byte symbols, then all the two bytes, then all the four bytes, and then everything else. This is to prevent gaps between symbols due to alignment constraints.</dd>
+<dt><strong>-Wl,-z,relro</strong></dt>
+<dd>Provides a read-only relocation table area in the final ELF. This option paves the way for using -z now which forces all relocations to be resolved at run-time (which would cause some additional initial load delay), providing an even higher level of protection to the relocation table &#8211; it could then be entirely read-only which can be used to further harden long-running programs like daemons.</dd>
+<dt><strong>-no-unneeded</strong></dt>
+<dd>Using &#8211;no-unneeded during build handles all cases.</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="section" id="preparing-environment-necessary-for-compiling-the-system">
+<h2>Preparing Environment Necessary for Compiling the System<a class="headerlink" href="#preparing-environment-necessary-for-compiling-the-system" title="Permalink to this headline">¶</a></h2>
+<p>At this stage; as request was made for compiling another system on the existing system, potential risks such as permanent damage on the existing system to be made by the bootstrap transaction must be considered and a suitable method must be selected. Of all methods, the most suitable one- though relatively a long process – is to make an isolated part on the existing system and to conduct transactions on this environment. For this, firstly a new user is created. The new user is named <em>bootstrap</em> on this application; almost all of the subsequent transactions will be conducted in the user name bootstrap. First of all; directories are created for conducting transactions in the bootstrap area and using the new system as root directory.</p>
+<div class="highlight-python"><pre>bootstrap@pardus ~ $ mkdir -p newroot/sysroot</pre>
+</div>
+<p>In the bootstrap to contain root codes of the programs to be compiled, a sources directory and a src directory is created under newroot to compile programs.</p>
+<div class="highlight-python"><pre>bootstrap@pardus ~ $ mkdir sources
+bootstrap@pardus ~/newroot $ mkdir src</pre>
+</div>
+<p>After that, we can save the variables to be frequently used including subdirectory and path in the .bashrc file, and use the shortcuts valid for that crust.</p>
+<div class="highlight-python"><pre>bootstrap@pardus ~ $ vi .bashrc</pre>
+</div>
+<p>Following lines are included in the .bashrc file:</p>
+<div class="highlight-python"><pre>export TARGET=x86_64-pc-linux-gnu
+export CROSS_COMPILE=${TARGET}-
+export PREFIX=/home/bootstrap/newroot
+export SYSROOT=${PREFIX}/sysroot
+export PATH=${PREFIX}/bin:${PREFIX}/sysroot/bin:${PATH}
+export MYDESTDIR=/home/bootstrap/newroot/installdir
+export CC=${CROSS_COMPILE}gcc
+export AR=${CROSS_COMPILE}ar
+export RANLIB=${CROSS_COMPILE}ranlib
+export AS=${CROSS_COMPILE}as
+export LD=${CROSS_COMPILE}ld</pre>
+</div>
+<p>TARGET refers to the architecture of the new system to be compiled, CROSS_COMPILE to the target system tools to be compiled, PREFIX to the path to conduct transactions, SYSROOT to root directory of the new system, PATH to paths regarding the new system, MYDESTDIR to the directory to include the programs to be compiled after compiling basic tools; CC, AR, RANLIB, AS and LD to the system tools required to be used during compiling.</p>
+</div>
+<div class="section" id="compiling-binutils-gcc-and-glibc">
+<h2>Compiling Binutils, GCC and GlibC<a class="headerlink" href="#compiling-binutils-gcc-and-glibc" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="gnu-binutils">
+<h3>GNU binutils<a class="headerlink" href="#gnu-binutils" title="Permalink to this headline">¶</a></h3>
+<p>The source code of the binutils to be used for the new system is located into the sources directory, and opens into the src directory under the newroot.</p>
+<div class="highlight-python"><pre>cd ${PREFIX}/src
+tar xvf binutils-xxx
+mkdir -p build/binutils-stage1
+cd build/binutils-stage1</pre>
+</div>
+<p>So far, source codes have been opened in the src, the build directory to be used for the compiling and binutils-stage1 directory to host binutils under the former have been created. The next step is for compiling binutils.</p>
+<div class="highlight-python"><pre>../../binutils-xxx/configure --prefix=${PREFIX} --target=${TARGET} --with-sysroot=${SYSROOT}
+make
+make install</pre>
+</div>
+<p>In the steps above; the binutils source codes opening into src were configured with the configuration settings, relatively. According to the additional parameters given here, the variables formerly added to the .bashrc file were used. Therefore; binutils was established under the target architecture and root directory of the new system in the path given.</p>
+<p><strong>After compiling binutils, it is necessary to compile gcc; but the former gcc/glibc version is different from the new gcc/glibc to be compiled. Basic programs must be parallel with each other. It is understood that interdependence to arise between the two programs from incompliant versions will be a problem. Firstly, glibc was compiled as an intermediate step as a solution for this problem.</strong></p>
+</div>
+<div class="section" id="gnu-library-c">
+<h3>GNU Library C<a class="headerlink" href="#gnu-library-c" title="Permalink to this headline">¶</a></h3>
+<p>For the glibc to be compiled for the new system, there is kernel-headers (heading files used by glibc and the other user space applications) dependence. Therefore; firstly, the pisi packet received by means of</p>
+<div class="highlight-python"><pre>pisi fetch kernel-headers</pre>
+</div>
+<p>opens into the newroot/sysroot by means of the following order.</p>
+<div class="highlight-python"><pre>unpisi kernel-headers-xxx.pisi</pre>
+</div>
+<p>Then, it may come to the steps necessary for compiling glibc. Source code of the glibc to be used for the new system is located into the sources directory, and it opens into the src directory under the newroot.</p>
+<div class="highlight-python"><pre>cd ${PREFIX}/src
+tar xvf glibc-xxx
+mkdir -p build/glibc-stage1
+cd build/glibc-stage1</pre>
+</div>
+<p>Source codes open into the src; in this way, glibc-stage1 directory is created under the build to be used for compiling.</p>
+<div class="highlight-python"><pre>../../glibc-xxx/configure --prefix=/usr  --target=${TARGET} --without-__thread --enable-add-ons=linuxthreads --with-headers=${SYSROOT}/usr/include
+make
+make install_root=${SYSROOT} install</pre>
+</div>
+<p>glibc is configured and installed by using the orders above.</p>
+<p><em>As a point of consideration; as the existing host architecture is the same as the target architecture, the parameters above are sufficient.. If any other architecture weretargeted, the configuration order would be as follows.</em></p>
+<div class="highlight-python"><pre>BUILD_CC=gcc CC=${CROSS_COMPILE}gcc AR=${CROSS_COMPILE}ar RANLIB=${CROSS_COMPILE}ranlib AS=${CROSS_COMPILE}as LD=${CROSS_COMPILE}ld ../../glibc-xxx/configure --prefix=usr  --target=${TARGET} --without-__thread --enable-add-ons=linuxthreads --with-headers=${SYSROOT}/usr/include</pre>
+</div>
+</div>
+<div class="section" id="gcc">
+<h3>GCC<a class="headerlink" href="#gcc" title="Permalink to this headline">¶</a></h3>
+<p>The source code of the gcc to be used for the new system is located into the sources directory, and opens into the src directory under the newroot.</p>
+<div class="highlight-python"><pre>cd ${PREFIX}/src
+tar xvf gcc-xxx
+mkdir -p build/gcc-stage1
+cd build/gcc-stage1</pre>
+</div>
+<p>Source codes open into the src; in this way, gcc-stage1 directory is created under the build to be used for compiling.</p>
+<div class="highlight-python"><pre>../../gcc-xxx/configure --prefix=${PREFIX} --target=${TARGET} --enable-languages=c  --with-build-sysroot=/ --with-sysroot=${SYSROOT} --with-headers=${SYSROOT}
+make
+make install</pre>
+</div>
+<p>gcc is configured and installed by using the orders above.</p>
+<p>After the compilation of binutils, gcc and glibc the major part of the bootstrapping is completed.</p>
+</div>
+</div>
+<div class="section" id="compiling-of-zlib-ncurses-and-bash">
+<h2>Compiling of zlib, ncurses and bash<a class="headerlink" href="#compiling-of-zlib-ncurses-and-bash" title="Permalink to this headline">¶</a></h2>
+<p>The last step consist of compiling of zlib, ncurses and bash tools for using the new system. This process needs add to new data in the .bashrc file.</p>
+<div class="highlight-python"><pre>alias autotools.configure="./configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info"
+alias autotools.install="make prefix=$MYDESTDIR/usr infodir=$MYDESTDIR/usr/share/info mandir=$MYDESTDIR/usr/share/man install"</pre>
+</div>
+<dl class="docutils">
+<dt><strong>zlib</strong></dt>
+<dd>General purpose data compression / decompression library.</dd>
+</dl>
+<p>The zlib package in the Pardus package repository</p>
+<div class="highlight-python"><pre>pisi build --unpack http://svn.pardus.org.tr/pardus/2009/devel/system/base/zlib/pspec.xml</pre>
+</div>
+<p>copy zlib* directory which under the /var/pisi/zlib-xxx/work/ directory and then going to the directory. Execute the intructions step by step in the actions.pyfile which is a part of the zlib package.</p>
+<div class="highlight-python"><pre>mkdir m4
+autoreconf -fi
+autotools.configure --disable-static
+make
+autotools.install</pre>
+</div>
+<p>In the steps above, required to using with <em>pisitools</em> but, the new system does not include the pisitools. Ongoing steps will realize in newroot/installdir. (xxx means version number)</p>
+<div class="highlight-python"><pre>mv usr/lib/libz* lib
+ln -s lib/libz.so.xxx  usr/lib/libz.so.xxx
+ln -s libz.so.xxx  usr/lib/libz.so.1
+ln -s libz.so.1  usr/lib/libz.so
+cp zconf.h  usr/include
+cp zlib.h  usr/include
+cp zutil.h  usr/include</pre>
+</div>
+<p>after the steps above, revome all &#8220;.la&#8221; files and then copy content of the installdir/ to under the newroot/sysroot directory. zlib is configured and installed by using the orders above.</p>
+<dl class="docutils">
+<dt><strong>ncurses</strong></dt>
+<dd>A programming library providing an API, allowing the programmer to write text user interfaces in a terminal-independent manner.</dd>
+</dl>
+<p>The ncurses package in the Pardus package repository</p>
+<div class="highlight-python"><pre>pisi build --unpack http://svn.pardus.org.tr/pardus/2009/devel/system/base/ncurses/pspec.xml</pre>
+</div>
+<p>copy ncurses* directory which under the /var/pisi/ncurses-xxx/work/ directory and then going to the directory. Execute the intructions step by step in the actions.py file which is a part of the ncurses package.</p>
+<div class="highlight-python"><pre>autotools.configure --without-debug --without-profile --disable-rpath --enable-const \
+                    --enable-largefile --enable-widec --with-terminfo-dirs='/etc/terminfo:/usr/share/terminfo'\
+                    --disable-termcap --with-shared --with-rcs-ids --with-chtype='long'\
+                    --with-mmask-t='long'  --without-ada --enable-symlinks··
+
+make
+make DESTDIR=$MYDESTDIR install</pre>
+</div>
+<p>for the ongoing steps under the newroot/installdir</p>
+<div class="highlight-python"><pre>rm -rf usr/lib/*.a
+ln -s usr/lib/*w.* usr/lib/*.*</pre>
+</div>
+<p>after the steps above, remove all &#8220;.la&#8221; files. Another ncurses package unpisi in any dummy directory and then copy consist of /etc directory newroot/sysroot. zlib is configured and installed by using the orders above.</p>
+<dl class="docutils">
+<dt><strong>bash</strong></dt>
+<dd>Bash  is  an  sh-compatible command language interpreter that executes commands read from the standard input or from a file.</dd>
+</dl>
+<p>The ncurses package in the Pardus package repository</p>
+<div class="highlight-python"><pre>pisi build --unpack http://svn.pardus.org.tr/pardus/2009/devel/system/base/bash/pspec.xml</pre>
+</div>
+<p>copy bash* directory which under the /var/pisi/bash-xxx/work/ directory and then going to the directory. Execute the intructions step by step in the actions.py file which is a part of the bash package.</p>
+<div class="highlight-python"><pre>autoconf
+autotools.configure --without-installed-readline --disable-profiling --without-gnu-malloc --with-curses
+make
+autotools.install</pre>
+</div>
+<p>for the ongoing steps under the newroot/installdir</p>
+<div class="highlight-python"><pre>mv usr/bin/bash  bin/
+ln -s bin/bash  bin/sh
+ln -s bin/bash  bin/rbash</pre>
+</div>
+<p>bash is configured and installed by using the orders above.</p>
+<p>After the compilation of zlib, ncurses and bash the bootstrapping is completed.</p>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Linux man pages</li>
+<li><a class="reference external" href="http://frank.harvard.edu/~coldwell/toolchain/">Building a GNU/Linux ARM Toolchain</a></li>
+<li><a class="reference external" href="http://en.gentoo-wiki.com/wiki/CFLAGS">CFLAGS</a></li>
+<li><a class="reference external" href="http://www.gentoo.org/doc/en/gcc-optimization.xml">Compilation Optimization Guide</a></li>
+<li><a class="reference external" href="https://wiki.ubuntu.com/CompilerFlags#-D_FORTIFY_SOURCE=2">D_FORTIFY_SOURCE=2</a></li>
+<li><a class="reference external" href="http://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html">Options for Code Generation Conventions</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/bootstrapping.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

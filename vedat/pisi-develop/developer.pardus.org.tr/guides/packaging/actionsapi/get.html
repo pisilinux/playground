@@ -1,0 +1,515 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/get.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Get</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="KDE4" href="kde4.html" />
+    <link rel="prev" title="Cmaketools" href="cmaketools.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Get</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Get</a><ul>
+<li><a class="reference external" href="#global-functions">Global Functions</a><ul>
+<li><a class="reference external" href="#curdir">curDIR</a></li>
+<li><a class="reference external" href="#curkernel">curKERNEL</a></li>
+<li><a class="reference external" href="#curpython">curPYTHON</a></li>
+<li><a class="reference external" href="#curperl">curPERL</a></li>
+<li><a class="reference external" href="#env">ENV</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#pisi-related-functions">PISI Related Functions</a><ul>
+<li><a class="reference external" href="#pkgdir">pkgDIR</a></li>
+<li><a class="reference external" href="#workdir">workDIR</a></li>
+<li><a class="reference external" href="#installdir">installDIR</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#pardus-release-related-functions">Pardus Release Related Functions</a><ul>
+<li><a class="reference external" href="#lsbinfo">lsbINFO</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#pspec-related-functions">PSPEC Related Functions</a><ul>
+<li><a class="reference external" href="#srcname">srcNAME</a></li>
+<li><a class="reference external" href="#srcversion">srcVERSION</a></li>
+<li><a class="reference external" href="#srcrelease">srcRELEASE</a></li>
+<li><a class="reference external" href="#srctag">srcTAG</a></li>
+<li><a class="reference external" href="#srcdir">srcDIR</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#build-related-functions">Build Related Functions</a><ul>
+<li><a class="reference external" href="#arch">ARCH</a></li>
+<li><a class="reference external" href="#host">HOST</a></li>
+<li><a class="reference external" href="#cflags">CFLAGS</a></li>
+<li><a class="reference external" href="#cxxflags">CXXFLAGS</a></li>
+<li><a class="reference external" href="#ldflags">LDFLAGS</a></li>
+<li><a class="reference external" href="#makejobs">makeJOBS</a></li>
+<li><a class="reference external" href="#buildtype">buildTYPE</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#directory-related-functions">Directory Related Functions</a><ul>
+<li><a class="reference external" href="#docdir">docDIR</a></li>
+<li><a class="reference external" href="#sbindir">sbinDIR</a></li>
+<li><a class="reference external" href="#infodir">infoDIR</a></li>
+<li><a class="reference external" href="#mandir">manDIR</a></li>
+<li><a class="reference external" href="#datadir">dataDIR</a></li>
+<li><a class="reference external" href="#confdir">confDIR</a></li>
+<li><a class="reference external" href="#localstatedir">localstateDIR</a></li>
+<li><a class="reference external" href="#libexecdir">libexecDIR</a></li>
+<li><a class="reference external" href="#defaultprefixdir">defaultprefixDIR</a></li>
+<li><a class="reference external" href="#kdedir">kdeDIR</a></li>
+<li><a class="reference external" href="#qtdir">qtDIR</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#binutils-related-functions">Binutils Related Functions</a><ul>
+<li><a class="reference external" href="#ar">AR</a></li>
+<li><a class="reference external" href="#as">AS</a></li>
+<li><a class="reference external" href="#cc">CC</a></li>
+<li><a class="reference external" href="#cxx">CXX</a></li>
+<li><a class="reference external" href="#ld">LD</a></li>
+<li><a class="reference external" href="#nm">NM</a></li>
+<li><a class="reference external" href="#ranlib">RANLIB</a></li>
+<li><a class="reference external" href="#f77">F77</a></li>
+<li><a class="reference external" href="#gcj">GCJ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="get"></span><h1>Get<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="global-functions">
+<h2>Global Functions<a class="headerlink" href="#global-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="curdir">
+<h3>curDIR<a class="headerlink" href="#curdir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">curDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns current work directory&#8217;s path.</p>
+</div>
+<div class="section" id="curkernel">
+<h3>curKERNEL<a class="headerlink" href="#curkernel" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">curKERNEL</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns currently running kernel&#8217;s version.</p>
+</div>
+<div class="section" id="curpython">
+<h3>curPYTHON<a class="headerlink" href="#curpython" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">curPYTHON</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns currently used python&#8217;s version.</p>
+</div>
+<div class="section" id="curperl">
+<h3>curPERL<a class="headerlink" href="#curperl" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">curPERL</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns currently used perl&#8217;s version.</p>
+</div>
+<div class="section" id="env">
+<h3>ENV<a class="headerlink" href="#env" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">ENV</span><span class="p">(</span><span class="n">environ</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns any given environ variable.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">ENV</span><span class="p">(</span><span class="s">&quot;MAKE_DOC&quot;</span><span class="p">)</span>
+<span class="n">get</span><span class="o">.</span><span class="n">ENV</span><span class="p">(</span><span class="s">&quot;LD_LIBRARY_PATH&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="pisi-related-functions">
+<h2>PISI Related Functions<a class="headerlink" href="#pisi-related-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pkgdir">
+<h3>pkgDIR<a class="headerlink" href="#pkgdir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">pkgDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the path of binary packages. Default is&#8221;/var/cache/pisi/packages&#8221;.</p>
+</div>
+<div class="section" id="workdir">
+<h3>workDIR<a class="headerlink" href="#workdir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">workDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the path of package work directory. For example it can return a path
+like &#8220;/var/pisi/texlive-core-0.0_20091107-4/work&#8221;.</p>
+</div>
+<div class="section" id="installdir">
+<h3>installDIR<a class="headerlink" href="#installdir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the package install directory. For example it can return a path like
+&#8220;/var/pisi/texlive-core-0.0_20091107-4/install&#8221;</p>
+</div>
+</div>
+<div class="section" id="pardus-release-related-functions">
+<h2>Pardus Release Related Functions<a class="headerlink" href="#pardus-release-related-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lsbinfo">
+<h3>lsbINFO<a class="headerlink" href="#lsbinfo" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">lsbINFO</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns a dictionary filled through /etc/lsb-release.</p>
+</div>
+</div>
+<div class="section" id="pspec-related-functions">
+<h2>PSPEC Related Functions<a class="headerlink" href="#pspec-related-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="srcname">
+<h3>srcNAME<a class="headerlink" href="#srcname" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">srcNAME</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the name of source package. (i.e. flashplugin)</p>
+</div>
+<div class="section" id="srcversion">
+<h3>srcVERSION<a class="headerlink" href="#srcversion" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">srcVERSION</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the version of source package. (i.e. 5.2_p1, 10.1.82.76)</p>
+</div>
+<div class="section" id="srcrelease">
+<h3>srcRELEASE<a class="headerlink" href="#srcrelease" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">srcRELEASE</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the release number of source package. (i.e. 28)</p>
+</div>
+<div class="section" id="srctag">
+<h3>srcTAG<a class="headerlink" href="#srctag" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">srcTAG</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the name, version and release number of source package. (i.e. 5.2_p1-28)</p>
+</div>
+<div class="section" id="srcdir">
+<h3>srcDIR<a class="headerlink" href="#srcdir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">srcDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the directory name of the package source under &#8220;/var/pisi/&#8221;.
+(i.e. teeworlds-0.5.2)</p>
+</div>
+</div>
+<div class="section" id="build-related-functions">
+<h2>Build Related Functions<a class="headerlink" href="#build-related-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="arch">
+<h3>ARCH<a class="headerlink" href="#arch" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">ARCH</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default arch value written at
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py</a>&#8221; in class
+GeneralDefaults. (i.e i686)</p>
+</div>
+<div class="section" id="host">
+<h3>HOST<a class="headerlink" href="#host" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">HOST</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default host value written at
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py</a>&#8221; in class
+BuildDefaults. (i.e i686-pc-linux-gnu)</p>
+</div>
+<div class="section" id="cflags">
+<h3>CFLAGS<a class="headerlink" href="#cflags" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">CFLAGS</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return the default cflags used for Pardus. You can see them from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py</a>&#8221; in class
+BuildDefaults.</p>
+</div>
+<div class="section" id="cxxflags">
+<h3>CXXFLAGS<a class="headerlink" href="#cxxflags" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">CXXFLAGS</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return the default cxxflags used for Pardus. You can see them from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py</a>&#8221; in class
+BuildDefaults.</p>
+</div>
+<div class="section" id="ldflags">
+<h3>LDFLAGS<a class="headerlink" href="#ldflags" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">LDFLAGS</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return the default ldflags used for pardus. You can see them from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py</a>&#8221; in class
+BuildDefaults.</p>
+</div>
+<div class="section" id="makejobs">
+<h3>makeJOBS<a class="headerlink" href="#makejobs" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">makeJOBS</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return the default jobs value used for pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py</a>&#8221; in class
+BuildDefaults.</p>
+</div>
+<div class="section" id="buildtype">
+<h3>buildTYPE<a class="headerlink" href="#buildtype" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">buildTYPE</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return the current build type included in pspec.xml with &lt;BuildType&gt; tag.</p>
+</div>
+</div>
+<div class="section" id="directory-related-functions">
+<h2>Directory Related Functions<a class="headerlink" href="#directory-related-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="docdir">
+<h3>docDIR<a class="headerlink" href="#docdir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">docDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default doc files directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py</a>&#8221; in
+class Dirs.</p>
+</div>
+<div class="section" id="sbindir">
+<h3>sbinDIR<a class="headerlink" href="#sbindir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">sbinDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default sbin directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py</a>&#8221; in
+class Dirs.</p>
+</div>
+<div class="section" id="infodir">
+<h3>infoDIR<a class="headerlink" href="#infodir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">infoDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default info files directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py</a>&#8221; in
+class Dirs.</p>
+</div>
+<div class="section" id="mandir">
+<h3>manDIR<a class="headerlink" href="#mandir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">manDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default man files directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py</a>&#8221; in
+class Dirs.</p>
+</div>
+<div class="section" id="datadir">
+<h3>dataDIR<a class="headerlink" href="#datadir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">dataDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default data files directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py</a>&#8221; in
+class Dirs.</p>
+</div>
+<div class="section" id="confdir">
+<h3>confDIR<a class="headerlink" href="#confdir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">confDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default configure files directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py</a>&#8221; in
+class Dirs.</p>
+</div>
+<div class="section" id="localstatedir">
+<h3>localstateDIR<a class="headerlink" href="#localstatedir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">localstateDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default locale files directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py</a>&#8221; in
+class Dirs.</p>
+</div>
+<div class="section" id="libexecdir">
+<h3>libexecDIR<a class="headerlink" href="#libexecdir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">libexecDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default library executable directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py</a>&#8221; in</p>
+</div>
+<div class="section" id="defaultprefixdir">
+<h3>defaultprefixDIR<a class="headerlink" href="#defaultprefixdir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">defaultprefixDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default prefix directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/variables.py</a>&#8221; in
+class Dirs.</p>
+</div>
+<div class="section" id="kdedir">
+<h3>kdeDIR<a class="headerlink" href="#kdedir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">kdeDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default kde directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py</a>&#8221; in class
+DirectoriesDefaults.</p>
+</div>
+<div class="section" id="qtdir">
+<h3>qtDIR<a class="headerlink" href="#qtdir" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">qtDIR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the default qt directory used for Pardus. You can see it from
+&#8220;<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/configfile.py</a>&#8221; in class
+DirectoriesDefaults.</p>
+</div>
+</div>
+<div class="section" id="binutils-related-functions">
+<h2>Binutils Related Functions<a class="headerlink" href="#binutils-related-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ar">
+<h3>AR<a class="headerlink" href="#ar" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">AR</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return GNU ar binutil executable variable of the system where the package being
+compiled. (i.e. ar)</p>
+</div>
+<div class="section" id="as">
+<h3>AS<a class="headerlink" href="#as" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">AS</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return GNU assembler binutil executable variable of the system where the package being
+compiled. (i.e. as)</p>
+</div>
+<div class="section" id="cc">
+<h3>CC<a class="headerlink" href="#cc" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">CC</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return gcc binutil executable variable of the system where the package being
+compiled. (i.e. i686-pc-linux-gnu-gcc)</p>
+</div>
+<div class="section" id="cxx">
+<h3>CXX<a class="headerlink" href="#cxx" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">CXX</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return gcc C++ binutil executable variable of the system where the package being
+compiled. (i.e. i686-pc-linux-gnu-g++)</p>
+</div>
+<div class="section" id="ld">
+<h3>LD<a class="headerlink" href="#ld" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">LD</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return GNU linker binutil executable variable of the system where the package being
+compiled. (i.e. ld)</p>
+</div>
+<div class="section" id="nm">
+<h3>NM<a class="headerlink" href="#nm" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">NM</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return GNU nm binutil executable variable of the system where the package being
+compiled. (i.e. nm)</p>
+</div>
+<div class="section" id="ranlib">
+<h3>RANLIB<a class="headerlink" href="#ranlib" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">RANLIB</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return ranlib binutil executable variable of the system where the package being
+compiled. (i.e. ranlib)</p>
+</div>
+<div class="section" id="f77">
+<h3>F77<a class="headerlink" href="#f77" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">F77</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return GNU fortran compiler binutil executable variable of the system where the package being
+compiled. (i.e. g77)</p>
+</div>
+<div class="section" id="gcj">
+<h3>GCJ<a class="headerlink" href="#gcj" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get</span><span class="o">.</span><span class="n">GCJ</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Return GNU java compiler binutil executable variable of the system where the package being
+compiled. (i.e. gcj)</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/get.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

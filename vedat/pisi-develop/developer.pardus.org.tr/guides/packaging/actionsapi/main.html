@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/main.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>About the document</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="Autotools" href="autotools.html" />
+    <link rel="prev" title="ActionsApi" href="index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">About the document</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">About the document</a><ul>
+<li><a class="reference external" href="#actions-api">Actions API</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="about-the-document">
+<span id="main"></span><h1>About the document<a class="headerlink" href="#about-the-document" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>One of the main part of pisi package is actions.py is. It is a python script
+that contains information of the operations to be executed on the source code.
+This document is an overview of the Actions API library which includes the
+functions that are available for use in actions.py scripts.</p>
+<div class="section" id="actions-api">
+<h2>Actions API<a class="headerlink" href="#actions-api" title="Permalink to this headline">¶</a></h2>
+<p>Actions API has a modular structure that makes the packaging process easier for
+the packager. The major modules of the Actions API are:</p>
+<blockquote>
+<ul class="simple">
+<li><a class="reference external" href="autotools.html#autotools"><em>Autotools</em></a>:  Standard functions for building and installing applications.</li>
+<li><a class="reference external" href="cmaketools.html#cmaketools"><em>Cmaketools</em></a>: Functions for building the applications that are configured with cmake.</li>
+<li><a class="reference external" href="get.html#get"><em>Get</em></a>: Functions for getting information about evnironment variables or packages needed in building and installation phases.</li>
+<li><a class="reference external" href="libtools.html#libtools"><em>Libtools</em></a>: Pre-build and post-build operations for configuring libraries.</li>
+<li><a class="reference external" href="kde.html#kde"><em>KDE</em></a>:_ Functions for configuring, building and installing KDE applications.</li>
+<li><a class="reference external" href="kde4.html#kde4"><em>KDE4</em></a>: Functions for configuring, building and installing KDE applications.</li>
+<li><a class="reference external" href="kerneltools.html#kerneltools"><em>Kerneltools</em></a>: Functions for configuring, building and installing kernel and kernel modules.</li>
+<li><a class="reference external" href="pisitools.html#pisitools"><em>Pisitools</em></a>: Fundamentally used for moving files to install directory from work directory, the functions included in pisitools are convenient for most operations i.e. symlinking, file manipulation via sed, deleting files or directories.</li>
+<li><a class="reference external" href="perlmodules.html#perlmodules"><em>Perlmodules</em></a>: Functions for configuring, building and installing perl modules.</li>
+<li><a class="reference external" href="pythonmodules.html#pythonmodules"><em>Pythonmodules</em></a>: Functions for configuring, building and installing python modules.</li>
+<li><a class="reference external" href="qt4.html#qt4"><em>Qt4</em></a>: Functions for configuring, building and installing Qt4.</li>
+<li><a class="reference external" href="rubymodules.html#rubymodules"><em>Rubymodules</em></a>: Functions for configuring, building and installing ruby modules.</li>
+<li><a class="reference external" href="scons.html#scons"><em>Scons</em></a>: Counterpart of autotools for the new generation building tools, scons.</li>
+<li><a class="reference external" href="shelltools.html#shelltools"><em>Shelltools</em></a> Functions for specific operations. Apart from pisitools, shelltools is capable of operating in absolute paths instead of relative paths. Granting the ability to operate in the darkest corners of the system to the packager shelltools has to be used responsibly.</li>
+<li><a class="reference external" href="texlivemodules.html#texlivemodules"><em>Texlivemodules</em></a> Functions for configuring, building and installing texlive modules.</li>
+</ul>
+</blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/main.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

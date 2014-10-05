@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/reviewing_guidelines.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Things To Check While Reviewing</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Packaging" href="index.html" />
+    <link rel="next" title="Bug Tracking Guide" href="../bugtracking/index.html" />
+    <link rel="prev" title="Package Reviewing Process" href="package-review-process.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Packaging</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Things To Check While Reviewing</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Things To Check While Reviewing</a></li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="things-to-check-while-reviewing">
+<span id="reviewing-guidelines"></span><h1>Things To Check While Reviewing<a class="headerlink" href="#things-to-check-while-reviewing" title="Permalink to this headline">¶</a></h1>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.2</td>
+</tr>
+</tbody>
+</table>
+<p>In order to review a new package, there are a lot of things to check. The below
+list only provides some guidelines for new rewievers in order to identify a way
+to follow. But of course this list is not enough. Reviewers should also use their
+own experiences when reviewing a package.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>The package name must be suitable to <a class="reference external" href="package_naming_guidelines.html">package naming</a>.</li>
+<li>The package must meet the <a class="reference external" href="packaging_guidelines.html">packaging guidelines</a>.</li>
+<li>The package must meet <a class="reference external" href="../licensing/licensing_guidelines.html">licensing guidelines</a>.</li>
+<li>The license tag in the pspec.xml file must match the actual <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/doc/en/licenses/">license short names</a>.</li>
+<li>The source code of the package and comments must be written in <a class="reference external" href="packaging_guidelines.html#summary-and-description">english</a>.</li>
+<li>The source code of the package must be <a class="reference external" href="packaging_guidelines.html#code-legibility">legible</a>.</li>
+<li>The package must successfully compile and build into pisi for at least one <a class="reference external" href="packaging_guidelines.html#architecture-support">architecture supported</a>.</li>
+<li>If the package could not successfully compile, build or work on a specific architecture, then those architectures should be specified in pspec.xml file with <a class="reference external" href="packaging_guidelines.html#architecture-support">ExcludeArch tag</a>.</li>
+<li>All <a class="reference external" href="packaging_guidelines.html#buildtime-dependencies">build dependencies</a> must be listed in <a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">pspex.xml file</a>, except for any that are listed in the <a class="reference external" href="packaging_guidelines.html#dependencies-excepted">dependencies excepted document</a>.</li>
+<li>The <a class="reference external" href="howto_create_pisi_packages.html#creating-translations-xml">translations.xml file</a> must be added to package.</li>
+<li>Almost every pisi package (or subpackage) have shared library files, you must run <a class="reference external" href="checkelf.html">checkelf</a> for every package and find broken links.</li>
+<li>Packages must not <a class="reference external" href="packaging_guidelines.html#duplication-of-system-libraries">bundle copies</a> of system libraries.</li>
+<li>Permissions on files must be set properly. Executables should be set with executable permissions, See <a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">Additional Files</a>.</li>
+<li>Each package must use related actionsapi modules rather than recreating similar modules in <cite>main</cite>.</li>
+<li>Package must contain code, or <a class="reference external" href="packaging_guidelines.html#summary-and-description">permissable content</a>.</li>
+<li>If the size or the quantity of the <a class="reference external" href="packaging_guidelines.html#documentation">documentation files</a> are large, they must go in a packagename-doc subpackage.</li>
+<li><a class="reference external" href="packaging_guidelines.html#devel-packages">Header files or unversioned shared libraries</a> must be in a packagename-devel subpackage.</li>
+<li><a class="reference external" href="packaging_guidelines.html#static-libraries">Libtool archives</a> .la must not be included in packages, these must be removed in the actions.py if they are built.</li>
+<li>The GUI application pacakges must contain <a class="reference external" href="packaging_guidelines.html#desktop-files">packagename.desktop file</a>, and the <a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">icon tag</a> of this application should also be defined in pspec.xml file.</li>
+<li>The reviewer should test the package in a related proper Pardus system.</li>
+<li>The reviewer should test that the application runs as described. For example the applcation should not be crashed or give a segfault.</li>
+<li>Usually, subpackages require the base package as a dependency, it should be defined as a <a class="reference external" href="packaging_guidelines.html#strict-dependencies">strict dependency</a> for subpackages as needed.</li>
+<li><a class="reference external" href="packaging_guidelines.html#devel-packages">Pkgconfig(.pc)</a> situation should be examined and their package placement should be decided.</li>
+</ol>
+</blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/reviewing_guidelines.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:19 GMT -->
+</html>

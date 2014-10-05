@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/kde/kde4-applications.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>KDE 4 Applications</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="KDE 4 Programming Howto" href="index.html" />
+    <link rel="next" title="Plasmoids" href="plasmoids.html" />
+    <link rel="prev" title="KDE 4 Programming Howto" href="index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">KDE 4 Programming Howto</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">KDE 4 Applications</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">KDE 4 Applications</a><ul>
+<li><a class="reference external" href="#a-simple-pykde-kapplication">A simple PyKDE KApplication</a></li>
+<li><a class="reference external" href="#running-a-kapplication-from-kde4-system-settings">Running a KApplication from KDE4 System Settings</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="kde-4-applications">
+<h1>KDE 4 Applications<a class="headerlink" href="#kde-4-applications" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="a-simple-pykde-kapplication">
+<h2>A simple PyKDE KApplication<a class="headerlink" href="#a-simple-pykde-kapplication" title="Permalink to this headline">¶</a></h2>
+<p>A basic example as follow:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">PyKDE4.kdecore</span> <span class="kn">import</span> <span class="n">ki18n</span><span class="p">,</span> <span class="n">KAboutData</span><span class="p">,</span> <span class="n">KCmdLineArgs</span>
+<span class="kn">from</span> <span class="nn">PyKDE4.kdeui</span> <span class="kn">import</span> <span class="n">KApplication</span><span class="p">,</span> <span class="n">KMainWindow</span>
+
+<span class="kn">from</span> <span class="nn">PyQt4.QtGui</span> <span class="kn">import</span> <span class="n">QLabel</span><span class="p">,</span> <span class="n">QWidget</span>
+
+<span class="c"># A simple KMainWindow implementation</span>
+<span class="k">class</span> <span class="nc">MainWindow</span><span class="p">(</span><span class="n">KMainWindow</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">KMainWindow</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mf">640</span><span class="p">,</span> <span class="mf">480</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s">&quot;This is a simple PyKDE4 program&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="mf">10</span><span class="p">,</span> <span class="mf">10</span><span class="p">,</span> <span class="mf">200</span><span class="p">,</span> <span class="mf">20</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;Test method called..&quot;</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="c"># About data definitions</span>
+    <span class="n">appName</span>     <span class="o">=</span> <span class="s">&quot;KApplication&quot;</span>
+    <span class="n">catalog</span>     <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="n">programName</span> <span class="o">=</span> <span class="n">ki18n</span><span class="p">(</span><span class="s">&quot;KApplication&quot;</span><span class="p">)</span>
+    <span class="n">version</span>     <span class="o">=</span> <span class="s">&quot;1.0&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">ki18n</span><span class="p">(</span><span class="s">&quot;KApplication example&quot;</span><span class="p">)</span>
+    <span class="n">license</span>     <span class="o">=</span> <span class="n">KAboutData</span><span class="o">.</span><span class="n">License_GPL</span>
+    <span class="n">copyright</span>   <span class="o">=</span> <span class="n">ki18n</span><span class="p">(</span><span class="s">&quot;(c) 2009 Panthera Pardus&quot;</span><span class="p">)</span>
+    <span class="n">text</span>        <span class="o">=</span> <span class="n">ki18n</span><span class="p">(</span><span class="s">&quot;none&quot;</span><span class="p">)</span>
+    <span class="n">homePage</span>    <span class="o">=</span> <span class="s">&quot;www.pardus.org.tr&quot;</span>
+    <span class="n">bugEmail</span>    <span class="o">=</span> <span class="s">&quot;info@pardus.org.tr&quot;</span>
+
+    <span class="c"># Create about data from defined variables</span>
+    <span class="n">aboutData</span>   <span class="o">=</span> <span class="n">KAboutData</span><span class="p">(</span><span class="n">appName</span><span class="p">,</span> <span class="n">catalog</span><span class="p">,</span> <span class="n">programName</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span>
+                                <span class="n">license</span><span class="p">,</span> <span class="n">copyright</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">homePage</span><span class="p">,</span> <span class="n">bugEmail</span><span class="p">)</span>
+
+    <span class="c"># Initialize Command Line arguments</span>
+    <span class="n">KCmdLineArgs</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">,</span> <span class="n">aboutData</span><span class="p">)</span>
+
+    <span class="c"># Create the application</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">KApplication</span><span class="p">()</span>
+
+    <span class="c"># Create Main Window</span>
+    <span class="n">mainWindow</span> <span class="o">=</span> <span class="n">MainWindow</span><span class="p">()</span>
+    <span class="n">mainWindow</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c"># Set top Widget as our mainWindow</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">setTopWidget</span><span class="p">(</span><span class="n">mainWindow</span><span class="p">)</span>
+
+    <span class="c"># Run the app</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you need you can use <tt class="docutils literal"><span class="pre">QWidget</span></tt> instead of <tt class="docutils literal"><span class="pre">KMainWindow</span></tt> as top widget of app:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MainWindow</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">QWidget</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you use <tt class="docutils literal"><span class="pre">QWidget</span></tt> you may need to define a connection for <tt class="docutils literal"><span class="pre">lastWindowClosed()</span></tt> signal:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">app</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="s">&#39;lastWindowClosed()&#39;</span><span class="p">),</span> <span class="n">app</span><span class="o">.</span><span class="n">quit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This application can run from command-line and you can use following cmd-line arguments:</p>
+<div class="highlight-python"><pre>$ python kapp.py --help
+Usage: kapp.py [Qt-options] [KDE-options]
+
+KApplication example
+
+Generic options:
+  --help                    Show help about options
+  --help-qt                 Show Qt specific options
+  --help-kde                Show KDE specific options
+  --help-all                Show all options
+  --author                  Show author information
+  -v, --version             Show version information
+  --license                 Show license information
+  --                        End of options</pre>
+</div>
+<p>For detailed information about <tt class="docutils literal"><span class="pre">KApplication</span></tt> you can grab api doc from <a class="footnote-reference" href="#id3" id="id1">[1]</a>. For example used above follow <a class="footnote-reference" href="#id4" id="id2">[2]</a>.</p>
+</div>
+<div class="section" id="running-a-kapplication-from-kde4-system-settings">
+<h2>Running a KApplication from KDE4 System Settings<a class="headerlink" href="#running-a-kapplication-from-kde4-system-settings" title="Permalink to this headline">¶</a></h2>
+<p>To run a <tt class="docutils literal"><span class="pre">KApplication</span></tt> from System Settings you need a proper <tt class="docutils literal"><span class="pre">.desktop</span></tt> file installed under
+<tt class="docutils literal"><span class="pre">/usr/kde/4/share/kde4/services</span></tt>.</p>
+<p>Example <tt class="docutils literal"><span class="pre">.desktop</span></tt> file:</p>
+<div class="highlight-python"><pre>[Desktop Entry]
+Exec=kcmshell4 service-manager
+Icon=preferences-desktop
+Type=Service
+X-KDE-ServiceTypes=KCModule
+
+X-KDE-Library=kpythonpluginfactory
+X-KDE-ParentApp=kcontrol
+X-KDE-PluginKeyword=service-manager/service-manager
+
+X-KDE-System-Settings-Parent-Category=computer-administration
+X-KDE-Weight=70
+
+Name=Service Manager
+Name[x-test]=xxService Managerxx
+Name[tr]=Servis Yöneticisi
+Comment=Service Manager
+X-KDE-Keywords=python service managers</pre>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">.desktop</span></tt> file above will add an entry for &#8220;Service Manager&#8221; under
+<em>Computer Administration</em> section in <em>System Settings</em> with <tt class="docutils literal"><span class="pre">preferences-desktop</span></tt> icon.
+For above <tt class="docutils literal"><span class="pre">.desktop</span></tt> file you need to put &#8220;Service Manager&#8221; application under
+<tt class="docutils literal"><span class="pre">/usr/kde/4/share/apps/service-manager</span></tt> and application name should be <tt class="docutils literal"><span class="pre">service-manager</span></tt>.</p>
+<p>Also for embedding a <tt class="docutils literal"><span class="pre">KApplication</span></tt> into <em>System Settings</em>, your application should have
+<tt class="docutils literal"><span class="pre">CreatePlugin</span></tt> method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">CreatePlugin</span><span class="p">(</span><span class="n">widget_parent</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">component_data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">ServiceManager</span><span class="p">(</span><span class="n">component_data</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This method will call by <em>System Settings</em> and it should return a <tt class="docutils literal"><span class="pre">KCModule</span></tt> implementation like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ServiceManager</span><span class="p">(</span><span class="n">KCModule</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_data</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="n">KCModule</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_data</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+        <span class="n">MainManager</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">standAlone</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">MainManager</span></tt> is your <tt class="docutils literal"><span class="pre">topWidget</span></tt> defined for <tt class="docutils literal"><span class="pre">KApplication</span></tt>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you need to use <tt class="docutils literal"><span class="pre">DBusQtMainLoop</span></tt> you must define it before creating the <tt class="docutils literal"><span class="pre">MainManager</span></tt>.</p>
+</div>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://api.kde.org/4.x-api/kdelibs-apidocs/kdeui/html/classKApplication.html">http://api.kde.org/4.x-api/kdelibs-apidocs/kdeui/html/classKApplication.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://svn.pardus.org.tr/uludag/branches/kde4-managers/tutorial">http://svn.pardus.org.tr/uludag/branches/kde4-managers/tutorial</a></td></tr>
+</tbody>
+</table>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Gökmen Göksel</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/kde/kde4-applications.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

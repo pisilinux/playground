@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/licensing/licensing_guidelines.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Licensing Guidelines</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Licensing" href="index.html" />
+    <link rel="next" title="Software Development" href="../softwaredevelopment/index.html" />
+    <link rel="prev" title="Forbidden Software and Special Cases" href="forbidden_special_software.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Licensing</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Licensing Guidelines</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Licensing Guidelines</a><ul>
+<li><a class="reference external" href="#package-licensing-guidelines">Package Licensing Guidelines</a><ul>
+<li><a class="reference external" href="#licence-file">Licence File</a><ul>
+<li><a class="reference external" href="#splitted-package-licensing">Splitted Package Licensing</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#license-tag">License Tag</a><ul>
+<li><a class="reference external" href="#valid-license-abbreviations">Valid License Abbreviations</a></li>
+<li><a class="reference external" href="#versioned-licenses">Versioned licenses</a></li>
+<li><a class="reference external" href="#multiple-licensing">Multiple Licensing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference external" href="#software-types">Software Types</a><ul>
+<li><a class="reference external" href="#shareware">Shareware</a></li>
+<li><a class="reference external" href="#emulators">Emulators</a></li>
+<li><a class="reference external" href="#binary-firmware">Binary Firmware</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="licensing-guidelines"></span><h1>Licensing Guidelines<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>The aim of Pardus Linux Distribution is to create a complete, general purpose operating system entirely from Free and Open Source software.</p>
+<div class="section" id="package-licensing-guidelines">
+<h2>Package Licensing Guidelines<a class="headerlink" href="#package-licensing-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>The software which is approved by <a class="reference external" href="http://www.gnu.org/licenses/license-list.html">Free Software Foundation</a> and has a licence under <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/doc/en/licenses/">Licence List</a>, can be exist under Pardus Project repositories.</p>
+<div class="section" id="licence-file">
+<h3>Licence File<a class="headerlink" href="#licence-file" title="Permalink to this headline">¶</a></h3>
+<p>The package source code must include its own licence file. This file must be added as a document in the pisi package under /usr/share/doc/&lt;package-name&gt;. If the source code does not include this file, the package maintainer should inform upstream about that mistake.</p>
+<div class="section" id="splitted-package-licensing">
+<h4>Splitted Package Licensing<a class="headerlink" href="#splitted-package-licensing" title="Permalink to this headline">¶</a></h4>
+<p>If a package is splitted into subpackages (docs, development files, libraries etc.), and is dependent upon a base package, there is no need to add same licence file into the pisi package for the spiltted package.</p>
+</div>
+</div>
+<div class="section" id="license-tag">
+<h3>License Tag<a class="headerlink" href="#license-tag" title="Permalink to this headline">¶</a></h3>
+<p>Every pisi package has a Licence tag. The contents of the Licence tag are specific for each licence of the packages. The licence field is refer to the licences of pisi package. Maintainers should ask the experienced maintainers for the licence, when in doubt.</p>
+<div class="section" id="valid-license-abbreviations">
+<h4>Valid License Abbreviations<a class="headerlink" href="#valid-license-abbreviations" title="Permalink to this headline">¶</a></h4>
+<p>License tag must be filled with the appropriate abbreviation of the licence which is listed <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/doc/en/licenses/">here</a>. If the licence of your package is not in the list, you should ask it to <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/pardus-devel">Pardus developer list</a>. If the licence is suitable with Pardus Licencing, it will put under this list.</p>
+</div>
+<div class="section" id="versioned-licenses">
+<h4>Versioned licenses<a class="headerlink" href="#versioned-licenses" title="Permalink to this headline">¶</a></h4>
+<p>Sometimes licences has version, and while a version of a package has is compatible with the old licence, the other version may compatible with the later one. So the maintainers should be careful also about the versions of the licenses. The versioned licence abbreviations also found in <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/doc/en/licenses/">Licence List</a>.</p>
+</div>
+<div class="section" id="multiple-licensing">
+<h4>Multiple Licensing<a class="headerlink" href="#multiple-licensing" title="Permalink to this headline">¶</a></h4>
+<p>Sometimes packages have more than one licenses distinct and independent from other, maintainers should also take into account this option. If a pacakage has more than one license, for each licence the Licence tag should be added.</p>
+</div>
+</div>
+</div>
+<div class="section" id="software-types">
+<h2>Software Types<a class="headerlink" href="#software-types" title="Permalink to this headline">¶</a></h2>
+<p>Some specific software types are examined from a licensing/legal perspective.</p>
+<div class="section" id="shareware">
+<h3>Shareware<a class="headerlink" href="#shareware" title="Permalink to this headline">¶</a></h3>
+<p>Shareware applications also known as trialware or demoware have not Open Source code, they refer to proprietary software that is provided to users without payment on a trial basis and is often limited by any combination of functionality, availability  or convenience. These type of software are not acceptable for Pardus repositories.</p>
+</div>
+<div class="section" id="emulators">
+<h3>Emulators<a class="headerlink" href="#emulators" title="Permalink to this headline">¶</a></h3>
+<p>If the emulator needs ROMs or any image files copyrighted which have not any freely redistributable permission written by their owners, then it is not permitted in Pardus Repositories.</p>
+</div>
+<div class="section" id="binary-firmware">
+<h3>Binary Firmware<a class="headerlink" href="#binary-firmware" title="Permalink to this headline">¶</a></h3>
+<p>Some hardware or drivers may need some binary-only software, if below requirements are provided, these software can include in Pardus repositories:</p>
+<blockquote>
+<ul class="simple">
+<li>The files of this software are under an accaptable firmware licence</li>
+<li>The files are non-executable</li>
+<li>The files are not libraries</li>
+<li>The files are standalone, not embedded in executable or library code</li>
+<li>The files must be necessary for the functionality of open source code being included in Pardus and there is not any open source alternative.</li>
+</ul>
+</blockquote>
+<p>A firmware licence is acceptable for Pardus if it allows some form of royalty-free use and it does not restrict redistribution.</p>
+<p>The redistribution restrictions for firmware that acceptable by Pardus Licensing:</p>
+<blockquote>
+<ul class="simple">
+<li>requiring that the firmware be redistributed only as incorporated in the redistributor&#8217;s product</li>
+<li>prohibitions on modification</li>
+<li>prohibitions on reverse engineering, disassembly or decompilation</li>
+<li>restricting to use in conjunction with the hardware associated with the firmware license</li>
+</ul>
+</blockquote>
+<p>If the maintainer unsure about the firmare licence, he can ask <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/pardus-devel">Pardus developer list</a>, and the other experienced maintainers will examine this.</p>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/licensing/licensing_guidelines.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

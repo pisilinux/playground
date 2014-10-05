@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/testing_process/package_update_tests/security_tests.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Security Vulnerability Update Tests</title>
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../../index.html" />
+    <link rel="up" title="Package Update Tests" href="index.html" />
+    <link rel="next" title="End of Life" href="../../end_of_life.html" />
+    <link rel="prev" title="Package Update Tests" href="package_update_tests.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Releasing</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Testing Process</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Package Update Tests</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Security Vulnerability Update Tests</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Security Vulnerability Update Tests</a></li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="security-vulnerability-update-tests">
+<span id="security-tests"></span><h1>Security Vulnerability Update Tests<a class="headerlink" href="#security-vulnerability-update-tests" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Last Modified Date:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>During maintenance phase the security vulnerabilities released packages should
+immediately update, test and merge to stable repository.</p>
+<p>After the all <a class="reference external" href="../../security_process.html#how-the-security-update-takes-place">mandatory work of security process</a> have done the test supervisor
+send the needed information to testers and the security update tests starts. The
+due date of the tests are very important, the packages should be tested until
+this time.</p>
+<p>The tester system must be <a class="reference external" href="package_update_tests.html#prepare-tester-machine">prepared as the package update tests</a>. But only one
+exeption can be existed: sometimes the test supervisor do not need to create
+a tester repository and gives the official testing repository as an information
+on security test warning mail instead. For this condition, testers will not add
+the tester or testing repository to the test system (the stable repository will
+remain).</p>
+<p>The <a class="reference external" href="package_update_tests.html#start-package-update-tests">package update test steps</a> must also be applied for this test type. But, if
+there is not exist a tester repository, the packages should directly install with
+their package links:</p>
+<div class="highlight-python"><pre>sudo pisi it http://packages.pardus.org.tr/pardus/2011/testing/x86_64/Charis-compact-fonts-4.106-2-p11-x86_64.pisi http://packages.pardus.org.tr/pardus/2011/testing/x86_64/Charis-fonts-4.106-7-p11-x86_64.pisi http://packages.pardus.org.tr/pardus/2011/testing/x86_64/QtCurve-Gtk2-1.8.3-29-p11-x86_64.pisi http://packages.pardus.org.tr/pardus/2011/testing/x86_64/QtCurve-KDE4-1.8.2-28-p11-x86_64.pisi</pre>
+</div>
+<p>The listed packages on security test warning mail must installed alltogether like the example above.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/testing_process/package_update_tests/security_tests.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

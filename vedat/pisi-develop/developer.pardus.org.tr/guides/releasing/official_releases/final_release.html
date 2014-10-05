@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/official_releases/final_release.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Final Release</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Official Releases" href="index.html" />
+    <link rel="next" title="Repository Concepts" href="../repository_concepts/index.html" />
+    <link rel="prev" title="Beta Release" href="beta_release.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Releasing</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Official Releases</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Final Release</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Final Release</a><ul>
+<li><a class="reference external" href="#relase-canditate">Relase Canditate</a></li>
+<li><a class="reference external" href="#id2">Final Release</a><ul>
+<li><a class="reference external" href="#final-goals">Final Goals</a></li>
+<li><a class="reference external" href="#final-release-requirements">Final Release Requirements</a></li>
+<li><a class="reference external" href="#final-tickets">Final Tickets</a></li>
+<li><a class="reference external" href="#final-tracker-bugs">Final Tracker Bugs</a></li>
+<li><a class="reference external" href="#final-postponement">Final Postponement</a></li>
+<li><a class="reference external" href="#validation-of-final-requirements">Validation of Final Requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="final-release"></span><h1>Final Release<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Last Modified Date:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="relase-canditate">
+<h2>Relase Canditate<a class="headerlink" href="#relase-canditate" title="Permalink to this headline">¶</a></h2>
+<p>The term release candidate (RC) refers to a version with potential to be a
+final product, ready to release unless fatal bugs emerge. At the start point
+of this  stage all bugs are reviewed and marked as RC release blocker or
+Final release brocker.</p>
+<p>Release canditate is called code complete when the development team agrees
+that no entirely new source code will be added to this release. There may
+still be source code changes to fix defects. There may still be changes
+to documentation and data files, and to the code for test cases or utilities.
+New code may be added in a future release.</p>
+<p>Therefore, at the end of this stage all RC release blocker bugs should be fixed.</p>
+</div>
+<div class="section" id="id2">
+<h2>Final Release<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>This phase indicates that the software has reached a point that it is ready to or
+has been delivered or provided to the users.</p>
+<p>The Final release blocker bugs are fixed, package integrity and feasibility
+are checked, last desktop and installation validation tests are done.</p>
+<div class="section" id="final-goals">
+<h3>Final Goals<a class="headerlink" href="#final-goals" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Provide a blocker bug free final release suitable for meeting the needs of our users.</li>
+</ul>
+</div>
+<div class="section" id="final-release-requirements">
+<h3>Final Release Requirements<a class="headerlink" href="#final-release-requirements" title="Permalink to this headline">¶</a></h3>
+<p>In order to do Pardus Final official, the following criterias must be met:</p>
+<ul>
+<li><p class="first">All <a class="reference external" href="beta_release.html#beta-release-requirements">beta release requirements</a> must be achieved.</p>
+</li>
+<li><p class="first">All bugs blocking the Final tracker must be closed.</p>
+</li>
+<li><p class="first">The installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must be able to complete an installation using IDE, SATA, SCSI and iSCSI storage devices</p>
+</li>
+<li><p class="first">The installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must be able to create partition tables using any file system offered in installer configuration and complete installation for LVM, software, hardware or BIOS RAID, or  IDE, SATA, SCSI and iSCSI storage devices.</p>
+</li>
+<li><p class="first">The installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must boot and run on all <a class="reference external" href="../../packaging/packaging_guidelines.html#architecture-support">supported architectures</a> from install and live images</p>
+</li>
+<li><p class="first">All known bugs can cause corruption of user data be fixed or marked as &#8220;High&#8221; on <a class="reference external" href="http://bugs.pardus.org.tr/">Pardus bugzilla</a></p>
+</li>
+<li><dl class="first docutils">
+<dt>The following criterias should be met on both live and default installed system for desktop validation</dt>
+<dd><ul class="first last simple">
+<li>The icons of desktop menu applications all should exist and have a consistent appearance and sufficiently high resolution to avoid appearing blurry</li>
+<li>All desktop menu applications must start successfully</li>
+<li>All desktop menu applications must pass basic functionality tests and not crash after a few minutes of normal use.</li>
+<li>All desktop menu applications have a working help.</li>
+<li>Any application can exist twice in desktop menu.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>The default panel configuration must function correctly</dt>
+<dd><ul class="first last simple">
+<li>Show desktop</li>
+<li>Show different desktops</li>
+<li>Show external device</li>
+<li>Sound Mixer</li>
+<li>Date &amp; Time</li>
+<li>Network connection</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Release notes should open automatically on other operating systems.</p>
+</li>
+<li><p class="first">The policy settings must work successfully</p>
+</li>
+<li><p class="first">Final release must include default artwork by default for the installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>), graphical boot, firstboot, graphical login, desktop background and splash screens.</p>
+</li>
+<li><p class="first">Pardus icon theme must be supported by the desktop greeter (<a class="reference external" href="../../../projects/kaptan/index.html">Kaptan</a>) and should load successfully if selected.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="final-tickets">
+<h3>Final Tickets<a class="headerlink" href="#final-tickets" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Decide for RC code name and its Wallpaper</li>
+<li>Send weekly emails about <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/scripts/find-urgent-packages">urgent package list</a></li>
+<li>Warn about Final artwork deadlines of each task one week before<ul>
+<li>Final Wallpapers</li>
+<li>Final Icon theme</li>
+<li>Final Splash screens</li>
+<li>Final Web banners</li>
+<li>DVD, CD cover, guide design</li>
+<li>Brochures, stand and roll-up design</li>
+<li>Promotion products design</li>
+</ul>
+</li>
+<li>Update feature list according to completed features</li>
+<li>Warn about Final Freeze (RC Phase) one week before</li>
+<li>Create Final Test Release for RC validation tests<ul>
+<li>Installation media</li>
+<li>Live media</li>
+</ul>
+</li>
+<li>Prepare and make &#8220;where we are meeting&#8221; after validation tests</li>
+<li>Create release-notes</li>
+<li>Upload release-notes to developer.pardus.org.tr</li>
+<li>Prepare press release from release-notes</li>
+<li>Upload press-release to pardus.org.tr</li>
+<li>Plan the date of product publicity (launching)</li>
+<li>Track the production of publicity and promotion materials</li>
+<li>Make stock plan for publicity and promotion materials</li>
+<li>Create Release Candidate (RC)<ul>
+<li>Installation media</li>
+<li>Live Media</li>
+</ul>
+</li>
+<li>Release RC<ul>
+<li>Upload iso to FTP servers</li>
+<li>Upload iso to torrents</li>
+</ul>
+</li>
+<li>Send an announcement mail for Final release</li>
+<li>Release Final<ul>
+<li>Open stable binary repository</li>
+<li>Add stable repository to packages.pardus.org.tr</li>
+<li>Warn mirrors and ULAKBIM one week before</li>
+<li>Upload iso to FTP servers</li>
+<li>Upload iso to torrents</li>
+</ul>
+</li>
+<li>Send an announcement mail for Final release</li>
+<li>Propose Schedule for Next Release</li>
+<li>Plan tasks for <a class="reference external" href="../end_of_life.html">EOL</a></li>
+</ol>
+</div>
+<div class="section" id="final-tracker-bugs">
+<h3>Final Tracker Bugs<a class="headerlink" href="#final-tracker-bugs" title="Permalink to this headline">¶</a></h3>
+<p>A bug is considered an final tracker bug if one of the following criterias is met:</p>
+<ol class="arabic simple">
+<li>If a package in the urgent package list of alpha, beta or final has a bug that can not be fixed with a future update or has a <a class="reference external" href="../../bugtracking/bug_cycle.html">severity</a> rating of high or urgent.</li>
+<li>Bugs that are a blocks the testing and test process. (Bugs related to untestable products)</li>
+<li>Bug relates to an unachieved <a class="reference internal" href="#final-release-requirements">Final Release Requirements</a></li>
+</ol>
+</div>
+<div class="section" id="final-postponement">
+<h3>Final Postponement<a class="headerlink" href="#final-postponement" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>One week before the release day, if all of the <a class="reference internal" href="#final-release-requirements">Final Release Requirements</a> are not achieved, the release will be delayed one week that the <a class="reference internal" href="#final-release-requirements">Final Release Requirements</a> can be achieved.</li>
+<li>This delay will be added all remaining tasks and final release date.</li>
+<li>The decision for the delay will be made on &#8220;where we are&#8221; meeting that be held 2 weeks prior to the shipping date of the releases.</li>
+</ol>
+</div>
+<div class="section" id="validation-of-final-requirements">
+<h3>Validation of Final Requirements<a class="headerlink" href="#validation-of-final-requirements" title="Permalink to this headline">¶</a></h3>
+<p>Test team has the responsibility of determining whether the criteria for the
+<a class="reference internal" href="#final-release-requirements">Final Release Requirements</a> has been met. At the end of the test process,
+the test team reports on <a class="reference external" href="http://bugs.pardus.org.tr/">Pardus Bugzilla</a> will be reviewed and discussed
+at the &#8220;where we are&#8221; meeting.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/official_releases/final_release.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

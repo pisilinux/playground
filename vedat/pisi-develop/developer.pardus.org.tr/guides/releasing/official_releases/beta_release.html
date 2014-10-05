@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/official_releases/beta_release.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Beta Release</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Official Releases" href="index.html" />
+    <link rel="next" title="Final Release" href="final_release.html" />
+    <link rel="prev" title="Alpha Release" href="alpha_release.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Releasing</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Official Releases</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Beta Release</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Beta Release</a><ul>
+<li><a class="reference external" href="#beta-goals">Beta Goals</a></li>
+<li><a class="reference external" href="#beta-release-requirements">Beta Release Requirements</a></li>
+<li><a class="reference external" href="#beta-tickets">Beta Tickets</a></li>
+<li><a class="reference external" href="#beta-tracker-bugs">Beta Tracker Bugs</a></li>
+<li><a class="reference external" href="#beta-postponement">Beta Postponement</a></li>
+<li><a class="reference external" href="#validation-of-beta-requirements">Validation of Beta Requirements</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="beta-release"></span><h1>Beta Release<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Last Modified Date:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>At the end of the beta phase, software should be feature complete, indicating
+that no more features will be added to the software. A feature complete version
+of a software is not yet final, (it has lots of bugs)but contains all intended
+functionality of the final version.</p>
+<p>According to this feature completeness, string freeze is also realized at
+early stages of this release.</p>
+<p>The <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/scripts/find-urgent-packages">urgent package list</a> creation period is also finished at the end of
+this stage. There can be made a <a class="reference external" href="../../packaging/package_components.html">component based</a> merged for other packages
+that have not merged yet to new release <a class="reference external" href="../repository_concepts/sourcecode_repository.html#package-source-repository">package source repository</a>.</p>
+<p>The <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/scripts/find-urgent-packages">urgent package list</a> can also be used for component based merged in order
+to list the packages and their dependencies under a related component.</p>
+<p>For example, release manager can send an email like &#8220;At the end of this week we
+will finsh the merge of all game packages&#8221;. And this list can also be seen under
+the related release&#8217; <a class="reference external" href="../repository_concepts/sourcecode_repository.html#package-source-repository">package source repository</a> <a class="reference external" href="../repository_concepts/sourcecode_repository.html#devel-folder">devel branch</a>.</p>
+<p>During this phase Beta release brockers should also be fixed.</p>
+<p>The translation freeze should also be held at the end of this stage.</p>
+<p>As we can also see that beta phase has also rapid changes and so the software can be
+unstable and could cause crashes or data loss.</p>
+<div class="section" id="beta-goals">
+<h2>Beta Goals<a class="headerlink" href="#beta-goals" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>The Beta official release wil be a <a class="reference external" href="../feature_freeze.html">code complete</a> test release.</li>
+<li>Test accepted features of Pardus for newly release</li>
+<li>Find as many as RC and final <a class="reference external" href="../../bugtracking/tracker_bug_process.html#open-tracker-bug-report">tracker bugs</a> as possible</li>
+</ol>
+</div>
+<div class="section" id="beta-release-requirements">
+<h2>Beta Release Requirements<a class="headerlink" href="#beta-release-requirements" title="Permalink to this headline">¶</a></h2>
+<p>In order to do Pardus Beta official, the following criterias must be meet:</p>
+<ul class="simple">
+<li>All <a class="reference external" href="alpha_release.html#alpha-release-requirements">alpha release requirements</a> must be achieved.</li>
+<li>All bugs blocking the Beta tracker must be closed.</li>
+<li>The installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must boot and run on all <a class="reference external" href="../../packaging/packaging_guidelines.html#architecture-support">supported architectures</a> from install and live images</li>
+<li>The installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must  be able to complete the installation using the shrink option supported different file systems.</li>
+<li>The installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must boot and run on systems using EFI</li>
+<li>The installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must be able to create and install to software, hardware or BIOS RAID-0, RAID-1 or RAID-5 partitions for anything except /boot</li>
+<li>The upgrade manager should complete the upgrade from a clean updated previous Pardus release.</li>
+<li>The rescue mode of (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must start successfully and be able to detect and mount LVM, and RAID (BIOS, hardware, software) installation</li>
+<li>The installed system must be able to boot with desktop environment sound</li>
+<li>The all <a class="reference external" href="../../../projects/index.html">Pardus technologies</a> must be able to work with new features.</li>
+<li>The deafult browser must run video and music</li>
+<li>The default video player must run videos with supported extentions from disks, DVD, VCD etc.</li>
+<li>The deafult music player must run songs with supported music extentions from disks, DVD, CD etc.</li>
+<li>The default desktop environment must mount removable media</li>
+<li>The desktop environment must succesfully shutdown, reboot, hibernate, logout etc.</li>
+<li>All supported languages should be announced on mail lists and the translations of these supported languages should be finished and tested before Beta released.</li>
+</ul>
+</div>
+<div class="section" id="beta-tickets">
+<h2>Beta Tickets<a class="headerlink" href="#beta-tickets" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Send weekly emails about <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/scripts/find-urgent-packages">urgent package list</a></p>
+</li>
+<li><p class="first">Warn about string freeze one week before</p>
+</li>
+<li><p class="first">Warn about <a class="reference external" href="../feature_freeze.html">code complete</a> one week before</p>
+</li>
+<li><p class="first">Warn about translation freeze one week before</p>
+</li>
+<li><p class="first">Plan for Final product publicity and promotion materials</p>
+</li>
+<li><p class="first">Create a list for promotion and publicity materials</p>
+</li>
+<li><p class="first">Plan for artwork pardus</p>
+<ul class="simple">
+<li>Final Wallpapers</li>
+<li>Final Icon theme</li>
+<li>Final Splash screens</li>
+<li>Final Web banners</li>
+<li>DVD, CD cover, guide design</li>
+<li>Brochures, stand and roll-up design</li>
+<li>Promotion products design</li>
+</ul>
+</li>
+<li><p class="first">Warn about artwork deadline one week before</p>
+</li>
+<li><p class="first">Warn about Beta freeze one week before</p>
+</li>
+<li><dl class="first docutils">
+<dt>Create Beta Test Release for Beta validation tests</dt>
+<dd><ul class="first last simple">
+<li>Installation media</li>
+<li>Live media</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Prepare and make &#8220;where we are meeting&#8221; after validation tests</p>
+</li>
+<li><p class="first">Create release-notes</p>
+</li>
+<li><p class="first">Upload release-notes to developer.pardus.org.tr</p>
+</li>
+<li><p class="first">Release Beta</p>
+<blockquote>
+<ul class="simple">
+<li>Warn mirrors and ULAKBIM one week before</li>
+<li>Upload iso to FTP servers</li>
+<li>Upload iso to torrents</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Send an announcement mail for Beta release</p>
+</li>
+<li><p class="first">Prepare and plan RC start meeting</p>
+</li>
+<li><p class="first">Open testing source and binary repositories</p>
+</li>
+<li><p class="first">Add new testing repository to packages.pardus.org.tr</p>
+</li>
+</ol>
+</div>
+<div class="section" id="beta-tracker-bugs">
+<h2>Beta Tracker Bugs<a class="headerlink" href="#beta-tracker-bugs" title="Permalink to this headline">¶</a></h2>
+<p>A bug is considered an beta tracker bug if one of the following criterias is met:</p>
+<ol class="arabic simple">
+<li>If a package in the urgent package list of alpha and beta has a bug that can not be fixed with a future update or has a <a class="reference external" href="../../bugtracking/bug_cycle.html">severity</a> rating of high or urgent.</li>
+<li>Bugs that are a blocks the testing and test process. (Bugs related to untestable products)</li>
+<li>Bug relates to an unachieved <a class="reference internal" href="#beta-release-requirements">Beta Release Requirements</a></li>
+</ol>
+</div>
+<div class="section" id="beta-postponement">
+<h2>Beta Postponement<a class="headerlink" href="#beta-postponement" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>One week before the release day, if all of the <a class="reference internal" href="#beta-release-requirements">Beta Release Requirements</a> are not achieved, the release will be delayed one week that the <a class="reference internal" href="#beta-release-requirements">Beta Release Requirements</a> can be achieved.</li>
+<li>This delay will be added all remaining tasks and final release date.</li>
+<li>The decision for the delay will be made on &#8220;where we are&#8221; meeting that be held 2 weeks prior to the shipping date of the releases.</li>
+</ol>
+</div>
+<div class="section" id="validation-of-beta-requirements">
+<h2>Validation of Beta Requirements<a class="headerlink" href="#validation-of-beta-requirements" title="Permalink to this headline">¶</a></h2>
+<p>Test team has the responsibility of determining whether the criteria for the
+<a class="reference internal" href="#beta-release-requirements">Beta Release Requirements</a> has been met. At the end of the test process,
+the test team reports on <a class="reference external" href="http://bugs.pardus.org.tr/">Pardus Bugzilla</a> will be reviewed and discussed
+at the &#8220;where we are&#8221; meeting.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/official_releases/beta_release.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

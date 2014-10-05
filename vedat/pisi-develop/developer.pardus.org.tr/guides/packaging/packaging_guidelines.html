@@ -1,0 +1,681 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/packaging_guidelines.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Packaging Guidelines</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Packaging" href="index.html" />
+    <link rel="next" title="How to Create Pisi Packages" href="howto_create_pisi_packages.html" />
+    <link rel="prev" title="Packaging" href="index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Packaging</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Packaging Guidelines</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Packaging Guidelines</a><ul>
+<li><a class="reference external" href="#naming">Naming</a></li>
+<li><a class="reference external" href="#binary-package-naming">Binary Package Naming</a></li>
+<li><a class="reference external" href="#legal">Legal</a><ul>
+<li><a class="reference external" href="#licensing">Licensing</a></li>
+<li><a class="reference external" href="#proprietary-dependencies-for-package">Proprietary Dependencies for Package</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#pre-built-binaries-or-libraries-not-allowed">Pre-built binaries or libraries not allowed</a><ul>
+<li><a class="reference external" href="#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#creating-a-package-from-scratch">Creating a package from scratch</a></li>
+<li><a class="reference external" href="#modifying-existing-package">Modifying Existing Package</a></li>
+<li><a class="reference external" href="#architecture-support">Architecture Support</a><ul>
+<li><a class="reference external" href="#build-package-for-a-special-architecture">Build Package For a Special Architecture</a></li>
+<li><a class="reference external" href="#building-packages">Building Packages</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#filesystem-hierarchy">Filesystem Hierarchy</a></li>
+<li><a class="reference external" href="#package-commit-hook">Package Commit Hook</a><ul>
+<li><a class="reference external" href="#some-errors">Some Errors:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#history-comments">History Comments</a></li>
+<li><a class="reference external" href="#buildtime-dependencies">Buildtime Dependencies</a></li>
+<li><a class="reference external" href="#runtime-dependencies">Runtime Dependencies</a></li>
+<li><a class="reference external" href="#strict-dependencies">Strict Dependencies</a></li>
+<li><a class="reference external" href="#any-dependency">Any Dependency</a></li>
+<li><a class="reference external" href="#dependencies-excepted">Dependencies Excepted</a></li>
+<li><a class="reference external" href="#summary-and-description">Summary and Description</a><ul>
+<li><a class="reference external" href="#description-hints">Description Hints</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#code-legibility">Code Legibility</a></li>
+<li><a class="reference external" href="#taking-sha-1-hash">Taking SHA-1 Hash</a></li>
+<li><a class="reference external" href="#giving-mirrors">Giving Mirrors</a></li>
+<li><a class="reference external" href="#documentation">Documentation</a></li>
+<li><a class="reference external" href="#devel-packages">Devel Packages</a></li>
+<li><a class="reference external" href="#compiler-flags">Compiler Flags</a></li>
+<li><a class="reference external" href="#debug-packages">Debug packages</a></li>
+<li><a class="reference external" href="#shared-libraries">Shared Libraries</a></li>
+<li><a class="reference external" href="#static-libraries">Static Libraries</a></li>
+<li><a class="reference external" href="#duplication-of-system-libraries">Duplication of system libraries</a></li>
+<li><a class="reference external" href="#desktop-files">Desktop files</a><ul>
+<li><a class="reference external" href="#desktop-file-format">.desktop File Format</a></li>
+<li><a class="reference external" href="#add-icon-and-desktop-file-as-a-additional-file">Add icon and .desktop File as a Additional File</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#handling-locale-files">Handling Locale Files</a></li>
+<li><a class="reference external" href="#parallel-make">Parallel make</a></li>
+<li><a class="reference external" href="#content-of-a-package">Content of a Package</a></li>
+<li><a class="reference external" href="#conflicting-packages">Conflicting Packages</a></li>
+<li><a class="reference external" href="#conflicting-files">Conflicting Files</a></li>
+<li><a class="reference external" href="#symlinks">Symlinks</a></li>
+<li><a class="reference external" href="#renaming-replacing-existing-packages">Renaming/replacing existing packages</a></li>
+<li><a class="reference external" href="#package-setup-post-install-post-and-pre-remove-cleanup-and-post-cleanup">Package Setup, Post Install, Post and Pre Remove, Cleanup  and Post Cleanup</a><ul>
+<li><a class="reference external" href="#operation-types">Operation types:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#special-packages">Special Packages</a><ul>
+<li><a class="reference external" href="#texlive-packages">Texlive Packages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="packaging-guidelines"></span><h1>Packaging Guidelines<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.6</td>
+</tr>
+</tbody>
+</table>
+<p>During package reviews the reviewer and the packager should deal with the above issues. They make sure that the package in review require a package or can be worked on after these packages is in the repository.</p>
+<p>Please remember that any package that you submit must also conform to the Review Guidelines.</p>
+<div class="section" id="naming">
+<h2>Naming<a class="headerlink" href="#naming" title="Permalink to this headline">¶</a></h2>
+<p>You should go through the <a class="reference external" href="package_naming_guidelines.html#package-naming"><em>Package Naming Guideline</em></a> to ensure that your package is named appropriately.</p>
+</div>
+<div class="section" id="binary-package-naming">
+<h2>Binary Package Naming<a class="headerlink" href="#binary-package-naming" title="Permalink to this headline">¶</a></h2>
+<p>The proper way to use the Version and Release fields can be found here: <a class="reference external" href="binary_package_naming_guidelines.html#binary-package-naming"><em>Binary Package Naming</em></a>.</p>
+</div>
+<div class="section" id="legal">
+<h2>Legal<a class="headerlink" href="#legal" title="Permalink to this headline">¶</a></h2>
+<p>Legal concerns about Pardus Linux Distribution package licensing can be found below.</p>
+<div class="section" id="licensing">
+<h3>Licensing<a class="headerlink" href="#licensing" title="Permalink to this headline">¶</a></h3>
+<p>You should review <a class="reference external" href="../licensing/licensing_guidelines.html#licensing-guidelines"><em>Licensing Guidelines</em></a> to ensure that your package is licensed appropriately.</p>
+</div>
+<div class="section" id="proprietary-dependencies-for-package">
+<h3>Proprietary Dependencies for Package<a class="headerlink" href="#proprietary-dependencies-for-package" title="Permalink to this headline">¶</a></h3>
+<p>Some software depends on other software. These dependencies sometimes can be non-free, legally unacceptable, or binary only (with the exception of permissible firmware), then they are not acceptable for the distribution, depending on this the dependent software is also inacceptable.</p>
+</div>
+</div>
+<div class="section" id="pre-built-binaries-or-libraries-not-allowed">
+<h2>Pre-built binaries or libraries not allowed<a class="headerlink" href="#pre-built-binaries-or-libraries-not-allowed" title="Permalink to this headline">¶</a></h2>
+<p>Every package has a source code and all program binaries and program libraries included in packages must be built from source code.</p>
+<p>This is a requirement for the following reasons:</p>
+<blockquote>
+<ol class="arabic">
+<li><p class="first">The libraries and binaries that are not built from the source code can be a security concern. The patching of these files is also inacceptable.</p>
+</li>
+<li><p class="first">If these packages compiled also from the source code, these compiled ones should be taken, the ancient ones probably are not compatible with security and optimization rules that are produces with Pardus standart flags.</p>
+<blockquote>
+<p>The above can be helpful in order to say a file is library or binary:</p>
+<ol class="arabic simple">
+<li>Is it executable? If so, it is probably a program binary.</li>
+<li>Does it contain a .so, ,so.#, or .so.#.#.# extension? If so, it is probably a program library.</li>
+<li>If in doubt, ask the reviewer.</li>
+</ol>
+</blockquote>
+</li>
+<li><p class="first">It is not permitted to compile source code has some non-open source part or it needs a propriatary compiler.</p>
+</li>
+</ol>
+</blockquote>
+<p>If a prebuilt binary in a package you MUST:</p>
+<blockquote>
+<ul class="simple">
+<li>Write related code in actions.py in order to remove all these pre-built program binaries and program libraries. Examples include, but are not limited to, .class, .dll, .DS_Store, .exe, .jar, .o, .pyc, .pyo, .egg, .so files.</li>
+<li>Ask upstream to remove the binaries in their next release.</li>
+</ul>
+</blockquote>
+<div class="section" id="exceptions">
+<h3>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<ul class="simple">
+<li>Some binary firmwares can be used, when it meets the <a class="reference external" href="../licensing/licensing_guidelines.html#binary-firmware">Licensing Guidelines</a> requirements.</li>
+<li>Content binaries (such as .mo, .pdf, .png, .ps files) are not required to be rebuilt from the source code.</li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div class="section" id="creating-a-package-from-scratch">
+<h2>Creating a package from scratch<a class="headerlink" href="#creating-a-package-from-scratch" title="Permalink to this headline">¶</a></h2>
+<p>When creating a package from scratch, you should follow the instructions of <a class="reference external" href="howto_create_pisi_packages.html#howto-create-pisi-packages"><em>How to Create Pisi Packages</em></a>. You should put aside your own experiences about packaging and formats and try to conform to this document as much as possible.</p>
+</div>
+<div class="section" id="modifying-existing-package">
+<h2>Modifying Existing Package<a class="headerlink" href="#modifying-existing-package" title="Permalink to this headline">¶</a></h2>
+<p>Modification on packages can exist in such situations: updating, bug fixing, renaming/replacing existing packages etc.</p>
+<p>During Modifications particularly you should take care:</p>
+<ol class="arabic simple">
+<li>Verify that any source and patches is necessary for the package and applicable.</li>
+<li>Verify that existing package licence matches with the current license of the software.</li>
+<li>Revise the summary and description for typos and oddities. Look <a class="reference internal" href="#summary-and-description">Summary and Description</a></li>
+<li>Control that the current software has new dependencies or ignore ancient ones.</li>
+<li>Revise that the package use relevant pisi actionsapi instead of pure python api&#8217;s. (Look <a class="reference external" href="actionsapi/index.html#actionsapi-index"><em>ActionsApi</em></a>)</li>
+</ol>
+</div>
+<div class="section" id="architecture-support">
+<h2>Architecture Support<a class="headerlink" href="#architecture-support" title="Permalink to this headline">¶</a></h2>
+<p>Pardus support two different architechtures (x86 (32 bit), x86_64 (64 bit)), packages must successfully compile and build into binary pisis on at least one supported architecture. If the package could not be compile for a specific architecture it should be specified in <a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">pspec.xml file</a>.</p>
+<div class="section" id="build-package-for-a-special-architecture">
+<h3>Build Package For a Special Architecture<a class="headerlink" href="#build-package-for-a-special-architecture" title="Permalink to this headline">¶</a></h3>
+<p>More than one pacakge can be created from the same source code and some of these pacakges can need special architecture and buid dependency to build. In this kind of a situation, the build architecture type and dependencies can be given for relevant packages in <a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">pspec.xml file</a> and this type can be parsed by <a class="reference external" href="actionsapi/get.html#buildtype">buildTYPE</a> () method in actions.py file.</p>
+<p>pspec.xml Example:</p>
+<div class="highlight-python"><pre>&lt;Package&gt;
+ &lt;Name&gt;libfoo&lt;/Name&gt;
+ ...
+ &lt;Files&gt;
+   &lt;Path fileType="library"&gt;/usr/lib&lt;/Path&gt;
+ &lt;Files&gt;
+&lt;/Package&gt;
+
+&lt;Package&gt;
+ &lt;Name&gt;libfoo-32bit&lt;/Name&gt;
+ &lt;BuildType&gt;32bit&lt;/BuildType&gt;
+ &lt;BuildDependencies&gt;
+   &lt;Dependency&gt;libbar-32bit&lt;/Dependency&gt;
+ &lt;/BuildDependencies&gt;
+ ...
+ &lt;Files&gt;
+   &lt;Path fileType="library"&gt;/usr/lib32&lt;/Path&gt;
+ &lt;Files&gt;
+&lt;/Package&gt;</pre>
+</div>
+<p>actions.py Example:</p>
+<div class="highlight-python"><pre>if get.buildTYPE() == "32bit":
+# add -32 for LDFLAGS</pre>
+</div>
+</div>
+<div class="section" id="building-packages">
+<h3>Building Packages<a class="headerlink" href="#building-packages" title="Permalink to this headline">¶</a></h3>
+<p>Pardus Linux Distribution has a build system, buildfarm. Buildfarm is automatically build the packages. During building of a package automatically, all type of information send to <a class="reference external" href="mailto:buildfarm&#37;&#52;&#48;pardus&#46;org&#46;tr">buildfarm<span>&#64;</span>pardus<span>&#46;</span>org<span>&#46;</span>tr</a> list. These package messages send by its release and architecture types.</p>
+<p>Type of massages send:</p>
+<ol class="arabic simple">
+<li>When a package is started to compile</li>
+<li>When a package succesfully compiled</li>
+<li>When a package does not succesfully compile</li>
+</ol>
+<p>If a package does not succesfully compile, the error output is given as a link in the message.</p>
+</div>
+</div>
+<div class="section" id="filesystem-hierarchy">
+<h2>Filesystem Hierarchy<a class="headerlink" href="#filesystem-hierarchy" title="Permalink to this headline">¶</a></h2>
+<p>Pardus Linux Distribution follows <a class="reference external" href="http://www.pathname.com/fhs/">Filesystem Hierarchy Standard</a> in order to define where files should be placed on the system.</p>
+<p>Some exeptions can be found such as &#8220;libexec&#8221;. Any information is given about libexec, but Pardus stores programs that are designed primarily to be run by other programs rather than by users. (exp: /usr/libexec on Pardus)</p>
+</div>
+<div class="section" id="package-commit-hook">
+<h2>Package Commit Hook<a class="headerlink" href="#package-commit-hook" title="Permalink to this headline">¶</a></h2>
+<p>When a wrong format is used in the pspec.xml file, <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/scripts/repokit/src/ismail2.py">package SVN commit hook</a> captures this error and gives the related warning.</p>
+<div class="section" id="some-errors">
+<h3>Some Errors:<a class="headerlink" href="#some-errors" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>invalid version</li>
+<li>bad release number</li>
+<li>invalid date</li>
+<li>package name has invalid char</li>
+<li>out of order release numbers</li>
+<li>this is a duplicate source package of</li>
+<li>this source has duplicate binary package</li>
+<li>package depends on missing package</li>
+</ul>
+</div>
+</div>
+<div class="section" id="history-comments">
+<h2>History Comments<a class="headerlink" href="#history-comments" title="Permalink to this headline">¶</a></h2>
+<p>Every time you make changes, that means whenever you increment a package release, you must add a history comment. (look <a class="reference external" href="howto_create_pisi_packages.html#howto-create-pisi-packages"><em>How to Create Pisi Packages</em></a>) The repository commit message  also the same with the history comment. This is important because the other developers and also users can follow the changes.</p>
+<p>Therefore there are some restrictions while writing history comments</p>
+<p>History comments and commit messages:</p>
+<ol class="arabic simple">
+<li>Should be in English</li>
+<li>Should be short and descriptive</li>
+<li>Max 80 character long</li>
+<li>If a comment has multi-line description, the format like below:</li>
+</ol>
+<div class="highlight-python"><pre>&lt;Comment&gt;
+    General summary:
+    - description 1
+    - description 2
+    .
+    .
+    .
+&lt;/Comment&gt;</pre>
+</div>
+<ol class="arabic simple">
+<li>If your changes closes or affects bugs of our bugzilla or an external bugzilla, the format like below:</li>
+</ol>
+<div class="highlight-python"><pre>&lt;Comment&gt;
+    - description 1
+    - description 2
+    - Fixes bugs (pb#9021, pb#9038, pb#9020, pb#4113, pb#9089, pb#8811, pb#8361, pb#9101, pb#8845, pb#8123, pb#6157, pb#9156, pb#9083)
+&lt;/Comment&gt;</pre>
+</div>
+<p>The bug format changes according to bugzilla source:</p>
+<blockquote>
+<ul>
+<li><p class="first">If the bug is in Pardus Bugzilla, the comments about this bug referenced with  &#8220;pb#&lt;bugnumber&gt;&#8221;.</p>
+</li>
+<li><dl class="first docutils">
+<dt>If the bug is in external bugzillas, the comments contains used bug references of relevant bugzillas:</dt>
+<dd><ul class="first last simple">
+<li>KDE bugs kde#&lt;bugnumber&gt;</li>
+<li>Redhat bugs rhbz#&lt;bugnumber&gt;</li>
+<li>SUSE bugs bnc#&lt;bugnumber&gt;</li>
+<li>Launchpad lp:&lt;bugnumber&gt;</li>
+<li>freedesktop.org  fdo#&lt;bugnumber&gt;</li>
+<li>bugzilla.novell.com bnc#&lt;bugnumber&gt;</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="buildtime-dependencies">
+<h2>Buildtime Dependencies<a class="headerlink" href="#buildtime-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>In package development and testing, please verify that your package is not missing any necessary build dependencies. Having proper build requirements saves the time of all developers and testers as well as autobuild systems because they will not need to search for missing build requirements manually.</p>
+<p>Buildtime dependencies is also important to use programs full-featured. For example, an application special support may be excluded because of an absent build dependency.</p>
+<p>The best way to find exact buildtime dependencies is to build the package in a proper system. You can use virtual systems in order to manage proper systems.</p>
+</div>
+<div class="section" id="runtime-dependencies">
+<h2>Runtime Dependencies<a class="headerlink" href="#runtime-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Runtime dependencies is important in order a program run properly. You can check your runtime dependencies with <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/scripts/checkelf">checkelf script</a>.  You can find proper runtime dependencies, undefined symbols,  if you run it on a proper system.</p>
+<p>You can find the usage from <a class="reference external" href="scripts/checkelf.html#checkelf"><em>checkelf</em></a>.</p>
+</div>
+<div class="section" id="strict-dependencies">
+<h2>Strict Dependencies<a class="headerlink" href="#strict-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Strict dependencies can be needed in some cases:</p>
+<ol class="arabic">
+<li><p class="first">If a package needs a exactly specific version &#8220;version&#8221; attribute is used.</p>
+<blockquote>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><pre>&lt;Dependency version="3.1.4"&gt;module-virtualbox&lt;/Dependency&gt;</pre>
+</div>
+</blockquote>
+</li>
+<li><p class="first">If a package needs one of the below versions of a package &#8220;versionTo&#8221; attribute is used. It is generally used for conflicting packages.</p>
+<blockquote>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><pre>&lt;Conflicts&gt;
+&lt;!-- /usr/kde/4/share/apps/kdevappwizard/templates/qmake_qt4guiapp.tar.bz2 file is common till 3.9.95 --&gt;
+   &lt;Package versionTo="3.9.94"&gt;kdevelop&lt;/Package&gt;
+&lt;/Conflicts&gt;</pre>
+</div>
+</blockquote>
+</li>
+<li><p class="first">If a package needs one of the above versions of a package &#8220;versionFrom&#8221; attribute is used.</p>
+<blockquote>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><pre>&lt;Dependency versionFrom="1.0.20"&gt;alsa-headers&lt;/Dependency&gt;</pre>
+</div>
+</blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>Sometimes &#8220;versionFrom&#8221;, &#8220;versionTo&#8221; or &#8220;version&#8221; are not enough for strict dependencies, for example a package needs only a patch in order to depend a package while its version can remain the same. At this time we need to use release numbers:</dt>
+<dd><ol class="first last arabic">
+<li><p class="first">If a package needs a exactly specific release &#8220;release&#8221; attribute is used.</p>
+<blockquote>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><pre>&lt;Dependency release="130"&gt;kernel-module-headers-pae&lt;/Dependency&gt;</pre>
+</div>
+</blockquote>
+</li>
+<li><p class="first">If a package needs one of the below releases of a package &#8220;releaseTo&#8221; attribute is used. It is generally used for conflicting packages.</p>
+<blockquote>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><pre>&lt;Conflicts&gt;
+    &lt;Package releaseTo="5"&gt;gwenview-i18n&lt;/Package&gt;
+&lt;/Conflicts&gt;</pre>
+</div>
+</blockquote>
+</li>
+<li><p class="first">If a package needs one of the above releases of a package &#8220;releaseFrom&#8221; attribute is used.</p>
+<blockquote>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><pre>&lt;Dependency releaseFrom="27"&gt;x264&lt;/Dependency&gt;</pre>
+</div>
+</blockquote>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p class="first">If more than one package are produced from same source (same pspec.xml) and some of the packages in that source depend each other. Pardus use value &#8220;current&#8221; for the strict release or version tags, in order to automatically assign the release or version number of the needed package.</p>
+<blockquote>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><pre>&lt;Dependency release="current"&gt;freetype&lt;/Dependency&gt;
+&lt;Dependency version="current"&gt;git&lt;/Dependency&gt;</pre>
+</div>
+</blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="any-dependency">
+<h2>Any Dependency<a class="headerlink" href="#any-dependency" title="Permalink to this headline">¶</a></h2>
+<p>In some cases the dependency of the package can related to the system, in other words due to some hardware differences package can depend different packages. In these type of cases the &lt;AnyDependency&gt; tag is used  for runtime dependencies in pspec.xml.</p>
+<p><strong>Example:</strong> If the system has a pae support the module-pae-kvm package will be installed, if not module-kvm package will be installed.</p>
+<blockquote>
+<div class="highlight-python"><pre>&lt;AnyDependency&gt;
+    &lt;Dependency&gt;module-kvm&lt;/Dependency&gt;
+    &lt;Dependency&gt;module-pae-kvm&lt;/Dependency&gt;
+&lt;/AnyDependency&gt;</pre>
+</div>
+</blockquote>
+</div>
+<div class="section" id="dependencies-excepted">
+<h2>Dependencies Excepted<a class="headerlink" href="#dependencies-excepted" title="Permalink to this headline">¶</a></h2>
+<p>Generally there are no need to include following dependencies as buildtime dependencies because these packages are considered as minimum build environment:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">autoconf</span>
+<span class="n">automake</span>
+<span class="n">binutils</span>
+<span class="n">bison</span>
+<span class="n">catbox</span>
+<span class="n">ccache</span>
+<span class="n">chrpath</span>
+<span class="n">cmake</span>
+<span class="n">dietlibc</span>
+<span class="n">diffstat</span>
+<span class="n">gcc</span>
+<span class="n">gmp</span>
+<span class="n">gnuconfig</span>
+<span class="n">icecream</span>
+<span class="n">intltool</span>
+<span class="n">klibc</span>
+<span class="n">libpthread</span><span class="o">-</span><span class="n">stubs</span>
+<span class="n">libsigsegv</span>
+<span class="n">libtool</span>
+<span class="n">m4</span>
+<span class="n">make</span>
+<span class="n">mpfr</span>
+<span class="n">nasm</span>
+<span class="n">patch</span>
+<span class="n">pkgconfig</span>
+<span class="n">quilt</span>
+<span class="n">scons</span>
+<span class="n">swig</span>
+<span class="n">unifdef</span>
+<span class="n">util</span><span class="o">-</span><span class="n">macros</span>
+<span class="n">xcb</span><span class="o">-</span><span class="n">proto</span>
+<span class="n">xorg</span><span class="o">-</span><span class="n">proto</span>
+<span class="n">xtrans</span>
+<span class="n">yacc</span>
+<span class="n">yasm</span>
+</pre></div>
+</div>
+<p>But any package above may have a dependency in each other.</p>
+</div>
+<div class="section" id="summary-and-description">
+<h2>Summary and Description<a class="headerlink" href="#summary-and-description" title="Permalink to this headline">¶</a></h2>
+<p>The summary should be a short and concise description of the package. The summary should not include the name of the package.</p>
+<div class="section" id="description-hints">
+<h3>Description Hints<a class="headerlink" href="#description-hints" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>The description expands upon summary.</li>
+<li>Do not include installation instructions in the description; it is not a manual.</li>
+<li>Please make sure that there are no lines in the description longer than 80 characters.</li>
+</ol>
+<p>The description and summary should be in English. Please also include in translations.xml file summary and description translations of other languages supported by Pardus that you know.</p>
+</div>
+</div>
+<div class="section" id="code-legibility">
+<h2>Code Legibility<a class="headerlink" href="#code-legibility" title="Permalink to this headline">¶</a></h2>
+<p>The packages source code must be legible. The package reviewer can simply read the codes.</p>
+</div>
+<div class="section" id="taking-sha-1-hash">
+<h2>Taking SHA-1 Hash<a class="headerlink" href="#taking-sha-1-hash" title="Permalink to this headline">¶</a></h2>
+<p>In order to verify integrity of packages, <a class="reference external" href="http://www.w3.org/PICS/DSig/SHA1_1_0.html">SHA-1</a> hash is used. This has code is added &lt;Archive&gt; tag in pspec.xml.</p>
+<p>In order to take the package hash, we need to download the souce code archive of the package and run the below command:</p>
+<div class="highlight-python"><pre>sha1sum source_code_archive</pre>
+</div>
+</div>
+<div class="section" id="giving-mirrors">
+<h2>Giving Mirrors<a class="headerlink" href="#giving-mirrors" title="Permalink to this headline">¶</a></h2>
+<p>In order to download source code of the package, the link is included between &lt;Archive&gt; tag in pspec.xml. We generally use mirrors for dowload links. The common mirrors used for Pardus are included in /etc/pisi/mirrors.conf file. You can find the relevant mirror from this file and can use it with &#8220;mirrors:&#8221; prefix (Found the used mirror value in /etc/pisi/mirrors and removed it from the download link and add  &#8220;mirrors:&#8221; prefix.).</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>http://ftp.gnu.org/gnu/freefont/freefont-sfd-20090104.tar.gz (The download link)
+mirrors://gnu/freefont/freefont-sfd-20090104.tar.gz (with mirror prefix)</pre>
+</div>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>Any necessary documentation included in the source package, excluded build instructions, INSTALL file, documentations for non-Linux systems etc. API documentations generally are splitted from the package and get name packagename-devel. Or they also are splitted to a new package as packagename-doc.</p>
+<p>The documentation files is also placed under &#8220;/usr/share/doc/packagename&#8221;. For some packages the documents are placed under &#8220;/usr/share/doc/packagename-version&#8221; automatically, you should move these files under &#8220;/usr/share/doc/packagename&#8221;.</p>
+</div>
+<div class="section" id="devel-packages">
+<h2>Devel Packages<a class="headerlink" href="#devel-packages" title="Permalink to this headline">¶</a></h2>
+<p>If the software has some files solely for development, those files should be put in a packagename-devel subpackage. The header files and unversioned shared libraries should be in packagename-devel package.</p>
+<p>The pkgconfig files generally used for developement, so they should be included in a packagename-devel package. But for example if the base package is a developement tool it can be included in base package.</p>
+</div>
+<div class="section" id="compiler-flags">
+<h2>Compiler Flags<a class="headerlink" href="#compiler-flags" title="Permalink to this headline">¶</a></h2>
+<p>Package configuration need applicable compiler flags are set in order to be built. During the package build these flags are used for optimization, linking, security, small register usage, specific architectures etc. You can see</p>
+</div>
+<div class="section" id="debug-packages">
+<h2>Debug packages<a class="headerlink" href="#debug-packages" title="Permalink to this headline">¶</a></h2>
+<p>Debug packages are very usefull in order to track a problem, because they have special symbols to generate <a class="reference external" href="../bugtracking/stack_traces.html">stack traces</a>. Therefore exact line number of the source file where things went wrong can be seen simply. There exist compiler <a class="reference external" href="../releasing/bootstrapping.html#c-compiler-flags-cflags">CFLAGS</a> and <a class="reference external" href="../releasing/bootstrapping.html#linker-flags-ldflags">LDFLAGS</a> on Pardus.</p>
+</div>
+<div class="section" id="shared-libraries">
+<h2>Shared Libraries<a class="headerlink" href="#shared-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Shared libraries are libraries that are loaded by programs when they start. When a shared library is installed properly, all programs that start afterwards automatically use the new shared library. The approach used by Linux permits you to:</p>
+<blockquote>
+<ul class="simple">
+<li>update libraries and still support programs that want to use older, non-backward-compatible versions of those libraries</li>
+<li>override specific libraries or even specific functions in a library when executing a particular program</li>
+<li>do all this while programs are running using existing libraries</li>
+</ul>
+</blockquote>
+<p>Whenever possible (and feasible), Pardus Packages containing libraries should build them as shared libraries.</p>
+</div>
+<div class="section" id="static-libraries">
+<h2>Static Libraries<a class="headerlink" href="#static-libraries" title="Permalink to this headline">¶</a></h2>
+<p>The static libraries should not be included in packages, but they may have some exceptions. The applications that links against static libraries should as far as possible link against shared versions by configuring with &#8211;disable-static.</p>
+<p>.la libtool archives  should not be included in packages. Packages that produce .la files while building with &#8211;disable-static configuration parameter, thay may need to be removed from the packages after build. ın some circumstances programs may need these files and it is not possible to remove them. This should be fixed in the source code of the program.</p>
+</div>
+<div class="section" id="duplication-of-system-libraries">
+<h2>Duplication of system libraries<a class="headerlink" href="#duplication-of-system-libraries" title="Permalink to this headline">¶</a></h2>
+<p>A local copy of the library that already exists on the system should not be included or build against by a package. The package should be patched to use the system libraries. The security and high priority bugs related to system libraries can directly be fixed thanks to this. Some packages may be granted an exception to this. (Please contact with <a class="reference external" href="http://liste.pardus.org.tr/mailman/listinfo/gelistirici">developer mail list</a> for further questions.)</p>
+</div>
+<div class="section" id="desktop-files">
+<h2>Desktop files<a class="headerlink" href="#desktop-files" title="Permalink to this headline">¶</a></h2>
+<p>When a package has a GUI application, then it needs to include a .desktop file. While creating a .desktop file,  please pay attention for correct usage of Name, GenericName, Categories.</p>
+<div class="section" id="desktop-file-format">
+<h3>.desktop File Format<a class="headerlink" href="#desktop-file-format" title="Permalink to this headline">¶</a></h3>
+<p>If the pacakge does not have its own .desktop file, you need to make your own. You need to create and put it under &#8220;files&#8221; directory of the pacakage. The name format of the .desktop will be packagename.desktop. The format is like the below:</p>
+<div class="highlight-python"><pre>[Desktop Entry]
+Encoding=UTF-8
+Name=gdpc
+Comment=Show Molecular Simulations
+Comment[tr]=Moleküler Simulasyonları Gösterir
+GenericName= Molecular Simulation Showing Tool
+GenericName[tr]= Moleküler Simulasyon Aracı
+Exec=gdpc
+Icon=gdpc.png
+StartupNotify=false
+Terminal=false
+Type=Application
+Categories=Qt;KDE;Education;Science;</pre>
+</div>
+</div>
+<div class="section" id="add-icon-and-desktop-file-as-a-additional-file">
+<h3>Add icon and .desktop File as a Additional File<a class="headerlink" href="#add-icon-and-desktop-file-as-a-additional-file" title="Permalink to this headline">¶</a></h3>
+<p>The desktop icon and the .desktop file path should be gived in the pacakge. In Pardus packaging format it can be gived as an additional package in pspec.xml file.</p>
+<div class="highlight-python"><pre>&lt;AdditionalFiles&gt;
+        &lt;AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/gdpc.png"&gt;gdpc.png&lt;/AdditionalFile&gt;
+        &lt;AdditionalFile owner="root" permission="0644" target="/usr/share/applications/gdpc.desktop"&gt;gdpc.desktop&lt;/AdditionalFile&gt;
+&lt;/AdditionalFiles&gt;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="handling-locale-files">
+<h2>Handling Locale Files<a class="headerlink" href="#handling-locale-files" title="Permalink to this headline">¶</a></h2>
+<p>Packages sometimes include translations. If it has translations in source code by default, it does not need to make additional changes in package scripts. If a package has an external translation file, you need to add it as a patch or additional file. If you add as an additional file, you need to put it the source part in pspec.xml.</p>
+</div>
+<div class="section" id="parallel-make">
+<h2>Parallel make<a class="headerlink" href="#parallel-make" title="Permalink to this headline">¶</a></h2>
+<p>Parallel make is genereally useful to speed up builds. If you want to build your packages with support parallel make, you need to change the &#8220;jobs&#8221;  parameter as &#8220;-j3&#8221; of /etc/pisi/pisi.conf file in your system.</p>
+</div>
+<div class="section" id="content-of-a-package">
+<h2>Content of a Package<a class="headerlink" href="#content-of-a-package" title="Permalink to this headline">¶</a></h2>
+<p>The contents in the package should enhance the user experience. Therefore fonts, themes, clipart, and wallpaper etc., which are freely distributable, and have not offensive, discriminatory, or derogatory content are allowed.</p>
+</div>
+<div class="section" id="conflicting-packages">
+<h2>Conflicting Packages<a class="headerlink" href="#conflicting-packages" title="Permalink to this headline">¶</a></h2>
+<p>Pardus packages should avoid conflicting with each other and as a Pardus package maintainer, we try to make both packages will install and run. But this is not always possible, so we let the user to decide which package to enable when they install the new package.</p>
+<p>Therefore  &lt;<a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">Conflicts</a>&gt; tag is used, for the conflicting packages. And dependencies should not be confused with the conflicts. If the software links to the libraries of another package or the software does not function properly without another package, it must use &lt;<a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">Dependency</a>&gt; instead of &lt;<a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">Conflicts</a>&gt; to mark that dependency.</p>
+</div>
+<div class="section" id="conflicting-files">
+<h2>Conflicting Files<a class="headerlink" href="#conflicting-files" title="Permalink to this headline">¶</a></h2>
+<p>There are many types of files which can conflict between different packages. Most of the problems can be resolved using &lt;<a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">Conflicts</a>&gt;. But some other cases can also be used for specific files without using &lt;<a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">Conflicts</a>&gt; tag. Some file names can be renamed, symbolic links can be used etc.</p>
+</div>
+<div class="section" id="symlinks">
+<h2>Symlinks<a class="headerlink" href="#symlinks" title="Permalink to this headline">¶</a></h2>
+<p>When you want to easily access folders and files from different folders without maintaining duplicate copies, the symbolic links can be used.</p>
+</div>
+<div class="section" id="renaming-replacing-existing-packages">
+<h2>Renaming/replacing existing packages<a class="headerlink" href="#renaming-replacing-existing-packages" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it is necessary to rename or replace an existing package. The new pacage(s) should make the change without user intervention.</p>
+<p>If a package is renamed without any functional changes or package(s) replace with an existing package, the necessary changes should be made on relevant files:</p>
+<blockquote>
+<ul class="simple">
+<li>The package(s) that will not exist after the changes, should be tagged between  &lt;Obsoletes&gt; &lt;/Obsoletes&gt;  in distribution.xml file as below:</li>
+</ul>
+<div class="highlight-python"><pre>&lt;Obsoletes&gt;
+&lt;!--A comment should be gived for package(s) that removed from repository--&gt;
+    &lt;Package&gt;oldpackage&lt;/Package&gt;
+    .
+    .
+    .
+&lt;/Obsoletes&gt;</pre>
+</div>
+<div class="highlight-python"><pre>Example:
+  &lt;!-- Replaced by texlive-core  texlive-latex texlive-latexextra texlive-latexrecommended texlive-omega --&gt;
+  &lt;Package&gt;tetex&lt;/Package&gt;</pre>
+</div>
+<ul class="simple">
+<li>The obsoleted packages in distribution.xml should be added under below information:</li>
+</ul>
+<div class="highlight-python"><pre>&lt;!--
+************************************************************
+not gone to binary stable yet, please don't remove this mark
+************************************************************
+--&gt;</pre>
+</div>
+<ul class="simple">
+<li>The new packages&#8217; pspec.xml file should include the old package(s) that are renamed or replaced. The format of this change:</li>
+</ul>
+<div class="highlight-python"><pre>&lt;Replaces&gt;
+   &lt;Package&gt;oldpackage&lt;/Package&gt;
+   .
+   .
+   .
+&lt;/Replaces&gt;</pre>
+</div>
+<div class="highlight-python"><pre>Example:
+ &lt;Replaces&gt;
+    &lt;Package&gt;tetex&lt;/Package&gt;
+    &lt;Package&gt;tetex-texmf&lt;/Package&gt;
+    &lt;Package&gt;tetex-extra&lt;/Package&gt;
+ &lt;/Replaces&gt;</pre>
+</div>
+</blockquote>
+</div>
+<div class="section" id="package-setup-post-install-post-and-pre-remove-cleanup-and-post-cleanup">
+<h2>Package Setup, Post Install, Post and Pre Remove, Cleanup  and Post Cleanup<a class="headerlink" href="#package-setup-post-install-post-and-pre-remove-cleanup-and-post-cleanup" title="Permalink to this headline">¶</a></h2>
+<p>Some packages need special operation before or after they installed. Pardus handles this situation with COMAR scripts. There are two scripts used for these operations in pisi packages, (package.py and pakhandler.py)</p>
+<p>If the operation effects only a specific package, package.py is used. This script settles down /var/db/comar3/scripts/System.Package. When it recieve an operation about that package, it applies the related operation followed in the script.</p>
+<p>If an operation effects the packages that installed after a specific package, pakhandler.py is used for that package. This script settles down under /var/db/comar3/scripts/System.PackageHandler and search packages for a specific rule and apply the related operation followed in the script.</p>
+<div class="section" id="operation-types">
+<h3>Operation types:<a class="headerlink" href="#operation-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>setupPackage: Execute package handler setup scripts</li>
+<li>cleanupPackage: Execute package handler cleanup scripts before installation</li>
+<li>postcleanupPackage: Execute package handler postcleanup scripts after installation</li>
+<li>postInstall: Execute post-install script of a package after installation</li>
+<li>preRemove: Execute pre-remove script of a package before installation</li>
+<li>postRemove: Execute post-remove script of a package after installation</li>
+</ul>
+</div>
+</div>
+<div class="section" id="special-packages">
+<h2>Special Packages<a class="headerlink" href="#special-packages" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="texlive-packages">
+<h3>Texlive Packages<a class="headerlink" href="#texlive-packages" title="Permalink to this headline">¶</a></h3>
+<p>Texlive has special packaging rules these can be found from <a class="reference external" href="texlive_packaging.html">texlive packaging</a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/packaging_guidelines.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+</html>

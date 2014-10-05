@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/texlive_packaging.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Texlive Packages in Pardus</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Texlive Packages in Pardus</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Texlive Packages in Pardus</a><ul>
+<li><a class="reference external" href="#current-state-of-texlive-2009">Current state of Texlive 2009</a></li>
+<li><a class="reference external" href="#texlive-2011">Texlive 2011</a></li>
+<li><a class="reference external" href="#new-component-structure">New Component structure</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="texlive-packages-in-pardus">
+<span id="texlive-packaging"></span><h1>Texlive Packages in Pardus<a class="headerlink" href="#texlive-packages-in-pardus" title="Permalink to this headline">¶</a></h1>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Fatih Arslan</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="current-state-of-texlive-2009">
+<h2>Current state of Texlive 2009<a class="headerlink" href="#current-state-of-texlive-2009" title="Permalink to this headline">¶</a></h2>
+<p>We have actionsapi module named _texlivemodules_ that has several file
+generating and populating scripts for texlive collections. This module is a one
+a one copy of the Gentoo texlive eclasses. The texlive tarballs are all created
+custom from the depending Gentoo ebuilds. This was done with a script that
+parses the gentoo ebuilds and created a tarball for pisi packaging.</p>
+<p>The main problem with this main workflow is the dependence to Gentoo ebuilds.
+Also it and hacky and ugly way to create this packages. We dont even know what
+the source of this packages are. This worklfow was also the same in Pardus 2008,
+pardus 2009. We just continued it in Pardus 2011. Our whole Texlive
+infrastructure was based on Gentoo. Because of this we use old Texlive 2009 based
+packages in Pardus 2011.</p>
+<p>We have a component named &#8220;Tex&#8221; that contains all TeX spesific packages and
+applications. The component itself has five directories (that is the current
+state and will change with the upcoming Texlive 2011). These directories are:</p>
+<p><strong>addon:</strong>      contains texlive collections and latex spesific modules</p>
+<p><strong>base:</strong>       contains basic and essential texlive collections and binaries</p>
+<p><strong>doc:</strong>        contains texlive documentations about languages</p>
+<p><strong>language:</strong>   contains texlive&#8217;s langfoo collections</p>
+<p><strong>tool:</strong>       contains several tools and applications (such as kile,lyx) to work with tex itself</p>
+<p>As you see four of the sub components are depending on Texlive itself. The addon
+itself contains modules that are not Texlive spesific. Texlive collections are
+mixed up with non-Texlive modules.</p>
+</div>
+<div class="section" id="texlive-2011">
+<h2>Texlive 2011<a class="headerlink" href="#texlive-2011" title="Permalink to this headline">¶</a></h2>
+<p>We just use rsync to get the sources for the binary programs. Along the way we
+provide a small part of the texmf tree, consisting of the configuration files of
+the programs and several scripts.  (we chose to exclude several files from here
+to include them in texlive-core. This is done automatically with the script</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rsyncupdate</span>
+</pre></div>
+</div>
+<p>This will fetch the sources for the packages texlive-bin. This package contains
+compiled main texlive-packages and a small part of the texmf tree as stated
+above. After syncing the packages we us the script</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">create</span><span class="o">-</span><span class="n">bin</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">tarballs</span>
+</pre></div>
+</div>
+<p>to create a tarball for the package texlive-bin. Just be reminded that this
+package itself is the main package. This is the heart of TexLive. But we also
+need a functionally body that is suitable to our need in real world situations.
+We call this package texlive-core.</p>
+<p>Now, Texlive provides packages in .tar.xz format. There are several of thousand
+little,big packages like tat. Our packages are obtained by selecting a set of
+TeXLive packages, uncompressing them and repacking them together. To obtain
+these packages, we look at a CTAN mirror (<a class="reference external" href="http://www.ctan.org/tex-archive/CTAN.sites">http://www.ctan.org/tex-archive/CTAN.sites</a>)
+in the /systems/texlive/tlnet/archive/ subdirectory.</p>
+<p>The next problem is : how to organize these (many) packages in reasonable
+packages. We follow the TeXLive organization of packages in &#8220;collections&#8221;. These
+collections can be seen when installing using tlmgr, the TeXLive package
+manager.</p>
+<p>We can see them  by opening for example collection-latexextra.tar.xz
+(downlaod it from a TeXLive mirror) : it contains a single TLPOBJ files with a
+list of dependencies, which gives the list of tar.xz archives that must be
+included in this collection.( for more info on TLPOBJ files search
+&#8220;TeX Live&#8217;s new infrastructure&#8221; in Google)</p>
+<p>Now the texlive-core package is not one collection, but several Texlive
+collections which we are tought they&#8217;re essential. The current state of the
+collections included are:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">basic</span>
+<span class="n">context</span>
+<span class="n">genericrecommended</span>
+<span class="n">fontsrecommended</span>
+<span class="n">langczechslovak</span>
+<span class="n">langdutch</span>
+<span class="n">langfrench</span>
+<span class="n">langgerman</span>
+<span class="n">langitalian</span>
+<span class="n">langpolish</span>
+<span class="n">langportuguese</span>
+<span class="n">langspanish</span>
+<span class="n">langenglish</span>
+<span class="n">latex</span>
+<span class="n">latex3</span>
+<span class="n">latexrecommended</span>
+<span class="n">luatex</span>
+<span class="n">mathextra</span>
+<span class="n">metapost</span>
+<span class="n">texinfo</span>
+<span class="n">xetex</span>
+</pre></div>
+</div>
+<p>We have automated script that make the packages. This script download
+collection, parse TLPOBJ files and creates tarball for pisi packages. The
+script name is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">create</span><span class="o">-</span><span class="n">tex</span><span class="o">-</span><span class="n">collection</span><span class="o">-</span><span class="n">tarball</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>You can open it and examine. The script do not just create the texlive-core
+package. It also creates other collections and the merges texlive-langeextra
+package. The basic workflow for the texlive-core package is:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Download each collection-foo package from the essential list (as given above)</li>
+<li>Extract them to obtain the TLPOBJ file</li>
+<li>Parse the necessary modules from each collection and create a list of these modules</li>
+<li>Download each module from the previous populated list (step 3)</li>
+<li>Extract again, this time to look for runtime patterns. All modules that  contains these matches are returned</li>
+<li>Discard and remove modules that are no in the list created in step</li>
+<li>Create a final tarball to be shipped with texlive-core package</li>
+</ol>
+</blockquote>
+<p>The workflow is similar for other packaging. Just examine the script. I&#8217;ve
+seperated each package workflow in a single module. That will make it easire to
+mantain for several conditions that might happen in the future.</p>
+<p>A sidenote, collections are disjoint, that means no collections conflicts with
+another. You should not face any file conflict with texlive packages. If there
+exist any file conflict, than please look and fix the function that parses and
+crates the dependency list along with the function that return runtime patterns.</p>
+</div>
+<div class="section" id="new-component-structure">
+<h2>New Component structure<a class="headerlink" href="#new-component-structure" title="Permalink to this headline">¶</a></h2>
+<p>First of all collections and tools are needed to be seperated. We will have only
+three subcomponents with the following structure:</p>
+<p><strong>base:</strong>       contains the main Texlive collection ( binaries and &#8220;medium&#8221; scheme of TexLive infrastructure</p>
+<p><strong>extra:</strong>      contains extra Texlive collections modules</p>
+<p><strong>addon:</strong>      contains non-Texlive modules, such as latex-beamer, latex-hevea</p>
+<p><strong>tool:</strong>       contains several tools and applications (such as kile,lyx) to work with tex itself</p>
+<p>Documentation is not provided anymore. It will be a seperate single tarball with
+will ship in the subcomponent base in the future. The language component itself
+is splited in merged into core and bin packages. That means half of the language
+packages (which I believe are essential) comes with the texlivec-core package.
+Other packages are merged into one package with the name texlive-langextra</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/texlive_packaging.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>
