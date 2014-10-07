@@ -1,0 +1,185 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>eric5</Name>
+        <Homepage>http://eric-ide.python-projects.org/index.html</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <Icon>eric5</Icon>
+        <IsA>app:gui</IsA>
+        <PartOf>programming.environment.eric</PartOf>
+        <Summary>Full featured Python IDE</Summary>
+        <Description>Eric is a full featured Python and Ruby editor and IDE, written in python. 
+        It is based on the cross platform Qt4 gui toolkit, integrating the highly flexible
+        Scintilla editor control. It is designed to be usable as everdays' quick and dirty
+        editor as well as being usable as a professional project management tool integrating
+        many advanced features Python offers the professional coder.</Description>
+        <Archive sha1sum="00f032ea308df20825fe6ff0eb4df4d20033d002" type="targz">mirrors://sourceforge/eric-ide/eric5-5.4.7.tar.gz</Archive>
+        <Archive sha1sum="97a07aa6efa40637b147c0570f467e6a57de1a77" type="targz">mirrors://sourceforge/eric-ide/eric5-i18n-cs-5.4.7.tar.gz</Archive>
+        <Archive sha1sum="59ef52765f5e25ce4d2e0dd4fa13d8f575dea970" type="targz">mirrors://sourceforge/eric-ide/eric5-i18n-de-5.4.7.tar.gz</Archive>
+        <Archive sha1sum="4bde68084f746993ca720b15af0db99583ca4104" type="targz">mirrors://sourceforge/eric-ide/eric5-i18n-es-5.4.7.tar.gz</Archive>
+        <Archive sha1sum="8c3285255e20e9517235f190f134e4263f6c530b" type="targz">mirrors://sourceforge/eric-ide/eric5-i18n-fr-5.4.7.tar.gz</Archive>
+        <Archive sha1sum="cf2681f59d3849bc379e9ff8e9b14dbfb6492eb2" type="targz">mirrors://sourceforge/eric-ide/eric5-i18n-it-5.4.7.tar.gz</Archive>
+        <Archive sha1sum="04d2e8ca99a5b1a39f0734909d19853fa37cd800" type="targz">mirrors://sourceforge/eric-ide/eric5-i18n-ru-5.4.7.tar.gz</Archive>
+        <Archive sha1sum="a2521def01143a8ae9dbe314d829a5762aada648" type="targz">mirrors://sourceforge/eric-ide/eric5-i18n-tr-5.4.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python3</Dependency>
+            <Dependency>python3-qt</Dependency>
+            <Dependency>qscintilla2-devel</Dependency>
+            <Dependency>qscintilla2-python3</Dependency>
+            <Dependency>python3-qt-webkit</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>eric5</Name>
+        <RuntimeDependencies>
+            <Dependency>python3</Dependency>
+            <Dependency>python3-qt</Dependency>
+            <Dependency>qscintilla2-python3</Dependency>
+            <Dependency>python3-qt-webkit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/qt4/qsci/api</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/appdata/eric5.appdata.xml</Path>
+            <Path fileType="data">/usr/lib/python3.4/site-packages/eric5/eric5config.py</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/eric5.desktop">eric.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/eric5.png">eric.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>eric5-i18n-cs</Name>
+        <RuntimeDependencies>
+            <Dependency version="current">eric5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="localedata">/usr/lib/python3*/site-packages/eric5/i18n/eric5_cs.qm</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>eric5-i18n-de</Name>
+        <RuntimeDependencies>
+            <Dependency version="current">eric5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="localedata">/usr/lib/python3*/site-packages/eric5/i18n/eric5_de.qm</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>eric5-i18n-es</Name>
+        <RuntimeDependencies>
+            <Dependency version="current">eric5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="localedata">/usr/lib/python3*/site-packages/eric5/i18n/eric5_es.qm</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>eric5-i18n-fr</Name>
+        <RuntimeDependencies>
+            <Dependency version="current">eric5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="localedata">/usr/lib/python3*/site-packages/eric5/i18n/eric5_fr.qm</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>eric5-i18n-it</Name>
+        <RuntimeDependencies>
+            <Dependency version="current">eric5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="localedata">/usr/lib/python3*/site-packages/eric5/i18n/eric5_it.qm</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>eric5-i18n-ru</Name>
+        <RuntimeDependencies>
+            <Dependency version="current">eric5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="localedata">/usr/lib/python3*/site-packages/eric5/i18n/eric5_ru.qm</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>eric5-i18n-tr</Name>
+        <RuntimeDependencies>
+            <Dependency version="current">eric5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="localedata">/usr/lib/python3*/site-packages/eric5/i18n/eric5_tr.qm</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="7">
+            <Date>2014-10-07</Date>
+            <Version>5.4.7</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-08-13</Date>
+            <Version>5.4.5</Version>
+            <Comment>Rebuild for missing runtime dep.</Comment>
+            <Name>Aydın Demirel</Name>
+            <Email>aydin.demirel@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-06-08</Date>
+            <Version>5.4.5</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2014-06-08</Date>
+            <Version>5.4.3</Version>
+            <Comment>Rebuild for binary file</Comment>
+            <Name>Aydın Demirel</Name>
+            <Email>aydin.demirel@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2014-06-01</Date>
+            <Version>5.4.3</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvarice@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2014-01-23</Date>
+            <Version>5.4.0</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-01-07</Date>
+            <Version>5.2.7</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
