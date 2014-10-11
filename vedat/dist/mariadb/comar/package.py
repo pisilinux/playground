@@ -22,4 +22,5 @@ def postInstall(fromVersion, fromRelease, toVersion, toRelease):
         # Create the database
         os.system("/usr/bin/mysql_install_db --datadir=/var/lib/mysql --basedir=/usr --force")
         os.system("/bin/chown -R mysql:mysql %s" % DATADIR)
+        os.system("/usr/bin/mysql_upgrade --force")
 
