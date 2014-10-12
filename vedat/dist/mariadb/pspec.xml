@@ -15,6 +15,7 @@
         <Archive sha1sum="46dc0b66567ff9d4e3a32d9d4b3c9ef250a6fc9e" type="targz">ftp://ftp.ulak.net.tr/pub/MariaDB/mariadb-10.0.14/source/mariadb-10.0.14.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>libaio-devel</Dependency>
+            <Dependency>unixODBC-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -25,6 +26,7 @@
         <Summary>The shared libraries required for MariaDB clients</Summary>
         <RuntimeDependencies>
             <Dependency>libaio</Dependency>
+            <Package>unixODBC</Package>
         </RuntimeDependencies>
         <Replaces>
             <Package>mysql-lib</Package>

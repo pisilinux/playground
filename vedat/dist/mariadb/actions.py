@@ -36,7 +36,7 @@ def setup():
                           -DWITH_READLINE=ON \
                           -DWITH_ZLIB=system \
                           -DWITH_SSL=system \
-                          -DWITH_PCRE=system \
+                          -DWITHOUT_PCRE=system \
                           -DWITH_LIBWRAP=OFF \
                           -DWITH_JEMALLOC=OFF \
                           -DWITH_EXTRA_CHARSETS=complex \
