@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/package-review-process.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Package Reviewing Process</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Packaging" href="index.html" />
+    <link rel="next" title="Things To Check While Reviewing" href="reviewing_guidelines.html" />
+    <link rel="prev" title="Package Components" href="package_components.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Packaging</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Package Reviewing Process</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Package Reviewing Process</a><ul>
+<li><a class="reference external" href="#package-review-guidelines">Package Review Guidelines</a></li>
+<li><a class="reference external" href="#review-process">Review Process</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="package-reviewing-process">
+<span id="package-review-process"></span><h1>Package Reviewing Process<a class="headerlink" href="#package-reviewing-process" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit, Ozan Çağlayan</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.2</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="package-review-guidelines">
+<h2>Package Review Guidelines<a class="headerlink" href="#package-review-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>The person who want to put his package in review and add it to Pardus Repositories, he
+should be a Pardus developer. (see <a class="reference external" href="../newcontributor/index.html#newcontributor-index"><em>New Contributors</em></a> and <a class="reference external" href="../newcontributor/developer_roles.html#developer-roles"><em>What kind of works a developer interested in?</em></a> )</p>
+<p>Package maintainer and the reviewer must follow the package review process and they
+should pay attention that the package adheres to <a class="reference external" href="package_naming_guidelines.html#package-naming"><em>Package Naming Guideline</em></a>,
+<a class="reference external" href="packaging_guidelines.html#packaging-guidelines"><em>Packaging Guidelines</em></a> and <a class="reference external" href="../licensing/licensing_guidelines.html#licensing-guidelines"><em>Licensing Guidelines</em></a>.</p>
+<p>They also pay attention that the package in review has not in repositories already.</p>
+</div>
+<div class="section" id="review-process">
+<h2>Review Process<a class="headerlink" href="#review-process" title="Permalink to this headline">¶</a></h2>
+<p>The package reviewing process steps on <a class="reference external" href="http://hata.pardus.org.tr/">Pardus Bug Tracking System</a>;</p>
+<ol class="arabic">
+<li><p class="first">When the developer thinks that his/her new package is ready for the reviewing
+process, he/she should copy it under the appropriate component of the
+<tt class="docutils literal"><span class="pre">playground/review</span></tt> directory under pardus SVN repository.</p>
+</li>
+<li><p class="first">If a bug is reported for requesting this new package on the bug tracking system,
+the process starts at this point.</p>
+</li>
+<li><p class="first">The developer who wants to maintain this new package, assigns the bug report
+to (him/her)self and changes the bug status to <tt class="docutils literal"><span class="pre">ASSIGNED</span></tt>. This operation
+can only be done by the members of bugzilla &#8220;<strong>editbugs</strong>&#8221; group.</p>
+</li>
+<li><p class="first">After the developer assigns the bug to (him/her)self, A new bug report which
+will block the package request bug will be created. (From now on, this new bug
+report will be mentioned as <strong>the bug report</strong>)</p>
+</li>
+<li><p class="first">The product of the bug report should be <tt class="docutils literal"><span class="pre">Package</span> <span class="pre">Review</span></tt>. The component of the
+bug report should be the appropriate repository component for being able to
+notify the relevant component responsibles by e-mail about this new package
+reviewing request.</p>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">Summary</span></tt> part of the bug report should contain the full path of the
+package after review folder (ex: <tt class="docutils literal"><span class="pre">desktop/toolkit/gtk/gtkimageview</span></tt>). The
+<tt class="docutils literal"><span class="pre">Details</span></tt> part of the bug should contain the description of the package, e.g. a
+detailed phrase which explains the main objective of the package, what it does,
+etc.</p>
+</li>
+<li><p class="first">If the package is taken to the reviewing process because of a specific
+reason (e.g. the package may be a dependency of an available package in the
+repository or of another to-be-reviewed package), this reason should be
+indicated in the <tt class="docutils literal"><span class="pre">Details</span></tt> part of the bug report.</p>
+</li>
+<li><p class="first">The repository of the package (contrib, pardus etc.) which the developer is
+willing to maintain the package in, should be indicated in the <tt class="docutils literal"><span class="pre">Details</span></tt> part
+of the bug report.</p>
+</li>
+<li><p class="first">If the package depends on other packages currently in reviewing process,
+the bug report should <tt class="docutils literal"><span class="pre">depend</span></tt> on those other packages&#8217; bug reports to
+establish a dependency relationship between them.</p>
+</li>
+<li><p class="first">All changes done to the package during the reviewing process (e.g. All
+modifications committed under <tt class="docutils literal"><span class="pre">playground/review</span></tt>) should be reflected as
+a comment to the relevant bug report using the following special keyword
+in the SVN commit messages:</p>
+<div class="highlight-python"><pre>BUG:COMMENT:&lt;Bug ID&gt;</pre>
+</div>
+</li>
+<li><p class="first">In order to decide that the package is suitable for a package repository, it
+should take necessary number of approvals. The approval comments will be given firstly
+by the supervisor of the package component, then by an other package
+maintainer.</p>
+<p>In order to complete the package reviewing process <strong>2 approval is necessary</strong>.
+One of these approvals should be given by component supervisor. If the package
+maintainer is also the component supervisor, the other package maintainers
+can give these two approvals.</p>
+</li>
+<li><p class="first">If the reviewer finds any problem about the package in review, he/she should
+wait for this problem to be fixed by the maintainer. In other words, the
+conditional approval is forbidden.</p>
+<ul class="simple">
+<li>Example:<ul>
+<li><strong>Bad:</strong>    After changing the directory paths, it will be <tt class="docutils literal"><span class="pre">ACK</span></tt>.</li>
+<li><strong>Good:</strong>   It should change the directory paths.</li>
+</ul>
+</li>
+</ul>
+<p>After the package maintainer has fixed the problem, the reviewer verifies
+the problem and gives an <tt class="docutils literal"><span class="pre">ACK</span></tt> as an approval comment.</p>
+</li>
+<li><dl class="first docutils">
+<dt>When supervisors give ACK, they will add keyword <strong>ACKS</strong> to the bug. After the bug</dt>
+<dd><p class="first last">gets an <strong>ACKS</strong> it needs one more ACK from a developer.  When developers give ACK,
+they will add keyword <strong>ACKD</strong> to the bug.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">The package that takes the necessary approvals, is taken into the package repositories,
+removed from the review directory and the bug status is changed to
+<tt class="docutils literal"><span class="pre">RESOLVED/FIXED</span></tt>.</p>
+</li>
+<li><p class="first">After the package is merged into Pardus Repositories and the review bug report
+is closed, package request bug will be closed too. <tt class="docutils literal"><span class="pre">RESOLVED/FIXED</span></tt> solution can
+also be applied for this bug. Ideally, closing both review and request bugs at
+the same commit is preferred.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/package-review-process.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/newcontributor/creating-svn-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating SVN Crypt Password</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="New Contributors" href="index.html" />
+    <link rel="next" title="Quick Guide to Pardus Translations" href="introduction-to-translation.html" />
+    <link rel="prev" title="How to be a Contributor?" href="how-to-be-contributor.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">New Contributors</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Creating SVN Crypt Password</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Creating SVN Crypt Password</a><ul>
+<li><a class="reference external" href="#creating-a-password-with-htpasswd">Creating a password with &#8220;htpasswd&#8221;</a></li>
+<li><a class="reference external" href="#creating-a-password-with-perl">Creating A Password With Perl</a></li>
+<li><a class="reference external" href="#creating-a-password-with-python">Creating A Password With Python</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="creating-svn-crypt-password">
+<span id="creating-svn-account"></span><h1>Creating SVN Crypt Password<a class="headerlink" href="#creating-svn-crypt-password" title="Permalink to this headline">¶</a></h1>
+<p>To create an SVN password you should specify a user name. This user name must not include abusive or any malicious words. The username should not be offensive, discriminatory, or derogatory.</p>
+<div class="section" id="creating-a-password-with-htpasswd">
+<h2>Creating a password with &#8220;htpasswd&#8221;<a class="headerlink" href="#creating-a-password-with-htpasswd" title="Permalink to this headline">¶</a></h2>
+<p>You can create your password and username by using htpasswd and you can attach the output file to your e-mail. To do this, you can use the command below:</p>
+<div class="highlight-python"><pre>$ htpasswd -c password_file user_name
+New password:
+Re-type new password:
+Adding password for user user_name</pre>
+</div>
+<p>As a result an output file (password_file) will be created and you can attach it to your e-mail.</p>
+</div>
+<div class="section" id="creating-a-password-with-perl">
+<h2>Creating A Password With Perl<a class="headerlink" href="#creating-a-password-with-perl" title="Permalink to this headline">¶</a></h2>
+<p>To do this the, you can use the command below:</p>
+<div class="highlight-python"><pre>perl -e "print crypt('yourpassword','xy'),\"\n\";"2</pre>
+</div>
+<p>This command will create just your password. In your e-mail you should mention the username you want to use.</p>
+</div>
+<div class="section" id="creating-a-password-with-python">
+<h2>Creating A Password With Python<a class="headerlink" href="#creating-a-password-with-python" title="Permalink to this headline">¶</a></h2>
+<p>You can do the same with python by using the command below:</p>
+<div class="highlight-python"><pre>python -c "import crypt; print crypt.crypt('password', 'xy')"</pre>
+</div>
+<p>In this case as well, just the shadowed form of your password will be given as output. In your e-mail you should mention the username you want to use.</p>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/newcontributor/creating-svn-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:02 GMT -->
+</html>

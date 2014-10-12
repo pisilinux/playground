@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/softwaredevelopment/coderules/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Code Rules</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Software Development" href="../index.html" />
+    <link rel="next" title="Code Rules" href="code_rules.html" />
+    <link rel="prev" title="Software Development" href="../index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Software Development</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Code Rules</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Code Rules</a><ul>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="code-rules"></span><h1>Code Rules<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="code_rules.html">Code Rules</a><ul>
+<li class="toctree-l2"><a class="reference external" href="code_rules.html#python-language-rules">Python Language Rules</a></li>
+<li class="toctree-l2"><a class="reference external" href="code_rules.html#python-style-rules">Python Style Rules</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="docstring_rules.html">Docstring Rules</a><ul>
+<li class="toctree-l2"><a class="reference external" href="docstring_rules.html#function-method-documentation">Function &amp; Method Documentation</a></li>
+<li class="toctree-l2"><a class="reference external" href="docstring_rules.html#module-documentation">Module Documentation</a></li>
+<li class="toctree-l2"><a class="reference external" href="docstring_rules.html#variable-attribute-documentation">Variable &amp; Attribute Documentation</a></li>
+<li class="toctree-l2"><a class="reference external" href="docstring_rules.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="unit_test_rules.html">Unit Test</a><ul>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#the-value-of-unit-tests">The Value of Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#unit-test-structure">Unit Test Structure</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#set-up-all-conditions-for-testing">Set Up All Conditions for Testing</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#call-the-method-or-trigger-being-tested">Call the method (or Trigger) being tested</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#verify-the-results-are-correct">Verify the results are correct</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#clean-up-is-easy">Clean up (is Easy!)</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#where-to-put-tests">Where to put tests?</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#what-to-test">What to Test</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#testing-unexpected-conditions">Testing Unexpected Conditions</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#bad-input-values">Bad Input Values</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#boundary-conditions">Boundary Conditions</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#tips-for-writing-great-unit-tests">Tips for writing great unit tests</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#pytest">Pytest</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#test-organization">Test organization</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#assertion-syntax">Assertion syntax</a></li>
+<li class="toctree-l2"><a class="reference external" href="unit_test_rules.html#dealing-with-exceptions">Dealing with exceptions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/softwaredevelopment/coderules/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

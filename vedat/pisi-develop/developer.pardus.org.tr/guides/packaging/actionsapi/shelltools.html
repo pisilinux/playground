@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/shelltools.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Shelltools</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="Texlivemodules" href="texlivemodules.html" />
+    <link rel="prev" title="Scons" href="scons.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Shelltools</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Shelltools</a><ul>
+<li><a class="reference external" href="#can-access-file">can_access_file</a></li>
+<li><a class="reference external" href="#can-access-directory">can_access_directory</a></li>
+<li><a class="reference external" href="#makedirs">makedirs</a></li>
+<li><a class="reference external" href="#echo">echo</a></li>
+<li><a class="reference external" href="#chmod">chmod</a></li>
+<li><a class="reference external" href="#chown">chown</a></li>
+<li><a class="reference external" href="#sym">sym</a></li>
+<li><a class="reference external" href="#unlink">unlink</a></li>
+<li><a class="reference external" href="#unlinkdir">unlinkDir</a></li>
+<li><a class="reference external" href="#move">move</a></li>
+<li><a class="reference external" href="#copy">copy</a></li>
+<li><a class="reference external" href="#copytree">copytree</a></li>
+<li><a class="reference external" href="#touch">touch</a></li>
+<li><a class="reference external" href="#cd">cd</a></li>
+<li><a class="reference external" href="#ls">ls</a></li>
+<li><a class="reference external" href="#export">export</a></li>
+<li><a class="reference external" href="#system">system</a></li>
+<li><a class="reference external" href="#islink">isLink</a></li>
+<li><a class="reference external" href="#isfile">isFile</a></li>
+<li><a class="reference external" href="#isdirectory">isDirectory</a></li>
+<li><a class="reference external" href="#isempty">isEmpty</a></li>
+<li><a class="reference external" href="#realpath">realPath</a></li>
+<li><a class="reference external" href="#basename">baseName</a></li>
+<li><a class="reference external" href="#dirname">dirName</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="shelltools"></span><h1>Shelltools<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="can-access-file">
+<h2>can_access_file<a class="headerlink" href="#can-access-file" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">can_access_file</span><span class="p">(</span><span class="n">sourceFilePath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Checks if the sourceFile is accessible.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">can_access_file</span><span class="p">(</span><span class="s">&quot;/usr/share/terminfo/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">termfile</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">can_access_file</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/texk/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">curDIR</span><span class="p">(),</span> <span class="nb">dir</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="can-access-directory">
+<h2>can_access_directory<a class="headerlink" href="#can-access-directory" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">can_access_directory</span><span class="p">(</span><span class="n">destinationDirectory</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Checks if the directory is accessible and test readability, writability and
+executablility of the directory.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">can_access_directory</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/texk/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">curDIR</span><span class="p">(),</span> <span class="nb">dir</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="makedirs">
+<h2>makedirs<a class="headerlink" href="#makedirs" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">makedirs</span><span class="p">(</span><span class="n">destinationDirectory</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creates the destinationDirectory.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/build&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">workDIR</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/build-default-i686-pc-linux-gnu-nptl&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">workDIR</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="echo">
+<h2>echo<a class="headerlink" href="#echo" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">echo</span><span class="p">(</span><span class="n">destionationFile</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Append the given content to the given file.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&#39;conf-cc&#39;</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> -O1 -fomit-frame-pointer -malign-double -fPIC -DPIC&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">CC</span><span class="p">(),</span><span class="n">get</span><span class="o">.</span><span class="n">CFLAGS</span><span class="p">()))</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;driver/ghc/Makefile&quot;</span><span class="p">,</span><span class="s">&quot;GHC_CFLAGS = </span><span class="si">%s</span><span class="s"> -Wa,--noexecstack&quot;</span>  <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">CFLAGS</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">CONFIGFILE</span><span class="p">,</span> <span class="s">&quot;CONFIG_READLINE=y&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/etc/pardus-release&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">(),</span> <span class="s">&quot;Pardus 2009.1 Anthropoides virgo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="chmod">
+<h2>chmod<a class="headerlink" href="#chmod" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">chmod</span><span class="p">(</span><span class="n">sourceFilePath</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="mf">0755</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Changes permissions of sourceFile. The default mode parameter is &#8220;0755&#8221;.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="s">&quot;config/config.sub&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;/lib/libz.so.*&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/usr/lib/misc/pt_chown&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">(),</span> <span class="mf">4711</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;/etc/ssh/sshd_config&quot;</span><span class="p">,</span> <span class="mf">0600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="chown">
+<h2>chown<a class="headerlink" href="#chown" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">chown</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">uid</span> <span class="o">=</span> <span class="s">&#39;root&#39;</span><span class="p">,</span> <span class="n">gid</span> <span class="o">=</span> <span class="s">&#39;root&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Changes the owner and group id of filePath with given  uid and gid.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">chown</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/var/run/openct&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">(),</span> <span class="n">gid</span><span class="o">=</span><span class="s">&quot;pnp&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">chown</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/var/run/openct&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">(),</span> <span class="n">gid</span><span class="o">=</span><span class="s">&quot;pnp&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">chown</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/var/run/memcached&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">(),</span> <span class="s">&quot;memcached&quot;</span><span class="p">,</span> <span class="s">&quot;memcached&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sym">
+<h2>sym<a class="headerlink" href="#sym" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">sym</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationFile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Crates symbolic link.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s">&quot;/usr/share/fonts/Type1/c059013l.pfb&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">/usr/share/pokerth/data/fonts/c059013l.pfb&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s">&quot;libcompface.so&quot;</span><span class="p">,</span> <span class="s">&quot;libcompface.so.1&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s">&quot;config/configure.in&quot;</span><span class="p">,</span> <span class="s">&quot;configure.in&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="unlink">
+<h2>unlink<a class="headerlink" href="#unlink" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">unlink</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Deletes the sourceFile.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">workDIR</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">get</span><span class="o">.</span><span class="n">srcDIR</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;/missing&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/doc/auctex.info&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">workDIR</span><span class="p">(),</span> <span class="n">get</span><span class="o">.</span><span class="n">srcDIR</span><span class="p">()))</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="s">&quot;config.sh&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="unlinkdir">
+<h2>unlinkDir<a class="headerlink" href="#unlinkdir" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">unlinkDir</span><span class="p">(</span><span class="n">sourceDirectory</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Deletes the sourceDirectory and all subdirectories.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">unlinkDir</span><span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">workDIR</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;/tmpbuild&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">unlinkDir</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/e2fsprogs-</span><span class="si">%s</span><span class="s">/tests/f_ext_journal/&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">workDIR</span><span class="p">(),</span> <span class="n">get</span><span class="o">.</span><span class="n">srcVERSION</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="move">
+<h2>move<a class="headerlink" href="#move" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">move</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Recursively moves a &#8220;source&#8221; file or directory to &#8220;destination.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="s">&quot;ac-wrapper.sh&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">/usr/lib/misc/&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="s">&quot;proc/*.h&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">/usr/include/proc/&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="s">&quot;x11-ssh-askpass.man&quot;</span><span class="p">,</span> <span class="s">&quot;x11-ssh-askpass.1&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="s">&quot;tmp/*&quot;</span><span class="p">,</span> <span class="s">&quot;.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="copy">
+<h2>copy<a class="headerlink" href="#copy" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Recursively copies a &#8220;source&#8221; file or directory to &#8220;destination.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&quot;Makefile.pre.in&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">/usr/lib/python2.3/config/&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&quot;scripts/*&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">/usr/bin/&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="copytree">
+<h2>copytree<a class="headerlink" href="#copytree" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">copytree</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">sym</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Recursively copy an entire directory tree rooted at source.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="s">&quot;data/library/blpython/widgets&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">/usr/share/cel-1.3/data/library/blpython/&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="s">&quot;include/asm-generic/&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">/usr/include/asm-generic/&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="touch">
+<h2>touch<a class="headerlink" href="#touch" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">touch</span><span class="p">(</span><span class="n">sourceFilePath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Changes the access time of the file(s), or creates it if it is not exist.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">workDIR</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;aclocal.m4&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="s">&quot;gcc/c-gperf.h&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="s">&quot;man/*.1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cd">
+<h2>cd<a class="headerlink" href="#cd" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cd</span><span class="p">(</span><span class="n">directoryName</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Changes the current working directory to directoryName.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">cd</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/build-default-i686-pc-linux-gnu-nptl&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">workDIR</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">cd</span><span class="p">(</span><span class="s">&quot;../&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ls">
+<h2>ls<a class="headerlink" href="#ls" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ls</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns a list of all files and directories in the source directory.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s">&quot;*.tex&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;/lib/libncursesw.so*&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s">&quot;*-*&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="export">
+<h2>export<a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">export</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sets the environment variable value for key.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s">&quot;CFLAGS&quot;</span><span class="p">,</span> <span class="n">cflags</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s">&quot;CXXFLAGS&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> -DPTYMODE=0620 -DPTYGROUP=5 -DUSE_PAM&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">CXXFLAGS</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s">&quot;LDFLAGS&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> -pie -Wl,-z,relro,-z,now&quot;</span>  <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">LDFLAGS</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="system">
+<h2>system<a class="headerlink" href="#system" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">system</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Executes the command in the system shell.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;texi2dvi -q -c --language=latex ./glossaries.dtx&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;cc -o bbox bbox.c&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;./update-pciids.sh &amp;&gt; /dev/null&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="islink">
+<h2>isLink<a class="headerlink" href="#islink" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">isLink</span><span class="p">(</span><span class="n">sourceFilePath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns &#8220;True&#8221; if the file refers to a symbolic link.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">isLink</span><span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#39;/maybe/link&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="isfile">
+<h2>isFile<a class="headerlink" href="#isfile" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">isFile</span><span class="p">(</span><span class="n">sourceFilePath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns &#8220;True&#8221; if the file is an existing regular file.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="s">&quot;alsaaudio.o&quot;</span><span class="p">)</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/etc/ld.so.cache&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="s">&quot;configure&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="isdirectory">
+<h2>isDirectory<a class="headerlink" href="#isdirectory" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">isDirectory</span><span class="p">(</span><span class="n">sourceDirectoryPath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns True if the directory is an existing directory.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">isDirectory</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/usr/share&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">isDirectory</span><span class="p">(</span><span class="s">&quot;install&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="isempty">
+<h2>isEmpty<a class="headerlink" href="#isempty" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">isEmpty</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns True if the given path is an empty file or directory.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/usr/share&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(</span><span class="s">&quot;install&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="realpath">
+<h2>realPath<a class="headerlink" href="#realpath" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">realPath</span><span class="p">(</span><span class="n">sourceFilePath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns the canonical path of the specified filename, eliminating any symbolic
+links encountered in the path</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">realPath</span><span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">()</span> <span class="o">+</span> <span class="n">link</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="basename">
+<h2>baseName<a class="headerlink" href="#basename" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">baseName</span><span class="p">(</span><span class="n">sourceFilePath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns the base pathname of given file.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shelltools</span><span class="o">.</span><span class="n">baseName</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/etc/ld.so.cache&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">installDIR</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dirname">
+<h2>dirName<a class="headerlink" href="#dirname" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dirName</span><span class="p">(</span><span class="n">sourceFilePath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Returns the directory of the given file.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">HAL_FDI</span><span class="o">=</span> <span class="s">&quot;usr/share/hal/fdi/information/20thirdparty/10-camera-libgphoto2.fdi&quot;</span>
+<span class="n">shelltools</span><span class="o">.</span><span class="n">dirName</span><span class="p">(</span><span class="n">HAL_FDI</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/shelltools.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

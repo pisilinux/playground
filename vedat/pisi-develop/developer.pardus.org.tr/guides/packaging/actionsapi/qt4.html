@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/qt4.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Qt4</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="Rubymodules" href="rubymodules.html" />
+    <link rel="prev" title="Pythonmodules" href="pythonmodules.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Qt4</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Qt4</a><ul>
+<li><a class="reference external" href="#default-values">Default Values</a><ul>
+<li><a class="reference external" href="#basename">basename</a></li>
+<li><a class="reference external" href="#prefix">prefix</a></li>
+<li><a class="reference external" href="#libdir">libdir</a></li>
+<li><a class="reference external" href="#bindir">bindir</a></li>
+<li><a class="reference external" href="#datadir">datadir</a></li>
+<li><a class="reference external" href="#includedir">includedir</a></li>
+<li><a class="reference external" href="#docdir">docdir</a></li>
+<li><a class="reference external" href="#examplesdir">examplesdir</a></li>
+<li><a class="reference external" href="#demosdir">demosdir</a></li>
+<li><a class="reference external" href="#importdir">importdir</a></li>
+<li><a class="reference external" href="#plugindir">plugindir</a></li>
+<li><a class="reference external" href="#translationdir">translationdir</a></li>
+<li><a class="reference external" href="#sysconfdir">sysconfdir</a></li>
+<li><a class="reference external" href="#qmake">qmake</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#configure">Configure</a></li>
+<li><a class="reference external" href="#make">Make</a></li>
+<li><a class="reference external" href="#install">install</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="qt4"></span><h1>Qt4<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="default-values">
+<h2>Default Values<a class="headerlink" href="#default-values" title="Permalink to this headline">¶</a></h2>
+<p>You can see all of the default parameters from:
+<a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/qt4.py">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/qt4.py</a></p>
+<div class="section" id="basename">
+<h3>basename<a class="headerlink" href="#basename" title="Permalink to this headline">¶</a></h3>
+<p>The default basename value is &#8220;qt4&#8221;</p>
+</div>
+<div class="section" id="prefix">
+<h3>prefix<a class="headerlink" href="#prefix" title="Permalink to this headline">¶</a></h3>
+<p>The default prefix is the default prefix of Pardus (see·
+<a class="reference external" href="get.html#defaultprefixdir">link</a>)</p>
+</div>
+<div class="section" id="libdir">
+<h3>libdir<a class="headerlink" href="#libdir" title="Permalink to this headline">¶</a></h3>
+<p>The default library directory is the concatenation of the default prefix
+directory and /lib value.</p>
+</div>
+<div class="section" id="bindir">
+<h3>bindir<a class="headerlink" href="#bindir" title="Permalink to this headline">¶</a></h3>
+<p>The default binary directory is the concatenation of the default prefix
+directory and /bin value.</p>
+</div>
+<div class="section" id="datadir">
+<h3>datadir<a class="headerlink" href="#datadir" title="Permalink to this headline">¶</a></h3>
+<p>The default data directory is the concatenation of the default prefix
+directory, /share and basename value.</p>
+</div>
+<div class="section" id="includedir">
+<h3>includedir<a class="headerlink" href="#includedir" title="Permalink to this headline">¶</a></h3>
+<p>The default include directory is the concatenation of the default prefix
+directory and /include value.</p>
+</div>
+<div class="section" id="docdir">
+<h3>docdir<a class="headerlink" href="#docdir" title="Permalink to this headline">¶</a></h3>
+<p>The default doc directory is the concatenation of default doc directory of
+Pardus and basename value. (see <a class="reference external" href="get.html#mandir">link</a>)</p>
+</div>
+<div class="section" id="examplesdir">
+<h3>examplesdir<a class="headerlink" href="#examplesdir" title="Permalink to this headline">¶</a></h3>
+<p>The default example directory is the concatenation of the default libdir
+directory, basename  value and /examples value.</p>
+</div>
+<div class="section" id="demosdir">
+<h3>demosdir<a class="headerlink" href="#demosdir" title="Permalink to this headline">¶</a></h3>
+<p>The default demo directory is the concatenation of the default libdir
+directory, basename  value and /demos value.</p>
+</div>
+<div class="section" id="importdir">
+<h3>importdir<a class="headerlink" href="#importdir" title="Permalink to this headline">¶</a></h3>
+<p>The default import directory is the concatenation of the default libdir
+directory, basename  value and /imports value.</p>
+</div>
+<div class="section" id="plugindir">
+<h3>plugindir<a class="headerlink" href="#plugindir" title="Permalink to this headline">¶</a></h3>
+<p>The default plugin directory is the concatenation of the default libdir
+directory, basename value and /plugins value.</p>
+</div>
+<div class="section" id="translationdir">
+<h3>translationdir<a class="headerlink" href="#translationdir" title="Permalink to this headline">¶</a></h3>
+<p>The default translation directory is the concatenation of the default datadir
+directory and /translations value.</p>
+</div>
+<div class="section" id="sysconfdir">
+<h3>sysconfdir<a class="headerlink" href="#sysconfdir" title="Permalink to this headline">¶</a></h3>
+<p>This value is set  as &#8220;/etc&#8221;.</p>
+</div>
+<div class="section" id="qmake">
+<h3>qmake<a class="headerlink" href="#qmake" title="Permalink to this headline">¶</a></h3>
+<p>The default qmake binary is put into default bindir.</p>
+</div>
+</div>
+<div class="section" id="configure">
+<h2>Configure<a class="headerlink" href="#configure" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">configure</span><span class="p">(</span><span class="n">projectfile</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">installPrefix</span><span class="o">=</span><span class="n">prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Configures the qt4 packages according to the parameters and project file given
+by the user and PISI&#8217;s default parameters.</p>
+</div>
+<div class="section" id="make">
+<h2>Make<a class="headerlink" href="#make" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">make</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Builds the qt4 packages according to the parameters given by the user.</p>
+</div>
+<div class="section" id="install">
+<h2>install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">install</span><span class="p">(</span><span class="n">parameters</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">argument</span> <span class="o">=</span> <span class="s">&#39;install&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Install the qt4 packages according to the parameters given by the user.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/qt4.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/softwaredevelopment/coderules/docstring_rules.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Docstring Rules</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Code Rules" href="index.html" />
+    <link rel="next" title="Unit Test" href="unit_test_rules.html" />
+    <link rel="prev" title="Code Rules" href="code_rules.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Software Development</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Code Rules</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Docstring Rules</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Docstring Rules</a><ul>
+<li><a class="reference external" href="#function-method-documentation">Function &amp; Method Documentation</a><ul>
+<li><a class="reference external" href="#function-method-documentation-sample-code">Function &amp; Method Documentation Sample Code</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#module-documentation">Module Documentation</a><ul>
+<li><a class="reference external" href="#module-documentation-sample-code">Module Documentation Sample Code</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#variable-attribute-documentation">Variable &amp; Attribute Documentation</a><ul>
+<li><a class="reference external" href="#variable-attribute-documentation-sample-code">Variable &amp; Attribute Documentation Sample Code</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#class-documentation">Class Documentation</a><ul>
+<li><a class="reference external" href="#class-documentation-sample-code">Class Documentation Sample Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <p id="docstring-rules"><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Mehmet Özdemir</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id1">
+<h1>Docstring Rules<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This document assumes Pardus developers use Sphinx to create apidoc. While you are writing docstring for your code you ARE EXPECTED TO OBEY writing restructured text conventions.</p>
+</div>
+<img alt="../../../_images/whole_view.png" src="../../../_images/whole_view.png" />
+<p>You can see the cheatsheet: <a class="reference external" href="PardusApiDocStandardsCheatSheet.html">http://developer.pardus.org.tr/guides/softwaredevelopment/coderules/PardusApiDocStandardsCheatSheet.pdf</a></p>
+<p>Below are the code documentation rules in generally we want you to observe:</p>
+<div class="section" id="function-method-documentation">
+<h2>Function &amp; Method Documentation<a class="headerlink" href="#function-method-documentation" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>One line summary (Synopsis)</dt>
+<dd><ul class="first last simple">
+<li>Synopsis will be put after the first &#8220;&#8221;&#8220;</li>
+<li>However, other lines will be the same align</li>
+<li>Synopsis is a brief description of method/function</li>
+<li>This is required</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>An extended description</dt>
+<dd><ul class="first last">
+<li><p class="first">Extended description is an optional field</p>
+</li>
+<li><dl class="first docutils">
+<dt>If extra information is needed about function/method, we write extended description</dt>
+<dd><ul class="first last simple">
+<li>For example, assume that there is a function takes a parameter whose name is hash. In extended description we may describe which hashes are supported or expected etc.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">There must be a blank line after synopsis</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Arguments</dt>
+<dd><ul class="first last">
+<li><p class="first">Argument names and argument types will be listed</p>
+</li>
+<li><p class="first">A simple description would be useful, helpful</p>
+</li>
+<li><p class="first">These properties will be written for every parameter</p>
+</li>
+<li><p class="first">This is required</p>
+</li>
+<li><p class="first">Format:</p>
+<div class="highlight-python"><pre>:param arg: `description`
+:type arg: `type of the above argument`</pre>
+</div>
+</li>
+<li><p class="first">There must be a blank line after extended description</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Return value</dt>
+<dd><ul class="first last">
+<li><p class="first">Return value and type should be written</p>
+</li>
+<li><p class="first">A description would be good</p>
+</li>
+<li><p class="first">This is required if there is return value</p>
+</li>
+<li><p class="first">Format:</p>
+<div class="highlight-python"><pre>:returns: `description`
+:rtype: `type`</pre>
+</div>
+</li>
+<li><p class="first">There must NOT be a blank line after arguments</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Exceptions</dt>
+<dd><ul class="first last">
+<li><p class="first">Exceptions should be listed</p>
+</li>
+<li><p class="first">Description of the exception should be written</p>
+</li>
+<li><p class="first">Format:</p>
+<div class="highlight-python"><pre>:raisises `Type of the Exception`: `description`</pre>
+</div>
+</li>
+<li><p class="first">There must NOT be a blank line after return value</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>End sof comment and blank line</dt>
+<dd><ul class="first last simple">
+<li>There must be a blank line after exceptions</li>
+<li>After the blank line triple &#8221; character comes and comment ends</li>
+<li>After the end of comment symbol there nust be a blank line</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>If needed:</strong> (not recommended)</p>
+<blockquote>
+<ul class="simple">
+<li>Example: A usage sample</li>
+<li>License: License of the method</li>
+<li>Algorithm: You can add implementation of the algorithm</li>
+<li>Notes: You can write additional notes</li>
+<li>Bugs: If there is any known bug this can be written</li>
+<li>Authors: Authors of the function/method</li>
+<li>See Also: Reader is warned to see related functions/methods</li>
+<li>Comments: Writer comments</li>
+<li>Warnings: Usage warnings</li>
+<li>Todo: A todo list</li>
+<li>Tags: Tags can be written. Like deprecated.</li>
+</ul>
+</blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Keep in mind that the above information aims to the users of our function/method. We embed comments and other information in our function&#8217;s/method&#8217;s code and this information is for function/method developers. Comments in this section generally starts with # character and a whitespace follows it. Then information is written.</p>
+</div>
+<div class="section" id="function-method-documentation-sample-code">
+<h3>Function &amp; Method Documentation Sample Code<a class="headerlink" href="#function-method-documentation-sample-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">addItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">mounted</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;This function is used for to add new disk unit items to the list.</span>
+
+<span class="sd">  Disk unit items are the items that are plugged to system. They are added to list with related unit information.</span>
+
+<span class="sd">  :param id_: Identification of the disk unit</span>
+<span class="sd">  :type id_: string</span>
+<span class="sd">  :param name: Name for this disk unit</span>
+<span class="sd">  :type name: string</span>
+<span class="sd">  :param description: A description about unit&#39;s features. `Like size, mount state etc.`</span>
+<span class="sd">  :type description: string</span>
+<span class="sd">  :param mounted: Mount state of the unit. If it is mounted this value must be True, otherwise False</span>
+<span class="sd">  :type mounted: Boolean</span>
+<span class="sd">  :returns: **True** if add operation is succesful, otherwise returns **False**</span>
+<span class="sd">  :rtype: Boolean</span>
+<span class="sd">  :raises UnitNotExistException: If id not exists raise UnitNotExistException (Salladim)</span>
+
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="k">if</span> <span class="n">mounted</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">Pds</span><span class="o">.</span><span class="n">session</span> <span class="o">==</span> <span class="n">ctx</span><span class="o">.</span><span class="n">pds</span><span class="o">.</span><span class="n">Kde4</span><span class="p">:</span>
+      <span class="n">icon</span> <span class="o">=</span> <span class="n">KIcon</span><span class="p">(</span><span class="s">&quot;drive-harddisk&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;emblem-mounted&quot;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">icon</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">KIconLoader</span><span class="o">.</span><span class="n">loadOverlayed</span><span class="p">(</span><span class="s">&#39;drive-harddisk&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;emblem-mounted&quot;</span><span class="p">],</span> <span class="mf">32</span><span class="p">))</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">KIcon</span><span class="p">(</span><span class="s">&quot;drive-harddisk&quot;</span><span class="p">)</span>
+
+  <span class="n">type_</span> <span class="o">=</span> <span class="s">&quot;disk&quot;</span>
+
+  <span class="c"># Build widget and widget item</span>
+  <span class="n">widget</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">makeItemWidget</span><span class="p">(</span><span class="n">id_</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">type_</span><span class="p">,</span> <span class="n">icon</span><span class="p">,</span> <span class="n">mounted</span><span class="p">)</span>
+  <span class="n">widgetItem</span> <span class="o">=</span> <span class="n">ItemListWidgetItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">listItems</span><span class="p">,</span> <span class="n">widget</span><span class="p">)</span>
+
+  <span class="c"># Delete is unnecessary</span>
+  <span class="n">widget</span><span class="o">.</span><span class="n">hideDelete</span><span class="p">()</span>
+
+  <span class="c"># Add to list</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">listItems</span><span class="o">.</span><span class="n">setItemWidget</span><span class="p">(</span><span class="n">widgetItem</span><span class="p">,</span> <span class="n">widget</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../../_images/method_sample.png" src="../../../_images/method_sample.png" />
+</div>
+</div>
+<div class="section" id="module-documentation">
+<h2>Module Documentation<a class="headerlink" href="#module-documentation" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Synopsis</dt>
+<dd><ul class="first last simple">
+<li>Brief description of the module</li>
+<li>This line should start below the &#8220;&#8221;&#8220;</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Module author</dt>
+<dd><ul class="first last">
+<li><p class="first">Format:</p>
+<div class="highlight-python"><pre>.._  moduleauthor:: pars &lt;admins@pardus.org.tr&gt;</pre>
+</div>
+</li>
+<li><p class="first">There must be a blank line after synopsis</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>End of module information</dt>
+<dd><ul class="first last simple">
+<li>Finish module documentation with triple &#8221; and put a blank line after that</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="section" id="module-documentation-sample-code">
+<h3>Module Documentation Sample Code<a class="headerlink" href="#module-documentation-sample-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module provides a widget that lists the disk items with a fancy view...</span>
+
+<span class="sd">.. moduleauthor:: pars &lt;admins@pardus.org.tr&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Unknown directive type &#8220;module&#8221;.
+Unknown directive type &#8220;moduleauthor&#8221;.
+<a class="reference external" href="http://packages.python.org/an_example_pypi_project/sphinx.html#full-code-example">http://packages.python.org/an_example_pypi_project/sphinx.html#full-code-example</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="variable-attribute-documentation">
+<h2>Variable &amp; Attribute Documentation<a class="headerlink" href="#variable-attribute-documentation" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Description</dt>
+<dd><ul class="first last simple">
+<li>What is that attribute, why you defined that?</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="section" id="variable-attribute-documentation-sample-code">
+<h3>Variable &amp; Attribute Documentation Sample Code<a class="headerlink" href="#variable-attribute-documentation-sample-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot; Holds the current index value for a ListElement &quot;&quot;&quot;</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mf">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>One line summary (Synopsis)</dt>
+<dd><ul class="first last simple">
+<li>Synopsis is a brief description of class. What does it represents?</li>
+<li>Synopsis will be put after the first &#8220;&#8221;&#8220;</li>
+<li>However, other lines will be the same align</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>An extended description</dt>
+<dd><ul class="first last simple">
+<li>If class needs an extended description this can be written but this is not an obligation</li>
+<li>There must be a blank line after synopsis</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Main Jobs</dt>
+<dd><ul class="first last">
+<li><p class="first">What that class do mainly; which main operations are supplied?</p>
+</li>
+<li><p class="first">If you believe giving main operation names useful, write them here. For example, a class may have lots of function but developer may wanna see main public functions and their tasks briefly. (This is not an obligation.)</p>
+</li>
+<li><p class="first">There must be a blank line after extended description (or synopsis if there is no extended description)</p>
+</li>
+<li><p class="first">Format:</p>
+<div class="highlight-python"><pre>**Job Definition**: `Job description`</pre>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="section" id="class-documentation-sample-code">
+<h3>Class Documentation Sample Code<a class="headerlink" href="#class-documentation-sample-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">EntryView</span><span class="p">(</span><span class="n">QScrollView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Holds the rule entries and shows them like a list view</span>
+
+<span class="sd">    This class is a simple listview implementation. It behaves like a</span>
+<span class="sd">    listview when entries are added, deleted or selected. The main</span>
+<span class="sd">    difference from a listview is this class stores custom widget</span>
+<span class="sd">    elements instead of listviewitems.</span>
+
+<span class="sd">    ** Item Addition**: add a new item to view</span>
+<span class="sd">    ** Item Deletion**: delete an existing item from view</span>
+<span class="sd">    ** Handling Item Events**: handle item events</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>One line summary (synopsis) property was removed because a good function name should already do this job (Gökmen Göksel)</li>
+<li>Examples are removed because we dont think to use doctest and importng examples to apidoc from external sources make our code more readable (Bahadır Kandemir)
+- We will use unit testing so doctest examples make our code dirty. However, code samples will be in apidoc because it is so important.</li>
+<li>We should avoid unnecessary descriptions when writing explanations in code. Sphinx supplies us to extend our documentation, it combines docstring and external documents</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/softwaredevelopment/coderules/docstring_rules.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:41 GMT -->
+</html>

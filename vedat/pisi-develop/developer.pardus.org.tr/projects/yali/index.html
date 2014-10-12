@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/projects/yali/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>YALI (Pardus Installer)</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Projects" href="../index.html" />
+    <link rel="next" title="Kaptan (Desktop Greeter)" href="../kaptan/index.html" />
+    <link rel="prev" title="PISI (Package Management)" href="../pisi/index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Projects</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">YALI (Pardus Installer)</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">YALI (Pardus Installer)</a><ul>
+<li><a class="reference external" href="#features">Features</a></li>
+<li><a class="reference external" href="#getting-source">Getting source</a></li>
+<li><a class="reference external" href="#requirements">Requirements</a></li>
+<li><a class="reference external" href="#bugs">Bugs</a></li>
+<li><a class="reference external" href="#tasks">Tasks</a></li>
+<li><a class="reference external" href="#developed-by">Developed by</a></li>
+<li><a class="reference external" href="#programming-environment">Programming Environment</a></li>
+<li><a class="reference external" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="yali-pardus-installer">
+<span id="yali4-index"></span><h1>YALI (Pardus Installer)<a class="headerlink" href="#yali-pardus-installer" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Gökmen GÖKSEL, Çağlar KİLİMCİ</td>
+</tr>
+</tbody>
+</table>
+<p><strong>YALI</strong> is Yet Another Linux Installer. It is the installer that sets up the system by installing packages from the installation media (eg. CD, network, Internet) and carrying out the basic conﬁguration. YALI is intended to be smooth in operation and fast in performance.</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Basic Pardus configurations</li>
+<li>Local configuration (keyboard, time zone etc.)</li>
+<li>Installation support with lvm and raid</li>
+<li>User management</li>
+<li>Partition management</li>
+</ul>
+</div>
+<div class="section" id="getting-source">
+<h2>Getting source<a class="headerlink" href="#getting-source" title="Permalink to this headline">¶</a></h2>
+<p>You can <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/yali/">browse</a> source code from <a class="reference external" href="http://websvn.pardus.org.tr/">WebSVN</a>.</p>
+<p>Or you can get the current version from Pardus SVN using following command:</p>
+<div class="highlight-python"><pre>$ svn co http://svn.pardus.org.tr/uludag/trunk/yali/</pre>
+</div>
+<p>And also there is an automatically created <a class="reference external" href="http://cekirdek.pardus.org.tr/~gokmen/yali-api-doc">ApiDoc</a> for Yalı4</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>PyQt</li>
+<li>GptSync</li>
+<li>Reiserfsprogs</li>
+<li>Ntfsprogs</li>
+<li>Dosfstools</li>
+<li>Python</li>
+<li>xorg</li>
+<li>Basic Linux Libraries</li>
+</ul>
+</div>
+<div class="section" id="bugs">
+<h2>Bugs<a class="headerlink" href="#bugs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/buglist.cgi?bug_severity=normal&amp;classification=Pardus%20Teknolojileri%20%2F%20Pardus%20Technologies&amp;query_format=advanced&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;product=YALI%20Kurulum%20Y%C3%B6neticisi%20%2F%20Installation%20Manager">Normal Priority Bug Reports</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/buglist.cgi?bug_severity=low&amp;classification=Pardus%20Teknolojileri%20%2F%20Pardus%20Technologies&amp;query_format=advanced&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;product=YALI%20Kurulum%20Y%C3%B6neticisi%20%2F%20Installation%20Manager">Wish Reports</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/buglist.cgi?bug_severity=newfeature&amp;classification=Pardus%20Teknolojileri%20%2F%20Pardus%20Technologies&amp;query_format=advanced&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;product=YALI%20Kurulum%20Y%C3%B6neticisi%20%2F%20Installation%20Manager">Feature Requests</a></li>
+</ul>
+</div>
+<div class="section" id="tasks">
+<h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://proje.pardus.org.tr:50030/projects/yali">Open Tasks</a></li>
+</ul>
+</div>
+<div class="section" id="developed-by">
+<h2>Developed by<a class="headerlink" href="#developed-by" title="Permalink to this headline">¶</a></h2>
+<p><strong>Current Developer</strong></p>
+<ul class="simple">
+<li>Mete Alpaslan &lt;mete [at] pardus.org.tr&gt;</li>
+</ul>
+<p><strong>Contributors</strong></p>
+<ul class="simple">
+<li>Murat Eren &lt;meren [at] pardus.org.tr&gt;</li>
+<li>Barış Metin &lt;baris [at] pardus.org.tr&gt;</li>
+<li>Gökmen GÖKSEL &lt;gokmen [at] pardus.org.tr&gt;</li>
+<li>Gürer Özen &lt;gurer [at] pardus.org.tr&gt;</li>
+<li>Halil İbrahim Güngör &lt;ibrahim [at] pardus.org.tr&gt;</li>
+<li>Onur Küçük &lt;onur [at] pardus.org.tr&gt;</li>
+<li>Renan Çakırerk &lt;renan [at] pardus.org.tr&gt;</li>
+</ul>
+<p><strong>Graphics</strong></p>
+<ul class="simple">
+<li>Banu Ünal &lt;banu [at] pardus.org.tr&gt;</li>
+<li>Gökhan Özkan &lt;gokhan [at] pardus.org.tr&gt;</li>
+<li>Renan Çakırerk &lt;renan [at] pardus.org.tr&gt;</li>
+<li>Umut Pulat &lt;umut [at] pardus.org.tr&gt;</li>
+</ul>
+<p><strong>QTermWidget Author for QConsole</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="mailto:e_k&#37;&#52;&#48;users&#46;sourceforge&#46;net">e_k<span>&#64;</span>users<span>&#46;</span>sourceforge<span>&#46;</span>net</a></li>
+</ul>
+</div>
+<div class="section" id="programming-environment">
+<h2>Programming Environment<a class="headerlink" href="#programming-environment" title="Permalink to this headline">¶</a></h2>
+<p>For hacking YALI you need to have basic knowledge about <a class="reference external" href="http://www.python.org/">Python</a>, <a class="reference external" href="http://en.wikipedia.org/wiki/C++">CPP</a> and <a class="reference external" href="http://www.trolltech.com/">Qt4</a> <em>for GUI</em>.Also <a class="reference external" href="http://www.vim.org/">Vim</a> &amp; <a class="reference external" href="http://www.gnu.org/software/emacs">Emacs</a> are the best friends of YALI developers.</p>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>Yali is distributed under the terms of the <a class="reference external" href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License (GPL), Version 2</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/projects/yali/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:01 GMT -->
+</html>

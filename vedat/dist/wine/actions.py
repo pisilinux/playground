@@ -31,37 +31,7 @@ def setup():
                --with-dbus \
                --with-opengl \
                --with-alsa \
-               --with-x \
-               --with-alsa \
-               --with-cms \
-               --with-coreaudio \
-               --with-cups \
-               --with-curses \
-               --with-fontconfig \
-               --with-freetype \
-               --with-glu \
-               --with-gnutls \
-               --with-gphoto \
-               --with-gsm \
-               --with-jpeg \
-               --with-ldap \
-               --with-mpg123 \
-               --with-opengl \
-               --with-oss \
-               --with-png \
-               --with-pthread \
-               --with-sane \
-               --with-xcomposite \
-               --with-xcursor \
-               --with-xinerama \
-               --with-xinput \
-               --with-xml \
-               --with-xrandr \
-               --with-xrender \
-               --with-xshape \
-               --with-xshm \
-               --with-xslt \
-               --with-xxf86vm "
+               --with-x"
 
     if get.buildTYPE() == "emul32":
         options += " --with-wine64=%s/work/wine-%s" % (get.pkgDIR(), get.srcVERSION())

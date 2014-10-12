@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/testing_process/package_update_tests/package_update_tests.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Package Update Tests</title>
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../../index.html" />
+    <link rel="up" title="Package Update Tests" href="index.html" />
+    <link rel="next" title="Security Vulnerability Update Tests" href="security_tests.html" />
+    <link rel="prev" title="Prepare Test Environment for Package Updates" href="prepare_test_environment_for_package_updates.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Releasing</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Testing Process</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Package Update Tests</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Package Update Tests</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Package Update Tests</a><ul>
+<li><a class="reference external" href="#prepare-tester-machine">Prepare Tester Machine</a></li>
+<li><a class="reference external" href="#start-package-update-tests">Start Package Update Tests</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="package-update-tests"></span><h1>Package Update Tests<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Last Modified Date:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>After the shippment of <a class="reference external" href="../../official_releases/final_release.html">final release</a> developers continue to add new packages
+and update their packages on <a class="reference external" href="../../repository_concepts/sourcecode_repository.html#devel-folder">devel source repository</a> during maintanence phase.</p>
+<p>When these packages get their stable versions the developers merge them to
+<a class="reference external" href="../../repository_concepts/sourcecode_repository.html#testing-folder">testing source repository</a>.</p>
+<p>The <a class="reference external" href="../../repository_concepts/software_repository.html">binary repositories</a> of these two repositories are generated automatically
+by related <a class="reference external" href="../../preparing_buildfarm.html">buildfarms</a>.</p>
+<p>The release manager compare these two binary repositories with <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/scripts/find-waiting-packages-for-ack">waiting packages for
+approval script</a> regularly (twice a month generally) and send a warning mail to
+start developer package approval.</p>
+<p>After that the package update test process starts; test supervisor make some
+<a class="reference external" href="prepare_test_environment_for_package_updates.html">mandatory operations</a> at the beginning of test process, send the needed information
+to testers and the package update tests starts.</p>
+<p>These tests includes regular tests for newly added and updated packages to <a class="reference external" href="../../repository_concepts/software_repository.html#testing-binary-repository">testing
+binary repository</a>.</p>
+<div class="section" id="prepare-tester-machine">
+<h2>Prepare Tester Machine<a class="headerlink" href="#prepare-tester-machine" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>You can reserve a min 8Gb special partition for tests. And at the beginning of each
+regular package update test, you should re-install this system (Because the test
+environment must be proper.)</li>
+</ul>
+<ul>
+<li><p class="first">After installation you must update the system. (The repository must be stable repository)</p>
+</li>
+<li><dl class="first docutils">
+<dt>Add the <a class="reference external" href="prepare_test_environment_for_package_updates.html#create-tester-repository-and-upload-repository-to-server">tester repository</a> to the system.</dt>
+<dd><p class="first">Change repository via  <a class="reference external" href="../../../../projects/package-manager/index.html">Package Manager</a>: Follow Settings -&gt; Package Manager Settings
+-&gt; Repositories and add the new repository, remove or disable the old repository (stable)
+Change repository via console:</p>
+<div class="last highlight-python"><pre>pisi lr
+pisi dr &lt;old repository name&gt;
+    or
+pisi rr &lt;old repository name&gt;
+pisi ar &lt;new repository name&gt; &lt;new repository&gt;</pre>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">Re-update the system with tester repository</p>
+</li>
+</ul>
+</div>
+<div class="section" id="start-package-update-tests">
+<h2>Start Package Update Tests<a class="headerlink" href="#start-package-update-tests" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Test supervisor sends a warning mail to start tests and gives relevant information
+(approved package list, tester repository name, tescase link etc.)</p>
+</li>
+<li><dl class="first docutils">
+<dt>For all packages:</dt>
+<dd><ol class="first last arabic">
+<li><dl class="first docutils">
+<dt>Install packages successively (If the package is already installed during update, the package manager will not list this package or the package install command will return package already installed warning)</dt>
+<dd><div class="first last highlight-python"><pre>pisi it &lt;package name&gt;</pre>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">Apply testcase of the installed package. (The testcases are groupped by <a class="reference external" href="../../../packaging/package_components.html">package components</a>. The warning mail includes the package list as components, therefore the testers can directly find the relevant testcase document. For example for the testcase of apache package, the server testcases document must be used)</p>
+</li>
+<li><dl class="first docutils">
+<dt>Report errors: After applying the testcases or using the package, if the tester experience with an error, this error must be repoted to bugzilla.</dt>
+<dd><p class="first">But, before you file a new bug report you should be sure that the bug that you find:</p>
+<ul class="last simple">
+<li>Does not have a duplicate See: <a class="reference external" href="../../../bugtracking/finding_duplicates.html">Finding duplicates</a></li>
+<li>Is suitable for <a class="reference external" href="../../../bugtracking/bug_and_feature_requests.html">effective bug reporting document</a>?</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Take system back: After installing a package and applying its testcase, the system should be taken back in order to install and test the next package on the approved package list. (If the package is directly installed with update, system will not taken back)</dt>
+<dd><ul class="first last">
+<li><p class="first">List the package changes:</p>
+<div class="highlight-python"><pre>pisi hs</pre>
+</div>
+<p>Example output:</p>
+<div class="highlight-python"><pre>Operation #51: install
+Date: 2011-01-26 10:39
+
+    * mkinitramfs is upgraded from 1.0.3-88-p11-x86_64 to 1.0.5-91-p11-x86_64.
+    * mudur is upgraded from 4.1.3-124-p11-x86_64 to 4.1.3-125-p11-x86_64.
+    * baselayout is upgraded from 3.5.1-162-p11-x86_64 to 3.5.1-163-p11-x86_64.
+
+
+Operation #50: upgrade
+Date: 2011-01-18 08:25
+
+    * baselayout is upgraded from 3.5.1-159-p11-x86_64 to 3.5.1-162-p11-x86_64.
+    * sqlite is upgraded from 3.7.1-28-p11-x86_64 to 3.7.4-29-p11-x86_64.
+    * grub is upgraded from 0.97-93-p11-x86_64 to 0.97-94-p11-x86_64.
+    * cursor-theme-oxygen-black is upgraded from 4.5.5-144-p11-x86_64 to 4.5.5-150-p11-x86_64.</pre>
+</div>
+</li>
+<li><dl class="first docutils">
+<dt>Take the relevant operation back: Control the last operation that you have done with the above command, then take the system back with below command (the given number to the command is the one previous operation number of your change operation number).</dt>
+<dd><div class="first last highlight-python"><pre>sudo pisi hs -t &lt;number of one previous operaiton&gt;</pre>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>After all package tests are finished, send a report as a reply of the warning mail to <a class="reference external" href="http://lists.pardus.org.tr/mailman/listinfo/testci">tester mail list</a>.</dt>
+<dd><p class="first">Example report:</p>
+<div class="last highlight-python"><pre>OK·
+---------------------------
+AstroMenace-1.2_080519-8-p11-i686.pisi
+AstroMenace-data-1.2_070928-2-p11-i686.pisi
+BackupPC-3.2.0-1-p11-i686.pisi
+Bitstream-Vera-fonts-1.10-4-p11-i686.pisi
+
+Not OK
+------------------------------
+ETL-0.04.13-4-p11-i686.pisi
+FreeImage-3.13.1-6-p11-i686.pisi
+FreeImage-devel-3.13.1-6-p11-i686.pisi
+FreeMat-4.0.1-3-p11-i686.pisi
+FusionSound-0.0_20080311-8-p11-i686.pisi
+FusionSound-devel-0.0_20080311-8-p11-i686.pisi</pre>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/testing_process/package_update_tests/package_update_tests.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

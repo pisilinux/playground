@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ActionsApi</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Packaging" href="../index.html" />
+    <link rel="next" title="About the document" href="main.html" />
+    <link rel="prev" title="Howto Build PiSi Package" href="../howto_build_pisi_package.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">ActionsApi</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">ActionsApi</a><ul>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="actionsapi">
+<span id="actionsapi-index"></span><h1>ActionsApi<a class="headerlink" href="#actionsapi" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="main.html">About the document</a><ul>
+<li class="toctree-l2"><a class="reference external" href="main.html#actions-api">Actions API</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="autotools.html">Autotools</a><ul>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#configure">configure</a></li>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#rawconfigure">rawConfigure</a></li>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#compile">compile</a></li>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#make">make</a></li>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#install">install</a></li>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#rawinstall">rawInstall</a></li>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#aclocal">aclocal</a></li>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#autoconf">autoconf</a></li>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#autoreconf">autoreconf</a></li>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#automake">automake</a></li>
+<li class="toctree-l2"><a class="reference external" href="autotools.html#autoheader">autoheader</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="cmaketools.html">Cmaketools</a><ul>
+<li class="toctree-l2"><a class="reference external" href="cmaketools.html#configure">configure</a></li>
+<li class="toctree-l2"><a class="reference external" href="cmaketools.html#make">make</a></li>
+<li class="toctree-l2"><a class="reference external" href="cmaketools.html#install">install</a></li>
+<li class="toctree-l2"><a class="reference external" href="cmaketools.html#rawinstall">rawInstall</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="get.html">Get</a><ul>
+<li class="toctree-l2"><a class="reference external" href="get.html#global-functions">Global Functions</a></li>
+<li class="toctree-l2"><a class="reference external" href="get.html#pisi-related-functions">PISI Related Functions</a></li>
+<li class="toctree-l2"><a class="reference external" href="get.html#pardus-release-related-functions">Pardus Release Related Functions</a></li>
+<li class="toctree-l2"><a class="reference external" href="get.html#pspec-related-functions">PSPEC Related Functions</a></li>
+<li class="toctree-l2"><a class="reference external" href="get.html#build-related-functions">Build Related Functions</a></li>
+<li class="toctree-l2"><a class="reference external" href="get.html#directory-related-functions">Directory Related Functions</a></li>
+<li class="toctree-l2"><a class="reference external" href="get.html#binutils-related-functions">Binutils Related Functions</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="kde4.html">KDE4</a><ul>
+<li class="toctree-l2"><a class="reference external" href="kde4.html#default-parameters">Default Parameters</a></li>
+<li class="toctree-l2"><a class="reference external" href="kde4.html#configure">configure</a></li>
+<li class="toctree-l2"><a class="reference external" href="kde4.html#make">make</a></li>
+<li class="toctree-l2"><a class="reference external" href="kde4.html#install">install</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="kde.html">KDE</a><ul>
+<li class="toctree-l2"><a class="reference external" href="kde.html#configure">configure</a></li>
+<li class="toctree-l2"><a class="reference external" href="kde.html#make">make</a></li>
+<li class="toctree-l2"><a class="reference external" href="kde.html#install">install</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="kerneltools.html">Kerneltools</a><ul>
+<li class="toctree-l2"><a class="reference external" href="kerneltools.html#configuration-part">Configuration Part</a></li>
+<li class="toctree-l2"><a class="reference external" href="kerneltools.html#building-and-installing-part">Building and Installing Part</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="libtools.html">Libtools</a><ul>
+<li class="toctree-l2"><a class="reference external" href="libtools.html#preplib">preplib</a></li>
+<li class="toctree-l2"><a class="reference external" href="libtools.html#gnuconfig-update">gnuconfig_update</a></li>
+<li class="toctree-l2"><a class="reference external" href="libtools.html#libtoolize">libtoolize</a></li>
+<li class="toctree-l2"><a class="reference external" href="libtools.html#gen-usr-ldscript">gen_usr_ldscript</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="perlmodules.html">Perlmodules</a><ul>
+<li class="toctree-l2"><a class="reference external" href="perlmodules.html#configure">configure</a></li>
+<li class="toctree-l2"><a class="reference external" href="perlmodules.html#make">make</a></li>
+<li class="toctree-l2"><a class="reference external" href="perlmodules.html#install">install</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="pisitools.html">Pisitools</a><ul>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#dobin">dobin</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#dodir">dodir</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#dodoc">dodoc</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#doexe">doexe</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#dohtml">dohtml</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#doinfo">doinfo</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#dolib">dolib</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#dolib-a">dolib_a</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#dolib-so">dolib_so</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#doman">doman</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#domo">domo</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#domove">domove</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#dosed">dosed</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#dosbin">dosbin</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#dosym">dosym</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#insinto">insinto</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#newdoc">newdoc</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#newman">newman</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#remove">remove</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#rename">rename</a></li>
+<li class="toctree-l2"><a class="reference external" href="pisitools.html#removedir">removeDir</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="pkgconfig.html">Pkgconfig</a><ul>
+<li class="toctree-l2"><a class="reference external" href="pkgconfig.html#getvariableforlibrary">getVariableForLibrary</a></li>
+<li class="toctree-l2"><a class="reference external" href="pkgconfig.html#getlibraryversion">getLibraryVersion</a></li>
+<li class="toctree-l2"><a class="reference external" href="pkgconfig.html#getlibrarycflags">getLibraryCFLAGS</a></li>
+<li class="toctree-l2"><a class="reference external" href="pkgconfig.html#getlibrarylibadd">getLibraryLIBADD</a></li>
+<li class="toctree-l2"><a class="reference external" href="pkgconfig.html#libraryexists">libraryExists</a></li>
+<li class="toctree-l2"><a class="reference external" href="pkgconfig.html#runmanualcommand">runManualCommand</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="pythonmodules.html">Pythonmodules</a><ul>
+<li class="toctree-l2"><a class="reference external" href="pythonmodules.html#configure">configure</a></li>
+<li class="toctree-l2"><a class="reference external" href="pythonmodules.html#compile">compile</a></li>
+<li class="toctree-l2"><a class="reference external" href="pythonmodules.html#install">install</a></li>
+<li class="toctree-l2"><a class="reference external" href="pythonmodules.html#run">run</a></li>
+<li class="toctree-l2"><a class="reference external" href="pythonmodules.html#fixcompiledpy">fixCompiledPy</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="qt4.html">Qt4</a><ul>
+<li class="toctree-l2"><a class="reference external" href="qt4.html#default-values">Default Values</a></li>
+<li class="toctree-l2"><a class="reference external" href="qt4.html#configure">Configure</a></li>
+<li class="toctree-l2"><a class="reference external" href="qt4.html#make">Make</a></li>
+<li class="toctree-l2"><a class="reference external" href="qt4.html#install">install</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="rubymodules.html">Rubymodules</a><ul>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#get-config">get_config</a></li>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#get-ruby-version">get_ruby_version</a></li>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#get-rubylibdir">get_rubylibdir</a></li>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#get-sitedir">get_sitedir</a></li>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#get-ruby-install-name">get_ruby_install_name</a></li>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#get-gemhome">get_gemhome</a></li>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#get-sitelibdir">get_sitelibdir</a></li>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#auto-dodoc">auto_dodoc</a></li>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#install">install</a></li>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#rake-install">rake_install</a></li>
+<li class="toctree-l2"><a class="reference external" href="rubymodules.html#run">run</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="scons.html">Scons</a><ul>
+<li class="toctree-l2"><a class="reference external" href="scons.html#make">make</a></li>
+<li class="toctree-l2"><a class="reference external" href="scons.html#install">install</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="shelltools.html">Shelltools</a><ul>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#can-access-file">can_access_file</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#can-access-directory">can_access_directory</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#makedirs">makedirs</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#echo">echo</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#chmod">chmod</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#chown">chown</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#sym">sym</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#unlink">unlink</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#unlinkdir">unlinkDir</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#move">move</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#copy">copy</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#copytree">copytree</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#touch">touch</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#cd">cd</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#ls">ls</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#export">export</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#system">system</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#islink">isLink</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#isfile">isFile</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#isdirectory">isDirectory</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#isempty">isEmpty</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#realpath">realPath</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#basename">baseName</a></li>
+<li class="toctree-l2"><a class="reference external" href="shelltools.html#dirname">dirName</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="texlivemodules.html">Texlivemodules</a><ul>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#compile">compile</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#install">install</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#createsymlinksformat2engines">createSymlinksFormat2Engines</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#addformat">addFormat</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#movesources">moveSources</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#buildformatfiles">buildFormatFiles</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#generateconfigfiles">generateConfigFiles</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#makelanguagesdefdatlines">makeLanguagesDefDatLines</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#installdocfiles">installDocFiles</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#installtexmffiles">installTexmfFiles</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#installconfigfiles">installConfigFiles</a></li>
+<li class="toctree-l2"><a class="reference external" href="texlivemodules.html#handleconfigfiles">handleConfigFiles</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+</html>

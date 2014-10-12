@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/scripts/checkelf.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>checkelf</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">checkelf</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">checkelf</a><ul>
+<li><a class="reference external" href="#the-usage-and-founctionality">The usage and founctionality:</a></li>
+<li><a class="reference external" href="#examples">Examples:</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="checkelf"></span><h1>checkelf<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Checkelf is a script which facilitates developers to find dependencies,
+undefined symbols of packages, etc. It&#8217;s based on Ozan&#8217;s checklib&#8217;s script.
+I&#8217;ve tried to explain all available options, which you can examine below.
+It has a lot of fine-tuning options which allows the user to get the
+desired output directly. For more info please read the options and examples
+at the end of the page.</p>
+<div class="section" id="the-usage-and-founctionality">
+<h2>The usage and founctionality:<a class="headerlink" href="#the-usage-and-founctionality" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">unused</span>
+</pre></div>
+</div>
+<p>This option is used in order to find unused direct dependencies. It shows
+only this options, all other result options are damped.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">f</span><span class="p">,</span> <span class="o">--</span><span class="n">undefined</span>
+</pre></div>
+</div>
+<p>This option is used in forder to find undefined symbols. It shows
+only this options, all other result options are damped.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">dependencies</span>
+</pre></div>
+</div>
+<p>This option is used in order to show the relation between dependencies
+in a fancy table. The table has three colums, first one shows the written
+dependencies that are written in the pspec.xml. The second colums shows
+the dependencies which checkelf has found; these dependencies must be added.
+The third column is just a difference from the first and second columd.
+It shows dependencies that sould be added to pspec.xml. It shows only this
+option, all other options are damped.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="o">--</span><span class="n">missing</span>
+</pre></div>
+</div>
+<p>This option is used in order to find missing dependencies according
+to ELF files. It list the missing packages that did not exist in
+pspec.xml, these sould be added to pspec.xml. It&#8217;s the same as the
+third column in the -t option. It shows only this option, all other options are
+damped</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">--</span><span class="n">runpath</span>
+</pre></div>
+</div>
+<p>This option is used in order to show the runpath of a binary file. In fact
+it executes &#8216;chrpath -l&#8217; and shows the output. It shows only this option,
+all other options are damped.</p>
+<div class="highlight-python"><pre>-c, --component &lt;component_name&gt;</pre>
+</div>
+<p>This option is used in order to check for packages that belongs to a spesific
+component.</p>
+<p>Example:</p>
+<p>$ checkelf -c tex.addon</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">systembase</span>
+</pre></div>
+</div>
+<p>The dependencies from system.base component have not been listed by default,
+if you want to list also system.base related dependencies you have to
+use this option. The dependencies from system.base component will be listed
+in red and (*) marker. The markes is useful to detect system.base packages
+in no-color mode.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">--</span><span class="n">all</span>
+</pre></div>
+</div>
+<p>This option checks all installed packages in the system. Note that this will
+print out all the results to the display which might be useless to read. Using
+-n option and piping the output is much more efficient</p>
+<p>Examle:</p>
+<p>$ checkelf -a -n &gt; results.txt</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">color</span>
+</pre></div>
+</div>
+<p>This option close the color option. When you take the output via pipe,
+the color characters will be ignored. Thus the output will be clear.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="o">--</span><span class="n">plain</span><span class="o">-</span><span class="nb">list</span>
+</pre></div>
+</div>
+<p>This option shows a simplified output. It doesn prettify anything, it
+justs outputs a plain list of packages. If you want to examine your pacakges
+via grep,awk,etc your should use this option</p>
+<div class="highlight-python"><pre>-d, --directory &lt;directory&gt;</pre>
+</div>
+<p>This option let you specify a folder to check for pisi files inside that
+directory</p>
+<p>Example:</p>
+<p>checkelf -d tempdir/</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="o">--</span><span class="n">recursive</span>
+</pre></div>
+</div>
+<p>This option can be used only with -d option. It recursively search for all
+pisi files inside the directory specified with -d. That means if a folder
+exist in that directory, the pisi files inside that directory is also checked.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples:<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>In general, checkelf can check for two types. It can check for installed
+packages, or it can check for a speficied pisi file.
+Below are several examples for real-world use of checkelf</p>
+<p>Ex:</p>
+<div class="highlight-python"><pre>$ checkelf gcc chromium-browser</pre>
+</div>
+<p>The installed packages gcc and chromium-browser are checked. Because no options
+are specified, checkelfs automatically enables -u, -f, -t options</p>
+<p>Ex:</p>
+<div class="highlight-python"><pre>$ checkelf Publican-2.1-1.pisi -s -m -n</pre>
+</div>
+<p>In the above example you can list all system.base related dependencies, only the
+missing dependencies of Publican pisi package colorless.</p>
+<p>Ex:</p>
+<div class="highlight-python"><pre>$ checkelf</pre>
+</div>
+<p>If checkelf is executed standalone, it will be check for all pisi files
+in the directory where it has been executed. If the command is executed without
+any parameter the -u, -f, -m paramaters take into account by default.</p>
+<p>Ex:</p>
+<div class="highlight-python"><pre>$ checkelf -d -r tempdir/ foo-4.31.pisi -u</pre>
+</div>
+<p>All pisi files inside the tempdir will be checked, if any other folder with other
+pisi files exist, these are checked too. Additional to the folder, the package
+foo-4.31.pisi is also checked. Note that we&#8217;ve used the -u option here. That means
+only the unused direct dependencies are showed, all other results are damped and
+are not showed</p>
+<p>Ex:</p>
+<div class="highlight-python"><pre>$ checkelf clementine-0.5.3-3.pisi -c tex.tools -n &gt; checked_packages.txt</pre>
+</div>
+<p>It checks for clementine and for all installed packages that belongs to tex.tools
+component. We store the results to the file checked_packages.txt, note that -n option
+is used to supress the colors. That is useful if you want to use piping. When you dont
+use the no-color option, all the ASCI color characters coding will be saved too.
+An additional note here should be mentioned. As you see, a pisi file and an installed
+package is checked together. However, that is not recommended! Because the enviroment
+settings for pisi files are changed. These settings also applies to the installed
+packages. That means you could get a clean result, but in fact that might be not the case.</p>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Fatih Arslan, Semen Cirit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/scripts/checkelf.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

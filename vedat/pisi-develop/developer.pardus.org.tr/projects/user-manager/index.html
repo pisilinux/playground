@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/projects/user-manager/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User Manager</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Projects" href="../index.html" />
+    <link rel="next" title="System Manager" href="../system-manager/index.html" />
+    <link rel="prev" title="Display Settings" href="../display-settings/index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Projects</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">User Manager</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">User Manager</a><ul>
+<li><a class="reference external" href="#features">Features</a></li>
+<li><a class="reference external" href="#source-code">Source Code</a></li>
+<li><a class="reference external" href="#requirements">Requirements</a></li>
+<li><a class="reference external" href="#bugs">Bugs</a></li>
+<li><a class="reference external" href="#tasks">Tasks</a></li>
+<li><a class="reference external" href="#developed-by">Developed by</a></li>
+<li><a class="reference external" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="user-manager">
+<span id="user-manager-index"></span><h1>User Manager<a class="headerlink" href="#user-manager" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Beyza Ermiş</td>
+</tr>
+</tbody>
+</table>
+<p>User Manager is a Kde application for managing users, groups and policies.
+It uses COMAR as configuration backend.</p>
+<p>To run User Manager you may follow either Pardus Menu &gt; Applications &gt; System &gt; User Manager
+or the System Configuration section</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>New users or groups could be added.</li>
+<li>Existing users or groups could be removed.</li>
+<li>Authorization scopes of existing groups and users could be modified.</li>
+</ul>
+</div>
+<div class="section" id="source-code">
+<h2>Source Code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
+<p>You can <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/kde/user-manager/manager/">browse</a> source code from <a class="reference external" href="http://websvn.pardus.org.tr/uludag/trunk/kde/user-manager/">WebSVN</a>.</p>
+<p>Or you can get the current version from Pardus SVN using following command:</p>
+<div class="highlight-python"><pre>$ svn co http://svn.pardus.org.tr/uludag/trunk/kde/user-manager/manager</pre>
+</div>
+<p>Then you can install user-manager from the source code by typing:</p>
+<blockquote>
+./setup build
+sudo ./setup install</blockquote>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>PyQT</li>
+<li>PyKDE</li>
+<li>PolicyKit</li>
+</ul>
+</div>
+<div class="section" id="bugs">
+<h2>Bugs<a class="headerlink" href="#bugs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/buglist.cgi?bug_severity=normal&amp;classification=Pardus%20Teknolojileri%20%2F%20Pardus%20Technologies&amp;query_format=advanced&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;product=Kullan%C4%B1c%C4%B1%20Y%C3%B6neticisi%20%2F%20User%20Manager">Normal Priority Bug Reports</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/buglist.cgi?bug_severity=low&amp;classification=Pardus%20Teknolojileri%20%2F%20Pardus%20Technologies&amp;query_format=advanced&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;product=Kullan%C4%B1c%C4%B1%20Y%C3%B6neticisi%20%2F%20User%20Manager">Wish Reports</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/buglist.cgi?bug_severity=newfeature&amp;classification=Pardus%20Teknolojileri%20%2F%20Pardus%20Technologies&amp;query_format=advanced&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;product=Kullan%C4%B1c%C4%B1%20Y%C3%B6neticisi%20%2F%20User%20Manager">Feature Requests</a></li>
+</ul>
+</div>
+<div class="section" id="tasks">
+<h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://proje.pardus.org.tr:50030/projects/user-manager/issues?set_filter=1&amp;tracker_id=4">Open tasks</a></li>
+</ul>
+</div>
+<div class="section" id="developed-by">
+<h2>Developed by<a class="headerlink" href="#developed-by" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>Gökmen Göksel &lt;gokmen_at_pardus.org.tr&gt;</p>
+<p><a href="#id3"><span class="problematic" id="id4">*</span></a>Bahadır Kandemir &lt;bahadir_at_pardus.org.tr&gt;</p>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>User Manager is distributed under the terms of the <a class="reference external" href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License (GPL), Version 2</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/projects/user-manager/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:01 GMT -->
+</html>

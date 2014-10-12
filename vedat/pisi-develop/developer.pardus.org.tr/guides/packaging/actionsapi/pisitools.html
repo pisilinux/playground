@@ -1,0 +1,387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/pisitools.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Pisitools</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="Pkgconfig" href="pkgconfig.html" />
+    <link rel="prev" title="Perlmodules" href="perlmodules.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Pisitools</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Pisitools</a><ul>
+<li><a class="reference external" href="#dobin">dobin</a></li>
+<li><a class="reference external" href="#dodir">dodir</a></li>
+<li><a class="reference external" href="#dodoc">dodoc</a></li>
+<li><a class="reference external" href="#doexe">doexe</a></li>
+<li><a class="reference external" href="#dohtml">dohtml</a></li>
+<li><a class="reference external" href="#doinfo">doinfo</a></li>
+<li><a class="reference external" href="#dolib">dolib</a></li>
+<li><a class="reference external" href="#dolib-a">dolib_a</a></li>
+<li><a class="reference external" href="#dolib-so">dolib_so</a></li>
+<li><a class="reference external" href="#doman">doman</a></li>
+<li><a class="reference external" href="#domo">domo</a></li>
+<li><a class="reference external" href="#domove">domove</a></li>
+<li><a class="reference external" href="#dosed">dosed</a></li>
+<li><a class="reference external" href="#dosbin">dosbin</a></li>
+<li><a class="reference external" href="#dosym">dosym</a></li>
+<li><a class="reference external" href="#insinto">insinto</a></li>
+<li><a class="reference external" href="#newdoc">newdoc</a></li>
+<li><a class="reference external" href="#newman">newman</a></li>
+<li><a class="reference external" href="#remove">remove</a></li>
+<li><a class="reference external" href="#rename">rename</a></li>
+<li><a class="reference external" href="#removedir">removeDir</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="pisitools"></span><h1>Pisitools<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="dobin">
+<h2>dobin<a class="headerlink" href="#dobin" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dobin</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationDirectory</span> <span class="o">=</span> <span class="s">&#39;/usr/bin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Moves the sourceFile&#8217; in work directory to destinationDirectory. The default
+value for destinationDirectory is /usr/bin.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">dobin</span><span class="p">(</span><span class="s">&quot;sed/sed&quot;</span><span class="p">,</span> <span class="s">&quot;/bin&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dobin</span><span class="p">(</span><span class="s">&quot;zipsplit&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dodir">
+<h2>dodir<a class="headerlink" href="#dodir" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dodir</span><span class="p">(</span><span class="n">destinationDirectory</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creates a directory tree in the install path.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">dodir</span><span class="p">(</span><span class="s">&quot;/usr/include/awk&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dodir</span><span class="p">(</span><span class="s">&quot;/usr/&quot;</span> <span class="o">+</span> <span class="n">get</span><span class="o">.</span><span class="n">HOST</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;/include&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dodir</span><span class="p">(</span><span class="s">&quot;/usr/share/doc/</span><span class="si">%s</span><span class="s">/examples&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">srcTAG</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dodoc">
+<h2>dodoc<a class="headerlink" href="#dodoc" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dodoc</span><span class="p">(</span><span class="n">sourceFiles</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the sourceFiles into /usr/share/doc/PACKAGE under the install directory.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">dodoc</span><span class="p">(</span><span class="s">&quot;README&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dodoc</span><span class="p">(</span><span class="s">&quot;*.html&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dodoc</span><span class="p">(</span><span class="s">&quot;FAQ&quot;</span><span class="p">,</span> <span class="s">&quot;README&quot;</span><span class="p">,</span> <span class="s">&quot;ChangeLog.*&quot;</span><span class="p">,</span> <span class="s">&quot;algorithm.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="doexe">
+<h2>doexe<a class="headerlink" href="#doexe" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">doexe</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationDirectory</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the executable source file from work directory to destination directory
+under the install directory.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">doexe</span><span class="p">(</span><span class="s">&quot;extras/scsi-devfs.sh&quot;</span><span class="p">,</span> <span class="s">&quot;/etc/udev/scripts/&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">doexe</span><span class="p">(</span><span class="s">&quot;etc/hotplug/*.rc&quot;</span><span class="p">,</span> <span class="s">&quot;/etc/hotplug/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dohtml">
+<h2>dohtml<a class="headerlink" href="#dohtml" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dohtml</span><span class="p">(</span><span class="n">sourceFiles</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the given html files into /usr/share/doc/PACKAGE/html under the install
+directory.</p>
+<p>The allowed extentions for html files are &#8220;.png, .gif, .html, .htm, .jpg, .css,
+.js&#8221;</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">dohtml</span><span class="p">(</span><span class="s">&quot;index.html&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dohtml</span><span class="p">(</span><span class="s">&quot;doc/*&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="doinfo">
+<h2>doinfo<a class="headerlink" href="#doinfo" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">doinfo</span><span class="p">(</span><span class="n">sourceFiles</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the given info files into /usr/share/info under the install directory.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">doinfo</span><span class="p">(</span><span class="s">&quot;*.info&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dolib">
+<h2>dolib<a class="headerlink" href="#dolib" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dolib</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationDirectory</span> <span class="o">=</span> <span class="s">&#39;/usr/lib&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the library files into /usr/lib under the install directory.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">dolib</span><span class="p">(</span><span class="s">&quot;libz.a&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dolib</span><span class="p">(</span><span class="s">&quot;lib/libpci.a&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dolib</span><span class="p">(</span><span class="s">&quot;libbz2.so.1.0.2&quot;</span><span class="p">,</span> <span class="s">&quot;/lib&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dolib-a">
+<h2>dolib_a<a class="headerlink" href="#dolib-a" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dolib_a</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationDirectory</span> <span class="o">=</span> <span class="s">&#39;/usr/lib&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the static library files into /usr/lib with permission 0644 under the
+install directory.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">dolib_a</span><span class="p">(</span><span class="s">&quot;lib/libpci.a&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dolib_a</span><span class="p">(</span><span class="s">&quot;libdb1.a&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dolib-so">
+<h2>dolib_so<a class="headerlink" href="#dolib-so" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dolib_so</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationDirectory</span> <span class="o">=</span> <span class="s">&#39;/usr/lib&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the shared library files into /usr/lib with permission 0755 under the
+install directory.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">dolib_so</span><span class="p">(</span><span class="s">&quot;libdb1.so.2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="doman">
+<h2>doman<a class="headerlink" href="#doman" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">doman</span><span class="p">(</span><span class="n">sourceFiles</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the  manual files into /usr/share/man/ under the install directory.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">doman</span><span class="p">(</span><span class="s">&quot;logrotate.8&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">doman</span><span class="p">(</span><span class="s">&quot;doc/bash.1&quot;</span><span class="p">,</span> <span class="s">&quot;doc/bashbug.1&quot;</span><span class="p">,</span> <span class="s">&quot;doc/builtins.1&quot;</span><span class="p">,</span> <span class="s">&quot;doc/rbash.1&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">doman</span><span class="p">(</span><span class="s">&quot;*.[1-8]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="domo">
+<h2>domo<a class="headerlink" href="#domo" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">domo</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">locale</span><span class="p">,</span> <span class="n">destinationFile</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Makes a mo destinationFile for locale language from the sourceFile po file in
+/usr/share/locale/LOCALE/LC_MESSAGES.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">domo</span><span class="p">(</span><span class="s">&quot;po/tr.po&quot;</span><span class="p">,</span> <span class="s">&quot;tr&quot;</span><span class="p">,</span> <span class="s">&quot;pam_login.mo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="domove">
+<h2>domove<a class="headerlink" href="#domove" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">domove</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">destinationFile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Moves the source file to destination directory under install directory.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">domove</span><span class="p">(</span><span class="s">&quot;/usr/bin/passwd&quot;</span><span class="p">,</span> <span class="s">&quot;/bin/&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">domove</span><span class="p">(</span><span class="s">&quot;/usr/bin/yacc&quot;</span><span class="p">,</span> <span class="s">&quot;/usr/bin&quot;</span><span class="p">,</span> <span class="s">&quot;yacc.bison&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">domove</span><span class="p">(</span><span class="s">&quot;/usr/docs/&quot;</span><span class="p">,</span> <span class="s">&quot;/usr/share/doc/</span><span class="si">%s</span><span class="s">/html/&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">srcTAG</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dosed">
+<h2>dosed<a class="headerlink" href="#dosed" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dosed</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">findPattern</span><span class="p">,</span> <span class="n">replacePattern</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Replaces the findPattern to replacePattern in sourceFile via sed.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">dosed</span><span class="p">(</span><span class="s">&quot;gcc/version.c&quot;</span><span class="p">,</span> <span class="s">&quot;&lt;URL:http://gcc.gnu.org/bugs.html&gt;&quot;</span> <span class="p">,</span> <span class="s">&quot;&lt;URL:http://bugs.uludag.org.tr&gt;&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dosed</span><span class="p">(</span><span class="s">&quot;sshd_config&quot;</span><span class="p">,</span> <span class="s">&quot;(?m)(#UsePAM ).*&quot;</span><span class="p">,</span> <span class="s">r&quot;UsePAM yes&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dosed</span><span class="p">(</span><span class="s">&quot;unix/Makefile&quot;</span><span class="p">,</span> <span class="s">&quot;-O3&quot;</span><span class="p">,</span> <span class="n">get</span><span class="o">.</span><span class="n">CFLAGS</span><span class="p">())</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dosed</span><span class="p">(</span><span class="s">&quot;Make.Rules&quot;</span><span class="p">,</span> <span class="s">&quot;HAVE_NDBM_H=yes&quot;</span><span class="p">,</span> <span class="s">&quot;HAVE_NDBM_H=no&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dosed</span><span class="p">(</span><span class="s">&quot;Makefile.def&quot;</span><span class="p">,</span> <span class="s">&quot;CC=cc&quot;</span><span class="p">,</span> <span class="s">&quot;CC=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">get</span><span class="o">.</span><span class="n">CC</span><span class="p">())</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dosed</span><span class="p">(</span><span class="s">&quot;automake.texi&quot;</span><span class="p">,</span> <span class="s">&quot;(?m)(@setfilename.*)automake&quot;</span><span class="p">,</span> <span class="s">r&quot;\1automake1.7&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dosbin">
+<h2>dosbin<a class="headerlink" href="#dosbin" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dosbin</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationDirectory</span> <span class="o">=</span> <span class="s">&#39;/usr/sbin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Moves the sourceFile in work directory to destinationDirectory under install
+directory. The default value for destinationDirectory is /usr/sbin.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">dosbin</span><span class="p">(</span><span class="s">&quot;traceroute6&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dosbin</span><span class="p">(</span><span class="s">&quot;extras/scsi_id/scsi_id&quot;</span><span class="p">,</span> <span class="s">&quot;/sbin&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dosym">
+<h2>dosym<a class="headerlink" href="#dosym" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dosym</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationFile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creates a symbolic link from the sourceFile to destinationFile.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">dosym</span><span class="p">(</span><span class="s">&quot;gzip&quot;</span><span class="p">,</span> <span class="s">&quot;/bin/gunzip&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dosym</span><span class="p">(</span><span class="s">&quot;libdb1.so.2&quot;</span><span class="p">,</span> <span class="s">&quot;/usr/lib/libdb.so.2&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dosym</span><span class="p">(</span><span class="s">&quot;../bin/lsmod&quot;</span><span class="p">,</span> <span class="s">&quot;/sbin/lsmod&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">dosym</span><span class="p">(</span><span class="s">&quot;/usr/X11R6/include/X11&quot;</span><span class="p">,</span> <span class="s">&quot;/usr/include/X11&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="insinto">
+<h2>insinto<a class="headerlink" href="#insinto" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">insinto</span> <span class="p">(</span><span class="n">destinationDirectory</span><span class="p">,</span> <span class="n">sourceFile</span><span class="p">,</span>  <span class="n">destinationFile</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">sym</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies a sourceFile into destinationDirectory as a destinationFile with same
+uid/guid/permissions&#8217;. destinationFile parameter is optional and it can be used
+when sourceFile name need to be changed.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">insinto</span><span class="p">(</span><span class="s">&quot;/opt/rar/bin&quot;</span><span class="p">,</span> <span class="s">&quot;rar&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">insinto</span><span class="p">(</span><span class="s">&quot;/etc/&quot;</span><span class="p">,</span> <span class="s">&quot;doc/nanorc.sample&quot;</span><span class="p">,</span> <span class="s">&quot;nanorc&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">insinto</span><span class="p">(</span><span class="s">&quot;/etc/hotplug&quot;</span><span class="p">,</span> <span class="s">&quot;etc/hotplug/*map&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="newdoc">
+<h2>newdoc<a class="headerlink" href="#newdoc" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">newdoc</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationFile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the sourceFile to /usr/share/doc/PACKAGE/ under installation directory.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">newdoc</span><span class="p">(</span><span class="s">&quot;extras/volume_id/README&quot;</span><span class="p">,</span> <span class="s">&quot;README_volume_id&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">newdoc</span><span class="p">(</span><span class="s">&quot;gprof/ChangeLog.linux&quot;</span><span class="p">,</span> <span class="s">&quot;gprof/ChangeLog.linux&quot;</span><span class="p">)</span>
+<span class="n">pisitools</span><span class="o">.</span><span class="n">newdoc</span><span class="p">(</span><span class="s">&quot;bfd/PORTING&quot;</span><span class="p">,</span> <span class="s">&quot;bfd/PORTING&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="newman">
+<h2>newman<a class="headerlink" href="#newman" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">newman</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationFile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the sourceFile to /usr/share/man/manPREFIX/ with a new name under
+installation directory.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">newman</span><span class="p">(</span><span class="s">&quot;less.nro&quot;</span><span class="p">,</span> <span class="s">&quot;less.1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove">
+<h2>remove<a class="headerlink" href="#remove" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">remove</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Deletes the sourceFile under the install directory.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;/usr/lib/libdb_cxx.so&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rename">
+<h2>rename<a class="headerlink" href="#rename" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rename</span><span class="p">(</span><span class="n">sourceFile</span><span class="p">,</span> <span class="n">destinationFile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Renames the sourceFile as destinationFile.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s">&quot;/usr/bin/bash&quot;</span><span class="p">,</span> <span class="s">&quot;bash.old&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The new file would be existed in /usr/bin/bash.old.</p>
+</div>
+<div class="section" id="removedir">
+<h2>removeDir<a class="headerlink" href="#removedir" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">removeDir</span><span class="p">(</span><span class="n">destinationDirectory</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Deletes the &#8216;destinationDirectory and all files inside.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pisitools</span><span class="o">.</span><span class="n">removeDir</span><span class="p">(</span><span class="s">&quot;/usr/lib&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/pisitools.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

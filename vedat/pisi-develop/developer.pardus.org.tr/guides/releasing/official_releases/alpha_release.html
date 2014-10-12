@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/official_releases/alpha_release.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Alpha Release</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Official Releases" href="index.html" />
+    <link rel="next" title="Beta Release" href="beta_release.html" />
+    <link rel="prev" title="Official Releases" href="index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Releasing</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Official Releases</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Alpha Release</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Alpha Release</a><ul>
+<li><a class="reference external" href="#alpha-goals">Alpha Goals</a></li>
+<li><a class="reference external" href="#alpha-release-requirements">Alpha Release Requirements</a></li>
+<li><a class="reference external" href="#pre-alpha-developer-release-tickets">Pre-Alpha (Developer Release) Tickets</a></li>
+<li><a class="reference external" href="#alpha-tickets">Alpha Tickets</a></li>
+<li><a class="reference external" href="#alpha-tracker-bugs">Alpha Tracker Bugs</a></li>
+<li><a class="reference external" href="#alpha-postponement">Alpha Postponement</a></li>
+<li><a class="reference external" href="#validation-of-alpha-requirements">Validation of Alpha Requirements</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="alpha-release"></span><h1>Alpha Release<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Last Modified Date:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>The alpha phase of the release life cycle is the first phase to begin software
+testing.</p>
+<p>Feature acceptence deadline is held during this phase and the <a class="reference external" href="../../newfeature/index.html">requested features</a>
+from users and developers are reported to <a class="reference external" href="http://bugs.pardus.org.tr/">Pardus Bugzilla</a> before this deadline.</p>
+<p>The requested features are reviewed and also prioritized during this period
+and no more features are added to this list. The features are also started to
+develop by developers.</p>
+<p>During this phase Alpha release brockers should also be fixed.</p>
+<p>For the packages, <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/scripts/find-urgent-packages">urgent package list</a> is created periodically and put as text
+file under the related release&#8217; <a class="reference external" href="../repository_concepts/sourcecode_repository.html#package-source-repository">package source repository</a> <a class="reference external" href="../repository_concepts/sourcecode_repository.html#devel-folder">devel branch</a>.
+These packages are updated and merged to new <a class="reference external" href="../repository_concepts/sourcecode_repository.html#package-source-repository">package source repository</a> at given
+period and time.</p>
+<p>As we can see during alpha phase rapid changes occur and so the software can be
+unstable and could cause crashes or data loss.</p>
+<div class="section" id="alpha-goals">
+<h2>Alpha Goals<a class="headerlink" href="#alpha-goals" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>The accepted features should be listed and prioritized at the and of Feature acceptence deadline.</li>
+<li>The Alpha official release wil be a <a class="reference external" href="../feature_freeze.html">feature complete</a> test release.</li>
+<li>Test <a class="reference external" href="http://bugs.pardus.org.tr/buglist.cgi?query_format=advanced&amp;bug_severity=newfeature&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;resolution=REMIND">accepted features</a> of Pardus for newly release</li>
+<li>Find as many as Beta, RC, final <a class="reference external" href="../../bugtracking/tracker_bug_process.html#open-tracker-bug-report">tracker bugs</a> as possible</li>
+</ol>
+</div>
+<div class="section" id="alpha-release-requirements">
+<h2>Alpha Release Requirements<a class="headerlink" href="#alpha-release-requirements" title="Permalink to this headline">¶</a></h2>
+<p>In order to do Pardus Alpha official, the following criterias must be meet:</p>
+<ul class="simple">
+<li>All bugs blocking the Alpha tracker must be closed.</li>
+<li>There must be no file conflicts or unresolved package dependencies in Alpha iso install and live images.</li>
+<li>The iso image must boot with graphical boot menu and allow the user to select installation options.</li>
+<li>The installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must boot and run on all <a class="reference external" href="../../packaging/packaging_guidelines.html#architecture-support">supported architectures</a> from install and live images</li>
+<li>The installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must be able to complete the installation using the install options use all space or use free space</li>
+<li>The installation manager (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must be able to complete an installation using IDE, SATA and SCSI storage devices, with the default file system (ext4) and LVM, standart partitioning</li>
+<li>The rescue mode of (<a class="reference external" href="../../../projects/yali/index.html">YALI</a>) must start successfully and be able to detect and mount an existing default installation</li>
+<li>The installed system must boot to th default desktop environment without user intervention</li>
+<li>The desktop greeter (<a class="reference external" href="../../../projects/kaptan/index.html">Kaptan</a>) should start when the system boot.</li>
+<li>The default web browser must run and be able to download files and load extensions</li>
+<li>Default applications that exist on desktop menu must be listed.</li>
+<li>The <a class="reference external" href="../../../projects/package-manager/index.html">Package Manager</a> must have the correct repository and be able to download and install updates with with <a class="reference external" href="../../../projects/pisi/index.html">PiSi</a>.</li>
+<li>The new release artwork must either refer to the current release under maintainance, or reference to a temporary test release. This artwork should be for the installer, firstboot, graphical boot, graphical login·</li>
+</ul>
+</div>
+<div class="section" id="pre-alpha-developer-release-tickets">
+<h2>Pre-Alpha (Developer Release) Tickets<a class="headerlink" href="#pre-alpha-developer-release-tickets" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Prepare and plan start meeting</li>
+<li>Create general release schedule (give deadlines only for general relase cycles (Alpha, Beta, RC, Final), ( deadline for submitting new features, feature freeze, string freeze, feature complete, translation freeze, repo freeze))</li>
+<li>Put the schedule to developer.pardus.org.tr</li>
+<li>Open <a class="reference external" href="../repository_concepts/sourcecode_repository.html#devel-folder">devel source</a> and  <a class="reference external" href="../repository_concepts/software_repository.html#devel-binary-repository">devel binary</a> repositories</li>
+<li>Add new devel repository to <a class="reference external" href="http://packages.pardus.org.tr/">http://packages.pardus.org.tr</a></li>
+<li>Open <a class="reference external" href="../../bugtracking/tracker_bug_process.html#open-tracker-bug-report">tracker bugs</a></li>
+<li>Prepare buildfarm servers</li>
+<li>State toolchain versions</li>
+<li>State compiler flags</li>
+<li>Prepare toolchain</li>
+<li><a class="reference external" href="../bootstrapping.html">Bootstrap</a></li>
+<li>Compile developer tools</li>
+<li>Install and build <a class="reference external" href="../preparing_buildfarm.html">buildfarm</a> systems</li>
+<li>Prepare pre-alpha (developer) release</li>
+<li>Enable <a class="reference external" href="../generating_nightly_builds.html">nightly builds</a></li>
+<li>Enable automatic mails about nightly build changes to <a class="reference external" href="http://lists.pardus.org.tr/mailman/listinfo/testci">tester list</a>.</li>
+<li>Review package components for orphan and dead packages</li>
+<li>Warn developers about their orphan and dead packages and developer release</li>
+<li>Warn users and developers about <a class="reference external" href="../../newfeature/newfeature_requests.html#how-do-i-propose-a-new-feature-that-i-do-not-contribute">feature request</a> deadline one week before</li>
+<li>Warn developers about <a class="reference external" href="../../newfeature/newfeature_requests.html#how-my-new-feature-request-is-accepted">feature submission</a> deadline one week before</li>
+<li>Create accepted feature list</li>
+<li>Create detailed release schedule (priotirize feaute list, give other detailes for development, artwork, documentation etc.)</li>
+<li>Update schedule on developer.pardus.org.tr</li>
+<li>Prepare a developer meeting on IRC</li>
+<li>Prepare and plan Alpha start meeting</li>
+</ol>
+</div>
+<div class="section" id="alpha-tickets">
+<h2>Alpha Tickets<a class="headerlink" href="#alpha-tickets" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Create default applications list for desktop menu</p>
+</li>
+<li><p class="first">Put feature list to developer.pardus.org.tr</p>
+</li>
+<li><p class="first">Send weekly emails about <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/scripts/find-urgent-packages">urgent package list</a></p>
+</li>
+<li><p class="first">Warn about <a class="reference external" href="../feature_freeze.html">feature freeze</a> one week before</p>
+</li>
+<li><p class="first">Warn about Alpha freeze one week before</p>
+</li>
+<li><dl class="first docutils">
+<dt>Plan for artwork Pardus</dt>
+<dd><ul class="first last simple">
+<li>Wallpapers</li>
+<li>Icon theme</li>
+<li>Splash screens</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Create Alpha Test Release for Alpha validation tests</dt>
+<dd><ul class="first last simple">
+<li>Installation media</li>
+<li>Live media</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Prepare and make &#8220;where we are meeting&#8221; after validation tests</p>
+</li>
+<li><p class="first">Create release-notes</p>
+</li>
+<li><p class="first">Upload release-notes to developer.pardus.org.tr</p>
+</li>
+<li><dl class="first docutils">
+<dt>Release Alpha</dt>
+<dd><ul class="first last simple">
+<li>Upload iso to FTP servers</li>
+<li>Upload iso to torrents</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Send an announcement mail for Alpha release</p>
+</li>
+<li><p class="first">Prepare and plan Beta start meeting</p>
+</li>
+</ol>
+</div>
+<div class="section" id="alpha-tracker-bugs">
+<h2>Alpha Tracker Bugs<a class="headerlink" href="#alpha-tracker-bugs" title="Permalink to this headline">¶</a></h2>
+<p>A bug is considered an alpha tracker bug if one of the following criterias is met:</p>
+<ol class="arabic simple">
+<li>If a package in the urgent package list of alpha has a bug that can not be fixed with a future update or has a <a class="reference external" href="../../bugtracking/bug_cycle.html">severity</a> rating of high or urgent.</li>
+<li>Bugs that are a blocks the testing and test process. (Bugs related to untestable products)</li>
+<li>Bug relates to an unachieved <a class="reference internal" href="#alpha-release-requirements">Alpha Release Requirements</a></li>
+</ol>
+</div>
+<div class="section" id="alpha-postponement">
+<h2>Alpha Postponement<a class="headerlink" href="#alpha-postponement" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>One week before the release day, if all of the <a class="reference internal" href="#alpha-release-requirements">Alpha Release Requirements</a> are not achieved, the release will be delayed one week o that the <a class="reference internal" href="#alpha-release-requirements">Alpha Release Requirements</a> can be achieved.</li>
+<li>This delay will be added all remaining tasks and final release date.</li>
+<li>The decision for the delay will be made on &#8220;where we are&#8221; meeting that be held 2 weeks prior to the shipping date of the releases.</li>
+</ol>
+</div>
+<div class="section" id="validation-of-alpha-requirements">
+<h2>Validation of Alpha Requirements<a class="headerlink" href="#validation-of-alpha-requirements" title="Permalink to this headline">¶</a></h2>
+<p>Test team has the responsibility of determining whether the criteria for the
+<a class="reference internal" href="#alpha-release-requirements">Alpha Release Requirements</a> has been met. At the end of the test process,
+the test team reports on <a class="reference external" href="http://bugs.pardus.org.tr/">Pardus Bugzilla</a> will be reviewed and discussed
+at the &#8220;where we are&#8221; meeting.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/official_releases/alpha_release.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/stock_responses.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Bugzilla Stock Responses</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Bug Tracking Guide" href="index.html" />
+    <link rel="next" title="Tracker Bug Process" href="tracker_bug_process.html" />
+    <link rel="prev" title="Stack Traces" href="stack_traces.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Bug Tracking Guide</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Bugzilla Stock Responses</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Bugzilla Stock Responses</a><ul>
+<li><a class="reference external" href="#insufficient-report">Insufficient Report</a></li>
+<li><a class="reference external" href="#duplicate-bugs">Duplicate Bugs</a></li>
+<li><a class="reference external" href="#more-than-one-issues-reported-in-one-bug">More than one issues reported in one bug</a></li>
+<li><a class="reference external" href="#wrong-component">Wrong Component</a></li>
+<li><a class="reference external" href="#bugs-already-fixed">Bugs already fixed</a></li>
+<li><a class="reference external" href="#bug-will-be-fixed-for-the-next-stable-update">Bug will be fixed for the next stable update</a></li>
+<li><a class="reference external" href="#upstream-bugs">Upstream Bugs</a><ul>
+<li><a class="reference external" href="#most-used-upstream-bug-tracking-list">Most used Upstream Bug Tracking List</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#duplicate-upstream-bugs">Duplicate Upstream Bugs</a></li>
+<li><a class="reference external" href="#end-of-life-eol-product">End of Life (EOL) product</a></li>
+<li><a class="reference external" href="#unmaintained-packages-by-upstream">Unmaintained Packages by Upstream</a></li>
+<li><a class="reference external" href="#stack-trace">Stack Trace</a></li>
+<li><a class="reference external" href="#extra-information-for-some-bugs">Extra information for some bugs</a><ul>
+<li><a class="reference external" href="#x-server-bugs">X Server Bugs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="bugzilla-stock-responses">
+<span id="stock-responses"></span><h1>Bugzilla Stock Responses<a class="headerlink" href="#bugzilla-stock-responses" title="Permalink to this headline">¶</a></h1>
+<p>To make Pardus better, the bugzilla bug tracking tool is used. But many bugs in Pardus
+bugzilla needs additional information in order to be fixed by developers. We create
+stock responses based on our previous experiences, in order to give quick responses to
+problematic bug reports. This helps bug triagers and developers request missing
+information quickly in a clear, friendly, and consistent manner.</p>
+<div class="section" id="insufficient-report">
+<h2>Insufficient Report<a class="headerlink" href="#insufficient-report" title="Permalink to this headline">¶</a></h2>
+<p>If the description of the bug is incomplete, please add &#8220;NEEDINFO&#8221; keyword and give
+the following response:</p>
+<div class="highlight-python"><pre>Thank you for the bug report. Unfortunately, we do not reproduce and  understand
+the problem you are having. If you have time and can still reproduce the bug,
+please read http://developer.pardus.org.tr/guides/bugtracking/bug_and_feature_request.html
+and add a description along those lines to this bug report so we can diagnose the
+problem. Thank you.</pre>
+</div>
+<p>If you can request more specific thingd than this, that would be very helpful for the
+reporter.</p>
+</div>
+<div class="section" id="duplicate-bugs">
+<h2>Duplicate Bugs<a class="headerlink" href="#duplicate-bugs" title="Permalink to this headline">¶</a></h2>
+<p>If the bug has a duplicate, please mark the less informed bug as &#8220;DUPLICATE&#8221;, and
+give the following message:</p>
+<div class="highlight-python"><pre>Thank you for the bug report. This bug has already been reported into our bug
+tracking system, but please feel free to report any further bugs you find.</pre>
+</div>
+</div>
+<div class="section" id="more-than-one-issues-reported-in-one-bug">
+<h2>More than one issues reported in one bug<a class="headerlink" href="#more-than-one-issues-reported-in-one-bug" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>Thank you for the bug report. In order to track bugs appropriately, the bug writing
+guidelines (https://bugs.pardus.org.tr/page.cgi?id=bug-writing.html) say that reporters
+file one bug per issue. It seems that this bug contains multiple issues. If you have
+time and can still reproduce the bug (or bugs), please submit them as separate bugs
+for each of your separate issues. One bug can remain in this report; simply edit
+the summary to reflect this. You can note the new bug numbers in a comment for this
+bug. Thank you.</pre>
+</div>
+<p>Users generally need more information about the separation of the bugs, please give specific
+informations and be polite.</p>
+</div>
+<div class="section" id="wrong-component">
+<h2>Wrong Component<a class="headerlink" href="#wrong-component" title="Permalink to this headline">¶</a></h2>
+<p>If the bug has been reported to the incorrect component, you can use this message
+inserting the appropriate component names:</p>
+<div class="highlight-python"><pre>Thank you for the report. It seems that this has been reported to the incorrect
+component. Therefor it is reassigned from &lt;oldcomponent&gt; to &lt;newcomponent&gt;. Feel
+free to report any further bugs you find to our bug tracking system. In order to
+find the correct component, you can refer to:
+http://developer.pardus.org.tr/guides/bugtracking/correct_component.html</pre>
+</div>
+</div>
+<div class="section" id="bugs-already-fixed">
+<h2>Bugs already fixed<a class="headerlink" href="#bugs-already-fixed" title="Permalink to this headline">¶</a></h2>
+<p>If the bug may no longer exist, please resolve the bug as &#8220;FIXED&#8221;, and give the
+following response:</p>
+<div class="highlight-python"><pre>Thank you for the bug report. Unfortunately we can not reproduce the bug,it may have
+already been fixed. If you have time to update the package and re-test, please do
+so and report the results here.</pre>
+</div>
+</div>
+<div class="section" id="bug-will-be-fixed-for-the-next-stable-update">
+<h2>Bug will be fixed for the next stable update<a class="headerlink" href="#bug-will-be-fixed-for-the-next-stable-update" title="Permalink to this headline">¶</a></h2>
+<p>If the bug is fixed in testing repository and it will be merged to stable repository
+in the next update, please resolve the bug as &#8220;FIXED&#8221;, and give the following response:</p>
+<div class="highlight-python"><pre>Thank you for the bug report. This bug was fixed in testing repository and it will
+be published with new stable update. Please feel free to report any further bugs you
+find, or make further reports if this bug is not fixed after you install the update.</pre>
+</div>
+</div>
+<div class="section" id="upstream-bugs">
+<h2>Upstream Bugs<a class="headerlink" href="#upstream-bugs" title="Permalink to this headline">¶</a></h2>
+<p>If the bug is not about packaging problems and the maintainer has no plan to work on
+this in the near feauture, and the buggy product has an own bug tracking system, please
+resolve the bug as &#8220;WONTFIX&#8221;, and give the following response:</p>
+<div class="highlight-python"><pre>Thank you for the bug report. This bug is not about a packaging problem, and at the
+moment, the Pardus developers are busy fixing other issues and may not have time to
+work on issues about upstream. You may report it to the authors (upstream) of the
+program.
+
+Bug tracking systems are used by most upstream authors, and more people who know
+the code will be looking at the bug report there.
+
+The upstream bug tracking system to use is:
+&lt;link&gt;
+
+You can add the upstream link to this bug, please make sure that the bug is not
+already been reported in the upstream bug tracking system.</pre>
+</div>
+<div class="section" id="most-used-upstream-bug-tracking-list">
+<h3>Most used Upstream Bug Tracking List<a class="headerlink" href="#most-used-upstream-bug-tracking-list" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>Gnome</td>
+<td><a class="reference external" href="http://bugzilla.gnome.org/">http://bugzilla.gnome.org/</a></td>
+</tr>
+<tr><td>KDE</td>
+<td><a class="reference external" href="http://bugs.kde.org/">http://bugs.kde.org/</a></td>
+</tr>
+<tr><td>Mozilla</td>
+<td><a class="reference external" href="https://bugzilla.mozilla.org/">https://bugzilla.mozilla.org/</a></td>
+</tr>
+<tr><td>Freedesktop</td>
+<td><a class="reference external" href="http://bugs.freedesktop.org/">http://bugs.freedesktop.org/</a></td>
+</tr>
+<tr><td>OpenOffice</td>
+<td><a class="reference external" href="http://qa.openoffice.org/issue_handling/project_issues.html">http://qa.openoffice.org/issue_handling/project_issues.html</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="duplicate-upstream-bugs">
+<h2>Duplicate Upstream Bugs<a class="headerlink" href="#duplicate-upstream-bugs" title="Permalink to this headline">¶</a></h2>
+<p>If the bug is not about a packaging problem, and it has already been reported to upsream
+bug tracking system, please resolve it as &#8220;WONTFIX&#8221;, and give the following response:</p>
+<div class="highlight-python"><pre>Thank you for the bug report. This particular bug has already been reported to the
+upstream of the software. You can add any additional information to the upstream
+bug report at:
+&lt;link&gt;
+If you want to follow what happens to the bug, you can add yourself to the upstream
+report.</pre>
+</div>
+</div>
+<div class="section" id="end-of-life-eol-product">
+<h2>End of Life (EOL) product<a class="headerlink" href="#end-of-life-eol-product" title="Permalink to this headline">¶</a></h2>
+<p>If a release comes to its end of life, its bugs resolution will be &#8220;WONTFIX&#8221;:</p>
+<div class="highlight-python"><pre>Thank you for your bug report. Unfortunately, with the upcoming Pardus &lt;new release name&gt;
+release, Pardus &lt;EOL release name&gt; which was in security-only mode for a while will soon
+reach its end-of-life and the current bug reports concerning Pardus &lt;EOL release name&gt;
+will become invalid. If you can still reproduce the bug on Pardus &lt;new release name&gt;,
+you can reopenthe bug and update the version information. Thanks.</pre>
+</div>
+</div>
+<div class="section" id="unmaintained-packages-by-upstream">
+<h2>Unmaintained Packages by Upstream<a class="headerlink" href="#unmaintained-packages-by-upstream" title="Permalink to this headline">¶</a></h2>
+<p>If the upstream no longer maintains the software, the resolution for these reports is &#8220;WONTFIX&#8221;:</p>
+<div class="highlight-python"><pre>Thank you for your report. The uptream of this software are no longer maintain it so
+Pardus does not provide or support it also. You can see from &lt;upstream url&gt; that it
+does not seem to have been updated since &lt;last date&gt;. Therefore there is unfortunately
+nothing the Pardus project can do to help you with this problem.</pre>
+</div>
+</div>
+<div class="section" id="stack-trace">
+<h2>Stack Trace<a class="headerlink" href="#stack-trace" title="Permalink to this headline">¶</a></h2>
+<p>If the bug caused by a crash, but a stack trace is missing in the bug report:</p>
+<div class="highlight-python"><pre>Thank you for the bug report. But we need a stack trace from the crash. It is
+impossible to analyse the cause without any stack trace. Please see
+http://developer.pardus.org.tr/guides/bugtracking/stack_traces.html
+for more information about getting a useful stack trace with debugging symbols.</pre>
+</div>
+</div>
+<div class="section" id="extra-information-for-some-bugs">
+<h2>Extra information for some bugs<a class="headerlink" href="#extra-information-for-some-bugs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="x-server-bugs">
+<h3>X Server Bugs<a class="headerlink" href="#x-server-bugs" title="Permalink to this headline">¶</a></h3>
+<p>Some files can be needed for X11 server bugs:</p>
+<div class="highlight-python"><pre>Thanks for the bug report. Your report have been reviewed, wee need some additional
+information that will be helpful in order to analyse this issue.
+
+Please attach your X server config file (/etc/X11/xorg.conf), X server log file
+(/var/log/Xorg.*.log) and the output of "dmesg" to the bug report as individual
+uncompressed text/plain file attachments using the bugzilla file attachment link
+above called "Add an attachment". Thanks.</pre>
+</div>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/stock_responses.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:20 GMT -->
+</html>

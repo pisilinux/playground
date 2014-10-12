@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/bug_cycle.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Bug Cycle</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Bug Tracking Guide" href="index.html" />
+    <link rel="next" title="Bug Requests" href="bug_and_feature_requests.html" />
+    <link rel="prev" title="Bug Tracking Guide" href="index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Bug Tracking Guide</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Bug Cycle</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Bug Cycle</a></li>
+</ul>
+
+          <div class="body">
+              
+  
+  <p id="bug-cycle"><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.2</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id1">
+<h1>Bug Cycle<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<img alt="../../_images/bugcycle.png" src="../../_images/bugcycle.png" />
+</blockquote>
+<p>This document gives information about Pardus bug tracking system process. The process that manage from Pardus bugzilla: package review, new contributor, security process are not included in this process.</p>
+<blockquote>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>When the bug is newly submitted it takes <strong>NEW</strong> status.</dt>
+<dd><p class="first last">Some details needed when repoting a bug, see <a class="reference external" href="http://bugs.pardus.org.tr/page.cgi?id=bug-writing.html">http://bugs.pardus.org.tr/page.cgi?id=bug-writing.html</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Triage starts:</dt>
+<dd><ol class="first last arabic">
+<li><p class="first">After the bug is submitting, if it needs additional information , the bug status left the same but the <strong>NEEDINFO</strong> keyword is added.</p>
+</li>
+<li><dl class="first docutils">
+<dt>If the bug does not need any additional information:</dt>
+<dd><ol class="first last arabic">
+<li><dl class="first docutils">
+<dt>The triager can change the severity:</dt>
+<dd><ul class="first last simple">
+<li>Severity is used to set how sewere the bug is. It can be set by a triager, but the triagers may not rechange the severity, when the assignee and/or package maintainer change the initial severity level chosen by the triager.</li>
+<li>Severities should be changed with following <a class="reference external" href="howto_bug_triage.html#bug-importance">bug importance</a> guide.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>If the bug is an insolubale bug:</dt>
+<dd><ul class="first last simple">
+<li>WONTFIX: Bugs are not related to Pardus and will never be fixed</li>
+<li>DUPLICATE: Bugs which have duplicates which are already been reported</li>
+<li>LATER: Bugs can be fixed for the next release or for a later time</li>
+<li>INVALID: Bugs that are not realy a bug</li>
+<li>WORKSFORME: Bugs could not be reproduced</li>
+<li>NEXTRELEASE: Bugs fixed in next release</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Bugs set as a tracker bug of a release by only release managers or related component supervisor.</p>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p class="first">When triage is finished, the <strong>TRIAGED</strong> keyword is given.</p>
+</li>
+<li><p class="first">When a developer starts to deal with the bug he/she changes the status to <strong>ASSIGNED</strong>.</p>
+</li>
+<li><p class="first">If the bug fixed by its developer,</p>
+<blockquote>
+<p>When the developer has been sure that the bug fixed, he/she should be fixed bug via SVN commits:</p>
+<blockquote>
+<p>The SVN commit should include:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;BUG:FIXED:&lt;BUGID&gt;&quot;</span>
+</pre></div>
+</div>
+</blockquote>
+<p>This commmit will automatically change the resolution of the bug as <strong>RESOLVED/FIXED</strong></p>
+</blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>The bug fixed program will pass the stable repository test process:</dt>
+<dd><ol class="first last arabic simple">
+<li>If the bug reproducible, the bug resolution is changed to <strong>REOPENED</strong></li>
+<li>If the bug can not be reproducible, it is left <strong>RESOLVED/FIXED</strong></li>
+<li>If new bugs found during stable repository tests, it should be reported by testers.</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>REOPENED</strong> bugs are reviewed again by assignee and will be fixed.</p>
+</li>
+</ol>
+</blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/bug_cycle.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:19 GMT -->
+</html>

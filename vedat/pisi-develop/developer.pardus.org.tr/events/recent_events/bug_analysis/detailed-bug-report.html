@@ -1,0 +1,2304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/events/recent_events/bug_analysis/detailed-bug-report.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Weekly Detail Bug Report</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Bug Analysis" href="index.html" />
+    <link rel="next" title="Weekly Bug Report" href="weekly-bug-report.html" />
+    <link rel="prev" title="All Opened, Reopened or Assigned Bugs" href="all-bugs-report.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Events</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Recent Events</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Bug Analysis</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Weekly Detail Bug Report</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Weekly Detail Bug Report</a><ul>
+<li><a class="reference external" href="#a-k-n-yollu">Aşkın Yollu</a><ul>
+<li><a class="reference external" href="#new-bug-report-links-since-last-week">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#resolved-bug-links-since-last-week">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#commented-bug-links-since-last-week">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#triaged-bug-links-since-last-week">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#ayan-zt-rk">Ayan Öztürk</a><ul>
+<li><a class="reference external" href="#id1">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id2">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id3">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id4">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#bertan-g-ndo-du">Bertan Gündoğdu</a><ul>
+<li><a class="reference external" href="#id5">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id6">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id7">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id8">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#beyza-ermi">Beyza Ermiş</a><ul>
+<li><a class="reference external" href="#id9">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id10">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id11">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id12">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#burak-al-kan">Burak Çalışkan</a><ul>
+<li><a class="reference external" href="#id13">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id14">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id15">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id16">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#a-lar-kilimci">Çağlar Kilimci</a><ul>
+<li><a class="reference external" href="#id17">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id18">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id19">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id20">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#david-stegbauer">David Stegbauer</a><ul>
+<li><a class="reference external" href="#id21">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id22">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id23">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id24">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#erdem-bayer">Erdem Bayer</a><ul>
+<li><a class="reference external" href="#id25">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id26">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id27">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id28">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#deniz-ege-tun-ay">Deniz Ege Tunçay</a><ul>
+<li><a class="reference external" href="#id29">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id30">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id31">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id32">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#emre-ereno-lu">Emre Erenoğlu</a><ul>
+<li><a class="reference external" href="#id33">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id34">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id35">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id36">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#id37">Emre Erenoğlu</a><ul>
+<li><a class="reference external" href="#id38">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id39">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id40">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id41">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#eren-t-rkay">Eren Türkay</a><ul>
+<li><a class="reference external" href="#id42">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id43">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id44">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id45">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#ertan-arg-den">Ertan Argüden</a><ul>
+<li><a class="reference external" href="#id46">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id47">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id48">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id49">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#ertu-rul-erata">Ertuğrul Erata</a><ul>
+<li><a class="reference external" href="#id50">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id51">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id52">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id53">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#fatih-arslan">Fatih Arslan</a><ul>
+<li><a class="reference external" href="#id54">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id55">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id56">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id57">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#fatih-a-c">Fatih Aşıcı</a><ul>
+<li><a class="reference external" href="#id58">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id59">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id60">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id61">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#fethican-co-kuner">Fethican Coşkuner</a><ul>
+<li><a class="reference external" href="#id62">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id63">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id64">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id65">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#g-k-en-eraslan">Gökçen Eraslan</a><ul>
+<li><a class="reference external" href="#id66">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id67">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id68">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id69">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#g-khan-zkan">Gökhan Özkan</a><ul>
+<li><a class="reference external" href="#id70">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id71">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id72">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id73">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#g-kmen-g-ksel">Gökmen Göksel</a><ul>
+<li><a class="reference external" href="#id74">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id75">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id76">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id77">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#g-khan-zbulak">Gökhan Özbulak</a><ul>
+<li><a class="reference external" href="#id78">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id79">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id80">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id81">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#g-rkan-zengin">Gürkan Zengin</a><ul>
+<li><a class="reference external" href="#id82">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id83">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id84">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id85">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#h-brahim-g-ng-r">H. İbrahim Güngör</a><ul>
+<li><a class="reference external" href="#id86">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id87">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id88">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id89">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#rajeev-j-sebastian">Rajeev J Sebastian</a><ul>
+<li><a class="reference external" href="#id90">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id91">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id92">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id93">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#baran-ak-ay-r">İşbaran Akçayır</a><ul>
+<li><a class="reference external" href="#id94">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id95">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id96">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id97">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#u-ur-etin">Uğur Çetin</a><ul>
+<li><a class="reference external" href="#id98">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id99">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id100">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id101">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#kenan-pelit">Kenan Pelit</a><ul>
+<li><a class="reference external" href="#id102">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id103">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id104">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id105">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#kaan-zdin-er">Kaan Özdinçer</a><ul>
+<li><a class="reference external" href="#id106">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id107">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id108">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id109">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#id110">Kaan Özdinçer</a><ul>
+<li><a class="reference external" href="#id111">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id112">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id113">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id114">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#koray-l-ker">Koray Löker</a><ul>
+<li><a class="reference external" href="#id115">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id116">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id117">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id118">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#mehmet-zdemir">Mehmet Özdemir</a><ul>
+<li><a class="reference external" href="#id119">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id120">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id121">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id122">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#meltem-parmaks-z">Meltem Parmaksız</a><ul>
+<li><a class="reference external" href="#id123">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id124">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id125">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id126">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#mehmet-emre-atasever">Mehmet Emre Atasever</a><ul>
+<li><a class="reference external" href="#id127">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id128">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id129">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id130">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#mesutcan-kurt">Mesutcan Kurt</a><ul>
+<li><a class="reference external" href="#id131">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id132">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id133">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id134">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#mete-bilgin">Mete Bilgin</a><ul>
+<li><a class="reference external" href="#id135">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id136">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id137">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id138">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#mete-alpaslan">Mete Alpaslan</a><ul>
+<li><a class="reference external" href="#id139">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id140">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id141">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id142">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#metin-akdere">Metin Akdere</a><ul>
+<li><a class="reference external" href="#id143">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id144">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id145">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id146">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#t-rker-sezer">Türker Sezer</a><ul>
+<li><a class="reference external" href="#id147">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id148">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id149">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id150">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#mehmet-nur-olcay">Mehmet Nur Olcay</a><ul>
+<li><a class="reference external" href="#id151">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id152">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id153">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id154">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#nihat-ciddi">Nihat Ciddi</a><ul>
+<li><a class="reference external" href="#id155">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id156">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id157">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id158">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#necdet-y-cel">Necdet Yücel</a><ul>
+<li><a class="reference external" href="#id159">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id160">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id161">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id162">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#necmettin-begiter">Necmettin Begiter</a><ul>
+<li><a class="reference external" href="#id163">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id164">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id165">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id166">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#o-uz-yar-mtepe">Oğuz Yarımtepe</a><ul>
+<li><a class="reference external" href="#id167">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id168">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id169">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id170">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#ozan-a-layan">Ozan Çağlayan</a><ul>
+<li><a class="reference external" href="#id171">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id172">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id173">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id174">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#renan-ak-rerk">Renan Çakırerk</a><ul>
+<li><a class="reference external" href="#id175">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id176">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id177">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id178">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#recep-k-rm-z">Recep Kırmızı</a><ul>
+<li><a class="reference external" href="#id179">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id180">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id181">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id182">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#serdar-dalg">Serdar Dalgıç</a><ul>
+<li><a class="reference external" href="#id183">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id184">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id185">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id186">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#semen-cirit">Semen Cirit</a><ul>
+<li><a class="reference external" href="#id187">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id188">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id189">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id190">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#erkan-tekman">Erkan Tekman</a><ul>
+<li><a class="reference external" href="#id191">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id192">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id193">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id194">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#michael-austin">Michael Austin</a><ul>
+<li><a class="reference external" href="#id195">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id196">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id197">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id198">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#nicolas-lara">Nicolas Lara</a><ul>
+<li><a class="reference external" href="#id199">New Bug Report Links since Last Week:</a></li>
+<li><a class="reference external" href="#id200">Resolved Bug Links since Last Week:</a></li>
+<li><a class="reference external" href="#id201">Commented bug links since Last Week:</a></li>
+<li><a class="reference external" href="#id202">Triaged bug links since Last Week:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="weekly-detail-bug-report">
+<h1>Weekly Detail Bug Report<a class="headerlink" href="#weekly-detail-bug-report" title="Permalink to this headline">¶</a></h1>
+<p><strong>Between:</strong> 15-10-2011/21-10-2011</p>
+<div class="section" id="a-k-n-yollu">
+<h2>Aşkın Yollu<a class="headerlink" href="#a-k-n-yollu" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+5</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6350">http://bugs.pardus.org.tr/show_bug.cgi?id=6350</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15403">http://bugs.pardus.org.tr/show_bug.cgi?id=15403</a></p>
+<p>Number of comments of this bug: 25</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="new-bug-report-links-since-last-week">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#new-bug-report-links-since-last-week" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="resolved-bug-links-since-last-week">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#resolved-bug-links-since-last-week" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="commented-bug-links-since-last-week">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#commented-bug-links-since-last-week" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="triaged-bug-links-since-last-week">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#triaged-bug-links-since-last-week" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="ayan-zt-rk">
+<h2>Ayan Öztürk<a class="headerlink" href="#ayan-zt-rk" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17842">http://bugs.pardus.org.tr/show_bug.cgi?id=17842</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17842">http://bugs.pardus.org.tr/show_bug.cgi?id=17842</a></p>
+<p>Number of comments of this bug: 8</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id1">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id2">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id3">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id4">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="bertan-g-ndo-du">
+<h2>Bertan Gündoğdu<a class="headerlink" href="#bertan-g-ndo-du" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+38</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6792">http://bugs.pardus.org.tr/show_bug.cgi?id=6792</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17779">http://bugs.pardus.org.tr/show_bug.cgi?id=17779</a></p>
+<p>Number of comments of this bug: 31</p>
+<p>Number of bugs reported since last week: 1</p>
+<div class="section" id="id5">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19374">http://bugs.pardus.org.tr/show_bug.cgi?id=19374</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 1</p>
+</div>
+<div class="section" id="id6">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18186">http://bugs.pardus.org.tr/show_bug.cgi?id=18186</a></li>
+</ol>
+<p>Number of commented bugs since last week: 6</p>
+</div>
+<div class="section" id="id7">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19280">http://bugs.pardus.org.tr/show_bug.cgi?id=19280</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18258">http://bugs.pardus.org.tr/show_bug.cgi?id=18258</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18186">http://bugs.pardus.org.tr/show_bug.cgi?id=18186</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19310">http://bugs.pardus.org.tr/show_bug.cgi?id=19310</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id8">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="beyza-ermi">
+<h2>Beyza Ermiş<a class="headerlink" href="#beyza-ermi" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+11</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=9300">http://bugs.pardus.org.tr/show_bug.cgi?id=9300</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17000">http://bugs.pardus.org.tr/show_bug.cgi?id=17000</a></p>
+<p>Number of comments of this bug: 11</p>
+<p>Number of bugs reported since last week: 3</p>
+<div class="section" id="id9">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19320">http://bugs.pardus.org.tr/show_bug.cgi?id=19320</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19339">http://bugs.pardus.org.tr/show_bug.cgi?id=19339</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19341">http://bugs.pardus.org.tr/show_bug.cgi?id=19341</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id10">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id11">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id12">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="burak-al-kan">
+<h2>Burak Çalışkan<a class="headerlink" href="#burak-al-kan" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+8</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16048">http://bugs.pardus.org.tr/show_bug.cgi?id=16048</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16048">http://bugs.pardus.org.tr/show_bug.cgi?id=16048</a></p>
+<p>Number of comments of this bug: 8</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id13">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id14">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id15">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id16">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="a-lar-kilimci">
+<h2>Çağlar Kilimci<a class="headerlink" href="#a-lar-kilimci" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+11</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5959">http://bugs.pardus.org.tr/show_bug.cgi?id=5959</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5959">http://bugs.pardus.org.tr/show_bug.cgi?id=5959</a></p>
+<p>Number of comments of this bug: 24</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id17">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id18">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 32</p>
+</div>
+<div class="section" id="id19">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19331">http://bugs.pardus.org.tr/show_bug.cgi?id=19331</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19332">http://bugs.pardus.org.tr/show_bug.cgi?id=19332</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19333">http://bugs.pardus.org.tr/show_bug.cgi?id=19333</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19334">http://bugs.pardus.org.tr/show_bug.cgi?id=19334</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19335">http://bugs.pardus.org.tr/show_bug.cgi?id=19335</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19336">http://bugs.pardus.org.tr/show_bug.cgi?id=19336</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19358">http://bugs.pardus.org.tr/show_bug.cgi?id=19358</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19359">http://bugs.pardus.org.tr/show_bug.cgi?id=19359</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19360">http://bugs.pardus.org.tr/show_bug.cgi?id=19360</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19361">http://bugs.pardus.org.tr/show_bug.cgi?id=19361</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19362">http://bugs.pardus.org.tr/show_bug.cgi?id=19362</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19363">http://bugs.pardus.org.tr/show_bug.cgi?id=19363</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19364">http://bugs.pardus.org.tr/show_bug.cgi?id=19364</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19365">http://bugs.pardus.org.tr/show_bug.cgi?id=19365</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19366">http://bugs.pardus.org.tr/show_bug.cgi?id=19366</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19367">http://bugs.pardus.org.tr/show_bug.cgi?id=19367</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19368">http://bugs.pardus.org.tr/show_bug.cgi?id=19368</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19369">http://bugs.pardus.org.tr/show_bug.cgi?id=19369</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19370">http://bugs.pardus.org.tr/show_bug.cgi?id=19370</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19371">http://bugs.pardus.org.tr/show_bug.cgi?id=19371</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19372">http://bugs.pardus.org.tr/show_bug.cgi?id=19372</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19381">http://bugs.pardus.org.tr/show_bug.cgi?id=19381</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19382">http://bugs.pardus.org.tr/show_bug.cgi?id=19382</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19383">http://bugs.pardus.org.tr/show_bug.cgi?id=19383</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19384">http://bugs.pardus.org.tr/show_bug.cgi?id=19384</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19385">http://bugs.pardus.org.tr/show_bug.cgi?id=19385</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19386">http://bugs.pardus.org.tr/show_bug.cgi?id=19386</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19389">http://bugs.pardus.org.tr/show_bug.cgi?id=19389</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19390">http://bugs.pardus.org.tr/show_bug.cgi?id=19390</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19391">http://bugs.pardus.org.tr/show_bug.cgi?id=19391</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19138">http://bugs.pardus.org.tr/show_bug.cgi?id=19138</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id20">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="david-stegbauer">
+<h2>David Stegbauer<a class="headerlink" href="#david-stegbauer" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+4</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17039">http://bugs.pardus.org.tr/show_bug.cgi?id=17039</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17039">http://bugs.pardus.org.tr/show_bug.cgi?id=17039</a></p>
+<p>Number of comments of this bug: 18</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id21">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id22">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id23">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id24">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="erdem-bayer">
+<h2>Erdem Bayer<a class="headerlink" href="#erdem-bayer" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+18</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=2420">http://bugs.pardus.org.tr/show_bug.cgi?id=2420</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=13875">http://bugs.pardus.org.tr/show_bug.cgi?id=13875</a></p>
+<p>Number of comments of this bug: 18</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id25">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id26">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id27">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id28">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="deniz-ege-tun-ay">
+<h2>Deniz Ege Tunçay<a class="headerlink" href="#deniz-ege-tun-ay" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+2</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6982">http://bugs.pardus.org.tr/show_bug.cgi?id=6982</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16428">http://bugs.pardus.org.tr/show_bug.cgi?id=16428</a></p>
+<p>Number of comments of this bug: 15</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id29">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id30">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id31">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id32">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="emre-ereno-lu">
+<h2>Emre Erenoğlu<a class="headerlink" href="#emre-ereno-lu" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17138">http://bugs.pardus.org.tr/show_bug.cgi?id=17138</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17138">http://bugs.pardus.org.tr/show_bug.cgi?id=17138</a></p>
+<p>Number of comments of this bug: 8</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id33">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id34">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 1</p>
+</div>
+<div class="section" id="id35">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17138">http://bugs.pardus.org.tr/show_bug.cgi?id=17138</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id36">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id37">
+<h2>Emre Erenoğlu<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+6</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16758">http://bugs.pardus.org.tr/show_bug.cgi?id=16758</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17530">http://bugs.pardus.org.tr/show_bug.cgi?id=17530</a></p>
+<p>Number of comments of this bug: 4</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id38">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id39">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id40">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id41">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="eren-t-rkay">
+<h2>Eren Türkay<a class="headerlink" href="#eren-t-rkay" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+10</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18369">http://bugs.pardus.org.tr/show_bug.cgi?id=18369</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18369">http://bugs.pardus.org.tr/show_bug.cgi?id=18369</a></p>
+<p>Number of comments of this bug: 13</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id42">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id43">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id44">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id45">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="ertan-arg-den">
+<h2>Ertan Argüden<a class="headerlink" href="#ertan-arg-den" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11776">http://bugs.pardus.org.tr/show_bug.cgi?id=11776</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11776">http://bugs.pardus.org.tr/show_bug.cgi?id=11776</a></p>
+<p>Number of comments of this bug: 6</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id46">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id47">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 2</p>
+</div>
+<div class="section" id="id48">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id48" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17754">http://bugs.pardus.org.tr/show_bug.cgi?id=17754</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id49">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id49" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="ertu-rul-erata">
+<h2>Ertuğrul Erata<a class="headerlink" href="#ertu-rul-erata" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+2</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4785">http://bugs.pardus.org.tr/show_bug.cgi?id=4785</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4785">http://bugs.pardus.org.tr/show_bug.cgi?id=4785</a></p>
+<p>Number of comments of this bug: 15</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id50">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id51">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id51" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id52">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id52" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id53">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id53" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="fatih-arslan">
+<h2>Fatih Arslan<a class="headerlink" href="#fatih-arslan" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+87</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10499">http://bugs.pardus.org.tr/show_bug.cgi?id=10499</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16053">http://bugs.pardus.org.tr/show_bug.cgi?id=16053</a></p>
+<p>Number of comments of this bug: 91</p>
+<p>Number of bugs reported since last week: 1</p>
+<div class="section" id="id54">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id54" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19319">http://bugs.pardus.org.tr/show_bug.cgi?id=19319</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 1</p>
+</div>
+<div class="section" id="id55">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id55" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4406">http://bugs.pardus.org.tr/show_bug.cgi?id=4406</a></li>
+</ol>
+<p>Number of commented bugs since last week: 37</p>
+</div>
+<div class="section" id="id56">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id56" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19360">http://bugs.pardus.org.tr/show_bug.cgi?id=19360</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19329">http://bugs.pardus.org.tr/show_bug.cgi?id=19329</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19362">http://bugs.pardus.org.tr/show_bug.cgi?id=19362</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19363">http://bugs.pardus.org.tr/show_bug.cgi?id=19363</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19237">http://bugs.pardus.org.tr/show_bug.cgi?id=19237</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16311">http://bugs.pardus.org.tr/show_bug.cgi?id=16311</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19276">http://bugs.pardus.org.tr/show_bug.cgi?id=19276</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14002">http://bugs.pardus.org.tr/show_bug.cgi?id=14002</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18991">http://bugs.pardus.org.tr/show_bug.cgi?id=18991</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18288">http://bugs.pardus.org.tr/show_bug.cgi?id=18288</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18994">http://bugs.pardus.org.tr/show_bug.cgi?id=18994</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19253">http://bugs.pardus.org.tr/show_bug.cgi?id=19253</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4406">http://bugs.pardus.org.tr/show_bug.cgi?id=4406</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18647">http://bugs.pardus.org.tr/show_bug.cgi?id=18647</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18649">http://bugs.pardus.org.tr/show_bug.cgi?id=18649</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18639">http://bugs.pardus.org.tr/show_bug.cgi?id=18639</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18812">http://bugs.pardus.org.tr/show_bug.cgi?id=18812</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18205">http://bugs.pardus.org.tr/show_bug.cgi?id=18205</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19359">http://bugs.pardus.org.tr/show_bug.cgi?id=19359</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id57">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id57" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="fatih-a-c">
+<h2>Fatih Aşıcı<a class="headerlink" href="#fatih-a-c" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+65</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=693">http://bugs.pardus.org.tr/show_bug.cgi?id=693</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=2975">http://bugs.pardus.org.tr/show_bug.cgi?id=2975</a></p>
+<p>Number of comments of this bug: 28</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id58">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id58" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id59">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id59" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 4</p>
+</div>
+<div class="section" id="id60">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id60" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14840">http://bugs.pardus.org.tr/show_bug.cgi?id=14840</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19276">http://bugs.pardus.org.tr/show_bug.cgi?id=19276</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id61">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id61" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="fethican-co-kuner">
+<h2>Fethican Coşkuner<a class="headerlink" href="#fethican-co-kuner" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+3</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18313">http://bugs.pardus.org.tr/show_bug.cgi?id=18313</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18313">http://bugs.pardus.org.tr/show_bug.cgi?id=18313</a></p>
+<p>Number of comments of this bug: 2</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id62">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id62" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id63">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id63" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id64">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id64" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id65">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id65" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="g-k-en-eraslan">
+<h2>Gökçen Eraslan<a class="headerlink" href="#g-k-en-eraslan" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+138</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3355">http://bugs.pardus.org.tr/show_bug.cgi?id=3355</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17706">http://bugs.pardus.org.tr/show_bug.cgi?id=17706</a></p>
+<p>Number of comments of this bug: 30</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id66">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id66" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id67">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id67" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 8</p>
+</div>
+<div class="section" id="id68">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id68" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19274">http://bugs.pardus.org.tr/show_bug.cgi?id=19274</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6131">http://bugs.pardus.org.tr/show_bug.cgi?id=6131</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19340">http://bugs.pardus.org.tr/show_bug.cgi?id=19340</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16669">http://bugs.pardus.org.tr/show_bug.cgi?id=16669</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17765">http://bugs.pardus.org.tr/show_bug.cgi?id=17765</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id69">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id69" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="g-khan-zkan">
+<h2>Gökhan Özkan<a class="headerlink" href="#g-khan-zkan" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=13551">http://bugs.pardus.org.tr/show_bug.cgi?id=13551</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=13551">http://bugs.pardus.org.tr/show_bug.cgi?id=13551</a></p>
+<p>Number of comments of this bug: 1</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id70">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id70" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id71">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id71" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id72">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id72" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id73">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id73" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="g-kmen-g-ksel">
+<h2>Gökmen Göksel<a class="headerlink" href="#g-kmen-g-ksel" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+67</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=1780">http://bugs.pardus.org.tr/show_bug.cgi?id=1780</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=1780">http://bugs.pardus.org.tr/show_bug.cgi?id=1780</a></p>
+<p>Number of comments of this bug: 25</p>
+<p>Number of bugs reported since last week: 1</p>
+<div class="section" id="id74">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id74" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19343">http://bugs.pardus.org.tr/show_bug.cgi?id=19343</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 1</p>
+</div>
+<div class="section" id="id75">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id75" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10353">http://bugs.pardus.org.tr/show_bug.cgi?id=10353</a></li>
+</ol>
+<p>Number of commented bugs since last week: 21</p>
+</div>
+<div class="section" id="id76">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id76" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18466">http://bugs.pardus.org.tr/show_bug.cgi?id=18466</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15302">http://bugs.pardus.org.tr/show_bug.cgi?id=15302</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10473">http://bugs.pardus.org.tr/show_bug.cgi?id=10473</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19373">http://bugs.pardus.org.tr/show_bug.cgi?id=19373</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10353">http://bugs.pardus.org.tr/show_bug.cgi?id=10353</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18258">http://bugs.pardus.org.tr/show_bug.cgi?id=18258</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19349">http://bugs.pardus.org.tr/show_bug.cgi?id=19349</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5590">http://bugs.pardus.org.tr/show_bug.cgi?id=5590</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19353">http://bugs.pardus.org.tr/show_bug.cgi?id=19353</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3994">http://bugs.pardus.org.tr/show_bug.cgi?id=3994</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=7003">http://bugs.pardus.org.tr/show_bug.cgi?id=7003</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14716">http://bugs.pardus.org.tr/show_bug.cgi?id=14716</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id77">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id77" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="g-khan-zbulak">
+<h2>Gökhan Özbulak<a class="headerlink" href="#g-khan-zbulak" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+31</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=8386">http://bugs.pardus.org.tr/show_bug.cgi?id=8386</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=8386">http://bugs.pardus.org.tr/show_bug.cgi?id=8386</a></p>
+<p>Number of comments of this bug: 21</p>
+<p>Number of bugs reported since last week: 2</p>
+<div class="section" id="id78">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id78" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19329">http://bugs.pardus.org.tr/show_bug.cgi?id=19329</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19397">http://bugs.pardus.org.tr/show_bug.cgi?id=19397</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 4</p>
+</div>
+<div class="section" id="id79">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id79" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19371">http://bugs.pardus.org.tr/show_bug.cgi?id=19371</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4018">http://bugs.pardus.org.tr/show_bug.cgi?id=4018</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18559">http://bugs.pardus.org.tr/show_bug.cgi?id=18559</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19372">http://bugs.pardus.org.tr/show_bug.cgi?id=19372</a></li>
+</ol>
+<p>Number of commented bugs since last week: 22</p>
+</div>
+<div class="section" id="id80">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id80" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19329">http://bugs.pardus.org.tr/show_bug.cgi?id=19329</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19371">http://bugs.pardus.org.tr/show_bug.cgi?id=19371</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19372">http://bugs.pardus.org.tr/show_bug.cgi?id=19372</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19277">http://bugs.pardus.org.tr/show_bug.cgi?id=19277</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4018">http://bugs.pardus.org.tr/show_bug.cgi?id=4018</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16052">http://bugs.pardus.org.tr/show_bug.cgi?id=16052</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19253">http://bugs.pardus.org.tr/show_bug.cgi?id=19253</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19126">http://bugs.pardus.org.tr/show_bug.cgi?id=19126</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19097">http://bugs.pardus.org.tr/show_bug.cgi?id=19097</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18812">http://bugs.pardus.org.tr/show_bug.cgi?id=18812</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18205">http://bugs.pardus.org.tr/show_bug.cgi?id=18205</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18559">http://bugs.pardus.org.tr/show_bug.cgi?id=18559</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id81">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id81" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="g-rkan-zengin">
+<h2>Gürkan Zengin<a class="headerlink" href="#g-rkan-zengin" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11116">http://bugs.pardus.org.tr/show_bug.cgi?id=11116</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11116">http://bugs.pardus.org.tr/show_bug.cgi?id=11116</a></p>
+<p>Number of comments of this bug: 5</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id82">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id82" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id83">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id83" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id84">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id84" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id85">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id85" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="h-brahim-g-ng-r">
+<h2>H. İbrahim Güngör<a class="headerlink" href="#h-brahim-g-ng-r" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+32</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6319">http://bugs.pardus.org.tr/show_bug.cgi?id=6319</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6319">http://bugs.pardus.org.tr/show_bug.cgi?id=6319</a></p>
+<p>Number of comments of this bug: 70</p>
+<p>Number of bugs reported since last week: 4</p>
+<div class="section" id="id86">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id86" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19338">http://bugs.pardus.org.tr/show_bug.cgi?id=19338</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19373">http://bugs.pardus.org.tr/show_bug.cgi?id=19373</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19385">http://bugs.pardus.org.tr/show_bug.cgi?id=19385</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19386">http://bugs.pardus.org.tr/show_bug.cgi?id=19386</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id87">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id87" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 13</p>
+</div>
+<div class="section" id="id88">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id88" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19232">http://bugs.pardus.org.tr/show_bug.cgi?id=19232</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18360">http://bugs.pardus.org.tr/show_bug.cgi?id=18360</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18812">http://bugs.pardus.org.tr/show_bug.cgi?id=18812</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18205">http://bugs.pardus.org.tr/show_bug.cgi?id=18205</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19253">http://bugs.pardus.org.tr/show_bug.cgi?id=19253</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id89">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id89" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="rajeev-j-sebastian">
+<h2>Rajeev J Sebastian<a class="headerlink" href="#rajeev-j-sebastian" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10625">http://bugs.pardus.org.tr/show_bug.cgi?id=10625</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10625">http://bugs.pardus.org.tr/show_bug.cgi?id=10625</a></p>
+<p>Number of comments of this bug: 10</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id90">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id90" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id91">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id91" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id92">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id92" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id93">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id93" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="baran-ak-ay-r">
+<h2>İşbaran Akçayır<a class="headerlink" href="#baran-ak-ay-r" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+6</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10328">http://bugs.pardus.org.tr/show_bug.cgi?id=10328</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10328">http://bugs.pardus.org.tr/show_bug.cgi?id=10328</a></p>
+<p>Number of comments of this bug: 10</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id94">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id94" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 1</p>
+</div>
+<div class="section" id="id95">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id95" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17964">http://bugs.pardus.org.tr/show_bug.cgi?id=17964</a></li>
+</ol>
+<p>Number of commented bugs since last week: 2</p>
+</div>
+<div class="section" id="id96">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id96" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17964">http://bugs.pardus.org.tr/show_bug.cgi?id=17964</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id97">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id97" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="u-ur-etin">
+<h2>Uğur Çetin<a class="headerlink" href="#u-ur-etin" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10837">http://bugs.pardus.org.tr/show_bug.cgi?id=10837</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10837">http://bugs.pardus.org.tr/show_bug.cgi?id=10837</a></p>
+<p>Number of comments of this bug: 6</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id98">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id98" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 4</p>
+</div>
+<div class="section" id="id99">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id99" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=12875">http://bugs.pardus.org.tr/show_bug.cgi?id=12875</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17205">http://bugs.pardus.org.tr/show_bug.cgi?id=17205</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17206">http://bugs.pardus.org.tr/show_bug.cgi?id=17206</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17207">http://bugs.pardus.org.tr/show_bug.cgi?id=17207</a></li>
+</ol>
+<p>Number of commented bugs since last week: 7</p>
+</div>
+<div class="section" id="id100">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id100" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=12875">http://bugs.pardus.org.tr/show_bug.cgi?id=12875</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17205">http://bugs.pardus.org.tr/show_bug.cgi?id=17205</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17206">http://bugs.pardus.org.tr/show_bug.cgi?id=17206</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17207">http://bugs.pardus.org.tr/show_bug.cgi?id=17207</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id101">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id101" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="kenan-pelit">
+<h2>Kenan Pelit<a class="headerlink" href="#kenan-pelit" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11424">http://bugs.pardus.org.tr/show_bug.cgi?id=11424</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11424">http://bugs.pardus.org.tr/show_bug.cgi?id=11424</a></p>
+<p>Number of comments of this bug: 8</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id102">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id102" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id103">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id103" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id104">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id104" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id105">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id105" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="kaan-zdin-er">
+<h2>Kaan Özdinçer<a class="headerlink" href="#kaan-zdin-er" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11253">http://bugs.pardus.org.tr/show_bug.cgi?id=11253</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11253">http://bugs.pardus.org.tr/show_bug.cgi?id=11253</a></p>
+<p>Number of comments of this bug: 14</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id106">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id106" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id107">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id107" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 2</p>
+</div>
+<div class="section" id="id108">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id108" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19232">http://bugs.pardus.org.tr/show_bug.cgi?id=19232</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id109">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id109" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id110">
+<h2>Kaan Özdinçer<a class="headerlink" href="#id110" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+13</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11758">http://bugs.pardus.org.tr/show_bug.cgi?id=11758</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18004">http://bugs.pardus.org.tr/show_bug.cgi?id=18004</a></p>
+<p>Number of comments of this bug: 16</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id111">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id111" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id112">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id112" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 4</p>
+</div>
+<div class="section" id="id113">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id113" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19232">http://bugs.pardus.org.tr/show_bug.cgi?id=19232</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id114">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id114" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="koray-l-ker">
+<h2>Koray Löker<a class="headerlink" href="#koray-l-ker" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+10</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=53">http://bugs.pardus.org.tr/show_bug.cgi?id=53</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=12727">http://bugs.pardus.org.tr/show_bug.cgi?id=12727</a></p>
+<p>Number of comments of this bug: 19</p>
+<p>Number of bugs reported since last week: 1</p>
+<div class="section" id="id115">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id115" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19326">http://bugs.pardus.org.tr/show_bug.cgi?id=19326</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 3</p>
+</div>
+<div class="section" id="id116">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id116" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17823">http://bugs.pardus.org.tr/show_bug.cgi?id=17823</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=9479">http://bugs.pardus.org.tr/show_bug.cgi?id=9479</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15664">http://bugs.pardus.org.tr/show_bug.cgi?id=15664</a></li>
+</ol>
+<p>Number of commented bugs since last week: 9</p>
+</div>
+<div class="section" id="id117">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id117" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19330">http://bugs.pardus.org.tr/show_bug.cgi?id=19330</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=9479">http://bugs.pardus.org.tr/show_bug.cgi?id=9479</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19337">http://bugs.pardus.org.tr/show_bug.cgi?id=19337</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15664">http://bugs.pardus.org.tr/show_bug.cgi?id=15664</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19326">http://bugs.pardus.org.tr/show_bug.cgi?id=19326</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17823">http://bugs.pardus.org.tr/show_bug.cgi?id=17823</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id118">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id118" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="mehmet-zdemir">
+<h2>Mehmet Özdemir<a class="headerlink" href="#mehmet-zdemir" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+24</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=9806">http://bugs.pardus.org.tr/show_bug.cgi?id=9806</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17765">http://bugs.pardus.org.tr/show_bug.cgi?id=17765</a></p>
+<p>Number of comments of this bug: 26</p>
+<p>Number of bugs reported since last week: 3</p>
+<div class="section" id="id119">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id119" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19365">http://bugs.pardus.org.tr/show_bug.cgi?id=19365</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19366">http://bugs.pardus.org.tr/show_bug.cgi?id=19366</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19375">http://bugs.pardus.org.tr/show_bug.cgi?id=19375</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id120">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id120" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 7</p>
+</div>
+<div class="section" id="id121">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id121" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18360">http://bugs.pardus.org.tr/show_bug.cgi?id=18360</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17116">http://bugs.pardus.org.tr/show_bug.cgi?id=17116</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19237">http://bugs.pardus.org.tr/show_bug.cgi?id=19237</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15735">http://bugs.pardus.org.tr/show_bug.cgi?id=15735</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id122">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id122" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="meltem-parmaks-z">
+<h2>Meltem Parmaksız<a class="headerlink" href="#meltem-parmaks-z" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+6</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15751">http://bugs.pardus.org.tr/show_bug.cgi?id=15751</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15751">http://bugs.pardus.org.tr/show_bug.cgi?id=15751</a></p>
+<p>Number of comments of this bug: 6</p>
+<p>Number of bugs reported since last week: 2</p>
+<div class="section" id="id123">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id123" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19335">http://bugs.pardus.org.tr/show_bug.cgi?id=19335</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19336">http://bugs.pardus.org.tr/show_bug.cgi?id=19336</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id124">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id124" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 2</p>
+</div>
+<div class="section" id="id125">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id125" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16018">http://bugs.pardus.org.tr/show_bug.cgi?id=16018</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id126">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id126" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="mehmet-emre-atasever">
+<h2>Mehmet Emre Atasever<a class="headerlink" href="#mehmet-emre-atasever" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=13831">http://bugs.pardus.org.tr/show_bug.cgi?id=13831</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=13831">http://bugs.pardus.org.tr/show_bug.cgi?id=13831</a></p>
+<p>Number of comments of this bug: 19</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id127">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id127" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id128">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id128" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id129">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id129" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id130">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id130" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="mesutcan-kurt">
+<h2>Mesutcan Kurt<a class="headerlink" href="#mesutcan-kurt" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+6</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5027">http://bugs.pardus.org.tr/show_bug.cgi?id=5027</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5027">http://bugs.pardus.org.tr/show_bug.cgi?id=5027</a></p>
+<p>Number of comments of this bug: 9</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id131">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id131" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id132">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id132" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id133">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id133" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id134">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id134" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="mete-bilgin">
+<h2>Mete Bilgin<a class="headerlink" href="#mete-bilgin" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+2</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18012">http://bugs.pardus.org.tr/show_bug.cgi?id=18012</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18012">http://bugs.pardus.org.tr/show_bug.cgi?id=18012</a></p>
+<p>Number of comments of this bug: 9</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id135">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id135" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 1</p>
+</div>
+<div class="section" id="id136">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id136" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16336">http://bugs.pardus.org.tr/show_bug.cgi?id=16336</a></li>
+</ol>
+<p>Number of commented bugs since last week: 3</p>
+</div>
+<div class="section" id="id137">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id137" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16336">http://bugs.pardus.org.tr/show_bug.cgi?id=16336</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17465">http://bugs.pardus.org.tr/show_bug.cgi?id=17465</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=9583">http://bugs.pardus.org.tr/show_bug.cgi?id=9583</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id138">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id138" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="mete-alpaslan">
+<h2>Mete Alpaslan<a class="headerlink" href="#mete-alpaslan" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+37</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5479">http://bugs.pardus.org.tr/show_bug.cgi?id=5479</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16537">http://bugs.pardus.org.tr/show_bug.cgi?id=16537</a></p>
+<p>Number of comments of this bug: 15</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id139">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id139" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id140">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id140" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id141">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id141" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id142">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id142" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="metin-akdere">
+<h2>Metin Akdere<a class="headerlink" href="#metin-akdere" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+40</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=2097">http://bugs.pardus.org.tr/show_bug.cgi?id=2097</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17669">http://bugs.pardus.org.tr/show_bug.cgi?id=17669</a></p>
+<p>Number of comments of this bug: 64</p>
+<p>Number of bugs reported since last week: 1</p>
+<div class="section" id="id143">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id143" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19393">http://bugs.pardus.org.tr/show_bug.cgi?id=19393</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 3</p>
+</div>
+<div class="section" id="id144">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id144" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18444">http://bugs.pardus.org.tr/show_bug.cgi?id=18444</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19178">http://bugs.pardus.org.tr/show_bug.cgi?id=19178</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19179">http://bugs.pardus.org.tr/show_bug.cgi?id=19179</a></li>
+</ol>
+<p>Number of commented bugs since last week: 28</p>
+</div>
+<div class="section" id="id145">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id145" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18315">http://bugs.pardus.org.tr/show_bug.cgi?id=18315</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17988">http://bugs.pardus.org.tr/show_bug.cgi?id=17988</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19238">http://bugs.pardus.org.tr/show_bug.cgi?id=19238</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17511">http://bugs.pardus.org.tr/show_bug.cgi?id=17511</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19048">http://bugs.pardus.org.tr/show_bug.cgi?id=19048</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19178">http://bugs.pardus.org.tr/show_bug.cgi?id=19178</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19179">http://bugs.pardus.org.tr/show_bug.cgi?id=19179</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18444">http://bugs.pardus.org.tr/show_bug.cgi?id=18444</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19066">http://bugs.pardus.org.tr/show_bug.cgi?id=19066</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19387">http://bugs.pardus.org.tr/show_bug.cgi?id=19387</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17884">http://bugs.pardus.org.tr/show_bug.cgi?id=17884</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16669">http://bugs.pardus.org.tr/show_bug.cgi?id=16669</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id146">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id146" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="t-rker-sezer">
+<h2>Türker Sezer<a class="headerlink" href="#t-rker-sezer" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+2</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17642">http://bugs.pardus.org.tr/show_bug.cgi?id=17642</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17642">http://bugs.pardus.org.tr/show_bug.cgi?id=17642</a></p>
+<p>Number of comments of this bug: 5</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id147">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id147" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 1</p>
+</div>
+<div class="section" id="id148">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id148" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19327">http://bugs.pardus.org.tr/show_bug.cgi?id=19327</a></li>
+</ol>
+<p>Number of commented bugs since last week: 6</p>
+</div>
+<div class="section" id="id149">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id149" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18026">http://bugs.pardus.org.tr/show_bug.cgi?id=18026</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16781">http://bugs.pardus.org.tr/show_bug.cgi?id=16781</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18678">http://bugs.pardus.org.tr/show_bug.cgi?id=18678</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15703">http://bugs.pardus.org.tr/show_bug.cgi?id=15703</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18681">http://bugs.pardus.org.tr/show_bug.cgi?id=18681</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19327">http://bugs.pardus.org.tr/show_bug.cgi?id=19327</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id150">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id150" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="mehmet-nur-olcay">
+<h2>Mehmet Nur Olcay<a class="headerlink" href="#mehmet-nur-olcay" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+4</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=9659">http://bugs.pardus.org.tr/show_bug.cgi?id=9659</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=9659">http://bugs.pardus.org.tr/show_bug.cgi?id=9659</a></p>
+<p>Number of comments of this bug: 10</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id151">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id151" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id152">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id152" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id153">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id153" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id154">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id154" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="nihat-ciddi">
+<h2>Nihat Ciddi<a class="headerlink" href="#nihat-ciddi" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18547">http://bugs.pardus.org.tr/show_bug.cgi?id=18547</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18547">http://bugs.pardus.org.tr/show_bug.cgi?id=18547</a></p>
+<p>Number of comments of this bug: 2</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id155">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id155" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id156">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id156" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id157">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id157" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id158">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id158" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="necdet-y-cel">
+<h2>Necdet Yücel<a class="headerlink" href="#necdet-y-cel" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+2</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=8525">http://bugs.pardus.org.tr/show_bug.cgi?id=8525</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=8525">http://bugs.pardus.org.tr/show_bug.cgi?id=8525</a></p>
+<p>Number of comments of this bug: 9</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id159">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id159" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 1</p>
+</div>
+<div class="section" id="id160">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id160" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18444">http://bugs.pardus.org.tr/show_bug.cgi?id=18444</a></li>
+</ol>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id161">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id161" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id162">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id162" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="necmettin-begiter">
+<h2>Necmettin Begiter<a class="headerlink" href="#necmettin-begiter" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+4</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=1898">http://bugs.pardus.org.tr/show_bug.cgi?id=1898</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5080">http://bugs.pardus.org.tr/show_bug.cgi?id=5080</a></p>
+<p>Number of comments of this bug: 25</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id163">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id163" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id164">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id164" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id165">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id165" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id166">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id166" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="o-uz-yar-mtepe">
+<h2>Oğuz Yarımtepe<a class="headerlink" href="#o-uz-yar-mtepe" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4179">http://bugs.pardus.org.tr/show_bug.cgi?id=4179</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4179">http://bugs.pardus.org.tr/show_bug.cgi?id=4179</a></p>
+<p>Number of comments of this bug: 38</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id167">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id167" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id168">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id168" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id169">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id169" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id170">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id170" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="ozan-a-layan">
+<h2>Ozan Çağlayan<a class="headerlink" href="#ozan-a-layan" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+312</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=1848">http://bugs.pardus.org.tr/show_bug.cgi?id=1848</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15946">http://bugs.pardus.org.tr/show_bug.cgi?id=15946</a></p>
+<p>Number of comments of this bug: 97</p>
+<p>Number of bugs reported since last week: 13</p>
+<div class="section" id="id171">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id171" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19321">http://bugs.pardus.org.tr/show_bug.cgi?id=19321</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19322">http://bugs.pardus.org.tr/show_bug.cgi?id=19322</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19325">http://bugs.pardus.org.tr/show_bug.cgi?id=19325</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19340">http://bugs.pardus.org.tr/show_bug.cgi?id=19340</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19347">http://bugs.pardus.org.tr/show_bug.cgi?id=19347</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19350">http://bugs.pardus.org.tr/show_bug.cgi?id=19350</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19351">http://bugs.pardus.org.tr/show_bug.cgi?id=19351</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19354">http://bugs.pardus.org.tr/show_bug.cgi?id=19354</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19368">http://bugs.pardus.org.tr/show_bug.cgi?id=19368</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19369">http://bugs.pardus.org.tr/show_bug.cgi?id=19369</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19379">http://bugs.pardus.org.tr/show_bug.cgi?id=19379</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19390">http://bugs.pardus.org.tr/show_bug.cgi?id=19390</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19391">http://bugs.pardus.org.tr/show_bug.cgi?id=19391</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 50</p>
+</div>
+<div class="section" id="id172">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id172" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19303">http://bugs.pardus.org.tr/show_bug.cgi?id=19303</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5546">http://bugs.pardus.org.tr/show_bug.cgi?id=5546</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3272">http://bugs.pardus.org.tr/show_bug.cgi?id=3272</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3357">http://bugs.pardus.org.tr/show_bug.cgi?id=3357</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4077">http://bugs.pardus.org.tr/show_bug.cgi?id=4077</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4151">http://bugs.pardus.org.tr/show_bug.cgi?id=4151</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4222">http://bugs.pardus.org.tr/show_bug.cgi?id=4222</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4798">http://bugs.pardus.org.tr/show_bug.cgi?id=4798</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10191">http://bugs.pardus.org.tr/show_bug.cgi?id=10191</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10551">http://bugs.pardus.org.tr/show_bug.cgi?id=10551</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6773">http://bugs.pardus.org.tr/show_bug.cgi?id=6773</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11831">http://bugs.pardus.org.tr/show_bug.cgi?id=11831</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14290">http://bugs.pardus.org.tr/show_bug.cgi?id=14290</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16206">http://bugs.pardus.org.tr/show_bug.cgi?id=16206</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=1937">http://bugs.pardus.org.tr/show_bug.cgi?id=1937</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3431">http://bugs.pardus.org.tr/show_bug.cgi?id=3431</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3490">http://bugs.pardus.org.tr/show_bug.cgi?id=3490</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3975">http://bugs.pardus.org.tr/show_bug.cgi?id=3975</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5198">http://bugs.pardus.org.tr/show_bug.cgi?id=5198</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18026">http://bugs.pardus.org.tr/show_bug.cgi?id=18026</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5585">http://bugs.pardus.org.tr/show_bug.cgi?id=5585</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5688">http://bugs.pardus.org.tr/show_bug.cgi?id=5688</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6807">http://bugs.pardus.org.tr/show_bug.cgi?id=6807</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=7507">http://bugs.pardus.org.tr/show_bug.cgi?id=7507</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=7906">http://bugs.pardus.org.tr/show_bug.cgi?id=7906</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=8103">http://bugs.pardus.org.tr/show_bug.cgi?id=8103</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5820">http://bugs.pardus.org.tr/show_bug.cgi?id=5820</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6315">http://bugs.pardus.org.tr/show_bug.cgi?id=6315</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6265">http://bugs.pardus.org.tr/show_bug.cgi?id=6265</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6019">http://bugs.pardus.org.tr/show_bug.cgi?id=6019</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=12224">http://bugs.pardus.org.tr/show_bug.cgi?id=12224</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=12488">http://bugs.pardus.org.tr/show_bug.cgi?id=12488</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15913">http://bugs.pardus.org.tr/show_bug.cgi?id=15913</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19116">http://bugs.pardus.org.tr/show_bug.cgi?id=19116</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18684">http://bugs.pardus.org.tr/show_bug.cgi?id=18684</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19392">http://bugs.pardus.org.tr/show_bug.cgi?id=19392</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19383">http://bugs.pardus.org.tr/show_bug.cgi?id=19383</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19382">http://bugs.pardus.org.tr/show_bug.cgi?id=19382</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17571">http://bugs.pardus.org.tr/show_bug.cgi?id=17571</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18583">http://bugs.pardus.org.tr/show_bug.cgi?id=18583</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18584">http://bugs.pardus.org.tr/show_bug.cgi?id=18584</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18585">http://bugs.pardus.org.tr/show_bug.cgi?id=18585</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18586">http://bugs.pardus.org.tr/show_bug.cgi?id=18586</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18587">http://bugs.pardus.org.tr/show_bug.cgi?id=18587</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18588">http://bugs.pardus.org.tr/show_bug.cgi?id=18588</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18589">http://bugs.pardus.org.tr/show_bug.cgi?id=18589</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18590">http://bugs.pardus.org.tr/show_bug.cgi?id=18590</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18591">http://bugs.pardus.org.tr/show_bug.cgi?id=18591</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18410">http://bugs.pardus.org.tr/show_bug.cgi?id=18410</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19378">http://bugs.pardus.org.tr/show_bug.cgi?id=19378</a></li>
+</ol>
+<p>Number of commented bugs since last week: 72</p>
+</div>
+<div class="section" id="id173">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id173" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19392">http://bugs.pardus.org.tr/show_bug.cgi?id=19392</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6019">http://bugs.pardus.org.tr/show_bug.cgi?id=6019</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19317">http://bugs.pardus.org.tr/show_bug.cgi?id=19317</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3975">http://bugs.pardus.org.tr/show_bug.cgi?id=3975</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19116">http://bugs.pardus.org.tr/show_bug.cgi?id=19116</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18583">http://bugs.pardus.org.tr/show_bug.cgi?id=18583</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=1937">http://bugs.pardus.org.tr/show_bug.cgi?id=1937</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3310">http://bugs.pardus.org.tr/show_bug.cgi?id=3310</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6807">http://bugs.pardus.org.tr/show_bug.cgi?id=6807</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18584">http://bugs.pardus.org.tr/show_bug.cgi?id=18584</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18585">http://bugs.pardus.org.tr/show_bug.cgi?id=18585</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18586">http://bugs.pardus.org.tr/show_bug.cgi?id=18586</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18587">http://bugs.pardus.org.tr/show_bug.cgi?id=18587</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18588">http://bugs.pardus.org.tr/show_bug.cgi?id=18588</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3357">http://bugs.pardus.org.tr/show_bug.cgi?id=3357</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5918">http://bugs.pardus.org.tr/show_bug.cgi?id=5918</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=2975">http://bugs.pardus.org.tr/show_bug.cgi?id=2975</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19184">http://bugs.pardus.org.tr/show_bug.cgi?id=19184</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17571">http://bugs.pardus.org.tr/show_bug.cgi?id=17571</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4389">http://bugs.pardus.org.tr/show_bug.cgi?id=4389</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5546">http://bugs.pardus.org.tr/show_bug.cgi?id=5546</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6315">http://bugs.pardus.org.tr/show_bug.cgi?id=6315</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11820">http://bugs.pardus.org.tr/show_bug.cgi?id=11820</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19378">http://bugs.pardus.org.tr/show_bug.cgi?id=19378</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18589">http://bugs.pardus.org.tr/show_bug.cgi?id=18589</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15280">http://bugs.pardus.org.tr/show_bug.cgi?id=15280</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4018">http://bugs.pardus.org.tr/show_bug.cgi?id=4018</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18590">http://bugs.pardus.org.tr/show_bug.cgi?id=18590</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4406">http://bugs.pardus.org.tr/show_bug.cgi?id=4406</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10551">http://bugs.pardus.org.tr/show_bug.cgi?id=10551</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5688">http://bugs.pardus.org.tr/show_bug.cgi?id=5688</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=9659">http://bugs.pardus.org.tr/show_bug.cgi?id=9659</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19383">http://bugs.pardus.org.tr/show_bug.cgi?id=19383</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19274">http://bugs.pardus.org.tr/show_bug.cgi?id=19274</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4798">http://bugs.pardus.org.tr/show_bug.cgi?id=4798</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4597">http://bugs.pardus.org.tr/show_bug.cgi?id=4597</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=12224">http://bugs.pardus.org.tr/show_bug.cgi?id=12224</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3265">http://bugs.pardus.org.tr/show_bug.cgi?id=3265</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5316">http://bugs.pardus.org.tr/show_bug.cgi?id=5316</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19382">http://bugs.pardus.org.tr/show_bug.cgi?id=19382</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3272">http://bugs.pardus.org.tr/show_bug.cgi?id=3272</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18890">http://bugs.pardus.org.tr/show_bug.cgi?id=18890</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4151">http://bugs.pardus.org.tr/show_bug.cgi?id=4151</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19278">http://bugs.pardus.org.tr/show_bug.cgi?id=19278</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10191">http://bugs.pardus.org.tr/show_bug.cgi?id=10191</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5585">http://bugs.pardus.org.tr/show_bug.cgi?id=5585</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=7507">http://bugs.pardus.org.tr/show_bug.cgi?id=7507</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5198">http://bugs.pardus.org.tr/show_bug.cgi?id=5198</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15192">http://bugs.pardus.org.tr/show_bug.cgi?id=15192</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3417">http://bugs.pardus.org.tr/show_bug.cgi?id=3417</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19281">http://bugs.pardus.org.tr/show_bug.cgi?id=19281</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=7906">http://bugs.pardus.org.tr/show_bug.cgi?id=7906</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19303">http://bugs.pardus.org.tr/show_bug.cgi?id=19303</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11831">http://bugs.pardus.org.tr/show_bug.cgi?id=11831</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18410">http://bugs.pardus.org.tr/show_bug.cgi?id=18410</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3431">http://bugs.pardus.org.tr/show_bug.cgi?id=3431</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18591">http://bugs.pardus.org.tr/show_bug.cgi?id=18591</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4077">http://bugs.pardus.org.tr/show_bug.cgi?id=4077</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19310">http://bugs.pardus.org.tr/show_bug.cgi?id=19310</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18288">http://bugs.pardus.org.tr/show_bug.cgi?id=18288</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18800">http://bugs.pardus.org.tr/show_bug.cgi?id=18800</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6131">http://bugs.pardus.org.tr/show_bug.cgi?id=6131</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3956">http://bugs.pardus.org.tr/show_bug.cgi?id=3956</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6773">http://bugs.pardus.org.tr/show_bug.cgi?id=6773</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6265">http://bugs.pardus.org.tr/show_bug.cgi?id=6265</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18042">http://bugs.pardus.org.tr/show_bug.cgi?id=18042</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18684">http://bugs.pardus.org.tr/show_bug.cgi?id=18684</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4222">http://bugs.pardus.org.tr/show_bug.cgi?id=4222</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id174">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id174" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="renan-ak-rerk">
+<h2>Renan Çakırerk<a class="headerlink" href="#renan-ak-rerk" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+107</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=994">http://bugs.pardus.org.tr/show_bug.cgi?id=994</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11503">http://bugs.pardus.org.tr/show_bug.cgi?id=11503</a></p>
+<p>Number of comments of this bug: 36</p>
+<p>Number of bugs reported since last week: 6</p>
+<div class="section" id="id175">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id175" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19328">http://bugs.pardus.org.tr/show_bug.cgi?id=19328</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19345">http://bugs.pardus.org.tr/show_bug.cgi?id=19345</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19346">http://bugs.pardus.org.tr/show_bug.cgi?id=19346</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19377">http://bugs.pardus.org.tr/show_bug.cgi?id=19377</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19387">http://bugs.pardus.org.tr/show_bug.cgi?id=19387</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19394">http://bugs.pardus.org.tr/show_bug.cgi?id=19394</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id176">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id176" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 11</p>
+</div>
+<div class="section" id="id177">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id177" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19328">http://bugs.pardus.org.tr/show_bug.cgi?id=19328</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16018">http://bugs.pardus.org.tr/show_bug.cgi?id=16018</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19344">http://bugs.pardus.org.tr/show_bug.cgi?id=19344</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19345">http://bugs.pardus.org.tr/show_bug.cgi?id=19345</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19346">http://bugs.pardus.org.tr/show_bug.cgi?id=19346</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4597">http://bugs.pardus.org.tr/show_bug.cgi?id=4597</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19320">http://bugs.pardus.org.tr/show_bug.cgi?id=19320</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id178">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id178" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="recep-k-rm-z">
+<h2>Recep Kırmızı<a class="headerlink" href="#recep-k-rm-z" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11575">http://bugs.pardus.org.tr/show_bug.cgi?id=11575</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11575">http://bugs.pardus.org.tr/show_bug.cgi?id=11575</a></p>
+<p>Number of comments of this bug: 6</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id179">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id179" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id180">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id180" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id181">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id181" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id182">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id182" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="serdar-dalg">
+<h2>Serdar Dalgıç<a class="headerlink" href="#serdar-dalg" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+44</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5728">http://bugs.pardus.org.tr/show_bug.cgi?id=5728</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=12443">http://bugs.pardus.org.tr/show_bug.cgi?id=12443</a></p>
+<p>Number of comments of this bug: 50</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id183">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id183" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 12</p>
+</div>
+<div class="section" id="id184">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id184" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19324">http://bugs.pardus.org.tr/show_bug.cgi?id=19324</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19316">http://bugs.pardus.org.tr/show_bug.cgi?id=19316</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18812">http://bugs.pardus.org.tr/show_bug.cgi?id=18812</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18496">http://bugs.pardus.org.tr/show_bug.cgi?id=18496</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19333">http://bugs.pardus.org.tr/show_bug.cgi?id=19333</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19332">http://bugs.pardus.org.tr/show_bug.cgi?id=19332</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17116">http://bugs.pardus.org.tr/show_bug.cgi?id=17116</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19280">http://bugs.pardus.org.tr/show_bug.cgi?id=19280</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19274">http://bugs.pardus.org.tr/show_bug.cgi?id=19274</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19237">http://bugs.pardus.org.tr/show_bug.cgi?id=19237</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=8922">http://bugs.pardus.org.tr/show_bug.cgi?id=8922</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19253">http://bugs.pardus.org.tr/show_bug.cgi?id=19253</a></li>
+</ol>
+<p>Number of commented bugs since last week: 95</p>
+</div>
+<div class="section" id="id185">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id185" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17664">http://bugs.pardus.org.tr/show_bug.cgi?id=17664</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18496">http://bugs.pardus.org.tr/show_bug.cgi?id=18496</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19331">http://bugs.pardus.org.tr/show_bug.cgi?id=19331</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19332">http://bugs.pardus.org.tr/show_bug.cgi?id=19332</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19333">http://bugs.pardus.org.tr/show_bug.cgi?id=19333</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16779">http://bugs.pardus.org.tr/show_bug.cgi?id=16779</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18315">http://bugs.pardus.org.tr/show_bug.cgi?id=18315</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15376">http://bugs.pardus.org.tr/show_bug.cgi?id=15376</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17001">http://bugs.pardus.org.tr/show_bug.cgi?id=17001</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17173">http://bugs.pardus.org.tr/show_bug.cgi?id=17173</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18991">http://bugs.pardus.org.tr/show_bug.cgi?id=18991</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16669">http://bugs.pardus.org.tr/show_bug.cgi?id=16669</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17669">http://bugs.pardus.org.tr/show_bug.cgi?id=17669</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17441">http://bugs.pardus.org.tr/show_bug.cgi?id=17441</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18850">http://bugs.pardus.org.tr/show_bug.cgi?id=18850</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19237">http://bugs.pardus.org.tr/show_bug.cgi?id=19237</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19238">http://bugs.pardus.org.tr/show_bug.cgi?id=19238</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10332">http://bugs.pardus.org.tr/show_bug.cgi?id=10332</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15403">http://bugs.pardus.org.tr/show_bug.cgi?id=15403</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18205">http://bugs.pardus.org.tr/show_bug.cgi?id=18205</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18994">http://bugs.pardus.org.tr/show_bug.cgi?id=18994</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17205">http://bugs.pardus.org.tr/show_bug.cgi?id=17205</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17206">http://bugs.pardus.org.tr/show_bug.cgi?id=17206</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17207">http://bugs.pardus.org.tr/show_bug.cgi?id=17207</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18360">http://bugs.pardus.org.tr/show_bug.cgi?id=18360</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17465">http://bugs.pardus.org.tr/show_bug.cgi?id=17465</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18366">http://bugs.pardus.org.tr/show_bug.cgi?id=18366</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16309">http://bugs.pardus.org.tr/show_bug.cgi?id=16309</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18368">http://bugs.pardus.org.tr/show_bug.cgi?id=18368</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16011">http://bugs.pardus.org.tr/show_bug.cgi?id=16011</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17988">http://bugs.pardus.org.tr/show_bug.cgi?id=17988</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16310">http://bugs.pardus.org.tr/show_bug.cgi?id=16310</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19274">http://bugs.pardus.org.tr/show_bug.cgi?id=19274</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19278">http://bugs.pardus.org.tr/show_bug.cgi?id=19278</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19280">http://bugs.pardus.org.tr/show_bug.cgi?id=19280</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19282">http://bugs.pardus.org.tr/show_bug.cgi?id=19282</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17751">http://bugs.pardus.org.tr/show_bug.cgi?id=17751</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18812">http://bugs.pardus.org.tr/show_bug.cgi?id=18812</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=8922">http://bugs.pardus.org.tr/show_bug.cgi?id=8922</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17116">http://bugs.pardus.org.tr/show_bug.cgi?id=17116</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16861">http://bugs.pardus.org.tr/show_bug.cgi?id=16861</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17375">http://bugs.pardus.org.tr/show_bug.cgi?id=17375</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18916">http://bugs.pardus.org.tr/show_bug.cgi?id=18916</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17511">http://bugs.pardus.org.tr/show_bug.cgi?id=17511</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17916">http://bugs.pardus.org.tr/show_bug.cgi?id=17916</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19178">http://bugs.pardus.org.tr/show_bug.cgi?id=19178</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19253">http://bugs.pardus.org.tr/show_bug.cgi?id=19253</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=17138">http://bugs.pardus.org.tr/show_bug.cgi?id=17138</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19316">http://bugs.pardus.org.tr/show_bug.cgi?id=19316</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15735">http://bugs.pardus.org.tr/show_bug.cgi?id=15735</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19323">http://bugs.pardus.org.tr/show_bug.cgi?id=19323</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19324">http://bugs.pardus.org.tr/show_bug.cgi?id=19324</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19325">http://bugs.pardus.org.tr/show_bug.cgi?id=19325</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19326">http://bugs.pardus.org.tr/show_bug.cgi?id=19326</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id186">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id186" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="semen-cirit">
+<h2>Semen Cirit<a class="headerlink" href="#semen-cirit" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+16</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4934">http://bugs.pardus.org.tr/show_bug.cgi?id=4934</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18820">http://bugs.pardus.org.tr/show_bug.cgi?id=18820</a></p>
+<p>Number of comments of this bug: 9</p>
+<p>Number of bugs reported since last week: 5</p>
+<div class="section" id="id187">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id187" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19355">http://bugs.pardus.org.tr/show_bug.cgi?id=19355</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19356">http://bugs.pardus.org.tr/show_bug.cgi?id=19356</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19357">http://bugs.pardus.org.tr/show_bug.cgi?id=19357</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19388">http://bugs.pardus.org.tr/show_bug.cgi?id=19388</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19395">http://bugs.pardus.org.tr/show_bug.cgi?id=19395</a></li>
+</ol>
+<p>Number of resolved bugs since last week: 12</p>
+</div>
+<div class="section" id="id188">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id188" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15287">http://bugs.pardus.org.tr/show_bug.cgi?id=15287</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14402">http://bugs.pardus.org.tr/show_bug.cgi?id=14402</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3135">http://bugs.pardus.org.tr/show_bug.cgi?id=3135</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5266">http://bugs.pardus.org.tr/show_bug.cgi?id=5266</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6819">http://bugs.pardus.org.tr/show_bug.cgi?id=6819</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14171">http://bugs.pardus.org.tr/show_bug.cgi?id=14171</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14191">http://bugs.pardus.org.tr/show_bug.cgi?id=14191</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14423">http://bugs.pardus.org.tr/show_bug.cgi?id=14423</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14559">http://bugs.pardus.org.tr/show_bug.cgi?id=14559</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15126">http://bugs.pardus.org.tr/show_bug.cgi?id=15126</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15203">http://bugs.pardus.org.tr/show_bug.cgi?id=15203</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15335">http://bugs.pardus.org.tr/show_bug.cgi?id=15335</a></li>
+</ol>
+<p>Number of commented bugs since last week: 38</p>
+</div>
+<div class="section" id="id189">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id189" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19330">http://bugs.pardus.org.tr/show_bug.cgi?id=19330</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15126">http://bugs.pardus.org.tr/show_bug.cgi?id=15126</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=7949">http://bugs.pardus.org.tr/show_bug.cgi?id=7949</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5266">http://bugs.pardus.org.tr/show_bug.cgi?id=5266</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=2838">http://bugs.pardus.org.tr/show_bug.cgi?id=2838</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19353">http://bugs.pardus.org.tr/show_bug.cgi?id=19353</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19354">http://bugs.pardus.org.tr/show_bug.cgi?id=19354</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19355">http://bugs.pardus.org.tr/show_bug.cgi?id=19355</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19356">http://bugs.pardus.org.tr/show_bug.cgi?id=19356</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19357">http://bugs.pardus.org.tr/show_bug.cgi?id=19357</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=9246">http://bugs.pardus.org.tr/show_bug.cgi?id=9246</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=8481">http://bugs.pardus.org.tr/show_bug.cgi?id=8481</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=13986">http://bugs.pardus.org.tr/show_bug.cgi?id=13986</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=9763">http://bugs.pardus.org.tr/show_bug.cgi?id=9763</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11820">http://bugs.pardus.org.tr/show_bug.cgi?id=11820</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16686">http://bugs.pardus.org.tr/show_bug.cgi?id=16686</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=19375">http://bugs.pardus.org.tr/show_bug.cgi?id=19375</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16560">http://bugs.pardus.org.tr/show_bug.cgi?id=16560</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=4018">http://bugs.pardus.org.tr/show_bug.cgi?id=4018</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15287">http://bugs.pardus.org.tr/show_bug.cgi?id=15287</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3135">http://bugs.pardus.org.tr/show_bug.cgi?id=3135</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14402">http://bugs.pardus.org.tr/show_bug.cgi?id=14402</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16580">http://bugs.pardus.org.tr/show_bug.cgi?id=16580</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=18765">http://bugs.pardus.org.tr/show_bug.cgi?id=18765</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6819">http://bugs.pardus.org.tr/show_bug.cgi?id=6819</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14423">http://bugs.pardus.org.tr/show_bug.cgi?id=14423</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5337">http://bugs.pardus.org.tr/show_bug.cgi?id=5337</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14171">http://bugs.pardus.org.tr/show_bug.cgi?id=14171</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=10332">http://bugs.pardus.org.tr/show_bug.cgi?id=10332</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14559">http://bugs.pardus.org.tr/show_bug.cgi?id=14559</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=5729">http://bugs.pardus.org.tr/show_bug.cgi?id=5729</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15203">http://bugs.pardus.org.tr/show_bug.cgi?id=15203</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=11876">http://bugs.pardus.org.tr/show_bug.cgi?id=11876</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=15335">http://bugs.pardus.org.tr/show_bug.cgi?id=15335</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=14191">http://bugs.pardus.org.tr/show_bug.cgi?id=14191</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=6131">http://bugs.pardus.org.tr/show_bug.cgi?id=6131</a></li>
+<li><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=3956">http://bugs.pardus.org.tr/show_bug.cgi?id=3956</a></li>
+</ol>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id190">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id190" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="erkan-tekman">
+<h2>Erkan Tekman<a class="headerlink" href="#erkan-tekman" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16270">http://bugs.pardus.org.tr/show_bug.cgi?id=16270</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=16270">http://bugs.pardus.org.tr/show_bug.cgi?id=16270</a></p>
+<p>Number of comments of this bug: 7</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id191">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id191" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id192">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id192" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id193">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id193" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id194">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id194" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="michael-austin">
+<h2>Michael Austin<a class="headerlink" href="#michael-austin" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=8192">http://bugs.pardus.org.tr/show_bug.cgi?id=8192</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=8192">http://bugs.pardus.org.tr/show_bug.cgi?id=8192</a></p>
+<p>Number of comments of this bug: 5</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id195">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id195" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id196">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id196" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id197">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id197" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id198">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id198" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="nicolas-lara">
+<h2>Nicolas Lara<a class="headerlink" href="#nicolas-lara" title="Permalink to this headline">¶</a></h2>
+<p>Total New, Opened, Reopened Bug Number:
+1</p>
+<p>Oldest Bug Id:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=7321">http://bugs.pardus.org.tr/show_bug.cgi?id=7321</a></p>
+<p>Bug id that has longest comment:</p>
+<p><a class="reference external" href="http://bugs.pardus.org.tr/show_bug.cgi?id=7321">http://bugs.pardus.org.tr/show_bug.cgi?id=7321</a></p>
+<p>Number of comments of this bug: 18</p>
+<p>Number of bugs reported since last week: 0</p>
+<div class="section" id="id199">
+<h3>New Bug Report Links since Last Week:<a class="headerlink" href="#id199" title="Permalink to this headline">¶</a></h3>
+<p>Number of resolved bugs since last week: 0</p>
+</div>
+<div class="section" id="id200">
+<h3>Resolved Bug Links since Last Week:<a class="headerlink" href="#id200" title="Permalink to this headline">¶</a></h3>
+<p>Number of commented bugs since last week: 0</p>
+</div>
+<div class="section" id="id201">
+<h3>Commented bug links since Last Week:<a class="headerlink" href="#id201" title="Permalink to this headline">¶</a></h3>
+<p>Number of triaged bugs since last week: 0</p>
+</div>
+<div class="section" id="id202">
+<h3>Triaged bug links since Last Week:<a class="headerlink" href="#id202" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/events/recent_events/bug_analysis/detailed-bug-report.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:32 GMT -->
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/softwaredevelopment/developmentlifecycle/software_development_lifecycle.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Software Development Processes</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Software Development Life Cycle" href="index.html" />
+    <link rel="next" title="Releasing" href="../../releasing/index.html" />
+    <link rel="prev" title="Software Development Life Cycle" href="index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Software Development</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Software Development Life Cycle</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Software Development Processes</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Software Development Processes</a><ul>
+<li><a class="reference external" href="#process-objectives-and-policies">Process Objectives and Policies</a></li>
+<li><a class="reference external" href="#process-scope">Process Scope</a></li>
+<li><a class="reference external" href="#process-owner">Process Owner</a></li>
+<li><a class="reference external" href="#process-relations">Process Relations</a></li>
+<li><a class="reference external" href="#process-inputs-outputs">Process Inputs/Outputs</a><ul>
+<li><a class="reference external" href="#inputs">Inputs</a></li>
+<li><a class="reference external" href="#outputs">Outputs</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#process-resources">Process Resources</a><ul>
+<li><a class="reference external" href="#human-resources">Human Resources</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#process-activities">Process Activities</a><ul>
+<li><a class="reference external" href="#project-initialization">Project Initialization</a><ul>
+<li><a class="reference external" href="#proprietary-projects">Proprietary Projects</a></li>
+<li><a class="reference external" href="#open-projects">Open Projects</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#establishment-of-the-system-requirements">Establishment of the System Requirements</a></li>
+<li><a class="reference external" href="#competitor-analysis">Competitor Analysis</a></li>
+<li><a class="reference external" href="#establishment-of-the-software-requirements">Establishment of the Software Requirements</a></li>
+<li><a class="reference external" href="#table-of-requirements-versioning">Table of Requirements versioning</a></li>
+<li><a class="reference external" href="#prioritization-of-requirements">Prioritization of requirements</a></li>
+<li><a class="reference external" href="#determination-of-the-project-team">Determination of the Project Team</a></li>
+<li><a class="reference external" href="#technical-analysis">Technical Analysis</a></li>
+<li><a class="reference external" href="#task-sharing">Task Sharing</a></li>
+<li><a class="reference external" href="#work-tracking">Work Tracking</a></li>
+<li><a class="reference external" href="#pardus-software-life-cycle-and-work-breakdown">Pardus Software Life Cycle and Work Breakdown</a><ul>
+<li><a class="reference external" href="#phase">Phase</a></li>
+<li><a class="reference external" href="#milestone">Milestone</a></li>
+<li><a class="reference external" href="#step">Step</a></li>
+<li><a class="reference external" href="#a-minimal-pardus-project-example">A Minimal Pardus Project Example</a></li>
+<li><a class="reference external" href="#equivalent-terms-in-pardus-project-tracking-system-tracker-pardus-org-tr">Equivalent Terms in Pardus Project Tracking System (tracker.pardus.org.tr)</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#coding-process">Coding Process</a><ul>
+<li><a class="reference external" href="#preparation-of-standard-software-documents">Preparation of Standard Software Documents</a></li>
+<li><a class="reference external" href="#defining-classes">Defining Classes</a></li>
+<li><a class="reference external" href="#defining-interfaces">Defining Interfaces</a></li>
+<li><a class="reference external" href="#determination-of-external-dependencies">Determination of External Dependencies</a></li>
+<li><a class="reference external" href="#testing-process">Testing Process</a></li>
+<li><a class="reference external" href="#determining-versions">Determining Versions</a><ul>
+<li><a class="reference external" href="#accepted-versions">Accepted Versions</a></li>
+<li><a class="reference external" href="#prototype-version">Prototype Version</a></li>
+<li><a class="reference external" href="#alpha-version">Alpha Version</a></li>
+<li><a class="reference external" href="#beta-version">Beta Version</a></li>
+<li><a class="reference external" href="#final-version">Final Version</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#version-numbering">Version Numbering</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference external" href="#success-criteria">Success Criteria</a></li>
+<li><a class="reference external" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="software-development-processes">
+<h1>Software Development Processes<a class="headerlink" href="#software-development-processes" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Gökmen Göksel, Semen Cirit, Renan Çakırerk, Beyza Ermiş</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<img alt="../../../_images/Graph.png" src="../../../_images/Graph.png" />
+<div class="section" id="process-objectives-and-policies">
+<h2>Process Objectives and Policies<a class="headerlink" href="#process-objectives-and-policies" title="Permalink to this headline">¶</a></h2>
+<p>Analysing, designing, developing and testing the requirements to bring out the software product that is demanded by the users or customers.</p>
+</div>
+<div class="section" id="process-scope">
+<h2>Process Scope<a class="headerlink" href="#process-scope" title="Permalink to this headline">¶</a></h2>
+<p>It covers the software development activities. It ends with the closure of the project.</p>
+</div>
+<div class="section" id="process-owner">
+<h2>Process Owner<a class="headerlink" href="#process-owner" title="Permalink to this headline">¶</a></h2>
+<p>The Project Leader who takes the responsibility of the software&#8217;s development and the software development team whom worked with.</p>
+</div>
+<div class="section" id="process-relations">
+<h2>Process Relations<a class="headerlink" href="#process-relations" title="Permalink to this headline">¶</a></h2>
+<p>This process is carried out in parallel with the Operational Coordinator..</p>
+</div>
+<div class="section" id="process-inputs-outputs">
+<h2>Process Inputs/Outputs<a class="headerlink" href="#process-inputs-outputs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="inputs">
+<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Project Plan</li>
+<li>Every kinds of document that is necessary for the realization of the project and is delivered by the customer or user</li>
+<li>Software Test Plan</li>
+</ul>
+</div>
+<div class="section" id="outputs">
+<h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>System requirements specification</li>
+<li>Software requirements specification</li>
+<li>Software design description document</li>
+<li>Interface design description document</li>
+<li>Database design description document</li>
+</ul>
+</div>
+</div>
+<div class="section" id="process-resources">
+<h2>Process Resources<a class="headerlink" href="#process-resources" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="human-resources">
+<h3>Human Resources<a class="headerlink" href="#human-resources" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Technical Coordinator is responsible for giving final approval for the technical infrastructure and giving the technology direction for the related project.</li>
+<li>Operational Coordinator is responsible for balancing and controlling the appropriateness of the project to software processes and progress and timing of the work with other projects and releases.</li>
+<li>Project Leader, is choosen by the &#8220;Technical Coordinator and Operational Coordinator based on the content of the job.</li>
+<li>Developers involved in the project, are choosen in conjunction with the Operational Coordinator at the request of Project Leader.</li>
+<li>Project Leader and the developers are responsible for determining the software requirements of the project and making competitor analysis, software design, software development, unit testing, system intergration and packaging.</li>
+<li>Project Leader is the follower of these works and the reporter to the upper unit (Operational Coordinator ve Technical Coordinator) at the same time.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="process-activities">
+<h2>Process Activities<a class="headerlink" href="#process-activities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="project-initialization">
+<h3>Project Initialization<a class="headerlink" href="#project-initialization" title="Permalink to this headline">¶</a></h3>
+<p>Project initialization starts with the statement of requirement description includes the main function of the software with one or two sentences made by the person or people who requested the software. This explanation could be illustrated as below:</p>
+<blockquote>
+“It is necessary a graphical user interface for the user management in the system.”</blockquote>
+<p>A Project leader is determined after the person who requested the software convey this information to the Operational Coordinator.</p>
+<p>After the Project Leader is determined, a representational code name is determined for the project and with this name a project is opened under Pardus Project Tracking System (tracker.pardus.org.tr). It could be expressed as a sub-project of another project in accordance with the project requirements. It will be appropriate the participation of the responsable of the superior project -even as a consultant- to the project in question in this condition. Furthermore, depending on the privacy status of the project, it is created a working directory at one of the code repositories “internal” or “uludag” under the subdirectory related to the topic. The information and documents related to all the studies should be stored under this directory. All progress should be carried out over the Project Tracking System and all the information and documents should be stores under the project&#8217;s working directory. Even if it has become absolute that a document put in the directory is not necessary anymore, it should not be removed for the purpose of recording; it should be presented to the required units within the “Project Final Report” when the project at available version or the project is at the end. In addition, an e-mail list could be opened for the purpose of the project issues&#8217; discussion, in the circumstance of the need for the project.</p>
+<p>The working repository should be opened under &#8220;internal&#8221; or &#8220;projects&#8221; repositories together with the specified code name depending on the privacy status of the project.</p>
+<div class="section" id="proprietary-projects">
+<h4>Proprietary Projects<a class="headerlink" href="#proprietary-projects" title="Permalink to this headline">¶</a></h4>
+<p>All the codes and documents related to the proprietary projects appear in a closed project directory.</p>
+</div>
+<div class="section" id="open-projects">
+<h4>Open Projects<a class="headerlink" href="#open-projects" title="Permalink to this headline">¶</a></h4>
+<p>Following the coding process of the project, a Git repository is opened with the project code name under Pardus Git server for the project. All the documentations that are prepared and developed up to this stage are moved to this repository. All the codes and documentations will be developed after this stage are stored/updated in this repository.</p>
+<p>If the decision of making the project an open project after the start of the project as a secret project is given; all the information and documentation that are stored in the “internal” up to this stage are moved to git repository presented in open.</p>
+</div>
+</div>
+<div class="section" id="establishment-of-the-system-requirements">
+<h3>Establishment of the System Requirements<a class="headerlink" href="#establishment-of-the-system-requirements" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>The first system requirements are conveyed by the &#8220;External Projects Coordinator&#8221; if the project is including external projects, otherwise they are conveyed by the Operational Coordinator according to the demands of new features requests from users.</li>
+<li>The system requirements table is established by the detailed description of the priority requirements that are targetted to be fulfilled at the user side (its priority, it is demanded for which user or customer etc.)</li>
+<li>System requirements are reviewed and refined by Project Leader, system engineer, External Project Coordinator (in the condition of external project) and Operational Coordinator</li>
+</ol>
+</div>
+<div class="section" id="competitor-analysis">
+<h3>Competitor Analysis<a class="headerlink" href="#competitor-analysis" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Project Leader determines the competitors that will be analyzed with the approval of Technical Coordinator.</li>
+<li>Project Leader determines a team related to the issue with the approval of &#8220;Operational Coordinator&#8221; for the competitor analysis. (This team is the probable development team of the project, then it could be additions or ommisions to this team)</li>
+<li>On behalf of obtaining certain results from the Competitor Analysis, proof of concept could be performed by the person/people related to the issue and the results of these processes will shape the software requirements substantially.</li>
+<li>In addition, in this process, the technical constraints are stated by the team that will perform the project and the software requirements could be changed based on these constraints.</li>
+</ol>
+</div>
+<div class="section" id="establishment-of-the-software-requirements">
+<h3>Establishment of the Software Requirements<a class="headerlink" href="#establishment-of-the-software-requirements" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Based on the system requirements and competitor analysis, the information is shared between a group consisted of experienced developers related to the issues and the software requirements are begined to be constituted.</li>
+<li>The first version of the software requirements is reviewed and refined by the Project Leader, system engineer and Technical Coordinator</li>
+</ol>
+</div>
+<div class="section" id="table-of-requirements-versioning">
+<h3>Table of Requirements versioning<a class="headerlink" href="#table-of-requirements-versioning" title="Permalink to this headline">¶</a></h3>
+<p>When the system and software requirements reaches a certain maturity (this stage is decided by the cooperation of the developers and the demanders of the project), the requirements table should not be changed except for minor corrections and/or unless there is a very unusual situation. If replacement is necessary, it is needed to get the approval of both he developers and the demanders of the project, and the changes could be only presented with the new version of the requirements table.</p>
+</div>
+<div class="section" id="prioritization-of-requirements">
+<h3>Prioritization of requirements<a class="headerlink" href="#prioritization-of-requirements" title="Permalink to this headline">¶</a></h3>
+<p>After filling the requirements table, a process related to prioritization of requirements begins with the participation of project leader, the demander(s) of the project and the team performed the competitor analysis. This process bases the ranking of the stages have to be done to reach the condition that performs the first sentence of the demand in the most basic sense.</p>
+</div>
+<div class="section" id="determination-of-the-project-team">
+<h3>Determination of the Project Team<a class="headerlink" href="#determination-of-the-project-team" title="Permalink to this headline">¶</a></h3>
+<p>Project leader constitutes a team according to the size and the urgency of the software needs together with &#8220;Operational Coordinator&#8221;</p>
+</div>
+<div class="section" id="technical-analysis">
+<h3>Technical Analysis<a class="headerlink" href="#technical-analysis" title="Permalink to this headline">¶</a></h3>
+<p>The steps after this stage are in the responsibility of the team that will carry out the project. The process begins with the technical analysis and decision of the probable operation(s)/algorithm(s) could be applied made by the project team. At the end of this process, it should be expressed definitely the method(s), library or the other application(s) decided to be used, covers the user requirements completely. The requirements table could be used as a check list for this process. The planning should also be done about the module(s) or additional software(s) that will be rewritten or making suitable for use in necessary conditions.</p>
+</div>
+<div class="section" id="task-sharing">
+<h3>Task Sharing<a class="headerlink" href="#task-sharing" title="Permalink to this headline">¶</a></h3>
+<p>Task-sharing is carried out for projects developed in a modular structure. This sharing process begins with the demands of the project leader and the member(s) of the technical team. After determining the task allocations and the module responsables in a certain matter, they are recorded to the project documentation and the work tracking system.</p>
+</div>
+<div class="section" id="work-tracking">
+<h3>Work Tracking<a class="headerlink" href="#work-tracking" title="Permalink to this headline">¶</a></h3>
+<p>The project schedule should be updated in each of every technical meetings with the participation of the person or people responsible for coding, if necessary the date shifting or postponing conditions should be comitted to the calendar with the approval of the person or people claiming the project. This processes are performed by the project leader. This calendar should be operated on Pardus Project Tracking System (tracker.pardus.org.tr) and it should be known that the entire development team will continue to the task sharing through this calendar. The responsibility of the unspecified conditions in project tracking system belong to the person who have been on that part of the task. The person/people who demands the project also could get the project status information from the system instantaneously.</p>
+</div>
+<div class="section" id="pardus-software-life-cycle-and-work-breakdown">
+<h3>Pardus Software Life Cycle and Work Breakdown<a class="headerlink" href="#pardus-software-life-cycle-and-work-breakdown" title="Permalink to this headline">¶</a></h3>
+<p>This section is to learn how we name the sections that make up a software project and how to manage them.</p>
+<p>Every software has a lifecycle. To develop a project we will use a balanced combination of Incremental, V Shaped and Prototyping software development life cycles specialized for Pardus.</p>
+<p>You can see details from <a class="reference external" href="software_development_lifecycle-2.html">Software Development Life Cycle</a> image.</p>
+<p>A Pardus software project is made up of several sections:</p>
+<div class="section" id="phase">
+<h4>Phase<a class="headerlink" href="#phase" title="Permalink to this headline">¶</a></h4>
+<p>Defines the major activities that every project must have. Every Phase is a <strong>sub-project</strong> of the main project.
+Each phase has a beginning and ending date.</p>
+<p>A minimal Pardus software project <strong>must</strong> have the following phases:</p>
+<blockquote>
+<ol class="arabic">
+<li><p class="first"><strong>Requirements Phase</strong>:
+Each project starts with the Requirements Phase.</p>
+<p>The requirements phase include:</p>
+<ul class="simple">
+<li>Gathering Requirements</li>
+<li>Preparing the requirements specifications document (RSD)</li>
+<li>Requirements Analysis</li>
+</ul>
+</li>
+<li><p class="first"><strong>Design Phase</strong>:
+The second phase is usually the Design Phase. In some projects there can also be an equipment preparation phase before or after this phase.</p>
+<p>A software design should be detailed so the programmer that translates the design to a programming language does not have to make any decisions while developing the software.</p>
+<p>The design should be supported with UML diagrams such as:</p>
+<ul class="simple">
+<li>Activity Diagrams</li>
+<li>Interaction Diagrams</li>
+<li>Class Diagrams</li>
+<li>Sequence Diagrams</li>
+</ul>
+<p>Software design are divided in two:</p>
+<ol class="arabic">
+<li><p class="first"><strong>High Level Design</strong></p>
+<p>A high-level design provides an overview of a solution, platform, system, product, service, or process. The purpose is the show the big picture.</p>
+<p>High level design includes:</p>
+<ul class="simple">
+<li>Architecture</li>
+<li>Components</li>
+<li>Interfaces</li>
+<li>Networks</li>
+<li>High level data flow</li>
+<li>Optional: Classes</li>
+</ul>
+</li>
+<li><p class="first"><strong>Low Level Design</strong></p>
+<p>A low-level design contains the details of the high level design. At the end of the low level design, the code should be <strong>all but written</strong>.</p>
+<p>Low level design includes:</p>
+<ul class="simple">
+<li>Classes</li>
+<li>Associations between classes</li>
+<li>Member and non-member functions</li>
+<li>Member variables</li>
+<li>Any other detail that are involved in testing</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p class="first"><strong>Implementation Phase</strong>:</p>
+</li>
+</ol>
+<blockquote>
+Implementation phase is translating the design to a programming language without making any design decisions.</blockquote>
+<ol class="arabic simple" start="4">
+<li><strong>Testing Phase</strong>:</li>
+</ol>
+<blockquote>
+<p>Testing phase includes:</p>
+<ul class="simple">
+<li>Unit testing (test cases will be run automatically by <strong>Buildbot</strong>)</li>
+<li>Alpha tests</li>
+<li>Beta tests</li>
+<li>Acceptance test</li>
+</ul>
+<p>Tests can run parallel with the Implementation Phase.</p>
+</blockquote>
+<ol class="arabic simple" start="5">
+<li><strong>Maintenance Phase</strong>:</li>
+</ol>
+<blockquote>
+<p>Maintenance Phase starts after the first version of the software (after Beta version) is released.</p>
+<p>Includes:</p>
+<ul class="simple">
+<li>Updating the software</li>
+<li>Fixing bugs</li>
+<li>Optimizations</li>
+<li>Implementing new technologies</li>
+</ul>
+</blockquote>
+</blockquote>
+</div>
+<div class="section" id="milestone">
+<h4>Milestone<a class="headerlink" href="#milestone" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt>Milestones are <strong>tasks</strong> which defines the major <strong>deliverables</strong> of each phase.</dt>
+<dd><ul class="first last simple">
+<li>Milestones should be numbered as &#8220;P.M&#8221;. P indicates the Phase number that the milstone belongs to and M indicates the milestone number.</li>
+<li>A milestone must have a starting and ending date.</li>
+<li>Milestones should be clear and specific in scope. Which means one must understand what will be required to complete the milestone.</li>
+<li>A milestone should be measurable.</li>
+<li>A milestone can be assigned to an individiual or a group of individuals.</li>
+</ul>
+</dd>
+<dt><em>Milestone Template</em></dt>
+<dd>Milestone 2 of Phase 1 will be written as:
+1.2 Module XYZ is completed - (01/01/2011 - 15/02/2011)</dd>
+</dl>
+</div>
+<div class="section" id="step">
+<h4>Step<a class="headerlink" href="#step" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt>Defines each <strong>sub-task</strong> to complete a milestone.</dt>
+<dd><ul class="first last simple">
+<li>A step must have a starting and ending date.</li>
+<li>A step should be measurable.</li>
+<li>A step can be assigned to an individiual or a group of individuals.</li>
+</ul>
+</dd>
+<dt><em>Step Template</em></dt>
+<dd>Step 2 of Milstone 3 of Phase 5 will be written as:
+5.3.2 Module XYZ is completed - (01/01/2011 - 15/02/2011)</dd>
+</dl>
+</div>
+<div class="section" id="a-minimal-pardus-project-example">
+<h4>A Minimal Pardus Project Example<a class="headerlink" href="#a-minimal-pardus-project-example" title="Permalink to this headline">¶</a></h4>
+<p>This section tries to explain how to apply the Pardus Software Development Lifecycle.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Determine which phases there will be in the project.</li>
+<li>Requirements phase begins.<ul>
+<li>Gather information about the project requirements.</li>
+<li>Prepare the Requirements Specification Document.</li>
+<li>Requirements analysis.</li>
+</ul>
+</li>
+<li>Estimate the begining and ending dates.</li>
+<li>Write down project milestones. These are the highest level milestones like &#8220;coding is finished&#8221;, &#8220;first prototype is released&#8221;, &#8220;testing is over&#8221;, &#8220;project is finished&#8221;.<ul>
+<li>Create a project schedule.</li>
+</ul>
+</li>
+<li>Design phase begins.<ul>
+<li>High level design begins. Estimate the begining and ending date of the high level design.
+- <em>Please refer to the High Level Design section</em></li>
+<li>Low level desing begins. Estimate the begining and ending date of the high level design.
+- <em>Please refer to the Low Level Design section</em>
+- Breakdown the low level design into steps (sub-tasks)</li>
+<li>Assign each step to an individual or a group with deadlines written.</li>
+<li>Enter each step to tracker.pardus.org.tr</li>
+<li>Determine how many prototypes are needed.
+- Which steps together will make the Prototype 1 (P1)
+- Which steps together will make the Prototype 2 (P2)
+- ...</li>
+<li>According to the step deadlines that build up to make a prototype determine the prototype release date.</li>
+<li>Determine which prototype will be considered as Alpha release.</li>
+<li>Prepare the Design Specification Document.</li>
+</ul>
+</li>
+<li>Implementation phase begins.<ul>
+<li>Writing unit tests before coding is prefered.</li>
+<li>According to the design document and <a class="reference external" href="../coderules/index.html">Pardus Coding Standarts</a> Document create the overall file and folder structure.</li>
+<li>Leave unit testing to Buildbot.</li>
+<li>Each step is reviewed by the <strong>Review Board</strong></li>
+</ul>
+</li>
+<li>The following will be applied when each protoype is ready.<ul>
+<li>Overall testing is done.</li>
+<li>Requirements compliance tests are done.</li>
+<li>Prototype review is done.</li>
+</ul>
+</li>
+<li>Alpha release is ready.<ul>
+<li>Alpha tests are done.
+- White Box, Black Box... etc.</li>
+</ul>
+</li>
+<li>Beta release is ready.<ul>
+<li>Beta tests are done.
+- Usability test.. etc.</li>
+</ul>
+</li>
+<li>Integration tests are applied.</li>
+<li>Next version after Beta is out and the project is over.</li>
+</ol>
+<blockquote>
+<ul class="simple">
+<li>If any tests fail, maintenance is applied.</li>
+</ul>
+</blockquote>
+</blockquote>
+</div>
+<div class="section" id="equivalent-terms-in-pardus-project-tracking-system-tracker-pardus-org-tr">
+<h4>Equivalent Terms in Pardus Project Tracking System (tracker.pardus.org.tr)<a class="headerlink" href="#equivalent-terms-in-pardus-project-tracking-system-tracker-pardus-org-tr" title="Permalink to this headline">¶</a></h4>
+<p>As said above, every project should be registered to the Redmine based Pardus Project Tracking System (tracker.pardus.org.tr).</p>
+<dl class="docutils">
+<dt>In Redmine the sections above are translated as:</dt>
+<dd><ul class="first last simple">
+<li>Phase -&gt; Sub-Project</li>
+<li>Milestone -&gt; Task</li>
+<li>Step -&gt; Sub Task</li>
+<li>Prototype -&gt; Version (Prototypes will be discussed in the next section)</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="coding-process">
+<h3>Coding Process<a class="headerlink" href="#coding-process" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="preparation-of-standard-software-documents">
+<h4>Preparation of Standard Software Documents<a class="headerlink" href="#preparation-of-standard-software-documents" title="Permalink to this headline">¶</a></h4>
+<p>To maintain the standard software development processes and to achieve the coding process through these standards, the reports/documents listed below should be prepared at the beginning of the coding stage and should be included in the project documentation. It should not be forgotten that all the developing process will be done based on these documents. It could be made changes on these documents in need and these documents should be in their own version numbers.</p>
+<p>The task of preparing these documents are performed by the specified person/people in the project team and if necessary, by the participation of the demander(s) of the project. As with all other work, the work tracking system should be used for the preparation and development process of these documents. These documents could be shared between the module developers.</p>
+<blockquote>
+<ul class="simple">
+<li>UML Diagram</li>
+<li>Flow Diagram</li>
+<li>Use-Case Diagram</li>
+<li>Object Diagram
+carried out the case of developer team</li>
+<li>Scenarios
+determination of Classes and relations between Classes</li>
+<li>Methods, Variables and Parameters
+In this type of definitions, it could be followed the skeleton code and the certification method can be accessed via this code</li>
+<li>Determination of data fields (Database Selection, Tables, Indexes and Table Relations)
+The Database requirements specified in the project requirements should be based on.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="defining-classes">
+<h4>Defining Classes<a class="headerlink" href="#defining-classes" title="Permalink to this headline">¶</a></h4>
+<p>A detailed class table is prepared for the all functions that are planned to be used at the beginning of the coding process, in terms of this table, API/library design is determined in a flexible way as possible and in accordance with the requirements of the project. The API/library design should be documented besides and it should not be forgotten that it will be the most comprehensive document of the project in technical sense.</p>
+</div>
+<div class="section" id="defining-interfaces">
+<h4>Defining Interfaces<a class="headerlink" href="#defining-interfaces" title="Permalink to this headline">¶</a></h4>
+<p>A similar one of the class table, which is defined for the properties and processes will be used, is prepared for the interfaces, if necessary. This table could include the interfaces that is necessary to cover the requirements specified in the user requirements document, the tasks of these interfaces and in addition of these, a mockup will be prepared for the interface. Furthermore, in the projects that need multi-interface, the interface transitions should be indicated on a flow diagram.</p>
+<p>The features that are determined when designinig the interface, should be prepared to fulfill the user requirements. It could be back to user requirements table if possible differences emerge, however this is not a preferred process. It should not be forgotten that the main goal of the interfaces is to fulfill the requirements.</p>
+</div>
+<div class="section" id="determination-of-external-dependencies">
+<h4>Determination of External Dependencies<a class="headerlink" href="#determination-of-external-dependencies" title="Permalink to this headline">¶</a></h4>
+<p>A report including all libraries will be used as external and their dependencies should be prepared an it should be updated for each change has been done. The content of this report should not be in a conflict with the constraints specified in the requirements table. For example;</p>
+<blockquote>
+“The product should be able to work in Linux Systems.”</blockquote>
+<p>the external dependencies of a project with such a constraint in the above sentence should be able to compatible with the Linux systems.</p>
+</div>
+<div class="section" id="testing-process">
+<h4>Testing Process<a class="headerlink" href="#testing-process" title="Permalink to this headline">¶</a></h4>
+<p>During the coding process, for each module performed; the module&#8217;s code is tested primarily by its developer. These tests should be carried out as described in the &#8220;Software Tests&#8221; document and for each module, its developer&#8217;s approval, about the module is carried out before that version, should be gained.</p>
+<p>Module tests include the following testing processes. The person/people who will carry out the test procedures should be specified in advance in the project document.</p>
+<blockquote>
+<ul class="simple">
+<li>Unit tests</li>
+<li>Requirement tests</li>
+<li>Installation tests</li>
+<li>Test team&#8217;s tests</li>
+<li>User group tests</li>
+</ul>
+</blockquote>
+<p>Testing processes described above, also for the system that all modules are combined, performed under the Project leader&#8217;s control prior to the specific versions/targets.</p>
+</div>
+<div class="section" id="determining-versions">
+<h4>Determining Versions<a class="headerlink" href="#determining-versions" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="accepted-versions">
+<h5>Accepted Versions<a class="headerlink" href="#accepted-versions" title="Permalink to this headline">¶</a></h5>
+<p>In the process of coding, specific target dates are determined for the below version conditions in a way that could be updated and renewed in constantly.</p>
+</div>
+<div class="section" id="prototype-version">
+<h5>Prototype Version<a class="headerlink" href="#prototype-version" title="Permalink to this headline">¶</a></h5>
+<blockquote>
+<ul class="simple">
+<li>This version is stored in the code repository in a flexible way; during the development of this version, a code directory structure is used; the detailed information about this structure is indicated in <a class="reference external" href="../coderules/index.html">Pardus Coding Standarts</a> document.</li>
+<li>For this version, every developer could create his/her own working directory (branch), this process could be described besides either per developer or per functions will be planned to be carried out in accordance with the requirements of the project</li>
+<li>This version could have a version number (like 1.0, 2.0) in itself. This version numbers are handled independent of the ultimate version numbers.</li>
+<li>The tag mechanism is used effectively, if supported (Git supports), in the storage will be used for the project. This tagging could be carried out for every prototype version. The standarts of the versioning are also placed under the title of Version Numbers.</li>
+<li>In this release, the expectation from the project is primarily fulfill the project initial sentence. Prototype version could be determined as a target version for also some of the detailed requirements introduced based on this sentence.</li>
+<li>Prototype version could reveal clear data in the course of the project and in some circumstances, it could even lead the project to return the process of the project requirements. To determine these kinds of situations, the demander(s) of the project should be included to the possible tests of Prototype Version.</li>
+<li>The API/library or interfaces developed in Prototype Version could be changed completely after &#8220;Prototype Presentation&#8221; meetings will be held with the participation of the &#8220;Technical Coordinator&#8221;, Test Team and the person/people claiming the project; although they are the basis for final version. However, it should not be forgotten that such conditions affects the project calendar in a negative way.</li>
+<li>Prototype version could not be ready for the end-user and it could include codes/interfaces that does not meet the interface standards or coding standards. The outputs need to be in the most basic level. Code or user documentations could be deficient.</li>
+<li>Software Development Document is prepared in the prototype version and it is published in &#8220;developer.pardus.org.tr&#8221;.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="alpha-version">
+<h5>Alpha Version<a class="headerlink" href="#alpha-version" title="Permalink to this headline">¶</a></h5>
+<blockquote>
+<ul class="simple">
+<li>This is the first version released after the adoption of the prototype version and any return cannot be made in the project after the release of this version.</li>
+<li>This version is stored in the code repository prepared in accordance with the <a class="reference external" href="../coderules/index.html">Pardus Coding Standarts</a> document. If necessary, code tree inherited from the prototype version could be re-designed as ststed in the document. After the alpha release completed, any changes can be made on the code directory tree structure.</li>
+<li>For this version, every developer could create his/her own working directory (branch), this process could be described besides either per developer or per functions will be planned to be carried out in accordance with the requirements of the project</li>
+<li>This version should get version number together with the main version. Near a version number such as “0.1”, the “a” phrase could be added; like “0.1a”. This version numbers could not be handled indepentent of the ultimate version&#8217;s numbers.</li>
+<li>During this release, all the modules planned to be presented in the final version should be determined, its requirements should be extracted and the prototype working should be completed. At the end of alpha version, if a new feature request occurs, a new version is aimed after the launch of final version.</li>
+<li>Alpha version&#8217;s requirements come to an end with the completion of all features. In other words alpha phase ends with a feature freeze, indicating that no more features will be added to the software. There may exist bugs.</li>
+<li>This version could be presented to a specific user group against approval of a contract including the risks will be received to get feedback.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="beta-version">
+<h5>Beta Version<a class="headerlink" href="#beta-version" title="Permalink to this headline">¶</a></h5>
+<blockquote>
+<ul class="simple">
+<li>Beta Version shows that the last point of the project came to and any feature cannot be added on the way to final version. After beta version, it is not possible to come back to a stage at the requirements level. In such cases, after reveal of the final version, a new version (version number) is aimed.</li>
+<li>The API/library or interfaces developed in the beta version cannot be different from the final version. Beta version is a stabilization phase, so during this version, it is possible to make only bug fixing, translation update or graphics update. For this reason, the Beta Version has great importance for the project.</li>
+<li>In this version, it is expected that all the prototypes developed at alpha version are made into product.</li>
+<li>This version should get version number together with the main version. Near a version number such as “0.1”, the “b” phrase could be added; like “0.1b”. This version numbers could not be handled indepentent of the ultimate version&#8217;s numbers.</li>
+<li>This version could be presented to a specific user group against approval of a contract including the risks will be received to get feedback.</li>
+<li>Beta version should be ready for the user, it cannot include codes/interfaces that does not meet the interface standards or coding standards. Code and user documents should be completed. Such conditions are deterrent conditions for release.</li>
+<li>Software Design Document prepared in the prototype version cannot be updated after the beta version. If an update is necessary, a new version will be developed after the final version should be waited.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="final-version">
+<h5>Final Version<a class="headerlink" href="#final-version" title="Permalink to this headline">¶</a></h5>
+<blockquote>
+<ul class="simple">
+<li>In this version, the fatal errors detected at the beta release, and improvement errors such as related to translations and visual deficiencies should be resolved. For the errors lead to completely change the substructure and need addition of new features, a new version is aimed after the release of the final version.</li>
+<li>After final version, it is not possible to come back to a stage at the requirements level. In such cases, after reveal of the final version, a new version (version number) is aimed.</li>
+<li>The project&#8217;s distribution processes (packaging, repository requirements, dependencies) should be completed with this version.</li>
+<li>This version gets the main version&#8217;s number, it does not get any suffix.</li>
+<li>Code, user documentations, installation documentations, technical support documentations and project web page should be completed. Such conditions are deterrent conditions for release.</li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div class="section" id="version-numbering">
+<h4>Version Numbering<a class="headerlink" href="#version-numbering" title="Permalink to this headline">¶</a></h4>
+<p>The version numbering standard will be applied in alpha version and after alpha version is as follows;</p>
+<blockquote>
+(Main Version Number).(Sub Version Number).(Revision Number).(Build Number)</blockquote>
+<p>Need to change of Main Version Number is decided according to the content of changes made compared a version before. The addition of a new module is not available in the previous version to the system is a sufficient reason to increase the Sub Version Number. Revision Number could be increased after each change that should be included in the application; for this number, change number in the repository could be based on. Build Number is important for users and test team rather than developers, this number is increased in every condition that the product is packaged and resend to the user/tester. And rather than versioning, it is updated independent of the project, depending on the package management sytem that the packaging process is done and repository conditions is located at.</p>
+</div>
+</div>
+</div>
+<div class="section" id="success-criteria">
+<h2>Success Criteria<a class="headerlink" href="#success-criteria" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>The rate of requirement change after the suspension of the software requirements (%)</li>
+<li>The number of problem/bug related to the software contained in the Project Progress Reports</li>
+<li>The number of bugs contained in developer tests</li>
+<li>The number of bugs contained in the customer approval tests</li>
+<li>The number of software process deviation during the project (in terms of practices are not carried out)</li>
+<li>The number of reproduced software work/product</li>
+</ol>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>The code documentation carried out during the coding process belongs to the developer who is responsible for the development of that module. This documentation should be done as described in the <a class="reference external" href="../coderules/index.html">Pardus Coding Standarts</a> document.</p>
+<p>The preparation of the &#8220;Help Documents&#8221; needed for presentation of the codes to the users is also included within the business plan of that module&#8217;s responsable. Several meetings or co-workings with participation of all the members of the team could be necessary for the &#8220;Help Documents&#8221; related to all system.</p>
+<p>The responsability of the preparation of the documents needed for the installation of the system and making it ready belongs to the development team; however, it could also be applied to suggestions of the person/people demanding the project. The installation requirements will emerge as a result of these documents should be stated in accordance with the constraints defined in project requirements.</p>
+<p>All the steps and technical requirements are necessary for the maintenance should be stated in &#8220;Maintenance Document&#8221; and it should not be forgetten that the target group of this documentation is technical staff.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/softwaredevelopment/developmentlifecycle/software_development_lifecycle.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/package_components.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Package Components</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Packaging" href="index.html" />
+    <link rel="next" title="Package Reviewing Process" href="package-review-process.html" />
+    <link rel="prev" title="Binary Package Naming" href="binary_package_naming_guidelines.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Packaging</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Package Components</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Package Components</a><ul>
+<li><a class="reference external" href="#desktop">Desktop</a></li>
+<li><a class="reference external" href="#editor">Editor</a></li>
+<li><a class="reference external" href="#game">Game</a></li>
+<li><a class="reference external" href="#hardware">Hardware</a></li>
+<li><a class="reference external" href="#kernel">Kernel</a></li>
+<li><a class="reference external" href="#multimedia">Multimedia</a></li>
+<li><a class="reference external" href="#network">Network</a></li>
+<li><a class="reference external" href="#office">Office</a></li>
+<li><a class="reference external" href="#programming">Programming</a></li>
+<li><a class="reference external" href="#science">Science</a></li>
+<li><a class="reference external" href="#server">Server</a></li>
+<li><a class="reference external" href="#system">System</a></li>
+<li><a class="reference external" href="#tex">Tex</a></li>
+<li><a class="reference external" href="#util">Util</a></li>
+<li><a class="reference external" href="#x11">X11</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="package-components"></span><h1>Package Components<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The packages are categorized by both their development characteristics and
+functionalities. These different categories are correspond to our pacakge
+components.</p>
+<p>Pardus have fifteen main component and these components has also related
+subcomponents. These components have a directory and subdirectory under
+<a class="reference external" href="../releasing/repository_concepts/sourcecode_repository.html#package-source-repository">package source repositories</a> of Pardus releases.</p>
+<p>Each main component and subcomponent has a <a class="reference external" href="../newcontributor/developer_roles.html#component-supervisor">component supervisor</a>.</p>
+<p>The followings are the main components of Pardus.</p>
+<div class="section" id="desktop">
+<h2>Desktop<a class="headerlink" href="#desktop" title="Permalink to this headline">¶</a></h2>
+<p>The different desktop environments and toolkits, fonts, icon themes packages
+are included in this component.</p>
+</div>
+<div class="section" id="editor">
+<h2>Editor<a class="headerlink" href="#editor" title="Permalink to this headline">¶</a></h2>
+<p>The different text editor packages are included in this component.</p>
+</div>
+<div class="section" id="game">
+<h2>Game<a class="headerlink" href="#game" title="Permalink to this headline">¶</a></h2>
+<p>Different type of games and engines are categorized under this component such
+as simulation, strategy, adventure etc.</p>
+</div>
+<div class="section" id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h2>
+<p>The different type of driver, firmware and emulator packages are included in
+this component.</p>
+</div>
+<div class="section" id="kernel">
+<h2>Kernel<a class="headerlink" href="#kernel" title="Permalink to this headline">¶</a></h2>
+<p>The different type of kernel and external modules are included in this component.</p>
+</div>
+<div class="section" id="multimedia">
+<h2>Multimedia<a class="headerlink" href="#multimedia" title="Permalink to this headline">¶</a></h2>
+<p>All graphics, sound and video applications, plugins and tools are included in this
+component.</p>
+</div>
+<div class="section" id="network">
+<h2>Network<a class="headerlink" href="#network" title="Permalink to this headline">¶</a></h2>
+<p>All sort of network applications, plugins, tools are included in this component.</p>
+</div>
+<div class="section" id="office">
+<h2>Office<a class="headerlink" href="#office" title="Permalink to this headline">¶</a></h2>
+<p>The different spell checkers, dictionaries and office tools are included in this
+component.</p>
+</div>
+<div class="section" id="programming">
+<h2>Programming<a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h2>
+<p>Different programming languages and environments, debug, build and code control
+applications, version control systems are included in this component.</p>
+</div>
+<div class="section" id="science">
+<h2>Science<a class="headerlink" href="#science" title="Permalink to this headline">¶</a></h2>
+<p>All sort of academic branch applications are included in this component.</p>
+</div>
+<div class="section" id="server">
+<h2>Server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<p>All sort of server and database applications are included in this component.</p>
+</div>
+<div class="section" id="system">
+<h2>System<a class="headerlink" href="#system" title="Permalink to this headline">¶</a></h2>
+<p>Packages about development and boot of the system are included in this component.</p>
+</div>
+<div class="section" id="tex">
+<h2>Tex<a class="headerlink" href="#tex" title="Permalink to this headline">¶</a></h2>
+<p>The TeX applications and tools are included in this component. For <a class="reference external" href="texlive_packaging.html#new-component-structure">texlive sub
+components</a>.</p>
+</div>
+<div class="section" id="util">
+<h2>Util<a class="headerlink" href="#util" title="Permalink to this headline">¶</a></h2>
+<p>Packages such as about archiving, administration, crypting, antivirus etc., are
+included in this component.</p>
+</div>
+<div class="section" id="x11">
+<h2>X11<a class="headerlink" href="#x11" title="Permalink to this headline">¶</a></h2>
+<p>The video and input drivers, graphical servers and terminals are included in
+this component.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/package_components.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+</html>

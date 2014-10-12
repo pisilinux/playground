@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/howto-create-pisi-package.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PiSi Packaging Guide</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">PiSi Packaging Guide</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">PiSi Packaging Guide</a><ul>
+<li><a class="reference external" href="#structure-of-a-pisi-1-1-package">Structure of a PiSi 1.1 Package</a></li>
+<li><a class="reference external" href="#building-a-pisi-package">Building a PiSi Package</a></li>
+<li><a class="reference external" href="#pspec-xml">pspec.xml</a></li>
+<li><a class="reference external" href="#installation-of-additional-files-from-the-files-of-the-source-tree">Installation of Additional Files from the Files Of the Source Tree</a></li>
+<li><a class="reference external" href="#actions-py">actions.py</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="pisi-packaging-guide"></span><h1>PiSi Packaging Guide<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="structure-of-a-pisi-1-1-package">
+<h2>Structure of a PiSi 1.1 Package<a class="headerlink" href="#structure-of-a-pisi-1-1-package" title="Permalink to this headline">¶</a></h2>
+<p>A pisi package is essentially a zipped file. Let&#8217;s download one and examine it:</p>
+<div class="highlight-python"><pre>$ wget http://paketler.pardus.org.tr/pardus-2007/knazar-0.2-3-3.pisi
+$ unzip knazar-0.2-3-3.pisi -d apackage
+Archive:  knazar-0.2-3-3.pisi
+  inflating: apackage/metadata.xml
+  inflating: apackage/files.xml
+  inflating: apackage/install.tar.lzma
+$ cd apackage
+$ ls
+files.xml  install.tar.lzma  metadata.xml</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">files.xml</span></tt> contains locations, types, sizes and sha1sums of all files in the package
+<tt class="docutils literal"><span class="pre">metadata.xml</span></tt> contains general information like package name, homepage, packager, etc.
+<tt class="docutils literal"><span class="pre">install.tar.lzma</span></tt> contains compressed files that we can extract with those commands</p>
+<div class="highlight-python"><pre>$ lzma -d install.tar.lzma install.tar
+$ tar xvf install.tar</pre>
+</div>
+</div>
+<div class="section" id="building-a-pisi-package">
+<h2>Building a PiSi Package<a class="headerlink" href="#building-a-pisi-package" title="Permalink to this headline">¶</a></h2>
+<p>In order to build a pisi package we need to prepare at least two files by hand: <tt class="docutils literal"><span class="pre">pspec.xml</span></tt> and <tt class="docutils literal"><span class="pre">actions.py</span></tt></p>
+</div>
+<div class="section" id="pspec-xml">
+<h2>pspec.xml<a class="headerlink" href="#pspec-xml" title="Permalink to this headline">¶</a></h2>
+<p>This file is an XML file containing at least 3 child nodes: <tt class="docutils literal"><span class="pre">Source,</span> <span class="pre">Package,</span> <span class="pre">History</span></tt></p>
+<p>There can be multiple Package nodes in here.</p>
+<p>In other words, one source package may generate multiple binary packages. Pisi is very flexible :)</p>
+<p>Let&#8217;s look at our example here: <a class="reference external" href="http://svn.pardus.org.tr/pardus/2011/devel/desktop/kde/addon/knazar/pspec.xml">http://svn.pardus.org.tr/pardus/2011/devel/desktop/kde/addon/knazar/pspec.xml</a></p>
+<p>As you can see in the example,</p>
+<p><tt class="docutils literal"><span class="pre">Source</span></tt> node contains general package and packager information, sha1sum, type and location of source archive, Patches and BuildDependencies.
+<tt class="docutils literal"><span class="pre">Package</span></tt> node contains RuntimeDependencies and locations of different file types, AdditionalFiles and Comar scripts if needed.
+<tt class="docutils literal"><span class="pre">History</span></tt> node simply contains information about package history.</p>
+<p>You may want to examine the dtd file for pisi here: <a class="reference external" href="http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd</a></p>
+</div>
+<div class="section" id="installation-of-additional-files-from-the-files-of-the-source-tree">
+<h2>Installation of Additional Files from the Files Of the Source Tree<a class="headerlink" href="#installation-of-additional-files-from-the-files-of-the-source-tree" title="Permalink to this headline">¶</a></h2>
+<p>The Package may contain the AdditionalFiles tag, which can be used to copy files from the files subdirectory of your source tree into the .pisi.</p>
+<p>E.g., suppose I have a structure like so:</p>
+<div class="highlight-python"><pre>myproject/
+myproject/files/somefile.config
+myproject/actions.py
+myproject/pspec.xml</pre>
+</div>
+<p>Then, (one of) the Package(s) can have the following:</p>
+<div class="highlight-python"><pre>&lt;Package&gt;
+    &lt;Name&gt;myproject&lt;/Name&gt;
+    &lt;Summary&gt;Core of MyProject.&lt;/Summary&gt;
+    &lt;RuntimeDependencies&gt;
+        &lt;Dependency&gt;some-lib&lt;/Dependency&gt;
+    &lt;/RuntimeDependencies&gt;
+    &lt;Files&gt;
+        &lt;Path fileType="executable"&gt;/usr/bin&lt;/Path&gt;
+    &lt;/Files&gt;
+    &lt;AdditionalFiles&gt;
+        &lt;AdditionalFile target="/etc/path/to/install" permission="0644"
+                        owner="root"&gt;somefile.config&lt;/AdditionalFile&gt;
+    &lt;/AdditionalFiles&gt;
+&lt;/Package&gt;</pre>
+</div>
+</div>
+<div class="section" id="actions-py">
+<h2>actions.py<a class="headerlink" href="#actions-py" title="Permalink to this headline">¶</a></h2>
+<p>This file contains python codes that would compile and install the source package into a specific InstallDIR (in our example it is <tt class="docutils literal"><span class="pre">/var/pisi/knazar-0.2-3-3/install/</span></tt>)</p>
+<p><a class="reference external" href="http://svn.pardus.org.tr/pardus/2011/devel/desktop/kde/addon/knazar/actions.py">http://svn.pardus.org.tr/pardus/2011/devel/desktop/kde/addon/knazar/actions.py</a></p>
+<p>In this file, we use <tt class="docutils literal"><span class="pre">Actions</span> <span class="pre">API</span></tt> that comes with pisi. <tt class="docutils literal"><span class="pre">Actions</span> <span class="pre">API</span></tt> has all functions for us to compile and install our package.</p>
+<p>If you know python, you may want to have a look at sources here: <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/">http://svn.pardus.org.tr/uludag/trunk/pisi/pisi/actionsapi/</a></p>
+<p>After preparing pspec.xml and actions.py you can easily form a pisi package by typing:</p>
+<div class="highlight-python"><pre>sudo pisi build pspec.xml</pre>
+</div>
+<p>in the console. To compile my example you may type:</p>
+<div class="highlight-python"><pre>sudo pisi bi http://svn.pardus.org.tr/pardus/2011/devel/desktop/kde/addon/knazar/pspec.xml</pre>
+</div>
+<p>Finally, you can examine other official pisi source packages here: <a class="reference external" href="http://svn.pardus.org.tr/pardus/devel/">http://svn.pardus.org.tr/pardus/devel/</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/howto-create-pisi-package.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/end_of_life.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>End of Life</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Releasing" href="index.html" />
+    <link rel="next" title="Communication" href="../communication/index.html" />
+    <link rel="prev" title="Security Vulnerability Update Tests" href="testing_process/package_update_tests/security_tests.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Releasing</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">End of Life</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">End of Life</a><ul>
+<li><a class="reference external" href="#setting-eol-date">Setting EOL date</a></li>
+<li><a class="reference external" href="#anouncement">Anouncement</a></li>
+<li><a class="reference external" href="#subversion-tasks">Subversion Tasks</a></li>
+<li><a class="reference external" href="#packages-web-site-tasks">Packages Web Site Tasks</a></li>
+<li><a class="reference external" href="#bugzilla-tasks">Bugzilla Tasks</a></li>
+<li><a class="reference external" href="#redmine-tasks">Redmine Tasks</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="end-of-life"></span><h1>End of Life<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Releases for which updates are no longer provided are considered to be
+unmaintained and thus end of life or commonly referred to as EOL.</p>
+<p>At the end of this maintenance period, Pardus reaches its end of life.</p>
+<p>This document explains the steps for which a release has reached EOL status.</p>
+<div class="section" id="setting-eol-date">
+<h2>Setting EOL date<a class="headerlink" href="#setting-eol-date" title="Permalink to this headline">¶</a></h2>
+<p>The EOL date will be determined according to followings:</p>
+<ul class="simple">
+<li>The relational projects with the EOL release should be taken to account.</li>
+</ul>
+</div>
+<div class="section" id="anouncement">
+<h2>Anouncement<a class="headerlink" href="#anouncement" title="Permalink to this headline">¶</a></h2>
+<p>The following anouncement will be made before 30 days of each step on Pardus devel, gelistirici, pardus-announce, duyuru lists:</p>
+<ul class="simple">
+<li>Last update date</li>
+<li>Last security update date</li>
+<li>Actual end of life date</li>
+</ul>
+<p>See <a class="reference external" href="http://liste.pardus.org.tr/pardus-devel/2010-August/001908.html">an example anouncement has made for Pardus EOL</a>.</p>
+</div>
+<div class="section" id="subversion-tasks">
+<h2>Subversion Tasks<a class="headerlink" href="#subversion-tasks" title="Permalink to this headline">¶</a></h2>
+<p>The unmaintained release is moved from main package repository
+(<a class="reference external" href="http://svn.pardus.org.tr/pardus/">http://svn.pardus.org.tr/pardus/</a>) to package tags repository
+(<a class="reference external" href="http://svn.pardus.org.tr/pardus/tags/">http://svn.pardus.org.tr/pardus/tags/</a>).</p>
+</div>
+<div class="section" id="packages-web-site-tasks">
+<h2>Packages Web Site Tasks<a class="headerlink" href="#packages-web-site-tasks" title="Permalink to this headline">¶</a></h2>
+<p>The package informations about the release that reaches its end of life will be
+removed from the packages web site.</p>
+<p>The example rsync.conf that changed in servers:</p>
+<div class="highlight-python"><pre>[pardus-2009]
+    path =  /home/pardus/depo/pardus-2009
+    comment = 2009 Pardus Repository</pre>
+</div>
+<p>The EOL release information in rsync.conf file is removed, and the packages web
+site directly sync and its information is disappeared.</p>
+</div>
+<div class="section" id="bugzilla-tasks">
+<h2>Bugzilla Tasks<a class="headerlink" href="#bugzilla-tasks" title="Permalink to this headline">¶</a></h2>
+<p>Pardus does not track or review bugs for releases where there will be no more
+updates, that means which reaches its EOL.</p>
+<p>All open bugs about the EOL release is controlled. If they are not reproducible
+on the actual release, they will be closed with the below message:</p>
+<div class="highlight-python"><pre>With the upcoming Pardus X release, Pardus Y which was in security-only
+mode for a while will soon reach its end-of-life and the current bug reports
+concerning Pardus Y will become invalid. If you can still reproduce the bug
+on Pardus X, you can reopen the bug and update the version information. Thanks.</pre>
+</div>
+<p>Also the <a class="reference external" href="../bugtracking/tracker_bug_process.html">tracker bugs</a> related to release will be closed. (alfa, beta, RC, final release blockers.)</p>
+</div>
+<div class="section" id="redmine-tasks">
+<h2>Redmine Tasks<a class="headerlink" href="#redmine-tasks" title="Permalink to this headline">¶</a></h2>
+<p>All opened issues should be closed or moved to new release issues on <a class="reference external" href="http://tracker.pardus.org.tr/">Pardus tracker</a>.</p>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/end_of_life.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

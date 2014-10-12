@@ -1,0 +1,576 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/howto_create_pisi_packages.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to Create Pisi Packages</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Packaging" href="index.html" />
+    <link rel="next" title="Howto Build PiSi Package" href="howto_build_pisi_package.html" />
+    <link rel="prev" title="Packaging Guidelines" href="packaging_guidelines.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Packaging</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">How to Create Pisi Packages</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">How to Create Pisi Packages</a><ul>
+<li><a class="reference external" href="#creating-package">Creating Package</a></li>
+<li><a class="reference external" href="#creating-pspec-xml">Creating pspec.xml</a><ul>
+<li><a class="reference external" href="#creating-empty-pspec-xml-file">Creating Empty pspec.xml File</a></li>
+<li><a class="reference external" href="#different-pspec-xml-file-tags">Different pspec.xml File Tags</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#creating-translations-xml">Creating translations.xml</a><ul>
+<li><a class="reference external" href="#different-translations-xml-file-tags">Different translations.xml File Tags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="how-to-create-pisi-packages">
+<span id="howto-create-pisi-packages"></span><h1>How to Create Pisi Packages<a class="headerlink" href="#how-to-create-pisi-packages" title="Permalink to this headline">¶</a></h1>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.6</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="creating-package">
+<h2>Creating Package<a class="headerlink" href="#creating-package" title="Permalink to this headline">¶</a></h2>
+<p>This document is specifically about creating pspec.xml files. In order to see
+basic dynamics of a packaging please see: <a class="reference external" href="packaging_guidelines.html#packaging-guidelines"><em>Packaging Guidelines</em></a>,
+<a class="reference external" href="package_naming_guidelines.html#package-naming"><em>Package Naming Guideline</em></a>, and <a class="reference external" href="howto_build_pisi_package.html#building-pisi-package"><em>Howto Build PiSi Package</em></a></p>
+<p>This document briefly explains different pieces of pspec.xml and explain them specifically.</p>
+<p>If you want to make packages and be a Pardus Package Maintainer please follow <a class="reference external" href="../newcontributor/how-to-be-contributor.html#how-to-be-contributor"><em>How to be a Contributor?</em></a>.</p>
+</div>
+<div class="section" id="creating-pspec-xml">
+<h2>Creating pspec.xml<a class="headerlink" href="#creating-pspec-xml" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>You first need to create a pspec.xml file under the package named directory.</dt>
+<dd>See <a class="reference external" href="package_naming_guidelines.html#package-naming"><em>Package Naming Guideline</em></a>.</dd>
+</dl>
+<div class="section" id="creating-empty-pspec-xml-file">
+<h3>Creating Empty pspec.xml File<a class="headerlink" href="#creating-empty-pspec-xml-file" title="Permalink to this headline">¶</a></h3>
+<p>In order to create an empty pspec.xml file, you only need to run the below
+command under package named directory.</p>
+<div class="highlight-python"><pre>cd package-name
+vi pspec.xml</pre>
+</div>
+<p><strong>This is the empty pspec.xml</strong></p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" ?&gt;
+&lt;!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd"&gt;
+&lt;PISI&gt;
+    &lt;Source&gt;
+    &lt;Name&gt;&lt;/Name&gt;
+    &lt;Homepage&gt;http://&lt;/Homepage&gt;
+    &lt;Packager&gt;
+        &lt;Name&gt;&lt;/Name&gt;
+        &lt;Email&gt;&lt;/Email&gt;
+    &lt;/Packager&gt;
+    &lt;ExcludeArch&gt;&lt;/ExcludeArch&gt;
+    &lt;License&gt;GPLv2&lt;/License&gt;
+    &lt;Icon&gt;&lt;/Icon&gt;
+    &lt;IsA&gt;&lt;/IsA&gt;
+    &lt;Summary&gt;&lt;/Summary&gt;
+    &lt;Description&gt;&lt;/Description&gt;
+    &lt;Archive sha1sum="" type=""&gt;http://&lt;/Archive&gt;
+    &lt;BuildDependencies&gt;
+        &lt;Dependency&gt;&lt;/Dependency&gt;
+    &lt;/BuildDependencies&gt;
+    &lt;Patches&gt;
+        &lt;Patch level=""&gt;&lt;/Patch&gt;
+    &lt;/Patches&gt;
+&lt;/Source&gt;
+
+&lt;Package&gt;
+    &lt;Name&gt;&lt;/Name&gt;
+     &lt;PartOf&gt;&lt;/PartOf&gt;
+     &lt;BuildType&gt;&lt;/BuildType&gt;
+     &lt;BuildFlags&gt;
+        &lt;Flag&gt;&lt;/Flag&gt;
+    &lt;/BuildFlags&gt;
+    &lt;RuntimeDependencies&gt;
+        &lt;AnyDependency&gt;
+            &lt;Dependency&gt;&lt;/Dependency&gt;
+        &lt;/AnyDependency&gt;
+        &lt;Dependency versionFrom=""&gt;&lt;/Dependency&gt;
+    &lt;/RuntimeDependencies&gt;
+     &lt;Conflicts&gt;
+        &lt;Package versionTo=""&gt;&lt;/Package&gt;
+        &lt;Package releaseTo=""&gt;&lt;/Package&gt;
+    &lt;/Conflicts&gt;
+    &lt;Replaces&gt;
+        &lt;Package&gt;&lt;/Package&gt;
+        &lt;Package&gt;&lt;/Package&gt;
+    &lt;/Replaces&gt;
+    &lt;Files&gt;
+        &lt;Path fileType="config"&gt;/etc&lt;/Path&gt;
+        &lt;Path fileType="executable"&gt;/usr/bin&lt;/Path&gt;
+        &lt;Path fileType="header"&gt;/usr/include&lt;/Path&gt;
+        &lt;Path fileType="library"&gt;/usr/lib&lt;/Path&gt;
+        &lt;Path fileType="localedata"&gt;/usr/share/locale&lt;/Path&gt;
+        &lt;Path fileType="man"&gt;/usr/share/man&lt;/Path&gt;
+        &lt;Path fileType="doc"&gt;/usr/share/doc&lt;/Path&gt;
+        &lt;Path fileType="data"&gt;/usr/share&lt;/Path&gt;
+    &lt;/Files&gt;
+    &lt;AdditionalFiles&gt;
+        &lt;AdditionalFile owner="root" permission="0644" target=""&gt;&lt;/AdditionalFile&gt;
+    &lt;/AdditionalFiles&gt;
+    &lt;Provides&gt;
+        &lt;COMAR script=""&gt;&lt;/COMAR&gt;
+    &lt;/Provides&gt;
+&lt;/Package&gt;
+
+&lt;History&gt;
+    &lt;Update release="" type=""&gt;
+        &lt;Date&gt;YYYY-MM-DD&lt;/Date&gt;
+        &lt;Version&gt;&lt;/Version&gt;
+        &lt;Comment&gt;First release.&lt;/Comment&gt;
+        &lt;Requires&gt;
+            &lt;Action&gt;reverseDependencyUpdate&lt;/Action&gt;
+            &lt;Action package=""&gt;reverseDependencyUpdate&lt;/Action&gt;
+            &lt;Action package=""&gt;systemRestart&lt;/Action&gt;
+            &lt;Action package=""&gt;serviceRestart&lt;/Action&gt;
+        &lt;/Requires&gt;
+        &lt;Name&gt;&lt;/Name&gt;
+        &lt;Email&gt;&lt;/Email&gt;
+    &lt;/Update&gt;
+&lt;/History&gt;
+&lt;/PISI&gt;</pre>
+</div>
+<p><strong>An example pspec.xml file for texlive-core package:</strong></p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" ?&gt;
+&lt;!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd"&gt;
+&lt;PISI&gt;
+&lt;Source&gt;
+    &lt;Name&gt;texlive-core&lt;/Name&gt;
+    &lt;Homepage&gt;http://www.tug.org/texlive&lt;/Homepage&gt;
+    &lt;Packager&gt;
+        &lt;Name&gt;Semen Cirit&lt;/Name&gt;
+        &lt;Email&gt;scirit@pardus.org.tr&lt;/Email&gt;
+    &lt;/Packager&gt;
+    &lt;License&gt;GPLv2&lt;/License&gt;
+    &lt;IsA&gt;data:doc&lt;/IsA&gt;
+    &lt;Summary&gt;Essential part of TeXLive&lt;/Summary&gt;
+    &lt;Description&gt;texlive-core is the essential part of TeXLive.&lt;/Description&gt;
+    &lt;Archive sha1sum="05f3e5557feec0c1e71eaaab3258101a2b7f5d7f" type="tarbz2"&gt;http://cekirdek.pardus.org.tr/~semen/dist/texlive/2009/texlive-core-20091107.tar.bz2&lt;/Archive&gt;
+    &lt;BuildDependencies&gt;
+        &lt;Dependency&gt;ed&lt;/Dependency&gt;
+        &lt;Dependency&gt;fontconfig&lt;/Dependency&gt;
+        &lt;Dependency&gt;teckit&lt;/Dependency&gt;
+        &lt;Dependency&gt;poppler&lt;/Dependency&gt;
+        &lt;Dependency&gt;libXmu&lt;/Dependency&gt;
+        &lt;Dependency&gt;libXpm&lt;/Dependency&gt;
+        &lt;Dependency&gt;libXaw&lt;/Dependency&gt;
+        &lt;Dependency&gt;libXfont&lt;/Dependency&gt;
+        &lt;Dependency&gt;silgraphite&lt;/Dependency&gt;
+    &lt;/BuildDependencies&gt;
+    &lt;Patches&gt;
+        &lt;Patch&gt;040_all_texmfdirs.patch&lt;/Patch&gt;
+        &lt;Patch&gt;020_all_poppler.patch&lt;/Patch&gt;
+        &lt;Patch&gt;030_all_installedscripts.patch&lt;/Patch&gt;
+        &lt;Patch&gt;010_all_icu_CVE-2007-4770.patch&lt;/Patch&gt;
+        &lt;Patch&gt;sedscript.patch&lt;/Patch&gt;
+        &lt;Patch&gt;sedscript2.patch&lt;/Patch&gt;
+        &lt;Patch&gt;sedscript3.patch&lt;/Patch&gt;
+    &lt;/Patches&gt;
+&lt;/Source&gt;
+
+&lt;Package&gt;
+    &lt;Name&gt;texlive-core&lt;/Name&gt;
+     &lt;PartOf&gt;office.misc&lt;/PartOf&gt;
+     &lt;BuildFlags&gt;
+        &lt;Flag&gt;noDebug&lt;/Flag&gt;
+        &lt;Flag&gt;noDelta&lt;/Flag&gt;
+    &lt;/BuildFlags&gt;
+    &lt;RuntimeDependencies&gt;
+        &lt;Dependency&gt;fontconfig&lt;/Dependency&gt;
+        &lt;Dependency&gt;teckit&lt;/Dependency&gt;
+        &lt;Dependency&gt;poppler&lt;/Dependency&gt;
+        &lt;Dependency&gt;silgraphite&lt;/Dependency&gt;
+    &lt;/RuntimeDependencies&gt;
+    &lt;Replaces&gt;
+        &lt;Package&gt;tetex&lt;/Package&gt;
+        &lt;Package&gt;tetex-texmf&lt;/Package&gt;
+        &lt;Package&gt;tetex-extra&lt;/Package&gt;
+    &lt;/Replaces&gt;
+    &lt;Files&gt;
+        &lt;Path fileType="config"&gt;/etc&lt;/Path&gt;
+        &lt;Path fileType="executable"&gt;/usr/bin&lt;/Path&gt;
+        &lt;Path fileType="header"&gt;/usr/include&lt;/Path&gt;
+        &lt;Path fileType="library"&gt;/usr/lib&lt;/Path&gt;
+        &lt;Path fileType="localedata"&gt;/usr/share/locale&lt;/Path&gt;
+        &lt;Path fileType="man"&gt;/usr/share/man&lt;/Path&gt;
+        &lt;Path fileType="doc"&gt;/usr/share/doc&lt;/Path&gt;
+        &lt;Path fileType="data"&gt;/usr/share&lt;/Path&gt;
+        &lt;Path fileType="data"&gt;/var/cache/fonts&lt;/Path&gt;
+    &lt;/Files&gt;
+    &lt;AdditionalFiles&gt;
+        &lt;AdditionalFile owner="root" permission="0644" target="/etc/env.d/98texlive"&gt;98texlive&lt;/AdditionalFile&gt;
+        AdditionalFile owner="root" permission="0644" target="/etc/texmf/texmf.d/00header.cnf"&gt;00header.cnf&lt;/AdditionalFile&gt;
+        &lt;AdditionalFile owner="root" permission="0644" target="/etc/texmf/texmf.d/05searchpaths.cnf"&gt;05searchpaths.cnf&lt;/AdditionalFile&gt;
+        &lt;AdditionalFile owner="root" permission="0644" target="/etc/texmf/texmf.d/10standardpaths.cnf"&gt;10standardpaths.cnf&lt;/AdditionalFile&gt;
+        &lt;AdditionalFile owner="root" permission="0644" target="/etc/texmf/texmf.d/15options.cnf"&gt;15options.cnf&lt;/AdditionalFile&gt;
+        &lt;AdditionalFile owner="root" permission="0644" target="/etc/texmf/texmf.d/20sizes.cnf"&gt;20sizes.cnf&lt;/AdditionalFile&gt;
+        &lt;AdditionalFile owner="root" permission="0755" target="/usr/bin/texmf-update"&gt;texmf-update2009&lt;/AdditionalFile&gt;
+    &lt;/AdditionalFiles&gt;
+    &lt;Provides&gt;
+        &lt;COMAR script="package.py"&gt;System.Package&lt;/COMAR&gt;
+        &lt;COMAR script="pakhandler.py"&gt;System.PackageHandler&lt;/COMAR&gt;
+     &lt;/Provides&gt;
+    &lt;/Package&gt;
+
+    &lt;History&gt;
+        &lt;Update release="5" type="critical"&gt;
+            &lt;Date&gt;2010-02-25&lt;/Date&gt;
+            &lt;Version&gt;0.0_20091107&lt;/Version&gt;
+            &lt;Comment&gt;
+                * Fix a file descriptor leak
+                * Fix e2fsck bug (Red Hat Bugzilla #465679)
+                * Fix a bug in resize2fs (Red Hat Bugzilla: #465984)
+                * Fix a bug in libblkid so it correctly detects the ext4 and ext4dev filesystems
+                * Fixed a parallel build problem (Sourceforge Bug: #214328)
+            &lt;/Comment&gt;
+            &lt;Name&gt;Semen Cirit&lt;/Name&gt;
+            &lt;Email&gt;scirit@pardus.org.tr&lt;/Email&gt;
+        &lt;/Update&gt;
+
+        &lt;Update release="4" type="security"&gt;
+            &lt;Date&gt;2010-02-20&lt;/Date&gt;
+            &lt;Version&gt;0.0_20080816&lt;/Version&gt;
+            &lt;Comment&gt;Bump xorg-server to 1.4.2 which fixes fixes CVE-2008-{1377,1379,2360,2361,2362}&lt;/Comment&gt;
+            &lt;Name&gt;Semen Cirit&lt;/Name&gt;
+            &lt;Email&gt;scirit@pardus.org.tr&lt;/Email&gt;
+        &lt;/Update&gt;
+
+        &lt;Update release="3"&gt;
+            &lt;Date&gt;2010-02-15&lt;/Date&gt;
+            &lt;Version&gt;0.0_20080816&lt;/Version&gt;
+            &lt;Comment&gt;Enable font generation to users.&lt;/Comment&gt;
+            &lt;Name&gt;Semen Cirit&lt;/Name&gt;
+            &lt;Email&gt;scirit@pardus.org.tr&lt;/Email&gt;
+        &lt;/Update&gt;
+    &lt;/History&gt;
+&lt;/PISI&gt;</pre>
+</div>
+</div>
+<div class="section" id="different-pspec-xml-file-tags">
+<h3>Different pspec.xml File Tags<a class="headerlink" href="#different-pspec-xml-file-tags" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt><strong>&lt;Source&gt;:</strong> This main tag is needed in order to give information about the source of the package.</dt>
+<dd><ol class="first arabic">
+<li><p class="first"><strong>&lt;Name&gt;:</strong> The name of the package is added here. It must follow the <a class="reference external" href="package_naming_guidelines.html#package-naming"><em>Package Naming Guideline</em></a>. This should be match with the &lt;Name&gt; part of &lt;Package&gt; tag.</p>
+</li>
+<li><p class="first"><strong>&lt;Homepage&gt;:</strong> The project page of the package is added here.</p>
+</li>
+<li><p class="first"><strong>&lt;Packager&gt;:</strong> The packager name is added &lt;Name&gt;, and email is added to &lt;Email&gt; part.</p>
+</li>
+<li><p class="first"><strong>&lt;ExcludeArch&gt;:</strong> When a package could not be compiled for a specific architecture it should be added to pspec.xml file with this tag. You can see different architecture types, look <strong>&lt;!&#8211; ExcludeArch &#8211;&gt;</strong> part of <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi-spec.rng">pisi-spec.rng</a> file.</p>
+</li>
+<li><p class="first"><strong>&lt;License&gt;:</strong> The package license type is added here. See <a class="reference external" href="../licensing/licensing_guidelines.html#licensing-guidelines"><em>Licensing Guidelines</em></a>. You can see different license type used, look <strong>&lt;!&#8211; License &#8211;&gt;</strong> part of <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi-spec.rng">pisi-spec.rng</a> file.</p>
+</li>
+<li><p class="first"><strong>&lt;Icon&gt;:</strong> If a package has a gui part, the icon name should be added this part.</p>
+</li>
+<li><dl class="first docutils">
+<dt><strong>&lt;IsA&gt;:</strong> This tag is used in order to give the types of the software which the the package includes. One then more IsA type can be used, if it is relevant. You can see different IsA types, look <strong>&lt;!&#8211; IsA &#8211;&gt;</strong> part of <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi-spec.rng">pisi-spec.rng</a> file.</dt>
+<dd><p class="first">Different IsA types used for Pardus packages:</p>
+<ul class="last simple">
+<li>app</li>
+<li>app:console</li>
+<li>app:gui</li>
+<li>app:web</li>
+<li>library</li>
+<li>service</li>
+<li>data</li>
+<li><a class="reference external" href="data:doc">data:doc</a></li>
+<li><a class="reference external" href="data:font">data:font</a></li>
+<li>kernel</li>
+<li>driver</li>
+<li>locale</li>
+<li>locale:aa</li>
+<li>locale:af</li>
+<li>locale:am</li>
+<li>locale:an</li>
+<li>locale:ar</li>
+<li>locale:as</li>
+<li>locale:ast</li>
+<li>locale:az</li>
+<li>locale:be</li>
+<li>locale:ber</li>
+<li>locale:bg</li>
+<li>locale:bn</li>
+<li>locale:bn_IN</li>
+<li>locale:bo</li>
+<li>locale:br</li>
+<li>locale:bs</li>
+<li>locale:byn</li>
+<li>locale:ca</li>
+<li>locale:ca&#64;valencia</li>
+<li>locale:crh</li>
+<li>locale:cs</li>
+<li>locale:csb</li>
+<li>locale:cy</li>
+<li>locale:da</li>
+<li>locale:de</li>
+<li>locale:dz</li>
+<li>locale:el</li>
+<li>locale:en</li>
+<li>locale:en_CA</li>
+<li>locale:en_GB</li>
+<li>locale:eo</li>
+<li>locale:es</li>
+<li>locale:et</li>
+<li>locale:eu</li>
+<li>locale:fa</li>
+<li>locale:fi</li>
+<li>locale:fil</li>
+<li>locale:fo</li>
+<li>locale:fr</li>
+<li>locale:fur</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>&lt;Summary&gt;:</strong> The summary part of the package is added here. See <a class="reference external" href="packaging_guidelines.html#summary-and-description">link</a>.</p>
+</li>
+<li><p class="first"><strong>&lt;Description&gt;:</strong> The description of the package is added here. See <a class="reference external" href="packaging_guidelines.html#summary-and-description">link</a>.</p>
+</li>
+<li><p class="first"><strong>&lt;Archive&gt;:</strong> The package source code link, archive type and SHA-1 hashes. See <a class="reference external" href="packaging_guidelines.html#taking-sha-1-hash">link</a>.</p>
+<blockquote>
+<p><strong>sha1sum:</strong> This attribute is for sha1sum value</p>
+<p><strong>type:</strong> This attribute is for archive type. You can see different archive types, look <strong>&lt;!&#8211; attlist.Archive &#8211;&gt;</strong> part of <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi-spec.rng">pisi-spec.rng</a> file.  These are the different archive types used for Pardus:</p>
+<blockquote>
+<ul class="simple">
+<li>targz</li>
+<li>tarbz2</li>
+<li>tarlzma</li>
+<li>tarxz</li>
+<li>tarZ</li>
+<li>tar</li>
+<li>zip</li>
+<li>gz</li>
+<li>gzip</li>
+<li>bz2</li>
+<li>bzip2</li>
+<li>lzma</li>
+<li>xz</li>
+<li>binary</li>
+</ul>
+</blockquote>
+<p>The download link includes between &lt;Archive&gt; tag and the mirrors can also be used. See <a class="reference external" href="packaging_guidelines.html#giving-mirrors">usage</a>.</p>
+</blockquote>
+</li>
+<li><p class="first"><strong>&lt;BuildDependencies&gt;:</strong> This part is used in order to list packages which is required for building (compiling) the package. These dependencies can not be automatically find. So you should try to compile the pacakge in a proper system and you need to include everything needed to build the program. The packages for development environment are not needed to add as a build dependency. You can see the list of packages that will be ignored from <a class="reference external" href="packaging_guidelines.html#dependencies-excepted">here</a>. You need to add all dependencies in a different &lt;Dependency&gt; tag.  You can also specify minimum versions or releases of the package. See <a class="reference external" href="packaging_guidelines.html#strict-dependencies">link</a> for details. You can see different strict dependency types, look <strong>&lt;!&#8211; attlist.VersionReleaseToFrom &#8211;&gt;</strong> part of <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi-spec.rng">pisi-spec.rng</a> file.</p>
+</li>
+<li><p class="first"><strong>&lt;Patches&gt;:</strong> The list of patches added here. Each patch should be added with &lt;Patch&gt; tag and added in the order that they applied. You can see different patch attributes, look <strong>&lt;!&#8211; attlist.Patch &#8211;&gt;</strong> part of <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi-spec.rng">pisi-spec.rng</a> file.</p>
+</li>
+</ol>
+<p class="last">The level parameter is needed in order to apply the patch properly. It specifies depth differences of the patch and the file that the patch will be applied.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>&lt;Package&gt;:</strong>  This main tag is needed in order to give package information when it runs on the system.</p>
+<blockquote>
+<ol class="arabic">
+<li><p class="first"><strong>&lt;Name&gt;:</strong> The name of the package is added here. It must follow the <a class="reference external" href="package_naming_guidelines.html#package-naming"><em>Package Naming Guideline</em></a>. This should be match with the &lt;Name&gt; part of &lt;Source&gt; tag.</p>
+</li>
+<li><p class="first"><strong>&lt;PartOf&gt;</strong> If a source contains more than one package, each package can belong to different <a class="reference external" href="package_components.html">components</a>. This compenent can be given between <strong>&lt;PartOf&gt;</strong> tag.</p>
+</li>
+<li><p class="first"><strong>&lt;BuildType&gt;</strong> One more than packages can be created from same source, if one of these packages needs a special architecture to build, it should be added with &lt;BuildType&gt; tag. This value can be &#8220;32bit&#8221; or &#8220;64bit&#8221;.</p>
+</li>
+<li><dl class="first docutils">
+<dt><strong>&lt;BuildFlags&gt;</strong>  You can see different build flags types, look <strong>&lt;!&#8211; Flag &#8211;&gt;</strong> part of <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi-spec.rng">pisi-spec.rng</a> file.</dt>
+<dd><p class="first"><strong>noDebug</strong> flag is used to disable building of a debug package for this package tag.</p>
+<p class="last"><strong>noDelta</strong> flag is used to disable building of delta packages automatically. It doesn&#8217;t change the behaviour of &#8220;pisi delta&#8221; command.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>&lt;BuildDependencies&gt;</strong> One more than packages can be created from same source, if one of these packages needs a special dependency to build, it should be added with &lt;BuildDependencies&gt; tag.</p>
+</li>
+<li><p class="first"><strong>&lt;RuntimeDependencies&gt;:</strong> This part is used in order to list packages which is required when the program runs. In order to find runtime dependencies please <a class="reference external" href="packaging_guidelines.html#runtime-dependencies">see</a>. You need to add all dependencies in a different &lt;Dependency&gt; tag. You can also specify minimum versions or releases of the package. See <a class="reference external" href="packaging_guidelines.html#strict-dependencies">link</a> for details. You can see different strict dependency types, look <strong>&lt;!&#8211; attlist.VersionReleaseToFrom &#8211;&gt;</strong> part of <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi-spec.rng">pisi-spec.rng</a> file.</p>
+</li>
+<li><p class="first"><strong>&lt;AnyDependency&gt;:</strong> This part is used when the package can have more than one dependency for a specific work. See <a class="reference external" href="packaging_guidelines.html#any-dependency">link</a>.</p>
+</li>
+<li><p class="first"><strong>&lt;Conflicts&gt;:</strong> This part is used for the packages that conflict with the prapared package. See <a class="reference external" href="packaging_guidelines.html#conflicting-packages">link</a></p>
+</li>
+<li><p class="first"><strong>&lt;Replaces&gt;:</strong> The packages that will be replaced with this package, will be added to this part. See <a class="reference external" href="packaging_guidelines.html#renaming-replacing-existing-packages">link</a></p>
+</li>
+<li><p class="first"><strong>&lt;Files&gt;:</strong> This part is needed to specify the paths of different file types in the system. All file paths will be used with &lt;Path fileType=&#8221;&#8220;&gt; tag.</p>
+<p>These are the different file types used for Pardus:</p>
+<ul class="simple">
+<li><strong>config:</strong> This is used for the configuration files and those  are placed under &#8220;/etc&#8221; path.</li>
+<li><strong>executable:</strong> This is used for the executable files and those are placed under &#8220;/usr/bin&#8221; path.</li>
+<li><strong>header:</strong> This is used for header files and those are placed under &#8220;/usr/include&#8221; path.</li>
+<li><strong>library:</strong> This is used for library files and those are placed under &#8220;/usr/lib&#8221; path.See <a class="reference external" href="packaging_guidelines.html#pre-built-binaries-or-libraries-not-allowed">link</a>.</li>
+<li><strong>localedata:</strong>&#8221; This is used for localisation files and those are placed under &#8220;/usr/share/locale&#8221; path.</li>
+<li><strong>man:</strong> This is used for manual files and those are placed under /usr/share/man path.</li>
+<li><strong>doc:</strong> This is used for documentation files and those are placed under &#8220;/usr/share/doc&#8221; path. See <a class="reference external" href="packaging_guidelines.html#documentation">link</a>.</li>
+<li><strong>data:</strong> This is used for shared data files and those are placed under &#8220;/usr/share&#8221; path.</li>
+<li><strong>info:</strong>  This is used for information files and those are placed under &#8220;/user/share/info&#8221; path.</li>
+</ul>
+</li>
+<li><p class="first"><strong>&lt;AdditionalFiles&gt;:</strong> This is used for files that does not exist in the source code and that will directly be installed to the system with the package. So we should give the file path, permission, group and owner for this file.</p>
+<blockquote>
+<p><strong>target:</strong> This attribute is used to specify the file path and name</p>
+<p><strong>permission:</strong> This attribute is used for giving <a class="reference external" href="http://en.wikipedia.org/wiki/Filesystem_permissions">file permissions</a>.</p>
+<p><strong>owner:</strong> This attribute is used to specify file owner.</p>
+<p><strong>group:</strong> This attribute is used to specify file group. The &#8220;groups&#8221; command will list the groups of the current owner.</p>
+<p>Each file should be added like the below format:</p>
+<div class="highlight-python"><pre>&lt;AdditionalFile owner="mpd" group="audio" permission="0640" target="/etc/mpd.conf"&gt;mpd.conf&lt;/AdditionalFile&gt;</pre>
+</div>
+<p>The files is included under files directory of the pisi package.</p>
+</blockquote>
+</li>
+<li><p class="first"><strong>&lt;Provides&gt;:</strong> This part is used for COMAR scripts. There ara two types of scripts used. And these files should be appeared in this part. See <a class="reference external" href="packaging_guidelines.html#package-setup-post-install-post-and-pre-remove-cleanup-and-post-cleanup">link</a></p>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p class="first"><strong>&lt;History&gt;:</strong>  This main tag is needed in order to give information about packaging change history.</p>
+<blockquote>
+<ol class="arabic">
+<li><p class="first"><strong>&lt;Update&gt;:</strong> This part is unclude some other sub tags. It also  consists some attributes:</p>
+<blockquote>
+<p><strong>release:</strong> The release number of the change should be gived here.</p>
+<p><strong>type:</strong> The type of the change should be gived there. There are two types used for Pardus. For critical changes &#8220;critical&#8221;, for security changes &#8220;security&#8221; value are used. You can see different update types, look <strong>&lt;!&#8211; attlist.Update &#8211;&gt;</strong> part of <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi-spec.rng">pisi-spec.rng</a> file.</p>
+</blockquote>
+</li>
+<li><p class="first"><strong>&lt;Date&gt;:</strong> This part is used for adding the time that the change done. The format should be &#8220;YYYY-MM-DD&#8221;</p>
+</li>
+<li><p class="first"><strong>&lt;Version&gt;:</strong> The version of the package should be written there. See <a class="reference external" href="binary_package_naming_guidelines.html#version-number">link</a></p>
+</li>
+<li><p class="first"><strong>&lt;Comment&gt;:</strong> The description of the change should be added here. See <a class="reference external" href="packaging_guidelines.html#history-comments">link</a></p>
+</li>
+<li><dl class="first docutils">
+<dt><strong>&lt;Requires&gt;:</strong> There are three type actions can be applied for the package. You can see different require types, look <strong>&lt;!&#8211; Requires &#8211;&gt;</strong> part of <a class="reference external" href="http://svn.pardus.org.tr/uludag/trunk/pisi/pisi-spec.rng">pisi-spec.rng</a> file.</dt>
+<dd><ul class="first last">
+<li><p class="first">reverseDependencyUpdate: This action should be used, when the package are installed, the packages that are dependent to this package should be updated:</p>
+<div class="highlight-python"><pre>&lt;Action package="module-fglrx-userspace"&gt;reverseDependencyUpdate&lt;/Action&gt;
+&lt;Action&gt;reverseDependencyUpdate&lt;/Action&gt;</pre>
+</div>
+</li>
+<li><p class="first">systemRestart: This action should be used, when the package are installed, system needs restart:</p>
+<div class="highlight-python"><pre>&lt;Action package="module-pae-nvidia-current"&gt;systemRestart&lt;/Action&gt;
+&lt;Action&gt;systemRestart&lt;/Action&gt;</pre>
+</div>
+</li>
+<li><p class="first">serviceRestart: This action should be used, when the package are installed, a specific service needs to restart:</p>
+<div class="highlight-python"><pre>&lt;Action package="dhcp"&gt;serviceRestart&lt;/Action&gt;
+&lt;Action&gt;systemRestart&lt;/Action&gt;</pre>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>&lt;Name&gt;:</strong> The name of the package maintainer that make the change should be added here.</p>
+</li>
+<li><p class="first"><strong>&lt;Email&gt;:</strong> The email of the package maintainer that make the change should be added here.</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="creating-translations-xml">
+<h2>Creating translations.xml<a class="headerlink" href="#creating-translations-xml" title="Permalink to this headline">¶</a></h2>
+<p>The translations.xml is included in the pisi package source and it is needed for
+the translations of summary and descriptions. All of the packages should include
+this file.</p>
+<p><strong>This is an empty translations.xml file:</strong></p>
+<div class="highlight-python"><pre>&lt;PISI&gt;
+    &lt;Source&gt;
+        &lt;Name&gt;&lt;/Name&gt;
+        &lt;Summary xml:lang=""&gt;&lt;/Summary&gt;
+        &lt;Description xml:lang=""&gt;&lt;/Description&gt;
+    &lt;/Source&gt;
+&lt;/PISI&gt;</pre>
+</div>
+<p><strong>This is an example translations.xml file:</strong></p>
+<div class="highlight-python"><pre>&lt;PISI&gt;
+    &lt;Source&gt;
+        &lt;Name&gt;texlive-core&lt;/Name&gt;
+        &lt;Summary xml:lang="tr"&gt;TeX Live Dağıtımının Ana Parçası&lt;/Summary&gt;
+        &lt;Description xml:lang="tr"&gt;texlive-core Tex Live dağıtımının ana parçasıdır.&lt;/Description&gt;
+        &lt;Description xml:lang="fr"&gt;texlive-core est la partie essentielle de TeXLive.&lt;/Description&gt;
+    &lt;/Source&gt;
+&lt;/PISI&gt;</pre>
+</div>
+<div class="section" id="different-translations-xml-file-tags">
+<h3>Different translations.xml File Tags<a class="headerlink" href="#different-translations-xml-file-tags" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><strong>&lt;Name&gt;:</strong> The name of the package should be added here.</li>
+<li><strong>&lt;Summary&gt;:</strong> The translation of the summary should be added there. The language type should be gived as a value of &#8220;xml:lang&#8221; attribute.</li>
+<li><strong>&lt;Description&gt;:</strong>  The translation of the description should be added there. The language type should be gived as a value of &#8220;xml:lang&#8221; attribute.</li>
+</ol>
+<p>See <a class="reference external" href="packaging_guidelines.html#summary-and-description">link</a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/howto_create_pisi_packages.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+</html>

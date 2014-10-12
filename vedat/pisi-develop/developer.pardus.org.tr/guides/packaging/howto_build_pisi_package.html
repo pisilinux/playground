@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/howto_build_pisi_package.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Howto Build PiSi Package</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Packaging" href="index.html" />
+    <link rel="next" title="ActionsApi" href="actionsapi/index.html" />
+    <link rel="prev" title="How to Create Pisi Packages" href="howto_create_pisi_packages.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Packaging</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Howto Build PiSi Package</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Howto Build PiSi Package</a><ul>
+<li><a class="reference external" href="#structure-of-a-pisi-package">Structure of a PiSi Package</a></li>
+<li><a class="reference external" href="#id1">Building PiSi Package</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="howto-build-pisi-package">
+<span id="building-pisi-package"></span><h1>Howto Build PiSi Package<a class="headerlink" href="#howto-build-pisi-package" title="Permalink to this headline">¶</a></h1>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>These are some guidelines in order to help new Pardus developers to get started with PiSi package building.</p>
+<div class="section" id="structure-of-a-pisi-package">
+<h2>Structure of a PiSi Package<a class="headerlink" href="#structure-of-a-pisi-package" title="Permalink to this headline">¶</a></h2>
+<p>A pisi package is essentially a zipped file. Let&#8217;s download one and examine it:</p>
+<div class="highlight-python"><pre>$ wget http://packages.pardus.org.tr/pardus/2011/devel/x86_64/knazar-1.1-10-p11-x86_64.pisi
+$ unzip knazar-1.1-10-p11-x86_64.pisi -d package
+  Archive:  knazar-0.2-3-3.pisi
+  inflating: apackage/metadata.xml
+  inflating: apackage/files.xml
+  inflating: apackage/install.tar.lzma
+$ cd package
+$ ls
+  files.xml  install.tar.xz  metadata.xml</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">files.xml</span></tt> contains locations, types, sizes and sha1sums of all files in the package.
+<tt class="docutils literal"><span class="pre">metadata.xml</span></tt> contains general information like package name, homepage, packager, etc.
+<tt class="docutils literal"><span class="pre">install.tar.lzma</span></tt> contains compressed files which will be installed under the system.</p>
+<div class="highlight-python"><pre>$ xz --decompress install.tar.lzma
+$ tar xvf install.tar</pre>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Building PiSi Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>In order to build a pisi package we need to prepare at least three files by hand:
+<a class="reference external" href="howto_create_pisi_packages.html#creating-pspec-xml">pspec.xml</a> and <a class="reference external" href="actionsapi/index.html">actions.py</a> and <a class="reference external" href="howto_create_pisi_packages.html#creating-translations-xml">translations.xml</a>.</p>
+<p>The <a class="reference external" href="howto_create_pisi_packages.html#creating-pspec-xml">pspec.xml</a> file provides information about the software being packaged. The
+<a class="reference external" href="actionsapi/index.html">actions.py</a> file includes the scripts in order to build the package. The
+<a class="reference external" href="howto_create_pisi_packages.html#creating-translations-xml">translations.xml</a> file has the summary and description translations for different
+languages supported for the related release.</p>
+<p>Additionaly some other directories can be needed in order to build a package: <a class="reference external" href="packaging_guidelines.html#package-setup-post-install-post-and-pre-remove-cleanup-and-post-cleanup">comar</a>
+and files directory (see AdditionalFiles on <a class="reference external" href="howto_create_pisi_packages.html#different-pspec-xml-file-tags">additional-files</a>).</p>
+<p>After preparing the package, you can build it with below command:
+(You can look for the parameters given with &#8220;pisi bi &#8211;help&#8221;)</p>
+<div class="highlight-python"><pre>pisi bi pspec.xml -vd</pre>
+</div>
+<p>PiSi package can be built in different stages:</p>
+<blockquote>
+<ol class="arabic simple">
+<li><strong>&#8211;fetch:</strong> Finish building after source archive is downloaded.</li>
+<li><strong>&#8211;unpack:</strong> Finish building after source archive is decompressed and the
+patches are applied.</li>
+<li><strong>&#8211;setup:</strong> Finish building after the configuration.</li>
+<li><strong>&#8211;build:</strong> Finish building after compiling.</li>
+<li><strong>&#8211;check:</strong> Finish building after testing.</li>
+<li><strong>&#8211;install:</strong> Finish building after instllation of the package.</li>
+<li><strong>&#8211;package:</strong> Creating the .pisi file</li>
+</ol>
+</blockquote>
+<p>This different stages enable to build the package progressively. For instance
+if building of a package takes too long, and you now that you have experienced
+with an error on installation step. You can only run the package from that step
+and you can gain time.</p>
+<p>After the unpack step, the package is unpacked under <tt class="docutils literal"><span class="pre">/var/pisi/&lt;packagename&gt;</span></tt>
+on your system and a work directory is created under it. This directory has a
+pisiBuildState file which includes the current build state and the source code
+of the package.</p>
+<p>After the installation step the install directory is also created under
+<tt class="docutils literal"><span class="pre">/var/pisi/&lt;packagename&gt;</span></tt> directory. This directory has the files that will
+be installed under a Pardus system when the package is installed.</p>
+<p>After the packaging step the files.xml and metadata.xml files are also created
+under <tt class="docutils literal"><span class="pre">/var/pisi/&lt;packagename&gt;</span></tt>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/howto_build_pisi_package.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+</html>

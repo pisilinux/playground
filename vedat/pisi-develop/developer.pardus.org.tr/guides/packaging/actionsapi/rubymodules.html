@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/rubymodules.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Rubymodules</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="Scons" href="scons.html" />
+    <link rel="prev" title="Qt4" href="qt4.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Rubymodules</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Rubymodules</a><ul>
+<li><a class="reference external" href="#get-config">get_config</a></li>
+<li><a class="reference external" href="#get-ruby-version">get_ruby_version</a></li>
+<li><a class="reference external" href="#get-rubylibdir">get_rubylibdir</a></li>
+<li><a class="reference external" href="#get-sitedir">get_sitedir</a></li>
+<li><a class="reference external" href="#get-ruby-install-name">get_ruby_install_name</a></li>
+<li><a class="reference external" href="#get-gemhome">get_gemhome</a></li>
+<li><a class="reference external" href="#get-sitelibdir">get_sitelibdir</a></li>
+<li><a class="reference external" href="#auto-dodoc">auto_dodoc</a></li>
+<li><a class="reference external" href="#install">install</a></li>
+<li><a class="reference external" href="#rake-install">rake_install</a></li>
+<li><a class="reference external" href="#run">run</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="rubymodules"></span><h1>Rubymodules<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="get-config">
+<h2>get_config<a class="headerlink" href="#get-config" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Get the value of given configure parameter.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get_config</span><span class="p">(</span><span class="s">&#39;ruby_version&#39;</span><span class="p">)</span>
+<span class="n">get_config</span><span class="p">(</span><span class="s">&#39;rubylibdir&#39;</span><span class="p">)</span>
+<span class="n">get_config</span><span class="p">(</span><span class="s">&#39;ruby_install_name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-ruby-version">
+<h2>get_ruby_version<a class="headerlink" href="#get-ruby-version" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get_ruby_version</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the version of the ruby</p>
+</div>
+<div class="section" id="get-rubylibdir">
+<h2>get_rubylibdir<a class="headerlink" href="#get-rubylibdir" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get_rubylibdir</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the ruby library directory.</p>
+</div>
+<div class="section" id="get-sitedir">
+<h2>get_sitedir<a class="headerlink" href="#get-sitedir" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get_sitedir</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns site_ruby directory</p>
+</div>
+<div class="section" id="get-ruby-install-name">
+<h2>get_ruby_install_name<a class="headerlink" href="#get-ruby-install-name" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get_ruby_install_name</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the ruby installation name.</p>
+</div>
+<div class="section" id="get-gemhome">
+<h2>get_gemhome<a class="headerlink" href="#get-gemhome" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get_gemhome</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the Ruby gems directory.</p>
+</div>
+<div class="section" id="get-sitelibdir">
+<h2>get_sitelibdir<a class="headerlink" href="#get-sitelibdir" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">get_sitelibdir</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns site_ruby library directory</p>
+</div>
+<div class="section" id="auto-dodoc">
+<h2>auto_dodoc<a class="headerlink" href="#auto-dodoc" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">auto_dodoc</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Copies AUTHORS, CHANGELOG, CONTRIBUTORS, Change*, KNOWN_BUGS, MAINTAINERS, NEWS, README*, History.txt files into /usr/share/doc/PACKAGE if they are exist.</p>
+</div>
+<div class="section" id="install">
+<h2>install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">install</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Install the ruby package with given parameters.</p>
+</div>
+<div class="section" id="rake-install">
+<h2>rake_install<a class="headerlink" href="#rake-install" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rake_install</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Executes rake script with given parameters for installation.</p>
+</div>
+<div class="section" id="run">
+<h2>run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">run</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Executes given parameters with ruby binary.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/rubymodules.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

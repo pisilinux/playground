@@ -1,0 +1,432 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/bug_and_feature_requests.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Bug Requests</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Bug Tracking Guide" href="index.html" />
+    <link rel="next" title="Starting Bug Triage" href="howto_bug_triage.html" />
+    <link rel="prev" title="Bug Cycle" href="bug_cycle.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Bug Tracking Guide</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Bug Requests</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Bug Requests</a><ul>
+<li><a class="reference external" href="#when-do-i-need-to-file-a-bug">When do I need to file a bug?</a></li>
+<li><a class="reference external" href="#bug-cycle">Bug Cycle</a></li>
+<li><a class="reference external" href="#before-reporting-a-bug">Before reporting a bug</a></li>
+<li><a class="reference external" href="#understanding-bug-tracking-system">Understanding Bug Tracking System</a></li>
+<li><a class="reference external" href="#find-duplicate-bugs">Find Duplicate Bugs</a></li>
+<li><a class="reference external" href="#gather-useful-information">Gather Useful Information</a></li>
+<li><a class="reference external" href="#start-to-file-a-bug">Start to file a bug</a></li>
+<li><a class="reference external" href="#find-right-component">Find right component</a></li>
+<li><a class="reference external" href="#after-reporting-bug">After reporting bug</a></li>
+<li><a class="reference external" href="#gather-information-for-specific-bugs">Gather Information for Specific Bugs</a><ul>
+<li><a class="reference external" href="#installation-bugs">Installation Bugs</a></li>
+<li><a class="reference external" href="#crashes">Crashes</a></li>
+<li><a class="reference external" href="#freeze-and-panics">Freeze and Panics</a></li>
+<li><a class="reference external" href="#hardware-specific-bugs">Hardware Specific Bugs</a></li>
+<li><a class="reference external" href="#programming-related-bugs">Programming related bugs</a></li>
+<li><a class="reference external" href="#x-server-related-bugs">X server related bugs</a></li>
+<li><a class="reference external" href="#for-network-manager">For network-manager</a></li>
+<li><a class="reference external" href="#for-disk-manager">for disk-manager</a></li>
+<li><a class="reference external" href="#for-service-manager">for service-manager</a></li>
+<li><a class="reference external" href="#for-boot-manager">for boot-manager</a></li>
+<li><a class="reference external" href="#for-firewall-manager">for firewall-manager</a></li>
+<li><a class="reference external" href="#camera-and-video-device-related-bugs">camera and video device related bugs</a></li>
+<li><a class="reference external" href="#audio-device-related-bugs">Audio Device related bugs</a></li>
+<li><a class="reference external" href="#user-authentications-and-permissions-related-bugs">User authentications and permissions related bugs</a></li>
+<li><a class="reference external" href="#firefox-related-bugs">Firefox related bugs</a></li>
+<li><a class="reference external" href="#openoffice-related-bugs">Openoffice related bugs</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#enhancements-and-new-feature-requests">Enhancements and new feature requests</a></li>
+<li><a class="reference external" href="#graphical-user-interface-related-bugs">Graphical User Interface related bugs</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="bug-requests"></span><h1>Bug Requests<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Last Modified Date:</strong> 29-07-2011</p>
+<p>Bugzilla is bug tracking system that used for Pardus Linux Distribution. Thanks to this tool feedbacks can be taken from users and developers on bugs and Pardus can be improved more powerfully.</p>
+<p>Sometimes new reported bugs has some inadequate and improper informations. While the reporters waste their time file bugs, developers have to spend more time in order to comprehend, analyse and fix the bug. Moreover bugs can be closed or left uninterested beacuse of missing and in accurate information.</p>
+<p>The following informations is about how bugs can be reported more accurately and efficiently.</p>
+<div class="section" id="when-do-i-need-to-file-a-bug">
+<h2>When do I need to file a bug?<a class="headerlink" href="#when-do-i-need-to-file-a-bug" title="Permalink to this headline">¶</a></h2>
+<p>If there are not exist any bug already been reported, the bugs of the software that mentioned in the release notes, on mailing lists or other formal documentation can be reported. Please do not hesitate to report bugs, under the assumption of everyone else is also seeing the same problem you are. The bug reports are so valuable in order to track them properly, because the problems that are figured out among the noise of mailing lists or irc-channels can be overlooked.</p>
+</div>
+<div class="section" id="bug-cycle">
+<h2>Bug Cycle<a class="headerlink" href="#bug-cycle" title="Permalink to this headline">¶</a></h2>
+<p>You can find additional information from <a class="reference external" href="bug_cycle.html">bug cycle</a> document.</p>
+</div>
+<div class="section" id="before-reporting-a-bug">
+<h2>Before reporting a bug<a class="headerlink" href="#before-reporting-a-bug" title="Permalink to this headline">¶</a></h2>
+<p>First you have to do taking an account from <a class="reference external" href="http://bugs.pardus.org.tr/">http://bugs.pardus.org.tr</a>. This is a very quick and simple process. See <a class="reference external" href="https://bugs.pardus.org.tr/docs/en/html/myaccount.html">https://bugs.pardus.org.tr/docs/en/html/myaccount.html</a>.</p>
+</div>
+<div class="section" id="understanding-bug-tracking-system">
+<h2>Understanding Bug Tracking System<a class="headerlink" href="#understanding-bug-tracking-system" title="Permalink to this headline">¶</a></h2>
+<p>Understanding the way of developers to comprehend, analyse and fixed the bugs and reporting the bugs in that way, make developers more receptive and more likely to fixed the bugs. If you have never used Bugzilla before or are new to filing bug reports, it may be helpful to read the following pages.</p>
+<blockquote>
+<ul class="simple">
+<li><a class="reference external" href="https://bugzilla.mozilla.org/page.cgi?id=etiquette.html">https://bugzilla.mozilla.org/page.cgi?id=etiquette.html</a></li>
+<li><a class="reference external" href="http://www.chiark.greenend.org.uk/~sgtatham/bugs.html">Effective bug reporting</a></li>
+</ul>
+</blockquote>
+<p>Base software are used by every user and it is possible that users will report bugs for them. But it does not mean that these software is more erroneous.</p>
+</div>
+<div class="section" id="find-duplicate-bugs">
+<h2>Find Duplicate Bugs<a class="headerlink" href="#find-duplicate-bugs" title="Permalink to this headline">¶</a></h2>
+<p>Before reporting your bug, you should be sure that your bug has not already been reported. The simplest way to make a <a class="reference external" href="http://bugs.pardus.org.tr/query.cgi?format=specific">keyword search</a>. Or you can use <a class="reference external" href="http://bugs.pardus.org.tr/query.cgi?format=advanced">advanced search</a>. You can also look the <a class="reference external" href="http://bugs.pardus.org.tr/duplicates.cgi">most reported bug statistics</a>.</p>
+<p>It is not a useful way is to say &#8220;I am also experiencing this bug.&#8221;. But you can give additional and useful details (log files, error reports etc.) about when you have experienced the bug.</p>
+<p>See <a class="reference external" href="finding_duplicates.html#finding-duplicates"><em>Finding Duplicate Bugs</em></a>.</p>
+</div>
+<div class="section" id="gather-useful-information">
+<h2>Gather Useful Information<a class="headerlink" href="#gather-useful-information" title="Permalink to this headline">¶</a></h2>
+<p>For additional information  <a class="reference internal" href="#gather-information-for-specific-bugs">Gather Information for Specific Bugs</a>.</p>
+<p>Generally useful to check /var/log/messages and ~/.xsession-errors (for desktop users) files. There are also software specific log files under /var/log directory, you can look log files according to your bug and attach them to the report.</p>
+</div>
+<div class="section" id="start-to-file-a-bug">
+<h2>Start to file a bug<a class="headerlink" href="#start-to-file-a-bug" title="Permalink to this headline">¶</a></h2>
+<p>You can file a bug report from <a class="reference external" href="http://bugs.pardus.org.tr/enter_bug.cgi">there</a>.</p>
+<p>You should read <a class="reference external" href="http://bugs.pardus.org.tr/page.cgi?id=bug-writing.html">bug writing guidelines</a> carefully.</p>
+<p>Please pay attention to give all informations about the bug and to use a clear expression. Comment like &#8220;This to be fixed!&#8221;, &#8220;This is catastrophic!&#8221; are not good, this type of comments generally are seemed as hostile and attacking by developers, and this doesn&#8217;t help them to fix the problem.</p>
+</div>
+<div class="section" id="find-right-component">
+<h2>Find right component<a class="headerlink" href="#find-right-component" title="Permalink to this headline">¶</a></h2>
+<p>This is very important to choose right product and compenent while filing a bug report. You can find directly the write developer by choosing the right component and this helps resolve the bugs faster. If you assign your bug to a wrong component, your bugs fixing should wait until a developer or a bug triager have assigned it to right component.</p>
+<p>See details from <a class="reference external" href="correct_component.html#correct-component"><em>Finding Correct Product and Component</em></a>.</p>
+</div>
+<div class="section" id="after-reporting-bug">
+<h2>After reporting bug<a class="headerlink" href="#after-reporting-bug" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<ul class="simple">
+<li>Developers generally do not send an acknowlegement comment that they are dealing with the bug. You should be patient during your bug left commentless, and you should keep on following.</li>
+<li>After reporting the bug, other users can comment it or developers can change the status or resolution of the bug report. In order to see different resolutions and status used in Pardus bug tracking system please visit <a class="reference external" href="bug_cycle.html">bug cycle</a>.</li>
+<li>Please do not allow someone to depart from your&#8217;s bug subject. The irrelevant conversations in your bug comment cause only confusion and difficulty to track it.</li>
+<li>If you think your bug has fixed but an other bug will exist about the same component, please file a new bug report.</li>
+<li>If your bug is relevant to a release that reaches its end of life, the bug triagers will control whether this bug is experienced for maintained releases. If the bug is not reproducible for the maintained releases, they will close it.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="gather-information-for-specific-bugs">
+<h2>Gather Information for Specific Bugs<a class="headerlink" href="#gather-information-for-specific-bugs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installation-bugs">
+<h3>Installation Bugs<a class="headerlink" href="#installation-bugs" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<ul class="simple">
+<li>Please add /var/log/yali.log file of the buggy installation.</li>
+<li>Please add &#8220;fdisk -l&#8221; output to the bug report, if this is a bug about partitioning.</li>
+</ul>
+</blockquote>
+<p>In order to take YALI related files:</p>
+<ul class="simple">
+<li>Press CTRL+ALT+F1 buttons at the same time.(This buttons direct you to system console.)</li>
+<li>Plug a usb stick to the machine.</li>
+<li>Mount the usb stick to the system:</li>
+</ul>
+<div class="highlight-python"><pre>mkdir /mnt/log
+mount /dev/&lt;your_usb_stick_partition&gt; /mnt/log</pre>
+</div>
+<ul class="simple">
+<li>Copy the files that needed for the bug.</li>
+</ul>
+<div class="highlight-python"><pre>cp /var/log/yali.log /mnt/log
+fdisk -l &gt; fdisk.txt
+cp fdisk.txt /mnt/log
+cp /etc/fstab /mnt/log</pre>
+</div>
+<ul class="simple">
+<li>Unmount the usb stick:</li>
+</ul>
+<div class="highlight-python"><pre>umount /dev/&lt;your_usb_stick_partition&gt;</pre>
+</div>
+</div>
+<div class="section" id="crashes">
+<h3>Crashes<a class="headerlink" href="#crashes" title="Permalink to this headline">¶</a></h3>
+<p>If you have encountered with a program crash, you should add the stack trace of the program. Pragram craches are hard to reproduce and fix. Therefore it is so valuable to give more information.</p>
+<p>If you use Pardus test repository, you can add the debug repository of the related release <a class="reference external" href="http://packages.pardus.org.tr/pardus-x-debug/pisi-index.xml.bz2">http://packages.pardus.org.tr/pardus-x-debug/pisi-index.xml.bz2</a> and install the debug package of the buggy package and you can catch debug symbols from stack trace that very useful to fix the bug.</p>
+</div>
+<div class="section" id="freeze-and-panics">
+<h3>Freeze and Panics<a class="headerlink" href="#freeze-and-panics" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>If all machine is freezed or the screen is all black:</dt>
+<dd><ul class="first last simple">
+<li>Check whether or not Capslock, NumLock key are ligthing when you activate them. If they are ligthing, there are something else going on.</li>
+<li>In order to check the booting problems, please run the system without splash. In order to achieve this, you should change &#8220;splah=silent&#8221; to &#8220;splah=verbose&#8221;</li>
+<li>For the possibility of a bug about graphic cards, please boot the system without video card option. In order to do this, please select F4 function key and choose &#8220;Graphic Cards Disabled&#8221; at boot screen.</li>
+<li>In order to state the problem specifically, you can disable various features. You can do this by pressing F5 function key and selecting ACPI disabled, Local APIC disabled successively on boot screen.</li>
+<li>If the system could not boot, please take a digital camera photo of the last thing on the screen.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="hardware-specific-bugs">
+<h3>Hardware Specific Bugs<a class="headerlink" href="#hardware-specific-bugs" title="Permalink to this headline">¶</a></h3>
+<p>If you thing the error that you experienced is hardware related, you can add the link of your system smolt profile. In order to make this, run &#8220;smoltGui&#8221; on console and click sendProfile button on the opened window. Smolt will send you, the smolt profile link.</p>
+<p>Hardware specific bugs generally related with video cards, graphics card, camera, printer etc, not related with openoffice, calculator, texlive etc.</p>
+</div>
+<div class="section" id="programming-related-bugs">
+<h3>Programming related bugs<a class="headerlink" href="#programming-related-bugs" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<ul class="simple">
+<li>Run the program on console and send all output with bug report. See <a class="reference external" href="correct_component.html#correct-component"><em>Finding Correct Product and Component</em></a>.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="x-server-related-bugs">
+<h3>X server related bugs<a class="headerlink" href="#x-server-related-bugs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The following command outputs should be added.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">lspci</span> <span class="o">-</span><span class="n">nn</span> <span class="o">&gt;</span> <span class="n">lspci</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">dmesg</span> <span class="o">&gt;</span> <span class="n">dmesg</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">lsmod</span> <span class="o">&gt;</span> <span class="n">lsmod</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>If the system and keyboard are working, please also add X server logs:</li>
+</ul>
+<div class="highlight-python"><pre>cat /var/log/Xorg.0.log &gt; xserver.txt</pre>
+</div>
+<ul class="simple">
+<li>If they are not working: Boot your system on VESA mode and take the following log:</li>
+</ul>
+<div class="highlight-python"><pre>cat /var/log/Xorg.0.log.old</pre>
+</div>
+<p>If the X was crashed, you can collect all above commands buy the below procedure:</p>
+<ul class="simple">
+<li>Press CTRL+ALT+F1 buttons at the same time.(This buttons direct you to system console.)</li>
+<li>Plug a usb stick to the machine.</li>
+<li>Mount the usb stick to th system:</li>
+</ul>
+<div class="highlight-python"><pre>mkdir /mnt/log
+mount /dev/&lt;your_usb_stick_partition&gt; /mnt/log</pre>
+</div>
+<ul class="simple">
+<li>Copy the files that needed for the bug.</li>
+</ul>
+<div class="highlight-python"><pre>cp &lt;output&gt; /mnt/log</pre>
+</div>
+<ul class="simple">
+<li>Unmount the usb stick:</li>
+</ul>
+<div class="highlight-python"><pre>umount /dev/&lt;your_usb_stick_partition&gt;</pre>
+</div>
+<p>For most of things COMAR log file is also needed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cat</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">comar3</span><span class="o">/</span><span class="n">trace</span><span class="o">.</span><span class="n">log</span> <span class="o">&gt;</span> <span class="n">comar</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="for-network-manager">
+<h3>For network-manager<a class="headerlink" href="#for-network-manager" title="Permalink to this headline">¶</a></h3>
+<p>In order to learn network device information:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">lspci</span> <span class="o">-</span><span class="n">nn</span> <span class="o">&gt;</span> <span class="n">lspci</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>Ethernet related problems:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ifconfig</span> <span class="o">-</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">ifconfig</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>Wireless related problems:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">iwconfig</span> <span class="o">&gt;</span> <span class="n">iwconfig</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="for-disk-manager">
+<h3>for disk-manager<a class="headerlink" href="#for-disk-manager" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fdisk</span> <span class="o">-</span><span class="n">l</span> <span class="o">&gt;</span> <span class="n">fdisk</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">fstab</span> <span class="o">&gt;</span> <span class="n">fstab</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="for-service-manager">
+<h3>for service-manager<a class="headerlink" href="#for-service-manager" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">service</span> <span class="o">-</span><span class="n">N</span> <span class="o">&gt;</span> <span class="n">service</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="for-boot-manager">
+<h3>for boot-manager<a class="headerlink" href="#for-boot-manager" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cat</span> <span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">grub</span><span class="o">/</span><span class="n">grub</span><span class="o">.</span><span class="n">conf</span> <span class="o">&gt;</span> <span class="n">grub</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="for-firewall-manager">
+<h3>for firewall-manager<a class="headerlink" href="#for-firewall-manager" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">service</span> <span class="o">-</span><span class="n">N</span> <span class="o">&gt;</span> <span class="n">service</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">iptables</span> <span class="o">&gt;</span> <span class="n">iptables</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="camera-and-video-device-related-bugs">
+<h3>camera and video device related bugs<a class="headerlink" href="#camera-and-video-device-related-bugs" title="Permalink to this headline">¶</a></h3>
+<p>The below command output should be taken after all camera related programs closed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dmesg</span> <span class="o">&gt;</span> <span class="n">dmesg</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">cat</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">syslog</span> <span class="o">&gt;</span> <span class="n">syslog</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">lsusb</span> <span class="o">&gt;</span> <span class="n">lsusb</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">test</span><span class="o">-</span><span class="n">webcam</span> <span class="o">&gt;</span> <span class="n">webcam</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="audio-device-related-bugs">
+<h3>Audio Device related bugs<a class="headerlink" href="#audio-device-related-bugs" title="Permalink to this headline">¶</a></h3>
+<p>Run the below command as root, and take the WWW link:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">alsa</span><span class="o">-</span><span class="n">info</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="user-authentications-and-permissions-related-bugs">
+<h3>User authentications and permissions related bugs<a class="headerlink" href="#user-authentications-and-permissions-related-bugs" title="Permalink to this headline">¶</a></h3>
+<p>If the audit server has been started, you can add the following command output to bug report:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">tail</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">audit</span><span class="o">/</span><span class="n">audit</span><span class="o">.</span><span class="n">log</span> <span class="o">&gt;</span> <span class="n">audit</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>If it was not start:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">tail</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">messages</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="firefox-related-bugs">
+<h3>Firefox related bugs<a class="headerlink" href="#firefox-related-bugs" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">In order to find the problem is related with firefox or its add-on: (If the problem is about the plugin please add olugin name to bug report)</p>
+<blockquote>
+<ul class="simple">
+<li>Follow Tools -&gt; Add-ons path and disable the enabled add-ons one by one and try to reproduce the bug for each. (After each disable of an add-on firefox should be restarted.)</li>
+<li>In order to test firefox without using any add-on or theme, please run &#8220;firefox -safe-mode&#8221; command on console.</li>
+<li>It would be useful to add the add-on and theme names used to bug report.</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Sometimes the problems are related with some special changes that have done by user, for these type of situations please try to reproduce the problem with creating a new user on the system.</p>
+</li>
+</ul>
+<p>See Firefox crashes on <a class="reference external" href="stack_traces.html#stack-traces"><em>Stack Traces</em></a>.</p>
+</div>
+<div class="section" id="openoffice-related-bugs">
+<h3>Openoffice related bugs<a class="headerlink" href="#openoffice-related-bugs" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>If a crash is experienced when openoffice start, this can be about OpenGL.</dt>
+<dd><ul class="first last">
+<li><p class="first">Please run <a class="reference external" href="scripts/testgl.html">tstgl.c</a> file:</p>
+<blockquote>
+<div class="highlight-python"><pre>gcc testgl.c -o testgl -lX11 -lGL
+./testgl</pre>
+</div>
+</blockquote>
+</li>
+<li><p class="first">If this command is also crashed, the problem is not about openoffice.</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">When the openoffice is crashed, if it shows a dialog, please add it to the bug report.</p>
+</li>
+<li><p class="first">You can also take the stack trace, with installing its debug packages: see <a class="reference external" href="stack_traces.html#stack-traces"><em>Stack Traces</em></a>.</p>
+<blockquote>
+<p>For example if a crash is occured for open office writer, the below commands should be run:</p>
+<div class="highlight-python"><pre>vim `which oowriter`
+    /opt/OpenOffice.org/lib/ooo-3.2/program/soffice.bin
+
+gdb /opt/OpenOffice.org/lib/ooo-3.2/program/soffice.bin
+run -writer
+bt</pre>
+</div>
+</blockquote>
+</li>
+</ul>
+<p>The stack trace output should be added to the bug report (-writer parameter will change according to openoffice applicaiton type. -calc, -impress, -math etc)</p>
+</div>
+</div>
+<div class="section" id="enhancements-and-new-feature-requests">
+<h2>Enhancements and new feature requests<a class="headerlink" href="#enhancements-and-new-feature-requests" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Pardus Linux Project is an open source project, therefore before reporting an enhancement or a new feature please visit <a class="reference external" href="../licensing/forbidden_special_software.html#forbidden-items"><em>Forbidden Software and Special Cases</em></a>.</li>
+<li>Please don&#8217;t forget to select newfeature severity reporting it from the bugzilla.</li>
+<li>Please explain the feature clearly and give the aim of it for Pardus Linux Dist.</li>
+<li>Requesting a new package is not a new feature or enhancement please report these from Packages/New Packages product on bugzilla.</li>
+</ul>
+<p>See details from <a class="reference external" href="../newfeature/newfeature_requests.html#newfeature-requests"><em>New Feature Requests</em></a>.</p>
+</div>
+<div class="section" id="graphical-user-interface-related-bugs">
+<h2>Graphical User Interface related bugs<a class="headerlink" href="#graphical-user-interface-related-bugs" title="Permalink to this headline">¶</a></h2>
+<p>If a graphical user interface bug exist, the best is to add the screenshot of it to the bug report. Screenshots enables developers to see the problematic part more easy.</p>
+<ul class="simple">
+<li>In order to take screenshots, you can press &#8220;Print Screen&#8221; key on keyboard or you can also use gimp and take screenshot by following File -&gt; Create -&gt; Screenshot way.</li>
+<li>In order to take video you can use recordmydesktop package.</li>
+</ul>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/bug_and_feature_requests.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:19 GMT -->
+</html>

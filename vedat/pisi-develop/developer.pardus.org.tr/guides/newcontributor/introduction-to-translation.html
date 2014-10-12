@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/newcontributor/introduction-to-translation.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Quick Guide to Pardus Translations</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="New Contributors" href="index.html" />
+    <link rel="next" title="FAQ About Translations" href="faq-about-translations.html" />
+    <link rel="prev" title="Creating SVN Crypt Password" href="creating-svn-account.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">New Contributors</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Quick Guide to Pardus Translations</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Quick Guide to Pardus Translations</a><ul>
+<li><a class="reference external" href="#subscribing-to-the-mailing-list">Subscribing to the Mailing List</a></li>
+<li><a class="reference external" href="#creating-a-bugzilla-account">Creating a Bugzilla Account</a></li>
+<li><a class="reference external" href="#introducing-yourself">Introducing Yourself</a></li>
+<li><a class="reference external" href="#requesting-team-membership">Requesting Team Membership</a></li>
+<li><a class="reference external" href="#obtaining-and-translating-projects">Obtaining and Translating Projects</a></li>
+<li><a class="reference external" href="#committing-projects">Committing Projects</a></li>
+<li><a class="reference external" href="#adding-non-existing-translation-file">Adding Non-Existing Translation File</a></li>
+<li><a class="reference external" href="#being-aware-of-translation-updates">Being Aware of Translation Updates</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="quick-guide-to-pardus-translations">
+<span id="introduction-to-translation"></span><h1>Quick Guide to Pardus Translations<a class="headerlink" href="#quick-guide-to-pardus-translations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subscribing-to-the-mailing-list">
+<h2>Subscribing to the Mailing List<a class="headerlink" href="#subscribing-to-the-mailing-list" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<ul class="simple">
+<li>Pardus uses Transifex to help translators keep track of translation
+projects. Register yourself to Transifex at
+<a class="reference external" href="http://translate.pardus.org.tr/">http://translate.pardus.org.tr</a>. Please, do not forget to update your
+Transifex account page. It&#8217;s mandatory to fill the Name and Surname
+informations. These informations are going to be shown in commit log.</li>
+<li>Visit <a class="reference external" href="http://lists.pardus.org.tr/mailman/listinfo/pardus-translators">http://lists.pardus.org.tr/mailman/listinfo/pardus-translators</a> and
+subscribe to this mailing list. pardus-translators [at] pardus.org.tr
+e-mail address is the unique channel that we communicate each other.
+Developers are announcing the string freeze date or an urgent translation
+state on this address. So, it&#8217;s better to follow this mailing address
+<em>reqularly</em> to be aware of any translation related topics.</li>
+<li>It is better to subscribe to development mailing list in order to keep
+syncronized with other developers. Use the link below:
+<a class="reference external" href="http://lists.pardus.org.tr/mailman/listinfo/pardus-devel">http://lists.pardus.org.tr/mailman/listinfo/pardus-devel</a>.</li>
+<li>If you want to see your translation commit, visit
+<a class="reference external" href="http://lists.pardus.org.tr/mailman/listinfo/uludag-commits">http://lists.pardus.org.tr/mailman/listinfo/uludag-commits</a>. You can follow
+all translation updates ( and other technical commit mails as well) from
+this mailing address.</li>
+<li>Wait for the confirmation emails from you&#8217;ve just registered or
+subscribed services. These e-mails contains a link to confirm your
+subscription, click the link to confirm your subscription.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="creating-a-bugzilla-account">
+<h2>Creating a Bugzilla Account<a class="headerlink" href="#creating-a-bugzilla-account" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<ul class="simple">
+<li>Visit <a class="reference external" href="http://bugs.pardus.org.tr/">http://bugs.pardus.org.tr</a> to create a Bugzilla account. This is
+useful for translators since there could be a bug in a translation file&#8217;s
+source (POT) and you should file a bug in order to warn the project
+maintainer. This is not mandatory of course.</li>
+<li>You are now a fully recognized member of Pardus community, capable of
+submitting contributions, submitting bugs and following the discussions of
+our groups.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="introducing-yourself">
+<h2>Introducing Yourself<a class="headerlink" href="#introducing-yourself" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<ul class="simple">
+<li>Post a short self introduction to the pardus-translators mailing list.
+Please remember to include your Transifex user name and your language.
+With this information, language coordinator can identify you for language
+team joining approval.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="requesting-team-membership">
+<h2>Requesting Team Membership<a class="headerlink" href="#requesting-team-membership" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<ul class="simple">
+<li>After you&#8217;ve successfully accomplished the steps above, you are ready to
+translate Pardus to a language that you want. Just click the &#8220;Join This
+Team&#8221; button at the language page that you want to join. If you filled the
+needed information on your Transifex account page and done the steps
+above, the language coordinator will approve your membership request and
+you&#8217;ll be able to ready to translate.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="obtaining-and-translating-projects">
+<h2>Obtaining and Translating Projects<a class="headerlink" href="#obtaining-and-translating-projects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<p>You may need to communicate with other translators in your language team to
+avoid conflict. If you are not sure, please contact your language
+coordinator.</p>
+<ol class="arabic">
+<li><p class="first">Visit your language page such as
+<a class="reference external" href="http://translate.pardus.org.tr/transifex/languages/l/pl/">http://translate.pardus.org.tr/transifex/languages/l/pl/</a>, and select a
+target release. The interface will redirect you to a page for that
+release, such as
+<a class="reference external" href="http://translate.pardus.org.tr/transifex/projects/p/pardus/r/corporate2/l/pl/">http://translate.pardus.org.tr/transifex/projects/p/pardus/r/corporate2/l/pl/</a>.</p>
+</li>
+<li><p class="first">Scroll down the page to find the table of all projects available for that
+release.</p>
+<img alt="../../_images/dl.png" src="../../_images/dl.png" />
+<p>Use the marked button or similar next to each project to download the po
+file.</p>
+</li>
+<li><p class="first">Before starting to translate any translation file, please make sure that
+none of the translators are working on the file you choose. Transifex eases
+this kind of conflicts with an icon indicating that a translator is working
+on the file. See the marked icon below:</p>
+<img alt="../../_images/locked.png" src="../../_images/locked.png" />
+</li>
+<li><p class="first">If noone is working on the file, as indicated by the icon, you can
+safely translate the file. First step is to lock the file by clicking the
+lock button. This way, you tell that you are working on the file and going
+to unlock it when the translation is done and commited.</p>
+</li>
+<li><p class="first">Now you are aware of the workflow and begin translating. Translate the po file to your
+language in a PO editor such as Lokalize.</p>
+</li>
+<li><p class="first">Check the integrity of your file before you commit it.</p>
+<p><tt class="docutils literal"><span class="pre">msgfmt</span> <span class="pre">-c</span> <span class="pre">--statistics</span> <span class="pre">pl.po</span></tt></p>
+</li>
+</ol>
+</blockquote>
+</div>
+<div class="section" id="committing-projects">
+<h2>Committing Projects<a class="headerlink" href="#committing-projects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<p>Once you finished your translation work, commit the file using the same interface.</p>
+<p>Use the upload button marked below for your language next to each project,
+then click the browse button to locate your translated file.</p>
+<img alt="../../_images/ul.png" src="../../_images/ul.png" />
+<p>Select the Send to commit your translated file.</p>
+<p>Interface displays the message <em>File submitted successfully</em>. If you receive
+an error or some other message except success, please post it to the
+pardus-translators mailing list so it can be addressed.</p>
+</blockquote>
+</div>
+<div class="section" id="adding-non-existing-translation-file">
+<h2>Adding Non-Existing Translation File<a class="headerlink" href="#adding-non-existing-translation-file" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<p>If there is no translation file for your language, please do the following
+steps:</p>
+<ul>
+<li><p class="first">Download the POT file and copy it as your own language&#8217;s <strong>po</strong> file.</p>
+<blockquote>
+<img alt="../../_images/dl-pot.png" src="../../_images/dl-pot.png" />
+</blockquote>
+</li>
+<li><p class="first">Once you finish the translation, click on the button marked below.</p>
+<blockquote>
+<img alt="../../_images/add-new.png" src="../../_images/add-new.png" />
+</blockquote>
+</li>
+<li><p class="first">Type your new file name in the field marked replacing the file name with
+your locale. See the image:</p>
+<blockquote>
+<blockquote>
+<p><strong>po/your_lang.po</strong></p>
+</blockquote>
+<img alt="../../_images/add-new2.png" src="../../_images/add-new2.png" />
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="being-aware-of-translation-updates">
+<h2>Being Aware of Translation Updates<a class="headerlink" href="#being-aware-of-translation-updates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<p>Transifex supports notifications per many events. One of them is PO updates.
+If you want to receive notifications when a project developer updates
+translation files, you should click the <em>Watch</em> button, as seen below:</p>
+<blockquote>
+<img alt="../../_images/watch.png" src="../../_images/watch.png" />
+</blockquote>
+<p>You can watch every languages po file updates or may want to watch only your
+language&#8217;s translation updates, it&#8217;s up to you.</p>
+<p>One notification that is useful as well is that watching a project&#8217;s events.
+If you want to receive notifications when a project has any update, such as
+a translator joins a team or a new project is added etc., click the related
+project&#8217;s <em>Watch</em> button. See the image:</p>
+<blockquote>
+<img alt="../../_images/watch-project.png" src="../../_images/watch-project.png" />
+</blockquote>
+</blockquote>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Halil İbrahim Güngör</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/newcontributor/introduction-to-translation.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+</html>

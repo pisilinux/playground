@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/repository_concepts/software_repository.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Software Repository (binary or package repository)</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Repository Concepts" href="index.html" />
+    <link rel="next" title="Subversion Usage" href="subversion_usage.html" />
+    <link rel="prev" title="Source Code Repository" href="sourcecode_repository.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Releasing</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Repository Concepts</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Software Repository (binary or package repository)</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Software Repository (binary or package repository)</a><ul>
+<li><a class="reference external" href="#devel-binary-repository">Devel Binary Repository</a></li>
+<li><a class="reference external" href="#testing-binary-repository">Testing Binary Repository</a></li>
+<li><a class="reference external" href="#stable-binary-repository">Stable Binary Repository</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="software-repository-binary-or-package-repository">
+<span id="software-repository"></span><h1>Software Repository (binary or package repository)<a class="headerlink" href="#software-repository-binary-or-package-repository" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.2</td>
+</tr>
+</tbody>
+</table>
+<p>A software repository generally means a storage location from which software
+packages may be retrieved and installed on a computer. Therefore compiled
+Pardus packages are located at software repositories in binary format.</p>
+<p>Every Pardus distribution has specific <a class="reference external" href="http://packages.pardus.org.tr/pardus/">binary repositories</a>.</p>
+<p>All of these repositories group packages by <a class="reference external" href="../../packaging/packaging_guidelines.html#architecture-support">supported architectures</a> and these
+repositories are also have debug packages folder.</p>
+<p>During alfa, beta versions of Pardus distributions, all these repositories are
+the same.</p>
+<p>Following table shows binary/farm/source mappings:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="36%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Binary Repo</th>
+<th class="head">Farm</th>
+<th class="head">Source Repo</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>devel/i686</td>
+<td>devel/i686</td>
+<td>devel</td>
+</tr>
+<tr><td>devel/x86_64</td>
+<td>devel/x86_86</td>
+<td>devel</td>
+</tr>
+<tr><td>testing/i686</td>
+<td>testing/i686</td>
+<td>testing</td>
+</tr>
+<tr><td>testing/x86_64</td>
+<td>testing/x86_64</td>
+<td>testing</td>
+</tr>
+<tr><td>stable/i686</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>testing</td>
+</tr>
+<tr><td>stable/x86_64</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>testing</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="devel-binary-repository">
+<h2>Devel Binary Repository<a class="headerlink" href="#devel-binary-repository" title="Permalink to this headline">¶</a></h2>
+<p>The packages under <a class="reference external" href="sourcecode_repository.html#devel-folder">devel package source repository</a> are compiled and the created
+binary pisi packages are located under this repository.</p>
+<p>Users that want to use bleeding edge versions of packages, they can use this
+repository.</p>
+</div>
+<div class="section" id="testing-binary-repository">
+<h2>Testing Binary Repository<a class="headerlink" href="#testing-binary-repository" title="Permalink to this headline">¶</a></h2>
+<p>The packages under <a class="reference external" href="sourcecode_repository.html#testing-folder">testing package source repository</a> are compiled and the created
+binary pisi packages are located under this repository.</p>
+</div>
+<div class="section" id="stable-binary-repository">
+<h2>Stable Binary Repository<a class="headerlink" href="#stable-binary-repository" title="Permalink to this headline">¶</a></h2>
+<p>The updated and newly added packages under test binary repository enters a test
+process. The approved packages after this process are merged to this stable
+repository by release manager.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/repository_concepts/software_repository.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

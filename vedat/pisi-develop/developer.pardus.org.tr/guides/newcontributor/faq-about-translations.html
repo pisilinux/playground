@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/newcontributor/faq-about-translations.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FAQ About Translations</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="New Contributors" href="index.html" />
+    <link rel="next" title="Contributor Candidate Mentoring" href="newcontributor_mentors.html" />
+    <link rel="prev" title="Quick Guide to Pardus Translations" href="introduction-to-translation.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">New Contributors</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">FAQ About Translations</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">FAQ About Translations</a><ul>
+<li><a class="reference external" href="#internationalization-i18n">1. Internationalization (i18n)</a></li>
+<li><a class="reference external" href="#localization-l10n">2. Localization (l10n)</a></li>
+<li><a class="reference external" href="#workflow-between-i18n-and-l10n">3. Workflow between i18n and l10n</a></li>
+<li><a class="reference external" href="#what-happens-when-i-translate-and-commit-the-language-po-file-to-svn">4. What happens when I translate and commit the LANGUAGE.po file to SVN?</a></li>
+<li><a class="reference external" href="#oh-i-thought-i-already-completed-the-translation-of-kaptan-but-there-are-still-english-messages-in-it">5. Oh, I thought I already completed the translation of Kaptan but there are still English messages in it!</a></li>
+<li><a class="reference external" href="#how-do-i-test-my-translation">How do i test my translation?</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="faq-about-translations">
+<span id="translations-faq"></span><h1>FAQ About Translations<a class="headerlink" href="#faq-about-translations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="internationalization-i18n">
+<h2>1. Internationalization (i18n)<a class="headerlink" href="#internationalization-i18n" title="Permalink to this headline">¶</a></h2>
+<p>Internationalization is the process of designing a software application so that
+it can be adapted to various languages and regions without engineering changes.
+This is actually what we are doing when we write the software components like
+Managers, YALI, Kaptan, sysinfo, etc, so this isn&#8217;t a process that you&#8217;re
+directly involved.</p>
+<p>In terms of programming, all the strings in an application presented to the
+user are wrapped with a function call like i18n(), ki18n(), etc. That&#8217;s all.
+Say that you&#8217;re printing a welcome message on the screen in Python:</p>
+<blockquote>
+<tt class="docutils literal"><span class="pre">print</span> <span class="pre">&quot;Hello&quot;</span></tt></blockquote>
+<p>This isn&#8217;t at all translatable to any language as it doesn&#8217;t support i18n. But
+if I import the relevant module and wrap that string by the relevant function
+like:</p>
+<blockquote>
+<tt class="docutils literal"><span class="pre">print</span> <span class="pre">i18n(&quot;Hello&quot;)</span></tt></blockquote>
+<p>the text will be replaced by the meaning of &#8220;Hello&#8221; in the corresponding
+language when a user runs the application.</p>
+<p>When the whole software is internationalized, a translation catalogue (a file
+with an extension .pot) is generated by browsing all the source code files of
+that software.  The catalogue is actually a plain text file which keeps the
+strings to be translated and their corresponding translations in a 2-line
+format:</p>
+<div class="highlight-python"><pre># Some comments about where this string is actually
+# coming from in terms of source code file and line number
+msgid "string to be translated 1"
+msgstr ""</pre>
+</div>
+<p>and it goes like this.</p>
+</div>
+<div class="section" id="localization-l10n">
+<h2>2. Localization (l10n)<a class="headerlink" href="#localization-l10n" title="Permalink to this headline">¶</a></h2>
+<p>Localization is the process of adapting internationalized software for a
+specific region or language by adding locale-specific components and
+translating text.</p>
+<p>Localization is actually what you are doing: Translating the English strings in
+the translation catalogue to another language.</p>
+</div>
+<div class="section" id="workflow-between-i18n-and-l10n">
+<h2>3. Workflow between i18n and l10n<a class="headerlink" href="#workflow-between-i18n-and-l10n" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The developer writes its software with i18n support,</li>
+<li>Once he/she thinks that it&#8217;s ready for localization, he/she generates a
+translation catalogue from it, basically a .pot file and makes it publicly
+available to you (through SVN in our case),</li>
+<li>The translator takes that .pot file and creates a copy of it which he/she
+calls LANGUAGE.po, e.g.  If I&#8217;m translating the software to Turkish, I
+take that .pot file and create a copy of it called tr.po.</li>
+<li>I use vi, nano, mcedit, lokalize, kbabel, or another application to edit
+that tr.po file for translating the strings in it,</li>
+<li>Once I think that it&#8217;s enough for that day, I commit it back to where it
+belongs in the SVN tree.</li>
+</ul>
+<blockquote>
+Some more practical rules and advises are below:</blockquote>
+<ul class="simple">
+<li>You never touch/modify the .pot file once you copy it as your LANGUAGE.po
+file,</li>
+<li>If there&#8217;s already a LANGUAGE.po file then it means that somebody has
+already started working on it OR the developer of the software had created
+empty LANGUAGE.po files for your convenience. All you have to do is to
+edit it to fix broken or missing translations and commit it back!</li>
+</ul>
+</div>
+<div class="section" id="what-happens-when-i-translate-and-commit-the-language-po-file-to-svn">
+<h2>4. What happens when I translate and commit the LANGUAGE.po file to SVN?<a class="headerlink" href="#what-happens-when-i-translate-and-commit-the-language-po-file-to-svn" title="Permalink to this headline">¶</a></h2>
+<p>The developers creates a tarball/archive of their project source codes
+including the po/ directory which contains all of the translation work done by
+you. Once the application becomes a pisi package and you install/upgrade it on
+your system, the new translations will immediately be available to you.</p>
+<p>If you think that you translated all the strings correctly and committed the
+LANGUAGE.po file to SVN, you may sit back and enjoy seeing your translation
+work on your screen as you use the related software.</p>
+</div>
+<div class="section" id="oh-i-thought-i-already-completed-the-translation-of-kaptan-but-there-are-still-english-messages-in-it">
+<h2>5. Oh, I thought I already completed the translation of Kaptan but there are still English messages in it!<a class="headerlink" href="#oh-i-thought-i-already-completed-the-translation-of-kaptan-but-there-are-still-english-messages-in-it" title="Permalink to this headline">¶</a></h2>
+<p>Okay, there could be more than one possible cause for this problem. Let&#8217;s
+learn about them:</p>
+<ul>
+<li><p class="first">You really completed the LANGUAGE.po file and committed it but the
+maintainer of the project wasn&#8217;t concerned at all to create a new tarball
+and push that as a pisi update to the repository. So your works aren&#8217;t
+reflected at all to the package. Just send an e-mail to the
+pardus-translators list as early as possible OR fire a bug report in
+bugzilla to poke us,</p>
+</li>
+<li><p class="first">You really completed the LANGUAGE.po file and committed it but to the
+wrong directory under SVN. We&#8217;ll talk about different directory
+hierarchies in SVN a little bit later so keep reading,</p>
+</li>
+<li><p class="first">You really think you&#8217;re completed the LANGUAGE.po file but actually there
+are translations which are marked as fuzzy.  When a translation is marked
+as fuzzy, the English string is displayed instead of the fuzzy
+translation. You have to correct that translation and remove the fuzzy
+mark in the .po file. Let&#8217;s see an example:</p>
+<div class="highlight-python"><pre>#, fuzzy
+msgid "Network settings"
+msgstr "A not-really correct phrase about the original string"</pre>
+</div>
+<p>As you can see, that translation is marked as fuzzy and you&#8217;ll just see
+&#8220;Network settings&#8221; instead of the not-really correct fuzzy translation. If
+you&#8217;re using a graphical tool, re-translating it correctly should be
+sufficient to mark it as non-fuzzy. If you&#8217;re using a text editor, just
+remove that &#8220;, fuzzy&#8221; from the line above, that&#8217;s all,</p>
+</li>
+<li><p class="first">You really completed the LANGUAGE.po file but the developer has just added
+a new string and you didn&#8217;t notice it at all.  In that case your
+LANGUAGE.po file will miss the translation for that new string which will
+cause it to be displayed in English. Just open the LANGUAGE.po file,
+translate the newly added strings and commit it.</p>
+</li>
+</ul>
+<ol class="arabic simple" start="6">
+<li>At the bottom of my LANGUAGE.po file there a lot of translations all starting with #. What am I supposed to do with them?</li>
+</ol>
+<p>Nothing! Those are old translations that you&#8217;ve made a while ago but which are
+not currently used by the application because the developer decided to not make
+them appear on the screen.</p>
+<p>When the developer updates the POT and PO files (Don&#8217;t panic we&#8217;ll talk about
+that too), the removed strings and their translations will be moved to the
+bottom of the PO files and be commented out with # characters so that they are
+not used at all.</p>
+<ol class="arabic simple" start="7">
+<li>I sometimes see that the POT file and all the PO files are modified, what does it mean?</li>
+</ol>
+<p>When a developer adds/removes/modifies some strings in its project source
+codes, he runs an automated script which reflects that change to the POT and
+PO files:</p>
+<ul>
+<li><p class="first">If there is/are new string(s), you just have to translate it/them in
+LANGUAGE.po and commit your changes back,</p>
+</li>
+<li><p class="first">If there is/are removed string(s), its/theirs translation(s) for it/them in
+the PO file is/are moved to the bottom of the file and each commented out
+with an # character. You don&#8217;t have to do anything in this case,</p>
+</li>
+<li><p class="first">If there is/are modified string(s), its/theirs translation becomes fuzzy.
+When you open the LANGUAGE.po file with your favourite localization tool or a
+text editor, you&#8217;ll see that the relevant translations is/are marked as fuzzy
+(has a # ,fuzzy line above it).  You now have to fix its/their translation(s)
+to unmark it/them as fuzzy.</p>
+<p>Note that you&#8217;ll see the original English strings instead of fuzzy marked
+translations when you run an application.</p>
+</li>
+</ul>
+<ol class="arabic simple" start="9">
+<li>I&#8217;m really confused about the branch/ and trunk/ hierarchy in Pardus SVN
+repository. What are they used for? Where should I commit my translation
+updates?</li>
+</ol>
+<p>You&#8217;re basically working in uludag repository (<a class="reference external" href="http://svn.pardus.org.tr/uludag">http://svn.pardus.org.tr/uludag</a>)
+which contains the source codes for Pardus technologies.</p>
+<dl class="docutils">
+<dt>An SVN project repository is generally divided into three folders:</dt>
+<dd><ul class="first last simple">
+<li>trunk/</li>
+<li>branches/</li>
+<li>tags/</li>
+</ul>
+</dd>
+</dl>
+<p>&#8220;trunk&#8221; is the directory under which the main project development occurs,
+&#8220;branches&#8221; is the directory in which you create various named branches of the
+main development line, &#8220;tags&#8221; is a directory of branches that are created, and
+perhaps destroyed but never changed.</p>
+<p>Now let&#8217;s forget about tags directory and focus over the other ones.</p>
+<p>In trunk, there are several directories for several projects like Kaptan, YALI,
+comar, pisi, kde, etc. This where the main development takes place.  For
+example, when I found a bug in Kaptan, trunk/kde/kaptan is generally the first
+place where I commit my fix.</p>
+<p>If I plan to do radical changes to Kaptan e.g. to add different features to it
+that will be used in Pardus 2011 but which will not appear in Pardus 2009, I
+create a branch in branches/kde/kaptan called for example 2011 and I continue
+the development in trunk/kde/kaptan and branches/kde/kaptan/2011 separately.</p>
+<p>So, If I add a new string to the 2011 branch of Kaptan and update the POT/PO
+files, you have to update the relevant PO files in branches/kde/kaptan/2011/po
+directory.</p>
+<p>Currently we have two main branches for every project: 2009 and Corporate2.
+Both are active and maintained so you should generally be updating both
+branches for every project if you see a translation update in uludag-commits.</p>
+<p>If there are no modifications to the strings in a specific branch of Kaptan,
+and you continue to improve the current translations in trunk/kde/kaptan, this
+is the developer&#8217;s responsibility to take what you changed in trunk/kde/kaptan
+and apply them over the relevant branches of Kaptan.</p>
+<ol class="arabic simple" start="10">
+<li>It is quite possible to see untranslated strings in KDE applications.
+Since KDE isn&#8217;t maintained in uludag/ repository, where should I update the translations?</li>
+</ol>
+<p>Nice question! This is one of the mysteries for translators. From time to time,
+we add new features to the KDE applications that needs for example a button in
+the user interface of that application.</p>
+<p>The PO files for KDE applications are either coming from the package itself or
+from kde-l10n-LANGUAGE packages in the repository.</p>
+<p>For example, we recently added a new item in the right-click menu of KMix (The
+speaker icon in your system tray) which opens pavucontrol for advanced sound
+settings. The feature was added to KMix shipped within the kdemultimedia
+package. As kdemultimedia is a base KDE package, all of its PO files comes from
+kde-l10n-LANGUAGE packages.</p>
+<p>This is the patch applied to kdemultimedia package which adds that item to
+KMix:
+<a class="reference external" href="http://svn.pardus.org.tr/pardus/2009/devel/desktop/kde/base/kdemultimedia/files/kmix-add-pavucontrol-shortcut.patch">http://svn.pardus.org.tr/pardus/2009/devel/desktop/kde/base/kdemultimedia/files/kmix-add-pavucontrol-shortcut.patch</a></p>
+<div class="highlight-python"><pre>Index: kdemultimedia-4.3.3/kmix/kmixdockwidget.cpp
+===================================================================
+--- kdemultimedia-4.3.3.orig/kmix/kmixdockwidget.cpp
++++ kdemultimedia-4.3.3/kmix/kmixdockwidget.cpp
+@@ -33,6 +33,8 @@
+ #include &lt;kwindowsystem.h&gt;
+ #include &lt;kactioncollection.h&gt;
+ #include &lt;ktoggleaction.h&gt;
++#include &lt;kprocess.h&gt;
++#include &lt;kmessagebox.h&gt;
+ #include &lt;qapplication.h&gt;
+ #include &lt;qcursor.h&gt;
+ #include &lt;QDesktopWidget&gt;
+@@ -98,6 +100,13 @@ void KMixDockWidget::createActions()
+     if ( a ) menu-&gt;addAction( a );
+ }
+
++  // Add pavucontrol shortcut to the context menu
++  QAction *paction = actionCollection()-&gt;addAction( "run_pavucontrol" );
++  paction-&gt;setText( i18n ("Advanced Sound Control") );                     &lt;-- A new string wrapped by i18n() --&gt;
++  connect(paction, SIGNAL(triggered(bool) ), SLOT (runPavucontrol() ));
++  QAction *a1 = actionCollection()-&gt;action ("run_pavucontrol" );
++  if ( a1 ) menu-&gt;addAction( a1 );
++
+   // Put "Select Master Channel" dialog in context menu
+   if ( m_mixer != 0 ) {
+   QAction *action = actionCollection()-&gt;addAction( "select_master" );
+@@ -158,6 +167,17 @@ void KMixDockWidget::selectMaster()
+     // !! The dialog is modal. Does it delete itself?
+ }
+
++void KMixDockWidget::runPavucontrol()
++{
++    KProcess *pulse_proc = new KProcess();
++    pulse_proc-&gt;setProgram("/usr/bin/pavucontrol");
++
++    if ( pulse_proc-&gt;startDetached() == 0 ) {
++        // Error
++        KMessageBox::error(0, i18n("Failed launching pavucontrol, make sure the pavucontrol package is correctly installed."),
++                              i18n("Error launching pavucontrol"));        &lt;-- Two new strings wrapped by i18n() --&gt;
++    }
++}</pre>
+</div>
+<p>So when I add this feature to KMix, I also patch the kde-l10n-tr package to
+add the translations for those 3 new strings. Let&#8217;s see this patch:
+<a class="reference external" href="http://svn.pardus.org.tr/pardus/2009/devel/desktop/kde/l10n/kde-l10n-tr/files/kmix-add-pavucontrol-i18n.patch">http://svn.pardus.org.tr/pardus/2009/devel/desktop/kde/l10n/kde-l10n-tr/files/kmix-add-pavucontrol-i18n.patch</a></p>
+<div class="highlight-python"><pre>Index: kde-l10n-tr-4.3.3/messages/kdemultimedia/kmix.po
+===================================================================
+--- kde-l10n-tr-4.3.3.orig/messages/kdemultimedia/kmix.po
++++ kde-l10n-tr-4.3.3/messages/kdemultimedia/kmix.po
+@@ -712,5 +712,14 @@ msgstr "Aygıt Ayarları"
+ msgid "Mixer"
+ msgstr "Karıştırıcı"
+
++msgid "Advanced Sound Control"
++msgstr "Gelişmiş Ses Denetimi"
++
++msgid "Failed launching pavucontrol, make sure the pavucontrol package is correctly installed."
++msgstr "pavucontrol başlatılamadı, pavucontrol paketinin yüklü olduğundan emin olun."
++
++msgid "Error launching pavucontrol"
++msgstr "pavucontrol başlatılamadı"
++
+ #~ msgid "Current Mixer"
+ #~ msgstr "Geçerli Karıştırıcı"</pre>
+</div>
+<p>The patch is pretty trivial!</p>
+<p>The main problem is that if you don&#8217;t dig into the paketler-commits list, you
+won&#8217;t notice that right-click menu action addition to KMix until you saw it on
+your desktop. We&#8217;re planning an automated notification system for this kind of
+modifications that&#8217;ll send an e-mail to pardus-translators which will tell
+which package you have to patch and what are the added/modified strings in it.</p>
+<p>As you don&#8217;t have access to pardus/ repositories for now, you can&#8217;t directly
+patch packages but if you attach your translation patches in a bug report that
+you&#8217;ll open, we&#8217;ll apply them as soon as possible to pardus/ repository.</p>
+</div>
+<div class="section" id="how-do-i-test-my-translation">
+<h2>How do i test my translation?<a class="headerlink" href="#how-do-i-test-my-translation" title="Permalink to this headline">¶</a></h2>
+<p>First of all, if you edited the relevant po file with a text editor, you should
+test it with &#8220;msgfmt&#8221; command. Ex.:</p>
+<blockquote>
+<tt class="docutils literal"><span class="pre">msgfmt</span> <span class="pre">-c</span> <span class="pre">--statistics</span> <span class="pre">&lt;insert_your_language&gt;.po</span></tt></blockquote>
+<p>The above command first checks whether if there are fatal errors or warnings
+with &#8220;-c&#8221; parameter, then shows the statics of your translation file with
+&#8220;&#8211;statistics&#8221; parameter, obviously.</p>
+<p>The result should be similar to this:</p>
+<div class="highlight-python"><pre>msgfmt -c --statistics tr.po
+395 translated messages, 1 untranslated message.</pre>
+</div>
+<p>If your translation contains missing or extra characters (e.g. extra n,
+missing % character, wrong order of %1 and %2), you will get an error like
+this:</p>
+<div class="highlight-python"><pre>msgfmt -c --statistics tr.po
+tr.po:28: `msgid' and `msgstr' entries do not both end with '\n'
+msgfmt: found 1 fatal error
+395 translated messages, 1 untranslated message.</pre>
+</div>
+<p>The above output tries to tell us that we have an extra &#8220;n&#8221; character on line
+28. We should fix it and then repeat the routine again.</p>
+<p>If you are satisfied with the result, compile your po file with the command:</p>
+<blockquote>
+<tt class="docutils literal"><span class="pre">msgfmt</span> <span class="pre">-o</span> <span class="pre">&lt;application&gt;.mo</span> <span class="pre">language.po</span></tt></blockquote>
+<p>This command compiles your po file into a binary format, &lt;application&gt;.mo.
+Most of the translation files (compiled ones, mo that is) usually stays in
+/usr/share/locale/&lt;language&gt;/LC_MESSAGES directory. KDE has its prefix so KDE
+related programs have their translation files in
+/usr/kde/4/share/locale/&lt;language&gt;/LC_MESSAGES. If you want to test your
+translation effort, copy your mo file to relevant directory. Here&#8217;s a routine i
+use for translating kaptan:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>pwd
+/home/igungor/bluebox/uludag/trunk/kde/kaptan/po</li>
+<li>vim tr.po (type type type, delete, type, delete. save and exit.)
+(You can use your favourite text editor of course.)</li>
+<li>msgfmt -c &#8211;statistics tr.po
+154 translated messages, 6 untranslated messages.
+(OK, no warning or fatal error. lets compile it)</li>
+<li>msgfmt -o kaptan.mo tr.po
+(we have kaptan.mo in our current working directory after this command if
+you get no output from this command.)</li>
+<li>sudo mv kaptan.mo /usr/kde/4/share/locale/tr/LC_MESSAGES/kaptan.mo</li>
+<li>LC_ALL=tr_TR kaptan
+(If you are using and English locale and test your application with
+another locale, you can use this command to change your locale for this
+application.)</li>
+</ol>
+</blockquote>
+<p>Voila! We have freshly translated Kaptan now. It is time to commit our changes.</p>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Halil İbrahim Güngör</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/newcontributor/faq-about-translations.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/libtools.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Libtools</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="ActionsApi" href="index.html" />
+    <link rel="next" title="Perlmodules" href="perlmodules.html" />
+    <link rel="prev" title="Kerneltools" href="kerneltools.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Packaging</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">ActionsApi</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Libtools</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Libtools</a><ul>
+<li><a class="reference external" href="#preplib">preplib</a></li>
+<li><a class="reference external" href="#gnuconfig-update">gnuconfig_update</a></li>
+<li><a class="reference external" href="#libtoolize">libtoolize</a></li>
+<li><a class="reference external" href="#gen-usr-ldscript">gen_usr_ldscript</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="id1">
+<span id="libtools"></span><h1>Libtools<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="preplib">
+<h2>preplib<a class="headerlink" href="#preplib" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">prelib</span><span class="p">(</span><span class="n">sourceDirectory</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Executes ldconfig command in the sourceDirectory.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">libtools</span><span class="o">.</span><span class="n">preplib</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gnuconfig-update">
+<h2>gnuconfig_update<a class="headerlink" href="#gnuconfig-update" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">gnuconfig_update</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Copies the newest config.sub and config.guess files to the source.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">libtools</span><span class="o">.</span><span class="n">gnuconfig_update</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="libtoolize">
+<h2>libtoolize<a class="headerlink" href="#libtoolize" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">libtoolize</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Makes it possible to execute libtoolize with given parameters on the source.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">libtools</span><span class="o">.</span><span class="n">libtoolize</span><span class="p">()</span>
+<span class="n">libtools</span><span class="o">.</span><span class="n">libtoolize</span><span class="p">(</span><span class="s">&quot;--force --copy&quot;</span><span class="p">)</span>
+<span class="n">libtools</span><span class="o">.</span><span class="n">libtoolize</span><span class="p">(</span><span class="s">&quot;--force --install&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gen-usr-ldscript">
+<h2>gen_usr_ldscript<a class="headerlink" href="#gen-usr-ldscript" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">gen_usr_ldscript</span><span class="p">(</span><span class="n">dynamicLib</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Since Pardus has critical dynamic libraries in /lib, and the static versions in
+/usr/lib, we need to have a dynamic lib in /usr/lib, otherwise we run
+into linking problems.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">libtools</span><span class="o">.</span><span class="n">gen_usr_ldscript</span><span class="p">(</span><span class="s">&quot;libhandle.so&quot;</span><span class="p">)</span>
+<span class="n">libtools</span><span class="o">.</span><span class="n">gen_usr_ldscript</span><span class="p">(</span><span class="s">&quot;libhandle.so&quot;</span><span class="p">)</span>
+<span class="n">libtools</span><span class="o">.</span><span class="n">gen_usr_ldscript</span><span class="p">(</span><span class="s">&quot;libdevmapper.so&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/actionsapi/libtools.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:36 GMT -->
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/package_naming_guidelines.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Package Naming Guideline</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Packaging" href="index.html" />
+    <link rel="next" title="Binary Package Naming" href="binary_package_naming_guidelines.html" />
+    <link rel="prev" title="Texlivemodules" href="actionsapi/texlivemodules.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Packaging</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Package Naming Guideline</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Package Naming Guideline</a><ul>
+<li><a class="reference external" href="#general-rules">General Rules</a><ul>
+<li><a class="reference external" href="#character-set">Character Set</a></li>
+<li><a class="reference external" href="#case-sensitivity">Case Sensitivity</a></li>
+<li><a class="reference external" href="#multiple-versions">Multiple Versions</a></li>
+<li><a class="reference external" href="#addons">Addons</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#splitted-packages">Splitted Packages</a><ul>
+<li><a class="reference external" href="#development-files">Development Files</a></li>
+<li><a class="reference external" href="#libraries">Libraries</a></li>
+<li><a class="reference external" href="#common-files">Common Files</a></li>
+<li><a class="reference external" href="#documentation">Documentation</a></li>
+<li><a class="reference external" href="#suites">Suites</a></li>
+<li><a class="reference external" href="#localization-files">Localization Files</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#rules-spesific-to-some-package-groups">Rules Spesific to Some Package Groups</a><ul>
+<li><a class="reference external" href="#apache-modules">Apache Modules</a></li>
+<li><a class="reference external" href="#cursor-themes">Cursor Themes</a></li>
+<li><a class="reference external" href="#django-modules">Django Modules</a></li>
+<li><a class="reference external" href="#fonts">Fonts</a></li>
+<li><a class="reference external" href="#icon-themes">Icon Themes</a></li>
+<li><a class="reference external" href="#kde-styles">KDE Styles</a></li>
+<li><a class="reference external" href="#kernel-modules">Kernel Modules</a></li>
+<li><a class="reference external" href="#kde-thumbnailers">KDE Thumbnailers</a></li>
+<li><a class="reference external" href="#kwin-decorations">KWin Decorations</a></li>
+<li><a class="reference external" href="#latex-packages">Latex Packages</a></li>
+<li><a class="reference external" href="#nss-modules">NSS Modules</a></li>
+<li><a class="reference external" href="#pam-modules">PAM Modules</a></li>
+<li><a class="reference external" href="#pear-packages">Pear Packages</a></li>
+<li><a class="reference external" href="#perl-modules">Perl Modules</a></li>
+<li><a class="reference external" href="#plasma-applets">Plasma Applets</a></li>
+<li><a class="reference external" href="#python-modules">Python Modules</a></li>
+<li><a class="reference external" href="#r-modules">R Modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="package-naming-guideline">
+<span id="package-naming"></span><h1>Package Naming Guideline<a class="headerlink" href="#package-naming-guideline" title="Permalink to this headline">¶</a></h1>
+<p><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Fatih Aşıcı</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>This document describes the package naming rules used in Pardus repositories.
+If you think these guidelines are not sufficient to choose a name for your
+package, please ask on developer mail lists.</p>
+<div class="section" id="general-rules">
+<h2>General Rules<a class="headerlink" href="#general-rules" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the general naming rules. Things might change for
+some package groups. These exceptions are described in the section titled with
+&#8220;Rules Spesific to Some Package Groups&#8221;.</p>
+<div class="section" id="character-set">
+<h3>Character Set<a class="headerlink" href="#character-set" title="Permalink to this headline">¶</a></h3>
+<p>All packages must be named using the following characters:</p>
+<div class="highlight-python"><pre>abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+0123456789-_+</pre>
+</div>
+</div>
+<div class="section" id="case-sensitivity">
+<h3>Case Sensitivity<a class="headerlink" href="#case-sensitivity" title="Permalink to this headline">¶</a></h3>
+<p>The preference of upstream maintainers must be respected. This means the case
+preference in archive names must be kept in package names. e.g. For a python
+module &#8220;Foo&#8221;, &#8220;python-Foo&#8221; must be used.</p>
+</div>
+<div class="section" id="multiple-versions">
+<h3>Multiple Versions<a class="headerlink" href="#multiple-versions" title="Permalink to this headline">¶</a></h3>
+<p>If multiple versions of a software will exist in the same repository, legacy
+packages should reflect the version. The common to provide this is to append
+major version numbers to the package name.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>The most recent version of qt:  qt
+3.x series of qt:               qt3</pre>
+</div>
+<p>If multiple version levels are needed, seperate them with an underscore.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>4.4.x series:   docbook-sgml4_4
+4.5.x series:   docbook-sgml4_5</pre>
+</div>
+</div>
+<div class="section" id="addons">
+<h3>Addons<a class="headerlink" href="#addons" title="Permalink to this headline">¶</a></h3>
+<p>The main application/library (in other words parent application/library) name
+must be followed by the component/addon name.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>Qt bindings for avahi:  avahi-qt (main package: avahi)</pre>
+</div>
+<p>Some words may be added before component name. Following examples show these
+words.</p>
+<p>Examples:</p>
+<div class="highlight-python"><pre>Consider "foo" as a main application name and "bar" as the name of an
+extension. One of the following names should be used for the extension
+package:
+
+ - foo-bar
+ - foo-addon-bar
+ - foo-applet-bar
+ - foo-backend-bar
+ - foo-extension-bar
+ - foo-plugin-bar</pre>
+</div>
+</div>
+</div>
+<div class="section" id="splitted-packages">
+<h2>Splitted Packages<a class="headerlink" href="#splitted-packages" title="Permalink to this headline">¶</a></h2>
+<p>For many reasons, it is useful to split packages whenever possible. This
+section mentions the naming of sub-packages coming from the same source.</p>
+<div class="section" id="development-files">
+<h3>Development Files<a class="headerlink" href="#development-files" title="Permalink to this headline">¶</a></h3>
+<p>These are the packages containing files needed for building applications.
+&#8220;-devel&#8221; suffix must be used for these packages.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>libX11-devel: libX11 headers and pkgconfig files</pre>
+</div>
+</div>
+<div class="section" id="libraries">
+<h3>Libraries<a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes it might be useful to separate libraries in one package. For these
+packages &#8220;-libs&#8221; suffix must be used.</p>
+</div>
+<div class="section" id="common-files">
+<h3>Common Files<a class="headerlink" href="#common-files" title="Permalink to this headline">¶</a></h3>
+<p>If a sub-package is needed by other sub-packages and this package itself does
+not provide a functionality, you can use &#8220;-common&#8221; suffix.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>php-common: PHP config files used by cli and apache module</pre>
+</div>
+</div>
+<div class="section" id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<p>Packages containg documentation files should be suffixed with &#8220;-docs&#8221;.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>qt-docs: Qt documentation files</pre>
+</div>
+</div>
+<div class="section" id="suites">
+<h3>Suites<a class="headerlink" href="#suites" title="Permalink to this headline">¶</a></h3>
+<p>Some meta packages could be desired to install all sub-packages together. This
+king of packages should be suffixed with &#8220;-suite&#8221;.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>koffice-suite: Meta package which depends on all koffice applications</pre>
+</div>
+</div>
+<div class="section" id="localization-files">
+<h3>Localization Files<a class="headerlink" href="#localization-files" title="Permalink to this headline">¶</a></h3>
+<p>Localization packages must be suffixed with &#8220;-l10n-xx&#8221; where xx is the locale
+code.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>kde-l10n-tr: Turkish localization package for KDE</pre>
+</div>
+</div>
+</div>
+<div class="section" id="rules-spesific-to-some-package-groups">
+<h2>Rules Spesific to Some Package Groups<a class="headerlink" href="#rules-spesific-to-some-package-groups" title="Permalink to this headline">¶</a></h2>
+<p>Some package groups have their own rules for naming. This section describes
+these exceptions for each group.</p>
+<div class="section" id="apache-modules">
+<h3>Apache Modules<a class="headerlink" href="#apache-modules" title="Permalink to this headline">¶</a></h3>
+<p>Packages containg Apache modules should use &#8220;mod_&#8221; prefix. This naming scheme
+is already used by many of the upstream maintainers.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>mod_php: PHP module for Apache</pre>
+</div>
+</div>
+<div class="section" id="cursor-themes">
+<h3>Cursor Themes<a class="headerlink" href="#cursor-themes" title="Permalink to this headline">¶</a></h3>
+<p>For packages containg cursor themes &#8220;cursor-theme-&#8221; prefix must be used.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>cursor-theme-oxygen-zion: Oxygen Zion cursor theme</pre>
+</div>
+</div>
+<div class="section" id="django-modules">
+<h3>Django Modules<a class="headerlink" href="#django-modules" title="Permalink to this headline">¶</a></h3>
+<p>The rules for Python packages do not apply for Django modules. These packages
+must have a &#8220;django-&#8221; prefix in their names.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>django-tagging:     Tagging module for Django</pre>
+</div>
+</div>
+<div class="section" id="fonts">
+<h3>Fonts<a class="headerlink" href="#fonts" title="Permalink to this headline">¶</a></h3>
+<p>Names of the font packages must end with &#8220;-fonts&#8221;.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">dejavu</span><span class="o">-</span><span class="n">fonts</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="icon-themes">
+<h3>Icon Themes<a class="headerlink" href="#icon-themes" title="Permalink to this headline">¶</a></h3>
+<p>Names of the packages containg an icon theme must start with &#8220;icon-theme-&#8220;.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>icon-theme-hicolor: Hicolor icon theme</pre>
+</div>
+</div>
+<div class="section" id="kde-styles">
+<h3>KDE Styles<a class="headerlink" href="#kde-styles" title="Permalink to this headline">¶</a></h3>
+<p>KDE styles must be kept in packages whose names start with &#8220;kde-style-&#8220;.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>kde-style-oxygen: Oxygen style for KDE</pre>
+</div>
+</div>
+<div class="section" id="kernel-modules">
+<h3>Kernel Modules<a class="headerlink" href="#kernel-modules" title="Permalink to this headline">¶</a></h3>
+<p>Names of packages containing kernel modules must be prefixed with &#8220;module-x&#8221;
+where x is the name of kernel flavor (pae, rt, etc.). If files needed by
+userspace applications (such as udev and modprobe configurations) are also
+needed, these must be separated with another sub-package whose name is also
+suffixed with &#8220;-common&#8221;.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>module-alsa:        ALSA kernel modules (kernel objects)
+module-alsa-common: udev and modprobe.conf files needed by ALSA drivers</pre>
+</div>
+</div>
+<div class="section" id="kde-thumbnailers">
+<h3>KDE Thumbnailers<a class="headerlink" href="#kde-thumbnailers" title="Permalink to this headline">¶</a></h3>
+<p>KDE thumbnailer packages must have a name prefixed with &#8220;kde-thumbnailer-&#8220;.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">kde</span><span class="o">-</span><span class="n">thumbnailer</span><span class="o">-</span><span class="n">ffmpeg</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="kwin-decorations">
+<h3>KWin Decorations<a class="headerlink" href="#kwin-decorations" title="Permalink to this headline">¶</a></h3>
+<p>KWin decoration packages must have a name prefixed with &#8220;kwin-decoration-&#8220;.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">kwin</span><span class="o">-</span><span class="n">decoration</span><span class="o">-</span><span class="n">aurorae</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="latex-packages">
+<h3>Latex Packages<a class="headerlink" href="#latex-packages" title="Permalink to this headline">¶</a></h3>
+<p>Latex packages must have a prefix of &#8220;latex-&#8221; in their names.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>latex-mh: Additional LaTeX math tools</pre>
+</div>
+</div>
+<div class="section" id="nss-modules">
+<h3>NSS Modules<a class="headerlink" href="#nss-modules" title="Permalink to this headline">¶</a></h3>
+<p>Packages containg NSS modules should use &#8220;nss_&#8221; prefix. This naming scheme
+is already used by many of the upstream maintainers.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>nss_ldap: NSS module for querying user information from LDAP</pre>
+</div>
+</div>
+<div class="section" id="pam-modules">
+<h3>PAM Modules<a class="headerlink" href="#pam-modules" title="Permalink to this headline">¶</a></h3>
+<p>Packages containg PAM modules should use &#8220;pam_&#8221; prefix. This naming scheme
+is already used by many of the upstream maintainers.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>pam_ldap: PAM module for LDAP authentication</pre>
+</div>
+</div>
+<div class="section" id="pear-packages">
+<h3>Pear Packages<a class="headerlink" href="#pear-packages" title="Permalink to this headline">¶</a></h3>
+<p>Pear packages must have a prefix of &#8220;PEAR-&#8221; in their names.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>PEAR-Net_Socket: Network Socket Interface</pre>
+</div>
+</div>
+<div class="section" id="perl-modules">
+<h3>Perl Modules<a class="headerlink" href="#perl-modules" title="Permalink to this headline">¶</a></h3>
+<p>Perl packages must have a prefix of &#8220;perl-&#8221; in their names.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>perl-YAML: YAML module for Perl</pre>
+</div>
+</div>
+<div class="section" id="plasma-applets">
+<h3>Plasma Applets<a class="headerlink" href="#plasma-applets" title="Permalink to this headline">¶</a></h3>
+<p>For packages providing Plasma applets, &#8220;plasma-applet-&#8221; prefix must be used.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>plasma-applet-network: Network configuration plasmoid for Plasma</pre>
+</div>
+</div>
+<div class="section" id="python-modules">
+<h3>Python Modules<a class="headerlink" href="#python-modules" title="Permalink to this headline">¶</a></h3>
+<p>If the upstream name includes the word &#8220;python&#8221;, the package name is not
+changed.</p>
+<p>Examples:</p>
+<div class="highlight-python"><pre>dbus-python:            Python bindings for dbus
+gnome-python-desktop:   Python bindings for GNOME desktop libraries</pre>
+</div>
+<p>If the upstream name does not include the word &#8220;python&#8221; and the project is a
+binding of another library, the library name with the prefix &#8220;python-&#8221; is
+used as the package name. In this case, the upstream name must be included
+in the package summary and description.</p>
+<p>Examples:</p>
+<div class="highlight-python"><pre>python-gtk:     Python bindings for GTK (pygtk)
+python-qt:      Python bindings for Qt (PyQt)</pre>
+</div>
+<p>When the name does not comply with the rules above, &#8220;python-&#8221; prefix must be
+added to the upstream name.</p>
+<p>Examples:</p>
+<div class="highlight-python"><pre>python-numpy:       The fundamental package needed for scientific computing
+                    with Python
+python-FormEncode:  A validation and form generation package for Python
+python-pyaspects:   Aspect-Oriented development for Python</pre>
+</div>
+<p>For modules built for Python3, &#8220;python3&#8221; must be used instead of the word
+&#8220;python&#8221;.</p>
+<p>Examples:</p>
+<div class="highlight-python"><pre>dbus-python3:           Python3 bindings for dbus
+gnome-python3-desktop:  Python3 bindings for GNOME desktop libraries
+python3-liblzma:        Python3 bindings for liblzma (pyliblzma)</pre>
+</div>
+</div>
+<div class="section" id="r-modules">
+<h3>R Modules<a class="headerlink" href="#r-modules" title="Permalink to this headline">¶</a></h3>
+<p>R packages must have a prefix of &#8220;R-&#8221; in their names.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>R-mathlib: mathlib module for R</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/packaging/package_naming_guidelines.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:18 GMT -->
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/tracker_bug_process.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tracker Bug Process</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="Bug Tracking Guide" href="index.html" />
+    <link rel="next" title="New Feature Requests and Tracking" href="../newfeature/index.html" />
+    <link rel="prev" title="Bugzilla Stock Responses" href="stock_responses.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Bug Tracking Guide</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Tracker Bug Process</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Tracker Bug Process</a><ul>
+<li><a class="reference external" href="#open-tracker-bug-report">Open Tracker Bug Report</a></li>
+<li><a class="reference external" href="#proposing-tracker-bugs">Proposing Tracker Bugs</a></li>
+<li><a class="reference external" href="#reviewing-tracker-bugs">Reviewing Tracker Bugs</a></li>
+<li><a class="reference external" href="#tracking-tracker-bugs">Tracking Tracker Bugs</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <p id="tracker-bug-process"><strong>Last Modified Date:</strong> October 26, 2011</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Semen Cirit</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id1">
+<h1>Tracker Bug Process<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Tracker bugs are used to keep track of release blocker bugs. These bugs must be
+fixed before these related release is shipped.</p>
+<p>Each release requirements are used to determine whether a bug is a tracker bug
+for given release (see <a class="reference external" href="../releasing/official_releases/alpha_release.html#alpha-release-requirements">alpha</a>, <a class="reference external" href="../releasing/official_releases/beta_release.html#beta-release-requirements">beta</a>, <a class="reference external" href="../releasing/official_releases/final_release.html#final-release-requirements">final</a> requirements)</p>
+<p>This document includes how bugs are proposed, reviewed and accepted as tracker
+bugs, and how tracker bugs are then tracked.</p>
+<div class="section" id="open-tracker-bug-report">
+<h2>Open Tracker Bug Report<a class="headerlink" href="#open-tracker-bug-report" title="Permalink to this headline">¶</a></h2>
+<p>Tracker bug report shoul be opened by release manager at the start time of
+a new release.</p>
+<p>There are four blocker bugs for each release cycle. These reports should be
+opened for relevant release product baselayout component and they should be
+assigned to relevant release manager.</p>
+<p>After that these reports should be depend each other with that order:</p>
+<div class="highlight-python"><pre>-&gt; means depends
+Final -&gt; RC -&gt; Beta -&gt; Alpha</pre>
+</div>
+</div>
+<div class="section" id="proposing-tracker-bugs">
+<h2>Proposing Tracker Bugs<a class="headerlink" href="#proposing-tracker-bugs" title="Permalink to this headline">¶</a></h2>
+<p>If you think that the bug that you find is a tracker bug for a release, you
+should mark it as blocker to the related release. To do this: enter the bug ID
+of the tracker bug into the &#8220;Blocks:&#8221; field in Bugzilla.</p>
+<p>When proposing a bug as a tracker, please control whether the bug violates the
+relevant release requirements.</p>
+</div>
+<div class="section" id="reviewing-tracker-bugs">
+<h2>Reviewing Tracker Bugs<a class="headerlink" href="#reviewing-tracker-bugs" title="Permalink to this headline">¶</a></h2>
+<p>The tracker bugs are approved or rejected by the collaboration of three groups:
+<a class="reference external" href="../newcontributor/areas-to-contribute.html#test">Test</a>, <a class="reference external" href="../newcontributor/areas-to-contribute.html#development">Development</a>, Release Managing.</p>
+<p>The review process can be done on weekly meetings, generally occur on Monday
+during release. We plan to make also public weekly IRC meetings for tracker bug
+reviews. These reviews can also be done on &#8220;where are we&#8221; meetings in order to
+decide whether a test release for validation should be approved as an <a class="reference external" href="../releasing/official-releases/index.html">official
+release</a>.</p>
+<p>The Bug ID&#8217;s that are rejected as trackers will be removed from tracker bugs. If
+the bug not rejected but will be done for the next release it should be marked
+for next release.</p>
+<p>The accepted bugs as tracker will continue to block the tracker bug, and will be
+fixed before the release time.</p>
+</div>
+<div class="section" id="tracking-tracker-bugs">
+<h2>Tracking Tracker Bugs<a class="headerlink" href="#tracking-tracker-bugs" title="Permalink to this headline">¶</a></h2>
+<p>Tracking tracker bugs and controlling that they are fixed is again an collaborative
+affort between <a class="reference external" href="../newcontributor/areas-to-contribute.html#test">Test</a>, <a class="reference external" href="../newcontributor/areas-to-contribute.html#development">Development</a>, Release Managing.</p>
+<p>The fixing process is the general <a class="reference external" href="bug_cycle.html">bug cycle</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/bugtracking/tracker_bug_process.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>

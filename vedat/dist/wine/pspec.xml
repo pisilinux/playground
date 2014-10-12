@@ -13,10 +13,10 @@
         <IsA>app:console</IsA>
         <Summary>WINE Is Not An Emulator, which lets you run Microsoft Windows applications</Summary>
         <Description>Wine allows running Windows 3.*, Windows 95/98 and Windows NT programs on a i386 (or compatible) machine running X11. It is still alpha level code; don't expect everything to work.</Description>
-        <Archive sha1sum="761a3f911947877cd20239519092b0ee0433bb35" type="tarbz2">mirrors://sourceforge/wine/wine-1.7.22.tar.bz2</Archive>
-        <Archive sha1sum="73d6b8aa7a8921f43b22c6d930e8d7e421058187" type="binary" target="wine-1.7.22">mirrors://sourceforge/wine/Wine%20Mono/4.5.2/wine-mono-4.5.2.msi</Archive>
-        <Archive sha1sum="b4923c0565e6cbd20075a0d4119ce3b48424f962" type="binary" target="wine-1.7.22">mirrors://sourceforge/wine/Wine%20Gecko/2.24/wine_gecko-2.24-x86.msi</Archive>
-        <Archive sha1sum="da65fb99a53d87c831030ec8787e31d797f60e60" type="binary" target="wine-1.7.22">mirrors://sourceforge/wine/Wine%20Gecko/2.24/wine_gecko-2.24-x86_64.msi</Archive>
+        <Archive sha1sum="d217e4dbac4d69dda9a9cccaa3ed92366d958d23" type="tarbz2">mirrors://sourceforge/wine/wine-1.7.28.tar.bz2</Archive>
+        <Archive sha1sum="73d6b8aa7a8921f43b22c6d930e8d7e421058187" type="binary" target="wine-1.7.28">mirrors://sourceforge/wine/Wine%20Mono/4.5.2/wine-mono-4.5.2.msi</Archive>
+        <Archive sha1sum="b4923c0565e6cbd20075a0d4119ce3b48424f962" type="binary" target="wine-1.7.28">mirrors://sourceforge/wine/Wine%20Gecko/2.24/wine_gecko-2.24-x86.msi</Archive>
+        <Archive sha1sum="da65fb99a53d87c831030ec8787e31d797f60e60" type="binary" target="wine-1.7.28">mirrors://sourceforge/wine/Wine%20Gecko/2.24/wine_gecko-2.24-x86_64.msi</Archive>
         <BuildDependencies>
             <Dependency>lcms2-devel</Dependency>
             <Dependency>libSM-devel</Dependency>
@@ -57,11 +57,11 @@
 
             <!-- fontforge is needed to build fonts -->
             <Dependency>fontforge</Dependency>
+            <Dependency>libpcap-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- fedora patches -->
             <Patch level="1">fedora/wine-cjk.patch</Patch>
-            <Patch level="1">find-ncurses.patch</Patch>
             <!-- Use XDG_DOCUMENTS_DIR for "My Documents" -->
             <Patch level="1">documents-path.patch</Patch>
             <Patch level="1">application-pdf.patch</Patch>
@@ -104,6 +104,7 @@
 
             <!-- required by winetricks -->
             <Dependency>cabextract</Dependency>
+            <Dependency>libpcap</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/etc/xdg</Path>
@@ -261,6 +262,34 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2014-10-03</Date>
+            <Version>1.7.28</Version>
+            <Comment>Version bump</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="10">
+            <Date>2014-09-19</Date>
+            <Version>1.7.27</Version>
+            <Comment>Version bump</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2014-08-18</Date>
+            <Version>1.7.24</Version>
+            <Comment>Version bump</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2014-07-25</Date>
+            <Version>1.7.23</Version>
+            <Comment>Version bump</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
         <Update release="7">
             <Date>2014-07-15</Date>
             <Version>1.7.22</Version>

@@ -5,8 +5,8 @@
         <Name>kernel</Name>
         <Homepage>http://www.kernel.org</Homepage>
         <Packager>
-            <Name>Anka-Team Kernel-Squad</Name>
-            <Email>admins@pisilinux.org</Email>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
         <IsA>kernel</IsA>
@@ -33,7 +33,7 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-3.16.2.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-3.16.4.xz</Patch>
 
             <!-- Maegia Linux patches -->
 
@@ -158,10 +158,14 @@
             <Patch level="1">patches/maegia/3rd-viahss-3.0-buildfix.patch</Patch>
 
             <Patch level="1">patches/maegia/smack-unionfs-deadlock-fix.patch</Patch>
+            <Patch level="1">patches/maegia/tools-perf-define_DEFAULT_SOURCE.patch</Patch>
 
             <!-- Archlinux Patches-->
             <Patch level="1">patches/archlinux/change-default-console-loglevel.patch</Patch>
-            <Patch level="1">patches/archlinux/compal-laptop-hwmon-fix.patch</Patch>
+            <Patch level="1">patches/cve-2014-3186.patch</Patch>
+            <Patch level="1">patches/cve-2014-3181.patch</Patch>
+            <Patch level="1">patches/cve-2014-6410.patch</Patch>
+
         </Patches>
     </Source>
 
@@ -249,16 +253,27 @@
     </Package>
 
     <History>
-        <Update release="39">
-            <Date>2014-09-07</Date>
-            <Version>3.16.2</Version>
-            <Comment>Version bump to 3.16.2 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.16.2</Comment>
+        <Update release="40">
+            <Date>2014-10-19</Date>
+            <Version>3.16.4</Version>
+            <Comment>Version bump to 3.16.3 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.16.3</Comment>
             <Type package="kernel">security</Type>
             <Requires>
                 <Action package="kernel">systemRestart</Action>
             </Requires>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="39">
+            <Date>2014-09-19</Date>
+            <Version>3.16.3</Version>
+            <Comment>Version bump to 3.16.3 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.16.3</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
         </Update>
         <Update release="38">
             <Date>2014-09-03</Date>

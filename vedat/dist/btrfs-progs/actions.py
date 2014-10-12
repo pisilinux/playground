@@ -11,14 +11,14 @@ from pisi.actionsapi import shelltools
 
 def build():
   
-    shelltools.cd("%s/" % get.workDIR())
-    pisitools.dosym("./Makefile", "Makefile")
+    #shelltools.cd("%s/" % get.workDIR())
+    #pisitools.dosym("./Makefile", "Makefile")
     autotools.make("V=1 CC=%s CFLAGS=\"%s\"" % (get.CC(), get.CFLAGS()))
     autotools.make("V=1 CC=%s CFLAGS=\"%s\" btrfs-select-super" % (get.CC(), get.CFLAGS()))
 
 def install():
   
-    shelltools.cd("%s/" % get.workDIR())
+    #shelltools.cd("%s/" % get.workDIR())
     autotools.rawInstall("prefix=/usr DESTDIR=%s" % get.installDIR())
     pisitools.remove("/usr/lib/*.a")
 

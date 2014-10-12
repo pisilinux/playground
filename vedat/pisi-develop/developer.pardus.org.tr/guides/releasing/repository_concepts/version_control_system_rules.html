@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/repository_concepts/version_control_system_rules.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Rules for a correct version control system usage</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../../index.html" />
+    <link rel="up" title="Repository Concepts" href="index.html" />
+    <link rel="next" title="Bootstrapping" href="../bootstrapping.html" />
+    <link rel="prev" title="Subversion Usage" href="subversion_usage.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../../index.html" accesskey="U">Guides</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Releasing</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">Repository Concepts</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Rules for a correct version control system usage</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Rules for a correct version control system usage</a><ul>
+<li><a class="reference external" href="#always-work-with-an-up-to-date-local-copy">Always work with an up-to-date local copy</a></li>
+<li><a class="reference external" href="#think-before-you-commit">Think before you commit</a></li>
+<li><a class="reference external" href="#write-descriptive-commit-log-messages">Write descriptive commit log messages</a></li>
+<li><a class="reference external" href="#abide-by-the-work-plans">Abide by the work plans</a></li>
+<li><a class="reference external" href="#changes-affecting-other-components">Changes affecting other components</a></li>
+<li><a class="reference external" href="#take-responsibility-for-the-changes-you-made">Take responsibility for the changes you made</a></li>
+<li><a class="reference external" href="#respect-the-generally-accepted-principles">Respect the generally accepted principles</a></li>
+<li><a class="reference external" href="#enter-the-bug-number-when-solving-a-bug-from-the-bug-tracking-system">Enter the bug number when solving a bug from the bug tracking system</a></li>
+<li><a class="reference external" href="#update-the-files-for-which-you-are-responsible">Update the files for which you are responsible</a></li>
+<li><a class="reference external" href="#do-not-add-the-automatically-created-files-to-the-repository">Do not add the automatically created files to the repository</a></li>
+<li><a class="reference external" href="#perform-atomic-updates">Perform atomic updates</a></li>
+<li><a class="reference external" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="rules-for-a-correct-version-control-system-usage">
+<span id="version-control-system-rules"></span><h1>Rules for a correct version control system usage<a class="headerlink" href="#rules-for-a-correct-version-control-system-usage" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Ozan Çağlayan, Semen Cirit, Çağlar Kilimci</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">October 26, 2011</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>Subversion repository is a common place shared by all developers. In order to
+work together developers should be using the repository efficiently, properly
+and in an organized way. Git repository also is a public place for sharing. Git
+will use only for software development in Pardus for now.</p>
+<p>Rules for using version control systems have to be respected by the developers
+having the privilege to write to Pardus repositories.</p>
+<div class="section" id="always-work-with-an-up-to-date-local-copy">
+<h2>Always work with an up-to-date local copy<a class="headerlink" href="#always-work-with-an-up-to-date-local-copy" title="Permalink to this headline">¶</a></h2>
+<p>The updates on the repositories will be more frequent as the quantity of the
+developers increase. In order to know about the rest of the process and to
+avoid a conflict between what you do and the rest to be done, before you begin
+to work, always update your repository by means of <em>svn update</em> or <em>git pull</em>
+command.</p>
+</div>
+<div class="section" id="think-before-you-commit">
+<h2>Think before you commit<a class="headerlink" href="#think-before-you-commit" title="Permalink to this headline">¶</a></h2>
+<p>Think twice before you commit the modifications you made, to the repositories.
+The data you commit to the repository will reach to all developers and affect
+their work. In this sense, its of great importance to follow the articles
+below:</p>
+<ol class="arabic simple">
+<li>Do not commit a non-running code to the repository,</li>
+<li>Always update your repository before you commit by means of <em>svn update</em> or
+<em>git pull</em> in order to get the last changes. Be sure that the changes you made
+do not conflict with the others,</li>
+<li>Pay attention to what you commit. To make sure of this, always control the
+changes you are about to commit by means of svn/git diff command before
+commitment,</li>
+<li>Always test the changes you made. Even better, test them twice.</li>
+</ol>
+</div>
+<div class="section" id="write-descriptive-commit-log-messages">
+<h2>Write descriptive commit log messages<a class="headerlink" href="#write-descriptive-commit-log-messages" title="Permalink to this headline">¶</a></h2>
+<p>Explanation messages used in the commit logs should focus on the modification
+and be as descriptive as possible. As much as you can, try to add explanation
+messages related with only the files you made changes on. However, in the
+limits of the context, you can include all the information which can not be
+derived from the output of a <em>svn diff</em> or <em>git diff</em> command in your
+explanation message.</p>
+<p>Refraining from adding a proper explanation message will make it difficult to
+understand the changes you made.</p>
+</div>
+<div class="section" id="abide-by-the-work-plans">
+<h2>Abide by the work plans<a class="headerlink" href="#abide-by-the-work-plans" title="Permalink to this headline">¶</a></h2>
+<p>If a work/time plan exists for the distribution in general or if the main
+developer of the component you are working on sets such a plan, abide by this
+plan regarding your commitments.</p>
+<p>For example, an application developer might want to stop adding new features
+to the application at a particular time and might want to work on fixing the
+known issues. Its expected that the change you make is coherent with this rule.</p>
+<p>If you are not sure of the coherency of the change you made with the plan, you
+have to refer the <a class="reference external" href="../../communication/mailing_lists.html">related e-mail lists</a> or the main developer.</p>
+</div>
+<div class="section" id="changes-affecting-other-components">
+<h2>Changes affecting other components<a class="headerlink" href="#changes-affecting-other-components" title="Permalink to this headline">¶</a></h2>
+<p>If you made a change affecting more than one component, inform all developers
+about the change. In order to ensure all developers know about the major update
+you made, always send an informative message to the <a class="reference external" href="../../communication/mailing_lists.html">related e-mail lists</a>.</p>
+</div>
+<div class="section" id="take-responsibility-for-the-changes-you-made">
+<h2>Take responsibility for the changes you made<a class="headerlink" href="#take-responsibility-for-the-changes-you-made" title="Permalink to this headline">¶</a></h2>
+<p>If the update you made is creating a problem, take the responsibility of it
+and make sure to solve it yourself or by getting help.</p>
+</div>
+<div class="section" id="respect-the-generally-accepted-principles">
+<h2>Respect the generally accepted principles<a class="headerlink" href="#respect-the-generally-accepted-principles" title="Permalink to this headline">¶</a></h2>
+<p>Obey the general rules accepted during developers&#8217; discussions and be sure
+that your changes are not violating those rules.</p>
+</div>
+<div class="section" id="enter-the-bug-number-when-solving-a-bug-from-the-bug-tracking-system">
+<h2>Enter the bug number when solving a bug from the bug tracking system<a class="headerlink" href="#enter-the-bug-number-when-solving-a-bug-from-the-bug-tracking-system" title="Permalink to this headline">¶</a></h2>
+<p>This part now is only for for svn, it will be developed for git:</p>
+<p>If the update you make is solving a reported bug, in order to synchronize the
+bug tracking system with the updates in the repository, notify the bug you
+solved.</p>
+<p>If the commit message includes the below information your changes on the
+source code and your message will be added as a comment to the bug report:</p>
+<div class="highlight-python"><pre>BUG:COMMENT:&lt;Bug ID&gt;</pre>
+</div>
+<p>If the svn/git commit message includes the below information your changes on
+the source code, your message will be added as a comment to the bug report and
+the bug status changed as RESOLVED/FIXED:</p>
+<div class="highlight-python"><pre>BUG:FIXED:&lt;Bug ID&gt;</pre>
+</div>
+</div>
+<div class="section" id="update-the-files-for-which-you-are-responsible">
+<h2>Update the files for which you are responsible<a class="headerlink" href="#update-the-files-for-which-you-are-responsible" title="Permalink to this headline">¶</a></h2>
+<p>Update only the files which are in your responsibility. If you find a bug in
+files which is in another developer&#8217;s responsibility, first, discuss the
+situation either by directly contacting the responsible developer or by asking
+the other developers in <a class="reference external" href="../../communication/mailing_lists.html">related e-mail lists</a> and only after doing so make an attemp to
+update the repository. If the responsible developer does not accept the changes
+you made, behave respectfully.</p>
+</div>
+<div class="section" id="do-not-add-the-automatically-created-files-to-the-repository">
+<h2>Do not add the automatically created files to the repository<a class="headerlink" href="#do-not-add-the-automatically-created-files-to-the-repository" title="Permalink to this headline">¶</a></h2>
+<p>Do not add the files such as Makefile, Makefile.in, configure scripts, etc.
+which are created afterwards by compilation tools. These files will be
+recreated in different forms in all developers&#8217; machines and will be perceived
+as an update by the other develepors. In general, adding these files to the
+repository is perceived as a bug.</p>
+</div>
+<div class="section" id="perform-atomic-updates">
+<h2>Perform atomic updates<a class="headerlink" href="#perform-atomic-updates" title="Permalink to this headline">¶</a></h2>
+<p>Commit all the modifications related to a particular improvement/update at
+once. Subversion and git lets you commit more than one file at a time. Other
+developers might be confused because of seperate commits and they can miss the
+improvements you made.</p>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://who-t.blogspot.com/2009/12/on-commit-messages.html">Commit Messages</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/guides/releasing/repository_concepts/version_control_system_rules.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:31:56 GMT -->
+</html>

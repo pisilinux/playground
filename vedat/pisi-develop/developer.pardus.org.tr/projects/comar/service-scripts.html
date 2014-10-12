@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from developer.pardus.org.tr/projects/comar/service-scripts.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Service Scripts</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2009',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Pardus v2009 documentation" href="../../index.html" />
+    <link rel="up" title="COMAR (Configuration Manager)" href="index.html" />
+    <link rel="next" title="PISI (Package Management)" href="../pisi/index.html" />
+    <link rel="prev" title="COMAR (Configuration Manager)" href="index.html" /> 
+  </head>
+  <body>
+    <div id="banner">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+          <li> &raquo;&nbsp;<a href="../index.html" accesskey="U">Projects</a></li>
+          <li> &raquo;&nbsp;<a href="index.html" accesskey="U">COMAR (Configuration Manager)</a></li>
+         <li> &raquo;&nbsp;<a href="#" accesskey="U">Service Scripts</a></li> 
+      </ul>
+    </div>
+        <div id="searchbar">
+                    <form class="search" action="http://developer.pardus.org.tr/search.html" method="get">
+                      <input type="text" name="q" size="18" value="Search" onclick="this.value='';" /> <input type="submit" value="Go" />
+                      <input type="hidden" name="check_keywords" value="yes" />
+                      <input type="hidden" name="area" value="default" />
+                    </form>
+          </div>
+      </div>
+    <div id="content">
+        <div class="bodywrapper">
+          
+            <b>Table of Contents</b>
+            <ul>
+<li><a class="reference external" href="#">Service Scripts</a><ul>
+<li><a class="reference external" href="#servicetype">serviceType</a></li>
+<li><a class="reference external" href="#servicedesc">serviceDesc</a></li>
+<li><a class="reference external" href="#synchronized-decorator">&#64;synchronized Decorator</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#service-api">Service API</a><ul>
+<li><a class="reference external" href="#startservice">startService()</a></li>
+<li><a class="reference external" href="#stopservice">stopService()</a></li>
+</ul>
+</li>
+</ul>
+
+          <div class="body">
+              
+  
+  <div class="section" id="service-scripts">
+<h1>Service Scripts<a class="headerlink" href="#service-scripts" title="Permalink to this headline">¶</a></h1>
+<p>Service scripts are Python scripts used by <tt class="docutils literal"><span class="pre">COMAR</span></tt> to manage system services and comes with <tt class="docutils literal"><span class="pre">PiSi</span></tt> packages. Any System.Service call made to <tt class="docutils literal"><span class="pre">COMAR</span></tt> (start, stop, info, ...) will be handled by service scripts.
+Service script, is a Python file like below. There are three methods. Two for starting and stopping service, one for giving status of service. Implementation of these three scripts is up to package maintainer. However, COMAR API package provides Service API, which contains useful methods for writing service scripts:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">serviceType</span> <span class="o">=</span> <span class="s">&quot;server&quot;</span>
+<span class="n">serviceDesc</span> <span class="o">=</span> <span class="n">_</span><span class="p">({</span><span class="s">&quot;en&quot;</span><span class="p">:</span> <span class="s">&quot;Server&quot;</span><span class="p">,</span>
+                 <span class="s">&quot;tr&quot;</span><span class="p">:</span> <span class="s">&quot;Sunucu&quot;</span><span class="p">})</span>
+
+<span class="kn">from</span> <span class="nn">comar.service</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@synchronized</span>
+<span class="k">def</span> <span class="nf">start</span><span class="p">():</span>
+    <span class="n">startService</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="s">&quot;/usr/bin/myserver&quot;</span><span class="p">,</span>
+                 <span class="n">args</span><span class="o">=</span><span class="s">&quot;start&quot;</span><span class="p">,</span>
+                 <span class="n">pidfile</span><span class="o">=</span><span class="s">&quot;/var/run/sunucu.pid&quot;</span><span class="p">,</span>
+                 <span class="n">donotify</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="nd">@synchronized</span>
+<span class="k">def</span> <span class="nf">stop</span><span class="p">():</span>
+    <span class="n">stopService</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="s">&quot;/usr/bin/myserver&quot;</span><span class="p">,</span>
+                <span class="n">args</span><span class="o">=</span><span class="s">&quot;stop&quot;</span><span class="p">,</span>
+                <span class="n">donotify</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">status</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">isServiceRunning</span><span class="p">(</span><span class="s">&quot;/var/run/myserver.pid&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="servicetype">
+<h2>serviceType<a class="headerlink" href="#servicetype" title="Permalink to this headline">¶</a></h2>
+<p>Possible values:</p>
+<div class="highlight-python"><pre>local   : Local services
+server  : Servers
+script  : Scripts</pre>
+</div>
+<p>This value is used to group services only.</p>
+</div>
+<div class="section" id="servicedesc">
+<h2>serviceDesc<a class="headerlink" href="#servicedesc" title="Permalink to this headline">¶</a></h2>
+<p>A service description may include some language options:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">serviceDesc</span> <span class="o">=</span> <span class="n">_</span><span class="p">({</span><span class="s">&quot;en&quot;</span><span class="p">:</span> <span class="s">&quot;My Server&quot;</span><span class="p">,</span>
+                 <span class="s">&quot;tr&quot;</span><span class="p">:</span> <span class="s">&quot;Sunucum&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>This value is used by System.Service GUIs. <tt class="docutils literal"><span class="pre">_()</span></tt> is used for localization.</p>
+</div>
+<div class="section" id="synchronized-decorator">
+<h2>&#64;synchronized Decorator<a class="headerlink" href="#synchronized-decorator" title="Permalink to this headline">¶</a></h2>
+<p>In boot sequence, service scripts can start other services. To prevent any race condition, <tt class="docutils literal"><span class="pre">&#64;synchronized</span></tt> decorator should be used.</p>
+</div>
+</div>
+<div class="section" id="service-api">
+<h1>Service API<a class="headerlink" href="#service-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="startservice">
+<h2>startService()<a class="headerlink" href="#startservice" title="Permalink to this headline">¶</a></h2>
+<p>Arguments:</p>
+<div class="highlight-python"><pre>command  : Application to execute [str]
+args     : Arguments (optional) [str]
+pidfile  : PID file for application. (optional) [str]
+           (Application won't be started if it's already running.)
+makepid  : If application doesn't create any PID file, API creates one. Generally used with ''detach'' argument (optional) [True/False]
+nice     : Niceness of process (optional) [int]
+chuid    : Owner of the process. Format: user:group (optional) [str:str]
+detach   : Fork process (optional) [True/False]
+donotify : Emit a System.Service.changed signal and notify all GUIs (optional) [True/False]
+           (This should be used. It's optional because some service scripts start more than one process.)</pre>
+</div>
+</div>
+<div class="section" id="stopservice">
+<h2>stopService()<a class="headerlink" href="#stopservice" title="Permalink to this headline">¶</a></h2>
+<p>Arguments:</p>
+<div class="highlight-python"><pre>pidfile  : PID file of the running process (optional) [str]
+command  : Application to stop (optional) [str]
+           (Scans /proc and kills all running applications having that /path/to/name)
+args     : Arguments (To stop application by calling it with an argument) (optional) [str]
+           (/proc won't be scanned, &lt;command args&gt; will be executed)
+chuid    : Owner of the process. Format: user:group (optional) [str:str]
+user     : Username associated with process. (optional) [str]
+signalno : Signal to be sent to running process (optional) [int]
+donotify : Emit a System.Service.changed signal and notify all GUIs (optional) [True/False]
+           (This should be used. It's optional because some service scripts stop more than one process.)</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        Pardus® and Pardus® logo are registered trademarks of TÜBİTAK/UEKAE. 
+        <!--&copy; Copyright 2008-2010, Pardus Developers.-->
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+
+<!-- Mirrored from developer.pardus.org.tr/projects/comar/service-scripts.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Oct 2014 13:30:21 GMT -->
+</html>
