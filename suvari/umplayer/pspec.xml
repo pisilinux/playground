@@ -13,7 +13,7 @@
         <IsA>app:gui</IsA>
         <Summary>An advanced mplayer frontend</Summary>
         <Description>Umplayer is Qt application which intends to be a complete front-end for MPlayer, from basic features like playing videos, DVDs, and VCDs to more advanced features like support for MPlayer filters and more.</Description>
-        <Archive sha1sum="fe352990c5dd0ddddcb04078711280a004136f0d" type="targz">http://source.pisilinux.org/erdinc/umplayer-0.6.8.tar.gz</Archive>
+        <Archive sha1sum="08e5e5e0b4a95c2352d38da63989128ed4925e72" type="tarbz2">mirrors://sourceforge/smplayer/UMPlayer/0.98.2/umplayer-0.98.2-by-the-smplayer-team.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>qt-devel</Dependency>
         </BuildDependencies>
@@ -29,7 +29,7 @@
 
             <!-- Fix crash when tvlist is empty (#15296) -->
             <Patch level="1">fix-tvlist-shortcut-crash.patch</Patch>
-            <Patch level="1">disable-facebook-popup.patch</Patch>
+<!--             <Patch level="1">disable-facebook-popup.patch</Patch> -->
             <Patch level="1">default-skin.patch</Patch>
             <!--<Patch level="1">tr.diff</Patch>-->
         </Patches>
@@ -42,13 +42,13 @@
             <Dependency>mplayer</Dependency>
         </RuntimeDependencies>
         <Files>
-	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="localedata">/usr/share/umplayer/translations</Path>
             <Path fileType="data">/usr/share/umplayer</Path>
             <Path fileType="data">/usr/share/applications</Path>
-	    <Path fileType="data">/usr/share/kde4</Path>
+            <Path fileType="data">/usr/share/kde4</Path>
             <Path fileType="data">/usr/share/icons</Path>
-	    <Path fileType="man">/usr/share/man</Path>-->
+            <Path fileType="man">/usr/share/man</Path>-->
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
         <AdditionalFiles>
@@ -58,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2014-10-12</Date>
+            <Version>0.98.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2014-02-17</Date>
             <Version>0.6.8</Version>
