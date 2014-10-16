@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" ?> 
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dosbox</Name> 
+        <Homepage>http://www.dosbox.com</Homepage> 
+        <Packager>
+	    <Name>Ekin Dursun</Name>
+            <Email>ekindursun@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License> 
+        <IsA>app:gui</IsA> 
+        <Summary>An x86 emulator with DOS</Summary>
+        <Description>DOSBox is an x86 emulator with DOS.</Description>
+        <Archive sha1sum="2d99f0013350efb29b769ff19ddc8e4d86f4e77e" type="targz">http://sourceforge.net/projects/dosbox/files/dosbox/0.74/dosbox-0.74.tar.gz</Archive>
+	<BuildDependencies>
+	    <Dependency>libsdl-devel</Dependency>
+	    <Dependency>alsa-lib-devel</Dependency>
+	    <Dependency>sdl-sound-devel</Dependency>
+	    <Dependency>sdl-net-devel</Dependency>
+	</BuildDependencies>
+    </Source>
+    <Package>
+        <Name>dosbox</Name>
+        <RuntimeDependencies>
+	    <Dependency>libsdl</Dependency>
+	    <Dependency>sdl-net</Dependency>
+	    <Dependency>sdl-sound-devel</Dependency>
+	    <Dependency>alsa-lib</Dependency>
+	</RuntimeDependencies>
+	<Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="man">/usr/share/man</Path>
+	</Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-10-16</Date>
+            <Version>0.74</Version>
+            <Comment>First release.</Comment>
+	    <Name>Ekin Dursun</Name>
+            <Email>ekindursun@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
