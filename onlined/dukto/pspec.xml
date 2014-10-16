@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" ?> 
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dukto</Name> 
+        <Homepage>http://msec.it/dukto</Homepage> 
+        <Packager>
+	    <Name>Ekin Dursun</Name>
+            <Email>ekindursun@gmail.com</Email>
+        </Packager>
+        <License>GPL</License> 
+        <IsA>app:gui</IsA> 
+        <Summary>Easy and multi-platform file transfer tool</Summary>
+        <Description>Dukto is a file transfer tool which you can transfer files over LAN with.</Description>
+        <Archive sha1sum="064c71da0560152d4c10e0c9425f71bb4371f62a" type="binary">http://download.opensuse.org/repositories/home:/colomboem/openSUSE_Factory/x86_64/dukto-6.0-13.8.x86_64.rpm</Archive>
+        <BuildDependencies>
+            <Dependency>rpm2targz</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>dukto</Name>
+        <RuntimeDependencies>
+	  <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="data">/usr/share/pixmaps/</Path>
+            <Path fileType="data">/usr/share/applications/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-10-08</Date>
+            <Version>6.0.13.8</Version>
+            <Comment>First release.</Comment>
+	    <Name>Ekin Dursun</Name>
+            <Email>ekindursun@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

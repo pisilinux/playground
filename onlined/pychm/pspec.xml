@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" ?> 
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pychm</Name> 
+        <Homepage>https://github.com/dottedmag/pychm</Homepage> 
+        <Packager>
+	    <Name>Ekin Dursun</Name>
+            <Email>ekindursun@gmail.com</Email>
+        </Packager>
+        <License>GPL</License> 
+        <IsA>library</IsA> 
+        <Summary>Python bindings for CHMLIB</Summary>
+        <Description>PyCHM is a Python library to manipulate CHM files (Microsoft HTML Help).</Description>
+        <Archive sha1sum="eaf655835ac3a58aad424a382f40f527c9624434" type="targz">https://github.com/dottedmag/pychm/archive/v0.8.4.1.tar.gz</Archive>
+	<BuildDependencies>
+	    <Dependency>chmlib-devel</Dependency>
+	</BuildDependencies>
+    </Source>
+    <Package>
+        <Name>pychm</Name>
+        <RuntimeDependencies>
+	    <Dependency>chmlib</Dependency>
+	</RuntimeDependencies>
+	<Files>
+	    <Path fileType="library">/usr/lib/python2.7/site-packages</Path>
+	    <Path fileType="doc">/usr/share/doc</Path>
+	</Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-10-16</Date>
+            <Version>0.8.4.1</Version>
+            <Comment>First release.</Comment>
+	    <Name>Ekin Dursun</Name>
+            <Email>ekindursun@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" ?> 
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>chm2pdf</Name> 
+        <Homepage>https://code.google.com/p/chm2pdf/</Homepage> 
+        <Packager>
+	    <Name>Ekin Dursun</Name>
+            <Email>ekindursun@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License> 
+        <IsA>app:console</IsA> 
+        <Summary>A script that converts CHM files into PDF files</Summary>
+        <Description>A Python script that converts a CHM file into a single PDF file.</Description>
+        <Archive sha1sum="92c3dc39aaa3d5452cc9d37d1d34385e8698888b" type="targz">http://chm2pdf.googlecode.com/files/chm2pdf-0.9.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>chm2pdf</Name>
+        <RuntimeDependencies>
+	    <Dependency>pychm</Dependency>
+	    <Dependency>htmldoc</Dependency>
+	</RuntimeDependencies>
+	<Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="doc">/usr/share/doc</Path>
+	</Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-10-16</Date>
+            <Version>0.9.1</Version>
+            <Comment>First release.</Comment>
+	    <Name>Ekin Dursun</Name>
+            <Email>ekindursun@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
