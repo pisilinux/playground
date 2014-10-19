@@ -306,9 +306,4 @@ def install():
     pisitools.remove("/usr/share/texmf-dist/ttf2pk/ttf2pk.cfg") 
     pisitools.remove("/usr/share/texmf-dist/xindy/modules/base/latin-lettergroups.xdy") 
     pisitools.remove("/usr/share/texmf-dist/scripts/arara/arara.sh")
-    pisitools.remove("/usr/share/texmf-dist/doc/man")
-    pisitools.remove("/usr/share/tlpkg/tlpobj")
-    pisitools.remove("/usr/share/texmf-dist/tex/plain/config/omega.ini")
-    pisitools.remove("/usr/share/texmf-dist/tex/plain/config/aleph.ini")
-    pisitools.remove("/usr/share/texmf-dist/web2c/updmap.cfg")
-    pisitools.remove("/usr/share/texmf-dist/scripts/context/stubs/mswin/")
+    
