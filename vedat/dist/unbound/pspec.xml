@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>unbound</Name>
+        <Homepage>http://unbound.net/</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary>Unbound is a validating, recursive, and caching DNS resolver. </Summary>
+        <Description>Unbound is designed as a set of modular components, so that also DNSSEC (secure DNS) validation and stub-resolvers (that do not run as a server, but are linked into an application) are easily possible. </Description>
+        <Archive sha1sum="a56e31e2f3a2fefa3caaad9200dd943d174ca81e" type="targz">http://unbound.net/downloads/unbound-1.4.22.tar.gz</Archive>
+        
+        <BuildDependencies>
+            <Dependency>libevent-devel</Dependency>
+        </BuildDependencies>
+        -->
+        <!--
+            <Dependency>Dep2-devel</Dependency>
+            <Dependency>Dep3-devel</Dependency>
+            <Dependency versionFrom="">Dep4-devel</Dependency>
+        <Patches>
+            <Patch>unbound.patch</Patch>
+            <Patch level="1">unbound.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>unbound</Name>
+        <!--
+        <RuntimeDependencies>
+            <Dependency>Dep1</Dependency>
+            <Dependency>Dep2</Dependency>
+            <Dependency>Dep3</Dependency>
+            <Dependency versionFrom="">Dep4</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+        
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/unbound/unbound.conf">conf</AdditionalFile>
+        </AdditionalFiles>
+        -->
+        <!--<AdditionalFile owner="root" permission="0644" target="/usr/share/applications/unbound.desktop">unbound.desktop</AdditionalFile>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+        -->
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-10-20</Date>
+            <Version>1.4.22</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pcf-unifont</Name>
+        <Homepage>http://unifoundry.com/unifont.html</Homepage>
+        <Packager>
+            <Name>Sezai Yeniay</Name>
+            <Email>sezaiyeniay@pisilinux.org</Email>
+        </Packager>
+        <License>GPL</License>
+        <License>custom</License>
+        <IsA>data:font</IsA>
+        <Summary>GNU Unifont Glyphs</Summary>
+        <Description>GNU Unifont Glyphs.</Description>
+        <Archive sha1sum="1182c40d580a973746f3d95e2b0917100d9cc4e6" type="gz">http://unifoundry.com/pub/unifont-7.0.03/font-builds/unifont-7.0.03.pcf.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>pcf-unifont</Name>
+        <Files>
+            <Path fileType="data">/usr/share/fonts/unifont</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2014-10-13</Date>
+            <Version>7.0.03</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2014-03-09</Date>
+            <Version>5.1.20080820</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-05-22</Date>
+            <Version>5.1.20080820</Version>
+            <Comment>First release.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
