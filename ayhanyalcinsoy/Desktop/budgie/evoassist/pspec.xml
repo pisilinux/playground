@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "https://evolve-os.com/standard/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>evoassist</Name>
+        <Homepage>https://evolve-os.com</Homepage>
+        <Packager>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Packager>
+        <Summary>Evo Assist Tool</Summary>
+        <Description>Early Testing of Evo Assist Tool</Description>
+        <License>GPLv2+</License>
+        <Archive sha1sum="1ac23c8d03bcbe9b792877d18a3a422afad516b7" type="zip">https://github.com/evolve-os/evoassist/archive/v1.zip</Archive>
+
+        <Patches>
+            <Patch level="1">fix.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>evoassist</Name>
+        <Files>
+            <Path fileType="*">/</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency>gnome-app-templates</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>python-gobject</Dependency>
+        </RuntimeDependencies>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" target="/usr/bin/evo-assist-ui-wrap" permission="0755">evoassist-ui-wrap.sh</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-10-21</Date>
+            <Version>1</Version>
+            <Comment>Add  evoassist to repositories</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+ 

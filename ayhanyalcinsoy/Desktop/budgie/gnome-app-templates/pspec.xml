@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "https://evolve-os.com/standard/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gnome-app-templates</Name>
+        <Homepage>https://evolve-os.com</Homepage>
+        <Packager>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Packager>
+        <Summary>GNOME Application Templates</Summary>
+        <Description>GNOME Application Templates, work of Ikey Doherty, unofficial.</Description>
+        <License>LGPLv2.1+</License>
+        <Archive sha1sum="b8a5a745992fc3f1654973b4d07ee9528dea58a2" type="tarxz">https://evolve-os.com/sources/gnome-app-templates-1.tar.xz</Archive>
+
+        <BuildDependencies>
+            <Dependency>gjs-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gnome-app-templates</Name>
+        <Files>
+            <Path fileType="library">/usr/lib/lib*.so.*</Path>
+            <Path fileType="library">/usr/lib/girepository-1.0</Path>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>gnome-app-templates-devel</Name>
+        <Summary>Development files for gnome-app-templates</Summary>
+        <Description>Development files for gnome-app-templates</Description>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/lib*.so</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">gnome-app-templates</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <Package>
+        <Name>gnome-app-templates-demos</Name>
+        <Summary>Demos for gnome-app-templates</Summary>
+        <Description>Demos for gnome-app-templates</Description>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">gnome-app-templates</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>08-24-2014</Date>
+            <Version>1</Version>
+            <Comment>Add gnome-app-templates to repositories</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+ 
