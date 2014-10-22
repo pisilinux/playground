@@ -1,0 +1,13 @@
+--- glib-2.0.vapi	2014-03-03 16:52:04.000000000 +0200
++++ vapi/glib-2.0.vapi	2014-10-21 15:59:34.555117545 +0300
+@@ -1171,6 +1171,10 @@
+ 	public int ascii_casecmp (string s2);
+ 	[CCode (cname = "g_ascii_strncasecmp")]
+ 	public int ascii_ncasecmp (string s2, size_t n);
++	[CCode (cname = "g_ascii_strup")]
++	public string ascii_up (ssize_t len = -1);
++	[CCode (cname = "g_ascii_strdown")]
++	public string ascii_down (ssize_t len = -1);
+ 
+ 	[CCode (cname = "g_utf8_skip")]
+ 	public static char[] skip;

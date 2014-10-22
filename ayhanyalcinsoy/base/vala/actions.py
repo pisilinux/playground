@@ -10,12 +10,16 @@ from pisi.actionsapi import get
 
 def setup():
     autotools.autoreconf("-vfi")
-    autotools.configure("--disable-wm")
+    autotools.configure("--enable-vapigen \
+                         --with-pic")
 
 def build():
     autotools.make()
 
+#def check():
+    #autotools.make("check")
+
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    
+    pisitools.dodoc("NEWS", "README", "AUTHORS", "COPYING")
