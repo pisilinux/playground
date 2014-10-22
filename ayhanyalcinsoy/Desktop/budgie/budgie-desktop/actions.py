@@ -6,10 +6,11 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import get
 
 def setup():
     autotools.autoreconf("-vfi")
-    autotools.configure()
+    autotools.configure("--disable-wm")
 
 def build():
     autotools.make()
