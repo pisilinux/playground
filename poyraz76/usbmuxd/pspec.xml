@@ -14,7 +14,7 @@
         <IsA>library</IsA>
         <Summary>Daemon for communicating with Apple's iPod Touch and iPhone</Summary>
         <Description>usbmuxd is a daemon used for communicating with Apple's iPod Touch and iPhone devices. It allows multiple services on the device to be accessed simultaneously.</Description>
-        <Archive sha1sum="a8f5d44b3014d57a6ae40960b56cc6f497876097" type="tarbz2">http://www.libimobiledevice.org/downloads/usbmuxd-1.1.0.tar.bz2</Archive>
+        <Archive sha1sum="bb9060845e680935b354c94156cf9b265044d04e" type="targz">https://github.com/libimobiledevice/usbmuxd/archive/1.1.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>libplist-devel</Dependency>
 	    <Dependency>libimobiledevice-devel</Dependency>
@@ -35,9 +35,6 @@
             <Path fileType="data">/lib/udev/rules.d</Path>
 	    <Path fileType="man">/usr/share/man</Path>
         </Files>
-    <AdditionalFiles>
-        <AdditionalFile owner="root" permission="0644" target="lib/udev/rules.d/">39-usbmuxd.rules></AdditionalFile>
-    </AdditionalFiles>
     </Package>
 
     <History>
