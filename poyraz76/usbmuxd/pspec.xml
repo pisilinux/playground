@@ -35,18 +35,9 @@
             <Path fileType="data">/lib/udev/rules.d</Path>
 	    <Path fileType="man">/usr/share/man</Path>
         </Files>
-    </Package>
-
-    <Package>
-        <Name>usbmuxd-devel</Name>
-        <Summary>Development files for usbmuxd</Summary>
-        <RuntimeDependencies>
-            <Dependency release="current">usbmuxd</Dependency>
-        </RuntimeDependencies>
-        <Files>
-            <Path fileType="header">/usr/include</Path>
-            <Path fileType="data">/usr/lib/pkgconfig</Path>
-        </Files>
+    <AdditionalFiles>
+        <AdditionalFile owner="root" permission="0644" target="lib/udev/rules.d/">39-usbmuxd.rules></AdditionalFile>
+    </AdditionalFiles>
     </Package>
 
     <History>

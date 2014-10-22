@@ -12,7 +12,8 @@ def setup():
     autotools.configure("\
                          --disable-static \
                          --disable-silent-rules \
-                        ")
+                         --without-systemd \
+                         --with-udevrulesdir=/lib/udev/rules.d/")
 
 def build():
     autotools.make()
