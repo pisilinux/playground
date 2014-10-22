@@ -1,0 +1,43 @@
+From 649b52dcbb1af198332ba9dbdaed0d32e761742a Mon Sep 17 00:00:00 2001
+From: Al Thomas <astavale@yahoo.co.uk>
+Date: Wed, 30 Apr 2014 20:40:40 +0200
+Subject: codegen: Uppercase strings in ASCII, otherwise broken for some
+ locales
+
+Fixes bug 704468
+
+diff --git a/codegen/valaccodebasemodule.vala b/codegen/valaccodebasemodule.vala
+index 8e7c4c4..9f39957 100644
+--- a/codegen/valaccodebasemodule.vala
++++ b/codegen/valaccodebasemodule.vala
+@@ -6025,9 +6025,9 @@ public abstract class Vala.CCodeBaseModule : CodeGenerator {
+ 
+ 	public static string get_ccode_upper_case_name (Symbol sym, string? infix = null) {
+ 		if (sym is Property) {
+-			return "%s_%s".printf (get_ccode_lower_case_name (sym.parent_symbol), Symbol.camel_case_to_lower_case (sym.name)).up ();
++			return "%s_%s".printf (get_ccode_lower_case_name (sym.parent_symbol), Symbol.camel_case_to_lower_case (sym.name)).ascii_up ();
+ 		} else {
+-			return get_ccode_lower_case_name (sym, infix).up ();
++			return get_ccode_lower_case_name (sym, infix).ascii_up ();
+ 		}
+ 	}
+ 
+diff --git a/vapi/glib-2.0.vapi b/vapi/glib-2.0.vapi
+index 5639a74..6c493d2 100644
+--- a/vapi/glib-2.0.vapi
++++ b/vapi/glib-2.0.vapi
+@@ -1171,6 +1171,10 @@ public class string {
+ 	public int ascii_casecmp (string s2);
+ 	[CCode (cname = "g_ascii_strncasecmp")]
+ 	public int ascii_ncasecmp (string s2, size_t n);
++	[CCode (cname = "g_ascii_strup")]
++	public string ascii_up (ssize_t len = -1);
++	[CCode (cname = "g_ascii_strdown")]
++	public string ascii_down (ssize_t len = -1);
+ 
+ 	[CCode (cname = "g_utf8_skip")]
+ 	public static char[] skip;
+-- 
+cgit v0.10.1
+
+ 
