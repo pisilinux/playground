@@ -32,7 +32,17 @@
 	    <Path fileType="executable">/usr/bin</Path>
 	    <Path fileType="doc">/usr/share/doc</Path>
 	    <Path fileType="man">/usr/share/man</Path>
+	    <Path fileType="data">/usr/share/icons/hicolor</Path>
+	    <Path fileType="data">/usr/share/applications</Path>
 	</Files>
+	<AdditionalFiles>
+            <AdditionalFile target="/usr/share/icons/hicolor/16x16/apps/dosbox.png" owner="root">dosbox-16.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/hicolor/24x24/apps/dosbox.png" owner="root">dosbox-24.png</AdditionalFile>
+	    <AdditionalFile target="/usr/share/icons/hicolor/32x32/apps/dosbox.png" owner="root">dosbox-32.png</AdditionalFile>
+	    <AdditionalFile target="/usr/share/icons/hicolor/48x48/apps/dosbox.png" owner="root">dosbox-48.png</AdditionalFile>
+	    <AdditionalFile target="/usr/share/icons/hicolor/256x256/apps/dosbox.png" owner="root">dosbox-256.png</AdditionalFile>
+	    <AdditionalFile target="/usr/share/applications/dosbox.desktop" owner="root">dosbox.desktop</AdditionalFile>
+        </AdditionalFiles>
     </Package>
     <History>
         <Update release="1">

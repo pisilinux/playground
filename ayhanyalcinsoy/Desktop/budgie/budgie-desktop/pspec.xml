@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>budgie-desktop</Name>
+        <Homepage>http://evolve-os.com/</Homepage>
+        <Packager>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Simple GTK3 desktop experience</Summary>
+        <Description>Simple GTK3 desktop experience</Description>
+        <Archive sha1sum="ebf17e67f73fd663908c12400162de54cc32205a" type="tarxz">https://github.com/evolve-os/budgie-desktop/releases/download/v7/budgie-desktop-7.tar.xz</Archive>
+        <BuildDependencies>
+             <Dependency>pulseaudio-libs-devel</Dependency>
+	     <Dependency>mutter-devel</Dependency>
+	     <Dependency>libwnck3-devel</Dependency>
+	     <Dependency>upower-devel</Dependency>
+	     <Dependency>gnome-menus-devel</Dependency>
+	     <Dependency>libpeas-devel</Dependency>
+	     <Dependency>libgee-devel</Dependency>
+	     <Dependency>gtk3-devel</Dependency>
+	     <Dependency>vala-devel</Dependency>
+	     <Dependency>glib2-devel</Dependency>
+        </BuildDependencies>
+	<Patches>
+             <!-- Currently Evolve OS specific - needs upstreaming back into Budgie //-->
+             <Patch level="1">evolveos-fix.patch</Patch>
+        </Patches>
+    </Source>
+        
+	<Package>
+        <Name>buggie-desktop</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>upower</Dependency>
+            <Dependency>libwnck3</Dependency>
+            <Dependency>gnome-menus</Dependency>
+            <Dependency>gnome-settings-daemon</Dependency>
+            <Dependency>libpeas</Dependency>
+            <Dependency>mutter</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+            <Dependency>libpulse</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>libgee</Dependency>     
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/lib*.so.*</Path>
+            <Path fileType="library">/usr/lib/girepository-1.0</Path>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="data">/usr/share/budgie-desktop</Path>
+            <Path fileType="library">/usr/lib/budgie-desktop/Gvc-1.0.typelib</Path>
+            <Path fileType="library">/usr/lib/budgie-desktop/lib*.so</Path>
+            <Path fileType="library">/usr/lib/budgie-desktop/*.plugin</Path>
+            <Path fileType="data">/usr/share/xsessions/budgie-desktop.desktop</Path>
+            <Path fileType="data">/usr/share/glib-2.0/schemas/com.evolve-os.budgie.panel.gschema.xml</Path>
+        </Files>
+	<AdditionalFiles>
+            <AdditionalFile owner="root" target="/usr/bin/budgie-session-launcher" permission="0755">budgie-session-launcher</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <Package>
+        <Name>budgie-desktop-devel</Name>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/lib*.so</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/share/vala/vapi</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">budgie-desktop</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-10-30</Date>
+            <Version>7.0</Version>
+            <Comment>first package</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+ 
