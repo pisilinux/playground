@@ -21,7 +21,13 @@ def setup():
                          --enable-plugin-glade \
                          --enable-introspection \
                          --disable-scrollkeeper \
-                         --enable-gtk-doc")
+                         --enable-gtk-doc \
+                         --prefix=/usr \
+                         --sysconfdir=/etc \
+                         --localstatedir=/var \
+                         --enable-glade-catalog \
+                         --enable-compile-warnings=minimum")
+    
     
     # for fix unused dependency
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
