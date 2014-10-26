@@ -15,27 +15,28 @@
         <Archive sha1sum="17591ffd8aea73527835ceb8d3baa0c93c250aea" type="targz">https://launchpad.net/lightdm-gtk-greeter/1.7/1.7.0/+download/lightdm-gtk-greeter-1.7.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>lightdm-devel</Dependency>
-	    <Dependency>gtk3-devel</Dependency>
-	    </BuildDependencies>
+            <Dependency>gtk3-devel</Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>
         <Name>lightdm-gtk-greeter</Name>
         <RuntimeDependencies>
-	  <Dependency>lightdm</Dependency>
-	  <Dependency>cairo</Dependency>
-	  <Dependency>gdk-pixbuf</Dependency>
-	  <Dependency>gtk3</Dependency>
+          <Dependency>lightdm</Dependency>
+          <Dependency>cairo</Dependency>
+          <Dependency>gdk-pixbuf</Dependency>
+          <Dependency>gtk3</Dependency>
         </RuntimeDependencies>
         <Files>
-	<Path fileType="executable">/usr/sbin/lightdm-gtk-greeter</Path>
-	<Path fileType="localedata">/usr/share/locale</Path>
-	<Path fileType="config">/etc/lightdm</Path>
-	<Path fileType="data">/usr/share</Path>
-	<Path fileType="executable">/usr/bin</Path>
-	<Path fileType="libexec">/usr/lib/lightdm</Path>
-	<Path fileType="desktop">usr/share/xgreeters</Path>
+            <Path fileType="config">/etc/lightdm</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/xgreeters</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile permission="0644" target="/etc/lightdm/lightdm-gtk-greeter.conf">lightdm-gtk-greeter.conf</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <History>
