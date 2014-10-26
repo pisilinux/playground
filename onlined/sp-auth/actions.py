@@ -11,4 +11,6 @@ from pisi.actionsapi import shelltools
 def install():
     pisitools.doexe("sp-sc-auth","/usr/bin")
     pisitools.dosym("sp-sc-auth","/usr/bin/sp-auth")
+    pisitools.dosym("sp-sc-auth","/usr/bin/sc-auth")
+    pisitools.dosym("sp-sc-auth","/usr/bin/sopcast")
     pisitools.dodoc("Readme")
