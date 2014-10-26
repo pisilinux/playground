@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Licensed under the GNU General Public License, version 2.
@@ -11,15 +12,22 @@ from pisi.actionsapi import get
 shelltools.export("HOME", get.workDIR())
 
 def setup():
-    autotools.configure("--with-greeter-user=lightdm\
-                         --with-greeter-session=lightdm-gtk-greeter\
-                         --enable-introspection\
-                         --disable-tests\
-                         --disable-static")
+    shelltools.system("sed -i -e 's:getgroups:lightdm_&:' tests/src/libsystem.c")
+    
+    autotools.configure("--prefix='/usr' --sbindir='/usr/bin' --sysconfdir='/etc' \
+                         --localstatedir='/var' --libexecdir='/usr/lib/lightdm' \
+                         --with-greeter-user='lightdm' \
+                         --with-greeter-session='lightdm-gtk-greeter' \
+                         --disable-static \
+                         --disable-tests")
 
 def build():
     autotools.make()
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-
+    pisitools.remove("/etc/init")
+    pisitools.remove("/usr/include/lightdm-qt")
+    pisitools.dodir("/usr/lib/systemd/system/graphical.target.wants")
+    pisitools.dosym("/usr/lib/systemd/system/lightdm.service", "/usr/lib/systemd/system/displaymanager.service")
+    pisitools.dosym("/usr/lib/systemd/system/lightdm.service", "/usr/lib/systemd/system/graphical.target.wants/lightdm.service")
