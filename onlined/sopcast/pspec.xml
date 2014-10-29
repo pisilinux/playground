@@ -2,7 +2,7 @@
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
-        <Name>sp-auth</Name> 
+        <Name>sopcast</Name> 
         <Homepage>http://www.sopcast.com</Homepage> 
         <Packager>
 	    <Name>Ekin Dursun</Name>
@@ -11,17 +11,17 @@
         <License>Sopcast</License> 
         <IsA>app:console</IsA> 
         <Summary>Sopcast client</Summary>
-        <Description>sp-auth converts Sopcast streams to local streams.</Description>
+        <Description>Sopcast converts Sopcast streams to local streams.</Description>
         <Archive sha1sum="498f856a4723e2a52460f8e856346428f4159184" type="targz">http://download.sopcast.com/download/sp-auth.tgz</Archive>
     </Source>
     <Package>
-        <Name>sp-auth</Name>
+        <Name>sopcast</Name>
         <RuntimeDependencies>
 	  <Dependency>libstdc++-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin/</Path>
-            <Path fileType="doc">/usr/share/doc/sp-auth/</Path>
+            <Path fileType="doc">/usr/share/doc/sopcast/</Path>
         </Files>
     </Package>
     <History>
