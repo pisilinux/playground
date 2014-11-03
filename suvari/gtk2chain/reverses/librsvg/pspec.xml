@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Scalable Vector Graphics (SVG) rendering library</Summary>
         <Description>librsvg is a component used within software applications to enable support for SVG-format scalable vector graphics.</Description>
-        <Archive sha1sum="840f1d56c1dc9dfe291049dfc9e46da0d1915bf3" type="tarxz">http://ftp.gnome.org/pub/GNOME/sources/librsvg/2.40/librsvg-2.40.4.tar.xz</Archive>
+        <Archive sha1sum="f78def208b4f01d22da616e341a3835490ab2ef4" type="tarxz">http://ftp.gnome.org/pub/GNOME/sources/librsvg/2.40/librsvg-2.40.5.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>libcroco-devel</Dependency>
             <Dependency>libgsf-devel</Dependency>
@@ -23,6 +23,7 @@
             <Dependency>gtk-doc</Dependency>
             <Dependency>gtk3-32bit</Dependency>
             <Dependency>vala-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
         </BuildDependencies>
         <Patches>
         </Patches>
@@ -86,7 +87,6 @@
             <Dependency>gdk-pixbuf-32bit</Dependency>
             <Dependency>fontconfig-32bit</Dependency>
             <Dependency>libudev-32bit</Dependency>
-            <Dependency>libudev-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">librsvg</Dependency>
@@ -106,10 +106,10 @@
     <History>
         <Update release="10">
             <Date>2014-09-29</Date>
-            <Version>2.40.4</Version>
+            <Version>2.40.5</Version>
             <Comment>Version bump.</Comment>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
         </Update> 
         <Update release="9">
             <Date>2014-05-17</Date>
