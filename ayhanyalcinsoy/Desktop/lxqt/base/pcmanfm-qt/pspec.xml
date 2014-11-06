@@ -1,0 +1,60 @@
+<PISI>
+    <Source>
+        <Name>pcmanfm-qt</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.base</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>The LXQt file manager, Qt port of PCManFM</Summary>
+        <Description>File manager and desktop icon manager (Qt port of PCManFM and libfm)</Description>
+	<Archive sha1sum="67ad51f18860a52e5c6a84559941043b9b806146" type="zip">https://content.wuala.com/contents/vedat/sources/pcmanfm-qt-master.zip</Archive>
+        <BuildDependencies>
+            <Dependency>libfm-qt-devel</Dependency>
+            <Dependency>liblxqt-devel</Dependency>
+            <Dependency>lxqt-menu-cache-devel</Dependency>
+	    <Dependency>libqtxdg-devel</Dependency>
+	    <Dependency>qt-devel</Dependency>
+	    <Dependency>cairo-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>pcmanfm-qt</Name>
+        <RuntimeDependencies>
+            <Dependency>gksu</Dependency>
+	    <Dependency>evince</Dependency>
+	    <Dependency>xarchiver</Dependency>
+            <Dependency>qterminal</Dependency>
+	    <Dependency>libqtxdg</Dependency>
+	    <Dependency>lxqtmenu-data</Dependency>
+	    <Dependency>glib2</Dependency>
+            <Dependency>lxqt-menu-cache</Dependency>
+	    <Dependency>gvfs</Dependency>
+	    <Dependency>polkit-gnome</Dependency>
+	    <Dependency>libfm-qt</Dependency>
+	    <Dependency>icon-theme-oxygen-png</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share/</Path>
+	    <Path fileType="header">/usr/include</Path>
+        </Files>
+	<AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/pcmanfm-qt.desktop">pcmanfm-qt.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.7.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat  Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+
