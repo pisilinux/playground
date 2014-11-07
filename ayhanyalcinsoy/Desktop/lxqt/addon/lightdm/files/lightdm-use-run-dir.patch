@@ -1,0 +1,16 @@
+# HG changeset patch
+# Parent 7809b3dab31692d7d1eeb9de16aa2f58cc0872b1
+Use /run instead of localstatedir/run/lightdm
+
+diff --git a/src/Makefile.am b/src/Makefile.am
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -83,7 +83,7 @@ lightdm_CFLAGS = \
+ 	-DSBIN_DIR=\"$(sbindir)\" \
+ 	-DUSERS_DIR=\"$(localstatedir)/lib/lightdm-data\" \
+ 	-DLOG_DIR=\"$(localstatedir)/log/lightdm\" \
+-	-DRUN_DIR=\"$(localstatedir)/run/lightdm\" \
++	-DRUN_DIR=\"/run/lightdm\" \
+ 	-DCACHE_DIR=\"$(localstatedir)/cache/lightdm\" \
+ 	-DSESSIONS_DIR=\"$(pkgdatadir)/sessions:$(datadir)/xsessions\" \
+ 	-DREMOTE_SESSIONS_DIR=\"$(pkgdatadir)/remote-sessions\" \

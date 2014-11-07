@@ -12,22 +12,26 @@
         <IsA>app:gui</IsA>
         <Summary>Simple GTK3 desktop experience</Summary>
         <Description>Simple GTK3 desktop experience</Description>
-        <Archive sha1sum="ebf17e67f73fd663908c12400162de54cc32205a" type="tarxz">https://github.com/evolve-os/budgie-desktop/releases/download/v7/budgie-desktop-7.tar.xz</Archive>
-        <BuildDependencies>
+<!--         <Archive sha1sum="d6931898fa7d45edde5843a6782a4b7491ea7ae1" type="targz">https://github.com/evolve-os/budgie-desktop/archive/v7.tar.gz</Archive> -->
+	<Archive sha1sum="1c6a582c43a824ae503fd8d46e75bc113bf8dc04" type="targz">/home/PisiLinux/İndirilenler/budgie-desktop-7.tar.gz</Archive>
+
+	<BuildDependencies>
              <Dependency>pulseaudio-libs-devel</Dependency>
 	     <Dependency>mutter-devel</Dependency>
 	     <Dependency>libwnck3-devel</Dependency>
 	     <Dependency>upower-devel</Dependency>
 	     <Dependency>gnome-menus-devel</Dependency>
 	     <Dependency>libpeas-devel</Dependency>
-	     <Dependency>libgee-devel</Dependency>
+	     <Dependency>libgee08-devel</Dependency>
 	     <Dependency>gtk3-devel</Dependency>
 	     <Dependency>vala-devel</Dependency>
 	     <Dependency>glib2-devel</Dependency>
+	     <Dependency>desktop-file-utils</Dependency>
         </BuildDependencies>
 	<Patches>
              <!-- Currently Evolve OS specific - needs upstreaming back into Budgie //-->
-             <Patch level="1">evolveos-fix.patch</Patch>
+             <Patch>evolveos-fix.patch</Patch>
+<!-- 	     <Patch>Budgiecompileerror.patch</Patch> -->
         </Patches>
     </Source>
         

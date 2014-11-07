@@ -9,13 +9,14 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    #autotools.autoreconf("-vfi")
-    autotools.configure("--disable-wm")
+    autotools.configure("--datadir=/usr/share/misc \
+                         --disable-zlib")
 
 def build():
     autotools.make()
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-
     
+
+    pisitools.dodoc("AUTHORS", "ChangeLog", "NEWS", "README")

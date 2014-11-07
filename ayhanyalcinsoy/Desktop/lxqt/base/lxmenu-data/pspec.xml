@@ -1,0 +1,36 @@
+<PISI>
+    <Source>
+        <Name>lxqtmenu-data</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.base</PartOf>
+        <IsA>data</IsA>
+        <Summary>freedesktop.org application menu definition files</Summary>
+        <Description>lxqtmenu-data is freedesktop.org application menu definition files</Description>
+        <BuildDependencies>
+            <Dependency>liblxqt-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="1dd790aa88e985f6089f4fcdfc22eb0599b8571d" type="zip">https://content.wuala.com/contents/vedat/sources/lxmenu-data-master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>lxqtmenu-data</Name>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+	    <Path fileType="data">/usr/share/desktop-directories</Path>
+	    <Path fileType="doc">/usr/share/doc/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

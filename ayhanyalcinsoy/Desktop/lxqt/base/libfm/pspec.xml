@@ -1,0 +1,67 @@
+<PISI>
+    <Source>
+        <Name>libfm-qt</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.base</PartOf>
+        <IsA>library</IsA>
+        <Summary>Core library of PCManFM file manager</Summary>
+        <Description>libfm is a Core library of PCManFM file manager</Description>
+	<Archive sha1sum="0388fb78275d6ade936ef0b08cdb586a16b5e732" type="zip">https://content.wuala.com/contents/vedat/sources/libfm-master.zip</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+	    <Dependency>libexif-devel</Dependency>
+	    <Dependency>gst-plugins-base-devel</Dependency>
+	    <Dependency>gtk-doc</Dependency>
+	    <Dependency>libmenu-cache</Dependency>
+	    <Dependency>lxqt-menu-cache-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>libfm-qt</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="sysdir">/etc</Path> 
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share</Path>
+        </Files>
+	<RuntimeDependencies>
+	    <Dependency>lxqtmenu-data</Dependency>
+            <Dependency>gvfs</Dependency>
+	    <Dependency>kdelibs</Dependency>
+            <Dependency>QtCurve-KDE4</Dependency>
+	    <Dependency>homerun</Dependency>
+            <Dependency>automoc4</Dependency>
+	    <Dependency>curl-devel</Dependency>
+	    <Dependency>cursor-theme-oxygen-blue</Dependency>    
+	    <Dependency>qt-webkit</Dependency>
+            <Dependency>python-qt-webkit</Dependency>
+	    <Dependency>webkit-gtk3</Dependency>
+	    <Dependency>gst-plugins-base</Dependency>
+	 </RuntimeDependencies>
+    </Package>
+    <Package>
+        <Name>libfm-qt-devel</Name>
+        <Summary>Development headers for libfm-qt</Summary>
+        <RuntimeDependencies>
+            <Dependency>libfm-qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-04-25</Date>
+            <Version>1.2.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
