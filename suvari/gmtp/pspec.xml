@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gmtp</Name>
+        <Homepage>http://gmtp.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>Mathias Freire</Name>
+            <Email>mathiasfreire45@gmail.com</Email>
+        </Packager>
+        <License>GPL-v3</License>
+        <IsA>app:gui</IsA>
+       <Summary>Simple MTP (Media Transfer Protocol) client.</Summary>
+       <Description>Supports MTP devices including those with multiple storage devices (typically mobile phones). Supports Drag'n'Drop interface for upload/download of files.</Description>
+       <Archive sha1sum="a11bb0deb0306af61ca5b76ad445e2e0dcf30b25" type="targz">mirrors://sourceforge/gmtp/gMTP-1.3.7/gmtp-1.3.7.tar.gz</Archive>
+       <BuildDependencies>
+	  <Dependency>gtk3-devel</Dependency>
+	  <Dependency>atk-devel</Dependency>
+          <Dependency>cairo-devel</Dependency>          
+	  <Dependency>libogg-devel</Dependency>	  	  
+	  <Dependency>pango-devel</Dependency>
+	  <Dependency>gdk-pixbuf-devel</Dependency>
+	  <Dependency>flac-devel</Dependency>
+          <Dependency>libusbx-devel</Dependency>	  
+	  <Dependency>libvorbis-devel</Dependency>
+	  <Dependency>libid3tag-devel</Dependency>
+	  <Dependency>libmtp-devel</Dependency>
+       </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gmtp</Name>
+        <RuntimeDependencies>
+          <Dependency>gtk3</Dependency>
+	  <Dependency>atk</Dependency>
+          <Dependency>cairo</Dependency>          
+	  <Dependency>libogg</Dependency>	  	  
+	  <Dependency>pango</Dependency>
+	  <Dependency>gdk-pixbuf</Dependency>
+	  <Dependency>flac</Dependency>
+          <Dependency>libusbx</Dependency>	  
+	  <Dependency>libvorbis</Dependency>
+	  <Dependency>libid3tag</Dependency>
+	  <Dependency>libmtp</Dependency>
+       </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share</Path>
+        </Files>
+	<AdditionalFiles>	  
+	  <AdditionalFile target="/usr/share/applications/gmtp.desktop" permission="0644" owner="root">gmtp.desktop</AdditionalFile>
+	</AdditionalFiles>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2014-09-08</Date>
+            <Version>1.3.7</Version>
+            <Comment>Version bump.</Comment>
+	    <Name>Mathias Freire</Name>   
+            <Email>mathiasfreire45@gmail.com</Email>             
+        </Update>
+	<Update release="1">
+            <Date>2014-03-27</Date>
+            <Version>1.3.6</Version>
+            <Comment>First Release</Comment>
+	    <Name>Mathias Freire</Name>   
+            <Email>mathiasfreire45@gmail.com</Email>             
+        </Update>
+    </History>
+</PISI>
+ 
+ 
