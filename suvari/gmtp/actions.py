@@ -11,10 +11,10 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-fiv")
-     
+    #autotools.autoreconf("-fiv")
+
     autotools.configure("--with-gtk3")
-    
+
 
 def build():
     autotools.make()
