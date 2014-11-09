@@ -79,8 +79,8 @@ def install():
     
     # install texmf tree
     folders = ["/usr/share",
-	       "/etc/texmf/chktex",
-	       "/etc/texmf/tex/",
+               "/etc/texmf/chktex",
+               "/etc/texmf/tex/",
                "/etc/texmf/web2c",
                "/etc/texmf/dvips/config",
                "/etc/texmf/dvipdfm",
