@@ -40,7 +40,6 @@ def setup():
               --enable-shared-glapi \
               --enable-texture-float \
               --enable-llvm-shared-libs \
-              --with-clang-libdir=/usr/lib \
              "
 
     if get.buildTYPE() == "emul32":
