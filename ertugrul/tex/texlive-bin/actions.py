@@ -72,7 +72,7 @@ def install():
     autotools.rawInstall("prefix=/usr DESTDIR=%s" % get.installDIR())
 
     pisitools.dodir("/usr/share/tlpkg/TeXLive")
-    shelltools.move("%s/source/utils/biber/TeXLive/*.pm" % get.workDIR(), "%s/usr/share/tlpkg/TeXLive" % get.installDIR())
+    #shelltools.move("%s/source/utils/biber/TeXLive/*.pm" % get.workDIR(), "%s/usr/share/tlpkg/TeXLive" % get.installDIR())
     
     
     # install texmf tree
@@ -180,7 +180,7 @@ def install():
     pisitools.remove("/usr/share/texmf-dist/xdvi/XDvi")
     pisitools.remove("/usr/share/texmf-dist/scripts/texlive/texconfig-dialog.sh") 
     pisitools.remove("/usr/share/texmf-dist/scripts/xindy/texindy.pl") 
-    pisitools.remove("/usr/share/texmf-dist/scripts/context/stubs/unix/pstopdf")
+    #pisitools.remove("/usr/share/texmf-dist/scripts/context/stubs/unix/pstopdf")
     pisitools.remove("/usr/share/texmf-dist/scripts/mkjobtexmf/mkjobtexmf.pl") 
     pisitools.remove("/usr/share/texmf-dist/dvips/base/special.pro") 
     pisitools.remove("/usr/share/texmf-dist/xindy/modules/base/letter-order.xdy") 
@@ -233,7 +233,7 @@ def install():
     pisitools.remove("/usr/share/texmf-dist/xindy/modules/base/keep-blanks.xdy") 
     pisitools.remove("/usr/share/texmf-dist/scripts/texloganalyser/texloganalyser")
     pisitools.remove("/usr/share/texmf-dist/scripts/bundledoc/bundledoc")
-    pisitools.remove("/usr/share/texmf-dist/scripts/context/stubs/unix/ctxtools")
+    #pisitools.remove("/usr/share/texmf-dist/scripts/context/stubs/unix/ctxtools")
     pisitools.remove("/usr/share/texmf-dist/scripts/ltxfileinfo/ltxfileinfo")
     pisitools.remove("/usr/share/texmf-dist/web2c/mktexupd")
     pisitools.remove("/usr/share/texmf-dist/xindy/modules/class/pagenums.xdy") 
