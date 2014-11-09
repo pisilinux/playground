@@ -99,7 +99,6 @@ def setup():
                        --without-system-orcus \
                        --without-system-npapi-headers \
                        --without-ppds \
-                       --without-afms \
                        --without-fonts \
                        --without-doxygen \
                        --with-system-libs \
