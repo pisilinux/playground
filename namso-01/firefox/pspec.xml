@@ -15,7 +15,7 @@
         <IsA>app:gui</IsA>
         <Summary>Firefox Web Browser</Summary>
         <Description>It is more secure and faster to browse the web with Firefox web browser. You can personalize your web browser with many specifications that is not enough to explain in two sentences.</Description>
-        <Archive sha1sum="60657ba123df85a632822974d8f914cc8c35a738" type="tarbz2">ftp://ftp.mozilla.org/pub/firefox/releases/33.0.2/source/firefox-33.0.2.source.tar.bz2</Archive>
+        <Archive sha1sum="88b8380f0c0929a8beb892e6169e8e5d4bf5f62f" type="tarbz2">ftp://ftp.mozilla.org/pub/firefox/releases/33.0.3/source/firefox-33.0.3.source.tar.bz2</Archive>
         <AdditionalFiles>
             <!--Our main configure script. Configure paramters are stored here.-->
             <AdditionalFile target=".mozconfig" permission="0644">mozconfig</AdditionalFile>
@@ -49,7 +49,7 @@
             <Dependency>libjpeg-turbo-devel</Dependency>
             <Dependency>pulseaudio-libs-devel</Dependency>
             <Dependency>gst-plugins-base-devel</Dependency>
-            <Dependency releaseFrom="11">nss-devel</Dependency>
+            <Dependency releaseFrom="5">nss-devel</Dependency>
             <Dependency releaseFrom="9">nspr-devel</Dependency>
             <Dependency>startup-notification-devel</Dependency>
             <Dependency versionFrom="1.3.0">libvpx-devel</Dependency>
@@ -57,6 +57,7 @@
         <Patches>
             <Patch level="1">rhbz-966424.patch</Patch>
             <Patch level="1">mozilla-858919.patch</Patch>
+            <Patch level="1">mozilla-1042889.patch</Patch>
             <Patch level="1">firefox-install-dir.patch</Patch>
             <Patch level="1">pisilinux/809055bug.patch</Patch>
             <Patch level="1">suse/mozilla-language.patch</Patch>
@@ -135,7 +136,7 @@
         </Provides>
     </Package>
 
-    <Package>
+    <!--<Package>
         <Name>firefox-lang-az</Name>
         <Summary>Firefox üçün Türkçe dil faylı</Summary>
         <RuntimeDependencies>
@@ -144,7 +145,7 @@
         <Files>
             <Path fileType="localedata">/usr/lib/firefox/browser/extensions/langpack-az@firefox.mozilla.org</Path>
         </Files>
-    </Package>
+    </Package>-->
 
     <Package>
         <Name>firefox-lang-be</Name>
@@ -423,11 +424,11 @@
 
     <History>
         <Update release="28">
-            <Date>2014-10-30</Date>
-            <Version>33.0.2</Version>
-            <Comment>Version bump, http://www.mozilla.org/en-US/firefox/33.0.2/releasenotes</Comment>
-            <Name>PisiLinux Community</Name>
-            <Email>admins@pisilinux.org</Email>
+            <Date>2014-11-10</Date>
+            <Version>33.0.3</Version>
+            <Comment>Version bump, http://www.mozilla.org/en-US/firefox/33.0.3/releasenotes</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
         </Update>
         <Update release="27">
             <Date>2014-09-29</Date>
