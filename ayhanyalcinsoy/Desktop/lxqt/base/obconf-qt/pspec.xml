@@ -1,0 +1,41 @@
+<PISI>
+    <Source>
+        <Name>obconf-qt</Name>
+        <Homepage>http://www.lxde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>GPL2</License>
+        <PartOf>desktop.lxqt.base</PartOf>
+        <IsA>app</IsA>
+        <Summary>This is a Qt port of ObConf, configurator of OpenBox window manager.</Summary>
+        <Description>This is a Qt port of ObConf, configurator of OpenBox window manager.</Description>
+	<Archive sha1sum="644482ffc09d442c0f6655c64a63268281bc87ab" type="zip">https://content.wuala.com/contents/vedat/sources/obconf-qt-master.zip</Archive>
+        <BuildDependencies>
+            <Dependency version="3.5.2">openbox3-devel</Dependency>
+	    <Dependency>pkgconfig</Dependency>
+	    <Dependency>qt-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>obconf-qt</Name>
+        <RuntimeDependencies>
+            <Dependency version="3.5.2">openbox3</Dependency>
+	    <Dependency>qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-05-02</Date>
+            <Version>0.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

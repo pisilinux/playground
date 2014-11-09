@@ -1,8 +1,0 @@
---- a/files/usr/bin/cinnamon-settings-users
-+++ b/files/usr/bin/cinnamon-settings-users
-@@ -2,5 +2,5 @@
- 
- import os
- 
--os.system("gksu /usr/lib/cinnamon-settings-users/cinnamon-settings-users.py")
-+os.system("pkexec /usr/lib/cinnamon-settings-users/cinnamon-settings-users.py")
