@@ -13,9 +13,10 @@
         <IsA>app:console</IsA>
         <Summary>Mesa graphics libraries and utilities</Summary>
         <Description>Mesa is an open-source implementation of the OpenGL specification - a system for rendering interactive 3D graphics.</Description>
-        <Archive sha1sum="6492772c27e5735c9bc83789ff565bbb8df82132" type="tarbz2">ftp://ftp.freedesktop.org/pub/mesa/10.3.1/MesaLib-10.3.1.tar.bz2</Archive>
+        <Archive sha1sum="82048401ab72f6ca38780ada6c8998b020cef0f5" type="tarbz2">ftp://ftp.freedesktop.org/pub/mesa/10.3.3/MesaLib-10.3.3.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>llvm</Dependency>
+	    <Dependency>llvm-clang-devel</Dependency>
             <Dependency>xorg-proto</Dependency>
             <Dependency>libdrm-devel</Dependency>
             <Dependency>libXext-devel</Dependency>
@@ -27,6 +28,8 @@
             <Dependency>libXxf86vm-devel</Dependency>
             <Dependency>libXvMC-devel</Dependency>
             <Dependency>libXv-devel</Dependency>
+	    <Dependency>elfutils</Dependency>
+	    <Dependency>libclc-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -47,6 +50,8 @@
             <Dependency>libdrm-nouveau</Dependency>
             <Dependency>wayland-client</Dependency>
             <Dependency>wayland-server</Dependency>
+	    <Dependency>llvm-clang</Dependency>
+	    <Dependency>libclc</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
@@ -131,13 +136,19 @@
             <COMAR script="package-emul32.py">System.Package</COMAR>
         </Provides>
     </Package>
-    <History>
+    <History><Update release="18">
+            <Date>2014-11-10</Date>
+            <Version>10.3.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ergün Salman</Name>
+            <Email>poyraz76pisilinux.org</Email>
+        </Update>
       <Update release="17">
             <Date>2014-10-16</Date>
             <Version>10.3.1</Version>
             <Comment>Version bump.</Comment>
             <Name>Ergün Salman</Name>
-            <Email>ergunsalman@hotmail.com</Email>
+            <Email>poyraz76@pisilinux.org</Email>
         </Update>
         <Update release="16">
             <Date>2014-09-24</Date>
