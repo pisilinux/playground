@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Arch Linux - {{ name }} ({{ architecture.name }}) - {{ list_title }}{% endblock %}
+{% block navbarclass %}anb-packages{% endblock %}
+
+{% block content %}
+<div class="box">
+    <h2>{{ list_title }} - {{ name }} ({{ architecture.name }})</h2>
+    <p>{{ packages|length }} package{{ packages|pluralize }} found.</p>
+    <table class="results">
+        <thead>
+            <tr>
+                <th>Arch</th>
+                <th>Repo</th>
+                <th>Name</th>
+                <th>Version</th>
+                <th>Description</th>
+                <th>Last Updated</th>
+                <th>Flag Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pkg in packages %}
+            <tr class="{% cycle 'odd' 'even' %}">
+                <td>{{ pkg.architecture.name }}</td>
+                <td>{{ pkg.repo.name|capfirst }}</td>
+                <td><a href="{{ pkg.get_absolute_homepage }}"
+                        title="Package details for {{ pkg.name }}">{{ pkg.name }}</a></td>
+                {% if pkg.flag_date %}
+                <td><span class="flagged">{{ pkg.full_version }}</span></td>
+                {% else %}
+                <td>{{ pkg.full_version }}</td>
+                {% endif %}
+                <td class="wrap">{{ pkg.pkgdesc }}</td>
+                <td>{{ pkg.last_update|date }}</td>
+                <td>{{ pkg.flag_date|date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

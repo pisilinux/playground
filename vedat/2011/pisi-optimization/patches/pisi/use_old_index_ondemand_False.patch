@@ -1,0 +1,12 @@
+diff -Nuar pisi_a/index.py pisi/index.py
+--- pisi_a/index.py	2011-08-23 19:54:57.754000010 +0300
++++ pisi/index.py	2011-08-23 19:54:25.963000011 +0300
+@@ -131,7 +131,7 @@
+             for fpath in old_index_files:
+                 ctx.ui.info("Parsing old index: %s" % fpath)
+                 index_xml = Index()
+-                index_xml.read(fpath)
++                index_xml.read(fpath, use_ondemand=False)
+                 old_index_dict = {}
+                 for package in index_xml.packages:
+                     # packageUri : path/PyKDEeXtensions-0.4.0-13-c2-x86_64.pisi

@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ManualPartWidget</class>
+ <widget class="QWidget" name="ManualPartWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>823</width>
+    <height>487</height>
+   </rect>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>600</width>
+       <height>250</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>300</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#frame{
+background-color: rgba(0,0,0,100);
+border-top: 1px solid rgba(255,255,255,60);
+border-bottom: 1px solid rgba(255,255,255,60);
+}
+
+
+QListView {
+     show-decoration-selected: 1; /* make the selection span the entire width of the view */
+ }
+
+ QListView::item{
+	border-radius: 2px;
+    border:0px;
+padding: 5px
+}
+
+ QListView::item:selected {
+border:0px;
+ }
+
+ QListView::item:selected:!active {
+     background-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 rgba(129, 3, 3, 255), stop:0.0192308 rgba(160, 35, 25, 255), stop:0.521739 rgba(166, 35, 29, 255), stop:0.531585 rgba(184, 46, 40, 255), stop:0.983696 rgba(168, 78, 74, 255), stop:1 rgba(210, 110, 110, 255));
+
+ }
+
+ QListView::item:selected:active {
+     background-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 rgba(129, 3, 3, 255), stop:0.0192308 rgba(160, 35, 25, 255), stop:0.521739 rgba(166, 35, 29, 255), stop:0.531585 rgba(184, 46, 40, 255), stop:0.983696 rgba(168, 78, 74, 255), stop:1 rgba(210, 110, 110, 255));
+ }
+
+ QListView::item:hover {
+     background-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 rgba(129, 3, 3, 100), stop:0.0192308 rgba(160, 35, 25, 100), stop:0.521739 rgba(166, 35, 29, 100), stop:0.531585 rgba(184, 46, 40, 100), stop:0.983696 rgba(168, 78, 74, 100), stop:1 rgba(210, 110, 110, 100));
+ }</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>20</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>20</number>
+      </property>
+      <property name="horizontalSpacing">
+       <number>30</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="spacing">
+         <number>30</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="spacing">
+           <number>15</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
+            <item>
+             <widget class="QTreeWidget" name="deviceTree">
+              <property name="maximumSize">
+               <size>
+                <width>650</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="sortingEnabled">
+               <bool>false</bool>
+              </property>
+              <property name="allColumnsShowFocus">
+               <bool>false</bool>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+              <property name="headerHidden">
+               <bool>false</bool>
+              </property>
+              <attribute name="headerCascadingSectionResizes">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="headerHighlightSections">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="headerMinimumSectionSize">
+               <number>75</number>
+              </attribute>
+              <attribute name="headerShowSortIndicator" stdset="0">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="headerStretchLastSection">
+               <bool>true</bool>
+              </attribute>
+              <column>
+               <property name="text">
+                <string>Device</string>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>8</pointsize>
+                </font>
+               </property>
+               <property name="textAlignment">
+                <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Mount Point</string>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>8</pointsize>
+                </font>
+               </property>
+               <property name="textAlignment">
+                <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Label</string>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>8</pointsize>
+                </font>
+               </property>
+               <property name="textAlignment">
+                <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Type</string>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>8</pointsize>
+                </font>
+               </property>
+               <property name="textAlignment">
+                <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Format</string>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>8</pointsize>
+                </font>
+               </property>
+               <property name="textAlignment">
+                <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Size</string>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>8</pointsize>
+                </font>
+               </property>
+               <property name="textAlignment">
+                <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="spacing">
+             <number>10</number>
+            </property>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QToolButton" name="newButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="text">
+               <string>Create</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../../yali-theme-pardus/data.qrc">
+                <normaloff>:/gui/pics/expand.png</normaloff>:/gui/pics/expand.png</iconset>
+              </property>
+              <property name="popupMode">
+               <enum>QToolButton::InstantPopup</enum>
+              </property>
+              <property name="toolButtonStyle">
+               <enum>Qt::ToolButtonTextBesideIcon</enum>
+              </property>
+              <property name="autoRaise">
+               <bool>false</bool>
+              </property>
+              <property name="arrowType">
+               <enum>Qt::NoArrow</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="editButton">
+              <property name="text">
+               <string>Edit</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../../yali-theme-pardus/data.qrc">
+                <normaloff>:/gui/pics/document-edit.png</normaloff>:/gui/pics/document-edit.png</iconset>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="deleteButton">
+              <property name="text">
+               <string>Delete</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../../yali-theme-pardus/data.qrc">
+                <normaloff>:/gui/pics/draw-eraser.png</normaloff>:/gui/pics/draw-eraser.png</iconset>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="resetButton">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../../yali-theme-pardus/data.qrc">
+                <normaloff>:/gui/pics/view-refresh.png</normaloff>:/gui/pics/view-refresh.png</iconset>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../../../yali-theme-pardus/data.qrc"/>
+ </resources>
+ <connections/>
+</ui>

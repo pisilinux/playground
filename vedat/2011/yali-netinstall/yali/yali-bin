@@ -1,0 +1,247 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2006-2010 TUBITAK/UEKAE
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your option)
+# any later version.
+#
+# Please read the COPYING file.
+#
+import os
+import sys
+import gettext
+_ = gettext.translation('yali', fallback=True).ugettext
+
+import yali
+import yali.context as ctx
+
+
+def load_modules():
+    """
+        Load modules.
+
+    """
+    os.system("modprobe -bqa dm-mod raid0 raid1 raid456 raid10")
+
+
+def load_config(options):
+    """
+        Load configuration.
+
+        Arguments:
+            parser: Options parsed with ConfigParser module
+            options: Options parsed with optparse module
+    """
+    # Read configuration file
+    if not os.path.exists(ctx.consts.conf_file):
+        ctx.logger.debug(_("%s is missing") % ctx.consts.conf_file)
+        sys.exit(1)
+
+    import ConfigParser
+    parser = ConfigParser.ConfigParser()
+
+    try:
+        parser.read(ctx.consts.conf_file)
+    except IOError:
+        ctx.logger.debug(_("%s is corrupted") % ctx.consts.conf_file)
+        sys.exit(1)
+
+    if parser.has_option("general", "installation"):
+        if parser.get("general", "installation") == "system":
+            options.install_type = ctx.STEP_BASE
+        elif parser.get("general", "installation") == "firstboot":
+            options.install_type = ctx.STEP_FIRST_BOOT
+        elif parser.get("general", "installation") == "rescue":
+            options.install_type = ctx.STEP_RESCUE
+        elif parser.get("general", "installation") == "oem":
+            options.install_type = ctx.STEP_OEM_INSTALL
+        else:
+            options.install_type = ctx.STEP_DEFAULT
+
+    if parser.has_option("general", "debug"):
+        if parser.get("general", "debug") == "True":
+            options.debug =  True
+        else:
+            options.debug =  False
+
+    if parser.has_option("general", "collection"):
+        if parser.get("general", "collection") == "False":
+            options.collection =  False
+        else:
+            options.collection =  True
+
+    if parser.has_option("general", "baseonly"):
+        if parser.get("general", "baseonly") == "True":
+            options.baseonly =  True
+        else:
+            options.baseonly =  False
+
+    if parser.has_option("general", "dryrun"):
+        if parser.get("general", "dryrun") == "True":
+            options.dryRun =  True
+        else:
+            options.dryRun =  False
+
+    if parser.has_option("general", "theme"):
+        options.theme = parser.get("general", "theme")
+
+    if parser.has_option("general", "branding"):
+        options.theme = parser.get("general", "branding")
+
+def setup_environment():
+    """
+        Setup environment.
+
+    """
+    import locale
+    #FIXME:Why do we need this?
+    locale.setlocale(locale.LC_ALL, "")
+    os.environ['LC_NUMERIC'] = 'C'
+    os.environ["LVM_SUPPRESS_FD_WARNINGS"] = "1"
+
+def setup_exception_handler():
+    import signal
+    import traceback
+    import cStringIO
+    def signal_handler(sig, frame):
+        if sig == signal.SIGTERM:
+            sys.exit(1)
+    def exception_handler(exception, value, error_traceback):
+        """ YALI exception handler for showing exceptions in GUI """
+        signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
+
+        sio = cStringIO.StringIO()
+
+        sio.write(_("Please file a bug report to <http://bugs.pardus.org.tr>.\n"))
+
+        _value = ''
+        for arg in value.args:
+            _value += str(arg) + '\n'
+
+        sio.write(_value)
+        sio.write(str(exception))
+        sio.write('\n\n')
+        sio.write(_("Backtrace:"))
+        sio.write('\n')
+        traceback.print_tb(error_traceback, None, sio)
+
+        sio.seek(0)
+        exception_traceback =  unicode(sio.read())
+
+        ctx.logger.debug(_("Unhandled internal YALI exception:%s") % exception_traceback)
+
+        if ctx.interface:
+            ctx.interface.exceptionWindow(exception, exception_traceback)
+
+    sys.excepthook = exception_handler
+    signal.signal(signal.SIGTERM, signal_handler)
+
+def init_gui_interface():
+    from yali.gui.interface import Interface
+    ctx.interface = Interface()
+
+def init_gui_runner():
+    from yali.gui.runner import Runner
+    gui_runner = Runner()
+    gui_runner.run()
+
+def load_options(argv=None):
+    from optparse import OptionParser
+    parser = OptionParser()
+    parser.add_option("-d", "--debug", dest="debug",
+                      action="store_true", default=False,
+                      help="enable debug")
+    parser.add_option("-c", "--config", dest="conffile",
+                      help="Use alternate configuration file", metavar="FILE")
+    parser.add_option("--dryRun", dest="dryRun",
+                      action="store_true",
+                      help="only show the result")
+    parser.add_option("--baseonly", dest="baseonly",
+                      action="store_true",
+                      help="install base system packages")
+    parser.add_option("--enable-collection", dest="collection",
+                      action="store_true", default=False,
+                      help="install collection base installation"
+                           " if collections exist")
+    parser.add_option("--system", dest="install_type", default=0,
+                      action="store_const", const= 1,
+                      help="start system installation")
+    parser.add_option("--firstboot", dest="install_type",
+                      action="store_const", const=2,
+                      help="start with first boot options")
+    parser.add_option("--rescue", dest="install_type",
+                      action="store_const", const=3,
+                      help="start Yali with rescue mode")
+    parser.add_option("--oem", dest="install_type",
+                      action="store_const", const=4,
+                      help="start Yali with oem mode")
+    parser.add_option("--kahya", dest="kahya",
+                      help="run with Kahya file", metavar="FILE")
+    parser.add_option("-s", "--startFrom", dest="startFrom",
+                      type="int", default=0,
+                      help="start from the given screen (num)")
+    parser.add_option("-t", "--theme", dest="theme",
+                      help="load given theme", type="str", default="pardus")
+    parser.add_option("-b", "--branding", dest="branding",
+                      help="load given branding", type="str", default="pardus")
+
+    return parser.parse_args(argv)
+
+def main():
+    # Only root can run that application
+    if os.getuid() != 0:
+        print "%s must be run as root." % sys.argv[0]
+        sys.exit(1)
+
+    # Terminate plymouth daemon if needed
+    if os.path.exists("/bin/plymouth") and not os.system("/bin/plymouth --ping"):
+        os.system("/bin/plymouth quit --retain-splash")
+
+    ctx.logger.debug("Yali has been started")
+    load_modules()
+    setup_environment()
+    init_gui_interface()
+    setup_exception_handler()
+
+    (options, args) = load_options()
+    load_config(options)
+
+    ctx.flags.install_type = options.install_type
+
+    ctx.flags.startup = options.startFrom
+
+    ctx.flags.debug = options.debug
+
+    ctx.flags.dryRun = options.dryRun
+
+    ctx.flags.collection = options.collection
+
+    ctx.flags.baseonly = options.baseonly
+
+    ctx.flags.theme = options.theme
+
+    ctx.flags.branding = options.branding
+
+    if options.kahya:
+        ctx.flags.kahya = True
+        ctx.flags.kahyaFile = options.kahya
+
+
+    if not ctx.storage:
+        from yali.storage import Storage
+        ctx.storage = Storage()
+
+    if not ctx.bootloader:
+        from yali.storage.bootloader import BootLoader
+        ctx.bootloader = BootLoader(ctx.storage)
+
+    ctx.flags.parse_kernel_options(ctx)
+
+    init_gui_runner()
+
+
+if __name__ == "__main__":
+    sys.exit(main())

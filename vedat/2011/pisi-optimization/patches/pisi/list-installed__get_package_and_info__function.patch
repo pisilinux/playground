@@ -1,0 +1,38 @@
+diff -Nuar pisi_orig209/cli/listinstalled.py pisi/cli/listinstalled.py
+--- pisi_orig209/cli/listinstalled.py	2011-08-19 08:18:56.831000006 +0300
++++ pisi/cli/listinstalled.py	2011-08-19 10:38:29.401000094 +0300
+@@ -78,8 +78,7 @@
+             ctx.ui.info(_('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
+             print         '==========================================================================='
+         for pkg in installed:
+-            package = self.installdb.get_package(pkg)
+-            inst_info = self.installdb.get_info(pkg)
++            package, inst_info = self.installdb.get_package_and_info(pkg)
+             if self.options.long:
+                 ctx.ui.info(unicode(package))
+                 ctx.ui.info(unicode(inst_info))
+diff -Nuar pisi_orig209/db/installdb.py pisi/db/installdb.py
+--- pisi_orig209/db/installdb.py	2011-08-19 08:18:56.835999997 +0300
++++ pisi/db/installdb.py	2011-08-19 10:40:26.147000102 +0300
+@@ -220,6 +220,21 @@
+                            ctime)
+         return info
+ 
++    def get_package_and_info(self, package):
++        files_xml = os.path.join(self.package_path(package), ctx.const.files_xml)
++        ctime = pisi.util.creation_time(files_xml)
++        pkg = self.get_package(package)
++        state = "i"
++        if pkg.name in self.list_pending():
++            state = "ip"
++
++        info = InstallInfo(state,
++                           pkg.version,
++                           pkg.release,
++                           pkg.distribution,
++                           ctime)
++        return pkg, info
++
+     def __make_dependency(self, depStr):
+         node = piksemel.parseString(depStr)
+         dependency = pisi.dependency.Dependency()

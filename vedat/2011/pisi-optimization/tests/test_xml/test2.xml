@@ -1,0 +1,228 @@
+<PISI>
+    <Source>
+        <Name>NetworkManager</Name>
+        <Homepage>http://projects.gnome.org/NetworkManager</Homepage>
+        <Packager>
+            <Email>ozan@pardus.org.tr</Email>
+        </Packager>
+    </Source>
+    <Package>
+        <Name>NetworkManager</Name>
+        <Summary xml:lang="en">Network connection manager powered by D-Bus and UDEV</Summary>
+        <Summary xml:lang="tr">D-Bus üzerinden yapılandırmaya izin veren, gelişmiş bir ağ yönetim altyapısı</Summary>
+        <Description xml:lang="en">NetworkManager attempts to keep an active network connection available at all times.</Description>
+        <Description xml:lang="tr">NetworkManager, etkin bir bağlantı kurmak ve onu sürekli ayakta tutmak üzere tasarlanmış, D-Bus ve UDEV teknolojilerini kullanan bir ağ yönetim altyapısıdır.</Description>
+        <IsA>app:console</IsA>
+        <PartOf>network.connection</PartOf>
+        <License>LGPLv2.1</License>
+        <RuntimeDependencies>
+            <Dependency>nss</Dependency>
+            <Dependency>nspr</Dependency>
+            <Dependency>libnl</Dependency>
+            <Dependency>dhcpcd</Dependency>
+            <Dependency>iproute2</Dependency>
+            <Dependency versionFrom="1.4.12">iptables</Dependency>
+            <Dependency>ModemManager</Dependency>
+            <Dependency>avahi-autoipd</Dependency>
+            <Dependency>wpa_supplicant</Dependency>
+            <Dependency versionFrom="2.4.5">ppp</Dependency>
+            <Dependency>mobile-broadband-provider-info</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/lib/udev</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/lib/udev/rules.d</Path>
+            <Path fileType="data">/lib/systemd/system</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/etc/dbus-1</Path>
+            <Path fileType="data">/etc/NetworkManager/system-connections</Path>
+            <Path fileType="data">/var/run/NetworkManager</Path>
+            <Path fileType="data">/var/lib/NetworkManager</Path>
+            <Path fileType="config">/etc</Path>
+        </Files>
+        <Provides>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+        <AdditionalFiles>
+            <AdditionalFile target="/etc/NetworkManager/NetworkManager.conf" permission="0644" owner="root">NetworkManager.conf</AdditionalFile>
+            <AdditionalFile target="/etc/conf.d/NetworkManager" permission="0644" owner="root">NetworkManager.confd</AdditionalFile>
+            <AdditionalFile target="/usr/sbin/migrate-comar-network-profiles" permission="0755" owner="root">migrate-comar-network-profiles</AdditionalFile>
+        </AdditionalFiles>
+        <History>
+            <Update release="19">
+                <Date>2011-08-04</Date>
+                <Version>0.8.5.91</Version>
+                <Comment>Handle WLAN security passwords gracefully while upgrading distribution. pb#18873</Comment>
+                <Name>Metin Akdere</Name>
+                <Email>metin@pardus.org.tr</Email>
+            </Update>
+            <Update release="18">
+                <Date>2011-08-03</Date>
+                <Version>0.8.5.91</Version>
+                <Comment>Version bump</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="17">
+                <Date>2011-08-03</Date>
+                <Version>0.8.4.0</Version>
+                <Comment>Depend new iptables</Comment>
+                <Name>Mehmet Özdemir</Name>
+                <Email>mehmet@pardus.org.tr</Email>
+            </Update>
+            <Update release="16">
+                <Date>2011-04-26</Date>
+                <Version>0.8.4.0</Version>
+                <Comment>Version bump</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="15">
+                <Date>2011-02-27</Date>
+                <Version>0.8.3.996</Version>
+                <Comment>Bump to 0.8.4 beta2</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="14">
+                <Date>2011-02-03</Date>
+                <Version>0.8.2</Version>
+                <Comment>- fix memory leak when activating a VPN connection
+                - fix possible crash in nm_setting_update_secrets()
+                - clear wired secrets tries counter when appropriate
+                - clear wireless secrets tries counter when deactivating
+                - handle D-Bus disconnect better on exit
+                - handle IP Method changes after modem has been created
+                - fix nm_utils_security_valid() checks for Ad-Hoc APs (rh #632123)
+                - fix a memory leaks in nm_setting_to_string()
+                - fix a crash due to uninitialized nis_domain (novell #655685)
+                - suppress error message when user settings service is not active
+                - handle device removal when properties are unreadable
+                - allow uppercase MAC addresses in unmanaged-devices in config file (rh #654714)
+                - ensure that dhcp client is exited
+                - fix uninitialized variable
+                - prevent dhcpcd from messing with routing (bgo #634983)
+                - ignore temporary files (bgo #602868)
+                - quiet keyfile plugin when re-read connection is the same as in-memory one
+                - install nm-online binary
+                - fix extra whitespaces in syslog outputs</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="13">
+                <Date>2011-01-27</Date>
+                <Version>0.8.2</Version>
+                <Comment>Restart and clean nscd caches on DNS change.</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="12">
+                <Date>2011-01-26</Date>
+                <Version>0.8.2</Version>
+                <Comment>Add missing policy file translations.</Comment>
+                <Name>Gökçen Eraslan</Name>
+                <Email>gokcen@pardus.org.tr</Email>
+            </Update>
+            <Update release="11">
+                <Date>2011-01-17</Date>
+                <Version>0.8.2</Version>
+                <Comment>Fix an assertion crash</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="10">
+                <Date>2010-12-07</Date>
+                <Version>0.8.2</Version>
+                <Comment>- Grab a serious crash fix from NM git tree,
+                - Set the backend as the default one.</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="9">
+                <Date>2010-11-08</Date>
+                <Version>0.8.2</Version>
+                <Comment>- Version bump,
+                - Add systemd support,
+                - Temporarily disable updating hostname.</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="8">
+                <Date>2010-10-13</Date>
+                <Version>0.8.1</Version>
+                <Comment>Mass rebuild for Pardus 2011 Beta</Comment>
+                <Name>Gökcen Eraslan</Name>
+                <Email>gokcen@pardus.org.tr</Email>
+            </Update>
+            <Update release="7">
+                <Date>2010-09-13</Date>
+                <Version>0.8.1</Version>
+                <Comment>Fix system CA certificate path.</Comment>
+                <Name>Gökçen Eraslan</Name>
+                <Email>gokcen@pardus.org.tr</Email>
+            </Update>
+            <Update release="6">
+                <Date>2010-08-24</Date>
+                <Version>0.8.1</Version>
+                <Comment>Split devel package.</Comment>
+                <Name>Fatih Aşıcı</Name>
+                <Email>fatih@pardus.org.tr</Email>
+            </Update>
+            <Update release="5">
+                <Date>2010-07-23</Date>
+                <Version>0.8.1</Version>
+                <Comment>Version bump</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="4">
+                <Date>2010-07-02</Date>
+                <Version>0.8.0.999</Version>
+                <Comment>Bump to 0.8.0.999</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="3">
+                <Date>2010-05-26</Date>
+                <Version>0.8.0.998</Version>
+                <Comment>Bump to beta2</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="2">
+                <Date>2010-05-20</Date>
+                <Version>0.8.0.997</Version>
+                <Comment>Version bump</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+            <Update release="1">
+                <Date>2010-04-26</Date>
+                <Version>0.8_20100426</Version>
+                <Comment>Initial release.</Comment>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Update>
+        </History>
+        <BuildHost>buildfarm.pardus.org.tr</BuildHost>
+        <Distribution>Pardus</Distribution>
+        <DistributionRelease>2011</DistributionRelease>
+        <Architecture>x86_64</Architecture>
+        <InstalledSize>3264627</InstalledSize>
+        <PackageFormat>1.2</PackageFormat>
+        <Source>
+            <Name>NetworkManager</Name>
+            <Homepage>http://projects.gnome.org/NetworkManager</Homepage>
+            <Packager>
+                <Name>Ozan Çağlayan</Name>
+                <Email>ozan@pardus.org.tr</Email>
+            </Packager>
+        </Source>
+    </Package>
+</PISI>

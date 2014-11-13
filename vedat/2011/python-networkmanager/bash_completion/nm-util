@@ -1,0 +1,56 @@
+# nm-util bash completion file
+
+_nm-util() {
+    local cur prev
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    case "$prev" in
+        -h|-l|-L|-A|-D|-M)
+            return 0
+            ;;
+        --help|--list|--list-active|--activate|--deactivate|--modify|--delete)
+            return 0
+            ;;
+        -u|--uuid)
+            local uuids=$(nm-util --list | awk '/^UUID:/ { print $2 }')
+            COMPREPLY=( $(compgen -W "$uuids" -- $cur) )
+            return 0
+            ;;
+        -t)
+            COMPREPLY=( $(compgen -W 'wired wireless' -- $cur) )
+            return 0
+            ;;
+        -d)
+            _available_interfaces
+            return 0
+            ;;
+    esac
+
+    local opts="-h -l -L -A -D -C -M -u -i -t -d"
+    local longopts="--help --list --list-active --activate --deactivate --create --modify --delete --uuid --id"
+    case "$cur" in
+        --*)
+            COMPREPLY=( $(compgen -W "$longopts" -- $cur) )
+            return 0
+            ;;
+        -*)
+            COMPREPLY=( $(compgen -W "$opts $longopts" -- $cur) )
+            return 0
+            ;;
+        [A-Za-z0-9]*)
+            return 0
+            ;;
+    esac
+
+
+    COMPREPLY=( $(compgen -W "$opts $longopts" -- $cur) )
+    return 0
+}
+
+complete -F _nm-util nm-util
+
+
+
+# vim: set ft=sh sw=4 ts=4 et

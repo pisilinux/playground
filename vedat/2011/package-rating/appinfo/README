@@ -1,0 +1,30 @@
+AppInfo
+-------
+Package Management System indepented, package metadata
+information management system.
+
+For now it just supports Pisi (Pardus Package Management System):
+
+Following dependencies must be installed:
+
+- Python 2.6>
+- sqlite3
+- pisi
+
+Creating a Score DB
+===================
+
+Server Settings
+~~~~~~~~~~~~~~~
+
+ $ appinfo -c                               # Creates an empty db named appinfo.db
+ $ appinfo -f PATH/TO/DB -p                 # Reads and uptades packages in the appinfo score db
+ $ appinfo -f PATH/TO/DB PACKAGE_NAME SCORE # To update current score of the PACKAGE_NAME with SCORE in given DB
+
+Client Settings
+~~~~~~~~~~~~~~~
+
+ $ appinfo -s SERVER_URL                # Sets appinfo remote server for client side
+ $ appinfo -u                           # Updates remote db from server settings if requires
+ $ appinfo PACKAGE_NAME                 # To get current score of the PACKAGE_NAME
+

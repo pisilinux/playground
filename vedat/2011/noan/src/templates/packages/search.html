@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% load package_extras %}
+{% load i18n %}
+{% block title %}Pardus - {% trans "Package Database" %}{% endblock %}
+{% block navbarclass %}anb-packages{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/media/admin_media/css/widgets.css" />
+{% endblock %}
+
+{% block content %}
+<div id="pkglist-search" class="box filter-criteria">
+
+    <h2>{% trans "Package Database" %}</h2>
+
+    <h3>{% trans "Package Search" %}</h3>
+    <form id="pkg-search" method="get" action="/packages/">
+        <p><input type="hidden" name="sort" value='{{sort}}' /></p>
+        {{ search_form.non_field_errors }}
+        <fieldset>
+            <legend>{% trans "Enter search criteria" %}</legend>
+            <div>{{ search_form.architecture.errors }}
+                <label for="id_architecture" title="{% trans "Limit results a specific CPU architecture" %}">
+                    {% trans "Arch" %}</label>{{ search_form.arch }}</div>
+            <div>{{ search_form.repo.errors }}
+                <label for="id_repo" title="{% trans "Limit results to a specific respository" %}">
+                    {% trans "Repository" %}</label>{{ search_form.repo }}</div>
+            <div>{{ search_form.repo.errors }}
+                <label for="id_repo" title="{% trans "Limit results to a specific respository" %}">
+                    {% trans "Component" %}</label>{{ search_form.pkgbase }}</div>
+            <div>{{ search_form.q.errors }}
+                <label for="id_q" title="{% trans "Enter keywords as desired" %}">
+                    {% trans "Keywords" %}</label>{{ search_form.q }}
+            {{ search_form.search_files.errors }}
+                <label for="id_search_files" title="{% trans "Search in package files" %}">
+                    {% trans "Search in package files" %}</label>{{ search_form.search_files }}</div>
+            <div>{{ search_form.packager.errors }}
+                <label for="id_packager" title="{% trans "Limit results to a specific packager" %}">
+                    {% trans "Packager" %}</label>{{ search_form.packager }}</div>
+            <div>{{ search_form.last_update.errors }}
+                <label for="id_last_update" title="{% trans "Limit results to a date after the date entered" %}">
+                    {% trans "Last Updated After" %}</label>{{ search_form.last_update }}</div>
+            <div>{{ search_form.limit.errors }}
+                <label for="id_limit" title="{% trans "Select the number of results to display per page" %}">
+                    {% trans "Per Page" %}</label>{{ search_form.limit }}</div>
+            <div><label>&nbsp;</label><input title="{% trans "search for packages using this criteria" %}"
+                type="submit" value="{% trans "Search" %}" /></div>
+        </fieldset>
+    </form>
+
+</div><!-- #pkglist-search -->
+
+{% if package_list %}
+<div id="pkglist-results" class="box">
+
+    {% if paginator %}
+    <div id="pkglist-stats-top">
+
+        <p>
+        {% blocktrans with paginator_count=paginator.count page_obj_number=page_obj.number paginator_num_pages=paginator.num_pages %}
+        {{ paginator_count }} packages found. Page {{ page_obj_number }} of {{ paginator_num_pages }}.
+        {% endblocktrans %}
+        </p>
+
+        <p class="pkglist-nav">
+            {% if page_obj.has_previous %}
+            <a class="prev" href="/packages/{{page_obj.previous_page_number}}/?{{current_query}}"
+                title="{% trans "Go to previous page" %}">&lt; {% trans "Prev" %}</a>
+            {% else %}
+            <span class="prev">&lt; {% trans "Prev" %}</span>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <a class="next" href="/packages/{{page_obj.next_page_number}}/?{{current_query}}"
+                title="{% trans "Go to next page" %}">{% trans "Next" %} &gt;</a>
+            {% else %}
+            <span class="next">{% trans "Next" %} &gt;</span>
+            {% endif %}
+        </p>
+
+    </div>
+    {% endif %}
+
+    <form id="pkglist-results-form" method="post" action="/packages/update/">{% csrf_token %}
+
+        <table class="results">
+            <thead>
+                <tr>
+                    <th><a href="/packages/?{% buildsortqs "architecture" %}"
+                            title="{% trans "Sort packages by architecture" %}">{% trans "Arch" %}</a></th>
+                    <th><a href="/packages/?{% buildsortqs "distribution" %}"
+                            title="{% trans "Sort packages by repository" %}">{% trans "Repo" %}</a></th>
+                    <th><a href="/packages/?{% buildsortqs "pkgbase" %}"
+                            title="{% trans "Sort packages by components" %}">{% trans "Component" %}</a></th>
+                    <th><a href="/packages/?{% buildsortqs "name" %}"
+                            title="{% trans "Sort packages by package name" %}">{% trans "Name" %}</a></th>
+                    <th>{% trans "Version" %}</th>
+                    {% if search_files %}
+                    <th>{% trans "Files" %}</th>
+                    {% else %}
+                    <th>{% trans "Description" %}</th>
+                    {% endif %}
+                    <th><a href="/packages/?{% buildsortqs "-last_update" %}"
+                            title="{% trans "Sort packages by last update" %}">{% trans "Last Updated" %}</a></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for pkg in package_list %}
+                <tr class="{% cycle 'odd' 'even' %}">
+                    <td style="width: 1px;">{{ pkg.architecture.name }}</td>
+                    <td style="width: 1px;">{{ pkg.repo.name|capfirst }}</td>
+                    <td style="width: 1px;"><a href="/packages/?pkgbase={{pkg.partOf.name}}"
+                            title="Component details for {{ pkg.partOf.name }}">{{ pkg.partOf.name }}</a></td>
+                    <td style="width: 1px;"><a href="/packages/{{ pkg.url }}"
+                            title="Package details for {{ pkg.name }}">{{ pkg.name }}</a></td>
+                    <td style="width: 1px;">{{ pkg.full_version }}</td>
+                    <td class="wrap">
+                        {% if search_files %}
+                            {% with files=pkg.package_files|find_files:q %}
+                                {% for file in files %}
+                                {{ file|safe|escape }}{% if not forloop.last %}<br />{% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                        {% else %}
+                            {{ pkg.pkgdesc }}
+                        {% endif %}
+                    </td>
+                    <td style="width: 1px;">{{ pkg.last_update|date }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% if paginator %}
+        <div id="pkglist-stats-bottom">
+
+            <p>
+            {% blocktrans with paginator_count=paginator.count page_obj_number=page_obj.number paginator_num_pages=paginator.num_pages %}
+            {{ paginator_count }} packages found. Page {{ page_obj_number }} of {{ paginator_num_pages }}.
+            {% endblocktrans %}
+            </p>
+
+                <p class="pkglist-nav">
+                    {% if page_obj.has_previous %}
+                    <a class="prev" href="/packages/{{page_obj.previous_page_number}}/?{{current_query}}"
+                        title="Go to previous page">&lt; {% trans "Prev" %}</a>
+                    {% else %}
+                    <span class="prev">&lt; {% trans "Prev" %}</span>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                    <a class="next" href="/packages/{{page_obj.next_page_number}}/?{{current_query}}"
+                        title="Go to next page">{% trans "Next" %} &gt;</a>
+                    {% else %}
+                    <span class="next">{% trans "Next" %} &gt;</span>
+                    {% endif %}
+                </p>
+
+        </div>
+        {% endif %}
+
+    </form>
+
+</div><!-- #pkglist-results -->
+{% else %}
+<!-- TODO -->
+<div class="box">
+    <p>{% trans "We couldn't find any packages matching your query. Try searching again using different criteria." %}</p>
+</div>
+{% endif %}
+
+<script type="text/javascript" src="/jsi18n/"></script>
+{% load adminmedia %}<script type="text/javascript" src="{% admin_media_prefix %}js/core.js"></script>
+<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% admin_media_prefix %}{% endfilter %}";</script>
+{{search_form.media}}
+{% endblock %}

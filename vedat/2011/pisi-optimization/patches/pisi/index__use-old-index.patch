@@ -1,0 +1,147 @@
+diff -aNur pisi_orig/api.py pisi/api.py
+--- pisi_orig/api.py	2011-08-15 09:16:39.264000011 +0300
++++ pisi/api.py	2011-08-16 10:49:40.490000024 +0300
+@@ -775,7 +775,7 @@
+ 
+ def index(dirs=None, output='pisi-index.xml',
+           skip_sources=False, skip_signing=False,
+-          compression=0):
++          compression=0, use_old_index=False):
+     """Accumulate PiSi XML files in a directory, and write an index."""
+     index = pisi.index.Index()
+     index.distribution = None
+@@ -784,7 +784,7 @@
+     for repo_dir in dirs:
+         repo_dir = str(repo_dir)
+         ctx.ui.info(_('Building index of PiSi files under %s') % repo_dir)
+-        index.index(repo_dir, skip_sources)
++        index.index(repo_dir, skip_sources, use_old_index)
+ 
+     sign = None if skip_signing else pisi.file.File.detached
+     index.write(output, sha1sum=True, compress=compression, sign=sign)
+diff -aNur pisi_orig/cli/index.py pisi/cli/index.py
+--- pisi_orig/cli/index.py	2011-08-15 09:16:39.254000015 +0300
++++ pisi/cli/index.py	2011-08-16 10:49:40.490000024 +0300
+@@ -73,6 +73,11 @@
+                          default=False,
+                          help=_("Do not sign index."))
+ 
++        group.add_option("--use-old-index",
++                         action="store_true",
++                         default=False,
++                         help=_("Use old pisi-index.xml to get package information and sha1sum."))
++
+         self.parser.add_option_group(group)
+ 
+     def run(self):
+@@ -90,4 +95,6 @@
+         index(self.args or ["."], ctx.get_option('output'),
+               skip_sources=ctx.get_option('skip_sources'),
+               skip_signing=ctx.get_option('skip_signing'),
+-              compression=compression)
++              compression=compression,
++              use_old_index=ctx.get_option('use_old_index'))
++
+diff -aNur pisi_orig/index.py pisi/index.py
+--- pisi_orig/index.py	2011-08-15 09:16:39.254000014 +0300
++++ pisi/index.py	2011-08-16 10:51:27.716000031 +0300
+@@ -84,9 +84,10 @@
+         tmpdir = os.path.join(ctx.config.index_dir(), repo)
+         pisi.file.File.check_signature(filename, tmpdir)
+ 
+-    def index(self, repo_uri, skip_sources=False):
++    def index(self, repo_uri, skip_sources=False, use_old_index=False):
+         self.repo_dir = repo_uri
+ 
++        old_index_files = [] # pisi-index.xml
+         packages = []
+         specs = []
+         deltas = {}
+@@ -105,6 +106,9 @@
+                 elif fn.endswith(ctx.const.package_suffix):
+                     packages.append(os.path.join(root, fn))
+ 
++                if fn == 'pisi-index.xml':
++                    old_index_files.append(os.path.join(root, fn))
++
+                 if fn == 'components.xml':
+                     self.components.extend(add_components(os.path.join(root, fn)))
+                 if fn == 'pspec.xml' and not skip_sources:
+@@ -116,6 +120,25 @@
+ 
+         ctx.ui.info("")
+ 
++        # if there is no pisi package in the working dir, don't parse pisi-index.xml
++        # because old_pisi_index used only getting package metadata and sha1sum
++        if use_old_index and packages:
++            old_indexes = [] # list of old_index_dict's
++            # FIXME: Use of many index file may cause high memory usage. index file count limit ???
++            if len(old_index_files) > 1:
++                ctx.ui.info("%-80.80s\r" % (_('%d index file found. This may cause high memory usage.')
++                                            % len(old_index_files)))
++            for fpath in old_index_files:
++                ctx.ui.info("Parsing old index: %s" % fpath)
++                index_xml = Index()
++                index_xml.read(fpath)
++                old_index_dict = {}
++                for package in index_xml.packages:
++                    # packageUri : path/PyKDEeXtensions-0.4.0-13-c2-x86_64.pisi
++                    old_index_dict[os.path.basename(package.packageURI)] = package
++
++                old_indexes.append(old_index_dict)
++
+         # Create a process pool, as many processes as the number of CPUs we
+         # have
+         pool = multiprocessing.Pool()
+@@ -152,13 +175,26 @@
+                 # with single parameters only. So we have to send our
+                 # parameters as a tuple to workaround that
+ 
+-                latest_packages.append((pkg, deltas, repo_uri))
++                if use_old_index:
++                    pkg_metadata = None
++                    # Find metadata from old pisi index
++                    for pmetadatas in old_indexes:
++                        pkg_fn = os.path.basename(pkg)
++                        if pmetadatas.has_key(pkg_fn):
++                            pkg_metadata = pmetadatas[pkg_fn]
++                            break
++                    latest_packages.append((pkg, deltas, repo_uri, pkg_metadata))
++                else:
++                    latest_packages.append((pkg, deltas, repo_uri))
+ 
+         # Before calling pool.map check if list is empty or not: python#12157
+         if latest_packages:
+             try:
+                 # Add binary packages to index using a process pool
+-                self.packages = pool.map(add_package, latest_packages)
++                if use_old_index:
++                    self.packages = pool.map(add_package_using_old_index, latest_packages)
++                else:
++                    self.packages = pool.map(add_package, latest_packages)
+             except:
+                 pool.terminate()
+                 pool.join()
+@@ -233,6 +269,22 @@
+ 
+         raise Exception
+ 
++def add_package_using_old_index(params):
++    try:
++        path, deltas, repo_uri, package_metadata = params
++
++        if package_metadata:
++            ctx.ui.info("%-80.80s\r" % (_('Adding package to index: %s') %
++                                        os.path.basename(path)), noln = True)
++            return package_metadata
++        else:
++            # if package not found in pisi index, use add_package
++            return add_package((path, deltas, repo_uri))
++
++    except KeyboardInterrupt:
++        # Multiprocessing hack, see add_package method for explanation
++        raise Exception
++
+ def add_groups(path):
+     ctx.ui.info(_('Adding groups.xml to index'))
+     groups_xml = group.Groups()

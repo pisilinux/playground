@@ -1,0 +1,484 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# Copyright 2010 Aerva, Inc
+# Copyright 2010 Gavin Bisesi
+# Copyright 2010 Mark Renouf
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import sys
+import dbus
+from optparse import OptionParser, OptionGroup
+from networkmanager import *
+from networkmanager.ipaddr import *
+import uuid
+
+nm = None
+
+class Usage(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+
+def device_for_hwaddr(hwaddr, nm=NetworkManager()):
+    for device in nm.devices:
+        if device.hwaddress == hwaddr:
+            return device
+
+def device_by_name(name, nm=NetworkManager()):
+    """Return the Device object for a given device name (eg. 'eth0' 'wlan0' 'ttyUSB1')"""
+    try:
+        return [dev for dev in nm.devices if str(dev.interface) == name][0]
+    except IndexError:
+        return None
+
+def connections_for_device(device, nm=NetworkManager()):
+    hwaddr = None
+    for device in nm.devices:
+        if device.interface == device:
+            hwaddr = device.hwaddr
+            break
+    if hwaddr is None:
+        return None
+
+    conns = []
+    for conn in nm.connections:
+        if conn.settings.mac_address == hwaddr:
+            conns.append(conn)
+    return conns
+
+def parse_connection_settings(args):
+    """Parses position arguments for connection settings
+
+    Format is in the form of [[token] <value>, ...] where the value
+    may be optional for some boolean options. Any problems are raised
+    as a ValueError with a user-friendly message.
+    """
+    options = {"auto": True}
+    pos = 0
+    # ip-based options (for static config, mostly)
+    ipv4_opts = ('ip','mask','gw','dns',)
+    # Options passed with direct values.
+    #   Currently used with CDMA
+    string_opts = ('num','user','pass',)
+    # Auto is the 'default' option
+    allowed_opts = ['auto',]
+    allowed_opts.extend(ipv4_opts)
+    allowed_opts.extend(string_opts)
+
+    while pos < len(args):
+        opt = args[pos]
+        if not opt in allowed_opts:
+            raise ValueError("Invalid option '%s'" % (opt))
+
+        if opt != "auto":
+            pos += 1
+            # The rest of these require a value in the next position
+            if pos == len(args):
+                raise ValueError("Missing value for option '%s'" % (opt))
+
+            value = args[pos]
+            try:
+                if opt in ipv4_opts:
+                    options[opt] = IPAddress(value,version=4)
+
+            except IPv4IpValidationError, e:
+                raise ValueError("Invalid value for '%s': %s" % (opt, e))
+
+        if opt in string_opts:
+            options[opt] = dbus.String(value)
+
+        if 'ip' in options:
+            options['auto'] = False
+
+        pos += 1
+
+    # TODO: Update for CDMA
+    settings_usage = "settings: \"[auto | ip <address> mask <address> gw <address> dns <dns>]"
+
+    if not options['auto']:
+        required_opts = ('ip', 'mask', 'gw', 'dns')
+        for opt in required_opts:
+            if not opt in options:
+                raise ValueError("Settings: Missing value for '%s'\n" % opt + settings_usage)
+
+    return options
+
+def display_connection(conn):
+    types = {'802-3-ethernet':'Wired (Ethernet)',
+             '802-11-wireless':'Wireless (Wifi)',
+             'cdma':'CDMA (Mobile Broadband)',}
+
+    print "UUID:     %s" % conn.settings.uuid
+    print "Id:       %s" % conn.settings.id
+    print "Type:     %s" % (types[conn.settings.type])
+    if conn.settings.mac_address is not None:
+        device = device_for_hwaddr(conn.settings.mac_address)
+        print "Device:   %s" % ("Unknown" if device is None else device.interface)
+
+    if conn.settings.auto:
+        print "Address:  auto (DHCP)"
+    else:
+        print "Address:  %s" % conn.settings.address
+        print "Netmask:  %s" % conn.settings.netmask
+        print "Gateway:  %s" % conn.settings.gateway
+
+    if conn.settings.dns is not None:
+        print "DNS:      %s" % conn.settings.dns
+
+def make_connection_filter(options):
+    types = {'wired': '802-3-ethernet',
+             'wireless': '802-11-wireless',
+             'cdma':'cdma',}
+
+    filters = []
+
+    if options.type:
+        filters.append(lambda conn: types[options.type] == str(conn.settings.type))
+
+    if options.device:
+        def devfilt(conn):
+            dev = device_by_name(options.device)
+            try:
+                return str(dev.hwaddress) == conn.settings.mac_address
+            except AttributeError:
+                # dev.hwaddress is not there
+                return False
+            except NameError:
+                # dev is not there
+                return False
+        filters.append(devfilt)
+
+    if options.uuid:
+        filters.append(lambda conn: options.uuid == conn.settings.uuid)
+
+    def connection_filter(conn):
+        return all(map(lambda f: f(conn), filters))
+
+    return connection_filter
+
+
+def list_connections(options, nm=NetworkManager()):
+    filt = make_connection_filter(options)
+    for conn in filter(filt, nm.connections):
+        display_connection(conn)
+
+def list_active_connections(options, nm=NetworkManager()):
+    types = {'802-3-ethernet':'Wired (Ethernet)',
+             '802-11-wireless':'Wireless (Wifi)',
+             'cdma':'CDMA (Mobile Broadband)',}
+    for active in nm.active_connections:
+        print "UUID:     %s" % active.connection.settings.uuid
+        print "Id:       %s" % active.connection.settings.id
+        print "State:    %s" % active.state
+        #print "Default:  %s" % active.default
+        print "Type:     %s" % (types[active.connection.settings.type])
+        print "Device:   %s" % (",".join([device.interface for device in active.devices]))
+        #print "Settings from %s:" % active.service_name
+
+        if active.connection.settings.auto:
+            print "Address:  auto (DHCP)"
+        else:
+            print "Address:  %s" % active.connection.settings.address
+            print "Netmask:  %s" % active.connection.settings.netmask
+            print "Gateway:  %s" % active.connection.settings.gateway
+
+        if active.connection.settings.dns is not None:
+            print "DNS:      %s"  % active.connection.settings.dns
+
+def create_connection(parser, options, args, nm=NetworkManager()):
+    types = {
+        'wired': DeviceType.ETHERNET,
+        'wireless': DeviceType.WIFI,
+        'cdma': DeviceType.CDMA,
+    }
+
+    if not options.id:
+        parser.error("Create: you must supply a connection id (--id=\"MyConnection\").")
+
+    if not options.device and not options.type:
+        parser.error("Create: you must specify a device name or connection type.")
+
+    device = None
+    # find the device with the specified interface name ('eth0', etc)
+    # TODO: use dict lookup table
+    if options.device:
+        for d in nm.devices:
+            if d.interface == options.device:
+                device = d
+
+    # if a device was specified, create a connection of the same type
+    # otherwise use the type that was supplied through the 'type' option
+    type = device.type if device else types[options.type]
+
+    # Create a settings object of the appropriate type
+    settings = None
+
+    # FIXME: Smelly (Factory pattern to fix?)
+    if type == DeviceType.ETHERNET:
+        settings = WiredSettings()
+    elif type == DeviceType.WIFI:
+        settings = WirelessSettings()
+    elif type == DeviceType.CDMA:
+        settings = CdmaSettings()
+
+    settings.uuid = str(uuid.uuid4())
+
+    # apply the settings
+    settings.id = options.id
+    if device is not None:
+        settings.device = device
+        # TODO: Add Device::get_hwaddress()
+        if type == DeviceType.ETHERNET:
+            settings.mac_address = device.hwaddress
+
+    # FIXME: Code duplication vs modify_connection()
+    try:
+        params = parse_connection_settings(args)
+    except ValueError, e:
+        parser.error(e)
+
+    if params['auto']:
+        settings.set_auto()
+    else:
+        settings.address = params['ip']
+        settings.netmask = params['mask']
+        settings.gateway = params['gw']
+
+    possible_settings = ('dns','num','user','pass')
+    for s in possible_settings:
+        if s in params:
+            setattr(settings, s, params[s])
+
+    nm.add_connection(settings)
+
+def modify_connection(parser, options, args, nm=NetworkManager()):
+    types = {'wired': '802-3-ethernet',
+             'wireless': '802-11-wireless',
+             'cdma':'cdma',}
+    uuid = options.ensure_value('uuid', None)
+
+    if uuid is None:
+        parser.error("Modify: you must supply a connection uuid "
+                     "(Use the  '--list' option to find this).")
+
+    conn = nm.get_connection(uuid)
+    if conn is None:
+        parser.error("Modify: the uuid does not match an existing connection")
+
+    settings = conn.settings
+    if options.type and conn.settings.type != types[options.type]:
+        parser.error("Modify: cannot change the type of a connection. Use --create")
+
+    # FIXME: Code duplication vs create_connection()
+    try:
+        params = parse_connection_settings(args)
+    except ValueError, e:
+        parser.error(e)
+
+    if params['auto']:
+        settings.set_auto()
+    else:
+        settings.address = params['ip']
+        settings.netmask = params['mask']
+        settings.gateway = params['gw']
+
+    possible_settings = ('dns','num','user','pass')
+    for s in possible_settings:
+        if s in params:
+            setattr(settings, s, params[s])
+
+    conn.update(settings)
+
+def delete_connection(parser, options, nm=NetworkManager()):
+    uuid = options.ensure_value('uuid', None)
+
+    if uuid is None:
+        parser.error("Delete: you must supply a connection uuid.")
+
+    conn = nm.get_connection(uuid)
+    if conn is None:
+        parser.error("Delete: the uuid does not match an existing connection")
+
+    conn.delete()
+
+def activate_connection(parser, options, nm=NetworkManager()):
+    uuid = options.ensure_value('uuid', None)
+
+    if uuid is None:
+        parser.error("Activate: you must supply a connection uuid "
+                     "(Use the  '--list' option to find this).")
+
+    conn = nm.get_connection(uuid)
+    if conn is None:
+        parser.error("Activate: the uuid does not match an existing connection")
+    device = None
+
+    #print "Devices: %s" % nm.devices
+    types = {
+        DeviceType.ETHERNET: '802-3-ethernet',
+        DeviceType.WIFI: '802-11-wireless',
+        DeviceType.CDMA: 'cdma',
+    }
+
+    for d in nm.devices:
+        try:
+            if types[d.type] == conn.settings.type:
+                device = d
+                break
+        except KeyError:
+            raise UnsupportedConnectionType("Activate: connection type '%s' is not supported" % d.type)
+
+    if device is None:
+        parser.error("Activate: there are no network devices "
+                     "available for this type of connection")
+
+    try:
+        nm.activate_connection(conn, device)
+    except dbus.exceptions.DBusException, e:
+        if str(e).startswith('org.freedesktop.NetworkManager.UnmanagedDevice'):
+            parser.error("Activate: device (%s) not currently managed" % device.interface)
+        else:
+            raise
+
+def deactivate_connection(parser, options, nm=NetworkManager()):
+    uuid = options.ensure_value('uuid', None)
+
+    if uuid is None:
+        parser.error("Deactivate: you must supply a connection uuid "
+                     "(Use the  '--list' option to find this).")
+
+    for active in nm.active_connections:
+        if active.connection.settings.uuid == uuid:
+            nm.deactivate_connection(active.proxy)
+            return
+
+def main(argv=None):
+
+    if argv is None:
+        argv = sys.argv
+
+    usage = ("usage: %prog --ACTION [--uuid ID] [--id=""NAME""] [-d DEVICE] "
+             "[-t TYPE] [auto | ip <address> mask <address> gw <address> dns <dns>]")
+
+    parser = OptionParser(usage)
+
+    action_group = OptionGroup(parser,
+        "Action", "Specify what action to perform (choose one).")
+
+    # Actions
+    action_group.add_option("-l", "--list",
+                        action="store_const",
+                        dest="action",
+                        const="list",
+                        help='List the existing connections')
+
+    action_group.add_option("-L", "--list-active",
+                        action="store_const",
+                        dest="action",
+                        const="list-active",
+                        help='List the connection which are currently active')
+
+    action_group.add_option("-A", "--activate",
+                        action="store_const",
+                        dest="action",
+                        const="activate",
+                        help='Activate a connection (must specify UUID)')
+
+    action_group.add_option("-D", "--deactivate",
+                        action="store_const",
+                        dest="action",
+                        const="deactivate",
+                        help='Deactivate a connection (must specify UUID)')
+
+    action_group.add_option("-C", "--create",
+                        action="store_const",
+                        dest="action",
+                        const="create",
+                        help='Create a new connection')
+
+    action_group.add_option("-M", "--modify",
+                        action="store_const",
+                        dest="action",
+                        const="modify",
+                        help='Update a connection')
+
+    action_group.add_option("--delete",
+                        action="store_const",
+                        dest="action",
+                        const="delete",
+                        help='Delete a connection')
+
+    parser.add_option_group(action_group)
+
+    details_group = OptionGroup(parser, "Details")
+
+    # Options
+    details_group.add_option("-u", "--uuid",
+                        action="store",
+                        dest="uuid",
+                        help="the unique id of connection to act on (see --list)")
+
+    details_group.add_option("-i", "--id",
+                        action="store",
+                        dest="id",
+                        help="the id (name) to use for the connection")
+
+    details_group.add_option("-t", "--type",
+                        choices=['wired','wireless', 'cdma'],
+                        action="store",
+                        dest="type",
+                        help="the connection type [wired|wireless|cdma]")
+
+    details_group.add_option("-d", "--device",
+                        action="store",
+                        dest="device",
+                        help="the network device to act on (ethX, wlanX, etc)")
+
+    parser.add_option_group(details_group)
+
+    (options, args) = parser.parse_args()
+
+    if not options.action:
+        parser.error("You must specifiy an action")
+
+    nm = NetworkManager()
+
+    # TODO: Use dict as dispatch table
+    if options.action is 'list':
+        list_connections(options, nm)
+    elif options.action is 'list-active':
+        list_active_connections(options, nm)
+    elif options.action is 'activate':
+        activate_connection(parser, options, nm)
+    elif options.action is 'deactivate':
+        deactivate_connection(parser, options, nm)
+    elif options.action is 'create':
+        create_connection(parser, options, args, nm)
+    elif options.action is 'modify':
+        modify_connection(parser, options, args, nm)
+    elif options.action is 'delete':
+        delete_connection(parser, options, nm)
+    elif options.action is 'enable':
+        enable_connection(parser, options, nm)
+    elif options.action is 'disable':
+        disable_connection(parser, options, nm)
+    else:
+        parser.print_usage()
+
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+

@@ -1,0 +1,234 @@
+body {
+    background-image:url('images/background.png');
+    background-color:#333;
+    background-repeat:no-repeat;
+    margin-left:0px;
+    color: white; text-shadow: #000 0em 0em 0.3em;
+}
+
+a {
+    color: white;
+    text-decoration:none;
+}
+
+a:hover {
+    color: white; text-shadow: #000 0em 0em 0.6em;
+}
+
+#logo {
+    background-image:url('images/logo.png');
+    background-repeat:no-repeat;
+    position:absolute;
+    width:145px;
+    height:40px;
+    right:8px;
+    top:13px;
+}
+
+#root, #other {
+    width: 100%;
+    margin: 0px 0px;
+    padding-top:0px;
+}
+
+#other {
+    width: 100%;
+    padding-top:8px;
+}
+
+#root>tr>td, #other>tr>td {
+    vertical-align:top;
+    padding:15px;
+    padding-top:5px;
+    padding-right:0px;
+}
+
+#right {
+    background-repeat:no-repeat;
+}
+
+#left {
+    background-repeat:no-repeat;
+    width:33%;
+    margin-top:-10px;
+}
+
+.bloc {
+    background-repeat:no-repeat;
+    width:33%;
+    margin-top:-10px;
+}
+
+/* Left Panel */
+table.stock {
+    font-size:12px;
+    border:0px;
+    border-spacing:0;
+    color: white; text-shadow: #000 1px 1px 1px
+    margin-top:0px;
+    width:96%;
+}
+
+table.stock tr.info, tr.progress {
+    height:35px;
+}
+
+table.stock tr.info[onClick] {
+    cursor:pointer;
+}
+
+table.stock tr.info[onClick]:hover {
+    color: white; text-shadow: #000 0em 0em 0.6em;
+}
+
+table.stock tr.info td:nth-child(1) {
+    background-image:url('images/infoBack.png');
+    background-repeat:no-repeat;
+    width:30px;
+}
+
+table.stock tr.progress td:nth-child(1) {
+    background-image:url('images/infoBack.png');
+    background-repeat:no-repeat;
+    width:30px;
+}
+
+table.stock tr.info td:nth-child(1)>img,
+table.stock tr.progress td:nth-child(1)>img {
+    padding: 4px;
+    padding-top:0px;
+    width:22px;
+    height:22px;
+    border:none;
+}
+
+table.stock tr.progress td:nth-child(2)>img {
+    padding: 4px;
+    padding-top:0px;
+    padding-left:0px;
+    height:16px;
+    border:none;
+}
+
+table.stock tr.info td:nth-child(2) {
+    background-image:url('images/tbArk.png');
+    background-repeat:repeat-x;
+}
+
+table.stock tr.progress td:nth-child(2) {
+    background-image:url('images/tbArk.png');
+    background-repeat:repeat-x;
+    padding-right:6px;
+}
+
+table.stock tr.info td:nth-child(2)>span.detail {
+    float:right;
+    font-size:10px;
+    color: white; text-shadow: #000 0px 1px 0.2em;
+    font-weight:bold;
+}
+
+table.stock tr.info td:nth-child(3) {
+    background-image:url('images/tbSag.png');
+    background-repeat:no-repeat;
+    width:4px;
+}
+
+table.stock tr.progress td:nth-child(3) {
+    background-image:url('images/tbSag.png');
+    background-repeat:no-repeat;
+    width:4px;
+}
+
+table.stock>tr>th {
+    padding-top:10px;
+    text-align:left;
+}
+
+/* Media Devices */
+
+table.medias {
+    font-size:12px;
+    border:0px;
+    border-spacing:0;
+    color: white; text-shadow: #000 0px 0px 0.3em;
+}
+
+table.medias tr.media {
+    height:67px;
+}
+
+table.medias tr.media td:nth-child(1) {
+    padding-left:8px;
+    background-image:url('images/mdSol.png');
+    background-repeat:no-repeat;
+    width:56px;
+}
+
+table.medias tr.media td:nth-child(1)>img {
+    padding: 4px;
+    padding-left:8px;
+    padding-top:0px;
+    width:48px;
+    height:48px;
+    border:none;
+}
+
+table.medias tr.media td:nth-child(2) {
+    background-image:url('images/mdArk.png');
+    background-repeat:repeat-x;
+}
+
+table.medias tr.media td:nth-child(2)>span.detail {
+    float:right;
+    font-size:10px;
+    color: white; text-shadow: #000 0px 1px 0.2em;
+    font-weight:bold;
+}
+
+table.medias tr.media td:nth-child(3) {
+    background-image:url('images/mdSag.png');
+    background-repeat:no-repeat;
+    width:16px;
+}
+
+table.medias>tr>th {
+    padding-top:10px;
+    text-align:left;
+}
+
+th {
+    text-align:left;
+}
+
+/* Misc Stuff */
+h2 {
+    clear:left;
+    font-size:15px;
+}
+
+img.diskusage {
+    height:16px;
+    padding-top:4px;
+    padding-bottom:4px;
+}
+
+span.mediaDf {
+    font-size:11px;
+}
+
+img.mediaIcon {
+    padding:4px;
+    padding-left:0px;
+    float:left;
+}
+
+div.device {
+    width:100%;
+}
+
+span.deviceInfo {
+    float:left;
+    padding-left:7px;
+}
+

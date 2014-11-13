@@ -1,0 +1,51 @@
+YALI is Yet Another Linux Installer. It is the installer that sets up
+the system by installing packages from the installation media (eg. CD,
+network, Internet) and carrying out the basic configuration. YALI is
+intended to be smooth in operation and fast in performance. It's written in
+Python using Qt4.
+
+Fore more information about YALI, visit
+http://www.pardus.org.tr/eng/projeler/yali
+
+
+-------------------------------------------------------------
+-------------------------------------------------------------
+
+for creating live cd with installer
+
+checkout pardusman from
+http://svn.pardus.org.tr/uludag/trunk/kde/pardusman/
+
+checkout distribution files from
+http://svn.pardus.org.tr/uludag/trunk/distribution/
+
+open pardusmanproject.xml with pardusman.py and enter path for distribution files
+make package changes if you want and save xml
+
+make your iso with yaliTestMaker
+
+**make sure of
+-yali-live installed (sudo python setup.py install)
+-pardus-branding-files installed
+
+sudo python yaliTestMaker.py -p path_to_pardusman/pardusman.py -f path_distribution_files/pardusmanproject.xml -w /tmp/iso/x86_64/
+
+*your iso will be in /tmp/iso/x86_64/
+
+*there are some hardcoded parts in yaliTestMaker.py
+
+-like copying branding file from
+/usr/share/yali/branding/pardus/release.xml
+
+-you should give path for branding file from this directory
+( or it gives stack error :) 
+
+-and change hardcoded lines about python version
+
+
+*Other things
+I made some changes for pardusman
+open pardusman/repotools/project.py
+
+clean live_exclude list if you want
+or it will delete manpages, infos and logs

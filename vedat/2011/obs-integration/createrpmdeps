@@ -1,0 +1,146 @@
+#!/usr/bin/perl -w
+
+BEGIN {
+  unshift @INC, ($::ENV{'BUILD_DIR'} || '/usr/lib/build');
+}
+
+use Build;
+use strict;
+
+######################################################################
+
+my $rpmdepfile = $ARGV[0];
+
+my %tag;
+
+my %oldp;
+my %oldr;
+if (defined($rpmdepfile) && open(F, '<', $rpmdepfile)) {
+  while (<F>) {
+    chomp;
+    if (/^P:([^ ]): /) {
+      $oldp{$1} = $_;
+    } elsif (/^R:([^ ]): /) {
+      $oldr{$1} = $_;
+    }
+  }
+  close F;
+}
+
+my $redo = 1;
+foreach my $dir (@ARGV) {
+  $redo = 0;
+  my @known;
+  my %known2fn;
+  my %known2path;
+  my %fnsize2id;
+  my $cmd = "find $dir -follow -type f \\( -name \"*.rpm\" -o -name \"*.deb\" \\) -a ! -name \"*src.rpm\" -printf '\%T@/\%s/\%i \%p\\n'";
+  open(F, '-|', $cmd) or next;
+  while (<F>) {
+    chomp;
+    next unless /^([\d\.]+\/\d+\/\d+) (.*)$/;
+    my $id = $1;
+    my $path = $2;
+    # new find added a fraction part to %T@, ignore it
+    $id =~ s/^(\d+)\.\d+/$1/;
+    next unless $path =~ /\.(?:rpm|deb)$/;
+    my $fn = $path;
+    $fn =~ s/.*\///;
+    next if $fn =~ /\.(?:patch|delta)\.rpm$/;
+    my ($r, $arch);
+    if ($fn =~ /^(.*)-[^-]+-[^-]+\.([^\. ]+)\.rpm$/) {
+      $r = $1;
+      $arch = $2;
+    } elsif ($path =~ /^(?:.*\/)?([^\/ ]+)\/([^\/ ]+)\.rpm$/) {
+      #next if $1 eq '.';
+      $r = $2;
+      $arch = $1;
+    } elsif ($fn =~ /^([^_]*)_(?:[^_]*)_([^_]*)\.deb$/) {
+      $r = $1;
+      $arch = $2;
+      $arch = 'noarch' if $arch eq 'all';
+    } else {
+      next;
+    }
+    next if $arch eq 'src' || $arch eq 'nosrc';
+    push @known, "$r.$arch-$id";
+    $known2fn{"$r.$arch-$id"} = $fn;
+    $known2path{"$r.$arch-$id"} = $path;
+    my $size = (split('/', $id))[1];
+    $fnsize2id{"$fn-$size"} = $id;
+  }
+
+  close F;
+
+  my %newp;
+  my %newr;
+  for (@known) {
+    $newp{$_} = $oldp{$_} if $oldp{$_};
+    $newr{$_} = $oldr{$_} if $oldr{$_};
+  }
+
+  my @todo = grep {!($newp{$_} && $newr{$_})} @known;
+  if (@todo) {
+    for my $known (@todo) {
+      my $path = $known2path{$known};
+      if ($path =~ /\.rpm$/) {
+	my %res = Build::Rpm::rpmq($path, 1000, 1001, 1002, 1006, 1022, 1047, 1049, 1048, 1050, 1112, 1113);
+	next unless %res;
+	Build::Rpm::add_flagsvers(\%res, 1047, 1112, 1113);
+	Build::Rpm::add_flagsvers(\%res, 1049, 1048, 1050);
+	my $id = $known;
+	$id =~ s/.*-//;
+	if ($known ne "$res{1000}->[0].$res{1022}->[0]-$id") {
+	  $known = "$res{1000}->[0].$res{1022}->[0]-$id";
+	  if (!$known2path{$known}) {
+	    push @known, $known;
+	    $known2path{$known} = $path;
+	  }
+	}
+	# rpm3 compatibility: retrofit missing self provides
+	my $name = $res{1000}->[0];
+	if (!@{$res{1047} || []} || $res{1047}->[-1] !~ /^\Q$name\E =/) {
+	  my $evr = "$res{1001}->[0]-$res{1002}->[0]";
+	  $evr = "$res{1003}->[0]:$evr" if $res{1003} && $res{1003}->[0];
+	  push @{$res{1047}}, "$name = $evr";
+	}
+
+	$newp{$known} = "P:$known: ".join(' ', @{$res{1047} || []});
+	$newr{$known} = "R:$known: ".join(' ', @{$res{1049} || []});
+	#$tag{$known} = $res{1000}->[0]."-".$res{1001}->[0]."-".$res{1002}->[0]." ".$res{1007}->[0]."-".$res{1006}->[0];
+	$tag{$known} = $res{1000}->[0]."-".$res{1001}->[0]."-".$res{1002}->[0]." ".$res{1006}->[0];
+      } else {
+	my %res = Build::Deb::debq($path);
+	next unless %res;
+	my ($dn, $da) = ($res{'PACKAGE'}, $res{'ARCHITECTURE'});
+	$da = 'noarch' if $da eq 'all';
+	my $id = $known;
+	$id =~ s/.*-//;
+	if ($known ne "$dn.$da-$id") {
+	  $known = "$dn.$da-$id";
+	  if (!$known2path{$known}) {
+	    push @known, $known;
+	    $known2path{$known} = $path;
+	  }
+	}
+	my @provides = split(',\s*', $res{'PROVIDES'} || '');
+	my @depends = split(',\s*', $res{'DEPENDS'} || '');
+	my @predepends = split(',\s*', $res{'PRE-DEPENDS'} || '');
+	s/\s.*// for @provides;   #for now
+	s/\s.*// for @depends;    #for now
+	s/\s.*// for @predepends; #for now
+	push @depends, @predepends;
+	push @provides, $res{'PACKAGE'};
+	$newp{$known} = "P:$known: ".join(' ', @provides);
+	$newr{$known} = "R:$known: ".join(' ', @depends);
+      }
+    }
+  }
+  @known = grep {$newp{$_} && $newr{$_}} @known;
+  for (@known) {
+    print "F:$_: $known2path{$_}\n";
+    print "$newp{$_}\n";
+    print "$newr{$_}\n";
+    print "I:$_: $tag{$_}\n" if exists $tag{$_};
+  }
+}

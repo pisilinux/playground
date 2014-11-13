@@ -1,0 +1,96 @@
+#!/usr/bin/perl -w
+
+BEGIN {
+  unshift @INC, ($::ENV{'BUILD_DIR'} || '/usr/lib/build');
+}
+
+use strict;
+use File::Path qw(mkpath rmtree);
+use Build::Pisi;
+use Archive::Extract;
+use Data::Dumper;
+use XML::Simple;
+my $cachedir = "/var/cache/pisi/index";
+my $baseurl; # current url
+
+# Fetch pisi-index.xml.xz to the destination directory
+sub getmetadata {
+  my ($url, $dest) = @_;
+  mkpath($dest);
+  system($INC[0]."/download", $dest, $url ."pisi-index.xml.xz");
+}
+
+# We have devel, testing, stable repos.
+# Reponame represents [distname-{devel,testing,stable}] ie. 2011-devel
+sub getreponame {
+  my ($url) = @_;
+  my @parts = split(/\//, $url);
+  for (my $i = 0; $i < @parts; $i++) {
+    return $parts[$i+1]."-".$parts[$i+2] if $parts[$i] =~ /^pardus$/;
+  }
+}
+
+# Convert an array to string by concenating the items
+sub arr2string {
+  my $string;
+  foreach (@_) {
+    if( ref( $_) ne 'HASH') {
+        $string .= " ". $_;
+    } else {
+        $string .= " ". $_->{'content'};
+    }
+  }
+  return $string
+}
+
+# Print out the information extracted from a package in pisi-index.xml
+sub packageinfo {
+    my ($p, $repourl) = @_;
+
+    my $version = $p->{'History'}->[0]->{'Update'}->[0]->{'Version'}->[0];
+    my $release = $p->{'History'}->[0]->{'Update'}->[0]->{'release'};
+    my $name = $p->{'Source'}->[0]->{'Name'}->[0];
+    my $dep = $p->{'RuntimeDependencies'}->[0]->{'Dependency'};
+    my $uri = $repourl . $p->{'PackageURI'}->[0]; #    ///////////////////////////// REPO ADRESİ EKLENECEK
+    my $id = $name . "-" . $p->{'Architecture'}->[0];
+
+    print "F:" . $id . ": " . $uri . "\n";
+    print "P:" . $id . ":" . $name . "\n";
+    print "R:" . $id . ":" . arr2string(@{$dep}) . "\n" if ($dep);
+    print "I:" . $id . ": " . $name . "-" . $version . "-" . $release . "\n";
+}
+
+for my $url (@ARGV) {
+  my $destdir;
+  my $reponame;
+
+  if ($url =~ /^http:\/\/([^\/]*)\/?/) {
+    my $reponame = getreponame($url);
+    $destdir = "$cachedir/$reponame/";
+    $baseurl = $url;
+    $baseurl .= '/' unless $baseurl =~ /\/$/;
+    getmetadata($baseurl, $destdir);
+  } else {
+    $destdir = $url;
+    $destdir .= '/' unless $destdir =~ /\/$/;
+    $baseurl = $destdir;
+  }
+
+  my $destfile = $destdir . "pisi-index.xml.xz";
+  qx(unxz $destfile);
+  my $xml = $destdir . "/" . "pisi-index.xml";
+  local *F;
+  open(F, '<', $xml) || die("$xml: $!\n");
+  my $repodata = '';
+  1 while sysread(F, $repodata, 4096, length($repodata)) > 0;
+  close F;
+ 
+  # Parsing index XML
+  my $xml_simple = XML::Simple->new(ForceArray =>1);
+  my $parsed_xml = $xml_simple->XMLin($xml);
+
+  # Send all the packages in the parsed xml to "packageinfo" method
+  for my $package (@{$parsed_xml->{'Package'}}) {
+      packageinfo($package, $url);
+   }
+}

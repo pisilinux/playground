@@ -1,0 +1,54 @@
+Legend:
+-------
+
++ Done
+- Not Implemented
+/ In Progress
+? I'm not sure !
+
+
+
+Research / Decide :
+--------------------
+
++ XML parser developed using Python
++ XML parser developed using C
++ Create a sample menu with ncurses/menu
++ When the communication start, decide to which kernel will load to client machine
++ Create a network that have server and client machines. Setup PTSP.
++ Research booting 64bit kernel from 32bit kernel
+    + with 'kexec'
+    ? NFS with two folders ?
+
+
+
+Server
+------
+    ? PTSP like system (note changes from PTSP)
+    ? a script to find and parse ISO files
+        ? extract necessary files from ISO (pisi-index.xml, gfxboot.cfg, ...)
+        + parse files from iso needed for XML
+            + distribution name (Kurumsal 2)
+            + ISO name (Kurumsal 2 Nightly 20110705)
+            + packages installed size
+            + get architecture (64bit / 32bit, etc.)
+        + create XML file for the client
+        + extract kernel / initramfs from ISO
+        + create initramfs containing all of the kernels of the ISO's
+
+Client
+------
+    Initramfs
+        ? add necessary checks for configfile / kernel prompt parser
+        + mount NFS (from PTSP like server)
+        + run menu when proper config is set
+        + boot ISO selected in menu
+
+    ISO Selection Menu
+        + parse XML data on server
+        ? inform initramfs which ISO to boot
+        + add static link support to libraries
+            + iksemel static lib
+            + libxml2 static lib
+
+

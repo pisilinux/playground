@@ -1,0 +1,86 @@
+\documentclass[a4paper,10pt]{article}
+
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}.}
+
+\title{YALI Test Cases}
+\author{Semen Cirit}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Check translations
+\item Check Release Notes and License files
+\item Check different keyboard layouts and note the selected one to test after install
+    \begin{enumerate}
+        \item Test it in tty and X
+    \end{enumerate}
+\item Set Date and Time, select a timezone and note it to test after install
+    \begin{enumerate}
+        \item Compare selected Timezone in /usr/share/zoneinfo/TIMEZONE with /etc/localtime
+    \end{enumerate}
+\item Add two users; one of with root privileges, one of without
+    \begin{enumerate}
+        \item Delete one and edit the other one and update it
+        \item Delete other user and try to add a new one with same name
+        \item Try to use not acceptable chars for inputs
+        \item Try to use wrong passwords in password inputs
+        \item Try to select do not ask password to this user
+        \item After the installation finished
+            Type as root
+            \begin{verbatim}
+            # nano /var/lib/PolicyKit/user-pardusman.auths
+            \end{verbatim}
+            Observe that all authentications added for this user.
+    \end{enumerate}
+
+\item Enter root password and machine name
+    \begin{enumerate}
+        \item Try to use not acceptable chars for inputs
+        \item Try to use wrong passwords in password inputs
+    \end{enumerate}
+
+\item Add users then select one of them for autologin.
+
+\item Do each of these options;
+    \begin{enumerate}
+        \item Select automatic partitioning to test resizing
+        \begin{enumerate}
+            \item Use more than 7 Gb disk partition which formatted with a resizable filesystem (ext3, ext4, ntfs)
+            \item Check both filesystem after installation, old one and new one
+        \end{enumerate}
+        \item Select Erase all partitions to format all partitions
+        \item Use Manual partitioning and create some partitions with all supported filesystems
+        \begin{enumerate}
+            \item Delete each one and add again
+            \item Delete all
+            \item Revert all changes
+            \item Resize some of them
+            \item Plug a new usb disk and click refresh disk
+            \item Try to create same partitions type with different partitions
+            \item Try to give different filesystems to already applied partitions
+        \end{enumerate}
+        \item First select  automatic partitioning,  then turn back and select manual partitioning and do the manual partitioning testcases.
+        \item Select manual partitioning then try to create different partitions with different filesystems, then try to turn back.
+        \begin{enumerate}
+            \item Does a message box appear on the screen in order to alert that the changes made will be removed.
+            \item When you click OK, observe that the partition table comes the initial state.
+        \end{enumerate}
+        \item Create three primary partition, a logical partition or try to left this partition empty, then try to make automatic resizing to this disk.
+    \end{enumerate}
+
+\item Select each grub options with new disks
+    \begin{enumerate}
+        \item Check debugger log for bios boot orders
+        \item Check other partitions grub.conf after installation
+    \end{enumerate}
+
+\item Check whole log file before restart, yali doesn't stores grub logs in yaliInstall.log because of some (mount,grub-install) problems
+\item Check is AutoLogin working
+\item Prepare a wrong CD and test the check CD part.
+
+\end{enumerate}
+
+\end{document}

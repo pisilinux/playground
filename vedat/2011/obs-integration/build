@@ -1,0 +1,2124 @@
+#!/bin/bash
+# Script to build a package.  It uses init_buildsystem to setup a chroot
+# building tree.  This script needs a directory as parameter.  This directory
+# has to include sources and a spec file.
+#
+# BUILD_ROOT        here the packages will be built
+#
+# (c) 1997-2008 SuSE GmbH Nuernberg, Germany
+
+test -z "$BUILD_DIR" && BUILD_DIR=/usr/lib/build
+test -z "$BUILD_ROOT" && BUILD_ROOT=/var/tmp/build-root
+
+export BUILD_ARCH BUILD_HOST_ARCH BUILD_ROOT BUILD_RPMS BUILD_DIR BUILD_DEBUG
+export BUILD_DIST
+
+ccache=0
+icecream=0
+shell=
+definesnstuff=()
+repos=()
+repos=("http://packages.pardus.org.tr/pardus/corporate2/devel/x86_64/pisi-index.xml.xz")
+old_packages=()
+
+# defaults for vm_img_mkfs
+vm_img_mkfs_ext4='mkfs.ext4 -m 0 -q -F'
+vm_img_tunefs_ext4='tune2fs -c 0 -O ^has_journal'
+vm_img_mkfs_ext3='mkfs.ext3 -m 0 -q -F'
+vm_img_tunefs_ext3='tune2fs -c 0 -o journal_data_writeback'
+vm_img_mkfs_ext2='mkfs.ext2 -m 0 -q -F'
+vm_img_tunefs_ext2='tune2fs -c 0'
+vm_img_mkfs_reiserfs='mkreiserfs -q -f'
+vm_img_mkfs_btrfs='mkfs.btrfs'
+
+vm_kernel=/boot/vmlinuz
+vm_initrd=/boot/initrd
+qemu_bin=/usr/bin/qemu
+uml_kernel=/boot/vmlinux-um
+uml_initrd=/boot/initrd-um
+
+kvm_bin=/usr/bin/qemu-kvm
+# whether we have virtio support
+kvm_virtio=
+
+# need to restore build root owner for non-root builds
+browner=0
+
+# Default uid:gid for the build user
+ABUILD_UID=399
+ABUILD_GID=399
+
+DO_INIT=true
+DO_LINT=
+DO_CHECKS=true
+CLEAN_BUILD=
+SPECFILES=()
+SRCDIR=
+BUILD_JOBS=
+ABUILD_TARGET=
+CREATE_BASELIBS=
+USEUSEDFORBUILD=
+LIST_STATE=
+VM_IMAGE=
+VM_SWAP=
+VM_KERNEL=
+VM_INITRD=
+VMDISK_ROOTSIZE=4096
+VMDISK_SWAPSIZE=1024
+VMDISK_FILESYSTEM=ext3
+MEMSIZE=
+RUNNING_IN_VM=
+RPMLIST=
+RELEASE=
+REASON=
+NOROOTFORBUILD=
+LOGFILE=
+KILL=
+CHANGELOG=
+BUILD_DEBUG=
+PERSONALITY_SYSCALL=
+INCARNATION=
+DISTURL=
+LINKSOURCES=
+OVERLAY=
+RSYNCSRC=
+RSYNCDEST=
+RSYNCDONE=
+SIGNDUMMY=
+
+# list of archs which need emulator initialization
+: ${EMULATOR_ARCHS:="armv4l armv5el armv6el armv7el armv7hl armv8el mips mipsel mips64 mips64el ppc ppc64 sh4"}
+export EMULATOR_ARCHS
+
+# list of devices registered by binfmt handlers in /proc/sys/fs/binfmt_misc
+: ${EMULATOR_DEVS:="arm mips mipsel mips64 mips64el ppc sh4 sparc"}
+export EMULATOR_DEVS
+
+# This is for insserv
+export YAST_IS_RUNNING=instsys
+
+unset LANGUAGE
+unset LANG
+export LC_ALL=POSIX
+umask 022
+
+echo_help () {
+    cat << EOT
+
+Some comments for build
+-----------------------
+
+With build you can create rpm packages.  They will be built in a chroot
+system.  This chroot system will be setup automatically.  Normally you can
+simply call build with a spec file as parameter - nothing else has to be
+set.
+
+If you want to set the directory were the chroot system will be setup
+(at the moment it uses $BUILD_ROOT),
+simply set the the environment variable BUILD_ROOT.
+
+Example:
+
+  export BUILD_ROOT=/var/tmp/mybuildroot
+
+
+Normally build builds the complete package including src.rpm (rpmbuild -ba).
+If you want let build only make the binary package, simply set
+
+   export BUILD_RPM_BUILD_STAGE=-bb
+
+(or -bc, -bp, -bi, ...  see "Maximum RPM" for more details [*]).
+
+When the build command succeeds, the rpm files can be found under
+$BUILD_ROOT/usr/src/packages/RPMS/
+
+
+Known Parameters:
+
+  --help      You already got it :)
+
+  --clean     Delete old build root before initializing it
+
+  --no-init   Skip initialization of build root and start with build
+              immediately.
+
+  --no-checks Do not run post-build checks
+
+  --repository PATH
+	      Use package repository at PATH. Supported formats are
+	      rpm-md and yast2.
+	      Alternatively zypp://NAME specifies the zypp
+	      repository NAME. The repo must be refreshed with zypp
+	      so package meta data is available locally. With emtpy
+	      NAME all enabled repositories are used.
+              a url can specify a remote repo.
+
+  --rpms path1:path2:...
+              Specify path where to find the RPMs for the build system
+
+  --arch arch1:arch2:...
+              Specify what architectures to select from the RPMs
+
+  --verify    Run verify when initializing the build root
+
+  --extra-packs pack
+              Also install package 'pack'
+
+  --root rootdir
+              Use 'rootdir' to setup chroot environment
+
+  --cachedir cachedir
+              Use 'cachedir' to cache remote repo's packages, the
+              default cache dir is /var/cache/build, every repo
+              given by --repository corresponds to a subdir named
+              as md5sum of its repo url, forx eaxmple:
+                 /var/cache/build/3e8ea9b47808629414a0cebc33ea285e
+
+  --oldpackages oldpackagesdir
+              Define a directory with a former build
+
+  --baselibs  Create -32bit/-64bit/-x86 rpms for other architectures
+
+  --list-state
+              List rpms that would be used to create a fresh build root.
+              Does not create the build root or perform a build.
+
+  --with X
+              enable feature X for build
+
+  --without X
+              disable feature X for build
+
+  --define 'X Y'
+              define macro X with value Y
+
+  --ccache
+              use ccache to speed up rebuilds
+
+  --icecream N
+              use N parallel build jobs with icecream
+  --overlay OVERLAY
+              Copy overlay filesystem to buildroot after installing
+              all RPMs. This must be a valid directory.
+
+  --rsync-src RSYNCSRC
+              Copy overlay folder (RSYNCSRC) to a folder (RSYNCDEST)
+              inside the buildroot using rsync.
+              It will "%define RSYNCDONE 1" for handling %setup in your
+              specfile. E.g.:
+              %prep
+              %if 0%{?RSYNCDONE}
+              %setup -n aaa_base -T -D -b 5 -b 7
+              %else
+              %setup -n aaa_base -b 5 -b 7
+              %endif
+
+  --rsync-dest RSYNCDEST
+              Copy overlay folder (RSYNCSRC) to a folder (RSYNCDEST)
+              inside the buildroot using rsync.
+
+  --uid uid:gid
+              Specify the uid and gid to use for the abuild user.
+              This is useful if you are hacking in the buildroot.
+              This must be set to the same value if the buildroot is re-used.
+
+  --vm-type TYPE
+              Use virtual machine instead of chroot
+              TYPE is one of xen|kvm|uml|qemu|lxc
+
+  --vm-disk FILE
+              Use FILE as disk for virtual machine.
+              Defaults to \$BUILD_ROOT.img if unset
+
+  --vm-swap FILE
+              Use FILE as swap space for virtual machine. The swap space is
+              also used for retrieving packages from the VM so it's size must be
+              sufficiently large
+
+  --vm-disk-size SIZEINMB
+  --vm-swap-size SIZEINMB
+  --vm-disk-filesystem TYPE
+              Defaults for automatic setup of VM root/swap files
+
+  --vm-kernel FILE
+  --vm-initrd FILE
+              Kernel and initrd to use for VM (kvm and qemu only)
+
+  --debug
+              enable creation of a debuginfo package
+
+Remember to have fun!
+
+[*] Maximum RPM: http://www.rpm.org/max-rpm/
+EOT
+}
+usage () {
+    echo "Usage: `basename $0` [--no-init|--clean|--rpms path|--verify|--help] [dir-to-build|spec-to-build]"
+    cleanup_and_exit 1
+}
+
+#
+#  cleanup_and_exit
+#  return values: 0 -> success, new packages built
+#                 1 -> error, build failed
+#                 2 -> successfull build, but no changes to former built packages
+#                 3 -> something wrong with build host
+#
+cleanup_and_exit () {
+    trap EXIT
+    test -z "$1" && set 0
+    rm -f $BUILD_ROOT/exit
+    if test "$1" -eq 1 -a -x /bin/df ; then
+        # okay, it failed, but maybe because disk space?
+	if df $BUILD_ROOT 2>/dev/null | grep -q "100%"; then
+	    set 3
+        fi
+    fi
+    if test -n "$RUNNING_IN_VM" ; then
+	chown $browner $BUILD_ROOT
+	cd /
+	if test -n "$VM_SWAP" -a -e "$VM_SWAP" ; then
+	    swapoff "$VM_SWAP" 2>/dev/null
+	    echo -n "BUILDSTATUS$1" >"$VM_SWAP"
+	fi
+	exec >&0 2>&0        # so that the logging tee finishes
+	sleep 1                # wait till tee terminates
+	if test "$VM_TYPE" != lxc; then
+	    kill -9 -1        # goodbye cruel world
+	    if ! test -x /sbin/halt ; then
+		test -e /proc/sysrq-trigger || mount -n -tproc none /proc
+		sync
+		sleep 2	# like halt does
+		if test -e /proc/sysrq-trigger; then
+		    echo o > /proc/sysrq-trigger
+		    sleep 5 # wait for sysrq to take effect
+		else
+		    echo "Warning: VM doesn't support sysrq and /sbin/halt not installed"
+		fi
+	    else
+		halt -f -p
+	    fi
+	    echo "Warning: clean shut down of the VM didn't work"
+	fi
+    else
+	umount -n $BUILD_ROOT/proc/sys/fs/binfmt_misc 2> /dev/null || true
+	umount -n $BUILD_ROOT/proc 2>/dev/null || true
+	umount -n $BUILD_ROOT/dev/pts 2>/dev/null || true
+	test "$VM_IMAGE" = 1 && VM_IMAGE=
+	[ -n "$VM_IMAGE" ] && umount $BUILD_ROOT 2>/dev/null || true
+    fi
+#    echo "pid $$ exit $1"
+    exit $1
+}
+
+fail_exit()
+{
+  cleanup_and_exit 1
+}
+
+shellquote()
+{
+    for arg; do
+	arg=${arg/\\/\\\\}
+	arg=${arg/\$/\\\$}
+	arg=${arg/\"/\\\"}
+	arg=${arg/\`/\\\`}
+	echo -n " \"$arg\""
+    done
+}
+
+# create a shell script from command line. Used for preserving arguments
+# through /bin/su -c
+toshellscript()
+{
+	echo "#!/bin/sh -x"
+	echo -n exec
+	shellquote "$@"
+	echo
+}
+
+setupccache()
+{
+    if [ "$ccache" = 1 ]; then
+	if mkdir -p $BUILD_ROOT/var/lib/build/ccache/bin; then
+	    for i in $(ls $BUILD_ROOT/usr/bin | grep -E '^(cc|gcc|[cg][+][+])([-]?[234][.]?[0-9])*$'); do
+#                ln -sf /usr/bin/ccache $BUILD_ROOT/var/lib/build/ccache/bin/$i
+		rm -f $BUILD_ROOT/var/lib/build/ccache/bin/$i
+		test -e $BUILD_ROOT/usr/bin/$i || continue
+		echo '#! /bin/sh' > $BUILD_ROOT/var/lib/build/ccache/bin/$i
+		echo "test -e /usr/bin/$i || exit 1" >> $BUILD_ROOT/var/lib/build/ccache/bin/$i
+		echo 'export PATH=/opt/icecream/bin:/usr/bin:$PATH' >> $BUILD_ROOT/var/lib/build/ccache/bin/$i
+		echo "ccache $i \"\$@\"" >> $BUILD_ROOT/var/lib/build/ccache/bin/$i
+		chmod 755 $BUILD_ROOT/var/lib/build/ccache/bin/$i
+		echo "Installed ccache wrapper as $BUILD_ROOT/var/lib/build/ccache/bin/$i"
+	    done
+	fi
+	mkdir -p "$BUILD_ROOT"/.ccache
+	chown -R "$ABUILD_UID:$ABUILD_GID" "$BUILD_ROOT/.ccache"
+	echo "export CCACHE_DIR=/.ccache" > "$BUILD_ROOT"/etc/profile.d/build_ccache.sh
+	echo 'export PATH=/var/lib/build/ccache/bin:$PATH' >> "$BUILD_ROOT"/etc/profile.d/build_ccache.sh
+    else
+	rm -f "$BUILD_ROOT$builduserhome"/bin/{gcc,g++,cc,c++}
+	rm -f "$BUILD_ROOT"/var/lib/build/ccache/bin/{gcc,g++,cc,c++}
+    fi
+}
+
+setupicecream()
+{
+    if [ "$icecream" -eq 0 ]; then
+	rm -rf "$BUILD_ROOT"/var/run/icecream
+	rm -f "$BUILD_ROOT"/etc/profile.d/build_icecream.sh
+	return
+    fi
+
+    if ! chroot "$BUILD_ROOT" rpm -q icecream >/dev/null 2>/dev/null; then
+	echo "*** icecream package not installed ***"
+	false
+	return
+    fi
+
+    echo "using icecream with $icecream jobs"
+
+    if [ "$ccache" -ne 1 ]; then
+	echo 'export PATH=/opt/icecream/bin:$PATH' > "$BUILD_ROOT"/etc/profile.d/build_icecream.sh
+    else
+	echo 'export CCACHE_PATH=/opt/icecream/bin' > "$BUILD_ROOT"/etc/profile.d/build_icecream.sh
+    fi
+
+    local icecc_vers=(`shopt -s nullglob; echo $BUILD_ROOT/var/run/icecream/*.tar.{bz2,gz}`)
+    icecc_vers=${icecc_vers//$BUILD_ROOT/}
+
+    # XXX use changelog like autobuild does instead?
+    # only run create-env if compiler or glibc changed
+    if [ -z "$icecc_vers" \
+	-o ! -e "$BUILD_ROOT/$icecc_vers" \
+	-o "$BUILD_ROOT/usr/bin/gcc" -nt "$BUILD_ROOT/$icecc_vers" \
+	-o "$BUILD_ROOT/usr/bin/g++" -nt "$BUILD_ROOT/$icecc_vers" \
+	-o "$BUILD_ROOT/usr/bin/as" -nt "$BUILD_ROOT/$icecc_vers" \
+	-o "$BUILD_ROOT/lib/libc.so.6" -nt "$BUILD_ROOT/$icecc_vers" ]
+    then
+	rm -rf $BUILD_ROOT/var/run/icecream
+	mkdir -p $BUILD_ROOT/var/run/icecream
+	if [ -e "$BUILD_ROOT"/usr/bin/create-env ]; then
+	  createenv=/usr/bin/create-env
+	elif [ -e "$BUILD_ROOT"/usr/lib/icecc/icecc-create-env ]; then
+	  createenv="/usr/lib/icecc/icecc-create-env /usr/bin/gcc /usr/bin/g++" # XXX
+	elif [ -e "$BUILD_ROOT"/usr/lib64/icecc/icecc-create-env ]; then
+	  createenv="/usr/lib64/icecc/icecc-create-env /usr/bin/gcc /usr/bin/g++" # XXX
+	else
+	  echo "create-env not found"
+	  false
+	  return
+	fi
+	chroot $BUILD_ROOT bash -c "cd /var/run/icecream; $createenv" || cleanup_and_exit 1
+	icecc_vers=(`shopt -s nullglob; echo $BUILD_ROOT/var/run/icecream/*.tar.{bz2,gz}`)
+	icecc_vers=${icecc_vers//$BUILD_ROOT/}
+    else
+	echo "reusing existing icecream environment $icecc_vers"
+    fi
+    if [ -n "$icecc_vers" ]; then
+      echo "export ICECC_VERSION=$icecc_vers" >> "$BUILD_ROOT"/etc/profile.d/build_icecream.sh
+    fi
+}
+
+setmemorylimit()
+{
+    if [ -n "$VM_IMAGE" -o -n "$RUNNING_IN_VM" ]; then
+	return
+    fi
+    local mem
+    while read mem; do
+	case "$mem" in
+	    MemTotal:*)
+		set -- $mem
+		eval "mem=\$(($2/3*4))"
+		ulimit -v $mem
+		echo "Memory limit set to ${mem}KB"
+		break;
+	    ;;
+	esac
+    done < <(cat /proc/meminfo) # cat for proc stuff
+}
+
+create_baselibs()
+{
+    local pkgs=()
+
+    BASELIBS_CFG=
+
+    if test "$BUILDTYPE" == "dsc" ; then
+	pkgs=($DEBS)
+    elif test "$BUILDTYPE" == "pisi" ; then
+        pkgs=($PISIPKGS)
+    else # spec and kiwi
+	if test -e $BUILD_ROOT$TOPDIR/SOURCES/baselibs.conf ; then
+	    BASELIBS_CFG="-c $TOPDIR/SOURCES/baselibs.conf"
+	fi
+	if test -e $BUILD_ROOT/usr/lib/build/baselibs_global.conf; then
+	    BASELIBS_GLOBAL="-c /usr/lib/build/baselibs_global.conf"
+	fi
+	pkgs=($RPMS)
+    fi
+
+    mount -n -tproc none $BUILD_ROOT/proc 2> /dev/null
+    # don't use -R as extracted sources, build root etc might be below $TOPDIR
+    chown "$ABUILD_UID:$ABUILD_GID" "$BUILD_ROOT$TOPDIR"/* "$BUILD_ROOT$TOPDIR"/RPMS/* || true
+
+    local mkbaselibs="/usr/lib/build/mkbaselibs"
+    local whichone=''
+    # $BUILD_DIR is set to /.build when using a vm. So we need to
+    # hardcode /usr/lib/build instead of $BUILD_DIR to prefer
+    # mkbaselibs from the distro.
+    if test -f $BUILD_ROOT$mkbaselibs; then
+	if test -z "$BASELIBS_CFG" -a -e $BUILD_ROOT/usr/lib/build/baselibs.conf ; then
+	    BASELIBS_CFG="-c /usr/lib/build/baselibs.conf"
+	fi
+    else
+	if test "$CREATE_BASELIBS" = 'internal'; then
+	    echo "Warning: mkbaselibs missing in build root, skipping baselibs"
+	    return
+	fi
+	# use external version
+	whichone=" (external)"
+	mkbaselibs="/.mkbaselibs/mkbaselibs"
+	rm -rf $BUILD_ROOT/.mkbaselibs
+	mkdir -p $BUILD_ROOT/.mkbaselibs
+	cp -f $BUILD_DIR/mkbaselibs $BUILD_ROOT/.mkbaselibs/
+	if test "$BUILDTYPE" == "dsc" ; then
+	    cp -f $BUILD_DIR/baselibs_global-deb.conf $BUILD_ROOT/.mkbaselibs/baselibs_g.conf
+	    cp -f $BUILD_ROOT$TOPDIR/SOURCES/baselibs-deb.conf $BUILD_ROOT/.mkbaselibs/baselibs-deb.conf
+	    BASELIBS_CFG="-c /.mkbaselibs/baselibs-deb.conf"
+	else
+	    cp -f $BUILD_DIR/baselibs_global.conf $BUILD_ROOT/.mkbaselibs/baselibs_g.conf
+	    if test -z "$BASELIBS_CFG" -a -e $BUILD_DIR/baselibs.conf; then
+		cp -f $BUILD_DIR/baselibs.conf $BUILD_ROOT/.mkbaselibs/baselibs.conf
+		BASELIBS_CFG="-c /.mkbaselibs/baselibs.conf"
+	    fi
+	fi
+	if test -e $BUILD_ROOT/.mkbaselibs/baselibs_g.conf; then
+	    BASELIBS_GLOBAL="-c /.mkbaselibs/baselibs_g.conf"
+	fi
+    fi
+    echo "... creating baselibs$whichone"
+    chroot $BUILD_ROOT su -c "$mkbaselibs $BASELIBS_GLOBAL $BASELIBS_CFG ${pkgs[*]#$BUILD_ROOT}" - $BUILD_USER || cleanup_and_exit 1
+    rm -rf $BUILD_ROOT/.mkbaselibs
+}
+
+copy_oldpackages()
+{
+    local i=0
+    local d
+    local dest
+    [ -z "$RUNNING_IN_VM" ] || return 0
+    if [ -z "$old_packages" ]; then
+	rm -rf "$BUILD_ROOT"/.build.oldpackages*
+	return 0
+    fi
+    for d in "${old_packages[@]}"; do
+	dest="$BUILD_ROOT/.build.oldpackages"
+	test "$i" = 0 || dest="$dest$i"
+	if [ -d "$d" -a "$d" != "$dest" ] ; then
+	    rm -rf "$dest"
+	    mkdir -p "$dest"
+	    cp -L $d/* "$dest"
+	    : $((++i))
+	fi
+    done
+}
+
+vm_img_mkfs()
+{
+    local fs="$1"
+    local img="$2"
+    local mkfs tunefs
+    eval "mkfs=\"\$vm_img_mkfs_${fs}\""
+    eval "tunefs=\"\$vm_img_tunefs_${fs}\""
+
+    if test -z "$mkfs"; then
+	echo "filesystem \"$fs\" isn't supported"
+	cleanup_and_exit 3
+    fi
+
+
+    echo "Creating $fs filesystem on $img"
+    $mkfs "$img"
+    if test -n "$tunefs" ; then
+	$tunefs "$img" || cleanup_and_exit 3
+    fi
+
+}
+
+detect_vm_2nd_stage()
+{
+    if ! test "$0" = "/.build/build" ; then
+	return 1
+    fi
+    if test $$ -eq 1 ; then
+	# ignore special init signals if we're init
+	# we're using ' ' instead of '' so that the signal handlers
+	# are reset in the child processes
+	trap ' ' HUP TERM
+	$0 "$@"
+	cleanup_and_exit $?
+    fi
+    echo "2nd stage started in virtual machine"
+    BUILD_ROOT=/
+    BUILD_DIR=/.build
+    . $BUILD_DIR/build.data
+    echo "machine type: `uname -m`"
+    if test "$PERSONALITY" != 0 -a -z "$PERSONALITY_SET" ; then
+	export PERSONALITY_SET=true
+	echo "switching personality to $PERSONALITY..."
+	# this is 32bit perl/glibc, thus the 32bit syscall number
+	exec perl -e 'syscall(136, '$PERSONALITY') == -1 && warn("personality: $!\n");exec "/.build/build" || die("/.build/build: $!\n")'
+    fi
+    RUNNING_IN_VM=true
+    mount -orw -n -tproc none /proc
+    if test "$VM_TYPE" != 'lxc'; then
+	mount -n -o remount,noatime,rw /
+    fi
+# qemu inside of xen does not work, check again with kvm later before enabling this
+#    if [ -e /dev/kqemu ]; then
+#        # allow abuild user to run qemu
+#        chmod 0666 /dev/kqemu
+#    fi
+    if test -n "$VM_SWAP" ; then
+	for i in 1 2 3 4 5 6 7 8 9 10 ; do
+	    test -e "$VM_SWAP" && break
+	    test $i = 1 && echo "waiting for $VM_SWAP to appear"
+	    echo -n .
+	    sleep 1
+	done
+	test $i = 1 || echo
+	# recreate the swap device manually if it didn't exist for some
+	# reason, hardcoded to hda2 atm
+	if ! test -b "$VM_SWAP" ; then
+	    rm -f "$VM_SWAP"
+	    umask 027
+	    mknod "$VM_SWAP" b 3 2
+	    umask 022
+	fi
+	swapon -v "$VM_SWAP" || exit 1
+    fi
+    HOST="$MYHOSTNAME"
+
+    return 0
+}
+
+find_spec_files()
+{
+    local spec files
+    if [ -z "$SPECFILES" ]; then
+	set -- "`pwd`"
+    else
+	set -- "${SPECFILES[@]}"
+    fi
+    SPECFILES=()
+    for spec in "$@"; do
+	if [ "$spec" = "${spec#/}" ]; then
+	    spec="`pwd`/$spec"
+	fi
+
+	if [ -d "$spec" ]; then
+	    specs=("$spec"/*.spec)
+	    if [ -n "$specs" ]; then
+		SPECFILES=("${SPECFILES[@]}" "${specs[@]}")
+	    else
+		specs=("$spec"/*.spec)
+		if [ -n "$specs" ]; then
+		    SPECFILES=("${SPECFILES[@]}" "${specs[@]}")
+		fi
+	    fi
+	else
+	    SPECFILES[${#SPECFILES[@]}]="$spec";
+	fi
+    done
+
+    if test -z "$SPECFILES"; then
+	echo no spec files or src rpms found in $@. exit...
+	cleanup_and_exit 1
+    fi
+}
+
+become_root_or_fail()
+{
+    if [ ! -w /root ]; then
+	echo "You have to be root to use $0" >&2
+	exit 1
+    fi
+    cleanup_and_exit 1
+}
+
+mkdir_build_root()
+{
+    if [ -d "$BUILD_ROOT" ]; then
+	# check if it is owned by root
+	if [ -z "$RUNNING_IN_VM" -a \! -O "$BUILD_ROOT" -a "`stat -c %u $BUILD_ROOT`" -ne 0 ]; then
+	    echo "BUILD_ROOT=$BUILD_ROOT must be owned by root. Exit..."
+	    cleanup_and_exit 1
+	fi
+    else
+	test "$BUILD_ROOT" != "${BUILD_ROOT%/*}" && mkdir -p "${BUILD_ROOT%/*}"
+	if ! mkdir $BUILD_ROOT; then
+	    echo "can not create BUILD_ROOT=$BUILD_ROOT. Exit..."
+	    cleanup_and_exit 1
+	fi
+    fi
+
+    if [ ! -w "$BUILD_ROOT" ]; then
+	echo "Error: BUILD_ROOT=$BUILD_ROOT not writeable, try --clean."
+	cleanup_and_exit 3
+    fi
+
+    rm -rf "$BUILD_ROOT"/.build.packages
+    if [ -z "$VM_TYPE" -a -z "$RUNNING_IN_VM" ]; then
+       # don't touch this in VM
+       rm -rf "$BUILD_ROOT"/.build
+       mkdir -p "$BUILD_ROOT"/.build
+    fi
+}
+
+linux64()
+{
+	perl -e 'syscall('$PERSONALITY_SYSCALL', 0); exec(@ARGV) || die("$ARGV[0]: $!\n")' "$@"
+}
+
+#### main ####
+
+trap fail_exit EXIT
+
+case `perl -V:archname` in
+    *x86_64*) PERSONALITY_SYSCALL=135 ;;
+    *i?86*)   PERSONALITY_SYSCALL=136 ;;
+esac
+
+shopt -s nullglob
+
+if detect_vm_2nd_stage ; then
+    set "/.build-srcdir/$SPECFILE"
+
+fi
+
+export PATH=$BUILD_DIR:/sbin:/usr/sbin:$PATH
+
+. $BUILD_DIR/common_functions || exit 1
+
+export HOST
+
+needarg()
+{
+  if [ -z "$ARG" ]; then
+    echo "$PARAM needs an agrument" >&2
+    cleanup_and_exit 1
+  fi
+}
+
+while test -n "$1"; do
+  PARAM="$1"
+  ARG="$2"
+  [ "$ARG" = "${ARG#-}" ] || ARG=""
+  shift
+  case $PARAM in
+    *-*=*)
+      ARG=${PARAM#*=}
+      PARAM=${PARAM%%=*}
+      set -- "----noarg=$PARAM" "$@"
+  esac
+  case $PARAM in
+      *-help|-h)
+	echo_help
+	cleanup_and_exit
+      ;;
+      *-no*init)
+	DO_INIT=false
+      ;;
+      *-no*checks)
+	DO_CHECKS=false
+      ;;
+      *-clean)
+	CLEAN_BUILD='--clean'
+      ;;
+      *-kill)
+	KILL=true
+      ;;
+      *-rpms)
+	needarg
+	BUILD_RPMS="$ARG"
+	shift
+      ;;
+      *-arch)
+	needarg
+	BUILD_ARCH="$ARG"
+	shift
+      ;;
+      *-verify)
+	export VERIFY_BUILD_SYSTEM=true
+      ;;
+      *-target)
+	needarg
+	ABUILD_TARGET="$ARG"
+	shift
+      ;;
+      *-jobs)
+	needarg
+	BUILD_JOBS="$ARG"
+	shift
+      ;;
+      *-extra*packs|-X)
+	needarg
+	BUILD_EXTRA_PACKS="$BUILD_EXTRA_PACKS $ARG"
+	shift
+      ;;
+      *-lint)
+	DO_LINT=true
+	;;
+      *-baselibs)
+	CREATE_BASELIBS=true
+	;;
+      *-baselibs-internal)
+	CREATE_BASELIBS=internal
+	;;
+      *-root)
+	needarg
+	BUILD_ROOT="$ARG"
+	shift
+      ;;
+      *-cachedir)
+	needarg
+	CACHE_DIR="$ARG"
+	shift
+      ;;
+      *-oldpackages)
+	needarg
+	old_packages=("${old_packages[@]}" "$ARG")
+	shift
+      ;;
+      *-dist)
+	needarg
+	BUILD_DIST="$ARG"
+	shift
+      ;;
+      *-xen|*-kvm|--uml|--qemu)
+	VM_TYPE=${PARAM##*-}
+	if [ -n "$ARG" ]; then
+	    VM_IMAGE="$ARG"
+	    shift
+	else
+	    VM_IMAGE=1
+	fi
+      ;;
+      --lxc)
+	VM_TYPE=${PARAM##*-}
+      ;;
+      --vm-type)
+	needarg
+	VM_TYPE="$ARG"
+	case "$VM_TYPE" in
+	    xen|kvm|uml|qemu|lxc) ;;
+	    none|chroot) VM_TYPE='' ;;
+	    *)
+		echo "VM $VM_TYPE not supported"
+		cleanup_and_exit
+	    ;;
+	esac
+	shift
+      ;;
+      --vm-disk)
+	needarg
+	VM_IMAGE="$ARG"
+	shift
+      ;;
+      *-xenswap|*-swap)
+	needarg
+	VM_SWAP="$ARG"
+	shift
+      ;;
+      *-xenmemory|*-memory)
+	needarg
+	MEMSIZE="$ARG"
+	shift
+      ;;
+      *-vm-kernel)
+	needarg
+	VM_KERNEL="$ARG"
+	shift
+      ;;
+      *-vm-initrd)
+	needarg
+	VM_INITRD="$ARG"
+	shift
+      ;;
+      *-vmdisk-rootsize|--vm-disk-size)
+	needarg
+	VMDISK_ROOTSIZE="$ARG"
+	shift
+      ;;
+      *-vmdisk-swapsize|--vm-swap-size)
+	needarg
+	VMDISK_SWAPSIZE="$ARG"
+	shift
+      ;;
+      *-vmdisk-filesystem|--vm-disk-filesystem)
+	needarg
+	VMDISK_FILESYSTEM="$ARG"
+	shift
+      ;;
+      *-rpmlist)
+	needarg
+	RPMLIST="--rpmlist $ARG"
+	BUILD_RPMS=
+	shift
+      ;;
+      *-release)
+	needarg
+	RELEASE="$ARG"
+	shift
+      ;;
+      *-logfile)
+	needarg
+	LOGFILE="$ARG"
+	shift
+      ;;
+      *-reason)
+	needarg
+	REASON="$ARG"
+	shift
+      ;;
+      *-norootforbuild)
+	NOROOTFORBUILD=true
+      ;;
+      *-stage)
+	needarg
+	BUILD_RPM_BUILD_STAGE="$ARG"
+	shift
+      ;;
+      *-useusedforbuild)
+	USEUSEDFORBUILD="--useusedforbuild"
+      ;;
+      *-list*state)
+	LIST_STATE=true
+      ;;
+      --define|--with|--without)
+	needarg
+	definesnstuff[${#definesnstuff[@]}]="$PARAM";
+	definesnstuff[${#definesnstuff[@]}]="$ARG";
+	shift
+      ;;
+      --repository|--repo)
+	needarg
+	repos[${#repos[@]}]="$PARAM";
+	repos[${#repos[@]}]="$ARG";
+	shift
+      ;;
+      --icecream)
+	needarg
+	icecream="$ARG"
+	if [ "$icecream" -gt 0 ]; then
+		BUILD_JOBS="$ARG"
+	fi
+	shift
+      ;;
+      --ccache)
+	ccache=1
+      ;;
+      --debug)
+	BUILD_DEBUG=1
+      ;;
+      --incarnation)
+	needarg
+	INCARNATION=$ARG
+	shift
+      ;;
+      --disturl)
+	needarg
+	DISTURL=$ARG
+	shift
+      ;;
+      --linksources)
+	LINKSOURCES=true
+      ;;
+      ----noarg)
+	echo "$ARG does not take an argument"
+	cleanup_and_exit
+      ;;
+      *-changelog)
+	CHANGELOG=true
+      ;;
+      --overlay)
+	needarg
+	OVERLAY=$ARG
+	shift
+      ;;
+      --rsync-src)
+	needarg
+	RSYNCSRC=$ARG
+	shift
+      ;;
+      --rsync-dest)
+	needarg
+	RSYNCDEST=$ARG
+	shift
+      ;;
+      --uid)
+	needarg
+	ABUILD_ID="$ARG"
+	if test -n "${ABUILD_ID//[0-9:]/}"; then
+	    echo "--uid argument must be uid:gid"
+	    cleanup_and_exit
+	fi
+	ABUILD_UID=${ABUILD_ID%:*}
+	ABUILD_GID=${ABUILD_ID#*:}
+	shift
+      ;;
+      --shell)
+	  shell=1
+	  shift
+      ;;
+      --signdummy)
+	SIGNDUMMY=1
+      ;;
+      -*)
+	echo Unknown Option "$PARAM". Exit.
+	cleanup_and_exit 1
+      ;;
+      *)
+	SPECFILES[${#SPECFILES[@]}]="$PARAM";
+      ;;
+    esac
+done
+
+if test "$VM_TYPE" = "lxc"; then
+    VM_IMAGE=''
+    VM_SWAP=''
+fi
+
+if test -n "$KILL" ; then
+    test -z "$SRCDIR" || usage
+    if test -n "$VM_IMAGE" -a -n "$VM_SWAP" -a -n "$VM_TYPE"; then
+	# mark job as failed so that we don't extract packages
+	echo -n "BUILDSTATUS1" >"$VM_SWAP"
+    fi
+    (set -C; > "$BUILD_ROOT/exit" 2>/dev/null || true)
+    if test "$VM_TYPE" = 'lxc'; then
+	LXCID=${BUILD_ROOT##*/}
+	lxc-stop -n "$LXCID" || true
+	lxc-destroy -n "$LXCID"
+    elif test -z "$VM_IMAGE" ; then
+	if ! $BUILD_DIR/killchroot -s 9 $BUILD_ROOT ; then
+	    echo "could not kill build in $BUILD_ROOT"
+	    cleanup_and_exit 1
+	fi
+    elif test "$VM_TYPE" = 'xen'; then
+	XENID="${VM_IMAGE%/root}"
+	XENID="${XENID%/tmpfs}"
+	XENID="${XENID##*/}"
+	XENID="${XENID#root_}"
+	if xm list "build:$XENID" >/dev/null 2>&1 ; then
+	    if ! xm destroy "build:$XENID" ; then
+		echo "could not kill xen build $XENID"
+		cleanup_and_exit 1
+	    fi
+	fi
+    elif test -n "$VM_TYPE"; then
+	if ! fuser -k -TERM "$VM_IMAGE"; then
+	    echo "could not kill build in $VM_IMAGE"
+	    cleanup_and_exit 1
+	fi
+    else
+	echo "don't know how to kill this build job"
+	cleanup_and_exit 1
+    fi
+    cleanup_and_exit 0
+fi
+
+if [ "$VM_TYPE" = 'xen' -a -z "$RUNNING_IN_VM" ]; then
+    # XXX: merge with kvm path?
+    if [ -n "$VM_KERNEL" ]; then
+	vm_kernel="$VM_KERNEL"
+    elif [ -e "/boot/vmlinuz-xen" ]; then
+	vm_kernel="/boot/vmlinuz-xen"
+    fi
+    if [ -n "$VM_INITRD" ]; then
+	vm_initrd="$VM_INITRD"
+    elif [ -e "/boot/initrd-xen" ]; then
+	vm_initrd="/boot/initrd-xen"
+    fi
+fi
+
+if [ "$VM_TYPE" = 'kvm' -a -z "$RUNNING_IN_VM" ]; then
+    if [ ! -r /dev/kvm -o ! -x "$qemu_bin"-kvm ]; then
+	echo "host doesn't support kvm"
+	echo "either the kvm kernel-module is not loaded or kvm is not installed or hardware virtualization is deactivated in the BIOS."
+	cleanup_and_exit 3
+    fi
+    qemu_bin="$kvm_bin"
+    if [ -n "$VM_KERNEL" ]; then
+	vm_kernel="$VM_KERNEL"
+    fi
+
+    # check if a SUSE system with virtio initrd is running
+    if [ -z "$VM_INITRD" -a -e /etc/sysconfig/kernel ]; then
+       a=$( source /etc/sysconfig/kernel; echo $INITRD_MODULES )
+       have_virtio_pci=""
+       have_virtio_blk=""
+       for i in $a; do
+          [ "$i" == "virtio_pci" ] && have_virtio_pci="1"
+          [ "$i" == "virtio_blk" ] && have_virtio_blk="1"
+       done
+       [ -n "$have_virtio_pci" -a -n "$have_virtio_blk" ] && VM_INITRD="/boot/initrd"
+    fi
+
+    if [ -n "$VM_INITRD" ]; then
+	vm_initrd="$VM_INITRD"
+	kvm_virtio=1
+    elif [ -e "${vm_initrd}-build" ]; then
+	vm_initrd="${vm_initrd}-build"
+	kvm_virtio=1
+    else
+	if [ -L "$vm_initrd" ]; then
+	    vm_initrd=`readlink -f "$vm_initrd"` || cleanup_and_exit 3
+	fi
+	vm_initrd_virtio="${vm_initrd}-virtio"
+
+	if [ ! -e ${vm_initrd_virtio} -o $vm_kernel -nt ${vm_initrd_virtio} ]; then
+	    mkinitrd_virtio_cmd=(env rootfstype="$VMDISK_FILESYSTEM" \
+		    mkinitrd -d /dev/null \
+		    -m "ext3 ext4 btrfs reiserfs binfmt_misc virtio_pci virtio_blk" \
+		    -k $vm_kernel \
+		    -i ${vm_initrd_virtio})
+	    if [ ! -w /root -o -n "$RPMLIST" ]; then
+		echo "No initrd that provides virtio support found. virtio accelleration disabled."
+		echo "Run the following command as root to enable virtio:"
+		shellquote "${mkinitrd_virtio_cmd[@]}"
+		echo
+	    elif /sbin/modinfo virtio_pci >/dev/null 2>&1; then
+		echo "creating $vm_initrd_virtio"
+		"${mkinitrd_virtio_cmd[@]}" || cleanup_and_exit 1
+		kvm_virtio=1
+		vm_initrd="${vm_initrd_virtio}"
+	    fi
+	else
+	    kvm_virtio=1
+	    vm_initrd="${vm_initrd_virtio}"
+	fi
+    fi
+
+    if [ "$kvm_virtio" = 1 ]; then
+	VM_SWAPDEV=/dev/vdb
+	qemu_rootdev=/dev/vda
+    else
+	VM_SWAPDEV=/dev/sdb
+	qemu_rootdev=/dev/sda
+    fi
+fi
+
+if [ "$VM_TYPE" = 'qemu' ]; then
+    VM_SWAPDEV=/dev/sdb
+    qemu_rootdev=/dev/sda
+fi
+
+if [ -z "$RPMLIST" -a -z "$RUNNING_IN_VM" ]; then
+    if [ -z "$repos" -a -z "$BUILD_RPMS" ]; then
+	repos=(--repository 'zypp://')
+    fi
+else
+    repos=()
+fi
+
+set_build_arch
+
+if [ -n "$CLEAN_BUILD" ]; then
+    DO_INIT=true
+fi
+
+find_spec_files
+
+if test -n "$LIST_STATE" ; then
+    BUILD_ROOT=`mktemp -d /var/tmp/build-list-state-XXXXXX`
+    test -d "$BUILD_ROOT" || cleanup_and_exit 3
+    SPECFILE=$SPECFILES # only one specified anyways
+    if test "$SPECFILE" != "${SPECFILE%.src.rpm}" ; then
+       rm -rf $BUILD_ROOT/usr/src/packages
+       mkdir -p $BUILD_ROOT/usr/src/packages/SOURCES $BUILD_ROOT/usr/src/packages/SPECS
+       rpm -i --nodigest --nosignature --root $BUILD_ROOT $SPECFILE || {
+	   echo "could not install $SPECFILE." 2>&1
+	   rm -rf $BUILD_ROOT
+	   cleanup_and_exit 3
+       }
+       for SPECFILE in $BUILD_ROOT/usr/src/packages/SPECS/*.spec ; do : ; done
+    fi
+    init_buildsystem --cachedir "$CACHE_DIR" --list-state "${definesnstuff[@]}" "${repos[@]}" $USEUSEDFORBUILD $SPECFILE $BUILD_EXTRA_PACKS
+    ERR=$?
+    rm -rf $BUILD_ROOT
+    cleanup_and_exit $ERR
+fi
+
+if test -z "$RUNNING_IN_VM" ; then
+    if test -n "$VM_IMAGE" ; then
+	if test "$VM_IMAGE" = 1 ; then
+	    VM_IMAGE="$BUILD_ROOT.img"
+	    echo "using $VM_IMAGE as vm image"
+	    if test -z "$VM_SWAP"; then
+		VM_SWAP="$BUILD_ROOT.swap"
+		echo "using $VM_SWAP as vm swap"
+	    fi
+	fi
+	if [ "$VM_TYPE" = 'xen' ]; then
+	    # this should not be needed, but sometimes a xen instance got lost
+	    XENID="${VM_IMAGE%/root}"
+	    XENID="${XENID%/tmpfs}"
+	    XENID="${XENID##*/}"
+	    XENID="${XENID#root_}"
+	    xm destroy "build:$XENID" >/dev/null 2>&1
+	fi
+	if test ! -e "$VM_IMAGE"; then
+	    echo "Creating $VM_IMAGE (${VMDISK_ROOTSIZE}M)"
+	    mkdir -p "${VM_IMAGE%/*}"
+	    dd if=/dev/zero of="$VM_IMAGE" bs=1M count=0 seek="$VMDISK_ROOTSIZE" || cleanup_and_exit 3
+	    if test -z "$CLEAN_BUILD" ; then
+		vm_img_mkfs "$VMDISK_FILESYSTEM" "$VM_IMAGE" || cleanup_and_exit 3
+	    fi
+	fi
+	if test -n "$VM_SWAP" -a ! -e "$VM_SWAP"; then
+	    # setup VM_SWAP
+	    echo "Creating $VM_SWAP (${VMDISK_SWAPSIZE}M)"
+	    mkdir -p "${VM_SWAP%/*}"
+	    dd if=/dev/zero of="$VM_SWAP" bs=1M count=0 seek="$VMDISK_SWAPSIZE" || cleanup_and_exit 3
+	fi
+	if test ! -e "$VM_IMAGE" ; then
+	    echo "you need to create $VM_IMAGE first"
+	    cleanup_and_exit 3
+	fi
+	if test -n "$CLEAN_BUILD" ; then
+	    vm_img_mkfs "$VMDISK_FILESYSTEM" "$VM_IMAGE" || cleanup_and_exit 3
+	fi
+	mkdir_build_root
+	if [ -w /root ]; then
+            if [ -b $VM_IMAGE ]; then
+                # mount device directly
+		mount $VM_IMAGE $BUILD_ROOT || cleanup_and_exit 3
+	    else
+		mount -o loop $VM_IMAGE $BUILD_ROOT || cleanup_and_exit 3
+            fi
+	else
+	    if ! mount $BUILD_ROOT; then
+		echo "mounting the build root failed. An fstab entry is probably missing or incorrect."
+		echo "/etc/fstab should contain an entry like this:"
+		echo "$VM_IMAGE $BUILD_ROOT auto noauto,user,loop 0 0"
+		cleanup_and_exit 3
+	    fi
+	fi
+    else
+	test -w /root || become_root_or_fail
+    fi
+    if test -n "$VM_SWAP" ; then
+	dd if=/dev/zero of="$VM_SWAP" bs=12 count=1 conv=notrunc 2>/dev/null
+	echo "mkswap $VM_SWAP"
+	mkswap "$VM_SWAP"
+    fi
+fi
+
+mkdir_build_root
+
+if [ "$BUILD_ROOT" = / ]; then
+    read dummy dummy browner dummy < <(ls -ld /)
+fi
+
+rm -f $BUILD_ROOT/exit
+
+if [ -w /root ]; then
+    mkdir -p $BUILD_ROOT/proc
+    mkdir -p $BUILD_ROOT/dev/pts
+    mount -n -tproc none $BUILD_ROOT/proc || true
+    mount -n -tdevpts none $BUILD_ROOT/dev/pts
+fi
+
+if test -z "$VM_IMAGE" -a -z "$LOGFILE"; then
+    LOGFILE="$BUILD_ROOT/.build.log"
+fi
+
+if test -n "$LOGFILE" -a -z "$shell" ; then
+    echo  logging output to $LOGFILE...
+    rm -f $LOGFILE
+    touch $LOGFILE
+    if test -n "$VM_IMAGE" ; then
+	exec 1> >(exec -a 'build logging tee' perl -e 'open(F,">>",$ARGV[0])||die("$ARGV[0]: $!\n");$|=1;select(F);$|=1;while(<STDIN>){print STDOUT;s/^\r//s;s/\r\n/\n/gs;print F}' $LOGFILE) 2>&1
+    else
+	exec 1> >(exec -a 'build logging tee' tee -a $LOGFILE) 2>&1
+    fi
+fi
+
+setmemorylimit
+
+#
+# say hello
+#
+test -z "$HOST" && HOST=`hostname`
+
+if [ -z "$RUNNING_IN_VM" ]; then
+    echo Using BUILD_ROOT=$BUILD_ROOT
+    test -n "$BUILD_RPMS" && echo Using BUILD_RPMS=$BUILD_RPMS
+    echo Using BUILD_ARCH=$BUILD_ARCH
+    test -n "$VM_TYPE" && echo "Doing $VM_TYPE build${VM_IMAGE:+ in $VM_IMAGE}"
+    echo
+fi
+
+test "$BUILD_ARCH" = all && BUILD_ARCH=
+BUILD_USER_ABUILD_USED=
+
+for SPECFILE in "${SPECFILES[@]}" ; do
+
+    SRCDIR="${SPECFILE%/*}"
+    SPECFILE="${SPECFILE##*/}"
+
+    BUILDTYPE=
+    case $SPECFILE in
+      *.spec|*.src.rpm) BUILDTYPE=spec ;;
+      *.dsc) BUILDTYPE=dsc ;;
+      *.kiwi) BUILDTYPE=kiwi ;;
+      pspec.xml) BUILDTYPE=pisi ;;
+    esac
+    if test -z "$BUILDTYPE" ; then
+       echo "don't know how to build $SPECFILE"
+       cleanup_and_exit 1
+    fi
+
+    cd "$SRCDIR"
+
+    if [ -z "$RUNNING_IN_VM" ]; then
+	echo
+	echo "$HOST started \"build $SPECFILE\" at `date --utc`."
+	echo
+	test -n "$REASON" && echo "$REASON"
+	echo
+    fi
+
+    #
+    # first setup building directory...
+    #
+    test -s "$SPECFILE" || {
+       echo "$SPECFILE" is empty.  This should not happen...
+       cleanup_and_exit 1
+    }
+
+    if test "$SPECFILE" != "${SPECFILE%.src.rpm}" ; then
+	echo processing src rpm $SRCDIR/$SPECFILE ...
+	MYSRCDIR=$BUILD_ROOT/.build-srcdir
+	rm -rf $MYSRCDIR
+	mkdir -p $MYSRCDIR
+	cd $MYSRCDIR || cleanup_and_exit 1
+	$BUILD_DIR/unrpm -q $SRCDIR/$SPECFILE || {
+	    echo "could not install $SPECFILE."
+	    cleanup_and_exit 1
+	}
+	for SPECFILE in *.spec ; do : ; done
+    else
+	MYSRCDIR="$SRCDIR"
+    fi
+
+    # FIX to work with baselibs_$PROJ etc
+    if test "$BUILDTYPE" == "dsc" -a -e ${SRCDIR}/baselibs-deb.conf ; then
+	# Set CREATE_BASELIBS if not set
+	echo "dsc build and baselibs-deb.conf present: forcing --baselibs to true"
+	CREATE_BASELIBS=true
+    fi
+
+    # Currently local osc build does not allow extra .deb packages to be
+    # specified on the command line. Both init_buildsystem and expanddeps
+    # need to handle .deb dependencies first
+    #    if test -n "$CREATE_BASELIBS" ; then
+    #        case $BUILDTYPE in
+    #            spec) ;;
+    #            dsc) BUILD_EXTRA_PACKS="$BUILD_EXTRA_PACKS libparse-debcontrol-perl" ;;
+    #        esac
+    #    fi
+
+    echo processing specfile $MYSRCDIR/$SPECFILE ...
+
+
+    ADDITIONAL_PACKS=""
+    test -z "$BUILD_EXTRA_PACKS" || ADDITIONAL_PACKS="$ADDITIONAL_PACKS $BUILD_EXTRA_PACKS"
+    test -z "$CREATE_BASELIBS" || ADDITIONAL_PACKS="$ADDITIONAL_PACKS build"
+    test "$ccache" = '0' || ADDITIONAL_PACKS="$ADDITIONAL_PACKS ccache"
+    test "$icecream" = 0 || ADDITIONAL_PACKS="$ADDITIONAL_PACKS icecream gcc-c++"
+    test -z "$DO_LINT" || ADDITIONAL_PACKS="$ADDITIONAL_PACKS rpmlint-Factory"
+
+    if test -n "$CHANGELOG" -a -z "$RUNNING_IN_VM" ; then
+	rm -f $BUILD_ROOT/.build-changelog
+	case $SPECFILE in
+	  *.dsc) CFFORMAT=debian ;;
+	  *) CFFORMAT=rpm ;;
+	esac
+	echo "running changelog2spec --target $CFFORMAT --file $MYSRCDIR/$SPECFILE"
+	if ! $BUILD_DIR/changelog2spec --target $CFFORMAT --file "$MYSRCDIR/$SPECFILE" > $BUILD_ROOT/.build-changelog ; then
+	    rm -f $BUILD_ROOT/.build-changelog
+	fi
+    fi
+
+    if test -n "$VM_TYPE" -a -z "$RUNNING_IN_VM"; then
+	rm -rf $BUILD_ROOT/.build
+	mkdir -p $BUILD_ROOT/.build
+	if test "$DO_INIT" = true ; then
+	    # do fist stage of init_buildsystem
+	    rm -f $BUILD_ROOT/.build.success
+	    set -- init_buildsystem --cachedir "$CACHE_DIR" --prepare "${definesnstuff[@]}" "${repos[@]}" $CLEAN_BUILD $USEUSEDFORBUILD $RPMLIST "$MYSRCDIR/$SPECFILE" $ADDITIONAL_PACKS
+	    echo "$* ..."
+	    "$@" || cleanup_and_exit 1
+	    check_exit
+	    if [ ! -w /root ]; then
+		# remove setuid bit if files belong to user to make e.g. mount work
+		find $BUILD_ROOT/{bin,sbin,usr/bin,usr/sbin} -type f -uid $UID -perm +4000 -print0 | xargs -0 --no-run-if-empty chmod -s
+	    fi
+	    copy_oldpackages
+	fi
+	# start up xen, rerun ourself
+	cp -a $BUILD_DIR/. $BUILD_ROOT/.build
+	if ! test "$MYSRCDIR" = $BUILD_ROOT/.build-srcdir ; then
+	    rm -rf $BUILD_ROOT/.build-srcdir
+	    mkdir $BUILD_ROOT/.build-srcdir
+	    if test "$BUILDTYPE" = kiwi ; then
+		cp -pRL "$MYSRCDIR"/* $BUILD_ROOT/.build-srcdir
+	    else
+		cp -p "$MYSRCDIR"/* $BUILD_ROOT/.build-srcdir
+	    fi
+	    MYSRCDIR=$BUILD_ROOT/.build-srcdir
+	else
+	    # cwd is at $BUILD_ROOT/.build-srcdir which we want to
+	    # umount later so step aside
+	    cd "$SRCDIR"
+	fi
+	Q="'\''"
+	echo "SPECFILE='${SPECFILE//"'"/$Q}'" > $BUILD_ROOT/.build/build.data
+	echo "BUILD_JOBS='${BUILD_JOBS//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "BUILD_ARCH='${BUILD_ARCH//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "BUILD_RPMS='${BUILD_RPMS//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	case $BUILD_DIST in
+	    */*)
+		cp $BUILD_DIST $BUILD_ROOT/.build/build.dist
+		BUILD_DIST=/.build/build.dist
+		;;
+	esac
+	echo "BUILD_DIST='${BUILD_DIST//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "RELEASE='${RELEASE//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "BUILD_DEBUG='${BUILD_DEBUG//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "SIGNDUMMY='${SIGNDUMMY//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "DO_LINT='${DO_LINT//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "DO_CHECKS='${DO_CHECKS//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "NOROOTFORBUILD='${NOROOTFORBUILD//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "CREATE_BASELIBS='$CREATE_BASELIBS'" >> $BUILD_ROOT/.build/build.data
+	echo "REASON='${REASON//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "CHANGELOG='${CHANGELOG//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "INCARNATION='${INCARNATION//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "DISTURL='${DISTURL//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	echo "DO_INIT='${DO_INIT//"'"/$Q}'" >> $BUILD_ROOT/.build/build.data
+	# FIXME: this depends on the kernel and vm.
+	# could be hda2, sda2 for xen or hdb/sdb for qemu
+	test -n "$VM_SWAP" && echo "VM_SWAP='${VM_SWAPDEV:-/dev/hda2}'" >> $BUILD_ROOT/.build/build.data
+	PERSONALITY=0
+	if test "$VM_TYPE" != 'lxc'; then
+	    test -n "$PERSONALITY_SYSCALL" && PERSONALITY=`perl -e 'print syscall('$PERSONALITY_SYSCALL', 0)."\n"'`
+	fi
+	echo "PERSONALITY='$PERSONALITY'" >> $BUILD_ROOT/.build/build.data
+	echo "MYHOSTNAME='`hostname`'" >> $BUILD_ROOT/.build/build.data
+	echo -n "definesnstuff=(" >> $BUILD_ROOT/.build/build.data
+	shellquote "${definesnstuff[@]}" >> $BUILD_ROOT/.build/build.data
+	echo ")" >> $BUILD_ROOT/.build/build.data
+	echo -n "repos=(" >> $BUILD_ROOT/.build/build.data
+	shellquote "${repos[@]}" >> $BUILD_ROOT/.build/build.data
+	echo ")" >> $BUILD_ROOT/.build/build.data
+	echo "VM_TYPE='$VM_TYPE'" >> $BUILD_ROOT/.build/build.data
+	echo "shell='$shell'" >> $BUILD_ROOT/.build/build.data
+	umount -n $BUILD_ROOT/proc/sys/fs/binfmt_misc 2> /dev/null || true
+	umount -n $BUILD_ROOT/proc 2> /dev/null || true
+	umount -n $BUILD_ROOT/dev/pts 2> /dev/null || true
+	umount -n $BUILD_ROOT/mnt 2> /dev/null || true
+
+	if [ -n "$VM_IMAGE" ]; then
+	    check_exit
+	    # needs to work otherwise we have a corrupted file system
+	    umount $BUILD_ROOT || cleanup_and_exit 1
+	fi
+
+	if check_use_emulator; then
+	    if [ -e $BUILD_DIR/initvm ]; then
+		vm_init_script="/.build/initvm"
+	    elif [ -e $BUILD_DIR/initscript_qemu_vm ]; then
+		vm_init_script="/.build/initscript_qemu_vm"
+	    else
+		echo "Warning: can't find initscript to register binfmts"
+	    fi
+	else
+	    vm_init_script="/.build/build"
+	fi
+
+	if [ "$VM_TYPE" = 'xen' ]; then
+		XMROOT="file:$(readlink -f $VM_IMAGE)"
+		XMROOT=${XMROOT/#file:\/dev/phy:/dev}
+		XMROOT="disk=$XMROOT,hda1,w"
+		XMSWAP=
+		if test -n "$VM_SWAP" ; then
+		    XMSWAP="file:$(readlink -f $VM_SWAP)"
+		    XMSWAP=${XMSWAP/#file:\/dev/phy:/dev}
+		    XMSWAP="disk=$XMSWAP,hda2,w"
+		fi
+		XENID="${VM_IMAGE%/root}"
+		XENID="${XENID%/tmpfs}"
+		XENID="${XENID##*/}"
+	        XENID="${XENID#root_}"
+
+		echo "booting XEN kernel ..."
+		if xm list "build:$XENID" >/dev/null 2>&1 ; then
+		   echo "Instance already exist, something really went wrong..."
+		   echo "Please report to your server admin, there might be multiple services running for same domain"
+		   cleanup_and_exit 3
+		fi
+		XEN_CONF_FILE=`mktemp /var/tmp/build.xen.conf-XXXXXXXXX` || cleanup_and_exit 3
+		echo "kernel = \"$vm_kernel\""                                           >  $XEN_CONF_FILE
+		echo "ramdisk = \"$vm_initrd\""                                          >> $XEN_CONF_FILE
+		echo "memory = ${MEMSIZE:-64}"                                           >> $XEN_CONF_FILE
+		echo "vcpus = $BUILD_JOBS"                                               >> $XEN_CONF_FILE
+		echo "root = \"/dev/hda1 ro\""                                           >> $XEN_CONF_FILE
+		echo "extra = \"init=/bin/bash console=ttyS0 panic=1 udev_timeout=360\"" >> $XEN_CONF_FILE
+		echo "on_poweroff = 'destroy'"                                           >> $XEN_CONF_FILE
+		echo "on_reboot = 'destroy'"                                             >> $XEN_CONF_FILE
+		echo "on_crash = 'destroy'"                                              >> $XEN_CONF_FILE
+		set -- xm create -c $XEN_CONF_FILE name="build:$XENID" $XMROOT $XMSWAP extra="quiet init="$vm_init_script" elevator=noop panic=1 console=ttyS0"
+		if test "$PERSONALITY" != 0 ; then
+		    # have to switch back to PER_LINUX to make xm work
+		    set -- linux64 "$@"
+		fi
+		echo "$@"
+		"$@" || cleanup_and_exit 3
+		rm "$XEN_CONF_FILE"
+	elif [ "$VM_TYPE" = 'uml' ]; then
+		echo "booting UML kernel ..."
+		set -- $uml_kernel initrd=$uml_initrd root=/ubda init="$vm_init_script" panic=1 elevator=noop quiet ubd0=$VM_IMAGE ${MEMSIZE:+mem=$MEMSIZE}
+		echo "$@"
+		"$@"
+	elif [ "$VM_TYPE" = 'qemu' -o "$VM_TYPE" = 'kvm' ]; then
+		echo "booting $VM_TYPE ..."
+		if [ "$kvm_virtio" = 1 ]; then
+		    CACHE=""
+                    if [ "$VM_TYPE" = 'kvm' -a -b "$VM_IMAGE" ]; then
+                      # speed optimization when using kvm with raw devices
+		      CACHE=",cache=none"
+                    fi
+		    qemu_args=(-drive file="$VM_IMAGE",if=virtio$CACHE -hda "$VM_IMAGE")
+		    if [ -n "$VM_SWAP" ]; then
+			qemu_args=("${qemu_args[@]}" "-drive")
+			qemu_args=("${qemu_args[@]}" "file=$VM_SWAP,if=virtio$CACHE")
+		    fi
+		else
+		    qemu_args=(-hda "$VM_IMAGE")
+		    if [ -n "$VM_SWAP" ]; then
+			qemu_args=("${qemu_args[@]}" "-hdb")
+			qemu_args=("${qemu_args[@]}" "$VM_SWAP")
+		    fi
+		fi
+		if [ -n "$BUILD_JOBS" -a "$icecream" = 0 ]; then
+		    qemu_args=("${qemu_args[@]}" "-smp" "$BUILD_JOBS")
+		fi
+                # workaround a bug in qemu-kvm where wrong cpuid can get set
+                KVM64_WORKAROUND=""
+	        if [ "$PERSONALITY" != 0 -a "$VM_TYPE" = 'kvm' ]; then
+                  KVM64_WORKAROUND="-cpu kvm64"
+		fi
+
+		set -- $qemu_bin -no-reboot -nographic -net none $KVM64_WORKAROUND \
+		    -kernel $vm_kernel \
+		    -initrd $vm_initrd \
+		    -append "root=$qemu_rootdev panic=1 quiet no-kvmclock rw elevator=noop console=ttyS0 init=$vm_init_script" \
+		    ${MEMSIZE:+-m $MEMSIZE} \
+		    "${qemu_args[@]}"
+
+		if test "$PERSONALITY" != 0 ; then
+		    # have to switch back to PER_LINUX to make qemu work
+		    set -- linux64 "$@"
+		fi
+		echo "$@"
+		"$@"
+	elif [ "$VM_TYPE" = 'lxc' ]; then
+		echo "booting $VM_TYPE ..."
+		LXCCONF="$BUILD_ROOT/.build.lxc.conf"
+		rm -f "$LXCCONF"
+		cat $BUILD_DIR/lxc.conf > "$LXCCONF"
+		cat >> "$LXCCONF" <<-EOF
+		lxc.rootfs = $BUILD_ROOT
+		EOF
+		# XXX: do this always instead of leaking the hosts' one?
+		echo "rootfs / rootfs rw 0 0" > $BUILD_ROOT/etc/mtab
+		LXCID=${BUILD_ROOT##*/}
+		lxc-destroy -n "$LXCID" >/dev/null 2>&1 || true
+		lxc-create -n "$LXCID" -f "$LXCCONF" || cleanup_and_exit 1
+		lxc-start -n "$LXCID" "$vm_init_script"
+		BUILDSTATUS="$?"
+		test "$BUILDSTATUS" != 255 || BUILDSTATUS=3
+		cleanup_and_exit "$BUILDSTATUS"
+	fi
+	if test -n "$VM_SWAP" ; then
+	    BUILDSTATUS=`dd if="$VM_SWAP" bs=12 count=1 2>/dev/null`
+	    case $BUILDSTATUS in
+	      BUILDSTATUS[02])
+		mkdir -p $BUILD_ROOT/.build.packages
+		cd $BUILD_ROOT/.build.packages || cleanup_and_exit 1
+		echo "build: extracting built packages..."
+		extractbuild --disk "$VM_IMAGE" --input "$VM_SWAP" --skip 512 -v || cleanup_and_exit 3
+		# create same layout as with plain chroot
+		if test "$BUILDTYPE" = spec ; then
+		    mkdir -p SRPMS
+		    for i in *src.rpm *.desktopfiles ; do
+			test -e "$i" || continue
+			mv "$i" SRPMS/
+		    done
+		    for i in *.rpm ; do
+			test -e "$i" || continue
+			arch=${i%.rpm}
+			arch=${i%.delta}
+			arch=${arch##*\.}
+			mkdir -p RPMS/$arch
+			mv "$i" RPMS/$arch/
+		    done
+		elif test "$BUILDTYPE" = dsc ; then
+		    mkdir -p DEBS
+		    find . -type f | while read i; do mv "$i" DEBS/; done
+		elif test "$BUILDTYPE" = pisi ; then
+		    mkdir -p PISIPKGS
+		    find . -type f | while read i; do mv "$i" PISIPKGS/; done
+		else
+		    mkdir -p KIWI
+		    find . -type f | while read i; do mv "$i" KIWI/; done
+		fi
+		for i in * ; do
+		    test -f "$i" || continue
+		    case $i in
+			_*|.*) ;;
+			*) mkdir -p OTHER ; mv $i OTHER/ ;;
+		    esac
+		done
+		cleanup_and_exit ${BUILDSTATUS#BUILDSTATUS}
+		;;
+	      BUILDSTATUS*)
+		cleanup_and_exit ${BUILDSTATUS#BUILDSTATUS}
+		;;
+	      *)
+		echo "No buildstatus set, either the packager broke the base system (glibc/bash/perl) or the build host has a kernel or hardware problem, OBS server will retry..."
+		cleanup_and_exit 3
+		;;
+	    esac
+	    cleanup_and_exit 1
+	fi
+	cleanup_and_exit 0
+    fi
+
+    if test "$DO_INIT" = true ; then
+	#
+	# create legacy .buildenv file
+	#
+	test -z "$INCARNATION" && INCARNATION=0
+	echo "BUILD_INCARNATION=$INCARNATION" > $BUILD_ROOT/.buildenv
+	CREATE_BUILD_BINARIES=
+	egrep '^#[       ]*needsbinariesforbuild[       ]*$' >/dev/null <$MYSRCDIR/$SPECFILE && CREATE_BUILD_BINARIES=--create-build-binaries
+	set -- init_buildsystem --cachedir "$CACHE_DIR" "${definesnstuff[@]}" "${repos[@]}" $CLEAN_BUILD $USEUSEDFORBUILD $CREATE_BUILD_BINARIES $RPMLIST "$MYSRCDIR/$SPECFILE" $ADDITIONAL_PACKS
+	echo "$* ..."
+	"$@" || cleanup_and_exit 1
+	check_exit
+	if df $BUILD_ROOT 2>/dev/null | grep -q "100%"; then
+	    df -h $BUILD_ROOT
+	    echo "build does not work on a completely full filesystem"
+	    cleanup_and_exit 1
+	fi
+	mount -n -tproc none $BUILD_ROOT/proc || true
+	mount -n -tdevpts none $BUILD_ROOT/dev/pts
+
+	copy_oldpackages
+    fi
+
+    if test -z "$BUILD_DIST" -a -e "$BUILD_ROOT/.guessed_dist" ; then
+	read BUILD_DIST < $BUILD_ROOT/.guessed_dist
+    fi
+
+    #
+    # fix rpmrc if we are compiling for i686
+    #
+    test -f $BUILD_ROOT/usr/lib/rpm/rpmrc_i586 && mv $BUILD_ROOT/usr/lib/rpm/rpmrc_i586 $BUILD_ROOT/usr/lib/rpm/rpmrc
+    if test -e $BUILD_ROOT/usr/lib/rpm/rpmrc -a "$BUILD_ARCH" != "${BUILD_ARCH#i686}" ; then
+	mv $BUILD_ROOT/usr/lib/rpm/rpmrc $BUILD_ROOT/usr/lib/rpm/rpmrc_i586
+	sed -e 's/^buildarchtranslate: athlon.*/buildarchtranslate: athlon: i686/' -e 's/^buildarchtranslate: i686.*/buildarchtranslate: i686: i686/' < $BUILD_ROOT/usr/lib/rpm/rpmrc_i586 > $BUILD_ROOT/usr/lib/rpm/rpmrc
+    fi
+
+    #
+    # install dummy sign program if needed
+    #
+    test -f $BUILD_ROOT/usr/bin/sign_installed && mv $BUILD_ROOT/usr/bin/sign_installed $BUILD_ROOT/usr/bin/sign
+    if test -n "$SIGNDUMMY" ; then
+	test -f $BUILD_ROOT/usr/bin/sign && mv $BUILD_ROOT/usr/bin/sign $BUILD_ROOT/usr/bin/sign_installed
+	cp $BUILD_DIR/signdummy $BUILD_ROOT/usr/bin/sign
+	chmod 755 $BUILD_ROOT/usr/bin/sign
+    fi
+
+    #
+    # check if we want to build with the abuild user
+    #
+    BUILD_USER=abuild
+    if test -x $BUILD_ROOT/bin/rpm ; then
+	SUSE_VERSION=`chroot $BUILD_ROOT /bin/rpm --eval '%{?suse_version}' 2>/dev/null`
+	if test -n "$SUSE_VERSION" && test "$SUSE_VERSION" -le 1020 ; then
+	    BUILD_USER=root
+	fi
+    fi
+    if test "$BUILD_USER" = abuild ; then
+	egrep '^#[       ]*needsrootforbuild[       ]*$' >/dev/null <$SPECFILE && BUILD_USER=root
+    else
+	egrep '^#[       ]*norootforbuild[       ]*$' >/dev/null <$SPECFILE && BUILD_USER=abuild
+    fi
+    test -n "$NOROOTFORBUILD" && BUILD_USER=abuild
+
+    if test $BUILD_USER = abuild ; then
+	if ! egrep '^abuild:' >/dev/null <$BUILD_ROOT/etc/passwd ; then
+	    echo "abuild::${ABUILD_UID}:${ABUILD_GID}:Autobuild:/home/abuild:/bin/bash" >>$BUILD_ROOT/etc/passwd
+	    echo 'abuild:*:::::::' >>$BUILD_ROOT/etc/shadow # This is needed on Mandriva 2009
+	    echo 'abuild:*::' >>$BUILD_ROOT/etc/gshadow # This is needed on Ubuntu
+	    echo "abuild::${ABUILD_GID}:" >>$BUILD_ROOT/etc/group
+	    mkdir -p $BUILD_ROOT/home/abuild
+	    chown "$ABUILD_UID:$ABUILD_GID" $BUILD_ROOT/home/abuild
+	else
+	    if ! egrep "^abuild:x?:${ABUILD_UID}:${ABUILD_GID}" >/dev/null <$BUILD_ROOT/etc/passwd ; then
+		echo "abuild user present in the buildroot ($BUILD_ROOT) but uid:gid does not match"
+		echo "buildroot currently using:"
+		egrep "^abuild:" <$BUILD_ROOT/etc/passwd
+		echo "build script attempting to use:"
+		echo "abuild::${ABUILD_UID}:${ABUILD_GID}:..."
+		echo "build aborting"
+		cleanup_and_exit 1
+	    fi
+	fi
+	if test -f $BUILD_ROOT/etc/shadow ; then
+	    sed -e "s@^root::@root:*:@" < $BUILD_ROOT/etc/shadow > $BUILD_ROOT/etc/shadow.t && mv $BUILD_ROOT/etc/shadow.t $BUILD_ROOT/etc/shadow
+	fi
+	if test -f $BUILD_ROOT/etc/gshadow ; then
+	    sed -e "s@^root::@root:*:@" < $BUILD_ROOT/etc/gshadow > $BUILD_ROOT/etc/gshadow.t && mv $BUILD_ROOT/etc/gshadow.t $BUILD_ROOT/etc/gshadow
+	fi
+	BUILD_USER_ABUILD_USED=true
+    else
+	# building as root
+	ABUILD_UID=0
+	ABUILD_GID=0
+	if egrep '^abuild:' >/dev/null <$BUILD_ROOT/etc/passwd ; then
+	    rm -rf $BUILD_ROOT/home/abuild
+	    egrep -v '^abuild:' <$BUILD_ROOT/etc/passwd >$BUILD_ROOT/etc/passwd.new
+	    mv $BUILD_ROOT/etc/passwd.new $BUILD_ROOT/etc/passwd
+	    egrep -v '^abuild:' <$BUILD_ROOT/etc/group >$BUILD_ROOT/etc/group.new
+	    mv $BUILD_ROOT/etc/group.new $BUILD_ROOT/etc/group
+	    if test -f $BUILD_ROOT/etc/shadow ; then
+	      egrep -v '^abuild:' <$BUILD_ROOT/etc/shadow >$BUILD_ROOT/etc/shadow.new
+	      mv $BUILD_ROOT/etc/shadow.new $BUILD_ROOT/etc/shadow
+	    fi
+	    if test -f $BUILD_ROOT/etc/gshadow ; then
+	      egrep -v '^abuild:' <$BUILD_ROOT/etc/gshadow >$BUILD_ROOT/etc/gshadow.new
+	      mv $BUILD_ROOT/etc/gshadow.new $BUILD_ROOT/etc/gshadow
+	    fi
+	fi
+    fi
+
+    if test "$BUILDTYPE" = spec ; then
+	TOPDIR=`chroot $BUILD_ROOT su -c "rpm --eval '%_topdir'" - $BUILD_USER`
+	if test -z "$TOPDIR"; then
+	    echo "Error: TOPDIR empty"
+	    cleanup_and_exit 1
+	fi
+    else
+	TOPDIR=/usr/src/packages
+	mkdir -p $BUILD_ROOT$TOPDIR
+    fi
+
+    rm -f $BUILD_ROOT/.build.packages
+    ln -s ${TOPDIR#/} $BUILD_ROOT/.build.packages
+
+    mount -n -tproc none $BUILD_ROOT/proc 2> /dev/null
+    mount -n -tdevpts none $BUILD_ROOT/dev/pts 2> /dev/null
+
+    setupicecream
+
+    setupccache
+
+    # nasty hack to prevent rpath on known paths
+    # FIXME: do this only for suse
+    if test -d "$BUILD_ROOT/etc/profile.d" ; then
+	echo "export SUSE_IGNORED_RPATHS=/etc/ld.so.conf" > "$BUILD_ROOT/etc/profile.d/buildsystem.sh"
+    fi
+
+    #
+    # now clean up RPM building directories
+    #
+    rm -rf $BUILD_ROOT$TOPDIR
+    for i in BUILD RPMS/`uname -m` RPMS/i386 RPMS/noarch SOURCES SPECS SRPMS BUILDROOT OTHER ; do
+	mkdir -p $BUILD_ROOT$TOPDIR/$i
+    done
+    chown -R "$ABUILD_UID:$ABUILD_GID" "$BUILD_ROOT$TOPDIR"
+    check_exit
+
+    mkdir -p $BUILD_ROOT$TOPDIR/SOURCES
+    if test "$BUILDTYPE" = kiwi ; then
+	mkdir -p $BUILD_ROOT$TOPDIR/KIWI
+	if test "$MYSRCDIR" = $BUILD_ROOT/.build-srcdir ; then
+	    mv "$MYSRCDIR"/* $BUILD_ROOT$TOPDIR/SOURCES/
+	else
+	    if test -z "$LINKSOURCES" ; then
+		cp -dLR "$MYSRCDIR"/* $BUILD_ROOT$TOPDIR/SOURCES/
+	    else
+		cp -lR "$MYSRCDIR"/* $BUILD_ROOT$TOPDIR/SOURCES/
+	    fi
+	    if test "$?" != 0 ; then
+		echo "source copy failed"
+		cleanup_and_exit 1
+	    fi
+	fi
+    else
+	cp -p "$MYSRCDIR"/* $BUILD_ROOT$TOPDIR/SOURCES/
+    fi
+    # strip prefix from autogenerated files of source services.
+    for i in $BUILD_ROOT$TOPDIR/SOURCES/_service\:*; do
+      mv "$i" "${i%/*}/${i##*:}"
+    done
+    SPECFILE="${SPECFILE##*:}"
+
+    test "$MYSRCDIR" = $BUILD_ROOT/.build-srcdir && rm -rf "$MYSRCDIR"
+    CHANGELOGARGS=
+    test -n "$CHANGELOG" -a -f "$BUILD_ROOT/.build-changelog" && CHANGELOGARGS="--changelog $BUILD_ROOT/.build-changelog"
+
+    if test "$BUILDTYPE" = spec ; then
+	# do buildrequires/release substitution
+	args=()
+	if test -n "$RELEASE"; then
+		args=(--release "$RELEASE")
+	fi
+	substitutedeps "${args[@]}" --root "$BUILD_ROOT" --dist "$BUILD_DIST" --archpath "$BUILD_ARCH" --configdir "$BUILD_DIR/configs" $CHANGELOGARGS "$BUILD_ROOT$TOPDIR/SOURCES/$SPECFILE" "$BUILD_ROOT/.spec.new" || cleanup_and_exit 1
+	# extract macros from configuration
+	getmacros --dist "$BUILD_DIST" --archpath "$BUILD_ARCH" --configdir "$BUILD_DIR/configs" > $BUILD_ROOT/root/.rpmmacros
+	if test -n "$BUILD_DEBUG" ; then
+	    echo '
+%prep %{?!_suse_insert_debug_package_seen:%?_suse_insert_debug_package}%%prep
+%package %{?!_suse_insert_debug_package_seen:%?_suse_insert_debug_package}%%package
+%suse_insert_debug_package \
+  %global _suse_insert_debug_package \\\
+    %%global _suse_insert_debug_package_seen 1 \\\
+    %%debug_package
+
+' >> $BUILD_ROOT/root/.rpmmacros
+	fi
+
+	if [ -n "$BUILD_JOBS" ]; then
+		cat >> $BUILD_ROOT/root/.rpmmacros <<-EOF
+		%jobs $BUILD_JOBS
+		%_smp_mflags -j$BUILD_JOBS
+		EOF
+	fi
+	test $BUILD_USER = abuild && cp -p $BUILD_ROOT/root/.rpmmacros $BUILD_ROOT/home/abuild/.rpmmacros
+	# extract optflags from configuration
+	getoptflags --dist "$BUILD_DIST" --configdir "$BUILD_DIR/configs" --archpath "$BUILD_ARCH" ${BUILD_DEBUG:+--debug} > $BUILD_ROOT/root/.rpmrc
+	test $BUILD_USER = abuild && cp -p $BUILD_ROOT/root/.rpmrc $BUILD_ROOT/home/abuild/.rpmrc
+	if test -z "$ABUILD_TARGET"; then
+	    ABUILD_TARGET=$(getchangetarget --dist "$BUILD_DIST" --configdir "$BUILD_DIR/configs" --archpath "$BUILD_ARCH" )
+	    test -z "$ABUILD_TARGET" || echo "build target is $ABUILD_TARGET"
+	fi
+    fi
+    if test -f $BUILD_ROOT/.spec.new ; then
+	if ! cmp -s $BUILD_ROOT$TOPDIR/SOURCES/$SPECFILE $BUILD_ROOT/.spec.new ; then
+	    echo -----------------------------------------------------------------
+	    echo I have the following modifications for $SPECFILE:
+	    sed -e "/^%changelog/q" $BUILD_ROOT$TOPDIR/SOURCES/$SPECFILE > $BUILD_ROOT/.spec.t1
+	    sed -e "/^%changelog/q" $BUILD_ROOT/.spec.new > $BUILD_ROOT/.spec.t2
+	    diff $BUILD_ROOT/.spec.t1 $BUILD_ROOT/.spec.t2
+	    rm -f $BUILD_ROOT/.spec.t1 $BUILD_ROOT/.spec.t2
+	    mv $BUILD_ROOT/.spec.new $BUILD_ROOT$TOPDIR/SOURCES/$SPECFILE
+	else
+	    rm -f $BUILD_ROOT/.spec.new
+	fi
+    fi
+
+    if test "$BUILDTYPE" = dsc ; then
+	rm -rf $BUILD_ROOT$TOPDIR/BUILD
+	mkdir -p $BUILD_ROOT$TOPDIR/SOURCES.DEB
+	chown -R "$ABUILD_UID:$ABUILD_GID" "$BUILD_ROOT$TOPDIR"
+	DEB_TRANSFORM=
+	DEB_SOURCEDIR=$TOPDIR/SOURCES
+	DEB_DSCFILE=$SPECFILE
+	for f in $BUILD_ROOT$TOPDIR/SOURCES/debian.* ; do
+	    test -f $f && DEB_TRANSFORM=true
+	done
+	if test -n "$DEB_TRANSFORM" ; then
+	    echo "running debian transformer..."
+	    if ! debtransform $CHANGELOGARGS $BUILD_ROOT$TOPDIR/SOURCES $BUILD_ROOT$TOPDIR/SOURCES/$SPECFILE $BUILD_ROOT$TOPDIR/SOURCES.DEB ; then
+		echo "debian transforming failed."
+		cleanup_and_exit 1
+	    fi
+	    DEB_SOURCEDIR=$TOPDIR/SOURCES.DEB
+	    for DEB_DSCFILE in $BUILD_ROOT/$DEB_SOURCEDIR/*.dsc ; do : ; done
+	    DEB_DSCFILE="${DEB_DSCFILE##*/}"
+	fi
+	chroot $BUILD_ROOT su -c "dpkg-source -x $DEB_SOURCEDIR/$DEB_DSCFILE $TOPDIR/BUILD" - $BUILD_USER
+    fi
+
+    if test "$BUILDTYPE" = "pisi" ; then
+	echo "Building PiSi source package..."
+	cp /etc/resolv.conf -t $BUILD_ROOT/etc
+	chroot $BUILD_ROOT su -c "cd $TOPDIR/SOURCES && pisi build -dv pspec.xml 2>&1 >/dev/null" - $BUILD_USER
+	mv $BUILD_ROOT/$TOPDIR/SOURCES/* -t $BUILD_ROOT/$TOPDIR/BUILD
+    fi
+
+    chown -R "$ABUILD_UID:$ABUILD_GID" "$BUILD_ROOT$TOPDIR"
+    cd $BUILD_ROOT$TOPDIR/SOURCES || cleanup_and_exit 1
+
+    echo -----------------------------------------------------------------
+    if test "$BUILD_USER" = root ; then
+	echo ----- building $SPECFILE
+    else
+	echo ----- building $SPECFILE "(user $BUILD_USER)"
+    fi
+    echo -----------------------------------------------------------------
+    echo -----------------------------------------------------------------
+    if [ -n "$RUNNING_IN_VM" ]; then
+	if [ -x /sbin/ip ]; then
+	    ip addr add 127.0.0.1/8 dev lo
+	    ip link set lo up
+	else
+	    ifconfig lo 127.0.0.1 up
+	fi
+	if [ -n "$MYHOSTNAME" ]; then
+	    hostname "$MYHOSTNAME"
+	fi
+    fi
+
+    BUILD_SUCCEEDED=false
+
+    if test -n "$OVERLAY" ; then
+	if test -d "$OVERLAY"; then
+	    pushd $OVERLAY
+	    echo "Copying overlay to BUILD_ROOT"
+	    tar -cpf - . | (cd $BUILD_ROOT ; tar -xvf -)
+	    popd
+	else
+	    echo "OVERLAY ($OVERLAY) is no directory - skipping"
+	fi
+    fi
+
+    if test -n "$RSYNCSRC" ; then
+	if test -n "$RSYNCDEST"; then
+	    if test -d "$RSYNCSRC"; then
+		if ! test -d "$BUILD_ROOT/$RSYNCDEST"; then
+		    echo "ATTENTION! Creating target directory ($BUILD_ROOT/$RSYNCDEST) as its not there."
+		    mkdir -p $BUILD_ROOT/$RSYNCDEST
+		fi
+		echo "Running rsync ..."
+		rsync -av $RSYNCSRC/* $BUILD_ROOT/$RSYNCDEST/
+		chown -R "$ABUILD_UID:$ABUILD_GID" "$BUILD_ROOT/$RSYNCDEST"
+		RSYNCDONE=true
+		echo "... done"
+	    else
+		echo "RSYNCSRC is no directory - skipping"
+	    fi
+	else
+	    echo "RSYNCSRC given, but not RSYNCDEST - skipping"
+	fi
+    fi
+
+    if test "$BUILDTYPE" = spec ; then
+	test -z "$BUILD_RPM_BUILD_STAGE" && BUILD_RPM_BUILD_STAGE=-ba
+
+	# XXX: move _srcdefattr to macro file?
+	rpmbopts=("$BUILD_RPM_BUILD_STAGE" "--define" "_srcdefattr (-,root,root)")
+	if [ -n "$ABUILD_TARGET" ]; then
+		rpmbopts[${#rpmbopts[@]}]="--target=$ABUILD_TARGET"
+	fi
+	if [ -n "$DISTURL" ]; then
+		rpmbopts[${#rpmbopts[@]}]='--define'
+		rpmbopts[${#rpmbopts[@]}]="disturl $DISTURL"
+	fi
+	if test -s "$BUILD_ROOT/usr/lib/rpm/mandriva/macros" ; then
+		rpmbopts[${#rpmbopts[@]}]='--eval'
+		rpmbopts[${#rpmbopts[@]}]="%undefine _enable_debug_packages"
+	fi
+	if [ -n "$BUILD_DEBUG" ]; then
+		rpmbopts[${#rpmbopts[@]}]='--eval'
+		rpmbopts[${#rpmbopts[@]}]="%suse_insert_debug_package"
+	fi
+	if [ -n "$RSYNCDONE" ] ; then
+		rpmbopts[${#rpmbopts[@]}]='--define'
+		rpmbopts[${#rpmbopts[@]}]="RSYNCDONE 1"
+	fi
+
+	rpmbuild=rpmbuild
+
+	test -x $BUILD_ROOT/usr/bin/rpmbuild || rpmbuild=rpm
+	# su involves a shell which would require even more
+	# complicated quoting to bypass than this
+	toshellscript $rpmbuild \
+		"${definesnstuff[@]}" \
+		"${rpmbopts[@]}" \
+		"$TOPDIR/SOURCES/$SPECFILE" \
+		> $BUILD_ROOT/.build.command
+	chmod 755 $BUILD_ROOT/.build.command
+	check_exit
+	if test -n "$shell"; then
+	    chroot $BUILD_ROOT su -
+	else
+	    chroot $BUILD_ROOT su -c /.build.command - $BUILD_USER < /dev/null && BUILD_SUCCEEDED=true
+	fi
+    fi
+
+    if test "$BUILDTYPE" = dsc ; then
+	# Checks to see if a build script should be used
+	# this allows the build environment to be manipulated
+	# and alternate build commands can be used
+# Debian policy requires to build with single CPU by default
+#	if [ -n "$BUILD_JOBS" ]; then
+#	    DSC_BUILD_JOBS="-j$BUILD_JOBS"
+#	fi
+	DSC_BUILD_CMD="dpkg-buildpackage -us -uc -rfakeroot-tcp $DSC_BUILD_JOBS"
+	if test -e $BUILD_ROOT/$TOPDIR/SOURCES/build.script ; then
+	    echo "Sourcing build.script to build - it should normally run 'dpkg-buildpackage -us -uc -rfakeroot-tcp'"
+	    DSC_BUILD_CMD="source $TOPDIR/SOURCES/build.script"
+	    chmod +x $BUILD_ROOT/$TOPDIR/SOURCES/build.script
+	fi
+
+	if test -n "$shell"; then
+	    chroot $BUILD_ROOT su -
+	else
+	    chroot $BUILD_ROOT su -c "cd $TOPDIR/BUILD && $DSC_BUILD_CMD" - $BUILD_USER < /dev/null && BUILD_SUCCEEDED=true
+	fi
+
+	mkdir -p $BUILD_ROOT/$TOPDIR/DEBS
+	for DEB in $BUILD_ROOT/$TOPDIR/*.deb ; do
+	    test -e "$DEB" && mv "$DEB" "$BUILD_ROOT/$TOPDIR/DEBS"
+	done
+	# link sources over
+	ln $BUILD_ROOT/$DEB_SOURCEDIR/$DEB_DSCFILE $BUILD_ROOT/$TOPDIR/DEBS/
+	while read f ; do
+	    ln $BUILD_ROOT/$DEB_SOURCEDIR/$f $BUILD_ROOT/$TOPDIR/DEBS/
+	done < <(sed -ne '/^Files:/,$s/^ ................................ [0-9][0-9]* //p' < $BUILD_ROOT/$DEB_SOURCEDIR/$DEB_DSCFILE)
+    fi
+
+    if test "$BUILDTYPE" = "pisi" ; then
+	if test -n "$shell"; then
+	    chroot $BUILD_ROOT su -
+	else
+	    chroot $BUILD_ROOT su -c "cd $TOPDIR/BUILD && pisi bi pspec.xml -dv" - $BUILD_USER < /dev/null && BUILD_SUCCEEDED=true
+    fi
+	mkdir -p $BUILD_ROOT/$TOPDIR/PISIPKGS
+	for PKG in $BUILD_ROOT/$TOPDIR/BUILD/*.pisi ; do
+	    test -e "$PKG" && mv "$PKG" "$BUILD_ROOT/$TOPDIR/PISIPKGS"
+	done
+    fi
+
+    if test "$BUILDTYPE" = kiwi ; then
+	. $BUILD_DIR/build_kiwi.sh
+	run_kiwi
+    fi
+
+    test "$BUILD_SUCCEEDED" = true || cleanup_and_exit 1
+    test -d "$SRCDIR" && cd "$SRCDIR"
+done
+
+RPMS=`find $BUILD_ROOT/$TOPDIR/RPMS -type f -name "*.rpm" 2>/dev/null || true`
+DEBS=`find $BUILD_ROOT/$TOPDIR/DEBS -type f -name "*.deb" 2>/dev/null || true`
+PISIPKGS=`find $BUILD_ROOT/$TOPDIR/PISIPKGS -type f -name "*.pisi" 2>/dev/null || true`
+
+if test -n "$RPMS" -a -n "$BUILD_USER_ABUILD_USED" ; then
+    echo "... checking for files with abuild user/group"
+    BADFILE=
+    while read un gn fn ; do
+	if test "$un" = abuild -o "$gn" = abuild -o "$un" = ${ABUILD_UID} -o "$gn" = ${ABUILD_GID} ; then
+	    echo "  $un $gn $fn"
+	    BADFILE=true
+	fi
+    done < <(rpm -qp --qf '[%{FILEUSERNAME} %{FILEGROUPNAME} %{FILENAMES}\n]' $RPMS)
+    if test -n "$BADFILE" ; then
+	echo "please fix your filelist (e.g. add defattr)"
+	cleanup_and_exit 1
+    fi
+fi
+
+if test -n "$RPMS" -a -d "$BUILD_ROOT/usr/lib/build/checks" ; then
+    export PNAME=""
+    export DO_RPM_REMOVE=true
+    for SRPM in $BUILD_ROOT/$TOPDIR/SRPMS/*src.rpm ; do
+	test -f "$SRPM" && PNAME=`rpm --nodigest --nosignature -qp --qf "%{NAME}" $SRPM`
+    done
+    for CHECKSCRIPT in $BUILD_ROOT/usr/lib/build/checks/* ; do
+	echo "... running `basename $CHECKSCRIPT`"
+	$CHECKSCRIPT || cleanup_and_exit 1
+    done
+fi
+
+if test -n "$RPMS" -a "$DO_CHECKS" != "false" -a -x "$BUILD_ROOT/opt/testing/bin/rpmlint" -a -d "$BUILD_ROOT/$TOPDIR/RPMS" ; then
+    LINT_RPM_FILE_LIST=($(find $BUILD_ROOT/$TOPDIR/RPMS \
+	\( -name "*-debuginfo-*" -o -name "*-debugsource-*" \
+	-o -name "*-32bit-*" -o -name "*-64bit-*" \
+	-o -name "*-x86-*" -o -name "*-ia32-*" \) -prune \
+	-o -type f -name '*.rpm' -print))
+    SRPM_FILE_LIST=($(find $BUILD_ROOT/$TOPDIR/SRPMS -type f -name "*.rpm"))
+    echo
+    echo "RPMLINT report:"
+    echo "==============="
+    chroot $BUILD_ROOT /opt/testing/bin/rpmlint --info ${LINT_RPM_FILE_LIST[*]#$BUILD_ROOT} ${SRPM_FILE_LIST[*]#$BUILD_ROOT} || cleanup_and_exit 1
+    echo
+fi
+
+if test \( -n "$RPMS" -o -n "$DEBS" \) -a -n "$CREATE_BASELIBS"; then
+    create_baselibs
+fi
+
+exitcode=0
+# post build scripts
+# TODO: don't hardcode. instead run scripts in a directory as it's done for the checks
+if test -n "$RPMS" \
+	-a -d "$BUILD_ROOT/$TOPDIR/RPMS" \
+	-a -d "$BUILD_ROOT/.build.oldpackages" \
+	; then
+    if test -x "$BUILD_ROOT/usr/lib/build/same-build-result.sh" ; then
+	echo "... comparing built packages with the former built"
+	mount -n -tproc none $BUILD_ROOT/proc 2> /dev/null
+	if chroot $BUILD_ROOT /usr/lib/build/same-build-result.sh /.build.oldpackages "$TOPDIR/RPMS" "$TOPDIR/SRPMS"; then
+	    chroot $BUILD_ROOT touch /.build/.same_result_marker
+	    # XXX: dirty build service hack. fix bs_worker. Search for
+	    # 'same_result_marker' for traces of a first try to get rid of this
+	    if test -n "$REASON" -a -n "$DISTURL"; then
+		exitcode=2
+	    fi
+	fi
+    fi
+    if test ! -e $BUILD_ROOT/.build/.same_result_marker \
+	-a -x "$BUILD_ROOT/usr/bin/makedeltarpm" \
+	-a -x $BUILD_ROOT/usr/lib/build/mkdrpms; then
+	echo "... creating delta rpms"
+	ds=("$BUILD_ROOT/$TOPDIR"/RPMS/* "$BUILD_ROOT$TOPDIR/SRPMS")
+	chroot $BUILD_ROOT /usr/lib/build/mkdrpms /.build.oldpackages "${ds[@]#$BUILD_ROOT}"
+    fi
+fi
+
+if test -n "$RUNNING_IN_VM" -a -n "$VM_SWAP"; then
+    echo "... saving built packages"
+    swapoff "$VM_SWAP"
+    args="--padstart 512 --padend 512 -v"
+    case "$BUILDTYPE" in
+	spec)
+	    computeblocklists $args $TOPDIR/RPMS/*/*.{d,}rpm $TOPDIR/SRPMS/* $TOPDIR/OTHER/* > "$VM_SWAP"
+	    ;;
+	dsc)
+	    computeblocklists $args $TOPDIR/DEBS/*.deb $TOPDIR/SOURCES.DEB/* $TOPDIR/OTHER/* > "$VM_SWAP"
+	    ;;
+	kiwi)
+	    computeblocklists $args $TOPDIR/KIWI/* $TOPDIR/OTHER/* > "$VM_SWAP"
+	    ;;
+    pisi)
+	    computeblocklists $args $TOPDIR/PISIPKGS/* $TOPDIR/OTHER/* > "$VM_SWAP"
+	    ;;
+
+    esac || cleanup_and_exit 1
+fi
+
+echo
+echo "$HOST finished \"build $SPECFILE\" at `date --utc`."
+echo
+
+cleanup_and_exit "$exitcode"

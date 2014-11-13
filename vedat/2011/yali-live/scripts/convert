@@ -1,0 +1,10 @@
+#!/bin/sh
+uis=`ls *.ui`
+
+for ui in $uis
+do
+    uic3 -convert $ui > $ui.new
+    mv $ui.new $ui
+done
+echo -e "\n\033[32mDone..\033[0m"
+

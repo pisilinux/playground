@@ -1,0 +1,61 @@
+PiSi Optimization
+
+This project involves experiments related to the optimization of PiSi.
+
+ - pisi index patch:
+
+    This patch adds "--use-old-index" option to "pisi index".
+    With this option, index method uses old "pisi-index.xml" file to getting unchanged packages information.
+
+    files:
+	patches/pisi/index__use-old-index.patch
+
+ - autoxml on demand decoding:
+
+    Current method: create objects for all the tags while parsing.
+    On demand decoding method: create object (decode tag) when its first call.
+    Some operations may not need to use all tags. When on demand decoding used with this kind of operations, significant performance gains can be achieved.
+
+    files:
+	pisi/pisi/pxml/ondemand.py
+	pisi/pisi/pxml/autoxml.py(changed)
+
+
+ - autoxml on demand decoding test:
+
+    Test script for on demand decoding.
+
+    files:
+      - tests/autoxml_ondemand_test.py
+      - tests/test_xml/*
+
+
+ - pisi list-installed patch:
+
+    "pisi list-installed" process parsing all metadata.xml's two time. This patch fixes this problem.
+
+    files:
+      - patches/pisi/list-installed__get_package_and_info__function.patch
+
+
+INSTALLATION:
+
+Install pisi release:209
+
+ - on demand decoding:
+    1. backup /usr/lib/pisi
+    2. copy [svn dir]/pisi/pisi to /usr/lib/pisi
+    3. for using on demand default:
+        cd /usr/lib/pardus/pisi
+        patch -p1 -i [svn dir]/patches/pisi/use_ondemand_default.patch
+
+ - list installed patch:
+    cd /usr/lib/pardus/pisi
+    patch -p1 -i [svn dir]/patches/pisi/list-installed__get_package_and_info__function.patch
+
+ - use old index patch:
+    cd /usr/lib/pardus/pisi
+    patch -p1 -i [svn dir]/patches/pisi/index__use-old-index.patch
+
+    if ondemand decoding installed:
+      patch -p1 -i [svn dir]/patches/pisi/use_old_index_ondemand_False.patch

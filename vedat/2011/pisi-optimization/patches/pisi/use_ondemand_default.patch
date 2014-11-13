@@ -1,0 +1,45 @@
+diff -Nuar pisi.orig/pxml/autoxml.py pisi/pxml/autoxml.py
+--- pisi.orig/pxml/autoxml.py	2011-09-24 15:26:47.366000044 +0300
++++ pisi/pxml/autoxml.py	2011-09-24 15:13:07.236000032 +0300
+@@ -338,7 +338,7 @@
+         cls.__init__ = initialize
+ 
+         cls.decoders = decoders
+-        def decode(self, node, errs, where = unicode(cls.tag), use_ondemand = False):
++        def decode(self, node, errs, where = unicode(cls.tag), use_ondemand = True):
+             self.use_ondemand = use_ondemand
+             for base in cls.autoxml_bases:
+                 base.decode(self, node, errs, where, use_ondemand)
+@@ -421,7 +421,7 @@
+             cls.__ne__ = notequal
+ 
+         if xmlfile_support:
+-            def parse(self, xml, keepDoc = False, use_ondemand = False):
++            def parse(self, xml, keepDoc = False, use_ondemand = True):
+                 "parse XML string and decode it into a python object"
+                 self.use_ondemand = use_ondemand
+                 self.parsexml(xml)
+@@ -442,7 +442,7 @@
+ 
+             def read(self, uri, keepDoc = False, tmpDir = '/tmp',
+                      sha1sum = False, compress = None, sign = None, copylocal = False, nodecode = False,
+-                     use_ondemand = False):
++                     use_ondemand = True):
+                 "read XML file and decode it into a python object"
+                 self.use_ondemand = use_ondemand
+ 
+diff -Nuar pisi.orig/specfile.py pisi/specfile.py
+--- pisi.orig/specfile.py	2011-09-24 15:26:47.367000044 +0300
++++ pisi/specfile.py	2011-09-24 15:27:37.195000044 +0300
+@@ -407,6 +407,11 @@
+             deps += sum([x.dependencies for x
+                          in package.packageAnyDependencies], [])
+             for dep in deps:
++                # FIXME: quick fix for ondemand decoding
++                # object.__dict__ usage blocking decode
++                if hasattr(dep, 'decodeAll'):
++                    dep.decodeAll()
++
+                 for attr_name, attr_value in dep.__dict__.items():
+                     if attr_value != "current":
+                         continue

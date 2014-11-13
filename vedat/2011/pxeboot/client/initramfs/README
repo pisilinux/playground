@@ -1,0 +1,19 @@
+
+ mkinitramfs
+ ------------
+
+ This is an initramfs creator for Pardus, Mkinitramfs part is written in Python, 
+the init script running in boot process is written as shell script (ash compatib
+le).
+
+ Init script creates a temporary initramfs to do initial system booting tasks (st
+orage probing, graphic card initialization) for installed systems and live syste
+ms. It can also be used as a very basic rescue system for failsafe operations.
+
+
+ For initramfs options, see the output of
+
+ mkinitramfs --help
+
+
+

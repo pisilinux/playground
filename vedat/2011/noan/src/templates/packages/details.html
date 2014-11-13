@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% load package_extras %}
+{% load i18n %}
+
+{% block title %}Pardus - {{ pkg.name }} {{ pkg.full_version }} - {% trans "Package Details" %}{% endblock %}
+
+{% block content %}
+<div id="pkgdetails" class="box">
+
+    <h2>{% trans "Package Details" %}: {{ pkg.name }} {{ pkg.full_version }}</h2>
+<div id="detailslinks" class="listing">
+
+        <div id="actionlist">
+            <h4> {% trans "Package Actions" %}</h4>
+            <ul class="small">
+                <li><a href="http://websvn.pardus.org.tr/pardus/{{ pkg.distribution|dist_replace }}/{{ pkg.partOf.name|replace:"." }}/{{ pkg.pkgbase }}" title="{% blocktrans with repo=pkg.repo|lower arch=pkg.architecture %}View SVN entries in the {{repo}}-{{arch}} branch {% endblocktrans %}">{% trans "SVN Entries" %} </a></li>
+                <!--<li><a href="svn trunk" title="View SVN entries on trunk">SVN Entries (trunk)</a></li>-->
+                <li><a href="http://bugzilla.pardus.org.tr/enter_bug.cgi?product={{ pkg.distribution.name|split:"-"|getVersion:"tr" }}%20paketleri%20%2F%20{{ pkg.distribution.name|split:"-"|getVersion }}%20packages&component={{ pkg.pkgbase }}&rep_platform={{ pkg.architecture }}" title="{% blocktrans with pkg_name=pkg.name %}Report a bug for {{ pkg_name }} {% endblocktrans %}">{% trans "Report a Bug" %}</a></li>
+                <li><a href="http://bugzilla.pardus.org.tr/buglist.cgi?query_format=specific&order=bugs.bug_id+desc&bug_status=__open__&product={{ pkg.distribution.name|split:"-"|getVersion:"tr" }}%20paketleri%20%2F%20{{ pkg.distribution.name|split:"-"|getVersion }}%20packages&component={{ pkg.pkgbase }}" title="{% blocktrans with pkg_name=pkg.name %}Bug reports for {{ pkg_name }}{% endblocktrans %}">{% trans "Bug Reports" %}</a></li>
+                <li><a href="http://packages.pardus.org.tr/pardus/{{ pkg.distribution.name|replace:"-"}}/{{ pkg.architecture }}/{{ pkg.uri }}" title="{% blocktrans with pkg_name=pkg.name %}Download {{ pkg_name }}{% endblocktrans %}">{% trans "Download" %}</a></li>
+            </ul>
+        </div>
+    </div><!-- #actionlist -->
+
+    <table id="pkginfo">
+        <tr>
+            <th>{% trans "Architecture" %} :</th>
+            <td><a href="/packages/?architecture={{ pkg.architecture.name }}"
+                    title="{% blocktrans with pkg_architecture_name=pkg.architecture.name %}Browse packages for {{ pkg_architecture_name }} architecture{% endblocktrans %}">{{ pkg.architecture.name }}</a></td>
+        </tr>
+        <tr>
+            <th> {% trans "Repository" %}:</th>
+            <td><a href="/packages/?repo={{ pkg.repo|capfirst }}"
+                    title="{% blocktrans with pkg_repo=pkg.repo|capfirst %}Browse the {{ pkg_repo }} repository{% endblocktrans %}">{{ pkg.repo|capfirst }}</a></td>
+        </tr>
+        <tr>
+            <th>{% trans "Description" %}: </th>
+            <td class="wrap">{{ pkg.pkgdesc.desc|default:"" }}</td>
+        </tr>
+        <tr>
+            <th>{% trans "Upstream URL" %}:</th>
+            <td>{% if pkg.homepage %}<a href="{{ pkg.homepage }}"
+                    title="{% blocktrans with pkg_name=pkg.name %}Visit the website for {{ pkg_name }}{% endblocktrans %}">{{ pkg.homepage }}</a>{% endif %}</td>
+        </tr>
+        <tr>
+            <th>{% trans "License(s)" %}:</th>
+            <td>
+                {% for license in pkg.licenses %}
+                <a href="http://svn.pardus.org.tr/uludag/trunk/doc/en/licenses/{{ license }}">{{ license }}</a>
+                {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>{% trans "Component" %}:</th>
+            {% with pkg.partOf as partOf %}
+            <td>{% if partOf %}
+                <a href="/packages/?sort=&pkgbase={{ partOf }}"
+                    title="{% blocktrans %}Group details for {{ partOf }}{% endblocktrans %}">{{ partOf }}</a><br/>
+                {% else %}None{% endif %}
+            </td>
+            {% endwith %}
+         </tr><tr>
+         <th>{% trans "Packager" %}:</th>
+            <td>
+                <a href="/packages/?sort=&packager={{ pkg.packager }}"
+                    title="{% blocktrans with pkg_packager=pkg.packager %}Packages maintained by {{ pkg_packager}}{% endblocktrans %}">{{ pkg.packager }}</a>
+            </td>
+        </tr><tr>
+        <th>{% trans "Package Size" %}:</th>
+            <td>{{ pkg.package_size|filesizeformat }}</td>
+        </tr><tr>
+        <th>{% trans "Installed Size" %}:</th>
+            <td>{{ pkg.installed_size|filesizeformat }}</td>
+        </tr><tr>
+        <th>{% trans "Last Updater" %}:</th>
+            <td>{{ pkg.last_packager }}</td>
+        </tr><tr>
+        <th>{% trans "Last Updated" %}:</th>
+            <td>{{ pkg.last_update }}</td>
+        </tr>
+
+    </table>
+
+    <div id="metadata">
+
+        {% with pkg.deps as deps %}
+        <div id="pkgdeps" class="listing">
+
+            <h3 title="{{ pkg.name }} {% trans "has the following dependencies" %}">
+                {% trans "Dependencies" %} ({{deps|length}})</h3>
+
+            {% if deps %}
+            <ul>
+                {% for depend in deps %}
+                <li><a href="/packages/{{ pkg.distribution }}/{{ pkg.architecture }}/{{ depend }}/"
+                    title="{% blocktrans%} View package details for {{ depend }} {% endblocktrans %}">{{ depend }}</a>{{ depend.dep.depvcmp|default:"" }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+
+
+        </div><!-- #pkgdeps -->
+        {% endwith %}
+
+        {% with pkg.revdeps as revdeps %}
+        <div id="pkgreqs" class="listing">
+
+            <h3 title="{% blocktrans with name=pkg.name %}Packages that require {{ name }} {% endblocktrans %}">
+                {% trans "Required By" %} ({{revdeps|length}})</h3>
+
+            {% if revdeps %}
+            <ul>
+                {% for dep in revdeps %}
+                <li><a href="/packages/{{ dep.distribution }}/{{ dep.architecture }}/{{ dep.name }}/"
+                    title="{% blocktrans with dep_name=dep.name %}View package details for {{ dep_name }} {% endblocktrans %}">{{ dep.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </div><!-- #pkgreqs -->
+        {% endwith %}
+
+        <div id="pkgfiles" class="listing">
+
+            <h3 title="{% trans "Complete list of files contained within this package" %}">
+                {% trans "Package Contents" %}</h3>
+
+            <div id="pkgfilelist">
+                <p><a id="filelink" href="files/"
+                    title="{% blocktrans with name=pkg.name %} Click to view the complete file list for {{ name }} {% endblocktrans %}">
+                   {% blocktrans with name=pkg.name %}  View the file list for {{ name }} {% endblocktrans %}</a></p>
+            </div>
+
+        </div><!-- #pkgfiles -->
+
+        <div id="pkgpatches" class="listing">
+
+            <h3 title="{{ pkg.name }} {% trans  "patches" %}">{% trans "Package History" %}</h3>
+
+            <style type="text/css">
+                th { text-align: left; padding-left: 7px; }
+                td { padding: 0 5px; vertical-align: top; text-align: left; }
+            </style>
+                <table class="results">
+                    <tr>
+                        <th>{% trans "Date" %}</th>
+                        <th>{% trans "Version" %}</th>
+                        <th>{% trans "Packager" %}</th>
+                        <th>{% trans "Details" %}</th>
+                    </tr>
+                    {% for update in pkg.updates reversed %}
+                    <tr class="{% cycle 'odd' 'even' %}">
+                        <td>{{ update.date|date:"Y-m-d" }}</td>
+                        <td>{{ update.version }}-{{ update.release }}</td>
+                        <td>
+                            {% with packager_username=update.packager|packager_username %}
+                            {% if packager_username %}
+                                <a href="/packages/?sort=&q=&packager={{ packager_username }}&last_update=&limit=50">
+                            {% else %}
+                                <a href="mailto:{{ update.email }}">
+                            {% endif %}
+                            {{ update.packager }}</a>
+                        </td>
+                        <td>{{ update.comment_html|safe }}</td>
+                        {% endwith %}
+                    </tr>
+                    {% endfor %}
+                </table>
+
+        </div><!-- #pkgpatches -->
+
+    </div><!-- #metadata -->
+
+</div><!-- #pkgdetails -->
+
+{% load cdn %}{% jquery %}
+<script type="text/javascript" src="/media/archweb.js"></script>
+<script type="text/javascript">
+$(document).ready(ajaxifyFiles);
+</script>
+{% endblock %}

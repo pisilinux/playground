@@ -1,0 +1,9 @@
+{% if files|length %}
+<ul>
+    {% for file in files %}
+    <li>{{ file }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="message">No file list available.</p>
+{% endif %}

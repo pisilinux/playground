@@ -1,0 +1,46 @@
+
+ YALI TODO List
+ --------------------------------------------------------
+  - Todo     > Comments, Details        | / In progress
+  ? Not determined if/how we have to do | + Accomplished
+ --------------------------------------------------------
+
+ General
+ --------------------------------------------------------
+     + Recovery mode #7169
+         + Grub recovery
+         + System recovery with Pisi History
+         + Password recovery
+     + Fix Keyboard shortcuts problems
+     + Improve user settings screen #8714 #7658
+     + Fix warning and info messages for new theme
+     + Use Bios Boot order if available for sorting device list
+     + Add polkit support to user settings screen
+     + Improve Exception dialog
+     + Fix low resolution screen problems
+     + Improve new theme widget states
+     + Dont install not needed Language Packages support
+     + Do not update user home dir if one have same id
+     + Support for installing only system.base packages
+     + Add eject cd-rom support when pisi fails
+
+     - Show a progress bar for Pisi HS Rescue operations
+     - Show a proper (Human Readable) dialog when Fs Check failed
+
+ %30 / Network Install #2095
+         > Needs a network settings screen
+     - Fix GRUB issue about wrong order of sd's
+         > example; hd0:sdb, hd1:sda from bios but system gives opposite, like hd0:sda, hd1:sdb
+
+ Partitioning
+ --------------------------------------------------------
+     + Use ext4 default for ext* partitions
+     + Support to use free space on disk for Auto Resize
+     + Improve NTFS check before resize
+     + Btrfs support
+         > depends new parted
+     + Auto resizing for logical and empty partitions. (It only auto resizing primary partitions now!)
+
+     - LVM/RAID support
+     ? Fat32 resize
+

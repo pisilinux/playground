@@ -21,7 +21,7 @@ def install():
     pisitools.insinto("/usr/", "./usr/*")
     shelltools.system("chmod -v 4755 %s/opt/google/chrome/chrome-sandbox" %get.installDIR())
     pisitools.dosym("/opt/google/chrome/google-chrome", "/usr/bin/google-chrome")
-    #pisitools.dosym("/opt/google/chrome/google-chrome.desktop", "/usr/share/applications/google-chrome.desktop")
+    pisitools.dosym("/usr/share/applications/google-chrome.desktop", "/opt/google/chrome/google-chrome.desktop")
     pisitools.dosym("/opt/google/chrome/product_logo_32.xpm", "/usr/share/pixmaps/google-chrome.xpm")
     pisitools.dosym("/opt/google/chrome/product_logo_256.png", "/usr/share/pixmaps/google-chrome.png")
     pisitools.dosym("/usr/lib/nss/libnss3.so", "/usr/lib/libnss3.so.1d")

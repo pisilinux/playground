@@ -1,0 +1,65 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>{% block title %}Pardus{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="/media/archweb.css" media="screen, projection" />
+    <link rel="search" type="application/opensearchdescription+xml" href="{% url opensearch-packages as osp %}{{ osp }}" title="Pardus Packages" />
+    {% block head %}{% endblock %}
+</head>
+<body class="{% if user.is_authenticated %}devmode {% endif %}{% block bodyclass %}{% endblock %}">
+
+    <div id="archnavbar" class="{% block navbarclass %}anb-home{% endblock %}">
+        <div id="archnavbarlogo"><h1><a href="/packages/" title="{% trans "Return to the main page" %}">Pardus</a></h1></div>
+        <div id="archnavbarmenu">
+            <ul id="archnavbarlist">
+                <li id="anb-home"><a href="/" title="{% trans "Pardus news, packages, projects and more" %}">{% trans "Home" %}</a></li>
+                <li id="anb-packages"><a href="/packages/" title="{% trans "Pardus Package Database" %}">{% trans "Packages" %}</a></li>
+                <li id="anb-wiki"><a href="http://pardus-wiki.org/" title="{% trans "User Wiki" %}">{% trans "User Wiki" %}</a></li>
+                <li id="anb-bugs"><a href="https://bugs.pardus.org.tr/" title="{% trans "Report and track bugs" %}">{% trans "Bugs" %}</a></li>
+                <li id="anb-download"><a href="http://developer.pardus.org.tr/" title="{% trans "Contribute" %}">{% trans "Contribute" %}</a></li>
+            </ul>
+        </div>
+    </div><!-- #archnavbar -->
+
+    <div id="content">
+        <div id="archdev-navbar"></div>
+        {% if messages %}
+            <div id="sys-message" class="box">
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+            <div id="content-left-wrapper">
+                <div id="content-left">
+                    {% block content_left %}{% endblock %}
+                </div><!-- #content_left -->
+            </div>
+
+            <div id="content-right">
+                {% block content_right %}{% endblock %}
+            </div><!-- #content_right -->
+        {% endblock %}
+
+        <!--<div id="footer">
+            <p>Copyright &copy; 2002-{% now "Y" %} <a href="mailto:jvinet@zeroflux.org"
+                title="Contact Judd Vinet">Judd Vinet</a> and <a href="mailto:aaron@archlinux.org"
+                title="Contact Aaron Griffin">Aaron Griffin</a>.</p>
+
+            <p>The Pardus name and logo are recognized
+            <a href="https://wiki.archlinux.org/index.php/DeveloperWiki:TrademarkPolicy"
+                title="Pardus Trademark Policy">trademarks</a>. Some rights reserved.</p>
+
+            <p>The registered trademark Linux® is used pursuant to a sublicense from LMI,
+            the exclusive licensee of Linus Torvalds, owner of the mark on a world-wide basis.</p>
+        </div>[> #footer <]-->
+
+    </div><!-- #content -->
+
+</body>
+</html>
