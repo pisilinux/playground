@@ -3,15 +3,16 @@
         <Name>pcmanfm-qt</Name>
         <Homepage>http://www.lxde.org</Homepage>
         <Packager>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
         </Packager>
         <License>GPL2</License>
         <PartOf>desktop.lxqt.base</PartOf>
         <IsA>app:gui</IsA>
         <Summary>The LXQt file manager, Qt port of PCManFM</Summary>
         <Description>File manager and desktop icon manager (Qt port of PCManFM and libfm)</Description>
-	<Archive sha1sum="67ad51f18860a52e5c6a84559941043b9b806146" type="zip">https://content.wuala.com/contents/vedat/sources/pcmanfm-qt-master.zip</Archive>
+<!-- 	<Archive sha1sum="eb5c64f618088f3835b18d5257e4e55b1bfd3e6a" type="targz">https://dl.dropboxusercontent.com/u/71120717/pcmanfm-qt-0.8.0.tar.gz</Archive> -->
+	<Archive sha1sum="05b31f27e09a2490f2c7ff33124e97e5b261c803" type="targz">http://lxqt.org/downloads/0.8.0/pcmanfm-qt-0.8.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>libfm-qt-devel</Dependency>
             <Dependency>liblxqt-devel</Dependency>
@@ -45,9 +46,18 @@
         </Files>
 	<AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/pcmanfm-qt.desktop">pcmanfm-qt.desktop</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/libfm-qt/translations/libfm-qt_tr.qm">libfm-qt_tr.qm</AdditionalFile>
+	    <AdditionalFile owner="root" permission="0644" target="/usr/share/pcmanfm-qt/translations/pcmanfm-qt_tr.qm">pcmanfm-qt_tr.qm</AdditionalFile>
         </AdditionalFiles>
     </Package>
     <History>
+        <Update release="2">
+            <Date>2014-11-07</Date>
+            <Version>0.8.0</Version>
+            <Comment>version bump</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2014-05-02</Date>
             <Version>0.7.0</Version>

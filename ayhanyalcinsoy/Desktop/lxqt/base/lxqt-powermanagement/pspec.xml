@@ -3,40 +3,46 @@
         <Name>lxqt-powermanagement</Name>
         <Homepage>http://www.lxde.org</Homepage>
         <Packager>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
         </Packager>
         <License>GPL2</License>
         <PartOf>desktop.lxqt.base</PartOf>
         <IsA>app:gui</IsA>
         <Summary>LXQt power management daemon.</Summary>
         <Description>Daemon use for power management and auto-suspend.</Description>
-	<Archive sha1sum="cb840b07aef41891c2759383793a43478ce37acc" type="targz">https://github.com/lxde/lxqt-powermanagement/archive/0.8.0.tar.gz</Archive>
+        <Archive sha1sum="cb840b07aef41891c2759383793a43478ce37acc" type="targz">http://lxqt.org/downloads/0.8.0/lxqt-powermanagement-0.8.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>liblxqt-devel</Dependency>
             <Dependency>qt-devel</Dependency>
-	    <Dependency>libxcb-devel</Dependency>
+            <Dependency>libxcb-devel</Dependency>
             <Dependency>upower-devel</Dependency>
-	    <Dependency>libqtxdg-devel</Dependency>
+            <Dependency>libqtxdg-devel</Dependency>
         </BuildDependencies>
     </Source>
     <Package>
         <Name>lxqt-powermanagement</Name>
         <RuntimeDependencies>
             <Dependency>libqtxdg</Dependency>
-	    <Dependency>upower</Dependency>
-	    <Dependency>liblxqt</Dependency>
-	    <Dependency>libxcb</Dependency>
+            <Dependency>upower</Dependency>
+            <Dependency>liblxqt</Dependency>	    
         </RuntimeDependencies>
         <Files>
-	    <Path fileType="executable">/usr/bin</Path>
-	    <Path fileType="data">/usr/share/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/</Path>
         </Files>
-	<AdditionalFiles>
+        <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/lxqt-config-powermanagement.desktop">lxqt-config-powermanagement.desktop</AdditionalFile>
         </AdditionalFiles>
     </Package>
     <History>
+        <Update release="3">
+            <Date>2014-10-21</Date>
+            <Version>0.8.0</Version>
+            <Comment>rebuild</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2014-10-21</Date>
             <Version>0.8.0</Version>

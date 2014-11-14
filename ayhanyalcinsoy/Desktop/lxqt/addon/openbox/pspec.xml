@@ -7,6 +7,7 @@
             <Email>admins@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
+	<PartOf>desktop.lxqt.addons</PartOf>
         <IsA>app:gui</IsA>
         <Summary>A standarts compliant, fast, lightweight window manager</Summary>
         <Description>Openbox is a window manager for the X11 windowing system.</Description>
@@ -46,7 +47,10 @@
             <Dependency>libXrender</Dependency>
             <Dependency>libXinerama</Dependency>
             <Dependency>startup-notification</Dependency>
-	    <Dependency>pcmanfm-qt</Dependency>
+            <Dependency>librsvg</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>librsvg</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -68,9 +72,9 @@
         <RuntimeDependencies>
             <Dependency release="2">openbox3</Dependency>
             <Dependency>pango-devel</Dependency>
-            <Dependency>glib2-devel</Dependency>
+            <Dependency>imlib2-devel</Dependency>
             <Dependency>libXft-devel</Dependency>
-            <Dependency>libxml2-devel</Dependency>
+            <Dependency>librsvg-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>

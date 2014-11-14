@@ -1,17 +1,17 @@
 <PISI>
     <Source>
         <Name>liblxqt</Name>
-        <Homepage>http://www.lxde.org</Homepage>
+        <Homepage>http://www.lxqt.org</Homepage>
         <Packager>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
         </Packager>
         <License>GPL2</License>
         <PartOf>desktop.lxqt.base</PartOf>
         <IsA>library</IsA>
         <Summary>Common base library for LXQt components.</Summary>
         <Description>Core utility library for all LXDE-Qt components</Description>
-        <Archive sha1sum="9c86ab52093489b534ef00944270dff0c50e04a4" type="targz">https://github.com/lxde/liblxqt/archive/0.8.0.tar.gz</Archive>
+        <Archive sha1sum="9c86ab52093489b534ef00944270dff0c50e04a4" type="targz">http://lxqt.org/downloads/lxqt/0.8.0/liblxqt-0.8.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>cmake</Dependency>
 	    <Dependency>libstdc++</Dependency>
@@ -27,7 +27,6 @@
         <Name>liblxqt</Name>
         <RuntimeDependencies>
             <Dependency>libqtxdg</Dependency>
-	    <Dependency>libX11</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>

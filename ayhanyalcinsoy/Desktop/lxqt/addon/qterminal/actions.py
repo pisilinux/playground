@@ -1,20 +1,19 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+#
 # Licensed under the GNU General Public License, version 3.
-# See the file http://www.gnu.org/copyleft/gpl.txt
+# See the file http://www.gnu.org/licenses/gpl.txt
 
-from pisi.actionsapi import cmaketools
-from pisi.actionsapi import get
+from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 
 def setup():
-    cmaketools.configure("-DCMAKE_BUILD_TYPE:STRING=Release \
-                          -DCMAKE_INSTALL_PREFIX=/usr \
-                          -DCMAKE_INSTALL_LIBDIR=/usr/lib")
+    autotools.configure()
 
 def build():
-    cmaketools.make()
+    autotools.make()
 
 def install():
-    cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
-    pisitools.dodoc("AUTHORS", "COPYING")
+    autotools.install()
+
+    pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "NEWS", "README")
