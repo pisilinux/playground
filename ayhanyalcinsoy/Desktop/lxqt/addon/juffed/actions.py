@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt
@@ -6,7 +6,7 @@
 from pisi.actionsapi import cmaketools
 from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
-WorkDir="./"
+
 def setup():
     cmaketools.configure("-DCMAKE_BUILD_TYPE=release \
                           -DCMAKE_INSTALL_PREFIX=/usr \
@@ -17,4 +17,11 @@ def build():
 
 def install():
     cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
-    pisitools.dodoc("AUTHORS", "COPYING")
+    pisitools.domove("/usr/lib64/libjuff.so" , "/usr/lib")
+    pisitools.domove("/usr/lib64/libjuff.so.0.10", "/usr/lib")
+    pisitools.domove("/usr/lib64/libjuffed-engine-qsci.so" , "/usr/lib")
+    pisitools.domove("/usr/lib64/libjuffed-engine-qsci.so.0.10" , "/usr/lib")
+    pisitools.domove("/usr/lib64/juffed" , "/usr/lib")
+    pisitools.removeDir("/usr/lib64")
+    pisitools.dodoc("COPYING")
+ 

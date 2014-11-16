@@ -1,0 +1,44 @@
+<PISI>
+    <Source>
+        <Name>juffed</Name>
+        <Homepage>http://projects.gnome.org/evince/</Homepage>
+        <Packager>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Packager>
+        <License>GPLV2</License>
+        <PartOf>desktop.lxqt.addons</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>Text editor</Summary>
+        <Description>Simple tabbed text editor with syntax highlighting, based on Qt4</Description>
+        <Archive sha1sum="6a6da1d4096ff7b4af320339a5c55e4258068e8f" type="tarbz2">http://downloads.sourceforge.net/juffed/juffed-0.10-1054.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>enca-devel</Dependency>
+            <Dependency>qscintilla2-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    <Package>
+        <Name>juffed</Name>
+        <RuntimeDependencies>
+            <Dependency>qscintilla2</Dependency>            
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/include</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/juffed/l10n/juffed_tr.qm">juffed_tr.qm</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-11-15</Date>
+            <Version>0.10</Version>
+            <Comment>First Release</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

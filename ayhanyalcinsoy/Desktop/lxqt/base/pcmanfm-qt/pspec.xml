@@ -11,32 +11,30 @@
         <IsA>app:gui</IsA>
         <Summary>The LXQt file manager, Qt port of PCManFM</Summary>
         <Description>File manager and desktop icon manager (Qt port of PCManFM and libfm)</Description>
-<!-- 	<Archive sha1sum="eb5c64f618088f3835b18d5257e4e55b1bfd3e6a" type="targz">https://dl.dropboxusercontent.com/u/71120717/pcmanfm-qt-0.8.0.tar.gz</Archive> -->
-	<Archive sha1sum="05b31f27e09a2490f2c7ff33124e97e5b261c803" type="targz">http://lxqt.org/downloads/0.8.0/pcmanfm-qt-0.8.0.tar.gz</Archive>
+        <Archive sha1sum="05b31f27e09a2490f2c7ff33124e97e5b261c803" type="targz">http://lxqt.org/downloads/0.8.0/pcmanfm-qt-0.8.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>libfm-qt-devel</Dependency>
             <Dependency>liblxqt-devel</Dependency>
             <Dependency>lxqt-menu-cache-devel</Dependency>
-	    <Dependency>libqtxdg-devel</Dependency>
-	    <Dependency>qt-devel</Dependency>
-	    <Dependency>cairo-devel</Dependency>
+            <Dependency>libqtxdg-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
         </BuildDependencies>
     </Source>
     <Package>
         <Name>pcmanfm-qt</Name>
         <RuntimeDependencies>
-            <Dependency>gksu</Dependency>
-	    <Dependency>evince</Dependency>
-	    <Dependency>xarchiver</Dependency>
+            <Dependency>gksu</Dependency>            
+            <Dependency>xarchiver</Dependency>
             <Dependency>qterminal</Dependency>
-	    <Dependency>libqtxdg</Dependency>
-	    <Dependency>lxqtmenu-data</Dependency>
-	    <Dependency>glib2</Dependency>
+            <Dependency>libqtxdg</Dependency>
+            <Dependency>lxqtmenu-data</Dependency>
+            <Dependency>glib2</Dependency>
             <Dependency>lxqt-menu-cache</Dependency>
-	    <Dependency>gvfs</Dependency>
-	    <Dependency>polkit-gnome</Dependency>
-	    <Dependency>libfm-qt</Dependency>
-	    <Dependency>icon-theme-oxygen-png</Dependency>
+            <Dependency>gvfs</Dependency>
+            <Dependency>polkit-gnome</Dependency>
+            <Dependency>libfm-qt</Dependency>
+            <Dependency>icon-theme-oxygen-png</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="library">/usr/lib</Path>
