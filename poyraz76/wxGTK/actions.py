@@ -54,3 +54,4 @@ def install():
 
     pisitools.dodoc("docs/*.txt", "docs/*.htm")
     pisitools.rename("/usr/bin/wxrc-3.0", "wxrc")
+    pisitools.dosym("/usr/bin/wx-config", "usr/bin/wxconfig")
