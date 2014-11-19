@@ -16,9 +16,10 @@ import os
 WorkDir = "."
 
 def setup():
-    
     shelltools.makedirs("%s/source/build" % get.workDIR())
+   
     shelltools.cd("%s/source/build" % get.workDIR())
+           
     shelltools.sym("../configure", "configure")
     autotools.configure("--prefix=/usr \
                          --sysconfdir=/etc \
@@ -33,7 +34,7 @@ def setup():
                          --disable-t1utils \
                          --disable-bibtexu \
                          --disable-xz \
-                         --disable-web2c \
+                         --enable-web2c \
                          --enable-shared \
                          --disable-static \
                          --with-system-zlib \
@@ -50,6 +51,7 @@ def setup():
                          --with-system-harfbuzz \
                          --with-system-graphite \
                          --with-system-icu \
+                         --with-system-libpaper \
                          --with-freetype2-libdir=/usr/lib \
                          --with-freetype2-include=/usr/include/freetype2 \
                          --with-xdvi-x-toolkit=xaw \
@@ -67,11 +69,17 @@ def build():
     autotools.make()
  
 def install():
+    pisitools.insinto("/etc/fonts/conf.avail/", "09-texlive-fonts.conf")
+    
     shelltools.cd("%s/source/build/" % get.workDIR())
     autotools.rawInstall("prefix=/usr DESTDIR=%s" % get.installDIR())
+            
+    # replace upstream texmf.cnf with ours
+    pisitools.remove("/usr/share/texmf-dist/web2c/texmf.cnf")
+    pisitools.insinto("/etc/texmf/web2c/", "../../texmf.cnf")
     
     #install biber
-    pisitools.dobin("../../biber")
+    #pisitools.dobin("../../biber")
 
     #pisitools.dodir("/usr/share/tlpkg/TeXLive")
     #shelltools.move("%s/source/utils/biber/TeXLive/*.pm" % get.workDIR(), "%s/usr/share/tlpkg/TeXLive" % get.installDIR())
@@ -91,8 +99,7 @@ def install():
             new_path = "/usr/share" + base_path
             shelltools.unlink(get.installDIR() + "/usr/bin/" + binary)
             pisitools.dosym(new_path, "/usr/bin/" + binary)
-
-     
+    
     bibtexextra_scripts=["bibexport", "listbib" ,"multibibliography", "urlbst"]
 
     core_scripts=["a2ping","a5toa4", "adhocfilelist", "afm2afm", "allcm", "allec", "allneeded", "arara","arlatex"
@@ -164,9 +171,7 @@ def install():
     for symlink in luatexsymlinks:
         pisitools.dosym("pdftex", "/usr/bin/%s" % symlink)
 
-
     pisitools.dosym("eptex", "/usr/bin/platex")
     pisitools.dosym("euptex", "/usr/bin/uplatex")
     pisitools.dosym("xetex", "/usr/bin/xelatex")
-
-    pisitools.removeDir("/usr/share/texmf-dist")
+    
