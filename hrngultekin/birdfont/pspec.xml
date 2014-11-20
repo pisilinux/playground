@@ -18,6 +18,15 @@
     </Source>
     <Package>
         <Name>birdfont</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>glibc-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency versionFrom="0.5">libgee-devel</Dependency>
+            <Dependency>unicode-ucd</Dependency>
+            <Dependency>webkit-gtk3-devel</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="all">/</Path>
         </Files>
