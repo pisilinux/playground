@@ -3,75 +3,52 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/licenses/gpl.txt
 
-from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
+from pisi.actionsapi import get
 
-WorkDir = "."
-revnr = get.srcVERSION().split(".")[1]
+import os
+from distutils.dir_util import copy_tree
 
 def setup():
     # Unpack and prepare files
-    for tar_file in shelltools.ls(get.workDIR()):
+    for tar_file in shelltools.ls("%s/texlive-core" % get.workDIR()):
         if tar_file.endswith("xz"):
             shelltools.system("tar Jxfv %s" % tar_file)
 
 def build():
+    shelltools.cd("%s/texlive-core/" % get.workDIR())
     for folder in ["tlpkg", "doc", "source"]:
         shelltools.unlinkDir(folder)
 
 def install():
-    # prepare and install installed packs list
-    pisitools.dodir("/var/lib/texmf/pisilinux/installedpacks")
-    pisitools.dosed("CONTENTS", "^#", deleteLine=True)
-    pisitools.insinto("/var/lib/texmf/pisilinux/installedpacks", "CONTENTS", "%s_%s.list" % (get.srcNAME(), revnr))
+    shelltools.cd("%s/texlive-core/" % get.workDIR())
+    pisitools.dodir("/usr/share")
 
-    for i in shelltools.ls("texmf-dist"):
-        shelltools.copytree("texmf-dist/%s/" % i, "%s/usr/share/texmf-dist/" % get.installDIR())
-    shelltools.system("find texmf-dist -type f -executable -exec chmod 755 %s/usr/share/{} \;" % get.installDIR())
+    wanteddirs = []
+    for file_ in shelltools.ls(get.workDIR()):
+        if shelltools.isDirectory(file_) and not "texmf" in file_:
+            wanteddirs.append(file_)
 
-    for i in shelltools.ls("."):
-        if shelltools.isDirectory(i) and not i.startswith("texmf"):
-            shelltools.copytree(i, "%s/usr/share/texmf-dist/" % get.installDIR())
-
-    # clean config files
-    pisitools.dosed("tex/generic/config", "DO NOT EDIT", deleteLine=True, filePattern="language\.d..$")
-    pisitools.dosed("texmf-dist/web2c/updmap.cfg", "^(#!\s*)?(Map|MixedMap)", deleteLine=True)
-    pisitools.dosed("%s/usr/share/texmf-dist/web2c/fmtutil.cnf" % get.installDIR(), "aleph", deleteLine=True)
-
-    # install config files
-    cfs = ["chktex/chktexrc",
-           "web2c/mktex.cnf",
-           "web2c/updmap.cfg",
-           "web2c/fmtutil.cnf",
-           "dvips/config/config.ps",
-           "dvipdfmx/dvipdfmx.cfg",
-           "tex/generic/config/language.dat",
-           "tex/generic/config/language.def",
-           "tex/generic/config/pdftexconfig.tex",
-           "ttf2pk/ttf2pk.cfg",
-           "xdvi/XDvi"]
-    for cf in cfs:
-        d = "/".join(cf.split("/")[:-1])
-        p = cf if shelltools.isFile(cf) else "texmf-dist/%s" % cf
-        pisitools.insinto("/etc/texmf/%s" % d, p)
-    #pisitools.dosym("/etc/texmf/web2c/texmf.cnf", "/usr/share/texmf-dist/web2c/texmf.cnf")
+    for folder in wanteddirs:
+        pisitools.insinto("/usr/share/texmf-dist", folder)
 
     # fix sandbox violations
-    #pisitools.dosed("texmf-dist/scripts/texlive/texlinks.sh", '"\$symlinkdir', r'"%s/$symlinkdir' % get.installDIR())
+    pisitools.dosed("texmf-dist/scripts/texlive/texlinks.sh", '"\$symlinkdir', r'"%s/$symlinkdir' % get.installDIR())
 
-    # create symlinks
-    pisitools.dodir("/usr/bin")
-    #shelltools.system("texmf-dist/scripts/texlive/texlinks.sh -f %s/usr/share/texmf-dist/web2c/fmtutil.cnf %s/usr/bin" % ((get.installDIR(), ) * 2))
+    # Recursively copy on directory on top of another, overwrite duplicate files too
+    if shelltools.can_access_directory("texmf-dist"):
+        copy_tree("texmf-dist", "%s/usr/share/texmf-dist" % get.installDIR())
 
-    # remove upstream updmap.cfg: it contains too many maps
-    pisitools.remove("/usr/share/texmf-dist/web2c/updmap.cfg")
+    ## chmod of script files
+    script_dir = get.installDIR() + "/usr/share/texmf-dist/scripts"
+    if shelltools.can_access_directory(script_dir):
+        for root, dirs, files in os.walk(script_dir):
+            for name in files:
+                shelltools.chmod(os.path.join(root, name), 0755)
 
-    # manpages already in texlive-bin
-    pisitools.removeDir("/usr/share/texmf-dist/doc/man")
-
-    # remove unneeded dir
-    pisitools.removeDir("/usr/share/texmf-dist/scripts/context/stubs/mswin")
+    # copy updmap.cfg in /etc
+    pisitools.insinto("/etc/texmf/web2c/", "texmf-dist/web2c/updmap.cfg")
 
     # link programs from /usr/share/texmf-dist/scripts
     linked_scripts="""
@@ -178,7 +155,8 @@ xindy/xindy.pl
         bn = shelltools.baseName(p).split(".")[0]
         if shelltools.isFile("%s/usr/share/texmf-dist/scripts/%s" % (get.installDIR(), p)):
             pisitools.dosym("/usr/share/texmf-dist/scripts/%s" % p, "/usr/bin/%s" % bn)
-    pisitools.dosym("/usr/share/texmf-dist/scripts/listings-ext/listings-ext.sh", "/usr/bin/listings-ext.sh")
+
+    #? pisitools.dosym("/usr/share/texmf-dist/scripts/listings-ext/listings-ext.sh", "/usr/bin/listings-ext.sh")
     pisitools.dosym("allcm", "/usr/bin/allec")
     pisitools.dosym("fmtutil", "/usr/bin/mktexfmt")
     pisitools.dosym("kpsetool", "/usr/bin/kpsexpand")
@@ -186,3 +164,25 @@ xindy/xindy.pl
     pisitools.dosym("epstopdf", "/usr/bin/repstopdf")
     pisitools.dosym("pdfcrop", "/usr/bin/rpdfcrop")
     pisitools.dosym("luaotfload-tool", "/usr/bin/mkluatexfontdb")
+
+    #remove unneded
+    pisitools.removeDir("/usr/share/texmf-dist/scripts/context/stubs/mswin")
+    pisitools.removeDir("/usr/share/texmf-dist/scripts/context/stubs/win64")
+
+    #remove conflicts files with texlive-bin
+    pisitools.remove("/usr/share/texmf-dist/dvipdfmx/dvipdfmx.cfg")
+    pisitools.remove("/usr/share/texmf-dist/dvips/base/*.pro")
+    pisitools.remove("/usr/share/texmf-dist/dvips/gsftopk/render.ps")
+    pisitools.remove("/usr/share/texmf-dist/fonts/cmap/dvipdfmx/EUC-UCS2")
+    pisitools.remove("/usr/share/texmf-dist/fonts/enc/dvips/base/7t.enc")
+    pisitools.remove("/usr/share/texmf-dist/fonts/enc/ttf2pk/base/T1-WGL4.enc")
+    pisitools.remove("/usr/share/texmf-dist/fonts/map/dvipdfmx/cid-x.map")
+    pisitools.removeDir("/usr/share/texmf-dist/fonts/sfd/ttf2pk")
+    pisitools.remove("/usr/share/texmf-dist/scripts/context/stubs/unix/*jit")
+    pisitools.removeDir("/usr/share/texmf-dist/scripts/crossrefware")
+    pisitools.remove("/usr/share/texmf-dist/texconfig/tcfmg*")
+    pisitools.remove("/usr/share/texmf-dist/ttf2pk/ttf2pk.cfg")
+    pisitools.remove("/usr/share/texmf-dist/ttf2pk/VPS.rpl")
+    pisitools.remove("/usr/share/texmf-dist/web2c/fmtutil.cnf")
+    pisitools.remove("/usr/share/texmf-dist/web2c/mktex*")
+    pisitools.removeDir("/usr/share/texmf-dist/xdvi")
