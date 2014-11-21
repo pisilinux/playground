@@ -49,6 +49,7 @@ def install():
 
     # copy updmap.cfg in /etc
     pisitools.insinto("/etc/texmf/web2c/", "texmf-dist/web2c/updmap.cfg")
+    pisitools.insinto("/etc/texmf/web2c/", "texmf-dist/web2c/fmtutil.cnf")
 
     # link programs from /usr/share/texmf-dist/scripts
     linked_scripts="""
@@ -180,9 +181,8 @@ xindy/xindy.pl
     pisitools.removeDir("/usr/share/texmf-dist/fonts/sfd/ttf2pk")
     pisitools.remove("/usr/share/texmf-dist/scripts/context/stubs/unix/*jit")
     pisitools.removeDir("/usr/share/texmf-dist/scripts/crossrefware")
-    pisitools.remove("/usr/share/texmf-dist/texconfig/tcfmg*")
     pisitools.remove("/usr/share/texmf-dist/ttf2pk/ttf2pk.cfg")
     pisitools.remove("/usr/share/texmf-dist/ttf2pk/VPS.rpl")
-    pisitools.remove("/usr/share/texmf-dist/web2c/fmtutil.cnf")
+    
     pisitools.remove("/usr/share/texmf-dist/web2c/mktex*")
     pisitools.removeDir("/usr/share/texmf-dist/xdvi")

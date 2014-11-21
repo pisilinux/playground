@@ -175,3 +175,9 @@ def install():
     pisitools.dosym("euptex", "/usr/bin/uplatex")
     pisitools.dosym("xetex", "/usr/bin/xelatex")
     
+    #remove conflicts files with texlive-core
+    pisitools.remove("/usr/share/texmf-dist/web2c/fmtutil.cnf")
+    pisitools.remove("/usr/share/texmf-dist/texconfig/tcfmgr")
+    pisitools.remove("/usr/share/texmf-dist/texconfig/tcfmgr.map")
+
+    
