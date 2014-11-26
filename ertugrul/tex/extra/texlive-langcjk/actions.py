@@ -10,7 +10,7 @@ from pisi.actionsapi import get
 import os
 from distutils.dir_util import copy_tree
 
-WorkDir = "." 
+WorkDir = "%s" % get.srcNAME()
 
 def setup():
     # Unpack and prepare files
@@ -44,14 +44,14 @@ def install():
             for name in files:
                 shelltools.chmod(os.path.join(root, name), 0755)
  
-    pisitools.remove("/usr/share/texmf-dist/scripts/ptex2pdf/ptex2pdf.lua")
+    # pisitools.remove("/usr/share/texmf-dist/scripts/ptex2pdf/ptex2pdf.lua")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/ksso17.cfg")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/j2so12.cfg")
-    pisitools.remove("/usr/share/texmf-dist/scripts/convbkmk/convbkmk.rb")
+    # pisitools.remove("/usr/share/texmf-dist/scripts/convbkmk/convbkmk.rb")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/c1so12.cfg")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/b5ka12.cfg")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/c4so12.cfg")
-    pisitools.remove("/usr/share/texmf-dist/scripts/jfontmaps/kanji-config-updmap.pl")
+    # pisitools.remove("/usr/share/texmf-dist/scripts/jfontmaps/kanji-config-updmap.pl")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/b5so12.cfg")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/csso12.cfg")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/c7so12.cfg")
@@ -61,6 +61,6 @@ def install():
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/b5kr12.cfg")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/c5so12.cfg")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/c2so12.cfg")
-    pisitools.remove("/usr/share/texmf-dist/scripts/jfontmaps/kanji-config-updmap-sys.sh")
-    pisitools.remove("/usr/share/texmf-dist/scripts/jfontmaps/kanji-fontmap-creator.pl")
+    # pisitools.remove("/usr/share/texmf-dist/scripts/jfontmaps/kanji-config-updmap-sys.sh")
+    # pisitools.remove("/usr/share/texmf-dist/scripts/jfontmaps/kanji-fontmap-creator.pl")
     pisitools.remove("/usr/share/texmf-dist/hbf2gf/gsfs14.cfg")
