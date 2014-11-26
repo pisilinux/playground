@@ -10,7 +10,7 @@ from pisi.actionsapi import get
 import os
 from distutils.dir_util import copy_tree
 
-WorkDir = "."
+WorkDir = "%s" % get.srcNAME()
 
 def setup():
     # Unpack and prepare files
@@ -43,6 +43,5 @@ def install():
         for root, dirs, files in os.walk(script_dir):
             for name in files:
                 shelltools.chmod(os.path.join(root, name), 0755)
-
 
     pisitools.remove("/usr/share/texmf-dist/scripts/mkgrkindex/mkgrkindex")

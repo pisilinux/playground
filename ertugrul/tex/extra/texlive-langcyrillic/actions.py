@@ -10,7 +10,7 @@ from pisi.actionsapi import get
 import os
 from distutils.dir_util import copy_tree
 
-WorkDir = "." 
+WorkDir = "%s" % get.srcNAME()
 
 def setup():
     # Unpack and prepare files
