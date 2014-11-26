@@ -10,7 +10,7 @@ from pisi.actionsapi import get
 import os
 from distutils.dir_util import copy_tree
 
-WorkDir = "." 
+WorkDir = "%s" % get.srcNAME()
 
 def setup():
     # Unpack and prepare files
@@ -36,7 +36,6 @@ def install():
     if shelltools.can_access_directory("texmf-dist"):
         # Recursively copy on directory on top of another, overwrite duplicate files too
         copy_tree("texmf-dist", "%s/usr/share/texmf-dist" % get.installDIR())
-
 
     ## chmod of script files
     script_dir = get.installDIR() + "/usr/share/texmf-dist/scripts"
