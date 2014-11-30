@@ -9,62 +9,30 @@
             <Email>groni@pisilinux.org</Email>
         </Packager>
         <License>GPLv3</License>
+        <Icon>plume-creator</Icon>
         <IsA>app:gui</IsA>
         <Summary>With Plume Creator, organize your writing projects !</Summary>
         <Description>Scenes, notes, characters,... Rich Text editing, full screen editing and multiple projects supported. Languages : english, french, italian, german, portuguese.</Description>
         <Archive sha1sum="e8ba72512c8340377c14cb440b676f0e7677f82a" type="targz">http://sourceforge.net/projects/plume-creator/files/0.6/plume-creator-0.66.1-src.tar.gz</Archive>
-        <!--
         <BuildDependencies>
-            <Dependency>Dep1-devel</Dependency>
-            <Dependency>Dep2-devel</Dependency>
-            <Dependency>Dep3-devel</Dependency>
-            <Dependency versionFrom="">Dep4-devel</Dependency>
+            <Dependency>qt-devel</Dependency>
         </BuildDependencies>
-        -->
-        <!--
-        <Patches>
-            <Patch>plume-creator.patch</Patch>
-            <Patch level="1">plume-creator.patch</Patch>
-        </Patches>
-        -->
     </Source>
 
     <Package>
         <Name>plume-creator</Name>
-        <!--
         <RuntimeDependencies>
-            <Dependency>Dep1</Dependency>
-            <Dependency>Dep2</Dependency>
-            <Dependency>Dep3</Dependency>
-            <Dependency versionFrom="">Dep4</Dependency>
+            <Dependency>qt</Dependency>
         </RuntimeDependencies>
-        -->
         <Files>
-            <Path fileType="all">/</Path>
-            <!--
-            <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="config">/etc</Path>
-            <Path fileType="library">/usr/lib</Path>
-            <Path fileType="header">/usr/include</Path>
-            <Path fileType="data">/usr/share</Path>
-            <Path fileType="localedata">/usr/share/locale</Path>
-            <Path fileType="man">/usr/share/man</Path>
-            <Path fileType="info">/usr/share/info</Path>
             <Path fileType="doc">/usr/share/doc</Path>
-            -->
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/mime</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/plume-creator</Path>
         </Files>
-        <!--
-        <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/plume-creator.desktop">plume-creator.desktop</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/plume-creator.png">plume-creator.png</AdditionalFile>
-        </AdditionalFiles>
-        -->
-        <!--
-        <Provides>
-            <COMAR script="package.py">System.Package</COMAR>
-            <COMAR script="service.py">System.Service</COMAR>
-        </Provides>
-        -->
     </Package>
 
     <History>
