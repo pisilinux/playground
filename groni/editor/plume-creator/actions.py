@@ -12,7 +12,7 @@ from pisi.actionsapi import get
 WorkDir = "."
 
 def setup():
-      shelltools.system("qmake ./plume-creator-all.pro")
+    qt4.configure(projectfile="plume-creator-all.pro", parameters="CONFIG+=release CONFIG-=debug PREFIX=/usr")
       
 def build():
     qt4.make()
