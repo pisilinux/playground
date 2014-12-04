@@ -13,7 +13,7 @@ def build():
     pythonmodules.compile(pyVer="3")
 
 def install():
-    pythonmodules.install()
+    pythonmodules.install(pyVer="3")
 
 
 
