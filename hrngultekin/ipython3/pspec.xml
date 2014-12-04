@@ -1,0 +1,56 @@
+<PISI>
+    <Source>
+        <Name>ipython3</Name>
+        <Homepage>http://ipython.org/</Homepage>
+        <Packager>
+            <Name>Harun Gültekin</Name>
+            <Email>hrngultekin@gmail.com</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app:console</IsA>
+        <Summary>An enhanced interactive Python3 shell</Summary>
+        <Description>ipython provides a replacement for the interactive Python3 interpreter with extra functionality.</Description>
+        <Archive sha1sum="53dbe3e014ccbf919e51cb4d4e722a0f2c701a41" type="targz">https://pypi.python.org/packages/source/i/ipython/ipython-2.3.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>ipython3</Name>
+        <RuntimeDependencies>
+            <Dependency>python3-pygments</Dependency>
+            <Dependency>python3-pyzmq</Dependency>
+            <!--Dependency>python3-sphinx</Dependency-->
+	    <!--Dependency>python3-nose</Dependency>
+            <Dependency>python3-pexpect</Dependency>
+            <Dependency>python3-tornado</Dependency-->
+        </RuntimeDependencies>
+        <Files>
+            <!--Path fileType="all">/</Path-->
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="doc">/usr/share/doc/README</Path>
+	    <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>    
+
+    <Package>
+        <Name>ipython3-docs</Name>
+        <Summary>Documentation files for ipython3</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">ipython3</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2014-12-04</Date>
+            <Version>2.3.1</Version>
+            <Comment>first build</Comment>
+            <Name>Harun Gültekin</Name>
+            <Email>hrngultekin@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
