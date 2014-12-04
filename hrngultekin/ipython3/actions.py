@@ -15,6 +15,10 @@ def build():
 def install():
     pythonmodules.install(pyVer="3")
     print os.getcwd()
+    pisitools.remove("/usr/bin/ipcluster")
+    pisitools.remove("/usr/bin/ipcontroller")
+    pisitools.remove("/usr/bin/ipengine")
+    pisitools.remove("/usr/bin/iptest")
     pisitools.remove("/usr/bin/ipython")
     
 # Take a look at the source folder for these file as documentation.
