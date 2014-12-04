@@ -4,7 +4,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt
 
 from pisi.actionsapi import pythonmodules
-#from pisi.actionsapi import pisitools
+from pisi.actionsapi import pisitools
 
 # if pisi can't find source directory, see /var/pisi/python3-pygments/work/ and:
 # WorkDir="python3-pygments-"+ get.srcVERSION() +"/sub_project_dir/"
@@ -14,6 +14,7 @@ def build():
 
 def install():
     pythonmodules.install(pyVer="3")
+    pisitools.rename("/usr/bin/pygmentize","pygmentize3")
 
 
 
