@@ -14,12 +14,15 @@ def build():
 
 def install():
     pythonmodules.install(pyVer="3")
-    print os.getcwd()
     pisitools.remove("/usr/bin/ipcluster")
     pisitools.remove("/usr/bin/ipcontroller")
     pisitools.remove("/usr/bin/ipengine")
     pisitools.remove("/usr/bin/iptest")
     pisitools.remove("/usr/bin/ipython")
+    pisitools.rename("/usr/share/man/man1/ipython.1","ipython3.1")
+    pisitools.rename("/usr/share/man/man1/ipcontroller.1", "ipcontroller3.1")
+    pisitools.rename("/usr/share/man/man1/ipengine.1","iengine3.1")
+    pisitools.rename("/usr/share/man/man1/ipcluster.1","ipcluster3.1")
     
 # Take a look at the source folder for these file as documentation.
 #    pisitools.dodoc("AUTHORS", "BUGS", "ChangeLog", "COPYING", "README")
