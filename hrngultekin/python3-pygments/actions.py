@@ -14,7 +14,7 @@ def build():
 
 def install():
     pythonmodules.install(pyVer="3")
-    pisitools.rename("/usr/bin/pygmentize","pygmentize3")
+    pisitools.rename("/usr/bin/pygmentize","python3-pygmentize")
 
 
 
