@@ -8,12 +8,17 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
-arch = "i386" if get.ARCH() == "i686" else "x86_64"
-
-WorkDir =  get.ARCH()
+def setup():
+    shelltools.cd("x86_64")
+    shelltools.system("ar x opera-stable_26.0.1656.32_amd64.deb")
+    shelltools.system("tar -xJf data.tar.xz")
 
 def install():
-    shelltools.cd(shelltools.ls("%s/%s" % (get.workDIR(), WorkDir))[0])
-    shelltools.system("./install --prefix /usr --force --repackage %s/usr" % get.installDIR())
-
-    pisitools.dosym("/usr/lib/browser-plugins/libflashplayer.so", "/usr/lib/opera/plugins/libflashplayer.so")
+    shelltools.cd("x86_64")
+    pisitools.insinto("/usr","usr/*")
+    pisitools.domove("/usr/lib/x86_64-linux-gnu/opera","/usr/lib")
+    pisitools.removeDir("/usr/lib/x86_64-linux-gnu")
+    pisitools.removeDir("/usr/share/lintian")
+    pisitools.remove("/usr/bin/opera")
+    pisitools.dosym("/usr/lib/opera/opera","/usr/bin/opera")
+    shelltools.system("chmod 4755 %s/usr/lib/opera/opera_sandbox" % get.installDIR())

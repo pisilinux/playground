@@ -12,46 +12,51 @@
         <Icon>opera</Icon>
         <IsA>app:gui</IsA>
         <Summary>Opera web browser</Summary>
-        <Description>Opera is a standards-compliant graphical Web browser.</Description>
-        <Archive sha1sum="fdd1ff1f49fac48cb8cd2eaa23e985a02866fb41" type="tarxz" target="i686">ftp://ftp.opera.com/pub/opera/linux/1216/opera-12.16-1860.i386.linux.tar.xz</Archive>
-        <Archive sha1sum="65a531e8d1179797be8db6bfa0f9856c0c356d0c" type="tarxz" target="x86_64">ftp://ftp.opera.com/pub/opera/linux/1216/opera-12.16-1860.x86_64.linux.tar.xz</Archive>
+	<Description>Opera is a standards-compliant graphical Web browser.</Description>
+        <Archive sha1sum="438a780593b7fdcbeeb3069b1a96ca8e6c819903" type="binary" target="x86_64">http://get.geo.opera.com.global.prod.fastly.net/pub/opera/desktop/26.0.1656.32/linux/opera-stable_26.0.1656.32_amd64.deb</Archive>
     </Source>
 
     <Package>
         <Name>opera</Name>
         <RuntimeDependencies>
-            <Dependency>qt</Dependency>
-            <Dependency>atk</Dependency>
-            <Dependency>gtk2</Dependency>
-            <Dependency>cairo</Dependency>
-            <Dependency>pango</Dependency>
-            <Dependency>libSM</Dependency>
-            <Dependency>libICE</Dependency>
-            <Dependency>kdelibs</Dependency>
-            <Dependency>libXext</Dependency>
-            <Dependency>gstreamer</Dependency>
-            <Dependency>fontconfig</Dependency>
-            <Dependency>gdk-pixbuf</Dependency>
-            <Dependency>libXrender</Dependency>
-            <Dependency>gst-plugins-base</Dependency>
-            <Dependency>libX11-32bit</Dependency>
-            <Dependency>jre7-openjdk</Dependency>
-            <Dependency>flashplugin</Dependency>
+	    <Dependency>nss</Dependency>
+	    <Dependency>gtk2</Dependency>
+	    <Dependency>cups</Dependency>
+	    <Dependency>nspr</Dependency>
+	    <Dependency>cairo</Dependency>
+	    <Dependency>gconf</Dependency>
+	    <Dependency>libXi</Dependency>
+	    <Dependency>pango</Dependency>
+	    <Dependency>libXtst</Dependency>
+	    <Dependency>alsa-lib</Dependency>
+	    <Dependency>libXrandr</Dependency>
+	    <Dependency>fontconfig</Dependency>
+	    <Dependency>gdk-pixbuf</Dependency>
+	    <Dependency>libXcursor</Dependency>
+	    <Dependency>libXdamage</Dependency>
+	    <Dependency>libXcomposite</Dependency>
+	    <Dependency>libXScrnSaver</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib/opera</Path>
             <Path fileType="data">/usr/share/applications</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
-            <Path fileType="data">/usr/share/icons</Path>
-            <Path fileType="man">/usr/share/man/man1</Path>
-            <Path fileType="data">/usr/share/mime/packages</Path>
-            <Path fileType="data">/usr/share/opera</Path>
+            <Path fileType="doc">/usr/share/doc/opera-stable</Path>
+            <Path fileType="data">/usr/share/icons/hicolor</Path>
+            <Path fileType="data">/usr/share/menu</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
         </Files>
     </Package>
 
     <History>
-            <Update release="7">
+	<Update release="8">
+	    <Date>2014-12-05</Date>
+            <Version>26.0.1656.32</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ekin Dursun</Name>
+            <Email>ekin.dursun@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
             <Date>2014-05-29</Date>
             <Version>12.16</Version>
             <Comment>Rebuild</Comment>
