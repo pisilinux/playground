@@ -22,5 +22,5 @@ def install():
     pisitools.remove("/usr/bin/opera")
     pisitools.dosym("/usr/lib/opera/opera","/usr/bin/opera")
     if not shelltools.isFile("/usr/lib/libudev.so.0"):
-        pisitools.dosym("/usr/lib/libudev.so","/usr/lib/libudev.so.0")
+        pisitools.dosym("/usr/lib/libudev.so","/usr/lib/opera/lib/libudev.so.0")
     shelltools.system("chmod 4755 %s/usr/lib/opera/opera_sandbox" % get.installDIR())
