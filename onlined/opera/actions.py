@@ -10,7 +10,7 @@ from pisi.actionsapi import get
 
 def setup():
     shelltools.cd("x86_64")
-    shelltools.system("ar x opera-stable_26.0.1656.32_amd64.deb")
+    shelltools.system("ar x opera-stable_%s_amd64.deb" % get.srcVERSION())
     shelltools.system("tar -xJf data.tar.xz")
 
 def install():
