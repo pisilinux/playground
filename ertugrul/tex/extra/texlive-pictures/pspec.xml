@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>texlive-pictures</Name>
+        <Homepage>http://www.tug.org/texlive</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <IsA>data:doc</IsA>
+        <Summary>TeXLive Graphics package</Summary>
+        <Description>texlive-pictures is TeXLive Graphics package.</Description>
+        <Archive sha1sum="422f7a179f6a8803c6f6c052f32d97e31da03158" type="targz">http://source.pisilinux.org/1.0/texlive/texlive-pictures-20141126.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>texlive-core</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>texlive-pictures</Name>
+        <RuntimeDependencies>
+            <Dependency>texlive-core</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/texmf-dist</Path>
+            <Path fileType="data">/var/lib/texmf</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/var/lib/texmf/pardus/texlive-pictures.maps">texlive-pictures.maps</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2014-10-26</Date>
+            <Version>20141126</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="4">
+            <Date>2014-10-04</Date>
+            <Version>2014.34851</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Aydın Demirel</Name>
+            <Email>aydin.demirel@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2014-05-29</Date>
+            <Version>2013.33045</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-03-21</Date>
+            <Version>0.0_20110314</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,45 @@
+<PISI>
+    <Source>
+        <Name>birdfont</Name>
+        <Homepage>http://birdfont.org/</Homepage>
+        <Packager>
+            <Name>Harun Gültekin</Name>
+            <Email>hrngultekin@gmail.com</Email>
+        </Packager>
+        <License>GPLv3+</License>
+        <License>LGPLv3+</License>
+        <IsA>app:gui</IsA>
+        <Summary>Font editor</Summary>
+        <Description>Font editor such as fontforge</Description>
+        <BuildDependencies>
+            <Dependency>rpm2targz</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="19954b3e01c9be4f652d720c3aac72032bfbae84" type="binary">http://download.opensuse.org/repositories/home:/johanmattssonm/Fedora_20/x86_64/birdfont-1.9-5.1.x86_64.rpm</Archive>
+    </Source>
+    <Package>
+        <Name>birdfont</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>glibc-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency versionFrom="0.5">libgee-devel</Dependency>
+            <Dependency>unicode-ucd</Dependency>
+            <Dependency>webkit-gtk3-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-11-20</Date>
+            <Version>1.9</Version>
+            <Comment>first release</Comment>
+            <Name>Harun Gültekin</Name>
+            <Email>hrngultekin@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
