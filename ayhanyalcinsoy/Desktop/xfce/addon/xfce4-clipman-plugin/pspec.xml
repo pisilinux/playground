@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xfce4-clipman-plugin</Name>
+        <Homepage>http://goodies.xfce.org/projects/panel-plugins/xfce4-clipman-plugin</Homepage>
+        <Packager>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <IsA>app:gui</IsA>
+        <Summary>A clipboard plugin for the Xfce4 panel</Summary>
+        <Description>A clipboard plugin for the Xfce4 panel</Description>
+        <Archive sha1sum="71767fef0a8366bb9a6bd3edeacf4a8dabdcaa40" type="tarbz2">http://archive.xfce.org/src/panel-plugins/xfce4-clipman-plugin/1.2/xfce4-clipman-plugin-1.2.6.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>libxfce4ui-devel</Dependency>
+            <Dependency>libxfce4util-devel</Dependency>
+            <Dependency>xfce4-panel-devel</Dependency>
+            <Dependency>exo-devel</Dependency>
+            <Dependency>libXtst-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>xfce4-clipman-plugin</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>libxfce4ui</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>xfce4-panel</Dependency>
+            <Dependency>libxfce4util</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc/xdg</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/xfce4</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>xfce4-clipman-plugin-devel</Name>
+        <Summary>xfce4-sensors-plugin için geliştirme dosyaları</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">xfce4-sensors-plugin</Dependency>
+            <Dependency>libxfce4ui-devel</Dependency>
+            <Dependency>libxfce4util-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-01-07</Date>
+            <Version>1.2.6</Version>
+            <Comment>First release</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
