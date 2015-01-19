@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ecryptfs-utils</Name>
+        <Homepage>https://launchpad.net/ecryptfs</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>eCryptfs is a cryptographic stacked Linux filesystem.</Summary>
+        <Description>Enterprise-class stacked cryptographic filesystem for Linux.</Description>
+        <Archive sha1sum="11b5a3177477a206e2210d8de272b6d2dc6afdef" type="targz">https://launchpad.net/ecryptfs/trunk/104/+download/ecryptfs-utils_104.orig.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>trousers-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+          <Patch level="1">ecryptfs-utils-100-sudokeyring.patch</Patch>
+          <Patch level="1">ecryptfs-utils-75-nocryptdisks.patch</Patch>
+          <Patch level="1">ecryptfs-utils-75-werror.patch</Patch>
+          <Patch level="1">ecryptfs-utils-83-fixsalt.patch</Patch>
+          <Patch level="1">ecryptfs-utils-83-splitnss.patch</Patch>
+          <Patch level="1">ecryptfs-utils-84-fixsigness.patch</Patch>
+          <Patch level="1">ecryptfs-utils-86-manpage.patch</Patch>
+          <Patch level="1">ecryptfs-utils-87-authconfig.patch</Patch>
+          <Patch level="1">ecryptfs-utils-87-autoload.patch</Patch>
+          <Patch level="1">ecryptfs-utils-87-fixconst.patch</Patch>
+          <Patch level="1">ecryptfs-utils-87-fixpamfork.patch</Patch>
+          <Patch level="1">ecryptfs-utils-87-nozombies.patch</Patch>
+          <Patch level="1">ecryptfs-utils-87-pamdata.patch</Patch>
+          <Patch level="1">ecryptfs-utils-96-groupcheck.patch</Patch>
+          <Patch level="1">ecryptfs-utils-99-selinux.patch</Patch>
+        </Patches>
+        <AdditionalFiles>
+            <AdditionalFile target="ecryptfs-mount-private.png">ecryptfs-mount-private.png</AdditionalFile>
+        </AdditionalFiles>
+    </Source>
+
+    <Package>
+        <Name>ecryptfs-utils</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+            <Path fileType="data">/lib/security/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/ecryptfs-utils</Path>
+        </Files>        
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>ecryptfs-utils-devel</Name>
+        <Summary>Development files for ecryptfs-utils</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">ecryptfs-utils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-01-18</Date>
+            <Version>104</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,15 @@
+diff -up ecryptfs-utils-87/src/utils/ecryptfs-migrate-home.authconfig ecryptfs-utils-87/src/utils/ecryptfs-migrate-home
+--- ecryptfs-utils-87/src/utils/ecryptfs-migrate-home.authconfig	2011-06-09 13:25:11.346617817 +0200
++++ ecryptfs-utils-87/src/utils/ecryptfs-migrate-home	2011-06-09 13:25:39.288769200 +0200
+@@ -98,6 +98,11 @@ sanity_check () {
+ 	if ! which rsync >/dev/null 2>&1; then
+ 		error "Please install the rsync package."
+ 	fi
++	# Check for ecryptfs pam module
++	if ! grep -q ecryptfs /etc/pam.d/postlogin
++	then
++		error "You must enable ecryptfs pam module first. It can be enabled by using: authconfig --enableecryptfs --updateall"
++	fi
+ 	# Check free space: make sure we have sufficient disk space
+ 	# available. To make a full copy, we will need at least 2.5x the
+ 	# disk usage of the target home directory.

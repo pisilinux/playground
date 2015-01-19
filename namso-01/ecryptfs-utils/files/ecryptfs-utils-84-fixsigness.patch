@@ -1,0 +1,21 @@
+diff -up ecryptfs-utils-103/src/key_mod/ecryptfs_key_mod_pkcs11_helper.c.fixsigness ecryptfs-utils-103/src/key_mod/ecryptfs_key_mod_pkcs11_helper.c
+--- ecryptfs-utils-103/src/key_mod/ecryptfs_key_mod_pkcs11_helper.c.fixsigness	2012-09-25 22:57:16.000000000 +0200
++++ ecryptfs-utils-103/src/key_mod/ecryptfs_key_mod_pkcs11_helper.c	2013-01-28 17:22:18.711183767 +0100
+@@ -1158,7 +1158,7 @@ static int tf_pkcs11h_key_x509file(struc
+ 			goto out;
+ 		}
+ 
+-		if ((subgraph_key_ctx->pkcs11h_data.certificate_blob_size = i2d_X509 (x509, NULL)) < 0	) {
++		if ((ssize_t)(subgraph_key_ctx->pkcs11h_data.certificate_blob_size = i2d_X509 (x509, NULL)) < 0	) {
+ 			syslog(LOG_ERR, "PKCS#11: Cannot read decode certificate");
+ 			rc = -EIO;
+ 			goto out;
+@@ -1179,7 +1179,7 @@ static int tf_pkcs11h_key_x509file(struc
+ 		 */
+ 		p = subgraph_key_ctx->pkcs11h_data.certificate_blob;
+ 
+-		if ((subgraph_key_ctx->pkcs11h_data.certificate_blob_size = i2d_X509 (x509, &p)) < 0) {
++		if ((ssize_t)(subgraph_key_ctx->pkcs11h_data.certificate_blob_size = i2d_X509 (x509, &p)) < 0) {
+ 			syslog(LOG_ERR, "PKCS#11: Cannot read decode certificate");
+ 			goto out;
+ 		}

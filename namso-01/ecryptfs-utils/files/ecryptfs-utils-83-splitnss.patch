@@ -1,0 +1,86 @@
+diff -up ecryptfs-utils-103/src/libecryptfs/key_management.c.splitnss ecryptfs-utils-103/src/libecryptfs/key_management.c
+--- ecryptfs-utils-103/src/libecryptfs/key_management.c.splitnss	2012-10-03 21:56:16.000000000 +0200
++++ ecryptfs-utils-103/src/libecryptfs/key_management.c	2013-01-28 17:21:57.036011421 +0100
+@@ -135,28 +135,8 @@ out:
+ }
+ 
+ 
+-int ecryptfs_remove_auth_tok_from_keyring(char *auth_tok_sig)
+-{
+-	int rc;
++#include "key_management.inc.c"
+ 
+-	rc = (int)keyctl_search(KEY_SPEC_USER_KEYRING, "user", auth_tok_sig, 0);
+-	if (rc < 0) {
+-		rc = errno;
+-		syslog(LOG_ERR, "Failed to find key with sig [%s]: %m\n",
+-		       auth_tok_sig);
+-		goto out;
+-	}
+-	rc = keyctl_unlink(rc, KEY_SPEC_USER_KEYRING);
+-	if (rc < 0) {
+-		rc = errno;
+-		syslog(LOG_ERR, "Failed to unlink key with sig [%s]: %s\n",
+-		       auth_tok_sig, strerror(rc));
+-		goto out;
+-	}
+-	rc = 0;
+-out:
+-	return rc;
+-}
+ int ecryptfs_add_auth_tok_to_keyring(struct ecryptfs_auth_tok *auth_tok,
+ 				     char *auth_tok_sig)
+ {
+diff -up ecryptfs-utils-103/src/libecryptfs/key_management.inc.c.splitnss ecryptfs-utils-103/src/libecryptfs/key_management.inc.c
+--- ecryptfs-utils-103/src/libecryptfs/key_management.inc.c.splitnss	2013-01-28 17:21:57.036011421 +0100
++++ ecryptfs-utils-103/src/libecryptfs/key_management.inc.c	2013-01-28 17:21:57.036011421 +0100
+@@ -0,0 +1,22 @@
++int ecryptfs_remove_auth_tok_from_keyring(char *auth_tok_sig)
++{
++	int rc;
++
++	rc = (int)keyctl_search(KEY_SPEC_USER_KEYRING, "user", auth_tok_sig, 0);
++	if (rc < 0) {
++		rc = errno;
++		syslog(LOG_ERR, "Failed to find key with sig [%s]: %m\n",
++		       auth_tok_sig);
++		goto out;
++	}
++	rc = keyctl_unlink(rc, KEY_SPEC_USER_KEYRING);
++	if (rc < 0) {
++		rc = errno;
++		syslog(LOG_ERR, "Failed to unlink key with sig [%s]: %s\n",
++		       auth_tok_sig, strerror(rc));
++		goto out;
++	}
++	rc = 0;
++out:
++	return rc;
++}
+diff -up ecryptfs-utils-103/src/utils/Makefile.am.splitnss ecryptfs-utils-103/src/utils/Makefile.am
+--- ecryptfs-utils-103/src/utils/Makefile.am.splitnss	2013-01-25 19:09:31.000000000 +0100
++++ ecryptfs-utils-103/src/utils/Makefile.am	2013-01-28 17:21:57.036011421 +0100
+@@ -39,7 +39,7 @@ mount_ecryptfs_CFLAGS = $(AM_CFLAGS) $(K
+ mount_ecryptfs_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la $(KEYUTILS_LIBS) $(LIBGCRYPT_LIBS)
+ umount_ecryptfs_SOURCES = umount.ecryptfs.c
+ umount_ecryptfs_CFLAGS = $(AM_CFLAGS) $(KEYUTILS_CFLAGS)
+-umount_ecryptfs_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la
++umount_ecryptfs_LDADD = -lkeyutils
+ ecryptfs_manager_SOURCES = manager.c io.c io.h gen_key.c
+ ecryptfs_manager_CFLAGS = $(AM_CFLAGS) $(KEYUTILS_CFLAGS) $(LIBGCRYPT_CFLAGS)
+ ecryptfs_manager_LDADD = $(top_builddir)/src/libecryptfs/libecryptfs.la $(KEYUTILS_LIBS) $(LIBGCRYPT_LIBS)
+diff -up ecryptfs-utils-103/src/utils/umount.ecryptfs.c.splitnss ecryptfs-utils-103/src/utils/umount.ecryptfs.c
+--- ecryptfs-utils-103/src/utils/umount.ecryptfs.c.splitnss	2012-09-25 22:57:16.000000000 +0200
++++ ecryptfs-utils-103/src/utils/umount.ecryptfs.c	2013-01-28 17:21:57.037011429 +0100
+@@ -24,7 +24,10 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <unistd.h>
+-#include "ecryptfs.h"
++#include <keyutils.h>
++#include <syslog.h>
++
++#include "../libecryptfs/key_management.inc.c"
+ 
+ static void usage()
+ {
