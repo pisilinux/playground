@@ -29,7 +29,7 @@ def build():
     autotools.make()
     
 def install():
-    autotools.rawInstall("DESTDIR=%s rootsbindir=/usr/bin INSTALL_ROOT=%s" %(get.installDIR(), get.installDIR()))
+    autotools.rawInstall("DESTDIR=%s INSTALL_ROOT=%s" %(get.installDIR(), get.installDIR()))
     
     pisitools.dopixmaps("ecryptfs-mount-private.png")
     

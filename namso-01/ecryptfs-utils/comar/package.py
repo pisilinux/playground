@@ -2,9 +2,7 @@
 
 import os, re
 
-OUR_ID = 640
 OUR_NAME = "ecryptfs"
-OUR_DESC = "MDM"
 
 
 for dirs in ("/usr/share/pixmaps/ecryptfs-mount-private.desktop", "/usr/share/pixmaps/ecryptfs-setup-private.desktop"):
@@ -14,7 +12,7 @@ for dirs in ("/usr/share/pixmaps/ecryptfs-mount-private.desktop", "/usr/share/pi
 
 def postInstall(fromVersion, fromRelease, toVersion, toRelease):
     try:
-        os.system ("groupadd -r -f %s" % (OUR_ID, OUR_NAME))
+        os.system ("groupadd -r -f %s" % (OUR_NAME))
         #os.system ("useradd -m -d /var/lib/mdm -r -s /bin/false -u %d -g %d %s -c %s" % (OUR_ID, OUR_ID, OUR_NAME, OUR_DESC))
     except:
         pass
