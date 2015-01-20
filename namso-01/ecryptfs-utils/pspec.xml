@@ -14,7 +14,8 @@
         <Description>Enterprise-class stacked cryptographic filesystem for Linux.</Description>
         <Archive sha1sum="11b5a3177477a206e2210d8de272b6d2dc6afdef" type="targz">https://launchpad.net/ecryptfs/trunk/104/+download/ecryptfs-utils_104.orig.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>trousers-devel</Dependency>
+            <Dependency>nss-devel</Dependency>
+            <Dependency>gnutls-devel</Dependency>
             <Dependency>pkcs11-helper-devel</Dependency>
         </BuildDependencies>
         <Patches>
@@ -41,6 +42,12 @@
 
     <Package>
         <Name>ecryptfs-utils</Name>
+        <RuntimeDependencies>
+            <Dependency>nss</Dependency>
+            <Dependency>gnutls</Dependency>
+            <Dependency>keyutils</Dependency>
+            <Dependency>pkcs11-helper</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="executable">/sbin</Path>

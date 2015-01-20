@@ -16,7 +16,7 @@ def setup():
     shelltools.touch("ecryptfs.conf")
     shelltools.echo("ecryptfs.conf", "# ecryptfs module is needed before ecryptfs mount, so mount helper can \n# check for file name encryption support\necryptfs")
     autotools.autoreconf("-fiv")
-    autotools.configure("--prefix=/usr --sbindir=/usr/bin --enable-tspi --enable-nss --enable-pkcs11-helper --enable-tests PYTHON=python2.7")
+    autotools.configure("--prefix=/usr --sbindir=/usr/bin --enable-nss --enable-pkcs11-helper --enable-tests PYTHON=python2.7")
     
     pisitools.dosed("src/desktop/ecryptfs-mount-private.desktop.in", "Type=Application", "Type=Application\nEncoding=UTF-8\nIcon=/usr/share/pixmaps/ecryptfs-mount-private.png")
     pisitools.dosed("src/desktop/ecryptfs-setup-private.desktop.in", "Type=Application", "Type=Application\nEncoding=UTF-8\nIcon=/usr/share/pixmaps/ecryptfs-mount-private.png")
