@@ -1,0 +1,7 @@
+#!/bin/bash
+version=`python -c "import platform; print platform.python_version()[:3]"`
+
+cp -rf /usr/lib/python$version/site-packages/yali/ /yali
+mount --bind /yali/ /usr/lib/python$version/site-packages/yali/
+
+echo "Yali is ready in /yali ..."

@@ -1,0 +1,161 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'yali/gui/Ui/logicalvolume.ui'
+#
+# Created: Mon Nov 24 20:29:51 2014
+#      by: PyQt4 UI code generator 4.9.6
+#
+# WARNING! All changes made in this file will be lost!
+
+import gettext
+__trans = gettext.translation('yali', fallback=True)
+i18n = __trans.ugettext
+from PyQt4 import QtCore, QtGui
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
+
+class Ui_LogicalVolumeWidget(object):
+    def setupUi(self, LogicalVolumeWidget):
+        LogicalVolumeWidget.setObjectName(_fromUtf8("LogicalVolumeWidget"))
+        LogicalVolumeWidget.resize(440, 355)
+        self.gridLayout = QtGui.QGridLayout(LogicalVolumeWidget)
+        self.gridLayout.setHorizontalSpacing(5)
+        self.gridLayout.setVerticalSpacing(10)
+        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
+        self.label = QtGui.QLabel(LogicalVolumeWidget)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+        self.name = QtGui.QLineEdit(LogicalVolumeWidget)
+        self.name.setMinimumSize(QtCore.QSize(0, 30))
+        self.name.setObjectName(_fromUtf8("name"))
+        self.gridLayout.addWidget(self.name, 0, 1, 1, 2)
+        self.label_2 = QtGui.QLabel(LogicalVolumeWidget)
+        font = QtGui.QFont()
+        self.label_2.setFont(font)
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
+        self.mountpointMenu = QtGui.QComboBox(LogicalVolumeWidget)
+        self.mountpointMenu.setMinimumSize(QtCore.QSize(300, 30))
+        self.mountpointMenu.setStyleSheet(_fromUtf8("    color: #333333;  "))
+        self.mountpointMenu.setEditable(True)
+        self.mountpointMenu.setObjectName(_fromUtf8("mountpointMenu"))
+        self.mountpointMenu.addItem(_fromUtf8(""))
+        self.mountpointMenu.setItemText(0, _fromUtf8(""))
+        self.gridLayout.addWidget(self.mountpointMenu, 1, 1, 1, 2)
+        self.sizeLabel = QtGui.QLabel(LogicalVolumeWidget)
+        font = QtGui.QFont()
+        self.sizeLabel.setFont(font)
+        self.sizeLabel.setObjectName(_fromUtf8("sizeLabel"))
+        self.gridLayout.addWidget(self.sizeLabel, 2, 0, 1, 1)
+        self.sizeSlider = QtGui.QSlider(LogicalVolumeWidget)
+        self.sizeSlider.setStyleSheet(_fromUtf8(""))
+        self.sizeSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.sizeSlider.setObjectName(_fromUtf8("sizeSlider"))
+        self.gridLayout.addWidget(self.sizeSlider, 2, 1, 1, 1)
+        self.sizeSpin = QtGui.QSpinBox(LogicalVolumeWidget)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.sizeSpin.sizePolicy().hasHeightForWidth())
+        self.sizeSpin.setSizePolicy(sizePolicy)
+        self.sizeSpin.setMinimumSize(QtCore.QSize(120, 30))
+        self.sizeSpin.setMinimum(20)
+        self.sizeSpin.setMaximum(100)
+        self.sizeSpin.setSingleStep(50)
+        self.sizeSpin.setProperty("value", 20)
+        self.sizeSpin.setObjectName(_fromUtf8("sizeSpin"))
+        self.gridLayout.addWidget(self.sizeSpin, 2, 2, 1, 1)
+        self.resizeRadio = QtGui.QRadioButton(LogicalVolumeWidget)
+        self.resizeRadio.setObjectName(_fromUtf8("resizeRadio"))
+        self.gridLayout.addWidget(self.resizeRadio, 3, 0, 1, 1)
+        self.resizeSlider = QtGui.QSlider(LogicalVolumeWidget)
+        self.resizeSlider.setEnabled(False)
+        self.resizeSlider.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.resizeSlider.setStyleSheet(_fromUtf8(""))
+        self.resizeSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.resizeSlider.setObjectName(_fromUtf8("resizeSlider"))
+        self.gridLayout.addWidget(self.resizeSlider, 3, 1, 1, 1)
+        self.resizeSpin = QtGui.QSpinBox(LogicalVolumeWidget)
+        self.resizeSpin.setEnabled(False)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.resizeSpin.sizePolicy().hasHeightForWidth())
+        self.resizeSpin.setSizePolicy(sizePolicy)
+        self.resizeSpin.setMinimumSize(QtCore.QSize(120, 30))
+        self.resizeSpin.setMinimum(20)
+        self.resizeSpin.setMaximum(100)
+        self.resizeSpin.setSingleStep(50)
+        self.resizeSpin.setProperty("value", 20)
+        self.resizeSpin.setObjectName(_fromUtf8("resizeSpin"))
+        self.gridLayout.addWidget(self.resizeSpin, 3, 2, 1, 1)
+        self.filesystemLabel = QtGui.QLabel(LogicalVolumeWidget)
+        font = QtGui.QFont()
+        self.filesystemLabel.setFont(font)
+        self.filesystemLabel.setObjectName(_fromUtf8("filesystemLabel"))
+        self.gridLayout.addWidget(self.filesystemLabel, 4, 0, 1, 1)
+        self.filesystemMenu = QtGui.QComboBox(LogicalVolumeWidget)
+        self.filesystemMenu.setMinimumSize(QtCore.QSize(0, 30))
+        self.filesystemMenu.setObjectName(_fromUtf8("filesystemMenu"))
+        self.gridLayout.addWidget(self.filesystemMenu, 4, 1, 1, 2)
+        self.formatRadio = QtGui.QRadioButton(LogicalVolumeWidget)
+        self.formatRadio.setObjectName(_fromUtf8("formatRadio"))
+        self.gridLayout.addWidget(self.formatRadio, 5, 0, 1, 1)
+        self.formatCombo = QtGui.QComboBox(LogicalVolumeWidget)
+        self.formatCombo.setEnabled(False)
+        self.formatCombo.setMinimumSize(QtCore.QSize(0, 30))
+        self.formatCombo.setObjectName(_fromUtf8("formatCombo"))
+        self.gridLayout.addWidget(self.formatCombo, 5, 1, 1, 2)
+        self.migrateRadio = QtGui.QRadioButton(LogicalVolumeWidget)
+        self.migrateRadio.setObjectName(_fromUtf8("migrateRadio"))
+        self.gridLayout.addWidget(self.migrateRadio, 6, 0, 1, 1)
+        self.migrateCombo = QtGui.QComboBox(LogicalVolumeWidget)
+        self.migrateCombo.setEnabled(False)
+        self.migrateCombo.setMinimumSize(QtCore.QSize(0, 30))
+        self.migrateCombo.setObjectName(_fromUtf8("migrateCombo"))
+        self.gridLayout.addWidget(self.migrateCombo, 6, 1, 1, 2)
+        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem, 8, 0, 1, 3)
+        self.buttonBox = QtGui.QDialogButtonBox(LogicalVolumeWidget)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+        self.gridLayout.addWidget(self.buttonBox, 9, 0, 1, 3)
+        self.radioButton = QtGui.QRadioButton(LogicalVolumeWidget)
+        self.radioButton.setText(_fromUtf8("HackRadioButton"))
+        self.radioButton.setObjectName(_fromUtf8("radioButton"))
+        self.gridLayout.addWidget(self.radioButton, 7, 0, 1, 1)
+
+        self.retranslateUi(LogicalVolumeWidget)
+        QtCore.QObject.connect(self.resizeRadio, QtCore.SIGNAL(_fromUtf8("toggled(bool)")), self.resizeSlider.setEnabled)
+        QtCore.QObject.connect(self.resizeSlider, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.resizeSpin.setValue)
+        QtCore.QObject.connect(self.resizeSpin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.resizeSlider.setValue)
+        QtCore.QObject.connect(self.sizeSlider, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.sizeSpin.setValue)
+        QtCore.QObject.connect(self.sizeSpin, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.sizeSlider.setValue)
+        QtCore.QObject.connect(self.resizeRadio, QtCore.SIGNAL(_fromUtf8("toggled(bool)")), self.resizeSpin.setEnabled)
+        QtCore.QObject.connect(self.formatRadio, QtCore.SIGNAL(_fromUtf8("toggled(bool)")), self.formatCombo.setEnabled)
+        QtCore.QObject.connect(self.migrateRadio, QtCore.SIGNAL(_fromUtf8("toggled(bool)")), self.migrateCombo.setEnabled)
+        QtCore.QMetaObject.connectSlotsByName(LogicalVolumeWidget)
+
+    def retranslateUi(self, LogicalVolumeWidget):
+        self.label.setText(i18n("Logical Volume:"))
+        self.label_2.setText(i18n("Use :"))
+        self.sizeLabel.setText(i18n("Size :"))
+        self.sizeSpin.setSuffix(i18n(" MB"))
+        self.resizeRadio.setText(i18n("Resize"))
+        self.resizeSpin.setSuffix(i18n(" MB"))
+        self.filesystemLabel.setText(i18n("File System :"))
+        self.formatRadio.setText(i18n("Format"))
+        self.migrateRadio.setText(i18n("Migrate"))
+
