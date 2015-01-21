@@ -1,0 +1,53 @@
+<PISI>
+    <Source>
+        <Name>samsung-tools</Name>
+        <Homepage>https://launchpad.net/samsung-tools</Homepage>
+        <Packager>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <IsA>app:gui</IsA>
+        <Summary>Tools for Samsung laptops</Summary>
+        <Description>Samsung dizüstü bilgisayarlar için araçlar</Description>
+        <Archive sha1sum="b5cf89eb2e1213f73e513a05b63f604ceadad5cf" type="targz">https://launchpadlibrarian.net/174852896/samsung-tools-2.3.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>samsung-tools</Name>
+        <RuntimeDependencies>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>notify-python</Dependency>
+            <Dependency>rfkill</Dependency>
+            <Dependency>keybinder</Dependency>
+            <Dependency>vbetool</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/samsung-tools</Path>
+	    <Path fileType="data">/usr/share/samsung-tools</Path>
+<!-- 	    <Path fileType="config">etc/samsung-tools/session.conf</Path> -->
+            <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/man</Path>
+	    <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="data">/usr/share/applications</Path>
+	    <Path fileType="local">/usr/share/locale</Path>
+       	    <Path fileType="data">/etc/samsung-tools/scripts/bluetooth-on</Path>
+            <Path fileType="data">/etc/samsung-tools/scripts/bluetooth-off</Path>
+            <Path fileType="data">/etc/samsung-tools/scripts/wireless-on</Path>
+            <Path fileType="data">/etc/samsung-tools/scripts/wireless-off</Path>
+	    <Path fileType="data">/usr/share/dbus-1/services/org.voria.SamsungTools.Session.service</Path>
+	    <Path fileType="data">/usr/share/dbus-1/system-services/org.voria.SamsungTools.System.service</Path>
+            <Path fileType="data">/etc/xdg/autostart/samsung-tools-session-service.desktop</Path>
+	    <Path fileType="data">/etc/dbus-1/system.d/org.voria.SamsungTools.System.conf</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2014-10-05</Date>
+            <Version>2.3.1</Version>
+            <Comment>First Release</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
