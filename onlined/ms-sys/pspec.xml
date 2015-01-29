@@ -6,13 +6,13 @@
         <Homepage>http://ms-sys.sourceforge.net</Homepage> 
         <Packager>
 	    <Name>Ekin Dursun</Name>
-            <Email>ekindursun@gmail.com</Email>
+            <Email>ekin.dursun@pisilinux.org</Email>
         </Packager>
         <License>GPL</License> 
         <IsA>app:console</IsA> 
         <Summary>A program for writing MS compatible MBRs</Summary>
         <Description>This is a Linux program for writing Microsoft compatible boot records. The program does the same as Microsoft "fdisk /mbr" to a hard disk or "sys d:" to a floppy or FAT partition except that it does not copy any system files, only the boot record is written.</Description>
-        <Archive sha1sum="09da17de95f9c6e8bd400432898fd99053b7408e" type="targz">http://downloads.sourceforge.net/project/ms-sys/ms-sys%20stable/2.4.0/ms-sys-2.4.0.tar.gz</Archive>
+        <Archive sha1sum="92953cc684499b71c919c055bf9e23bd850be04e" type="targz">http://downloads.sourceforge.net/project/ms-sys/ms-sys%20stable/2.4.1/ms-sys-2.4.1.tar.gz</Archive>
     </Source>
     <Package>
         <Name>ms-sys</Name>
@@ -23,12 +23,19 @@
         </Files>
     </Package>
     <History>
+	<Update release="2">
+            <Date>2015-02-04</Date>
+            <Version>2.4.1</Version>
+            <Comment>Version bump.</Comment>
+	    <Name>Ekin Dursun</Name>
+            <Email>ekin.dursun@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2014-10-09</Date>
             <Version>2.4.0</Version>
             <Comment>First release.</Comment>
 	    <Name>Ekin Dursun</Name>
-            <Email>ekindursun@gmail.com</Email>
+            <Email>ekin.dursun@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>
