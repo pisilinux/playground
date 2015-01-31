@@ -1,0 +1,31 @@
+From dae7d2089516d9cf014b9fad0adb484f19282a29 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Sat, 24 Jan 2015 20:59:27 +0000
+Subject: [PATCH] Resolves: rhbz#1179642 crash in GetFocus with empty
+ mpPreviouslyFocusedListBox
+
+Change-Id: I7559067c00617482d34e7cbdd177202868cbfc76
+---
+ sc/source/ui/dbgui/PivotLayoutTreeListBase.cxx | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/sc/source/ui/dbgui/PivotLayoutTreeListBase.cxx b/sc/source/ui/dbgui/PivotLayoutTreeListBase.cxx
+index 84b61d4..ff0c95e 100644
+--- a/sc/source/ui/dbgui/PivotLayoutTreeListBase.cxx
++++ b/sc/source/ui/dbgui/PivotLayoutTreeListBase.cxx
+@@ -123,9 +123,10 @@ void ScPivotLayoutTreeListBase::GetFocus()
+     if( GetGetFocusFlags() & GETFOCUS_MNEMONIC )
+     {
+         SvTreeListEntry* pEntry = mpParent->mpPreviouslyFocusedListBox->GetCurEntry();
+-        InsertEntryForSourceTarget(pEntry, NULL);
++        if (pEntry)
++            InsertEntryForSourceTarget(pEntry, NULL);
+ 
+-        if(mpParent->mpPreviouslyFocusedListBox != NULL)
++        if (mpParent->mpPreviouslyFocusedListBox != NULL)
+             mpParent->mpPreviouslyFocusedListBox->GrabFocus();
+     }
+ 
+-- 
+1.9.3
+

@@ -1,0 +1,148 @@
+From 7e787af122ebcef29b284e8c46d84a12c0625cd8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Mon, 12 Jan 2015 15:45:19 +0000
+Subject: [PATCH] radio check top/center/bottom alignment for table cells
+
+Change-Id: I30b51510ac5fbfb3c1dd09e0f86a246a8b516f1e
+(cherry picked from commit 2aa40ecebb2cb1e5d2cf85d7ada70b5e541bad67)
+---
+ sw/source/ui/app/mn.src                  | 3 +++
+ sw/uiconfig/sglobal/menubar/menubar.xml  | 6 +++---
+ sw/uiconfig/sweb/menubar/menubar.xml     | 6 +++---
+ sw/uiconfig/swform/menubar/menubar.xml   | 6 +++---
+ sw/uiconfig/swreport/menubar/menubar.xml | 6 +++---
+ sw/uiconfig/swriter/menubar/menubar.xml  | 6 +++---
+ sw/uiconfig/swxform/menubar/menubar.xml  | 6 +++---
+ 7 files changed, 21 insertions(+), 18 deletions(-)
+
+diff --git a/sw/source/ui/app/mn.src b/sw/source/ui/app/mn.src
+index 4fa9b14..4bb40ac 100644
+--- a/sw/source/ui/app/mn.src
++++ b/sw/source/ui/app/mn.src
+@@ -397,18 +397,21 @@
+                 SEPARATOR ; \
+                 MenuItem\
+                 {\
++                    RadioCheck = TRUE ; \
+                     Identifier = SID_TABLE_VERT_NONE ; \
+                     HelpId = CMD_SID_TABLE_VERT_NONE ; \
+                     Text [ en-US ] = "~Top" ; \
+                 };\
+                 MenuItem\
+                 {\
++                    RadioCheck = TRUE ; \
+                     Identifier = SID_TABLE_VERT_CENTER ; \
+                     HelpId = CMD_SID_TABLE_VERT_CENTER ; \
+                     Text [ en-US ] = "C~enter" ; \
+                 };\
+                 MenuItem\
+                 {\
++                    RadioCheck = TRUE ; \
+                     Identifier = SID_TABLE_VERT_BOTTOM ; \
+                     HelpId = CMD_SID_TABLE_VERT_BOTTOM ; \
+                     Text [ en-US ] = "~Bottom" ; \
+diff --git a/sw/uiconfig/sglobal/menubar/menubar.xml b/sw/uiconfig/sglobal/menubar/menubar.xml
+index d5736a5..6f09ae8 100644
+--- a/sw/uiconfig/sglobal/menubar/menubar.xml
++++ b/sw/uiconfig/sglobal/menubar/menubar.xml
+@@ -304,9 +304,9 @@
+           <menu:menuitem menu:id=".uno:CommonAlignRight" menu:style="radio"/>
+           <menu:menuitem menu:id=".uno:CommonAlignJustified" menu:style="radio"/>
+           <menu:menuseparator/>
+-          <menu:menuitem menu:id=".uno:CommonAlignTop"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignBottom"/>
++          <menu:menuitem menu:id=".uno:CommonAlignTop" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignBottom" menu:style="radio"/>
+         </menu:menupopup>
+       </menu:menu>
+       <menu:menu menu:id=".uno:ArrangeMenu">
+diff --git a/sw/uiconfig/sweb/menubar/menubar.xml b/sw/uiconfig/sweb/menubar/menubar.xml
+index ee78c24..87115d4 100644
+--- a/sw/uiconfig/sweb/menubar/menubar.xml
++++ b/sw/uiconfig/sweb/menubar/menubar.xml
+@@ -248,9 +248,9 @@
+           <menu:menuitem menu:id=".uno:CommonAlignRight" menu:style="radio"/>
+           <menu:menuitem menu:id=".uno:CommonAlignJustified" menu:style="radio"/>
+           <menu:menuseparator/>
+-          <menu:menuitem menu:id=".uno:CommonAlignTop"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignBottom"/>
++          <menu:menuitem menu:id=".uno:CommonAlignTop" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignBottom" menu:style="radio"/>
+         </menu:menupopup>
+       </menu:menu>
+       <menu:menu menu:id=".uno:ArrangeMenu">
+diff --git a/sw/uiconfig/swform/menubar/menubar.xml b/sw/uiconfig/swform/menubar/menubar.xml
+index ddf914f..7305ceb 100644
+--- a/sw/uiconfig/swform/menubar/menubar.xml
++++ b/sw/uiconfig/swform/menubar/menubar.xml
+@@ -303,9 +303,9 @@
+           <menu:menuitem menu:id=".uno:CommonAlignRight" menu:style="radio"/>
+           <menu:menuitem menu:id=".uno:CommonAlignJustified" menu:style="radio"/>
+           <menu:menuseparator/>
+-          <menu:menuitem menu:id=".uno:CommonAlignTop"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignBottom"/>
++          <menu:menuitem menu:id=".uno:CommonAlignTop" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignBottom" menu:style="radio"/>
+         </menu:menupopup>
+       </menu:menu>
+       <menu:menu menu:id=".uno:ArrangeMenu">
+diff --git a/sw/uiconfig/swreport/menubar/menubar.xml b/sw/uiconfig/swreport/menubar/menubar.xml
+index fab0914..a41c3c2 100644
+--- a/sw/uiconfig/swreport/menubar/menubar.xml
++++ b/sw/uiconfig/swreport/menubar/menubar.xml
+@@ -304,9 +304,9 @@
+           <menu:menuitem menu:id=".uno:CommonAlignRight" menu:style="radio"/>
+           <menu:menuitem menu:id=".uno:CommonAlignJustified" menu:style="radio"/>
+           <menu:menuseparator/>
+-          <menu:menuitem menu:id=".uno:CommonAlignTop"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignBottom"/>
++          <menu:menuitem menu:id=".uno:CommonAlignTop" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignBottom" menu:style="radio"/>
+         </menu:menupopup>
+       </menu:menu>
+       <menu:menu menu:id=".uno:ArrangeMenu">
+diff --git a/sw/uiconfig/swriter/menubar/menubar.xml b/sw/uiconfig/swriter/menubar/menubar.xml
+index b26b980..f5b3fa9 100644
+--- a/sw/uiconfig/swriter/menubar/menubar.xml
++++ b/sw/uiconfig/swriter/menubar/menubar.xml
+@@ -312,9 +312,9 @@
+           <menu:menuitem menu:id=".uno:CommonAlignRight" menu:style="radio"/>
+           <menu:menuitem menu:id=".uno:CommonAlignJustified" menu:style="radio"/>
+           <menu:menuseparator/>
+-          <menu:menuitem menu:id=".uno:CommonAlignTop"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignBottom"/>
++          <menu:menuitem menu:id=".uno:CommonAlignTop" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignBottom" menu:style="radio"/>
+         </menu:menupopup>
+       </menu:menu>
+       <menu:menu menu:id=".uno:ArrangeMenu">
+diff --git a/sw/uiconfig/swxform/menubar/menubar.xml b/sw/uiconfig/swxform/menubar/menubar.xml
+index ec9f631..4c08ef2 100644
+--- a/sw/uiconfig/swxform/menubar/menubar.xml
++++ b/sw/uiconfig/swxform/menubar/menubar.xml
+@@ -305,9 +305,9 @@
+           <menu:menuitem menu:id=".uno:CommonAlignRight" menu:style="radio"/>
+           <menu:menuitem menu:id=".uno:CommonAlignJustified" menu:style="radio"/>
+           <menu:menuseparator/>
+-          <menu:menuitem menu:id=".uno:CommonAlignTop"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter"/>
+-          <menu:menuitem menu:id=".uno:CommonAlignBottom"/>
++          <menu:menuitem menu:id=".uno:CommonAlignTop" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignVerticalCenter" menu:style="radio"/>
++          <menu:menuitem menu:id=".uno:CommonAlignBottom" menu:style="radio"/>
+         </menu:menupopup>
+       </menu:menu>
+       <menu:menu menu:id=".uno:ArrangeMenu">
+-- 
+1.9.3
+

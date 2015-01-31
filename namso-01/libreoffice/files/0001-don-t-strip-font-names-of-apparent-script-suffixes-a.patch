@@ -1,0 +1,72 @@
+From 15e1c881684c0127c0ca989924bbf2508b4fd780 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Mon, 26 Jan 2015 15:00:29 +0000
+Subject: [PATCH] don't strip font names of apparent script suffixes anymore
+
+e.g. "CM Roman CE" should be left alone.
+
+bump font cache id to invalidate old cached lists
+
+I think this practice stems from Window 3.1/Word 95 where the encoding was
+included in the font name
+http://www.webcenter.ru/~kazarn/eng/fonts_ttf.htm#charsettbl Microsoft Office
+still generates RTF files with weird-ass Win 3.1 style fontnames but any actual
+existing fonts that happen to have names that fall into that pattern should be
+left alone now.
+
+Change-Id: Ibb704048d63b33ce510d6b1076700c6e94a0af2a
+---
+ unotools/qa/unit/testGetEnglishSearchName.cxx | 7 +++----
+ unotools/source/misc/fontdefs.cxx             | 2 --
+ vcl/generic/fontmanager/fontcache.cxx         | 2 +-
+ 3 files changed, 4 insertions(+), 7 deletions(-)
+
+diff --git a/unotools/qa/unit/testGetEnglishSearchName.cxx b/unotools/qa/unit/testGetEnglishSearchName.cxx
+index dbc8b17..c9d8e1f 100644
+--- a/unotools/qa/unit/testGetEnglishSearchName.cxx
++++ b/unotools/qa/unit/testGetEnglishSearchName.cxx
+@@ -39,12 +39,11 @@ void Test::testSingleElement()
+         //trailingWhitespaces
+         test1 = GetEnglishSearchFontName( "Symbol    " );
+         CPPUNIT_ASSERT_EQUAL(OUString("symbol"),test1);
+-        //removing Skripts
++        //no longer remove script suffixes
+         test1 = GetEnglishSearchFontName( "Symbol(SIP)" );
+         CPPUNIT_ASSERT_EQUAL(OUString("symbol(sip)"),test1);
+-        //remove Whitespaces between
+-        test1 = GetEnglishSearchFontName( "Symbol (thai)" );
+-        CPPUNIT_ASSERT_EQUAL( OUString("symbol"),test1);
++        test1 = GetEnglishSearchFontName( "CM Roman CE" );
++        CPPUNIT_ASSERT_EQUAL( OUString("cmromance"),test1);
+         //remove special characters; leave semicolon, numbers
+         test1 = GetEnglishSearchFontName( "sy;mb?=ol129" );
+         CPPUNIT_ASSERT_EQUAL( OUString("sy;mbol129"),test1);
+diff --git a/unotools/source/misc/fontdefs.cxx b/unotools/source/misc/fontdefs.cxx
+index f368cc6..04c6fc4 100644
+--- a/unotools/source/misc/fontdefs.cxx
++++ b/unotools/source/misc/fontdefs.cxx
+@@ -367,8 +367,6 @@ OUString GetEnglishSearchFontName(const OUString& rInName)
+     if ( i != nLen )
+          rName.truncate(i);
+ 
+-    // Remove Script at the end
+-    rName = StripScriptFromName(rName.toString());
+     nLen = rName.getLength();
+ 
+     // remove all whitespaces and converts to lower case ASCII
+diff --git a/vcl/generic/fontmanager/fontcache.cxx b/vcl/generic/fontmanager/fontcache.cxx
+index 56a15bf..e978eb7 100644
+--- a/vcl/generic/fontmanager/fontcache.cxx
++++ b/vcl/generic/fontmanager/fontcache.cxx
+@@ -38,7 +38,7 @@
+ #endif
+ 
+ #define FONTCACHEFILE "/user/psprint/pspfontcache"
+-#define CACHE_MAGIC "LibreOffice PspFontCacheFile format 5"
++#define CACHE_MAGIC "LibreOffice PspFontCacheFile format 6"
+ 
+ using namespace std;
+ using namespace psp;
+-- 
+1.9.3
+

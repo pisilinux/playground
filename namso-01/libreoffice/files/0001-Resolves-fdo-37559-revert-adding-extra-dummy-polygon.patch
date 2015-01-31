@@ -1,0 +1,73 @@
+From 62ccbdf2233e10e70909a080f09465982a504474 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Wed, 5 Nov 2014 13:49:07 +0000
+Subject: [PATCH] Resolves: fdo#37559 revert adding extra dummy polygons to get
+ better gradients
+
+Change-Id: I38b8e7cb79540a99696ac09e4061c9d87440b2b2
+---
+ drawinglayer/source/primitive2d/polygonprimitive2d.cxx  |  3 +--
+ svx/source/customshapes/EnhancedCustomShape2d.cxx       | 16 ----------------
+ svx/source/customshapes/EnhancedCustomShapeFontWork.cxx |  2 +-
+ 3 files changed, 2 insertions(+), 19 deletions(-)
+
+diff --git a/drawinglayer/source/primitive2d/polygonprimitive2d.cxx b/drawinglayer/source/primitive2d/polygonprimitive2d.cxx
+index 4a2944b..85b118f 100644
+--- a/drawinglayer/source/primitive2d/polygonprimitive2d.cxx
++++ b/drawinglayer/source/primitive2d/polygonprimitive2d.cxx
+@@ -526,11 +526,10 @@ namespace drawinglayer
+         {
+             // copy local polygon, it may be changed
+             basegfx::B2DPolygon aLocalPolygon(getB2DPolygon());
+-            aLocalPolygon.removeDoublePoints();
+             basegfx::B2DPolyPolygon aArrowA;
+             basegfx::B2DPolyPolygon aArrowB;
+ 
+-            if(!aLocalPolygon.isClosed() && aLocalPolygon.count() > 1)
++            if(!aLocalPolygon.isClosed())
+             {
+                 // apply arrows
+                 const double fPolyLength(basegfx::tools::getLength(aLocalPolygon));
+diff --git a/svx/source/customshapes/EnhancedCustomShape2d.cxx b/svx/source/customshapes/EnhancedCustomShape2d.cxx
+index 1e0e818..64e08d9 100644
+--- a/svx/source/customshapes/EnhancedCustomShape2d.cxx
++++ b/svx/source/customshapes/EnhancedCustomShape2d.cxx
+@@ -1902,22 +1902,6 @@ void EnhancedCustomShape2d::CreateSubPath( sal_uInt16& rSrcPt, sal_uInt16& rSegm
+ 
+     if(aNewB2DPolyPolygon.count())
+     {
+-        if( !bLineGeometryNeededOnly )
+-        {
+-            // hack aNewB2DPolyPolygon to fill logic rect - this is
+-            // needed to produce gradient fills that look like mso
+-            aNewB2DPolygon.clear();
+-            aNewB2DPolygon.append(basegfx::B2DPoint(0,0));
+-            aNewB2DPolygon.setClosed(true);
+-            aNewB2DPolyPolygon.append(aNewB2DPolygon);
+-
+-            aNewB2DPolygon.clear();
+-            aNewB2DPolygon.append(basegfx::B2DPoint(aLogicRect.GetWidth(),
+-                                                    aLogicRect.GetHeight()));
+-            aNewB2DPolygon.setClosed(true);
+-            aNewB2DPolyPolygon.append(aNewB2DPolygon);
+-        }
+-
+         // #i37011#
+         bool bForceCreateTwoObjects(false);
+ 
+diff --git a/svx/source/customshapes/EnhancedCustomShapeFontWork.cxx b/svx/source/customshapes/EnhancedCustomShapeFontWork.cxx
+index 7332449..fba8740 100644
+--- a/svx/source/customshapes/EnhancedCustomShapeFontWork.cxx
++++ b/svx/source/customshapes/EnhancedCustomShapeFontWork.cxx
+@@ -606,7 +606,7 @@ void InsertMissingOutlinePoints( const Polygon& /*rOutlinePoly*/, const std::vec
+ void GetPoint( const Polygon& rPoly, const std::vector< double >& rDistances, const double& fX, double& fx1, double& fy1 )
+ {
+     fy1 = fx1 = 0.0;
+-    if ( rPoly.GetSize() > 1 )
++    if ( rPoly.GetSize() )
+     {
+         std::vector< double >::const_iterator aIter = std::lower_bound( rDistances.begin(), rDistances.end(), fX );
+         sal_uInt16 nIdx = sal::static_int_cast<sal_uInt16>( std::distance( rDistances.begin(), aIter ) );
+-- 
+1.9.3
+

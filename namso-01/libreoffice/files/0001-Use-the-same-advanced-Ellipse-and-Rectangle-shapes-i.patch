@@ -1,0 +1,139 @@
+From 5bf5fb4567096680d417af37744c743f00e26eeb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Wed, 14 Jan 2015 16:55:02 +0000
+Subject: [PATCH] Use the same advanced Ellipse and Rectangle shapes in writer
+ as draw
+
+i.e. reconcile writer with draw/impress wrt.
+
+commit 0e9faf7a0f8c76b50d9a9354d5fab5d1ad4af821
+Author: Petr Mladek <pmladek@suse.cz>
+Date:   Fri Apr 22 16:51:58 2011 +0200
+
+    sd-toolbar-advanced-shapes.diff: used advanced Ellipse and Rectangle shapes
+
+    they allow to wrap text according to the shape which is a very nice
+    feature (bnc#171052)
+
+Change-Id: I0bddfe65030f3515bcb5a30f2886d3ad17a72b0d
+---
+ sw/uiconfig/sglobal/toolbar/drawbar.xml  | 6 +++---
+ sw/uiconfig/swform/toolbar/drawbar.xml   | 6 +++---
+ sw/uiconfig/swreport/toolbar/drawbar.xml | 6 +++---
+ sw/uiconfig/swriter/toolbar/drawbar.xml  | 6 +++---
+ sw/uiconfig/swxform/toolbar/drawbar.xml  | 6 +++---
+ 5 files changed, 15 insertions(+), 15 deletions(-)
+
+diff --git a/sw/uiconfig/sglobal/toolbar/drawbar.xml b/sw/uiconfig/sglobal/toolbar/drawbar.xml
+index 8731a05..b31c198 100644
+--- a/sw/uiconfig/sglobal/toolbar/drawbar.xml
++++ b/sw/uiconfig/sglobal/toolbar/drawbar.xml
+@@ -21,8 +21,8 @@
+  <toolbar:toolbaritem xlink:href=".uno:SelectObject" toolbar:helpid="10128"/>
+  <toolbar:toolbarseparator/>
+  <toolbar:toolbaritem xlink:href=".uno:Line" toolbar:helpid="10102"/>
+- <toolbar:toolbaritem xlink:href=".uno:Rect" toolbar:helpid="10104"/>
+- <toolbar:toolbaritem xlink:href=".uno:Ellipse" toolbar:helpid="10110"/>
++ <toolbar:toolbaritem xlink:href=".uno:BasicShapes.rectangle" toolbar:helpid="10104"/>
++ <toolbar:toolbaritem xlink:href=".uno:BasicShapes.ellipse" toolbar:helpid="10110"/>
+  <toolbar:toolbaritem xlink:href=".uno:Polygon_Unfilled" toolbar:visible="false" toolbar:helpid="10395"/>
+  <toolbar:toolbaritem xlink:href=".uno:Bezier_Unfilled" toolbar:visible="false" toolbar:helpid="10397"/>
+  <toolbar:toolbaritem xlink:href=".uno:Freeline_Unfilled" toolbar:helpid="10464"/>
+@@ -48,4 +48,4 @@
+  <toolbar:toolbaritem xlink:href=".uno:InsertGraphic" toolbar:helpid="10241"/>
+  <toolbar:toolbarseparator/>
+  <toolbar:toolbaritem xlink:href=".uno:ExtrusionToggle" toolbar:helpid="10960"/>
+-</toolbar:toolbar>
+\ No newline at end of file
++</toolbar:toolbar>
+diff --git a/sw/uiconfig/swform/toolbar/drawbar.xml b/sw/uiconfig/swform/toolbar/drawbar.xml
+index 8731a05..b31c198 100644
+--- a/sw/uiconfig/swform/toolbar/drawbar.xml
++++ b/sw/uiconfig/swform/toolbar/drawbar.xml
+@@ -21,8 +21,8 @@
+  <toolbar:toolbaritem xlink:href=".uno:SelectObject" toolbar:helpid="10128"/>
+  <toolbar:toolbarseparator/>
+  <toolbar:toolbaritem xlink:href=".uno:Line" toolbar:helpid="10102"/>
+- <toolbar:toolbaritem xlink:href=".uno:Rect" toolbar:helpid="10104"/>
+- <toolbar:toolbaritem xlink:href=".uno:Ellipse" toolbar:helpid="10110"/>
++ <toolbar:toolbaritem xlink:href=".uno:BasicShapes.rectangle" toolbar:helpid="10104"/>
++ <toolbar:toolbaritem xlink:href=".uno:BasicShapes.ellipse" toolbar:helpid="10110"/>
+  <toolbar:toolbaritem xlink:href=".uno:Polygon_Unfilled" toolbar:visible="false" toolbar:helpid="10395"/>
+  <toolbar:toolbaritem xlink:href=".uno:Bezier_Unfilled" toolbar:visible="false" toolbar:helpid="10397"/>
+  <toolbar:toolbaritem xlink:href=".uno:Freeline_Unfilled" toolbar:helpid="10464"/>
+@@ -48,4 +48,4 @@
+  <toolbar:toolbaritem xlink:href=".uno:InsertGraphic" toolbar:helpid="10241"/>
+  <toolbar:toolbarseparator/>
+  <toolbar:toolbaritem xlink:href=".uno:ExtrusionToggle" toolbar:helpid="10960"/>
+-</toolbar:toolbar>
+\ No newline at end of file
++</toolbar:toolbar>
+diff --git a/sw/uiconfig/swreport/toolbar/drawbar.xml b/sw/uiconfig/swreport/toolbar/drawbar.xml
+index 8731a05..b31c198 100644
+--- a/sw/uiconfig/swreport/toolbar/drawbar.xml
++++ b/sw/uiconfig/swreport/toolbar/drawbar.xml
+@@ -21,8 +21,8 @@
+  <toolbar:toolbaritem xlink:href=".uno:SelectObject" toolbar:helpid="10128"/>
+  <toolbar:toolbarseparator/>
+  <toolbar:toolbaritem xlink:href=".uno:Line" toolbar:helpid="10102"/>
+- <toolbar:toolbaritem xlink:href=".uno:Rect" toolbar:helpid="10104"/>
+- <toolbar:toolbaritem xlink:href=".uno:Ellipse" toolbar:helpid="10110"/>
++ <toolbar:toolbaritem xlink:href=".uno:BasicShapes.rectangle" toolbar:helpid="10104"/>
++ <toolbar:toolbaritem xlink:href=".uno:BasicShapes.ellipse" toolbar:helpid="10110"/>
+  <toolbar:toolbaritem xlink:href=".uno:Polygon_Unfilled" toolbar:visible="false" toolbar:helpid="10395"/>
+  <toolbar:toolbaritem xlink:href=".uno:Bezier_Unfilled" toolbar:visible="false" toolbar:helpid="10397"/>
+  <toolbar:toolbaritem xlink:href=".uno:Freeline_Unfilled" toolbar:helpid="10464"/>
+@@ -48,4 +48,4 @@
+  <toolbar:toolbaritem xlink:href=".uno:InsertGraphic" toolbar:helpid="10241"/>
+  <toolbar:toolbarseparator/>
+  <toolbar:toolbaritem xlink:href=".uno:ExtrusionToggle" toolbar:helpid="10960"/>
+-</toolbar:toolbar>
+\ No newline at end of file
++</toolbar:toolbar>
+diff --git a/sw/uiconfig/swriter/toolbar/drawbar.xml b/sw/uiconfig/swriter/toolbar/drawbar.xml
+index 8731a05..b31c198 100644
+--- a/sw/uiconfig/swriter/toolbar/drawbar.xml
++++ b/sw/uiconfig/swriter/toolbar/drawbar.xml
+@@ -21,8 +21,8 @@
+  <toolbar:toolbaritem xlink:href=".uno:SelectObject" toolbar:helpid="10128"/>
+  <toolbar:toolbarseparator/>
+  <toolbar:toolbaritem xlink:href=".uno:Line" toolbar:helpid="10102"/>
+- <toolbar:toolbaritem xlink:href=".uno:Rect" toolbar:helpid="10104"/>
+- <toolbar:toolbaritem xlink:href=".uno:Ellipse" toolbar:helpid="10110"/>
++ <toolbar:toolbaritem xlink:href=".uno:BasicShapes.rectangle" toolbar:helpid="10104"/>
++ <toolbar:toolbaritem xlink:href=".uno:BasicShapes.ellipse" toolbar:helpid="10110"/>
+  <toolbar:toolbaritem xlink:href=".uno:Polygon_Unfilled" toolbar:visible="false" toolbar:helpid="10395"/>
+  <toolbar:toolbaritem xlink:href=".uno:Bezier_Unfilled" toolbar:visible="false" toolbar:helpid="10397"/>
+  <toolbar:toolbaritem xlink:href=".uno:Freeline_Unfilled" toolbar:helpid="10464"/>
+@@ -48,4 +48,4 @@
+  <toolbar:toolbaritem xlink:href=".uno:InsertGraphic" toolbar:helpid="10241"/>
+  <toolbar:toolbarseparator/>
+  <toolbar:toolbaritem xlink:href=".uno:ExtrusionToggle" toolbar:helpid="10960"/>
+-</toolbar:toolbar>
+\ No newline at end of file
++</toolbar:toolbar>
+diff --git a/sw/uiconfig/swxform/toolbar/drawbar.xml b/sw/uiconfig/swxform/toolbar/drawbar.xml
+index 8731a05..b31c198 100644
+--- a/sw/uiconfig/swxform/toolbar/drawbar.xml
++++ b/sw/uiconfig/swxform/toolbar/drawbar.xml
+@@ -21,8 +21,8 @@
+  <toolbar:toolbaritem xlink:href=".uno:SelectObject" toolbar:helpid="10128"/>
+  <toolbar:toolbarseparator/>
+  <toolbar:toolbaritem xlink:href=".uno:Line" toolbar:helpid="10102"/>
+- <toolbar:toolbaritem xlink:href=".uno:Rect" toolbar:helpid="10104"/>
+- <toolbar:toolbaritem xlink:href=".uno:Ellipse" toolbar:helpid="10110"/>
++ <toolbar:toolbaritem xlink:href=".uno:BasicShapes.rectangle" toolbar:helpid="10104"/>
++ <toolbar:toolbaritem xlink:href=".uno:BasicShapes.ellipse" toolbar:helpid="10110"/>
+  <toolbar:toolbaritem xlink:href=".uno:Polygon_Unfilled" toolbar:visible="false" toolbar:helpid="10395"/>
+  <toolbar:toolbaritem xlink:href=".uno:Bezier_Unfilled" toolbar:visible="false" toolbar:helpid="10397"/>
+  <toolbar:toolbaritem xlink:href=".uno:Freeline_Unfilled" toolbar:helpid="10464"/>
+@@ -48,4 +48,4 @@
+  <toolbar:toolbaritem xlink:href=".uno:InsertGraphic" toolbar:helpid="10241"/>
+  <toolbar:toolbarseparator/>
+  <toolbar:toolbaritem xlink:href=".uno:ExtrusionToggle" toolbar:helpid="10960"/>
+-</toolbar:toolbar>
+\ No newline at end of file
++</toolbar:toolbar>
+-- 
+1.9.3
+

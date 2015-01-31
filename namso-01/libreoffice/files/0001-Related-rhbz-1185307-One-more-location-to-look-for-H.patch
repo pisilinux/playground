@@ -1,0 +1,27 @@
+From b471dca2a924a3f03fe2a0a7fe2612f9c6c6bd54 Mon Sep 17 00:00:00 2001
+From: Stephan Bergmann <sbergman@redhat.com>
+Date: Fri, 23 Jan 2015 15:55:24 +0100
+Subject: [PATCH] Related rhbz#1185307: One more location to look for Hamcrest
+ jar
+
+Change-Id: I307a009c14dd5cd946b39fbfb80ffc3962a7739b
+---
+ configure.ac | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/configure.ac b/configure.ac
+index 5c67205..607e97e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -12022,6 +12022,8 @@ if test "$ENABLE_JAVA" != "" -a "$with_junit" != "no"; then
+         if test "$with_hamcrest" = "yes"; then
+             if test -e /usr/share/lib/java/hamcrest.jar; then
+                 HAMCREST_JAR=/usr/share/lib/java/hamcrest.jar
++            elif test -e /usr/share/java/hamcrest/core.jar; then
++                HAMCREST_JAR=/usr/share/java/hamcrest/core.jar
+             else
+                 HAMCREST_JAR=/usr/share/java/hamcrest.jar
+             fi
+-- 
+1.9.3
+
