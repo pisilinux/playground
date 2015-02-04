@@ -1,0 +1,777 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>package-manager-pds</Name>
+        <Homepage>http://www.pardus.org.tr/</Homepage>
+        <Packager>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>PiSi graphical user interface</Summary>
+        <Description>Package Manager is PiSi's easy-to-use graphical user interface.</Description>
+        <Archive sha1sum="30ab0c47fb43503e7ec9ee5b8927af21bad88b1d" type="targz">http://x86-64.comu.edu.tr/lxde/package-manager-3.0.3_20110210.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>docutils</Dependency>
+            <Dependency>PyQt</Dependency>
+            <Dependency>pardus-gnome-settings</Dependency>
+            <Dependency versionFrom="1.2.4">pardus-desktop-services</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="0">desktop.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>package-manager-pds</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="2.4_alpha2">pisi</Dependency>
+            <Dependency>PyQt</Dependency>
+            <Dependency>PyQt-webkit</Dependency>
+            <Dependency>pardus-gnome-settings</Dependency>
+            <Dependency versionFrom="1.2.3">pardus-desktop-services</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/mime</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Conflicts>
+            <Package>package-manager</Package>
+        </Conflicts>
+    </Package>
+
+    <History>
+        <Update release="85">
+            <Date>2011-02-10</Date>
+            <Version>3.0.3_20110210</Version>
+            <Comment>Update. Non-KDE version</Comment>
+            <Name>Alper Tekinalp</Name>
+            <Email>alper.tekinalp@gmail.com</Email>
+        </Update>
+        <Update release="84">
+            <Date>2011-02-01</Date>
+            <Version>3.0.3</Version>
+            <Comment>
+                - New version 3.0.3
+                - Fix changing repository names issue
+                - Take care clear cache method exceptions
+                - Fix update filter types
+                - PM is now capable to save auth/domain required proxy settings
+                - Make "use kde settings" optional, hide the option if kde does not provides proxy settings
+                - Set Application wide proxy settings at start if exists
+                - Draw update type tag next of selected tags
+                - Use pisi.fetcher.Fetcher.test method to test connection with pisi's connection settings
+                - Fix paint issues when repo or package meta data is not reachable
+                - Fix settingsdialog issues
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="83">
+            <Date>2011-01-20</Date>
+            <Version>3.0.2</Version>
+            <Comment>Bug fixed at http://bugs.pardus.org.tr/16337</Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="82">
+            <Date>2011-01-19</Date>
+            <Version>3.0.2</Version>
+            <Comment>Fix progressdialog transition effect</Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="81">
+            <Date>2011-01-17</Date>
+            <Version>3.0.2</Version>
+            <Comment>
+                - New version
+                - Add more desktop files for Install More Software menu items ...
+                - Use KStatusNotifierItem instead of KNotification..
+                - Even internet connection not availabe, user may use local repositories...
+                - Check if repos available before starting to update...
+                - Critical bugfix for Russian translations
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="80">
+            <Date>2011-01-15</Date>
+            <Version>3.0.1</Version>
+            <Comment>
+                - Faster first run
+                - If operation is not started by PackageManager instance do not show the summary dialog about the operation
+                - In details page if package has screenshot and if user click the screenshot it will load the original image in another pds instance
+                - Add command line option to select given component in install section
+                - Do not block the mainloop as default, it will cause to freeze PM itself..
+                - Bug fixed at http://bugs.pardus.org.tr/15998
+                - Use an icon for webdialog close button
+                - Bug fixed at http://bugs.pardus.org.tr/15908
+                - Use TextElide mode as Middle
+                - Add tooltip for each group item
+                - Bug fixed at http://bugs.pardus.org.tr/16178
+                - If all given packages and their dependencies are local packages ignore checking internet connection status
+                - Bug fixed at http://bugs.pardus.org.tr/16164
+                - Ignore .desktop files which has not exec line
+                - Bug fixed at http://bugs.pardus.org.tr/16122
+                - Do not take into account packages which are not in any repository
+                - Force to use enabled button from active style for details button
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="79">
+            <Date>2010-12-30</Date>
+            <Version>3.0.0</Version>
+            <Comment>
+                - Fix webdialog close button issue on other styles
+                - Force to use enabled button from active style for details button
+                - Fix tabbar issue
+                - Bug fixed at http://bugs.pardus.org.tr/15908
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="78">
+            <Date>2010-12-30</Date>
+            <Version>3.0.0</Version>
+            <Comment>
+                - Package Manager v 3.0.0
+                - UI, Cosmetic fixes
+                - Fix System Tray issues
+                - Bug fixed at http://bugs.pardus.org.tr/3894
+                - Bug fixed at http://bugs.pardus.org.tr/15387
+                - Bug fixed at http://bugs.pardus.org.tr/14189
+                - Bug fixed at http://bugs.pardus.org.tr/13950
+                - Bug fixed at http://bugs.pardus.org.tr/15731
+                - Fix i18n issues in pm-install
+                - Check if comar.link is running for pisi before starting the operation
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="77">
+            <Date>2010-12-28</Date>
+            <Version>3.0.0_rc1</Version>
+            <Comment>
+                - New release before final
+                - In upgrade state force to use PackageDB instead of InstallDB
+                - Bug fixed at http://bugs.pardus.org.tr/15292
+                - PM Install rewritten
+                - Fix basketdialog packagelist for new packagelist
+                - Hide message box even mainwindow is not visible
+                - Bug fixed at http://bugs.pardus.org.tr/15283
+                - Code cleanups, translation fixes
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="76">
+            <Date>2010-12-01</Date>
+            <Version>3.0.0_beta2</Version>
+            <Comment>
+                - Bug fixed at http://bugs.pardus.org.tr/15283
+                - Bug fixed at http://bugs.pardus.org.tr/15352
+                - Fix updating repo progress
+                - Fix network check
+                - Fix empty basket issues
+                - Fix search in updates
+                - Fix memory leak
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="75">
+            <Date>2010-11-08</Date>
+            <Version>3.0.0_beta1</Version>
+            <Comment>
+                - Using raster as default graphicssystem
+                - Solid Networking check added
+                - Information message about updates added
+                - Package Re-install option added
+                - Sip issues are fixed
+                - Search mechanism moved in a QThread
+                - QProgressIndicator integrated
+                - Pm-Install fixed
+                - Showing package files support added
+                - Default repo addresses are fixed
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="74">
+            <Date>2010-10-21</Date>
+            <Version>3.0.0_alpha3</Version>
+            <Comment>Fix archive</Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="73">
+            <Date>2010-10-21</Date>
+            <Version>3.0.0_alpha3</Version>
+            <Comment>
+                - Progressbar integration with mainwindow
+                - BasketDialog integration with mainwindow
+                - Search integration with mainwindow
+                - Get detailed package information from appinfo server
+                - Get rating information from appinfo server (stars in package list)
+                - PDS.Gui integration
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="72">
+            <Date>2010-10-12</Date>
+            <Version>3.0.0_alpha2</Version>
+            <Comment>Mass rebuild for Pardus 2011 Beta</Comment>
+            <Name>Fatih Aşıcı</Name>
+            <Email>fatih@pardus.org.tr</Email>
+        </Update>
+        <Update release="71">
+            <Date>2010-09-15</Date>
+            <Version>3.0.0_alpha2</Version>
+            <Comment>
+                - New Interface
+                - Fast GUI animations
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="70">
+            <Date>2010-09-03</Date>
+            <Version>3.0.0_alpha1</Version>
+            <Comment>
+                - Package Manager 3.0 Alpha 1
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="69">
+            <Date>2010-06-03</Date>
+            <Version>2.2.4</Version>
+            <Comment>
+                - Archive update
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="68">
+            <Date>2010-06-03</Date>
+            <Version>2.2.4</Version>
+            <Comment>
+                - New Version
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="67">
+            <Date>2010-06-01</Date>
+            <Version>2.2.3</Version>
+            <Comment>
+                - New Version
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="66">
+            <Date>2010-05-27</Date>
+            <Version>2.2.2</Version>
+            <Comment>
+                - New Version
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="65">
+            <Date>2010-05-24</Date>
+            <Version>2.2.1</Version>
+            <Comment>
+                - New Version
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="64">
+            <Date>2010-05-21</Date>
+            <Version>2.2.0</Version>
+            <Comment>
+                - Fix groupList selection problem
+                - PM Install refactored
+                - Drawing quailty improved
+                - Layout issues are fixed
+                - Update Actions problems solved
+                - Take care of pisi's needService/SystemReboot mechanism
+                - Fix Qt-Only mode translations
+                - Show different warnings for update type
+                - #7785 Add support for setting cache_dir
+                - #7217 Add Hiding support for Tray Icon if there is no updates
+            </Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="63">
+            <Date>2010-05-17</Date>
+            <Version>2.2.0</Version>
+            <Comment>New Package Manager landed</Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="62">
+            <Date>2010-03-26</Date>
+            <Version>1.5.0</Version>
+            <Comment>Clean PolicyKit-kde dependency</Comment>
+            <Name>Ozan Çağlayan</Name>
+            <Email>ozan@pardus.org.tr</Email>
+        </Update>
+        <Update release="61">
+            <Date>2009-12-17</Date>
+            <Version>1.5.0</Version>
+            <Comment>Fix add icon, uncomment notification-daemon dependency</Comment>
+            <Name>Ozan Çağlayan</Name>
+            <Email>ozan@pardus.org.tr</Email>
+        </Update>
+        <Update release="60">
+            <Date>2009-12-08</Date>
+            <Version>1.5.0</Version>
+            <Comment>Keep libtool la files.</Comment>
+            <Name>Ozan Çağlayan</Name>
+            <Email>ozan@pardus.org.tr</Email>
+        </Update>
+       <Update release="59">
+            <Date>2009-11-19</Date>
+            <Version>1.5.0</Version>
+            <Comment>Corporate2 port of package-manager</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+       <Update release="58">
+            <Date>2009-11-15</Date>
+            <Version>1.4.0</Version>
+            <Comment>Cleanup package for Corporate2.</Comment>
+            <Name>Ekin Meroğlu</Name>
+            <Email>ekin@pardus.org.tr</Email>
+        </Update>
+        <Update release="57">
+            <Date>2009-03-30</Date>
+            <Version>1.4.0</Version>
+            <Comment>Change cursor while searching for indacating an operation is going under (#9094).</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="56">
+            <Date>2009-03-09</Date>
+            <Version>1.4.0</Version>
+            <Comment>Refresh search state after basket close (#9368).</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="55">
+            <Date>2009-01-29</Date>
+            <Version>1.4.0</Version>
+            <Comment>Add Deutsch translation fixes (#9088).</Comment>
+            <Name>Ozan Çağlayan</Name>
+            <Email>ozan@pardus.org.tr</Email>
+        </Update>
+        <Update release="54">
+            <Date>2009-01-07</Date>
+            <Version>1.4.0</Version>
+            <Comment>
+              * Swedish and Spanish translation updates
+              * Fix double click pisi package install problem (#8915)
+            </Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="53">
+            <Date>2008-12-02</Date>
+            <Version>1.3.9</Version>
+            <Comment>
+              * Install now fetches all and then installs
+              * Disable cancel button when fetching finished and started instaling
+            </Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="52">
+            <Date>2008-11-25</Date>
+            <Version>1.3.8</Version>
+            <Comment>Pressing cancel search button should reset state.</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="51">
+            <Date>2008-11-23</Date>
+            <Version>1.3.8</Version>
+            <Comment>Use KCursor and fix another cursor problem in BasketDialog.py</Comment>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcen@pardus.org.tr</Email>
+        </Update>
+        <Update release="50">
+            <Date>2008-11-18</Date>
+            <Version>1.3.8</Version>
+            <Comment>
+                - Add package search button and disable auto search on keypress
+                - Added missing runtime dependency PyKDEeXtensions to the package
+            </Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="49">
+            <Date>2008-10-14</Date>
+            <Version>1.3.7</Version>
+            <Comment>Use QCursor instead of KCursor.</Comment>
+            <Name>Gökmen Göksel</Name>
+            <Email>gokmen@pardus.org.tr</Email>
+        </Update>
+        <Update release="48">
+            <Date>2008-10-10</Date>
+            <Version>1.3.7</Version>
+            <Comment>
+                - Fix translation problem in credits sections (Fixes #7599),
+                - Fix the size problem of package icons (Fixes #6015).
+            </Comment>
+            <Name>Ozan Çağlayan</Name>
+            <Email>ozan@pardus.org.tr</Email>
+        </Update>
+        <Update release="47">
+            <Date>2008-08-26</Date>
+            <Version>1.3.7</Version>
+            <Comment>
+                * Swedish translations by Patrik Karlsson
+                * French translations by Amine Chadly
+                * Spanish translations by Klemens Häckel
+            </Comment>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcen@pardus.org.tr</Email>
+        </Update>
+        <Update release="46">
+            <Date>2008-06-30</Date>
+            <Version>1.3.7</Version>
+            <Comment>pm-install fix</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="45">
+            <Date>2008-06-27</Date>
+            <Version>1.3.7</Version>
+            <Comment>Replaced/Obsoleted package upgrade bug fix</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="44">
+            <Date>2008-06-25</Date>
+            <Version>1.3.6</Version>
+            <Comment>New progress dialog, bug fixes</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="43">
+            <Date>2008-06-18</Date>
+            <Version>1.3.5</Version>
+            <Comment>de,es,fr,nl translation updates</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="42">
+            <Date>2008-06-17</Date>
+            <Version>1.3.5</Version>
+            <Comment>New release, proxy and bandwidth config</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="41">
+            <Date>2008-06-09</Date>
+            <Version>1.3.4</Version>
+            <Comment>Bandwidth settings</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="40">
+            <Date>2008-06-06</Date>
+            <Version>1.3.3</Version>
+            <Comment>Fix another shutdown blocking case</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="39">
+            <Date>2008-05-30</Date>
+            <Version>1.3.3</Version>
+            <Comment>Fixed shutdown and only two repo bug, inform for network errors</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="38">
+            <Date>2008-05-11</Date>
+            <Version>1.3.2</Version>
+            <Comment>Fix cancel for comar 2.0 </Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="37">
+            <Date>2008-05-11</Date>
+            <Version>1.3.1</Version>
+            <Comment>Handle repo index errors</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="36">
+            <Date>2008-05-09</Date>
+            <Version>1.3.1</Version>
+            <Comment>Handle wrong password error</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="35">
+            <Date>2008-05-09</Date>
+            <Version>1.3.1</Version>
+            <Comment>Minor bug fix release</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="34">
+            <Date>2008-05-08</Date>
+            <Version>1.3</Version>
+            <Comment>Comar 2.0 changes</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="33">
+            <Date>2007-11-13</Date>
+            <Version>1.1.3</Version>
+            <Comment>Some translation fixes</Comment>
+            <Name>Gökçen Eraslan</Name>
+            <Email>gokcen@pardus.org.tr</Email>
+        </Update>
+        <Update release="32">
+            <Date>2007-07-05</Date>
+            <Version>1.1.3</Version>
+            <Comment>Replaces logic and some fixes</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="31">
+            <Date>2007-06-29</Date>
+            <Version>1.1.2</Version>
+            <Comment>Put it under Core category</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@pardus.org.tr</Email>
+        </Update>
+        <Update release="30">
+            <Date>2007-06-20</Date>
+            <Version>1.1.2</Version>
+            <Comment>po updates and help files</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="29">
+            <Date>2007-06-17</Date>
+            <Version>1.1.2</Version>
+            <Comment>set cache op should not close progress dialog</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="28">
+            <Date>2007-05-31</Date>
+            <Version>1.1.2</Version>
+            <Comment>Cache settings to pisi.conf, d.click unicode path fix</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="27">
+            <Date>2007-05-14</Date>
+            <Version>1.1.1</Version>
+            <Comment>jscript terminate dialog bug, packagecache for search</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="26">
+            <Date>2007-04-06</Date>
+            <Version>1.1</Version>
+            <Comment>reload pisi when its db version is upgraded</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="25">
+            <Date>2007-03-08</Date>
+            <Version>1.1</Version>
+            <Comment>Use pisi for search</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="24">
+            <Date>2007-02-19</Date>
+            <Version>1.1</Version>
+            <Comment>Fix wrong total package number problem when conflicts exist</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="23">
+            <Date>2006-12-19</Date>
+            <Version>1.1</Version>
+            <Comment>Locale bug fix where no locale info in kdeglobals</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="22">
+            <Date>2006-12-12</Date>
+            <Version>1.1</Version>
+            <Comment>Stable release</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="21">
+            <Date>2006-12-09</Date>
+            <Version>1.1_rc6</Version>
+            <Comment>Install pm-install</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@pardus.org.tr</Email>
+        </Update>
+        <Update release="20">
+            <Date>2006-12-08</Date>
+            <Version>1.1_rc6</Version>
+            <Comment>Install package from desktop, cache not used by default</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="19">
+            <Date>2006-12-01</Date>
+            <Version>1.1_rc5</Version>
+            <Comment>Package cache management, pisi.api locale setup, other bug fixes</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="18">
+            <Date>2006-11-25</Date>
+            <Version>1.1_rc4</Version>
+            <Comment>basket close seg.fault fix</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="17">
+            <Date>2006-11-24</Date>
+            <Version>1.1_rc4</Version>
+            <Comment>the tray</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="16">
+            <Date>2006-11-10</Date>
+            <Version>1.1_rc3</Version>
+            <Comment>wrong progress when there is a conflict</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="15">
+            <Date>2006-11-10</Date>
+            <Version>1.1_rc3</Version>
+            <Comment>mostly functional small fixes</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="14">
+            <Date>2006-11-07</Date>
+            <Version>1.1_rc2</Version>
+            <Comment>pisi, comar upgrade within pm fixes, component icons</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="13">
+            <Date>2006-11-02</Date>
+            <Version>1.1_rc1</Version>
+            <Comment>comar reconnect bug fix</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="12">
+            <Date>2006-11-02</Date>
+            <Version>1.1_rc1</Version>
+            <Comment>Bug fix release</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="11">
+            <Date>2006-10-29</Date>
+            <Version>1.1_beta7</Version>
+            <Comment>Cancel bug fix with new comar api usage.</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="10">
+            <Date>2006-10-29</Date>
+            <Version>1.1_beta7</Version>
+            <Comment>Cancel mechanism and bugfixes.</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="9">
+            <Date>2006-10-25</Date>
+            <Version>1.1_beta6</Version>
+            <Comment>Revert unicode patch, broken one now in Python</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@pardus.org.tr</Email>
+        </Update>
+        <Update release="8">
+            <Date>2006-10-25</Date>
+            <Version>1.1_beta6</Version>
+            <Comment>search fix</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="7">
+            <Date>2006-10-24</Date>
+            <Version>1.1_beta6</Version>
+            <Comment>Backport unicode patch from SVN to match with Python</Comment>
+            <Name>S.Çağlar Onur</Name>
+            <Email>caglar@pardus.org.tr</Email>
+        </Update>
+        <Update release="6">
+            <Date>2006-10-19</Date>
+            <Version>1.1_beta6</Version>
+            <Comment>initial basket feature, bug fixes</Comment>
+            <Name>Faik Uygur</Name>
+            <Email>faik@pardus.org.tr</Email>
+        </Update>
+        <Update release="5">
+            <Date>2006-07-11</Date>
+            <Version>1.1_beta5</Version>
+            <Comment>Make initial repo check better</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@pardus.org.tr</Email>
+        </Update>
+        <Update release="4">
+            <Date>2006-07-10</Date>
+            <Version>1.1_beta5</Version>
+            <Comment>New tarball</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@pardus.org.tr</Email>
+        </Update>
+        <Update release="3">
+            <Date>2006-07-07</Date>
+            <Version>1.1_beta4</Version>
+            <Comment>New tarball</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@pardus.org.tr</Email>
+        </Update>
+        <Update release="2">
+            <Date>2006-07-07</Date>
+            <Version>1.1_rc1</Version>
+            <Comment>New tarball</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@pardus.org.tr</Email>
+        </Update>
+        <Update release="1">
+            <Date>2006-07-06</Date>
+            <Version>1.1_rc1</Version>
+            <Comment>First release.</Comment>
+            <Name>İsmail Dönmez</Name>
+            <Email>ismail@pardus.org.tr</Email>
+        </Update>
+    </History>
+</PISI>
