@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>qbittorrent-git</Name>
+        <Homepage>http://www.qbittorrent.org</Homepage>
+        <Packager>
+            <Name>Ekin Dursun</Name>
+            <Email>ekin.dursun@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <Icon>qbittorrent</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Qt4 based BitTorrent client</Summary>
+        <Description>qbittorrent is a BitTorrent client using the libtorrent library.</Description>
+        <Archive sha1sum="ba7974ff8651efb5eaf7f33bb515047744111740" type="zip">https://github.com/qbittorrent/qBittorrent/archive/master.zip</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>libtorrent-devel</Dependency>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>geoip-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>qbittorrent-git</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>libtorrent</Dependency>
+            <Dependency>boost</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>geoip</Dependency>
+        </RuntimeDependencies>
+	<Conflicts>
+	    <Package>qbittorrent</Package>
+	</Conflicts>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-02-07</Date>
+            <Version>2463</Version>
+            <Comment>First release</Comment>
+            <Name>Ekin Dursun</Name>
+            <Email>ekin.dursun@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
