@@ -9,11 +9,8 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    cmaketools.configure("-DCMAKE_INSTALL_LIBDIR=lib \
-                          -DJPEG_FACTORY=ON \
-                          -DENABLE_TESTS=OFF \
-                          -DSIMGEAR_SHARED=ON \
-                          -DSYSTEM_EXPAT=ON")
+    cmaketools.configure("-DCMAKE_INSTALL_PREFIX=/usr \
+                          -DCMAKE_INSTALL_LIBDIR=lib")
 
 def build():
     cmaketools.make()
