@@ -11,14 +11,19 @@ from pisi.actionsapi import get
 
 
 def setup():
-  
+    shelltools.makedirs("build")
+    shelltools.cd("build")
+    shelltools.cd("..")
     cmaketools.configure('-DCMAKE_BUILD_TYPE=Release \
                           -DCMAKE_INSTALL_PREFIX=/usr \
                           -DPHONON_BUILD_PHONON4QT5=ON \
                           -DPHONON_INSTALL_QT_EXTENSIONS_INTO_SYSTEM_QT=ON \
+                          -DPHONON_BUILD_PHONON4QT5=ON \
                           -DQT_QMAKE_EXECUTABLE=/usr/lib/qt5/bin/qmake \
                           -DCMAKE_INSTALL_LIBDIR=lib \
                           -DCMAKE_SKIP_RPATH:BOOL=YES')
+def build():    
+    cmaketools.make()
 
 def install():
     cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
