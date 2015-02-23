@@ -2,7 +2,7 @@
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
-        <Name>phonon-qt5</Name>
+        <Name>qt5-phonon</Name>
         <Homepage>http://phonon.kde.org</Homepage>
         <Packager>
             <Name>PisiLinux Community</Name>
@@ -26,7 +26,7 @@
     </Source>
 
     <Package>
-        <Name>phonon-qt5</Name>
+        <Name>qt5-phonon</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
 	    <Dependency>qt5-tools</Dependency>
@@ -40,10 +40,10 @@
     </Package>
 
     <Package>
-        <Name>phonon-qt5-devel</Name>
+        <Name>qt5phonon-devel</Name>
         <Summary>Development files for phonon-qt5</Summary>
         <RuntimeDependencies>
-            <Dependency release="current">phonon-qt5</Dependency>
+            <Dependency release="current">qt5-phonon</Dependency>
             <Dependency>qt5-base-devel</Dependency>
         </RuntimeDependencies>
         <Files>
