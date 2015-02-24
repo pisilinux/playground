@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>qt5-polkit</Name>
+        <Homepage>http://en.wordpress.com/tag/polkit-qt-1/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>Qt5-based API for PolKit</Summary>
+        <Description>polkit-qt5 is a library that lets developers use the PolKit API through a nice Qt5-styled API. It is mainly a wrapper around QAction and QAbstractButton that lets you integrate those two component easily with PolicyKit.</Description>
+        <Archive sha1sum="042b8a42e88bd578c27600e9b70c4e142a39da91" type="tarbz2">mirrors://kde/stable/apps/KDE4.x/admin/polkit-qt-1-0.112.0.tar.bz2</Archive>
+        <BuildDependencies>
+	    <Dependency>qt5-base-devel</Dependency>
+            <Dependency>automoc4</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">polkit-qt-0.95.1-install-cmake-find.patch</Patch>
+	    <Patch level="1">do-not-use-global-static-systembus-instance.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>qt5-polkit</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>qt5-polkit-devel</Name>
+        <Summary>Development files for qt5-polkit</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5-polkit</Dependency>
+            <Dependency>qt5-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/share/cmake</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-09-21</Date>
+            <Version>0.112.0</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
