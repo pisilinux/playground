@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-kapidox</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <Summary>KDE5 Frameworks API documentation tools.</Summary>
+        <Description>KDE5 Frameworks API documentation tools.</Description>
+        <Archive sha1sum="165fb954ad7dcb4a44db9a9847a4643ebf497d67" type="tarxz">mirrors://kde/stable/frameworks/5.7/kapidox-5.7.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>python-Jinja2</Dependency>
+	    <Dependency>python-PyYAML</Dependency>
+	    <Dependency>qt5-base-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-kapidox</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-02-25</Date>
+            <Version>5.7.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>        
+    </History>
+</PISI>
