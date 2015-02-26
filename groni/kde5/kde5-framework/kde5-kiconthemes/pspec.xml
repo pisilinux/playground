@@ -1,0 +1,81 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-kiconthemes</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>KDE5 icon utilities</Summary>
+        <Description>This library contains classes to improve the handling of icons in applications using the KDE Frameworks.</Description>
+        <Archive sha1sum="7b37327314cfbbb3a9b7d03c2d4d8eb14f629dfe" type="tarxz">mirrors://kde/stable/frameworks/5.7/kiconthemes-5.7.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-svg-devel</Dependency>    
+	    <Dependency versionFrom="5.7.0">kde5-kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kitemviews-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-kiconthemes</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+	    <Dependency>qt5-svg</Dependency>
+            <Dependency versionFrom="5.7.0">kde5-kconfigwidgets</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kitemviews</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>kde5-kiconthemes-devel</Name>
+	<Summary>Development files for kiconthemes</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">kde5-kiconthemes</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-02-26</Date>
+            <Version>5.7.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>        
+    </History>
+</PISI>
