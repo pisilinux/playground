@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-kio</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>Network transparent access to files and data</Summary>
+        <Description>This framework implements almost all the file management functions you will ever need. </Description>
+        <Archive sha1sum="9897aafc8c6e27f6e4d3112cead3db83f903897b" type="tarxz">mirrors://kde/stable/frameworks/5.7/kio-5.7.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>acl-devel</Dependency>	   
+	    <Dependency>attr-devel</Dependency>
+	    <Dependency>openssl-devel</Dependency>
+	    <Dependency>mit-kerberos</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-karchive-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kbookmarks-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcompletion-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcrash-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdoctools-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kguiaddons-devel</Dependency>	   
+	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kitemviews-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kjobwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-knotifications-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ktextwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwallet-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kxmlgui-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-solid-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+	<Patches>
+<!-- 	  <Patch level="1">0001-Fix-thumbnails-for-mimetype-groups.patch</Patch> -->
+<!-- 	  <Patch level="1">0002-Fix-relative-paths-being-turned-into-http-urls-by-fr.patch</Patch> -->
+	</Patches>
+    </Source>
+
+    <Package>
+        <Name>kde5-kio</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>acl</Dependency>	   
+	    <Dependency>attr</Dependency>
+	    <Dependency>openssl</Dependency>
+	    <Dependency>mit-kerberos</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-karchive</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kbookmarks</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcompletion</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfigwidgets</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcrash</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdoctools</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kguiaddons</Dependency>	   
+	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kiconthemes</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kitemviews</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kjobwidgets</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-knotifications</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ktextwidgets</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwallet</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kxmlgui</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-solid</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc/xdg</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="executable">/usr/lib/libexec</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="doc">/usr/share/man</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>kde5-kio-devel</Name>
+	<Summary>Development files for kio</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-base-devel</Dependency>
+            <Dependency release="current">kde5-kio</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kbookmarks-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcompletion-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kjobwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kxmlgui-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-solid-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>	    
+            <Path fileType="data">/usr/lib/cmake</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-02-27</Date>
+            <Version>5.7.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>Ergün Salman</Name>
+            <Email>Poyraz76@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>        
+    </History>
+</PISI>
