@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-kdesignerplugin</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>QT Designer integration for KDE5 Frameworks widgets</Summary>
+        <Description>This framework provides plugins for Qt Designer that allow it to display the widgets provided by various KDE frameworks, as well as a utility (kgendesignerplugin) that can be used to generate other such plugins from ini-style description files.</Description>
+        <Archive sha1sum="af7203acced37c08de79e196632c83fc67c68d14" type="tarxz">mirrors://kde/stable/frameworks/5.7/kdesignerplugin-5.7.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kitemviews-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kbookmarks-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcompletion-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-sonnet-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdoctools-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kguiaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kiconthemes-devel</Dependency>	   
+	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kplotting-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ktextwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kxmlgui-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-kdesignerplugin</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kitemviews</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-sonnet</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kbookmarks</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcompletion</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfigwidgets</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdoctools</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kguiaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kiconthemes</Dependency>	   
+	    <Dependency versionFrom="5.7.0">kde5-kio</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kplotting</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ktextwidgets</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kxmlgui</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="doc">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-03-02</Date>
+            <Version>5.7.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>        
+    </History>
+</PISI>
