@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-kross</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <Summary>KDE5 application scripting helper</Summary>
+        <Description>Kross is a scripting bridge to embed scripting functionality into an application. It supports QtScript as a scripting interpreter backend.</Description>
+        <Archive sha1sum="c796b429bc3a7033be2632a847bd1c2bdc81422b" type="tarxz">mirrors://kde/stable/frameworks/5.7/portingAids/kross-5.7.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+	    <Dependency>qt5-script-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdoctools-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcompletion-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kparts-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kxmlgui-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-kross</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+	    <Dependency>qt5-script</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdoctools</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcompletion</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kiconthemes</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kio</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kparts</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kxmlgui</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>kde5-kross-devel</Name>
+	<Summary>Development files for kross</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-base-devel</Dependency>
+            <Dependency release="current">kde5-kross</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-03-04</Date>
+            <Version>5.7.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>        
+    </History>
+</PISI>
