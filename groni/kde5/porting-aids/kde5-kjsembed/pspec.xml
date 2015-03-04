@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-kjsembed</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <Summary>JavaScript support for HTML rendering engine on KDE5</Summary>
+        <Description>KHTML is a web rendering engine, based on the KParts technology and using KJS for JavaScript support.</Description>
+        <Archive sha1sum="bc34a4bb094a43880edba92e6b870580e545714b" type="tarxz">mirrors://kde/stable/frameworks/5.7/portingAids/kjsembed-5.7.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+	    <Dependency>qt5-svg-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdoctools-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kjs-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-kjsembed</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+	    <Dependency>qt5-svg</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdoctools</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kjs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>kde5-kjsembed-devel</Name>
+	<Summary>Development files for kjsembed</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-base-devel</Dependency>
+            <Dependency release="current">kde5-kjsembed</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-03-04</Date>
+            <Version>5.7.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>        
+    </History>
+</PISI>
