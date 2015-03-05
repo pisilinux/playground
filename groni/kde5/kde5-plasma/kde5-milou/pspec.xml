@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-milou</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>KDedicated search application built on top of Baloo</Summary>
+        <Description>Dedicated search application built on top of Baloo</Description>
+        <Archive sha1sum="94c9f8ccf1eaeec3a918d83596f1187823c26c05" type="tarxz">mirrors://kde/stable/plasma/5.2.1/milou-5.2.1.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+	    <Dependency>qt5-declarative</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdeclarative-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-krunner-devel</Dependency>
+	    <Dependency versionFrome="5.7.0">kde5-plasma-framework-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>	    
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-milou</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+	    <Dependency>qt5-declarative</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdeclarative</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-krunner</Dependency>
+	    <Dependency versionFrome="5.7.0">kde5-plasma-framework</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>	    
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-03-05</Date>
+            <Version>5.2.1</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>
