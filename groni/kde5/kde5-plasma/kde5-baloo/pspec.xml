@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-baloo</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>KDE 5 Framework for searching and managing metadata</Summary>
+        <Description>Baloo is a framework for searching and managing metada</Description>
+        <Archive sha1sum="6c5431b8663d9931360293ab3265ffe35dcdd644" type="tarxz">mirrors://kde/stable/plasma/5.2.1/baloo-5.6.1.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+	    <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>attr-devel</Dependency>
+            <Dependency>xapian-core-devel</Dependency>    
+	    <Dependency versionFrom="5.7.0">kde5-kauth-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcmutils-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcrash-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdelibs4-support-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kidletime-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-krunner-devel</Dependency>   
+	    <Dependency versionFrom="5.7.0">kde5-solid-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kitemmodels-devel</Dependency>
+	    <Dependency versionFrom="5.6.1">kde5-kfilemetadata-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>	    
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-baloo</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+	    <Dependency>qt5-declarative</Dependency>
+            <Dependency>attr</Dependency>
+            <Dependency>xapian-core</Dependency>    
+	    <Dependency versionFrom="5.7.0">kde5-kauth</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcmutils</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcrash</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kitemmodels</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdelibs4-support</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kidletime</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kio</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-krunner</Dependency>	   
+	    <Dependency versionFrom="5.7.0">kde5-solid</Dependency>
+	    <Dependency versionFrom="5.6.1">kde5-kfilemetadata</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Replaces>
+          <Package>baloo</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>baloo</Package>
+        </Conflicts> 
+    </Package>
+    
+    <Package>
+        <Name>kde5-baloo-devel</Name>
+	<Summary>Development files for baloo5</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-base-devel</Dependency>
+            <Dependency release="current">kde5-baloo</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+        <Replaces>
+          <Package>baloo-devel</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>baloo-devel</Package>
+        </Conflicts> 
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-03-05</Date>
+            <Version>5.6.1</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>
