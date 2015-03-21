@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-kdewebkit</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>KDE5 WebKit integration</Summary>
+        <Description>KdeWebkit provides KDE integration of the QtWebKit library.</Description>
+        <Archive sha1sum="1055d9683f318d3446b0ff10e6372ada37ee03d6" type="tarxz">mirrors://kde/stable/frameworks/5.7/kdewebkit-5.7.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>	    
+	    <Dependency versionFrom="5.7.0">kde5-kbookmarks-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcompletion-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kguiaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>	   
+	    <Dependency versionFrom="5.7.0">kde5-kitemviews-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-knotifications-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kparts-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ktextwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwallet-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kxmlgui-devel</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-solid-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-kdewebkit</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>    
+	    <Dependency versionFrom="5.7.0">kde5-kbookmarks</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcompletion</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kconfigwidgets</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kguiaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kiconthemes</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kio</Dependency>	   
+	    <Dependency versionFrom="5.7.0">kde5-kitemviews</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-knotifications</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kparts</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-ktextwidgets</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwallet</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-kxmlgui</Dependency>
+	    <Dependency versionFrom="5.7.0">kde5-solid</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="data">/usr/mkspecs/modules/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>kde5-kdewebkit-devel</Name>
+	<Summary>Development files for kdewebkit</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-base-devel</Dependency>
+            <Dependency release="current">kde5-kdewebkit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-02-27</Date>
+            <Version>5.7.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>        
+    </History>
+</PISI>
