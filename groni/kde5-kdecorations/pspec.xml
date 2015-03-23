@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-kdecorations</Name>
+        <Homepage>https://projects.kde.org/projects/kde/workspace/kdecoration</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv3</License>
+        <IsA>library</IsA>
+        <Summary>Plugin based library to create window decorations</Summary>
+        <Description>Plugin based library to create window decorations</Description>
+        <Archive sha1sum="961451c45dd2d7fa1e1e5359bc6ee2c6318e5536" type="binary">http://download.kde.org/stable/plasma/5.2.1/kdecoration-5.2.1.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>            
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-kdecorations</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>            
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/cmake</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/doc</Path>            
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-03-22</Date>
+            <Version>5.2.1</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
