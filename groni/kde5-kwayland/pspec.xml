@@ -15,14 +15,16 @@
         <Archive sha1sum="b0d38691cc5c45f8f0a4b89801489dbd82eecd11" type="binary">http://download.kde.org/stable/plasma/5.2.1/kwayland-5.2.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
-            <Dependency>extra-cmake-modules</Dependency>            
+            <Dependency>extra-cmake-modules</Dependency>
+	    <Dependency>wayland-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>kde5-kwayland</Name>
         <RuntimeDependencies>
-            <Dependency>qt5-base</Dependency>            
+            <Dependency>qt5-base</Dependency>
+	    <Dependency>wayland</Dependency> 
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib/cmake</Path>

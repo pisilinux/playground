@@ -12,6 +12,7 @@ from pisi.actionsapi import get
 def setup():
     shelltools.makedirs("build")
     shelltools.cd("build")
+    #shelltools.cd(".")
     cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
                           -DCMAKE_INSTALL_PREFIX=/usr \
                           -DLIB_INSTALL_DIR=lib \
@@ -19,10 +20,11 @@ def setup():
 
 def build():
     shelltools.cd("build")
+    shelltools.cd("..")
     cmaketools.make()
 
 def install():
     shelltools.cd("build")
     cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
-    shelltools.cd("..")
+    #shelltools.cd("..")
     pisitools.dodoc("COPYING.LIB")
