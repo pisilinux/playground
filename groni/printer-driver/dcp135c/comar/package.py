@@ -4,9 +4,9 @@
 import os
 
 def postInstall(fromVersion, fromRelease, toVersion, toRelease):
-    if not os.path.exists("/usr/share/cups/model/brdcp135c.ppd"):
-        os.system("/usr/local/Brother/Printer/dcp135c/cupswrapper/cupswrapperdcp135c -i")
+    if not os.path.exists("/usr/local/Brother/cupswrapper/cupswrapperDCP7030-2.0.2"):
+        os.system("/usr/local/Brother/cupswrapper/cupswrapperDCP7030-2.0.2 -i")
 
 def preRemove():
-    if os.path.exists("/usr/share/cups/model/brdcp135c.ppd"):
-        os.system("/usr/local/Brother/Printer/dcp135c/cupswrapper/cupswrapperdcp135c -e")
+    if os.path.exists("/usr/local/Brother/cupswrapper/cupswrapperDCP7030-2.0.2"):
+        os.system("/usr/local/Brother/cupswrapper/cupswrapperDCP7030-2.0.2 -e")

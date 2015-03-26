@@ -17,4 +17,4 @@ def build():
 def install():
     cmaketools.install()
 
-    pisitools.dodoc("README.txt", "TODO", "license.txt", "MANUAL")
+    pisitools.dodoc("README.txt", "license.txt", "MANUAL")

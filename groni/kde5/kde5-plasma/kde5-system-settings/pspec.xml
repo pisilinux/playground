@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-system-settings</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>KDE5 system settings manager</Summary>
+        <Description>System-settings is a control panel for KDE5 Plasma</Description>
+        <Archive sha1sum="df5db5df20db3d102e3a6844a340f4c6e9ca262f" type="tarxz">http://download.kde.org/stable/plasma/5.2.1/systemsettings-5.2.1.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+	    <Dependency>kde5-kauth-devel</Dependency>
+	    <Dependency>kde5-kcompletion-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-kconfigwidgets-devel</Dependency>
+	    <Dependency>kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency>kde5-kcmutils-devel</Dependency>
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kdbusaddons-devel</Dependency>
+	    <Dependency>kde5-kdelibs4-support-devel</Dependency>
+	    <Dependency>kde5-khtml-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kiconthemes-devel</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
+	    <Dependency>kde5-kitemviews-devel</Dependency> 
+	    <Dependency>kde5-kservice-devel</Dependency> 
+	    <Dependency>kde5-kwindowsystem-devel</Dependency> 
+	    <Dependency>kde5-kxmlgui-devel</Dependency>    
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-system-settings</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+	    <Dependency>kde5-kauth</Dependency>
+	    <Dependency>kde5-kcompletion</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kconfigwidgets</Dependency>
+	    <Dependency>kde5-kwidgetsaddons</Dependency>
+	    <Dependency>kde5-kcmutils</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kdbusaddons</Dependency>
+	    <Dependency>kde5-kdelibs4-support</Dependency>
+	    <Dependency>kde5-khtml</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
+	    <Dependency>kde5-kiconthemes</Dependency>
+	    <Dependency>kde5-kio</Dependency>
+	    <Dependency>kde5-kitemviews</Dependency>	 
+	    <Dependency>kde5-kservice</Dependency>	 
+	    <Dependency>kde5-kwindowsystem</Dependency>	 
+	    <Dependency>kde5-kxmlgui</Dependency>	
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>kde5-system-settings-devel</Name>
+	<Summary>Development files for system-settings</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-base-devel</Dependency>
+            <Dependency release="current">kde5-system-settings</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-03-23</Date>
+            <Version>5.2.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.0.2</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>        
+    </History>
+</PISI>
