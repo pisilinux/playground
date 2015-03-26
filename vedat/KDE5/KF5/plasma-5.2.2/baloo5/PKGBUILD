@@ -1,0 +1,42 @@
+
+# include global config
+source ../_buildscripts/${current_repo}-${_arch}-cfg.conf
+
+pkgname=baloo
+#pkgver=${_plasmaver}
+pkgver=5.6.1
+pkgrel=2
+pkgdesc="A framework for searching and managing metadata"
+arch=('x86_64')
+url='https://projects.kde.org/projects/kde/kdelibs/baloo'
+license=('LGPL')
+depends=('xapian-core' 'akonadi' 'kfilemetadata' 'ki18n' 'kconfig' 'kidletime' 'kauth' 'kcrash' 'solid' 'kio'
+         'kdelibs4support') # 'kf5-kdepimlibs')
+makedepends=('extra-cmake-modules' 'kdoctools')
+conflicts=('kf5-baloo')
+replaces=('kf5-baloo')
+provides=('kf5-baloo')
+source=("http://download.kde.org/stable/plasma/$pkgver/baloo-$pkgver.tar.xz")
+#md5sums=(`grep ${_pkgname}-$_plasmaver.tar.xz ../kf5.md5 | cut -d" " -f1`)
+md5sums=('df0d96ef85bfe46bceab6fdf796300f8')
+
+build() {
+  mkdir -p build
+  cd build
+  
+  cmake ../${pkgname}-$pkgver \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DSYSCONF_INSTALL_DIR=/etc \
+    -DPLUGIN_INSTALL_DIR=/usr/lib/qt5/plugins \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+    -DLIB_INSTALL_DIR=lib \
+    -DLIBEXEC_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+
+  make DESTDIR=${pkgdir} install
+}

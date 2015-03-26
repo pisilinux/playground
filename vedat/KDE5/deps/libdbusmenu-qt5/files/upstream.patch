@@ -1,0 +1,1302 @@
+diff -Nuar libdbusmenu-qt-0.9.2/CMakeLists.txt libdbusmenu-qt-0.9.3/CMakeLists.txt
+--- libdbusmenu-qt-0.9.2/CMakeLists.txt	2012-03-29 18:47:52.000000000 +0300
++++ libdbusmenu-qt-0.9.3/CMakeLists.txt	2015-03-11 23:08:15.000000000 +0200
+@@ -1,5 +1,5 @@
+ project(dbusmenu-qt)
+-cmake_minimum_required(VERSION 2.6.0)
++cmake_minimum_required(VERSION 2.8.11)
+ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules")
+ 
+ # Build options
+@@ -24,8 +24,47 @@
+ 
+ set(dbusmenu_qt_lib_VERSION ${dbusmenu_qt_lib_SOVERSION}.${dbusmenu_qt_lib_API_VERSION}.${dbusmenu_qt_lib_PATCH_VERSION})
+ 
++# Check if we want to explicitly select the Qt version to be used or autodetect
++if (NOT USE_QT4 AND NOT USE_QT5)
++    # Autodetect, prefering Qt5
++    message(STATUS "Autodetecting Qt version to use")
++    find_package(Qt5Widgets QUIET)
++    if (Qt5Widgets_FOUND)
++        set(USE_QT5 TRUE)
++    endif()
++endif()
++
++# Detect for which Qt version we're building
++if (USE_QT5)
++    find_package(Qt5Widgets REQUIRED)
++    find_package(Qt5DBus REQUIRED)
++    include_directories(${Qt5Widgets_INCLUDE_DIRS} ${Qt5DBus_INCLUDE_DIRS})
++    find_package(Qt5Core REQUIRED)
++    set(CMAKE_AUTOMOC ON)
++    set(CMAKE_AUTOMOC_RELAXED_MODE ON)
++    set(CMAKE_POSITION_INDEPENDENT_CODE ON)
++
++    set(QT_SUFFIX "qt5")
++else()
++    find_package(Qt4 REQUIRED)
++    include_directories(
++      ${QT_INCLUDE_DIR}
++      ${QT_QTCORE_INCLUDE_DIR}
++      ${QT_QTDBUS_INCLUDE_DIR}
++      ${QT_QTGUI_INCLUDE_DIR}
++      )
++
++    set(QT_SUFFIX "qt")
++endif()
++
++include(CMakePackageConfigHelpers)
++include(GNUInstallDirs)
++set(LIB_DESTINATION "${CMAKE_INSTALL_LIBDIR}")
++set(CMAKECONFIG_INSTALL_DIR "${LIB_DESTINATION}/cmake/dbusmenu-${QT_SUFFIX}")
++set(INCLUDE_INSTALL_DIR "include/dbusmenu-${QT_SUFFIX}")
++
+ # dist targets
+-set(ARCHIVE_NAME libdbusmenu-qt-${dbusmenu_qt_VERSION})
++set(ARCHIVE_NAME libdbusmenu-${QT_SUFFIX}-${dbusmenu_qt_VERSION})
+ add_custom_target(dist
+     COMMAND bzr export --root=${ARCHIVE_NAME} ${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}.tar.bz2
+     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+@@ -44,23 +83,16 @@
+     )
+ add_dependencies(distcheck dist)
+ 
+-find_package(Qt4 REQUIRED)
++configure_file(dbusmenu-qt.pc.in ${CMAKE_BINARY_DIR}/dbusmenu-${QT_SUFFIX}.pc @ONLY)
+ 
+-include_directories(
+-    ${QT_INCLUDE_DIR}
+-    ${QT_QTCORE_INCLUDE_DIR}
+-    ${QT_QTDBUS_INCLUDE_DIR}
+-    ${QT_QTGUI_INCLUDE_DIR}
+-    )
+-
+-configure_file(dbusmenu-qt.pc.in ${CMAKE_BINARY_DIR}/dbusmenu-qt.pc @ONLY)
+-
+-install(FILES ${CMAKE_BINARY_DIR}/dbusmenu-qt.pc
+-    DESTINATION lib${LIB_SUFFIX}/pkgconfig
++install(FILES ${CMAKE_BINARY_DIR}/dbusmenu-${QT_SUFFIX}.pc
++        DESTINATION ${LIB_DESTINATION}/pkgconfig
+     )
+ 
+ add_subdirectory(src)
++if (NOT USE_QT5) # TODO port tests to Qt5
+ add_subdirectory(tests)
++endif()
+ add_subdirectory(tools)
+ 
+ if(WITH_DOC)
+@@ -71,6 +103,28 @@
+         )
+ 
+     install(DIRECTORY ${CMAKE_BINARY_DIR}/html/
+-        DESTINATION share/doc/dbusmenu-qt
++        DESTINATION share/doc/libdbusmenu-${QT_SUFFIX}-doc
+         )
+ endif(WITH_DOC)
++
++# Generate dbusmenu-qt-config* files
++configure_package_config_file(
++    dbusmenu-qt-config.cmake.in
++    ${CMAKE_BINARY_DIR}/dbusmenu-${QT_SUFFIX}-config.cmake
++    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
++    PATH_VARS INCLUDE_INSTALL_DIR
++    )
++
++write_basic_package_version_file(
++    ${CMAKE_BINARY_DIR}/dbusmenu-${QT_SUFFIX}-config-version.cmake
++    VERSION ${dbusmenu_qt_VERSION}
++    COMPATIBILITY SameMajorVersion
++    )
++
++# Install dbusmenu-qt-config* files
++install(FILES
++    ${CMAKE_BINARY_DIR}/dbusmenu-${QT_SUFFIX}-config.cmake
++    ${CMAKE_BINARY_DIR}/dbusmenu-${QT_SUFFIX}-config-version.cmake
++    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
++    COMPONENT Devel
++    )
+diff -Nuar libdbusmenu-qt-0.9.2/dbusmenu-qt-config.cmake.in libdbusmenu-qt-0.9.3/dbusmenu-qt-config.cmake.in
+--- libdbusmenu-qt-0.9.2/dbusmenu-qt-config.cmake.in	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/dbusmenu-qt-config.cmake.in	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1,5 @@
++@PACKAGE_INIT@
++
++include("${CMAKE_CURRENT_LIST_DIR}/dbusmenu-@QT_SUFFIX@-targets.cmake")
++
++set_and_check(dbusmenu-@QT_SUFFIX@_INCLUDE_DIRS "@PACKAGE_INCLUDE_INSTALL_DIR@")
+diff -Nuar libdbusmenu-qt-0.9.2/dbusmenu-qt.pc.in libdbusmenu-qt-0.9.3/dbusmenu-qt.pc.in
+--- libdbusmenu-qt-0.9.2/dbusmenu-qt.pc.in	2012-03-29 18:47:52.000000000 +0300
++++ libdbusmenu-qt-0.9.3/dbusmenu-qt.pc.in	2015-03-11 23:08:15.000000000 +0200
+@@ -1,10 +1,10 @@
+ prefix=@CMAKE_INSTALL_PREFIX@
+ exec_prefix=@CMAKE_INSTALL_PREFIX@
+ libdir=@CMAKE_INSTALL_PREFIX@/lib
+-includedir=@CMAKE_INSTALL_PREFIX@/include/dbusmenu-qt
++includedir=@CMAKE_INSTALL_PREFIX@/include/dbusmenu-@QT_SUFFIX@
+ 
+-Name: libdbusmenu-qt
++Name: libdbusmenu-@QT_SUFFIX@
+ Description: Qt implementation of dbusmenu spec
+ Version: @dbusmenu_qt_VERSION@
+-Libs: -L${libdir} -ldbusmenu-qt
++Libs: -L${libdir} -ldbusmenu-@QT_SUFFIX@
+ Cflags: -I${includedir}
+diff -Nuar libdbusmenu-qt-0.9.2/debian/changelog libdbusmenu-qt-0.9.3/debian/changelog
+--- libdbusmenu-qt-0.9.2/debian/changelog	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/changelog	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1,472 @@
++libdbusmenu-qt (0.9.3+14.10.20140619-0ubuntu1) utopic; urgency=low
++
++  [ Aurélien Gâteau ]
++  * Fix build with Clang
++  * With this change, users of dbusmenu-qt no longer need to call
++    include_directories(${dbusmenu-qt5_INCLUDE_DIRS}). Simply adding
++    dbusmenu-qt5 to the target_link_libraries() call takes care of
++    defining the include directory. This requires CMake 2.8.11, so I
++    bumped the minimum version numbers accordingly.
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 19 Jun 2014 09:07:18 +0000
++
++libdbusmenu-qt (0.9.3+14.04.20140314-0ubuntu1) trusty; urgency=medium
++
++  [ Pete Woods ]
++  * Add importer parameter to allow control over DBus behavior.
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 14 Mar 2014 16:41:54 +0000
++
++libdbusmenu-qt (0.9.2+14.04.20140305-0ubuntu1) trusty; urgency=low
++
++  * New rebuild forced
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 05 Mar 2014 09:29:14 +0000
++
++libdbusmenu-qt (0.9.2+14.04.20140218.2-0ubuntu1) trusty; urgency=low
++
++  [ Pete Woods ]
++  * Remove busy watcher (LP: #1280372)
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 18 Feb 2014 14:33:02 +0000
++
++libdbusmenu-qt (0.9.2+14.04.20140217.1-0ubuntu1) trusty; urgency=low
++
++  [ Pete Woods ]
++  * Fix compile warning when building with -Wpedantic (extra semicolon).
++
++  [ Ted Gould ]
++  * Flushing trunk with a release
++
++  [ Timo Jyrinki ]
++  * Drop reference to libqt5core5 which will get renamed. (LP:
++    #1271058). (LP: #1271058)
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 17 Feb 2014 18:03:31 +0000
++
++libdbusmenu-qt (0.9.2+14.04.20131209-0ubuntu1) trusty; urgency=low
++
++  [ Marcus Tomlinson ]
++  * When adding a new submenu action, refresh() that action to ensure
++    full menu hierarchy is built.
++
++  [ Ubuntu daily release ]
++  * Automatic snapshot from revision 253
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 09 Dec 2013 02:29:59 +0000
++
++libdbusmenu-qt (0.9.2+14.04.20131125-0ubuntu1) trusty; urgency=low
++
++  [ Aurélien Gâteau ]
++  * This change install CMake config files for dbusmenu-qt and dbusmenu-
++    qt5. This makes it easy for other projects to use the library with
++    find(dbusmenu-qt) or find(dbusmenu-qt5) without having to ship a
++    FindDBusMenuQt.cmake file. (More about this topic here:
++    http://www.cmake.org/Wiki/CMake/Tutorials/Packaging ). Test programs
++    available here: http://agateau.com/tmp/dmqt-samples.tar.bz2.
++
++  [ Marcus Tomlinson ]
++  * Destructors of classes intended to be base classes updated to
++    virtual.
++
++  [ Ubuntu daily release ]
++  * Automatic snapshot from revision 251
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 25 Nov 2013 03:56:49 +0000
++
++libdbusmenu-qt (0.9.2+13.10.20130826-0ubuntu1) saucy; urgency=low
++
++  [ Joe Yasi ]
++  * This fixes bug #1035755, [firefox] Extension causes context/drop
++    down menus to disappear. The patch uses the correct X11 event
++    timestamp instead of the system time. (LP: #1035755)
++
++  [ Ubuntu daily release ]
++  * Automatic snapshot from revision 248
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 26 Aug 2013 10:07:36 +0000
++
++libdbusmenu-qt (0.9.2+13.10.20130628-0ubuntu1) saucy; urgency=low
++
++  [ Łukasz 'sil2100' Zemczak ]
++  * Fix the pkg-config file for the libdbusmenu-qt5 case, as the
++    includedir was missing the correct QT_SUFFIX.
++
++  [ Ubuntu daily release ]
++  * Automatic snapshot from revision 246
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 28 Jun 2013 02:03:12 +0000
++
++libdbusmenu-qt (0.9.2daily13.05.02-0ubuntu1) saucy; urgency=low
++
++  [ Łukasz 'sil2100' Zemczak ]
++  * debian/control, debian/rules:
++    - Modifications related to compliance with our packaging standards
++
++  [ Ubuntu daily release ]
++  * Automatic snapshot from revision 244
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 02 May 2013 22:59:30 +0000
++
++libdbusmenu-qt (0.9.2daily13.03.28-0ubuntu1) raring; urgency=low
++
++  [ Łukasz 'sil2100' Zemczak ]
++  * Add inline packaging metadata.
++  * debian/control, 
++    debian/libdbusmenu-qt5.install,
++    debian/libdbusmenu-qt5-dev.install,
++    debian/libdbusmenu-qt5-doc.install:
++    - Add the -qt5 package versions of all libdbusmenu packages
++  * debian/rules:
++    - Enable a double build - first build a Qt4 version of libdbusmenu for
++      libdbusmenu-qt2 and then a Qt5 version for libdbusmenu-qt5
++
++  [ Mathieu Trudel-Lapierre ]
++  * debian/copyright: fix copyright stanza for LGPL 2.
++  * debian/control: bump debhelper Build-Depends to 9.
++  * debian/source.lintian-overrides: drop the override.
++  * debian/watch: dropped; no longer needed with inline packaging.
++  * debian/control:
++    - bump Standards-Version to 3.9.4. 
++    - add Vcs-Bzr/Vcs-Browser.
++    - add comments for developers.
++  * Automatic snapshot from revision 240 (bootstrap). (LP: #1126205)
++
++  [ Ubuntu daily release ]
++  * Automatic snapshot from revision 241
++
++ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 28 Mar 2013 20:27:01 +0000
++
++libdbusmenu-qt (0.9.2-0ubuntu4) raring; urgency=low
++
++  * Mark two library symbols as optional, fixing build failure with GCC 4.8.
++
++ -- Matthias Klose <doko@ubuntu.com>  Tue, 26 Feb 2013 10:02:51 +0100
++
++libdbusmenu-qt (0.9.2-0ubuntu3) quantal; urgency=low
++
++  * Update symbols file again for powerpc and armel to fix FTBFS on those
++    archs
++
++ -- Scott Kitterman <scott@kitterman.com>  Mon, 24 Sep 2012 11:56:51 -0400
++
++libdbusmenu-qt (0.9.2-0ubuntu2) quantal; urgency=low
++
++  * Update symbols file to fix FTBFS
++
++ -- Scott Kitterman <scott@kitterman.com>  Mon, 24 Sep 2012 09:58:44 -0400
++
++libdbusmenu-qt (0.9.2-0ubuntu1) precise; urgency=low
++
++  * New upstream release.
++
++ -- Aurélien Gâteau <aurelien.gateau@ubuntu.com>  Thu, 29 Mar 2012 17:51:21 +0200
++
++libdbusmenu-qt (0.9.1-0ubuntu1) precise; urgency=low
++
++  * New upstream release.
++
++ -- Aurélien Gâteau <aurelien.gateau@ubuntu.com>  Mon, 26 Mar 2012 15:36:30 +0200
++
++libdbusmenu-qt (0.9.0-2ubuntu1) precise; urgency=low
++
++  * Merge from Debian git, remaining changes:
++    - patches/002-use-multiarch-lib-paths: fixed author
++    - copyright: fixed "Source" field
++
++ -- Aurélien Gâteau <aurelien.gateau@ubuntu.com>  Thu, 24 Nov 2011 16:32:30 +0100
++
++libdbusmenu-qt (0.9.0-2) UNRELEASED; urgency=low
++
++  * update description for -dev package too. (Closes: #640251)
++  * Implement multiarch.
++    - bump cmake build dependency to 2.8.5.
++    - bump debhelper build dependency to 8.1.3.
++  * debian/rules: move --parallel after $@ 
++  * New binary package libdbusmenu-qt-doc.
++  * Remove embedded jquery and depend on libjs-jquery.
++
++ -- Praveen Arimbrathodiyil <pravi.a@gmail.com>  Thu, 01 Sep 2011 19:29:20 +0530
++
++libdbusmenu-qt (0.9.0-1) unstable; urgency=low
++
++  * New upstream release.
++  * Add doxygen as build dependency.
++  * Minor fixes to description, thanks to Filipus Klutiero. (Closes: #630193)
++  * Update symbols file.
++
++ -- Praveen Arimbrathodiyil <pravi.a@gmail.com>  Thu, 01 Sep 2011 12:57:01 +0530
++
++libdbusmenu-qt (0.9.0-0ubuntu2) oneiric; urgency=low
++
++  * Remove build-dependency on libqjson-dev.
++  * Convert to multiarch. (LP: #838470)
++  * debian/patches/kubuntu_03_multiarch_support.diff:
++    - add multiarch support to upstream CMake
++
++ -- Aurélien Gâteau <aurelien.gateau@canonical.com>  Wed, 07 Sep 2011 13:05:40 +0200
++
++libdbusmenu-qt (0.9.0-0ubuntu1) oneiric; urgency=low
++
++  * New upstream release.
++  * debian/control:
++    - Update Vcs-Bzr to current kubuntu-packagers location
++  * debian/libdbusmenu-qt2.symbols:
++    - updated
++
++ -- Didier Roche <didrocks@ubuntu.com>  Fri, 02 Sep 2011 13:50:43 +0200
++
++libdbusmenu-qt (0.8.3-0ubuntu1) oneiric; urgency=low
++
++  * New upstream release
++  * debian/control:
++    - Update Vcs-Bzr to current kubuntu-packagers location
++    - Change HomePage to launchpad page
++    - Update Standards-Version
++  * debian/copyright, debian/watch:
++    - point now to launchpad
++  * remove debian/patches/kubuntu_03_dont-show-more-icons-than-desired.diff:
++    upstreamed
++  * debian/libdbusmenu-qt2.symbols:
++    - updated symbols
++
++ -- Didier Roche <didrocks@ubuntu.com>  Wed, 22 Jun 2011 11:13:07 +0200
++
++libdbusmenu-qt (0.8.2-0ubuntu2) natty; urgency=low
++
++  * Add kubuntu_03_dont-show-more-icons-than-desired.diff by Michael Terry
++    https://code.launchpad.net/~mterry/libdbusmenu-qt/dont-show-more-
++    icons-than-desired/+merge/58387 'Respect QAction's setting for
++    whether an icon should be shown in the menu or not.'
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Wed, 20 Apr 2011 13:47:45 +0100
++
++libdbusmenu-qt (0.8.2-0ubuntu1) natty; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Fri, 15 Apr 2011 12:07:57 +0100
++
++libdbusmenu-qt (0.8.1-0ubuntu1) natty; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 24 Mar 2011 16:40:25 +0000
++
++libdbusmenu-qt (0.8.0-3) unstable; urgency=low
++
++  * gcc seems to still emit some random symbols on some arches. Mark them as
++    optional and arch specific. (Closes: #628745)
++
++ -- Modestas Vainius <modax@debian.org>  Wed, 01 Jun 2011 13:24:35 +0300
++
++libdbusmenu-qt (0.8.0-2) unstable; urgency=low
++
++  * Fix symbol files to build against gcc 4.6. (Closes: #628745)
++  * Bump Standards-Version to 3.9.2: no changes needed.
++  * Add myself to Uploaders.
++
++ -- Modestas Vainius <modax@debian.org>  Wed, 01 Jun 2011 11:23:55 +0300
++
++libdbusmenu-qt (0.8.0-1) unstable; urgency=low
++
++  * New upstream release (3 private symbols dropped).
++  * Symbols file updated, missing symbols removed.
++  * Thanks to Shravan Aras for helping me with cscope.
++
++ -- Praveen Arimbrathodiyil <pravi.a@gmail.com>  Sat, 02 Apr 2011 23:22:22 +0530
++
++libdbusmenu-qt (0.8.0-0ubuntu1) natty; urgency=low
++
++  * New upstream release
++  * Remove kubuntu_00_external_contributions.diff no longer required
++  * Update kubuntu_01_no_test.diff
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Fri, 25 Feb 2011 10:39:05 +0000
++
++libdbusmenu-qt (0.7.0-1) unstable; urgency=low
++
++  * New upstream release. 
++  * DM upload is allowed.
++  * adding libqjson-dev to build dependencies (for testapp). 
++
++ -- Praveen Arimbrathodiyil <pravi.a@gmail.com>  Sat, 19 Mar 2011 11:03:22 +0530
++
++libdbusmenu-qt (0.7.0-0ubuntu1) natty; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Fri, 14 Jan 2011 15:56:38 +0000
++
++libdbusmenu-qt (0.6.6-1) unstable; urgency=low
++
++  * New upstream release. (Closes: #606199)
++
++  [ Praveen Arimbrathodiyil ]
++  * debian/rules: added support for parallel building.
++  * debian/copyright: cleared copyright info of removed patch.
++  * debian/control: changed homepage to page on launchpad.net.
++  * debian/control: updated vcs from svn to git.
++  * debian/control: updated policy to 3.9.1
++
++  [ José Manuel Santamaría Lema ]
++  * Update symbols file.
++
++ -- Praveen Arimbrathodiyil <pravi.a@gmail.com>  Sun, 27 Feb 2011 07:05:33 +0530
++
++libdbusmenu-qt (0.6.6-0ubuntu1) natty; urgency=low
++
++  * New upstream bugfix release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 09 Dec 2010 11:59:53 +0000
++
++libdbusmenu-qt (0.6.4-0ubuntu1) maverick; urgency=low
++
++  * New upstream bugfix release
++  * Refresh kubuntu_00_external_contributions.diff
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 23 Sep 2010 13:45:17 +0100
++
++libdbusmenu-qt (0.6.3-0ubuntu1) maverick; urgency=low
++
++  * New upstream release
++  * Add kubuntu_00_external_contributions.diff
++  * Remove kubuntu_02_unbreak_kde_titles.diff
++
++ -- Aurélien Gâteau <aurelien.gateau@canonical.com>  Thu, 16 Sep 2010 17:01:41 +0200
++
++libdbusmenu-qt (0.6.2-0ubuntu1) maverick; urgency=low
++
++  * New upstream release, memory leak and crash fixes
++  * Add kubuntu_02_unbreak_kde_titles.diff from
++    http://gitorious.org/dbusmenu/dbusmenu-
++    qt/commit/71851809ef7e109f02635877ead1dbac48a2e64e
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 09 Sep 2010 16:42:01 +0100
++
++libdbusmenu-qt (0.6.1-0ubuntu1) maverick; urgency=low
++
++  * New upstream release, fixes memory leaks
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Fri, 03 Sep 2010 17:14:45 +0100
++
++libdbusmenu-qt (0.6.0-0ubuntu1) maverick; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 19 Aug 2010 14:58:03 +0100
++
++libdbusmenu-qt (0.5.8.0ubuntu1) maverick; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 05 Aug 2010 16:08:10 +0100
++
++libdbusmenu-qt (0.5.1-1) unstable; urgency=low
++
++  * New upstream release. (Closes: #587546)
++  * debian/watch: changed release url to new location.
++  * debian/copyright: made it machine readable.
++  * debian/copyright: changed debian packaging to LGPL-2+ in sync with
++    upstream license (Thanks to Sune Vuorela)
++  * debian/control: updated policy to 3.9.0
++  * debian/libdbusmenu-qt2.symbols: new symbols added.
++  * debian/control: dev & lib package clarification added to descriptions.
++
++ -- Praveen Arimbrathodiyil <pravi.a@gmail.com>  Fri, 02 Jul 2010 01:30:47 +0530
++
++libdbusmenu-qt (0.5.1-0ubuntu1) maverick; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 08 Jul 2010 21:07:52 +0100
++
++libdbusmenu-qt (0.5.0-0ubuntu1) maverick; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Mon, 28 Jun 2010 16:54:14 +0100
++
++libdbusmenu-qt (0.4.0-0ubuntu1) maverick; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Fri, 25 Jun 2010 14:20:55 +0100
++
++libdbusmenu-qt (0.3.5-0ubuntu1) maverick; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 17 Jun 2010 14:30:00 +0100
++
++libdbusmenu-qt (0.3.4-0ubuntu1) maverick; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 10 Jun 2010 23:45:12 +0100
++
++libdbusmenu-qt (0.3.3-1) unstable; urgency=low
++
++  * New upstream release.
++  * added libdbusmenu-qt2.symbols file.
++
++ -- Praveen Arimbrathodiyil <pravi.a@gmail.com>  Fri, 11 Jun 2010 17:13:07 +0530
++
++libdbusmenu-qt (0.3.3-0ubuntu1) maverick; urgency=low
++
++  * New upstream release:
++    - Update kubuntu_01_no_test.diff
++
++ -- Jonathan Thomas <echidnaman@kubuntu.org>  Mon, 07 Jun 2010 22:36:42 -0400
++
++libdbusmenu-qt (0.3.2-1) unstable; urgency=low
++
++  * Initial release. (Closes: #579677)
++
++ -- Praveen Arimbrathodiyil <pravi.a@gmail.com>  Tue, 04 May 2010 13:31:09 +0530
++
++libdbusmenu-qt (0.3.2-0ubuntu1) lucid; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 08 Apr 2010 14:23:59 +0100
++
++libdbusmenu-qt (0.3.0-0ubuntu1) lucid; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Wed, 10 Mar 2010 12:41:06 +0000
++
++libdbusmenu-qt (0.2.2-0ubuntu2) lucid; urgency=low
++
++  * Add build dep on qjson and pkg-config
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Wed, 17 Feb 2010 17:02:07 +0000
++
++libdbusmenu-qt (0.2.2-0ubuntu1) lucid; urgency=low
++
++  * New upstream release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Wed, 17 Feb 2010 15:13:29 +0000
++
++libdbusmenu-qt (0.2.1-0ubuntu2) lucid; urgency=low
++
++  * libdbusmenu-qt-dev depends on libdbusmenu-qt1 not 0
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 04 Feb 2010 20:21:41 +0000
++
++libdbusmenu-qt (0.2.1-0ubuntu1) lucid; urgency=low
++
++  * New upstream release
++  * Switch to source format 3.0
++  * New SO version, switch package name to libdbusmenu-qt1
++  * Add kubuntu_01_no_test.diff, tests don't work without X
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Thu, 04 Feb 2010 18:13:44 +0000
++
++libdbusmenu-qt (0.1.0-0ubuntu1) lucid; urgency=low
++
++  * Initial Release
++
++ -- Jonathan Riddell <jriddell@ubuntu.com>  Sun, 03 Jan 2010 23:21:24 +0100
++
+diff -Nuar libdbusmenu-qt-0.9.2/debian/compat libdbusmenu-qt-0.9.3/debian/compat
+--- libdbusmenu-qt-0.9.2/debian/compat	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/compat	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1 @@
++9
+diff -Nuar libdbusmenu-qt-0.9.2/debian/control libdbusmenu-qt-0.9.3/debian/control
+--- libdbusmenu-qt-0.9.2/debian/control	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/control	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1,102 @@
++Source: libdbusmenu-qt
++Section: libs
++Priority: optional
++Build-Depends: cmake (>= 2.8.11),
++               debhelper (>= 9),
++               doxygen,
++               libqjson-dev,
++               libqt4-dev,
++               qtbase5-dev,
++Maintainer: Kubuntu Developers <kubuntu-devel@lists.ubuntu.com>
++XSBC-Original-Maintainer: Jonathan Riddell <jriddell@ubuntu.com>
++Standards-Version: 3.9.4
++Homepage: https://launchpad.net/libdbusmenu-qt
++# If you aren't ~dbusmenu-team but need to upload packaging changes,
++# just go ahead.  ~dbusmenu-team will notice and sync up the code again.
++Vcs-Bzr: https://code.launchpad.net/~dbusmenu-team/libdbusmenu-qt/trunk
++Vcs-Browser: https://bazaar.launchpad.net/~dbusmenu-team/libdbusmenu-qt/trunk/files
++
++Package: libdbusmenu-qt2
++Architecture: any
++Pre-Depends: ${misc:Pre-Depends},
++Depends: ${misc:Depends},
++         ${shlibs:Depends},
++Multi-Arch: same
++Description: Qt implementation of the DBusMenu protocol
++ This library provides a Qt implementation of the DBusMenu protocol.
++ .
++ The DBusMenu protocol makes it possible for applications to export
++ and import their menus over DBus.
++ .
++ This package provides shared libraries.
++
++Package: libdbusmenu-qt5
++Architecture: any
++Pre-Depends: ${misc:Pre-Depends},
++Depends: ${misc:Depends},
++         ${shlibs:Depends},
++Suggests: libqt5dbus5,
++          libqt5gui5,
++          libqt5widgets5,
++Multi-Arch: same
++Description: Qt5 implementation of the DBusMenu protocol
++ This library provides a Qt5 implementation of the DBusMenu protocol.
++ .
++ The DBusMenu protocol makes it possible for applications to export
++ and import their menus over DBus.
++ .
++ This package provides shared libraries.
++
++Package: libdbusmenu-qt-dev
++Section: libdevel
++Architecture: any
++Depends: libdbusmenu-qt2 (= ${binary:Version}),
++         libqt4-dev,
++         ${misc:Depends},
++Description: Qt implementation of the DBusMenu protocol (development)
++ This library provides a Qt implementation of the DBusMenu protocol.
++ .
++ The DBusMenu protocol makes it possible for applications to export
++ and import their menus over DBus.
++ .
++ This package provides header files for development.
++
++Package: libdbusmenu-qt5-dev
++Section: libdevel
++Architecture: any
++Depends: libdbusmenu-qt5 (= ${binary:Version}),
++         qtbase5-dev,
++         ${misc:Depends},
++Description: Qt5 implementation of the DBusMenu protocol (development)
++ This library provides a Qt5 implementation of the DBusMenu protocol.
++ .
++ The DBusMenu protocol makes it possible for applications to export
++ and import their menus over DBus.
++ .
++ This package provides header files for development.
++
++Package: libdbusmenu-qt-doc
++Section: doc
++Architecture: all
++Depends: libjs-jquery,
++         ${misc:Depends},
++Description: Qt implementation of the DBusMenu protocol (documentation)
++ This library provides a Qt implementation of the DBusMenu protocol.
++ .
++ The DBusMenu protocol makes it possible for applications to export
++ and import their menus over DBus.
++ .
++ This package provides API documentation in html format.
++
++Package: libdbusmenu-qt5-doc
++Section: doc
++Architecture: all
++Depends: libjs-jquery,
++         ${misc:Depends},
++Description: Qt5 implementation of the DBusMenu protocol (documentation)
++ This library provides a Qt5 implementation of the DBusMenu protocol.
++ .
++ The DBusMenu protocol makes it possible for applications to export
++ and import their menus over DBus.
++ .
++ This package provides API documentation in html format.
+diff -Nuar libdbusmenu-qt-0.9.2/debian/copyright libdbusmenu-qt-0.9.3/debian/copyright
+--- libdbusmenu-qt-0.9.2/debian/copyright	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/copyright	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1,32 @@
++Format: http://dep.debian.net/deps/dep5/
++Upstream-Name: libdbusmenu-qt
++Upstream-Contact: Aurelien Gateau <aurelien.gateau@canonical.com>
++Source: https://launchpad.net/libdbusmenu-qt
++
++Files: src/*
++Copyright: 2009-2010, Canonical
++Author: Aurelien Gateau <aurelien.gateau@canonical.com>
++License: LGPL-2
++
++Files: debian/*
++Copyright: 2010, Praveen Arimbrathodiyil <pravi.a@gmail.com>
++License: LGPL-2
++
++License: LGPL-2
++ This library is free software; you can redistribute it and/or
++ modify it under the terms of the GNU Library General Public
++ License (LGPL), version 2 as published by the Free Software
++ Foundation.
++ .
++ This library is distributed in the hope that it will be useful,
++ but WITHOUT ANY WARRANTY; without even the implied warranty of
++ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ Library General Public License for more details.
++ .
++ You should have received a copy of the GNU Library General Public License
++ along with this library; see the file COPYING.LIB.  If not, write to
++ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
++ Boston, MA 02110-1301, USA.
++ .
++ On Debian systems, the complete text of the GNU Library General Public
++ License, version 2, can be found in /usr/share/common-licenses/LGPL-2.
+diff -Nuar libdbusmenu-qt-0.9.2/debian/docs libdbusmenu-qt-0.9.3/debian/docs
+--- libdbusmenu-qt-0.9.2/debian/docs	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/docs	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1,2 @@
++NEWS
++README
+diff -Nuar libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt2.install libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt2.install
+--- libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt2.install	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt2.install	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1 @@
++usr/lib/*/libdbusmenu-qt.so.2*
+diff -Nuar libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt5-dev.install libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt5-dev.install
+--- libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt5-dev.install	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt5-dev.install	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1,4 @@
++usr/include/dbusmenu-qt5/*
++usr/lib/*/lib*-qt5.so
++usr/lib/*/pkgconfig/dbusmenu-qt5.pc
++usr/lib/*/cmake/dbusmenu-qt5/*
+diff -Nuar libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt5-doc.install libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt5-doc.install
+--- libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt5-doc.install	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt5-doc.install	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1 @@
++usr/share/doc/libdbusmenu-qt5-doc/
+diff -Nuar libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt5.install libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt5.install
+--- libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt5.install	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt5.install	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1 @@
++usr/lib/*/libdbusmenu-qt5.so.2*
+diff -Nuar libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt-dev.install libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt-dev.install
+--- libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt-dev.install	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt-dev.install	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1,4 @@
++usr/include/dbusmenu-qt/*
++usr/lib/*/lib*-qt.so
++usr/lib/*/pkgconfig/dbusmenu-qt.pc
++usr/lib/*/cmake/dbusmenu-qt/*
+diff -Nuar libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt-doc.install libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt-doc.install
+--- libdbusmenu-qt-0.9.2/debian/libdbusmenu-qt-doc.install	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/libdbusmenu-qt-doc.install	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1 @@
++usr/share/doc/libdbusmenu-qt-doc/
+diff -Nuar libdbusmenu-qt-0.9.2/debian/rules libdbusmenu-qt-0.9.3/debian/rules
+--- libdbusmenu-qt-0.9.2/debian/rules	1970-01-01 02:00:00.000000000 +0200
++++ libdbusmenu-qt-0.9.3/debian/rules	2015-03-11 23:08:15.000000000 +0200
+@@ -0,0 +1,45 @@
++#!/usr/bin/make -f
++
++# Uncomment this to turn on verbose mode.
++#export DH_VERBOSE=1
++
++export DPKG_GENSYMBOLS_CHECK_LEVEL=4
++
++%:
++	dh $@ --parallel --buildsystem=cmake
++
++override_dh_auto_configure:
++	mkdir qt4
++	mkdir qt5
++	cd qt4 && QT_SELECT=qt4 cmake -DCMAKE_INSTALL_PREFIX=/usr -DUSE_QT4=true -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
++	cd qt5 && QT_SELECT=qt5 cmake -DCMAKE_INSTALL_PREFIX=/usr -DUSE_QT5=true -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
++
++override_dh_auto_build:
++	cd qt4 && make
++	cd qt5 && make
++
++override_dh_clean:
++	dh_clean
++	rm -rf qt4
++	rm -rf qt5
++
++override_dh_auto_install:
++	cd qt4 && make DESTDIR=../debian/tmp install
++	cd qt5 && make DESTDIR=../debian/tmp install
++	echo "Removing embedded jquery javascript library..."
++	rm debian/tmp/usr/share/doc/libdbusmenu-qt-doc/jquery.js
++	rm debian/tmp/usr/share/doc/libdbusmenu-qt5-doc/jquery.js
++
++override_dh_install:
++	dh_install --fail-missing
++
++override_dh_auto_test:
++	echo "Skipping tests (can't test inside chroot)..."
++
++override_dh_gencontrol:
++	# Ugly hack, since we don't want to have Qt5 as our depends, we prefer
++	# those as Suggests for now
++	sed -i '/^shlibs/s/libqt5[^,]*, //g' debian/libdbusmenu-qt5.substvars
++	sed -i '/^shlibs/s/,[^,]* libqt5.*$$//' debian/libdbusmenu-qt5.substvars
++
++	dh_gencontrol
+diff -Nuar libdbusmenu-qt-0.9.2/README libdbusmenu-qt-0.9.3/README
+--- libdbusmenu-qt-0.9.2/README	2012-03-29 18:47:52.000000000 +0300
++++ libdbusmenu-qt-0.9.3/README	2015-03-11 23:08:15.000000000 +0200
+@@ -7,7 +7,9 @@
+ 
+ # Author
+ 
+-Canonical DX Team, Aurélien Gâteau <aurelien.gateau@canonical.com>
++Canonical DX Team
++Maintainer: Renato Filho <renato.filho@canonical.com>
++Former maintainer: Aurélien Gâteau
+ 
+ # Documentation
+ 
+diff -Nuar libdbusmenu-qt-0.9.2/src/CMakeLists.txt libdbusmenu-qt-0.9.3/src/CMakeLists.txt
+--- libdbusmenu-qt-0.9.2/src/CMakeLists.txt	2012-03-29 18:47:52.000000000 +0300
++++ libdbusmenu-qt-0.9.3/src/CMakeLists.txt	2015-03-11 23:08:15.000000000 +0200
+@@ -17,6 +17,11 @@
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+ endif (__DBUSMENU_HAVE_W_ALL)
+ 
++check_cxx_compiler_flag(-std=c++11 __DBUSMENU_HAVE_CXX11)
++if (__DBUSMENU_HAVE_CXX11)
++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
++endif (__DBUSMENU_HAVE_CXX11)
++
+ # Check whether QIcon::name() exists. It was added in late Qt 4.7 cycle, and is
+ # not present in betas.
+ set(CMAKE_REQUIRED_INCLUDES "${QT_INCLUDE_DIR}")
+@@ -49,38 +54,64 @@
+     ${CMAKE_BINARY_DIR}/src
+     )
+ 
+-qt4_automoc(${dbusmenu_qt_SRCS})
+-
+-qt4_add_dbus_adaptor(dbusmenu_qt_SRCS
+-    ${CMAKE_CURRENT_SOURCE_DIR}/com.canonical.dbusmenu.xml
+-    ${CMAKE_CURRENT_SOURCE_DIR}/dbusmenuexporterdbus_p.h DBusMenuExporterDBus
+-    )
++if (NOT USE_QT5)
++    qt4_automoc(${dbusmenu_qt_SRCS})
++    qt4_add_dbus_adaptor(dbusmenu_qt_SRCS
++        ${CMAKE_CURRENT_SOURCE_DIR}/com.canonical.dbusmenu.xml
++        ${CMAKE_CURRENT_SOURCE_DIR}/dbusmenuexporterdbus_p.h DBusMenuExporterDBus
++        )
++else()
++    qt5_add_dbus_adaptor(dbusmenu_qt_SRCS
++        ${CMAKE_CURRENT_SOURCE_DIR}/com.canonical.dbusmenu.xml
++        ${CMAKE_CURRENT_SOURCE_DIR}/dbusmenuexporterdbus_p.h DBusMenuExporterDBus
++        )
++endif()
+ 
+ configure_file(dbusmenu_version.h.in
+     ${CMAKE_CURRENT_BINARY_DIR}/dbusmenu_version.h
+     )
+ 
+-add_library(dbusmenu-qt SHARED ${dbusmenu_qt_SRCS})
+-set_target_properties(dbusmenu-qt PROPERTIES
++add_library(dbusmenu-${QT_SUFFIX} SHARED ${dbusmenu_qt_SRCS})
++set_target_properties(dbusmenu-${QT_SUFFIX} PROPERTIES
+     VERSION ${dbusmenu_qt_lib_VERSION}
+     SOVERSION ${dbusmenu_qt_lib_SOVERSION}
+     )
+ 
+-target_link_libraries(dbusmenu-qt
+-    ${QT_QTGUI_LIBRARIES}
+-    ${QT_QTDBUS_LIBRARIES}
+-    ${QT_QTCORE_LIBRARIES}
++
++if (NOT USE_QT5)
++    target_link_libraries(dbusmenu-${QT_SUFFIX}
++        ${QT_QTGUI_LIBRARIES}
++        ${QT_QTDBUS_LIBRARIES}
++        ${QT_QTCORE_LIBRARIES}
++        )
++else()
++    target_link_libraries(dbusmenu-${QT_SUFFIX}
++        ${Qt5Gui_LIBRARIES}
++        ${Qt5Core_LIBRARIES}
++        ${Qt5DBus_LIBRARIES}
++        ${Qt5Widgets_LIBRARIES}
++        )
++endif()
++
++# Make sure linking to the target adds dbusmenu-qt install directory
++target_include_directories(dbusmenu-${QT_SUFFIX}
++    INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>")
++
++install(TARGETS dbusmenu-${QT_SUFFIX}
++    EXPORT dbusmenu-${QT_SUFFIX}-targets
++    LIBRARY DESTINATION ${LIB_DESTINATION}
++    RUNTIME DESTINATION bin
+     )
+ 
+-install(TARGETS dbusmenu-qt
+-    LIBRARY DESTINATION lib${LIB_SUFFIX})
++install(EXPORT dbusmenu-${QT_SUFFIX}-targets
++    DESTINATION ${CMAKECONFIG_INSTALL_DIR})
+ 
+ install(DIRECTORY .
+-    DESTINATION include/dbusmenu-qt
++    DESTINATION ${INCLUDE_INSTALL_DIR}
+     FILES_MATCHING PATTERN "*.h"
+     PATTERN "*_p.h" EXCLUDE
+     )
+ 
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/dbusmenu_version.h
+-    DESTINATION include/dbusmenu-qt/
++    DESTINATION ${INCLUDE_INSTALL_DIR}
+     )
+diff -Nuar libdbusmenu-qt-0.9.2/src/dbusmenuexporter.cpp libdbusmenu-qt-0.9.3/src/dbusmenuexporter.cpp
+--- libdbusmenu-qt-0.9.2/src/dbusmenuexporter.cpp	2012-03-29 18:47:52.000000000 +0300
++++ libdbusmenu-qt-0.9.3/src/dbusmenuexporter.cpp	2015-03-11 23:08:15.000000000 +0200
+@@ -233,19 +233,20 @@
+ 
+ void DBusMenuExporterPrivate::insertIconProperty(QVariantMap *map, QAction *action) const
+ {
+-    QString iconName = q->iconNameForAction(action);
++    // provide the icon name for per-theme lookups
++    const QString iconName = q->iconNameForAction(action);
+     if (!iconName.isEmpty()) {
+         map->insert("icon-name", iconName);
+-        return;
+-    }
+-    QIcon icon = action->icon();
+-    if (icon.isNull()) {
+-        return;
+     }
+ 
+-    QBuffer buffer;
+-    icon.pixmap(16).save(&buffer, "PNG");
+-    map->insert("icon-data", buffer.data());
++    // provide the serialized icon data in case the icon
++    // is unnamed or the name isn't supported by the theme
++    const QIcon icon = action->icon();
++    if (!icon.isNull()) {
++        QBuffer buffer;
++        icon.pixmap(16).save(&buffer, "PNG");
++        map->insert("icon-data", buffer.data());
++    }
+ }
+ 
+ static void collapseSeparator(QAction* action)
+@@ -386,7 +387,7 @@
+             oldEnd = oldProperties.constEnd();
+         for(; oldIt != oldEnd; ++oldIt) {
+             QString key = oldIt.key();
+-            QVariantMap::ConstIterator newIt = newProperties.find(key);
++            QVariantMap::ConstIterator newIt = newProperties.constFind(key);
+             if (newIt != newEnd) {
+                 if (newIt.value() != oldIt.value()) {
+                     updatedProperties.insert(key, newIt.value());
+@@ -400,7 +401,7 @@
+         QVariantMap::ConstIterator newIt = newProperties.constBegin();
+         for (; newIt != newEnd; ++newIt) {
+             QString key = newIt.key();
+-            oldIt = oldProperties.find(key);
++            oldIt = oldProperties.constFind(key);
+             if (oldIt == oldEnd) {
+                 updatedProperties.insert(key, newIt.value());
+             }
+diff -Nuar libdbusmenu-qt-0.9.2/src/dbusmenuexporter.h libdbusmenu-qt-0.9.3/src/dbusmenuexporter.h
+--- libdbusmenu-qt-0.9.2/src/dbusmenuexporter.h	2012-03-29 18:47:52.000000000 +0300
++++ libdbusmenu-qt-0.9.3/src/dbusmenuexporter.h	2015-03-11 23:08:15.000000000 +0200
+@@ -47,7 +47,7 @@
+      */
+     DBusMenuExporter(const QString &dbusObjectPath, QMenu *menu, const QDBusConnection &dbusConnection = QDBusConnection::sessionBus());
+ 
+-    ~DBusMenuExporter();
++    virtual ~DBusMenuExporter();
+ 
+     /**
+      * Asks the matching DBusMenuImporter to activate @p action. For menus it
+diff -Nuar libdbusmenu-qt-0.9.2/src/dbusmenuimporter.cpp libdbusmenu-qt-0.9.3/src/dbusmenuimporter.cpp
+--- libdbusmenu-qt-0.9.2/src/dbusmenuimporter.cpp	2012-03-29 18:47:52.000000000 +0300
++++ libdbusmenu-qt-0.9.3/src/dbusmenuimporter.cpp	2015-03-11 23:08:15.000000000 +0200
+@@ -89,6 +89,8 @@
+ 
+     bool m_mustEmitMenuUpdated;
+ 
++    DBusMenuImporterType m_type;
++
+     QDBusPendingCallWatcher *refresh(int id)
+     {
+         #ifdef BENCHMARK
+@@ -189,6 +191,7 @@
+             updateActionVisible(action, value);
+         } else if (key == "shortcut") {
+             updateActionShortcut(action, value);
++        } else if (key == "children-display") {
+         } else {
+             DMWARNING << "Unhandled property update" << key;
+         }
+@@ -276,12 +279,53 @@
+     void sendEvent(int id, const QString &eventId)
+     {
+         QVariant empty = QVariant::fromValue(QDBusVariant(QString()));
+-        uint timestamp = QDateTime::currentDateTime().toTime_t();
+-        m_interface->asyncCall("Event", id, eventId, empty, timestamp);
++        m_interface->asyncCall("Event", id, eventId, empty, 0u);
++    }
++
++    bool waitForWatcher(QDBusPendingCallWatcher * _watcher, int maxWait)
++    {
++        QPointer<QDBusPendingCallWatcher> watcher(_watcher);
++
++        if(m_type == ASYNCHRONOUS) {
++            QTimer timer;
++            timer.setSingleShot(true);
++            QEventLoop loop;
++            loop.connect(&timer, SIGNAL(timeout()), SLOT(quit()));
++            loop.connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)), SLOT(quit()));
++            timer.start(maxWait);
++            loop.exec();
++            timer.stop();
++
++            if (!watcher) {
++                // Watcher died. This can happen if importer got deleted while we were
++                // waiting. See:
++                // https://bugs.kde.org/show_bug.cgi?id=237156
++                return false;
++            }
++
++            if(!watcher->isFinished()) {
++                // Timed out
++                return false;
++            }
++        } else {
++            watcher->waitForFinished();
++        }
++
++        if (watcher->isError()) {
++            DMWARNING << watcher->error().message();
++            return false;
++        }
++
++        return true;
+     }
+ };
+ 
+ DBusMenuImporter::DBusMenuImporter(const QString &service, const QString &path, QObject *parent)
++: DBusMenuImporter(service, path, ASYNCHRONOUS, parent)
++{
++}
++
++DBusMenuImporter::DBusMenuImporter(const QString &service, const QString &path, DBusMenuImporterType type, QObject *parent)
+ : QObject(parent)
+ , d(new DBusMenuImporterPrivate)
+ {
+@@ -292,6 +336,8 @@
+     d->m_menu = 0;
+     d->m_mustEmitMenuUpdated = false;
+ 
++    d->m_type = type;
++
+     connect(&d->m_mapper, SIGNAL(mapped(int)), SLOT(sendClickedEvent(int)));
+ 
+     d->m_pendingLayoutUpdateTimer = new QTimer(this);
+@@ -421,6 +467,11 @@
+         connect(action, SIGNAL(triggered()),
+             &d->m_mapper, SLOT(map()));
+         d->m_mapper.setMapping(action, dbusMenuItem.id);
++
++        if( action->menu() )
++        {
++          d->refresh( dbusMenuItem.id )->waitForFinished();
++        }
+     }
+     #ifdef BENCHMARK
+     DMDEBUG << "- Menu filled:" << sChrono.elapsed() << "ms";
+@@ -438,33 +489,6 @@
+     QMetaObject::invokeMethod(menu(), "aboutToShow");
+ }
+ 
+-static bool waitForWatcher(QDBusPendingCallWatcher * _watcher, int maxWait)
+-{
+-    QTime time;
+-    time.start();
+-    QPointer<QDBusPendingCallWatcher> watcher(_watcher);
+-    while (watcher && !watcher->isFinished() && time.elapsed() < maxWait) {
+-        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+-    }
+-
+-    if (!watcher) {
+-        // Watcher died. This can happen if importer got deleted while we were
+-        // waiting. See:
+-        // https://bugs.kde.org/show_bug.cgi?id=237156
+-        return false;
+-    }
+-
+-    // Tricky: watcher has indicated it is finished, but its finished() signal
+-    // has not been emitted yet. Calling waitForFinished() ensures it is
+-    // emitted.
+-    if (watcher->isFinished()) {
+-        watcher->waitForFinished();
+-        return true;
+-    } else {
+-        return false;
+-    }
+-}
+-
+ void DBusMenuImporter::slotMenuAboutToShow()
+ {
+     QMenu *menu = qobject_cast<QMenu*>(sender());
+@@ -488,7 +512,7 @@
+ 
+     QPointer<QObject> guard(this);
+ 
+-    if (!waitForWatcher(watcher, ABOUT_TO_SHOW_TIMEOUT)) {
++    if (!d->waitForWatcher(watcher, ABOUT_TO_SHOW_TIMEOUT)) {
+         DMWARNING << "Application did not answer to AboutToShow() before timeout";
+     }
+ 
+@@ -528,7 +552,7 @@
+     if (needRefresh || menu->actions().isEmpty()) {
+         d->m_idsRefreshedByAboutToShow << id;
+         watcher = d->refresh(id);
+-        if (!waitForWatcher(watcher, REFRESH_TIMEOUT)) {
++        if (!d->waitForWatcher(watcher, REFRESH_TIMEOUT)) {
+             DMWARNING << "Application did not refresh before timeout";
+         }
+     }
+diff -Nuar libdbusmenu-qt-0.9.2/src/dbusmenuimporter.h libdbusmenu-qt-0.9.3/src/dbusmenuimporter.h
+--- libdbusmenu-qt-0.9.2/src/dbusmenuimporter.h	2012-03-29 18:47:52.000000000 +0300
++++ libdbusmenu-qt-0.9.3/src/dbusmenuimporter.h	2015-03-11 23:08:15.000000000 +0200
+@@ -35,6 +35,16 @@
+ class QMenu;
+ 
+ class DBusMenuImporterPrivate;
++
++/**
++ * Determine whether internal method calls should allow the Qt event loop
++ * to execute or not
++ */
++enum DBusMenuImporterType {
++    ASYNCHRONOUS,
++    SYNCHRONOUS
++};
++
+ /**
+  * A DBusMenuImporter instance can recreate a menu serialized over DBus by
+  * DBusMenuExporter
+@@ -48,7 +58,13 @@
+      */
+     DBusMenuImporter(const QString &service, const QString &path, QObject *parent = 0);
+ 
+-    ~DBusMenuImporter();
++    /**
++     * Creates a DBusMenuImporter listening over DBus on service, path, with either async
++     * or sync DBus calls
++     */
++    DBusMenuImporter(const QString &service, const QString &path, DBusMenuImporterType type, QObject *parent = 0);
++
++    virtual ~DBusMenuImporter();
+ 
+     /**
+      * The menu created from listening to the DBusMenuExporter over DBus
+@@ -121,7 +137,7 @@
+     friend class DBusMenuImporterPrivate;
+ 
+     // Use Q_PRIVATE_SLOT to avoid exposing DBusMenuItemList
+-    Q_PRIVATE_SLOT(d, void slotItemsPropertiesUpdated(const DBusMenuItemList &updatedList, const DBusMenuItemKeysList &removedList));
++    Q_PRIVATE_SLOT(d, void slotItemsPropertiesUpdated(const DBusMenuItemList &updatedList, const DBusMenuItemKeysList &removedList))
+ };
+ 
+ #endif /* DBUSMENUIMPORTER_H */
+diff -Nuar libdbusmenu-qt-0.9.2/src/dbusmenu_p.h libdbusmenu-qt-0.9.3/src/dbusmenu_p.h
+--- libdbusmenu-qt-0.9.2/src/dbusmenu_p.h	2012-03-29 18:47:52.000000000 +0300
++++ libdbusmenu-qt-0.9.3/src/dbusmenu_p.h	2015-03-11 23:08:15.000000000 +0200
+@@ -39,7 +39,7 @@
+     Q_OBJECT
+ public:
+     DBusMenu(QMenu *menu, DBusMenuExporter *exporter, int parentId);
+-    ~DBusMenu();
++    virtual ~DBusMenu();
+ 
+ protected:
+     virtual bool eventFilter(QObject *obj, QEvent *event);
+diff -Nuar libdbusmenu-qt-0.9.2/tools/testapp/CMakeLists.txt libdbusmenu-qt-0.9.3/tools/testapp/CMakeLists.txt
+--- libdbusmenu-qt-0.9.2/tools/testapp/CMakeLists.txt	2012-03-29 18:47:52.000000000 +0300
++++ libdbusmenu-qt-0.9.3/tools/testapp/CMakeLists.txt	2015-03-11 23:08:15.000000000 +0200
+@@ -2,22 +2,45 @@
+     main.cpp
+     )
+ 
+-include_directories(
+-    ${CMAKE_CURRENT_SOURCE_DIR}/../../src
+-    ${CMAKE_CURRENT_BINARY_DIR}/../../src
+-    ${QT_INCLUDE_DIR}
+-    ${QT_QTCORE_INCLUDE_DIR}
+-    ${QT_QTGUI_INCLUDE_DIR}
+-    ${QT_QTDBUS_INCLUDE_DIR}
+-    ${QJSON_INCLUDE_DIR}
+-    )
+-
+ add_executable(dbusmenubench-qtapp ${qtapp_SRCS})
+ 
+-target_link_libraries(dbusmenubench-qtapp
+-    dbusmenu-qt
+-    ${QT_QTGUI_LIBRARY}
+-    ${QT_QTCORE_LIBRARY}
+-    ${QT_QTDBUS_LIBRARY}
+-    ${QJSON_LIBRARIES}
+-    )
++if (NOT USE_QT5)
++    # Qt4
++    include_directories(
++        ${CMAKE_CURRENT_SOURCE_DIR}/../../src
++        ${CMAKE_CURRENT_BINARY_DIR}/../../src
++        ${QT_INCLUDE_DIR}
++        ${QT_QTCORE_INCLUDE_DIR}
++        ${QT_QTGUI_INCLUDE_DIR}
++        ${QT_QTDBUS_INCLUDE_DIR}
++        ${QJSON_INCLUDE_DIR}
++        )
++
++    target_link_libraries(dbusmenubench-qtapp
++        dbusmenu-qt
++        ${QT_QTGUI_LIBRARY}
++        ${QT_QTCORE_LIBRARY}
++        ${QT_QTDBUS_LIBRARY}
++        ${QJSON_LIBRARIES}
++        )
++else()
++   # Qt5
++    include_directories(
++        ${CMAKE_CURRENT_SOURCE_DIR}/../../src
++        ${CMAKE_CURRENT_BINARY_DIR}/../../src
++        ${Qt5Widgets_INCLUDE_DIRS}
++        ${Qt5Core_INCLUDE_DIRS}
++        ${Qt5Gui_INCLUDE_DIRS}
++        ${Qt5DBus_INCLUDE_DIRS}
++        ${QJSON_INCLUDE_DIR}
++        )
++   
++    target_link_libraries(dbusmenubench-qtapp
++        dbusmenu-qt5
++        ${Qt5Gui_LIBRARIES}
++        ${Qt5Core_LIBRARIES}
++        ${Qt5DBus_LIBRARIES}
++        ${Qt5Widgets_LIBRARIES}
++        ${QJSON_LIBRARIES}
++        )
++endif()

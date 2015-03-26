@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libbluedevil</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>KDE daemon listening for wall and write messages</Summary>
+        <Description>KDE daemon listening for wall and write messages</Description>
+        <Archive sha1sum="4ae174b40441d19ba09e3b011cc85bb1d3751504" type="tarxz">http://download.kde.org/stable/plasma/5.2.2/libbluedevil-5.2.2.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>		 
+	    <Dependency>bluez-libs-devel</Dependency>
+	    <Dependency>kcoreaddons-devel</Dependency>
+	    <Dependency>kwidgetsaddons-devel</Dependency>
+	    <Dependency>kdbusaddons-devel</Dependency>
+	    <Dependency>ki18n-devel</Dependency>
+	    <Dependency>kinit</Dependency>
+	    <Dependency>kio-devel</Dependency>
+	    <Dependency>kiconthemes-devel</Dependency>
+	    <Dependency>knotifications-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>	    
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libbluedevil</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>	
+	    <Dependency>ki18n</Dependency>
+	    <Dependency>knotifications</Dependency>
+	    <Dependency>bluez-libs</Dependency>
+	    <Dependency>kdbusaddons</Dependency>
+	    <Dependency>kiconthemes</Dependency>
+	    <Dependency>kcoreaddons</Dependency>
+	    <Dependency>kio</Dependency>
+	    <Dependency>kinit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="config">/usr/lib64</Path>
+	    <Path fileType="config">/usr/lib64/pkgconfig</Path>
+        </Files>        
+    </Package>
+    
+    <Package>
+        <Name>libbluedevil-devel</Name>
+	<Summary>Development files for kwin</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-devel</Dependency>
+            <Dependency release="current">libbluedevil</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-03-11</Date>
+            <Version>5.2.2</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.0.2</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>

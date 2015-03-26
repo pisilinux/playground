@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>polkit-kde-agent</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	    <IsA>app:console</IsA>
+	    <IsA>app:gui</IsA>
+        <Summary>The KDE Plasma Workspace Components</Summary>
+        <Description>The KDE Plasma Workspace Components</Description>
+        <Archive sha1sum="8e20b1f364450af5bc28fe8c3c64e83840586e0f" type="tarxz">mirrors://kde/stable/plasma/5.2.2/polkit-kde-agent-1-5.2.2.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>
+	    <Dependency>alsa-lib-devel</Dependency>
+	    <Dependency>baloo5-devel</Dependency>
+	    <Dependency>kactivities5-devel</Dependency>
+	    <Dependency>kcmutils-devel</Dependency>
+	    <Dependency>kcoreaddons-devel</Dependency>
+	    <Dependency>kcrash-devel</Dependency>
+	    <Dependency>kdeclarative-devel</Dependency>
+	    <Dependency>kdelibs4-support-devel</Dependency>
+	    <Dependency>kdesu-devel</Dependency>
+	    <Dependency>kdewebkit-devel</Dependency>
+	    <Dependency>kdoctools-devel</Dependency>	
+	    <Dependency>kidletime-devel</Dependency>	
+	    <Dependency>kjsembed-devel</Dependency>	
+	    <Dependency>knewstuff-devel</Dependency>	
+	    <Dependency>knotifyconfig-devel</Dependency>	
+	    <Dependency>krunner-devel</Dependency>	
+	    <Dependency>ktexteditor-devel</Dependency>	
+	    <Dependency>kwallet5-devel</Dependency>	
+	    <Dependency>kwin-devel</Dependency>	    	
+	    <Dependency>libkscreen-devel</Dependency>	
+	    <Dependency>libksysguard5-devel</Dependency>
+	    <Dependency>plasma-framework-devel</Dependency>
+	    <Dependency>solid-devel</Dependency>
+	    <Dependency>framework-integration-devel</Dependency>
+	    <Dependency>solid-devel</Dependency>
+	    <Dependency>breeze-style</Dependency>
+	    <Dependency>milou</Dependency>
+	    <Dependency>phonon-qt5-devel</Dependency>
+	    <Dependency>libqalculate-devel</Dependency>
+	    <Dependency versionFrom="1.3">prison-qt5-devel</Dependency>
+	    <Dependency>libXrender-devel</Dependency>
+	    <Dependency>xcb-util-keysyms-devel</Dependency>
+	    <Dependency>xcb-util-image-devel</Dependency>
+	    <Dependency>libXcursor-devel</Dependency>			    
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>polkit-kde-agent</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>		    
+	    <Dependency>alsa-lib</Dependency>
+	    <Dependency>baloo5</Dependency>
+	    <Dependency>kactivities5</Dependency>
+	    <Dependency>kcmutils</Dependency>
+	    <Dependency>kcoreaddons</Dependency>
+	    <Dependency>kcrash</Dependency>
+	    <Dependency>kdeclarative</Dependency>
+	    <Dependency>kdelibs4-support</Dependency>
+	    <Dependency>kdesu</Dependency>
+	    <Dependency>kdewebkit</Dependency>
+	    <Dependency>kdoctools</Dependency>	
+	    <Dependency>kidletime</Dependency>	
+	    <Dependency>kjsembed</Dependency>	
+	    <Dependency>knewstuff</Dependency>	
+	    <Dependency>knotifyconfig</Dependency>	
+	    <Dependency>krunner</Dependency>	
+	    <Dependency>ktexteditor</Dependency>	
+	    <Dependency>kwallet5</Dependency>	
+	    <Dependency>kwin</Dependency>	    	
+	    <Dependency>libkscreen</Dependency>	
+	    <Dependency>libksysguard5</Dependency>
+	    <Dependency>plasma-framework</Dependency>
+	    <Dependency>solid</Dependency>
+	    <Dependency>framework-integration</Dependency>
+	    <Dependency>solid</Dependency>
+	    <Dependency>breeze-style</Dependency>
+	    <Dependency>milou</Dependency>
+	    <Dependency>phonon-qt5</Dependency>	    
+	    <Dependency>libqalculate</Dependency>
+	    <Dependency>prison-qt5</Dependency>
+	    <Dependency>libXrender</Dependency>
+	    <Dependency>xcb-util-keysyms</Dependency>
+	    <Dependency>xcb-util-image</Dependency>
+	    <Dependency>libXcursor</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Replaces>
+          <Package>kde-workspace</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>kde-workspace</Package>
+        </Conflicts>  
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.2.2</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>
