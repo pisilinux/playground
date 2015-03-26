@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-sddm</Name>
+        <Homepage>https://github.com/sddm/sddm</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>The Simple Desktop Display Manager</Summary>
+        <Description>SDDM is the preferred display manager for KDE Plasma desktop.</Description>
+        <Archive sha1sum="c5bbe6e849e9870a0e1b3c5ea9e7a3b48f9ecda5" type="targz">https://github.com/sddm/sddm/archive/v0.11.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>qt5-tools-devel</Dependency>
+            <Dependency>python3</Dependency>
+	    <Dependency>libxkbfile-devel</Dependency>
+	    <Dependency>libxcb-devel</Dependency>
+	    <Dependency>pam-devel</Dependency>
+	    <Dependency>kde5-kdoctools-devel</Dependency>
+	    <Dependency>xorg-server-xephyr</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-sddm</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+            <Dependency>qt5-tools</Dependency>
+	    <Dependency>kde5-kdoctools</Dependency>
+            <Dependency>xorg-server-xephyr</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc/dbus-1/system.d</Path>
+	    <Path fileType="config">/etc/pam.d</Path>
+            <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="data">/etc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man/man1</Path>
+	    <Path fileType="man">/usr/share/man/man5</Path>           
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+	<Provides>
+            <COMAR script="service.py">System.Service</COMAR>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+        <AdditionalFiles>
+            <AdditionalFile target="/etc/sddm.conf" permission="0644" owner="root">sddm.conf</AdditionalFile>
+            <AdditionalFile target="/etc/pam.d/sddm" permission="0644" owner="root">sddm</AdditionalFile>
+        </AdditionalFiles>
+     </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-03-25</Date>
+            <Version>0.11.0</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
