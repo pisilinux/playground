@@ -1,0 +1,49 @@
+
+# include global config
+source ../_buildscripts/${current_repo}-${_arch}-cfg.conf
+
+pkgname=kmailtransport
+#pkgver=${_kdever}
+pkgver=14.12.83
+pkgrel=1
+pkgdesc="Manage mail transport"
+arch=('x86_64')
+url='https://projects.kde.org/projects/kde/pim/kmailtransport'
+license=('LGPL')
+depends=('kdelibs4support' 'kcmutils' 'kconfigwidgets' 'kwallet' 'kmime' 'akonadi' 'kdepimlibs')
+makedepends=('extra-cmake-modules' 'kdoctools' 'git' 'boost')
+#source=($_mirror/${_pkgname}-$_kdever.tar.xz)
+#md5sums=(`grep ${_pkgname}-$_kdever.tar.xz ../kde-sc.md5 | cut -d" " -f1`)
+source=("git://anongit.kde.org/kmailtransport.git")
+md5sums=('SKIP')
+
+prepare() {
+  cd $pkgname
+  #sed -i -e 's|set(KMIME_LIB_VERSION "4.81.0")|set(KMIME_LIB_VERSION "4.80.0")|' ${srcdir}/${pkgname}/CMakeLists.txt
+  #sed -i -e 's|set(AKONADI_LIB_VERSION "4.81.0")|set(AKONADI_LIB_VERSION "4.80.0")|' ${srcdir}/${pkgname}/CMakeLists.txt
+  #sed -i -e 's|set(AKONADIMIME_LIB_VERSION "4.81.0")|set(AKONADIMIME_LIB_VERSION "4.80.0")|' ${srcdir}/${pkgname}/CMakeLists.txt
+}
+
+build() {
+  cd ${srcdir}
+
+  mkdir build
+  
+  cd build 
+  cmake ../${pkgname} \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+    -DQML_INSTALL_DIR=/usr/lib/qt5/qml \
+    -DPLUGIN_INSTALL_DIR=/usr/lib/qt5/plugins \
+    -DBUILD_TESTING=OFF 
+  make 
+}
+
+package() {
+  cd ${srcdir}/build
+  
+  make DESTDIR=${pkgdir} install
+}

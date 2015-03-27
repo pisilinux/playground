@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>package-manager</Name>
+        <Homepage>http://www.pisilinux.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>PiSi graphical user interface</Summary>
+        <Description>Package Manager is PiSi's easy-to-use graphical user interface.</Description>
+        <Archive sha1sum="f38baac1c6e2a14f4271e7045f680aac1432b3ca" type="zip">/home/vedat/İndirilenler/package-management-master.zip</Archive>
+        <BuildDependencies>
+            <Dependency>docutils</Dependency>
+            <Dependency>python-qt5</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>package-manager</Name>
+        <RuntimeDependencies>
+            <Dependency>pisi</Dependency>
+            <Dependency>python-qt5</Dependency>
+            <Dependency>python-appinfo</Dependency>
+            <Dependency>python-sip</Dependency>
+            <Dependency>pisilinux-desktop-services</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="7">
+            <Date>2014-12-07</Date>
+            <Version>4.0.0</Version>
+            <Comment>Patch add (kurulum sonrası bilgi ekranında gelen görsel gösterme seçeneği arttırıldı.).</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-06-14</Date>
+            <Version>4.0.0</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-02-13</Date>
+            <Version>4.0.0</Version>
+            <Comment>Cosmetic GUI patch</Comment>
+            <Name>Nikolay Semenov</Name>
+            <Email>tribunal@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2014-01-12</Date>
+            <Version>4.0.0</Version>
+            <Comment>Switch PDS based managers, use github source named package-manager-pds.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-12-19</Date>
+            <Version>3.0.3</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-09-14</Date>
+            <Version>3.0.3</Version>
+            <Comment>Release Bump.</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-08-01</Date>
+            <Version>3.0.3</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

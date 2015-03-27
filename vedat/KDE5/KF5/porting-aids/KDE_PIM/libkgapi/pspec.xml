@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libkgapi</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>Library to provides access and handling of KAlarm calendar data</Summary>
+        <Description>Library to provides access and handling of KAlarm calendar data</Description>
+        <Archive sha1sum="1207a323f9fc3849cfb483a152a6fb378ad98689" type="tarxz">https://dl.dropboxusercontent.com/s/t8z1063obb9ux4e/libkgapi.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>kcalcore-devel</Dependency>
+            <Dependency>kholidays-devel</Dependency>
+            <Dependency>kidentitymanagement-devel</Dependency>
+            <Dependency>kdepimlibs5-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libkgapi</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>libkgapi-devel</Name>
+	<Summary>Development files for kdelibs4-support</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-devel</Dependency>
+            <Dependency release="current">libkgapi</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-03-20</Date>
+            <Version>5.0.0</Version>
+            <Comment>qt5 support</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedatqpisilinux.org</Email>
+        </Update>     
+    </History>
+</PISI>

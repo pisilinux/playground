@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>baloo-widgets</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>Framework for searching and managing metadata</Summary>
+        <Description>Baloo is a framework for searching and managing metada</Description>
+        <Archive sha1sum="87a0c489646d435d5b24cd96402e5ed0ab65161f" type="tarxz">https://dl.dropboxusercontent.com/s/fnckcq0ammvhlin/baloo-widgets.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>
+            <Dependency>baloo5-devel</Dependency>
+            <Dependency>attr-devel</Dependency>
+            <Dependency>xapian-core-devel</Dependency>		    
+	    <Dependency>kauth-devel</Dependency>
+	    <Dependency>kcmutils-devel</Dependency>
+	    <Dependency>kconfig-devel</Dependency>
+	    <Dependency>kcrash-devel</Dependency>
+	    <Dependency>kdelibs4-support-devel</Dependency>
+	    <Dependency>ki18n-devel</Dependency>
+	    <Dependency>kidletime-devel</Dependency>
+	    <Dependency>kio-devel</Dependency>
+	    <Dependency>krunner-devel</Dependency>	   
+	    <Dependency>solid-devel</Dependency>
+	    <Dependency versionFrom="5.6.2">kfilemetadata5-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>	    
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>baloo-widgets</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>
+            <Dependency>baloo5</Dependency>
+            <Dependency>attr</Dependency>
+            <Dependency>xapian-core</Dependency>		    
+	    <Dependency>kauth</Dependency>
+	    <Dependency>kcmutils</Dependency>
+	    <Dependency>kconfig</Dependency>
+	    <Dependency>kcrash</Dependency>
+	    <Dependency>kdelibs4-support</Dependency>
+	    <Dependency>ki18n</Dependency>
+	    <Dependency>kidletime</Dependency>
+	    <Dependency>kio</Dependency>
+	    <Dependency>krunner</Dependency>	   
+	    <Dependency>solid</Dependency>
+	    <Dependency versionFrom="5.6.1">kfilemetadata5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Replaces>
+          <Package>baloo</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>baloo</Package>
+        </Conflicts> 
+    </Package>
+    
+    <Package>
+        <Name>baloo-widgets-devel</Name>
+	<Summary>Development files for baloo-widgets</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-devel</Dependency>
+            <Dependency release="current">baloo-widgets</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+        <Replaces>
+          <Package>baloo-devel</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>baloo-devel</Package>
+        </Conflicts> 
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-03-21</Date>
+            <Version>5</Version>
+            <Comment>qt5 support</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>       
+        <Update release="1">
+            <Date>2015-09-20</Date>
+            <Version>5</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>

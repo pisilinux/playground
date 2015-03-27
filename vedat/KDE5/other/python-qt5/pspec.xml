@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>python-qt5</Name>
+        <Homepage>http://www.riverbankcomputing.co.uk/software/pyqt</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>GPLv3</License>
+        <IsA>library</IsA>
+        <Summary>A set of Python 2.x bindings for the Qt 4.x Toolkit</Summary>
+        <Description>Qt is a set of C++ libraries and development tools that includes platform independent abstractions for graphical user interfaces, networking, threads, Unicode, regular expressions, SQL databases, SVG, OpenGL, XML, and user and application settings. PyQt implements 440 of these classes as a set of Python modules.</Description>
+        <Archive sha1sum="0662379b66da422dfcbb0ca46df9d41208e859f4" type="targz">http://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.4.1/PyQt-gpl-5.4.1.tar.gz</Archive> 
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>
+            <Dependency version="4.16.6">sip5-devel</Dependency>
+            <Dependency>python3</Dependency>
+            <Dependency>dbus-python3</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>python-qt5-common</Name>
+        <Summary>Common files shared between python-qt5.</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>
+            <Dependency version="4.16.6">sip5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/pylupdate5</Path>
+            <Path fileType="executable">/usr/bin/pyrcc5</Path>
+            <Path fileType="library">/usr/lib/qt5</Path>
+            <Path fileType="data">/usr/share/qt5/qsci</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins/designer</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>python-qt5</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">python-qt5-common</Dependency>
+            <Dependency>qt5</Dependency>
+            <Dependency>sip5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/pyuic5</Path>
+            <Path fileType="library">/usr/lib/python2.7</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>python3-qt5</Name>
+        <Summary>A set of Python 3.x bindings for the Qt 5.x Toolkit</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">python-qt5-common</Dependency>
+            <Dependency>qt5</Dependency>
+            <Dependency>python3-sip5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/pyuic5-python</Path>
+            <Path fileType="library">/usr/lib/python3*</Path>
+            <Path fileType="data">/usr/share/sip/PyQt5</Path>
+        </Files>
+    </Package>
+
+   
+    <History>
+        <Update release="1">
+            <Date>2015-03-15</Date>
+            <Version>5.4.1</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
