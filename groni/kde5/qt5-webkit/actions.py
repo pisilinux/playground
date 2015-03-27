@@ -12,17 +12,15 @@ from pisi.actionsapi import get
 
 def setup():
     shelltools.system("export QT5LINK=/usr/lib/qt5/bin")
-    shelltools.system("qmake-qt5 WebKit.pro")
-    #autotools.autoreconf("-fiv")
-    #autotools.configure("--no-webkit2\
-     #                    --no-video \
-      #                   --prefix /usr")
+    shelltools.system("qmake-qt5 WebKit.pro")    
 
 def build():
     qt5.make("-j4")
 
 def install():
-    qt5.install("INSTALL_ROOT=%s" % get.installDIR())
+    pisitools.dodir("/usr/bin")
+    pisitools.dodir("/usr/lib")
+    qt5.install()
 
     #I hope qtchooser will manage this issue
     for bin in shelltools.ls("%s/usr/lib/qt5/bin" % get.installDIR()):
