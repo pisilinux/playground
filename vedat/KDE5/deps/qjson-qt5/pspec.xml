@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>qjson-qt5</Name>
+        <Homepage>http://qjson.sourceforge.net</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>Qt-based library that maps JSON data to QVariant objects</Summary>
+        <Description>libqjson, (JavaScript Object Notation) is a lightweight data-interchange format. It can represents integer, real number, string, an ordered sequence of value, and a collection of name/value pairs.</Description>
+        <Archive sha1sum="197ccfd533f17bcf40428e68a82e6622047ed4ab" type="tarbz2">mirrors://sourceforge/qjson/qjson/0.8.1/qjson-0.8.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>
+            <Dependency>cmake</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>qjson_upstream.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>qjson-qt5</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Replaces>
+          <Package>libqjson</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>libqjson</Package>
+        </Conflicts>  
+    </Package>
+
+    <Package>
+        <Name>qjson-qt5-devel</Name>
+        <Summary>Development files for qjson-qt5</Summary>
+        <RuntimeDependencies>
+            <Dependency releaseFrom="1">qjson-qt5</Dependency>
+            <Dependency>qt5-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/qjson</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib/cmake/qjson</Path>
+        </Files>
+        <Replaces>
+          <Package>libqjson-devel</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>libqjson-devel</Package>
+        </Conflicts>  
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-05-30</Date>
+            <Version>0.8.1.1</Version>
+            <Comment>qt5 support.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -13,6 +13,8 @@ def setup():
                             -DCMAKE_INSTALL_PREFIX=/usr \
                             -DLIB_INSTALL_DIR=lib \
                             -DPLUGIN_INSTALL_DIR=/usr/lib/qt5/plugins \
+                            -DPYTHON_EXECUTABLE=/usr/bin/python3 \
+                            -DECM_MKSPECS_INSTALL_DIR=/usr/lib/qt5/mkspecs/modules \
                             -DDATABASE_BACKEND=SQLITE \
                             -DKDE_INSTALL_USE_QT_SYS_PATHS=ON")
 

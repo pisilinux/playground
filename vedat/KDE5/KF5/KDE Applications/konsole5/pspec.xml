@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>konsole</Name>
+        <Homepage>https://projects.kde.org/projects/kde/applications/dolphin</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Summary>KDE File Manager</Summary>
+        <Description>python-kde is the Python bindings for KDE5.</Description>
+        <Archive sha1sum="7f246a5cd7159c767744302cc3d9b329762e35ef" type="tarxz">https://dl.dropboxusercontent.com/s/ko21apl2tnv9sbk/konsole.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+	    <Dependency versionFrom="5.8.0">kinit</Dependency>
+	    <Dependency versionFrom="5.8.0">kdelibs4-support-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">knotifyconfig-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">knotifications-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kparts-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kpty-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kemoticons-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kitemmodels-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kdoctools-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kio-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>konsole5</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kinit</Dependency>
+	    <Dependency versionFrom="5.8.0">kdelibs4-support</Dependency>
+	    <Dependency versionFrom="5.8.0">kiconthemes</Dependency>
+	    <Dependency versionFrom="5.8.0">knotifyconfig</Dependency>
+	    <Dependency versionFrom="5.8.0">knotifications</Dependency>
+	    <Dependency versionFrom="5.8.0">kparts</Dependency>
+	    <Dependency versionFrom="5.8.0">kpty</Dependency>
+	    <Dependency versionFrom="5.8.0">kemoticons</Dependency>
+	    <Dependency versionFrom="5.8.0">kitemmodels</Dependency>
+	    <Dependency versionFrom="5.8.0">kdoctools</Dependency>
+	    <Dependency versionFrom="5.8.0">kio</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/etc/xdg/servicemenu.knsrc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-03-19</Date>
+            <Version>5</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
