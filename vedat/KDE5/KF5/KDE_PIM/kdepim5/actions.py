@@ -8,11 +8,12 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import cmaketools
 
 def setup():
-    # pisitools.ldflags.add("-Wl,-rpath")
     cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
+                          -DECM_MKSPECS_INSTALL_DIR=/usr/lib/qt5/mkspecs/modules \
                           -DQT_PLUGIN_INSTALL_DIR=lib/qt5/plugins \
-                          -DLOCALE_INSTALL_DIR=/usr/share/locale \
                           -DLIB_INSTALL_DIR=lib \
+                          -DSYSCONF_INSTALL_DIR=/etc \
+                          -I/usr/include/KF5/akonadi \
                           -DPYTHON_EXECUTABLE=/usr/bin/python3 \
                           -DBUILD_TESTING=OFF")
 
@@ -22,4 +23,4 @@ def build():
 def install():
     cmaketools.install()
     
-    pisitools.dodoc("README.md", "COPYING.LIB")
+    pisitools.dodoc("COPYING", "COPYING.LIB")

@@ -8,12 +8,15 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import cmaketools
 
 def setup():
-    # pisitools.ldflags.add("-Wl,-rpath")
     cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
+                          -DECM_MKSPECS_INSTALL_DIR=/usr/lib/qt5/mkspecs/modules \
                           -DQT_PLUGIN_INSTALL_DIR=lib/qt5/plugins \
-                          -DLOCALE_INSTALL_DIR=/usr/share/locale \
                           -DLIB_INSTALL_DIR=lib \
+                          -DSYSCONF_INSTALL_DIR=/etc \
+                          -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+                          -DCMAKE_SKIP_RPATH=ON \
                           -DPYTHON_EXECUTABLE=/usr/bin/python3 \
+                          -DQML_INSTALL_DIR=/usr/lib/qt5/qml \
                           -DBUILD_TESTING=OFF")
 
 def build():
@@ -22,4 +25,5 @@ def build():
 def install():
     cmaketools.install()
     
-    pisitools.dodoc("README.md", "COPYING.LIB")
+    #pisitools.insinto("/usr/include/KF5/KLDAP", "/usr/include/KF5/kldap_version.h")
+    #pisitools.dodoc("COPYING.LIB", "README", "CHANGELOG", "AUTHORS")

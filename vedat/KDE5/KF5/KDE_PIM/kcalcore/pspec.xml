@@ -2,7 +2,7 @@
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
-        <Name>kauth</Name>
+        <Name>kcalcore</Name>
         <Homepage>http://www.kde.org</Homepage>
         <Packager>
             <Name>Vedat Demir</Name>
@@ -10,41 +10,45 @@
         </Packager>
         <License>LGPLv2</License>
         <IsA>library</IsA>
-        <Summary>Framework which lets applications perform actions as a privileged user</Summary>
-        <Description>Framework which lets applications perform actions as a privileged user</Description>
-        <Archive sha1sum="2723d951c1be06f8483c03933599b02d6be48f4e" type="tarxz">mirrors://kde/stable/frameworks/5.8/kauth-5.8.0.tar.xz</Archive>
+	<IsA>app:console</IsA>
+        <Summary>Code and utilities to ease the transition to KDE Frameworks 5</Summary>
+        <Description>KDELibs4Support provides libraries to port KDE4 programs to QT5/KF5</Description>
+        <Archive sha1sum="c56212975648b0abba6a67918c88a70d14b00d3f" type="tarxz">https://dl.dropboxusercontent.com/s/bxy2m6edu2wmbo5/kcalcore.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-devel</Dependency>
-	    <Dependency>polkit-qt5-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kcoreaddons-devel</Dependency>
+            <Dependency>kdelibs4-support-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>kdoctools-devel</Dependency>
+            <Dependency>libical-devel</Dependency>
+            <Dependency>git</Dependency>
         </BuildDependencies>
-	<Patches>
-	</Patches>
     </Source>
 
     <Package>
-        <Name>kauth</Name>
+        <Name>kcalcore</Name>
         <RuntimeDependencies>
             <Dependency>qt5</Dependency>
-	    <Dependency versionFrom="5.8.0">kcoreaddons</Dependency>
+            <Dependency>kdelibs4-support</Dependency>
+            <Dependency>libical</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
             <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
 	    <Path fileType="library">/usr/lib/qt5</Path>
 	    <Path fileType="library">/usr/lib</Path>
-	    <Path fileType="library">/usr/libexec</Path>
             <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="man">/usr/share/man</Path>
         </Files>
     </Package>
     
     <Package>
-        <Name>kauth-devel</Name>
-	<Summary>Development files for kauth</Summary>
+        <Name>kcalcore-devel</Name>
+	<Summary>Development files for kdelibs4-support</Summary>
         <RuntimeDependencies>
-            <Dependency release="current">kauth</Dependency>
-	    <Dependency versionFrom="5.8.0">kcoreaddons-devel</Dependency>
+	    <Dependency>qt5-devel</Dependency>
+            <Dependency release="current">kcalcore</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -55,18 +59,11 @@
 
     <History>
         <Update release="2">
-            <Date>2012-03-20</Date>
-            <Version>5.8.0</Version>
-            <Comment>Version Bump</Comment>
+            <Date>2015-03-20</Date>
+            <Version>14.12.83</Version>
+            <Comment>qt5 support</Comment>
             <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
-        </Update>   
-        <Update release="1">
-            <Date>2014-09-20</Date>
-            <Version>5.8.0</Version>
-            <Comment>First release</Comment>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
-        </Update>        
+            <Email>vedatqpisilinux.org</Email>
+        </Update>     
     </History>
 </PISI>

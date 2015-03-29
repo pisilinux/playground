@@ -8,11 +8,8 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import cmaketools
 
 def setup():
-    # pisitools.ldflags.add("-Wl,-rpath")
     cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
-                          -DQT_PLUGIN_INSTALL_DIR=lib/qt5/plugins \
-                          -DLOCALE_INSTALL_DIR=/usr/share/locale \
-                          -DLIB_INSTALL_DIR=lib \
+                          -DSHARED_ONLY=yes \
                           -DPYTHON_EXECUTABLE=/usr/bin/python3 \
                           -DBUILD_TESTING=OFF")
 
@@ -22,4 +19,4 @@ def build():
 def install():
     cmaketools.install()
     
-    pisitools.dodoc("README.md", "COPYING.LIB")
+    pisitools.dodoc("TODO", "THANKS", "LICENSE", "AUTHORS")

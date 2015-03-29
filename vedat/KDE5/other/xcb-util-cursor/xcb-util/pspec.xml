@@ -1,0 +1,81 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xcb-util-cursor</Name>
+        <Homepage>http://xcb.freedesktop.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>library</IsA>
+        <Summary>A number of libraries which sit on top of libxcb</Summary>
+        <Description>The xcb-util-cursor module provides a number of libraries which sit on top of libxcb, the core X protocol library, and some of the extension libraries.</Description>
+        <Archive sha1sum="b55a92cd96c3ec1be9a26963df6d5f16e68fffea" type="tarbz2">http://xcb.freedesktop.org/dist/xcb-util-cursor-0.1.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xcb-util-renderutil-devel</Dependency>
+            <Dependency>xcb-util-image-devel</Dependency>
+            <Dependency>libxcb-devel</Dependency>
+            <Dependency>xcb-util-image-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>xcb-util-cursor</Name>
+        <RuntimeDependencies>
+            <Dependency>xcb-util-renderutil</Dependency>
+            <Dependency>xcb-util-image</Dependency>
+            <Dependency>libxcb</Dependency>
+            <Dependency>xcb-util-image</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>xcb-util-cursor-devel</Name>
+        <Summary>Development files for xcb-util-cursor</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">xcb-util-cursor</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>xcb-util-cursor-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for xcb-util-cursor</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>libxcb-32bit</Dependency>
+            <Dependency>xcb-util-image-32bit</Dependency>
+            <Dependency>xcb-util-renderutil-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">xcb-util-cursor</Dependency>
+            <Dependency>xcb-util-image-32bit</Dependency>
+            <Dependency>xcb-util-renderutil-32bit</Dependency>
+            <Dependency>libxcb-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-06-01</Date>
+            <Version>0.1.2</Version>
+            <Comment>First release</Comment>
+            <Name>Erdem Artan</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

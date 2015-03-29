@@ -9,9 +9,11 @@ from pisi.actionsapi import cmaketools
 
 def setup():
     cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
-                          -DECM_MKSPECS_INSTALL_DIR=/usr/lib/qt5/mkspecs/modules \
                           -DLIB_INSTALL_DIR=lib \
                           -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+                          -DPLUGIN_INSTALL_DIR=/usr/lib/qt5/plugins \
+                          -DPYTHON_EXECUTABLE=/usr/bin/python3 \
+                          -DECM_MKSPECS_INSTALL_DIR=/usr/lib/qt5/mkspecs/modules \
                           -DBUILD_TESTING=OFF")
 
 def build():
