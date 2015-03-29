@@ -11,6 +11,7 @@ def setup():
     cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
                           -DECM_MKSPECS_INSTALL_DIR=/usr/lib/qt5/mkspecs/modules \
                           -DLIB_INSTALL_DIR=lib \
+                          -DPLUGIN_INSTALL_DIR=/usr/lib/qt5/plugins \
                           -DSYSCONF_INSTALL_DIR=/etc \
                           -DPYTHON_EXECUTABLE=/usr/bin/python3 \
                           -DBUILD_TESTING=OFF")

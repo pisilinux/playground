@@ -8,6 +8,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import cmaketools
 
 def setup():
+    # pisitools.ldflags.add("-Wl,-rpath")
     cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
                           -DQT_PLUGIN_INSTALL_DIR=lib/qt5/plugins \
                           -DLOCALE_INSTALL_DIR=/usr/share/locale \

@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>qtcurve-GTK2</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Open Collaboration Service client library, based on Qt 5</Summary>
+        <Description>Attica is a library to access Open Collaboration Service servers, based on Qt 5.</Description>
+        <Archive sha1sum="4eb06054424f0fea9b81ce5098f6addc2b1b557e" type="tarxz">https://dl.dropboxusercontent.com/s/7wnwsp39g10fjll/qtcurve.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>
+	    <Dependency versionFrom="1.8.0">extra-cmake-modules</Dependency>
+	    <Dependency versionFrom="5.8.0">karchive-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kdelibs4-support-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kio-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kxmlgui-devel</Dependency>
+	    <Dependency>libX11-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kdoctools-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>qtcurve-GTK2</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>
+	    <Dependency versionFrom="5.8.0">karchive</Dependency>
+	    <Dependency versionFrom="5.8.0">kconfig</Dependency>
+	    <Dependency versionFrom="5.8.0">kconfigwidgets</Dependency>
+	    <Dependency versionFrom="5.8.0">ki18n</Dependency>
+	    <Dependency versionFrom="5.8.0">kdelibs4-support</Dependency>
+	    <Dependency versionFrom="5.8.0">kio</Dependency>
+	    <Dependency versionFrom="5.8.0">kwidgetsaddons</Dependency>
+	    <Dependency versionFrom="5.8.0">kxmlgui</Dependency>
+	    <Dependency>libX11</Dependency>
+	    <Dependency versionFrom="5.8.0">kdoctools</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile permission="0644" target="/usr/share/themes/QtCurve/kdeglobals">kdeglobals</AdditionalFile>
+        </AdditionalFiles>
+        <Replaces>
+          <Package>QtCurve-Gtk2</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>QtCurve-Gtk2</Package>
+        </Conflicts>  
+    </Package>
+    
+
+    <History>
+        <Update release="1">
+            <Date>2015-03-15</Date>
+            <Version>1.8.18.6</Version>
+            <Comment>qt5 support</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>    
+    </History>
+</PISI>

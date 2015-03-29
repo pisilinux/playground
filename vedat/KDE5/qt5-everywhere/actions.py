@@ -59,5 +59,5 @@ def install():
     pisitools.dodir("/usr/bin")
     pisitools.dodir("/usr/lib")
     autotools.rawInstall ("INSTALL_ROOT=%s" % get.installDIR())
-
+    pisitools.dosym("/usr/bin/qdbus", "/usr/bin/qdbus-qt5")
     pisitools.remove("/usr/lib/*.prl") 

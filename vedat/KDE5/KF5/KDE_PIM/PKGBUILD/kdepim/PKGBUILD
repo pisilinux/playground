@@ -1,0 +1,84 @@
+
+# include global config
+source ../_buildscripts/${current_repo}-${_arch}-cfg.conf
+
+pkgname=kdepim
+arch=('x86_64')
+#pkgver=${_kdever}
+pkgver=14.12.85
+pkgrel=1
+pkgdesc="Project that aims to bring together anything to do with personal information management."
+url="http://www.kde.org"
+license=('GPL' 'LGPL' 'FDL')
+depends=('grantlee-qt5' 'phonon-qt5' 'qt5-tools' 'prison' 'baloo' 'libkgapi' 'qtwebengine' 'kdepim-runtime'
+         #frameworks
+         'kdelibs4support' 'kwallet' 'knewstuff' 'kcmutils' 'kdewebkit' 'karchive' 'knotifyconfig'
+         'kconfig' 'khtml' 'kservice' 'kdbusaddons' 'kauth' 'ktexteditor' 'kdnssd' 'kcodecs' 'kglobalaccel'
+         'sonnet' 'kross' 
+         #kdepimlibs
+         'kcontacts' 'kcalcore' 'kidentitymanagement' 'kldap' 'kmailtransport' 'kcalutils' 'kontactinterface'
+         'kholidays' 'ktnef' 'kimap' 'kmbox' 'akonadi-calendar' 'syndication' 'gpgmepp' 'kalarmcal' 'kmime'
+         'kxmlrpcclient' 'kblog' 'kdepimlibs' 'akonadi-search')
+makedepends=('boost' 'extra-cmake-modules' 'kdoctools' 'git')
+conflicts=('kf5-kdepim'
+           'kdepim-common'
+           'kdepim-akonadiconsole'
+           'kdepim-akregator'
+           'kdepim-blogilo'
+           'kdepim-kaddressbook'
+           'kdepim-kalarm'
+           'kdepim-kjots'
+	   'kdepim-kleopatra'
+           'kdepim-kmail'
+           'kdepim-knode'
+           'kdepim-knotes'
+           'kdepim-kontact'
+           'kdepim-korganizer'
+           'kdepim-ktimetracker') 
+replaces=('kf5-kdepim'
+          'kdepim-common'
+	  'kdepim-akonadiconsole'
+          'kdepim-akregator'
+          'kdepim-blogilo'
+          'kdepim-kaddressbook'
+          'kdepim-kalarm'
+          'kdepim-kjots'
+	  'kdepim-kleopatra'
+          'kdepim-kmail'
+          'kdepim-knode'
+          'kdepim-knotes'
+          'kdepim-kontact'
+          'kdepim-korganizer'
+          'kdepim-ktimetracker')
+install=kdepim.install
+#source=($_mirror/${pkgbase}-${pkgver}.tar.xz)
+#md5sums=(`grep ${pkgbase}-$_kdever.tar.xz ../kde-sc.md5 | cut -d" " -f1`)
+source=("git://anongit.kde.org/kdepim.git")
+md5sums=('SKIP')
+
+build() {
+  cd ${srcdir}
+  #sed -i 's|KF5::AkonadiPrivate|KF5::KF5AkonadiPrivate|' ${srcdir}/$_pkgname/akonadi_next/CMakeLists.txt
+
+  mkdir build
+  
+  cd build 
+  cmake ../${pkgname} \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DLIB_INSTALL_DIR=lib \
+    -DSYSCONF_INSTALL_DIR=/etc \
+    -DQML_INSTALL_DIR=/usr/lib/qt5/qml \
+    -DPLUGIN_INSTALL_DIR=/usr/lib/qt5/plugins \
+    -DKDEPIM_BUILD_MOBILE=FALSE \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+    #-DBUILD_TESTING=OFF
+  make 
+}
+
+package() {
+  cd ${srcdir}/build
+  
+  make DESTDIR=${pkgdir} install
+}
