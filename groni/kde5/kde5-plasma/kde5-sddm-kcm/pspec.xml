@@ -25,8 +25,8 @@
             <Dependency>qt5-tools-devel</Dependency>
             <Dependency>qt5-x11extras-devel</Dependency>
 	    <Dependency>kde5-kconfig-devel</Dependency>
-	    <Dependency>python3</Dependency>
-	    <Dependency>libXcursor-devel</Dependency>
+	    <Dependency>docutils</Dependency>
+	    <Dependency>libXcursor-devel</Dependency>	    
         </BuildDependencies>
     </Source>
 
@@ -45,13 +45,13 @@
             <Dependency>kde5-kconfig</Dependency>
 	    <Dependency>qt5-x11extras</Dependency>
 	    <Dependency>qt5-declarative</Dependency>
+	    <Dependency>xorg-server-xephyr</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="config">/etc/dbus-1</Path>
-            <Path fileType="library">/usr/lib/qt5/plugins</Path>
-	    <Path fileType="library">/usr/lib</Path>
-            <Path fileType="data">/usr/share/kservices5</Path>
+            <Path fileType="config">/etc/</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/kservices</Path>
 	    <Path fileType="data">/usr/share</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="doc">/usr/share/doc</Path>

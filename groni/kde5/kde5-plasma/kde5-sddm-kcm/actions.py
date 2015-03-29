@@ -11,10 +11,9 @@ from pisi.actionsapi import get
 def setup():
     cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
                           -DCMAKE_INSTALL_PREFIX=/usr \
-                          -DLIB_INSTALL_DIR=lib \
-                          -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-                          -DSYSCONF_INSTALL_DIR=/etc \
-                          -DBUILD_TESTING=OFF")
+                          -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib/sddm \
+                          -DBUILD_MAN_PAGES=ON ")
+                          
 
 def build():
     cmaketools.make()
