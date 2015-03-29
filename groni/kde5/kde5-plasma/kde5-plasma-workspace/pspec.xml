@@ -1,0 +1,151 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-plasma-workspace</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	    <IsA>app:console</IsA>
+	    <IsA>app:gui</IsA>
+        <Summary>The KDE5 Plasma Workspace Components</Summary>
+        <Description>The KDE5 Plasma Workspace Components</Description>
+        <Archive sha1sum="70b33e244cc74081cb8a39ced93f1eca4bb6ab36" type="tarxz">http://download.kde.org/stable/plasma/5.2.1/plasma-workspace-5.2.1.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+	    <Dependency>gpsd-devel</Dependency>
+	    <Dependency>kde5-kwayland</Dependency>
+	    <Dependency>kde5-baloo-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+	    <Dependency>kde5-kdelibs4-support-devel</Dependency>
+	    <Dependency>kde5-kdoctools-devel</Dependency>
+	    <Dependency>kde5-krunner-devel</Dependency>
+	    <Dependency>kde5-kwin-devel</Dependency>
+	    <Dependency>libXcursor-devel</Dependency>    
+        </BuildDependencies>
+        <Patches>
+	  <Patch level="1">lockscreen-focus.patch</Patch>
+	    <!--<Patch level="1">create_kdehome.patch</Patch>
+            <Patch level="1">0001-Rename-qdbus-in-startkde.patch</Patch>
+	  <Patch level="1">0003-Remove-export-of-QT_PLUGIN_PATH.patch</Patch> -->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>kde5-plasma-workspace</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>    
+	    <Dependency>qt5-tools</Dependency>
+	    <Dependency>kde5-kde-cli-tools</Dependency>
+	    <Dependency>kde5-kded</Dependency>
+	    <Dependency>kde5-kjsembed</Dependency>
+	    <Dependency>kde5-knewstuff</Dependency>
+	    <Dependency>kde5-knotifyconfig</Dependency>
+	    <Dependency>kde5-ktexteditor</Dependency>
+	    <Dependency>kde5-kwayland</Dependency>
+	    <Dependency>kde5-libkscreen</Dependency>
+	    <Dependency>kde5-libksysguard</Dependency>
+	    <Dependency>libqalculate</Dependency>
+	    <Dependency>libXdamage</Dependency>
+	    <Dependency>kde5-milou</Dependency>
+	    <Dependency>xorg-util</Dependency>
+	    <Dependency>kde5-krunner</Dependency>
+	    <Dependency>kde5-kwin</Dependency>
+	    <Dependency>kde5-libksysguard</Dependency>
+	    <Dependency>kde5-kdoctools</Dependency>
+	    <Dependency>kde5-kdelibs4-support</Dependency>
+	    
+	    <!--<Dependency>kde5-kcmutils</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kcrash</Dependency>
+	    <Dependency>kde5-kdeclarative</Dependency>
+	    <Dependency>kde5-kdelibs4-support</Dependency>
+	    <Dependency>kde5-kdesu</Dependency>
+	    <Dependency>kde5-kdewebkit</Dependency>
+	    	
+	    <Dependency>kde5-kidletime</Dependency>	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    <Dependency>kde5-kwallet</Dependency>	
+	    	    	
+	    	
+	    
+	    <Dependency>kde5-plasma-framework</Dependency>
+	    <Dependency>kde5-solid</Dependency>
+	    <Dependency>kde5-kwayland</Dependency>
+	    <Dependency>kde5-framework-integration</Dependency>
+	    <Dependency>kde5-breeze-style</Dependency>
+	    
+	    <Dependency>qt5-phonon</Dependency>	    
+	    
+	    <Dependency>prison</Dependency>
+	    <Dependency>libXrender</Dependency>
+	    <Dependency>xapian-core</Dependency>
+	    <Dependency>xcb-util-keysyms</Dependency>
+	    <Dependency>xcb-util-image</Dependency>
+	    <Dependency>libXcursor</Dependency> -->
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+	<AdditionalFiles>
+	  <AdditionalFile target="/etc/pam.d/kde" permission="0644" owner="root">kde.pam</AdditionalFile>
+        </AdditionalFiles>
+        <Replaces>
+          <Package>kde-workspace</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>kde-workspace</Package>
+        </Conflicts>  
+    </Package>
+    
+    <Package>
+        <Name>kde5-plasma-workspace-devel</Name>
+	<Summary>Development files for kde5 plasma-workspace</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-base-devel</Dependency>
+            <Dependency release="current">kde5-plasma-workspace</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>                
+        <Replaces>
+          <Package>kde-workspace-devel</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>kde-workspace-devel</Package>
+        </Conflicts> 
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-03-23</Date>
+            <Version>5.2.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.0.2</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>        
+    </History>
+</PISI>
