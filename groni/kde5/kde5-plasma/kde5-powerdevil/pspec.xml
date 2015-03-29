@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-powerdevil</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>KDE power manager module</Summary>
+        <Description>KDE Power Management module. Provides kded daemon DBus helper and KCM for configuring Power settings</Description>
+        <Archive sha1sum="d3771d294f8ee8c47a3850b5216e2aed038a9968" type="tarxz">mirrors://kde/stable/plasma/5.2.1/powerdevil-5.2.1.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>		    
+	    <Dependency>kde5-kauth-devel</Dependency>
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kdelibs4-support-devel</Dependency>
+	    <Dependency>kde5-kglobalaccel-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kidletime-devel</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
+	    <Dependency>kde5-knotifyconfig-devel</Dependency>
+	    <Dependency>kde5-plasma-workspace-devel</Dependency>
+	    <Dependency>kde5-solid-devel</Dependency>
+	    <Dependency>libXrandr-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>	    
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-powerdevil</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>		    
+	    <Dependency>kde5-kauth</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kdelibs4-support</Dependency>
+	    <Dependency>kde5-kglobalaccel</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
+	    <Dependency>kde5-kidletime</Dependency>
+	    <Dependency>kde5-kio</Dependency>
+	    <Dependency>kde5-knotifyconfig</Dependency>
+	    <Dependency>kde5-plasma-workspace</Dependency>
+	    <Dependency>kde5-solid</Dependency>
+	    <Dependency>libXrandr</Dependency>
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-03-29</Date>
+            <Version>5.2.1</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>
