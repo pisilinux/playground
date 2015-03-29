@@ -17,6 +17,9 @@
         <Archive sha1sum="70b33e244cc74081cb8a39ced93f1eca4bb6ab36" type="tarxz">http://download.kde.org/stable/plasma/5.2.1/plasma-workspace-5.2.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
+	    <Dependency>kde5-libkscreen-devel</Dependency>
+	    <Dependency>kde5-libksysguard-devel</Dependency>
+	    <Dependency>libqalculate-devel</Dependency>
 	    <Dependency>gpsd-devel</Dependency>
 	    <Dependency>kde5-kwayland</Dependency>
 	    <Dependency>kde5-baloo-devel</Dependency>
@@ -25,13 +28,16 @@
 	    <Dependency>kde5-kdoctools-devel</Dependency>
 	    <Dependency>kde5-krunner-devel</Dependency>
 	    <Dependency>kde5-kwin-devel</Dependency>
-	    <Dependency>libXcursor-devel</Dependency>    
+	    <Dependency>libXcursor-devel</Dependency>
+	    <Dependency>libXrender-devel</Dependency>
+	    <Dependency>xcb-util-keysyms-devel</Dependency>
+	    <Dependency>xcb-util-image-devel</Dependency>
         </BuildDependencies>
         <Patches>
 	  <Patch level="1">lockscreen-focus.patch</Patch>
-	    <!--<Patch level="1">create_kdehome.patch</Patch>
+	    <Patch level="1">create_kdehome.patch</Patch>
             <Patch level="1">0001-Rename-qdbus-in-startkde.patch</Patch>
-	  <Patch level="1">0003-Remove-export-of-QT_PLUGIN_PATH.patch</Patch> -->
+	  <Patch level="1">0003-Remove-export-of-QT_PLUGIN_PATH.patch</Patch>
         </Patches>
     </Source>
 
@@ -57,40 +63,14 @@
 	    <Dependency>kde5-kwin</Dependency>
 	    <Dependency>kde5-libksysguard</Dependency>
 	    <Dependency>kde5-kdoctools</Dependency>
-	    <Dependency>kde5-kdelibs4-support</Dependency>
-	    
-	    <!--<Dependency>kde5-kcmutils</Dependency>
-	    <Dependency>kde5-kcoreaddons</Dependency>
-	    <Dependency>kde5-kcrash</Dependency>
-	    <Dependency>kde5-kdeclarative</Dependency>
-	    <Dependency>kde5-kdelibs4-support</Dependency>
-	    <Dependency>kde5-kdesu</Dependency>
-	    <Dependency>kde5-kdewebkit</Dependency>
-	    	
-	    <Dependency>kde5-kidletime</Dependency>	
-	    	
-	    	
-	    	
-	    	
-	    	
-	    <Dependency>kde5-kwallet</Dependency>	
-	    	    	
-	    	
-	    
-	    <Dependency>kde5-plasma-framework</Dependency>
-	    <Dependency>kde5-solid</Dependency>
-	    <Dependency>kde5-kwayland</Dependency>
 	    <Dependency>kde5-framework-integration</Dependency>
+	    <Dependency>kde5-kdelibs4-support</Dependency>
 	    <Dependency>kde5-breeze-style</Dependency>
-	    
-	    <Dependency>qt5-phonon</Dependency>	    
-	    
-	    <Dependency>prison</Dependency>
 	    <Dependency>libXrender</Dependency>
-	    <Dependency>xapian-core</Dependency>
 	    <Dependency>xcb-util-keysyms</Dependency>
 	    <Dependency>xcb-util-image</Dependency>
-	    <Dependency>libXcursor</Dependency> -->
+	    <Dependency>libXcursor</Dependency>	    
+	    
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
@@ -100,10 +80,7 @@
 	    <Path fileType="library">/usr/lib/qt5</Path>
 	    <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
-        </Files>
-	<AdditionalFiles>
-	  <AdditionalFile target="/etc/pam.d/kde" permission="0644" owner="root">kde.pam</AdditionalFile>
-        </AdditionalFiles>
+        </Files>	
         <Replaces>
           <Package>kde-workspace</Package>
         </Replaces>
