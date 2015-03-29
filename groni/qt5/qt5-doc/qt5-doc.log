@@ -1,0 +1,60 @@
+[01;32mKaynak paket inşa ediliyor: qt5-doc
+[0mDEBUG: ComponentDB initialized in 0.00343084335327.
+DEBUG: RepoDB initialized in 0.000182867050171.
+DEBUG: InstallDB initialized in 0.00609993934631.
+qtdoc-opensource-src-5.4.1.tar.xz [önbellekte]
+[32mArşiv(ler) açılıyor...
+[0m açıldı (/var/pisi/qt5-doc-5.4.1-1/work)
+[32mKaynak yapılandırılıyor...
+[0mSandbox açık inşa...
+Çalışıyor qmake-qt5 qtdoc.pro
+DEBUG: "qmake-qt5 qtdoc.pro" dönüş değeri 0
+[32mKaynak inşa ediliyor...
+[0mSandbox açık inşa...
+Çalışıyor make VERBOSE=1 -j5
+cd doc/ && ( test -e Makefile || /usr/bin/qmake-qt5 /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/doc.pro -o Makefile ) && make -f Makefile 
+make[1]: Entering directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc'
+make[1]: Nothing to be done for 'first'.
+make[1]: Leaving directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc'
+DEBUG: "make VERBOSE=1 -j5" dönüş değeri 0
+Çalışıyor make VERBOSE=1 -j5 docs
+make -f Makefile html_docs && make -f Makefile qch_docs
+make[1]: Entering directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1'
+make -f Makefile prepare_docs && make -f Makefile generate_docs
+make[2]: Entering directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1'
+cd doc/ && ( test -e Makefile || /usr/bin/qmake-qt5 /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/doc.pro -o Makefile ) && make -f Makefile prepare_docs
+make[3]: Entering directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc'
+QT_INSTALL_DOCS=/usr/share/doc/qt5 QT_VERSION_TAG=541 QT_VER=5.4 QT_VERSION=5.4.1 /usr/lib/qt5/bin/qdoc -outputdir /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/qtdoc -installdir /usr/share/doc/qt5 /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/config/qtdoc.qdocconf -prepare -indexdir /usr/share/doc/qt5 -no-link-errors
+make[3]: Leaving directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc'
+make[2]: Leaving directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1'
+make[2]: Entering directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1'
+cd doc/ && ( test -e Makefile || /usr/bin/qmake-qt5 /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/doc.pro -o Makefile ) && make -f Makefile generate_docs
+make[3]: Entering directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc'
+QT_INSTALL_DOCS=/usr/share/doc/qt5 QT_VERSION_TAG=541 QT_VER=5.4 QT_VERSION=5.4.1 /usr/lib/qt5/bin/qdoc -outputdir /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/qtdoc -installdir /usr/share/doc/qt5 /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/config/qtdoc.qdocconf -generate -indexdir /usr/share/doc/qt5
+make[3]: Leaving directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc'
+make[2]: Leaving directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1'
+make[1]: Leaving directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1'
+make[1]: Entering directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1'
+cd doc/ && ( test -e Makefile || /usr/bin/qmake-qt5 /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/doc.pro -o Makefile ) && make -f Makefile qch_docs
+make[2]: Entering directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc'
+/usr/lib/qt5/bin/qhelpgenerator /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/qtdoc/qtdoc.qhp -o /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/qtdoc.qch
+Building up file structure...
+Insert custom filters...
+Insert help data for filter section (1 of 1)...
+Insert files...
+Insert contents...
+Insert indices...
+Documentation successfully generated.
+make[2]: Leaving directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc'
+make[1]: Leaving directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1'
+DEBUG: "make VERBOSE=1 -j5 docs" dönüş değeri 0
+[32mPaket test ediliyor...
+[0m[32mKuruluyor...
+[0mSandbox açık inşa...
+Çalışıyor make DESTDIR="/var/pisi/qt5-doc-5.4.1-1/install" INSTALL_ROOT="/var/pisi/qt5-doc-5.4.1-1/install" INSTALL_ROOT=/var/pisi/qt5-doc-5.4.1-1/install install
+cd doc/ && ( test -e Makefile || /usr/bin/qmake-qt5 /var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc/doc.pro -o Makefile ) && make -f Makefile install
+make[1]: Entering directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc'
+make[1]: Nothing to be done for 'install'.
+make[1]: Leaving directory '/var/pisi/qt5-doc-5.4.1-1/work/qtdoc-opensource-src-5.4.1/doc'
+DEBUG: "make DESTDIR="/var/pisi/qt5-doc-5.4.1-1/install" INSTALL_ROOT="/var/pisi/qt5-doc-5.4.1-1/install" INSTALL_ROOT=/var/pisi/qt5-doc-5.4.1-1/install install" dönüş değeri 0
+İnşa dizini bırakılıyor

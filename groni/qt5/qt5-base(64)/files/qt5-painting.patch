@@ -1,0 +1,42 @@
+From d17a7f82d54dd60fc29809dd889c7d206bb38b1e Mon Sep 17 00:00:00 2001
+From: Thiago Macieira <thiago.macieira@intel.com>
+Date: Thu, 29 Dec 2011 19:28:23 -0200
+Subject: [PATCH] Ensure that qdrawhelper.cpp is compiled with vectorisation active
+
+The GCC option -ftree-vectorize is enabled only at level -O3, so force
+-O3 if this is an optimised build. Also, ensure that we're using SSE
+for floating point math if we're in x86 (32-bit) builds.
+
+No change is necessary for the Intel compiler, since it enables
+vectorisation by default at any non-zero -O level.
+
+These options are not possible with MSVC.
+
+Change-Id: If1169a73cd8a3e8b34d9e21f281b78897b9aec3e
+---
+ src/gui/painting/qdrawhelper.cpp |    9 +++++++++
+ 1 files changed, 9 insertions(+), 0 deletions(-)
+
+diff --git a/src/gui/painting/qdrawhelper.cpp b/src/gui/painting/qdrawhelper.cpp
+index f2b9bf7..6bd81e7 100644
+--- a/src/gui/painting/qdrawhelper.cpp
++++ qtbase-opensource-src-5.4.0/src/gui/painting/qdrawhelper.cpp
+@@ -39,6 +39,15 @@
+ **
+ ****************************************************************************/
+ 
++#if defined(__OPTIMIZE__) && !defined(__INTEL_COMPILER) && defined(__GNUC__) \
++    && (__GNUC__ * 100 + __GNUC_MINOR__ >= 404)
++// GCC 4.4 supports #pragma GCC optimize and #pragma GCC target
++#  pragma GCC optimize "O3"
++#  if defined(__i386__) && defined(__SSE2__) && !defined(__SSE2_MATH__)
++#   pragma GCC target "fpmath=sse"
++#  endif
++#endif
++
+ #include <private/qdrawhelper_p.h>
+ #include <private/qpaintengine_raster_p.h>
+ #include <private/qpainter_p.h>
+-- 
+1.7.1
+
