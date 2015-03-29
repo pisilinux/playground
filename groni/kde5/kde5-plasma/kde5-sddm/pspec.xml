@@ -17,14 +17,18 @@
             <Dependency>qt5-base-devel</Dependency>
             <Dependency>qt5-declarative-devel</Dependency>
             <Dependency>qt5-tools-devel</Dependency>
-            <Dependency>python3</Dependency>
-	    <Dependency>docutils</Dependency>
+            <Dependency>docutils</Dependency>
 	    <Dependency>libxkbfile-devel</Dependency>
 	    <Dependency>libxcb-devel</Dependency>
 	    <Dependency>pam-devel</Dependency>
 	    <Dependency>kde5-kdoctools-devel</Dependency>
 	    <Dependency>xorg-server-xephyr</Dependency>
         </BuildDependencies>
+	<Patches>
+            <Patch>sddm_upstream.patch</Patch>
+            <Patch>sddm-0.10.0-upower.patch</Patch>
+            <Patch>sddm-0.11.0-consolekit.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -34,7 +38,6 @@
             <Dependency>qt5-declarative</Dependency>
             <Dependency>qt5-tools</Dependency>
 	    <Dependency>docutils</Dependency>
-	    <Dependency>kde5-kdoctools</Dependency>
             <Dependency>xorg-server-xephyr</Dependency>
         </RuntimeDependencies>
         <Files>

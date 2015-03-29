@@ -10,6 +10,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
+    shelltools.system("sed -e 's|-Wall -march=native||'  -e 's|-O2||'  -i CMakeLists.txt")
     cmaketools.configure("-DCMAKE_INSTALL_PREFIX=/usr \
                           -DCMAKE_BUILD_TYPE=Release \
                           -with-systemdsystemunitdir=no \
@@ -20,5 +21,5 @@ def build():
     cmaketools.make()
 
 def install():
-    cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
+    cmaketools.install()
     pisitools.dodoc("COPYING-CC-BY-3.0", "CONTRIBUTORS", "ChangeLog", "COPYING", "COPYING-CC-BY-SA-3.0", "README.md")
