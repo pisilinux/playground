@@ -11,15 +11,11 @@ from pisi.actionsapi import qt5
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("export QT5LINK=/usr/lib/qt5/bin")
-    shelltools.system("qmake-qt5 WebKit.pro")
-    #autotools.autoreconf("-fiv")
-    #autotools.configure("--no-webkit2\
-     #                    --no-video \
-      #                   --prefix /usr")
+    shelltools.export("QT5LINK", "/usr/lib/qt5/bin")
+    qt5.configure(projectfile='WebKit.pro')
 
 def build():
-    qt5.make("-j4")
+    qt5.make()
 
 def install():
     pisitools.dodir("/usr/bin")
