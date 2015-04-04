@@ -9,8 +9,8 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
 def setup():
-    shelltools.system("ar x %s/spotify-client_0.9.11.27.g2b1a638.81-1_amd64.deb" % get.workDIR())
-    shelltools.system("tar xzvf %s/data.tar.gz --exclude=usr/bin/spotify" %get.workDIR())
+    shelltools.system("ar x %s/spotify-client_0.9.17.1.g9b85d43.7-1_amd64.deb" % get.workDIR())
+    shelltools.system("tar xJvf %s/data.tar.xz --exclude=usr/bin/spotify" %get.workDIR())
 
 def install():
     pisitools.insinto("/usr/", "usr/*")
