@@ -1,0 +1,67 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Licensed under the GNU General Public License, version 3.
+# See the file http://www.gnu.org/licenses/gpl.txt
+
+from pisi.actionsapi import shelltools, get, autotools, pisitools
+
+   #sed -i "s|-O2|${CXXFLAGS}|" qtbase/mkspecs/common/{g++,gcc}-base.conf
+   #sed -i "/^QMAKE_LFLAGS_RPATH/s| -Wl,-rpath,||g" qtbase/mkspecs/common/gcc-base-unix.conf
+   #sed -i "/^QMAKE_LFLAGS\s/s|+=|+= ${LDFLAGS}|g" qtbase/mkspecs/common/gcc-base.conf
+
+def setup():
+    # TODO: Use system xkbcommon (>=0.4.1)
+    # NOTE: —no-warnings-are-errors  is due to ld.gold warnings:
+    # sqlite3 hidden symbols
+    autotools.rawConfigure ("-opensource \
+                             -confirm-license \
+                             -eglfs \
+                             -opengl es2 \
+                             -xcb \
+                             -no-pch \
+                             -dbus-linked \
+                             -openssl-linked \
+                             -optimized-qmake \
+                             -icu \
+                             -cups \
+                             -nis \
+                             -widgets \
+                             -gui \
+                             -qt-xcb \
+                             -openssl-linked \
+                             -system-libjpeg \
+                             -system-libpng \
+                             -system-harfbuzz \
+                             -system-zlib \
+                             -system-sqlite \
+                             -largefile \
+                             -c++11 \
+                             -shared \
+                             -no-static \
+                             -release \
+                             -prefix /usr \
+                             -bindir /usr/bin \
+                             -headerdir /usr/include/qt5 \
+                             -archdatadir /usr/lib/qt5 \
+                             -datadir /usr/share/qt5 \
+                             -docdir /usr/share/doc/qt5 \
+                             -examplesdir /usr/lib/qt5/examples \
+                             -sysconfdir /etc/xdg \
+                             -plugin-sql-{psql,mysql,sqlite} \
+                             -nomake tests \
+                             -nomake examples \
+                             -xkb-config-root /usr/share/X11/xkb \
+                             -no-use-gold-linker \
+                             -no-warnings-are-errors ")
+
+
+def build():
+    autotools.make ()
+
+def install():
+    pisitools.dodir("/usr/bin")
+    pisitools.dodir("/usr/lib")
+    autotools.rawInstall ("INSTALL_ROOT=%s" % get.installDIR())
+    pisitools.dosym("/usr/bin/qdbus", "/usr/bin/qdbus-qt5")
+    pisitools.remove("/usr/lib/*.prl") 

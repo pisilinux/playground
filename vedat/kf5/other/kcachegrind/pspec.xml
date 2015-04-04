@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kcachegrind</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>KDE library for handling mail messages and newsgroup articles.</Summary>
+        <Description>Kmime library for handling mail messages and newsgroup articles.</Description>
+        <Archive sha1sum="7fb410cdee2b9ceddf688ead2fe4e36fdc2f37c8" type="tarxz">https://dl.dropboxusercontent.com/s/agjdm3wi89e71dq/kcachegrind.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">karchive-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kxmlgui-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kdelibs4-support-devel</Dependency>
+	    <Dependency versionFrom="5.8.0">kdoctools-devel</Dependency>
+	    <Dependency>git</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kcachegrind</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>
+	    <Dependency versionFrom="5.8.0">karchive</Dependency>
+	    <Dependency versionFrom="5.8.0">kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.8.0">kwidgetsaddons</Dependency>
+	    <Dependency versionFrom="5.8.0">kxmlgui</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="binary">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+
+    <History>
+        <Update release="1">
+            <Date>2015-04-20</Date>
+            <Version>14.12.80</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>

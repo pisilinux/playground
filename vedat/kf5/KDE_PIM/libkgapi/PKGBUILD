@@ -1,0 +1,42 @@
+
+pkgname=libkgapi
+pkgver=4.72.0
+pkgrel=3
+pkgdesc="A KDE-based library for accessing various Google services via their public API"
+url='https://projects.kde.org/projects/extragear/libs/libkgapi'
+arch=('x86_64')
+license=('GPL' 'LGPL' 'FDL')
+depends=('kcoreaddons' 'kio' 'kwindowsystem' 'kcalcore' 'kcontacts')
+makedepends=('extra-cmake-modules' 'kdoctools' 'boost')
+conflicts=('kf5-libkgapi')
+replaces=('kf5-libkgapi')
+provides=('kf5-libkgapi')
+#source=("http://download.kde.org/stable/${pkgname}/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
+source=("git://anongit.kde.org/libkgapi#branch=frameworks")
+md5sums=('SKIP')
+
+build() {
+  cd ${srcdir}
+  #sed -i 's|add_subdirectory(tests)|#add_subdirectory(tests)|' ${srcdir}/$_pkgname/CMakeLists.txt
+  mkdir build
+  
+  cd build 
+  cmake ../${pkgname} \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DLIB_INSTALL_DIR=lib \
+    -DSYSCONF_INSTALL_DIR=/etc \
+    -DQML_INSTALL_DIR=/usr/lib/qt5/qml \
+    -DPLUGIN_INSTALL_DIR=/usr/lib/qt5/plugins \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+    -DBUILD_TESTING=ON 
+  make 
+}
+
+package() {
+  cd ${srcdir}/build
+  
+  make DESTDIR=${pkgdir} install
+}
+

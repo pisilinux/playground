@@ -1,0 +1,149 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.solusos.com/standard/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>qt5-everywhere</Name>
+        <Homepage>http://qt.digia.com/</Homepage>
+        <Packager>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@evolve-os.com</Email>
+        </Packager>
+        <Summary>Cross platform application and UI framework</Summary>
+        <Description>Cross platform application and UI development framework</Description>
+        <License>LGPLv2.1-linking-exception</License>
+        <Archive sha1sum="daa3373af8d6656a1066ff23bc9100b5ca004ecf" type="tarxz">http://download.qt-project.org/official_releases/qt/5.4/5.4.1/single/qt-everywhere-opensource-src-5.4.1.tar.xz</Archive>
+
+        <BuildDependencies>
+            <Dependency>gperf</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency type="pkgconfig">mesa-glu</Dependency>
+            <Dependency type="pkgconfig">libXcomposite-devel</Dependency>
+            <Dependency type="pkgconfig">tiff-devel</Dependency>
+            <Dependency type="pkgconfig">xcb-util-devel</Dependency>
+            <Dependency type="pkgconfig">icu4c-devel</Dependency>
+            <Dependency type="pkgconfig">alsa-lib-devel</Dependency>
+            <Dependency type="pkgconfig">libXv-devel</Dependency>
+            <Dependency type="pkgconfig">libXext-devel</Dependency>
+            <Dependency type="pkgconfig">gstreamer-next-devel</Dependency>
+            <Dependency type="pkgconfig">gst-plugins-base-next</Dependency>
+            <Dependency type="pkgconfig">libdrm-devel</Dependency>
+            <Dependency type="pkgconfig">libxkbcommon-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency type="pkgconfig">libX11-devel</Dependency>
+            <Dependency type="pkgconfig">pulseaudio-libs-devel</Dependency>
+            <Dependency type="pkgconfig">libXi-devel</Dependency>
+            <Dependency type="pkgconfig">libXcursor-devel</Dependency>
+            <Dependency type="pkgconfig">libXrandr-devel</Dependency>
+            <Dependency type="pkgconfig">libXtst-devel</Dependency>
+
+            <Dependency type="pkgconfig">nss-devel</Dependency>
+            <Dependency>cups-devel</Dependency>
+
+            <Dependency type="pkgconfig">gtk+extra-devel</Dependency>
+            <Dependency type="pkgconfig">cairo-devel</Dependency>
+            <Dependency type="pkgconfig">pango-devel</Dependency>
+            <Dependency type="pkgconfig">atk-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>qt5</Name>
+        <Files>
+            <Path fileType="library">/usr/lib/lib*.so*</Path>
+            <Path fileType="library">/usr/lib/lib*.a</Path>
+            <Path fileType="library">/usr/lib/qt5/imports</Path>
+            <Path fileType="library">/usr/lib/qt5/qml</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins</Path>
+            <Path fileType="executable">/usr/lib/qt5/libexec</Path>
+            <Path fileType="data">/usr/share/qt5/*.pak</Path>
+            <Path fileType="data">/usr/share/qt5/*.dat</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>qt5-devel</Name>
+        <Summary>Development files for Qt 5</Summary>
+        <Description>Development files for Qt 5</Description>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+            <Path fileType="data">/usr/lib/qt5/mkspecs</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <Package>
+        <Name>qt5-demos</Name>
+        <Summary>Demonstration programs for Qt 5</Summary>
+        <Description>Demonstration programs for Qt 5</Description>
+        <Files>
+            <Path fileType="executable">/usr/lib/qt5/examples</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <Package>
+        <Name>qt5-translations</Name>
+        <Summary>Localised translations for Qt 5</Summary>
+        <Description>Localised translations for Qt 5</Description>
+        <Files>
+            <Path fileType="localedata">/usr/share/qt5/translations</Path>
+            <Path fileType="data">/usr/share/qt5/phrasebooks</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <Package>
+        <Name>qt5-docs</Name>
+        <Summary>API Documentation for Qt 5</Summary>
+        <Description>API Documentation for Qt 5</Description>
+        <Files>
+            <Path fileType="doc">/usr/share/doc/qt5</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5-devel</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>03-08-2015</Date>
+            <Version>5.4.1</Version>
+            <Comment>Fix XKB config root</Comment>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@evolve-os.com</Email>
+        </Update>
+
+        <Update release="3">
+            <Date>03-08-2015</Date>
+            <Version>5.4.0</Version>
+            <Comment>Fix XKB config root</Comment>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@evolve-os.com</Email>
+        </Update>
+
+        <Update release="2">
+            <Date>12-13-2014</Date>
+            <Version>5.4.0</Version>
+            <Comment>Update to 5.4.0</Comment>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@evolve-os.com</Email>
+        </Update>
+
+        <Update release="1">
+            <Date>09-19-2013</Date>
+            <Version>5.1.1</Version>
+            <Comment>Add qt5 to repositories</Comment>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solusos.com</Email>
+        </Update>
+    </History>
+</PISI> 

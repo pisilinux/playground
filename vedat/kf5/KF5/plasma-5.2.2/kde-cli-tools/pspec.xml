@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde-cli-tools</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>Additional client tools for KDE applications</Summary>
+        <Description>Additional client tools for KDE applications</Description>
+        <Archive sha1sum="aec09dbde71509e75880d3bb291b47c383eac577" type="tarxz">https://dl.dropboxusercontent.com/s/3lmgac7o4k7ptg2/kde-cli-tools.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>		    
+	    <Dependency>kcmutils-devel</Dependency>    
+	    <Dependency>kinit</Dependency>
+	    <Dependency>kconfig-devel</Dependency>
+	    <Dependency>kemoticons-devel</Dependency>
+	    <Dependency>kitemmodels-devel</Dependency>
+	    <Dependency>kdelibs4-support-devel</Dependency>
+	    <Dependency>kdesu-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>	    
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde-cli-tools</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>		    
+	    <Dependency>kcmutils</Dependency>
+	    <Dependency>kconfig</Dependency>
+	    <Dependency>kdelibs4-support</Dependency>
+	    <Dependency>kdesu</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Replaces>
+          <Package>kde-runtime</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>kde-runtime</Package>
+        </Conflicts>  
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>

@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>system-settings</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+	<IsA>app:console</IsA>
+        <Summary>KDE system settings manager</Summary>
+        <Description>system-settings is a control panel for KDE Plasma 5</Description>
+        <Archive sha1sum="23c4b928b2d5d145ceb51e2c61d8e8031154b695" type="tarxz">mirrors://kde/stable/plasma/5.2.2/systemsettings-5.2.2.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-devel</Dependency>
+	    <Dependency>kcmutils-devel</Dependency>
+	    <Dependency>kconfig-devel</Dependency>
+	    <Dependency>kdbusaddons-devel</Dependency>
+	    <Dependency>kdelibs4-support-devel</Dependency>
+	    <Dependency>khtml-devel</Dependency>
+	    <Dependency>ki18n-devel</Dependency>
+	    <Dependency>kiconthemes-devel</Dependency>
+	    <Dependency>kio-devel</Dependency>
+	    <Dependency>kitemviews-devel</Dependency>	 
+	    <Dependency>kservice-devel</Dependency>	 
+	    <Dependency>kwindowsystem-devel</Dependency>	 
+	    <Dependency>kxmlgui-devel</Dependency>	 	    
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>system-settings</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5</Dependency>		    
+	    <Dependency>kcmutils</Dependency>
+	    <Dependency>kconfig</Dependency>
+	    <Dependency>kdbusaddons</Dependency>
+	    <Dependency>kdelibs4-support</Dependency>
+	    <Dependency>khtml</Dependency>
+	    <Dependency>ki18n</Dependency>
+	    <Dependency>kiconthemes</Dependency>
+	    <Dependency>kio</Dependency>
+	    <Dependency>kitemviews</Dependency>	 
+	    <Dependency>kservice</Dependency>	 
+	    <Dependency>kwindowsystem</Dependency>	 
+	    <Dependency>kxmlgui</Dependency>	
+        </RuntimeDependencies>
+        <Files>
+	    <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Conflicts>
+          <Package>kde-l10n-tr</Package>
+        </Conflicts>  
+    </Package>
+    
+    <Package>
+        <Name>system-settings-devel</Name>
+	<Summary>Development files for system-settings</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-devel</Dependency>
+            <Dependency release="current">system-settings</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+	    <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-09-20</Date>
+            <Version>5.2.2</Version>
+            <Comment>qt support</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update> 
+        <Update release="1">
+            <Date>2014-09-20</Date>
+            <Version>5.8.0</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>

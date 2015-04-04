@@ -1,0 +1,31 @@
+
+pkgname=jsoncpp
+pkgver=1.4.2
+pkgrel=1
+pkgdesc="A JSON C++ library"
+url='https://github.com/open-source-parsers/jsoncpp'
+license=('custom:Public_Domain')
+arch=('x86_64')
+depends=('gcc-libs' 'python2')
+makedepends=('cmake')
+source=("https://github.com/open-source-parsers/jsoncpp/archive/${pkgver}.tar.gz")
+md5sums=('7cf0f549c5acd6abb2cd7a7abc0a95ee')
+
+build() {
+  cd ${pkgname}-${pkgver}
+  mkdir -p build/debug
+  cd build/debug
+  
+  cmake -DCMAKE_BUILD_TYPE=debug \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DJSONCPP_LIB_BUILD_SHARED=ON -G "Unix Makefiles" ../..
+  make
+}
+
+package() {
+  cd ${pkgname}-${pkgver}/build/debug
+  make DESTDIR=${pkgdir} install
+  
+  cd ../..
+  install -Dm644 LICENSE ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
+}
