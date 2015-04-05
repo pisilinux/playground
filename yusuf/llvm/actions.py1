@@ -103,7 +103,7 @@ def install():
     pisitools.remove("/usr/lib/llvm/*LLVMHello.*")
 
     pisitools.remove("/usr/share/doc/llvm/*.tar.gz")
-    #pisitools.remove("/usr/share/doc/llvm/ocamldoc/html/*.tar.gz")
+    pisitools.remove("/usr/share/doc/llvm/ocamldoc/html/*.tar.gz")
     pisitools.removeDir("/usr/share/doc/llvm/ps")
 
     # Install vim syntax files for .ll and .td files
