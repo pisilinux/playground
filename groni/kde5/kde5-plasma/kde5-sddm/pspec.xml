@@ -41,17 +41,20 @@
             <Dependency>xorg-server-xephyr</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="config">/etc/dbus-1/system.d</Path>
-	    <Path fileType="config">/etc/pam.d</Path>
-            <Path fileType="library">/usr/lib/qt5</Path>
-	    <Path fileType="library">/usr/lib/</Path>
-            <Path fileType="header">/usr/include</Path>
+            <Path fileType="config">/etc/pam.d</Path>
+	    <Path fileType="config">/etc</Path>
+	    <Path fileType="config">/etc/dbus-1/system.d</Path>
             <Path fileType="data">/usr/share</Path>
-	    <Path fileType="data">/etc</Path>
-            <Path fileType="localedata">/usr/share/locale</Path>
-            <Path fileType="man">/usr/share/man/man1</Path>
-	    <Path fileType="man">/usr/share/man/man5</Path>           
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins</Path>
+	    <Path fileType="library">/usr/lib/qt5/qml</Path>
+	    <Path fileType="library">/usr/lib/sddm</Path>
+	    <Path fileType="library">/usr/lib/systemd/system</Path>
+	    <Path fileType="man">/usr/share/man/man1</Path>
+	    <Path fileType="man">/usr/share/man/man5</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
 	<Provides>
