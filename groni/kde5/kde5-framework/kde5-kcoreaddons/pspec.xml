@@ -17,8 +17,9 @@
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
             <Dependency>gamin-devel</Dependency>
+            <Dependency>qt5-tools-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
-        </BuildDependencies>	
+        </BuildDependencies>        
     </Source>
 
     <Package>
@@ -26,6 +27,8 @@
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
             <Dependency>gamin</Dependency>
+            <Dependency>qt5-tools</Dependency>
+            <Dependency>shared-mime-info</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
