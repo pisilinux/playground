@@ -32,12 +32,13 @@
 	    <Dependency>libXrender-devel</Dependency>
 	    <Dependency>xcb-util-keysyms-devel</Dependency>
 	    <Dependency>xcb-util-image-devel</Dependency>
+	    <Dependency>xcb-util-renderutil-devel</Dependency>
         </BuildDependencies>
         <Patches>
 	  <Patch level="1">lockscreen-focus.patch</Patch>
-	    <Patch level="1">create_kdehome.patch</Patch>
+	    <!--<Patch level="1">create_kdehome.patch</Patch>
             <Patch level="1">0001-Rename-qdbus-in-startkde.patch</Patch>
-	  <Patch level="1">0003-Remove-export-of-QT_PLUGIN_PATH.patch</Patch>
+	  <Patch level="1">0003-Remove-export-of-QT_PLUGIN_PATH.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -69,16 +70,25 @@
 	    <Dependency>libXrender</Dependency>
 	    <Dependency>xcb-util-keysyms</Dependency>
 	    <Dependency>xcb-util-image</Dependency>
+	    <Dependency>xcb-util-renderutil</Dependency>
 	    <Dependency>libXcursor</Dependency>	    
 	    
         </RuntimeDependencies>
         <Files>
-	    <Path fileType="config">/etc</Path>
-            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="config">/etc/pam.d</Path>
+            <Path fileType="config">/etc/xdg/autostart</Path>
+            <Path fileType="config">/etc/xdg</Path>
+            <Path fileType="data">/usr/share/plasma</Path>
+            <Path fileType="data">/usr/share/sddm</Path>
+            <Path fileType="data">/usr/share/kservices5</Path>
+            <Path fileType="data">/usr/share/knotifications5</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="applications">/usr/share/applications</Path>
 	    <Path fileType="localedata">/usr/share/locale</Path>
 	    <Path fileType="executable">/usr/bin</Path>
-	    <Path fileType="library">/usr/lib/qt5</Path>
-	    <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="library">/usr/lib/qt5/plugins</Path>
+            <Path fileType="library">/usr/lib/qt5/qml</Path>
+            <!--<Path fileType="library">/usr/lib</Path> -->
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>	
         <Replaces>
@@ -100,13 +110,30 @@
             <Path fileType="header">/usr/include</Path>
             <Path fileType="data">/usr/lib/cmake</Path>
 	    <Path fileType="config">/usr/lib/pkgconfig</Path>
-        </Files>                
+        </Files>
+	<AdditionalFiles>            
+            <AdditionalFile target="/etc/pam.d/kde" permission="0644" owner="root">kde.pam</AdditionalFile>
+        </AdditionalFiles>
         <Replaces>
           <Package>kde-workspace-devel</Package>
         </Replaces>
         <Conflicts>
           <Package>kde-workspace-devel</Package>
         </Conflicts> 
+    </Package>
+    
+    <Package>
+        <Name>kde5-drkonqi</Name>
+	<Summary>KDE crash handler</Summary>
+        <RuntimeDependencies>
+	    <Dependency>kde5-kdewebkit</Dependency>
+            <Dependency release="current">kde5-plasma-workspace</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/lib/libexec</Path>
+            <!--<Path fileType="library">/usr/lib</Path> -->
+            <Path fileType="data">/usr/share</Path>	    
+        </Files>	
     </Package>
 
     <History>
