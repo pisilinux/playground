@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-konsole</Name>
+        <Homepage>https://projects.kde.org/projects/kde/applications/dolphin</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Summary>KDE Konsole</Summary>
+        <Description>Konsole for KDE5</Description>
+        <Archive sha1sum="7f246a5cd7159c767744302cc3d9b329762e35ef" type="tarxz">https://dl.dropboxusercontent.com/s/ko21apl2tnv9sbk/konsole.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+	    <Dependency>extra-cmake-modules</Dependency>
+	    <Dependency>kde5-kinit</Dependency>
+	    <Dependency>kde5-kdelibs4-support-devel</Dependency>
+	    <Dependency>kde5-kiconthemes-devel</Dependency>
+	    <Dependency>kde5-knotifyconfig-devel</Dependency>
+	    <Dependency>kde5-knotifications-devel</Dependency>
+	    <Dependency>kde5-kparts-devel</Dependency>
+	    <Dependency>kde5-kpty-devel</Dependency>
+	    <Dependency>kde5-kemoticons-devel</Dependency>
+	    <Dependency>kde5-kitemmodels-devel</Dependency>
+	    <Dependency>kde5-kdoctools-devel</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>kde5-konsole</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+	    <Dependency>kde5-kinit</Dependency>
+	    <Dependency>kde5-kdelibs4-support</Dependency>
+	    <Dependency>kde5-kiconthemes</Dependency>
+	    <Dependency>kde5-knotifyconfig</Dependency>
+	    <Dependency>kde5-knotifications</Dependency>
+	    <Dependency>kde5-kparts</Dependency>
+	    <Dependency>kde5-kpty</Dependency>
+	    <Dependency>kde5-kemoticons</Dependency>
+	    <Dependency>kde5-kitemmodels</Dependency>
+	    <Dependency>kde5-kdoctools</Dependency>
+	    <Dependency>kde5-kio</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/etc/xdg/servicemenu.knsrc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-03-19</Date>
+            <Version>5</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
