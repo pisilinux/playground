@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde5-baseapps</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Framework providing components to allow applications to integrate with a KDE Workspace</Summary>
+        <Description>Framework Integration is a set of plugins responsible for better integration of Qt applications when running on a KDE Plasma workspace.</Description>
+        <Archive sha1sum="e973e4a41d484484d9a03afdf0e0c719086e79ce" type="tarxz">https://dl.dropboxusercontent.com/s/bvucngva3y50dzh/kde-baseapps.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>	    
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kconfigwidgets-devel</Dependency>
+            <Dependency>kde5-kiconthemes-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
+	    <Dependency>kde5-knotifications-devel</Dependency>
+	    <Dependency>kde5-kwidgetsaddons-devel</Dependency>	    
+	    <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kde5-baseapps</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>	    
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kconfigwidgets</Dependency>
+            <Dependency>kde5-kiconthemes</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
+	    <Dependency>kde5-kio</Dependency>
+	    <Dependency>kde5-knotifications</Dependency>
+            <Dependency>kde5-kwidgetsaddons</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/etc/xdg</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
+	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>kde5-baseapps-devel</Name>
+	<Summary>Development files for kde5-baseapps</Summary>
+        <RuntimeDependencies>
+	    <Dependency>qt5-base-devel</Dependency>
+            <Dependency release="current">kde5-baseapps</Dependency>
+	    <Dependency>kde5-kiconthemes-devel</Dependency>
+	    <Dependency>kde5-kconfigwidgets-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-09-20</Date>
+            <Version>14.12.86</Version>
+            <Comment>qt5 support</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>  
+    </History>
+</PISI>
