@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>jemalloc</Name>
+        <Homepage>http://www.canonware.com/jemalloc/index.html</Homepage>
+        <Packager>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Packager>
+        <License>BSD</License>
+        <PartOf>programming.misc</PartOf>
+        <IsA>library</IsA>
+        <Summary>General-purpose scalable concurrent malloc implementation</Summary>
+        <Description>jemalloc is a general purpose malloc(3) implementation that emphasizes fragmentation avoidance and scalable concurrency support.</Description>
+        <BuildDependencies>
+            <Dependency>glibc-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="40c0892b172e5dc14a6cea6fe4edda7dea4f3a68" type="tarbz2">http://www.canonware.com/download/jemalloc/jemalloc-3.6.0.tar.bz2</Archive>
+    </Source>
+    <Package>
+        <Name>jemalloc</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="executable">/usr/bin</Path>
+	    <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>jemalloc-devel</Name>
+        <Summary>Development files for jemalloc</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">jemalloc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2015-04-19</Date>
+            <Version>3.6.0</Version>
+            <Comment>First release</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+
+<!-- By PiSiDo 2.0.0 -->
