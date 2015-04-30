@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libfdk-aac</Name>
+        <Homepage>http://sourceforge.net/projects/opencore-amr/</Homepage>
+        <Packager>
+           <Name>Idris KALP</Name>
+           <Email>idriskalp@gmail.com</Email>
+        </Packager>
+        <License>FDK</License>
+        <IsA>library</IsA>
+        <Summary>Fraunhofer FDK AAC codec library</Summary>
+        <Description>Fraunhofer FDK AAC codec library</Description>
+        <Archive sha1sum="9215d19bdd911954fd5bc879c707ab571716ba0d" type="targz">http://sourceforge.net/projects/opencore-amr/files/fdk-aac/fdk-aac-0.1.4.tar.gz/download</Archive>
+    </Source>
+
+    <Package>
+        <Name>libfdk-aac</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+	    <Path fileType="data">/usr/share</Path>
+	    <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>libfdk-aac-devel</Name>
+	<RuntimeDependencies>
+	  <Dependency release="current">libfdk-aac</Dependency>
+	</RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+	    <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    
+    <History>
+      <Update release="2">
+            <Date>2015-04-30</Date>
+            <Version>0.1.4</Version>
+            <Comment>First Release</Comment>
+	    <Name>Idris KALP</Name>   
+            <Email>idriskalp@gmail.com</Email>             
+        </Update>
+    </History>
+</PISI>
+ 
+ 
