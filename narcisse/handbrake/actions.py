@@ -22,6 +22,9 @@ def setup():
     shelltools.system("./configure --force \
 		      --prefix=/usr \
 		      --disable-gtk-update-checks \
+		      --enable-x265 \
+		      --enable-fdk-aac \
+		      --enable-libav-aac \
 		      --verbose")
 
                        
