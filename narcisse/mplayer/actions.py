@@ -12,11 +12,13 @@ from pisi.actionsapi import pythonmodules
 
 pisitools.flags.sub("-O[\ds]+", "-O3")
 
+pisitools.ldflags.add("-lvorbisenc -lvorbis -logg -L/usr/lib -ldvdcss -L/usr/lib -ldvdread -L/usr/lib -ldvdnav")
+
 def setup():
 #    for f in ["configure", "libmpdemux/demux_rtp.cpp", "libmpdemux/demux_rtp_internal.h"]:
 #        pisitools.dosed(f, "([\"<])(liveMedia|BasicUsageEnvironment)(\.hh)([\">])", "\\1\\2/\\2\\3\\4")
 #    pisitools.dosed("libmpdemux/demux_rtp.cpp", "GroupsockHelper.hh", "groupsock/GroupsockHelper.hh")
-    shelltools.copytree("../ffmpeg-2.2.4", "ffmpeg")
+    shelltools.copytree("../ffmpeg-2.6.2", "ffmpeg")
     autotools.rawConfigure(' \
                              --confdir=/usr/share/mplayer \
                              --datadir=/usr/share/mplayer \
@@ -28,11 +30,9 @@ def setup():
                              --disable-ass-internal \
                              --disable-bitmap-font \
                              --disable-debug \
-                             --disable-dvdread-internal \
                              --disable-esd \
                              --enable-fribidi \
                              --disable-ggi \
-                             --disable-libdvdcss-internal \
                              --disable-live \
                              --disable-mga \
                              --disable-nas \
@@ -51,6 +51,7 @@ def setup():
                              --enable-cmov \
                              --enable-dvb \
                              --enable-dvdread \
+                             --enable-dvdnav \
                              --enable-fbdev \
                              --enable-ffmpeg_a \
                              --enable-fontconfig \
@@ -103,7 +104,6 @@ def setup():
                              --enable-xv \
                              --enable-xvid \
                              --enable-xvmc \
-                             --extra-ldflags="-lvorbisenc -lvorbis -logg" \
                              --extra-libs="-lfribidi -lglib-2.0 -lopenal -ljack -lxvidcore -lfontconfig -lass -laa -lX11 -lXext" \
                              --language=en \
                              --with-xvmclib=XvMCW \

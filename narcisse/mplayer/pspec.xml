@@ -14,9 +14,9 @@
         <IsA>app:console</IsA>
         <Summary>Media Player for Linux</Summary>
         <Description>MPlayer is a movie player that can run on many platforms. It plays most MPEG/VOB, AVI, Ogg/OGM, VIVO, ASF/WMA/WMV, QT/MOV/MP4, RealMedia, Matroska, NUT, NuppelVideo, FLI, YUV4MPEG, FILM, RoQ, PVA files, supported by many native codecs.</Description>
-        <Archive sha1sum="0c9b18710cb885bf0b95ea8e18757234c8a37e83" type="tarxz">http://source.pisilinux.org/1.0/mplayer-1.2_pre37124.tar.xz</Archive>
-        <Archive sha1sum="24387e4ab47ca936692198d14ddb5b3015b862ea" type="targz">http://ffmpeg.org/releases/ffmpeg-2.2.4.tar.gz</Archive>
-        <Archive sha1sum="6f7522a14c7ff0083990d32f213ff6d8e577821e" type="targz" target="mplayer-1.2_pre37124">http://source.pisilinux.org/1.0/MPlayer_default_skin-0.1.tar.gz</Archive>
+        <Archive sha1sum="6b00b684415b13e459c852706164ab414e7a75e6" type="tarxz">https://dl.dropboxusercontent.com/u/71264624/mplayer-37389.tar.xz</Archive>
+        <Archive sha1sum="65470c9b967485f72f81758a7bad44cf7a1763db" type="tarbz2">http://ffmpeg.org/releases/ffmpeg-2.6.2.tar.bz2</Archive>
+        <Archive sha1sum="6f7522a14c7ff0083990d32f213ff6d8e577821e" type="targz" target="mplayer-37389">http://source.pisilinux.org/1.0/MPlayer_default_skin-0.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gsm-devel</Dependency>
             <Dependency>atk-devel</Dependency>
@@ -40,6 +40,7 @@
             <Dependency>libXv-devel</Dependency>
             <Dependency>libmad-devel</Dependency>
             <Dependency>giflib-devel</Dependency>
+	    <Dependency>gnutls-devel</Dependency>
             <Dependency>libdca-devel</Dependency>
             <Dependency>libogg-devel</Dependency>
             <Dependency>libnut-devel</Dependency>
@@ -51,6 +52,7 @@
             <Dependency>libmng-devel</Dependency>
             <Dependency>libsdl-devel</Dependency>
 	    <Dependency>fribidi-devel</Dependency>
+	    <Dependency>libbs2b-devel</Dependency>
             <Dependency>twolame-devel</Dependency>
             <Dependency>libXvMC-devel</Dependency>
             <Dependency>live555-devel</Dependency>
@@ -118,6 +120,7 @@
             <Dependency>libdca</Dependency>
             <Dependency>openal</Dependency>
             <Dependency>giflib</Dependency>
+	    <Dependency>gnutls</Dependency>
             <Dependency>mpg123</Dependency>
             <Dependency>libsdl</Dependency>
             <Dependency>libvpx</Dependency>
@@ -126,6 +129,7 @@
             <Dependency>libnut</Dependency>
             <Dependency>libopus</Dependency>
             <Dependency>libXvMC</Dependency>
+	    <Dependency>libbs2b</Dependency>
             <Dependency>libcaca</Dependency>
             <Dependency>twolame</Dependency>
             <Dependency>libXext</Dependency>
@@ -198,6 +202,13 @@
     </Package>
 
     <History>
+      <Update release="8">
+            <Date>2015-04-30</Date>
+            <Version>1.2_pre37389</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2014-10-26</Date>
             <Version>1.2_pre37124</Version>
