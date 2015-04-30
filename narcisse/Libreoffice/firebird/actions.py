@@ -20,11 +20,15 @@ def setup():
     shelltools.system("find ./ -name \*.sh -print0 | xargs -0 chmod +x")
     for d in ("btyacc", "editline", "icu"):
         shelltools.unlinkDir("extern/%s" % d)
+        
+    shelltools.system("echo 'FIREBIRD CLASSIC SERVER BUILDING'")
     autotools.autoreconf("-fi")
     autotools.configure("--prefix=/opt/firebird \
                          --disable-static \
-                         --enable-superserver \
                          --with-editline \
+                         --with-fbbin=/opt/firebird/bin-classic \
+                         --with-fbsbin=/opt/firebird/bin-classic \
+                         --with-fbplugins=/opt/firebird/plugins-classic \
                          --with-gnu-ld \
                          --with-system-editline \
                          --with-system-icu \
@@ -37,11 +41,40 @@ def build():
     pisitools.dosed("install/makeInstallImage.sh", "exit 1", "# exit 1")
     pisitools.dosed("install/makeInstallImage.sh", "chown", 'echo ""# chown')
     pisitools.dosed("install/makeInstallImage.sh", "chmod", 'echo ""# chmod')
-    autotools.make("-f Makefile.install buildRoot")
+    shelltools.system("./install/makeInstallImage.sh")
+#    autotools.make("-f Makefile.install buildroot")
+    shelltools.system("mv buildroot buildroot-classic")
+    
+    shelltools.system("echo 'FIREBIRD SUPERSERVER BUILDING'")
+    
+    shelltools.cd("..")
+    
+    autotools.make("clean")
+
+    autotools.autoreconf("-fi")
+    autotools.configure("--prefix=/opt/firebird \
+                         --disable-static \
+                         --enable-superserver \
+                         --with-editline \
+                         --with-gnu-ld \
+                         --with-system-editline \
+                         --with-system-icu \
+                         ")
+
+    autotools.make("-j1")
+    shelltools.cd("gen")
+    pisitools.dosed("install/makeInstallImage.sh", "exit 1", "# exit 1")
+    pisitools.dosed("install/makeInstallImage.sh", "chown", 'echo ""# chown')
+    pisitools.dosed("install/makeInstallImage.sh", "chmod", 'echo ""# chmod') 
+    shelltools.system("./install/makeInstallImage.sh")
+#    autotools.make("-f Makefile.install buildroot")
 
 def install():
     # Copy to install directory
-    shelltools.copytree("gen/buildroot/", get.installDIR())
+    shelltools.copytree("gen/buildroot-classic", get.installDIR())
+    
+    pisitools.insinto("/opt/firebird/bin/", "gen/buildroot/opt/firebird/bin/*")
+    pisitools.insinto("/opt/firebird/plugins/", "gen/buildroot/opt/firebird/plugins/*")
 
     # Move headers
     pisitools.remove("/usr/include/*")
