@@ -22,7 +22,9 @@ def setup():
                             --enable-gpl \
                             --enable-libass \
                             --enable-libbluray \
+                            --enable-libbs2b \
                             --enable-libfreetype \
+                            --enable-libfdk-aac \
                             --enable-libgsm \
                             --enable-libmodplug \
                             --enable-libmp3lame \
@@ -38,15 +40,20 @@ def setup():
                             --enable-libv4l2 \
                             --enable-libvorbis \
                             --enable-libvpx \
+                            --enable-libwebp \
+                            --enable-libwavpack \
                             --enable-libx264 \
                             --enable-libx265 \
                             --enable-libxvid \
+                            --enable-openal \
+                            --enable-opengl \
                             --enable-pic \
                             --enable-postproc \
                             --enable-runtime-cpudetect \
                             --enable-shared \
                             --enable-swresample \
                             --enable-vdpau \
+                            --enable-vaapi \
                             --enable-version3 \
                             --enable-x11grab \
                             --enable-libdc1394 \
