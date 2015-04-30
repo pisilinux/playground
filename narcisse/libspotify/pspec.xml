@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libspotify</Name>
+        <Homepage>https://developer.spotify.com/technologies/libspotify/</Homepage>
+        <Packager>
+           <Name>Idris KALP</Name>
+           <Email>idriskalp@gmail.com</Email>
+        </Packager>
+        <License>Spotify</License>
+        <IsA>library</IsA>        
+        <Summary>Spotify Audio Streaming Library</Summary>
+        <Description>The Libspotify SDK and CocoaLibSpotify provide C language APIs that enable you to add Spotify music services to your own applications.</Description>
+        <Archive sha1sum="c052b4efdcdb0035a058617762e21c0b344e0f58" type="targz">https://developer.spotify.com/download/libspotify/libspotify-12.1.51-Linux-x86_64-release.tar.gz</Archive>
+    </Source>
+    
+    <Package>
+        <Name>libspotify</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>   
+	    <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="man">/usr/share/man</Path>
+         </Files>
+    </Package>
+    
+    <Package>
+        <Name>libspotify-devel</Name>
+        <RuntimeDependencies>
+	    <Dependency release="current">libspotify</Dependency>
+	  </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>           
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+         </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-04-30</Date>
+            <Version>12.1.51</Version>
+            <Comment>First release.</Comment>
+            <Name>Idris KALP</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
+
+    
+    
