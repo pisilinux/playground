@@ -9,35 +9,18 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
+ver = get.srcVERSION()
+
 def setup():
-    shelltools.cd("../")
-    shelltools.makedirs("gst-next")
-    shelltools.copy("gstreamer-vaapi-0.5.8/*", "gst-next")
-    shelltools.cd("gst-next")
-    autotools.configure("--prefix=/usr --disable-static")
-    
-    shelltools.cd("../")
-    shelltools.cd("gstreamer-vaapi-0.5.8")
+    autotools.autoreconf("-vfi")
     autotools.configure("--with-gstreamer-api=0.10")
     
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
-    shelltools.cd("../")
-    shelltools.cd("gst-next")
-    autotools.make()
-    
-    shelltools.cd("../")
-    shelltools.cd("gstreamer-vaapi-0.5.8")
     autotools.make()
 
 def install():
-    shelltools.cd("../")
-    shelltools.cd("gst-next")
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    
-    shelltools.cd("../")
-    shelltools.cd("gstreamer-vaapi-0.5.8")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.dodoc("AUTHORS", "COPYING*", "NEWS", "README")
