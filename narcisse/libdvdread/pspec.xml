@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Provides a simple foundation for reading DVD-Video images</Summary>
         <Description>A DVD player for the Solaris, Linux and BSD environments released under the GNU Public License (GPL).  It is includes bookmarks, time skipping, multichannel audio, SPDIF output, crop and zoom video. It supports DVD menus and navigation, reads from mounted, unmounted DVDs and hard drive and reads encrypted and unencrypted DVDs using libdvdread/libdvdcss.</Description>
-        <Archive sha1sum="54d00e38860a9c82fc10f4f0deb3c28fdf244d13" type="tarbz2">http://download.videolan.org/pub/videolan/libdvdread/5.0.2/libdvdread-5.0.2.tar.bz2</Archive>
+        <Archive sha1sum="3cda64c06ca9b617d976c490651db4391a162e1f" type="tarbz2">http://download.videolan.org/pub/pub/pub/videolan/libdvdread/5.0.3/libdvdread-5.0.3.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>libdvdcss-devel</Dependency>
 	    <Dependency>git</Dependency>
@@ -46,6 +46,13 @@
     </Package>
 
     <History>
+      <Update release="7">
+            <Date>2015-04-30</Date>
+            <Version>5.0.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskap@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2015-01-31</Date>
             <Version>5.0.2</Version>
