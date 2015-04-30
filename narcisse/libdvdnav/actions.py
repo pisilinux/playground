@@ -16,8 +16,7 @@ def setup():
     libtools.libtoolize("--force --install")
     autotools.autoreconf("-fi")
 
-    autotools.configure("--with-libdvdcss=/usr \
-                         --disable-static")
+    autotools.configure("--with-libdvdcss=/usr")
 
 def build():
     autotools.make()
