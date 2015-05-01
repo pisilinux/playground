@@ -1,0 +1,32 @@
+From 857152e54d3c969a7b0056d71bbb6f9f6eeec347 Mon Sep 17 00:00:00 2001
+From: rpmbuild <rpmbuild@fedoraproject.org>
+Date: Fri, 30 May 2014 09:15:36 +0200
+Subject: [PATCH] disable swui test on RHEL-7
+
+---
+ sw/Module_sw.mk | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/sw/Module_sw.mk b/sw/Module_sw.mk
+index 53a19bb..6702d9f 100644
+--- a/sw/Module_sw.mk
++++ b/sw/Module_sw.mk
+@@ -47,7 +47,6 @@ $(eval $(call gb_Module_add_targets,sw,\
+ endif
+ 
+ $(eval $(call gb_Module_add_slowcheck_targets,sw,\
+-    CppunitTest_sw_uwriter \
+     CppunitTest_sw_htmlexport \
+     CppunitTest_sw_htmlimport \
+     CppunitTest_sw_macros_test \
+@@ -60,7 +59,6 @@ $(eval $(call gb_Module_add_slowcheck_targets,sw,\
+     CppunitTest_sw_rtfimport \
+     CppunitTest_sw_odfexport \
+     CppunitTest_sw_odfimport \
+-    CppunitTest_sw_uiwriter \
+     CppunitTest_sw_mailmerge \
+     CppunitTest_sw_globalfilter \
+ ))
+-- 
+1.9.3
+

@@ -1,0 +1,24 @@
+From 793adaba0568a89a521274d354911b03a7e09161 Mon Sep 17 00:00:00 2001
+From: rpmbuild <rpmbuild@fedoraproject.org>
+Date: Tue, 27 May 2014 20:03:53 +0200
+Subject: [PATCH] disable failing test on rhel
+
+---
+ sc/Module_sc.mk | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/sc/Module_sc.mk b/sc/Module_sc.mk
+index 2b82efa..5d92799 100644
+--- a/sc/Module_sc.mk
++++ b/sc/Module_sc.mk
+@@ -57,7 +57,6 @@ $(eval $(call gb_Module_add_check_targets,sc,\
+ ))
+ 
+ $(eval $(call gb_Module_add_slowcheck_targets,sc, \
+-    CppunitTest_sc_subsequent_filters_test \
+     CppunitTest_sc_subsequent_export_test \
+     CppunitTest_sc_html_export_test \
+     CppunitTest_sc_opencl_test \
+-- 
+1.9.3
+

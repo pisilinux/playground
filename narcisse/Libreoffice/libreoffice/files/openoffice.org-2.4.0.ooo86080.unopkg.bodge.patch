@@ -1,13 +1,24 @@
---- openoffice.org.orig/desktop/scripts/unopkg.sh	2008-01-14 15:55:26.000000000 +0000
-+++ openoffice.org/desktop/scripts/unopkg.sh	2008-02-14 10:52:10.000000000 +0000
-@@ -62,6 +62,33 @@
+From 3b77bbe76b9f99d871074e8baa6e0845f4756442 Mon Sep 17 00:00:00 2001
+From: David Tardon <dtardon@redhat.com>
+Date: Mon, 3 Feb 2014 20:24:50 +0100
+Subject: [PATCH] i#86080 unopkg bodge
+
+---
+ desktop/scripts/unopkg.sh | 33 +++++++++++++++++++++++++++++++--
+ 1 file changed, 31 insertions(+), 2 deletions(-)
+
+diff --git a/desktop/scripts/unopkg.sh b/desktop/scripts/unopkg.sh
+index d16d226..aefc918 100755
+--- a/desktop/scripts/unopkg.sh
++++ b/desktop/scripts/unopkg.sh
+@@ -53,6 +53,33 @@ AIX)
      ;;
  esac
  
 +isnotuser=0
 +for arg in $@
 +do
-+if [ "$arg" = "--shared" -o "$arg" = "--bundled" ]; then 
++if [ "$arg" = "--shared" -o "$arg" = "--bundled" ]; then
 +    isnotuser=1
 +fi
 +done
@@ -34,7 +45,7 @@
  #collect all bootstrap variables specified on the command line
  #so that they can be passed as arguments to javaldx later on
  for arg in $@
-@@ -110,6 +137,8 @@
+@@ -92,6 +119,8 @@ unset XENVIRONMENT
  # SAL_NO_XINITTHREADS=true; export SAL_NO_XINITTHREADS
  
  # execute binary
@@ -45,3 +56,6 @@
 +if [ -n "$INSTDIR" ]; then
 +   rm -rf $INSTDIR
 +fi
+-- 
+1.8.4.2
+

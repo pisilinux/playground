@@ -1,0 +1,38 @@
+From 61deda9f7191e14e54be1b79a721ca73f42d5574 Mon Sep 17 00:00:00 2001
+From: rpmbuild <rpmbuild@fedoraproject.org>
+Date: Sat, 31 May 2014 10:19:14 +0200
+Subject: [PATCH] disable failing test on rhel-6
+
+---
+ dbaccess/Module_dbaccess.mk | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/dbaccess/Module_dbaccess.mk b/dbaccess/Module_dbaccess.mk
+index 824f3f5..3214658 100644
+--- a/dbaccess/Module_dbaccess.mk
++++ b/dbaccess/Module_dbaccess.mk
+@@ -46,7 +46,6 @@ $(eval $(call gb_Module_add_check_targets,dbaccess,\
+ 
+ ifeq ($(ENABLE_JAVA),TRUE)
+ $(eval $(call gb_Module_add_check_targets,dbaccess,\
+-    CppunitTest_dbaccess_hsqldb_test \
+ ))
+ endif
+ 
+diff --git a/writerperfect/Module_writerperfect.mk b/writerperfect/Module_writerperfect.mk
+index 9c30697..c5fbcca 100644
+--- a/writerperfect/Module_writerperfect.mk
++++ b/writerperfect/Module_writerperfect.mk
+@@ -31,12 +31,4 @@ $(eval $(call gb_Module_add_check_targets,writerperfect,\
+ 	CppunitTest_writerperfect_stream \
+ ))
+ 
+-$(eval $(call gb_Module_add_slowcheck_targets,writerperfect,\
+-	CppunitTest_writerperfect_calc \
+-	CppunitTest_writerperfect_draw \
+-	CppunitTest_writerperfect_impress \
+-	CppunitTest_writerperfect_writer \
+-	StaticLibrary_writerperfect_importtestbase \
+-))
+-
+ # vim: set noet sw=4 ts=4:

@@ -11,6 +11,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import autotools
 from pisi.actionsapi import shelltools
 
+pisitools.cxxflags.add("-fpermissive")
 pisitools.ldflags.add("-L/usr/lib/nss")
 pisitools.flags.remove("-pipe", "-Wall", "-g", "-fexceptions")
 shelltools.export("ARCH_FLAGS", get.CXXFLAGS())
@@ -88,12 +89,9 @@ def setup():
                        --without-system-apache-commons \
                        --without-system-libexttextcat \
                        --without-system-jfreereport \
-                       --without-system-icu \
                        --without-system-liblangtag \
-                       --without-system-harfbuzz \
                        --without-system-boost \
                        --without-system-hsqldb \
-                       --without-system-firebird \
                        --without-myspell-dicts \
                        --without-system-orcus \
                        --without-system-npapi-headers \
@@ -105,9 +103,12 @@ def setup():
                        --with-system-headers \
                        --with-system-cairo \
                        --with-system-mythes \
-                       --without-system-libabw \
-                       --without-system-libebook \
-                       --without-system-libfreehand \
+                       --with-system-coinmp \
+                       --with-system-libabw \
+                       --with-system-libebook \
+                       --with-system-libfreehand \
+                       --with-system-libpagemaker \
+                       --with-system-icu \
                        --with-system-libcdr \
                        --with-system-libwpg \
                        --with-system-libwps \
@@ -115,18 +116,20 @@ def setup():
                        --with-system-clucene \
                        --with-system-libmspub \
                        --with-system-cppunit \
-                       --without-system-libmwaw \
+                       --with-system-libmwaw \
                        --with-system-mdds \
                        --with-system-libodfgen \
-                       --without-system-libgltf \
+                       --with-system-libgltf \
                        --with-system-libetonyek \
-                       --without-system-librevenge \
+                       --with-system-librevenge \
                        --with-system-libatomic_ops \
-                       --without-system-libcmis \
+                       --with-system-libcmis \
                        --with-system-beanshell \
                        --with-system-graphite \
                        --with-system-dicts \
                        --with-system-libvisio \
+                       --with-system-harfbuzz \
+                       --with-system-firebird \
                        --with-external-dict-dir=/usr/share/hunspell \
                        --with-external-hyph-dir=/usr/share/hyphen \
                        --with-external-thes-dir=/usr/share/mythes \
