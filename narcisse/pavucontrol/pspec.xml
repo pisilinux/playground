@@ -12,7 +12,7 @@
         <IsA>app:gui</IsA>
         <Summary>PulseAudio Volume Control</Summary>
         <Description>pavucontrol is a simple GTK based volume control tool ("mixer") for the PulseAudio sound server. In contrast to classic mixer tools this one allows you to control both the volume of hardware devices and of each playback stream seperately.</Description>
-        <Archive sha1sum="5cf0fb666d2022b22599a6d052f56e0c86d3013d" type="tarxz">http://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-2.0.tar.xz</Archive>
+        <Archive sha1sum="df427f09dbb14ca3200a6eb5e53f9d4138648b5b" type="tarxz">http://freedesktop.org/software/pulseaudio/pavucontrol/pavucontrol-3.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gtk3-devel</Dependency>
             <Dependency>atkmm-devel</Dependency>
@@ -52,6 +52,13 @@
     </Package>
 
     <History>
+      <Update release="3">
+            <Date>2015-05-01</Date>
+            <Version>3.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2013-07-14</Date>
             <Version>2.0</Version>
