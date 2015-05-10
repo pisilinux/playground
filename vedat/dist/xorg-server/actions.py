@@ -11,10 +11,8 @@ from pisi.actionsapi import get
 def setup():
 #    shelltools.chmod("hw/vnc/symlink-vnc.sh")
 
-    #autotools.autoreconf("-fiv")
-    autotools.configure("--prefix=/usr \
-                         --localstatedir=/var \
-                         --enable-install-libxf86config \
+    autotools.autoreconf("-fiv")
+    autotools.configure('--enable-install-libxf86config \
                          --enable-aiglx \
                          --enable-glx-tls \
                          --enable-composite \
@@ -23,50 +21,44 @@ def setup():
                          --enable-dri \
                          --enable-dri2 \
                          --enable-config-udev \
-                         --disable-config-hal \
                          --enable-xfree86-utils \
                          --enable-xorg \
                          --enable-dmx \
                          --enable-xvfb \
-                         --disable-xnest \
+                         --enable-xnest \
                          --enable-kdrive \
                          --enable-kdrive-evdev \
                          --enable-kdrive-kbd \
                          --enable-kdrive-mouse \
                          --enable-xephyr \
+                         --enable-libdrm \
+                         --disable-config-hal \
                          --disable-xfake \
                          --disable-xfbdev \
                          --disable-devel-docs \
                          --disable-static \
+                         --disable-linux-acpi \
                          --without-doxygen \
-                         --with-pic \
                          --without-dtrace \
+                         --without-xmlto \
+                         --without-fop \
+                         --with-sha1=libcrypto \
+                         --with-pic \
                          --with-int10=x86emu \
-                         --with-os-name=\"PisiLinux\" \
-                         --with-os-vendor=\"Pisi GNU/Linux Community\" \
+                         --with-os-name="PisiLinux" \
+                         --with-os-vendor="Pisi GNU/Linux Community" \
                          --with-builderstring=\"Package: %s\" \
                          --with-fontrootdir=/usr/share/fonts \
                          --with-default-font-path=catalogue:/etc/X11/fontpath.d,built-ins \
                          --with-xkb-output=/var/lib/xkb \
-                         --with-dri-driver-path=/usr/lib/xorg/modules/dri \
-                         --without-xmlto \
-                         --without-fop \      
-                         --enable-install-setuid  \
-                         --enable-suid-wrapper  \          
+                         --localstatedir=/var \
+                         --sysconfdir=/etc/X11 \
                          PCI_TXT_IDS_DIR=/usr/share/X11/pci \
-                         XSERVERCFLAGS_LIBS=-L/usr/lib \
-                         XSERVERCFLAGS_CFLAGS=-I/usr/include  \
-                         PKG_CONFIG_PATH=/usr/lib/pkgconfig \
-                         " % get.srcTAG())
-    
+                         ' % get.srcTAG())
+
+#--with-dri-driver-path=/usr/lib/xorg/modules/dri \
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
-    pisitools.dosed("hw/xfree86/dri/dri.h", "xf86dri.h", "X11/dri/xf86dri.h")
-    #pisitools.dosed("include/inputstr.h", "pixman.h", "pixman-1/pixman.h")
-    #pisitools.dosed("dix/devices.c", "pixman.h", "pixman-1/pixman.h")
-    #pisitools.dosed("dix/main.c", "pixman.h", "pixman-1/pixman.h")
-    #pisitools.dosed("dix/getevents.c", "pixman.h", "pixman-1/pixman.h")
-    #pisitools.dosed("dix/region.c", "pixman.h", "pixman-1/pixman.h")
-    
+
 def build():
     autotools.make()
 
@@ -80,5 +72,7 @@ def install():
 
     # Remove empty dir
     pisitools.removeDir("/var/log")
-
+    
+    pisitools.remove("/usr/lib/*.a")
+    
     pisitools.dodoc("COPYING", "README")

@@ -1,0 +1,12 @@
+--- Mesa-10.3.2/include/GL/glxext.h~	2014-10-22 16:37:26.000000000 +0200
++++ Mesa-10.3.2/include/GL/glxext.h	2014-10-30 19:49:51.561677653 +0100
+@@ -477,6 +477,9 @@
+ 
+ #ifndef GLX_NV_copy_buffer
+ #define GLX_NV_copy_buffer 1
++#include <stddef.h>
++typedef ptrdiff_t GLsizeiptr;
++typedef ptrdiff_t GLintptr;
+ typedef void ( *PFNGLXCOPYBUFFERSUBDATANVPROC) (Display *dpy, GLXContext readCtx, GLXContext writeCtx, GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size);
+ typedef void ( *PFNGLXNAMEDCOPYBUFFERSUBDATANVPROC) (Display *dpy, GLXContext readCtx, GLXContext writeCtx, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size);
+ #ifdef GLX_GLXEXT_PROTOTYPES 

@@ -20,24 +20,23 @@ def setup():
               --with-gallium-drivers=r300,r600,radeonsi,nouveau,svga,swrast \
               --with-dri-drivers=i915,i965,r200,radeon,nouveau,swrast \
               --with-egl-platforms=x11,drm,wayland \
-              --enable-llvm-shared-libs \
               --enable-xa \
               --enable-dri \
+              --enable-dri3 \
               --enable-egl \
               --enable-gbm \
               --enable-glx \
               --enable-gles1 \
               --enable-gles2 \
               --enable-vdpau \
-              --enable-openvg \
               --enable-osmesa \
+              --enable-nine \
               --enable-sysfs \
               --enable-xvmc \
               --enable-glx-tls \
-              --enable-gallium-egl \
-              --enable-gallium-gbm \
-              --enable-gallium-llvm \
               --enable-shared-glapi \
+              --enable-shared \
+              --enable-gallium-llvm \
               --enable-texture-float \
               --enable-llvm-shared-libs \
              "
@@ -65,11 +64,14 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.domove("%s/libGL.so.1.2.0" % Libdir, "%s/mesa" % Libdir)
-    pisitools.dosym("libGL.so.1.2.0", "%s/libGL.so.1.2" % Libdir)
-
-    if get.buildTYPE() == "emul32":
-        return
+    #pisitools.domove("%s/libGL.so.1.2.0" % Libdir, "%s/mesa" % Libdir)
+    #pisitools.dosym("%s/usr/lib/mesa/libGL.so.1.2.0" % get.installDIR(), "%s/libGL.so.1.2" % Libdir)
+    
+    #pisitools.insinto("%s/" % Libdir, "%s/usr/lib/mesa/libGL.so.1.2.0" % get.installDIR(), "libGL.so.1")
+    #pisitools.insinto("%s/" % Libdir, "%s/usr/lib/mesa/libGL.so.1.2.0" % get.installDIR(), "libGL.so")
+    
+    #if get.buildTYPE() == "emul32":
+     #   return
 
     pisitools.dodoc("docs/COPYING")
     pisitools.dohtml("docs/*")
