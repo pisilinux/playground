@@ -1,0 +1,373 @@
+# If a package is listed here, it will be built apart from the
+# usual "grab bag" package that's made from each source directory.
+#
+# Things to note:
+#
+# Listing a package here will not cause it to be built.  To do that,
+# make sure it is added to one of the files in the modules/ directory
+# that is built by the main KDE.SlackBuild script.
+#
+# If a subpackage name happens to be the same as the "grab bag" package
+# that contains it, you need to be a bit careful.  Unless everything
+# in that collection will be built modular, *do not* list that name
+# here!  If you do, first the module by that name will be built, and
+# then everything that's not modular in that collection will be built
+# into a "grab bag" that will replace that first package.
+#
+# If the goal is to build the most combined packages possible, the
+# easiest way to accomplish that is just to move this file out of the
+# way and replace it with an empty one before building.
+
+#
+# The Frameworks 5, Plasma 5 and Applications:
+#
+
+# frameworks
+# Tier 1, depends on Qt5, system libraries:
+attica-framework
+extra-cmake-modules
+kitemmodels
+kitemviews
+kplotting
+threadweaver
+kcodecs
+kguiaddons
+kidletime
+kwidgetsaddons
+sonnet
+kconfig
+kwindowsystem
+solid
+kglobalaccel
+karchive
+kdbusaddons
+kcoreaddons
+kimageformats
+ki18n
+networkmanager-qt
+# Tier 2, depends on Tier 1, Qt5, system libraries:
+kauth
+kcrash
+kjobwidgets
+kcompletion
+kdoctools
+kjs
+kpackage
+kdnssd
+kconfigwidgets
+kservice
+kiconthemes
+knotifications
+kunitconversion
+kpty
+# Tier 3, depends on Tier 1 and 2, Qt5, system libraries:
+kwallet
+kemoticons
+kdesu
+ktextwidgets
+kxmlgui
+kbookmarks
+kcmutils
+kio
+knewstuff
+kparts
+kdewebkit
+kdesignerplugin
+kdeclarative
+kinit
+kded
+knotifyconfig
+#kprintutils
+kjsembed
+kross
+kmediaplayer
+ktexteditor
+#kfileaudiopreview
+kactivities-framework
+plasma-framework
+krunner
+kpeople
+kxmlrpcclient
+# Tier 4, depends on Tier 1, 2 and 3, Qt5, system libraries:
+kapidox
+frameworkintegration
+kdelibs4support
+khtml
+
+# plasma
+kfilemetadata5
+kdepimlibs-framework
+baloo5
+kdecoration
+breeze
+kde-cli-tools
+khelpcenter
+kinfocenter
+kio-extras
+libksysguard
+ksysguard
+kwin
+kwrited
+libkscreen2
+milou
+oxygen
+oxygen-fonts
+systemsettings
+kwayland
+plasma-desktop
+plasma-workspace
+kdeplasma-addons
+plasma-workspace-wallpapers
+libmm-qt5
+libnm-qt5
+plasma5-nm
+powerdevil
+#libbluedevil
+#bluedevil
+khotkeys
+kmenuedit
+polkit-kde-framework
+kscreen2
+sddm-kcm
+kde-gtk-config
+muon
+ksshaskpass
+
+# plasma-extra
+sddm-qt5
+sddm-theme-breeze
+kdeconnect-framework
+polkit-kde-kcmodules-framework
+
+# applications
+# old kdebase:
+kde-baseapps
+kde-wallpapers
+kde-workspace
+kde-runtime
+kde-base-artwork
+# Old kdesdk:
+cervisia
+dolphin-plugins
+kcachegrind
+kde-dev-scripts
+kde-dev-utils
+kdesdk-kioslaves
+kdesdk-strigi-analyzers
+kdesdk-thumbnailers
+libkomparediff2
+kompare
+lokalize
+poxml
+umbrello
+# The old kdegraphics:
+libkipi
+libkexiv2
+libkdcraw
+libksane
+kdegraphics-mobipocket
+kdegraphics-strigi-analyzer
+okular
+kdegraphics-thumbnailers
+kamera
+kcolorchooser
+kgamma
+kolourpaint
+kruler
+ksaneplugin
+ksnapshot
+svgpart
+libkface
+# The old kdeaccessibility:
+#jovie
+kaccessible
+kmouth
+kmousetool
+kmag
+# The old kdeutils:
+ark
+filelight
+kcalc
+kcharselect
+kdf
+kfloppy
+kgpg
+print-manager
+kremotecontrol
+ktimer
+kwalletmanager
+superkaramba
+sweeper
+# The old kdemultimedia:
+libkcddb
+libkcompactdisc
+audiocd-kio
+dragon
+#ffmpegthumbs
+mplayerthumbs
+juk
+kmix
+#kscd
+# The oxygen icon set:
+oxygen-icons
+# The kdenetwork:
+kdenetwork-filesharing
+kdenetwork-strigi-analyzers
+zeroconf-ioslave
+kget
+kopete
+kppp
+krdc
+krfb
+# kdeadmin:
+kcron
+ksystemlog
+kuser
+# kdeartwork:
+kdeartwork
+# kdegames:
+libkdegames
+libkmahjongg
+klickety
+ksudoku
+ksquares
+kpat
+klines
+ksnakeduel
+kollision
+kshisen
+kblocks
+lskat
+kreversi
+bovo
+kajongg
+granatier
+kmines
+kiriki
+kigo
+bomber
+kolf
+kdiamond
+kbounce
+konquest
+kapman
+knavalbattle
+killbots
+kubrick
+kgoldrunner
+knetwalk
+kbreakout
+ksirk
+kfourinline
+picmi
+kblackbox
+palapeli
+katomic
+ktuberling
+kjumpingcube
+kmahjongg
+kspaceduel
+# kdetoys:
+amor
+kteatime
+ktux
+# kdeedu:
+libkdeedu
+kdeedu-data
+artikulate
+blinken
+cantor
+kalzium
+kbruch
+kgeography
+kiten
+klettres
+kmplot
+kstars
+kqtquickcharts
+ktouch
+kturtle
+kwordquiz
+marble
+pairs
+rocs
+step
+# kdewebdev:
+kdewebdev
+
+#
+# Ported to KF5:
+kate
+konsole
+analitza
+gwenview
+kalgebra
+kanagram
+khangman
+kig
+parley
+kapptemplate
+okteta
+libkeduvocdocument
+
+
+#
+# The old KDE 4 stuff which has not been migrated yet. or is still needed
+# by un-migrated applications:
+#
+
+# kdelibs:
+kdelibs
+
+# kdebase:
+baloo
+baloo-widgets
+nepomuk-core
+nepomuk-widgets
+kfilemetadata
+kactivities
+katepart4
+konsolepart4
+
+# kdebindings
+smokegen
+smokeqt
+qtruby
+perlqt
+smokekde
+korundum
+perlkde
+pykde4
+kross-interpreters
+kimono
+qyoto
+
+# kdepim
+kdepim
+kdepim-runtime
+
+# kdepimlibs
+kdepimlibs
+
+# kdeplasma-addons
+#kdeplasma-addons
+
+# extragear
+calligra
+k3b
+kaudiocreator
+kplayer
+kwebkitpart
+oxygen-gtk2
+oxygen-gtk3
+kdevplatform
+kdevelop-pg-qt
+kdevelop
+kdev-python
+kdevelop-php
+kdevelop-php-docs
+skanlite
+kio-mtp
+libktorrent
+ktorrent
+partitionmanager

@@ -23,9 +23,10 @@ def setup():
                                      --enable=QtWidgets \
                                      --enable=QtXml \
                                      --enable=QtGui \
+                                     --sip /usr/sbin/sip \
                                      --qmake='/usr/bin/qmake' \
                                      --destdir='/usr/lib/python3.4/site-packages' \
-                                     --sip-incdir='/usr/include/python3.4' \
+                                     --sip-incdir='/usr/include/python3.4/sip5' \
                                      CFLAGS='%s' CXXFLAGS='%s'" % (get.CFLAGS(), get.CXXFLAGS()), pyVer = "3")
     
     shelltools.cd("%s/Py2Qt-gpl-5.4.1" % get.workDIR())
@@ -37,6 +38,9 @@ def setup():
                                      --enable=QtWidgets \
                                      --enable=QtXml \
                                      --enable=QtGui \
+                                     --destdir='/usr/lib/python2.7/site-packages' \
+                                     --sip-incdir='/usr/include/python2.7/sip5' \
+                                     --sip /usr/sbin/sip \
                                      --qmake='/usr/bin/qmake'")
     #shelltools.system("find -name 'Makefile' | xargs sed -i 's|-Wl,-rpath,/usr/lib||g;s|-Wl,-rpath,.* ||g'")    
 

@@ -15,8 +15,8 @@
         <Description>A QT wrapper around the NetworkManager libraries</Description>
         <Archive sha1sum="8a783cad4a2d426ea3b676eb44c4acb1560ea9e4" type="tarxz">mirrors://kde/stable/frameworks/5.8/networkmanager-qt-5.8.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-devel</Dependency>
-        <Dependency>NetworkManager-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>NetworkManager-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>	    
         </BuildDependencies>
     </Source>
@@ -24,7 +24,7 @@
     <Package>
         <Name>networkmanager-qt5</Name>
         <RuntimeDependencies>
-            <Dependency>qt5</Dependency>
+            <Dependency>qt5-base</Dependency>
             <Dependency>NetworkManager</Dependency>
         </RuntimeDependencies>
         <Files>

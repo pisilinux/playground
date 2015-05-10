@@ -21,16 +21,16 @@ def setup():
     shelltools.copytree("./%s" % WorkDir,  "build_python3")
     shelltools.cd(WorkDir)
     pythonmodules.run('configure.py \
-                    -b /usr/bin \
-                    -d /usr/lib/%s/site-packages \
-                    -e /usr/include/%s \
+                    -b /usr/sbin \
+                    -d /usr/lib/%s/site-packages/sip5 \
+                    -e /usr/include/%s/sip5 \
                     CFLAGS+="%s" CXXFLAGS+="%s"' % (py2dir, py2dir, get.CFLAGS(), get.CXXFLAGS()))
 
     shelltools.cd("../build_python3/%s" % WorkDir)
     pythonmodules.run('configure.py \
-                    -b /usr/bin \
-                    -d /usr/lib/%s/site-packages \
-                    -e /usr/include/%s \
+                    -b /usr/sbin \
+                    -d /usr/lib/%s/site-packages/sip5 \
+                    -e /usr/include/%s/sip5 \
                     CFLAGS="%s" CXXFLAGS="%s"' % (py3dir, py3dir, get.CFLAGS(), get.CXXFLAGS()), pyVer = "3")
 
 def build():
@@ -41,7 +41,8 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    pisitools.dodoc("LICENSE*", "NEWS", "README")
+    #pisitools.dodoc("LICENSE*", "NEWS", "README")
 
     shelltools.cd("../build_python3/%s" % WorkDir)
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+

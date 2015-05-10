@@ -28,12 +28,9 @@
     <Package>
         <Name>sip5</Name>
         <Files>
-            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
-        <Replaces>
-          <Package versionFrom="4.14.3">sip</Package>
-        </Replaces>
     </Package>
 
     <Package>
@@ -45,9 +42,6 @@
         <Files>
             <Path fileType="library">/usr/lib/python2*</Path>
         </Files>
-        <Replaces>
-          <Package versionFrom="4.14.3">python-sip</Package>
-        </Replaces>
     </Package>
 
     <Package>
@@ -60,9 +54,6 @@
         <Files>
             <Path fileType="library">/usr/lib/python3*</Path>
         </Files>
-        <Replaces>
-          <Package versionFrom="4.14.3">python3-sip</Package>
-        </Replaces>
     </Package>
 
     <Package>
@@ -76,9 +67,6 @@
         <Files>
             <Path fileType="header">/usr/include</Path>
         </Files>
-        <Replaces>
-          <Package versionFrom="4.14.3">sip-devel</Package>
-        </Replaces>
     </Package>
 
     <History>
