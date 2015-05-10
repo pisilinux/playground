@@ -11,13 +11,8 @@ from pisi.actionsapi import get
 
 import os
 
-snapshot = False
 
-if snapshot:
-    verMajor, verMinor = get.srcVERSION().replace("pre", "").split("_", 1)
-    WorkDir = "gcc-4.7-%s" % verMinor
-else:
-    verMajor = get.srcVERSION()
+verMajor = "5.1.0"
 
 arch = get.ARCH().replace("x86_64", "x86-64")
 
@@ -62,6 +57,50 @@ def setup():
     shelltools.cd("build")
 
     shelltools.system('.././gcc-%s/configure \
+                       --with-system-zlib \
+                       --with-bugurl=http://bugs.pisilinux.org \
+                       --with-linker-hash-style=gnu \
+                       --with-pkgversion="Pisi Linux" \
+                       --with-multilib-list=m32,m64 \
+                       --with-system-libunwind \
+                       --with-gxx-include-dir=/usr/include/c++/4.9.2 \
+                       --disable-libunwind-exceptions \
+                       --disable-libstdcxx-pch \
+                       --disable-libssp \
+                       --disable-werror \
+                       --disable-cloog-version-check \
+                       --disable-libgcj \
+                       --disable-build-poststage1-with-cxx \
+                       --disable-build-with-cxx \
+                       --enable-gnu-unique-object \
+                       --enable-bootstrap \
+                       --enable-__cxa_atexit \
+                       --enable-libstdcxx-allocator=new \
+                       --enable-java-awt="xlib,qt" \
+                       --disable-libstdcxx-pch \
+                       --enable-libstdcxx-threads \
+                       --enable-libstdcxx-time=rt \
+                       --enable-libstdcxx-visibility \
+                       --enable-symvers=gnu \
+                       --enable-languages=c,c++,fortran,lto,objc,obj-c++,java,go \
+                       --enable-shared \
+                       --enable-decimal-float \
+                       --enable-gnu-unique-object \
+                       --enable-gnu-indirect-function \
+                       --enable-initfini-array \
+                       --enable-threads=posix \
+                       --enable-clocale=gnu \
+                       --enable-linker-build-id \
+                       --enable-cloog-backend=isl \
+                       --enable-plugin \
+                       --enable-checking=release \
+                       --enable-c99 \
+                       --enable-lto \
+                       --enable-libitm \
+                       --enable-linker-build-id \
+                       --enable-linux-futex \
+                       --enable-long-long \
+                       --enable-nls \
                        --prefix=/usr \
                        --bindir=/usr/bin \
                        --libdir=/usr/lib \
@@ -69,27 +108,9 @@ def setup():
                        --includedir=/usr/include \
                        --mandir=/usr/share/man \
                        --infodir=/usr/share/info \
-                       --with-bugurl=http://bugs.pisilinux.org \
-                       --enable-languages=c,c++,fortran,lto,objc,obj-c++ \
-                       --disable-libgcj \
-                       --enable-shared \
-                       --enable-threads=posix \
-                       --with-system-zlib \
-                       --enable-__cxa_atexit \
-                       --disable-libunwind-exceptions \
-                       --enable-clocale=gnu \
-                       --disable-libstdcxx-pch \
-                       --disable-libssp \
-                       --enable-gnu-unique-object \
-                       --enable-linker-build-id \
-                       --enable-cloog-backend=isl \
-                       --disable-cloog-version-check \
-                       --enable-lto \
-                       --enable-plugin \
-                       --with-linker-hash-style=gnu \
-                       --with-pkgversion="Pisi Linux" \
-                       --disable-werror \
-                       --enable-checking=release \
+                       --x-libraries=/usr/lib/X11 \
+                       --host=x86_64-pc-linux-gnu \
+                       --build=x86_64-pc-linux-gnu \
                        --build=%s \
                                %s \
                                %s ' % ( verMajor , get.HOST(), opt_arch, opt_multilib))

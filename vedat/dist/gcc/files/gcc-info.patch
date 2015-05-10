@@ -1,0 +1,444 @@
+--- a/gcc/doc/cpp.texi	2004-09-17 10:22:36.000000000 +0200
++++ b/gcc/doc/cpp.texi	2004-09-26 10:58:58.166721432 +0200
+@@ -50,9 +50,9 @@
+ @set cppmanual
+ 
+ @ifinfo
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* Cpp: (cpp).                  The GNU C preprocessor.
++* Cpp: (cpp).				The GNU C preprocessor
+ @end direntry
+ @end ifinfo
+ 
+--- a/gcc/doc/cppinternals.texi	2004-07-03 01:57:11.000000000 +0200
++++ b/gcc/doc/cppinternals.texi	2004-09-26 10:58:58.208715048 +0200
+@@ -3,9 +3,9 @@
+ @settitle The GNU C Preprocessor Internals
+ 
+ @ifinfo
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* Cpplib: (cppinternals).      Cpplib internals.
++* Cpplib: (cppinternals).		Cpplib internals
+ @end direntry
+ @end ifinfo
+ 
+--- a/gcc/doc/gcc.texi	2004-07-22 22:12:20.000000000 +0200
++++ b/gcc/doc/gcc.texi	2004-09-26 10:58:58.218713528 +0200
+@@ -62,12 +62,12 @@
+      funds for GNU development.
+ @end copying
+ @ifnottex
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* gcc: (gcc).                  The GNU Compiler Collection.
+-* g++: (gcc).                  The GNU C++ compiler.
+-* gcov: (gcc) Gcov.            @command{gcov}---a test coverage program.
+-* gcov-tool: (gcc) Gcov-tool.  @command{gcov-tool}---an offline gcda profile processing program.
++* gcc: (gcc).				The GNU Compiler Collection
++* g++: (gcc).				The GNU C++ compiler
++* gcov: (gcc) Gcov.			@command{gcov}---a test coverage program
++* gcov-tool: (gcc) Gcov-tool.		@command{gcov-tool}---an offline gcda profile processing program
+ @end direntry
+ This file documents the use of the GNU compilers.
+ @sp 1
+--- a/gcc/doc/gccint.texi	2004-05-24 00:54:29.000000000 +0200
++++ b/gcc/doc/gccint.texi	2004-09-26 10:58:58.222712920 +0200
+@@ -46,9 +46,9 @@
+      funds for GNU development.
+ @end copying
+ @ifnottex
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* gccint: (gccint).            Internals of the GNU Compiler Collection.
++* gccint: (gccint).			Internals of the GNU Compiler Collection
+ @end direntry
+ This file documents the internals of the GNU compilers.
+ @sp 1
+--- a/gcc/ada/gnat-style.texi	2004-09-01 13:51:52.000000000 +0200
++++ b/gcc/ada/gnat-style.texi	2004-09-26 10:58:58.342694680 +0200
+@@ -28,9 +28,9 @@
+ @setchapternewpage odd
+ 
+ 
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* gnat-style: (gnat-style).      GNAT Coding Style
++* gnat-style: (gnat-style).		GNAT Coding Style
+ @end direntry
+ 
+ @macro syntax{element}
+--- a/gcc/ada/gnat_ugn.texi	2005-12-06 23:45:52.983574000 +0100
++++ b/gcc/ada/gnat_ugn.texi	2005-12-11 02:35:45.580878360 +0100
+@@ -10,7 +10,7 @@
+ @paragraphindent 0
+ @exampleindent 4
+ @finalout
+-@dircategory GNU Ada Tools 
++@dircategory Programming Languages:
+ @direntry
+ * gnat_ugn: (gnat_ugn.info). gnat_ugn
+ @end direntry
+--- a/gcc/fortran/gfortran.texi	2004-09-16 15:13:39.000000000 +0200
++++ b/gcc/fortran/gfortran.texi	2004-09-26 11:05:50.258074024 +0200
+@@ -62,9 +62,9 @@
+ @end copying
+ 
+ @ifinfo
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* gfortran: (gfortran).                  The GNU Fortran Compiler.
++* gfortran: (gfortran).			The GNU Fortran Compiler
+ @end direntry
+ This file documents the use and the internals of
+ the GNU Fortran compiler, (@command{gfortran}).
+--- gcc-4.9.2/gcc/java/gcj.texi.orig	2014-01-02 22:25:41.000000000 +0100
++++ gcc-4.9.2/gcc/java/gcj.texi	2015-01-13 20:25:09.094821767 +0100
+@@ -53,29 +53,21 @@
+ 
+ @ifinfo
+ @format
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* Gcj: (gcj).               Ahead-of-time compiler for the Java language
++* Gcj: (gcj).				Ahead-of-time compiler for the Java language
+ @end direntry
+ 
+-@dircategory Individual utilities
++@dircategory Programming tools:
+ @direntry
+-* jcf-dump: (gcj)Invoking jcf-dump.
+-                            Print information about Java class files
+-* gij: (gcj)Invoking gij.   GNU interpreter for Java bytecode
+-* gcj-dbtool: (gcj)Invoking gcj-dbtool.
+-                            Tool for manipulating class file databases.
+-* jv-convert: (gcj)Invoking jv-convert.
+-                            Convert file from one encoding to another
+-* grmic: (gcj)Invoking grmic.
+-                            Generate stubs for Remote Method Invocation.
+-* gc-analyze: (gcj)Invoking gc-analyze.
+-                            Analyze Garbage Collector (GC) memory dumps.
+-* aot-compile: (gcj)Invoking aot-compile.
+-                            Compile bytecode to native and generate databases.
+-* rebuild-gcj-db: (gcj)Invoking rebuild-gcj-db.
+-                            Merge the per-solib databases made by aot-compile
+-                            into one system-wide database.
++* jcf-dump: (gcj)jcf-dump.		Print information about Java class files
++* gij: (gcj)gij.			GNU interpreter for Java bytecode
++* jv-convert: (gcj)jv-convert.		Convert file from one encoding to another
++* gcj-dbtool: (gcj)gcj-dbtool.		Db tool
++* grmic: (gcj)grmic.			Generate stubs for Remote Method Invocation
++* gc-analyze: (gcj)gc-analyze.		Analyze Garbage Collector (GC) memory dumps
++* aot-compile: (gcj)aot-compile.	Compile bytecode to native and generate databases
++* rebuild-gcj-db: (gcj)rebuild-gcj-db.	Merge the per-solib databases made by aot-compile into one system-wide database
+ @end direntry
+ @end format
+ 
+@@ -108,33 +100,31 @@
+ @file{.class} files.
+ 
+ @menu
+-* Copying::             The GNU General Public License
++* Copying::		The GNU General Public License
+ * GNU Free Documentation License::
+-                        How you can share and copy this manual
+-* Invoking gcj::        Compiler options supported by @command{gcj}
+-* Compatibility::       Compatibility between gcj and other tools for Java
+-* Invoking jcf-dump::   Print information about class files
+-* Invoking gij::        Interpreting Java bytecodes
+-* Invoking gcj-dbtool:: Tool for manipulating class file databases.
+-* Invoking jv-convert:: Converting from one encoding to another
+-* Invoking grmic::      Generate stubs for Remote Method Invocation.
+-* Invoking gc-analyze:: Analyze Garbage Collector (GC) memory dumps.
+-* Invoking aot-compile:: Compile bytecode to native and generate databases.
+-* Invoking rebuild-gcj-db:: Merge the per-solib databases made by aot-compile
+-                            into one system-wide database.
+-* About CNI::           Description of the Compiled Native Interface
+-* System properties::   Modifying runtime behavior of the libgcj library
+-* Resources::           Where to look for more information
+-* Index::               Index.
++			How you can share and copy this manual
++* gcj::			Compiler options supported by @command{gcj}
++* Compatibility::	Compatibility between gcj and other tools for Java
++* jcf-dump::		Print information about class files
++* gij::			Interpreting Java bytecodes
++* gcj-dbtool::		Tool for manipulating class file databases.
++* jv-convert::		Converting from one encoding to another
++* grmic::		Generate stubs for Remote Method Invocation.
++* gc-analyze::		Analyze Garbage Collector (GC) memory dumps.
++* aot-compile::		Compile bytecode to native and generate databases.
++* rebuild-gcj-db::	Merge the per-solib databases made by aot-compile into one system-wide database.
++* About CNI::		Description of the Compiled Native Interface
++* System properties::	Modifying runtime behavior of the libgcj library
++* Resources::		Where to look for more information
++* Index::		Index.
+ @end menu
+ 
+-
+ @include gpl_v3.texi
+ 
+ @include fdl.texi
+ 
+ 
+-@node Invoking gcj
++@node gcj
+ @chapter Invoking gcj
+ 
+ @c man title gcj Ahead-of-time compiler for the Java language
+@@ -685,8 +675,8 @@
+ @code{-findirect-dispatch} then add them to the system-wide
+ classmap.db file using @code{gcj-dbtool}, they will be automatically
+ loaded by the @code{libgcj} system classloader.  This is the new,
+-preferred classname-to-library resolution mechanism.  @xref{Invoking
+-gcj-dbtool}, for more information on using the classmap database.
++preferred classname-to-library resolution mechanism.  @xref{gcj-dbtool},
++for more information on using the classmap database.
+ 
+ @item
+ The old classname-to-library lookup mechanism is still supported
+@@ -733,7 +723,7 @@
+ @end itemize
+ 
+ 
+-@node Invoking jcf-dump
++@node jcf-dump
+ @chapter Invoking jcf-dump
+ 
+ @c man title jcf-dump print information about Java class files
+@@ -793,7 +783,7 @@
+ 
+ @c man end
+ 
+-@node Invoking gij
++@node gij
+ @chapter Invoking gij
+ 
+ @c man title gij GNU interpreter for Java bytecode
+@@ -922,7 +912,7 @@
+ 
+ @c man end
+ 
+-@node Invoking gcj-dbtool
++@node gcj-dbtool
+ @chapter Invoking gcj-dbtool.
+ 
+ @c man title gcj-dbtool Manipulate class file mapping databases for libgcj
+@@ -1013,7 +1003,7 @@
+ 
+ @c man end
+ 
+-@node Invoking jv-convert
++@node jv-convert
+ @chapter Invoking jv-convert
+ 
+ @c man title jv-convert Convert file from one encoding to another
+@@ -1072,7 +1062,7 @@
+ 
+ @c man end
+ 
+-@node Invoking grmic
++@node grmic
+ @chapter Invoking grmic
+ 
+ @c man title grmic Generate stubs for Remote Method Invocation
+@@ -1151,7 +1141,7 @@
+ @c man end
+ 
+ 
+-@node Invoking gc-analyze
++@node gc-analyze
+ @chapter Invoking gc-analyze
+ 
+ @c man title gc-analyze Analyze Garbage Collector (GC) memory dumps
+@@ -1234,7 +1224,7 @@
+ 
+ @c man end
+ 
+-@node Invoking aot-compile
++@node aot-compile
+ @chapter Invoking aot-compile
+ 
+ @c man title aot-compile Compile bytecode to native and generate databases
+@@ -1292,7 +1282,7 @@
+ 
+ @c man end
+ 
+-@node Invoking rebuild-gcj-db
++@node rebuild-gcj-db
+ @chapter Invoking rebuild-gcj-db
+ 
+ @c man title rebuild-gcj-db Merge the per-solib databases made by aot-compile into one system-wide database.
+--- a/gcc/ada/gnat_rm.texi	2005-11-30 12:12:06.000000000 +0100
++++ b/gcc/ada/gnat_rm.texi	2005-12-11 02:36:14.863426736 +0100
+@@ -26,7 +26,7 @@
+ @paragraphindent 0
+ @exampleindent 4
+ @finalout
+-@dircategory GNU Ada Tools 
++@dircategory Programming Languages:
+ @direntry
+ * gnat_rm: (gnat_rm.info). gnat_rm
+ @end direntry
+--- a/gcc/doc/install.texi	2005-11-30 12:02:42.000000000 +0100
++++ b/gcc/doc/install.texi	2005-12-11 02:44:22.598279768 +0100
+@@ -87,9 +87,9 @@
+ @ifinfo
+ @insertcopying
+ @end ifinfo
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* gccinstall: (gccinstall).    Installing the GNU Compiler Collection.
++* gccinstall: (gccinstall).		Installing the GNU Compiler Collection
+ @end direntry
+ 
+ @c Part 3 Titlepage and Copyright
+--- gcc-4.6.2/gcc/go/gccgo.texi.orig	2011-02-14 05:42:53.000000000 +0100
++++ gcc-4.6.2/gcc/go/gccgo.texi	2011-10-31 18:27:12.670749858 +0100
+@@ -48,9 +48,9 @@
+ 
+ @ifinfo
+ @format
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* Gccgo: (gccgo).           A GCC-based compiler for the Go language
++* Gccgo: (gccgo).			A GCC-based compiler for the Go language
+ @end direntry
+ @end format
+ 
+--- gcc-4.8.2/libjava/classpath/doc/cp-tools.texinfo.orig	2013-02-21 10:40:44.000000000 +0100
++++ gcc-4.8.2/libjava/classpath/doc/cp-tools.texinfo	2014-04-21 08:05:30.116078643 +0200
+@@ -35,9 +35,9 @@
+ @ifnotplaintext
+ @setchapternewpage on
+ 
+-@dircategory GNU Libraries
++@dircategory Libraries:
+ @direntry
+-* Classpath Tools: (cp-tools).  GNU Classpath Tools Guide
++* Classpath Tools: (cp-tools).		GNU Classpath Tools Guide
+ @end direntry
+ @end ifnotplaintext
+ @end ifinfo
+--- gcc-4.8.2/libgomp/libgomp.texi.orig	2013-01-14 19:18:49.000000000 +0100
++++ gcc-4.8.2/libgomp/libgomp.texi	2014-04-21 08:06:10.259411139 +0200
+@@ -29,9 +29,9 @@
+ @end copying
+ 
+ @ifinfo
+-@dircategory GNU Libraries
++@dircategory Libraries:
+ @direntry
+-* libgomp: (libgomp).          GNU Offloading and Multi Processing Runtime Library.
++* libgomp: (libgomp).			GNU Offloading and Multi Processing Runtime Library
+ @end direntry
+ 
+ This manual documents the GNU implementation of the OpenMP API for 
+--- gcc-4.8.2/libitm/libitm.texi.orig	2013-02-03 18:46:11.000000000 +0100
++++ gcc-4.8.2/libitm/libitm.texi	2014-04-21 08:06:38.919410542 +0200
+@@ -18,9 +18,9 @@
+ @end copying
+ 
+ @ifinfo
+-@dircategory GNU Libraries
++@dircategory Libraries:
+ @direntry
+-* libitm: (libitm).                    GNU Transactional Memory Library
++* libitm: (libitm).			GNU Transactional Memory Library
+ @end direntry
+ 
+ This manual documents the GNU Transactional Memory Library.
+--- gcc-4.8.2/libquadmath/libquadmath.texi.orig	2013-01-22 09:23:32.000000000 +0100
++++ gcc-4.8.2/libquadmath/libquadmath.texi	2014-04-21 08:07:12.262743180 +0200
+@@ -23,9 +23,9 @@
+ @end copying
+ 
+ @ifinfo
+-@dircategory GNU Libraries
++@dircategory Libraries:
+ @direntry
+-* libquadmath: (libquadmath).                  GCC Quad-Precision Math Library
++* libquadmath: (libquadmath).		GCC Quad-Precision Math Library
+ @end direntry
+ 
+ This manual documents the GCC Quad-Precision Math Library API.
+--- gcc-4.9.2/libffi/doc/libffi.texi.orig	2014-02-13 17:18:13.000000000 +0100
++++ gcc-4.9.2/libffi/doc/libffi.texi	2015-01-13 20:19:48.088168568 +0100
+@@ -31,9 +31,9 @@
+ @end quotation
+ @end copying
+ 
+-@dircategory Development
++@dircategory Libraries:
+ @direntry
+-* libffi: (libffi).             Portable foreign-function interface library.
++* libffi: (libffi).			Portable foreign-function interface library
+ @end direntry
+ 
+ @titlepage
+--- gcc-4.9.2/libjava/classpath/doc/cp-hacking.texinfo.orig	2010-10-12 17:55:12.000000000 +0200
++++ gcc-4.9.2/libjava/classpath/doc/cp-hacking.texinfo	2015-01-13 20:20:39.751499738 +0100
+@@ -14,9 +14,9 @@
+ Copyright (C) 1998,1999,2000,2001,2002,2003,2004,2005,2007,2009 Free Software Foundation, Inc.
+ 
+ @ifnotplaintext
+-@dircategory GNU Libraries
++@dircategory Libraries:
+ @direntry
+-* Classpath Hacking: (cp-hacking).  GNU Classpath Hacker's Guide
++* Classpath Hacking: (cp-hacking).	GNU Classpath Hacker's Guide
+ @end direntry
+ @end ifnotplaintext
+ @end ifinfo
+--- gcc-4.9.2/libjava/classpath/doc/cp-vmintegration.texinfo.orig	2008-06-28 15:29:13.000000000 +0200
++++ gcc-4.9.2/libjava/classpath/doc/cp-vmintegration.texinfo	2015-01-13 20:21:24.928164508 +0100
+@@ -15,9 +15,9 @@
+ Copyright (C) 1998-2002, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+ 
+ @ifnotplaintext
+-@dircategory GNU Libraries
++@dircategory Libraries:
+ @direntry
+-* VM Integration: (cp-vmintegration).  GNU Classpath VM Integration Guide
++* VM Integration: (cp-vmintegration).	GNU Classpath VM Integration Guide
+ @end direntry
+ @end ifnotplaintext
+ @end ifinfo
+--- gcc-4.9.2/libiberty/libiberty.texi.orig	2015-01-13 20:22:23.151495398 +0100
++++ gcc-4.9.2/libiberty/libiberty.texi	2015-01-13 20:22:25.921495282 +0100
+@@ -11,10 +11,9 @@
+ @finalout
+ @c %**end of header
+ 
+-@dircategory GNU libraries
++@dircategory Libraries:
+ @direntry
+-* Libiberty: (libiberty).          Library of utility functions which
+-                                   are missing or broken on some systems.
++* Libiberty: (libiberty).		Library of utility functions which are missing or broken on some systems
+ @end direntry
+ 
+ @macro libib
+--- gcc-4.9.2/gcc/fortran/gfc-internals.texi.orig	2014-01-02 22:25:41.000000000 +0100
++++ gcc-4.9.2/gcc/fortran/gfc-internals.texi	2015-01-13 20:23:53.034825013 +0100
+@@ -53,9 +53,9 @@
+ @end copying
+ 
+ @ifinfo
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* gfortran: (gfortran).                  The GNU Fortran Compiler.
++* gfortran: (gfortran).			The GNU Fortran Compiler
+ @end direntry
+ This file documents the internals of the GNU Fortran
+ compiler, (@command{gfortran}). 
