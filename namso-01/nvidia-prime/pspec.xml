@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>prime-indicator</Name>
+        <Homepage>https://github.com/beidl/prime-indicator</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>PRIME Indicator - indicator applet for NVIDIA Optimus laptops.</Summary>
+        <Description>A library to allow applications to export a menu into the Unity Menu bar. Based on KSNI it also works in KDE and will fallback to generic Systray support if none of those are available.</Description>
+        <Archive sha1sum="59c2c0d7ba4a22eaa10c69dd90af261062fcf4aa" type="tarxz">file:///home/ata/PiSi/prime-indicator-2015-05.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>libappindicator-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>prime-indicator</Name>
+        <RuntimeDependencies>
+            <!--<Dependency>gtk2</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libappindicator</Dependency>
+            <Dependency>libdbusmenu-gtk</Dependency>
+            <Dependency>libdbusmenu-glib</Dependency>-->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="config">/etc/xdg/autostart/</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="config">/etc/sudoers.d/prime-indicator-sudoers</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-05-12</Date>
+            <Version>2015.05</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

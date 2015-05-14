@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>nvidia</Name>
+        <Homepage>http://www.nvidia.com</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>custom</License>
+        <IsA>app:gui</IsA>
+        <Summary>NVIDIA drivers for linux</Summary>
+        <Description>NVIDIA drivers for linux.</Description>
+        <Archive sha1sum="d15907ed7527f3590407a340a2882e5a9600a81d" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86/349.16/NVIDIA-Linux-x86-349.16.run</Archive>
+        <Archive sha1sum="700c28fb2acd0aa2682dd8b3b12128ac3110b0b6" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86_64/349.16/NVIDIA-Linux-x86_64-349.16-no-compat32.run</Archive>
+        <BuildDependencies>
+           <!-- <Dependency>libdbusmenu-gtk</Dependency>
+            <Dependency>libindicator-devel</Dependency>-->
+        </BuildDependencies>        
+        <AdditionalFiles>
+            <AdditionalFile target="nv-drm-343.36.patch">nv-drm-343.36.patch</AdditionalFile>
+        </AdditionalFiles>
+        <Patches>
+            <!--<Patch level="1">0001_Fix_mono_dir.patch</Patch>-->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>nvidia-utils</Name>
+        <!--<RuntimeDependencies>
+            <Dependency>gtk2</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libindicator</Dependency>
+            <Dependency>libdbusmenu-gtk</Dependency>
+            <Dependency>libdbusmenu-glib</Dependency>
+        </RuntimeDependencies>-->
+        <Files>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="library">/usr/lib/vdpau/</Path>
+            <Path fileType="library">/usr/lib/nvidia/</Path>
+            <Path fileType="man">/usr/share/man/man1/</Path>
+            <Path fileType="library">/usr/lib/libcuda.so.*</Path>
+            <Path fileType="doc">/usr/share/doc/nvidia/html/</Path>
+            <Path fileType="library">/usr/lib/libnvcuvid.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-ml.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-cfg.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-tls.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-ifr.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-fbc.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-gtk2.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-gtk3.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-glsi.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-encode.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-glcore.so.*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-eglcore.so.*</Path>
+            <Path fileType="library">/usr/share/pixmaps/nvidia-settings.png</Path>
+            <Path fileType="library">/usr/lib/nvidia/xorg/modules/extensions/</Path>
+            <Path fileType="library">/usr/lib/xorg/modules/drivers/nvidia_drv.so</Path>
+            <Path fileType="library">/usr/share/nvidia/nvidia-application-profiles-*</Path>
+            <Path fileType="library">/usr/share/applications/nvidia-settings.desktop</Path>
+            <Path fileType="library">/usr/lib/systemd/system/nvidia-persistenced.service</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>nvidia-libgl</Name>
+        <Summary>NVIDIA drivers libraries symlinks</Summary>
+        <!--<RuntimeDependencies>
+            <Dependency release="current">libappindicator</Dependency>
+        </RuntimeDependencies>-->
+        <Files>
+            <Path fileType="library">/usr/lib/libGL.s*</Path>
+            <Path fileType="library">/usr/lib/libEGL.s*</Path>
+            <Path fileType="library">/usr/lib/libGLESv2.s*</Path>
+            <Path fileType="library">/usr/lib/libGLESv1_CM.s*</Path>
+            <Path fileType="library">/usr/lib/libGLESv1_CM.so.*</Path>
+            <Path fileType="library">/usr/lib/xorg/modules/extensions/libglx.s*</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>nvidia340xx-opencl</Name>
+        <!--<RuntimeDependencies>
+            <Dependency release="current">libappindicator</Dependency>
+        </RuntimeDependencies>-->
+        <Files>
+            <Path fileType="config">/etc/OpenCL/vendors/nvidia.icd</Path>
+            <Path fileType="library">/usr/lib/libOpenCL.so*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-opencl.so*</Path>
+            <Path fileType="library">/usr/lib/libnvidia-compiler.so*</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>nvidia340xx-tls</Name>
+        <!--<RuntimeDependencies>
+            <Dependency release="current">libappindicator</Dependency>
+        </RuntimeDependencies>-->
+        <Files>
+            <Path fileType="library" permanent="true">/lib/modules/</Path>
+            <Path fileType="library" permanent="true">/lib/modprobe.d</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-05-12</Date>
+            <Version>349.16</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
