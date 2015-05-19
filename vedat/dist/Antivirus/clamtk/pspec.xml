@@ -14,6 +14,9 @@
         <Summary>Simple GUI for Clam Antivirus</Summary>
         <Description>ClamTk is a graphical frontend for Clam Antivirus. It is designed to be a lightweight, easy-to-use, point-and-click virus scanner.</Description>
         <Archive sha1sum="8d8d66f184620e2e1c3dcbfabcca9888f8c387a0" type="targz">https://bitbucket.org/dave_theunsub/clamtk/downloads/clamtk-5.18.tar.gz</Archive>
+        <Patches>
+            <Patch>clamtk-icon.patch</Patch>
+        </Patches>
     </Source>
     <Package>
         <Name>clamtk</Name>
@@ -46,51 +49,6 @@
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/clamtk.png">clamtk.png</AdditionalFile>
-	    
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/16x16/actions/gtk-new.png">16x16/gtk-new.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/16x16/actions/gtk-properties.png">16x16/gtk-properties.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/16x16/actions/gtk-refresh.png">16x16/gtk-refresh.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/16x16/actions/gtk-goto-bottom.png">16x16/gtk-goto-bottom.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/16x16/places/gtk-directory.png">16x16/gtk-directory.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/16x16/places/gtk-network.png">16x16/gtk-network.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/16x16/mimetypes/gtk-file.png">16x16/gtk-file.png</AdditionalFile>
-	    
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/22x22/actions/gtk-new.png">22x22/gtk-new.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/22x22/actions/gtk-properties.png">22x22/gtk-properties.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/22x22/actions/gtk-refresh.png">22x22/gtk-refresh.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/22x22/places/gtk-goto-bottom.png">22x22/gtk-goto-bottom.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/22x22/places/gtk-directory.png">22x22/gtk-directory.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/22x22/places/gtk-network.png">22x22/gtk-network.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/22x22/mimetypes/gtk-file.png">22x22/gtk-file.png</AdditionalFile>
-	    
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/24x24/actions/gtk-new.png">24x24/gtk-new.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/24x24/actions/gtk-properties.png">24x24/gtk-properties.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/24x24/actions/gtk-refresh.png">24x24/gtk-refresh.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/24x24/actions/gtk-goto-bottom.png">24x24/gtk-goto-bottom.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/24x24/places/gtk-directory.png">24x24/gtk-directory.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/24x24/places/gtk-network.png">24x24/gtk-network.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/24x24/mimetypes/gtk-file.png">24x24/gtk-file.png</AdditionalFile>
-	    
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/32x32/actions/gtk-new.png">32x32/gtk-new.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/32x32/actions/gtk-properties.png">32x32/gtk-properties.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/32x32/actions/gtk-refresh.png">32x32/gtk-refresh.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/32x32/actions/gtk-goto-bottom.png">32x32/gtk-goto-bottom.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/32x32/places/gtk-directory.png">32x32/gtk-directory.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/32x32/places/gtk-network.png">32x32/gtk-network.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/32x32/mimetypes/gtk-file.png">32x32/gtk-file.png</AdditionalFile>
-	    
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/48x48/actions/gtk-new.png">48x48/gtk-new.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/48x48/actions/gtk-properties.png">48x48/gtk-properties.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/48x48/actions/gtk-refresh.png">48x48/gtk-refresh.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/48x48/actions/gtk-goto-bottom.png">48x48/gtk-goto-bottom.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/48x48/places/gtk-network.png">48x48/gtk-network.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/48x48/mimetypes/gtk-file.png">48x48/gtk-file.png</AdditionalFile>
-	    
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/256x256/actions/gtk-new.png">256x256/gtk-new.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/256x256/actions/gtk-properties.png">256x256/gtk-properties.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/256x256/actions/gtk-refresh.png">256x256/gtk-refresh.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/256x256/places/gtk-network.png">256x256/gtk-network.png</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/icons/oxygen/256x256/mimetypes/gtk-file.png">256x256/gtk-file.png</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
