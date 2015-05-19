@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>bino</Name>
+        <Homepage>http://bino3d.org</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <Icon>bino</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>3D video player with multi-display support.</Summary>
+        <Description>bino, 3D video player with multi-display support.</Description>
+        <Archive sha1sum="80a0e2ab566a2a66e6a24f7d659ff8210dffe91b" type="tarxz">http://download.savannah.nongnu.org/releases/bino/bino-1.6.1.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt-devel</Dependency>
+            <Dependency>glew-devel</Dependency>
+            <Dependency>ffmpeg-devel</Dependency>
+            <Dependency>libass-devel</Dependency>
+            <Dependency>openal-devel</Dependency>
+            <Dependency>freealut-devel</Dependency>
+            <Dependency>lirc-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>bino</Name>
+        <RuntimeDependencies>
+            <Dependency>qt</Dependency>
+            <Dependency>mplayer</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/bino</Path>
+            <Path fileType="data">/usr/share/kde4</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2014-11-02</Date>
+            <Version>1.6.1</Version>
+            <Comment>New Package</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
