@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>clamtk</Name>
+        <Homepage>http://clamtk.sourceforge.net</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>clamtk</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Simple GUI for Clam Antivirus</Summary>
+        <Description>ClamTk is a graphical frontend for Clam Antivirus. It is designed to be a lightweight, easy-to-use, point-and-click virus scanner.</Description>
+        <Archive sha1sum="8d8d66f184620e2e1c3dcbfabcca9888f8c387a0" type="targz">https://bitbucket.org/dave_theunsub/clamtk/downloads/clamtk-5.18.tar.gz</Archive>
+        <Patches>
+            <Patch>clamtk-icon.patch</Patch>
+        </Patches>
+    </Source>
+    <Package>
+        <Name>clamtk</Name>
+        <RuntimeDependencies>
+            <Dependency>clamav</Dependency>
+            <Dependency>perl-Gtk2</Dependency>
+            <Dependency>perl-JSON</Dependency>
+            <Dependency>perl-libwww</Dependency>
+            <Dependency>perl-Net-DNS</Dependency>
+            <Dependency>perl-Net-SMTP-SSL</Dependency>
+            <Dependency>perl-Text-CSV</Dependency>
+            <Dependency>perl-Net-SSLeay</Dependency>
+            <Dependency>perl-Text-Glob</Dependency>
+            <Dependency>perl-Date-Calc</Dependency>
+            <Dependency>perl-Config-Tiny</Dependency>
+            <Dependency>perl-IO-Socket-SSL</Dependency>
+	    <!--<Dependency>perl-Locale-gettext</Dependency> -->
+            <Dependency>perl-File-Find-Rule</Dependency>
+            <Dependency>perl-LWP-Protocol-https</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="localedata">/usr/share/icons/oxygen</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/clamtk.png">clamtk.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="9">
+            <Date>2015-05-16</Date>
+            <Version>5.18</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2015-02-16</Date>
+            <Version>5.14</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2014-11-01</Date>
+            <Version>5.10</Version>
+            <Comment>fix dep.</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-10-16</Date>
+            <Version>5.10</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-09-14</Date>
+            <Version>5.09</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Aydın Demirel</Name>
+            <Email>aydin.demirel@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2014-04-23</Date>
+            <Version>5.05</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2014-02-17</Date>
+            <Version>4.44</Version>
+            <Comment>Release.</Comment>
+            <Name>Fatih Turgel</Name>
+            <Email>turgelfatih@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-05-20</Date>
+            <Version>4.44</Version>
+            <Comment>Fixed</Comment>
+            <Name>Fatih Turgel</Name>
+            <Email>turgelfatih@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-03-17</Date>
+            <Version>4.44</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
