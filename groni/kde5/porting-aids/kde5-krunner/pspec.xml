@@ -13,18 +13,18 @@
 	<IsA>app:console</IsA>
         <Summary>QT application integration framework for KDE5</Summary>
         <Description>Framework Integration is a set of plugins responsible for better integration of Qt applications when running on a KDE Plasma workspace.</Description>
-        <Archive sha1sum="7f5eaead1ed925e5db6eee06d35e8581b468b686" type="tarxz">mirrors://kde/stable/frameworks/5.7/portingAids/krunner-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="7963cd1098863a560f7b30476aa900949675b253" type="tarxz">http://download.kde.org/stable/frameworks/5.9/portingAids/krunner-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>qt5-declarative-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-plasma-framework-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-solid-devel</Dependency>	   
-	    <Dependency versionFrom="5.7.0">kde5-threadweaver-devel</Dependency>
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
+	    <Dependency>kde5-kservice-devel</Dependency>
+	    <Dependency>kde5-plasma-framework-devel</Dependency>
+	    <Dependency>kde5-solid-devel</Dependency>	   
+	    <Dependency>kde5-threadweaver-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -34,14 +34,14 @@
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
             <Dependency>qt5-declarative</Dependency>    
-	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-plasma-framework</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-solid</Dependency>	   
-	    <Dependency versionFrom="5.7.0">kde5-threadweaver</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
+	    <Dependency>kde5-kio</Dependency>
+	    <Dependency>kde5-kservice</Dependency>
+	    <Dependency>kde5-plasma-framework</Dependency>
+	    <Dependency>kde5-solid</Dependency>	   
+	    <Dependency>kde5-threadweaver</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
@@ -59,7 +59,7 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kde5-krunner</Dependency>	    
-	    <Dependency versionFrom="5.7.0">kde5-plasma-framework-devel</Dependency>
+	    <Dependency>kde5-plasma-framework-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -69,6 +69,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-21</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-03-04</Date>
             <Version>5.7.0</Version>

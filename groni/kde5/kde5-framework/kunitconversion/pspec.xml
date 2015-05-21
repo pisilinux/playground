@@ -2,7 +2,7 @@
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
-        <Name>kde5-kplotting</Name>
+        <Name>kde5-kunitconversion</Name>
         <Homepage>http://www.kde.org</Homepage>
         <Packager>
             <Name>Pisi Linux Admins</Name>
@@ -10,22 +10,26 @@
         </Packager>
         <License>LGPLv2</License>
         <IsA>library</IsA>
-        <Summary>KDE5 Data plotting</Summary>
-        <Description>Kplotting contains data plotting classes for QT 5 and KDE</Description>
-        <Archive sha1sum="f3e6ac040aeb35cc70c17b3d70b106c0e24c6fd2" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kplotting-5.9.0.tar.xz</Archive>
+        <Summary>KDE unit conversion framework</Summary>
+        <Description>KUnitConversion provides functions to convert values in different physical units.</Description>
+        <Archive sha1sum="1fbb07d5832301708ec46715a00bcdb591996e8b" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kunitconversion-5.9.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-base-devel</Dependency>
-	    <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qt5-base-devel</Dependency>	    
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
-        <Name>kde5-kplotting</Name>
+        <Name>kde5-kunitconversion</Name>
         <RuntimeDependencies>
-            <Dependency>qt5-base</Dependency>
+            <Dependency>qt5-base</Dependency>    
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
+	    <Path fileType="localedata">/usr/share/locale</Path>
 	    <Path fileType="library">/usr/lib/qt5</Path>
 	    <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
@@ -33,11 +37,13 @@
     </Package>
     
     <Package>
-        <Name>kde5-kplotting-devel</Name>
-	<Summary>Development files for kplotting</Summary>
+        <Name>kde5-kunitconversion-devel</Name>
+	<Summary>Development files for kunitconversion</Summary>
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
-            <Dependency release="current">kde5-kplotting</Dependency>
+            <Dependency release="current">kde5-kunitconversion</Dependency>
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -47,26 +53,19 @@
     </Package>
 
     <History>
-        <Update release="3">
+        <Update release="2">
             <Date>2015-05-21</Date>
             <Version>5.9.0</Version>
             <Comment>Version bump.</Comment>
             <Name>Stefan Gronewold(groni)</Name>
             <Email>groni@pisilinux.org</Email>
         </Update>
-        <Update release="2">
-            <Date>2015-03-02</Date>
-            <Version>5.7.0</Version>
-            <Comment>Version bump.</Comment>
-            <Name>Stefan Gronewold(groni)</Name>
-            <Email>groni@pisilinux.org</Email>
-        </Update>
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.2.0</Version>
+            <Version>5.8.0</Version>
             <Comment>First release</Comment>
-            <Name>Idris Kalp</Name>
-            <Email>idriskalp@gmail.com</Email>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
         </Update>        
     </History>
 </PISI>

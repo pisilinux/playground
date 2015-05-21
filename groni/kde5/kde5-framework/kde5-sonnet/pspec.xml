@@ -13,7 +13,7 @@
 	<IsA>app:console</IsA>
         <Summary>KDE spell schecking library</Summary>
         <Description>This framework contains two main components: Interface to KWallet, the safe desktop-wide storage for passwords on KDE workspaces. The kwalletd used to safely store the passwords on KDE work spaces.</Description>
-        <Archive sha1sum="06da89b3a1553bd1fe9083141ab4c08a34b30c22" type="tarxz">mirrors://kde/stable/frameworks/5.7/sonnet-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="e9f52e3dfacb71106110408b4630d5c031afdfd9" type="tarxz">http://download.kde.org/stable/frameworks/5.9/sonnet-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
             <Dependency>aspell-devel</Dependency>
@@ -54,6 +54,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-26</Date>
             <Version>5.7.0</Version>

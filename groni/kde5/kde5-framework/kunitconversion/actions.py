@@ -8,9 +8,12 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import cmaketools
 
 def setup():
+    pisitools.ldflags.add("-Wl,-rpath,/usr/lib")
     cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
                           -DECM_MKSPECS_INSTALL_DIR=/usr/lib/qt5/mkspecs/modules \
                           -DLIB_INSTALL_DIR=lib \
+                          -DPLUGIN_INSTALL_DIR=/usr/lib/qt5/plugins \
+                          -DPYTHON_EXECUTABLE=/usr/bin/python3 \
                           -DBUILD_TESTING=OFF")
 
 def build():
@@ -19,4 +22,4 @@ def build():
 def install():
     cmaketools.install()
     
-    pisitools.dodoc("README.md","COPYING.LIB")
+    pisitools.dodoc("README.md", "COPYING.LIB")

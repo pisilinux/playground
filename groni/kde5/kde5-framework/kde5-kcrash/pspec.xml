@@ -13,12 +13,12 @@
 	<IsA>app:console</IsA>
         <Summary>KDE5 crash handling application</Summary>
         <Description>KCrash provides support for intercepting and handling application crashes.</Description>
-        <Archive sha1sum="56cbe4b857136df2feb4824ca0761683dbc9f933" type="tarxz">mirrors://kde/stable/frameworks/5.7/kcrash-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="06cfff2bcd246d9ccc7afbc6abf40a465277d9b2" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kcrash-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>qt5-x11extras-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-kwindowsystem-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -28,8 +28,8 @@
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
 	    <Dependency>qt5-x11extras</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kwindowsystem</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -47,8 +47,8 @@
 	    <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>qt5-x11extras-devel</Dependency>
             <Dependency release="current">kde5-kcrash</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-kwindowsystem-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -58,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-25</Date>
             <Version>5.7.0</Version>

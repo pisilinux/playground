@@ -11,14 +11,14 @@
         <License>LGPLv2</License>
         <IsA>library</IsA>
         <Summary>JavaScript support for HTML rendering engine on KDE5</Summary>
-        <Description>KHTML is a web rendering engine, based on the KParts technology and using KJS for JavaScript support.</Description>
-        <Archive sha1sum="bc34a4bb094a43880edba92e6b870580e545714b" type="tarxz">mirrors://kde/stable/frameworks/5.7/portingAids/kjsembed-5.7.0.tar.xz</Archive>
+        <Description>The KJSEmbed library is an easy-to-use wrapper around the KDE ECMAScript interpreter (kjs) that makes it easy to add scriptability to an application.</Description>
+        <Archive sha1sum="3e3dd035eac4f01a2857951b2e6c03fa99db09bb" type="tarxz">http://download.kde.org/stable/frameworks/5.9/portingAids/kjsembed-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>qt5-svg-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdoctools-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kjs-devel</Dependency>
+	    <Dependency>kde5-kdoctools-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kjs-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -28,9 +28,9 @@
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
 	    <Dependency>qt5-svg</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdoctools</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kjs</Dependency>
+	    <Dependency>kde5-kdoctools</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
+	    <Dependency>kde5-kjs</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
@@ -58,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-21</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-03-04</Date>
             <Version>5.7.0</Version>

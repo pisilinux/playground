@@ -12,20 +12,20 @@
         <IsA>library</IsA>
         <Summary>Integration of QML and KDE workspaces</Summary>
         <Description>KDeclarative provides integration of QML and KDE workspaces.</Description>
-        <Archive sha1sum="ffc2eca80d9681e3d85e89aebe8f4f1eca98686e" type="tarxz">mirrors://kde/stable/frameworks/5.7/kdeclarative-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="b8a939f7c1b786c95bb99cee941812e7253bb999" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kdeclarative-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
-	    <Dependency>libepoxy-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kglobalaccel-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kguiaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kiconthemes-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem-devel</Dependency>
+	    <Dependency>libepoxy-devel</Dependency>            
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kservice-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-kglobalaccel-devel</Dependency>
+	    <Dependency>kde5-kguiaddons-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kiconthemes-devel</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
+	    <Dependency>kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency>kde5-kwindowsystem-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -36,18 +36,20 @@
             <Dependency>qt5-base</Dependency>
 	    <Dependency>libepoxy</Dependency>
 	    <Dependency>qt5-declarative</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kglobalaccel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kguiaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kiconthemes</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem</Dependency>
+            <Dependency>kde5-kpackage</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kservice</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kglobalaccel</Dependency>
+	    <Dependency>kde5-kguiaddons</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
+	    <Dependency>kde5-kiconthemes</Dependency>
+	    <Dependency>kde5-kio</Dependency>
+	    <Dependency>kde5-kwidgetsaddons</Dependency>
+	    <Dependency>kde5-kwindowsystem</Dependency>
         </RuntimeDependencies>
         <Files>
+            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="data">/usr/share</Path>
 	    <Path fileType="library">/usr/lib/qt5</Path>
 	    <Path fileType="library">/usr/lib</Path>
@@ -61,7 +63,7 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kde5-kdeclarative</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -71,6 +73,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-21</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-27</Date>
             <Version>5.7.0</Version>

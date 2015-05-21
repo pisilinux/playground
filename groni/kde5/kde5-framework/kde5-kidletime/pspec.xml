@@ -13,7 +13,7 @@
 	<IsA>app:console</IsA>
         <Summary>Idle time reporting utility</Summary>
         <Description>KIdleTime is a singleton reporting information on idle time. It is useful not only for finding out about the current idle time of the PC, but also for getting notified upon idle time events, such as custom timeouts, or user activity.</Description>
-        <Archive sha1sum="470bf135ff060c2a33abee70e6f87b7238992c32" type="tarxz">mirrors://kde/stable/frameworks/5.7/kidletime-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="41393450f4d59b445aa1ab37e27b6e74e725fc9d" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kidletime-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
             <Dependency>libXScrnSaver-devel</Dependency>	    
@@ -53,6 +53,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-21</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-26</Date>
             <Version>5.7.0</Version>

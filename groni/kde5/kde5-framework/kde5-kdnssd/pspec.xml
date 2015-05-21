@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Network service discovery using Zeroconf</Summary>
         <Description>KDNSSD is a library for handling the DNS-based Service Discovery Protocol (DNS-SD), the layer of Zeroconf that allows network services, such as printers, to be discovered without any user intervention or centralized infrastructure.</Description>
-        <Archive sha1sum="cb6652041f129a7b07ded6e568da4653cbfbefbd" type="tarxz">mirrors://kde/stable/frameworks/5.7/kdnssd-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="6e86c7b64f5efe9e2b804534ee7f45e4efbce229" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kdnssd-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>avahi-compat-libdns_sd-devel</Dependency>
@@ -23,8 +23,7 @@
     <Package>
         <Name>kde5-kdnssd</Name>
         <RuntimeDependencies>
-            <Dependency>qt5-base</Dependency>
-	    <Dependency>avahi-compat-libdns_sd</Dependency>
+            <Dependency>qt5-base</Dependency>	    
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -50,6 +49,13 @@
     </Package>
     
     <History>
+        <Update release="3">
+            <Date>2015-05-21</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-26</Date>
             <Version>5.7.0</Version>

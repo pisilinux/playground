@@ -13,13 +13,13 @@
 	<IsA>app:console</IsA>
         <Summary>KDE emoticon manager</Summary>
         <Description>KEmoticons converts emoticons from text to a graphical representation with images in HTML.</Description>
-        <Archive sha1sum="8e51f7ecfd4d4ef3366c7cd697cea5006b49d624" type="tarxz">mirrors://kde/stable/frameworks/5.7/kemoticons-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="d73a5fda5ab53721646a9468a61cb5f4ee47be53" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kemoticons-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-karchive-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-karchive-devel</Dependency>
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kservice-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -28,10 +28,10 @@
         <Name>kde5-kemoticons</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-karchive</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>
+	    <Dependency>kde5-karchive</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kservice</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -56,6 +56,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-21</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-03-02</Date>
             <Version>5.7.0</Version>

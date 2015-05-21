@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Plugins allowing Qt applications to access further types of images</Summary>
         <Description>KDE5 KCodecs provide a collection of methods to manipulate strings using various encodings.</Description>
-        <Archive sha1sum="39b06b112a03b184b907a3fc3d750307c9a55bbf" type="tarxz">mirrors://kde/stable/frameworks/5.7/kcodecs-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="5ffecde580419cc1c7e018a303f1bafb6d4d4c4b" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kcodecs-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
@@ -48,6 +48,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-25</Date>
             <Version>5.7.0</Version>

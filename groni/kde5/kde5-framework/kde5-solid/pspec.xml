@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>KDE5 hardware integration framework</Summary>
         <Description>Solid is a device integration framework.  It provides a way of querying and interacting with hardware independently of the underlying operating system.</Description>
-        <Archive sha1sum="5e1e2f9ff4f45806fd9b5e65ee394446697ee358" type="tarxz">mirrors://kde/stable/frameworks/5.7/solid-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="bcd5e23912af1e6b084b0dd2f0f2a37529603754" type="tarxz">http://download.kde.org/stable/frameworks/5.9/solid-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
             <Dependency>qt5-tools-devel</Dependency>
@@ -57,6 +57,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-26</Date>
             <Version>5.7.0</Version>

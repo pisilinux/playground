@@ -13,7 +13,7 @@
 	<IsA>app:console</IsA>
         <Summary>Extra modules for Qt-DBus</Summary>
         <Description>KDE5-KDBusAddons provides convenience classes on top of QtDBus, as well as an API to create KDED modules.</Description>
-        <Archive sha1sum="8d45e5384ff9b9094ab90b9a61a87ca2875c559b" type="tarxz">mirrors://kde/stable/frameworks/5.7/kdbusaddons-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="3c1364b9f9c8bc122e8683591a748256bbeda688" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kdbusaddons-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>qt5-x11extras-devel</Dependency>
@@ -52,6 +52,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-25</Date>
             <Version>5.7.0</Version>

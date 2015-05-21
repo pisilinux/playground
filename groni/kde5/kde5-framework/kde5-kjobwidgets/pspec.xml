@@ -13,12 +13,13 @@
 	<IsA>app:console</IsA>
         <Summary>Widgets for showing progress of asynchronous jobs</Summary>
         <Description>KJobWIdgets provides widgets for showing progress of asynchronous jobs.</Description>
-        <Archive sha1sum="c140908d3ce484ea65b609245754fa46fc541d0d" type="tarxz">mirrors://kde/stable/frameworks/5.7/kjobwidgets-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="6345a8709f967b953b61901699b05969139e4461" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kjobwidgets-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-kwidgetsaddons-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -26,8 +27,9 @@
         <Name>kde5-kjobwidgets</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kwidgetsaddons</Dependency>
+            <Dependency>qt5-x11extras</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -44,8 +46,9 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kde5-kjobwidgets</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-kwidgetsaddons-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -55,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-26</Date>
             <Version>5.7.0</Version>

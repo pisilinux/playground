@@ -13,7 +13,7 @@
 	<IsA>app:console</IsA>
         <Summary>Code and utilities to ease the transition to KDE Frameworks 5</Summary>
         <Description>KDELibs4Support provides libraries to port KDE4 programs to QT5/KDE5</Description>
-        <Archive sha1sum="689d4f9d0c76e722b44c164dff608208333f1c51" type="tarxz">mirrors://kde/stable/frameworks/5.7/portingAids/kdelibs4support-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="c08531e8e0458c1bdca5101b714e17aa9036e375" type="tarxz">http://download.kde.org/stable/frameworks/5.9/portingAids/kdelibs4support-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
             <Dependency>openssl-devel</Dependency>
@@ -21,34 +21,34 @@
 	    <Dependency>qt5-svg-devel</Dependency>
 	    <Dependency>qt5-x11extras-devel</Dependency>
 	    <Dependency>libICE-devel</Dependency>
-            <Dependency versionFrom="5.7.0">kde5-kauth-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-solid-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcodecs-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kjobwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kbookmarks-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcompletion-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfigwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcrash-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdesignerplugin</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdoctools-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kglobalaccel-devel</Dependency>	   
-	    <Dependency versionFrom="5.7.0">kde5-kguiaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kiconthemes-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kinit</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kitemviews-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-knotifications-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kparts-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ktextwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kunitconversion-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kxmlgui-devel</Dependency>
+            <Dependency>kde5-kauth-devel</Dependency>
+	    <Dependency>kde5-solid-devel</Dependency>
+	    <Dependency>kde5-kcodecs-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-kjobwidgets-devel</Dependency>
+	    <Dependency>kde5-kbookmarks-devel</Dependency>
+	    <Dependency>kde5-kcompletion-devel</Dependency>
+            <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kconfigwidgets-devel</Dependency>
+	    <Dependency>kde5-kcrash-devel</Dependency>
+	    <Dependency>kde5-kdbusaddons-devel</Dependency>
+	    <Dependency>kde5-kdesignerplugin</Dependency>
+	    <Dependency>kde5-kdoctools-devel</Dependency>
+	    <Dependency>kde5-kglobalaccel-devel</Dependency>	   
+	    <Dependency>kde5-kguiaddons-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kiconthemes-devel</Dependency>
+	    <Dependency>kde5-kinit</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
+	    <Dependency>kde5-kitemviews-devel</Dependency>
+	    <Dependency>kde5-knotifications-devel</Dependency>
+	    <Dependency>kde5-kparts-devel</Dependency>
+	    <Dependency>kde5-kservice-devel</Dependency>
+	    <Dependency>kde5-ktextwidgets-devel</Dependency>
+	    <Dependency>kde5-kunitconversion-devel</Dependency>
+	    <Dependency>kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency>kde5-kwindowsystem-devel</Dependency>
+	    <Dependency>kde5-kxmlgui-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -61,35 +61,36 @@
 	    <Dependency>qt5-svg</Dependency>
 	    <Dependency>qt5-x11extras</Dependency>
             <Dependency>openssl</Dependency>
-            <Dependency>libSM</Dependency><Dependency versionFrom="5.7.0">kde5-kauth-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kauth</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-solid</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcodecs</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kjobwidgets</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kbookmarks</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcompletion</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfigwidgets</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcrash</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdesignerplugin</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdoctools</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kglobalaccel</Dependency>	   
-	    <Dependency versionFrom="5.7.0">kde5-kguiaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kiconthemes</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kinit</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kitemviews</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-knotifications</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kparts</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ktextwidgets</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kunitconversion</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kxmlgui</Dependency>
+            <Dependency>libSM</Dependency>
+            <Dependency>kde5-kauth-devel</Dependency>
+	    <Dependency>kde5-kauth</Dependency>
+	    <Dependency>kde5-solid</Dependency>
+	    <Dependency>kde5-kcodecs</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kjobwidgets</Dependency>
+	    <Dependency>kde5-kbookmarks</Dependency>
+	    <Dependency>kde5-kcompletion</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kconfigwidgets</Dependency>
+	    <Dependency>kde5-kcrash</Dependency>
+	    <Dependency>kde5-kdbusaddons</Dependency>
+	    <Dependency>kde5-kdesignerplugin</Dependency>
+	    <Dependency>kde5-kdoctools</Dependency>
+	    <Dependency>kde5-kglobalaccel</Dependency>	   
+	    <Dependency>kde5-kguiaddons</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
+	    <Dependency>kde5-kiconthemes</Dependency>
+	    <Dependency>kde5-kinit</Dependency>
+	    <Dependency>kde5-kio</Dependency>
+	    <Dependency>kde5-kitemviews</Dependency>
+	    <Dependency>kde5-knotifications</Dependency>
+	    <Dependency>kde5-kparts</Dependency>
+	    <Dependency>kde5-kservice</Dependency>
+	    <Dependency>kde5-ktextwidgets</Dependency>
+	    <Dependency>kde5-kunitconversion</Dependency>
+	    <Dependency>kde5-kwidgetsaddons</Dependency>
+	    <Dependency>kde5-kwindowsystem</Dependency>
+	    <Dependency>kde5-kxmlgui</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
@@ -118,6 +119,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-21</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-03-04</Date>
             <Version>5.7.0</Version>

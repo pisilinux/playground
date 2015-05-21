@@ -13,7 +13,7 @@
 	<IsA>app:console</IsA>
         <Summary>KDE5 plasma workspace</Summary>
         <Description>This package contains the basic packages for a Plasma workspace.</Description>
-        <Archive sha1sum="3528ab6ad46c971c06bdebaa07afcb5485680e38" type="tarxz">mirrors://kde/stable/plasma/5.2.1/plasma-desktop-5.2.1.tar.xz</Archive>
+        <Archive sha1sum="bd4c15d73cb376b74f9e31826942f918c3c86a21" type="tarxz">http://download.kde.org/stable/plasma/5.3.0/plasma-desktop-5.3.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>kde5-attica-devel</Dependency>
@@ -85,6 +85,13 @@
     </Package>
 
     <History>
+        <Update release="2">
+            <Date>2015-05-20</Date>
+            <Version>5.3.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2015-03-05</Date>
             <Version>5.0.2</Version>

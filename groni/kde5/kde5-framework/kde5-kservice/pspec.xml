@@ -13,15 +13,15 @@
 	<IsA>app:console</IsA>
         <Summary>KDE5 Desktop Services</Summary>
         <Description>Kservice Provides a plugin framework for handling desktop services. Services can be applications or libraries. They can be bound to MIME types or handled by application specific code.</Description>
-        <Archive sha1sum="8c8c5b31c523bb2eddae5c6d4c014fac9e5948fb" type="tarxz">mirrors://kde/stable/frameworks/5.7/kservice-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="19790a000a6bc783a51c4c24af6376c74ea31af0" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kservice-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>	    
-	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcrash-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdoctools-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-kcrash-devel</Dependency>
+	    <Dependency>kde5-kdoctools-devel</Dependency>
+	    <Dependency>kde5-kdbusaddons-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -30,12 +30,12 @@
         <Name>kde5-kservice</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>    
-	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcrash</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdoctools</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kcrash</Dependency>
+	    <Dependency>kde5-kdoctools</Dependency>
+	    <Dependency>kde5-kdbusaddons</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
@@ -55,10 +55,10 @@
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency>boost-devel</Dependency>
             <Dependency release="current">kde5-kservice</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kconfig-devel</Dependency>
+            <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-kdbusaddons-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -68,6 +68,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-26</Date>
             <Version>5.7.0</Version>

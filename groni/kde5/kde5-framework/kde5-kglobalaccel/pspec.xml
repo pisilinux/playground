@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Global desktop keyboard shortcuts</Summary>
         <Description>KGlobalAccel allows you to have global accelerators that are independent of the focused window.</Description>
-        <Archive sha1sum="5b13d4dd3dd2232fffe5d2dde0b7a19c42d48d66" type="tarxz">mirrors://kde/stable/frameworks/5.7/kglobalaccel-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="b406c0c3cf220d77d491d4482333799f7a4c365a" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kglobalaccel-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
@@ -56,6 +56,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-25</Date>
             <Version>5.7.0</Version>
