@@ -5,11 +5,11 @@
 # See the file http://www.gnu.org/licenses/gpl.txt
 
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 
-WorkDir = "./"
+
 
 def install():
-    pisitools.insinto("/usr/share/icons", "numix-icon-theme-circle-master/Numix-Circle")
-    pisitools.insinto("/usr/share/icons", "numix-icon-theme-master/Numix")
-    
-    pisitools.dodoc("numix-icon-theme-circle-master/LICENSE", "numix-icon-theme-circle-master/README.md", "numix-icon-theme-master/LICENSE", "numix-icon-theme-master/README.md")
+    pisitools.insinto("/usr/share/icons", "Numix")
+    pisitools.insinto("/usr/share/icons", "Numix-Light")
+    pisitools.dodoc("license", "readme.md")

@@ -1,6 +1,6 @@
 <PISI>
     <Source>
-        <Name>icon-theme-numix-circle</Name>
+        <Name>icon-theme-numix</Name>
         <Homepage>http://numixproject.org</Homepage>
         <Packager>
             <Name>Vedat Demir</Name>
@@ -9,17 +9,22 @@
         <License>GPLv3</License>
         <IsA>data</IsA>
         <Summary>Numix Circle is an icon theme.</Summary>
-        <Description>Numix Circle is an icon theme for Linux/Android from the Numix project.</Description>
-        <Archive sha1sum="43eac617028b0fdab5d1b8c90999feac9370c778" type="zip">https://content.wuala.com/contents/vedat/source/numix-icon-theme-circle-master.zip</Archive>
-	<Archive sha1sum="b69cc6cba5535a32912c83ca526e16b0ef3a5c88" type="zip">https://content.wuala.com/contents/vedat/source/numix-icon-theme-master.zip</Archive>
+        <Description>Numix is an icon theme for Linux/Android from the Numix project.</Description>
+	<Archive sha1sum="ba327a27354a75a7a460cf041b21d7411ed43f0e" type="tarxz">http://ppa.launchpad.net/numix/ppa/ubuntu/pool/main/n/numix-icon-theme/numix-icon-theme_0.3+375~201505171701~ubuntu15.04.1.tar.xz</Archive>
     </Source>
 
     <Package>
-        <Name>icon-theme-numix-circle</Name>
+        <Name>icon-theme-numix</Name>
         <Files>
             <Path fileType="data">/usr/share/icons</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/icons/Numix/16x16/apps/start-here.png">icons/16.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/Numix/22x22/apps/start-here.png">icons/22.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/Numix/32x32/apps/start-here.png">icons/32.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/Numix/48x48/apps/start-here.png">icons/48.png</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <History>
