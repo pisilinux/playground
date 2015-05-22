@@ -12,6 +12,8 @@ from pisi.actionsapi import shelltools
 def setup():
     options = "./autogen.sh \
                --prefix=/usr \
+               --disable-static \
+               --disable-silent-rules \
               "
     
     if get.buildTYPE() == "_emul32":
