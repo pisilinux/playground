@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gtkhotkey</Name>
+        <Homepage>https://launchpad.net/gtkhotkey</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Platform independent hotkey handling for Gtk+ applications</Summary>
+        <Description>Platform independent hotkey handling for Gtk+ applications</Description>
+        <Archive sha1sum="4dfc99163945c16e47f5296d3a3b7fb3f96bc91c" type="targz">https://launchpad.net/gtkhotkey/0.2/0.2.1/+download/gtkhotkey-0.2.1.tar.gz</Archive>
+        <BuildDependencies>
+	    <Dependency>atk-devel</Dependency>	    
+            <Dependency>gtk2-devel</Dependency>
+	    <Dependency>cairo-devel</Dependency>
+	    <Dependency>pango-devel</Dependency>
+	    <Dependency>gdk-pixbuf-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gtkhotkey</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>	    
+            <Dependency>gtk2</Dependency>
+	    <Dependency>cairo</Dependency>
+	    <Dependency>pango</Dependency>
+	    <Dependency>gdk-pixbuf</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+	    <Path fileType="doc">/usr/share/gtk-doc</Path>
+	    <Path fileType="doc">/usr/share/doc</Path>
+	    <Path fileType="doc">/usr/share/gtkhotkey</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>gtkhotkey-devel</Name>
+        <Summary>gtkhotkey development files</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">gtkhotkey</Dependency>
+            <Dependency>atk-devel</Dependency>	    
+            <Dependency>gtk2-devel</Dependency>
+	    <Dependency>cairo-devel</Dependency>
+	    <Dependency>pango-devel</Dependency>
+	    <Dependency>gdk-pixbuf-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-05-24</Date>
+            <Version>0.2.1</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
