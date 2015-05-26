@@ -13,17 +13,17 @@
 	<IsA>app:console</IsA>
         <Summary>KDE applications initialization utility</Summary>
         <Description>Kdeinit is a process launcher somewhat similar to the famous init used for booting UNIX.</Description>
-        <Archive sha1sum="7f69b4eaffc95f4c0c77892f6d01dc2f4ef32175" type="tarxz">mirrors://kde/stable/frameworks/5.7/kinit-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="da9e42074b3a9cd28d784a7247ce81c411a673d7" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kinit-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcrash-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdoctools-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem-devel</Dependency>
+	    <Dependency>kde5-kcrash-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kdoctools-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
+	    <Dependency>kde5-kservice-devel</Dependency>
+	    <Dependency>kde5-kwindowsystem-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
 	<Patches>
@@ -35,14 +35,14 @@
         <Name>kde5-kinit</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>	   
-	    <Dependency versionFrom="5.7.0">kde5-kcrash</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdoctools</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem</Dependency>
+	    <Dependency>kde5-kcrash</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kdoctools</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
+	    <Dependency>kde5-kio</Dependency>
+	    <Dependency>kde5-kservice</Dependency>
+	    <Dependency>kde5-kwindowsystem</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>            
@@ -68,6 +68,13 @@
       </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-21</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-27</Date>
             <Version>5.7.0</Version>

@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Framework which lets applications perform actions as a privileged user</Summary>
         <Description>Framework which lets applications perform actions as a privileged user</Description>
-        <Archive sha1sum="ed14fc03db7242037d5904cbe5efc5fec79b4738" type="tarxz">mirrors://kde/stable/frameworks/5.7/kauth-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="15f03e20dad66adaca9a668701ae4eb303ecf376" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kauth-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>qt5-polkit-devel</Dependency>
@@ -26,7 +26,7 @@
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
 	    <Dependency>qt5-polkit</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
@@ -53,6 +53,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-25</Date>
             <Version>5.7.0</Version>

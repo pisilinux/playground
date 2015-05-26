@@ -13,7 +13,7 @@
 	<IsA>app:console</IsA>
         <Summary>Utilities for core application functionality and accessing the OS</Summary>
         <Description>KCoreAddons provides classes built on top of QtCore to perform various tasks such as manipulating mime types, autosaving files, creating backup files, generating random sequences, performing text manipulations such as macro replacement, accessing user information and many more.</Description>
-        <Archive sha1sum="c51566b30943be1b323f627fd68361a2c78227d4" type="tarxz">mirrors://kde/stable/frameworks/5.7/kcoreaddons-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="23b86058ad4fcb13571f330fedb88c352525f8ae" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kcoreaddons-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
             <Dependency>gamin-devel</Dependency>
@@ -55,6 +55,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-25</Date>
             <Version>5.7.0</Version>

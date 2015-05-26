@@ -13,10 +13,9 @@
 	<IsA>app:console</IsA>
         <Summary>JavaScript engine for KDE</Summary>
         <Description>This library provides an ECMAScript compatible interpreter. The ECMA standard is based on well known scripting languages such as Netscape's JavaScript and Microsoft's JScript.</Description>
-        <Archive sha1sum="4980d86bd23e1b4f26fe3437507d0a5e1d3e071b" type="tarxz">mirrors://kde/stable/frameworks/5.7/portingAids/kjs-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="594f5fb9825fe06f4fc80737c29eefd35f1d8040" type="tarxz">http://download.kde.org/stable/frameworks/5.9/portingAids/kjs-5.9.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-base-devel</Dependency>
-            <Dependency>pcre++-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>            
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -24,8 +23,7 @@
     <Package>
         <Name>kde5-kjs</Name>
         <RuntimeDependencies>
-            <Dependency>qt5-base</Dependency>
-	    <Dependency>pcre++</Dependency>
+            <Dependency>qt5-base</Dependency>	    
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="executable">/usr/bin</Path>
@@ -52,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-21</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-03-04</Date>
             <Version>5.7.0</Version>

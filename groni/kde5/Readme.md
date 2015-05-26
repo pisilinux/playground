@@ -13,3 +13,8 @@ And after it install again
 sudo pisi it kde-workspace baloo
 
 Then have you no problems after it
+
+
+Edit:
+
+Update KDE5 Packages to KDE 5.3

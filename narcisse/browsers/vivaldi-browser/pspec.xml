@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>vivaldi-browser</Name>
+        <Homepage>https://vivaldi.com/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>EULA</License>
+        <Icon>vivaldi-browser</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Vivaldi Browser</Summary>
+        <Description>An advanced browser made with the power user in mind. Finally you can surf your way.</Description>
+        <Archive sha1sum="721893ebf73cdcfa99c7f6d9a352ca22ee10e801" type="binary">https://vivaldi.com/download/Vivaldi_TP3.1.0.162.9-1_amd64.deb</Archive>
+    </Source>
+
+    <Package>
+        <Name>vivaldi-browser</Name>
+        <RuntimeDependencies>
+            <Dependency>nss</Dependency>
+	    <Dependency>cups</Dependency>
+	    <Dependency>gtk2</Dependency>
+	    <Dependency>cairo</Dependency>
+	    <Dependency>gconf</Dependency>
+	    <Dependency>libXi</Dependency>
+	    <Dependency>pango</Dependency>
+	    <Dependency>libXext</Dependency>
+	    <Dependency>libXtst</Dependency>
+	    <Dependency>alsa-lib</Dependency>
+	    <Dependency>libXfixes</Dependency>
+	    <Dependency>libXrandr</Dependency>
+	    <Dependency>fontconfig</Dependency>
+	    <Dependency>gdk-pixbuf</Dependency>
+	    <Dependency>libXcursor</Dependency>
+	    <Dependency>libXdamage</Dependency>
+	    <Dependency>libXdamage</Dependency>
+	    <Dependency>libXrender</Dependency>
+	    <Dependency>libxkbfile</Dependency>
+	    <Dependency>pepperflash</Dependency>
+	    <Dependency>libXScrnSaver</Dependency>
+	    <Dependency>libXcomposite</Dependency>
+        </RuntimeDependencies>
+       
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/opt</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+	<AdditionalFiles>
+	  <AdditionalFile target="/opt/vivaldi/vivaldi">vivaldi</AdditionalFile>
+	</AdditionalFiles>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2015-05-24</Date>
+            <Version>1.0.162.9</Version>
+            <Comment>First release</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

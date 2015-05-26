@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Qt 5 addon providing access to numerous types of archives</Summary>
         <Description>KArchive provides classes for easy reading, creation and manipulation of "archive" formats like ZIP and TAR.</Description>
-        <Archive sha1sum="fda59fe0dd22fda0d658d38d4d3e66a5da67db21" type="tarxz">mirrors://kde/stable/frameworks/5.7/karchive-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="79d5c57655a93cc49d904ad9ae715205b6a220e1" type="tarxz">http://download.kde.org/stable/frameworks/5.9/karchive-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
@@ -47,6 +47,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
       <Update release="2">
             <Date>2015-02-25</Date>
             <Version>5.7.0</Version>

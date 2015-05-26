@@ -12,21 +12,21 @@
         <IsA>library</IsA>
         <Summary>Framework for downloading and sharing additional application data</Summary>
         <Description>The KNewStuff library implements collaborative data sharing for applications.</Description>
-        <Archive sha1sum="8447b28d35416cc48344a44841412c6a647dbc99" type="tarxz">mirrors://kde/stable/frameworks/5.7/knewstuff-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="98df76e39914330b4a1dfee8cf934a4447133695" type="tarxz">http://download.kde.org/stable/frameworks/5.9/knewstuff-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>	    
-	    <Dependency versionFrom="5.7.0">kde5-attica-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-karchive-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcompletion-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kiconthemes-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kitemviews-devel</Dependency>	   
-	    <Dependency versionFrom="5.7.0">kde5-ktextwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kxmlgui-devel</Dependency>
+	    <Dependency>kde5-attica-devel</Dependency>
+	    <Dependency>kde5-karchive-devel</Dependency>
+	    <Dependency>kde5-kcompletion-devel</Dependency>
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kcoreaddons-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
+	    <Dependency>kde5-kiconthemes-devel</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
+	    <Dependency>kde5-kitemviews-devel</Dependency>	   
+	    <Dependency>kde5-ktextwidgets-devel</Dependency>
+	    <Dependency>kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency>kde5-kxmlgui-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -36,24 +36,24 @@
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
             <Dependency>boost</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ktextwidgets</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kiconthemes</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcompletion</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kitemviews</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-karchive</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-attica</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcmutils</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdeclarative</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kdbusaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kglobalaccel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kservice</Dependency>	   
-	    <Dependency versionFrom="5.7.0">kde5-kxmlgui</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwindowsystem</Dependency>
+	    <Dependency>kde5-kwidgetsaddons</Dependency>
+	    <Dependency>kde5-ktextwidgets</Dependency>
+	    <Dependency>kde5-kiconthemes</Dependency>
+	    <Dependency>kde5-kcompletion</Dependency>
+	    <Dependency>kde5-kitemviews</Dependency>
+	    <Dependency>kde5-karchive</Dependency>
+	    <Dependency>kde5-attica</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kcmutils</Dependency>
+	    <Dependency>kde5-kdeclarative</Dependency>
+	    <Dependency>kde5-kdbusaddons</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
+	    <Dependency>kde5-kio</Dependency>
+	    <Dependency>kde5-kglobalaccel</Dependency>
+	    <Dependency>kde5-kservice</Dependency>	   
+	    <Dependency>kde5-kxmlgui</Dependency>
+	    <Dependency>kde5-kwindowsystem</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -70,10 +70,10 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kde5-knewstuff</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-attica-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-karchive-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kio-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kxmlgui-devel</Dependency>
+	    <Dependency>kde5-attica-devel</Dependency>
+	    <Dependency>kde5-karchive-devel</Dependency>
+	    <Dependency>kde5-kio-devel</Dependency>
+	    <Dependency>kde5-kxmlgui-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -83,6 +83,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-21</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-03-02</Date>
             <Version>5.7.0</Version>

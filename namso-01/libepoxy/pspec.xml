@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libepoxy</Name>
+        <Homepage>https://github.com/anholt/libepoxy</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>library</IsA>
+        <Summary>Epoxy runtime library</Summary>
+        <Description>A library for handling OpenGL function pointer management.</Description>
+        <Archive sha1sum="e700520711b9e4fa07c286aa36e431d8ad4133f5" type="targz">https://github.com/anholt/libepoxy/archive/v1.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>util-macros</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libepoxy</Name>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+ 
+    <Package>
+        <Name>libepoxy-devel</Name>
+        <Summary>libepoxy için geliştirme dosyaları</Summary>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libepoxy-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for libexpoxy</Summary>
+        <BuildType>_emul32</BuildType>
+        <RuntimeDependencies>
+            <Dependency release="current">libepoxy</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2015-05-25</Date>
+            <Version>1.2</Version>
+            <Comment>libepoxy-32bit added</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2015-05-10</Date>
+            <Version>1.2</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

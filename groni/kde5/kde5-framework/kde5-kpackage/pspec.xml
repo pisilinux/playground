@@ -12,13 +12,13 @@
         <IsA>app:library</IsA>
         <Summary>Framework that lets applications manage user installable packages of non-binary assets</Summary>
         <Description>KPackage is dependent on the Smart package manager.</Description>
-        <Archive sha1sum="c27b5c62e1b424e10b477abb652f9d6807b97f35" type="tarxz">http://download.kde.org/stable/frameworks/5.7/kpackage-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="8e501753b318fe2fb3741cc2fa462dfab152d005" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kpackage-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>python3</Dependency>
             <Dependency>qt5-tools-devel</Dependency>
             <Dependency>extra-cmake-modules</Dependency>
-            <Dependency versionFrom="5.7.0">kde5-kdoctools-devel</Dependency>
+            <Dependency>kde5-kdoctools-devel</Dependency>
         </BuildDependencies>        
     </Source>
 
@@ -27,11 +27,11 @@
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
             <Dependency>qt5-tools</Dependency>
-            <Dependency versionFrom="5.7.0">kde5-kdoctools</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-ki18n</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-karchive</Dependency>
+            <Dependency>kde5-kdoctools</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-karchive</Dependency>
         </RuntimeDependencies>
         <Files>            
             <Path fileType="executable">/usr/bin</Path>
@@ -45,6 +45,13 @@
 	</Package>
     
     <History>
+        <Update release="2">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2015-02-27</Date>
             <Version>5.7.0</Version>

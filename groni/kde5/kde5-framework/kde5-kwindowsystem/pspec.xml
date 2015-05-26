@@ -13,7 +13,7 @@
 	<IsA>app:console</IsA>
         <Summary>KDE5 window manager access framework</Summary>
         <Description>KWindowSystem provides information about the state of the window manager and allows asking the window manager to change the using a more high-level interface than the NETWinInfo/NETRootInfo low-level classes.</Description>
-        <Archive sha1sum="079665ed2aaa4e0661ec8a744c6f866c486ea421" type="tarxz">mirrors://kde/stable/frameworks/5.7/kwindowsystem-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="1dfe65a9f4c0c3e99342a8b085d0b60bf4fef296" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kwindowsystem-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
             <Dependency>libXfixes-devel</Dependency>	    
@@ -59,6 +59,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-25</Date>
             <Version>5.7.0</Version>

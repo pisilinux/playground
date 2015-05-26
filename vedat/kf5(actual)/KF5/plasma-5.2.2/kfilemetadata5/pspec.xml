@@ -2,7 +2,7 @@
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
-        <Name>kfilemetadata5</Name>
+        <Name>kde5-kfilemetadata</Name>
         <Homepage>http://www.kde.org</Homepage>
         <Packager>
             <Name>Vedat Demir</Name>
@@ -15,29 +15,29 @@
         <Description>KDE library for extracting meta data from files.</Description>
         <Archive sha1sum="77f7da9e94345972d06692359872592357dd359a" type="tarxz">http://download.kde.org/stable/plasma/5.2.2/kfilemetadata-5.6.2.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-devel</Dependency>		    
+            <Dependency>qt5-base-devel</Dependency>		    
 	    <Dependency>ebook-tools-devel</Dependency>
 	    <Dependency>exiv2-devel</Dependency>
 	    <Dependency>ffmpeg-devel</Dependency>
 	    <Dependency>taglib-devel</Dependency>
 	    <Dependency>poppler-qt5-devel</Dependency>
-	    <Dependency>karchive-devel</Dependency>
-	    <Dependency>ki18n-devel</Dependency>
+	    <Dependency>kde5-karchive-devel</Dependency>
+	    <Dependency>kde5-ki18n-devel</Dependency>
 	    <Dependency>exiv2-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>	    
         </BuildDependencies>
     </Source>
 
     <Package>
-        <Name>kfilemetadata5</Name>
+        <Name>kde5-kfilemetadata</Name>
         <RuntimeDependencies>
-            <Dependency>qt5</Dependency>		    
+            <Dependency>qt5-base</Dependency>		    
 	    <Dependency>ebook-tools</Dependency>
 	    <Dependency>ffmpeg</Dependency>
 	    <Dependency>taglib</Dependency>
 	    <Dependency>poppler-qt5</Dependency>
-	    <Dependency>karchive</Dependency>
-	    <Dependency>ki18n</Dependency>
+	    <Dependency>kde5-karchive</Dependency>
+	    <Dependency>kde5-ki18n</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -50,11 +50,11 @@
     </Package>
     
     <Package>
-        <Name>kfilemetadata5-devel</Name>
-	<Summary>Development files for kfilemetadata5</Summary>
+        <Name>kde5-kfilemetadata-devel</Name>
+	<Summary>Development files for kde5-kfilemetadata</Summary>
         <RuntimeDependencies>
-	    <Dependency>qt5-devel</Dependency>
-            <Dependency release="current">kfilemetadata5</Dependency>
+	    <Dependency>qt5-base-devel</Dependency>
+            <Dependency release="current">kde5-kfilemetadata</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>

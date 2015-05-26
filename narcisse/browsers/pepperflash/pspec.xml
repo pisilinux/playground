@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pepperflash</Name>
+        <Homepage>http://www.google.com</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>custom:chrome</License>
+        <IsA>library</IsA>
+        <Summary>Google Chrome's Pepper Flash plugin for Chromium.</Summary>
+        <Description>Google Chrome's Pepper Flash plugin for Chromium (stable version)</Description>
+        <Archive sha1sum="da21df51448b066d36de914e3fb846e5272b85b6" type="tarxz">https://dl.dropboxusercontent.com/u/71264624/PepperFlash-18.0.0.129.tar.xz</Archive>
+    </Source>
+
+    <Package>
+        <Name>pepperflash</Name>
+        <Files>
+            <Path fileType="library">/usr/lib/chromium-browser/PepperFlash/</Path>
+        </Files>
+    </Package>
+
+    <History>
+      <Update release="3">
+            <Date>2015-05-24</Date>
+            <Version>18.0.0.129</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2015-05-21</Date>
+            <Version>17.0.0.188</Version>
+            <Comment>Version bump</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2015-04-25</Date>
+            <Version>17.0.0.169</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -13,11 +13,11 @@
 	<IsA>app:console</IsA>
         <Summary>Addon with auto completion widgets and classes</Summary>
         <Description>KCompletion provides widgets with advanced completion support as well as a lower-level completion class which can be used with your own widgets.</Description>
-        <Archive sha1sum="e7491ac49211eaf838d5741d2044dea1cd7d57fd" type="tarxz">mirrors://kde/stable/frameworks/5.7/kcompletion-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="5595077392ccf2a6f97797cfeaa19c78f5b291ba" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kcompletion-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>	    
-	    <Dependency versionFrom="5.7.0">kde5-kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency>kde5-kconfig-devel</Dependency>
+	    <Dependency>kde5-kwidgetsaddons-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -26,8 +26,8 @@
         <Name>kde5-kcompletion</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>	    
-	    <Dependency versionFrom="5.7.0">kde5-kconfig</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons</Dependency>
+	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kwidgetsaddons</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -45,7 +45,7 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>	 
             <Dependency release="current">kde5-kcompletion</Dependency>
-	    <Dependency versionFrom="5.7.0">kde5-kwidgetsaddons-devel</Dependency>
+	    <Dependency>kde5-kwidgetsaddons-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -55,6 +55,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-26</Date>
             <Version>5.7.0</Version>

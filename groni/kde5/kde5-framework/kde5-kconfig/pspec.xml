@@ -14,7 +14,7 @@
 	<IsA>app:gui</IsA>
         <Summary>Advanced configuration system for KDE Frameworks 5</Summary>
         <Description>Kconfig provides advanced libraries and tools for accessing configuration files.</Description>
-        <Archive sha1sum="625b67cae786fda3d6bb6ac47ebf712cd36edc72" type="tarxz">mirrors://kde/stable/frameworks/5.7/kconfig-5.7.0.tar.xz</Archive>
+        <Archive sha1sum="0e225b49cbe34130ba8f8b419d379e39ac27ffe9" type="tarxz">http://download.kde.org/stable/frameworks/5.9/kconfig-5.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
@@ -55,6 +55,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2015-05-20</Date>
+            <Version>5.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2015-02-25</Date>
             <Version>5.7.0</Version>
