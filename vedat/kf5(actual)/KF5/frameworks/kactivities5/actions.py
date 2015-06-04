@@ -5,30 +5,16 @@
 # See the file http://www.gnu.org/licenses/gpl.txt
 
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import cmaketools
-from pisi.actionsapi import shelltools
-from pisi.actionsapi import get
+from pisi.actionsapi import kde5
 
 def setup():
-    pisitools.ldflags.add("-Wl,-rpath,/usr/lib")
-    
-    shelltools.makedirs("%s/build" %get.workDIR())
-
-    cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
-                          -DKACTIVITIES_ENABLE_EXCEPTIONS=OFF \
-                          -DECM_MKSPECS_INSTALL_DIR=/usr/lib/qt5/mkspecs/modules \
-                          -DQT_PLUGIN_INSTALL_DIR=lib/qt5/plugins \
-                          -DQML_INSTALL_DIR=lib/qt5/qml \
-                          -DLIB_INSTALL_DIR=lib \
-                          -DSYSCONF_INSTALL_DIR=/etc \
-                          -DLOCALE_INSTALL_DIR=/usr/share/locale \
-                          -DPYTHON_EXECUTABLE=/usr/bin/python3 \
-                          -DBUILD_TESTING=OFF")
+    kde5.configure()
 
 def build():
-    cmaketools.make()
+    kde5.make()
 
 def install():
-    cmaketools.install()
+    kde5.install()
+    
     
     pisitools.dodoc("README.md", "MAINTAINER", "TODO")

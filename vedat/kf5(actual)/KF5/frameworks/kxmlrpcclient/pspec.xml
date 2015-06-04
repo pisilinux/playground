@@ -15,7 +15,7 @@
         <Description>Library to provides access and handling of KAlarm calendar data</Description>
         <Archive sha1sum="f43a6e17b889c7971caaa887f8df48a675a56e69" type="tarxz">https://dl.dropboxusercontent.com/s/02n5u2u3iqdhioa/kxmlrpcclient.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
             <Dependency>extra-cmake-modules</Dependency>
             <Dependency>kcalcore-devel</Dependency>
             <Dependency>kholidays-devel</Dependency>
@@ -27,14 +27,14 @@
     <Package>
         <Name>kxmlrpcclient</Name>
         <RuntimeDependencies>
-            <Dependency>qt5</Dependency>
+            <Dependency>qt5-base</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
             <Path fileType="data">/usr/share</Path>
 	    <Path fileType="localedata">/usr/share/locale</Path>
 	    <Path fileType="executable">/usr/bin</Path>
-	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib/qt5-base</Path>
 	    <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
 	    <Path fileType="man">/usr/share/man</Path>
@@ -45,7 +45,7 @@
         <Name>kxmlrpcclient-devel</Name>
 	<Summary>Development files for kdelibs4-support</Summary>
         <RuntimeDependencies>
-	    <Dependency>qt5-devel</Dependency>
+	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kxmlrpcclient</Dependency>
         </RuntimeDependencies>
         <Files>

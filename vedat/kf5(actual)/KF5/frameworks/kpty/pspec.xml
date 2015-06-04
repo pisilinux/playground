@@ -12,12 +12,12 @@
         <IsA>library</IsA>
         <Summary>Libraries for pseudo terminal devices</Summary>
         <Description>Kpty rovides primitives to interface with pseudo terminal devices as well as a KProcess derived class for running child processes and communicating with them using a pty.</Description>
-        <Archive sha1sum="a0e7618c45cf6bfda002125cf1596efc2ba69812" type="tarxz">mirrors://kde/stable/frameworks/5.8/kpty-5.8.0.tar.xz</Archive>
+        <Archive sha1sum="28719ef0f3fb3634d2335255e2fc2e9f7a4a778d" type="tarxz">mirrors://kde/stable/frameworks/5.10/kpty-5.10.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>utempter-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">ki18n-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -25,15 +25,15 @@
     <Package>
         <Name>kpty</Name>
         <RuntimeDependencies>
-            <Dependency>qt5</Dependency>
+            <Dependency>qt5-base</Dependency>
 	    <Dependency>utempter</Dependency>
-	    <Dependency versionFrom="5.8.0">kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.8.0">ki18n</Dependency>
+	    <Dependency versionFrom="5.10.0">kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.10.0">ki18n</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
 	    <Path fileType="localedata">/usr/share/locale</Path>
-	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib/qt5-base</Path>
 	    <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
@@ -43,10 +43,10 @@
         <Name>kpty-devel</Name>
 	<Summary>Development files for kpty</Summary>
         <RuntimeDependencies>
-	    <Dependency>qt5-devel</Dependency>
+	    <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>utempter-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">ki18n-devel</Dependency>
             <Dependency release="current">kpty</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -57,16 +57,9 @@
     </Package>
 
     <History>
-        <Update release="2">
-            <Date>2015-03-23</Date>
-            <Version>5.8.0</Version>
-            <Comment>qt support</Comment>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
-        </Update> 
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.8.0</Version>
+            <Version>5.10.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

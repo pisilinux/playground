@@ -13,9 +13,9 @@
 	<IsA>app:console</IsA>
         <Summary>KDE spell schecking library</Summary>
         <Description>This framework contains two main components: Interface to KWallet, the safe desktop-wide storage for passwords on KDE workspaces. The kwalletd used to safely store the passwords on KDE work spaces.</Description>
-        <Archive sha1sum="fd7c2d3bbb87194841569c126cf76223147c656d" type="tarxz">mirrors://kde/stable/frameworks/5.8/sonnet-5.8.0.tar.xz</Archive>
+        <Archive sha1sum="47257344bb02f6a5035322d6078b07246255ac05" type="tarxz">mirrors://kde/stable/frameworks/5.10/sonnet-5.10.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
             <Dependency>aspell-devel</Dependency>
 	    <Dependency>hunspell-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
@@ -25,14 +25,14 @@
     <Package>
         <Name>sonnet</Name>
         <RuntimeDependencies>
-            <Dependency>qt5</Dependency>
+            <Dependency>qt5-base</Dependency>
 	    <Dependency>aspell</Dependency>
 	    <Dependency>hunspell</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
 	    <Path fileType="localedata">/usr/share/locale</Path>
-	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib/qt5-base</Path>
 	    <Path fileType="library">/usr/lib</Path>
 	    <Path fileType="executable">/usr/bin</Path>
             <Path fileType="doc">/usr/share/doc</Path>
@@ -43,7 +43,7 @@
         <Name>sonnet-devel</Name>
 	<Summary>Development files for sonnet</Summary>
         <RuntimeDependencies>
-	    <Dependency>qt5-devel</Dependency>
+	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">sonnet</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -54,16 +54,9 @@
     </Package>
 
     <History>
-        <Update release="2">
-            <Date>2015-09-20</Date>
-            <Version>5.8.0</Version>
-            <Comment>qt support</Comment>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
-        </Update> 
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.8.0</Version>
+            <Version>5.10.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

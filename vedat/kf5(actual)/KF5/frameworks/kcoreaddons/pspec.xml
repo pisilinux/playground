@@ -13,9 +13,9 @@
 	<IsA>app:console</IsA>
         <Summary>Utilities for core application functionality and accessing the OS</Summary>
         <Description>KCoreAddons provides classes built on top of QtCore to perform various tasks such as manipulating mime types, autosaving files, creating backup files, generating random sequences, performing text manipulations such as macro replacement, accessing user information and many more.</Description>
-        <Archive sha1sum="41aa49d1c6580e5d00818270e0272e2478d6e3b2" type="tarxz">http://download.kde.org/stable/frameworks/5.8/kcoreaddons-5.8.0.tar.xz</Archive>
+        <Archive sha1sum="41aa49d1c6580e5d00818270e0272e2478d6e3b2" type="tarxz">http://download.kde.org/stable/frameworks/5.10/kcoreaddons-5.10.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
             <Dependency>gamin-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
@@ -26,14 +26,14 @@
     <Package>
         <Name>kcoreaddons</Name>
         <RuntimeDependencies>
-            <Dependency>qt5</Dependency>
+            <Dependency>qt5-base</Dependency>
             <Dependency>gamin</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
 	    <Path fileType="localedata">/usr/share/locale</Path>
 	    <Path fileType="executable">/usr/bin</Path>
-	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib/qt5-base</Path>
 	    <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
@@ -43,7 +43,7 @@
         <Name>kcoreaddons-devel</Name>
 	<Summary>Development files for kcoreaddons</Summary>
         <RuntimeDependencies>
-	    <Dependency>qt5-devel</Dependency>
+	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kcoreaddons</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -54,16 +54,9 @@
     </Package>
 
     <History>
-        <Update release="2">
-            <Date>2015-03-11</Date>
-            <Version>5.8.0</Version>
-            <Comment>Version Bump</Comment>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
-        </Update>  
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.8.0</Version>
+            <Version>5.10.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

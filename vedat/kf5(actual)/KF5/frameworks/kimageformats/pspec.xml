@@ -13,9 +13,9 @@
 	<IsA>app:console</IsA>
         <Summary>Image formats addons for QT 5</Summary>
         <Description>This framework provides additional image format plugins for QtGui. </Description>
-        <Archive sha1sum="aa8a16046e106b5eacbb307fc7b11f3b742c0b86" type="tarxz">mirrors://kde/stable/frameworks/5.8/kimageformats-5.8.0.tar.xz</Archive>
+        <Archive sha1sum="3228f3a9b98c62a1b5992bc9910a0d8068d900bc" type="tarxz">mirrors://kde/stable/frameworks/5.10/kimageformats-5.10.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
             <Dependency>openexr-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
@@ -24,7 +24,7 @@
     <Package>
         <Name>kimageformats</Name>
         <RuntimeDependencies>
-            <Dependency>qt5</Dependency>
+            <Dependency>qt5-base</Dependency>
 	    <Dependency>openexr-libs</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -37,7 +37,7 @@
     <History>
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.8.0</Version>
+            <Version>5.10.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

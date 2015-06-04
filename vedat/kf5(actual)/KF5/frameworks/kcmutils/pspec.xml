@@ -12,16 +12,16 @@
         <IsA>library</IsA>
         <Summary>Utilities for interacting with KCModules</Summary>
         <Description>KCMUtils provides various classes to work with KCModules. KCModules can be created with the KConfigWidgets framework.</Description>
-        <Archive sha1sum="b66afcdb018c539174d5fa8f748e639c6b55c46a" type="tarxz">mirrors://kde/stable/frameworks/5.8/kcmutils-5.8.0.tar.xz</Archive>
+        <Archive sha1sum="b66afcdb018c539174d5fa8f748e639c6b55c46a" type="tarxz">mirrors://kde/stable/frameworks/5.10/kcmutils-5.10.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kconfigwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kiconthemes-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kitemviews-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kservice-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kxmlgui-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kitemviews-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kservice-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kxmlgui-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -29,19 +29,19 @@
     <Package>
         <Name>kcmutils</Name>
         <RuntimeDependencies>
-            <Dependency>qt5-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kconfigwidgets</Dependency>
-	    <Dependency versionFrom="5.8.0">kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.8.0">ki18n</Dependency>
-	    <Dependency versionFrom="5.8.0">kiconthemes</Dependency>
-	    <Dependency versionFrom="5.8.0">kitemviews</Dependency>
-	    <Dependency versionFrom="5.8.0">kservice</Dependency>
-	    <Dependency versionFrom="5.8.0">kxmlgui</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kconfigwidgets</Dependency>
+	    <Dependency versionFrom="5.10.0">kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.10.0">ki18n</Dependency>
+	    <Dependency versionFrom="5.10.0">kiconthemes</Dependency>
+	    <Dependency versionFrom="5.10.0">kitemviews</Dependency>
+	    <Dependency versionFrom="5.10.0">kservice</Dependency>
+	    <Dependency versionFrom="5.10.0">kxmlgui</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
 	    <Path fileType="localedata">/usr/share/locale</Path>
-	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib/qt5-base</Path>
 	    <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
@@ -51,13 +51,13 @@
         <Name>kcmutils-devel</Name>
 	<Summary>Development files for kcmutils</Summary>
         <RuntimeDependencies>
-	    <Dependency>qt5-devel</Dependency>
+	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kcmutils</Dependency>
-	    <Dependency versionFrom="5.8.0">kconfigwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kiconthemes-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kitemviews-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kservice-devel</Dependency>
-	    <Dependency versionFrom="5.8.0">kxmlgui-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kitemviews-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kservice-devel</Dependency>
+	    <Dependency versionFrom="5.10.0">kxmlgui-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -67,16 +67,9 @@
     </Package>
 
     <History>
-        <Update release="2">
-            <Date>2015-09-20</Date>
-            <Version>5.8.0</Version>
-            <Comment>qt support</Comment>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
-        </Update> 
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.8.0</Version>
+            <Version>5.10.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

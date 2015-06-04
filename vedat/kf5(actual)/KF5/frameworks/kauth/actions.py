@@ -6,21 +6,15 @@
 
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import cmaketools
+from pisi.actionsapi import kde5
 
 def setup():
-    pisitools.ldflags.add("-Wl,-rpath,/usr/lib")
-    cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
-                          -DLIB_INSTALL_DIR=lib \
-                          -DPLUGIN_INSTALL_DIR=/usr/lib/qt5/plugins \
-                          -DPYTHON_EXECUTABLE=/usr/bin/python3 \
-                          -DSYSCONF_INSTALL_DIR=/etc \
-                          -DECM_MKSPECS_INSTALL_DIR=/usr/lib/qt5/mkspecs/modules \
-                          -DBUILD_TESTING=OFF")
+    kde5.configure()
 
 def build():
-    cmaketools.make()
+    kde5.make()
 
 def install():
-    cmaketools.install()
+    kde5.install()
     
     pisitools.dodoc("README.md", "COPYING.LIB")

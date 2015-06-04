@@ -11,8 +11,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
 def setup():
-    cmaketools.configure("-DCMAKE_INSTALL_PREFIX=/usr \
-                          -DCMAKE_BUILD_TYPE=Release \
+    cmaketools.configure("\
                           -DBUILD_HTML_DOCS=OFF \
                           -DBUILD_MAN_DOCS=OFF", sourceDir=".")
 

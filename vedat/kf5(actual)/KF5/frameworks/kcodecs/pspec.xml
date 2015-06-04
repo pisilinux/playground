@@ -12,9 +12,9 @@
         <IsA>library</IsA>
         <Summary>Plugins allowing Qt applications to access further types of images</Summary>
         <Description>KCodecs provide a collection of methods to manipulate strings using various encodings.</Description>
-        <Archive sha1sum="95692e6693fe9ffde6350be47741620429d07488" type="tarxz">mirrors://kde/stable/frameworks/5.8/kcodecs-5.8.0.tar.xz</Archive>
+        <Archive sha1sum="7fd9352b1a434077ca2cd537c9d5de19f4f9824c" type="tarxz">mirrors://kde/stable/frameworks/5.10/kcodecs-5.10.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -22,12 +22,12 @@
     <Package>
         <Name>kcodecs</Name>
         <RuntimeDependencies>
-            <Dependency>qt5</Dependency>
+            <Dependency>qt5-base</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
 	    <Path fileType="localedata">/usr/share/locale</Path>
-	    <Path fileType="library">/usr/lib/qt5</Path>
+	    <Path fileType="library">/usr/lib/qt5-base</Path>
 	    <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
@@ -37,7 +37,7 @@
         <Name>kcodecs-devel</Name>
 	<Summary>Development files for kcodecs</Summary>
         <RuntimeDependencies>
-	    <Dependency>qt5-devel</Dependency>
+	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kcodecs</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -47,17 +47,10 @@
         </Files>
     </Package>
 
-    <History>
-        <Update release="2">
-            <Date>2015-03-20</Date>
-            <Version>5.8.0</Version>
-            <Comment>qt5 support</Comment>
-            <Name>Vedat Demir</Name>
-            <Email>vedat@pisilinux.org</Email>
-        </Update>           
+    <History>         
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.8.0</Version>
+            <Version>5.10.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>
