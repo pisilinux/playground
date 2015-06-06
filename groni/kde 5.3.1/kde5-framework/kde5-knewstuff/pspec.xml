@@ -12,9 +12,9 @@
         <IsA>library</IsA>
         <Summary>Framework for downloading and sharing additional application data</Summary>
         <Description>The KNewStuff library implements collaborative data sharing for applications.</Description>
-        <Archive sha1sum="9f1ecbf12a3903d5cd05ffdcf9b3d69b9ef1b25e" type="tarxz">http://download.kde.org/stable/frameworks/5.10/knotifyconfig-5.10.0.tar.xz</Archive>
+        <Archive sha1sum="a5e80a8b73867a52739e821071ffe8a39327ff83" type="tarxz">http://download.kde.org/stable/frameworks/5.10/knewstuff-5.10.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-base-devel</Dependency>	    
+        <Dependency>qt5-base-devel</Dependency>	    
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -22,19 +22,33 @@
     <Package>
         <Name>kde5-knewstuff</Name>
         <RuntimeDependencies>
-            <Dependency>qt5-base</Dependency>
-            <Dependency>kde5-kcompletion</Dependency>
+        <Dependency>qt5-base</Dependency>
+        <Dependency>boost</Dependency>
+	    <Dependency>kde5-kwidgetsaddons</Dependency>
+	    <Dependency>kde5-ktextwidgets</Dependency>
+	    <Dependency>kde5-kiconthemes</Dependency>
+	    <Dependency>kde5-kcompletion</Dependency>
+	    <Dependency>kde5-kitemviews</Dependency>
+	    <Dependency>kde5-karchive</Dependency>
+	    <Dependency>kde5-attica</Dependency>
 	    <Dependency>kde5-kconfig</Dependency>
+	    <Dependency>kde5-kcoreaddons</Dependency>
+	    <Dependency>kde5-kcmutils</Dependency>
+	    <Dependency>kde5-kdeclarative</Dependency>
+	    <Dependency>kde5-kdbusaddons</Dependency>
 	    <Dependency>kde5-ki18n</Dependency>
 	    <Dependency>kde5-kio</Dependency>
-	    <Dependency>qt5-phonon</Dependency>
+	    <Dependency>kde5-kglobalaccel</Dependency>
+	    <Dependency>kde5-kservice</Dependency>	   
+	    <Dependency>kde5-kxmlgui</Dependency>
+	    <Dependency>kde5-kwindowsystem</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="data">/usr/share</Path>
+        <Path fileType="data">/usr/share</Path>
 	    <Path fileType="localedata">/usr/share/locale</Path>
 	    <Path fileType="library">/usr/lib/qt5</Path>
 	    <Path fileType="library">/usr/lib</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
+        <Path fileType="doc">/usr/share/doc</Path>
         </Files>
     </Package>
     
@@ -43,7 +57,7 @@
 	<Summary>Development files for knewstuff</Summary>
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
-            <Dependency release="current">kde5-knewstuff</Dependency>	    
+        <Dependency release="current">kde5-knewstuff</Dependency>	    
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -54,7 +68,7 @@
 
     <History>
         <Update release="1">
-            <Date>2015-06-01</Date>
+            <Date>2015-06-06</Date>
             <Version>5.10.0</Version>
             <Comment>First Release.</Comment>
             <Name>Stefan Gronewold(groni)</Name>
