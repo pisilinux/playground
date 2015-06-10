@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>calamares</Name>
+        <Homepage>https://github.com/calamares/calamares</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Distribution-independent installer framework</Summary>
+        <Description>Distribution-independent installer framework</Description>
+        <Archive sha1sum="d7611b829d1499ee3f0161eb0e6a7a44feb8b90d" type="tarxz">/home/vedat/calamares.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-svg-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>kcoreaddons-devel</Dependency>
+            <Dependency>solid-devel</Dependency>
+            <Dependency>libyaml-devel</Dependency>
+            <Dependency>parted-devel</Dependency>
+            <Dependency>libatasmart-devel</Dependency>
+            <Dependency>udisks2-devel</Dependency>
+            <Dependency>polkit-qt5-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qt5-tools-devel</Dependency>
+            <Dependency>git</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>calamares</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-svg</Dependency>
+            <Dependency>kconfig</Dependency>
+            <Dependency>ki18n</Dependency>
+            <Dependency>kcoreaddons</Dependency>
+            <Dependency>solid</Dependency>
+            <Dependency>yaml-cpp</Dependency>
+            <Dependency>parted</Dependency>
+            <Dependency>libatasmart</Dependency>
+            <Dependency>udisks2</Dependency>
+            <Dependency>polkit-qt5</Dependency>
+            <Dependency>qt5-tools</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/calamares</Path>
+            <Path fileType="data">/usr/lib</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+            <Path fileType="data">/usr/lib/calamares</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/include/libcalamares</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-06-07</Date>
+            <Version>1.0.3.12</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>yaml-cpp</Name>
+        <Homepage>https://github.com/jbeder/yaml-cpp</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:lib</IsA>
+        <Summary>A YAML parser and emitter in C++</Summary>
+        <Description>YAML parser and emitter in C++ matching the YAML 1.2</Description>
+        <Archive sha1sum="61edcbb18b106dfc240f151998e233c03bdbf9f3" type="targz">https://github.com/jbeder/yaml-cpp/archive/release-0.5.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>boost-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>yaml-cpp</Name>
+        <RuntimeDependencies>
+            <Dependency>boost</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/lib</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/mime</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/appdata</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/doc/audacity</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+   </Package>
+   
+    <Package>
+        <Name>yaml-cpp-devel</Name>
+        <RuntimeDependencies>
+            <Dependency>boost-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/include/yaml-cpp</Path>
+            <Path fileType="data">/usr/lib/pkgconfig/</Path>
+        </Files>
+   </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-06-07</Date>
+            <Version>0.5.2</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
