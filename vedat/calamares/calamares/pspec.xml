@@ -12,9 +12,12 @@
         <IsA>app:gui</IsA>
         <Summary>Distribution-independent installer framework</Summary>
         <Description>Distribution-independent installer framework</Description>
-        <Archive sha1sum="d7611b829d1499ee3f0161eb0e6a7a44feb8b90d" type="tarxz">/home/vedat/calamares.tar.xz</Archive>
+        <Archive sha1sum="f18d97886914a377996f5dcc01724015f30ee207" type="tarxz">https://dl.dropboxusercontent.com/s/egdqpbahnilbdmo/calamares.tar.xz</Archive>
         <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
             <Dependency>qt5-svg-devel</Dependency>
+            <Dependency>qt5-tools-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
             <Dependency>kconfig-devel</Dependency>
             <Dependency>ki18n-devel</Dependency>
             <Dependency>kcoreaddons-devel</Dependency>
@@ -25,8 +28,6 @@
             <Dependency>udisks2-devel</Dependency>
             <Dependency>polkit-qt5-devel</Dependency>
             <Dependency>extra-cmake-modules</Dependency>
-            <Dependency>qt5-tools-devel</Dependency>
-            <Dependency>git</Dependency>
         </BuildDependencies>
         <Patches>
         </Patches>
@@ -35,7 +36,10 @@
     <Package>
         <Name>calamares</Name>
         <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
             <Dependency>qt5-svg</Dependency>
+            <Dependency>qt5-tools</Dependency>
+            <Dependency>qt5-declarative</Dependency>
             <Dependency>kconfig</Dependency>
             <Dependency>ki18n</Dependency>
             <Dependency>kcoreaddons</Dependency>
@@ -45,7 +49,6 @@
             <Dependency>libatasmart</Dependency>
             <Dependency>udisks2</Dependency>
             <Dependency>polkit-qt5</Dependency>
-            <Dependency>qt5-tools</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
