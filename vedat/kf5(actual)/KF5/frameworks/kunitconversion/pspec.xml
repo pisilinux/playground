@@ -12,11 +12,11 @@
         <IsA>library</IsA>
         <Summary>KDE unit conversion framework</Summary>
         <Description>KUnitConversion provides functions to convert values in different physical units.</Description>
-        <Archive sha1sum="1a7c7222b502f20f25b5b437f9ec1fd2e8964ba5" type="tarxz">mirrors://kde/stable/frameworks/5.10/kunitconversion-5.10.0.tar.xz</Archive>
+        <Archive sha1sum="1a7c7222b502f20f25b5b437f9ec1fd2e8964ba5" type="tarxz">mirrors://kde/stable/frameworks/5.11/kunitconversion-5.11.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>	    
-	    <Dependency versionFrom="5.10.0">kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">ki18n-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -24,8 +24,8 @@
         <Name>kunitconversion</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>    
-	    <Dependency versionFrom="5.10.0">kconfig</Dependency>
-	    <Dependency versionFrom="5.10.0">ki18n</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfig</Dependency>
+	    <Dependency versionFrom="5.11.0">ki18n</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -42,8 +42,8 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kunitconversion</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">ki18n-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -55,7 +55,7 @@
     <History>
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.10.0</Version>
+            <Version>5.11.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

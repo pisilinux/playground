@@ -12,11 +12,11 @@
         <IsA>library</IsA>
         <Summary>Framework which lets applications perform actions as a privileged user</Summary>
         <Description>Framework which lets applications perform actions as a privileged user</Description>
-        <Archive sha1sum="6e8645a32b80e8cdf52cbfae126d8cef35feb67c" type="tarxz">mirrors://kde/stable/frameworks/5.10/kauth-5.10.0.tar.xz</Archive>
+        <Archive sha1sum="9740d238ca209eb43e48aaa0bf375a8c9a3e3100" type="tarxz">mirrors://kde/stable/frameworks/5.11/kauth-5.11.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
 	    <Dependency>polkit-qt5-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
 	<Patches>
@@ -28,7 +28,7 @@
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
 	    <Dependency>polkit-qt5</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
@@ -45,7 +45,7 @@
 	<Summary>Development files for kauth</Summary>
         <RuntimeDependencies>
             <Dependency release="current">kauth</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -57,7 +57,7 @@
     <History>
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.10.0</Version>
+            <Version>5.11.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

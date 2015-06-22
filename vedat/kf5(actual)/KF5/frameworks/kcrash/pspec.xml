@@ -13,11 +13,12 @@
 	<IsA>app:console</IsA>
         <Summary>KDE crash handling application</Summary>
         <Description>KCrash provides support for intercepting and handling application crashes.</Description>
-        <Archive sha1sum="29e2193b2172ef04e20feb3affa67dc00d6c276f" type="tarxz">mirrors://kde/stable/frameworks/5.10/kcrash-5.10.0.tar.xz</Archive>
+        <Archive sha1sum="be7fdf5b1012c73fca00e71c7e9251bb29556a87" type="tarxz">mirrors://kde/stable/frameworks/5.11/kcrash-5.11.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kwindowsystem-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwindowsystem-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -26,8 +27,9 @@
         <Name>kcrash</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.10.0">kwindowsystem</Dependency>
+            <Dependency>qt5-x11extras</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.11.0">kwindowsystem</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -44,8 +46,8 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kcrash</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kwindowsystem-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwindowsystem-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -57,7 +59,7 @@
     <History>
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.10.0</Version>
+            <Version>5.11.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

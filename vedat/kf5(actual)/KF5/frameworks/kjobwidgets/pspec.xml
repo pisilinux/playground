@@ -13,11 +13,12 @@
 	<IsA>app:console</IsA>
         <Summary>Widgets for showing progress of asynchronous jobs</Summary>
         <Description>KJobWIdgets provides widgets for showing progress of asynchronous jobs.</Description>
-        <Archive sha1sum="9b9506feaea8a999bd86188105d142b1f1966328" type="tarxz">mirrors://kde/stable/frameworks/5.10/kjobwidgets-5.10.0.tar.xz</Archive>
+        <Archive sha1sum="2953b5b98a340cb023a601e400663159c89867c8" type="tarxz">mirrors://kde/stable/frameworks/5.11/kjobwidgets-5.11.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kwidgetsaddons-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwidgetsaddons-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -26,8 +27,9 @@
         <Name>kjobwidgets</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.10.0">kwidgetsaddons</Dependency>
+            <Dependency>qt5-x11extras</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.11.0">kwidgetsaddons</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -44,8 +46,8 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kjobwidgets</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwidgetsaddons-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -57,7 +59,7 @@
     <History>
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.10.0</Version>
+            <Version>5.11.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

@@ -13,17 +13,19 @@
 	<IsA>app:console</IsA>
         <Summary>KDE text editing widgets</Summary>
         <Description>KTextWidgets provides widgets for displaying and editing text. It supports rich text as well as plain text.</Description>
-        <Archive sha1sum="e05b62d147cea1a40a2d624b41fdc4d8466d79e1" type="tarxz">mirrors://kde/stable/frameworks/5.10/ktextwidgets-5.10.0.tar.xz</Archive>
+        <Archive sha1sum="79e47a1177410916bea84108cc3aacf2b85195ad" type="tarxz">mirrors://kde/stable/frameworks/5.11/ktextwidgets-5.11.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>qt5-base-devel</Dependency>	    
-	    <Dependency versionFrom="5.10.0">kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kcompletion-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfigwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kiconthemes-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kwidgetsaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">sonnet-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kservice-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>	
+	    <Dependency versionFrom="5.11.0">kcoreaddons-devel</Dependency>  
+	    <Dependency versionFrom="5.11.0">kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcompletion-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwindowsystem-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">sonnet-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kservice-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -32,15 +34,17 @@
         <Name>ktextwidgets</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
-            <Dependency>boost</Dependency>	    
-	    <Dependency versionFrom="5.10.0">kconfig</Dependency>
-	    <Dependency versionFrom="5.10.0">kcompletion</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfigwidgets</Dependency>
-	    <Dependency versionFrom="5.10.0">kiconthemes</Dependency>
-	    <Dependency versionFrom="5.10.0">kwidgetsaddons</Dependency>
-	    <Dependency versionFrom="5.10.0">ki18n</Dependency>
-	    <Dependency versionFrom="5.10.0">sonnet</Dependency>
-	    <Dependency versionFrom="5.10.0">kservice</Dependency>
+            <Dependency>boost</Dependency>	
+	    <Dependency versionFrom="5.11.0">kcoreaddons</Dependency>    
+	    <Dependency versionFrom="5.11.0">kconfig</Dependency>    
+	    <Dependency versionFrom="5.11.0">kwindowsystem</Dependency>
+	    <Dependency versionFrom="5.11.0">kcompletion</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfigwidgets</Dependency>
+	    <Dependency versionFrom="5.11.0">kiconthemes</Dependency>
+	    <Dependency versionFrom="5.11.0">kwidgetsaddons</Dependency>
+	    <Dependency versionFrom="5.11.0">ki18n</Dependency>
+	    <Dependency versionFrom="5.11.0">sonnet</Dependency>
+	    <Dependency versionFrom="5.11.0">kservice</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="data">/usr/share</Path>
@@ -57,14 +61,14 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">ktextwidgets</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kcompletion-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfigwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kiconthemes-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kwidgetsaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">sonnet-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kservice-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcompletion-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">sonnet-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kservice-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -76,7 +80,7 @@
     <History>
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.10.0</Version>
+            <Version>5.11.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

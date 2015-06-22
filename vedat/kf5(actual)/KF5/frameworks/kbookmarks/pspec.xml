@@ -12,14 +12,16 @@
         <IsA>library</IsA>
         <Summary>Access and manipulate bookmarks stored using XBEL format</Summary>
         <Description>Framework which lets you access and manipulate bookmarks stored using XBEL format</Description>
-        <Archive sha1sum="b893da19487320f1a5649ac2d671b366393ea3b0" type="tarxz">mirrors://kde/stable/frameworks/5.10/kbookmarks-5.10.0.tar.xz</Archive>
+        <Archive sha1sum="ba2bb31eeb5593f627b2f8d334f31b3d8793990d" type="tarxz">mirrors://kde/stable/frameworks/5.11/kbookmarks-5.11.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfigwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kiconthemes-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kwidgetsaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kxmlgui-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcodecs-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kxmlgui-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -28,11 +30,13 @@
         <Name>kbookmarks</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfigwidgets</Dependency>
-	    <Dependency versionFrom="5.10.0">kiconthemes</Dependency>
-	    <Dependency versionFrom="5.10.0">kwidgetsaddons</Dependency>
-	    <Dependency versionFrom="5.10.0">kxmlgui</Dependency>
+	    <Dependency versionFrom="5.11.0">kcodecs</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfig</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfigwidgets</Dependency>
+	    <Dependency versionFrom="5.11.0">kiconthemes</Dependency>
+	    <Dependency versionFrom="5.11.0">kwidgetsaddons</Dependency>
+	    <Dependency versionFrom="5.11.0">kxmlgui</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
@@ -50,9 +54,9 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kbookmarks</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfigwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kiconthemes-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kxmlgui-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kxmlgui-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -64,7 +68,7 @@
     <History>       
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.10.0</Version>
+            <Version>5.11.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

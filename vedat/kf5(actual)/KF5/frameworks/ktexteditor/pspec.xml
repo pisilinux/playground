@@ -12,17 +12,17 @@
         <IsA>library</IsA>
         <Summary>KDE text editor libraries</Summary>
         <Description>KTextEditor provides a powerful text editor component that you can embed in your application.</Description>
-        <Archive sha1sum="14e212af889efdbe2f2d0a099d9fad9fdaad44e9" type="tarxz">mirrors://kde/stable/frameworks/5.10/ktexteditor-5.10.0.tar.xz</Archive>
+        <Archive sha1sum="14e212af889efdbe2f2d0a099d9fad9fdaad44e9" type="tarxz">mirrors://kde/stable/frameworks/5.11/ktexteditor-5.11.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>	    
-	    <Dependency versionFrom="5.10.0">karchive-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kguiaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfig-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kio-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kparts-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">sonnet-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">karchive-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kguiaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kio-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kparts-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">sonnet-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
     </Source>
@@ -31,14 +31,14 @@
         <Name>ktexteditor</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>	    
-	    <Dependency versionFrom="5.10.0">karchive</Dependency>
-	    <Dependency versionFrom="5.10.0">kguiaddons</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfig</Dependency>
-	    <Dependency versionFrom="5.10.0">ki18n</Dependency>
-	    <Dependency versionFrom="5.10.0">kio</Dependency>
-	    <Dependency versionFrom="5.10.0">ki18n</Dependency>
-	    <Dependency versionFrom="5.10.0">kparts</Dependency>
-	    <Dependency versionFrom="5.10.0">sonnet</Dependency>
+	    <Dependency versionFrom="5.11.0">karchive</Dependency>
+	    <Dependency versionFrom="5.11.0">kguiaddons</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfig</Dependency>
+	    <Dependency versionFrom="5.11.0">ki18n</Dependency>
+	    <Dependency versionFrom="5.11.0">kio</Dependency>
+	    <Dependency versionFrom="5.11.0">ki18n</Dependency>
+	    <Dependency versionFrom="5.11.0">kparts</Dependency>
+	    <Dependency versionFrom="5.11.0">sonnet</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc</Path>
@@ -56,7 +56,7 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">ktexteditor</Dependency>
-	    <Dependency versionFrom="5.10.0">kparts-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kparts-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -68,7 +68,7 @@
     <History>
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.10.0</Version>
+            <Version>5.11.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>

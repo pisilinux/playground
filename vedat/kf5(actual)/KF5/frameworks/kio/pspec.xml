@@ -13,34 +13,39 @@
 	<IsA>app:console</IsA>
         <Summary>Network transparent access to files and data</Summary>
         <Description>This framework implements almost all the file management functions you will ever need. </Description>
-        <Archive sha1sum="422122b6aa715472aad5ce86938940a241e1fbd0" type="tarxz">mirrors://kde/stable/frameworks/5.10/kio-5.10.0.tar.xz</Archive>
+        <Archive sha1sum="8a20f17d613b5ddfca363d71797bf64ffca4a264" type="tarxz">mirrors://kde/stable/frameworks/5.11/kio-5.11.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-script-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
             <Dependency>acl-devel</Dependency>	   
 	    <Dependency>attr-devel</Dependency>
+	    <Dependency>libxslt-devel</Dependency>
 	    <Dependency>openssl-devel</Dependency>
 	    <Dependency>mit-kerberos</Dependency>
-	    <Dependency versionFrom="5.10.0">karchive-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kbookmarks-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kcompletion-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfigwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kcrash-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kdbusaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kdoctools-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kguiaddons-devel</Dependency>	   
-	    <Dependency versionFrom="5.10.0">ki18n-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kiconthemes-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kitemviews-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kjobwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">knotifications-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kservice-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">ktextwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kwallet5-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kwidgetsaddons-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kwindowsystem-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kxmlgui-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">solid-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcodecs-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfig-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">karchive-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kbookmarks-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcompletion-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfigwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcrash-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kdbusaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kdoctools-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kguiaddons-devel</Dependency>	   
+	    <Dependency versionFrom="5.11.0">ki18n-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kiconthemes-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kitemviews-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kjobwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">knotifications-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kservice-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">ktextwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwallet-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwidgetsaddons-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kwindowsystem-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kxmlgui-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">solid-devel</Dependency>
 	    <Dependency>extra-cmake-modules</Dependency>
         </BuildDependencies>
 	<Patches>
@@ -52,31 +57,36 @@
         <Name>kio</Name>
         <RuntimeDependencies>
             <Dependency>qt5-base</Dependency>
+            <Dependency>qt5-script</Dependency>	
+            <Dependency>qt5-x11extras</Dependency>	
             <Dependency>acl</Dependency>	   
 	    <Dependency>attr</Dependency>
 	    <Dependency>openssl</Dependency>
+	    <Dependency>libxslt</Dependency>
 	    <Dependency>mit-kerberos</Dependency>
-	    <Dependency versionFrom="5.10.0">karchive</Dependency>
-	    <Dependency versionFrom="5.10.0">kbookmarks</Dependency>
-	    <Dependency versionFrom="5.10.0">kcompletion</Dependency>
-	    <Dependency versionFrom="5.10.0">kconfigwidgets</Dependency>
-	    <Dependency versionFrom="5.10.0">kcoreaddons</Dependency>
-	    <Dependency versionFrom="5.10.0">kcrash</Dependency>
-	    <Dependency versionFrom="5.10.0">kdbusaddons</Dependency>
-	    <Dependency versionFrom="5.10.0">kdoctools</Dependency>
-	    <Dependency versionFrom="5.10.0">kguiaddons</Dependency>	   
-	    <Dependency versionFrom="5.10.0">ki18n</Dependency>
-	    <Dependency versionFrom="5.10.0">kiconthemes</Dependency>
-	    <Dependency versionFrom="5.10.0">kitemviews</Dependency>
-	    <Dependency versionFrom="5.10.0">kjobwidgets</Dependency>
-	    <Dependency versionFrom="5.10.0">knotifications</Dependency>
-	    <Dependency versionFrom="5.10.0">kservice</Dependency>
-	    <Dependency versionFrom="5.10.0">ktextwidgets</Dependency>
-	    <Dependency versionFrom="5.10.0">kwallet5</Dependency>
-	    <Dependency versionFrom="5.10.0">kwidgetsaddons</Dependency>
-	    <Dependency versionFrom="5.10.0">kwindowsystem</Dependency>
-	    <Dependency versionFrom="5.10.0">kxmlgui</Dependency>
-	    <Dependency versionFrom="5.10.0">solid</Dependency>
+	    <Dependency versionFrom="5.11.0">kcodecs</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfig</Dependency>
+	    <Dependency versionFrom="5.11.0">karchive</Dependency>
+	    <Dependency versionFrom="5.11.0">kbookmarks</Dependency>
+	    <Dependency versionFrom="5.11.0">kcompletion</Dependency>
+	    <Dependency versionFrom="5.11.0">kconfigwidgets</Dependency>
+	    <Dependency versionFrom="5.11.0">kcoreaddons</Dependency>
+	    <Dependency versionFrom="5.11.0">kcrash</Dependency>
+	    <Dependency versionFrom="5.11.0">kdbusaddons</Dependency>
+	    <Dependency versionFrom="5.11.0">kdoctools</Dependency>
+	    <Dependency versionFrom="5.11.0">kguiaddons</Dependency>	   
+	    <Dependency versionFrom="5.11.0">ki18n</Dependency>
+	    <Dependency versionFrom="5.11.0">kiconthemes</Dependency>
+	    <Dependency versionFrom="5.11.0">kitemviews</Dependency>
+	    <Dependency versionFrom="5.11.0">kjobwidgets</Dependency>
+	    <Dependency versionFrom="5.11.0">knotifications</Dependency>
+	    <Dependency versionFrom="5.11.0">kservice</Dependency>
+	    <Dependency versionFrom="5.11.0">ktextwidgets</Dependency>
+	    <Dependency versionFrom="5.11.0">kwallet</Dependency>
+	    <Dependency versionFrom="5.11.0">kwidgetsaddons</Dependency>
+	    <Dependency versionFrom="5.11.0">kwindowsystem</Dependency>
+	    <Dependency versionFrom="5.11.0">kxmlgui</Dependency>
+	    <Dependency versionFrom="5.11.0">solid</Dependency>
         </RuntimeDependencies>
         <Files>
 	    <Path fileType="config">/etc/xdg</Path>
@@ -97,12 +107,12 @@
         <RuntimeDependencies>
 	    <Dependency>qt5-base-devel</Dependency>
             <Dependency release="current">kio</Dependency>
-	    <Dependency versionFrom="5.10.0">kbookmarks-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kcompletion-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kjobwidgets-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kservice-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">kxmlgui-devel</Dependency>
-	    <Dependency versionFrom="5.10.0">solid-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kbookmarks-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kcompletion-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kjobwidgets-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kservice-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">kxmlgui-devel</Dependency>
+	    <Dependency versionFrom="5.11.0">solid-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>	    
@@ -114,7 +124,7 @@
     <History>
         <Update release="1">
             <Date>2014-09-20</Date>
-            <Version>5.10.0</Version>
+            <Version>5.11.0</Version>
             <Comment>First release</Comment>
             <Name>Vedat Demir</Name>
             <Email>vedat@pisilinux.org</Email>
