@@ -14,7 +14,6 @@ def setup():
     
     options = "-DCMAKE_INSTALL_PREFIX=/usr/share \
                -DTJPEG_INCLUDE_DIR=/usr/include \
-               -DTJPEG_LIBRARY=/usr/lib/libturbojpeg.so \
                -DVGL_BINDIR=/usr/bin \
                -DVGL_INCDIR=/usr/include \
                -DVGL_DOCDIR=/usr/share/doc/%s \
@@ -23,11 +22,13 @@ def setup():
     if get.buildTYPE() == "emul32":
       
       options += "-DVGL_LIBDIR=/usr/lib32 \
+                  -DTJPEG_LIBRARY=/usr/lib32/libturbojpeg.so \
                   -DVGL_FAKELIBDIR=/usr/lib32/fakelib \
                  "
     elif get.ARCH() == "x86_64":
       
       options += "-DVGL_LIBDIR=/usr/lib \
+                  -DTJPEG_LIBRARY=/usr/lib/libturbojpeg.so \
                   -DVGL_FAKELIBDIR=/usr/lib/fakelib \
                  "
       
