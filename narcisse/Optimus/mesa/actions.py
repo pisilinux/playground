@@ -15,60 +15,45 @@ def setup():
 # --enable-sysfs option provides better hardware information support with "lspci"
 # --enable-32-bit option is not present anymore. Although build fails in emul32. With --disable-asm option, not fail. Needs to be tested.
 
+
     options ="\
-              --prefix=/usr \
-              --sysconfdir=/etc \
               --with-dri-driverdir=/usr/lib/xorg/modules/dri \
-              --with-gallium-drivers=r300,r600,radeonsi,nouveau,svga,swrast \
+              --with-gallium-drivers=r300,r600,nouveau,svga,swrast \
               --with-dri-drivers=i915,i965,r200,radeon,nouveau,swrast \
               --with-egl-platforms=x11,drm,wayland \
-              --enable-llvm-shared-libs \
+              --enable-xa \
+              --enable-dri \
               --enable-egl \
               --enable-gbm \
-              --enable-gallium-llvm \
-              --enable-shared-glapi \
               --enable-glx \
-              --enable-glx-tls \
-              --enable-dri \
-              --enable-osmesa \
+              --enable-omx \
+              --enable-dri3 \
               --enable-gles1 \
               --enable-gles2 \
-              --enable-texture-float \
-              --enable-xa \
               --enable-vdpau \
-              --enable-omx \
-              --enable-nine \
-              --enable-opencl"
+              --enable-osmesa \
+              --enable-sysfs \
+              --enable-xvmc \
+              --enable-glx-tls \
+              --enable-gallium-llvm \
+              --enable-llvm-shared-libs \
+              --enable-shared-glapi \
+              --enable-texture-float \
+             "
 
     if get.buildTYPE() == "emul32":
         # compile with llvm doesn't work for now, test it later
 
-        options += " --build=i686-pc-linux-gnu --host=i686-pc-linux-gnu \
-                     --libdir=/usr/lib32 \
-                     --prefix=/usr \
-                     --sysconfdir=/etc \
-                     --with-dri-driverdir=/usr/lib32/xorg/modules/dri \
-                     --with-gallium-drivers=r300,r600,radeonsi,nouveau,swrast \
-                     --with-dri-drivers=i915,i965,r200,radeon,nouveau,swrast \
-                     --with-egl-platforms=x11,drm,wayland \
-                     --enable-llvm-shared-libs \
-                     --enable-egl \
-                     --enable-gbm \
-                     --enable-gallium-llvm \
-                     --enable-shared-glapi \
-                     --enable-glx-tls \
-                     --enable-dri \
-                     --enable-glx \
-                     --enable-osmesa \
-                     --enable-gles1 \
-                     --enable-gles2 \
-                     --enable-texture-float \
-                     --enable-nine \
-                     --enable-vdpau"
+        options += " --with-dri-driverdir=/usr/lib32/xorg/modules/dri \
+                     --with-gallium-drivers=r600,nouveau,swrast \
+                     --with-clang-libdir=/usr/lib32 \
+                     --disable-gallium-llvm \
+                     --disable-asm "
 
     elif get.ARCH() == "x86_64":
 
         options += " --with-clang-libdir=/usr/lib \
+                     --enable-opencl \
                      --enable-opencl-icd \
                    "
 

@@ -13,10 +13,11 @@
         <IsA>app:console</IsA>
         <Summary>Mesa graphics libraries and utilities</Summary>
         <Description>Mesa is an open-source implementation of the OpenGL specification - a system for rendering interactive 3D graphics.</Description>
-        <Archive sha1sum="e5659207105531385454e6fa08a1c3cf46a2ce95" type="tarxz">ftp://ftp.freedesktop.org/pub/mesa/10.5.2/mesa-10.5.2.tar.xz</Archive>
+        <Archive sha1sum="860569c4ed8bdd335800e4743045cd7a48e7b7cb" type="tarxz">ftp://ftp.freedesktop.org/pub/mesa/10.6.0/mesa-10.6.0.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>llvm</Dependency>
-            <Dependency>libclc-devel</Dependency>
+	    <Dependency>libclc-devel</Dependency>
+            <Dependency>llvm-libs</Dependency>
+            <Dependency>llvm-clang-devel</Dependency>
             <Dependency>xorg-proto</Dependency>
             <Dependency>libdrm-devel</Dependency>
             <Dependency>libXext-devel</Dependency>
@@ -25,28 +26,35 @@
             <Dependency>libXfixes-devel</Dependency>
             <Dependency>libtalloc-devel</Dependency>
             <Dependency>libXdamage-devel</Dependency>
-            <Dependency>libXxf86vm-devel</Dependency>
-            <Dependency>python-mako</Dependency>
             <Dependency>libomxil-bellagio-devel</Dependency>
+            <Dependency>libXxf86vm-devel</Dependency>
+            <Dependency>libXvMC-devel</Dependency>
+            <Dependency>libXv-devel</Dependency>
+            <Dependency>python-mako</Dependency>
+            <Dependency releaseFrom="3">libxshmfence-devel</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>mesa</Name>
         <RuntimeDependencies>
-            <Dependency>llvm</Dependency>
-            <Dependency>libclc</Dependency>
+            <Dependency>llvm-libs</Dependency>
             <Dependency>libdrm</Dependency>
             <Dependency>libXext</Dependency>
             <Dependency>libXfixes</Dependency>
             <Dependency>libXdamage</Dependency>
             <Dependency>libXxf86vm</Dependency>
+            <Dependency>libXv</Dependency>
+            <Dependency>libXvMC</Dependency>
             <Dependency>libdrm-intel</Dependency>
-            <Dependency>libxshmfence</Dependency>
             <Dependency>libdrm-radeon</Dependency>
             <Dependency>libdrm-nouveau</Dependency>
             <Dependency>wayland-client</Dependency>
             <Dependency>wayland-server</Dependency>
+            <Dependency>llvm-clang</Dependency>
+            <Dependency>libclc</Dependency>
+            <Dependency releaseFrom="3">libxshmfence</Dependency>
+	    <Dependency>libomxil-bellagio</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
@@ -136,19 +144,6 @@
     </Package>
 
     <Package>
-        <Name>mesa-opencl</Name>
-        <Summary>Mesa OpenCL libraries</Summary>
-        <RuntimeDependencies>
-            <Dependency release="current">mesa</Dependency>
-        </RuntimeDependencies>
-        <Files>
-            <Path fileType="config">/etc/OpenCL</Path>
-            <Path fileType="library">/usr/lib/libMesaOpenCL.*</Path>
-            <Path fileType="header">/usr/include/KHR</Path>
-        </Files>
-    </Package>
-
-    <Package>
         <Name>mesa-devel</Name>
         <Summary>Development files for mesa</Summary>
         <RuntimeDependencies>
@@ -191,6 +186,7 @@
             <Dependency>libdrm-intel-32bit</Dependency>
             <Dependency>libdrm-radeon-32bit</Dependency>
             <Dependency>libdrm-nouveau-32bit</Dependency>
+	    <Dependency>libomxil-bellagio-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency>expat-32bit</Dependency>
@@ -202,10 +198,13 @@
             <Dependency>libXfixes-32bit</Dependency>
             <Dependency>libXdamage-32bit</Dependency>
             <Dependency>libXxf86vm-32bit</Dependency>
+            <Dependency>libXv-32bit</Dependency>
+            <Dependency>libXvMC-32bit</Dependency>
             <Dependency>libdrm-intel-32bit</Dependency>
             <Dependency>libxshmfence-32bit</Dependency>
             <Dependency>libdrm-radeon-32bit</Dependency>
             <Dependency>libdrm-nouveau-32bit</Dependency>
+	    <Dependency>libomxil-bellagio-32bit</Dependency>
             <Dependency release="current">mesa</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -216,6 +215,13 @@
         </Provides>
     </Package>
     <History>
+      <Update release="18">
+            <Date>2015-06-21</Date>
+            <Version>10.6.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="17">
             <Date>2015-04-07</Date>
             <Version>10.5.2</Version>
