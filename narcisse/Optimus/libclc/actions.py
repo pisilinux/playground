@@ -12,11 +12,22 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("./configure.py --prefix=/usr --pkgconfigdir=/usr/lib/pkgconfig")
+    
+    shelltools.system("./configure.py \
+                       --prefix=/usr \
+                       --pkgconfigdir=/usr/lib/pkgconfig \
+                       --enable-runtime-subnormal \
+                       --with-cxx-compiler=g++ \
+                      ")
+    
 
 def build():
+    
+    
     autotools.make()
 
 def install():
+    
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    
     pisitools.dodoc("LICENSE.TXT","CREDITS.TXT", "README.TXT")
