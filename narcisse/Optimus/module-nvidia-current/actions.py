@@ -31,8 +31,9 @@ else:
 def setup():
     shelltools.system("sh NVIDIA-Linux-%s-%s.run -x --target tmp"
                       % (arch, get.srcVERSION()))
+    
     shelltools.move("tmp/*", ".")
-
+    
     # Our libc is TLS enabled so use TLS library
     shelltools.unlink("*-tls.so*")
     shelltools.move("tls/*", ".")
@@ -53,6 +54,10 @@ def build():
 
     autotools.make("module")
     
+    shelltools.cd("uvm")
+    
+    autotools.make("module")
+    
 def install():
 
     if not get.buildTYPE() == 'emul32':
@@ -60,17 +65,33 @@ def install():
         pisitools.insinto("/lib/modules/%s/extra/nvidia" % KDIR,
                           "kernel/nvidia.ko")
 	
+	pisitools.insinto("/lib/modules/%s/extra/nvidia" % KDIR,
+                          "kernel/uvm/nvidia-uvm.ko")
+	
 	# Command line tools and their man pages
         pisitools.dobin("nvidia-smi")
         pisitools.doman("nvidia-smi.1.gz")
         
-        pisitools.dobin("nvidia-persistenced")
+        for binary in ("nvidia-cuda-mps-control", "nvidia-cuda-mps-server", "nvidia-debugdump", "nvidia-persistenced", "nvidia-smi"):
+            pisitools.dobin("%s" %binary)
+            
+        for man in ("nvidia-smi.1.gz", "nvidia-cuda-mps-control.1.gz", "nvidia-persistenced.1.gz"):
+            pisitools.doman("%s" %man)
 
 
     ###  Libraries
     # OpenGl library
     pisitools.dolib("libGL.so.%s" % version, nvlibdir)
     pisitools.dosym("libGL.so.%s" % version, "%s/libGL.so.1.2.0" % nvlibdir)
+    
+    pisitools.dolib("libEGL.so.%s" % version, nvlibdir)
+    pisitools.dosym("libEGL.so.%s" % version, "%s/libEGL.so.1.0.0" % nvlibdir)
+    
+    pisitools.dolib("libGLESv1_CM.so.%s" % version, nvlibdir)
+    pisitools.dosym("libGLESv1_CM.so.%s" % version, "%s/libGLESv1_CM.so.1.1.0" % nvlibdir)
+    
+    pisitools.dolib("libGLESv2.so.%s" % version, nvlibdir)
+    pisitools.dosym("libGLESv2.so.%s" % version, "%s/libGLESv2.so.2.0.0" % nvlibdir)
 
     # OpenCL
     pisitools.dolib("libOpenCL.so.1.0.0", libdir)
@@ -99,7 +120,7 @@ def install():
     pisitools.dosym("libnvidia-compiler.so.%s" % version, "%s/libnvidia-compiler.so.1" % libdir)
 
     # OpenGL core library and others
-    for lib in ("glcore", "tls", "encode", "fbc", "glsi", "ifr", "eglcore"):
+    for lib in ("glcore", "tls", "encode", "fbc", "glsi", "ifr", "eglcore", "opencl"):
         pisitools.dolib("libnvidia-%s.so.%s" % (lib, version), libdir)
         pisitools.dosym("libnvidia-%s.so.%s" % (lib, version), "%s/libnvidia-%s.so.1" %(libdir, lib))
 
