@@ -2,7 +2,7 @@ PISILINUX OPTIMUS TESTING INSTRUCTIONS
 
 *** Building a package ***
 
-In order to build a package from this repo, you will need those steps:
+In order to build a package from this repo, you will need to do those steps:
 
 1- You need a raw link of pspec.xml file for that package. Open pspec.xml file of that package on browser, click "Raw" button on the page and copy the address from the adress bar.
 
