@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dosbox</Name>
+        <Homepage>http://www.dosbox.com</Homepage>
+        <Packager>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Icon>dosbox</Icon>
+        <Summary>Emulator with builtin DOS for running DOS Games</Summary>
+        <Description>dosbox, Emulator with builtin DOS for running DOS Games</Description>
+        <Archive sha1sum="2d99f0013350efb29b769ff19ddc8e4d86f4e77e" type="targz">http://downloads.sourceforge.net/project/dosbox/dosbox/0.74/dosbox-0.74.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libsdl</Dependency>
+            <Dependency>sdl-net</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>sdl-sound</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">gcc46.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>dosbox</Name>
+        <RuntimeDependencies>
+            <Dependency>mesa</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>sdl-net</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>sdl-sound</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/pixmaps/dosbox.png">dosbox.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/applications/dosbox.desktop">dosbox.desktop</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/hicolor/16x16/apps/dosbox.png">icons/hicolor/16x16/apps/dosbox.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/hicolor/24x24/apps/dosbox.png">icons/hicolor/24x24/apps/dosbox.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/hicolor/32x32/apps/dosbox.png">icons/hicolor/32x32/apps/dosbox.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/hicolor/48x48/apps/dosbox.png">icons/hicolor/48x48/apps/dosbox.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/hicolor/96x96/apps/dosbox.png">icons/hicolor/96x96/apps/dosbox.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/hicolor/128x128/apps/dosbox.png">icons/hicolor/128x128/apps/dosbox.png</AdditionalFile>
+            <AdditionalFile target="/usr/share/icons/hicolor/256x256/apps/dosbox.png">icons/hicolor/256x256/apps/dosbox.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>  
+        <Update release="1">
+            <Date>2015-07-15</Date>
+            <Version>0.74</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
