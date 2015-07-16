@@ -14,7 +14,6 @@ def setup():
                          --localstatedir=/var \
                          --sbindir=/usr/sbin \
                          --disable-rpath \
-                         --disable-rpath \
                          --enable-gost \
                          --with-libevent \
                          --with-pythonmodule \
