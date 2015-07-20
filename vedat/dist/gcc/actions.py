@@ -12,7 +12,7 @@ from pisi.actionsapi import get
 import os
 
 
-verMajor = "5.1.0"
+verMajor = "5.2.0"
 
 arch = get.ARCH().replace("x86_64", "x86-64")
 
@@ -63,7 +63,7 @@ def setup():
                        --with-pkgversion="Pisi Linux" \
                        --with-multilib-list=m32,m64 \
                        --with-system-libunwind \
-                       --with-gxx-include-dir=/usr/include/c++/4.9.2 \
+                       --with-gxx-include-dir=/usr/include/c++/5.2.0 \
                        --disable-libunwind-exceptions \
                        --disable-libstdcxx-pch \
                        --disable-libssp \
