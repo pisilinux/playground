@@ -63,6 +63,9 @@ def setup():
                        --with-pkgversion="Pisi Linux" \
                        --with-multilib-list=m32,m64 \
                        --with-system-libunwind \
+                       --with-gmp \
+                       --with-mpfr \
+                       --with-mpc \
                        --with-gxx-include-dir=/usr/include/c++/5.2.0 \
                        --disable-libunwind-exceptions \
                        --disable-libstdcxx-pch \
