@@ -82,7 +82,7 @@ def setup():
                        --enable-libstdcxx-time=rt \
                        --enable-libstdcxx-visibility \
                        --enable-symvers=gnu \
-                       --enable-languages=c,c++,fortran,lto,objc,obj-c++,java,go \
+                       --enable-languages=c,c++,fortran,lto,objc,obj-c++ \
                        --enable-shared \
                        --enable-decimal-float \
                        --enable-gnu-unique-object \
