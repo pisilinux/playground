@@ -1,0 +1,14 @@
+--- glibc-2.17/aclocal.m4~	2012-12-25 04:02:13.000000000 +0100
++++ glibc-2.17/aclocal.m4	2012-12-25 12:11:19.271094384 +0100
+@@ -2,11 +2,6 @@
+ dnl the internal functions defined and used by the main configure script
+ dnl match those expected by the fragments.
+ m4_define([GLIBC_AUTOCONF_VERSION], [2.69])
+-m4_if(m4_defn([AC_AUTOCONF_VERSION]), GLIBC_AUTOCONF_VERSION, [],
+-      [m4_fatal(m4_flatten(
+-Exactly version GLIBC_AUTOCONF_VERSION of Autoconf is required but you have
+-m4_defn([AC_AUTOCONF_VERSION])
+-), [63])])dnl
+ dnl
+ dnl We define the macro GLIBC_PROVIDES to do an AC_PROVIDE for each macro
+ dnl which appears in configure.in before the sysdep configure scripts are run. 

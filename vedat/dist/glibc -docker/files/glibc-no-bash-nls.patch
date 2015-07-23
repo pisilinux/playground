@@ -1,0 +1,138 @@
+--- glibc-2.21/elf/ldd.bash.in.org	2015-02-06 16:35:42.258090169 +0100
++++ glibc-2.21/elf/ldd.bash.in	2015-02-06 16:35:57.491784092 +0100
+@@ -1,4 +1,4 @@
+-#! @BASH@
++#!/bin/sh
+ # Copyright (C) 1996-2015 Free Software Foundation, Inc.
+ # This file is part of the GNU C Library.
+ 
+@@ -35,16 +35,16 @@ while test $# -gt 0; do
+   case "$1" in
+   --vers | --versi | --versio | --version)
+     echo 'ldd @PKGVERSION@@VERSION@'
+-    printf $"Copyright (C) %s Free Software Foundation, Inc.
++    printf "Copyright (C) %s Free Software Foundation, Inc.
+ This is free software; see the source for copying conditions.  There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ " "2015"
+-    printf $"Written by %s and %s.
++    printf "Written by %s and %s.
+ " "Roland McGrath" "Ulrich Drepper"
+     exit 0
+     ;;
+   --h | --he | --hel | --help)
+-    echo $"Usage: ldd [OPTION]... FILE...
++    echo "Usage: ldd [OPTION]... FILE...
+       --help              print this help and exit
+       --version           print version information and exit
+   -d, --data-relocs       process data relocations
+@@ -52,7 +52,7 @@
+   -u, --unused            print unused direct dependencies
+   -v, --verbose           print all information
+ "
+-    printf $"For bug reporting instructions, please see:\\n%s.\\n" \
++    printf "For bug reporting instructions, please see:\\n%s.\\n" \
+       "@REPORT_BUGS_TO@"
+     exit 0
+     ;;
+@@ -79,15 +79,15 @@
+     shift
+     ;;
+   --v | --ve | --ver)
+-    echo >&2 $"ldd: option \`$1' is ambiguous"
++    echo >&2 "ldd: option \`$1' is ambiguous"
+     exit 1
+     ;;
+   --)		# Stop option processing.
+     shift; break
+     ;;
+   -*)
+-    echo >&2 'ldd:' $"unrecognized option" "\`$1'"
+-    echo >&2 $"Try \`ldd --help' for more information."
++    echo >&2 'ldd:' "unrecognized option" "\`$1'"
++    echo >&2 "Try \`ldd --help' for more information."
+     exit 1
+     ;;
+   *)
+@@ -121,8 +121,8 @@
+ 
+ case $# in
+ 0)
+-  echo >&2 'ldd:' $"missing file arguments"
+-  echo >&2 $"Try \`ldd --help' for more information."
++  echo >&2 'ldd:' "missing file arguments"
++  echo >&2 "Try \`ldd --help' for more information."
+   exit 1
+   ;;
+ 1)
+@@ -147,13 +141,13 @@
+      ;;
+   esac
+   if test ! -e "$file"; then
+-    echo "ldd: ${file}:" $"No such file or directory" >&2
++    echo "ldd: ${file}:" "No such file or directory" >&2
+     result=1
+   elif test ! -f "$file"; then
+-    echo "ldd: ${file}:" $"not regular file" >&2
++    echo "ldd: ${file}:" "not regular file" >&2
+     result=1
+   elif test -r "$file"; then
+-    test -x "$file" || echo 'ldd:' $"\
++    test -x "$file" || echo 'ldd:' "\
+ warning: you do not have execution permission for" "\`$file'" >&2
+     RTLD=
+     ret=1
+@@ -182,7 +176,7 @@
+     1)
+       # This can be a non-ELF binary or no binary at all.
+       nonelf "$file" || {
+-	echo $"	not a dynamic executable"
++	echo "	not a dynamic executable"
+ 	result=1
+       }
+       ;;
+@@ -190,12 +184,12 @@
+       try_trace "$RTLD" "$file" || result=1
+       ;;
+     *)
+-      echo 'ldd:' ${RTLD} $"exited with unknown exit code" "($ret)" >&2
++      echo 'ldd:' ${RTLD} "exited with unknown exit code" "($ret)" >&2
+       exit 1
+       ;;
+     esac
+   else
+-    echo 'ldd:' $"error: you do not have read permission for" "\`$file'" >&2
++    echo 'ldd:' "error: you do not have read permission for" "\`$file'" >&2
+     result=1
+   fi
+ done
+--- glibc-2.21/elf/sotruss.sh~	2015-02-06 16:36:52.000000000 +0100
++++ glibc-2.21/elf/sotruss.sh	2015-02-06 16:40:23.484746243 +0100
+@@ -1,4 +1,4 @@
+-#! @BASH@
++#!/bin/sh
+ # Copyright (C) 2011-2015 Free Software Foundation, Inc.
+ # This file is part of the GNU C Library.
+ 
+@@ -72,18 +72,18 @@ while test $# -gt 0; do
+   case "$1" in
+   --v | --ve | --ver | --vers | --versi | --versio | --version)
+     echo "sotruss @PKGVERSION@@VERSION@"
+-    printf $"Copyright (C) %s Free Software Foundation, Inc.
++    printf "Copyright (C) %s Free Software Foundation, Inc.
+ This is free software; see the source for copying conditions.  There is NO
+ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ " "2015"
+-    printf $"Written by %s.\n" "Ulrich Drepper"
++    printf "Written by %s.\n" "Ulrich Drepper"
+     exit 0
+     ;;
+   -\? | --h | --he | --hel | --help)
+     do_help
+     ;;
+   --u | --us | --usa | --usag | --usage)
+-    printf $"Usage: %s [-ef] [-F FROMLIST] [-o FILENAME] [-T TOLIST] [--exit]
++    printf "Usage: %s [-ef] [-F FROMLIST] [-o FILENAME] [-T TOLIST] [--exit]
+ 	    [--follow] [--from FROMLIST] [--output FILENAME] [--to TOLIST]
+ 	    [--help] [--usage] [--version] [--]
+ 	    EXECUTABLE [EXECUTABLE-OPTION...]\n" sotruss 
