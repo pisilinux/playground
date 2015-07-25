@@ -20,4 +20,4 @@ def install():
 
     pisitools.dodoc("LICENSE", "LISANS", "OKUBUNU", "README")
 
-# By PiSiDo 2.0.1
+# By PiSiDo 2.1.0
