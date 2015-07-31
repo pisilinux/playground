@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>screenkey</Name>
+        <Homepage>http://seminar.io/projects/screenkey/</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>Screencast your keys</Summary>
+        <Description>A screencast tool to display your keys inspired by Screenflick and initially based on the key-mon project code.</Description>
+        <Archive sha1sum="a775ad6f7ed2d63348a4fb9b4c7f193afbd2a062" type="targz">https://launchpad.net/screenkey/0.2/0.2.0/+download/screenkey-0.2.tar.gz</Archive>
+        
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+	    <Dependency>python-distutils-extra</Dependency>
+	    <Dependency>python-setuptools</Dependency>            
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>screenkey</Name>
+        
+        <RuntimeDependencies>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>keybinder</Dependency>
+            <Dependency>python-xlib</Dependency>
+	    <Dependency>xmodmap</Dependency>
+        </RuntimeDependencies>        
+      <Files>            
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="icon">/usr/share/pixmaps</Path>
+            <Path fileType="application">/usr/share/applications</Path>
+            <Path fileType="doc">/usr/share/doc</Path>            
+        </Files>
+        
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/screenkey.desktop">screenkey.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/screenkey.png">screenkey.png</AdditionalFile>
+        </AdditionalFiles>        
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-07-31</Date>
+            <Version>0.2</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
