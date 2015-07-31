@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xorg-xmodmap</Name>
+        <Homepage>http://xorg.freedesktop.org/</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>custom</License>
+        <IsA>app:console</IsA>
+        <Summary>Utility for modifying keymaps and button mappings</Summary>
+        <Description>Utility for modifying keymaps and button mappings</Description>
+        <Archive sha1sum="931c3b7e8c606362554a9e75de52af3303f64a90" type="targz">http://xorg.freedesktop.org/archive/individual/app/xmodmap-1.0.9.tar.gz</Archive>
+        
+        <BuildDependencies>
+            <Dependency>util-macros</Dependency>            
+        </BuildDependencies>        
+    </Source>
+
+    <Package>
+        <Name>xorg-xmodmap</Name>
+        
+        <RuntimeDependencies>
+            <Dependency>libX11</Dependency>            
+        </RuntimeDependencies>        
+        <Files>            
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>            
+        </Files>        
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-07-31</Date>
+            <Version>1.0.9</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
