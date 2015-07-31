@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>key-mon</Name>
+        <Homepage>https://code.google.com/p/key-mon/</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>Apache License 2.0</License>
+        <IsA>app:gui</IsA>
+        <Summary>Keyboard Status Monitor (key-mon)</Summary>
+        <Description>Utility to show live keyboard and mouse status for teaching and screencasts.</Description>
+        <Archive sha1sum="7ef2319a0935c78c6ccea457e7477b2b8c41869d" type="zip">https://key-mon.googlecode.com/files/key-mon-1.17.zip</Archive>
+    <BuildDependencies>
+      <Dependency>python</Dependency>
+    </BuildDependencies>  
+    </Source>
+    <Package>
+        <Name>key-mon</Name>        
+        <RuntimeDependencies>
+            <Dependency>dbus-python</Dependency>
+            <Dependency>dbus-glib</Dependency>
+            <Dependency>python-gtk</Dependency>
+            <Dependency>python-xlib</Dependency>
+        </RuntimeDependencies>        
+        <Files>            
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="application">/usr/share/applications</Path>
+            <Path fileType="icon">/usr/share/icons</Path>
+	    <Path fileType="pixmaps">/usr/share/pixmaps</Path>
+            <Path fileType="doc">/usr/share/doc</Path>            
+        </Files>
+        
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/key-mon.desktop">key-mon.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/key-mon.xpm">key-mon.xpm</AdditionalFile>
+        </AdditionalFiles>        
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-07-31</Date>
+            <Version>1.17</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
