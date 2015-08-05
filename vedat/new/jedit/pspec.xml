@@ -14,11 +14,10 @@
         <Description>Text editor for programmers, written in Java</Description>
         <BuildDependencies>
             <Dependency>desktop-file-utils</Dependency>
-            <Dependency>gendesk</Dependency>
             <Dependency>jdk7-openjdk</Dependency>
             <Dependency>jre7-openjdk</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="87e66a4d17744403b318acc51d0de5d96ee7d406" type="binary">http://www.tellurianring.com/projects/jedit-daily/jEdit/2014-05-21_22-35-58/jedit5.3pre1install.jar</Archive>
+        <Archive sha1sum="513eb5fcc1d93e64396e2e1759fe9a7ea4251da4" type="binary">http://www.tellurianring.com/projects/jedit-daily/jEdit/2015-06-16_04-59-12/jedit5.3pre1install.jar</Archive>
     </Source>
     <Package>
         <Name>jedit</Name>
@@ -33,7 +32,8 @@
             <Path fileType="data">/usr/share/applications</Path>
             <Path fileType="data">/usr/share/pixmaps</Path>
             <Path fileType="doc">/usr/share/man</Path>
-            <Path fileType="data">/usr/share/java/jedit</Path>      
+            <Path fileType="data">/usr/share/java/jedit</Path>   
+            <Path fileType="data">/usr/share/jedit</Path>     
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/jedit.desktop">jedit.desktop</AdditionalFile>
@@ -41,6 +41,13 @@
         </AdditionalFiles>
     </Package>
     <History>
+        <Update release="3">
+            <Date>2015-07-23</Date>
+            <Version>5.3.0</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2014-05-23</Date>
             <Version>5.3.0</Version>

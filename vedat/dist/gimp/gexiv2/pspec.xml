@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gexiv2</Name>
+        <Homepage>https://wiki.gnome.org/gexiv2</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Summary>GObject-based wrapper around the Exiv2 library</Summary>
+        <Description>GObject-based wrapper around the Exiv2 library.</Description>
+        <Archive sha1sum="b8298434bd7b14dd41d46cf4a8eec31c87ec0b2a" type="targz">https://github.com/GNOME/gexiv2/archive/gexiv2-0.10.3.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python-pygobject3-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gexiv2</Name>
+        <IsA>library</IsA>
+        <RuntimeDependencies>
+            <Dependency>python-pygobject3</Dependency>
+            <Dependency>python3</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/vala</Path>
+            <Path fileType="doc">/usr/share/gir*</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>gexiv2-devel</Name>
+        <IsA>library</IsA>
+        <Summary>Development header and documents for gexiv2</Summary>
+        <RuntimeDependencies>
+            <Dependency>gexiv2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+
+    <History>
+        <Update release="1">
+            <Date>2015-05-27</Date>
+            <Version>0.10.3</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
