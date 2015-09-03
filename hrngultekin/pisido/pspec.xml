@@ -16,23 +16,30 @@
             <Dependency>qt-devel</Dependency>
             <Dependency>qtermwidget-devel</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="96992d447d2d6960b4efe5b45ffd36f83d9fceaa" type="targz">https://github.com/hrngultekin/PisiDo/raw/master/pisido-2.2.0.tar.gz</Archive>
+        <Archive sha1sum="6f1a2dec2086e41883d69f3c4552bf95dc0e4f37" type="targz">https://github.com/hrngultekin/PisiDo/raw/master/pisido-2.3.0.tar.gz</Archive>
     </Source>
     <Package>
         <Name>pisido</Name>
         <Summary>A pisi packager from GUI</Summary>
-        <RuntimeDependencies>
-            <Dependency>qscintilla2</Dependency>
-            <Dependency>qt</Dependency>
-            <Dependency>qtermwidget</Dependency>
-        </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="data">/usr/share</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="all">/</Path>
         </Files>
     </Package>
     <History>
+        <Update release="9">
+            <Date>2015-09-03</Date>
+            <Version>2.3.0</Version>
+            <Comment>version bump</Comment>
+            <Name>Harun Gültekin</Name>
+            <Email>hrngultekin@gmail.com</Email>
+        </Update>
+        <Update release="8">
+            <Date>2015-08-26</Date>
+            <Version>2.2.1</Version>
+            <Comment>rebuild</Comment>
+            <Name>Harun Gültekin</Name>
+            <Email>hrngultekin@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2015-08-01</Date>
             <Version>2.2.0</Version>
@@ -85,4 +92,4 @@
     </History>
 </PISI>
 
-<!-- By PiSiDo 2.2.0 -->
+<!-- By PiSiDo 2.3.0 -->
