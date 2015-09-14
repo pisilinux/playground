@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>wing</Name>
+        <Homepage>http://www.wingware.com</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>None</License>
+        <License>None</License>
+        <IsA>app:gui</IsA>
+        <Summary>Wing IDE Professional is the full-featured Python IDE.</Summary>
+        <Description>Wing IDE Professional is the full-featured Python IDE for professional programmers.</Description>
+        <Archive sha1sum="a3458d2323152ef940373054b51ff6bbcdd6b351" type="targz">http://wingware.com/pub/wingide-101/5.1.7/wingide-101-5.1.7-1-x86_64-linux.tar.gz</Archive> 
+        <BuildDependencies>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libSM-devel</Dependency>
+            <Dependency>libICE-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>sqlite-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>freetype-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>wing</Name>
+        <Summary>Wing IDE Professional is the full-featured Python IDE.</Summary>
+        <RuntimeDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libSM</Dependency>
+            <Dependency>libICE</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>sqlite</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>libXrender</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/wing</Path>
+            <Path fileType="data">/opt/wingide</Path>
+            <Path fileType="data">/usr/share/applications/wing.desktop</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/wing.desktop">wing.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+   
+    <History>
+        <Update release="1">
+            <Date>2015-08-25</Date>
+            <Version>5.1.7</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
