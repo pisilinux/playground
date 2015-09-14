@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>marble</Name>
+        <Homepage>http://edu.kde.org/applications/all/marble</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>marble</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Virtual globe and eorld atlas</Summary>
+        <Description>Marble is a virtual globe and world atlas that you can use to learn more about the Earth.</Description>
+        <Archive sha1sum="f8adb053e0b9ff6d0a2bc95593ed38afaae2a4f9" type="tarxz">http://download.kde.org/stable/applications/15.08.0/src/marble-15.08.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qt5-webkit-devel</Dependency>
+            <Dependency>qt5-script-devel</Dependency>
+            <Dependency>qt5-svg-devel</Dependency>
+            <Dependency>qt5-sql-odbc</Dependency>
+            <Dependency>qt5-sql-mysql</Dependency>
+            <Dependency>qt5-sql-sqlite</Dependency>
+            <Dependency>qt5-phonon-devel</Dependency>
+            <Dependency>qt5-sql-postgresql</Dependency>
+            <Dependency>kdoctools-devel</Dependency>
+            <Dependency>qt5-serialport-devel</Dependency>
+            <Dependency>kio-devel</Dependency>
+            <Dependency>kwallet-devel</Dependency>
+            <Dependency>knewstuff-devel</Dependency>
+            <Dependency>kparts-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>krunner-devel</Dependency>
+            <Dependency>docbook-xml</Dependency>
+            <Dependency>docbook-xsl</Dependency>
+            <Dependency>kcoreaddons-devel</Dependency>
+            <Dependency>kconfigwidgets-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>kwidgetsaddons-devel</Dependency>
+            <Dependency>qt5-location-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>marble</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>kio</Dependency>
+            <Dependency>ki18n</Dependency>
+            <Dependency>kparts</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>kconfig</Dependency>
+            <Dependency>krunner</Dependency>
+            <Dependency>kwallet</Dependency>
+            <Dependency>kxmlgui</Dependency>
+            <Dependency>qt5-svg</Dependency>
+            <Dependency>knewstuff</Dependency>
+            <Dependency>qt5-phonon</Dependency>
+            <Dependency>qt5-script</Dependency>
+            <Dependency>qt5-webkit</Dependency>
+            <Dependency>kcoreaddons</Dependency>
+            <Dependency>kconfigwidgets</Dependency>
+            <Dependency>kwidgetsaddons</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/config.kcfg</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/marble</Path>
+            <Path fileType="data">/usr/share/mime/packages/geo.xml</Path>
+            <Path fileType="data">/usr/share/appdata</Path>
+            <Path fileType="data">/usr/share/kservices5</Path>
+            <Path fileType="data">/usr/share/kxmlgui5</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>marble-devel</Name>
+        <Summary>Development files for marble</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">marble</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-09-19</Date>
+            <Version>1.11.80</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>       
+    </History>
+</PISI>
