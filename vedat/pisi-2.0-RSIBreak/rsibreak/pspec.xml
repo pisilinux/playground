@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>rsibreak</Name>
+        <Homepage>https://userbase.kde.org/RSIBreak</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>rsibreak</Icon>
+        <IsA>library</IsA>
+        <Summary>RSIBreak takes care of your health</Summary>
+        <Description>RSIBreak takes care of your health and regularly breaks your work to avoid repetitive strain injury (RSI)</Description>
+        <Archive sha1sum="4b870b82fcc0b8d393655b5550237bad8f5d5e51" type="tarxz">http://download.kde.org/stable/rsibreak/0.12/rsibreak-0.12.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+            <Dependency>kconfigwidgets-devel</Dependency>
+            <Dependency>kdbusaddons-devel</Dependency>
+            <Dependency>kdoctools-devel</Dependency>
+            <Dependency>kiconthemes-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>kidletime-devel</Dependency>
+            <Dependency>knotifyconfig-devel</Dependency>
+            <Dependency>ktextwidgets-devel</Dependency>
+            <Dependency>kxmlgui-devel</Dependency>
+            <Dependency>kwindowsystem-devel</Dependency>
+            <Dependency>docbook-xml</Dependency>
+            <Dependency>docbook-xsl</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>rsibreak</Name>
+        <IsA>app:gui</IsA>
+        <RuntimeDependencies>
+            <Dependency>ki18n</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>kconfig</Dependency>
+            <Dependency>kxmlgui</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>kidletime</Dependency>
+            <Dependency>kcoreaddons</Dependency>
+            <Dependency>kdbusaddons</Dependency>
+            <Dependency>kiconthemes</Dependency>
+            <Dependency>ktextwidgets</Dependency>
+            <Dependency>knotifyconfig</Dependency>
+            <Dependency>kwindowsystem</Dependency>
+            <Dependency>kconfigwidgets</Dependency>
+            <Dependency>knotifications</Dependency>
+            <Dependency>kwidgetsaddons</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/knotifications5</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/dbus-1/interfaces</Path>
+            <Path fileType="data">/etc/xdg/autostart</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2015-09-19</Date>
+            <Version>0.12</Version>
+            <Comment>First release</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>       
+    </History>
+</PISI>
