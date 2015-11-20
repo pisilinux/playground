@@ -1,0 +1,123 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>sddm-kcm</Name>
+        <Homepage>https://projects.kde.org/projects/kde/workspace/sddm-kcm</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>KDE5 Config Module for SDDM</Summary>
+        <Description>KDE5 Config Module for SDDM</Description>
+        <Archive sha1sum="edd55222cb40c280c390a531e5bf1130c2f7c841" type="tarxz">mirrors://kde/unstable/plasma/5.4.95/sddm-kcm-5.4.95.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>kcoreaddons-devel</Dependency>
+            <Dependency>kdoctools-devel</Dependency>
+            <Dependency>kconfigwidgets-devel</Dependency>
+            <Dependency>kauth-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>kxmlgui-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>kio-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>docutils</Dependency>
+            <Dependency>libXcursor-devel</Dependency>
+            <Dependency>xcb-util-image-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>sddm-kcm</Name>
+        <RuntimeDependencies>
+            <Dependency>kcoreaddons</Dependency>
+            <Dependency>sddm</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>kconfigwidgets</Dependency>
+            <Dependency>kauth</Dependency>
+            <!--<Dependency>kxmlgui</Dependency>-->
+            <Dependency>ki18n</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>kio</Dependency>
+            <Dependency>libXcursor</Dependency>
+            <Dependency>kconfig</Dependency>
+            <Dependency>qt5-x11extras</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+            <!--<Dependency>xorg-server-xephyr</Dependency>-->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/dbus-1/system.d</Path>
+            <Path fileType="data">/usr/share/dbus-1/system-services</Path>
+            <Path fileType="data">/usr/share/kservices5</Path>
+            <Path fileType="data">/usr/share/</Path>
+            <Path fileType="data">/usr/share/polkit-1/actions</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins</Path>
+            <Path fileType="executable">/usr/lib/libexec/kauth</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="7">
+            <Date>2015-11-20</Date>
+            <Version>5.4.95</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2015-11-16</Date>
+            <Version>5.4.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2015-10-07</Date>
+            <Version>5.4.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2015-09-12</Date>
+            <Version>5.4.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2015-08-25</Date>
+            <Version>5.4.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2015-07-03</Date>
+            <Version>5.3.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2015-06-14</Date>
+            <Version>5.3.1</Version>
+            <Comment>First Release.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

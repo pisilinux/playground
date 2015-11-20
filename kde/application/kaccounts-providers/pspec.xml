@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kaccounts-providers</Name>
+        <Homepage>https://projects.kde.org/projects/playground/base/kde-accounts/kaccounts-providers</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app</IsA>
+        <Summary>Small system to administer web accounts for the sites and services across the KDE desktop, including: Google, Facebook, Owncloud, IMAP, 
+Jabber and others</Summary>
+        <Description>Small system to administer web accounts for the sites and services across the KDE desktop, including: Google, Facebook, Owncloud, IMAP, 
+Jabber and others</Description>
+        <Archive sha1sum="c26e76408d8f3d6bbb051a83cbdea7bc168f1b07" type="tarxz">http://download.kde.org/unstable/applications/15.11.80/src/kaccounts-providers-15.11.80.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>kaccounts-integration-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>kcoreaddons-devel</Dependency>
+            <Dependency>libaccounts-qt5-devel</Dependency>
+            <Dependency>libaccounts-glib-devel</Dependency>
+            <Dependency>signon-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>kaccounts-providers</Name>
+        <RuntimeDependencies>
+            <Dependency>kaccounts-integration</Dependency>
+            <Dependency>libaccounts-glib</Dependency>
+        </RuntimeDependencies>
+        <Summary>Small system to administer web accounts for the sites and services across the KDE desktop, including: Google, Facebook, Owncloud, IMAP, 
+Jabber and others</Summary>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2015-11-20</Date>
+            <Version>15.11.80</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2015-11-15</Date>
+            <Version>15.08.3</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
