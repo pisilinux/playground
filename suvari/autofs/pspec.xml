@@ -12,56 +12,94 @@
         <IsA>app:console</IsA>
         <Summary>A tool for automatically mounting and unmounting filesystems</Summary>
         <Description>autofs is a daemon which automatically mounts filesystems when you use them, and unmounts them later when you are not using them.</Description>
-        <Archive sha1sum="682d94538c96049bb6b9db8725fb60ded4d0dd7f" type="tarxz">ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-5.0.7.tar.xz</Archive>
+        <Archive sha1sum="69e567b0f424aa56cd57e2b4e12d27cef291a268" type="tarxz">ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-5.1.1.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>libtirpc</Dependency>
-            <Dependency>nfs-utils</Dependency>
-            <Dependency>cyrus-sasl</Dependency>
+<!--             <Dependency>libtirpc</Dependency> -->
+<!--             <Dependency>nfs-utils</Dependency> -->
+            <Dependency>cyrus-sasl-devel</Dependency>
             <Dependency>mit-kerberos</Dependency>
             <Dependency>openldap-client</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>e2fsprogs-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">autofs-5.0.6-fix-recursive-mount-deadlock.patch</Patch>
-            <Patch level="1">autofs-5.0.6-increase-file-map-read-buffer-size.patch</Patch>
-            <Patch level="1">mandriva/autofs-5.0.4-link-with-kerberos-lib.patch</Patch>
-            <Patch level="1">autofs-5.0.7-after-nss-lookup.patch</Patch>
-            <Patch level="1">autofs-5.0.6-separate-config-files.patch</Patch>
-            <Patch level="1">autofs-5.0.4-rename-configuration-file.patch</Patch>
-            <Patch level="1">autofs-5.0.7-dont-wait-forever-to-restart.patch</Patch>
-            <Patch level="1">autofs-5.0.7-allow-non-root-user-to-check-status.patch</Patch>
-            <Patch level="1">autofs-5.0.7-configure-allow-cross-compilation-update.patch</Patch>
-            <Patch level="1">autofs-5.0.7-configure-in-allow-cross-compilation.patch</Patch>
-            <Patch level="1">autofs-5.0.7-fix-ipv6-proximity-calculation.patch</Patch>
-            <Patch level="1">autofs-5.0.7-fix-nobind-sun-escaped-map-entries.patch</Patch>
-            <Patch level="1">autofs-5.0.7-fix-null-map-entry-order-handling.patch</Patch>
-            <Patch level="1">autofs-5.0.7-fix-parse-buffer-initialization.patch</Patch>
-            <Patch level="1">autofs-5.0.7-fix-typo-in-automount-8.patch</Patch>
-            <Patch level="1">autofs-5.0.7-fix-use-cache-entry-after-free-mistake.patch</Patch>
-            <Patch level="1">autofs-5.0.7-handle-new-location-of-systemd.patch</Patch>
-            <Patch level="1">autofs-5.0.7-include-usage-in-usage-message.patch</Patch>
-            <!--<Patch level="0">makefile.patch</Patch>-->
-            <Patch level="1">disable-default-cd-mount.patch</Patch>
-	    <Patch level="1">autofs-5.0.7-mount-sloppy.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-fix-gcc5-complaints.patch</Patch>
+            <Patch level="1">autofs-5.1.1-update-libtirpc-workaround-for-new-soname.patch</Patch>
+            <Patch level="1">autofs-5.1.1-revert-fix-libtirpc-name-clash.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-left-mount-count-return.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-return-handling-in-sss-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-move-query-dn-calculation-from-do_bind-to-do_connect.patch</Patch>
+            <Patch level="1">autofs-5.1.1-make-do_connect-return-a-status.patch</Patch>
+            <Patch level="1">autofs-5.1.1-make-connect_to_server-return-a-status.patch</Patch>
+            <Patch level="1">autofs-5.1.1-make-find_dc_server-return-a-status.patch</Patch>
+            <Patch level="1">autofs-5.1.1-make-find_server-return-a-status.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-return-handling-of-do_reconnect-in-ldap-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-rwlock-unlock-crash.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-config-old-name-lookup.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-error-handling-on-ldap-bind-fail.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-direct-mount-stale-instance-flag-reset.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-direct-map-expire-not-set-for-initial-empty-map.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-missing-source-sss-in-multi-map-lookup.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-update_hosts_mounts-return.patch</Patch>
+            <Patch level="1">autofs-5.1.1-move-check_nss_result-to-nsswitch_c.patch</Patch>
+            <Patch level="1">autofs-5.1.1-make-open_lookup-return-nss-status.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-nsswitch-handling-when-opening-multi-map.patch</Patch>
+            <Patch level="1">autofs-5.1.1-add-reinit-entry-point-to-modules.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-parse-modules.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-dir-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-file-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-hesiod-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-hosts-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-ldap-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-nisplus-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-program-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-sss-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-yp-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-add-type-to-struct-lookup_mod.patch</Patch>
+            <Patch level="1">autofs-5.1.1-factor-out-free-multi-map-context.patch</Patch>
+            <Patch level="1">autofs-5.1.1-factor-out-alloc-multi-map-context.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-map-format-check-in-nss_open_lookup-multi-map-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-implement-reinit-in-multi-lookup-module.patch</Patch>
+            <Patch level="1">autofs-5.1.1-change-lookup-to-use-reinit-instead-of-reopen.patch</Patch>
+            <Patch level="1">autofs-5.1.1-update-map_hash_table_size-description.patch</Patch>
+            <Patch level="1">autofs-5.1.1-add-configuration-option-to-use-hostname-in-mounts.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-out-of-order-call-in-program-map-lookup.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-error-handling-of-is_mounted.patch</Patch>
+            <Patch level="1">autofs-5.1.1-Add-a-mode-option-for-master-map-entries.patch</Patch>
+            <Patch level="1">autofs-5.1.1-define-monotonic-clock-helper-functions.patch</Patch>
+            <Patch level="1">autofs-5.1.1-use-monotonic-clock-for-alarm-thread-condition-wait.patch</Patch>
+            <Patch level="1">autofs-5.1.1-define-pending-condition-init-helper-function.patch</Patch>
+            <Patch level="1">autofs-5.1.1-use-monotonic-clock-for-direct-mount-condition.patch</Patch>
+            <Patch level="1">autofs-5.1.1-use-monotonic-clock-for-indirect-mount-condition.patch</Patch>
+            <Patch level="1">autofs-5.1.1-change-remaining-gettimeofday-to-use-clock_gettime.patch</Patch>
+            <Patch level="1">autofs-5.1.1-change-time-to-use-monotonic_clock.patch</Patch>
+            <Patch level="1">autofs-5.1.1-remove-unused-function-elapsed.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-unbind-external-mech.patch</Patch>
+            <Patch level="1">autofs-5.1.1-fix-sasl-connection-concurrancy-problem.patch</Patch>
         </Patches>
     </Source>
 
     <Package>
         <Name>autofs</Name>
         <RuntimeDependencies>
-            <Dependency>libtirpc</Dependency>
-            <Dependency>nfs-utils</Dependency>
+<!--             <Dependency>libtirpc</Dependency> -->
+<!--             <Dependency>nfs-utils</Dependency> -->
             <Dependency>cyrus-sasl</Dependency>
             <Dependency>mit-kerberos</Dependency>
             <Dependency>openldap-client</Dependency>
+            <Dependency>kmod</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>e2fsprogs</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
-            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="data">/run</Path>
-            <Path fileType="library">/lib/systemd/system/autofs.service</Path>
+<!--             <Path fileType="library">/lib/systemd/system/autofs.service</Path> -->
         </Files>
         <Provides>
             <COMAR script="autofs.py">System.Service</COMAR>
@@ -69,6 +107,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2015-12-23</Date>
+            <Version>5.1.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvarice@gmail.com</Email>
+        </Update>
         <Update release="3">
             <Date>2014-01-11</Date>
             <Version>5.0.7</Version>
