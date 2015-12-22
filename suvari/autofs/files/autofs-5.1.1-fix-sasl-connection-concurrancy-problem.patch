@@ -1,0 +1,836 @@
+autofs-5.1.1 - fix sasl connection concurrancy problem
+
+From: Ian Kent <raven@themaw.net>
+
+After using the contributed Cyrus SASL code in autofs for years I've
+finally looked at the Cyrus SASL C API RFC only to find that the
+library isn't thread safe unless a connection context per thread is
+used, similar to the LDAP library.
+
+To be fair this code originated prior to the threaded version of
+autofs so it's my bad I didn't check.
+
+But having seen this I have no choice but to make the sasl context
+per thread not per autofs lookup context.
+
+Also extend the mutual exclusion even further.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG             |    1 
+ include/lookup_ldap.h |   16 +++-
+ modules/cyrus-sasl.c  |   46 ++++++-----
+ modules/lookup_ldap.c |  198 +++++++++++++++++++++++++------------------------
+ 4 files changed, 136 insertions(+), 125 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 83412a3..663b867 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -32,6 +32,7 @@
+ - change time() to use monotonic_clock().
+ - remove unused function elapsed().
+ - fix unbind sasl external mech.
++- fix sasl connection concurrancy problem.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/include/lookup_ldap.h b/include/lookup_ldap.h
+index be4bc1e..3a7aba7 100644
+--- a/include/lookup_ldap.h
++++ b/include/lookup_ldap.h
+@@ -34,6 +34,13 @@ struct ldap_searchdn {
+ 	struct ldap_searchdn *next;
+ };
+ 
++struct ldap_conn {
++	LDAP *ldap;
++#ifdef WITH_SASL
++	sasl_conn_t *sasl_conn;
++#endif
++};
++
+ struct lookup_context {
+ 	char *mapname;
+ 	unsigned int format;
+@@ -86,7 +93,6 @@ struct lookup_context {
+ 	/* Kerberos */
+ 	krb5_context krb5ctxt;
+ 	krb5_ccache  krb5_ccache;
+-	sasl_conn_t  *sasl_conn;
+ 	/* SASL external */
+ 	char	     *extern_cert;
+ 	char	     *extern_key;
+@@ -113,16 +119,16 @@ struct lookup_context {
+ 
+ /* lookup_ldap.c */
+ LDAP *init_ldap_connection(unsigned logopt, const char *uri, struct lookup_context *ctxt);
+-int unbind_ldap_connection(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt);
++int unbind_ldap_connection(unsigned logopt, struct ldap_conn *conn, struct lookup_context *ctxt);
+ int authtype_requires_creds(const char *authtype);
+ 
+ #ifdef WITH_SASL
+ /* cyrus-sasl.c */
+ int autofs_sasl_client_init(unsigned logopt);
+ int autofs_sasl_init(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt);
+-int autofs_sasl_bind(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt);
+-void autofs_sasl_unbind(LDAP *ldap, struct lookup_context *ctxt);
+-void autofs_sasl_dispose(LDAP *ldap, struct lookup_context *ctxt);
++int autofs_sasl_bind(unsigned logopt, struct ldap_conn *conn, struct lookup_context *ctxt);
++void autofs_sasl_unbind(struct ldap_conn *conn, struct lookup_context *ctxt);
++void autofs_sasl_dispose(struct ldap_conn *conn, struct lookup_context *ctxt);
+ void autofs_sasl_done(void);
+ /* cyrus-sasl-extern */
+ int do_sasl_extern(LDAP *ldap, struct lookup_context *ctxt);
+diff --git a/modules/cyrus-sasl.c b/modules/cyrus-sasl.c
+index c5e72f7..11a1178 100644
+--- a/modules/cyrus-sasl.c
++++ b/modules/cyrus-sasl.c
+@@ -885,16 +885,19 @@ sasl_choose_mech(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt)
+  *  Routine called when unbinding an ldap connection.
+  */
+ void
+-autofs_sasl_unbind(LDAP *ldap, struct lookup_context *ctxt)
++autofs_sasl_unbind(struct ldap_conn *conn, struct lookup_context *ctxt)
+ {
+ 	if (ctxt->sasl_mech && !strncmp(ctxt->sasl_mech, "EXTERNAL", 8)) {
+-		ldap_unbind_s(ldap);
++		if (conn->ldap) {
++			ldap_unbind_s(conn->ldap);
++			conn->ldap = NULL;
++		}
+ 		return;
+ 	}
+ 
+-	if (ctxt->sasl_conn) {
+-		sasl_dispose(&ctxt->sasl_conn);
+-		ctxt->sasl_conn = NULL;
++	if (conn->sasl_conn) {
++		sasl_dispose(&conn->sasl_conn);
++		conn->sasl_conn = NULL;
+ 	}
+ }
+ 
+@@ -908,13 +911,10 @@ autofs_sasl_unbind(LDAP *ldap, struct lookup_context *ctxt)
+  * -1  -  Failure
+  */
+ int
+-autofs_sasl_bind(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt)
++autofs_sasl_bind(unsigned logopt,
++		 struct ldap_conn *conn, struct lookup_context *ctxt)
+ {
+-	sasl_conn_t *conn = NULL;
+-
+-	/* If we already have a connection use it */
+-	if (ctxt->sasl_conn)
+-		return 0;
++	sasl_conn_t *sasl_conn = NULL;
+ 
+ 	if (ctxt->sasl_mech && !strncmp(ctxt->sasl_mech, "EXTERNAL", 8)) {
+ 		int result;
+@@ -923,7 +923,7 @@ autofs_sasl_bind(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt)
+ 		      "Attempting sasl bind with mechanism %s",
+ 		      ctxt->sasl_mech);
+ 
+-		result = do_sasl_extern(ldap, ctxt);
++		result = do_sasl_extern(conn->ldap, ctxt);
+ 		if (result)
+ 			debug(logopt,
+ 			      "Failed to authenticate with mech %s",
+@@ -953,14 +953,16 @@ autofs_sasl_bind(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt)
+ 	 *  auth mechanism.
+ 	 */
+ 	if (ctxt->sasl_mech)
+-		conn = sasl_bind_mech(logopt, ldap, ctxt, ctxt->sasl_mech);
++		sasl_conn = sasl_bind_mech(logopt,
++					   conn->ldap, ctxt, ctxt->sasl_mech);
+ 	else
+-		conn = sasl_choose_mech(logopt, ldap, ctxt);
++		sasl_conn = sasl_choose_mech(logopt, conn->ldap, ctxt);
+ 
+ 	if (!conn)
+ 		return -1;
+ 
+-	ctxt->sasl_conn = conn;
++	conn->sasl_conn = sasl_conn;
++
+ 	return 0;
+ }
+ 
+@@ -968,19 +970,21 @@ autofs_sasl_bind(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt)
+  *  Destructor routine.  This should be called when finished with an ldap
+  *  session.
+  */
+-void autofs_sasl_dispose(LDAP *ldap, struct lookup_context *ctxt)
++void autofs_sasl_dispose(struct ldap_conn *conn, struct lookup_context *ctxt)
+ {
+ 	int status, ret;
+ 
+ 	if (ctxt->sasl_mech && !strncmp(ctxt->sasl_mech, "EXTERNAL", 8)) {
+-		if (ldap)
+-			ldap_unbind_s(ldap);
++		if (conn && conn->ldap) {
++			ldap_unbind_s(conn->ldap);
++			conn->ldap = NULL;
++		}
+ 		return;
+ 	}
+ 
+-	if (ctxt->sasl_conn) {
+-		sasl_dispose(&ctxt->sasl_conn);
+-		ctxt->sasl_conn = NULL;
++	if (conn && conn->sasl_conn) {
++		sasl_dispose(&conn->sasl_conn);
++		conn->sasl_conn = NULL;
+ 	}
+ 
+ 	if (ctxt->kinit_successful) {
+diff --git a/modules/lookup_ldap.c b/modules/lookup_ldap.c
+index 7f50c34..959890a 100644
+--- a/modules/lookup_ldap.c
++++ b/modules/lookup_ldap.c
+@@ -214,7 +214,9 @@ int bind_ldap_simple(unsigned logopt, LDAP *ldap, const char *uri, struct lookup
+ 	return 0;
+ }
+ 
+-int __unbind_ldap_connection(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt)
++int __unbind_ldap_connection(unsigned logopt,
++			     struct ldap_conn *conn,
++			     struct lookup_context *ctxt)
+ {
+ 	int rv = LDAP_SUCCESS;
+ 
+@@ -222,30 +224,35 @@ int __unbind_ldap_connection(unsigned logopt, LDAP *ldap, struct lookup_context
+ 		ctxt->use_tls = LDAP_TLS_INIT;
+ #ifdef WITH_SASL
+ 	if (ctxt->auth_required & LDAP_NEED_AUTH)
+-		autofs_sasl_unbind(ldap, ctxt);
+-	else
+-		rv = ldap_unbind_ext(ldap, NULL, NULL);
+-#else
+-	rv = ldap_unbind_ext(ldap, NULL, NULL);
++		autofs_sasl_unbind(conn, ctxt);
++	/* No, sasl_dispose does not release the ldap connection
++	 * unless it's using sasl EXTERNAL
++	 */
+ #endif
++	if (conn->ldap) {
++		rv = ldap_unbind_ext(conn->ldap, NULL, NULL);
++		conn->ldap = NULL;
++	}
+ 	if (rv != LDAP_SUCCESS)
+ 		error(logopt, "unbind failed: %s", ldap_err2string(rv));
+ 
+ 	return rv;
+ }
+ 
+-int unbind_ldap_connection(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt)
++int unbind_ldap_connection(unsigned logopt,
++			   struct ldap_conn *conn,
++			   struct lookup_context *ctxt)
+ {
+ 	int rv;
+ 
+ 	ldapinit_mutex_lock();
+-	rv = __unbind_ldap_connection(logopt, ldap, ctxt);
++	rv = __unbind_ldap_connection(logopt, conn, ctxt);
+ 	ldapinit_mutex_unlock();
+ 
+ 	return rv;
+ }
+ 
+-LDAP *__init_ldap_connection(unsigned logopt, const char *uri, struct lookup_context *ctxt)
++LDAP *init_ldap_connection(unsigned logopt, const char *uri, struct lookup_context *ctxt)
+ {
+ 	LDAP *ldap = NULL;
+ 	struct timeval timeout     = { ctxt->timeout, 0 };
+@@ -313,7 +320,7 @@ LDAP *__init_ldap_connection(unsigned logopt, const char *uri, struct lookup_con
+ 				return NULL;
+ 			}
+ 			ctxt->use_tls = LDAP_TLS_DONT_USE;
+-			ldap = __init_ldap_connection(logopt, uri, ctxt);
++			ldap = init_ldap_connection(logopt, uri, ctxt);
+ 			if (ldap)
+ 				ctxt->use_tls = LDAP_TLS_INIT;
+ 			return ldap;
+@@ -324,17 +331,6 @@ LDAP *__init_ldap_connection(unsigned logopt, const char *uri, struct lookup_con
+ 	return ldap;
+ }
+ 
+-LDAP *init_ldap_connection(unsigned logopt, const char *uri, struct lookup_context *ctxt)
+-{
+-	LDAP *ldap;
+-
+-	ldapinit_mutex_lock();
+-	ldap = __init_ldap_connection(logopt, uri, ctxt);
+-	ldapinit_mutex_unlock();
+-
+-	return ldap;
+-}
+-
+ static int get_query_dn(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt, const char *class, const char *key)
+ {
+ 	char buf[MAX_ERR_BUF];
+@@ -574,33 +570,32 @@ static int find_query_dn(unsigned logopt, LDAP *ldap, struct lookup_context *ctx
+ 	return 0;
+ }
+ 
+-static int do_bind(unsigned logopt, LDAP *ldap, const char *uri, struct lookup_context *ctxt)
++static int do_bind(unsigned logopt, struct ldap_conn *conn,
++		   const char *uri, struct lookup_context *ctxt)
+ {
+ 	char *host = NULL, *nhost;
+ 	int rv;
+ 
+-	ldapinit_mutex_lock();
+ #ifdef WITH_SASL
+ 	debug(logopt, MODPREFIX "auth_required: %d, sasl_mech %s",
+ 	      ctxt->auth_required, ctxt->sasl_mech);
+ 
+ 	if (ctxt->auth_required & LDAP_NEED_AUTH) {
+-		rv = autofs_sasl_bind(logopt, ldap, ctxt);
++		rv = autofs_sasl_bind(logopt, conn, ctxt);
+ 		debug(logopt, MODPREFIX "autofs_sasl_bind returned %d", rv);
+ 	} else {
+-		rv = bind_ldap_simple(logopt, ldap, uri, ctxt);
++		rv = bind_ldap_simple(logopt, conn->ldap, uri, ctxt);
+ 		debug(logopt, MODPREFIX "ldap simple bind returned %d", rv);
+ 	}
+ #else
+-	rv = bind_ldap_simple(logopt, ldap, uri, ctxt);
++	rv = bind_ldap_simple(logopt, conn->ldap, uri, ctxt);
+ 	debug(logopt, MODPREFIX "ldap simple bind returned %d", rv);
+ #endif
+-	ldapinit_mutex_unlock();
+ 
+ 	if (rv != 0)
+ 		return 0;
+ 
+-	rv = ldap_get_option(ldap, LDAP_OPT_HOST_NAME, &host);
++	rv = ldap_get_option(conn->ldap, LDAP_OPT_HOST_NAME, &host);
+         if (rv != LDAP_SUCCESS || !host) {
+ 		debug(logopt, "failed to get hostname for connection");
+ 		return 0;
+@@ -634,15 +629,12 @@ static int do_bind(unsigned logopt, LDAP *ldap, const char *uri, struct lookup_c
+ 	return 1;
+ }
+ 
+-static int do_connect(unsigned logopt, LDAP **ldap,
++static int do_connect(unsigned logopt, struct ldap_conn *conn,
+ 		      const char *uri, struct lookup_context *ctxt)
+ {
+ 	char *cur_host = NULL;
+-	LDAP *handle;
+ 	int ret = NSS_STATUS_SUCCESS;
+ 
+-	*ldap = NULL;
+-
+ #ifdef WITH_SASL
+ 	if (ctxt->extern_cert && ctxt->extern_key) {
+ 		set_env(logopt, ENV_LDAPTLS_CERT, ctxt->extern_cert);
+@@ -650,8 +642,8 @@ static int do_connect(unsigned logopt, LDAP **ldap,
+ 	}
+ #endif
+ 
+-	handle = init_ldap_connection(logopt, uri, ctxt);
+-	if (!handle) {
++	conn->ldap = init_ldap_connection(logopt, uri, ctxt);
++	if (!conn->ldap) {
+ 		ret = NSS_STATUS_UNAVAIL;
+ 		goto out;
+ 	}
+@@ -661,8 +653,8 @@ static int do_connect(unsigned logopt, LDAP **ldap,
+ 		cur_host = ctxt->cur_host;
+ 	uris_mutex_unlock(ctxt);
+ 
+-	if (!do_bind(logopt, handle, uri, ctxt)) {
+-		unbind_ldap_connection(logopt, handle, ctxt);
++	if (!do_bind(logopt, conn, uri, ctxt)) {
++		__unbind_ldap_connection(logopt, conn, ctxt);
+ 		ret = NSS_STATUS_UNAVAIL;
+ 		goto out;
+ 	}
+@@ -673,7 +665,6 @@ static int do_connect(unsigned logopt, LDAP **ldap,
+ 	uris_mutex_lock(ctxt);
+ 	if (ctxt->schema && ctxt->qdn && (cur_host == ctxt->cur_host)) {
+ 		uris_mutex_unlock(ctxt);
+-		*ldap = handle;
+ 		goto out;
+ 	}
+ 	uris_mutex_unlock(ctxt);
+@@ -684,8 +675,8 @@ static int do_connect(unsigned logopt, LDAP **ldap,
+ 	 * base dn for searches.
+ 	 */
+ 	if (!ctxt->schema) {
+-		if (!find_query_dn(logopt, handle, ctxt)) {
+-			unbind_ldap_connection(logopt, handle, ctxt);
++		if (!find_query_dn(logopt, conn->ldap, ctxt)) {
++			__unbind_ldap_connection(logopt, conn, ctxt);
+ 			ret = NSS_STATUS_NOTFOUND;
+ 			warn(logopt,
+ 			      MODPREFIX "failed to find valid query dn");
+@@ -694,21 +685,21 @@ static int do_connect(unsigned logopt, LDAP **ldap,
+ 	} else if (!(ctxt->format & MAP_FLAG_FORMAT_AMD)) {
+ 		const char *class = ctxt->schema->map_class;
+ 		const char *key = ctxt->schema->map_attr;
+-		if (!get_query_dn(logopt, handle, ctxt, class, key)) {
+-			unbind_ldap_connection(logopt, handle, ctxt);
++		if (!get_query_dn(logopt, conn->ldap, ctxt, class, key)) {
++			__unbind_ldap_connection(logopt, conn, ctxt);
+ 			ret = NSS_STATUS_NOTFOUND;
+ 			error(logopt, MODPREFIX "failed to get query dn");
+ 			goto out;
+ 		}
+ 	}
+ 
+-	*ldap = handle;
+ out:
+ 	return ret;
+ }
+ 
+ static unsigned long get_amd_timestamp(struct lookup_context *ctxt)
+ {
++	struct ldap_conn conn;
+ 	LDAP *ldap;
+ 	LDAPMessage *result = NULL, *e;
+ 	char *query;
+@@ -719,9 +710,11 @@ static unsigned long get_amd_timestamp(struct lookup_context *ctxt)
+ 	unsigned long timestamp = 0;
+ 	int rv, l, ql;
+ 
+-	rv = do_connect(LOGOPT_ANY, &ldap, ctxt->server, ctxt);
++	memset(&conn, 0, sizeof(struct ldap_conn));
++	rv = do_connect(LOGOPT_ANY, &conn, ctxt->server, ctxt);
+ 	if (rv != NSS_STATUS_SUCCESS)
+ 		return 0;
++	ldap = conn.ldap;
+ 
+ 	map = amd_timestamp.map_attr;
+ 	class = amd_timestamp.entry_class;
+@@ -758,7 +751,7 @@ static unsigned long get_amd_timestamp(struct lookup_context *ctxt)
+ 	rv = ldap_search_s(ldap, ctxt->base, scope, query, attrs, 0, &result);
+ 	if ((rv != LDAP_SUCCESS) || !result) {
+ 		crit(LOGOPT_ANY, MODPREFIX "timestamp query failed %s", query);
+-		unbind_ldap_connection(LOGOPT_ANY, ldap, ctxt);
++		unbind_ldap_connection(LOGOPT_ANY, &conn, ctxt);
+ 		if (result)
+ 			ldap_msgfree(result);
+ 		free(query);
+@@ -770,7 +763,7 @@ static unsigned long get_amd_timestamp(struct lookup_context *ctxt)
+ 		debug(LOGOPT_ANY,
+ 		     MODPREFIX "got answer, but no entry for timestamp");
+ 		ldap_msgfree(result);
+-		unbind_ldap_connection(LOGOPT_ANY, ldap, ctxt);
++		unbind_ldap_connection(LOGOPT_ANY, &conn, ctxt);
+ 		free(query);
+ 		return CHE_MISSING;
+ 	}
+@@ -821,18 +814,18 @@ next:
+ 	}
+ 
+ 	ldap_msgfree(result);
+-	unbind_ldap_connection(LOGOPT_ANY, ldap, ctxt);
++	unbind_ldap_connection(LOGOPT_ANY, &conn, ctxt);
+ 	free(query);
+ 
+ 	return timestamp;
+ }
+ 
+-static int connect_to_server(unsigned logopt, LDAP **ldap,
++static int connect_to_server(unsigned logopt, struct ldap_conn *conn,
+ 			     const char *uri, struct lookup_context *ctxt)
+ {
+ 	int ret;
+ 
+-	ret = do_connect(logopt, ldap, uri, ctxt);
++	ret = do_connect(logopt, conn, uri, ctxt);
+ 	if (ret != NSS_STATUS_SUCCESS) {
+ 		warn(logopt,
+ 		     MODPREFIX "couldn't connect to server %s",
+@@ -842,7 +835,7 @@ static int connect_to_server(unsigned logopt, LDAP **ldap,
+ 	return ret;
+ }
+ 
+-static int find_dc_server(unsigned logopt, LDAP **ldap,
++static int find_dc_server(unsigned logopt, struct ldap_conn *conn,
+ 			  const char *uri, struct lookup_context *ctxt)
+ {
+ 	char *str, *tok, *ptr = NULL;
+@@ -858,7 +851,7 @@ static int find_dc_server(unsigned logopt, LDAP **ldap,
+ 		int rv;
+ 
+ 		debug(logopt, "trying server uri %s", this);
+-		rv = connect_to_server(logopt, ldap, this, ctxt);
++		rv = connect_to_server(logopt, conn, this, ctxt);
+ 		if (rv == NSS_STATUS_SUCCESS) {
+ 			info(logopt, "connected to uri %s", this);
+ 			free(str);
+@@ -875,7 +868,7 @@ static int find_dc_server(unsigned logopt, LDAP **ldap,
+ }
+ 
+ static int find_server(unsigned logopt,
+-		       LDAP **ldap, struct lookup_context *ctxt)
++		       struct ldap_conn *conn, struct lookup_context *ctxt)
+ {
+ 	struct ldap_uri *this = NULL;
+ 	struct list_head *p, *first;
+@@ -906,7 +899,7 @@ static int find_server(unsigned logopt,
+ 		if (!strstr(this->uri, ":///")) {
+ 			uri = strdup(this->uri);
+ 			debug(logopt, "trying server uri %s", uri);
+-			rv = connect_to_server(logopt, ldap, uri, ctxt);
++			rv = connect_to_server(logopt, conn, uri, ctxt);
+ 			if (rv == NSS_STATUS_SUCCESS) {
+ 				ret = NSS_STATUS_SUCCESS;
+ 				info(logopt, "connected to uri %s", uri);
+@@ -928,7 +921,7 @@ static int find_server(unsigned logopt,
+ 				dclist = tmp;
+ 				uri = strdup(dclist->uri);
+ 			}
+-			rv = find_dc_server(logopt, ldap, uri, ctxt);
++			rv = find_dc_server(logopt, conn, uri, ctxt);
+ 			if (rv == NSS_STATUS_SUCCESS) {
+ 				ret = NSS_STATUS_SUCCESS;
+ 				free(uri);
+@@ -947,7 +940,7 @@ static int find_server(unsigned logopt,
+ 	}
+ 
+ 	uris_mutex_lock(ctxt);
+-	if (ldap)
++	if (conn->ldap)
+ 		ctxt->uri = this;
+ 	if (dclist) {
+ 		if (!ctxt->dclist)
+@@ -965,37 +958,39 @@ static int find_server(unsigned logopt,
+ }
+ 
+ static int do_reconnect(unsigned logopt,
+-			LDAP **ldap, struct lookup_context *ctxt)
++			struct ldap_conn *conn, struct lookup_context *ctxt)
+ {
+ 	int ret = NSS_STATUS_UNAVAIL;
+ 	int dcrv = NSS_STATUS_SUCCESS;
+ 	int rv = NSS_STATUS_SUCCESS;
+ 
++	ldapinit_mutex_lock();
+ 	if (ctxt->server || !ctxt->uris) {
+-		ret = do_connect(logopt, ldap, ctxt->server, ctxt);
++		ret = do_connect(logopt, conn, ctxt->server, ctxt);
+ #ifdef WITH_SASL
+ 		/* Dispose of the sasl authentication connection and try again. */
+ 		if (ctxt->auth_required & LDAP_NEED_AUTH &&
+ 		    ret != NSS_STATUS_SUCCESS && ret != NSS_STATUS_NOTFOUND) {
+-			ldapinit_mutex_lock();
+-			autofs_sasl_dispose(*ldap, ctxt);
+-			ldapinit_mutex_unlock();
+-			ret = connect_to_server(logopt, ldap,
++			autofs_sasl_dispose(conn, ctxt);
++			ret = connect_to_server(logopt, conn,
+ 						ctxt->server, ctxt);
+ 		}
+ #endif
++		ldapinit_mutex_unlock();
+ 		return ret;
+ 	}
+ 
+ 	if (ctxt->dclist) {
+-		dcrv = find_dc_server(logopt, ldap, ctxt->dclist->uri, ctxt);
+-		if (dcrv == NSS_STATUS_SUCCESS)
++		dcrv = find_dc_server(logopt, conn, ctxt->dclist->uri, ctxt);
++		if (dcrv == NSS_STATUS_SUCCESS) {
++			ldapinit_mutex_unlock();
+ 			return dcrv;
++		}
+ 	}
+ 
+ 	uris_mutex_lock(ctxt);
+ 	if (ctxt->dclist) {
+-		if (!ldap || ctxt->dclist->expire < monotonic_time(NULL)) {
++		if (!conn->ldap || ctxt->dclist->expire < monotonic_time(NULL)) {
+ 			free_dclist(ctxt->dclist);
+ 			ctxt->dclist = NULL;
+ 		}
+@@ -1009,7 +1004,7 @@ static int do_reconnect(unsigned logopt,
+ 	if (!ctxt->uri)
+ 		goto find_server;
+ 
+-	rv = do_connect(logopt, ldap, ctxt->uri->uri, ctxt);
++	rv = do_connect(logopt, conn, ctxt->uri->uri, ctxt);
+ #ifdef WITH_SASL
+ 	/*
+ 	 * Dispose of the sasl authentication connection and try the
+@@ -1017,26 +1012,24 @@ static int do_reconnect(unsigned logopt,
+ 	 */
+ 	if (ctxt->auth_required & LDAP_NEED_AUTH &&
+ 	    rv != NSS_STATUS_SUCCESS && rv != NSS_STATUS_NOTFOUND) {
+-		ldapinit_mutex_lock();
+-		autofs_sasl_dispose(*ldap, ctxt);
+-		ldapinit_mutex_unlock();
+-		rv = connect_to_server(logopt, ldap, ctxt->uri->uri, ctxt);
++		autofs_sasl_dispose(conn, ctxt);
++		rv = connect_to_server(logopt, conn, ctxt->uri->uri, ctxt);
+ 	}
+ #endif
+-	if (rv == NSS_STATUS_SUCCESS)
++	if (rv == NSS_STATUS_SUCCESS) {
++		ldapinit_mutex_unlock();
+ 		return rv;
++	}
+ 
+ 	/* Failed to connect, try to find a new server */
+ 
+ find_server:
+ #ifdef WITH_SASL
+-	ldapinit_mutex_lock();
+-	autofs_sasl_dispose(*ldap, ctxt);
+-	ldapinit_mutex_unlock();
++	autofs_sasl_dispose(conn, ctxt);
+ #endif
+ 
+ 	/* Current server failed, try the rest or dc connection */
+-	ret = find_server(logopt, ldap, ctxt);
++	ret = find_server(logopt, conn, ctxt);
+ 	if (ret != NSS_STATUS_SUCCESS) {
+ 		if (ret == NSS_STATUS_NOTFOUND ||
+ 		    dcrv == NSS_STATUS_NOTFOUND ||
+@@ -1044,6 +1037,7 @@ find_server:
+ 			ret = NSS_STATUS_NOTFOUND;
+ 		error(logopt, MODPREFIX "failed to find available server");
+ 	}
++	ldapinit_mutex_unlock();
+ 
+ 	return ret;
+ }
+@@ -1877,11 +1871,6 @@ int lookup_reinit(const char *mapfmt,
+ 
+ 	*context = new;
+ 
+-#ifdef WITH_SASL
+-	ldapinit_mutex_lock();
+-	autofs_sasl_dispose(NULL, ctxt);
+-	ldapinit_mutex_unlock();
+-#endif
+ 	free_context(ctxt);
+ 
+ 	return 0;
+@@ -1893,6 +1882,8 @@ int lookup_read_master(struct master *master, time_t age, void *context)
+ 	unsigned int timeout = master->default_timeout;
+ 	unsigned int logging = master->default_logging;
+ 	unsigned int logopt = master->logopt;
++	struct ldap_conn conn;
++	LDAP *ldap;
+ 	int rv, l, count;
+ 	char buf[MAX_ERR_BUF];
+ 	char parse_buf[PARSE_MAX_BUF];
+@@ -1903,12 +1894,13 @@ int lookup_read_master(struct master *master, time_t age, void *context)
+ 	char **values = NULL;
+ 	char *attrs[3];
+ 	int scope = LDAP_SCOPE_SUBTREE;
+-	LDAP *ldap = NULL;
+ 
+ 	/* Initialize the LDAP context. */
+-	rv = do_reconnect(logopt, &ldap, ctxt);
++	memset(&conn, 0, sizeof(struct ldap_conn));
++	rv = do_reconnect(logopt, &conn, ctxt);
+ 	if (rv)
+ 		return rv;
++	ldap = conn.ldap;
+ 
+ 	class = ctxt->schema->entry_class;
+ 	entry = ctxt->schema->entry_attr;
+@@ -1942,7 +1934,7 @@ int lookup_read_master(struct master *master, time_t age, void *context)
+ 	if ((rv != LDAP_SUCCESS) || !result) {
+ 		error(logopt, MODPREFIX "query failed for %s: %s",
+ 		      query, ldap_err2string(rv));
+-		unbind_ldap_connection(logging, ldap, ctxt);
++		unbind_ldap_connection(logging, &conn, ctxt);
+ 		if (result)
+ 			ldap_msgfree(result);
+ 		free(query);
+@@ -1955,7 +1947,7 @@ int lookup_read_master(struct master *master, time_t age, void *context)
+ 		      MODPREFIX "query succeeded, no matches for %s",
+ 		      query);
+ 		ldap_msgfree(result);
+-		unbind_ldap_connection(logging, ldap, ctxt);
++		unbind_ldap_connection(logging, &conn, ctxt);
+ 		free(query);
+ 		return NSS_STATUS_NOTFOUND;
+ 	} else
+@@ -2076,7 +2068,7 @@ next:
+ 
+ 	/* Clean up. */
+ 	ldap_msgfree(result);
+-	unbind_ldap_connection(logopt, ldap, ctxt);
++	unbind_ldap_connection(logopt, &conn, ctxt);
+ 	free(query);
+ 
+ 	return NSS_STATUS_SUCCESS;
+@@ -2796,6 +2788,7 @@ static int read_one_map(struct autofs_point *ap,
+ 			struct lookup_context *ctxt,
+ 			time_t age, int *result_ldap)
+ {
++	struct ldap_conn conn;
+ 	struct ldap_search_params sp;
+ 	char buf[MAX_ERR_BUF];
+ 	char *class, *info, *entry;
+@@ -2816,10 +2809,11 @@ static int read_one_map(struct autofs_point *ap,
+ 	sp.age = age;
+ 
+ 	/* Initialize the LDAP context. */
+-	sp.ldap = NULL;
+-	rv = do_reconnect(ap->logopt, &sp.ldap, ctxt);
++	memset(&conn, 0, sizeof(struct ldap_conn));
++	rv = do_reconnect(ap->logopt, &conn, ctxt);
+ 	if (rv)
+ 		return rv;
++	sp.ldap = conn.ldap;
+ 
+ 	class = ctxt->schema->entry_class;
+ 	entry = ctxt->schema->entry_attr;
+@@ -2878,7 +2872,7 @@ static int read_one_map(struct autofs_point *ap,
+ 			if (sp.pageSize < 5) {
+ 				debug(ap->logopt, MODPREFIX
+ 				      "result size too small");
+-				unbind_ldap_connection(ap->logopt, sp.ldap, ctxt);
++				unbind_ldap_connection(ap->logopt, &conn, ctxt);
+ 				*result_ldap = rv;
+ 				free(sp.query);
+ 				return NSS_STATUS_UNAVAIL;
+@@ -2887,7 +2881,7 @@ static int read_one_map(struct autofs_point *ap,
+ 		}
+ 
+ 		if (rv != LDAP_SUCCESS || !sp.result) {
+-			unbind_ldap_connection(ap->logopt, sp.ldap, ctxt);
++			unbind_ldap_connection(ap->logopt, &conn, ctxt);
+ 			*result_ldap = rv;
+ 			if (sp.result)
+ 				ldap_msgfree(sp.result);
+@@ -2903,7 +2897,7 @@ static int read_one_map(struct autofs_point *ap,
+ 			rv = do_get_entries(&sp, source, ctxt);
+ 		if (rv != LDAP_SUCCESS) {
+ 			ldap_msgfree(sp.result);
+-			unbind_ldap_connection(ap->logopt, sp.ldap, ctxt);
++			unbind_ldap_connection(ap->logopt, &conn, ctxt);
+ 			*result_ldap = rv;
+ 			if (sp.cookie)
+ 				ber_bvfree(sp.cookie);
+@@ -2916,7 +2910,7 @@ static int read_one_map(struct autofs_point *ap,
+ 
+ 	debug(ap->logopt, MODPREFIX "done updating map");
+ 
+-	unbind_ldap_connection(ap->logopt, sp.ldap, ctxt);
++	unbind_ldap_connection(ap->logopt, &conn, ctxt);
+ 
+ 	source->age = age;
+ 	if (sp.cookie)
+@@ -2959,6 +2953,8 @@ static int lookup_one(struct autofs_point *ap, struct map_source *source,
+ 		char *qKey, int qKey_len, struct lookup_context *ctxt)
+ {
+ 	struct mapent_cache *mc;
++	struct ldap_conn conn;
++	LDAP *ldap;
+ 	int rv, i, l, ql, count;
+ 	char buf[MAX_ERR_BUF];
+ 	time_t age = monotonic_time(NULL);
+@@ -2971,7 +2967,6 @@ static int lookup_one(struct autofs_point *ap, struct map_source *source,
+ 	struct berval **bvValues;
+ 	char *attrs[3];
+ 	int scope = LDAP_SCOPE_SUBTREE;
+-	LDAP *ldap = NULL;
+ 	struct mapent *we;
+ 	unsigned int wild = 0;
+ 	int ret = CHE_MISSING;
+@@ -2984,11 +2979,13 @@ static int lookup_one(struct autofs_point *ap, struct map_source *source,
+ 	}
+ 
+ 	/* Initialize the LDAP context. */
+-	rv = do_reconnect(ap->logopt, &ldap, ctxt);
++	memset(&conn, 0, sizeof(struct ldap_conn));
++	rv = do_reconnect(ap->logopt, &conn, ctxt);
+ 	if (rv == NSS_STATUS_UNAVAIL)
+ 		return CHE_UNAVAIL;
+ 	if (rv == NSS_STATUS_NOTFOUND)
+ 		return ret;
++	ldap = conn.ldap;
+ 
+ 	class = ctxt->schema->entry_class;
+ 	entry = ctxt->schema->entry_attr;
+@@ -3076,7 +3073,7 @@ static int lookup_one(struct autofs_point *ap, struct map_source *source,
+ 
+ 	if ((rv != LDAP_SUCCESS) || !result) {
+ 		crit(ap->logopt, MODPREFIX "query failed for %s", query);
+-		unbind_ldap_connection(ap->logopt, ldap, ctxt);
++		unbind_ldap_connection(ap->logopt, &conn, ctxt);
+ 		if (result)
+ 			ldap_msgfree(result);
+ 		free(query);
+@@ -3091,7 +3088,7 @@ static int lookup_one(struct autofs_point *ap, struct map_source *source,
+ 		debug(ap->logopt,
+ 		     MODPREFIX "got answer, but no entry for %s", query);
+ 		ldap_msgfree(result);
+-		unbind_ldap_connection(ap->logopt, ldap, ctxt);
++		unbind_ldap_connection(ap->logopt, &conn, ctxt);
+ 		free(query);
+ 		return CHE_MISSING;
+ 	}
+@@ -3277,7 +3274,7 @@ next:
+ 	}
+ 
+ 	ldap_msgfree(result);
+-	unbind_ldap_connection(ap->logopt, ldap, ctxt);
++	unbind_ldap_connection(ap->logopt, &conn, ctxt);
+ 
+ 	/* Failed to find wild entry, update cache if needed */
+ 	cache_writelock(mc);
+@@ -3317,7 +3314,8 @@ static int lookup_one_amd(struct autofs_point *ap,
+ 			  struct lookup_context *ctxt)
+ {
+ 	struct mapent_cache *mc = source->mc;
+-	LDAP *ldap = NULL;
++	struct ldap_conn conn;
++	LDAP *ldap;
+ 	LDAPMessage *result = NULL, *e;
+ 	char *query;
+ 	int scope = LDAP_SCOPE_SUBTREE;
+@@ -3336,11 +3334,13 @@ static int lookup_one_amd(struct autofs_point *ap,
+ 	}
+ 
+ 	/* Initialize the LDAP context. */
+-	rv = do_reconnect(ap->logopt, &ldap, ctxt);
++	memset(&conn, 0, sizeof(struct ldap_conn));
++	rv = do_reconnect(ap->logopt, &conn, ctxt);
+ 	if (rv == NSS_STATUS_UNAVAIL)
+ 		return CHE_UNAVAIL;
+ 	if (rv == NSS_STATUS_NOTFOUND)
+ 		return ret;
++	ldap = conn.ldap;
+ 
+ 	map = ctxt->schema->map_attr;
+ 	class = ctxt->schema->entry_class;
+@@ -3382,7 +3382,7 @@ static int lookup_one_amd(struct autofs_point *ap,
+ 	rv = ldap_search_s(ldap, ctxt->base, scope, query, attrs, 0, &result);
+ 	if ((rv != LDAP_SUCCESS) || !result) {
+ 		crit(ap->logopt, MODPREFIX "query failed for %s", query);
+-		unbind_ldap_connection(ap->logopt, ldap, ctxt);
++		unbind_ldap_connection(ap->logopt, &conn, ctxt);
+ 		if (result)
+ 			ldap_msgfree(result);
+ 		free(query);
+@@ -3397,7 +3397,7 @@ static int lookup_one_amd(struct autofs_point *ap,
+ 		debug(ap->logopt,
+ 		     MODPREFIX "got answer, but no entry for %s", query);
+ 		ldap_msgfree(result);
+-		unbind_ldap_connection(ap->logopt, ldap, ctxt);
++		unbind_ldap_connection(ap->logopt, &conn, ctxt);
+ 		free(query);
+ 		return CHE_MISSING;
+ 	}
+@@ -3459,7 +3459,7 @@ next:
+ 	}
+ 
+ 	ldap_msgfree(result);
+-	unbind_ldap_connection(ap->logopt, ldap, ctxt);
++	unbind_ldap_connection(ap->logopt, &conn, ctxt);
+ 	free(query);
+ 
+ 	return ret;

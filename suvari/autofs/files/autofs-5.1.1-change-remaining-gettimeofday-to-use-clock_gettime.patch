@@ -1,0 +1,170 @@
+autofs-5.1.1 - change remaining gettimeofday() to use clock_gettime()
+
+From: Yu Ning <ning.yu@ubuntu.com>
+
+The time returned by gettimeofday() is affected by discontinuous jumps
+in the system time, so it causes an issue that autofs may not auto
+unmount a mount point if system time is manually changed by the system
+administrator.
+
+To fix the issue we need to convert to using a monotonic clock source
+instead of the clock source used by gettimeofday().
+
+Change the reamining gettimeofday() function calls to clock_gettime()
+calls.
+
+Signed-off-by: Yu Ning <ning.yu@ubuntu.com>
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG            |    1 +
+ lib/rpc_subs.c       |    9 ++++-----
+ modules/replicated.c |   30 ++++++++++++++----------------
+ 3 files changed, 19 insertions(+), 21 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index c243a8a..49520d3 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -28,6 +28,7 @@
+ - define pending condition init helper function.
+ - use monotonic clock for direct mount condition.
+ - use monotonic clock for indirect mount condition.
++- change remaining gettimeofday() to use clock_gettime().
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/lib/rpc_subs.c b/lib/rpc_subs.c
+index e0e1979..4a84c16 100644
+--- a/lib/rpc_subs.c
++++ b/lib/rpc_subs.c
+@@ -1092,19 +1092,18 @@ int rpc_time(const char *host,
+ {
+ 	int status;
+ 	double taken;
+-	struct timeval start, end;
+-	struct timezone tz;
++	struct timespec start, end;
+ 	int proto = (ping_proto & RPC_PING_UDP) ? IPPROTO_UDP : IPPROTO_TCP;
+ 	unsigned long vers = ping_vers;
+ 
+-	gettimeofday(&start, &tz);
++	clock_gettime(CLOCK_MONOTONIC, &start);
+ 	status = __rpc_ping(host, vers, proto, seconds, micros, option);
+-	gettimeofday(&end, &tz);
++	clock_gettime(CLOCK_MONOTONIC, &end);
+ 
+ 	if (status == RPC_PING_FAIL || status < 0)
+ 		return status;
+ 
+-	taken = elapsed(start, end);
++	taken = monotonic_elapsed(start, end);
+ 
+ 	if (result != NULL)
+ 		*result = taken;
+diff --git a/modules/replicated.c b/modules/replicated.c
+index 8437f5f..f4cae3e 100644
+--- a/modules/replicated.c
++++ b/modules/replicated.c
+@@ -231,8 +231,7 @@ static unsigned int get_nfs_info(unsigned logopt, struct host *host,
+ 	socklen_t len = INET6_ADDRSTRLEN;
+ 	char buf[len + 1];
+ 	struct pmap parms;
+-	struct timeval start, end;
+-	struct timezone tz;
++	struct timespec start, end;
+ 	unsigned int supported = 0;
+ 	double taken = 0;
+ 	int status, count = 0;
+@@ -292,9 +291,9 @@ static unsigned int get_nfs_info(unsigned logopt, struct host *host,
+ 		supported = status;
+ 		goto done_ver;
+ 	} else if (!status) {
+-		gettimeofday(&start, &tz);
++		clock_gettime(CLOCK_MONOTONIC, &start);
+ 		status = rpc_ping_proto(rpc_info);
+-		gettimeofday(&end, &tz);
++		clock_gettime(CLOCK_MONOTONIC, &end);
+ 		if (status == -ETIMEDOUT) {
+ 			supported = status;
+ 			goto done_ver;
+@@ -306,7 +305,7 @@ static unsigned int get_nfs_info(unsigned logopt, struct host *host,
+ 				debug(logopt,
+ 				      "nfs v4 random selection time: %f", reply);
+ 			} else {
+-				reply = elapsed(start, end);
++				reply = monotonic_elapsed(start, end);
+ 				debug(logopt, "nfs v4 rpc ping time: %f", reply);
+ 			}
+ 			taken += reply;
+@@ -351,9 +350,9 @@ v3_ver:
+ 		supported = status;
+ 		goto done_ver;
+ 	} else if (!status) {
+-		gettimeofday(&start, &tz);
++		clock_gettime(CLOCK_MONOTONIC, &start);
+ 		status = rpc_ping_proto(rpc_info);
+-		gettimeofday(&end, &tz);
++		clock_gettime(CLOCK_MONOTONIC, &end);
+ 		if (status == -ETIMEDOUT) {
+ 			supported = status;
+ 			goto done_ver;
+@@ -365,7 +364,7 @@ v3_ver:
+ 				debug(logopt,
+ 				      "nfs v3 random selection time: %f", reply);
+ 			} else {
+-				reply = elapsed(start, end);
++				reply = monotonic_elapsed(start, end);
+ 				debug(logopt, "nfs v3 rpc ping time: %f", reply);
+ 			}
+ 			taken += reply;
+@@ -407,9 +406,9 @@ v2_ver:
+ 		supported = status;
+ 		goto done_ver;
+ 	} else if (!status) {
+-		gettimeofday(&start, &tz);
++		clock_gettime(CLOCK_MONOTONIC, &start);
+ 		status = rpc_ping_proto(rpc_info);
+-		gettimeofday(&end, &tz);
++		clock_gettime(CLOCK_MONOTONIC, &end);
+ 		if (status == -ETIMEDOUT)
+ 			supported = status;
+ 		else if (status > 0) {
+@@ -420,7 +419,7 @@ v2_ver:
+ 				debug(logopt,
+ 				      "nfs v2 random selection time: %f", reply);
+ 			} else {
+-				reply = elapsed(start, end);;
++				reply = monotonic_elapsed(start, end);;
+ 				debug(logopt, "nfs v2 rpc ping time: %f", reply);
+ 			}
+ 			taken += reply;
+@@ -523,8 +522,7 @@ static int get_supported_ver_and_cost(unsigned logopt, struct host *host,
+ 	struct conn_info pm_info, rpc_info;
+ 	int proto;
+ 	unsigned int vers;
+-	struct timeval start, end;
+-	struct timezone tz;
++	struct timespec start, end;
+ 	double taken = 0;
+ 	time_t timeout = RPC_TIMEOUT;
+ 	int status = 0;
+@@ -610,16 +608,16 @@ static int get_supported_ver_and_cost(unsigned logopt, struct host *host,
+ 	if (status == -EHOSTUNREACH)
+ 		goto done;
+ 	else if (!status) {
+-		gettimeofday(&start, &tz);
++		clock_gettime(CLOCK_MONOTONIC, &start);
+ 		status = rpc_ping_proto(&rpc_info);
+-		gettimeofday(&end, &tz);
++		clock_gettime(CLOCK_MONOTONIC, &end);
+ 		if (status > 0) {
+ 			if (random_selection) {
+ 				/* Random value between 0 and 1 */
+ 				taken = ((float) random())/((float) RAND_MAX+1);
+ 				debug(logopt, "random selection time %f", taken);
+ 			} else {
+-				taken = elapsed(start, end);
++				taken = monotonic_elapsed(start, end);
+ 				debug(logopt, "rpc ping time %f", taken);
+ 			}
+ 		}

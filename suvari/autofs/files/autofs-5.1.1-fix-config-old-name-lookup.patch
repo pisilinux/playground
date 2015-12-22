@@ -1,0 +1,58 @@
+autofs-5.1.1 - fix config old name lookup
+
+From: Ian Kent <raven@themaw.net>
+
+There are three cases needed to handle configuration name lookup.
+
+First there's the configuration key name, the name match is case
+insensitive so the recent case change isn't a seperate case.
+
+But the much older configuration key names that began with "DEFAULT_"
+need special handling.
+
+There are two cases that need to be covered:
+1) an old name is given but a new name needs to be located.
+2) a new name is given but an old name needs to be located.
+
+Only 1) is currently covered, so fix that in conf_lookup().
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG      |    1 +
+ lib/defaults.c |   11 +++++++++++
+ 2 files changed, 12 insertions(+)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 3bd7145..ebd66d8 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -11,6 +11,7 @@
+ - make find_server() return a status.
+ - fix return handling of do_reconnect() in ldap module.
+ - fix rwlock unlock crash.
++- fix config old name lookup.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/lib/defaults.c b/lib/defaults.c
+index 5711e65..74fafc5 100644
+--- a/lib/defaults.c
++++ b/lib/defaults.c
+@@ -728,6 +728,17 @@ static struct conf_option *conf_lookup(const char *section, const char *key)
+ 		 */
+ 		if (strlen(key) > 8 && !strncasecmp("DEFAULT_", key, 8))
+ 			co = conf_lookup_key(section, key + 8);
++		else {
++			/* A new key name has been given but the value
++			 * we seek is stored under an old key name (which
++			 * includes the "DEFAULT_" prefix or doesn't exist.
++			 */
++			char old_key[PATH_MAX + 1];
++
++			strcpy(old_key, "DEFAULT_");
++			strcat(old_key, key);
++			co = conf_lookup_key(section, old_key);
++		}
+ 	}
+ 
+ 	return co;

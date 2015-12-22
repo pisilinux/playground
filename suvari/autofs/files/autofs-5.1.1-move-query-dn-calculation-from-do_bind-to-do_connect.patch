@@ -1,0 +1,160 @@
+autofs-5.1.1 - move query dn calculation from do_bind() to do_connect()
+
+From: Ian Kent <raven@themaw.net>
+
+In the ldap lookup module the do_reconnect() call doesn't distinguish
+between no entry found and service unavailable.
+
+If service unavailable gets returned from a master map read it results
+in autofs not updating the mounts. A notfound return doesn't because it
+indicates the map doesn't exist so updating the mounts isn't a problem
+as it can be when the source is unavailable.
+
+Start the update of do_reconnect() by moving the query dn calculation
+from do_bind() to do_connect().
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG             |    1 +
+ modules/lookup_ldap.c |   81 ++++++++++++++++++++++++++++++-------------------
+ 2 files changed, 51 insertions(+), 31 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index ee078bb..0be1bf2 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -4,6 +4,7 @@
+ - revert fix libtirpc name clash.
+ - fix left mount count return from umount_multi_triggers().
+ - fix return handling in sss lookup module.
++- move query dn calculation from do_bind() to do_connect().
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/modules/lookup_ldap.c b/modules/lookup_ldap.c
+index 5da613e..ea63736 100644
+--- a/modules/lookup_ldap.c
++++ b/modules/lookup_ldap.c
+@@ -574,7 +574,7 @@ static int find_query_dn(unsigned logopt, LDAP *ldap, struct lookup_context *ctx
+ static int do_bind(unsigned logopt, LDAP *ldap, const char *uri, struct lookup_context *ctxt)
+ {
+ 	char *host = NULL, *nhost;
+-	int rv, need_base = 1;
++	int rv;
+ 
+ #ifdef WITH_SASL
+ 	debug(logopt, MODPREFIX "auth_required: %d, sasl_mech %s",
+@@ -610,6 +610,7 @@ static int do_bind(unsigned logopt, LDAP *ldap, const char *uri, struct lookup_c
+ 	}
+ 	ldap_memfree(host);
+ 
++	uris_mutex_lock(ctxt);
+ 	if (!ctxt->cur_host) {
+ 		ctxt->cur_host = nhost;
+ 		if (!(ctxt->format & MAP_FLAG_FORMAT_AMD)) {
+@@ -618,43 +619,21 @@ static int do_bind(unsigned logopt, LDAP *ldap, const char *uri, struct lookup_c
+ 		}
+ 	} else {
+ 		/* If connection host has changed update */
+-		if (strcmp(ctxt->cur_host, nhost)) {
++		if (!strcmp(ctxt->cur_host, nhost))
++			free(nhost);
++		else {
+ 			free(ctxt->cur_host);
+ 			ctxt->cur_host = nhost;
+-		} else {
+-			free(nhost);
+-			need_base = 0;
+-		}
+-	}
+-
+-	if (ctxt->schema && ctxt->qdn && !need_base)
+-		return 1;
+-
+-	/*
+-	 * If the schema isn't defined in the configuration then check for
+-	 * presence of a map dn with a the common schema. Then calculate the
+-	 * base dn for searches.
+-	 */
+-	if (!ctxt->schema) {
+-		if (!find_query_dn(logopt, ldap, ctxt)) {
+-			warn(logopt,
+-			      MODPREFIX "failed to find valid query dn");
+-			return 0;
+-		}
+-	} else if (!(ctxt->format & MAP_FLAG_FORMAT_AMD)) {
+-		const char *class = ctxt->schema->map_class;
+-		const char *key = ctxt->schema->map_attr;
+-		if (!get_query_dn(logopt, ldap, ctxt, class, key)) {
+-			error(logopt, MODPREFIX "failed to get query dn");
+-			return 0;
+ 		}
+ 	}
++	uris_mutex_unlock(ctxt);
+ 
+ 	return 1;
+ }
+ 
+ static LDAP *do_connect(unsigned logopt, const char *uri, struct lookup_context *ctxt)
+ {
++	char *cur_host = NULL;
+ 	LDAP *ldap;
+ 
+ #ifdef WITH_SASL
+@@ -665,13 +644,53 @@ static LDAP *do_connect(unsigned logopt, const char *uri, struct lookup_context
+ #endif
+ 
+ 	ldap = init_ldap_connection(logopt, uri, ctxt);
+-	if (ldap) {
+-		if (!do_bind(logopt, ldap, uri, ctxt)) {
++	if (!ldap)
++		goto out;
++
++	uris_mutex_lock(ctxt);
++	if (ctxt->cur_host)
++		cur_host = ctxt->cur_host;
++	uris_mutex_unlock(ctxt);
++
++	if (!do_bind(logopt, ldap, uri, ctxt)) {
++		unbind_ldap_connection(logopt, ldap, ctxt);
++		ldap = NULL;
++		goto out;
++	}
++
++	/* If the lookup schema and the query dn are set and the
++	 * ldap host hasn't changed return.
++	 */
++	uris_mutex_lock(ctxt);
++	if (ctxt->schema && ctxt->qdn && (cur_host == ctxt->cur_host)) {
++		uris_mutex_unlock(ctxt);
++		return ldap;
++	}
++	uris_mutex_unlock(ctxt);
++
++	/*
++	 * If the schema isn't defined in the configuration then check for
++	 * presence of a map dn with a the common schema. Then calculate the
++	 * base dn for searches.
++	 */
++	if (!ctxt->schema) {
++		if (!find_query_dn(logopt, ldap, ctxt)) {
++			unbind_ldap_connection(logopt, ldap, ctxt);
++			ldap = NULL;
++			warn(logopt,
++			      MODPREFIX "failed to find valid query dn");
++			goto out;
++		}
++	} else if (!(ctxt->format & MAP_FLAG_FORMAT_AMD)) {
++		const char *class = ctxt->schema->map_class;
++		const char *key = ctxt->schema->map_attr;
++		if (!get_query_dn(logopt, ldap, ctxt, class, key)) {
+ 			unbind_ldap_connection(logopt, ldap, ctxt);
+ 			ldap = NULL;
++			error(logopt, MODPREFIX "failed to get query dn");
+ 		}
+ 	}
+-
++out:
+ 	return ldap;
+ }
+ 

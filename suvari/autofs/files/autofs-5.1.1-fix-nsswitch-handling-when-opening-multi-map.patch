@@ -1,0 +1,48 @@
+autofs-5.1.1 - fix nsswitch handling when opening multi map
+
+From: Ian Kent <raven@themaw.net>
+
+When initializing the lookup module for multi-map entries nsswitch
+actions should be honoured to the extent they can be. In particular
+the case of a map not found should use an nsswitch action (if present)
+to work out whether to continue looking or return a failure.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ modules/lookup_multi.c |    9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/modules/lookup_multi.c b/modules/lookup_multi.c
+index 55035e4..ba8d4f0 100644
+--- a/modules/lookup_multi.c
++++ b/modules/lookup_multi.c
+@@ -84,6 +84,7 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+ 	list_for_each(p, head) {
+ 		struct nss_source *this;
+ 		int status;
++		int ret;
+ 
+ 		this = list_entry(p, struct nss_source, list);
+ 
+@@ -127,6 +128,10 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+ 
+ 			argv[0] = save_argv0;
+ 			free(path);
++
++			ret = check_nss_result(this, status);
++			if (ret >= 0)
++				break;
+ 		}
+ 
+ 		status = open_lookup(this->source, MODPREFIX,
+@@ -135,6 +140,10 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+ 			free_sources(&nsslist);
+ 			return mod;
+ 		}
++
++		ret = check_nss_result(this, status);
++		if (ret >= 0)
++			break;
+ 	}
+ 	free_sources(&nsslist);
+ 

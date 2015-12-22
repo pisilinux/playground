@@ -6,19 +6,16 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
     autotools.autoreconf("-vif")
-    autotools.configure("--disable-mount-locking \
-                         --enable-ignore-busy \
-                         --disable-mount-move \
-                         --with-sasl=yes \
-                         --with-systemd \
-                         --without-hesiod \
-                         --with-fifodir=/run/autofs \
-                         --with-flagdir=/run/autofs \
-                         --with-libtirpc")
+    autotools.configure("./configure --prefix=/usr --sysconfdir=/etc/autofs --sbindir=/usr/bin \
+                                     --with-mapdir=/etc/autofs --without-hesiod \
+                                     --enable-ignore-busy")
+    shelltools.system("sed -i -e 's|/etc/auto.misc|/etc/autofs/auto.misc|' \
+                              -e 's|/etc/auto.master.d|/etc/autofs/auto.master.d|' samples/auto.master")
 
 def build():
     autotools.make()

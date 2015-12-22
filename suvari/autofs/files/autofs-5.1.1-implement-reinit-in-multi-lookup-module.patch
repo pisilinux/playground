@@ -1,0 +1,265 @@
+autofs-5.1.1 - implement reinit in multi lookup module
+
+From: Ian Kent <raven@themaw.net>
+
+Update the multi lookup module to add an implementation for the newly
+added reinit entry point.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ modules/lookup_multi.c |  228 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 227 insertions(+), 1 deletion(-)
+
+diff --git a/modules/lookup_multi.c b/modules/lookup_multi.c
+index f8ebf94..fadd2ea 100644
+--- a/modules/lookup_multi.c
++++ b/modules/lookup_multi.c
+@@ -146,6 +146,31 @@ static int free_multi_context(struct lookup_context *ctxt)
+ 	return rv;
+ }
+ 
++static struct lookup_context *update_multi_context(struct lookup_context *ctxt,
++						   struct lookup_context *new)
++{
++	int i;
++
++	for (i = 0; i < new->n && i < ctxt->n; i++) {
++		if (new->m[i].mod)
++			continue;
++
++		if (!ctxt->m[i].mod)
++			continue;
++
++		/* reinit or open failed, use old one, questionable but
++		 * we need to do something.
++		 */
++		new->m[i].mod = ctxt->m[i].mod;
++		ctxt->m[i].mod = NULL;
++		new->m[i].argc = ctxt->m[i].argc;
++		new->m[i].argv = ctxt->m[i].argv;
++		ctxt->m[i].argv = NULL;
++	}
++
++	return new;
++}
++
+ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const char **argv)
+ {
+ 	struct list_head nsslist;
+@@ -268,6 +293,8 @@ int lookup_init(const char *my_mapfmt,
+ 	struct lookup_context *ctxt;
+ 	int i;
+ 
++	*context = NULL;
++
+ 	ctxt = alloc_context(my_mapfmt, argc, argv);
+ 	if (!ctxt)
+ 		return 1;
+@@ -291,7 +318,206 @@ int lookup_init(const char *my_mapfmt,
+ int lookup_reinit(const char *my_mapfmt,
+ 		  int argc, const char *const *argv, void **context)
+ {
+-	return 0;
++	struct lookup_context *ctxt = (struct lookup_context *) *context;
++	struct list_head nsslist;
++	struct list_head *head, *p;
++	struct lookup_context *new;
++	char buf[MAX_ERR_BUF], *estr;
++	int i, ret = 0;
++	int status;
++
++	new = alloc_context(my_mapfmt, argc, argv);
++	if (!new)
++		return 1;
++
++	for (i = 0; i < new->n; i++) {
++		if (i >= ctxt->n) {
++			new->m[i].mod = nss_open_lookup(my_mapfmt,
++							new->m[i].argc,
++							new->m[i].argv);
++			if (!new->m[i].mod) {
++				logerr(MODPREFIX "error opening module");
++				/* TODO: check */
++				ret = 1;
++				goto out;
++			}
++			continue;
++		}
++
++		if (*new->m[i].argv[0] == '/') {
++			if (strcmp(new->m[i].argv[0], ctxt->m[i].argv[0]))
++				open_lookup("file", MODPREFIX,
++					     my_mapfmt,
++					     new->m[i].argc,
++					     new->m[i].argv,
++					     &new->m[i].mod);
++			else {
++				new->m[i].mod = ctxt->m[i].mod;
++				if (reinit_lookup(new->m[i].mod, "file",
++					      MODPREFIX, my_mapfmt,
++					      new->m[i].argc, new->m[i].argv))
++					new->m[i].mod = NULL;
++				else
++					ctxt->m[i].mod = NULL;
++			}
++			continue;
++		}
++
++		if (!strncmp(new->m[i].argv[0], "file", 4) ||
++		    !strncmp(new->m[i].argv[0], "yp", 2) ||
++		    !strncmp(new->m[i].argv[0], "nisplus", 7) ||
++		    !strncmp(new->m[i].argv[0], "nis", 3) ||
++		    !strncmp(new->m[i].argv[0], "ldaps", 5) ||
++		    !strncmp(new->m[i].argv[0], "ldap", 4) ||
++		    !strncmp(new->m[i].argv[0], "sss", 3)) {
++			char type[MAX_MAP_TYPE_STRING];
++			char *fmt;
++
++			strcpy(type, new->m[i].argv[0]);
++			fmt = strchr(type, ',');
++			if (!fmt)
++				fmt = (char *) my_mapfmt;
++			else {
++				*fmt = '\0';
++				fmt++;
++			}
++
++			if (!strcmp(new->m[i].argv[0], ctxt->m[i].argv[0]) &&
++			    !strcmp(new->m[i].argv[1], ctxt->m[i].argv[1])) {
++				new->m[i].mod = ctxt->m[i].mod;
++				if (reinit_lookup(new->m[i].mod, new->m[i].argv[0],
++					      MODPREFIX, fmt,
++					      new->m[i].argc - 1, new->m[i].argv + 1))
++					new->m[i].mod = NULL;
++				else
++					ctxt->m[i].mod = NULL;
++			} else {
++				open_lookup(type, MODPREFIX, fmt,
++					    new->m[i].argc - 1,
++					    new->m[i].argv + 1,
++					    &new->m[i].mod);
++			}
++			continue;
++		}
++
++		INIT_LIST_HEAD(&nsslist);
++
++		if (nsswitch_parse(&nsslist)) {
++			if (!list_empty(&nsslist))
++				free_sources(&nsslist);
++			logerr("can't to read name service switch config.");
++			/* TODO: check */
++			ret = 1;
++			goto out;
++		}
++
++		head = &nsslist;
++		list_for_each(p, head) {
++			struct nss_source *this;
++
++			this = list_entry(p, struct nss_source, list);
++
++			if (!strcmp(this->source, ctxt->m[i].mod->type)) {
++				new->m[i].mod = ctxt->m[i].mod;
++				if (reinit_lookup(new->m[i].mod, this->source,
++					      MODPREFIX, my_mapfmt,
++					      new->m[i].argc, new->m[i].argv))
++					new->m[i].mod = NULL;
++				else
++					ctxt->m[i].mod = NULL;
++				continue;
++			}
++
++			if (!strcmp(this->source, "files")) {
++				char src_file[] = "file";
++				char src_prog[] = "program";
++				struct stat st;
++				char *type, *path, *save_argv0;
++
++				path = malloc(strlen(AUTOFS_MAP_DIR) +
++					      strlen(new->m[i].argv[0]) + 2);
++				if (!path) {
++					estr = strerror_r(errno, buf, MAX_ERR_BUF);
++					logerr(MODPREFIX "error: %s", estr);
++					free_sources(&nsslist);
++					ret = 1;
++					goto out;
++				}
++				strcpy(path, AUTOFS_MAP_DIR);
++				strcat(path, "/");
++				strcat(path, new->m[i].argv[0]);
++
++				if (stat(path, &st) == -1 || !S_ISREG(st.st_mode)) {
++					free(path);
++					continue;
++				}
++
++				if (st.st_mode & __S_IEXEC)
++					type = src_prog;
++				else
++					type = src_file;
++
++				save_argv0 = (char *) new->m[i].argv[0];
++				new->m[i].argv[0] = path;
++
++				if (strcmp(type, ctxt->m[i].mod->type)) {
++					status = open_lookup(type,
++							     MODPREFIX,
++							     my_mapfmt,
++							     new->m[i].argc,
++							     new->m[i].argv,
++							     &new->m[i].mod);
++					if (status == NSS_STATUS_SUCCESS) {
++						free(save_argv0);
++						break;
++					}
++				} else {
++					new->m[i].mod = ctxt->m[i].mod;
++					if (reinit_lookup(new->m[i].mod, type,
++						      MODPREFIX, my_mapfmt,
++						      new->m[i].argc, new->m[i].argv))
++						new->m[i].mod = NULL;
++					else {
++						ctxt->m[i].mod = NULL;
++						free(save_argv0);
++						break;
++					}
++				}
++
++				new->m[i].argv[0] = save_argv0;
++				free(path);
++				continue;
++			}
++
++			if (strcmp(this->source, ctxt->m[i].mod->type)) {
++				status = open_lookup(this->source, MODPREFIX,
++						     my_mapfmt,
++						     new->m[i].argc,
++						     new->m[i].argv,
++						     &new->m[i].mod);
++				if (status == NSS_STATUS_SUCCESS)
++					break;
++			} else {
++				new->m[i].mod = ctxt->m[i].mod;
++				if (reinit_lookup(new->m[i].mod, this->source,
++					      MODPREFIX, my_mapfmt,
++					      new->m[i].argc, new->m[i].argv))
++					new->m[i].mod = NULL;
++				else {
++					ctxt->m[i].mod = NULL;
++					break;
++				}
++			}
++		}
++		free_sources(&nsslist);
++	}
++out:
++	/* Update new context with any needed old context */
++	*context = update_multi_context(ctxt, new);
++	free_multi_context(ctxt);
++	free(ctxt);
++
++	return ret;
+ }
+ 
+ int lookup_read_master(struct master *master, time_t age, void *context)

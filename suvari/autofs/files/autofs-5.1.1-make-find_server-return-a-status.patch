@@ -1,0 +1,121 @@
+autofs-5.1.1 - make find_server() return a status
+
+From: Ian Kent <raven@themaw.net>
+
+In the ldap lookup module the do_reconnect() call doesn't distinguish
+between no entry found and service unavailable.
+
+If service unavailable gets returned from a master map read it results
+in autofs not updating the mounts. A notfound return doesn't because it
+indicates the map doesn't exist so updating the mounts isn't a problem
+as it can be when the source is unavailable.
+
+Next step in the update of do_reconnect() is to make find_server()
+return a status instead of an LDAP handle and pass back the LDAP handle
+via a function parameter.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG             |    1 +
+ modules/lookup_ldap.c |   30 +++++++++++++++++++-----------
+ 2 files changed, 20 insertions(+), 11 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 99f465a..bc79bc0 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -8,6 +8,7 @@
+ - make do_connect() return a status.
+ - make connect_to_server() return a status.
+ - make find_dc_server() return a status.
++- make find_server() return a status.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/modules/lookup_ldap.c b/modules/lookup_ldap.c
+index 02d9ca9..783239d 100644
+--- a/modules/lookup_ldap.c
++++ b/modules/lookup_ldap.c
+@@ -871,14 +871,14 @@ static int find_dc_server(unsigned logopt, LDAP **ldap,
+ 	return ret;
+ }
+ 
+-static LDAP *find_server(unsigned logopt, struct lookup_context *ctxt)
++static int find_server(unsigned logopt,
++		       LDAP **ldap, struct lookup_context *ctxt)
+ {
+-	LDAP *ldap = NULL;
+-	struct ldap_uri *this;
++	struct ldap_uri *this = NULL;
+ 	struct list_head *p, *first;
+ 	struct dclist *dclist;
+ 	char *uri = NULL;
+-	int ret;
++	int ret = NSS_STATUS_UNAVAIL;
+ 
+ 	uris_mutex_lock(ctxt);
+ 	dclist = ctxt->dclist;
+@@ -892,6 +892,8 @@ static LDAP *find_server(unsigned logopt, struct lookup_context *ctxt)
+ 	/* Try each uri, save point in server list upon success */
+ 	p = first->next;
+ 	while(p != first) {
++		int rv;
++
+ 		/* Skip list head */
+ 		if (p == ctxt->uris) {
+ 			p = p->next;
+@@ -901,12 +903,15 @@ static LDAP *find_server(unsigned logopt, struct lookup_context *ctxt)
+ 		if (!strstr(this->uri, ":///")) {
+ 			uri = strdup(this->uri);
+ 			debug(logopt, "trying server uri %s", uri);
+-			ret = connect_to_server(logopt, &ldap, uri, ctxt);
+-			if (ret == NSS_STATUS_SUCCESS) {
++			rv = connect_to_server(logopt, ldap, uri, ctxt);
++			if (rv == NSS_STATUS_SUCCESS) {
++				ret = NSS_STATUS_SUCCESS;
+ 				info(logopt, "connected to uri %s", uri);
+ 				free(uri);
+ 				break;
+ 			}
++			if (rv == NSS_STATUS_NOTFOUND)
++				ret = NSS_STATUS_NOTFOUND;
+ 		} else {
+ 			if (dclist)
+ 				uri = strdup(dclist->uri);
+@@ -920,11 +925,14 @@ static LDAP *find_server(unsigned logopt, struct lookup_context *ctxt)
+ 				dclist = tmp;
+ 				uri = strdup(dclist->uri);
+ 			}
+-			ret = find_dc_server(logopt, &ldap, uri, ctxt);
+-			if (ret == NSS_STATUS_SUCCESS) {
++			rv = find_dc_server(logopt, ldap, uri, ctxt);
++			if (rv == NSS_STATUS_SUCCESS) {
++				ret = NSS_STATUS_SUCCESS;
+ 				free(uri);
+ 				break;
+ 			}
++			if (rv == NSS_STATUS_NOTFOUND)
++				ret = NSS_STATUS_NOTFOUND;
+ 		}
+ 		free(uri);
+ 		uri = NULL;
+@@ -950,7 +958,7 @@ static LDAP *find_server(unsigned logopt, struct lookup_context *ctxt)
+ 	}
+ 	uris_mutex_unlock(ctxt);
+ 
+-	return ldap;
++	return ret;
+ }
+ 
+ static LDAP *do_reconnect(unsigned logopt, struct lookup_context *ctxt)
+@@ -1023,8 +1031,8 @@ find_server:
+ #endif
+ 
+ 	/* Current server failed, try the rest or dc connection */
+-	ldap = find_server(logopt, ctxt);
+-	if (!ldap)
++	ret = find_server(logopt, &ldap, ctxt);
++	if (ret != NSS_STATUS_SUCCESS)
+ 		error(logopt, MODPREFIX "failed to find available server");
+ 
+ 	return ldap;

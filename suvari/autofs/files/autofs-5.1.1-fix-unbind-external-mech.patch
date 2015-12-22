@@ -1,0 +1,140 @@
+autofs-5.1.1 - fix unbind sasl external mech
+
+From: Ian Kent <raven@themaw.net>
+
+If the sasl EXTERNAL mechanism is being used autofs leaks ldap
+connection resources.
+
+In this case the current ldap connection needs to be unbound
+when calling autofs_sasl_unbind() or autofs_sasl_dispose().
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG             |    1 +
+ include/lookup_ldap.h |    4 ++--
+ modules/cyrus-sasl.c  |   15 +++++++++++++--
+ modules/lookup_ldap.c |   12 ++++++------
+ 4 files changed, 22 insertions(+), 10 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 4acb332..83412a3 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -31,6 +31,7 @@
+ - change remaining gettimeofday() to use clock_gettime().
+ - change time() to use monotonic_clock().
+ - remove unused function elapsed().
++- fix unbind sasl external mech.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/include/lookup_ldap.h b/include/lookup_ldap.h
+index ba817aa..be4bc1e 100644
+--- a/include/lookup_ldap.h
++++ b/include/lookup_ldap.h
+@@ -121,8 +121,8 @@ int authtype_requires_creds(const char *authtype);
+ int autofs_sasl_client_init(unsigned logopt);
+ int autofs_sasl_init(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt);
+ int autofs_sasl_bind(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt);
+-void autofs_sasl_unbind(struct lookup_context *ctxt);
+-void autofs_sasl_dispose(struct lookup_context *ctxt);
++void autofs_sasl_unbind(LDAP *ldap, struct lookup_context *ctxt);
++void autofs_sasl_dispose(LDAP *ldap, struct lookup_context *ctxt);
+ void autofs_sasl_done(void);
+ /* cyrus-sasl-extern */
+ int do_sasl_extern(LDAP *ldap, struct lookup_context *ctxt);
+diff --git a/modules/cyrus-sasl.c b/modules/cyrus-sasl.c
+index 21bc00c..c5e72f7 100644
+--- a/modules/cyrus-sasl.c
++++ b/modules/cyrus-sasl.c
+@@ -885,8 +885,13 @@ sasl_choose_mech(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt)
+  *  Routine called when unbinding an ldap connection.
+  */
+ void
+-autofs_sasl_unbind(struct lookup_context *ctxt)
++autofs_sasl_unbind(LDAP *ldap, struct lookup_context *ctxt)
+ {
++	if (ctxt->sasl_mech && !strncmp(ctxt->sasl_mech, "EXTERNAL", 8)) {
++		ldap_unbind_s(ldap);
++		return;
++	}
++
+ 	if (ctxt->sasl_conn) {
+ 		sasl_dispose(&ctxt->sasl_conn);
+ 		ctxt->sasl_conn = NULL;
+@@ -963,10 +968,16 @@ autofs_sasl_bind(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt)
+  *  Destructor routine.  This should be called when finished with an ldap
+  *  session.
+  */
+-void autofs_sasl_dispose(struct lookup_context *ctxt)
++void autofs_sasl_dispose(LDAP *ldap, struct lookup_context *ctxt)
+ {
+ 	int status, ret;
+ 
++	if (ctxt->sasl_mech && !strncmp(ctxt->sasl_mech, "EXTERNAL", 8)) {
++		if (ldap)
++			ldap_unbind_s(ldap);
++		return;
++	}
++
+ 	if (ctxt->sasl_conn) {
+ 		sasl_dispose(&ctxt->sasl_conn);
+ 		ctxt->sasl_conn = NULL;
+diff --git a/modules/lookup_ldap.c b/modules/lookup_ldap.c
+index afc89c1..7f50c34 100644
+--- a/modules/lookup_ldap.c
++++ b/modules/lookup_ldap.c
+@@ -222,7 +222,7 @@ int __unbind_ldap_connection(unsigned logopt, LDAP *ldap, struct lookup_context
+ 		ctxt->use_tls = LDAP_TLS_INIT;
+ #ifdef WITH_SASL
+ 	if (ctxt->auth_required & LDAP_NEED_AUTH)
+-		autofs_sasl_unbind(ctxt);
++		autofs_sasl_unbind(ldap, ctxt);
+ 	else
+ 		rv = ldap_unbind_ext(ldap, NULL, NULL);
+ #else
+@@ -978,7 +978,7 @@ static int do_reconnect(unsigned logopt,
+ 		if (ctxt->auth_required & LDAP_NEED_AUTH &&
+ 		    ret != NSS_STATUS_SUCCESS && ret != NSS_STATUS_NOTFOUND) {
+ 			ldapinit_mutex_lock();
+-			autofs_sasl_dispose(ctxt);
++			autofs_sasl_dispose(*ldap, ctxt);
+ 			ldapinit_mutex_unlock();
+ 			ret = connect_to_server(logopt, ldap,
+ 						ctxt->server, ctxt);
+@@ -1018,7 +1018,7 @@ static int do_reconnect(unsigned logopt,
+ 	if (ctxt->auth_required & LDAP_NEED_AUTH &&
+ 	    rv != NSS_STATUS_SUCCESS && rv != NSS_STATUS_NOTFOUND) {
+ 		ldapinit_mutex_lock();
+-		autofs_sasl_dispose(ctxt);
++		autofs_sasl_dispose(*ldap, ctxt);
+ 		ldapinit_mutex_unlock();
+ 		rv = connect_to_server(logopt, ldap, ctxt->uri->uri, ctxt);
+ 	}
+@@ -1031,7 +1031,7 @@ static int do_reconnect(unsigned logopt,
+ find_server:
+ #ifdef WITH_SASL
+ 	ldapinit_mutex_lock();
+-	autofs_sasl_dispose(ctxt);
++	autofs_sasl_dispose(*ldap, ctxt);
+ 	ldapinit_mutex_unlock();
+ #endif
+ 
+@@ -1879,7 +1879,7 @@ int lookup_reinit(const char *mapfmt,
+ 
+ #ifdef WITH_SASL
+ 	ldapinit_mutex_lock();
+-	autofs_sasl_dispose(ctxt);
++	autofs_sasl_dispose(NULL, ctxt);
+ 	ldapinit_mutex_unlock();
+ #endif
+ 	free_context(ctxt);
+@@ -3816,7 +3816,7 @@ int lookup_done(void *context)
+ 	int rv = close_parse(ctxt->parse);
+ #ifdef WITH_SASL
+ 	ldapinit_mutex_lock();
+-	autofs_sasl_dispose(ctxt);
++	autofs_sasl_dispose(NULL, ctxt);
+ 	autofs_sasl_done();
+ 	ldapinit_mutex_unlock();
+ #endif

@@ -1,0 +1,98 @@
+autofs-5.1.1 - fix return handling in sss lookup module
+
+From: Ian Kent <raven@themaw.net>
+
+In the sss lookup module some of the calls don't distinguish between
+no entry found and service unavailable.
+
+If service unavailable gets returned from a master map read it results
+in autofs not updating the mounts. A notfound return doesn't because it
+indicates the map doesn't exist so updating the mounts isn't a problem
+as it can be when the source is unavailable.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG            |    1 +
+ modules/lookup_sss.c |   24 +++++++++++++++++-------
+ 2 files changed, 18 insertions(+), 7 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index bd7b981..ee078bb 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -3,6 +3,7 @@
+ - update libtirpc workaround for new soname.
+ - revert fix libtirpc name clash.
+ - fix left mount count return from umount_multi_triggers().
++- fix return handling in sss lookup module.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/modules/lookup_sss.c b/modules/lookup_sss.c
+index 528ab41..720b5e3 100644
+--- a/modules/lookup_sss.c
++++ b/modules/lookup_sss.c
+@@ -148,9 +148,8 @@ static int setautomntent(unsigned int logopt,
+ 		error(logopt, MODPREFIX "setautomntent: %s", estr);
+ 		if (*sss_ctxt)
+ 			free(*sss_ctxt);
+-		return 0;
+ 	}
+-	return 1;
++	return ret;
+ }
+ 
+ static int endautomntent(unsigned int logopt,
+@@ -161,9 +160,8 @@ static int endautomntent(unsigned int logopt,
+ 		char buf[MAX_ERR_BUF];
+ 		char *estr = strerror_r(ret, buf, MAX_ERR_BUF);
+ 		error(logopt, MODPREFIX "endautomntent: %s", estr);
+-		return 0;
+ 	}
+-	return 1;
++	return ret;
+ }
+ 
+ int lookup_read_master(struct master *master, time_t age, void *context)
+@@ -180,8 +178,12 @@ int lookup_read_master(struct master *master, time_t age, void *context)
+ 	char *value = NULL;
+ 	int count, ret;
+ 
+-	if (!setautomntent(logopt, ctxt, ctxt->mapname, &sss_ctxt))
++	ret = setautomntent(logopt, ctxt, ctxt->mapname, &sss_ctxt);
++	if (ret) {
++		if (ret == ENOENT)
++			return NSS_STATUS_NOTFOUND;
+ 		return NSS_STATUS_UNAVAIL;
++	}
+ 
+ 	count = 0;
+ 	while (1) {
+@@ -280,8 +282,12 @@ int lookup_read_map(struct autofs_point *ap, time_t age, void *context)
+ 		return NSS_STATUS_SUCCESS;
+ 	}
+ 
+-	if (!setautomntent(ap->logopt, ctxt, ctxt->mapname, &sss_ctxt))
++	ret = setautomntent(ap->logopt, ctxt, ctxt->mapname, &sss_ctxt);
++	if (ret) {
++		if (ret == ENOENT)
++			return NSS_STATUS_NOTFOUND;
+ 		return NSS_STATUS_UNAVAIL;
++	}
+ 
+ 	count = 0;
+ 	while (1) {
+@@ -386,8 +392,12 @@ static int lookup_one(struct autofs_point *ap,
+ 
+ 	mc = source->mc;
+ 
+-	if (!setautomntent(ap->logopt, ctxt, ctxt->mapname, &sss_ctxt))
++	ret = setautomntent(ap->logopt, ctxt, ctxt->mapname, &sss_ctxt);
++	if (ret) {
++		if (ret == ENOENT)
++			return NSS_STATUS_NOTFOUND;
+ 		return NSS_STATUS_UNAVAIL;
++	}
+ 
+ 	ret = ctxt->getautomntbyname_r(qKey, &value, sss_ctxt);
+ 	if (ret && ret != ENOENT) {

@@ -1,0 +1,91 @@
+autofs-5.1.1 - define monotonic clock helper functions
+
+From: Yu Ning <ning.yu@ubuntu.com>
+
+The time returned by gettimeofday() is affected by discontinuous jumps
+in the system time, so it causes an issue that autofs may not auto
+unmount a mount point if system time is manually changed by the system
+administrator.
+
+To fix the issue we need to convert to using a monotonic clock source
+instead of the clock source used by gettimeofday().
+
+Start by defining two helper functions that will be used by later
+patches.
+
+Signed-off-by: Yu Ning <ning.yu@ubuntu.com>
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG           |    1 +
+ include/automount.h |   10 ++++++++++
+ include/rpc_subs.h  |    1 +
+ lib/rpc_subs.c      |   11 +++++++++++
+ 4 files changed, 23 insertions(+)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index f954018..566a6c6 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -23,6 +23,7 @@
+ - fix out of order call in program map lookup.
+ - fix error handling of is_mounted().
+ - Add a mode option for master map entries.
++- define monotonic clock helper functions.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/include/automount.h b/include/automount.h
+index c56e265..9e82048 100644
+--- a/include/automount.h
++++ b/include/automount.h
+@@ -582,6 +582,16 @@ do { \
+ 		fatal(_m_unlock); \
+ } while(0)
+ 
++static inline time_t monotonic_time(time_t *t)
++{
++	struct timespec ts;
++
++	clock_gettime(CLOCK_MONOTONIC, &ts);
++	if (t)
++		*t = (time_t) ts.tv_sec;
++	return (time_t) ts.tv_sec;
++}
++
+ /* Expire alarm handling routines */
+ int alarm_start_handler(void);
+ int alarm_add(struct autofs_point *ap, time_t seconds);
+diff --git a/include/rpc_subs.h b/include/rpc_subs.h
+index b6d59f9..e329224 100644
+--- a/include/rpc_subs.h
++++ b/include/rpc_subs.h
+@@ -71,6 +71,7 @@ int rpc_portmap_getport(struct conn_info *, struct pmap *, unsigned short *);
+ int rpc_ping_proto(struct conn_info *);
+ int rpc_ping(const char *, long, long, unsigned int);
+ double elapsed(struct timeval, struct timeval);
++double monotonic_elapsed(struct timespec, struct timespec);
+ int rpc_time(const char *, unsigned int, unsigned int, long, long, unsigned int, double *);
+ const char *get_addr_string(struct sockaddr *, char *, socklen_t);
+ 
+diff --git a/lib/rpc_subs.c b/lib/rpc_subs.c
+index 68d68f4..e0e1979 100644
+--- a/lib/rpc_subs.c
++++ b/lib/rpc_subs.c
+@@ -1075,6 +1075,17 @@ double elapsed(struct timeval start, struct timeval end)
+ 	return t2-t1;
+ }
+ 
++double monotonic_elapsed(struct timespec start, struct timespec end)
++{
++	double t1, t2;
++
++	t1 =  (double) start.tv_sec +
++		(double) (start.tv_nsec/(1000*1000*1000));
++	t2 =  (double) end.tv_sec +
++		(double) (end.tv_nsec/(1000*1000*1000));
++	return t2 - t1;
++}
++
+ int rpc_time(const char *host,
+ 	     unsigned int ping_vers, unsigned int ping_proto,
+ 	     long seconds, long micros, unsigned int option, double *result)

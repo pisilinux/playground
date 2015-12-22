@@ -1,0 +1,138 @@
+autofs-5.1.1 - move check_nss_result() to nsswitchr.c
+
+From: Ian Kent <raven@themaw.net>
+
+The check_nss_result() function will be needed by the multi-map lookup
+module so move it to the nss library module.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ daemon/lookup.c    |   45 ---------------------------------------------
+ include/nsswitch.h |    1 +
+ lib/nsswitch.c     |   45 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 46 insertions(+), 45 deletions(-)
+
+diff --git a/daemon/lookup.c b/daemon/lookup.c
+index 62071df..53455a1 100644
+--- a/daemon/lookup.c
++++ b/daemon/lookup.c
+@@ -25,51 +25,6 @@
+ #include "automount.h"
+ #include "nsswitch.h"
+ 
+-static int check_nss_result(struct nss_source *this, enum nsswitch_status result)
+-{
+-	enum nsswitch_status status;
+-	struct nss_action a;
+-
+-	/* Check if we have negated actions */
+-	for (status = 0; status < NSS_STATUS_MAX; status++) {
+-		a = this->action[status];
+-		if (a.action == NSS_ACTION_UNKNOWN)
+-			continue;
+-
+-		if (a.negated && result != status) {
+-			if (a.action == NSS_ACTION_RETURN) {
+-				if (result == NSS_STATUS_SUCCESS)
+-					return 1;
+-				else
+-					return 0;
+-			}
+-		}
+-	}
+-
+-	a = this->action[result];
+-
+-	/* Check if we have other actions for this status */
+-	switch (result) {
+-	case NSS_STATUS_SUCCESS:
+-		if (a.action == NSS_ACTION_CONTINUE)
+-			break;
+-		return 1;
+-
+-	case NSS_STATUS_NOTFOUND:
+-	case NSS_STATUS_UNAVAIL:
+-	case NSS_STATUS_TRYAGAIN:
+-		if (a.action == NSS_ACTION_RETURN) {
+-			return 0;
+-		}
+-		break;
+-
+-	default:
+-		break;
+-	}
+-
+-	return -1;
+-}
+-
+ static void nsslist_cleanup(void *arg)
+ {
+ 	struct list_head *nsslist = (struct list_head *) arg;
+diff --git a/include/nsswitch.h b/include/nsswitch.h
+index 2b445a9..d3e4027 100644
+--- a/include/nsswitch.h
++++ b/include/nsswitch.h
+@@ -56,6 +56,7 @@ struct nss_source {
+ }; 
+ 
+ int set_action(struct nss_action *a, char *status, char *action, int negated);
++int check_nss_result(struct nss_source *this, enum nsswitch_status result);
+ struct nss_source *add_source(struct list_head *head, char *source);
+ int free_sources(struct list_head *list);
+ 
+diff --git a/lib/nsswitch.c b/lib/nsswitch.c
+index c6163a7..74c7525 100644
+--- a/lib/nsswitch.c
++++ b/lib/nsswitch.c
+@@ -55,6 +55,51 @@ int set_action(struct nss_action *act, char *status, char *action, int negated)
+ 	return 1;
+ }
+ 
++int check_nss_result(struct nss_source *this, enum nsswitch_status result)
++{
++	enum nsswitch_status status;
++	struct nss_action a;
++
++	/* Check if we have negated actions */
++	for (status = 0; status < NSS_STATUS_MAX; status++) {
++		a = this->action[status];
++		if (a.action == NSS_ACTION_UNKNOWN)
++			continue;
++
++		if (a.negated && result != status) {
++			if (a.action == NSS_ACTION_RETURN) {
++				if (result == NSS_STATUS_SUCCESS)
++					return 1;
++				else
++					return 0;
++			}
++		}
++	}
++
++	a = this->action[result];
++
++	/* Check if we have other actions for this status */
++	switch (result) {
++	case NSS_STATUS_SUCCESS:
++		if (a.action == NSS_ACTION_CONTINUE)
++			break;
++		return 1;
++
++	case NSS_STATUS_NOTFOUND:
++	case NSS_STATUS_UNAVAIL:
++	case NSS_STATUS_TRYAGAIN:
++		if (a.action == NSS_ACTION_RETURN) {
++			return 0;
++		}
++		break;
++
++	default:
++		break;
++	}
++
++	return -1;
++}
++
+ struct nss_source *add_source(struct list_head *head, char *source)
+ {
+ 	struct nss_source *s;

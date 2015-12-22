@@ -1,0 +1,216 @@
+autofs-5.1.1 - implement reinit in ldap lookup module
+
+From: Ian Kent <raven@themaw.net>
+
+Refactor the ldap lookup module to add an implementation for the newly
+added reinit entry point.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ modules/lookup_ldap.c |  109 +++++++++++++++++++++++++++++++++++--------------
+ 1 file changed, 77 insertions(+), 32 deletions(-)
+
+diff --git a/modules/lookup_ldap.c b/modules/lookup_ldap.c
+index 0f5bc48..578d6c6 100644
+--- a/modules/lookup_ldap.c
++++ b/modules/lookup_ldap.c
+@@ -1683,39 +1683,23 @@ static void validate_uris(struct list_head *list)
+ 	return;			
+ }
+ 
+-/*
+- * This initializes a context (persistent non-global data) for queries to
+- * this module.  Return zero if we succeed.
+- */
+-int lookup_init(const char *mapfmt,
+-		int argc, const char *const *argv, void **context)
++static int do_init(const char *mapfmt,
++		   int argc, const char *const *argv,
++		   struct lookup_context *ctxt, unsigned int reinit)
+ {
+ 	unsigned int is_amd_format;
+-	struct lookup_context *ctxt;
+-	char buf[MAX_ERR_BUF];
+ 	int ret;
+ 
+-	*context = NULL;
+-
+-	/* If we can't build a context, bail. */
+-	ctxt = malloc(sizeof(struct lookup_context));
+-	if (!ctxt) {
+-		char *estr = strerror_r(errno, buf, sizeof(buf));
+-		logerr(MODPREFIX "malloc: %s", estr);
+-		return 1;
+-	}
+-	memset(ctxt, 0, sizeof(struct lookup_context));
+-
+ 	ret = pthread_mutex_init(&ctxt->uris_mutex, NULL);
+ 	if (ret) {
+ 		error(LOGOPT_ANY, MODPREFIX "failed to init uris mutex");
+-		free(ctxt);
+ 		return 1;
+ 	}
+ 
+ 	/* If a map type isn't explicitly given, parse it like sun entries. */
+ 	if (mapfmt == NULL)
+ 		mapfmt = MAPFMT_DEFAULT;
++
+ 	is_amd_format = 0;
+ 	if (!strcmp(mapfmt, "amd")) {
+ 		is_amd_format = 1;
+@@ -1733,7 +1717,6 @@ int lookup_init(const char *mapfmt,
+ 		 */
+ 		if (!parse_server_string(LOGOPT_NONE, argv[0], ctxt)) {
+ 			error(LOGOPT_ANY, MODPREFIX "cannot parse server string");
+-			free_context(ctxt);
+ 			return 1;
+ 		}
+ 
+@@ -1758,7 +1741,6 @@ int lookup_init(const char *mapfmt,
+ 		char *tmp = conf_amd_get_ldap_base();
+ 		if (!tmp) {
+ 			error(LOGOPT_ANY, MODPREFIX "failed to get base dn");
+-			free_context(ctxt);
+ 			return 1;
+ 		}
+ 		ctxt->base = tmp;
+@@ -1767,7 +1749,6 @@ int lookup_init(const char *mapfmt,
+ 		if (!tmp) {
+ 			error(LOGOPT_ANY,
+ 			      MODPREFIX "failed to get ldap_hostports");
+-			free_context(ctxt);
+ 			return 1;
+ 		}
+ 
+@@ -1777,21 +1758,18 @@ int lookup_init(const char *mapfmt,
+ 		 */
+ 		if (!parse_server_string(LOGOPT_NONE, tmp, ctxt)) {
+ 			error(LOGOPT_ANY, MODPREFIX "cannot parse server string");
+-			free_context(ctxt);
+ 			return 1;
+ 		}
+ 		free(tmp);
+ 
+ 		if (!ctxt->server) {
+ 			error(LOGOPT_ANY, MODPREFIX "ldap_hostports not valid");
+-			free_context(ctxt);
+ 			return 1;
+ 		}
+ 
+ 		tmp = strdup(argv[0]);
+ 		if (!tmp) {
+ 			error(LOGOPT_ANY, MODPREFIX "failed to set mapname");
+-			free_context(ctxt);
+ 			return 1;
+ 		}
+ 		ctxt->mapname = tmp;
+@@ -1805,7 +1783,7 @@ int lookup_init(const char *mapfmt,
+ 	 */
+ 	ret = parse_ldap_config(LOGOPT_NONE, ctxt);
+ 	if (ret) {
+-		free_context(ctxt);
++		error(LOGOPT_ANY, MODPREFIX "failed to parse ldap config");
+ 		return 1;
+ 	}
+ 
+@@ -1815,7 +1793,6 @@ int lookup_init(const char *mapfmt,
+ 	if (!autofs_sasl_client_init(LOGOPT_NONE)) {
+ 		error(LOGOPT_ANY, "failed to init sasl client");
+ 		ldapinit_mutex_unlock();
+-		free_context(ctxt);
+ 		return 1;
+ 	}
+ 	ldapinit_mutex_unlock();
+@@ -1824,13 +1801,51 @@ int lookup_init(const char *mapfmt,
+ 	if (is_amd_format)
+ 		ctxt->timestamp = get_amd_timestamp(ctxt);
+ 
+-	/* Open the parser, if we can. */
+-	ctxt->parse = open_parse(mapfmt, MODPREFIX, argc - 1, argv + 1);
+-	if (!ctxt->parse) {
++	if (reinit) {
++		ret = reinit_parse(ctxt->parse,
++				   mapfmt, MODPREFIX, argc - 1, argv + 1);
++		if (ret)
++			logmsg(MODPREFIX "failed to reinit parse context");
++	} else {
++		/* Open the parser, if we can. */
++		ctxt->parse = open_parse(mapfmt, MODPREFIX, argc - 1, argv + 1);
++		if (!ctxt->parse) {
++			logerr(MODPREFIX "failed to open parse context");
++			ret = 1;
++		}
++	}
++
++	return ret;
++}
++
++/*
++ * This initializes a context (persistent non-global data) for queries to
++ * this module.  Return zero if we succeed.
++ */
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
++{
++	struct lookup_context *ctxt;
++	char buf[MAX_ERR_BUF];
++	int ret;
++
++	*context = NULL;
++
++	/* If we can't build a context, bail. */
++	ctxt = malloc(sizeof(struct lookup_context));
++	if (!ctxt) {
++		char *estr = strerror_r(errno, buf, sizeof(buf));
++		logerr(MODPREFIX "malloc: %s", estr);
++		return 1;
++	}
++	memset(ctxt, 0, sizeof(struct lookup_context));
++
++	ret = do_init(mapfmt, argc, argv, ctxt, 0);
++	if (ret) {
+ 		free_context(ctxt);
+-		logerr(MODPREFIX "failed to open parse context");
+ 		return 1;
+ 	}
++
+ 	*context = ctxt;
+ 
+ 	return 0;
+@@ -1839,6 +1854,36 @@ int lookup_init(const char *mapfmt,
+ int lookup_reinit(const char *mapfmt,
+ 		  int argc, const char *const *argv, void **context)
+ {
++	struct lookup_context *ctxt = (struct lookup_context *) *context;
++	struct lookup_context *new;
++	char buf[MAX_ERR_BUF];
++	int ret;
++
++	/* If we can't build a context, bail. */
++	new = malloc(sizeof(struct lookup_context));
++	if (!new) {
++		char *estr = strerror_r(errno, buf, sizeof(buf));
++		logerr(MODPREFIX "malloc: %s", estr);
++		return 1;
++	}
++	memset(new, 0, sizeof(struct lookup_context));
++
++	new->parse = ctxt->parse;
++	ret = do_init(mapfmt, argc, argv, new, 1);
++	if (ret) {
++		free_context(new);
++		return 1;
++	}
++
++	*context = new;
++
++#ifdef WITH_SASL
++	ldapinit_mutex_lock();
++	autofs_sasl_dispose(ctxt);
++	ldapinit_mutex_unlock();
++#endif
++	free_context(ctxt);
++
+ 	return 0;
+ }
+ 

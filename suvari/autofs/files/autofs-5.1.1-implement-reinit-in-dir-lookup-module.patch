@@ -1,0 +1,121 @@
+autofs-5.1.1 - implement reinit in dir lookup module
+
+From: Ian Kent <raven@themaw.net>
+
+Refactor the dir lookup module to add an implementation for the newly
+added reinit entry point.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ modules/lookup_dir.c |   58 ++++++++++++++++++++++++++++++++++----------------
+ 1 file changed, 39 insertions(+), 19 deletions(-)
+
+diff --git a/modules/lookup_dir.c b/modules/lookup_dir.c
+index 7a95e24..2880447 100644
+--- a/modules/lookup_dir.c
++++ b/modules/lookup_dir.c
+@@ -50,24 +50,13 @@ struct lookup_context {
+ 
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+-
+-int lookup_init(const char *mapfmt,
+-		int argc, const char *const *argv, void **context)
++static int do_init(const char *mapfmt,
++		   int argc, const char *const *argv,
++		   struct lookup_context *ctxt)
+ {
+-	struct lookup_context *ctxt;
+-	char buf[MAX_ERR_BUF];
+ 	struct stat st;
+ 
+-	*context = NULL;
+-	ctxt = malloc(sizeof(struct lookup_context));
+-	if (!ctxt) {
+-		char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+-		logerr(MODPREFIX "malloc: %s", estr);
+-		return 1;
+-	}
+-
+ 	if (argc < 1) {
+-		free(ctxt);
+ 		logerr(MODPREFIX "No map name");
+ 		return 1;
+ 	}
+@@ -75,40 +64,71 @@ int lookup_init(const char *mapfmt,
+ 	ctxt->mapname = argv[0];
+ 
+ 	if (ctxt->mapname[0] != '/') {
+-		free(ctxt);
+ 		logmsg(MODPREFIX
+ 		     "dir map %s is not an absolute pathname", argv[0]);
+ 		return 1;
+ 	}
+ 
+ 	if (access(ctxt->mapname, R_OK)) {
+-		free(ctxt);
+ 		warn(LOGOPT_NONE, MODPREFIX
+ 		     "dir map %s missing or not readable", argv[0]);
+ 		return 1;
+ 	}
+ 
+ 	if (stat(ctxt->mapname, &st)) {
+-		free(ctxt);
+ 		warn(LOGOPT_NONE, MODPREFIX
+ 		     "dir map %s, could not stat", argv[0]);
+ 		return 1;
+ 	}
+ 
+-	if ( (!S_ISDIR(st.st_mode)) && (!S_ISLNK(st.st_mode)) ) {
+-		free(ctxt);
++	if ((!S_ISDIR(st.st_mode)) && (!S_ISLNK(st.st_mode))) {
+ 		warn(LOGOPT_NONE, MODPREFIX
+ 		     "dir map %s, is not a directory", argv[0]);
+ 		return 1;
+ 	}
+ 
++	return 0;
++}
++
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
++{
++	struct lookup_context *ctxt;
++	char buf[MAX_ERR_BUF];
++
++	*context = NULL;
++
++	ctxt = malloc(sizeof(struct lookup_context));
++	if (!ctxt) {
++		char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
++		logerr(MODPREFIX "malloc: %s", estr);
++		return 1;
++	}
++	memset(ctxt, 0, sizeof(struct  lookup_context));
++
++	if (do_init(mapfmt, argc, argv, ctxt)) {
++		free(ctxt);
++		return 1;
++	}
++
+ 	*context = ctxt;
++
+ 	return 0;
+ }
+ 
+ int lookup_reinit(const char *mapfmt,
+ 		  int argc, const char *const *argv, void **context)
+ {
++	struct lookup_context *ctxt = (struct lookup_context *) *context;
++	struct lookup_context new;
++	int ret;
++
++	ret = do_init(mapfmt, argc, argv, &new);
++	if (ret)
++		return 1;
++
++	ctxt->mapname = new.mapname;
++
+ 	return 0;
+ }
+ 

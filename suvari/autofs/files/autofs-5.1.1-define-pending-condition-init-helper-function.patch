@@ -1,0 +1,68 @@
+autofs-5.1.1 - define pending condition init helper function
+
+From: Yu Ning <ning.yu@ubuntu.com>
+
+The time returned by gettimeofday() is affected by discontinuous jumps
+in the system time, so it causes an issue that autofs may not auto
+unmount a mount point if system time is manually changed by the system
+administrator.
+
+To fix the issue we need to convert to using a monotonic clock source
+instead of the clock source used by gettimeofday().
+
+We also want to use a monotonic clock source for the condition wait
+of both the direct and indirect mount thread creation as well the
+expire thread creation of each. So create a common helper function
+to initialize a condition variable to use a monotonic clock source.
+
+Signed-off-by: Yu Ning <ning.yu@ubuntu.com>
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG           |    1 +
+ include/automount.h |   21 +++++++++++++++++++++
+ 2 files changed, 22 insertions(+)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index c443f49..20a64a7 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -25,6 +25,7 @@
+ - Add a mode option for master map entries.
+ - define monotonic clock helper functions.
+ - use monotonic clock for alarm thread condition wait.
++- define pending condition init helper function.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/include/automount.h b/include/automount.h
+index 9e82048..2cf0611 100644
+--- a/include/automount.h
++++ b/include/automount.h
+@@ -429,6 +429,27 @@ struct pending_args {
+ };
+ 
+ #ifdef INCLUDE_PENDING_FUNCTIONS
++static void pending_cond_init(void *arg)
++{
++	struct pending_args *mt = (struct pending_args *) arg;
++	pthread_condattr_t condattrs;
++	int status;
++
++	status = pthread_condattr_init(&condattrs);
++	if (status)
++		fatal(status);
++
++	status = pthread_condattr_setclock(&condattrs, CLOCK_MONOTONIC);
++	if (status)
++		fatal(status);
++
++	status = pthread_cond_init(&mt->cond, &condattrs);
++	if (status)
++		fatal(status);
++
++	pthread_condattr_destroy(&condattrs);
++}
++
+ static void pending_cond_destroy(void *arg)
+ {
+ 	struct pending_args *mt = (struct pending_args *) arg;

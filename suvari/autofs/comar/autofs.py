@@ -2,13 +2,13 @@ from comar.service import *
 import os
 
 serviceType = "local"
-serviceDefault = "off"
+serviceDefault = "on"
 serviceDesc = _({"en": "Automount filesystems on demand",
                  "tr": "Dosya sistemi otomatik bağlayıcı"})
 serviceConf = "autofs"
 
 PIDFILE = "/run/autofs/autofs.pid"
-AUTOMOUNT = "/usr/sbin/automount"
+AUTOMOUNT = "/usr/bin/automount"
 
 @synchronized
 def start():

@@ -1,0 +1,260 @@
+autofs-5.1.1 - make open_lookup() return nss status
+
+From: Ian Kent <raven@themaw.net>
+
+In order to distinguish between source unavailable and map not found
+when opening nsswitch sources that have non-default actions open_lookup()
+needs to return distinct results for these two cases.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ daemon/lookup.c        |   21 +++++++++++----------
+ daemon/module.c        |   22 +++++++++++++---------
+ include/automount.h    |    4 ++--
+ modules/lookup_multi.c |   20 +++++++++++++-------
+ modules/parse_amd.c    |    6 ++++--
+ 5 files changed, 43 insertions(+), 30 deletions(-)
+
+diff --git a/daemon/lookup.c b/daemon/lookup.c
+index 53455a1..0579f98 100644
+--- a/daemon/lookup.c
++++ b/daemon/lookup.c
+@@ -44,9 +44,9 @@ static int do_read_master(struct master *master, char *type, time_t age)
+ 	argv[0] = master->name;
+ 	argv[1] = NULL;
+ 
+-	lookup = open_lookup(type, "", NULL, argc, argv);
+-	if (!lookup)
+-		return NSS_STATUS_UNAVAIL;
++	status = open_lookup(type, "", NULL, argc, argv, &lookup);
++	if (status != NSS_STATUS_SUCCESS)
++		return status;
+ 
+ 	status = lookup->lookup_read_master(master, age, lookup->context);
+ 
+@@ -300,10 +300,11 @@ static int do_read_map(struct autofs_point *ap, struct map_source *map, time_t a
+ 	struct lookup_mod *lookup;
+ 	int status;
+ 
+-	lookup = open_lookup(map->type, "", map->format, map->argc, map->argv);
+-	if (!lookup) {
++	status = open_lookup(map->type, "", map->format,
++			     map->argc, map->argv, &lookup);
++	if (status != NSS_STATUS_SUCCESS) {
+ 		debug(ap->logopt, "lookup module %s failed", map->type);
+-		return NSS_STATUS_UNAVAIL;
++		return status;
+ 	}
+ 
+ 	master_source_writelock(ap->entry);
+@@ -737,12 +738,12 @@ int do_lookup_mount(struct autofs_point *ap, struct map_source *map, const char
+ 	int status;
+ 
+ 	if (!map->lookup) {
+-		lookup = open_lookup(map->type, "",
+-				     map->format, map->argc, map->argv);
+-		if (!lookup) {
++		status = open_lookup(map->type, "",
++				     map->format, map->argc, map->argv, &lookup);
++		if (status != NSS_STATUS_SUCCESS) {
+ 			debug(ap->logopt,
+ 			      "lookup module %s failed", map->type);
+-			return NSS_STATUS_UNAVAIL;
++			return status;
+ 		}
+ 		map->lookup = lookup;
+ 	}
+diff --git a/daemon/module.c b/daemon/module.c
+index 466d8d7..9028aaa 100644
+--- a/daemon/module.c
++++ b/daemon/module.c
+@@ -17,6 +17,7 @@
+ #include <string.h>
+ #include <stdlib.h>
+ #include "automount.h"
++#include "nsswitch.h"
+ 
+ int load_autofs4_module(void)
+ {
+@@ -53,8 +54,8 @@ int load_autofs4_module(void)
+ 	return 1;
+ }
+ 
+-struct lookup_mod *open_lookup(const char *name, const char *err_prefix,
+-			       const char *mapfmt, int argc, const char *const *argv)
++int open_lookup(const char *name, const char *err_prefix, const char *mapfmt,
++		int argc, const char *const *argv, struct lookup_mod **lookup)
+ {
+ 	struct lookup_mod *mod;
+ 	char buf[MAX_ERR_BUF];
+@@ -63,6 +64,7 @@ struct lookup_mod *open_lookup(const char *name, const char *err_prefix,
+ 	void *dh;
+ 	int *ver;
+ 
++	*lookup = NULL;
+ 
+ 	mod = malloc(sizeof(struct lookup_mod));
+ 	if (!mod) {
+@@ -70,7 +72,7 @@ struct lookup_mod *open_lookup(const char *name, const char *err_prefix,
+ 			char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+ 			logerr("%s%s", err_prefix, estr);
+ 		}
+-		return NULL;
++		return NSS_STATUS_UNAVAIL;
+ 	}
+ 
+ 	size = snprintf(fnbuf, sizeof(fnbuf),
+@@ -81,7 +83,7 @@ struct lookup_mod *open_lookup(const char *name, const char *err_prefix,
+ 			char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+ 			logerr("%s%s", err_prefix, estr);
+ 		}
+-		return NULL;
++		return NSS_STATUS_UNAVAIL;
+ 	}
+ 
+ 	if (!(dh = dlopen(fnbuf, RTLD_NOW))) {
+@@ -89,7 +91,7 @@ struct lookup_mod *open_lookup(const char *name, const char *err_prefix,
+ 			logerr("%scannot open lookup module %s (%s)",
+ 			       err_prefix, name, dlerror());
+ 		free(mod);
+-		return NULL;
++		return NSS_STATUS_UNAVAIL;
+ 	}
+ 
+ 	if (!(ver = (int *) dlsym(dh, "lookup_version"))
+@@ -99,7 +101,7 @@ struct lookup_mod *open_lookup(const char *name, const char *err_prefix,
+ 			     err_prefix, name);
+ 		dlclose(dh);
+ 		free(mod);
+-		return NULL;
++		return NSS_STATUS_UNAVAIL;
+ 	}
+ 
+ 	if (!(mod->lookup_init = (lookup_init_t) dlsym(dh, "lookup_init")) ||
+@@ -111,16 +113,18 @@ struct lookup_mod *open_lookup(const char *name, const char *err_prefix,
+ 			logerr("%slookup module %s corrupt", err_prefix, name);
+ 		dlclose(dh);
+ 		free(mod);
+-		return NULL;
++		return NSS_STATUS_UNAVAIL;
+ 	}
+ 
+ 	if (mod->lookup_init(mapfmt, argc, argv, &mod->context)) {
+ 		dlclose(dh);
+ 		free(mod);
+-		return NULL;
++		return NSS_STATUS_NOTFOUND;
+ 	}
+ 	mod->dlhandle = dh;
+-	return mod;
++	*lookup = mod;
++
++	return NSS_STATUS_SUCCESS;
+ }
+ 
+ int close_lookup(struct lookup_mod *mod)
+diff --git a/include/automount.h b/include/automount.h
+index 447aba1..d614c10 100644
+--- a/include/automount.h
++++ b/include/automount.h
+@@ -302,8 +302,8 @@ struct lookup_mod {
+ 	void *context;
+ };
+ 
+-struct lookup_mod *open_lookup(const char *name, const char *err_prefix,
+-			       const char *mapfmt, int argc, const char *const *argv);
++int open_lookup(const char *name, const char *err_prefix, const char *mapfmt,
++		int argc, const char *const *argv, struct lookup_mod **lookup);
+ int close_lookup(struct lookup_mod *);
+ 
+ /* parse module */
+diff --git a/modules/lookup_multi.c b/modules/lookup_multi.c
+index ffb236c..55035e4 100644
+--- a/modules/lookup_multi.c
++++ b/modules/lookup_multi.c
+@@ -50,8 +50,10 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+ 	if (!argv || !argv[0])
+ 		return NULL;
+ 
+-	if (*argv[0] == '/')
+-		return open_lookup("file", MODPREFIX, format, argc, argv);
++	if (*argv[0] == '/') {
++		open_lookup("file", MODPREFIX, format, argc, argv, &mod);
++		return mod;
++	}
+ 
+ 	if (!strncmp(argv[0], "file", 4) ||
+ 	    !strncmp(argv[0], "yp", 2) ||
+@@ -65,7 +67,8 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+ 			fmt++;
+ 		else
+ 			fmt = format;
+-		return open_lookup(argv[0], MODPREFIX, fmt, argc -1, argv + 1);
++		open_lookup(argv[0], MODPREFIX, fmt, argc - 1, argv + 1, &mod);
++		return mod;
+ 	}
+ 
+ 	INIT_LIST_HEAD(&nsslist);
+@@ -80,6 +83,7 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+ 	head = &nsslist;
+ 	list_for_each(p, head) {
+ 		struct nss_source *this;
++		int status;
+ 
+ 		this = list_entry(p, struct nss_source, list);
+ 
+@@ -113,8 +117,9 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+ 			save_argv0 = (char *) argv[0];
+ 			argv[0] = path;
+ 
+-			mod = open_lookup(type, MODPREFIX, format, argc, argv);
+-			if (mod) {
++			status = open_lookup(type, MODPREFIX,
++					     format, argc, argv, &mod);
++			if (status == NSS_STATUS_SUCCESS) {
+ 				free_sources(&nsslist);
+ 				free(save_argv0);
+ 				return mod;
+@@ -124,8 +129,9 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+ 			free(path);
+ 		}
+ 
+-		mod = open_lookup(this->source, MODPREFIX, format, argc, argv);
+-		if (mod) {
++		status = open_lookup(this->source, MODPREFIX,
++				     format, argc, argv, &mod);
++		if (status == NSS_STATUS_SUCCESS) {
+ 			free_sources(&nsslist);
+ 			return mod;
+ 		}
+diff --git a/modules/parse_amd.c b/modules/parse_amd.c
+index 899be40..2e3d21f 100644
+--- a/modules/parse_amd.c
++++ b/modules/parse_amd.c
+@@ -31,6 +31,7 @@
+ 
+ #define MODULE_PARSE
+ #include "automount.h"
++#include "nsswitch.h"
+ 
+ #define MODPREFIX "parse(amd): "
+ 
+@@ -1129,6 +1130,7 @@ static int do_host_mount(struct autofs_point *ap, const char *name,
+ 	struct mapent *me;
+ 	const char *argv[2];
+ 	const char **pargv = NULL;
++	int status;
+ 	int argc = 0;
+ 	int ret = 1;
+ 
+@@ -1170,8 +1172,8 @@ static int do_host_mount(struct autofs_point *ap, const char *name,
+ 	}
+ 
+ 	instance_mutex_lock();
+-	lookup = open_lookup("hosts", MODPREFIX, NULL, argc, pargv);
+-	if (!lookup) {
++	status = open_lookup("hosts", MODPREFIX, NULL, argc, pargv, &lookup);
++	if (status != NSS_STATUS_SUCCESS) {
+ 		debug(ap->logopt, "open lookup module hosts failed");
+ 		instance_mutex_unlock();
+ 		goto out;

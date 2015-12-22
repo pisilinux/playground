@@ -1,0 +1,56 @@
+autofs-5.1.1 - fix direct map expire not set for initial empty map
+
+From: Ian Kent <raven@themaw.net>
+
+If an empty direct map is present at startup the expire alarm can't be
+set because the expire run frequency isn't known. But if the map is
+re-read and is no longer empty the expire alarm wasn't being set.
+
+Fix suggested by xuw at redhat dot com, thanks.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG      |    1 +
+ daemon/state.c |   10 ++++++++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 7bd261a..52b166d 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -14,6 +14,7 @@
+ - fix config old name lookup.
+ - fix error handling on ldap bind fail.
+ - fix direct mount stale instance flag reset.
++- fix direct map expire not set for initail empty map.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/daemon/state.c b/daemon/state.c
+index 3bea4af..6c8c4f6 100644
+--- a/daemon/state.c
++++ b/daemon/state.c
+@@ -488,6 +488,7 @@ static void *do_readmap(void *arg)
+ 		status = lookup_ghost(ap, ap->path);
+ 	} else {
+ 		struct mapent *me;
++		unsigned int append_alarm = !ap->exp_runfreq;
+ 
+ 		mnts = tree_make_mnt_tree(_PROC_MOUNTS, "/");
+ 		pthread_cleanup_push(tree_mnts_cleanup, mnts);
+@@ -517,6 +518,15 @@ static void *do_readmap(void *arg)
+ 			map->stale = 0;
+ 			map = map->next;
+ 		}
++
++		/* If the direct mount map was empty at startup no expire
++		 * alarm will have been added. So add it here if there are
++		 * now map entries.
++		 */
++		if (append_alarm && ap->exp_runfreq)
++			alarm_add(ap, ap->exp_runfreq +
++				  rand() % ap->exp_runfreq);
++
+ 		pthread_cleanup_pop(1);
+ 		pthread_cleanup_pop(1);
+ 		pthread_cleanup_pop(1);

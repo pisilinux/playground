@@ -1,0 +1,59 @@
+autofs-5.1.1 - fix update_hosts_mounts() return
+
+From: Ian Kent <raven@themaw.net>
+
+The return of update_hosts_mounts() isn't used so set it to void type
+and log a warning if the map entry fails the parse.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG              |    1 +
+ modules/lookup_hosts.c |   11 ++++++-----
+ 2 files changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index e22877e..77aad99 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -16,6 +16,7 @@
+ - fix direct mount stale instance flag reset.
+ - fix direct map expire not set for initail empty map.
+ - fix missing source sss in multi map lookup.
++- fix update_hosts_mounts() return.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/modules/lookup_hosts.c b/modules/lookup_hosts.c
+index 0d48356..53aa9d6 100644
+--- a/modules/lookup_hosts.c
++++ b/modules/lookup_hosts.c
+@@ -162,9 +162,9 @@ static int do_parse_mount(struct autofs_point *ap, struct map_source *source,
+ 	return NSS_STATUS_SUCCESS;
+ }
+ 
+-static int update_hosts_mounts(struct autofs_point *ap,
+-			       struct map_source *source, time_t age,
+-			       struct lookup_context *ctxt)
++static void update_hosts_mounts(struct autofs_point *ap,
++				struct map_source *source, time_t age,
++				struct lookup_context *ctxt)
+ {
+ 	struct mapent_cache *mc;
+ 	struct mapent *me;
+@@ -212,13 +212,14 @@ next:
+ 		ap->flags |= MOUNT_FLAG_REMOUNT;
+ 		ret = ctxt->parse->parse_mount(ap, me->key, strlen(me->key),
+ 					       me->mapent, ctxt->parse->context);
++		if (ret)
++			warn(ap->logopt, MODPREFIX
++			     "failed to parse mount %s", me->mapent);
+ 		ap->flags &= ~MOUNT_FLAG_REMOUNT;
+ cont:
+ 		me = cache_lookup_next(mc, me);
+ 	}
+ 	pthread_cleanup_pop(1);
+-
+-	return NSS_STATUS_SUCCESS;
+ }
+ 
+ int lookup_read_map(struct autofs_point *ap, time_t age, void *context)

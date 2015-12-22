@@ -1,0 +1,666 @@
+autofs-5.1.1 - add reinit entry point to modules
+
+From: Ian Kent <raven@themaw.net>
+
+In order to avoid closing and then re-opening lookup modules
+on HUP signal (since there init entry point needs to be called
+for initialization) add a reinit entry point to lookup, parse
+and mount modules.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ daemon/module.c           |   39 +++++++++++++++++++++++++++++++++++++++
+ include/automount.h       |   15 +++++++++++++++
+ modules/lookup_dir.c      |    9 ++++++++-
+ modules/lookup_file.c     |    9 ++++++++-
+ modules/lookup_hesiod.c   |    9 ++++++++-
+ modules/lookup_hosts.c    |    9 ++++++++-
+ modules/lookup_ldap.c     |    9 ++++++++-
+ modules/lookup_multi.c    |    9 ++++++++-
+ modules/lookup_nisplus.c  |    9 ++++++++-
+ modules/lookup_program.c  |    9 ++++++++-
+ modules/lookup_sss.c      |    9 ++++++++-
+ modules/lookup_userhome.c |    9 ++++++++-
+ modules/lookup_yp.c       |    9 ++++++++-
+ modules/mount_afs.c       |    5 +++++
+ modules/mount_autofs.c    |    5 +++++
+ modules/mount_bind.c      |    5 +++++
+ modules/mount_changer.c   |    5 +++++
+ modules/mount_ext2.c      |    5 +++++
+ modules/mount_generic.c   |    5 +++++
+ modules/mount_nfs.c       |    5 +++++
+ modules/parse_amd.c       |    5 +++++
+ modules/parse_hesiod.c    |    5 +++++
+ modules/parse_sun.c       |    5 +++++
+ 23 files changed, 192 insertions(+), 11 deletions(-)
+
+diff --git a/daemon/module.c b/daemon/module.c
+index 9028aaa..3bd7a0c 100644
+--- a/daemon/module.c
++++ b/daemon/module.c
+@@ -105,6 +105,7 @@ int open_lookup(const char *name, const char *err_prefix, const char *mapfmt,
+ 	}
+ 
+ 	if (!(mod->lookup_init = (lookup_init_t) dlsym(dh, "lookup_init")) ||
++	    !(mod->lookup_reinit = (lookup_reinit_t) dlsym(dh, "lookup_reinit")) ||
+ 	    !(mod->lookup_read_master = (lookup_read_master_t) dlsym(dh, "lookup_read_master")) ||
+ 	    !(mod->lookup_read_map = (lookup_read_map_t) dlsym(dh, "lookup_read_map")) ||
+ 	    !(mod->lookup_mount = (lookup_mount_t) dlsym(dh, "lookup_mount")) ||
+@@ -127,6 +128,19 @@ int open_lookup(const char *name, const char *err_prefix, const char *mapfmt,
+ 	return NSS_STATUS_SUCCESS;
+ }
+ 
++int reinit_lookup(struct lookup_mod *mod, const char *name,
++		  const char *err_prefix, const char *mapfmt,
++		  int argc, const char *const *argv)
++{
++	if (mod->lookup_reinit(mapfmt, argc, argv, &mod->context)) {
++		if (err_prefix)
++			logerr("%scould not reinit lookup module %s",
++			       err_prefix, name);
++		return 1;
++	}
++	return 0;
++}
++
+ int close_lookup(struct lookup_mod *mod)
+ {
+ 	int rv = mod->lookup_done(mod->context);
+@@ -185,6 +199,7 @@ struct parse_mod *open_parse(const char *name, const char *err_prefix,
+ 	}
+ 
+ 	if (!(mod->parse_init = (parse_init_t) dlsym(dh, "parse_init")) ||
++	    !(mod->parse_reinit = (parse_reinit_t) dlsym(dh, "parse_reinit")) ||
+ 	    !(mod->parse_mount = (parse_mount_t) dlsym(dh, "parse_mount")) ||
+ 	    !(mod->parse_done = (parse_done_t) dlsym(dh, "parse_done"))) {
+ 		if (err_prefix)
+@@ -204,6 +219,18 @@ struct parse_mod *open_parse(const char *name, const char *err_prefix,
+ 	return mod;
+ }
+ 
++int reinit_parse(struct parse_mod *mod, const char *name,
++		 const char *err_prefix, int argc, const char *const *argv)
++{
++	if (mod->parse_reinit(argc, argv, &mod->context)) {
++		if (err_prefix)
++			logerr("%scould not reinit parse module %s",
++			       err_prefix, name);
++		return 1;
++	}
++	return 0;
++}
++
+ int close_parse(struct parse_mod *mod)
+ {
+ 	int rv = mod->parse_done(mod->context);
+@@ -261,6 +288,7 @@ struct mount_mod *open_mount(const char *name, const char *err_prefix)
+ 	}
+ 
+ 	if (!(mod->mount_init = (mount_init_t) dlsym(dh, "mount_init")) ||
++	    !(mod->mount_reinit = (mount_reinit_t) dlsym(dh, "mount_reinit")) ||
+ 	    !(mod->mount_mount = (mount_mount_t) dlsym(dh, "mount_mount")) ||
+ 	    !(mod->mount_done = (mount_done_t) dlsym(dh, "mount_done"))) {
+ 		if (err_prefix)
+@@ -280,6 +308,17 @@ struct mount_mod *open_mount(const char *name, const char *err_prefix)
+ 	return mod;
+ }
+ 
++int reinit_mount(struct mount_mod *mod, const char *name, const char *err_prefix)
++{
++	if (mod->mount_reinit(&mod->context)) {
++		if (err_prefix)
++			logerr("%scould not reinit mount module %s",
++			       err_prefix, name);
++		return 1;
++	}
++	return 0;
++}
++
+ int close_mount(struct mount_mod *mod)
+ {
+ 	int rv = mod->mount_done(mod->context);
+diff --git a/include/automount.h b/include/automount.h
+index d614c10..ab3e360 100644
+--- a/include/automount.h
++++ b/include/automount.h
+@@ -281,12 +281,14 @@ int lookup_source_close_ioctlfd(struct autofs_point *ap, const char *key);
+ 
+ #ifdef MODULE_LOOKUP
+ int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context);
++int lookup_reinit(const char *mapfmt, int argc, const char *const *argv, void **context);
+ int lookup_read_master(struct master *master, time_t age, void *context);
+ int lookup_read_map(struct autofs_point *, time_t, void *context);
+ int lookup_mount(struct autofs_point *, const char *, int, void *);
+ int lookup_done(void *);
+ #endif
+ typedef int (*lookup_init_t) (const char *, int, const char *const *, void **);
++typedef int (*lookup_reinit_t) (const char *, int, const char *const *, void **);
+ typedef int (*lookup_read_master_t) (struct master *master, time_t, void *);
+ typedef int (*lookup_read_map_t) (struct autofs_point *, time_t, void *);
+ typedef int (*lookup_mount_t) (struct autofs_point *, const char *, int, void *);
+@@ -294,6 +296,7 @@ typedef int (*lookup_done_t) (void *);
+ 
+ struct lookup_mod {
+ 	lookup_init_t lookup_init;
++	lookup_reinit_t lookup_reinit;
+ 	lookup_read_master_t lookup_read_master;
+ 	lookup_read_map_t lookup_read_map;
+ 	lookup_mount_t lookup_mount;
+@@ -304,6 +307,9 @@ struct lookup_mod {
+ 
+ int open_lookup(const char *name, const char *err_prefix, const char *mapfmt,
+ 		int argc, const char *const *argv, struct lookup_mod **lookup);
++int reinit_lookup(struct lookup_mod *mod, const char *name,
++		  const char *err_prefix, const char *mapfmt,
++		  int argc, const char *const *argv);
+ int close_lookup(struct lookup_mod *);
+ 
+ /* parse module */
+@@ -312,16 +318,19 @@ int close_lookup(struct lookup_mod *);
+ 
+ #ifdef MODULE_PARSE
+ int parse_init(int argc, const char *const *argv, void **context);
++int parse_reinit(int argc, const char *const *argv, void **context);
+ int parse_mount(struct autofs_point *ap, const char *name,
+ 		int name_len, const char *mapent, void *context);
+ int parse_done(void *);
+ #endif
+ typedef int (*parse_init_t) (int, const char *const *, void **);
++typedef int (*parse_reinit_t) (int, const char *const *, void **);
+ typedef int (*parse_mount_t) (struct autofs_point *, const char *, int, const char *, void *);
+ typedef int (*parse_done_t) (void *);
+ 
+ struct parse_mod {
+ 	parse_init_t parse_init;
++	parse_reinit_t parse_reinit;
+ 	parse_mount_t parse_mount;
+ 	parse_done_t parse_done;
+ 	void *dlhandle;
+@@ -330,6 +339,8 @@ struct parse_mod {
+ 
+ struct parse_mod *open_parse(const char *name, const char *err_prefix,
+ 			     int argc, const char *const *argv);
++int reinit_parse(struct parse_mod *, const char *name,
++		 const char *err_prefix, int argc, const char *const *argv);
+ int close_parse(struct parse_mod *);
+ 
+ /* mount module */
+@@ -338,17 +349,20 @@ int close_parse(struct parse_mod *);
+ 
+ #ifdef MODULE_MOUNT
+ int mount_init(void **context);
++int mount_reinit(void **context);
+ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int name_len,
+ 		const char *what, const char *fstype, const char *options, void *context);
+ int mount_done(void *context);
+ #endif
+ typedef int (*mount_init_t) (void **);
++typedef int (*mount_reinit_t) (void **);
+ typedef int (*mount_mount_t) (struct autofs_point *, const char *, const char *, int,
+ 				const char *, const char *, const char *, void *);
+ typedef int (*mount_done_t) (void *);
+ 
+ struct mount_mod {
+ 	mount_init_t mount_init;
++	mount_reinit_t mount_reinit;
+ 	mount_mount_t mount_mount;
+ 	mount_done_t mount_done;
+ 	void *dlhandle;
+@@ -356,6 +370,7 @@ struct mount_mod {
+ };
+ 
+ struct mount_mod *open_mount(const char *name, const char *err_prefix);
++int reinit_mount(struct mount_mod *mod, const char *name, const char *err_prefix);
+ int close_mount(struct mount_mod *);
+ 
+ /* buffer management */
+diff --git a/modules/lookup_dir.c b/modules/lookup_dir.c
+index cbeda1f..7a95e24 100644
+--- a/modules/lookup_dir.c
++++ b/modules/lookup_dir.c
+@@ -51,7 +51,8 @@ struct lookup_context {
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+ 
+-int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
+ {
+ 	struct lookup_context *ctxt;
+ 	char buf[MAX_ERR_BUF];
+@@ -105,6 +106,12 @@ int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **co
+ 	return 0;
+ }
+ 
++int lookup_reinit(const char *mapfmt,
++		  int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ static int acceptable_dirent_p(const struct dirent *e)
+ {
+   size_t namesz;
+diff --git a/modules/lookup_file.c b/modules/lookup_file.c
+index 7c982c6..c32a4cd 100644
+--- a/modules/lookup_file.c
++++ b/modules/lookup_file.c
+@@ -50,7 +50,8 @@ struct lookup_context {
+ 
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+-int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
+ {
+ 	struct lookup_context *ctxt;
+ 	char buf[MAX_ERR_BUF];
+@@ -112,6 +113,12 @@ int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **co
+ 	return 0;
+ }
+ 
++int lookup_reinit(const char *mapfmt,
++		  int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ static int read_one(unsigned logopt, FILE *f, char *key, unsigned int *k_len, char *mapent, unsigned int *m_len)
+ {
+ 	char *kptr, *p;
+diff --git a/modules/lookup_hesiod.c b/modules/lookup_hesiod.c
+index 526f294..de5ec08 100644
+--- a/modules/lookup_hesiod.c
++++ b/modules/lookup_hesiod.c
+@@ -39,7 +39,8 @@ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+ /* This initializes a context (persistent non-global data) for queries to
+    this module. */
+-int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
+ {
+ 	struct lookup_context *ctxt = NULL;
+ 	char buf[MAX_ERR_BUF];
+@@ -96,6 +97,12 @@ int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **co
+ 	return 0;
+ }
+ 
++int lookup_reinit(const char *mapfmt,
++		  int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ int lookup_read_master(struct master *master, time_t age, void *context)
+ {
+ 	return NSS_STATUS_UNKNOWN;
+diff --git a/modules/lookup_hosts.c b/modules/lookup_hosts.c
+index 53aa9d6..8ba0a4a 100644
+--- a/modules/lookup_hosts.c
++++ b/modules/lookup_hosts.c
+@@ -46,7 +46,8 @@ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ exports rpc_get_exports(const char *host, long seconds, long micros, unsigned int option);
+ void rpc_exports_free(exports list);
+ 
+-int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
+ {
+ 	struct lookup_context *ctxt;
+ 	char buf[MAX_ERR_BUF];
+@@ -73,6 +74,12 @@ int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **co
+ 	return 0;
+ }
+ 
++int lookup_reinit(const char *mapfmt,
++		  int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ int lookup_read_master(struct master *master, time_t age, void *context)
+ {
+ 	return NSS_STATUS_UNKNOWN;
+diff --git a/modules/lookup_ldap.c b/modules/lookup_ldap.c
+index d846d8e..0f5bc48 100644
+--- a/modules/lookup_ldap.c
++++ b/modules/lookup_ldap.c
+@@ -1687,7 +1687,8 @@ static void validate_uris(struct list_head *list)
+  * This initializes a context (persistent non-global data) for queries to
+  * this module.  Return zero if we succeed.
+  */
+-int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
+ {
+ 	unsigned int is_amd_format;
+ 	struct lookup_context *ctxt;
+@@ -1835,6 +1836,12 @@ int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **co
+ 	return 0;
+ }
+ 
++int lookup_reinit(const char *mapfmt,
++		  int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ int lookup_read_master(struct master *master, time_t age, void *context)
+ {
+ 	struct lookup_context *ctxt = (struct lookup_context *) context;
+diff --git a/modules/lookup_multi.c b/modules/lookup_multi.c
+index ba8d4f0..0ee20f5 100644
+--- a/modules/lookup_multi.c
++++ b/modules/lookup_multi.c
+@@ -150,7 +150,8 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+ 	return NULL;
+ }
+ 
+-int lookup_init(const char *my_mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *my_mapfmt,
++		int argc, const char *const *argv, void **context)
+ {
+ 	struct lookup_context *ctxt;
+ 	char buf[MAX_ERR_BUF];
+@@ -244,6 +245,12 @@ error_out:
+ 	return 1;
+ }
+ 
++int lookup_reinit(const char *my_mapfmt,
++		  int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ int lookup_read_master(struct master *master, time_t age, void *context)
+ {
+         return NSS_STATUS_UNKNOWN;
+diff --git a/modules/lookup_nisplus.c b/modules/lookup_nisplus.c
+index d5eba47..0c66152 100644
+--- a/modules/lookup_nisplus.c
++++ b/modules/lookup_nisplus.c
+@@ -30,7 +30,8 @@ struct lookup_context {
+ 
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+-int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
+ {
+ 	struct lookup_context *ctxt;
+ 	char buf[MAX_ERR_BUF];
+@@ -76,6 +77,12 @@ int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **co
+ 	return 0;
+ }
+ 
++int lookup_reinit(const char *mapfmt,
++		  int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ int lookup_read_master(struct master *master, time_t age, void *context)
+ {
+ 	struct lookup_context *ctxt = (struct lookup_context *) context;
+diff --git a/modules/lookup_program.c b/modules/lookup_program.c
+index a3a7e98..fa4f54d 100644
+--- a/modules/lookup_program.c
++++ b/modules/lookup_program.c
+@@ -49,7 +49,8 @@ struct parse_context {
+ 
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+-int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
+ {
+ 	struct lookup_context *ctxt;
+ 	char buf[MAX_ERR_BUF];
+@@ -100,6 +101,12 @@ int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **co
+ 	return 0;
+ }
+ 
++int lookup_reinit(const char *mapfmt,
++		  int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ int lookup_read_master(struct master *master, time_t age, void *context)
+ {
+         return NSS_STATUS_UNKNOWN;
+diff --git a/modules/lookup_sss.c b/modules/lookup_sss.c
+index 720b5e3..c58a272 100644
+--- a/modules/lookup_sss.c
++++ b/modules/lookup_sss.c
+@@ -56,7 +56,8 @@ struct lookup_context {
+ 
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+-int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
+ {
+ 	struct lookup_context *ctxt;
+ 	char buf[MAX_ERR_BUF];
+@@ -137,6 +138,12 @@ lib_names_fail:
+ 	return 1;
+ }
+ 
++int lookup_reinit(const char *mapfmt,
++		  int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ static int setautomntent(unsigned int logopt,
+ 			 struct lookup_context *ctxt, const char *mapname,
+ 			 void **sss_ctxt)
+diff --git a/modules/lookup_userhome.c b/modules/lookup_userhome.c
+index fb3caaa..c21dee9 100644
+--- a/modules/lookup_userhome.c
++++ b/modules/lookup_userhome.c
+@@ -29,7 +29,14 @@
+ 
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+-int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
++{
++	return 0;		/* Nothing to do */
++}
++
++int lookup_reinit(const char *mapfmt,
++		  int argc, const char *const *argv, void **context)
+ {
+ 	return 0;		/* Nothing to do */
+ }
+diff --git a/modules/lookup_yp.c b/modules/lookup_yp.c
+index fcf470a..1e5a7ed 100644
+--- a/modules/lookup_yp.c
++++ b/modules/lookup_yp.c
+@@ -103,7 +103,8 @@ static unsigned int get_map_order(const char *domain, const char *map)
+ 	return (unsigned int) last_changed;
+ }
+ 
+-int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **context)
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
+ {
+ 	struct lookup_context *ctxt;
+ 	char buf[MAX_ERR_BUF];
+@@ -165,6 +166,12 @@ int lookup_init(const char *mapfmt, int argc, const char *const *argv, void **co
+ 	return 0;
+ }
+ 
++int lookup_reinit(const char *mapfmt,
++		  int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ int yp_all_master_callback(int status, char *ypkey, int ypkeylen,
+ 		    char *val, int vallen, char *ypcb_data)
+ {
+diff --git a/modules/mount_afs.c b/modules/mount_afs.c
+index 50628ce..2a776bd 100644
+--- a/modules/mount_afs.c
++++ b/modules/mount_afs.c
+@@ -25,6 +25,11 @@ int mount_init(void **context)
+ 	return 0;
+ }
+ 
++int mount_reinit(void **context)
++{
++	return 0;
++}
++
+ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int name_len,
+ 		const char *what, const char *fstype, const char *options, void *context)
+ {
+diff --git a/modules/mount_autofs.c b/modules/mount_autofs.c
+index 4846e7f..39948e6 100644
+--- a/modules/mount_autofs.c
++++ b/modules/mount_autofs.c
+@@ -39,6 +39,11 @@ int mount_init(void **context)
+ 	return 0;
+ }
+ 
++int mount_reinit(void **context)
++{
++	return 0;
++}
++
+ int mount_mount(struct autofs_point *ap, const char *root, const char *name,
+ 		int name_len, const char *what, const char *fstype,
+ 		const char *c_options, void *context)
+diff --git a/modules/mount_bind.c b/modules/mount_bind.c
+index ac954e3..4864ea5 100644
+--- a/modules/mount_bind.c
++++ b/modules/mount_bind.c
+@@ -67,6 +67,11 @@ out:
+ 	return 0;
+ }
+ 
++int mount_reinit(void **context)
++{
++	return 0;
++}
++
+ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int name_len,
+ 		const char *what, const char *fstype, const char *options, void *context)
+ {
+diff --git a/modules/mount_changer.c b/modules/mount_changer.c
+index 5e2b47c..798f23b 100644
+--- a/modules/mount_changer.c
++++ b/modules/mount_changer.c
+@@ -41,6 +41,11 @@ int mount_init(void **context)
+ 	return 0;
+ }
+ 
++int mount_reinit(void **context)
++{
++	return 0;
++}
++
+ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int name_len,
+ 		const char *what, const char *fstype, const char *options, void *context)
+ {
+diff --git a/modules/mount_ext2.c b/modules/mount_ext2.c
+index 3c87512..c00e3d5 100644
+--- a/modules/mount_ext2.c
++++ b/modules/mount_ext2.c
+@@ -33,6 +33,11 @@ int mount_init(void **context)
+ 	return 0;
+ }
+ 
++int mount_reinit(void **context)
++{
++	return 0;
++}
++
+ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int name_len,
+ 		const char *what, const char *fstype, const char *options, void *context)
+ {
+diff --git a/modules/mount_generic.c b/modules/mount_generic.c
+index c4108e6..ae63787 100644
+--- a/modules/mount_generic.c
++++ b/modules/mount_generic.c
+@@ -33,6 +33,11 @@ int mount_init(void **context)
+ 	return 0;
+ }
+ 
++int mount_reinit(void **context)
++{
++	return 0;
++}
++
+ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int name_len,
+ 		const char *what, const char *fstype, const char *options,
+ 		void *context)
+diff --git a/modules/mount_nfs.c b/modules/mount_nfs.c
+index 315fc99..15e1043 100644
+--- a/modules/mount_nfs.c
++++ b/modules/mount_nfs.c
+@@ -54,6 +54,11 @@ int mount_init(void **context)
+ 	return !mount_bind;
+ }
+ 
++int mount_reinit(void **context)
++{
++	return 0;
++}
++
+ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int name_len,
+ 		const char *what, const char *fstype, const char *options,
+ 		void *context)
+diff --git a/modules/parse_amd.c b/modules/parse_amd.c
+index 2e3d21f..0626bf4 100644
+--- a/modules/parse_amd.c
++++ b/modules/parse_amd.c
+@@ -130,6 +130,11 @@ int parse_init(int argc, const char *const *argv, void **context)
+ 	return 0;
+ }
+ 
++int parse_reinit(int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ static struct substvar *add_lookup_vars(struct autofs_point *ap,
+ 					const char *key, int key_len,
+ 					struct map_source *source,
+diff --git a/modules/parse_hesiod.c b/modules/parse_hesiod.c
+index 237fd50..0b2b57f 100644
+--- a/modules/parse_hesiod.c
++++ b/modules/parse_hesiod.c
+@@ -261,6 +261,11 @@ int parse_init(int argc, const char *const *argv, void **context)
+ 	return 0;
+ }
+ 
++int parse_reinit(int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ int parse_done(void *context)
+ {
+ 	return 0;
+diff --git a/modules/parse_sun.c b/modules/parse_sun.c
+index 10dbd0c..35d6da5 100644
+--- a/modules/parse_sun.c
++++ b/modules/parse_sun.c
+@@ -413,6 +413,11 @@ options_done:
+ 	return 0;
+ }
+ 
++int parse_reinit(int argc, const char *const *argv, void **context)
++{
++	return 0;
++}
++
+ static const char *parse_options(const char *str, char **ret, unsigned int logopt)
+ {
+ 	const char *cp = str;

@@ -1,0 +1,189 @@
+autofs-5.1.1 - implement reinit in sss lookup module
+
+From: Ian Kent <raven@themaw.net>
+
+Refactor the sss lookup module to add an implementation for the newly
+added reinit entry point.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ modules/lookup_sss.c |  130 +++++++++++++++++++++++++++++++++++++-------------
+ 1 file changed, 95 insertions(+), 35 deletions(-)
+
+diff --git a/modules/lookup_sss.c b/modules/lookup_sss.c
+index c58a272..2f32e94 100644
+--- a/modules/lookup_sss.c
++++ b/modules/lookup_sss.c
+@@ -56,39 +56,16 @@ struct lookup_context {
+ 
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+-int lookup_init(const char *mapfmt,
+-		int argc, const char *const *argv, void **context)
++static int open_sss_lib(struct lookup_context *ctxt)
+ {
+-	struct lookup_context *ctxt;
+-	char buf[MAX_ERR_BUF];
+ 	char dlbuf[PATH_MAX];
+ 	char *estr;
+ 	void *dh;
+ 	size_t size;
+ 
+-	*context = NULL;
+-
+-	ctxt = malloc(sizeof(struct lookup_context));
+-	if (!ctxt) {
+-		estr = strerror_r(errno, buf, MAX_ERR_BUF);
+-		logerr(MODPREFIX "malloc: %s", estr);
+-		return 1;
+-	}
+-
+-	if (argc < 1) {
+-		free(ctxt);
+-		logerr(MODPREFIX "No map name");
+-		return 1;
+-	}
+-	ctxt->mapname = argv[0];
+-
+-	if (!mapfmt)
+-		mapfmt = MAPFMT_DEFAULT;
+-
+ 	size = snprintf(dlbuf, sizeof(dlbuf),
+ 			"%s/%s.so", SSS_LIB_DIR, SSS_SO_NAME);
+ 	if (size >= sizeof(dlbuf)) {
+-		free(ctxt);
+ 		logmsg(MODPREFIX "sss library path too long");
+ 		return 1;
+ 	}
+@@ -96,7 +73,6 @@ int lookup_init(const char *mapfmt,
+ 	dh = dlopen(dlbuf, RTLD_LAZY);
+ 	if (!dh) {
+ 		logerr(MODPREFIX "failed to open %s: %s", dlbuf, dlerror());
+-		free(ctxt);
+ 		return 1;
+ 	}
+ 	ctxt->dlhandle = dh;
+@@ -117,15 +93,6 @@ int lookup_init(const char *mapfmt,
+ 	if (!ctxt->setautomntent)
+ 		goto lib_names_fail;
+ 
+-	ctxt->parse = open_parse(mapfmt, MODPREFIX, argc - 1, argv + 1);
+-	if (!ctxt->parse) {
+-		logmsg(MODPREFIX "failed to open parse context");
+-		dlclose(dh);
+-		free(ctxt);
+-		return 1;
+-	}
+-	*context = ctxt;
+-
+ 	return 0;
+ 
+ lib_names_fail:
+@@ -134,13 +101,106 @@ lib_names_fail:
+ 	else
+ 		logerr(MODPREFIX "dlsym: %s", estr);
+ 	dlclose(dh);
+-	free(ctxt);
++
+ 	return 1;
+ }
+ 
++static int do_init(const char *mapfmt,
++		   int argc, const char *const *argv,
++		   struct lookup_context *ctxt, unsigned int reinit)
++{
++	int ret = 0;
++
++	if (argc < 1) {
++		logerr(MODPREFIX "No map name");
++		ret = 1;
++		goto out;
++	}
++	ctxt->mapname = argv[0];
++
++	if (!mapfmt)
++		mapfmt = MAPFMT_DEFAULT;
++
++	if (!reinit) {
++		ret = open_sss_lib(ctxt);
++		if (ret)
++			goto out;
++	}
++
++	if (reinit) {
++		ret = reinit_parse(ctxt->parse, mapfmt, MODPREFIX, argc - 1, argv + 1);
++		if (ret)
++			logmsg(MODPREFIX "failed to reinit parse context");
++	} else {
++		ctxt->parse = open_parse(mapfmt, MODPREFIX, argc - 1, argv + 1);
++		if (!ctxt->parse) {
++			logmsg(MODPREFIX "failed to open parse context");
++			dlclose(ctxt->dlhandle);
++			ret = 1;
++		}
++	}
++out:
++	return ret;
++}
++
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
++{
++	struct lookup_context *ctxt;
++	char buf[MAX_ERR_BUF];
++	char *estr;
++
++	*context = NULL;
++
++	ctxt = malloc(sizeof(struct lookup_context));
++	if (!ctxt) {
++		estr = strerror_r(errno, buf, MAX_ERR_BUF);
++		logerr(MODPREFIX "malloc: %s", estr);
++		return 1;
++	}
++
++	if (do_init(mapfmt, argc, argv, ctxt, 0)) {
++		free(ctxt);
++		return 1;
++	}
++
++	*context = ctxt;
++
++	return 0;
++}
++
+ int lookup_reinit(const char *mapfmt,
+ 		  int argc, const char *const *argv, void **context)
+ {
++	struct lookup_context *ctxt = (struct lookup_context *) *context;
++	struct lookup_context *new;
++	char buf[MAX_ERR_BUF];
++	int ret;
++
++	new = malloc(sizeof(struct lookup_context));
++	if (!new) {
++		char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
++		logerr(MODPREFIX "malloc: %s", estr);
++		return 1;
++	}
++
++	new->parse = ctxt->parse;
++	ret = do_init(mapfmt, argc, argv, new, 1);
++	if (ret) {
++		free(new);
++		return 1;
++	}
++
++	new->dlhandle = ctxt->dlhandle;
++	new->setautomntent = ctxt->setautomntent;
++	new->getautomntent_r = ctxt->getautomntent_r;
++	new->getautomntbyname_r = ctxt->getautomntbyname_r;
++	new->endautomntent = ctxt->endautomntent;
++
++	*context = new;
++
++	free(ctxt);
++
+ 	return 0;
+ }
+ 

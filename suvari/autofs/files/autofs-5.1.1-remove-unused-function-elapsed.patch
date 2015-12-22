@@ -1,0 +1,57 @@
+autofs-5.1.1 - remove unused function elapsed()
+
+From: Ian Kent <raven@themaw.net>
+
+Now that the monotonic clock source is used the elapsed() function
+is no longer used, remove it.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG          |    1 +
+ include/rpc_subs.h |    1 -
+ lib/rpc_subs.c     |    8 --------
+ 3 files changed, 1 insertion(+), 9 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 4f589db..4acb332 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -30,6 +30,7 @@
+ - use monotonic clock for indirect mount condition.
+ - change remaining gettimeofday() to use clock_gettime().
+ - change time() to use monotonic_clock().
++- remove unused function elapsed().
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/include/rpc_subs.h b/include/rpc_subs.h
+index e329224..e744e89 100644
+--- a/include/rpc_subs.h
++++ b/include/rpc_subs.h
+@@ -70,7 +70,6 @@ int rpc_portmap_getclient(struct conn_info *, const char *, struct sockaddr *, s
+ int rpc_portmap_getport(struct conn_info *, struct pmap *, unsigned short *);
+ int rpc_ping_proto(struct conn_info *);
+ int rpc_ping(const char *, long, long, unsigned int);
+-double elapsed(struct timeval, struct timeval);
+ double monotonic_elapsed(struct timespec, struct timespec);
+ int rpc_time(const char *, unsigned int, unsigned int, long, long, unsigned int, double *);
+ const char *get_addr_string(struct sockaddr *, char *, socklen_t);
+diff --git a/lib/rpc_subs.c b/lib/rpc_subs.c
+index 4a84c16..8995996 100644
+--- a/lib/rpc_subs.c
++++ b/lib/rpc_subs.c
+@@ -1067,14 +1067,6 @@ int rpc_ping(const char *host, long seconds, long micros, unsigned int option)
+ 	return status;
+ }
+ 
+-double elapsed(struct timeval start, struct timeval end)
+-{
+-	double t1, t2;
+-	t1 =  (double)start.tv_sec + (double)start.tv_usec/(1000*1000);
+-	t2 =  (double)end.tv_sec + (double)end.tv_usec/(1000*1000);
+-	return t2-t1;
+-}
+-
+ double monotonic_elapsed(struct timespec start, struct timespec end)
+ {
+ 	double t1, t2;

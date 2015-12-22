@@ -1,0 +1,208 @@
+autofs-5.1.1 - fix return handling of do_reconnect() in ldap module
+
+From: Ian Kent <raven@themaw.net>
+
+In the ldap lookup module the do_reconnect() call doesn't distinguish
+between no entry found and service unavailable.
+
+If service unavailable gets returned from a master map read it results
+in autofs not updating the mounts. A notfound return doesn't because it
+indicates the map doesn't exist so updating the mounts isn't a problem
+as it can be when the source is unavailable.
+
+Finally make do_reconnect() return a status instead of an LDAP handle
+and pass back the LDAP handle via a function parameter.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG             |    1 +
+ modules/lookup_ldap.c |   78 ++++++++++++++++++++++++++++---------------------
+ 2 files changed, 46 insertions(+), 33 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index bc79bc0..fa8231c 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -9,6 +9,7 @@
+ - make connect_to_server() return a status.
+ - make find_dc_server() return a status.
+ - make find_server() return a status.
++- fix return handling of do_reconnect() in ldap module.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/modules/lookup_ldap.c b/modules/lookup_ldap.c
+index 783239d..7e23869 100644
+--- a/modules/lookup_ldap.c
++++ b/modules/lookup_ldap.c
+@@ -961,31 +961,33 @@ static int find_server(unsigned logopt,
+ 	return ret;
+ }
+ 
+-static LDAP *do_reconnect(unsigned logopt, struct lookup_context *ctxt)
++static int do_reconnect(unsigned logopt,
++			LDAP **ldap, struct lookup_context *ctxt)
+ {
+-	LDAP *ldap = NULL;
+-	int ret;
++	int ret = NSS_STATUS_UNAVAIL;
++	int dcrv = NSS_STATUS_SUCCESS;
++	int rv = NSS_STATUS_SUCCESS;
+ 
+ 	if (ctxt->server || !ctxt->uris) {
+-		ret = do_connect(logopt, &ldap, ctxt->server, ctxt);
++		ret = do_connect(logopt, ldap, ctxt->server, ctxt);
+ #ifdef WITH_SASL
+ 		/* Dispose of the sasl authentication connection and try again. */
+-		if (ret != NSS_STATUS_SUCCESS &&
+-		    ctxt->auth_required & LDAP_NEED_AUTH) {
++		if (ctxt->auth_required & LDAP_NEED_AUTH &&
++		    ret != NSS_STATUS_SUCCESS && ret != NSS_STATUS_NOTFOUND) {
+ 			ldapinit_mutex_lock();
+ 			autofs_sasl_dispose(ctxt);
+ 			ldapinit_mutex_unlock();
+-			ret = connect_to_server(logopt, &ldap,
++			ret = connect_to_server(logopt, ldap,
+ 						ctxt->server, ctxt);
+ 		}
+ #endif
+-		return ldap;
++		return ret;
+ 	}
+ 
+ 	if (ctxt->dclist) {
+-		ret = find_dc_server(logopt, &ldap, ctxt->dclist->uri, ctxt);
+-		if (ret == NSS_STATUS_SUCCESS)
+-			return ldap;
++		dcrv = find_dc_server(logopt, ldap, ctxt->dclist->uri, ctxt);
++		if (dcrv == NSS_STATUS_SUCCESS)
++			return dcrv;
+ 	}
+ 
+ 	uris_mutex_lock(ctxt);
+@@ -1004,22 +1006,22 @@ static LDAP *do_reconnect(unsigned logopt, struct lookup_context *ctxt)
+ 	if (!ctxt->uri)
+ 		goto find_server;
+ 
+-	ret = do_connect(logopt, &ldap, ctxt->uri->uri, ctxt);
++	rv = do_connect(logopt, ldap, ctxt->uri->uri, ctxt);
+ #ifdef WITH_SASL
+ 	/*
+ 	 * Dispose of the sasl authentication connection and try the
+ 	 * current server again before trying other servers in the list.
+ 	 */
+-	if (ret != NSS_STATUS_SUCCESS &&
+-	    ctxt->auth_required & LDAP_NEED_AUTH) {
++	if (ctxt->auth_required & LDAP_NEED_AUTH &&
++	    rv != NSS_STATUS_SUCCESS && rv != NSS_STATUS_NOTFOUND) {
+ 		ldapinit_mutex_lock();
+ 		autofs_sasl_dispose(ctxt);
+ 		ldapinit_mutex_unlock();
+-		ret = connect_to_server(logopt, &ldap, ctxt->uri->uri, ctxt);
++		rv = connect_to_server(logopt, ldap, ctxt->uri->uri, ctxt);
+ 	}
+ #endif
+-	if (ldap)
+-		return ldap;
++	if (rv == NSS_STATUS_SUCCESS)
++		return rv;
+ 
+ 	/* Failed to connect, try to find a new server */
+ 
+@@ -1031,11 +1033,16 @@ find_server:
+ #endif
+ 
+ 	/* Current server failed, try the rest or dc connection */
+-	ret = find_server(logopt, &ldap, ctxt);
+-	if (ret != NSS_STATUS_SUCCESS)
++	ret = find_server(logopt, ldap, ctxt);
++	if (ret != NSS_STATUS_SUCCESS) {
++		if (ret == NSS_STATUS_NOTFOUND ||
++		    dcrv == NSS_STATUS_NOTFOUND ||
++		    rv == NSS_STATUS_NOTFOUND)
++			ret = NSS_STATUS_NOTFOUND;
+ 		error(logopt, MODPREFIX "failed to find available server");
++	}
+ 
+-	return ldap;
++	return ret;
+ }
+ 
+ int get_property(unsigned logopt, xmlNodePtr node, const char *prop, char **value)
+@@ -1841,12 +1848,12 @@ int lookup_read_master(struct master *master, time_t age, void *context)
+ 	char **values = NULL;
+ 	char *attrs[3];
+ 	int scope = LDAP_SCOPE_SUBTREE;
+-	LDAP *ldap;
++	LDAP *ldap = NULL;
+ 
+ 	/* Initialize the LDAP context. */
+-	ldap = do_reconnect(logopt, ctxt);
+-	if (!ldap)
+-		return NSS_STATUS_UNAVAIL;
++	rv = do_reconnect(logopt, &ldap, ctxt);
++	if (rv)
++		return rv;
+ 
+ 	class = ctxt->schema->entry_class;
+ 	entry = ctxt->schema->entry_attr;
+@@ -2754,9 +2761,10 @@ static int read_one_map(struct autofs_point *ap,
+ 	sp.age = age;
+ 
+ 	/* Initialize the LDAP context. */
+-	sp.ldap = do_reconnect(ap->logopt, ctxt);
+-	if (!sp.ldap)
+-		return NSS_STATUS_UNAVAIL;
++	sp.ldap = NULL;
++	rv = do_reconnect(ap->logopt, &sp.ldap, ctxt);
++	if (rv)
++		return rv;
+ 
+ 	class = ctxt->schema->entry_class;
+ 	entry = ctxt->schema->entry_attr;
+@@ -2908,7 +2916,7 @@ static int lookup_one(struct autofs_point *ap, struct map_source *source,
+ 	struct berval **bvValues;
+ 	char *attrs[3];
+ 	int scope = LDAP_SCOPE_SUBTREE;
+-	LDAP *ldap;
++	LDAP *ldap = NULL;
+ 	struct mapent *we;
+ 	unsigned int wild = 0;
+ 	int ret = CHE_MISSING;
+@@ -2921,9 +2929,11 @@ static int lookup_one(struct autofs_point *ap, struct map_source *source,
+ 	}
+ 
+ 	/* Initialize the LDAP context. */
+-	ldap = do_reconnect(ap->logopt, ctxt);
+-	if (!ldap)
++	rv = do_reconnect(ap->logopt, &ldap, ctxt);
++	if (rv == NSS_STATUS_UNAVAIL)
+ 		return CHE_UNAVAIL;
++	if (rv == NSS_STATUS_NOTFOUND)
++		return ret;
+ 
+ 	class = ctxt->schema->entry_class;
+ 	entry = ctxt->schema->entry_attr;
+@@ -3252,7 +3262,7 @@ static int lookup_one_amd(struct autofs_point *ap,
+ 			  struct lookup_context *ctxt)
+ {
+ 	struct mapent_cache *mc = source->mc;
+-	LDAP *ldap;
++	LDAP *ldap = NULL;
+ 	LDAPMessage *result = NULL, *e;
+ 	char *query;
+ 	int scope = LDAP_SCOPE_SUBTREE;
+@@ -3271,9 +3281,11 @@ static int lookup_one_amd(struct autofs_point *ap,
+ 	}
+ 
+ 	/* Initialize the LDAP context. */
+-	ldap = do_reconnect(ap->logopt, ctxt);
+-	if (!ldap)
++	rv = do_reconnect(ap->logopt, &ldap, ctxt);
++	if (rv == NSS_STATUS_UNAVAIL)
+ 		return CHE_UNAVAIL;
++	if (rv == NSS_STATUS_NOTFOUND)
++		return ret;
+ 
+ 	map = ctxt->schema->map_attr;
+ 	class = ctxt->schema->entry_class;

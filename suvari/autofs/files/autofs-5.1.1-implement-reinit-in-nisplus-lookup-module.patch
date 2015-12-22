@@ -1,0 +1,133 @@
+autofs-5.1.1 - implement reinit in nisplus lookup module
+
+From: Ian Kent <raven@themaw.net>
+
+Refactor the nisplus lookup module to add an implementation for the newly
+added reinit entry point.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ modules/lookup_nisplus.c |   83 +++++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 63 insertions(+), 20 deletions(-)
+
+diff --git a/modules/lookup_nisplus.c b/modules/lookup_nisplus.c
+index 0c66152..5fd1d89 100644
+--- a/modules/lookup_nisplus.c
++++ b/modules/lookup_nisplus.c
+@@ -30,25 +30,16 @@ struct lookup_context {
+ 
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+-int lookup_init(const char *mapfmt,
+-		int argc, const char *const *argv, void **context)
++static int do_init(const char *mapfmt,
++		   int argc, const char *const *argv,
++		   struct lookup_context *ctxt, unsigned int reinit)
+ {
+-	struct lookup_context *ctxt;
+-	char buf[MAX_ERR_BUF];
+-
+-	*context = NULL;
+-
+-	ctxt = malloc(sizeof(struct lookup_context));
+-	if (!ctxt) {
+-		char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+-		logerr(MODPREFIX "%s", estr);
+-		return 1;
+-	}
++	int ret = 0;
+ 
+ 	if (argc < 1) {
+-		free(ctxt);
+ 		logmsg(MODPREFIX "No map name");
+-		return 1;
++		ret = 1;
++		goto out;
+ 	}
+ 	ctxt->mapname = argv[0];
+ 
+@@ -58,20 +49,50 @@ int lookup_init(const char *mapfmt,
+ 	 */
+ 	ctxt->domainname = nis_local_directory();
+ 	if (!ctxt->domainname) {
+-		free(ctxt);
+ 		logmsg(MODPREFIX "NIS+ domain not set");
+-		return 1;
++		ret = 1;
++		goto out;
+ 	}
+ 
+ 	if (!mapfmt)
+ 		mapfmt = MAPFMT_DEFAULT;
+ 
+-	ctxt->parse = open_parse(mapfmt, MODPREFIX, argc - 1, argv + 1);
+-	if (!ctxt->parse) {
++	if (reinit) {
++		ret = reinit_parse(ctxt->parse, mapfmt, MODPREFIX, argc, argv);
++		if (ret)
++			logmsg(MODPREFIX "failed to reinit parse context");
++	} else {
++		ctxt->parse = open_parse(mapfmt, MODPREFIX, argc - 1, argv + 1);
++		if (!ctxt->parse) {
++			logerr(MODPREFIX "failed to open parse context");
++			ret = 1;
++		}
++	}
++out:
++	return ret;
++}
++
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv, void **context)
++{
++	struct lookup_context *ctxt;
++	char buf[MAX_ERR_BUF];
++
++	*context = NULL;
++
++	ctxt = malloc(sizeof(struct lookup_context));
++	if (!ctxt) {
++		char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
++		logerr(MODPREFIX "%s", estr);
++		return 1;
++	}
++	memset(ctxt, 0, sizeof(struct lookup_context));
++
++	if (do_init(mapfmt, argc, argv, ctxt, 0)) {
+ 		free(ctxt);
+-		logerr(MODPREFIX "failed to open parse context");
+ 		return 1;
+ 	}
++
+ 	*context = ctxt;
+ 
+ 	return 0;
+@@ -80,6 +101,28 @@ int lookup_init(const char *mapfmt,
+ int lookup_reinit(const char *mapfmt,
+ 		  int argc, const char *const *argv, void **context)
+ {
++	struct lookup_context *ctxt = (struct lookup_context *) *context;
++	struct lookup_context *new;
++	char buf[MAX_ERR_BUF];
++	int ret;
++
++	new = malloc(sizeof(struct lookup_context));
++	if (!new) {
++		char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
++		logerr(MODPREFIX "%s", estr);
++		return 1;
++	}
++	memset(new, 0, sizeof(struct lookup_context));
++
++	new->parse = ctxt->parse;
++	ret = do_init(mapfmt, argc, argv, new, 1);
++	if (ret)
++		return 1;
++
++	*context = new;
++
++	free(ctxt);
++
+ 	return 0;
+ }
+ 

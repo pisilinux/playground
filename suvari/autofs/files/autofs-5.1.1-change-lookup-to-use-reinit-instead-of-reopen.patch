@@ -1,0 +1,77 @@
+autofs-5.1.1 - change lookup to use reinit instead of reopen
+
+From: Ian Kent <raven@themaw.net>
+
+When a HUP signal is received lookup module are cloed and then re-opened.
+This can occassionally cause a problem with library data segemets and
+lead to a SEGV.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG       |    1 +
+ daemon/lookup.c |   32 +++++++++++++++++++++-----------
+ 2 files changed, 22 insertions(+), 11 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 77aad99..16e5344 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -17,6 +17,7 @@
+ - fix direct map expire not set for initail empty map.
+ - fix missing source sss in multi map lookup.
+ - fix update_hosts_mounts() return.
++- change lookup to use reinit instead of reopen.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/daemon/lookup.c b/daemon/lookup.c
+index 0579f98..afd14ab 100644
+--- a/daemon/lookup.c
++++ b/daemon/lookup.c
+@@ -300,17 +300,27 @@ static int do_read_map(struct autofs_point *ap, struct map_source *map, time_t a
+ 	struct lookup_mod *lookup;
+ 	int status;
+ 
+-	status = open_lookup(map->type, "", map->format,
+-			     map->argc, map->argv, &lookup);
+-	if (status != NSS_STATUS_SUCCESS) {
+-		debug(ap->logopt, "lookup module %s failed", map->type);
+-		return status;
+-	}
+-
++	lookup = NULL;
+ 	master_source_writelock(ap->entry);
+-	if (map->lookup)
+-		close_lookup(map->lookup);
+-	map->lookup = lookup;
++	if (!map->lookup) {
++		status = open_lookup(map->type, "", map->format,
++				     map->argc, map->argv, &lookup);
++		if (status != NSS_STATUS_SUCCESS) {
++			master_source_unlock(ap->entry);
++			debug(ap->logopt,
++			      "lookup module %s open failed", map->type);
++			return status;
++		}
++		map->lookup = lookup;
++	} else {
++		lookup = map->lookup;
++		status = lookup->lookup_reinit(map->format,
++					       map->argc, map->argv,
++					       &lookup->context);
++		if (status)
++			warn(ap->logopt,
++			     "lookup module %s reinit failed", map->type);
++	}
+ 	master_source_unlock(ap->entry);
+ 
+ 	if (!map->stale)
+@@ -742,7 +752,7 @@ int do_lookup_mount(struct autofs_point *ap, struct map_source *map, const char
+ 				     map->format, map->argc, map->argv, &lookup);
+ 		if (status != NSS_STATUS_SUCCESS) {
+ 			debug(ap->logopt,
+-			      "lookup module %s failed", map->type);
++			      "lookup module %s open failed", map->type);
+ 			return status;
+ 		}
+ 		map->lookup = lookup;

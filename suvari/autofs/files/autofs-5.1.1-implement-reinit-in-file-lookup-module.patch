@@ -1,0 +1,147 @@
+autofs-5.1.1 - implement reinit in file lookup module
+
+From: Ian Kent <raven@themaw.net>
+
+Refactor the file lookup module to add an implementation for the newly
+added reinit entry point.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ modules/lookup_file.c |   85 +++++++++++++++++++++++++++++++++++++------------
+ 1 file changed, 65 insertions(+), 20 deletions(-)
+
+diff --git a/modules/lookup_file.c b/modules/lookup_file.c
+index c32a4cd..aed3cba 100644
+--- a/modules/lookup_file.c
++++ b/modules/lookup_file.c
+@@ -50,23 +50,13 @@ struct lookup_context {
+ 
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
+-int lookup_init(const char *mapfmt,
+-		int argc, const char *const *argv, void **context)
++static int do_init(const char *mapfmt,
++		   int argc, const char *const *argv,
++		   struct lookup_context *ctxt, unsigned int reinit)
+ {
+-	struct lookup_context *ctxt;
+-	char buf[MAX_ERR_BUF];
+-
+-	*context = NULL;
+-
+-	ctxt = malloc(sizeof(struct lookup_context));
+-	if (!ctxt) {
+-		char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+-		logerr(MODPREFIX "malloc: %s", estr);
+-		return 1;
+-	}
++	int ret = 0;
+ 
+ 	if (argc < 1) {
+-		free(ctxt);
+ 		logerr(MODPREFIX "No map name");
+ 		return 1;
+ 	}
+@@ -74,14 +64,12 @@ int lookup_init(const char *mapfmt,
+ 	ctxt->mapname = argv[0];
+ 
+ 	if (ctxt->mapname[0] != '/') {
+-		free(ctxt);
+ 		logmsg(MODPREFIX
+ 		     "file map %s is not an absolute pathname", argv[0]);
+ 		return 1;
+ 	}
+ 
+ 	if (access(ctxt->mapname, R_OK)) {
+-		free(ctxt);
+ 		warn(LOGOPT_NONE, MODPREFIX
+ 		    "file map %s missing or not readable", argv[0]);
+ 		return 1;
+@@ -95,19 +83,51 @@ int lookup_init(const char *mapfmt,
+ 
+ 	ctxt->opts_argv = copy_argv(argc, (const char **) argv);
+ 	if (ctxt->opts_argv == NULL) {
+-		free(ctxt);
+ 		warn(LOGOPT_NONE, MODPREFIX "failed to duplicate options");
+ 		return 1;
+ 	}
+ 	ctxt->opts_argc = argc;
+ 
+-	ctxt->parse = open_parse(mapfmt, MODPREFIX, argc, argv);
+-	if (!ctxt->parse) {
++	if (reinit) {
++		ret = reinit_parse(ctxt->parse, mapfmt, MODPREFIX, argc, argv);
++		if (ret)
++			logmsg(MODPREFIX "failed to reinit parse context");
++	} else {
++		ctxt->parse = open_parse(mapfmt, MODPREFIX, argc, argv);
++		if (!ctxt->parse) {
++			logmsg(MODPREFIX "failed to open parse context");
++			ret = 1;
++		}
++	}
++
++	if (ret)
+ 		free_argv(ctxt->opts_argc, ctxt->opts_argv);
++
++	return ret;
++}
++
++int lookup_init(const char *mapfmt,
++		int argc, const char *const *argv,
++		void **context)
++{
++	struct lookup_context *ctxt;
++	char buf[MAX_ERR_BUF];
++
++	*context = NULL;
++
++	ctxt = malloc(sizeof(struct lookup_context));
++	if (!ctxt) {
++		char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
++		logerr(MODPREFIX "malloc: %s", estr);
++		return 1;
++	}
++	memset(ctxt, 0, sizeof(struct lookup_context));
++
++	if (do_init(mapfmt, argc, argv, ctxt, 0)) {
+ 		free(ctxt);
+-		logmsg(MODPREFIX "failed to open parse context");
+ 		return 1;
+ 	}
++
+ 	*context = ctxt;
+ 
+ 	return 0;
+@@ -116,6 +136,31 @@ int lookup_init(const char *mapfmt,
+ int lookup_reinit(const char *mapfmt,
+ 		  int argc, const char *const *argv, void **context)
+ {
++	struct lookup_context *ctxt = (struct lookup_context *) *context;
++	struct lookup_context *new;
++	char buf[MAX_ERR_BUF];
++	int ret;
++
++	new = malloc(sizeof(struct lookup_context));
++	if (!new) {
++		char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
++		logerr(MODPREFIX "malloc: %s", estr);
++		return 1;
++	}
++	memset(new, 0, sizeof(struct lookup_context));
++
++	new->parse = ctxt->parse;
++	ret = do_init(mapfmt, argc, argv, new, 1);
++	if (ret) {
++		free(new);
++		return 1;
++	}
++
++	*context = new;
++
++	free_argv(ctxt->opts_argc, ctxt->opts_argv);
++	free(ctxt);
++
+ 	return 0;
+ }
+ 

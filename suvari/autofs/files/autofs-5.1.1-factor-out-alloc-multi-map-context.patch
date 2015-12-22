@@ -1,0 +1,203 @@
+autofs-5.1.1 - factor out alloc multi map context
+
+From: Ian Kent <raven@themaw.net>
+
+Seperate out the context allocation function for the multi map module.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ modules/lookup_multi.c |  161 +++++++++++++++++++++++++-----------------------
+ 1 file changed, 85 insertions(+), 76 deletions(-)
+
+diff --git a/modules/lookup_multi.c b/modules/lookup_multi.c
+index 36ace11..433b424 100644
+--- a/modules/lookup_multi.c
++++ b/modules/lookup_multi.c
+@@ -40,6 +40,84 @@ struct lookup_context {
+ 
+ int lookup_version = AUTOFS_LOOKUP_VERSION;	/* Required by protocol */
+ 
++static int free_multi_context(struct lookup_context *);
++
++static struct lookup_context *alloc_context(const char *format,
++					    int argc, const char *const *argv)
++{
++	struct lookup_context *ctxt;
++	char buf[MAX_ERR_BUF];
++	char **args;
++	int i, an;
++	char *estr;
++
++	ctxt = malloc(sizeof(struct lookup_context));
++	if (!ctxt)
++		goto nomem;
++
++	memset(ctxt, 0, sizeof(struct lookup_context));
++
++	if (argc < 1) {
++		logerr(MODPREFIX "No map list");
++		goto error_out;
++	}
++
++	ctxt->n = 1;				/* Always at least one map */
++	for (i = 0; i < argc; i++) {
++		if (!strcmp(argv[i], "--"))	/* -- separates maps */
++			ctxt->n++;
++	}
++
++	if (!(ctxt->m = malloc(ctxt->n * sizeof(struct module_info))) ||
++	    !(ctxt->argl = malloc((argc + 1) * sizeof(const char *))))
++		goto nomem;
++
++	memset(ctxt->m, 0, ctxt->n * sizeof(struct module_info));
++
++	memcpy(ctxt->argl, argv, (argc + 1) * sizeof(const char *));
++
++	args = NULL;
++	for (i = an = 0; ctxt->argl[an]; an++) {
++		if (ctxt->m[i].argc == 0)
++			args = (char **) &ctxt->argl[an];
++
++		if (strcmp(ctxt->argl[an], "--"))
++			ctxt->m[i].argc++;
++		else {
++			ctxt->argl[an] = NULL;
++			if (!args) {
++				logerr(MODPREFIX "error assigning map args");
++				goto error_out;
++			}
++			ctxt->m[i].argv = copy_argv(ctxt->m[i].argc,
++						    (const char **) args);
++			if (!ctxt->m[i].argv)
++				goto nomem;
++			args = NULL;
++			i++;
++		}
++	}
++
++	/* catch the last one */
++	if (args) {
++		ctxt->m[i].argv = copy_argv(ctxt->m[i].argc, (const char **) args);
++		if (!ctxt->m[i].argv)
++			goto nomem;
++	}
++
++	return ctxt;
++
++nomem:
++	estr = strerror_r(errno, buf, MAX_ERR_BUF);
++	logerr(MODPREFIX "error: %s", estr);
++
++error_out:
++	free_multi_context(ctxt);
++	free(ctxt);
++
++	return NULL;
++}
++
+ static int free_multi_context(struct lookup_context *ctxt)
+ {
+ 	int rv;
+@@ -180,95 +258,26 @@ int lookup_init(const char *my_mapfmt,
+ 		int argc, const char *const *argv, void **context)
+ {
+ 	struct lookup_context *ctxt;
+-	char buf[MAX_ERR_BUF];
+-	char **args;
+-	int i, an;
+-	char *estr;
++	int i;
+ 
+-	ctxt = malloc(sizeof(struct lookup_context));
++	ctxt = alloc_context(my_mapfmt, argc, argv);
+ 	if (!ctxt)
+-		goto nomem;
+-
+-	memset(ctxt, 0, sizeof(struct lookup_context));
+-
+-	if (argc < 1) {
+-		logerr(MODPREFIX "No map list");
+-		goto error_out;
+-	}
+-
+-	ctxt->n = 1;				/* Always at least one map */
+-	for (i = 0; i < argc; i++) {
+-		if (!strcmp(argv[i], "--"))	/* -- separates maps */
+-			ctxt->n++;
+-	}
+-
+-	if (!(ctxt->m = malloc(ctxt->n * sizeof(struct module_info))) ||
+-	    !(ctxt->argl = malloc((argc + 1) * sizeof(const char *))))
+-		goto nomem;
+-
+-	memset(ctxt->m, 0, ctxt->n * sizeof(struct module_info));
+-
+-	memcpy(ctxt->argl, argv, (argc + 1) * sizeof(const char *));
+-
+-	args = NULL;
+-	for (i = an = 0; ctxt->argl[an]; an++) {
+-		if (ctxt->m[i].argc == 0) {
+-			args = (char **) &ctxt->argl[an];
+-		}
+-		if (!strcmp(ctxt->argl[an], "--")) {
+-			ctxt->argl[an] = NULL;
+-			if (!args) {
+-				logerr(MODPREFIX "error assigning map args");
+-				goto error_out;
+-			}
+-			ctxt->m[i].argv = copy_argv(ctxt->m[i].argc, (const char **) args);
+-			if (!ctxt->m[i].argv)
+-				goto nomem;
+-			args = NULL;
+-			i++;
+-		} else {
+-			ctxt->m[i].argc++;
+-		}
+-	}
+-
+-	/* catch the last one */
+-	if (args) {
+-		ctxt->m[i].argv = copy_argv(ctxt->m[i].argc, (const char **) args);
+-		if (!ctxt->m[i].argv)
+-			goto nomem;
+-	}
++		return 1;
+ 
+ 	for (i = 0; i < ctxt->n; i++) {
+ 		ctxt->m[i].mod = nss_open_lookup(my_mapfmt,
+ 				 ctxt->m[i].argc, ctxt->m[i].argv);
+ 		if (!ctxt->m[i].mod) {
+ 			logerr(MODPREFIX "error opening module");
+-			goto error_out;
++			free_multi_context(ctxt);
++			free(ctxt);
++			return 1;
+ 		}
+ 	}
+ 
+ 	*context = ctxt;
+-	return 0;
+ 
+-nomem:
+-	estr = strerror_r(errno, buf, MAX_ERR_BUF);
+-	logerr(MODPREFIX "error: %s", estr);
+-error_out:
+-	if (ctxt) {
+-		if (ctxt->m) {
+-			for (i = 0; i < ctxt->n; i++) {
+-				if (ctxt->m[i].mod)
+-					close_lookup(ctxt->m[i].mod);
+-				if (ctxt->m[i].argv)
+-					free_argv(ctxt->m[i].argc, ctxt->m[i].argv);
+-			}
+-			free(ctxt->m);
+-		}
+-		if (ctxt->argl)
+-			free(ctxt->argl);
+-		free(ctxt);
+-	}
+-	return 1;
++	return 0;
+ }
+ 
+ int lookup_reinit(const char *my_mapfmt,

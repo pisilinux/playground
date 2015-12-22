@@ -1,0 +1,67 @@
+autofs-5.1.1 - fix rwlock unlock crash
+
+From: Ian Kent <raven@themaw.net>
+
+It should be the case that the only way that automount can exit
+the kernel communication read loop is after reading a packet and
+performing shutdown operations.
+
+However there are reports of pthread_rwlock_unlock() being called
+from the exit cleanup function when the lock it is trying to unlock
+is not held.
+
+But the call to the cleanup function is outside the communication
+loop so call it from each of the loop break points instead so that
+the expected locks must be held.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG          |    1 +
+ daemon/automount.c |    7 ++++---
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index fa8231c..3bd7145 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -10,6 +10,7 @@
+ - make find_dc_server() return a status.
+ - make find_server() return a status.
+ - fix return handling of do_reconnect() in ldap module.
++- fix rwlock unlock crash.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/daemon/automount.c b/daemon/automount.c
+index c81b4af..6cba3db 100644
+--- a/daemon/automount.c
++++ b/daemon/automount.c
+@@ -1757,6 +1757,7 @@ void *handle_mounts(void *arg)
+ 			 */
+ 			if (ap->type == LKP_DIRECT) {
+ 				umount_autofs(ap, NULL, 1);
++				handle_mounts_cleanup(ap);
+ 				break;
+ 			}
+ 
+@@ -1767,8 +1768,10 @@ void *handle_mounts(void *arg)
+ 			 * occurs while we're trying to umount.
+ 			 */
+ 			ret = umount_autofs(ap, NULL, 1);
+-			if (!ret)
++			if (!ret) {
++				handle_mounts_cleanup(ap);
+ 				break;
++			}
+ 
+ 			/* Failed shutdown returns to ready */
+ 			warn(ap->logopt,
+@@ -1789,8 +1792,6 @@ void *handle_mounts(void *arg)
+ 		}
+ 	}
+ 
+-	handle_mounts_cleanup(ap);
+-
+ 	return NULL;
+ }
+ 

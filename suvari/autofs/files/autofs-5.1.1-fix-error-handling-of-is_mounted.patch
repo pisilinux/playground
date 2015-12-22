@@ -1,0 +1,71 @@
+autofs-5.1.1 - fix error handling of is_mounted()
+
+From: Ian Kent <raven@themaw.net>
+
+If the ops->ismountpoint() ioctl call fails for some reason is_mounted()
+would return 0 indicating the path isn't mounted even if it is.
+
+In this case fall back to the resource intensive mount table lookup.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG    |    1 +
+ lib/mounts.c |   15 +++++++++++----
+ 2 files changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 3dd28cc..8d27e55 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -21,6 +21,7 @@
+ - update map_hash_table_size description.
+ - add configuration option to use fqdn in mounts.
+ - fix out of order call in program map lookup.
++- fix error handling of is_mounted().
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/lib/mounts.c b/lib/mounts.c
+index f665721..455bdca 100644
+--- a/lib/mounts.c
++++ b/lib/mounts.c
+@@ -1032,12 +1032,19 @@ static int table_is_mounted(const char *table, const char *path, unsigned int ty
+ 	return ret;
+ }
+ 
+-static int ioctl_is_mounted(const char *path, unsigned int type)
++static int ioctl_is_mounted(const char *table, const char *path, unsigned int type)
+ {
+ 	struct ioctl_ops *ops = get_ioctl_ops();
+ 	unsigned int mounted;
++	int ret;
++
++	/* If the ioctl fails fall back to the potentially resource
++	 * intensive mount table check.
++	 */
++	ret = ops->ismountpoint(LOGOPT_NONE, -1, path, &mounted);
++	if (ret == -1)
++		return table_is_mounted(table, path, type);
+ 
+-	ops->ismountpoint(LOGOPT_NONE, -1, path, &mounted);
+ 	if (mounted) {
+ 		switch (type) {
+ 		case MNTS_ALL:
+@@ -1056,7 +1063,7 @@ int is_mounted(const char *table, const char *path, unsigned int type)
+ 	struct ioctl_ops *ops = get_ioctl_ops();
+ 
+ 	if (ops->ismountpoint)
+-		return ioctl_is_mounted(path, type);
++		return ioctl_is_mounted(table, path, type);
+ 	else
+ 		return table_is_mounted(table, path, type);
+ }
+@@ -1439,7 +1446,7 @@ int tree_is_mounted(struct mnt_list *mnts, const char *path, unsigned int type)
+ 	int mounted = 0;
+ 
+ 	if (ops->ismountpoint)
+-		return ioctl_is_mounted(path, type);
++		return ioctl_is_mounted(_PROC_MOUNTS, path, type);
+ 
+ 	INIT_LIST_HEAD(&list);
+ 

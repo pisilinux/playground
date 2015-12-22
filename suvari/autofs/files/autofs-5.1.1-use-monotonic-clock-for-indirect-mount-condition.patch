@@ -1,0 +1,100 @@
+autofs-5.1.1 - use monotonic clock for indirect mount condition
+
+From: Yu Ning <ning.yu@ubuntu.com>
+
+The time returned by gettimeofday() is affected by discontinuous jumps
+in the system time, so it causes an issue that autofs may not auto
+unmount a mount point if system time is manually changed by the system
+administrator.
+
+To fix the issue we need to convert to using a monotonic clock source
+instead of the clock source used by gettimeofday().
+
+Change the indirect mount and expire thread creation to use a monotonic
+clock source.
+
+Signed-off-by: Yu Ning <ning.yu@ubuntu.com>
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG         |    1 +
+ daemon/indirect.c |   20 ++++++--------------
+ 2 files changed, 7 insertions(+), 14 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index e3b1f04..c243a8a 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -27,6 +27,7 @@
+ - use monotonic clock for alarm thread condition wait.
+ - define pending condition init helper function.
+ - use monotonic clock for direct mount condition.
++- use monotonic clock for indirect mount condition.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/daemon/indirect.c b/daemon/indirect.c
+index bfd181d..263fff1 100644
+--- a/daemon/indirect.c
++++ b/daemon/indirect.c
+@@ -640,7 +640,6 @@ int handle_packet_expire_indirect(struct autofs_point *ap, autofs_packet_expire_
+ 	char buf[MAX_ERR_BUF];
+ 	pthread_t thid;
+ 	struct timespec wait;
+-	struct timeval now;
+ 	int status, state;
+ 
+ 	pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &state);
+@@ -658,9 +657,7 @@ int handle_packet_expire_indirect(struct autofs_point *ap, autofs_packet_expire_
+ 		return 1;
+ 	}
+ 
+-	status = pthread_cond_init(&mt->cond, NULL);
+-	if (status)
+-		fatal(status);
++	pending_cond_init(mt);
+ 
+ 	status = pthread_mutex_init(&mt->mutex, NULL);
+ 	if (status)
+@@ -695,9 +692,8 @@ int handle_packet_expire_indirect(struct autofs_point *ap, autofs_packet_expire_
+ 
+ 	mt->signaled = 0;
+ 	while (!mt->signaled) {
+-		gettimeofday(&now, NULL);
+-		wait.tv_sec = now.tv_sec + 2;
+-		wait.tv_nsec = now.tv_usec * 1000;
++		clock_gettime(CLOCK_MONOTONIC, &wait);
++		wait.tv_sec += 2;
+ 		status = pthread_cond_timedwait(&mt->cond, &mt->mutex, &wait);
+ 		if (status && status != ETIMEDOUT)
+ 			fatal(status);
+@@ -799,7 +795,6 @@ int handle_packet_missing_indirect(struct autofs_point *ap, autofs_packet_missin
+ 	char buf[MAX_ERR_BUF];
+ 	struct pending_args *mt;
+ 	struct timespec wait;
+-	struct timeval now;
+ 	struct mapent *me;
+ 	int status, state;
+ 
+@@ -845,9 +840,7 @@ int handle_packet_missing_indirect(struct autofs_point *ap, autofs_packet_missin
+ 	}
+ 	memset(mt, 0, sizeof(struct pending_args));
+ 
+-	status = pthread_cond_init(&mt->cond, NULL);
+-	if (status)
+-		fatal(status);
++	pending_cond_init(mt);
+ 
+ 	status = pthread_mutex_init(&mt->mutex, NULL);
+ 	if (status)
+@@ -888,9 +881,8 @@ int handle_packet_missing_indirect(struct autofs_point *ap, autofs_packet_missin
+ 
+ 	mt->signaled = 0;
+ 	while (!mt->signaled) {
+-		gettimeofday(&now, NULL);
+-		wait.tv_sec = now.tv_sec + 2;
+-		wait.tv_nsec = now.tv_usec * 1000;
++		clock_gettime(CLOCK_MONOTONIC, &wait);
++		wait.tv_sec += 2;
+ 		status = pthread_cond_timedwait(&mt->cond, &mt->mutex, &wait);
+ 		if (status && status != ETIMEDOUT)
+ 			fatal(status);

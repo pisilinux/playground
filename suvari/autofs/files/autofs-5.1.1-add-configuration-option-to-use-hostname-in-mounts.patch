@@ -1,0 +1,198 @@
+autofs-5.1.1 - add configuration option to use fqdn in mounts
+
+From: Ian Kent <raven@themaw.net>
+
+When a server name returns multiple IP addresses autofs uses the IP
+address when performing the mount to ensure that the the host proximity
+order is respected, and that servers that aren't responding aren't
+tried.
+
+But sometimes people need to use the server name for the mount so
+add a configuration option to enable that.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG                      |    1 +
+ include/defaults.h             |    3 +++
+ lib/defaults.c                 |   18 ++++++++++++++++++
+ man/autofs.conf.5.in           |   18 ++++++++++++++++++
+ modules/mount_nfs.c            |    3 ++-
+ modules/replicated.c           |    6 ++++++
+ redhat/autofs.conf.default.in  |    8 ++++++++
+ samples/autofs.conf.default.in |    8 ++++++++
+ 8 files changed, 64 insertions(+), 1 deletion(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 2b8d224..2c516e4 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -19,6 +19,7 @@
+ - fix update_hosts_mounts() return.
+ - change lookup to use reinit instead of reopen.
+ - update map_hash_table_size description.
++- add configuration option to use fqdn in mounts.
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/include/defaults.h b/include/defaults.h
+index 4f32e12..3788078 100644
+--- a/include/defaults.h
++++ b/include/defaults.h
+@@ -47,6 +47,8 @@
+ 
+ #define DEFAULT_MAP_HASH_TABLE_SIZE	"1024"
+ 
++#define DEFAULT_USE_HOSTNAME_FOR_MOUNTS	"0"
++
+ /* Config entry flags */
+ #define CONF_NONE			0x00000000
+ #define CONF_ENV			0x00000001
+@@ -162,6 +164,7 @@ unsigned int defaults_get_mount_wait(void);
+ unsigned int defaults_get_umount_wait(void);
+ const char *defaults_get_auth_conf_file(void);
+ unsigned int defaults_get_map_hash_table_size(void);
++unsigned int defaults_use_hostname_for_mounts(void);
+ 
+ unsigned int conf_amd_mount_section_exists(const char *);
+ char *conf_amd_get_arch(void);
+diff --git a/lib/defaults.c b/lib/defaults.c
+index 74fafc5..7159536 100644
+--- a/lib/defaults.c
++++ b/lib/defaults.c
+@@ -73,6 +73,8 @@
+ 
+ #define NAME_MAP_HASH_TABLE_SIZE	"map_hash_table_size"
+ 
++#define NAME_USE_HOSTNAME_FOR_MOUNTS	"use_hostname_for_mounts"
++
+ #define NAME_AMD_ARCH				"arch"
+ #define NAME_AMD_AUTO_ATTRCACHE			"auto_attrcache"
+ #define NAME_AMD_AUTO_DIR			"auto_dir"
+@@ -335,6 +337,11 @@ static int conf_load_autofs_defaults(void)
+ 	if (ret == CFG_FAIL)
+ 		goto error;
+ 
++	ret = conf_update(sec, NAME_USE_HOSTNAME_FOR_MOUNTS,
++			  DEFAULT_USE_HOSTNAME_FOR_MOUNTS, CONF_ENV);
++	if (ret == CFG_FAIL)
++		goto error;
++
+ 	/* LDAP_URI and SEARCH_BASE can occur multiple times */
+ 	while ((co = conf_lookup(sec, NAME_LDAP_URI)))
+ 		conf_delete(co->section, co->name);
+@@ -1701,6 +1708,17 @@ unsigned int defaults_get_map_hash_table_size(void)
+ 	return (unsigned int) size;
+ }
+ 
++unsigned int defaults_use_hostname_for_mounts(void)
++{
++	int res;
++
++	res = conf_get_yesno(autofs_gbl_sec, NAME_USE_HOSTNAME_FOR_MOUNTS);
++	if (res < 0)
++		res = atoi(DEFAULT_USE_HOSTNAME_FOR_MOUNTS);
++
++	return res;
++}
++
+ unsigned int conf_amd_mount_section_exists(const char *section)
+ {
+ 	return conf_section_exists(section);
+diff --git a/man/autofs.conf.5.in b/man/autofs.conf.5.in
+index 4434eb8..6eb5d02 100644
+--- a/man/autofs.conf.5.in
++++ b/man/autofs.conf.5.in
+@@ -111,6 +111,24 @@ entries, in this case, is usually much less than the number of entries
+ in the map. In this last case it would be unusual for the map entry
+ cache to grow large enough to warrant increasing the default before
+ an event that cleans stale entries, a map re-read for example.
++.TP
++.B use_hostname_for_mounts
++.br
++NFS mounts where the host name resolves to more than one IP address
++are probed for availability and to establish the order in which mounts
++to them should be tried. To ensure that mount attempts are made only
++to hosts that are responding and are tried in the order of hosts with
++the quickest response the IP address of the host needs to be used for
++the mount.
++
++If it is necessary to use the hostname given in the map entry for the
++mount regardless, then set this option to "yes".
++
++Be aware that if this is done there is no defense against the host
++name resolving to one that isn't responding and while the number
++of attempts at a successful mount will correspond to the number of
++addresses the host name resolves to the order will also not correspond
++to fastest responding hosts.
+ .SS LDAP Configuration
+ .P
+ Configuration settings available are:
+diff --git a/modules/mount_nfs.c b/modules/mount_nfs.c
+index 15e1043..aa786f3 100644
+--- a/modules/mount_nfs.c
++++ b/modules/mount_nfs.c
+@@ -316,7 +316,8 @@ dont_probe:
+ 
+ 		/* Not a local host - do an NFS mount */
+ 
+-		if (this->rr && this->addr) {
++		if (this->rr && this->addr &&
++		    !defaults_use_hostname_for_mounts()) {
+ 			socklen_t len = INET6_ADDRSTRLEN;
+ 			char n_buf[len + 1];
+ 			const char *n_addr;
+diff --git a/modules/replicated.c b/modules/replicated.c
+index 32860d5..8437f5f 100644
+--- a/modules/replicated.c
++++ b/modules/replicated.c
+@@ -667,6 +667,12 @@ int prune_host_list(unsigned logopt, struct host **list,
+ 	if (!*list)
+ 		return 0;
+ 
++	/* If we're using the host name then there's no point probing
++	 * avialability and respose time.
++	 */
++	if (defaults_use_hostname_for_mounts())
++		return 1;
++
+ 	/* Use closest hosts to choose NFS version */
+ 
+ 	first = *list;
+diff --git a/redhat/autofs.conf.default.in b/redhat/autofs.conf.default.in
+index da0882f..b751043 100644
+--- a/redhat/autofs.conf.default.in
++++ b/redhat/autofs.conf.default.in
+@@ -142,6 +142,14 @@ mount_nfs_default_protocol = 4
+ #
+ #map_hash_table_size = 1024
+ #
++# use_hostname_for_mounts - nfs mounts where the host name resolves
++# 			 to more than one IP address normally need
++# 			 to use the IP address to esure a mount to
++# 			 a host that isn't responding isn't done.
++# 			 If that behaviour is not wanted then set
++#			 ths to "yes", default is "no".
++#
++#use_hostname_for_mounts = "no"
+ #
+ # Otions for the amd parser within autofs.
+ #
+diff --git a/samples/autofs.conf.default.in b/samples/autofs.conf.default.in
+index 80abb43..4b48c63 100644
+--- a/samples/autofs.conf.default.in
++++ b/samples/autofs.conf.default.in
+@@ -141,6 +141,14 @@ browse_mode = no
+ #
+ #map_hash_table_size = 1024
+ #
++# use_hostname_for_mounts - nfs mounts where the host name resolves
++# 			to more than one IP address normally need
++# 			to use the IP address to esure a mount to
++# 			a host that isn't responding isn't done.
++# 			If that behaviour is not wanted then set
++#			ths to "yes", default is "no".
++#
++#use_hostname_for_mounts = "no"
+ #
+ # Otions for the amd parser within autofs.
+ #

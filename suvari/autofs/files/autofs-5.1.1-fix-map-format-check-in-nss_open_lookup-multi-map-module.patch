@@ -1,0 +1,47 @@
+autofs-5.1.1 - fix map format check in nss_open_lookup() multi map module
+
+From: Ian Kent <raven@themaw.net>
+
+The nss_open_lookup() function doesn't properly allow for map format when
+it's given with the map type.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ modules/lookup_multi.c |   16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/modules/lookup_multi.c b/modules/lookup_multi.c
+index 433b424..f8ebf94 100644
+--- a/modules/lookup_multi.c
++++ b/modules/lookup_multi.c
+@@ -24,6 +24,8 @@
+ #include "automount.h"
+ #include "nsswitch.h"
+ 
++#define MAX_MAP_TYPE_STRING	20
++
+ #define MODPREFIX "lookup(multi): "
+ 
+ struct module_info {
+@@ -166,11 +168,17 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+ 	    !strncmp(argv[0], "ldaps", 5) ||
+ 	    !strncmp(argv[0], "ldap", 4) ||
+ 	    !strncmp(argv[0], "sss", 3)) {
+-		const char *fmt = strchr(argv[0], ',');
+-		if (fmt)
++		char type[MAX_MAP_TYPE_STRING];
++		char *fmt;
++
++		strcpy(type, argv[0]);
++		fmt = strchr(type, ',');
++		if (!fmt)
++			fmt = (char *) format;
++		else {
++			*fmt = '\0';
+ 			fmt++;
+-		else
+-			fmt = format;
++		}
+ 		open_lookup(argv[0], MODPREFIX, fmt, argc - 1, argv + 1, &mod);
+ 		return mod;
+ 	}

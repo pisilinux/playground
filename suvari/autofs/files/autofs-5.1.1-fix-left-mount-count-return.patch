@@ -1,0 +1,41 @@
+autofs-5.1.1 - fix left mount count return from umount_multi_triggers()
+
+From: Xu Wang <xuw@redhat.com>
+
+If a umount of an NFS mount at the root of a multi-mount fails
+umount_multi_triggers() will return an zero (success) when it should
+return 1 (a fail). In this case do_expire_direct() will close the
+me->ioctlfd fd used for expires stopping further expires of the
+direct mount.
+
+Signed-off-by: Ian Kent <raven@themaw.net>
+---
+ CHANGELOG    |    1 +
+ lib/mounts.c |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 3a9266d..bd7b981 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -2,6 +2,7 @@
+ =======================
+ - update libtirpc workaround for new soname.
+ - revert fix libtirpc name clash.
++- fix left mount count return from umount_multi_triggers().
+ 
+ 21/04/2015 autofs-5.1.1
+ =======================
+diff --git a/lib/mounts.c b/lib/mounts.c
+index 84af6be..f665721 100644
+--- a/lib/mounts.c
++++ b/lib/mounts.c
+@@ -2131,7 +2131,7 @@ int umount_multi_triggers(struct autofs_point *ap, struct mapent *me, char *root
+ 				if (mount_multi_triggers(ap, me, root, strlen(root), "/") < 0)
+ 					warn(ap->logopt,
+ 					     "failed to remount offset triggers");
+-				return left++;
++				return ++left;
+ 			}
+ 		}
+ 
