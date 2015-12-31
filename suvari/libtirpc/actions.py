@@ -12,6 +12,8 @@ def setup():
     autotools.autoreconf("-fisv")
 
     options = "\
+               --prefix=/usr \
+               --sysconf=/etc \
                --disable-static \
                --disable-silent-rules \
                --%sable-gssapi \
@@ -31,5 +33,6 @@ def check():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.insinto("/etc", "doc/netconfig", "netconfig")
+    #pisitools.insinto("/etc", "doc/netconfig", "netconfig")
     pisitools.dodoc("AUTHORS", "NEWS", "ChangeLog", "README", "THANKS", "TODO")
+    
