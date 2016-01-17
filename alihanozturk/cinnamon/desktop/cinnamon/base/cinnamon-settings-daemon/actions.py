@@ -10,19 +10,16 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("sed -i -e 's@{ACLOCAL_FLAGS}@{ACLOCAL_FLAGS} -I m4@g' Makefile.am")
-    shelltools.echo("AC_CONFIG_MACRO_DIR([m4])", "configure.ac")
     shelltools.system("./autogen.sh")
     autotools.autoreconf("-vif")
-    autotools.configure("--sbindir=/sbin \
+    autotools.configure("--prefix=/usr \
+                         --sysconfdir=/etc \
+                         --libexecdir=/usr/lib/cinnamon-settings-daemon \
+                         --localstatedir=/var \
                          --disable-static \
                          --disable-schemas-compile \
                          --enable-polkit \
-                         --disable-systemd \
-                         --enable-profiling \
-                         --with-console-kit=yes \
-                         --without-dbus-sys \
-                         --with-dbus-services=/usr/share/dbus-1/services")
+                         --enable-profiling")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 

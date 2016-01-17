@@ -10,19 +10,16 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.echo("ACLOCAL_AMFLAGS = -I m4", "Makefile.am")
-    shelltools.echo("AC_CONFIG_MACRO_DIR([m4])", "configure.ac")
     shelltools.system("./autogen.sh")
     autotools.autoreconf("-vif")
     autotools.configure("--sysconfdir=/etc \
+                         --libexecdir=/usr/lib/cinnamon-screensaver \
+                         --prefix=/usr \
+                         --disable-static \
                          --with-mit-ext \
                          --with-xf86gamma-ext \
                          --enable-locking \
-                         --disable-schemas-compile \
-                         --enable-docbook-docs \
-                         --with-pam-prefix=/etc \
-                         --with-console-kit=yes \
-                         --without-systemd")
+                         --enable-docbook-docs")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 

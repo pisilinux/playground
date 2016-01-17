@@ -9,12 +9,13 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
+WorkDir="cjs-2.8.0"
+
 def setup():
-    shelltools.system("sed -i -e 's@{ACLOCAL_FLAGS}@{ACLOCAL_FLAGS} -I m4@g' Makefile.am")
-    shelltools.echo("AC_CONFIG_MACRO_DIR([m4])", "configure.ac")
     shelltools.system("./autogen.sh")
     autotools.autoreconf("-fi")
-    autotools.configure("--disable-static")
+    autotools.configure("--disable-static \
+                         --libexecdir=/usr/lib")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 
@@ -23,6 +24,5 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    pisitools.insinto("/usr/lib/girepository-1.0", "usr/lib/cjs/girepository-1.0/CjsPrivate-1.0.typelib")
 
     pisitools.dodoc("COPYING", "COPYING.LGPL", "NEWS", "README")

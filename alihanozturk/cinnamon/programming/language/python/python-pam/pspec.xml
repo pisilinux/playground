@@ -13,6 +13,9 @@
         <Summary>Pure Python interface to the Pluggable Authentication Modules system on Linux</Summary>
         <Description>Module that provides an authenticate function that allows the caller to authenticate a given username / password against the PAM system on Linux.</Description>
         <Archive sha1sum="447362aab11fc3d45f07d16ddadab1479aa4e660" type="targz">https://pypi.python.org/packages/source/p/pam/pam-0.1.4.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python-setuptools</Dependency>
+        </BuildDependencies>
     </Source>
     
     <Package>

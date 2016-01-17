@@ -13,16 +13,8 @@ def setup():
     shelltools.system("./autogen.sh")
     autotools.autoreconf("-vif")
     autotools.configure("--prefix=/usr \
-                         --sbindir=/sbin \
-                         --localstatedir=/var \
-                         --datadir=/usr/share \
-                         --enable-gconf \
-                         --disable-systemd \
-                         --enable-docbook-docs \
-                         --with-console-kit=yes \
-                         --enable-polkit \
-                         --enable-pam \
-                         --disable-schemas-compile")
+                         --libexecdir=/usr/lib/cinnamon-session \
+                         --localstatedir=/var")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 

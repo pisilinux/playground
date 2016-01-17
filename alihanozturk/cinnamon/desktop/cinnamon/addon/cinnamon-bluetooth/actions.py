@@ -10,9 +10,12 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-fi")
-    autotools.configure("--enable-documentation \
-                         --disable-static")
+    autotools.autoreconf("-vfi")
+    autotools.configure("--disable-scrollkeeper \
+                         --disable-ibus \
+                         --disable-update-mimedb \
+                         --without-cheese \
+                         --with-clutter")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
         

@@ -12,10 +12,12 @@ from pisi.actionsapi import get
 def setup():
     shelltools.system("./autogen.sh")
     autotools.autoreconf("-vfi")
-    autotools.configure("--disable-static \
-                         --enable-documentation \
-                         --disable-systemd \
-                         --disable-update-mimedb")
+    autotools.configure("--prefix=/usr \
+                         --sysconfdir=/etc \
+                         --localstatedir=/var \
+                         --disable-static \
+                         --with-libsocialweb \
+                         --enable-documentation")
     
     pisitools.dosed("libtool", "( -shared )", " -Wl,-O1,--as-needed\\1")
     pisitools.dosed("libtool", '(    if test "\$export_dynamic" = yes && test -n "\$export_dynamic_flag_spec"; then)', '      func_append compile_command " -Wl,-O1,--as-needed"\n      func_append finalize_command " -Wl,-O1,--as-needed"\n\\1')

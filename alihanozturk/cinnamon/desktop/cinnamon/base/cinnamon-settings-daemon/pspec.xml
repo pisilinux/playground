@@ -13,34 +13,45 @@
         <IsA>app:gui</IsA>
         <Summary>The daemon sharing settings from CINNAMON to GTK+/KDE applications</Summary>
         <Description>A daemon to share settings from CINNAMON to other applications. It also handles global keybindings, and many of desktop-wide settings.</Description>
-        <Archive sha1sum="75404a1ae416649d0d522912be6c71c4d34efdaa" type="targz">https://github.com/linuxmint/cinnamon-settings-daemon/archive/2.2.4.tar.gz</Archive>
+        <Archive sha1sum="02b49a32b58c46a208a5f329365a18412b672c79" type="targz">https://github.com/linuxmint/cinnamon-settings-daemon/archive/2.8.3.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>nss-devel</Dependency>
-            <Dependency>atk-devel</Dependency>
-            <Dependency>cups-devel</Dependency>
-            <Dependency>gtk3-devel</Dependency>
-            <Dependency>lcms2-devel</Dependency>
-            <Dependency>pango-devel</Dependency>
-            <Dependency>cairo-devel</Dependency>
-            <Dependency>libXi-devel</Dependency>
-            <Dependency>pango-devel</Dependency>
             <Dependency>gnome-common</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>dbus-glib-devel</Dependency>
+            <Dependency>gettext-devel</Dependency>
             <Dependency>intltool</Dependency>
-            <Dependency>colord-devel</Dependency>
-            <Dependency>upower-devel</Dependency>
-            <Dependency>mit-kerberos</Dependency>
-            <Dependency>libXext-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>cinnamon-desktop-devel</Dependency>
+            <Dependency>at-spi2-core-devel</Dependency>
+            <Dependency>libxkbfile-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>cups-devel</Dependency>
             <Dependency>libnotify-devel</Dependency>
-            <Dependency>libwacom-devel</Dependency>
-            <Dependency>libXfixes-devel</Dependency>
-            <Dependency>libcanberra-gtk3</Dependency>
-            <Dependency>fontconfig-devel</Dependency>
-            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>lcms2-devel</Dependency>
             <Dependency>libgnomekbd-devel</Dependency>
+            <Dependency>libxklavier-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>librsvg-devel</Dependency>
             <Dependency>libcanberra-devel</Dependency>
             <Dependency>pulseaudio-libs-devel</Dependency>
+            <Dependency>upower-devel</Dependency>
+            <Dependency>libcanberra-gtk3</Dependency>
+            <Dependency>libcanberra-gtk3-devel</Dependency>
+            <Dependency>colord-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>libXScrnSaver-devel</Dependency>
             <Dependency>xorg-input-wacom-devel</Dependency>
-            <Dependency>cinnamon-desktop-devel</Dependency>
+            <Dependency>libwacom-devel</Dependency>
+            <Dependency>nss-devel</Dependency>
+            <Dependency>nss</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libXxf86misc-devel</Dependency>
+            <Dependency>libXi-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -48,48 +59,48 @@
         <Name>cinnamon-settings-daemon</Name>
         <RuntimeDependencies>
             <Dependency>nss</Dependency>
-            <Dependency>gtk3</Dependency>
             <Dependency>cups</Dependency>
-            <Dependency>lcms2</Dependency>
-            <Dependency>pango</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>nspr</Dependency>
             <Dependency>cairo</Dependency>
+            <Dependency>eudev</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>lcms2</Dependency>
             <Dependency>libXi</Dependency>
             <Dependency>colord</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>polkit</Dependency>
             <Dependency>upower</Dependency>
             <Dependency>libXext</Dependency>
-            <Dependency>libnotify</Dependency>
-            <Dependency>libXfixes</Dependency>
             <Dependency>libwacom</Dependency>
+            <Dependency>dbus-glib</Dependency>
+            <Dependency>libXfixes</Dependency>
+            <Dependency>libnotify</Dependency>
             <Dependency>fontconfig</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
-            <Dependency>libxklavier</Dependency>
             <Dependency>libcanberra</Dependency>
             <Dependency>libgnomekbd</Dependency>
+            <Dependency>libxklavier</Dependency>
             <Dependency>pulseaudio-libs</Dependency>
-            <Dependency>libcanberra-gtk3</Dependency>
             <Dependency>cinnamon-desktop</Dependency>
-            <Dependency>alsa-plugins-pulseaudio</Dependency>
-            <Dependency>xorg-input-wacom</Dependency>
-            <Dependency>librsvg</Dependency>
-            <Dependency>ibus</Dependency>
-            <Dependency>libXtst</Dependency>
-            <Dependency>pulseaudio</Dependency>
-            <Dependency>polkit-gnome</Dependency>
+            <Dependency>libcanberra-gtk3</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/cinnamon-settings-daemon-3.0</Path>
-            <Path fileType="library">/usr/libexec</Path>
-            <Path fileType="man">/usr/share/man</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
-            <Path fileType="data">/usr/share/icons</Path>
-            <Path fileType="data">/usr/share/dbus-1</Path>
-            <Path fileType="data">/usr/share/glib-2.0</Path>
-            <Path fileType="data">/usr/share/polkit-1</Path>
+            <Path fileType="config">/etc/cinnamon-settings-daemon/xrandr</Path>
             <Path fileType="config">/etc/dbus-1/system.d</Path>
+            <Path fileType="library">/usr/lib/cinnamon-settings-daemon-3.0</Path>
+            <Path fileType="libexec">/usr/lib/cinnamon-settings-daemon</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/cinnamon-settings-daemon/csd-a11y-preferences-dialog.ui</Path>
+            <Path fileType="data">/usr/share/cinnamon-settings-daemon/icons/hicolor/64x64/devices</Path>
+            <Path fileType="data">/usr/share/cinnamon-settings-daemon-3.0</Path>
+            <Path fileType="data">/usr/share/dbus-1/system-services</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/glib-2.0/schemas</Path>
+            <Path fileType="data">/usr/share/icons</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
-            <Path fileType="data">/usr/share/applications/</Path>
-            <Path fileType="config">/etc/cinnamon-settings-daemon/</Path>
-            <Path fileType="data">/usr/share/cinnamon-settings-daemon*</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/polkit-1/actions</Path>  
         </Files>
     </Package>
 
@@ -98,14 +109,23 @@
         <Summary>cinnamon-settings-daemon için geliştirme dosyaları</Summary>
         <RuntimeDependencies>
           <Dependency release="current">cinnamon-settings-daemon</Dependency>
+          <Dependency>glib2-devel</Dependency>
+          <Dependency>dbus-glib-devel</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="header">/usr/include</Path>
+            <Path fileType="header">/usr/include/cinnamon-settings-daemon-3.0/cinnamon-settings-daemon</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2015-12-20</Date>
+            <Version>2.8.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="3">
             <Date>2014-06-10</Date>
             <Version>2.2.4</Version>

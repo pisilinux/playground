@@ -14,10 +14,9 @@ def setup():
     autotools.autoreconf("-vif")
     autotools.configure("--prefix=/usr \
                          --sysconfdir=/etc \
-                         --sbindir=/sbin \
-                         --datadir=/usr/share \
+                         --libexecdir=/usr/lib \
                          --localstatedir=/var \
-                         --disable-schemas-compile")
+                         --disable-static")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
     

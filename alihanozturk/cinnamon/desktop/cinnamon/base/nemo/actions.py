@@ -10,12 +10,18 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("sed -i -e '/AC_SUBST(DISABLE_DEPRECATED_CFLAGS)/d' configure.in")
+    pisitools.dosed("data/merge_action_strings", "#!/usr/bin/python2", "#!/usr/bin/python")
+    pisitools.dosed("data/extract_action_strings", "#!/usr/bin/python2", "#!/usr/bin/python")
+    shelltools.export("PYTHON", "/usr/bin/python2.7")
     shelltools.system("./autogen.sh")
-    autotools.configure("--disable-schemas-compile \
-                         --enable-gtk-doc \
-                         --disable-more-warnings \
-                         --disable-update-mimedb")
+    autotools.configure("--libexecdir=/usr/lib/nemo \
+                         --prefix=/usr \
+                         --sysconfdir=/etc \
+                         --disable-update-mimedb \
+                         --disable-tracker \
+                         --disable-schemas-compile \
+                         --disable-gtk-doc-html \
+                         --enable-gtk-doc")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 
@@ -24,6 +30,5 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    pisitools.dodir("/usr/share/nemo/themes/Adwaita-Nemo/gtk-3.0/apps/")
 
     pisitools.dodoc("README", "AUTHORS")

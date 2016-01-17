@@ -10,9 +10,10 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.configure("--sbindir=/sbin \
-                         --disable-static \
-                         --enable-introspection")
+    shelltools.system("./autogen.sh")
+    autotools.autoreconf("-vif")
+    autotools.configure("--sbindir=/usr/bin \
+                         --disable-static")
 
 def build():
     autotools.make()

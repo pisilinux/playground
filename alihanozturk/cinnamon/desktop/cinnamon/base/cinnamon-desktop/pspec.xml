@@ -12,45 +12,45 @@
         <IsA>app:gui</IsA>
         <Summary>The cinnamon-desktop package contains an internal library (libcinnamondesktop) used to implement some portions of the CINNAMON desktop</Summary>
         <Description>The cinnamon-desktop package contains an internal library (libcinnamondesktop) used to implement some portions of the CINNAMON desktop, and also some data files and other shared components of the CINNAMON user environment.</Description>
-        <Archive sha1sum="5e8791db5f748a35ef838c983baea4c492a1ab54" type="targz">https://github.com/linuxmint/cinnamon-desktop/archive/2.2.3.tar.gz</Archive>
+        <Archive sha1sum="f7ca193cfa26831bd09b50d12c866c89d39071dc" type="targz">https://github.com/linuxmint/cinnamon-desktop/archive/2.8.0.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>atk-devel</Dependency>
-            <Dependency>gtk3-devel</Dependency>
-            <Dependency>cairo-devel</Dependency>
-            <Dependency>pango-devel</Dependency>
-            <Dependency>libXext-devel</Dependency>
-            <Dependency>libXrandr-devel</Dependency>            
-            <Dependency>libxkbfile-devel</Dependency>
-            <Dependency>gdk-pixbuf-devel</Dependency>
             <Dependency>gnome-common</Dependency>
-            <Dependency>gnome-doc-utils</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>gettext-devel</Dependency>
             <Dependency>intltool</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libxkbfile-devel</Dependency>
+            <Dependency>xkeyboard-config</Dependency>
+            <Dependency>at-spi2-atk-devel</Dependency>
+            <Dependency>at-spi2-core-devel</Dependency>
         </BuildDependencies>
+	<Patches>
+            <Patch level="1">config.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
         <Name>cinnamon-desktop</Name>
         <RuntimeDependencies>
-            <Dependency>atk</Dependency>
             <Dependency>gtk3</Dependency>
             <Dependency>cairo</Dependency>
-            <Dependency>pango</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libX11</Dependency>
             <Dependency>libXext</Dependency>
             <Dependency>libXrandr</Dependency>            
-            <Dependency>libxkbfile</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
-            <Dependency>gnome-themes-standard</Dependency>
-            <Dependency>gnome-backgrounds</Dependency>
-            <Dependency>gnome-doc-utils</Dependency>
-            <Dependency>gobject-introspection</Dependency>
-            <Dependency>xkeyboard-config</Dependency>
-            <Dependency>gsettings-desktop-schemas</Dependency>
+            <Dependency>libxkbfile</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/libcinnamon-desktop.so</Path>
-            <Path fileType="library">/usr/lib/libcinnamon-desktop.so.4</Path>
-            <Path fileType="library">/usr/lib/libcinnamon-desktop.so.4.0.0</Path>
-            <Path fileType="library">/usr/libexec</Path>
+            
+            <Path fileType="library">/usr/lib/libcinnamon-desktop.so.*</Path>
+	    <Path fileType="library">/usr/lib/cinnamon-rr-debug</Path>
+	    <Path fileType="binary">/usr/bin</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="data">/usr/share/glib-2.0</Path>
@@ -63,11 +63,11 @@
         <Summary>cinnamon-desktop için geliştirm dosyaları</Summary>
         <RuntimeDependencies>
             <Dependency release="current">cinnamon-desktop</Dependency>
-            <Dependency>gtk3-devel</Dependency>
             <Dependency>libxkbfile-devel</Dependency>
-            <Dependency>startup-notification-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
         </RuntimeDependencies>
         <Files>
+            <Path fileType="library">/usr/lib/libcinnamon-desktop.so</Path>
             <Path fileType="library">/usr/lib/girepository-1.0</Path>
             <Path fileType="data">/usr/share/gir-1.0</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
@@ -76,6 +76,20 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2015-12-04</Date>
+            <Version>2.8.0</Version>
+            <Comment>Verison bump.</Comment>
+            <Name>ALihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2015-09-20</Date>
+            <Version>2.6.5</Version>
+            <Comment>Verison bump.</Comment>
+            <Name>ALihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="3">
             <Date>2014-05-23</Date>
             <Version>2.2.3</Version>

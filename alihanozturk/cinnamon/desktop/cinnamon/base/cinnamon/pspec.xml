@@ -12,49 +12,51 @@
         <IsA>app:gui</IsA>
         <Summary>Gnome Shell çatallaması gnome2 görünümlü Cinnamon masaüstü</Summary>
         <Description>Cinnamon, Gnome Shell çatallaması gnome2 görünümlü Cinnamon masaüstü.</Description>
-        <Archive sha1sum="a7170d9ccacc08f4a343f561afc3df87a7a73f8e" type="targz">https://github.com/linuxmint/Cinnamon/archive/2.2.13.tar.gz</Archive>
+        <Archive sha1sum="2bd17270d32e5d81681641341da2006c9b9a72af" type="targz">https://github.com/linuxmint/Cinnamon/archive/2.8.6.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gnome-common</Dependency>
             <Dependency>intltool</Dependency>
-            <Dependency>gjs-devel</Dependency>
-            <Dependency>atk-devel</Dependency>
-            <Dependency>mesa-devel</Dependency>
+            <Dependency>gtk-doc</Dependency>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
-            <Dependency>cogl-devel</Dependency>
-            <Dependency>cairo-devel</Dependency>
-            <Dependency>libXi-devel</Dependency>
-            <Dependency>gconf-devel</Dependency>
-            <Dependency>pango-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>dbus-glib-devel</Dependency>
             <Dependency>muffin-devel</Dependency>
-            <Dependency>clutter-devel</Dependency>
-            <Dependency>libsoup-devel</Dependency>
-            <Dependency>libXext-devel</Dependency>
-            <Dependency>libcroco-devel</Dependency>
-            <Dependency>json-glib-devel</Dependency>
-            <Dependency>libXrandr-devel</Dependency>
-            <Dependency>gstreamer-devel</Dependency>
-            <Dependency>libXfixes-devel</Dependency>
-            <Dependency>gdk-pixbuf-devel</Dependency>
-            <Dependency>libXdamage-devel</Dependency>
-            <Dependency>gnome-menus-devel</Dependency>
-            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>cinnamon-menus-devel</Dependency>
+            <Dependency>gconf-devel</Dependency>
             <Dependency>cjs-internals-devel</Dependency>
-            <Dependency>libXcomposite-devel</Dependency>
-            <Dependency>NetworkManager-devel</Dependency>
-            <Dependency>gnome3-desktop-devel</Dependency>
-            <Dependency>gnome-bluetooth-devel</Dependency>
-            <Dependency>pulseaudio-libs-devel</Dependency>
-            <Dependency>libgnome-keyring-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libsoup-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>cjs-internals-devel</Dependency>
+            <Dependency>clutter-devel</Dependency>
             <Dependency>startup-notification-devel</Dependency>
             <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>libXfixes-devel</Dependency>
+            <Dependency>NetworkManager-devel</Dependency>
+            <Dependency>libgnome-keyring-devel</Dependency>
+            <Dependency>at-spi2-core-devel</Dependency>
+            <Dependency>pulseaudio-libs-devel</Dependency>
+            <Dependency>libxkbfile-devel</Dependency>
+            <Dependency>json-glib-devel</Dependency>
+            <Dependency>libcroco-devel</Dependency>
+            <Dependency>gstreamer-next-devel</Dependency>
+            <Dependency>cogl-devel</Dependency>
+            <Dependency>network-manager-applet</Dependency>
+            <Dependency>cinnamon-control-center-devel</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch level="1">background.patch</Patch> -->
-<!--             <Patch level="1">upower_calender_fix.patch</Patch> -->
+            <Patch level="1">cinnamon-favourite-applications.patch</Patch>
+            <Patch level="1">cinnamon-fix-backgrounds-lookup.patch</Patch>
             <Patch level="1">set_wheel.patch</Patch>
-            <Patch level="1">autostart.patch</Patch>
-<!--             <Patch level="1">cinnamon-2.2.6-automagic-gnome-bluetooth.patch</Patch> -->
-<!--             <Patch level="1">cinnamon-2.2.6-optional-networkmanager.patch</Patch> -->
+            <Patch level="1">cinnamon-fallback-icewm.patch</Patch>
+            <Patch level="1">cinnamon-icon-themes-with-cursors.patch</Patch>
+            <Patch level="1">cinnamon-network-user-connections.patch</Patch>
+            <Patch level="1">cinnamon-no-gksu-requirement.patch</Patch>
+            <Patch level="1">cinnamon-settings-native.patch</Patch>
+            <Patch level="1">default-theme.patch</Patch>
         </Patches>
     </Source>
 
@@ -62,99 +64,93 @@
         <Name>cinnamon</Name>
         <RuntimeDependencies>
             <Dependency>atk</Dependency>
-            <Dependency>gjs</Dependency>
-            <Dependency>mesa</Dependency>
-            <Dependency>gtk3</Dependency>
             <Dependency>cogl</Dependency>
-            <Dependency>nemo</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>mesa</Dependency>
             <Dependency>cairo</Dependency>
-            <Dependency>js185</Dependency>
-            <Dependency>libXi</Dependency>
-            <Dependency>gconf</Dependency>
+            <Dependency>glib2</Dependency>
             <Dependency>pango</Dependency>
+            <Dependency>libX11</Dependency>
             <Dependency>muffin</Dependency>
             <Dependency>clutter</Dependency>
-            <Dependency>libsoup</Dependency>
-            <Dependency>libXext</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>mozjs24</Dependency>
             <Dependency>libcroco</Dependency>
-            <Dependency>json-glib</Dependency>
-            <Dependency>libevdev</Dependency>
-            <Dependency>libXrandr</Dependency>
             <Dependency>libXfixes</Dependency>
-            <Dependency>libXdamage</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
-            <Dependency>libcanberra</Dependency>
-            <Dependency>libxkbcommon</Dependency>
+            <Dependency>at-spi2-atk</Dependency>
             <Dependency>cjs-internals</Dependency>
-            <Dependency>libXcomposite</Dependency>
             <Dependency>cinnamon-menus</Dependency>
-            <Dependency>NetworkManager</Dependency>
             <Dependency>gstreamer-next</Dependency>
-            <Dependency>gnome-bluetooth</Dependency>
             <Dependency>pulseaudio-libs</Dependency>
-            <Dependency>libgnome-keyring</Dependency>
-            <Dependency>cinnamon-desktop</Dependency>
             <Dependency>startup-notification</Dependency>
             <Dependency>gobject-introspection</Dependency>
-<!--             checkelf ile çıkmayanlar -->
+<!--             checkelf -s -x ile çıkmayanlar -->
+            <Dependency>cinnamon-desktop</Dependency>
             <Dependency>cinnamon-control-center</Dependency>
             <Dependency>cinnamon-screensaver</Dependency>
             <Dependency>cinnamon-session</Dependency>
             <Dependency>cinnamon-settings-daemon</Dependency>
             <Dependency>cinnamon-translations</Dependency>
+            <Dependency>nemo</Dependency>
+            <Dependency>NetworkManager</Dependency>
+            <Dependency>libgnome-keyring</Dependency>
             <Dependency>network-manager-applet</Dependency>
             <Dependency>accountsservice</Dependency>
-            <Dependency>clutter-gtk</Dependency>
-            <Dependency>librsvg</Dependency>
-            <Dependency>mesa-utils</Dependency>
+            <Dependency>upower</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+            <Dependency>polkit</Dependency>
             <Dependency>polkit-gnome</Dependency>
-            <Dependency>python-pam</Dependency>
-            <Dependency>python-inotify</Dependency>
-            <Dependency>python-lxml</Dependency>
+            <Dependency>gnome-bluetooth</Dependency>
+            <Dependency>blueberry</Dependency>
+            <Dependency>cinnamon-themes</Dependency>
             <Dependency>python-cairo</Dependency>
             <Dependency>python-pygobject</Dependency>
-            <Dependency>python-imaging</Dependency>
-            <Dependency>python-pexpect</Dependency>
+            <Dependency>python-pam</Dependency>
             <Dependency>python-gtk</Dependency>
-            <Dependency>python-simplejson</Dependency>
-            <Dependency>icon-theme-gnome</Dependency>
-            <Dependency>icon-theme-gnome-symbolic</Dependency>
-            <Dependency>gnome-themes-standard</Dependency>
-            <Dependency>gsettings-desktop-schemas</Dependency>
-            <Dependency>libgnomekbd</Dependency>
-            <Dependency>gstreamer</Dependency>
-            <Dependency>gst-plugins-base</Dependency>
-            <Dependency>gst-plugins-base-next</Dependency>
-            <Dependency>caribou</Dependency>
-            <Dependency>upower</Dependency>
-            <Dependency>gksu</Dependency>
-            <Dependency>gnome-settings-daemon</Dependency>
-            <Dependency>gnome-terminal</Dependency>
-            <Dependency>libpeas</Dependency>
-            <Dependency>desktop-file-utils</Dependency>
-            <Dependency>xdg-utils</Dependency>
-            <Dependency>pixman</Dependency>
-            <Dependency>bluez</Dependency>
-            <Dependency>webkit-gtk2</Dependency>
-            <Dependency>pulseaudio</Dependency>
-            <Dependency>at-spi2-atk</Dependency>
-            <Dependency>mobile-broadband-provider-info</Dependency>
+            <Dependency>mesa-glu</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="config">/etc</Path>
+            <Path fileType="config">/etc/xdg/menus</Path>
             <Path fileType="executable">/usr/bin/</Path>
-            <Path fileType="data">/usr/share/</Path>
-            <Path fileType="library">/usr/lib</Path>
-            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="library">/usr/lib/cinnamon/*.typelib</Path>
+            <Path fileType="library">/usr/lib/cinnamon/*.so</Path>
+            <Path fileType="library">/usr/lib/cinnamon/cinnamon</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/cinnamon</Path>
+            <Path fileType="data">/usr/share/cinnamon-session</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/desktop-directories</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="doc">/usr/share/gtk-doc</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/polkit-1</Path>
+            <Path fileType="data">/usr/share/themes</Path>
+            <Path fileType="data">/usr/share/xsessions</Path>
         </Files>
         <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/polkit-cinnamon-authentication-agent-1.desktop">polkit-cinnamon-authentication-agent-1.desktop</AdditionalFile>
-<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/cinnamon-pisilinux.gschema.override">cinnamon-pisilinux.gschema.override</AdditionalFile> -->
-<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/themes/Adwaita/backgrounds/pisi.jpg">pisi.jpg</AdditionalFile> -->
+<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/cinnamon-pisilinux.gschema.override">cinnamon-pisilinux.gschema.override</AdditionalFile> --> -->
+<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/themes/Adwaita/backgrounds/pisi.jpg">pisi.jpg</AdditionalFile> --> -->
         </AdditionalFiles>
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2015-12-22</Date>
+            <Version>2.8.6</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2015-09-20</Date>
+            <Version>2.6.13</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="3">
             <Date>2014-05-28</Date>
             <Version>2.2.13</Version>

@@ -13,27 +13,30 @@
         <IsA>app:gui</IsA>
         <Summary>File manager for Cinnamon</Summary>
         <Description>Nemo is the file manager and graphical shell for the Cinnamon desktop that makes it easy to manage your files and the rest of your system.</Description>
-        <Archive sha1sum="37c05a6672be8910fcc2f5300d9570670bfa4e90" type="targz">https://github.com/linuxmint/nemo/archive/2.2.2.tar.gz</Archive>
+        <Archive sha1sum="871bb3fd1cde02f05f0bf052283352c22fb87556" type="targz">https://github.com/linuxmint/nemo/archive/2.8.6.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>atk-devel</Dependency>
-            <Dependency>gtk3-devel</Dependency>
-            <Dependency>cairo-devel</Dependency>
-            <Dependency>python-polib</Dependency>
-            <Dependency>pango-devel</Dependency>
-            <Dependency>exempi-devel</Dependency>
             <Dependency>gnome-common</Dependency>
-            <Dependency>libnotify-devel</Dependency>
-            <Dependency>gobject-introspection</Dependency>
-            <Dependency>gtk-doc</Dependency>
-            <Dependency>docbook-xsl</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>gettext-devel</Dependency>
             <Dependency>intltool</Dependency>
-            <Dependency>libexif-devel</Dependency>
-            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>gtk-doc</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>at-spi2-core-devel</Dependency>
             <Dependency>cinnamon-desktop-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>libxkbfile-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>libexif-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
+            <Dependency>exempi-devel</Dependency>
+            <Dependency>python-devel</Dependency>
+            <Dependency>python-pygobject3-devel</Dependency>
+            <Dependency>python-polib</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch level="1">nemo-2.0.1-view-no-return.patch</Patch> -->
-<!--             <Patch level="1">nemo-2.2.0-void-return-no-return.patch</Patch> -->
+            <Patch level="1">nemo-void-return-no-return.patch</Patch>
         </Patches>
     </Source>
 
@@ -43,51 +46,35 @@
             <Dependency>atk</Dependency>
             <Dependency>gtk3</Dependency>
             <Dependency>cairo</Dependency>
+            <Dependency>glib2</Dependency>
             <Dependency>pango</Dependency>
             <Dependency>exempi</Dependency>
+            <Dependency>libX11</Dependency>
             <Dependency>libexif</Dependency>
+            <Dependency>libxml2</Dependency>
             <Dependency>libnotify</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
-            <Dependency>cinnamon-desktop</Dependency>
-            <Dependency>gvfs</Dependency>
-            <Dependency>dconf</Dependency>
-            <Dependency>libXrender</Dependency>
-            <Dependency>libXext</Dependency>
-            <Dependency>gsettings-desktop-schemas</Dependency>
-            <Dependency>icon-theme-gnome-symbolic</Dependency>
-            <Dependency>desktop-file-utils</Dependency>
             <Dependency>cinnamon-translations</Dependency>
-            <Dependency>gobject-introspection</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/libnemo-extension.so</Path>
-            <Path fileType="library">/usr/lib/libnemo-extension.so.1</Path>
-            <Path fileType="library">/usr/lib/libnemo-extension.so.1.4.0</Path>
-            <Path fileType="executable">/usr/libexec</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
-            <Path fileType="doc">/usr/share/gtk-doc</Path>
-            <Path fileType="data">/usr/share/man</Path>
             <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib/*.so.*</Path>
+            <Path fileType="library">/usr/lib/nemo</Path>
+            <Path fileType="data">/usr/lib/girepository-1.0</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/man</Path>
             <Path fileType="data">/usr/share/nemo</Path>
             <Path fileType="data">/usr/share/icons</Path>
-            <Path fileType="library">/usr/lib/nemo</Path>
-            <Path fileType="data">/usr/share/GConf</Path>
             <Path fileType="data">/usr/share/dbus-1</Path>
             <Path fileType="data">/usr/share/polkit-1</Path>
             <Path fileType="data">/usr/share/glib-2.0/</Path>
-            <Path fileType="config">/etc/xdg/autostart</Path>
             <Path fileType="data">/usr/share/applications</Path>
-            <Path fileType="data">/usr/share/mime/packages</Path>
-            <Path fileType="data">/usr/share/mime/application</Path>
             <Path fileType="data">/usr/share/mime</Path>
             <Path fileType="data">/usr/share/gtksourceview-2.0/</Path>
             <Path fileType="library">/usr/share/gtksourceview-3.0</Path>
         </Files>
         <AdditionalFiles>
-<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/nemo-fedora.gschema.override">nemo-fedora.gschema.override</AdditionalFile> -->
-<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/nemo/themes/Adwaita-Nemo/gtk-3.0/apps/nemo.css">nemo.css</AdditionalFile> -->
-<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/nemo/themes/Adwaita-Nemo/gtk-3.0/gtk-dark.css">gtk-dark.css</AdditionalFile> -->
-<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/nemo/themes/Adwaita-Nemo/gtk-3.0/gtk.css">gtk.css</AdditionalFile> -->
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/nemo-fedora.gschema.override">nemo-fedora.gschema.override</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
@@ -96,10 +83,9 @@
         <Summary>nemo için geliştirme dosyaları</Summary>
         <RuntimeDependencies>
             <Dependency release="current">nemo</Dependency>
-            <Dependency>gtk3-devel</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="data">/usr/lib/girepository-1.0</Path>
+            <Path fileType="library">/usr/lib/*.so</Path>
             <Path fileType="data">/usr/share/gir-1.0</Path>
             <Path fileType="header">/usr/include/nemo</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
@@ -107,6 +93,20 @@
     </Package>
     
     <History>
+        <Update release="5">
+            <Date>2015-12-16</Date>
+            <Version>2.8.6</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2015-09-21</Date>
+            <Version>2.6.7</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="3">
             <Date>2014-05-23</Date>
             <Version>2.2.2</Version>

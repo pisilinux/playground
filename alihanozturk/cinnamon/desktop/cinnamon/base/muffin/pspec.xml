@@ -12,25 +12,32 @@
         <IsA>app:gui</IsA>
         <Summary>The Cinnamon Window Manager</Summary>
         <Description>Cinnamon masaüstünün pencere uygulamasıdır.</Description>
-        <Archive sha1sum="0ebaf61b0a6f52b00f29625300625ec3a557e841" type="targz">https://github.com/linuxmint/muffin/archive/2.2.5.tar.gz</Archive>
+        <Archive sha1sum="96953dbdf077374c0ce59cba0e239f95df214cb3" type="targz">https://github.com/linuxmint/muffin/archive/2.8.4.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>zenity</Dependency>
-            <Dependency>cogl-devel</Dependency>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>gtk-doc</Dependency>
+            <Dependency>gnome-doc-utils</Dependency>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
-            <Dependency>gconf-devel</Dependency>
+            <Dependency>at-spi2-core-devel</Dependency>
             <Dependency>pango-devel</Dependency>
             <Dependency>cairo-devel</Dependency>
-            <Dependency>clutter-devel</Dependency>
-            <Dependency>libXcursor-devel</Dependency>
-            <Dependency>gnome-common</Dependency>
-            <Dependency>intltool</Dependency>
-            <Dependency>gnome-doc-utils</Dependency>
-            <Dependency>libcanberra-gtk3</Dependency>
-            <Dependency>libXxf86vm-devel</Dependency>
+            <Dependency>cogl-devel</Dependency>
             <Dependency>cinnamon-desktop-devel</Dependency>
-            <Dependency>gsettings-desktop-schemas</Dependency>
+            <Dependency>clutter-devel</Dependency>
+            <Dependency>libxkbfile-devel</Dependency>
+            <Dependency>json-glib-devel</Dependency>
+            <Dependency>zenity</Dependency>
             <Dependency>startup-notification-devel</Dependency>
-            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>libcanberra-gtk3</Dependency>
+            <Dependency>libcanberra-gtk3-devel</Dependency>
+            <Dependency>libICE-devel</Dependency>
+            <Dependency>libSM-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
         </BuildDependencies>
         <Patches>
 <!--             <Patch level="1">automake.patch</Patch> -->
@@ -42,53 +49,38 @@
     <Package>
         <Name>muffin</Name>
         <RuntimeDependencies>
-            <Dependency>atk</Dependency>
-            <Dependency>mesa</Dependency>
-            <Dependency>gtk3</Dependency>
             <Dependency>cogl</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>mesa</Dependency>
             <Dependency>cairo</Dependency>
-            <Dependency>dconf</Dependency>
+            <Dependency>glib2</Dependency>
             <Dependency>libSM</Dependency>
-            <Dependency>libXi</Dependency>
             <Dependency>pango</Dependency>
             <Dependency>libICE</Dependency>
-            <Dependency>zenity</Dependency>
+            <Dependency>libX11</Dependency>
             <Dependency>clutter</Dependency>
             <Dependency>libXext</Dependency>
-            <Dependency>libevdev</Dependency>
-            <Dependency>json-glib</Dependency>
-            <Dependency>libXrandr</Dependency>
             <Dependency>libXfixes</Dependency>
-            <Dependency>libXrender</Dependency>
-            <Dependency>libXdamage</Dependency>
-            <Dependency>libXcursor</Dependency>
+            <Dependency>libXrandr</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libXcursor</Dependency>
+            <Dependency>libXdamage</Dependency>
+            <Dependency>libXrender</Dependency>
             <Dependency>libXinerama</Dependency>
             <Dependency>libcanberra</Dependency>
-            <Dependency>libxkbcommon</Dependency>
             <Dependency>libXcomposite</Dependency>
-            <Dependency>cinnamon-desktop</Dependency>
             <Dependency>libcanberra-gtk3</Dependency>
             <Dependency>startup-notification</Dependency>
             <Dependency>gobject-introspection</Dependency>
-            <Dependency>mesa-utils</Dependency>
-            <Dependency>mesa-glu</Dependency>
-            <Dependency>gnome-themes-standard</Dependency>
-            <Dependency>gsettings-desktop-schemas</Dependency>
-            <Dependency>xdg-user-dirs</Dependency>
-            <Dependency>gnome-doc-utils</Dependency>
+            <Dependency>cinnamon-desktop</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib/muffin/plugins</Path>
             <Path fileType="library">/usr/lib/muffin/Meta-Muffin.0.typelib</Path>
-            <Path fileType="library">/usr/lib/libmuffin.so</Path>
-            <Path fileType="library">/usr/lib/libmuffin.so.0</Path>
-            <Path fileType="library">/usr/lib/libmuffin.so.0.0.0</Path>
-            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="library">/usr/lib/*.so.*</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="data">/usr/share/GConf</Path>
             <Path fileType="data">/usr/share/locale</Path>
             <Path fileType="data">/usr/share/muffin</Path>
             <Path fileType="data">/usr/share/glib-2.0</Path>
@@ -102,18 +94,34 @@
         <RuntimeDependencies>
             <Dependency release="current">muffin</Dependency>
             <Dependency>gtk3-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
             <Dependency>clutter-devel</Dependency>
             <Dependency>cinnamon-desktop-devel</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/girepository-1.0</Path>
-            <Path fileType="header">/usr/include</Path>
+            <Path fileType="header">/usr/include/muffin/meta</Path>
+            <Path fileType="library">/usr/lib/*.so</Path>
+            <Path fileType="library">/usr/lib/muffin/Meta-Muffin.0.gir</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
-            <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="data">/usr/share/gtk-doc/html/muffin</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2015-12-08</Date>
+            <Version>2.8.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2015-09-20</Date>
+            <Version>2.6.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="3">
             <Date>2014-05-23</Date>
             <Version>2.2.5</Version>

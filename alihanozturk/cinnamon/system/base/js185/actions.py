@@ -8,7 +8,7 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
-WorkDir = "js-%s/js/src" % get.srcVERSION()
+WorkDir = "js-1.8.5/js/src"
 
 def setup():
    shelltools.export("CPPFLAGS", get.CXXFLAGS())
@@ -20,3 +20,6 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    
+    
+    pisitools.rename("/usr/bin/js-config", "js185-config")
