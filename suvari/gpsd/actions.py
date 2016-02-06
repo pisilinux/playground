@@ -10,34 +10,24 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
-def setup():
-    shelltools.cd("..")
-    shelltools.cd("gpsd-3.16")
-    
-    #shelltools.export("NCURSES_CONFIG", "/usr/bin/ncursesw6-config")
-
 def build():
-    shelltools.cd("..")
-    shelltools.cd("gpsd-3.16")
-    scons.make("prefix=/usr \
+    scons.make("COMPILE_FLAGS='%s %s %s -fvisibility-inlines-hidden' \
+                systemd=no \
+                dbus_export=yes \
+                debug=yes \
+                chrpath=False \
+                python=False \
                 libQgpsmm=no \
-                gpsd_group=uucp \
-                ncursesdir=/usr/bin/ncursesw6-config \
-                sbindir=/usr/bin")
-    # fix python 2.7 path
-    #shelltools.system("sed -i -e "s|#![ ]*/usr/bin/python$|#!/usr/bin/python2|"
-                              #-e "s|#![ ]*/usr/bin/env python$|#!/usr/bin/env python2|" \
-    #$(find . -name *.py)
-    shelltools.system("sed -i 's|/usr/bin/env python|/usr/bin/env python|' gegps \
-                                                                            gpscat gpsfake gpsprof xgps xgpsspeed")
+                nostrip=True \
+                gpsd_user=gpsd \
+                gpsd_group=uucp" % (get.CFLAGS(), get.CXXFLAGS(), get.LDFLAGS()))
+
     shelltools.system("sed -i 's/sbin/bin/g' comar/*.service")
 
-    #autotools.make()
 
 def install():
-    shelltools.cd("..")
-    shelltools.cd("gpsd-3.16")
-    #autotools.install()
+    shelltools.system("sed -i 's|.so gps.1|.so man1/gps.1|' cgps.1 lcdgps.1 xgps.1 xgpsspeed.1")
+    scons.install()
 
     # We're using conf.d instead of sysconfig
     pisitools.dosed("gpsd.hotplug.wrapper", "sysconfig\/", "conf.d/")

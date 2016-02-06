@@ -13,7 +13,9 @@
         <Description>gpsd is a service daemon that monitor one or more GPSes attached to a host computer through serial or USB ports, making all data of the sensors available to be queried on TCP port 2947 of the host computer.</Description>
         <Archive sha1sum="f211a45eb6e8d067df2d02f7d9347e3977296ed9" type="targz">http://download.savannah.gnu.org/releases/gpsd/gpsd-3.16.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>xmlto</Dependency>
+            <Dependency>dbus-devel</Dependency>
+            <Dependency>dbus-glib-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
             <Dependency>ncurses-devel</Dependency>
             <Dependency>bluez-libs-devel</Dependency>
             <Dependency>qt5-base-devel</Dependency>
@@ -22,10 +24,13 @@
             <Dependency>scons</Dependency>
             <Dependency>docbook-xsl</Dependency>
             <Dependency>asciidoc</Dependency>
+            <Dependency>python-qt5-devel</Dependency>
             <Dependency>python-gtk-devel</Dependency>
         </BuildDependencies>
         <Patches>
 <!--             <Patch level="1">gpsmon_c.patch</Patch> -->
+            <Patch level="1">gpsd-fix-shebang.patch</Patch>
+            <Patch level="1">gpsd-3.15-dynamic-libs.patch</Patch>
 <!--             <Patch level="1">SConstruct.patch</Patch> -->
 <!--             <Patch level="1">fix-libusb-linking.patch</Patch> -->
         </Patches>
