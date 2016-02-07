@@ -10,17 +10,24 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
+def setup():
+    shelltools.export("CC", get.CC())
+    shelltools.export("CXX", get.CXX())
+    shelltools.export("CPPFLAGS", get.CXXFLAGS())
+    shelltools.export("CXXFLAGS", get.CXXFLAGS())
+    shelltools.export("CFLAGS",  get.CFLAGS())
+    shelltools.export("LDFLAGS", get.LDFLAGS())
+
 def build():
-    scons.make("COMPILE_FLAGS='%s %s %s -fvisibility-inlines-hidden' \
+    scons.make("\
                 systemd=no \
                 dbus_export=yes \
                 debug=yes \
-                chrpath=False \
                 python=False \
                 libQgpsmm=no \
                 nostrip=True \
                 gpsd_user=gpsd \
-                gpsd_group=uucp" % (get.CFLAGS(), get.CXXFLAGS(), get.LDFLAGS()))
+                gpsd_group=dialout")
 
     shelltools.system("sed -i 's/sbin/bin/g' comar/*.service")
 
