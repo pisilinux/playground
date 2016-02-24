@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>aptana-studio3</Name>
+        <Homepage>http://www.aptana.com/products/studio3/download.html</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPL3</License>
+        <IsA>app:gui</IsA>
+        <Summary>Aptana Studio 3.6.1 is code base and complete eclipse-based environment</Summary>
+        <Description>Aptana Studio 3.6.1 is code base and complete eclipse-based environment that includes extensive capabilities to build Ruby and Rails, PHP, and Python applications, along with complete HTML, CSS and JavaScript editing.</Description>
+        <Archive sha1sum="9e19e96b5a53f381b898f49eca5a7ff7479d6e42" type="zip">https://github.com/aptana/studio3/releases/download/v3.6.1/Aptana_Studio_3_Setup_Linux_x86_64_3.6.1.zip</Archive>                
+    </Source>
+
+    <Package>
+        <Name>aptana-studio3</Name>
+        <RuntimeDependencies>
+            <Dependency>jre7-openjdk</Dependency>
+            <Dependency>jdk7-openjdk</Dependency>
+            <Dependency>openjdk7-src</Dependency>
+            <Dependency>jre7-openjdk-headless</Dependency>          
+        </RuntimeDependencies>
+        <Files>            
+            <Path fileType="data">/opt</Path>
+            <Path fileType="icon">/usr/share/pixmaps</Path>
+            <Path fileType="application">/usr/share/applications</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/share/applications/aptana-studio.desktop">aptana-studio.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>        
+        <Update release="1">
+            <Date>2016-02-24</Date>
+            <Version>3.6.1</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
