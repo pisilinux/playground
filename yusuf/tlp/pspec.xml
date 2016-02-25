@@ -1,0 +1,46 @@
+<PISI>
+    <Source>
+        <Name>tlp</Name>
+        <Homepage>http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html'</Homepage>
+        <Packager>
+            <Name>Ali Algul</Name>
+            <Email>alialgul@pisilinux.org</Email>
+        </Packager>
+        <License>GPL3</License>
+        <Summary>Linux Advanced Power Management</Summary>
+        <Description>Linux Advanced Power Management</Description>
+        <BuildDependencies> 
+<!--             <Dependency>NetworkManager-devel</Dependency> 
+            <Dependency>bash</Dependency>
+            <Dependency>hdparm</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>smartmontools</Dependency>
+            <Dependency>wireless-tools-devel</Dependency>-->
+        </BuildDependencies>
+        <Archive sha1sum="96c359168542bf7dcc5eb08177b862b7d8cca32e" type="targz">http://pkgs.fedoraproject.org/repo/pkgs/tlp/0.8.tar.gz/d53ef993ce96ccff904d6caad1f14006/0.8.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>tlp</Name>
+        <Summary>Linux Advanced Power Management</Summary>
+
+        <Files>
+           <Path fileType="exectuable">/usr/bin</Path>
+           <Path fileType="libary">/usr/lib</Path>
+           <Path fileType="libary">/lib</Path>
+           <Path fileType="exectuable">/etc</Path>
+           <Path fileType="data">/usr</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2016-02-25</Date>
+            <Version>0.8</Version>
+            <Comment>firstbuild</Comment>
+            <Name>Ali Algul</Name>
+            <Email>alialgul@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
