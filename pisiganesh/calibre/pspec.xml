@@ -23,35 +23,42 @@
     <Package>
         <Name>calibre</Name>
         <Files>
-            <Path fileType="data">/opt/calibre</Path>
-            <Path fileType="executable">/opt/calibre/bin</Path>
-            <Path fileType="library">/opt/calibre/lib</Path>
-            <Path fileType="data">/opt/calibre/resources</Path>
-            <Path fileType="data">/usr</Path>
+            <Path fileType="data">/opt/calibre-1.15.0-x86_64</Path>
+            <Path fileType="executable">/opt/calibre-1.15.0-x86_64/bin</Path>
+            <Path fileType="library">/opt/calibre-1.15.0-x86_64/lib</Path>
+            <Path fileType="data">/opt/calibre-1.15.0-x86_64/resources</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile target="/usr/share/applications/calibre.desktop" permission="0644" group="root" owner="root">calibre.desktop</AdditionalFile>
             <AdditionalFile target="/usr/share/pixmaps/calibre.png" permission="0644" group="root" owner="root">calibre.png</AdditionalFile>
         </AdditionalFiles>
         <RuntimeDependencies>
-            <Dependency>chmlib</Dependency>
-            <Dependency>libmtp</Dependency>
-            <Dependency>libwmf</Dependency>
-            <Dependency>libxml2</Dependency>
-            <Dependency>podofo</Dependency>
-            <Dependency>poppler</Dependency>
-            <Dependency>psutils</Dependency>
             <Dependency>python</Dependency>
+            <Dependency>python-imaging</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>python-qt5</Dependency>
+            <Dependency>imagemagick</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>python-dateutil</Dependency>
             <Dependency>python-beautifulsoup</Dependency>
             <Dependency>python-cssutils</Dependency>
-            <Dependency>python-dateutil</Dependency>
             <Dependency>python-dns</Dependency>
-            <Dependency>python-icu</Dependency>
-            <Dependency>python-imaging</Dependency>
-            <Dependency>python-mechanize</Dependency>
-            <Dependency>python-qt</Dependency>
-            <Dependency>qt</Dependency>
+            <Dependency>poppler</Dependency>
+            <Dependency>podofo</Dependency>
+            <Dependency>libwmf</Dependency>
+            <Dependency>chmlib</Dependency>
+            <Dependency>icu4c</Dependency>
+            <Dependency>libmtp</Dependency>
+            <Dependency>psutils</Dependency>
+            <Dependency>qt5-x11extras</Dependency>
+            <Dependency>dbus-python3</Dependency>
+            <Dependency>python-Pygments</Dependency>
+            <Dependency>qt5-webkit</Dependency>
             <Dependency>xdg-utils</Dependency>
+            <Dependency>shared-mime-info</Dependency>
+            <Dependency>python-mechanize</Dependency> 
         </RuntimeDependencies>
     </Package>
     <History>
