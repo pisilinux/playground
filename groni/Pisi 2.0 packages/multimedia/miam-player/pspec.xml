@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>miam-player</Name>
+        <Homepage>http://www.miam-player.org/</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>A nice music player based on Qt5 !</Summary>
+        <Description>Cross-platform open source music player built with Qt5, QTav and Taglib.</Description>
+        <Archive sha1sum="880f06c0bfa10103ee13b0728d90cbd583418321" type="targz">https://github.com/MBach/Miam-Player/archive/v0.8.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
+            <Dependency>qt5-multimedia-devel</Dependency>
+            <Dependency>qt5-sql-mysql</Dependency>
+            <Dependency>qt5-sql-postgresql</Dependency>
+            <Dependency>qt5-sql-sqlite</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>qtav-devel</Dependency>            
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>miam-player</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>           
+            <Dependency>qt5-multimedia</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>qtav</Dependency>
+            <Dependency>taglib</Dependency>
+            <Dependency>qt5-x11extras</Dependency>                      
+        </RuntimeDependencies>
+        <Files>            
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib/qt5</Path>
+            <Path fileType="application">/usr/share/applications</Path>
+        </Files>        
+    </Package>
+
+    <History>        
+        <Update release="1">
+            <Date>2016-02-28</Date>
+            <Version>0.8.0</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
