@@ -84,6 +84,7 @@ def install():
     # OpenGl library
     pisitools.dolib("libGL.so.%s" % version, nvlibdir)
     pisitools.dosym("libGL.so.%s" % version, "%s/libGL.so.1.2.0" % nvlibdir)
+    pisitools.dolib("libGL.so.%s" % version, libdir)
     
     pisitools.dolib("libEGL.so.1", nvlibdir)
     pisitools.dolib("libEGL_nvidia.so.%s" % version, libdir)
@@ -176,7 +177,3 @@ def install():
     # we have seperate packages for each of them. Nvidia provides tarballs for
     # these binaries. Don't forget to update these package with each NVIDIA
     # driver update.
-
-    # Nvidia-bug-report
-    # Comes with our own nvidia-xcfonig package
-    # pisitools.dobin("nvidia-bug-report.sh")
