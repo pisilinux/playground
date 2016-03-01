@@ -35,21 +35,31 @@ Bumblebee Yükleme Talimatları / Bumblebee Install Instructions
 
    sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/module-nvidia-current-p20/pspec.xml && sudo pisi install *nvidia*.pisi
    
+7- primus paketini derleyin ve kurun
+   Build and install primus package
+   
+   sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/primus/pspec.xml && sudo pisi install primus*.pisi
+   
+8- nvidia-settings paketini derleyin ve kurun
+   build and install nvidia-settings
+   
+   sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/nvidia-settings/pspec.xml && sudo pisi install nvidia-settings*.pisi
+   
 
-7- Çeşitli paketler kurun 
+9- Çeşitli paketler kurun 
    Various packages
 
    sudo pisi install mesa-demos mesa-demos-32bit mesa-utils module-bbswitch   
 
    
    
-8- Son olarak bumblebee paketini derleyin ve kurun 
+10- Son olarak bumblebee paketini derleyin ve kurun 
    Finally build and install bumblebee packages
 
    sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/bumblebee/pspec.xml && sudo pisi install bumblebee*.pisi
    
    
-9- Yeniden başlatın ve şu komutlarla çalıştığını test edin.
+11- Yeniden başlatın ve şu komutlarla çalıştığını test edin.
    Reboot and test if it works by those commands
    
    optirun glxinfo
@@ -60,7 +70,7 @@ Bumblebee Yükleme Talimatları / Bumblebee Install Instructions
    primusrun glxgears
    primusrun glxspheres
    
-10- Çalıştırmak istediğiniz komutun önüne primusrun veya optirun getirerek, programı Nvidia üzerinden çalıştırabilirsiniz.
+12- Çalıştırmak istediğiniz komutun önüne primusrun veya optirun getirerek, programı Nvidia üzerinden çalıştırabilirsiniz.
     By typing primusrun or optirun before the command, you can run the program on Nvidia card.
     
     
