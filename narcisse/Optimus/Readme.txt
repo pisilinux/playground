@@ -1,104 +1,67 @@
-PISILINUX OPTIMUS TESTING INSTRUCTIONS
+Bumblebee Yükleme Talimatları / Bumblebee Install Instructions
 
-*** Building a package ***
+1- system.devel paketlerini yükleyin 
+   install system.devel packages
 
-In order to build a package from this repo, you will need to do those steps:
-
-1- You need a raw link of pspec.xml file for that package. Open pspec.xml file of that package on browser, click "Raw" button on the page and copy the address from the adress bar.
-
-2- Build the package via this command. Substitute the address you've just copied here with <address here>
-
-   sudo pisi build <address here> --ignore-sandbox -y
-   
-3- In order to install packages:
-
-   sudo pisi install *.pisi --ignore-file-conflicts
-
-
-*** UPDATE: Build libdrm from here. It's updated version for mesa. ***
-*** UPDATE: Build libbsd from here. It's updated version. ***
-*** UPDATE: Build libjpeg-turbo from here. It's updated version for VirtualGL. ***
-
-
-PACKAGE BUILDING AND INSTALLATION ORDER
-
-0- Build && install libomxil-bellagio from here.
-
-1- Build && install libclc. This is just a dependency for Mesa OpenCL. It may be unnecessary.
-
-
-
-2- Build mesa. After successful build, you will see a lot of packages. Just install regular mesa packages and mesa-dri-intel, optional mesa-opencl.
-   The others are irrelevant. Actually, we just avoid swrast and vmware drivers' installation. 
-   
-   *** Delete those packages after build and install remaining ***
-   
-   * mesa-dri-swrast
-   * mesa-dri-nouveau
-   * mesa-dri-radeon
-   * mesa-dri-vmware
+   sudo pisi install -c system.devel
    
 
+2- libbsd derleme ve kurulumu 
+   libbsd build and install
+
+   sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/libbsd/pspec.xml && sudo pisi install libsd*.pisi
    
-3- Build && install module-nvidia-current
+   
+3- fltk derleme ve kurulumu 
+   fltk build and install
 
+   sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/fltk/pspec.xml && sudo pisi install fltk*.pisi
+   
+   
+4- virtualgl derleme ve kurulumu 
+   virtualgl build and install
 
-4- Install module-bbswitch.
+   sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/virtualgl/pspec.xml && sudo pisi install virtualgl*.pisi
+   
+   
+5- Eğer Pisi 1.2 sürümünü kullanıyorsanız, bu modülü derleyin. 
+   If you are using Pisi version 1.2, build and install this module
 
+   sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/module-nvidia-current-p12/pspec.xml && sudo pisi install *nvidia*.pisi
+   
 
-5- Build && install libbsd from here.
+6- Eğer Pisi 2.0 sürümünü kullanıyorsanız, bu modülü derleyin 
+   If you are using Pisi version 2.0, build and install this module
 
+   sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/module-nvidia-current-p20/pspec.xml && sudo pisi install *nvidia*.pisi
+   
 
-6- Build && install fltk from here. This one has been added 32-bit support for virtualgl.
+7- Çeşitli paketler kurun 
+   Various packages
 
+   sudo pisi install mesa-demos mesa-demos-32bit mesa-utils module-bbswitch   
 
-7- Build && install virtualgl. This one has been added 32 bit support for 32-bit applications.
+   
+   
+8- Son olarak bumblebee paketini derleyin ve kurun 
+   Finally build and install bumblebee packages
 
-
-8- Build && install bumblebee from here.
-
-9- Build && install nv-scripts from here.
-
-
-Now we've got everything we need. Before reboot, do these too;
-
-
-* sudo groupadd bumblebee
-
-* sudo gpasswd -a $USER bumblebee
-
-* Add these line to the end of /etc/modprobe.d/blacklist.conf file
-  
-  blacklist nouveau
-
-
-Reboot. After reboot, start bumblebee daemon by this:
-
-* sudo bumblebeed --daemon
-
-
-And we're ready. Test with this:
-
-* optirun glxinfo | grep "NVIDIA"
-
-
-If you get nothing, try to switch libGL and try again previous step:
-
-* sudo run-nv
-
-
-To activate Nvidia card:
-
-* sudo run-nv
-
-To deactivate:
-
-* sudo kill-nv
-
-
-And done. Enjoy...
-
-
-Idris Kalp
-
-  
+   sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/bumblebee/pspec.xml && sudo pisi install bumblebee*.pisi
+   
+   
+9- Yeniden başlatın ve şu komutlarla çalıştığını test edin.
+   Reboot and test if it works by those commands
+   
+   optirun glxinfo
+   optirun glxgears
+   optirun glxspheres
+   
+   primusrun glxinfo
+   primusrun glxgears
+   primusrun glxspheres
+   
+10- Çalıştırmak istediğiniz komutun önüne primusrun veya optirun getirerek, programı Nvidia üzerinden çalıştırabilirsiniz.
+    By typing primusrun or optirun before the command, you can run the program on Nvidia card.
+    
+    
+    
