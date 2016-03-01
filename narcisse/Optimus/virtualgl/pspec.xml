@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>A toolkit for displaying OpenGL applications to thin clients</Summary>
         <Description>Redirects 3D commands from an OpenGL application onto a server-side 3D graphics card.</Description>
-        <Archive sha1sum="5635a46855351bcc98813bbddfb30694b3be308b" type="targz">mirrors://sourceforge/virtualgl/VirtualGL-2.4.tar.gz</Archive>
+        <Archive sha1sum="494ced91402e7cd4b3f561c202f8b4298d777785" type="targz">https://sourceforge.net/projects/virtualgl/files/2.5/VirtualGL-2.5.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>fltk-devel</Dependency>
             <Dependency>libXv-devel</Dependency>
@@ -44,10 +44,10 @@
     
     <Package>
         <Name>virtualgl-32bit</Name>
-        <Summary>32 bit shared libraries of VirtualGL</Summary>
-        <PartOf>emul32</PartOf>
-        <BuildType>emul32</BuildType>
-        <BuildDependencies>
+	<Summary>32 bit shared libraries of VirtualGL</Summary>
+	<PartOf>emul32</PartOf>
+	<BuildType>emul32</BuildType>
+	<BuildDependencies>
             <Dependency>fltk-32bit</Dependency>
             <Dependency>libXv-32bit</Dependency>
             <Dependency>libXext-32bit</Dependency>
@@ -64,6 +64,7 @@
             <Dependency>libjpeg-turbo-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
+	    <Path fileType="executable">/usr/bin/*32</Path>
             <Path fileType="library">/usr/lib32</Path>
             <Path fileType="library">/usr/lib32/fakelib</Path>
         </Files>
@@ -83,13 +84,27 @@
     </Package>
 
     <History>
+      <Update release="6">
+            <Date>2015-06-21</Date>
+            <Version>2.5</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+      <Update release="5">
+            <Date>2015-06-21</Date>
+            <Version>2.4.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
       <Update release="4">
-            <Date>2015-05-16</Date>
+            <Date>2015-04-30</Date>
             <Version>2.4</Version>
             <Comment>Version bump</Comment>
             <Name>Idris KALP</Name>
             <Email>idriskalp@gmail.com</Email>
-      </Update>
+        </Update>
       <Update release="3">
             <Date>2014-09-10</Date>
             <Version>2.3.2</Version>
