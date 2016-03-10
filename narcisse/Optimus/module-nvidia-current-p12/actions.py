@@ -88,18 +88,18 @@ def install():
     
     pisitools.dolib("libGLESv1_CM_nvidia.so.%s" %version, nvlibdir)
     pisitools.dosym("libGLESv1_CM_nvidia.so.%s" %version, "%s/libGLESv1_CM.so.1.1.0" % nvlibdir)
-    pisitools.dosym("libGLESv1_CM_nvidia.so.%s" %version, "%s/libGLESv1_CM.so.1" % nvlibdir)
-    pisitools.dosym("libGLESv1_CM_nvidia.so.%s" %version, "%s/libGLESv1_CM.so" % nvlibdir)
+    #pisitools.dosym("libGLESv1_CM_nvidia.so.%s" %version, "%s/libGLESv1_CM.so.1" % nvlibdir)
+    #pisitools.dosym("libGLESv1_CM_nvidia.so.%s" %version, "%s/libGLESv1_CM.so" % nvlibdir)
     
     pisitools.dolib("libGLESv2_nvidia.so.%s" %version, nvlibdir)
     pisitools.dosym("libGLESv2_nvidia.so.%s" %version, "%s/libGLESv2.so.2.0.0" % nvlibdir)
-    pisitools.dosym("libGLESv2_nvidia.so.%s" %version, "%s/libGLESv2.so.2" % nvlibdir)
-    pisitools.dosym("libGLESv2_nvidia.so.%s" %version, "%s/libGLESv2.so" % nvlibdir)
+    #pisitools.dosym("libGLESv2_nvidia.so.%s" %version, "%s/libGLESv2.so.2" % nvlibdir)
+    #pisitools.dosym("libGLESv2_nvidia.so.%s" %version, "%s/libGLESv2.so" % nvlibdir)
     
     pisitools.dolib("libEGL_nvidia.so.%s" %version, nvlibdir)
     pisitools.dosym("libEGL_nvidia.so.%s" %version, "%s/libEGL.so.1.0.0" % nvlibdir)
-    pisitools.dosym("libEGL_nvidia.so.%s" %version, "%s/libEGL.so.1" % nvlibdir)
-    pisitools.dosym("libEGL_nvidia.so.%s" %version, "%s/libEGL.so" % nvlibdir)
+    #pisitools.dosym("libEGL_nvidia.so.%s" %version, "%s/libEGL.so.1" % nvlibdir)
+    #pisitools.dosym("libEGL_nvidia.so.%s" %version, "%s/libEGL.so" % nvlibdir)
 
     # OpenCL
     pisitools.dolib("libOpenCL.so.1.0.0", libdir)
