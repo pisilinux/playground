@@ -15,7 +15,7 @@ def setup():
 def install():
     pisitools.insinto("/usr/", "usr/*")
     pisitools.removeDir("/usr/share/spotify")
-    pisitools.remove("/usr/share/doc/spotify-client/changelog.Debian.gz")
+    pisitools.remove("/usr/share/doc/spotify-client-0.9.17/changelog.Debian.gz")
     pisitools.insinto("/opt/", "opt/*")
     for i in [16,22,24,32,48,64,128,256,512]:
 		pisitools.dosym("/opt/spotify/spotify-client/Icons/spotify-linux-%s.png" % i,"/usr/share/icons/hicolor/{0}x{0}/apps/spotify-client.png".format(i))
