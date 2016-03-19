@@ -9,7 +9,7 @@ Bumblebee Yükleme Talimatları / Bumblebee Install Instructions
 2- libbsd derleme ve kurulumu 
    libbsd build and install
 
-   sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/libbsd/pspec.xml && sudo pisi install libsd*.pisi
+   sudo pisi build https://raw.githubusercontent.com/pisilinux/playground/master/narcisse/Optimus/libbsd/pspec.xml && sudo pisi install libbsd*.pisi
    
    
 3- fltk derleme ve kurulumu 
