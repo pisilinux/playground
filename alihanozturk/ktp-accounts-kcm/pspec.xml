@@ -12,7 +12,7 @@
         <IsA>app</IsA>
         <Summary>KCM Module for configuring Telepathy Instant Messaging Accounts</Summary>
         <Description>KCM Module for configuring Telepathy Instant Messaging Accounts</Description>
-        <Archive sha1sum="e42c0753938b48c5692b212fe4459da23a42cd5e" type="tarxz">http://download.kde.org/stable/applications/15.12.2/src/ktp-accounts-kcm-15.12.2.tar.xz</Archive>
+        <Archive sha1sum="c8b23a12014092924e76f939db48dc3b7669045e" type="tarxz">http://download.kde.org/stable/applications/15.12.3/src/ktp-accounts-kcm-15.12.3.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>extra-cmake-modules</Dependency>
             <Dependency>qt5-base-devel</Dependency>
@@ -26,7 +26,6 @@
 	    <Dependency>kiconthemes-devel</Dependency>
 	    <Dependency>kitemviews-devel</Dependency>
 	    <Dependency>telepathy-qt5-devel</Dependency>
-            <Dependency>telepathy-glib-devel</Dependency>
 	    <Dependency>kaccounts-integration-devel</Dependency>
             <Dependency>libaccounts-qt5-devel</Dependency>
             <Dependency>solid-devel</Dependency>
@@ -34,13 +33,10 @@
             <Dependency>libaccounts-glib-devel</Dependency>
             <Dependency>intltool</Dependency>
             <Dependency>kaccounts-providers</Dependency>
-            <Dependency>ktp-common-internals-devel</Dependency>
-            <Dependency>ModemManager-devel</Dependency>
-            <Dependency>libmm-glib-devel</Dependency>
 <!--             <Dependency>telepathy-haze</Dependency> -->
 <!--             <Dependency>telepathy-gabble</Dependency> -->
             <Dependency>signon-devel</Dependency>
-            <Dependency>telepathy-mission-control-devel</Dependency>
+<!--             <Dependency>telepathy-mission-control-devel</Dependency> -->
             <Dependency>gettext-devel</Dependency>
 <!--             <Dependency>telepathy-idle</Dependency> -->
 <!--             <Dependency>telepathy-salut</Dependency> -->
@@ -76,23 +72,9 @@
     </Package>
 
     <History>
-        <Update release="3">
-            <Date>2016-02-17</Date>
-            <Version>15.12.2</Version>
-            <Comment>Version bump</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
-        <Update release="2">
-            <Date>2016-01-13</Date>
-            <Version>15.12.1</Version>
-            <Comment>Version bump</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
         <Update release="1">
-            <Date>2015-12-19</Date>
-            <Version>15.12.0</Version>
+            <Date>2016-03-30</Date>
+            <Version>15.12.3</Version>
             <Comment>First release</Comment>
             <Name>Alihan Öztürk</Name>
             <Email>alihan@pisilinux.org</Email>

@@ -6,9 +6,10 @@
 
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import cmaketools
+from pisi.actionsapi import kde5
 
 def setup():
-    cmaketools.configure()
+    cmaketools.configure("-DKDE_INSTALL_USE_QT_SYS_PATHS=ON")
 
 def build():
     cmaketools.make()
