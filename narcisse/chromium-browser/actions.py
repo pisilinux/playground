@@ -9,16 +9,22 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
+pisitools.flags.add("-fno-stack-protector")
+pisitools.flags.remove("-fstack-protector")
+pisitools.cxxflags.add("-std=gnu++14 -fpermissive")
+
 def setup():
 
     shelltools.export("LC_ALL", "C")
     shelltools.system("sed -i 's|icu)|icu-i18n)|g' build/linux/system.gyp")
     shelltools.system("export -n CFLAGS CXXFLAGS")
-    shelltools.touch(get.workDIR() + "/chromium-48.0.2564.97/chrome/test/data/webui/i18n_process_css_test.html")
+    <!--shelltools.touch(get.workDIR() + "/chromium-48.0.2564.97/chrome/test/data/webui/i18n_process_css_test.html")-->
     
     options = "\
+               -Drelease_extra_cflags='%s' \
                -Duse_system_expat=1 \
                -Duse_system_flac=1 \
+               -Duse_system_fffmpeg=0 \
                -Duse_system_harfbuzz=1 \
                -Duse_system_icu=0 \
                -Duse_system_jsoncpp=1 \
@@ -27,18 +33,30 @@ def setup():
                -Duse_system_libpng=1 \
                -Duse_system_libvpx=0 \
                -Duse_system_libwebp=1 \
+               -Duse_system_libwebm=0 \
                -Duse_system_opus=1 \
                -Duse_system_snappy=1 \
                -Duse_system_speex=1 \
                -Duse_system_zlib=1 \
                -Duse_system_bzip2=1 \
-               -Dicu_use_data_file_flag=0 \
+               -Duse_system_nspr=1 \
                -Duse_gconf=0 \
+               -Duse_sysroot=0 \
+               -Denable_hangout_services_extension=1 \
+               -Dlogging_like_official_build=1 \
+               -Dtracing_like_official_build=1 \
+               -Dfieldtrial_testing_like_official_build=1 \
+               -Dffmpeg_branding=Chrome \
+               -Dproprietary_codecs=1 \
+               -Denable_widevine=1 \
+               -Denable_pepper_cdms=1 \
+               -Dtoolkit_uses_gtk=0 \
                -Dclang=0 \
+               -Dhost_clang=0 \
+               -Duse_bundled_clang=0 \
                -Dlinux_use_bundled_gold=0 \
                -Dlinux_use_bundled_binutils=0 \
                -Dlinux_use_gold_flags=0 \
-               -Dhost_clang=0 \
                -Dclang_use_chrome_plugins=0 \
                -Dlinux_link_gsettings=1 \
                -Dlinux_link_kerberos=1 \
@@ -50,26 +68,26 @@ def setup():
                -Dlibspeechd_h_prefix=speech-dispatcher/ \
                -Dwerror= \
                -Ddisable_fatal_linker_warnings=1 \
-               -Ddisable_nacl=1 \
-               -Ddisable_newlib_untar=1 \
-               -Ddisable_pnacl=1 \
+               -Ddisable_nacl=0 \
+               -Ddisable_newlib_untar=0 \
+               -Ddisable_pnacl=0 \
                -Ddisable_sse2=1 \
                -Ddisable_glibc=1 \
                -Dtarget_arch=x64 \
-               -Dffmpeg_branding=Chromium \
-               -Dproprietary_codecs=1 \
                -Dpython_arch=x64 \
-               -Dlogging_like_official_build=1 \
                -Dlinux_sandbox_chrome_path=/usr/lib/chromium-browser/chromium-browser \
                -Dlinux_sandbox_path=/usr/lib/chromium-browser/chromium-sandbox \
+               -Dusb_ids_path=/usr/share/misc/usb.ids \
                -Dgoogle_api_key=AIzaSyBINKL31ZYd8W5byPuwTXYK6cEyoceGh6Y \
                -Dgoogle_default_client_id=879512332529.apps.googleusercontent.com \
-               -Dgoogle_default_client_secret=RmQPJJeL1cNJ8iETnoVD4X17 "
+               -Dgoogle_default_client_secret=RmQPJJeL1cNJ8iETnoVD4X17 " %(get.CFLAGS())
    
     shelltools.system("build/linux/unbundle/replace_gyp_files.py  %s" % options)
    
     shelltools.export("GYP_GENERATORS","ninja")
     shelltools.system("build/gyp_chromium build/all.gyp --depth=. %s" % options)
+    
+    shelltools.system("python build/download_nacl_toolchains.py --packages nacl_x86_newlib,pnacl_newlib,pnacl_translator sync --extract")
     
   
 def build():
@@ -79,13 +97,15 @@ def build():
     shelltools.system("ninja -C out/Release chromedriver")
 
 def install():
+	
+	pisitools.dosed("out/Release/xdg-settings", "xdg-mime", "/usr/lib/chromium-chromium-browser/xdg-mime")
+	shelltools.makedirs("%s/usr/lib/chromium-browser" % get.installDIR())
   
     shelltools.cd("out/Release")
-
-    shelltools.makedirs("%s/usr/lib/chromium-browser" % get.installDIR())
     
-    binaries_for_inst=["chrome", "chrome_sandbox", "chromedriver", "natives_blob.bin", "snapshot_blob.bin"]
-    #libraries_for_inst=["libffmpegsumo.so", "icudtl.dat"]
+    binaries_for_inst=["chrome", "chrome_sandbox", "chromedriver", "natives_blob.bin", "snapshot_blob.bin", "nacl_helper", "nacl_helper_bootstrap", "nacl_irt_x86_64.nexe", "xdg-mime", "xdg-settings"]
+    
+    libraries_for_inst=["libwidevinecdmadapter.so", "libwidevinecdm.so", "icudtl.dat"]
 
    
     # install and strip binaries
@@ -93,8 +113,8 @@ def install():
         pisitools.insinto("/usr/lib/chromium-browser", mybin)
        
     # install and strip shared libs  
-    # for mylib in libraries_for_inst:
-        # pisitools.insinto("/usr/lib/chromium-browser", mylib)
+    for mylib in libraries_for_inst:
+        pisitools.insinto("/usr/lib/chromium-browser", mylib)
          
     pisitools.dosym("/usr/lib/chromium-browser/chrome", "/usr/lib/chromium-browser/chromium-browser")
     pisitools.rename("/usr/lib/chromium-browser/chrome_sandbox", "chrome-sandbox")

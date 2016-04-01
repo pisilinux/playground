@@ -1,8 +1,8 @@
 --- chrome/chrome_exe.gypi.ldflags	2012-06-28 09:02:24.000000000 -0400
 +++ chrome/chrome_exe.gypi	2012-07-06 15:46:13.008003437 -0400
-@@ -25,6 +25,14 @@
-         '<(DEPTH)/content/app/startup_helper_win.cc',
-         '<(DEPTH)/content/public/common/content_switches.cc',
+@@ -76,6 +76,14 @@
+         'app/main_dll_loader_win.cc',
+         'app/main_dll_loader_win.h',
        ],
 +      # Hey, I know what would be an awesome idea.
 +      # Let us statically compile EVERYTHING into one giant
