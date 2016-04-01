@@ -24,7 +24,7 @@ def setup():
                -Drelease_extra_cflags='%s' \
                -Duse_system_expat=1 \
                -Duse_system_flac=1 \
-               -Duse_system_fffmpeg=0 \
+               -Duse_system_ffmpeg=0 \
                -Duse_system_harfbuzz=1 \
                -Duse_system_icu=0 \
                -Duse_system_jsoncpp=1 \
