@@ -98,8 +98,8 @@ def build():
 
 def install():
 	
-	pisitools.dosed("out/Release/xdg-settings", "xdg-mime", "/usr/lib/chromium-chromium-browser/xdg-mime")
-	shelltools.makedirs("%s/usr/lib/chromium-browser" % get.installDIR())
+    pisitools.dosed("out/Release/xdg-settings", "xdg-mime", "/usr/lib/chromium-chromium-browser/xdg-mime")
+    shelltools.makedirs("%s/usr/lib/chromium-browser" % get.installDIR())
   
     shelltools.cd("out/Release")
     
