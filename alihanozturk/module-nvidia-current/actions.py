@@ -35,7 +35,7 @@ def setup():
 
     shelltools.echo("ld.so.conf", nvlibdir)
     shelltools.echo("XvMCConfig", "%s/libXvMCNVIDIA.so" % nvlibdir)
-
+    
 def build():
     # We don't need kernel module for emul32 build
     if get.buildTYPE() == 'emul32':
@@ -84,12 +84,34 @@ def install():
     # OpenGl library
     pisitools.dolib("libGL.so.%s" % version, nvlibdir)
     pisitools.dosym("libGL.so.%s" % version, "%s/libGL.so.1.2.0" % nvlibdir)
+    pisitools.dosym("libGL.so.%s" % version, "%s/libGL.so" % nvlibdir)
     pisitools.dolib("libGL.so.%s" % version, libdir)
     
     pisitools.dolib("libEGL.so.1", nvlibdir)
+    pisitools.dosym("libEGL.so.1", "%s/libEGL.so" % nvlibdir)
+    pisitools.dosym("libEGL.so.1", "%s/libEGL.so.%s" % (libdir, version))
+    
+    pisitools.dolib("libGLESv1_CM.so.1", nvlibdir)
+    pisitools.dosym("libGLESv1_CM.so.1", "%s/libGLESv1_CM.so" % nvlibdir)
+    pisitools.dosym("libGLESv1_CM.so.1", "%s/libGLESv1_CM.so.%s" % (libdir, version))
+    
+    pisitools.dolib("libGLESv2.so.2", nvlibdir)
+    pisitools.dosym("libGLESv2.so.2", "%s/libGLESv2.so" % nvlibdir)
+    pisitools.dosym("libGLESv2.so.2", "%s/libGLESv2.so.%s" % (libdir, version))
+    
     pisitools.dolib("libEGL_nvidia.so.%s" % version, libdir)
+    pisitools.dosym("libEGL_nvidia.so.%s" % version, "%s/libEGL_nvidia.so" % libdir)
+    pisitools.dosym("libEGL_nvidia.so.%s" % version, "%s/libEGL_nvidia.so.0" % libdir)
+    
     pisitools.dolib("libGLESv1_CM_nvidia.so.%s" % version, libdir)
+    pisitools.dosym("libGLESv1_CM_nvidia.so.%s" % version, "%s/libGLESv1_CM_nvidia.so" % libdir)
+    pisitools.dosym("libGLESv1_CM_nvidia.so.%s" % version, "%s/libGLESv1_CM_nvidia.so.1" % libdir)
+    
     pisitools.dolib("libGLESv2_nvidia.so.%s" % version, libdir)
+    pisitools.dosym("libGLESv2_nvidia.so.%s" % version, "%s/libGLESv2_nvidia.so" % libdir)
+    pisitools.dosym("libGLESv2_nvidia.so.%s" % version, "%s/libGLESv2_nvidia.so.2" % libdir)
+    
+    
 
     # OpenCL
     pisitools.insinto("/etc/OpenCL/vendors", "nvidia.icd")
@@ -118,46 +140,74 @@ def install():
     # data for NVIDIA GPUs, as well as limited managment capabilities
     pisitools.dolib("libnvidia-ml.so.%s" % version, libdir)
     pisitools.dosym("libnvidia-ml.so.%s" % version, "%s/libnvidia-ml.so.1" % libdir)
-
+    pisitools.dosym("libnvidia-ml.so.%s" % version, "%s/libnvidia-ml.so" % libdir)
+    
     pisitools.dolib("libnvidia-cfg.so.%s" % version, libdir)
     pisitools.dosym("libnvidia-cfg.so.%s" % version, "%s/libnvidia-cfg.so.1" % libdir)
+    pisitools.dosym("libnvidia-cfg.so.%s" % version, "%s/libnvidia-cfg.so" % libdir)
 
     
 
     # OpenGL core library and others
+    pisitools.dolib("libOpenGL.so.0", libdir)
+    pisitools.dosym("libOpenGL.so.0", "%s/libOpenGL.so" % libdir)
+    
+    pisitools.dolib("libGLdispatch.so.0", libdir)
+    pisitools.dosym("libGLdispatch.so.0", "%s/libGLdispatch.so" % libdir)
+    
     for lib in ("glcore", "tls", "encode", "fbc", "glsi", "ifr", "eglcore"):
         pisitools.dolib("libnvidia-%s.so.%s" % (lib, version), libdir)
         pisitools.dosym("libnvidia-%s.so.%s" % (lib, version), "%s/libnvidia-%s.so.1" %(libdir, lib))
+        pisitools.dosym("libnvidia-%s.so.%s" % (lib, version), "%s/libnvidia-%s.so" %(libdir, lib))
 
     # VDPAU driver
     pisitools.dolib("libvdpau_nvidia.so.%s" % version, "%s/vdpau" % libdir)
+    pisitools.dosym("libvdpau_nvidia.so.%s" % version, "%s/vdpau/libvdpau_nvidia.so.1" % libdir)
+    pisitools.dosym("libvdpau_nvidia.so.%s" % version, "%s/vdpau/libvdpau_nvidia.so" % libdir)
+    
+    pisitools.dolib("libvdpau_nvidia.so.%s" % version, libdir)
+    pisitools.dosym("libvdpau_nvidia.so.%s" % version, "%s/libvdpau_nvidia.so.1" % libdir)
     pisitools.dosym("libvdpau_nvidia.so.%s" % version, "%s/libvdpau_nvidia.so" % libdir)
     
     # nvidia-tls library
-    pisitools.dolib("libnvidia-tls.so.%s" % version, libdir)
     pisitools.dolib("tls/libnvidia-tls.so.%s" % version, "%s/tls" % libdir)
+    pisitools.dosym("tls/libnvidia-tls.so.%s" % version, "%s/tls/libnvidia-tls.so" % libdir)
 
     # X modules
     pisitools.dolib("nvidia_drv.so", "%s/modules/drivers" % xorglibdir)
+    
+    pisitools.dolib("libGLX.so.0", libdir)
+    pisitools.dosym("libGLX.so.0", "%s/libGLX.so.%s" % (libdir, version))
+    pisitools.dosym("libGLX.so.0", "%s/libGLX.so" % libdir)
+    
+    pisitools.dolib("libGLX.so.0", nvlibdir)
+    pisitools.dosym("libGLX.so.0", "%s/libGLX.so" % nvlibdir)
+    
+    pisitools.dolib("libGLX_nvidia.so.%s" % version, libdir)
+    pisitools.dosym("libGLX_nvidia.so.%s" % version, "%s/libGLX_nvidia.so.0" % libdir)
+    pisitools.dosym("libGLX_nvidia.so.%s" % version, "%s/libGLX_nvidia.so" % libdir)
+    pisitools.dosym("libGLX_nvidia.so.%s" % version, "%s/libGLX_indirect.so.0" % libdir)
+    
     pisitools.dolib("libglx.so.%s" % version, "%s/modules/extensions" % xorglibdir)
     pisitools.dosym("libglx.so.%s" % version, "%s/modules/extensions/libglx.so.1" % xorglibdir)
     
-    pisitools.dolib("libGLX_nvidia.so.%s" % version, libdir)
-    pisitools.dosym("libGLX_nvidia.so.%s" % version, "%s/libGLX_indirect.so.0" % libdir)
-    
     # PTX JIT Compiler (Parallel Thread Execution (PTX) is a pseudo-assembly language for CUDA)
     pisitools.dolib("libnvidia-ptxjitcompiler.so.%s" % version, libdir)
+    pisitools.dosym("libnvidia-ptxjitcompiler.so.%s" % version, "%s/libnvidia-ptxjitcompiler.so" % libdir)
     
     # Fat (multiarchitecture) binary loader
     pisitools.dolib("libnvidia-fatbinaryloader.so.%s" % version, libdir)
+    pisitools.dosym("libnvidia-fatbinaryloader.so.%s" % version, "%s/libnvidia-fatbinaryloader.so" % libdir)
     
     pisitools.insinto("/usr/share/X11/xorg.conf.d", "nvidia-drm-outputclass.conf")
-    pisitools.insinto("/usr/share/nvidia", "nvidia-application-profiles-361.28-rc")
-    pisitools.insinto("/usr/share/nvidia", "nvidia-application-profiles-361.28-key-documentation")
+    pisitools.insinto("/usr/share/nvidia", "nvidia-application-profiles-%s-rc" % version)
+    pisitools.insinto("/usr/share/nvidia", "nvidia-application-profiles-%s-key-documentation" % version)
     pisitools.insinto("/usr/share/pixmaps", "nvidia-settings.png")
     
     pisitools.dolib("libnvidia-gtk2.so.%s" % version, libdir)
+    pisitools.dolib("libnvidia-gtk2.so.%s" % version, "%s/libnvidia-gtk2.so" % libdir)
     pisitools.dolib("libnvidia-gtk3.so.%s" % version, libdir)
+    pisitools.dolib("libnvidia-gtk3.so.%s" % version, "%s/libnvidia-gtk3.so" % libdir)
 
     # Exit time for emul32 build
     if get.buildTYPE() == 'emul32':
