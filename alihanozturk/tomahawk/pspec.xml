@@ -1,0 +1,69 @@
+<PISI>
+    <Source>
+        <Name>tomahawk</Name>
+        <Homepage>http://tomahawk-player.org/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>A Music Player App written in C++/Qt5</Summary>
+        <Description>Tomahawk is a free multi-source and cross-platform music player.</Description>
+        <Archive sha1sum="2cfd5cf4c908f9b1144e5d265624311be98ce394" type="tarbz2">http://download.tomahawk-player.org/tomahawk-0.8.4.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>cmake</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-svg-devel</Dependency>
+            <Dependency>qt5-designer-devel</Dependency>
+            <Dependency>qt5-webkit-devel</Dependency>
+            <Dependency>qt5-linguist</Dependency>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>google-sparsehash</Dependency>
+            <Dependency>gnutls-devel</Dependency>
+            <Dependency>qca2-qt5-devel</Dependency>
+            <Dependency>attica-devel</Dependency>
+            <Dependency>quazip-devel</Dependency>
+            <Dependency>telepathy-qt5-devel</Dependency>
+            <Dependency>qt5-phonon-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>liblastfm-devel</Dependency>
+            <Dependency>qt5-keychain-devel</Dependency>
+            <Dependency>libechonest-devel</Dependency>
+            <Dependency>lucene++-devel</Dependency>
+            <Dependency>jreen-devel</Dependency>
+            <Dependency>qt5-keychain-devel</Dependency>
+            <Dependency>qt5-keychain-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+<!--             <Patch level="1">arch-build.patch</Patch> -->
+            <Patch level="1">tomahawk-0.8.4-echonest231.patch</Patch>
+            <Patch level="1">tomahawk-0.8.4-qca-qt5-linking.patch</Patch>
+<!--             <Patch level="1">tomahawk-0.8.4-qt55.patch</Patch> -->
+            <Patch level="1">tomahawk-0.8.4-taglib_version.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>tomahawk</Name>
+        <Summary>A Music Player App written in C++/Qt5</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-04-27</Date>
+            <Version>8.4</Version>
+            <Comment>First release.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

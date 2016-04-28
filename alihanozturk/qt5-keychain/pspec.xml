@@ -1,0 +1,56 @@
+<PISI>
+    <Source>
+        <Name>qt5-keychain</Name>
+        <Homepage>https://github.com/frankosterfeld/qtkeychain</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>app</IsA>
+        <Summary>Provides support for secure credentials storage</Summary>
+        <Description>QtKeychain is a Qt API to store passwords and other secret data securely</Description>
+        <Archive type="targz" sha1sum="9aa8e205a80130368be131bd1eb78d03799e405d">https://github.com/frankosterfeld/qtkeychain/archive/v0.6.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>cmake</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-linguist</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>qt5-keychain</Name>
+        <Summary>Provides support for secure credentials storage</Summary>
+        <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency>qt5-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/libqt5keychain*</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>qt5-keychain-devel</Name>
+        <Summary>Development files for qt5-keychain</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5-keychain</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2016-04-27</Date>
+            <Version>0.6.2</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
