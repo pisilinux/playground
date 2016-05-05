@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>polkit-kde-authentication-agent-1</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <IsA>app:console</IsA>
+        <IsA>app:gui</IsA>
+        <Summary>The KDE Plasma Workspace Components</Summary>
+        <Description>The Polkit-KDE-Agent package contains a graphical Polkit authentication agent for the KDE Plasma Desktop.</Description>
+        <Archive sha1sum="09839526d03a56e5e937d4ebd41925a15d3ab213" type="tarxz">mirrors://kde/stable/plasma/5.6.3/polkit-kde-agent-1-5.6.3.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>kdoctools-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>knotifications-devel</Dependency>
+            <Dependency>polkit-qt-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>polkit-kde-authentication-agent-1</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>kcrash</Dependency>
+            <Dependency>kcoreaddons</Dependency>
+            <Dependency>polkit-qt</Dependency>
+            <Dependency>ki18n</Dependency>
+            <Dependency>kdbusaddons</Dependency>
+            <Dependency>kiconthemes</Dependency>
+            <Dependency>kwindowsystem</Dependency>
+            <Dependency>knotifications</Dependency>
+            <Dependency>kwidgetsaddons</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/qt5</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2016-04-29</Date>
+            <Version>5.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-04-08</Date>
+            <Version>5.6.2</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

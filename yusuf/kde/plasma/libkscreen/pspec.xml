@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libkscreen</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <IsA>app:console</IsA>
+        <Summary>KDE5 screen management library</Summary>
+        <Description>Dynamic display management library for KDE</Description>
+        <Archive sha1sum="46ed4993581af27bf88f4dd64187efa83f1e04b0" type="tarxz">mirrors://kde/stable/plasma/5.6.3/libkscreen-5.6.3.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
+            <Dependency>libxcb-devel</Dependency>
+            <Dependency>kwayland-devel</Dependency>
+            <Dependency>xcb-util-devel</Dependency>
+            <Dependency>xcb-util-image-devel</Dependency>
+            <Dependency>xcb-util-keysyms-devel</Dependency>
+            <Dependency>libXcursor-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>kwayland-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>libkscreen</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>kwayland</Dependency>
+            <Dependency>libXrandr</Dependency>
+            <Dependency>libxcb</Dependency>
+            <Dependency>libgcc</Dependency> 
+            <Dependency>qt5-x11extras</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/qt5</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/dbus-1</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libkscreen-devel</Name>
+        <Summary>Development files for libkscreen</Summary>
+        <RuntimeDependencies>
+            <Dependency>libxcb-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
+            <Dependency>kwayland-devel</Dependency>
+            <Dependency release="current">libkscreen</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+            <Path fileType="config">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2016-04-29</Date>
+            <Version>5.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-04-08</Date>
+            <Version>5.6.2</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

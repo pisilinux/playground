@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kwallet-pam</Name>
+        <Homepage>https://projects.kde.org/kwallet-pam</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <IsA>app:console</IsA>
+        <Summary>KWallet PAM integration.</Summary>
+        <Description>KWallet PAM integration.</Description>
+        <Archive sha1sum="07d4e7eb596d828376f8a17227b32763e2940181" type="tarxz">mirrors://kde/stable/plasma/5.6.3/kwallet-pam-5.6.3.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>pam-devel</Dependency>
+            <Dependency>libgcrypt-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kwallet-pam</Name>
+        <RuntimeDependencies>
+            <Dependency>pam</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>libgcrypt</Dependency> 
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/xdg/autostart</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2016-04-29</Date>
+            <Version>5.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-04-08</Date>
+            <Version>5.6.2</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

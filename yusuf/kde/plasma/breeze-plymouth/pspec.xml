@@ -1,0 +1,56 @@
+<PISI>
+    <Source>
+        <Name>breeze-plymouth</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Breeze theme for Plymouth.</Summary>
+        <Description>Breeze theme for Plymouth.</Description>
+        <Archive type="tarxz" sha1sum="589e4955a048074f28ca6936ac97f67d308e7091">mirrors://kde/stable/plasma/5.6.3/breeze-plymouth-5.6.3.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>plymouth-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>breeze-plymouth</Name>
+        <Summary>Breeze theme for Plymouth.</Summary>
+        <RuntimeDependencies>
+            <Dependency>plymouth</Dependency>
+            <Dependency>grub2</Dependency>
+            <Dependency>plymouth-core-libs</Dependency>
+            <Dependency>plymouth-theme-spinner</Dependency>
+            <Dependency>plymouth-graphics-libs</Dependency>
+            <Dependency>plymouth-plugin-script</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/plymouth/themes/breeze/images/pisi.logo.png">pisi.logo.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/plymouth/themes/breeze/images/16bit/pisi.logo.png">pisi.16bit.png</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2016-04-29</Date>
+            <Version>5.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-04-23</Date>
+            <Version>5.6.2</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

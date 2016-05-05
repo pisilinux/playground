@@ -1,0 +1,63 @@
+
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde-l10n-nb</Name>
+        <Homepage>http://l10n.kde.org</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>locale:nb</IsA>
+        <Summary>Norwegian Bookma KDE5 internationalization package</Summary>
+        <Description>kde-l10n-nb is the KDE5 internationalization package that provides Norwegian Bookma translations for KDE5 applications.</Description>
+        <Archive sha1sum="4ecfbf40c0f5d57bb2516e699de062383cdf98ab" type="tarxz">mirrors://kde/stable/applications/16.04.0/src/kde-l10n/kde-l10n-nb-16.04.0.tar.xz</Archive>
+            <BuildDependencies> 
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+            <Dependency>qt5-linguist</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>kdoctools-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>kde4.patch</Patch>
+        </Patches>
+</Source>
+
+    <Package>
+        <Name>kde-l10n-nb</Name>
+        <Icon>lang-nb</Icon>
+        <PartOf>system.locale</PartOf>
+        <Files>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="localedata">/usr/share/apps</Path>
+            <Path fileType="localedata">/usr/share/khangman</Path>
+            <Path fileType="localedata">/usr/share/klettres</Path>
+            <Path fileType="localedata">/usr/share/kturtle</Path>
+            <Path fileType="localedata">/usr/share/katepart</Path>
+        </Files>
+    </Package>
+
+    <!--<Package>
+        <Name>kde-l10n-nb-doc</Name>
+        <Summary>Norwegian Bookma documentation files for KDE</Summary>
+        <Files>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>-->
+
+    <History>
+        <Update release="1">
+            <Date>2016-04-25</Date>
+            <Version>16.04.0</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

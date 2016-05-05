@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>powerdevil</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <IsA>app:console</IsA>
+        <Summary>KDE power manager module</Summary>
+        <Description>KDE Power Management module. Provides kded daemon DBus helper and KCM for configuring Power settings</Description>
+        <Archive sha1sum="c26a97f4b5dcff29ee820d8ecacc34238f794a8c" type="tarxz">mirrors://kde/stable/plasma/5.6.3/powerdevil-5.6.3.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>kdoctools-devel</Dependency>
+            <Dependency>kidletime-devel</Dependency>
+            <Dependency>libxcb-devel</Dependency>
+            <Dependency>eudev-devel</Dependency>
+            <Dependency>kdesignerplugin</Dependency>
+            <Dependency>kinit-devel</Dependency>
+            <Dependency>kunitconversion-devel</Dependency>
+            <Dependency>kitemmodels-devel</Dependency>
+            <Dependency>kemoticons-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
+            <Dependency >plasma-workspace-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">powerdevil-enable-upower.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>powerdevil</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>kidletime</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>libxcb</Dependency>
+            <Dependency>eudev</Dependency>
+            <Dependency>plasma-workspace</Dependency>
+            <Dependency>kio</Dependency>
+            <Dependency>kauth</Dependency>
+            <Dependency>ki18n</Dependency>
+            <Dependency>solid</Dependency>
+            <Dependency>kconfig</Dependency>
+            <Dependency>kxmlgui</Dependency>
+            <Dependency>kservice</Dependency>
+            <Dependency>kwayland</Dependency>
+            <Dependency>qt5-x11extras</Dependency>
+            <Dependency>libkscreen</Dependency>
+            <Dependency>kactivities</Dependency>
+            <Dependency>kcompletion</Dependency>
+            <Dependency>kcoreaddons</Dependency>
+            <Dependency>kdbusaddons</Dependency>
+            <Dependency>kglobalaccel</Dependency>
+            <Dependency>knotifyconfig</Dependency>
+            <Dependency>kconfigwidgets</Dependency>
+            <Dependency>knotifications</Dependency>
+            <Dependency>kwidgetsaddons</Dependency>
+            <Dependency>kdelibs4-support</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+            <Path fileType="library">/usr/lib/qt5</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2016-04-29</Date>
+            <Version>5.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-04-08</Date>
+            <Version>5.6.2</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

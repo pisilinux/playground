@@ -1,0 +1,61 @@
+
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde-l10n-ca</Name>
+        <Homepage>http://l10n.kde.org</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>locale:ca</IsA>
+        <Summary>Catalan KDE5 internationalization package</Summary>
+        <Description>kde-l10n-ca is the KDE5 internationalization package that provides Catalan translations for KDE5 applications.</Description>
+        <Archive sha1sum="5dafef5de7a8324b6cd7199cfc049c5d1038f495" type="tarxz">mirrors://kde/stable/applications/16.04.0/src/kde-l10n/kde-l10n-ca-16.04.0.tar.xz</Archive>
+            <BuildDependencies> 
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+            <Dependency>qt5-linguist</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>kdoctools-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>kde4.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>kde-l10n-ca</Name>
+        <Icon>lang-ca</Icon>
+        <PartOf>system.locale</PartOf>
+        <Files>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="localedata">/usr/share/apps</Path>
+            <Path fileType="data">/usr/share/khangman</Path>
+            <Path fileType="data"> /usr/share/ktuberling</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>kde-l10n-ca-doc</Name>
+        <Summary>Catalan documentation files for KDE</Summary>
+        <Files>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2016-04-25</Date>
+            <Version>16.04.0</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

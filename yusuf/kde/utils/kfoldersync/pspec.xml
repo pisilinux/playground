@@ -1,0 +1,69 @@
+
+<PISI>
+    <Source>
+        <Name>kfoldersync</Name>
+        <Homepage>http://ur1.ca/hq3ve</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>system</PartOf>
+        <Summary>Folder synchronization and backup tool for KDE</Summary>
+        <Description>Smart folder comparison, It depends only on KDE Frameworks.</Description>
+        <BuildDependencies>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>cmake</Dependency>
+            <Dependency>kcoreaddons-devel</Dependency>
+            <Dependency>kdbusaddons-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>kio-devel</Dependency>
+            <Dependency>knotifications-devel</Dependency>
+            <Dependency>kxmlgui-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+            <Dependency>kconfigwidgets-devel</Dependency>
+            <Dependency>kdbusaddons-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>kitemviews-devel</Dependency>
+            <Dependency>kio-devel</Dependency>
+            <Dependency>kwidgetsaddons-devel</Dependency>
+            <Dependency>kwindowsystem-devel</Dependency>
+            <Dependency>kxmlgui-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="tarxz" sha1sum="7ddc0b9ca7dff5bf8d2afb33a1d14349bbad6c0f">http://kde-apps.org/CONTENT/content-files/164092-kfoldersync-3.1.5.tar.xz</Archive>
+    </Source>
+    <Package>
+        <Name>kfoldersync</Name>
+        <Summary>Folder synchronization and backup tool for KDE</Summary>
+        <RuntimeDependencies>
+            <Dependency>kcoreaddons</Dependency>
+            <Dependency>ki18n</Dependency>
+            <Dependency>kio</Dependency>           
+            <Dependency>qt5-base</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>kconfig</Dependency>
+            <Dependency>kxmlgui</Dependency>
+            <Dependency>kitemviews</Dependency>
+            <Dependency>kdbusaddons</Dependency>
+            <Dependency>kconfigwidgets</Dependency>
+            <Dependency>kwidgetsaddons</Dependency>
+            <Dependency>kwindowsystem</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2016-04-10</Date>
+            <Version>3.1.5</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

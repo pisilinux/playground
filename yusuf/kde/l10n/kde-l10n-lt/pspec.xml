@@ -1,0 +1,62 @@
+
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kde-l10n-lt</Name>
+        <Homepage>http://l10n.kde.org</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>locale:lt</IsA>
+        <Summary>Lithuanian KDE5 internationalization package</Summary>
+        <Description>kde-l10n-lt is the KDE5 internationalization package that provides Lithuanian translations for KDE5 applications.</Description>
+        <Archive sha1sum="817d2a105f2f2c5859df9d64246baa8a28e62a3e" type="tarxz">mirrors://kde/stable/applications/16.04.0/src/kde-l10n/kde-l10n-lt-16.04.0.tar.xz</Archive>
+            <BuildDependencies> 
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+            <Dependency>qt5-linguist</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>kdoctools-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>kde4.patch</Patch>
+        </Patches>
+</Source>
+
+    <Package>
+        <Name>kde-l10n-lt</Name>
+        <Icon>lang-lt</Icon>
+        <PartOf>system.locale</PartOf>
+        <Files>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="localedata">/usr/share/apps</Path>
+            <Path fileType="data">/usr/share/khangman</Path>
+            <Path fileType="data">/usr/share/klettres</Path>
+            <Path fileType="data"> /usr/share/ktuberling</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>kde-l10n-lt-doc</Name>
+        <Summary>German documentation files for KDE</Summary>
+        <Files>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2016-04-25</Date>
+            <Version>16.04.0</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

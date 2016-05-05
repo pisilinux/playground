@@ -1,0 +1,44 @@
+<PISI>
+    <Source>
+        <Name>breeze-grub</Name>
+        <Homepage>http://www.kde.org</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Breeze theme for GRUB.</Summary>
+        <Description>Breeze theme for GRUB.</Description>
+        <Archive sha1sum="9101427001b10bbe91d39eadee24b367209a2c00" type="tarxz">mirrors://kde/stable/plasma/5.6.3/breeze-grub-5.6.3.tar.xz</Archive>
+    </Source>
+    
+    <Package>
+        <Name>breeze-grub</Name>
+        <Summary>Breeze theme for GRUB.</Summary>
+        <RuntimeDependencies>
+            <Dependency>grub2</Dependency>
+            <Dependency>noto-fonts</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2016-04-29</Date>
+            <Version>5.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-04-08</Date>
+            <Version>5.6.2</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

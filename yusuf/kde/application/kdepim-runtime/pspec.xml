@@ -1,0 +1,122 @@
+
+﻿<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>kdepim-runtime</Name>
+        <Homepage>http://community.kde.org/KDE_PIM</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <Icon>kontact</Icon>
+        <IsA>library</IsA>
+        <IsA>app:gui</IsA>
+        <Summary>KDE5 PIM Runtime Environment</Summary>
+        <Description>kdepim-runtime contains KDE5 PIM (Personal Information Management) runtime environment like akonadi agents.</Description>
+        <Archive sha1sum="b7ae61ed4a81920536e11c948e77a94764a34291" type="tarxz">mirrors://kde/stable/applications/16.04.0/src/kdepim-runtime-16.04.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>kdoctools-devel</Dependency>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>shared-mime-info</Dependency>
+            <Dependency versionFrom="16.04.0">akonadi-devel</Dependency>
+            <Dependency versionFrom="16.04.0">akonadi-calendar-devel</Dependency>
+            <Dependency versionFrom="16.04.0">akonadi-search-devel</Dependency>
+            <Dependency versionFrom="5.21.0">kcmutils-devel</Dependency>
+            <Dependency versionFrom="5.21.0">kdelibs4-support-devel</Dependency>
+            <Dependency versionFrom="5.21.0">kdesignerplugin</Dependency>
+            <Dependency versionFrom="5.21.0">kemoticons-devel</Dependency>
+            <Dependency versionFrom="5.21.0">kitemmodels-devel</Dependency>
+            <Dependency versionFrom="5.21.0">kinit-devel</Dependency>
+            <Dependency versionFrom="5.21.0">kunitconversion-devel</Dependency>
+            <Dependency versionFrom="5.21.0">knotifyconfig-devel</Dependency>
+            <Dependency versionFrom="5.21.0">kross-devel</Dependency>
+            <Dependency versionFrom="16.04.0">kmailtransport-devel</Dependency>
+            <Dependency versionFrom="16.04.0">kidentitymanagement-devel</Dependency>
+            <Dependency versionFrom="16.04.0">kalarmcal-devel</Dependency>
+            <Dependency versionFrom="16.04.0">kcalutils-devel</Dependency>
+            <Dependency versionFrom="16.04.0">kmbox-devel</Dependency>
+            <Dependency versionFrom="16.04.0">kimap-devel</Dependency>
+            <Dependency>libkgapi-devel</Dependency>
+            <Dependency versionFrom="16.04.0">kholidays-devel</Dependency>
+            <Dependency versionFrom="16.04.0">ksyndication-devel</Dependency>
+            <Dependency versionFrom="16.04.0">kdepimlibs-devel</Dependency>
+            <Dependency>cyrus-sasl-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>qt5-quick1-devel</Dependency>
+            <Dependency>qt5-xmlpatterns-devel</Dependency>
+            <Dependency>qt5-webkit-devel</Dependency>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qt5-location-devel </Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>kdepim-runtime</Name>
+        <RuntimeDependencies>
+            <Dependency>akonadi</Dependency>
+            <Dependency>libkgapi</Dependency>
+            <Dependency>kio</Dependency>
+            <Dependency>ki18n</Dependency>
+            <Dependency>kimap</Dependency>
+            <Dependency>kmbox</Dependency>
+            <Dependency>kmime</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>kcodecs</Dependency>
+            <Dependency>kconfig</Dependency>
+            <Dependency>kwallet</Dependency>
+            <Dependency>kxmlgui</Dependency>
+            <Dependency>kcalcore</Dependency>
+            <Dependency>kcmutils</Dependency>
+            <Dependency>kservice</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>kalarmcal</Dependency>
+            <Dependency>kcalutils</Dependency>
+            <Dependency>kdepimlibs</Dependency>
+            <Dependency>kitemviews</Dependency>
+            <Dependency>kcompletion</Dependency>
+            <Dependency>kcoreaddons</Dependency>
+            <Dependency>kdbusaddons</Dependency>
+            <Dependency>kitemmodels</Dependency>
+            <Dependency>kcontacts</Dependency>
+            <Dependency>kjobwidgets</Dependency>
+            <Dependency>knotifyconfig</Dependency>
+            <Dependency>kwindowsystem</Dependency>
+            <Dependency>kconfigwidgets</Dependency>
+            <Dependency>kmailtransport</Dependency>
+            <Dependency>ktextwidgets</Dependency>
+            <Dependency>knotifications</Dependency>
+            <Dependency>kwidgetsaddons</Dependency>
+            <Dependency>qt5-xmlpatterns</Dependency>
+            <Dependency>akonadi-calendar</Dependency>
+            <Dependency>kdelibs4-support</Dependency>
+            <Dependency>kidentitymanagement</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/xdg</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/mime</Path>
+            <Path fileType="data">/usr/share/kservicetypes5</Path>
+             <Path fileType="data">/usr/share/kservices5</Path>
+             <Path fileType="data">/usr/share/knotifications5</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/akonadi</Path>
+            <Path fileType="data">/usr/share/ontology</Path>
+            <Path fileType="data">/usr/share/autostart</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2016-04-25</Date>
+            <Version>16.04.0</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
