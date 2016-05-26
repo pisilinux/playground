@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>phototonic</Name>
+        <Homepage>http://oferkv.github.io/phototonic/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>Phototonic is an image viewer and organizer for Linux written in C++ and Qt. </Summary>
+        <Description>Phototonic is an image viewer and organizer for Linux written in C++ and Qt. </Description>
+        <Archive sha1sum="53a2569c4a9771fe4652e83e95a45deeb2eea9b6" type="targz">https://github.com/oferkv/phototonic/archive/v1.7.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>exiv2-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>phototonic</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>exiv2-libs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/icons/hicolor</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="application">/usr/share/applications</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2016-05-18</Date>
+            <Version>1.7</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>
