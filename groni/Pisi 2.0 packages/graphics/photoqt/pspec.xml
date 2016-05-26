@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>photoqt</Name>
+        <Homepage>http://photoqt.org/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>PhotoQt is a simple, yet powerful and good looking image viewer</Summary>
+        <Description>PhotoQt is written in Qt, published as open-source, and completely free.</Description>
+        <Archive sha1sum="050309397aa99eba66017376aa52f48538eb76b0" type="targz">http://photoqt.org/pkgs/photoqt-1.4.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-svg-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>exiv2-devel</Dependency>
+            <Dependency>qt5-phonon-devel</Dependency>
+            <Dependency>libraw-devel</Dependency>
+            <Dependency>GraphicsMagick-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>photoqt</Name>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>qt5-svg</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+            <Dependency>exiv2-libs</Dependency>
+            <Dependency>libgcc</Dependency>            
+            <Dependency>libraw</Dependency>            
+            <Dependency>GraphicsMagick</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="application">/usr/share/applications</Path>
+            <Path fileType="icon">/usr/share/icons</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2016-05-18</Date>
+            <Version>1.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>        
+    </History>
+</PISI>
