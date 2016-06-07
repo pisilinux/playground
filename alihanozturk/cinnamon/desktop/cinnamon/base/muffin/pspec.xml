@@ -12,12 +12,13 @@
         <IsA>app:gui</IsA>
         <Summary>The Cinnamon Window Manager</Summary>
         <Description>Cinnamon masaüstünün pencere uygulamasıdır.</Description>
-        <Archive sha1sum="96953dbdf077374c0ce59cba0e239f95df214cb3" type="targz">https://github.com/linuxmint/muffin/archive/2.8.4.tar.gz</Archive>
+        <Archive sha1sum="2c1f32ee62c4500d5c02cedde47873d8d7f1f964" type="targz">https://github.com/linuxmint/muffin/archive/3.0.3.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gnome-common</Dependency>
             <Dependency>glib2-devel</Dependency>
             <Dependency>intltool</Dependency>
             <Dependency>gtk-doc</Dependency>
+            <Dependency>gconf-devel</Dependency>
             <Dependency>gnome-doc-utils</Dependency>
             <Dependency>gettext-devel</Dependency>
             <Dependency>gobject-introspection-devel</Dependency>
@@ -33,22 +34,28 @@
             <Dependency>zenity</Dependency>
             <Dependency>startup-notification-devel</Dependency>
             <Dependency>libxslt-devel</Dependency>
-            <Dependency>libcanberra-gtk3</Dependency>
+            <Dependency>libXcomposite-devel</Dependency>
+            <Dependency>libXfixes-devel</Dependency>
+            <Dependency>libXdamage-devel</Dependency>
+            <Dependency>libXinerama-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+            <Dependency>libXcursor-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>libXt-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
             <Dependency>libcanberra-gtk3-devel</Dependency>
+            <Dependency>libcanberra-gtk-devel</Dependency>
             <Dependency>libICE-devel</Dependency>
             <Dependency>libSM-devel</Dependency>
             <Dependency>docbook-xsl</Dependency>
         </BuildDependencies>
-        <Patches>
-<!--             <Patch level="1">automake.patch</Patch> -->
-<!--             <Patch level="1">revert_ibus.patch</Patch> -->
-<!--             <Patch level="1">remove_muffin_binary.patch</Patch> -->
-        </Patches>
     </Source>
 
     <Package>
         <Name>muffin</Name>
         <RuntimeDependencies>
+            <Dependency>atk</Dependency>
             <Dependency>cogl</Dependency>
             <Dependency>gtk3</Dependency>
             <Dependency>mesa</Dependency>
@@ -58,8 +65,10 @@
             <Dependency>pango</Dependency>
             <Dependency>libICE</Dependency>
             <Dependency>libX11</Dependency>
+            <Dependency>libdrm</Dependency>
             <Dependency>clutter</Dependency>
             <Dependency>libXext</Dependency>
+            <Dependency>json-glib</Dependency>
             <Dependency>libXfixes</Dependency>
             <Dependency>libXrandr</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
@@ -68,19 +77,22 @@
             <Dependency>libXrender</Dependency>
             <Dependency>libXinerama</Dependency>
             <Dependency>libcanberra</Dependency>
+            <Dependency>xdg-user-dirs</Dependency>
             <Dependency>libXcomposite</Dependency>
+            <Dependency>wayland-client</Dependency>
+            <Dependency>wayland-server</Dependency>
+            <Dependency>cinnamon-desktop</Dependency>
             <Dependency>libcanberra-gtk3</Dependency>
             <Dependency>startup-notification</Dependency>
             <Dependency>gobject-introspection</Dependency>
-            <Dependency>cinnamon-desktop</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/muffin/plugins</Path>
-            <Path fileType="library">/usr/lib/muffin/Meta-Muffin.0.typelib</Path>
-            <Path fileType="library">/usr/lib/*.so.*</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/muffin</Path>
+            <Path fileType="library">/usr/lib/libmuffin*</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="doc">/usr/share/doc</Path>
-            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/gtk-doc</Path>
             <Path fileType="data">/usr/share/locale</Path>
             <Path fileType="data">/usr/share/muffin</Path>
             <Path fileType="data">/usr/share/glib-2.0</Path>
@@ -99,49 +111,18 @@
             <Dependency>cinnamon-desktop-devel</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="header">/usr/include/muffin/meta</Path>
-            <Path fileType="library">/usr/lib/*.so</Path>
-            <Path fileType="library">/usr/lib/muffin/Meta-Muffin.0.gir</Path>
+            <Path fileType="header">/usr/include</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
-            <Path fileType="data">/usr/share/gtk-doc/html/muffin</Path>
         </Files>
     </Package>
 
     <History>
-        <Update release="5">
-            <Date>2015-12-08</Date>
-            <Version>2.8.4</Version>
-            <Comment>Version bump.</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
-        <Update release="4">
-            <Date>2015-09-20</Date>
-            <Version>2.6.1</Version>
-            <Comment>Version bump.</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
-        <Update release="3">
-            <Date>2014-05-23</Date>
-            <Version>2.2.5</Version>
-            <Comment>Version bump.</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
-        <Update release="2">
-            <Date>2014-04-11</Date>
-            <Version>2.0.5</Version>
-            <Comment>Some Fix</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
         <Update release="1">
-            <Date>2013-12-12</Date>
-            <Version>2.0.5</Version>
-            <Comment>First release</Comment>
-            <Name>Osman Erkan</Name>
-            <Email>osman.erkan@pisilinux.org</Email>
+            <Date>2016-05-18</Date>
+            <Version>3.0.3</Version>
+            <Comment>First release.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

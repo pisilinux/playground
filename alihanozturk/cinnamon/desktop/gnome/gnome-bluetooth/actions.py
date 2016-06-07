@@ -6,13 +6,10 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.configure("--enable-introspection \
-                         --disable-desktop-update \
-                         --disable-icon-update")
+    autotools.configure()
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
     

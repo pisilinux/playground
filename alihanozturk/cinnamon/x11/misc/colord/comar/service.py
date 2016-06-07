@@ -12,7 +12,7 @@ pidFile = "/run/colord.pid"
 
 @synchronized
 def start():
-    startService(command="/usr/libexec/colord",
+    startService(command="/usr/lib/colord",
                  pidfile=pidFile,
                  makepid=True,
                  detach=True,

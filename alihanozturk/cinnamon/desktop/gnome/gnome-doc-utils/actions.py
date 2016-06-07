@@ -18,5 +18,8 @@ def build():
 
 def install():
     autotools.install()
+    
+    pisitools.domove("/usr/share/pkgconfig/*.pc", "/usr/lib/pkgconfig/")
+    pisitools.removeDir("/usr/share/pkgconfig")
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "README", "NEWS")

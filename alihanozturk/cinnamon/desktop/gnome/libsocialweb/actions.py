@@ -12,11 +12,11 @@ from pisi.actionsapi import get
 
 def setup():
     autotools.configure("--prefix=/usr \
-			 --sysconfdir=/etc \
-			 --libexecdir=/usr/lib/libsocialweb \
-			 --enable-all-services=yes \
-			 --with-online=networkmanager \
-			 --enable-vala-bindings")
+                         --sysconfdir=/etc \
+                         --libexecdir=/usr/lib/libsocialweb \
+                         --enable-all-services=yes \
+                         --with-online=networkmanager \
+                         --enable-vala-bindings")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 

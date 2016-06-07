@@ -13,9 +13,8 @@ from pisi.actionsapi import get
 def setup():
     autotools.autoreconf("-fiv")
     autotools.configure("--disable-static\
-                         --disable-rpath\
-                         --enable-xkb-support\
-                         --enable-xmodmap-support")
+                         --with-xkb-base=/usr/share/X11/xkb \
+                         --with-xkb-bin-base=/usr/bin")
 
 def build():
     autotools.make()

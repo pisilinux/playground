@@ -9,12 +9,10 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
-WorkDir="cjs-2.8.0"
-
 def setup():
     shelltools.system("./autogen.sh")
     autotools.autoreconf("-fi")
-    autotools.configure("--disable-static \
+    autotools.configure("--prefix=/usr \
                          --libexecdir=/usr/lib")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")

@@ -10,17 +10,11 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    pisitools.dosed("data/merge_action_strings", "#!/usr/bin/python2", "#!/usr/bin/python")
-    pisitools.dosed("data/extract_action_strings", "#!/usr/bin/python2", "#!/usr/bin/python")
-    shelltools.export("PYTHON", "/usr/bin/python2.7")
-    shelltools.system("./autogen.sh")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
     autotools.configure("--libexecdir=/usr/lib/nemo \
                          --prefix=/usr \
                          --sysconfdir=/etc \
                          --disable-update-mimedb \
-                         --disable-tracker \
-                         --disable-schemas-compile \
-                         --disable-gtk-doc-html \
                          --enable-gtk-doc")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
@@ -31,4 +25,4 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.dodoc("README", "AUTHORS")
+    pisitools.dodoc("README*", "AUTHORS", "NEWS", "THANKS", "COPYING*")

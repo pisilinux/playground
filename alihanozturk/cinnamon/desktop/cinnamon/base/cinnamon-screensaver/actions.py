@@ -10,16 +10,13 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("./autogen.sh")
     autotools.autoreconf("-vif")
-    autotools.configure("--sysconfdir=/etc \
+    autotools.configure("--prefix=/usr \
+                         --sysconfdir=/etc \
                          --libexecdir=/usr/lib/cinnamon-screensaver \
-                         --prefix=/usr \
                          --disable-static \
-                         --with-mit-ext \
-                         --with-xf86gamma-ext \
-                         --enable-locking \
-                         --enable-docbook-docs")
+                         --with-pam-prefix=/etc \
+                         --enable-locking")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 

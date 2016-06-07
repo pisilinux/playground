@@ -11,7 +11,7 @@ def build():
     autotools.make()
 
 def install():
-    pisitools.insinto("/usr/share/cinnamon/locale", "po-export/*")
+    pisitools.insinto("/usr/share/locale", "po-export/*")
     pisitools.insinto("/usr/share/locale", "usr/share/locale/*")
 
     pisitools.dodoc("README*", "COPYING")

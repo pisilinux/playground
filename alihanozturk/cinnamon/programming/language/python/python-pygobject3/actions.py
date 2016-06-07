@@ -19,12 +19,16 @@ def setup():
     shelltools.system("../configure --prefix=/usr \
                        --localstatedir=/var \
                        --disable-static")
+    
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
     shelltools.cd("../build-python2")
     shelltools.export("PYTHON", "/usr/bin/python2.7")
     shelltools.system("../configure --prefix=/usr \
                        --localstatedir=/var \
                        --disable-static")
+    
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     shelltools.cd("build-python3")

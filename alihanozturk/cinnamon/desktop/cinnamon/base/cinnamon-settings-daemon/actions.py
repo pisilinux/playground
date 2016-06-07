@@ -17,9 +17,7 @@ def setup():
                          --libexecdir=/usr/lib/cinnamon-settings-daemon \
                          --localstatedir=/var \
                          --disable-static \
-                         --disable-schemas-compile \
-                         --enable-polkit \
-                         --enable-profiling")
+                         --disable-systemd")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 

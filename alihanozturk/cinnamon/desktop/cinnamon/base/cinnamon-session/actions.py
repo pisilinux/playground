@@ -10,11 +10,11 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("./autogen.sh")
     autotools.autoreconf("-vif")
     autotools.configure("--prefix=/usr \
                          --libexecdir=/usr/lib/cinnamon-session \
-                         --localstatedir=/var")
+                         --localstatedir=/var \
+                         --enable-ipv6")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 

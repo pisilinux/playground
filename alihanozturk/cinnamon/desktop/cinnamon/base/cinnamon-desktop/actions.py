@@ -10,12 +10,12 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("./autogen.sh")
     autotools.autoreconf("-vif")
     autotools.configure("--prefix=/usr \
                          --sysconfdir=/etc \
                          --libexecdir=/usr/lib \
                          --localstatedir=/var \
+                         --enable-introspection \
                          --disable-static")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")

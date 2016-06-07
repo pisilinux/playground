@@ -13,18 +13,13 @@ def setup():
                          --sysconfdir=/etc \
                          --localstatedir=/var \
                          --libexecdir=/usr/lib/colord \
-                         --enable-print-profiles \
-                         --disable-examples \
-                         --disable-static \
-                         --disable-rpath \
-                         --disable-silent-rules \
-                         --enable-polkit \
-                         --enable-systemd-login=no \
-                         --with-daemon-user=colord \
-                         --with-systemdsystemunitdir=no \
-                         --enable-introspection \
-                         --enable-vala \
-                         --enable-sane")
+                         --with-daemon-user=colord    \
+                         --enable-vala                \
+                         --enable-systemd-login=no    \
+                         --disable-argyllcms-sensor   \
+                         --disable-bash-completion    \
+                         --disable-static             \
+                         --with-systemdsystemunitdir=no")
     
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 

@@ -14,6 +14,7 @@
         <Archive sha1sum="79fc9c9be912d4992d27c86e3b97d25c61dad524" type="tarxz">mirrors://gnome/libsocialweb/0.25/libsocialweb-0.25.21.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>glib2-devel</Dependency>
+            <Dependency>keyutils</Dependency>
             <Dependency>intltool</Dependency>
             <Dependency>gconf-devel</Dependency>
             <Dependency>dbus-devel</Dependency>
@@ -25,7 +26,6 @@
             <Dependency>NetworkManager-devel</Dependency>
             <Dependency>vala-devel</Dependency>
             <Dependency>gobject-introspection-devel</Dependency>
-            <Dependency>gtk-doc</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">c1791e96182815449781fcda6007b69cd88cf7bf.patch</Patch>
@@ -48,13 +48,16 @@
             <Dependency>libgnome-keyring</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*.so.*</Path>
+            <Path fileType="library">/usr/lib/libsocialweb*</Path>
             <Path fileType="library">/usr/lib/girepository-1.0</Path>
             <Path fileType="library">/usr/lib/libsocialweb</Path>
             <Path fileType="data">/usr/share/dbus-1</Path>
             <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="doc">/usr/share/gtk-doc</Path>
             <Path fileType="data">/usr/share/libsocialweb</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/vala/vapi</Path>
         </Files>
     </Package>
 
@@ -62,44 +65,21 @@
         <Name>libsocialweb-devel</Name>
         <Summary>Development files for libsocialweb</Summary>
         <RuntimeDependencies>
+            <Dependency>dbus-glib-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
             <Dependency>libsoup-devel</Dependency>
             <Dependency>librest-devel</Dependency>
             <Dependency release="current">libsocialweb</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include/libsocialweb</Path>
-            <Path fileType="library">/usr/lib/*.so</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
-            <Path fileType="data">/usr/share/gir-1.0</Path>
-            <Path fileType="data">/usr/share/vala/vapi</Path>
-            <Path fileType="data">/usr/share/gtk-doc/html</Path>
         </Files>
     </Package>
 
     <History>
-        <Update release="4">
-            <Date>2015-12-21</Date>
-            <Version>0.25.21</Version>
-            <Comment>Rebuild</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
-        <Update release="3">
-            <Date>2015-05-22</Date>
-            <Version>0.25.21</Version>
-            <Comment>Rebuild for vala</Comment>
-            <Name>Ayhan Yalçınsoy</Name>
-            <Email>ayhanyalcinsoy@pisilinux.org</Email>
-        </Update>
-        <Update release="2">
-            <Date>2014-06-14</Date>
-            <Version>0.25.21</Version>
-            <Comment>Rebuild for gcc</Comment>
-            <Name>Osman Erkan</Name>
-            <Email>osman.erkan@pisilinux.org</Email>
-        </Update>
         <Update release="1">
-            <Date>2013-10-27</Date>
+            <Date>2016-05-15</Date>
             <Version>0.25.21</Version>
             <Comment>First release</Comment>
             <Name>Osman Erkan</Name>

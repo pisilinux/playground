@@ -12,9 +12,9 @@ from pisi.actionsapi import get
 
 def setup():
     autotools.configure("--prefix=/usr \
-			 --disable-static \
-                         --enable-vala \
-                         --enable-introspection")
+                         --disable-static")
+    
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     autotools.make()

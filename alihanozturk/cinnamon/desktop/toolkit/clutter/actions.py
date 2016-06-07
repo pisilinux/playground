@@ -10,14 +10,7 @@ from pisi.actionsapi import get
 
 def setup():
     autotools.autoreconf("-vif")
-    autotools.configure("--enable-egl-backend \
-                         --enable-evdev-input \
-                         --enable-introspection \
-                         --enable-xinput \
-                         --disable-static \
-                         --enable-x11-backend \
-                         --enable-gtk-doc \
-                         --enable-shared ")
+    autotools.configure("--enable-egl-backend")
 
     pisitools.dosed("libtool"," -shared ", " -Wl,-O1,--as-needed -shared ")
 

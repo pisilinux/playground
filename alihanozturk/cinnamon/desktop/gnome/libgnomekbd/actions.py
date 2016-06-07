@@ -11,8 +11,7 @@ from pisi.actionsapi import get
 
 
 def setup():
-    autotools.configure("--disable-static \
-                         --enable-introspection=yes")
+    autotools.configure("--disable-static")
 
     pisitools.dosed("libtool", " -shared ", " -Wl,--as-needed -shared ")
 

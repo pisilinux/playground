@@ -12,48 +12,46 @@
         <IsA>app:gui</IsA>
         <Summary>Utilities to configure the Cinnamon desktop</Summary>
         <Description>This package contains configuration utilities for the Cinnamon desktop, which allow to configure accessibility options, desktop fonts, keyboard and mouse properties, sound setup, desktop theme and background, user interface properties, screen resolution, and other settings.</Description>
-        <Archive sha1sum="5f40815e4aae943abf03d20c253e2c7fbdc0b092" type="targz">https://github.com/linuxmint/cinnamon-control-center/archive/2.8.1.tar.gz</Archive>
+        <Archive sha1sum="248830180ada165700aa72d2bd7f297d253ac4d2" type="targz">https://github.com/linuxmint/cinnamon-control-center/archive/3.0.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gnome-common</Dependency>
             <Dependency>intltool</Dependency>
             <Dependency>gettext-devel</Dependency>
+            <Dependency>cinnamon-settings-daemon-devel</Dependency>
+            <Dependency>cinnamon-desktop-devel</Dependency>
+            <Dependency>cinnamon-menus-devel</Dependency>
+            <Dependency>colord-devel</Dependency>
+            <Dependency>dbus-glib-devel</Dependency>
+            <Dependency>dbus-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>upower-devel</Dependency>
+            <Dependency>libwacom-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>libmm-glib-devel</Dependency>
+            <Dependency>NetworkManager-devel</Dependency>
+            <Dependency>ModemManager-devel</Dependency>
+            <Dependency>xorg-input-wacom-devel</Dependency>
             <Dependency>libxslt-devel</Dependency>
             <Dependency>libX11-devel</Dependency>
             <Dependency>libICE-devel</Dependency>
-            <Dependency>glib2-devel</Dependency>
-            <Dependency>gtk3-devel</Dependency>
-            <Dependency>cinnamon-desktop-devel</Dependency>
-            <Dependency>libnotify-devel</Dependency>
-            <Dependency>at-spi2-core-devel</Dependency>
+            <Dependency>accountsservice-devel</Dependency>
             <Dependency>libxkbfile-devel</Dependency>
-            <Dependency>cinnamon-menus-devel</Dependency>
             <Dependency>libXxf86misc-devel</Dependency>
-            <Dependency>dbus-glib-devel</Dependency>
-            <Dependency>polkit-devel</Dependency>
-            <Dependency>gdk-pixbuf-devel</Dependency>
-            <Dependency>colord-devel</Dependency>
-            <Dependency>eudev-devel</Dependency>
-            <Dependency>libxklavier-devel</Dependency>
-            <Dependency>libgnomekbd-devel</Dependency>
-            <Dependency>pulseaudio-libs-devel</Dependency>
-            <Dependency>libcanberra-gtk3-devel</Dependency>
-            <Dependency>libcanberra-gtk3</Dependency>
-            <Dependency>libxml2-devel</Dependency>
-            <Dependency>iso-codes</Dependency>
-            <Dependency>libsocialweb-devel</Dependency>
-            <Dependency>libwacom-devel</Dependency>
-            <Dependency>NetworkManager-devel</Dependency>
-            <Dependency>ModemManager-devel</Dependency>
             <Dependency>network-manager-applet-devel</Dependency>
-            <Dependency>xorg-input-wacom-devel</Dependency>
-            <Dependency>upower-devel</Dependency>
-            <Dependency>cinnamon-settings-daemon-devel</Dependency>
-            <Dependency>dbus-devel</Dependency>
-            <Dependency>libcanberra-devel</Dependency>
-            <Dependency>libmm-glib-devel</Dependency>
-            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>iso-codes</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
+            <Dependency>libgnomekbd-devel</Dependency>
+            <Dependency>libxklavier-devel</Dependency>
             <Dependency>libXi-devel</Dependency>
+            <Dependency>pulseaudio-libs-devel</Dependency>
             <Dependency>timezone</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>libsocialweb-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -62,7 +60,9 @@
         <RuntimeDependencies>
             <Dependency>atk</Dependency>
             <Dependency>cups</Dependency>
+            <Dependency>mesa</Dependency>
             <Dependency>gtk3</Dependency>
+            <Dependency>dbus</Dependency>
             <Dependency>cairo</Dependency>
             <Dependency>glib2</Dependency>
             <Dependency>libXi</Dependency>
@@ -71,34 +71,34 @@
             <Dependency>libX11</Dependency>
             <Dependency>polkit</Dependency>
             <Dependency>libwacom</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>iso-codes</Dependency>
             <Dependency>dbus-glib</Dependency>
             <Dependency>libnotify</Dependency>
             <Dependency>fontconfig</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
             <Dependency>libmm-glib</Dependency>
-            <Dependency>libcanberra</Dependency>
             <Dependency>libgnomekbd</Dependency>
             <Dependency>libxklavier</Dependency>
             <Dependency>libsocialweb</Dependency>
             <Dependency>ModemManager</Dependency>
+            <Dependency>polkit-gnome</Dependency>
             <Dependency>NetworkManager</Dependency>
             <Dependency>cinnamon-menus</Dependency>
             <Dependency>accountsservice</Dependency>
             <Dependency>pulseaudio-libs</Dependency>
             <Dependency>cinnamon-desktop</Dependency>
-            <Dependency>libcanberra-gtk3</Dependency>
-            <Dependency>xorg-input-wacom</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
             <Dependency>cinnamon-translations</Dependency>
             <Dependency>network-manager-applet</Dependency>
             <Dependency>cinnamon-control-center-sounds</Dependency>
+            <Dependency>cinnamon-settings-daemon</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="config">/etc/xdg/autostart/</Path>
-            <Path fileType="config">/etc/xdg/menus</Path>
+            <Path fileType="config">/etc</Path>
             <Path fileType="executable">/usr/bin/</Path>
-            <Path fileType="library">/usr/lib/cinnamon-control-center-1/panels</Path>
-            <Path fileType="library">/usr/lib/libcinnamon-control-center.so.1</Path>
-            <Path fileType="library">/usr/lib/libcinnamon-control-center.so.1.0.0</Path>
+            <Path fileType="library">/usr/lib/cinnamon-control-center-1</Path>
+            <Path fileType="library">/usr/lib/libcinnamon-control-center*</Path>
             <Path fileType="data">/usr/share/applications</Path>
             <Path fileType="data">/usr/share/cinnamon-control-center</Path>
             <Path fileType="data">/usr/share/desktop-directories</Path>
@@ -118,40 +118,18 @@
             <Dependency release="current">cinnamon-control-center</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/libcinnamon-control-center.so</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
             <Path fileType="header">/usr/include/cinnamon-control-center-1/libcinnamon-control-center</Path>
         </Files>
     </Package>
     
     <History>
-        <Update release="4">
-            <Date>2015-12-21</Date>
-            <Version>2.8.1</Version>
-            <Comment>Verison bump.</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
-        <Update release="3">
-            <Date>2014-05-28</Date>
-            <Version>2.2.9</Version>
-            <Comment>Verison bump.</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
-        <Update release="2">
-            <Date>2014-04-11</Date>
-            <Version>2.0.9</Version>
-            <Comment>Some fix</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
-        </Update>
         <Update release="1">
-            <Date>2013-12-12</Date>
-            <Version>2.0.9</Version>
-            <Comment>First release</Comment>
-            <Name>Osman Erkan</Name>
-            <Email>osman.erkan@pisilinux.org</Email>
+            <Date>2016-05-18</Date>
+            <Version>3.0.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

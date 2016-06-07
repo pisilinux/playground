@@ -11,15 +11,12 @@ from pisi.actionsapi import get
 
 def setup():
     shelltools.system("./autogen.sh")
-    #autotools.autoreconf("-vfi")
     autotools.configure("--localstatedir=/var \
                          --libexecdir=/usr/lib/cinnamon \
                          --prefix=/usr \
                          --sysconfdir=/etc \
-                         --disable-schemas-compile \
-                         --enable-compile-warnings=no \
-                         --disable-rpath \
-                         --enable-introspection=yes \
+                         --disable-schemas-install \
+                         --enable-compile-warnings=yes \
                          --enable-gtk-doc")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
@@ -29,6 +26,5 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    #shelltools.makedirs("/usr/share/cinnamon/locale/")
-
+    
     pisitools.dodoc("README", "AUTHORS")

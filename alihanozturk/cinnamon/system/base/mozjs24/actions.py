@@ -9,27 +9,26 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-WorkDir = "mozjs-%s/js/src" % get.srcVERSION()
-
 def setup():
-    shelltools.system("sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl")
-    shelltools.export("CPPFLAGS", get.CXXFLAGS())
+    shelltools.cd("js/src")
     shelltools.export("SHELL", "/bin/sh")
     autotools.configure("--with-system-nspr \
-                         --enable-system-ffi \
+                         --disable-tests \
+                         --disable-strip \
+                         --enable-ctypes \
+                         --enable-threadsafe \
                          --enable-readline \
-                         --disable-static \
-                         --enable-xterm-updates \
-                         --enable-threadsafe")
+                         --enable-system-ffi \
+                         --disable-intl-api")
 
 def build():
+    shelltools.cd("js/src")
     autotools.make()
 
 def check():
+    shelltools.cd("js/src")
     autotools.make("check")
 
 def install():
+    shelltools.cd("js/src")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    
-    
-    pisitools.rename("/usr/lib/pkgconfig/mozjs-.pc", "mozjs-24.pc")
