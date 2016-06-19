@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>hyphen</Name>
+        <Homepage>http://sourceforge.net/projects/hunspell/files/Hyphen</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>MPL-1.1</License>
+        <License>GPLv2</License>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <IsA>app:console</IsA>
+        <Summary>ALTLinux hyphenation library</Summary>
+        <Description>hyphen,library for high quality hyphenation and justification.</Description>
+        <Archive sha1sum="0556c392beb59433e577e3517575801212201df6" type="targz">https://sourceforge.net/projects/hunspell/files/Hyphen/2.8/hyphen-2.8.8.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>hyphen</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/hyphen</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>hyphen-devel</Name>
+        <Summary>Development files for hyphen</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">hyphen</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2016-06-07</Date>
+            <Version>2.8.8</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>osman.erkan@yandex.xom</Email>
+        </Update>
+    </History>
+</PISI>

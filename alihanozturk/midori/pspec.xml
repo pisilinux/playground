@@ -1,0 +1,75 @@
+<PISI>
+    <Source>
+        <Name>midori</Name>
+        <Homepage>http://midori-browser.org/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Lightweight web browser.</Summary>
+        <Description>A lightweight, fast and free web browser.</Description>
+        <Archive sha1sum="64c86935028feb5f89d799c2acacaad67764da6f" type="tarbz2">http://midori-browser.org/downloads/midori_0.5.11_all_.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>cmake</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>webkit2gtk-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>sqlite-devel</Dependency>
+            <Dependency>gcr-devel</Dependency>
+            <Dependency>libXScrnSaver-devel</Dependency>
+            <Dependency>librsvg-devel</Dependency>
+            <Dependency>hyphen-devel</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>libsoup-gnome</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">soversion.patch</Patch>
+            <Patch level="1">homepage.patch</Patch>
+        </Patches>
+    </Source>
+    
+    <Package>
+        <Name>midori</Name>
+        <Summary>Lightweight web browser.</Summary>
+        <RuntimeDependencies>
+            <Dependency>gcr</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>sqlite</Dependency>
+            <Dependency>hyphen</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libsoup</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>webkit2gtk</Dependency>
+            <Dependency>libsoup-gnome</Dependency>
+            <Dependency>libXScrnSaver</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/appdata</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/midori</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files> 
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-05-31</Date>
+            <Version>0.5.11</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

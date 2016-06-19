@@ -1,0 +1,147 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>webkit2gtk</Name>
+        <Homepage>http://webkitgtk.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <License>LGPLv2.1</License>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>An opensource web browser engine for GTK+ applications</Summary>
+        <Description>The GTK+ port of WebKit is intended to provide a browser component primarily for users of the portable GTK+ UI toolkit on platforms like Linux.</Description>
+        <Archive sha1sum="3a8199a220ba832614d3f51f160bd5c4fd3e79bf" type="tarxz">http://www.webkitgtk.org/releases/webkitgtk-2.13.1.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>cmake</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>gnutls-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>freetype-devel</Dependency>
+            <Dependency>harfbuzz-devel</Dependency>
+            <Dependency>libpng-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>at-spi2-core-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>hyphen-devel</Dependency>
+            <Dependency>libXt-devel</Dependency>
+            <Dependency>webp-devel</Dependency>
+            <Dependency>icu4c-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>libsoup-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+            <Dependency>libXcomposite-devel</Dependency>
+            <Dependency>libXdamage-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>ruby-devel</Dependency>
+            <Dependency>libsecret-devel</Dependency>
+            <Dependency>itstool</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>sqlite-devel</Dependency>
+            <Dependency>geoclue-devel</Dependency>
+            <Dependency>enchant-devel</Dependency>
+            <Dependency>gperf</Dependency>
+            <Dependency>which</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>libgudev-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>gstreamer-next-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>gst-plugins-base-next-devel</Dependency>
+            <Dependency>gst-plugins-bad-next-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>webkit2gtk</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk2</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>webp</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>icu4c</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>sqlite</Dependency>
+            <Dependency>enchant</Dependency>
+            <Dependency>geoclue</Dependency>
+            <Dependency>libsoup</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>harfbuzz</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>libsecret</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libXdamage</Dependency>
+            <Dependency>libXcomposite</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>gstreamer-next</Dependency>
+            <Dependency>gst-plugins-base-next</Dependency>
+            <Dependency>gst-plugins-bad-next</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/girepository-1.0</Path>
+            <Path fileType="library">/usr/lib/webkit2gtk-4.0</Path>
+            <Path fileType="library">/usr/lib/libwebkit2gtk*</Path>
+            <Path fileType="library">/usr/lib/libjavascriptcoregtk*</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>webkit2gtk-devel</Name>
+        <IsA>library</IsA>
+        <IsA>data:doc</IsA>
+        <Summary>Development files for GTK+ port of WebKit</Summary>
+        <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libsoup-devel</Dependency>
+            <Dependency release="current">webkit2gtk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="2">
+            <Date>2016-06-07</Date>
+            <Version>2.13.1</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-05-17</Date>
+            <Version>2.12.2</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

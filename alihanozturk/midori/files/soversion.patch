@@ -1,0 +1,11 @@
+--- midori-0.5.6/midori/CMakeLists.txt.orig	2014-01-01 21:12:02.451888244 +0100
++++ midori-0.5.6/midori/CMakeLists.txt	2014-01-01 21:12:27.475088363 +0100
+@@ -57,7 +57,7 @@ target_link_libraries(${LIBMIDORI}
+ set_target_properties(${LIBMIDORI} PROPERTIES
+                       COMPILE_FLAGS ${CFLAGS}
+                       SOVERSION 1
+-                      VERSION 0.0.0
++                      VERSION 1.0.0
+                       )
+ if (WIN32)
+     install(TARGETS ${LIBMIDORI}
