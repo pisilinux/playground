@@ -1,0 +1,43 @@
+<PISI>
+    <Source>
+        <Name>qmltermwidget</Name>
+        <Homepage>https://github.com/Swordfish90/qmltermwidget</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>QML port of qtermwidget.</Summary>
+        <Description>This project is a QML port of qtermwidget. It is written to be as close as possible to the upstream project in order to make cooperation possible.</Description>
+        <Archive type="targz" sha1sum="98ddbab82c6d81eb8902379ec9a1d4f1b294c96b">https://github.com/papyros/qmltermwidget/archive/v0.1.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>qmltermwidget</Name>
+        <Summary>QML port of qtermwidget.</Summary>
+        <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-06-26</Date>
+            <Version>0.1.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

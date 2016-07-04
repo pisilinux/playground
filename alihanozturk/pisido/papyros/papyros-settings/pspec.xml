@@ -1,0 +1,40 @@
+<PISI>
+    <Source>
+        <Name>papyros-settings</Name>
+        <Homepage>https://github.com/papyros/settings-app</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary> The Settings app for Papyros.</Summary>
+        <Description>The system settings app for Papyros. This is mostly a proof-of-concept right now, with very few settings modules. Feel free to contribute new ones or improve the existing ones!</Description>
+        <Archive sha1sum="f7feffa694ed4d02953db55faab918603d6ccce3" type="targz">https://github.com/papyros/settings-app/archive/v0.1.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>papyros-settings</Name>
+        <Summary> The Settings app for Papyros.</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-06-28</Date>
+            <Version>0.1.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

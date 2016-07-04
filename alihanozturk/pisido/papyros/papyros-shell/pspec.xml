@@ -1,0 +1,43 @@
+<PISI>
+    <Source>
+        <Name>papyros-shell</Name>
+        <Homepage>https://github.com/papyros/papyros-shell</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>The desktop shell for Papyros, built using QtQuick and QtCompositor as a compositor for Wayland.</Summary>
+        <Description>Papyros Shell is the desktop shell for Papyros, an operating system based upon Linux which conforms to Google’s Material Design guidelines. The focus will be on creating a stable and easy-to-use operating system with a heavy emphasis on well-thought-out design.</Description>
+        <Archive type="zip" sha1sum="6add93cbfa34bcc03d6c43b3fa47033de94ee8cb">https://github.com/papyros/papyros-shell/archive/develop.zip</Archive>
+        <BuildDependencies>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>qt5-wayland-devel</Dependency>
+            <Dependency>pam-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>papyros-shell</Name>
+        <Summary>The desktop shell for Papyros, built using QtQuick and QtCompositor as a compositor for Wayland.</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-06-28</Date>
+            <Version>0.1</Version>
+            <Comment>First release.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

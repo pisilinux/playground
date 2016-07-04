@@ -1,0 +1,37 @@
+<PISI>
+    <Source>
+        <Name>wayland-protocols</Name>
+        <Homepage>http://wayland.freedesktop.org</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>app:console</IsA>
+        <Summary>Specifications of extended Wayland protocols.</Summary>
+        <Description>Specifications of extended Wayland protocols.</Description>
+        <Archive type="tarxz" sha1sum="39c466c9a2328e3ee1c6c2c71298a72ddaa44dfc">https://wayland.freedesktop.org/releases/wayland-protocols-1.4.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>wayland-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>wayland-protocols</Name>
+        <Summary>Specifications of extended Wayland protocols.</Summary>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-06-27</Date>
+            <Version>1.4</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,53 @@
+<PISI>
+    <Source>
+        <Name>papyros-terminal</Name>
+        <Homepage>https://github.com/papyros/terminal-app</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:console</IsA>
+        <Summary> Terminal app for Papyros. </Summary>
+        <Description>This is the terminal app for Papyros. The UI is built with our Material Design framework, and the backend is based on QMLTermWidget used in cool-retro-term.</Description>
+        <Archive sha1sum="36e5a9779c0e934eb3fc035a0541642c15bb8aa4" type="targz">https://github.com/papyros/terminal-app/archive/v0.1.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qmltermwidget</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>libpapyros-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+            <Dependency>kwallet-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>papyros-terminal</Name>
+        <Summary> Terminal app for Papyros. </Summary>
+        <RuntimeDependencies>
+            <Dependency>qmltermwidget</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+            <Dependency>libpapyros</Dependency>
+            <Dependency>qml-material</Dependency>
+            <Dependency>qt5-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/share/appdata</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-06-27</Date>
+            <Version>0.1.1</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

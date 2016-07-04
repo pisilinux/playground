@@ -1,0 +1,63 @@
+<PISI>
+    <Source>
+        <Name>greenisland</Name>
+        <Homepage>https://github.com/greenisland/greenisland</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>QtQuick Wayland compositor and shell for desktop and mobile.</Summary>
+        <Description>Green Island provides a full blown Wayland compositor for QtQuick as well as pluggable hardware abstraction, extensions, tools and a Qt-style API for Wayland clients.</Description>
+        <Archive type="zip" sha1sum="2ea681d85c18e5a88ca9287275044b88cf2e427b">https://github.com/greenisland/greenisland/archive/master.zip</Archive>
+        <BuildDependencies>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>qt5-wayland-devel</Dependency>
+            <Dependency>libxkbcommon-devel</Dependency>
+            <Dependency>libXcomposite-devel</Dependency>
+            <Dependency>wayland-devel</Dependency>
+            <Dependency>wayland-client</Dependency>
+            <Dependency>wayland-cursor</Dependency>
+            <Dependency>wayland-server</Dependency>
+            <Dependency>wayland-protocols</Dependency>
+            <Dependency>eudev-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>libdrm-devel</Dependency>
+            <Dependency>llvm-clang-devel</Dependency>
+            <Dependency>gdb-devel</Dependency>
+            <Dependency>freetype-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>pam-devel</Dependency>
+            <Dependency>libinput-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libXcursor-devel</Dependency>
+            <Dependency>libxcb-devel</Dependency>
+            <Dependency>xcb-util-cursor-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>greenisland</Name>
+        <Summary>QtQuick Wayland compositor and shell for desktop and mobile.</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-06-27</Date>
+            <Version>0.7.2</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

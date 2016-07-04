@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>telepathy-accounts-signon</Name>
+        <Homepage>https://gitlab.com/accounts-sso/telepathy-accounts-signon/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>app</IsA>
+        <Summary>A mission control plugin for Telepathy</Summary>
+        <Description>A mission control plugin for Telepathy, integrating with libaccounts and libsignon
+to provide IM accounts and authentication.</Description>
+        <Archive type="tarbz2" sha1sum="8721b3bd5382f50dee83d01c7a5731141bc0358c">https://gitlab.com/accounts-sso/telepathy-accounts-signon/repository/archive.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>telepathy-mission-control-devel</Dependency>
+<!--             <Dependency>libaccounts-glib-devel</Dependency> -->
+<!--             <Dependency>libsignon-glib-devel</Dependency> -->
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>telepathy-accounts-signon</Name>
+        <Summary>A mission control plugin for Telepathy</Summary>
+        <!--
+        <RuntimeDependencies>
+            <Dependency>Dep1</Dependency>
+            <Dependency>Dep2</Dependency>
+            <Dependency>Dep3</Dependency>
+            <Dependency versionFrom="">Dep4</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2015-11-22</Date>
+            <Version>1.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

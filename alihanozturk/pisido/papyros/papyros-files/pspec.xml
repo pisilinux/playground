@@ -1,0 +1,53 @@
+<PISI>
+    <Source>
+        <Name>papyros-files</Name>
+        <Homepage>https://github.com/papyros/files-app</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:gui</IsA>
+        <Summary>The file manager for Papyros.</Summary>
+        <Description>This is the file manager app for Papyros. The UI is build with our Material Design framework, and the backend is based on the Ubuntu Touch file manager. The goal is for the app to be cross patform and run on Linux, OS X, and Windows.</Description>
+        <Archive type="targz" sha1sum="b8f464ccc237bcec40197a9b44adb3acb0bf28c7">https://github.com/papyros/files-app/archive/v0.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>cmake</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>qt5-linguist</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>qml-material</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>papyros-files</Name>
+        <Summary>The file manager for Papyros.</Summary>
+        <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency>taglib</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+            <Dependency>qml-material</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/papyros-files</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-06-27</Date>
+            <Version>0.1</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

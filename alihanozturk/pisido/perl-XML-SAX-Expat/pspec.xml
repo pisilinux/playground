@@ -1,0 +1,44 @@
+<PISI>
+    <Source>
+        <Name>perl-XML-SAX-Expat</Name>
+        <Homepage>http://search.cpan.org/dist/XML-SAX-Expat</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>SAX2 Driver for Expat (XML::Parser)</Summary>
+        <Description>SAX2 Driver for Expat (XML::Parser)</Description>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-XML-NamespaceSupport</Dependency>
+            <Dependency>perl-XML-Parser</Dependency>
+            <Dependency>perl-XML-SAX</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="74609fe5ee5011eac193fbf1ae20e327ce12372c" type="targz">http://search.cpan.org/CPAN/authors/id/B/BJ/BJOERN/XML-SAX-Expat-0.51.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>perl-XML-SAX-Expat</Name>
+        <Summary>SAX2 Driver for Expat (XML::Parser)</Summary>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>perl-XML-NamespaceSupport</Dependency>
+            <Dependency>perl-XML-Parser</Dependency>
+            <Dependency>perl-XML-SAX</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2016-06-07</Date>
+            <Version>0.51</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

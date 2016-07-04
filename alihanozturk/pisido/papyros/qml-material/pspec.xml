@@ -1,0 +1,49 @@
+<PISI>
+    <Source>
+        <Name>qml-material</Name>
+        <Homepage>https://github.com/papyros/qml-material</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>A UI framework for QtQuick implementing Material Design</Summary>
+        <Description>This is a library of QML widgets implementing Google's Material Design. It is completely cross platform, and runs on Linux, OS X, and Windows. It may also run on iOS and Android, though those platforms have not been tested and are not currently officially supported.</Description>
+        <Archive type="targz" sha1sum="0eead2d4b665d31cf56837198713ebd38d9ec280">https://github.com/papyros/qml-material/archive/v0.2.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>qt5-svg-devel</Dependency>
+            <Dependency>qt5-graphicaleffects</Dependency>
+            <Dependency>qt5-quickcontrols</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>qml-material</Name>
+        <Summary>A UI framework for QtQuick implementing Material Design</Summary>
+        <RuntimeDependencies>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+            <Dependency>qt5-graphicaleffects</Dependency>
+            <Dependency>qt5-quickcontrols</Dependency>
+            <Dependency>qt5-svg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-06-27</Date>
+            <Version>0.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

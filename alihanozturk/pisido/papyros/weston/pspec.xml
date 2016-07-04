@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>weston</Name>
+        <Homepage>http://wayland.freedesktop.org</Homepage>
+        <Packager>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Demos that demonstrate various aspects of Wayland</Summary>
+        <Description>Demos that demonstrate various aspects of Wayland</Description>
+        <Archive sha1sum="8b051ee16b785b6db16657161aeed6cd6724f028" type="tarxz">https://wayland.freedesktop.org/releases/weston-1.11.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>webp-devel</Dependency>
+            <Dependency>dbus-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>lcms2-devel</Dependency>
+            <Dependency>pam-devel</Dependency>
+            <Dependency>libunwind-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>colord-devel</Dependency>
+            <Dependency>libdrm-devel</Dependency>
+            <Dependency>pixman-devel</Dependency>
+            <Dependency>libmtdev-devel</Dependency>
+            <Dependency>libva-devel</Dependency>
+            <Dependency>libXcursor-devel</Dependency>
+            <Dependency>poppler-glib-devel</Dependency>
+            <Dependency>libxkbcommon-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>wayland-devel</Dependency>
+            <Dependency>wayland-cursor</Dependency>
+            <Dependency>wayland-protocols</Dependency>
+            <Dependency>libinput-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>weston</Name>
+        <RuntimeDependencies>
+            <Dependency>pam</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>webp</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>eudev</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>lcms2</Dependency>
+            <Dependency>libva</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>colord</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libdrm</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>libxcb</Dependency>
+            <Dependency>pixman</Dependency>
+            <Dependency>libinput</Dependency>
+            <Dependency>libunwind</Dependency>
+            <Dependency>libXcursor</Dependency>
+            <Dependency>libdrm-intel</Dependency>
+            <Dependency>libxkbcommon</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>wayland-client</Dependency>
+            <Dependency>wayland-cursor</Dependency>
+            <Dependency>wayland-server</Dependency>
+            <Dependency>wayland-protocols</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/weston</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/wayland-sessions</Path>
+            <Path fileType="data">/usr/share/weston</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>weston-devel</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">weston</Dependency>
+            <Dependency>pixman-devel</Dependency>
+            <Dependency>libxkbcommon-devel</Dependency>
+            <Dependency>wayland-server</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2016-06-27</Date>
+            <Version>1.11.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

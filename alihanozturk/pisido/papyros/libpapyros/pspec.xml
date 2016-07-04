@@ -1,0 +1,60 @@
+<PISI>
+    <Source>
+        <Name>libpapyros</Name>
+        <Homepage>https://github.com/papyros/libpapyros</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Library of common classes for Papyros.</Summary>
+        <Description>A collection of classes used throughout Papyros.</Description>
+        <Archive sha1sum="e5c1c2412e8a6ae942edfd966cbf301471b5b1be" type="targz">https://github.com/papyros/libpapyros/archive/v0.2.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>extra-cmake-modules</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>kwallet-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>libpapyros</Name>
+        <Summary>Library of common classes for Papyros.</Summary>
+        <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency>kconfig</Dependency>
+            <Dependency>kwallet</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>libpapyros-devel</Name>
+        <Summary>Development files for libpapyros.</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libpapyros</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/cmake</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2016-06-27</Date>
+            <Version>0.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

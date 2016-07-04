@@ -1,0 +1,55 @@
+<PISI>
+    <Source>
+        <Name>libqtxdg</Name>
+        <Homepage>http://www.lxqt.org</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPL2</License>
+        <IsA>library</IsA>
+        <Summary>Library providing freedesktop.org specs implementations for Qt.</Summary>
+        <Description>Library providing freedesktop.org specs implementations for Qt.</Description>
+        <Archive sha1sum="cd5ad7881099ceba52df893005dc85153980ef45" type="tarxz">https://downloads.lxqt.org/libqtxdg/1.3.0/libqtxdg-1.3.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>cmake</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>libqtxdg</Name>
+        <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency>qt5-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libqtxdg-devel</Name>
+        <Summary>Development headers for libqtxdg</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libqtxdg</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2016-06-26</Date>
+            <Version>1.3.0</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
+
