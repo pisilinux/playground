@@ -1,0 +1,15 @@
+Description: Never default to using the custom title bar. Chromium should
+  integrate, not be a special little snowflake.
+
+Index: dev.xenial/ui/base/x/x11_util.cc
+===================================================================
+--- dev.xenial.orig/ui/base/x/x11_util.cc
++++ dev.xenial/ui/base/x/x11_util.cc
+@@ -979,6 +979,7 @@ bool GetCustomFramePrefDefault() {
+   // Also disable custom frames for (at-least-partially-)EWMH-supporting tiling
+   // window managers.
+   ui::WindowManagerName wm = GuessWindowManager();
++  return false;
+   if (wm == WM_AWESOME ||
+       wm == WM_I3 ||
+       wm == WM_ION3 ||

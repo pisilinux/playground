@@ -1,0 +1,814 @@
+Index: tools/grit/grit/format/gzip_string.py
+diff --git a/tools/grit/grit/format/gzip_string.py b/tools/grit/grit/format/gzip_string.py
+deleted file mode 100644
+index 4f54aac1da04c5803e28d74aa4e211f67048c8a7..0000000000000000000000000000000000000000
+--- a/tools/grit/grit/format/gzip_string.py
++++ /dev/null
+@@ -1,43 +0,0 @@
+-# Copyright (c) 2016 The Chromium Authors. All rights reserved.
+-# Use of this source code is governed by a BSD-style license that can be
+-# found in the LICENSE file.
+-"""Provides gzip utilities for strings.
+-"""
+-import cStringIO
+-import gzip
+-import subprocess
+-
+-
+-def GzipStringRsyncable(data):
+-  # Make call to host system's gzip to get access to --rsyncable option. This
+-  # option makes updates much smaller - if one line is changed in the resource,
+-  # it won't have to push the entire compressed resource with the update.
+-  # Instead, --rsyncable breaks the file into small chunks, so that one doesn't
+-  # affect the other in compression, and then only that chunk will have to be
+-  # updated.
+-  gzip_proc = subprocess.Popen(['gzip', '--stdout', '--rsyncable',
+-                                '--best', '--no-name'],
+-                               stdin=subprocess.PIPE,
+-                               stdout=subprocess.PIPE,
+-                               stderr=subprocess.PIPE)
+-  data, stderr = gzip_proc.communicate(data)
+-  if gzip_proc.returncode != 0:
+-    raise subprocess.CalledProcessError(gzip_proc.returncode, 'gzip',
+-                                        stderr)
+-  return data
+-
+-
+-def GzipString(data):
+-  # Gzipping using Python's built in gzip: Windows doesn't ship with gzip, and
+-  # OSX's gzip does not have an --rsyncable option built in. Although this is
+-  # not preferable to --rsyncable, it is an option for the systems that do
+-  # not have --rsyncable. If used over GzipStringRsyncable, the primary
+-  # difference of this function's compression will be larger updates every time
+-  # a compressed resource is changed.
+-  gzip_output = cStringIO.StringIO()
+-  with gzip.GzipFile(mode='wb', compresslevel=9, fileobj=gzip_output,
+-                     mtime=0) as gzip_file:
+-    gzip_file.write(data)
+-  data = gzip_output.getvalue()
+-  gzip_output.close()
+-  return data
+Index: tools/grit/grit/format/gzip_string_unittest.py
+diff --git a/tools/grit/grit/format/gzip_string_unittest.py b/tools/grit/grit/format/gzip_string_unittest.py
+deleted file mode 100644
+index 8df8b3b3f6a71b4687893030fe9d9b24ad9ab814..0000000000000000000000000000000000000000
+--- a/tools/grit/grit/format/gzip_string_unittest.py
++++ /dev/null
+@@ -1,62 +0,0 @@
+-# Copyright (c) 2016 The Chromium Authors. All rights reserved.
+-# Use of this source code is governed by a BSD-style license that can be
+-# found in the LICENSE file.
+-
+-'''Unit tests for grit.format.gzip_string'''
+-
+-import gzip
+-import io
+-import os
+-import sys
+-if __name__ == '__main__':
+-  sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
+-
+-import unittest
+-
+-from grit.format import gzip_string
+-
+-
+-class FormatGzipStringUnittest(unittest.TestCase):
+-
+-  def testGzipStringRsyncable(self):
+-    # Can only test the rsyncable version on platforms which support rsyncable,
+-    # which at the moment is Linux.
+-    if sys.platform == 'linux2':
+-      header_begin = ('\x1f\x8b')  # gzip first two bytes
+-      input = ('TEST STRING STARTING NOW'
+-               'continuing'
+-               '<even more>'
+-               '<finished NOW>')
+-
+-      compressed = gzip_string.GzipStringRsyncable(input)
+-      self.failUnless(header_begin == compressed[:2])
+-
+-      compressed_file = io.BytesIO()
+-      compressed_file.write(compressed)
+-      compressed_file.seek(0)
+-
+-      with gzip.GzipFile(mode='rb', fileobj=compressed_file) as f:
+-        output = f.read()
+-      self.failUnless(output == input)
+-
+-  def testGzipString(self):
+-    header_begin = '\x1f\x8b'  # gzip first two bytes
+-    input = ('TEST STRING STARTING NOW'
+-             'continuing'
+-             '<even more>'
+-             '<finished NOW>')
+-
+-    compressed = gzip_string.GzipString(input)
+-    self.failUnless(header_begin == compressed[:2])
+-
+-    compressed_file = io.BytesIO()
+-    compressed_file.write(compressed)
+-    compressed_file.seek(0)
+-
+-    with gzip.GzipFile(mode='rb', fileobj=compressed_file) as f:
+-      output = f.read()
+-    self.failUnless(output == input)
+-
+-
+-if __name__ == '__main__':
+-  unittest.main()
+Index: tools/grit/grit/testdata/test_text.txt
+diff --git a/tools/grit/grit/testdata/test_text.txt b/tools/grit/grit/testdata/test_text.txt
+deleted file mode 100644
+index 55d5dd17707036d1e4dbcd0c7806b6bfccbbb9dd..0000000000000000000000000000000000000000
+--- a/tools/grit/grit/testdata/test_text.txt
++++ /dev/null
+@@ -1 +0,0 @@
+-This is a test!
+Index: chrome/browser/browser_resources.grd
+diff --git a/chrome/browser/browser_resources.grd b/chrome/browser/browser_resources.grd
+index 8f9029f27a80e2812d0c5cd1a46411fab661fdfb..d3df92059a09530423c3c960222221bbf16b6d0d 100644
+--- a/chrome/browser/browser_resources.grd
++++ b/chrome/browser/browser_resources.grd
+@@ -109,9 +109,9 @@
+       <if expr="not is_ios">
+         <include name="IDR_DEVTOOLS_DISCOVERY_PAGE_HTML" file="devtools\frontend\devtools_discovery_page.html" type="BINDATA"/>
+       </if>
+-      <include name="IDR_DOMAIN_RELIABILITY_INTERNALS_HTML" file="resources\domain_reliability_internals.html" compress="gzip" type="BINDATA" />
+-      <include name="IDR_DOMAIN_RELIABILITY_INTERNALS_CSS" file="resources\domain_reliability_internals.css" compress="gzip" type="BINDATA" />
+-      <include name="IDR_DOMAIN_RELIABILITY_INTERNALS_JS" file="resources\domain_reliability_internals.js" compress="gzip" type="BINDATA" />
++      <include name="IDR_DOMAIN_RELIABILITY_INTERNALS_HTML" file="resources\domain_reliability_internals.html" type="BINDATA" />
++      <include name="IDR_DOMAIN_RELIABILITY_INTERNALS_CSS" file="resources\domain_reliability_internals.css" type="BINDATA" />
++      <include name="IDR_DOMAIN_RELIABILITY_INTERNALS_JS" file="resources\domain_reliability_internals.js" type="BINDATA" />
+       <include name="IDR_DOWNLOAD_FILE_TYPES_PB" file="${root_gen_dir}\chrome\browser\resources\safe_browsing\download_file_types.pb" use_base_dir="false" type="BINDATA" />
+       <if expr="not is_android">
+         <include name="IDR_MD_DOWNLOADS_1X_INCOGNITO_MARKER_PNG" file="resources\md_downloads\1x\incognito_marker.png" type="BINDATA" />
+@@ -188,16 +188,16 @@
+         <include name="IDR_OFFLINE_INTERNALS_CSS" file="resources\offline_pages\offline_internals.css" type="BINDATA" />
+         <include name="IDR_OFFLINE_INTERNALS_JS" file="resources\offline_pages\offline_internals.js" type="BINDATA" />
+         <include name="IDR_OFFLINE_INTERNALS_BROWSER_PROXY_JS" file="resources\offline_pages\offline_internals_browser_proxy.js" type="BINDATA" />
+-        <include name="IDR_POPULAR_SITES_INTERNALS_HTML" file="resources\popular_sites_internals.html" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-        <include name="IDR_POPULAR_SITES_INTERNALS_CSS" file="resources\popular_sites_internals.css" compress="gzip" type="BINDATA" />
+-        <include name="IDR_POPULAR_SITES_INTERNALS_JS" file="resources\popular_sites_internals.js" compress="gzip" type="BINDATA" />
+-        <include name="IDR_SNIPPETS_INTERNALS_HTML" file="resources\snippets_internals.html" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-        <include name="IDR_SNIPPETS_INTERNALS_CSS" file="resources\snippets_internals.css" compress="gzip" type="BINDATA" />
+-        <include name="IDR_SNIPPETS_INTERNALS_JS" file="resources\snippets_internals.js" compress="gzip" type="BINDATA" />
++        <include name="IDR_POPULAR_SITES_INTERNALS_HTML" file="resources\popular_sites_internals.html" allowexternalscript="true" type="BINDATA" />
++        <include name="IDR_POPULAR_SITES_INTERNALS_CSS" file="resources\popular_sites_internals.css" type="BINDATA" />
++        <include name="IDR_POPULAR_SITES_INTERNALS_JS" file="resources\popular_sites_internals.js" type="BINDATA" />
++        <include name="IDR_SNIPPETS_INTERNALS_HTML" file="resources\snippets_internals.html" allowexternalscript="true" type="BINDATA" />
++        <include name="IDR_SNIPPETS_INTERNALS_CSS" file="resources\snippets_internals.css" type="BINDATA" />
++        <include name="IDR_SNIPPETS_INTERNALS_JS" file="resources\snippets_internals.js" type="BINDATA" />
+       </if>
+-      <include name="IDR_SUPERVISED_USER_INTERNALS_HTML" file="resources\supervised_user_internals.html" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_SUPERVISED_USER_INTERNALS_CSS" file="resources\supervised_user_internals.css" compress="gzip" type="BINDATA" />
+-      <include name="IDR_SUPERVISED_USER_INTERNALS_JS" file="resources\supervised_user_internals.js" compress="gzip" type="BINDATA" />
++      <include name="IDR_SUPERVISED_USER_INTERNALS_HTML" file="resources\supervised_user_internals.html" allowexternalscript="true" type="BINDATA" />
++      <include name="IDR_SUPERVISED_USER_INTERNALS_CSS" file="resources\supervised_user_internals.css" type="BINDATA" />
++      <include name="IDR_SUPERVISED_USER_INTERNALS_JS" file="resources\supervised_user_internals.js" type="BINDATA" />
+       <if expr="_google_chrome or enable_hangout_services_extension">
+         <!-- Hangout Services extension, included in Google Chrome builds only. -->                                                                                                                                                                                            
+         <include name="IDR_HANGOUT_SERVICES_MANIFEST" file="resources\hangout_services\manifest.json" type="BINDATA" />    
+Index: chrome/browser/resources/net_internals_resources.grd
+diff --git a/chrome/browser/resources/net_internals_resources.grd b/chrome/browser/resources/net_internals_resources.grd
+index 6b3aefe83c5229af485c4be85f907976c63c3346..a488a157766d903388381eb3d8e08c4254b4077e 100644
+--- a/chrome/browser/resources/net_internals_resources.grd
++++ b/chrome/browser/resources/net_internals_resources.grd
+@@ -10,8 +10,8 @@
+   </outputs>
+   <release seq="1">
+     <includes>
+-      <include name="IDR_NET_INTERNALS_INDEX_HTML" file="net_internals/index.html" flattenhtml="true" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_NET_INTERNALS_INDEX_JS" file="net_internals/index.js" flattenhtml="true" compress="gzip" type="BINDATA" />
++      <include name="IDR_NET_INTERNALS_INDEX_HTML" file="net_internals/index.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
++      <include name="IDR_NET_INTERNALS_INDEX_JS" file="net_internals/index.js" flattenhtml="true" type="BINDATA" />
+     </includes>
+   </release>
+ </grit>
+Index: chrome/browser/resources/password_manager_internals_resources.grd
+diff --git a/chrome/browser/resources/password_manager_internals_resources.grd b/chrome/browser/resources/password_manager_internals_resources.grd
+index 367acb90fd182db4d79dd79bf224b40b49edad48..26f5e7c08bbd8c15cce58e2627262ae64fbe28e1 100644
+--- a/chrome/browser/resources/password_manager_internals_resources.grd
++++ b/chrome/browser/resources/password_manager_internals_resources.grd
+@@ -8,9 +8,9 @@
+   </outputs>
+   <release seq="1">
+     <includes>
+-      <include name="IDR_PASSWORD_MANAGER_INTERNALS_PASSWORD_MANAGER_INTERNALS_HTML" file="password_manager_internals/password_manager_internals.html" flattenhtml="true" allowexternalscript="false" compress="gzip" type="BINDATA" />
+-      <include name="IDR_PASSWORD_MANAGER_INTERNALS_PASSWORD_MANAGER_INTERNALS_JS" file="password_manager_internals/password_manager_internals.js" flattenhtml="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_PASSWORD_MANAGER_INTERNALS_PASSWORD_MANAGER_INTERNALS_CSS" file="password_manager_internals/password_manager_internals.css" flattenhtml="true" compress="gzip" type="BINDATA" />
++      <include name="IDR_PASSWORD_MANAGER_INTERNALS_PASSWORD_MANAGER_INTERNALS_HTML" file="password_manager_internals/password_manager_internals.html" flattenhtml="true" allowexternalscript="false" type="BINDATA" />
++      <include name="IDR_PASSWORD_MANAGER_INTERNALS_PASSWORD_MANAGER_INTERNALS_JS" file="password_manager_internals/password_manager_internals.js" flattenhtml="true" type="BINDATA" />
++      <include name="IDR_PASSWORD_MANAGER_INTERNALS_PASSWORD_MANAGER_INTERNALS_CSS" file="password_manager_internals/password_manager_internals.css" flattenhtml="true" type="BINDATA" />
+     </includes>
+   </release>
+ </grit>
+Index: chrome/browser/resources/translate_internals_resources.grd
+diff --git a/chrome/browser/resources/translate_internals_resources.grd b/chrome/browser/resources/translate_internals_resources.grd
+index 1ad9abf3d3f561d72ed482aa7eb2ea5ca98858f3..59ba42c50a57e7dd2ff90726cd3c5dd4d2df869f 100644
+--- a/chrome/browser/resources/translate_internals_resources.grd
++++ b/chrome/browser/resources/translate_internals_resources.grd
+@@ -8,8 +8,8 @@
+   </outputs>
+   <release seq="1">
+     <includes>
+-      <include name="IDR_TRANSLATE_INTERNALS_TRANSLATE_INTERNALS_HTML" file="translate_internals/translate_internals.html" flattenhtml="true" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_TRANSLATE_INTERNALS_TRANSLATE_INTERNALS_JS" file="translate_internals/translate_internals.js" compress="gzip" type="BINDATA" />
++      <include name="IDR_TRANSLATE_INTERNALS_TRANSLATE_INTERNALS_HTML" file="translate_internals/translate_internals.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
++      <include name="IDR_TRANSLATE_INTERNALS_TRANSLATE_INTERNALS_JS" file="translate_internals/translate_internals.js" type="BINDATA" />
+     </includes>
+   </release>
+ </grit>
+Index: components/resources/gcm_driver_resources.grdp
+diff --git a/components/resources/gcm_driver_resources.grdp b/components/resources/gcm_driver_resources.grdp
+index a35430ebe7775bd6893261464b00478874f9ec1c..5ab55e32d698017d566e0648ae0a3f995bd00bad 100644
+--- a/components/resources/gcm_driver_resources.grdp
++++ b/components/resources/gcm_driver_resources.grdp
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <grit-part>
+-  <include name="IDR_GCM_DRIVER_GCM_INTERNALS_HTML" file="../gcm_driver/resources/gcm_internals.html" flattenhtml="true" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-  <include name="IDR_GCM_DRIVER_GCM_INTERNALS_CSS" file="../gcm_driver/resources/gcm_internals.css" compress="gzip" type="BINDATA" />
+-  <include name="IDR_GCM_DRIVER_GCM_INTERNALS_JS" file="../gcm_driver/resources/gcm_internals.js" compress="gzip" type="BINDATA" />
++  <include name="IDR_GCM_DRIVER_GCM_INTERNALS_HTML" file="../gcm_driver/resources/gcm_internals.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
++  <include name="IDR_GCM_DRIVER_GCM_INTERNALS_CSS" file="../gcm_driver/resources/gcm_internals.css" type="BINDATA" />
++  <include name="IDR_GCM_DRIVER_GCM_INTERNALS_JS" file="../gcm_driver/resources/gcm_internals.js" type="BINDATA" />
+ </grit-part>
+Index: components/resources/signin_resources.grdp
+diff --git a/components/resources/signin_resources.grdp b/components/resources/signin_resources.grdp
+index 28afaf36fbd21f9e95fbaedc2102cda8d1febed7..37fe757b24a2153b9294bcb9bc4d9988843d1d8b 100644
+--- a/components/resources/signin_resources.grdp
++++ b/components/resources/signin_resources.grdp
+@@ -2,9 +2,8 @@
+ <grit-part>
+   <include name="IDR_SIGNIN_INTERNALS_INDEX_HTML"
+     file="../signin/core/browser/resources/signin_index.html"
+-    flattenhtml="true" allowexternalscript="true" compress="gzip"
+-    type="BINDATA" />
++    flattenhtml="true" allowexternalscript="true" type="BINDATA" />
+   <include name="IDR_SIGNIN_INTERNALS_INDEX_JS"
+     file="../signin/core/browser/resources/signin_internals.js"
+-    compress="gzip" type="BINDATA" />
++    type="BINDATA" />
+ </grit-part>
+Index: content/content_resources.grd
+diff --git a/content/content_resources.grd b/content/content_resources.grd
+index 33908256f4b35fe1a900fe0963205104f89e5ab3..014468c2134e74dbfae23749750bc906cc0f0a11 100644
+--- a/content/content_resources.grd
++++ b/content/content_resources.grd
+@@ -13,20 +13,20 @@
+       <include name="IDR_ACCESSIBILITY_HTML" file="browser/resources/accessibility/accessibility.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
+       <include name="IDR_ACCESSIBILITY_CSS" file="browser/resources/accessibility/accessibility.css" type="BINDATA" />
+       <include name="IDR_ACCESSIBILITY_JS" file="browser/resources/accessibility/accessibility.js" flattenhtml="true" type="BINDATA" />
+-      <include name="IDR_APPCACHE_INTERNALS_HTML" file="browser/resources/appcache/appcache_internals.html" flattenhtml="true" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_APPCACHE_INTERNALS_JS" file="browser/resources/appcache/appcache_internals.js" flattenhtml="false" compress="gzip" type="BINDATA" />
+-      <include name="IDR_APPCACHE_INTERNALS_CSS" file="browser/resources/appcache/appcache_internals.css" flattenhtml="true" compress="gzip" type="BINDATA" />
++      <include name="IDR_APPCACHE_INTERNALS_HTML" file="browser/resources/appcache/appcache_internals.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
++      <include name="IDR_APPCACHE_INTERNALS_JS" file="browser/resources/appcache/appcache_internals.js" flattenhtml="false" type="BINDATA" />
++      <include name="IDR_APPCACHE_INTERNALS_CSS" file="browser/resources/appcache/appcache_internals.css" flattenhtml="true" type="BINDATA" />
+       <include name="IDR_DEVTOOLS_PINCH_CURSOR_ICON" file="browser/resources/devtools/devtools_pinch_cursor.png" type="BINDATA" />
+       <include name="IDR_DEVTOOLS_PINCH_CURSOR_ICON_2X" file="browser/resources/devtools/devtools_pinch_cursor_2x.png" type="BINDATA" />
+       <include name="IDR_DEVTOOLS_TOUCH_CURSOR_ICON" file="browser/resources/devtools/devtools_touch_cursor.png" type="BINDATA" />
+       <include name="IDR_DEVTOOLS_TOUCH_CURSOR_ICON_2X" file="browser/resources/devtools/devtools_touch_cursor_2x.png" type="BINDATA" />
+-      <include name="IDR_GPU_INTERNALS_HTML" file="browser/resources/gpu/gpu_internals.html" flattenhtml="true" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_GPU_INTERNALS_JS" file="browser/resources/gpu/gpu_internals.js" flattenhtml="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_INDEXED_DB_INTERNALS_HTML" file="browser/resources/indexed_db/indexeddb_internals.html" flattenhtml="true" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_INDEXED_DB_INTERNALS_JS" file="browser/resources/indexed_db/indexeddb_internals.js" flattenhtml="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_INDEXED_DB_INTERNALS_CSS" file="browser/resources/indexed_db/indexeddb_internals.css" flattenhtml="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_MEDIA_INTERNALS_HTML" file="browser/resources/media/media_internals.html" flattenhtml="true" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_MEDIA_INTERNALS_JS" file="browser/resources/media/media_internals.js" flattenhtml="true" compress="gzip" type="BINDATA" />
++      <include name="IDR_GPU_INTERNALS_HTML" file="browser/resources/gpu/gpu_internals.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
++      <include name="IDR_GPU_INTERNALS_JS" file="browser/resources/gpu/gpu_internals.js" flattenhtml="true" type="BINDATA" />
++      <include name="IDR_INDEXED_DB_INTERNALS_HTML" file="browser/resources/indexed_db/indexeddb_internals.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
++      <include name="IDR_INDEXED_DB_INTERNALS_JS" file="browser/resources/indexed_db/indexeddb_internals.js" flattenhtml="true" type="BINDATA" />
++      <include name="IDR_INDEXED_DB_INTERNALS_CSS" file="browser/resources/indexed_db/indexeddb_internals.css" flattenhtml="true" type="BINDATA" />
++      <include name="IDR_MEDIA_INTERNALS_HTML" file="browser/resources/media/media_internals.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
++      <include name="IDR_MEDIA_INTERNALS_JS" file="browser/resources/media/media_internals.js" flattenhtml="true" type="BINDATA" />
+       <include name="IDR_MOJO_CATALOG_MANIFEST" file="../services/catalog/manifest.json" type="BINDATA" />
+       <include name="IDR_MOJO_CONTENT_BROWSER_MANIFEST" file="${root_out_dir}/content_browser_manifest.json" use_base_dir="false" type="BINDATA" />
+       <include name="IDR_MOJO_CONTENT_RENDERER_MANIFEST" file="${root_out_dir}/content_renderer_manifest.json" use_base_dir="false" type="BINDATA" />
+@@ -34,11 +34,11 @@
+       <include name="IDR_NETWORK_ERROR_LISTING_HTML" file="browser/resources/net/network_errors_listing.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
+       <include name="IDR_NETWORK_ERROR_LISTING_JS" file="browser/resources/net/network_errors_listing.js" flattenhtml="true" type="BINDATA" />
+       <include name="IDR_NETWORK_ERROR_LISTING_CSS" file="browser/resources/net/network_errors_listing.css" flattenhtml="true" type="BINDATA" />
+-      <include name="IDR_SERVICE_WORKER_INTERNALS_HTML" file="browser/resources/service_worker/serviceworker_internals.html" flattenhtml="true" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_SERVICE_WORKER_INTERNALS_JS" file="browser/resources/service_worker/serviceworker_internals.js" flattenhtml="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_SERVICE_WORKER_INTERNALS_CSS" file="browser/resources/service_worker/serviceworker_internals.css" flattenhtml="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_WEBRTC_INTERNALS_HTML" file="browser/resources/media/webrtc_internals.html" flattenhtml="true" allowexternalscript="true" compress="gzip" type="BINDATA" />
+-      <include name="IDR_WEBRTC_INTERNALS_JS" file="browser/resources/media/webrtc_internals.js" flattenhtml="true" compress="gzip" type="BINDATA" />
++      <include name="IDR_SERVICE_WORKER_INTERNALS_HTML" file="browser/resources/service_worker/serviceworker_internals.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
++      <include name="IDR_SERVICE_WORKER_INTERNALS_JS" file="browser/resources/service_worker/serviceworker_internals.js" flattenhtml="true" type="BINDATA" />
++      <include name="IDR_SERVICE_WORKER_INTERNALS_CSS" file="browser/resources/service_worker/serviceworker_internals.css" flattenhtml="true" type="BINDATA" />
++      <include name="IDR_WEBRTC_INTERNALS_HTML" file="browser/resources/media/webrtc_internals.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
++      <include name="IDR_WEBRTC_INTERNALS_JS" file="browser/resources/media/webrtc_internals.js" flattenhtml="true" type="BINDATA" />
+       <if expr="is_macosx">
+         <include name="IDR_GPU_SANDBOX_PROFILE" file="browser/gpu.sb" type="BINDATA" />
+         <include name="IDR_COMMON_SANDBOX_PROFILE" file="common/common.sb" type="BINDATA" />
+Index: content/public/test/browser_test_utils.cc
+diff --git a/content/public/test/browser_test_utils.cc b/content/public/test/browser_test_utils.cc
+index b51ae710bbf255dcaad0ebbffbbcf117a7112065..acec230a10ba65ea5dd1b8a53858527b07523fb0 100644
+--- a/content/public/test/browser_test_utils.cc
++++ b/content/public/test/browser_test_utils.cc
+@@ -792,9 +792,8 @@ bool ExecuteWebUIResourceTest(WebContents* web_contents,
+   for (std::vector<int>::iterator iter = ids.begin();
+        iter != ids.end();
+        ++iter) {
+-    scoped_refptr<base::RefCountedMemory> resource =
+-        ResourceBundle::GetSharedInstance().LoadDataResourceBytes(*iter);
+-    script.append(resource->front_as<char>(), resource->size());
++    ResourceBundle::GetSharedInstance().GetRawDataResource(*iter)
++        .AppendToString(&script);
+     script.append("\n");
+   }
+   if (!ExecuteScript(web_contents, script))
+Index: tools/grit/grit/exception.py
+diff --git a/tools/grit/grit/exception.py b/tools/grit/grit/exception.py
+index 905046a81db083a29eeb67fbd1dca64b89944d09..a9584a0e05036bd8674d6c1758e071348b535e3f 100755
+--- a/tools/grit/grit/exception.py
++++ b/tools/grit/grit/exception.py
+@@ -48,6 +48,7 @@ class UnexpectedContent(Parsing):
+   '''This element should not have content'''
+   pass
+ 
++
+ class MissingMandatoryAttribute(Parsing):
+   '''This element is missing a mandatory attribute'''
+   pass
+@@ -135,7 +136,3 @@ class IdRangeOverlap(Base):
+   '''ID range overlap.'''
+   pass
+ 
+-
+-class ReservedHeaderCollision(Base):
+-  '''Resource included with first 3 bytes matching reserved header.'''
+-  pass
+Index: tools/grit/grit/format/data_pack_unittest.py
+diff --git a/tools/grit/grit/format/data_pack_unittest.py b/tools/grit/grit/format/data_pack_unittest.py
+index d677531e78abea18659539adc3317cf82f7638b9..f6e9edcfcb6c99799e76d8c4230c3fddb66793aa 100755
+--- a/tools/grit/grit/format/data_pack_unittest.py
++++ b/tools/grit/grit/format/data_pack_unittest.py
+@@ -13,7 +13,6 @@ if __name__ == '__main__':
+ 
+ import unittest
+ 
+-from grit import exception
+ from grit.format import data_pack
+ 
+ 
+@@ -33,39 +32,6 @@ class FormatDataPackUnittest(unittest.TestCase):
+     output = data_pack.WriteDataPackToString(input, data_pack.UTF8)
+     self.failUnless(output == expected)
+ 
+-  def testIncludeWithReservedHeader(self):
+-    from grit import util
+-    from grit.node import misc, include, empty
+-    root = misc.GritNode()
+-    root.StartParsing(u'grit', None)
+-    root.HandleAttribute(u'latest_public_release', u'0')
+-    root.HandleAttribute(u'current_release', u'1')
+-    root.HandleAttribute(u'base_dir', ur'..\resource')
+-    release = misc.ReleaseNode()
+-    release.StartParsing(u'release', root)
+-    release.HandleAttribute(u'seq', u'1')
+-    root.AddChild(release)
+-    includes = empty.IncludesNode()
+-    includes.StartParsing(u'includes', release)
+-    release.AddChild(includes)
+-    include_node = include.IncludeNode()
+-    include_node.StartParsing(u'include', includes)
+-    include_node.HandleAttribute(u'name', u'test')
+-    include_node.HandleAttribute(u'type', u'BINDATA')
+-    include_node.HandleAttribute(u'file', u'doesntmatter')
+-    includes.AddChild(include_node)
+-    include_node.EndParsing()
+-    root.EndParsing()
+-
+-    ReadFile_copy = util.ReadFile
+-    try:
+-      util.ReadFile = lambda a, b: include.IncludeNode.RESERVED_HEADER
+-      with self.assertRaises(exception.ReservedHeaderCollision):
+-        data_pack.Format(root)
+-
+-    finally:
+-      util.ReadFile = ReadFile_copy
+-
+   def testRePackUnittest(self):
+     expected_with_whitelist = {
+         1: 'Never gonna', 10: 'give you up', 20: 'Never gonna let',
+Index: tools/grit/grit/node/include.py
+diff --git a/tools/grit/grit/node/include.py b/tools/grit/grit/node/include.py
+index 39e226e7ff97d084094b571dcb50ab60a4259252..4780d5e8425b475a5956028bbcfd832b3dd29c05 100755
+--- a/tools/grit/grit/node/include.py
++++ b/tools/grit/grit/node/include.py
+@@ -7,21 +7,17 @@
+ """
+ 
+ import os
+-import sys
+ 
+-from grit import exception
+-from grit import util
+-import grit.format.gzip_string
+ import grit.format.html_inline
+-import grit.format.rc
+ import grit.format.rc_header
++import grit.format.rc
++
+ from grit.node import base
++from grit import util
+ 
+ class IncludeNode(base.Node):
+   """An <include> element."""
+ 
+-  RESERVED_HEADER = '\xff\x1f\x8b'
+-
+   def __init__(self):
+     super(IncludeNode, self).__init__()
+ 
+@@ -43,6 +39,7 @@
+               preprocess_only=False,
+               allow_external_script=allow_external_script))
+     return self._flattened_data
++  
+   def MandatoryAttributes(self):
+     return ['name', 'type', 'file']
+ 
+@@ -52,7 +49,6 @@
+             'filenameonly': 'false',
+             'mkoutput': 'false',
+             'flattenhtml': 'false',
+-            'compress': 'false',
+             'allowexternalscript': 'false',
+             'relativepath': 'false',
+             'use_base_dir': 'true',
+@@ -96,25 +92,6 @@
+       filename = self.ToRealPath(self.GetInputPath())
+       data = util.ReadFile(filename, util.BINARY)
+ 
+-    if 'compress' in self.attrs and self.attrs['compress'] == 'gzip':
+-      # We only use rsyncable compression on Linux.
+-      # We exclude ChromeOS since ChromeOS bots are Linux based but do not have
+-      # the --rsyncable option built in for gzip. See crbug.com/617950.
+-      if sys.platform == 'linux2' and 'chromeos' not in self.GetRoot().defines:
+-        data = grit.format.gzip_string.GzipStringRsyncable(data)
+-      else:
+-        data = grit.format.gzip_string.GzipString(data)
+-      data = self.RESERVED_HEADER[0] + data
+-    elif data[:3] == self.RESERVED_HEADER:
+-      # We are reserving these 3 bytes as the header for gzipped files in the
+-      # data pack. 1f:8b is the first two bytes of a gzipped header, and ff is
+-      # a custom byte we throw in front of the gzip header so that we prevent
+-      # accidentally throwing this error on a resource we gzipped beforehand and
+-      # don't wish to compress again. If this exception is hit, change the first
+-      # byte of RESERVED_HEADER, and then mirror that update in
+-      # ui/base/resource/resource_bundle.h
+-      raise exception.ReservedHeaderCollision()
+-
+     # Include does not care about the encoding, because it only returns binary
+     # data.
+     return id, data
+Index: tools/grit/grit/node/include_unittest.py
+diff --git a/tools/grit/grit/node/include_unittest.py b/tools/grit/grit/node/include_unittest.py
+index 2b29e11815179880aed331ba4a221af5b6d78aab..e5544281fd0ad76dc9a988e1bd4281ee33d5349c 100755
+--- a/tools/grit/grit/node/include_unittest.py
++++ b/tools/grit/grit/node/include_unittest.py
+@@ -11,8 +11,8 @@ if __name__ == '__main__':
+   sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
+ 
+ import os
++import StringIO
+ import unittest
+-import zlib
+ 
+ from grit.node import misc
+ from grit.node import include
+@@ -69,21 +69,6 @@ class IncludeNodeUnittest(unittest.TestCase):
+                      util.normpath(
+                        os.path.join(ur'../', ur'flugel/kugel.pdf')))
+ 
+-  def testCompressGzip(self):
+-    root = util.ParseGrdForUnittest('''
+-        <includes>
+-          <include name="TEST_TXT" file="test_text.txt"
+-                   compress="gzip" type="BINDATA"/>
+-        </includes>''', base_dir = util.PathFromRoot('grit/testdata'))
+-    inc, = root.GetChildrenOfType(include.IncludeNode)
+-    throwaway, compressed = inc.GetDataPackPair(lang='en', encoding=1)
+-
+-    # compressed[1:] ensures we skip the special inserted first byte.
+-    decompressed_data = zlib.decompress(compressed[1:], 16 + zlib.MAX_WBITS)
+-    self.assertEqual(util.ReadFile(util.PathFromRoot('grit/testdata')
+-                                   + "/test_text.txt", util.BINARY),
+-                     decompressed_data)
+-
+ 
+ if __name__ == '__main__':
+   unittest.main()
+Index: tools/grit/grit/test_suite_all.py
+diff --git a/tools/grit/grit/test_suite_all.py b/tools/grit/grit/test_suite_all.py
+index c8f483f775dee26b5ee7ed0ad3f653d87bf5a047..56f90b08ad4a660501b978e2bb16ba22c4ddb832 100755
+--- a/tools/grit/grit/test_suite_all.py
++++ b/tools/grit/grit/test_suite_all.py
+@@ -35,7 +35,6 @@ class TestSuiteAll(unittest.TestSuite):
+     import grit.format.c_format_unittest
+     import grit.format.chrome_messages_json_unittest
+     import grit.format.data_pack_unittest
+-    import grit.format.gzip_string_unittest
+     import grit.format.html_inline_unittest
+     import grit.format.js_map_format_unittest
+     import grit.format.rc_header_unittest
+@@ -96,7 +95,6 @@ class TestSuiteAll(unittest.TestSuite):
+         grit.format.html_inline_unittest.HtmlInlineUnittest,
+         grit.format.js_map_format_unittest.JsMapFormatUnittest,
+         grit.format.rc_header_unittest.RcHeaderFormatterUnittest,
+-        grit.format.gzip_string_unittest.FormatGzipStringUnittest,
+         grit.format.rc_unittest.FormatRcUnittest,
+         grit.format.resource_map_unittest.FormatResourceMapUnittest,
+         grit.format.policy_templates.policy_template_generator_unittest.
+Index: ui/base/BUILD.gn
+diff --git a/ui/base/BUILD.gn b/ui/base/BUILD.gn
+index dae2d7ac70597dff0f089a8e5f7c27daf57a09c6..6256fac621ca03969aa7fc3ee8197ec772204e49 100644
+--- a/ui/base/BUILD.gn
++++ b/ui/base/BUILD.gn
+@@ -371,7 +371,6 @@ component("base") {
+     "//base/third_party/dynamic_annotations",
+     "//net",
+     "//third_party/icu",
+-    "//third_party/zlib:zlib",
+     "//ui/base:ui_data_pack",
+     "//ui/display",
+     "//ui/events",
+Index: ui/base/DEPS
+diff --git a/ui/base/DEPS b/ui/base/DEPS
+index acac72efa5490e3b58af7af7749bf8bbe0cf6c58..1a5dca373722b3c152490a4e00f37beb3baaf409 100644
+--- a/ui/base/DEPS
++++ b/ui/base/DEPS
+@@ -3,7 +3,6 @@ include_rules = [
+   "+net",
+   "+skia/ext",
+   "+third_party/skia",
+-  "+third_party/zlib/zlib.h",
+   "+ui/display",
+   "+ui/events",
+   "+ui/gfx",
+Index: ui/base/resource/resource_bundle.cc
+diff --git a/ui/base/resource/resource_bundle.cc b/ui/base/resource/resource_bundle.cc
+index 9ce3a27385b122a8a02debe8b6ae4f1da619464b..dd53c481c905e9607a3939430c57993152bc5f82 100644
+--- a/ui/base/resource/resource_bundle.cc
++++ b/ui/base/resource/resource_bundle.cc
+@@ -23,12 +23,10 @@
+ #include "base/strings/string_piece.h"
+ #include "base/strings/utf_string_conversions.h"
+ #include "base/synchronization/lock.h"
+-#include "base/sys_byteorder.h"
+ #include "build/build_config.h"
+ #include "skia/ext/image_operations.h"
+ #include "third_party/skia/include/core/SkBitmap.h"
+ #include "third_party/skia/include/core/SkColor.h"
+-#include "third_party/zlib/zlib.h"
+ #include "ui/base/l10n/l10n_util.h"
+ #include "ui/base/layout.h"
+ #include "ui/base/material_design/material_design_controller.h"
+@@ -114,39 +112,6 @@ SkBitmap CreateEmptyBitmap() {
+   return bitmap;
+ }
+ 
+-// Decodes given gzip input via zlib.
+-base::RefCountedBytes* DecodeGzipData(const unsigned char* input_buffer,
+-                                      size_t input_size) {
+-  z_stream inflateStream;
+-  memset(&inflateStream, 0, sizeof(inflateStream));
+-  inflateStream.zalloc = Z_NULL;
+-  inflateStream.zfree = Z_NULL;
+-  inflateStream.opaque = Z_NULL;
+-
+-  inflateStream.avail_in = input_size;
+-  inflateStream.next_in = const_cast<Bytef*>(input_buffer);
+-
+-  CHECK(input_size >= 4);
+-  // Size of output comes from footer of gzip file format, found as the last 4
+-  // bytes in the compressed file, which are stored little endian.
+-  inflateStream.avail_out = base::ByteSwapToLE32(
+-      *reinterpret_cast<const uint32_t*>(&input_buffer[input_size - 4]));
+-
+-  std::vector<unsigned char> output(inflateStream.avail_out);
+-  inflateStream.next_out = reinterpret_cast<Bytef*>(&output[0]);
+-
+-  CHECK(inflateInit2(&inflateStream, 16) == Z_OK);
+-  CHECK(inflate(&inflateStream, Z_FINISH) == Z_STREAM_END);
+-  CHECK(inflateEnd(&inflateStream) == Z_OK);
+-
+-  // Cannot use TakeVector since it puts the RefCounted* into a scoped_refptr,
+-  // and callers of this function return a raw pointer (not a scoped_refptr), so
+-  // the memory will be deallocated upon exit of the calling function.
+-  base::RefCountedBytes* returnVal = new base::RefCountedBytes();
+-  returnVal->data().swap(output);
+-  return returnVal;
+-}
+-
+ }  // namespace
+ 
+ // An ImageSkiaSource that loads bitmaps for the requested scale factor from
+@@ -512,16 +477,9 @@ base::RefCountedMemory* ResourceBundle::LoadDataResourceBytesForScale(
+ 
+   if (!bytes) {
+     base::StringPiece data =
+-        GetRawDataResourceForScaleImpl(resource_id, scale_factor);
++        GetRawDataResourceForScale(resource_id, scale_factor);
+     if (!data.empty()) {
+-      if (data.starts_with(CUSTOM_GZIP_HEADER)) {
+-        // Jump past special identification byte prepended to header
+-        const unsigned char* gzip_start =
+-            reinterpret_cast<const unsigned char*>(data.data()) + 1;
+-        bytes = DecodeGzipData(gzip_start, data.length() - 1);
+-      } else {
+-        bytes = new base::RefCountedStaticMemory(data.data(), data.length());
+-      }
++      bytes = new base::RefCountedStaticMemory(data.data(), data.length());
+     }
+   }
+ 
+@@ -535,13 +493,31 @@ base::StringPiece ResourceBundle::GetRawDataResource(int resource_id) const {
+ base::StringPiece ResourceBundle::GetRawDataResourceForScale(
+     int resource_id,
+     ScaleFactor scale_factor) const {
+-  base::StringPiece data =
+-      GetRawDataResourceForScaleImpl(resource_id, scale_factor);
++  base::StringPiece data;
++  if (delegate_ &&
++      delegate_->GetRawDataResource(resource_id, scale_factor, &data))
++    return data;
++
++  if (scale_factor != ui::SCALE_FACTOR_100P) {
++    for (size_t i = 0; i < data_packs_.size(); i++) {
++      if (data_packs_[i]->GetScaleFactor() == scale_factor &&
++          data_packs_[i]->GetStringPiece(static_cast<uint16_t>(resource_id),
++                                         &data))
++        return data;
++    }
++  }
+ 
+-  // Do not allow this function to retrieve gzip compressed resources.
+-  CHECK(!data.starts_with(CUSTOM_GZIP_HEADER));
++  for (size_t i = 0; i < data_packs_.size(); i++) {
++    if ((data_packs_[i]->GetScaleFactor() == ui::SCALE_FACTOR_100P ||
++         data_packs_[i]->GetScaleFactor() == ui::SCALE_FACTOR_200P ||
++         data_packs_[i]->GetScaleFactor() == ui::SCALE_FACTOR_300P ||
++         data_packs_[i]->GetScaleFactor() == ui::SCALE_FACTOR_NONE) &&
++        data_packs_[i]->GetStringPiece(static_cast<uint16_t>(resource_id),
++                                       &data))
++      return data;
++  }
+ 
+-  return data;
++  return base::StringPiece();
+ }
+ 
+ base::string16 ResourceBundle::GetLocalizedString(int message_id) {
+@@ -901,36 +877,6 @@ bool ResourceBundle::LoadBitmap(int resource_id,
+   return false;
+ }
+ 
+-base::StringPiece ResourceBundle::GetRawDataResourceForScaleImpl(
+-    int resource_id,
+-    ScaleFactor scale_factor) const {
+-  base::StringPiece data;
+-  if (delegate_ &&
+-      delegate_->GetRawDataResource(resource_id, scale_factor, &data))
+-    return data;
+-
+-  if (scale_factor != ui::SCALE_FACTOR_100P) {
+-    for (size_t i = 0; i < data_packs_.size(); i++) {
+-      if (data_packs_[i]->GetScaleFactor() == scale_factor &&
+-          data_packs_[i]->GetStringPiece(static_cast<uint16_t>(resource_id),
+-                                         &data))
+-        return data;
+-    }
+-  }
+-
+-  for (size_t i = 0; i < data_packs_.size(); i++) {
+-    if ((data_packs_[i]->GetScaleFactor() == ui::SCALE_FACTOR_100P ||
+-         data_packs_[i]->GetScaleFactor() == ui::SCALE_FACTOR_200P ||
+-         data_packs_[i]->GetScaleFactor() == ui::SCALE_FACTOR_300P ||
+-         data_packs_[i]->GetScaleFactor() == ui::SCALE_FACTOR_NONE) &&
+-        data_packs_[i]->GetStringPiece(static_cast<uint16_t>(resource_id),
+-                                       &data))
+-      return data;
+-  }
+-
+-  return base::StringPiece();
+-}
+-
+ gfx::Image& ResourceBundle::GetEmptyImage() {
+   base::AutoLock lock(*images_and_fonts_lock_);
+ 
+Index: ui/base/resource/resource_bundle.h
+diff --git a/ui/base/resource/resource_bundle.h b/ui/base/resource/resource_bundle.h
+index 8dcb137a1da0c92b37eaeb7dcb20c3a690ff16a8..c81bcf5bf31e8e2c13e3ce74941866453a3bc888 100644
+--- a/ui/base/resource/resource_bundle.h
++++ b/ui/base/resource/resource_bundle.h
+@@ -50,8 +50,6 @@ class UI_BASE_EXPORT ResourceBundle {
+   static const int kMediumFontDelta = 3;
+   static const int kLargeFontDelta = 8;
+ 
+-  static constexpr const char* CUSTOM_GZIP_HEADER = "\xff\x1f\x8b";
+-
+   // Legacy font style mappings. TODO(tapted): Phase these out in favour of
+   // client code providing their own constant with the desired font size delta.
+   enum FontStyle {
+@@ -230,7 +228,7 @@ class UI_BASE_EXPORT ResourceBundle {
+       ScaleFactor scale_factor) const;
+ 
+   // Return the contents of a scale independent resource in a
+-  // StringPiece given the resource id.
++  // StringPiece given the resource id
+   base::StringPiece GetRawDataResource(int resource_id) const;
+ 
+   // Return the contents of a resource in a StringPiece given the resource id
+@@ -388,15 +386,6 @@ class UI_BASE_EXPORT ResourceBundle {
+                   SkBitmap* bitmap,
+                   bool* fell_back_to_1x) const;
+ 
+-  // Loads the raw bytes of a data resource nearest the scale factor
+-  // |scale_factor| into |bytes|, without doing any processing or
+-  // interpretation of the resource. Use ResourceHandle::SCALE_FACTOR_NONE
+-  // for scale independent image resources (such as wallpaper).
+-  // Returns NULL if we fail to read the resource.
+-  base::StringPiece GetRawDataResourceForScaleImpl(
+-      int resource_id,
+-      ScaleFactor scale_factor) const;
+-
+   // Returns true if missing scaled resources should be visually indicated when
+   // drawing the fallback (e.g., by tinting the image).
+   static bool ShouldHighlightMissingScaledResources();
+Index: ui/base/resource/resource_bundle_unittest.cc
+diff --git a/ui/base/resource/resource_bundle_unittest.cc b/ui/base/resource/resource_bundle_unittest.cc
+index f053f57d522d0e6e11ff7f95cb370dc27bc491b9..1dcee7a17d9f82ac4b3cb5dad2d6df046f24c37e 100644
+--- a/ui/base/resource/resource_bundle_unittest.cc
++++ b/ui/base/resource/resource_bundle_unittest.cc
+@@ -6,7 +6,6 @@
+ 
+ #include <stddef.h>
+ #include <stdint.h>
+-#include <string.h>
+ 
+ #include "base/base_paths.h"
+ #include "base/big_endian.h"
+@@ -271,44 +270,6 @@ TEST_F(ResourceBundleTest, DelegateLoadDataResourceBytes) {
+   EXPECT_EQ(static_memory, result);
+ }
+ 
+-TEST_F(ResourceBundleTest, LoadDataResourceBytesGzip) {
+-  base::ScopedTempDir dir;
+-  ASSERT_TRUE(dir.CreateUniqueTempDir());
+-  base::FilePath data_path = dir.path().Append(FILE_PATH_LITERAL("sample.pak"));
+-
+-  char kCompressedEntryPakContents[] = {
+-      0x04u, 0x00u, 0x00u, 0x00u,                // header(version
+-      0x01u, 0x00u, 0x00u, 0x00u,                //        no. entries
+-      0x01u,                                     //        encoding)
+-      0x04u, 0x00u, 0x15u, 0x00u, 0x00u, 0x00u,  // index entry 4
+-      0x00u, 0x00u, 0x3bu, 0x00u, 0x00u,
+-      0x00u,  // extra entry for the size of last
+-      // Entry 4 is a compressed gzip file (with custom leading byte) saying:
+-      // "This is compressed\n"
+-      ResourceBundle::CUSTOM_GZIP_HEADER[0], 0x1fu, 0x8bu, 0x08u, 0x00u, 0x00u,
+-      0x00u, 0x00u, 0x00u, 0x00u, 0x03u, 0x0bu, 0xc9u, 0xc8u, 0x2cu, 0x56u,
+-      0x00u, 0xa2u, 0xe4u, 0xfcu, 0xdcu, 0x82u, 0xa2u, 0xd4u, 0xe2u, 0xe2u,
+-      0xd4u, 0x14u, 0x2eu, 0x00u, 0xd9u, 0xf8u, 0xc4u, 0x6fu, 0x13u, 0x00u,
+-      0x00u, 0x00u};
+-
+-  size_t compressed_entry_pak_size = sizeof(kCompressedEntryPakContents);
+-
+-  // Dump contents into the pak file.
+-  ASSERT_EQ(base::WriteFile(data_path, kCompressedEntryPakContents,
+-      compressed_entry_pak_size), static_cast<int>(compressed_entry_pak_size));
+-
+-  ResourceBundle* resource_bundle = CreateResourceBundle(nullptr);
+-  resource_bundle->AddDataPackFromPath(data_path, SCALE_FACTOR_NONE);
+-
+-  // Load the compressed resource.
+-  scoped_refptr<base::RefCountedMemory> result =
+-      resource_bundle->LoadDataResourceBytes(4);
+-  EXPECT_EQ(
+-      strncmp("This is compressed\n",
+-              reinterpret_cast<const char*>(result->front()), result->size()),
+-      0);
+-}
+-
+ TEST_F(ResourceBundleTest, DelegateGetRawDataResource) {
+   MockResourceBundleDelegate delegate;
+   ResourceBundle* resource_bundle = CreateResourceBundle(&delegate);
+Index: ui/base/ui_base.gyp
+diff --git a/ui/base/ui_base.gyp b/ui/base/ui_base.gyp
+index 9522452af35d50879b7fba0ebe23870ac9f423fa..23e62d7b029bfa5770da9238c189eb9888556f60 100644
+--- a/ui/base/ui_base.gyp
++++ b/ui/base/ui_base.gyp
+@@ -66,7 +66,6 @@
+         '../../skia/skia.gyp:skia',
+         '../../third_party/icu/icu.gyp:icui18n',
+         '../../third_party/icu/icu.gyp:icuuc',
+-        '../../third_party/zlib/zlib.gyp:zlib',
+         '../../url/url.gyp:url_lib',
+         '../display/display.gyp:display',
+         '../events/events.gyp:events',

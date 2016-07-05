@@ -14,7 +14,7 @@
         <IsA>app:gui</IsA>
         <Summary>A WebKit powered web browser</Summary>
         <Description>Chromium-browser is an open-source web browser, powered by WebKit.</Description>
-        <Archive sha1sum="df930aa1f85eee9511863cf5db7f66813a9170e5" type="tarxz">http://gsdview.appspot.com/chromium-browser-official/chromium-51.0.2693.2-nacl.tar.xz</Archive>
+        <Archive sha1sum="40d6d13a3de3615ee26f922cc76b6cd1dd4e3918" type="tarxz">http://gsdview.appspot.com/chromium-browser-official/chromium-53.0.2783.5-nacl.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>alsa-lib-devel</Dependency>
             <Dependency>at-spi2-atk-devel</Dependency>
@@ -35,7 +35,7 @@
             <Dependency>speech-dispatcher-devel</Dependency>
             <Dependency>gdk-pixbuf-devel</Dependency>
             <Dependency>gsm-devel</Dependency>
-            <Dependency>gtk2-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
             <Dependency>harfbuzz-devel</Dependency>
             <Dependency>hunspell-devel</Dependency>
             <Dependency>icu4c-devel</Dependency>
@@ -87,7 +87,7 @@
             <Patch>gentoo/chromium-libsecret-r0.patch</Patch>
             <Patch>gentoo/chromium-system-jinja-r7.patch</Patch>
             
-	    <Patch>opensuse/chromium-gcc-fixes.patch</Patch>
+<!-- 	    <Patch>opensuse/chromium-gcc-fixes.patch</Patch> -->
             <Patch>opensuse/chromium-master-prefs-path.patch</Patch>
             <Patch>opensuse/chromium-more-codec-aliases.patch</Patch>
             <Patch>opensuse/no-clang-on-packman.diff</Patch>
@@ -102,7 +102,10 @@
             <Patch>pld-linux/angle.patch</Patch>
             <Patch>pld-linux/system-mesa.patch</Patch>
 	    
-	    <Patch>isnan_fail.patch</Patch>
+	    <Patch>ubuntu/enable_vaapi_on_linux.diff</Patch>   
+	    <Patch>ubuntu/notifications-nicer.patch</Patch>
+	    
+	    <Patch>revert-gzip-compress.patch</Patch>
             <!--<Patch>pld-linux/ffmpeg-generate-errors.patch</Patch>
             <Patch>fedora/webui-error.patch</Patch>-->
         </Patches>
@@ -119,7 +122,7 @@
             <Dependency>flac</Dependency>
             <Dependency>fontconfig</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
-            <Dependency>gtk2</Dependency>
+            <Dependency>gtk3</Dependency>
             <Dependency>libevent</Dependency>
             <Dependency>libjpeg-turbo</Dependency>
             <Dependency>libopus</Dependency>
@@ -172,6 +175,13 @@
     </Package>
 
     <History>
+      <Update release="3">
+            <Date>2016-06-04</Date>
+            <Version>53.0.2783.5</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
       <Update release="2">
             <Date>2016-04-01</Date>
             <Version>51.0.2693.2</Version>
