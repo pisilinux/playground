@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>A toolkit for displaying OpenGL applications to thin clients</Summary>
         <Description>Redirects 3D commands from an OpenGL application onto a server-side 3D graphics card.</Description>
-        <Archive sha1sum="494ced91402e7cd4b3f561c202f8b4298d777785" type="targz">https://sourceforge.net/projects/virtualgl/files/2.5/VirtualGL-2.5.tar.gz</Archive>
+        <Archive sha1sum="4be0689a667c9b9fe59575d81a003324e9dfc20a" type="targz">https://sourceforge.net/projects/virtualgl/files/2.4.1/VirtualGL-2.4.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>fltk-devel</Dependency>
             <Dependency>libXv-devel</Dependency>
@@ -84,6 +84,13 @@
     </Package>
 
     <History>
+      <Update release="7">
+            <Date>2016-07-09</Date>
+            <Version>2.4.1</Version>
+            <Comment>Version downgrade</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
       <Update release="6">
             <Date>2015-06-21</Date>
             <Version>2.5</Version>
