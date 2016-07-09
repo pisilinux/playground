@@ -67,6 +67,9 @@ def install():
 	pisitools.insinto("/lib/modules/%s/extra/nvidia" % KDIR,
                           "kernel/nvidia-modeset.ko")
 	
+	pisitools.insinto("/lib/modules/%s/extra/nvidia" % KDIR,
+                          "kernel/nvidia-drm.ko")
+	
 	# Command line tools and their man pages
         pisitools.dobin("nvidia-smi")
         pisitools.doman("nvidia-smi.1.gz")
