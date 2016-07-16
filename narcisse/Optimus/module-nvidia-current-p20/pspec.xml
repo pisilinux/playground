@@ -11,10 +11,10 @@
         <License>NVIDIA</License>
         <Summary>NVIDIA drivers for GeForce 6xxx and newer GPUs</Summary>
         <Description>NVIDIA graphics drivers provide optimized 2D/3D performance.</Description>
-        <Archive sha1sum="26fbf11adad7d3f87df6705ec8cf223d5ab6ba2a" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86/367.27/NVIDIA-Linux-x86-367.27.run</Archive>
-        <Archive sha1sum="845160564bc6b5587bb86cf5244a35969c1ef923" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86_64/367.27/NVIDIA-Linux-x86_64-367.27.run</Archive>
+        <Archive sha1sum="8cfa97e0e914832ab46f09c3e41d3fb3024502e1" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86/367.35/NVIDIA-Linux-x86-367.35.run</Archive>
+        <Archive sha1sum="d4be68d56456f39bb17787af6c334cc241df60d0" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86_64/367.35/NVIDIA-Linux-x86_64-367.35.run</Archive>
         <BuildDependencies>
-            <Dependency version="4.4.8">kernel-module-headers</Dependency>
+            <Dependency version="4.6.3">kernel-module-headers</Dependency>
             <Dependency>libX11-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -24,7 +24,7 @@
         <IsA>driver</IsA>
         <Summary>Kernel module for current NVIDIA graphics driver releases</Summary>
         <RuntimeDependencies>
-            <Dependency version="4.4.8">kernel</Dependency>
+            <Dependency version="4.6.3">kernel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -89,9 +89,9 @@
     </Package>
 
     <History>
-		 <Update release="2">
-            <Date>2016-07-09</Date>
-            <Version>367.27</Version>
+		 <Update release="3">
+            <Date>2016-07-17</Date>
+            <Version>367.35</Version>
             <Comment>Version bump</Comment>
             <Name>Idris Kalp</Name>
             <Email>idriskalp@gmail.com</Email>
