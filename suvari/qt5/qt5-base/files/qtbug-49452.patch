@@ -1,0 +1,58 @@
+From 6f423555eba55ccdf7287071e10576bc1b687fd2 Mon Sep 17 00:00:00 2001
+From: Eskil Abrahamsen Blomfeldt <eskil.abrahamsen-blomfeldt@qt.io>
+Date: Mon, 1 Aug 2016 13:39:53 +0200
+Subject: [PATCH] REG: Fix unwanted cache flush in Freetype engine
+
+The Freetype cache was almost completely disabled by
+134c6db8587a8ce156d4fa31ffa62605821851b2 because after that
+change, the lockedAlphaMapForGlyph() function would no longer
+cut off early for empty glyphs like spaces, but rather go
+through all alpha map functions before it realized that there
+was nothing to render. This would in turn invalidate the cache
+for every empty glyph, causing all glyphs to be rerendered for
+every isolated word.
+
+This change adds back a cut off. This is only needed in the
+lockedAlphaMapForGlyph() function, since the superclass implementation
+of the other alpha map functions already contains a cut off for
+width/height == 0.
+
+[ChangeLog][Qt Gui][Text] Fixed a performance regression in Freetype
+engine that was introduced in Qt 5.5.
+
+Change-Id: I381285939909e99cc5fb5f3497fecf9fa871f29a
+Task-number: QTBUG-49452
+Reviewed-by: Simon Hausmann <simon.hausmann@qt.io>
+---
+ src/gui/text/qfontengine_ft.cpp | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/src/gui/text/qfontengine_ft.cpp b/src/gui/text/qfontengine_ft.cpp
+index 4de41df..7c878da 100644
+--- a/src/gui/text/qfontengine_ft.cpp
++++ b/src/gui/text/qfontengine_ft.cpp
+@@ -1716,7 +1716,7 @@ glyph_metrics_t QFontEngineFT::alphaMapBoundingBox(glyph_t glyph, QFixed subPixe
+ 
+ static inline QImage alphaMapFromGlyphData(QFontEngineFT::Glyph *glyph, QFontEngine::GlyphFormat glyphFormat)
+ {
+-    if (glyph == Q_NULLPTR)
++    if (glyph == Q_NULLPTR || glyph->height == 0 || glyph->width == 0)
+         return QImage();
+ 
+     QImage::Format format = QImage::Format_Invalid;
+@@ -1764,11 +1764,15 @@ QImage *QFontEngineFT::lockedAlphaMapForGlyph(glyph_t glyphIndex, QFixed subPixe
+ 
+     currentlyLockedAlphaMap = alphaMapFromGlyphData(glyph, neededFormat);
+ 
++    const bool glyphHasGeometry = glyph != Q_NULLPTR && glyph->height != 0 && glyph->width != 0;
+     if (!cacheEnabled && glyph != &emptyGlyph) {
+         currentlyLockedAlphaMap = currentlyLockedAlphaMap.copy();
+         delete glyph;
+     }
+ 
++    if (!glyphHasGeometry)
++        return Q_NULLPTR;
++
+     if (currentlyLockedAlphaMap.isNull())
+         return QFontEngine::lockedAlphaMapForGlyph(glyphIndex, subPixelPosition, neededFormat, t, offset);
+ 
