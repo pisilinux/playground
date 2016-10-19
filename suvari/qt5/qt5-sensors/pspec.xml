@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>qt5-sensors</Name>
+        <Homepage>http://qt.digia.com/</Homepage>
+        <Packager>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Packager>
+        <Summary>Provides access to sensor hardware and motion gesture recognition</Summary>
+        <Description>Provides access to sensor hardware and motion gesture recognition</Description>
+        <License>LGPLv2.1-linking-exception</License>
+        <Archive sha1sum="a9bd0f4e76cb7ee4a83b8082261b60e1c8a42304" type="tarxz">http://download.qt.io/official_releases/qt/5.6/5.6.0/submodules/qtsensors-opensource-src-5.6.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.6.0">qt5-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>qt5-assistant-devel</Dependency>
+            <Dependency>qt5-sql-sqlite</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>qt5-sensors</Name>
+        <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency versionFrom="5.6.0">qt5-base</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib/qt5</Path>
+            <Path fileType="data">/usr/share/licenses</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>qt5-sensors-devel</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5-sensors</Dependency>
+            <Dependency versionFrom="5.6.0">qt5-base-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="header">/usr/include/qt5</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>qt5-sensors-docs</Name>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.6.0">qt5-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc/qt5</Path>
+        </Files>
+    </Package>
+
+
+    <History>
+        <Update release="4">
+            <Date>2016-06-09</Date>
+            <Version>5.6.0</Version>
+            <Comment>Release Bump</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2016-05-16</Date>
+            <Version>5.6.0</Version>
+            <Comment>Release Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2016-05-01</Date>
+            <Version>5.6.0</Version>
+            <Comment>Release Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-04-17</Date>
+            <Version>5.6.0</Version>
+            <Comment>First release</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,156 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>qt5-webkit</Name>
+        <Homepage>http://qt.digia.com/</Homepage>
+        <Packager>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Packager>
+        <Summary>Classes for a WebKit2 based implementation and a new QML API</Summary>
+        <Description>Classes for a WebKit2 based implementation and a new QML API</Description>
+        <License>LGPLv2.1-linking-exception</License>
+        <Archive sha1sum="d99faab3d55770723cb1f2ec22adff6a8effb2e2" type="tarxz">http://download.qt.io/community_releases/5.6/5.6.0/qtwebkit-opensource-src-5.6.0.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency versionFrom="5.6.0">qt5-base-devel</Dependency>
+            <Dependency>qt5-sensors-devel</Dependency>
+            <Dependency>qt5-location-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>qt5-multimedia-devel</Dependency>
+            <Dependency>qt5-assistant-devel</Dependency>
+            <Dependency>qt5-sql-sqlite</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>libXtst-devel</Dependency>
+            <Dependency>gst-plugins-base-devel</Dependency>
+            <Dependency>icu4c-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>dbus-devel</Dependency>
+            <Dependency>ruby-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>gstreamer-next-devel</Dependency>
+            <Dependency>libpng-devel</Dependency>
+            <Dependency>libpcre-devel</Dependency>
+            <Dependency>eudev-devel</Dependency>
+            <Dependency>webp-devel</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>libXcomposite-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+            <Dependency>sqlite-devel</Dependency>
+            <Dependency>perl-Digest-MD5</Dependency>
+            <Dependency>perl-Text-ParseWords</Dependency>
+            <Dependency>gperf</Dependency>
+            <Dependency>bison</Dependency>
+            <Dependency>flex</Dependency>
+            <Dependency>qt5-phonon-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>qt5-webkit</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib/qt5/plugins</Path>
+            <Path fileType="library">/usr/lib/qt5/</Path>
+            <Path fileType="executable">/usr/lib/qt5/bin/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.6.0">qt5-base</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>webp</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>icu4c</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>sqlite</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>libXrender</Dependency>
+            <Dependency>qt5-sensors</Dependency>
+            <Dependency>libXcomposite</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>gst-plugins-base</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <Package>
+        <Name>qt5-webkit-devel</Name>
+        <Files>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="header">/usr/include/qt5/</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency release="current">qt5-webkit</Dependency>
+            <Dependency versionFrom="5.6.0">qt5-base-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>webp-devel</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>icu4c-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>libpng-devel</Dependency>
+            <Dependency>sqlite-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+            <Dependency>qt5-sensors-devel</Dependency>
+            <Dependency>libXcomposite-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>gst-plugins-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <Package>
+        <Name>qt5-webkit-docs</Name>
+        <Files>
+            <Path fileType="doc">/usr/share/doc/qt5</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency versionFrom="5.6.0">qt5-base</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <History>
+        <Update release="4">
+            <Date>2016-06-09</Date>
+            <Version>5.6.0</Version>
+            <Comment>Release Bump</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2016-05-16</Date>
+            <Version>5.6.0</Version>
+            <Comment>Release Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2016-05-01</Date>
+            <Version>5.6.0</Version>
+            <Comment>Release Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-04-17</Date>
+            <Version>5.6.0</Version>
+            <Comment>First release</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
