@@ -42,14 +42,14 @@
         </Files>
         <RuntimeDependencies>
             <Dependency release="current">qt5-xmlpatterns</Dependency>
-            <Dependency>qt5-base-devel</Dependency>
+            <Dependency versionFrom="5.6.2">qt5-base-devel</Dependency>
         </RuntimeDependencies>
     </Package>
 
     <Package>
         <Name>qt5-xmlpatterns-docs</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="5.6.0">qt5-base</Dependency>
+            <Dependency versionFrom="5.6.2">qt5-base</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="doc">/usr/share/doc/qt5</Path>
@@ -58,9 +58,9 @@
 
     <History>
         <Update release="5">
-            <Date>2016-10-19</Date>
+            <Date>2016-10-21</Date>
             <Version>5.6.2</Version>
-            <Comment>Release Bump</Comment>
+            <Comment>Version Bump</Comment>
             <Name>Pisi Linux Community</Name>
             <Email>admin@pisilinux.org</Email>
         </Update>
