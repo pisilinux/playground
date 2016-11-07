@@ -18,15 +18,12 @@
         <BuildDependencies>
             <Dependency>doxygen</Dependency>
         </BuildDependencies>
-        <Patches>
-            <!--<Patch level="0">lensfun-0.2.6-build.patch</Patch> -->
-            <!--<Patch level="1">lensfun-0.2.3-64bits.patch</Patch>-->
-        </Patches>
     </Source>
 
     <Package>
         <Name>lensfun</Name>
         <Files>
+            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="library">/usr/lib/python3.4/</Path>
             <Path fileType="doc">/usr/share/doc</Path>
