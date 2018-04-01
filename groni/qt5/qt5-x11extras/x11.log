@@ -1,73 +1,0 @@
-DEBUG: ComponentDB initialized in 0.00510406494141.
-DEBUG: RepoDB initialized in 0.000191211700439.
-DEBUG: InstallDB initialized in 0.00683307647705.
-Kaynak http://download.qt.io/official_releases/qt/5.4/5.4.1/submodules/qtx11extras-opensource-src-5.4.1.tar.xz adresinden indiriliyor
-qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB)  4%     10.94 MB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 15%     10.94 MB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 20%     10.94 MB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 26%     10.94 MB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 31%     10.94 MB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 37%     10.94 MB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 42%     10.94 MB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 48%     10.94 MB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 54%     10.94 MB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 59%     92.37 KB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 65%     92.37 KB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 70%     92.37 KB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 76%     92.37 KB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 81%     92.37 KB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 87%     92.37 KB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 92%     92.37 KB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB) 98%     92.37 KB/s [00:00:00]qtx11extras-opensource-src-5.4.1.tar.xz (24.0 KB)100%     92.37 KB/s [00:00:00] [tamamlandı]
-Kaynak arşivi depolandı:  /var/cache/pisi/archives/qtx11extras-opensource-src-5.4.1.tar.xz
-[32mArşiv(ler) açılıyor...
-[0m açıldı (/var/pisi/qt5-x11extras-5.4.1-1/work)
-[32mKaynak yapılandırılıyor...
-[0mSandbox açık inşa...
-Çalışıyor qmake-qt5 qtx11extras.pro
-Info: creating cache file /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/.qmake.cache
-DEBUG: "qmake-qt5 qtx11extras.pro" dönüş değeri 0
-[32mKaynak inşa ediliyor...
-[0mSandbox açık inşa...
-Çalışıyor make VERBOSE=1 -j5
-cd src/ && ( test -e Makefile || /usr/bin/qmake-qt5 /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src/src.pro -o Makefile ) && make -f Makefile 
-make[1]: Entering directory '/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src'
-cd x11extras/ && ( test -e Makefile || /usr/bin/qmake-qt5 /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src/x11extras/x11extras.pro -o Makefile ) && make -f Makefile 
-make[2]: Entering directory '/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src/x11extras'
-x86_64-pc-linux-gnu-g++ -c -mtune=generic -march=x86-64 -O2 -pipe -fstack-protector -D_FORTIFY_SOURCE=2 -g -fPIC -O2 -mtune=generic -march=x86-64 -O2 -pipe -fstack-protector -D_FORTIFY_SOURCE=2 -g -fPIC -fvisibility=hidden -fvisibility-inlines-hidden -std=c++0x -fno-exceptions -Wall -W -D_REENTRANT -fPIC -DQT_NO_USING_NAMESPACE -DQT_BUILD_X11EXTRAS_LIB -DQT_BUILDING_QT -DQT_NO_CAST_TO_ASCII -DQT_ASCII_CAST_WARNINGS -DQT_MOC_COMPAT -DQT_USE_QSTRINGBUILDER -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x050000 -DQT_NO_EXCEPTIONS -D_LARGEFILE64_SOURCE -D_LARGEFILE_SOURCE -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/firebird -isystem /usr/include/postgresql/server -I../../include -I../../include/QtX11Extras -I/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/include/QtX11Extras/5.4.1 -I/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/include/QtX11Extras/5.4.1/QtX11Extras -isystem /usr/include/qt5/QtGui/5.4.1 -isystem /usr/include/qt5/QtGui/5.4.1/QtGui -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I.moc -I/usr/lib/qt5/mkspecs/linux-g++ -o .obj/qx11info_x11.o qx11info_x11.cpp
-rm -f libQt5X11Extras.so.5.4.1 libQt5X11Extras.so libQt5X11Extras.so.5 libQt5X11Extras.so.5.4
-x86_64-pc-linux-gnu-g++ -Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common -Wl,--no-undefined -Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common -Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common -fuse-ld=gold -shared -Wl,-Bsymbolic-functions -Wl,-soname,libQt5X11Extras.so.5 -o libQt5X11Extras.so.5.4.1 .obj/qx11info_x11.o  -lQt5Gui -lQt5Core -lpthread -lGL 
-ln -s libQt5X11Extras.so.5.4.1 libQt5X11Extras.so
-ln -s libQt5X11Extras.so.5.4.1 libQt5X11Extras.so.5
-ln -s libQt5X11Extras.so.5.4.1 libQt5X11Extras.so.5.4
-rm -f ../../lib/libQt5X11Extras.so.5.4.1
-mv -f libQt5X11Extras.so.5.4.1  ../../lib/ 
-rm -f ../../lib/libQt5X11Extras.so
-rm -f ../../lib/libQt5X11Extras.so.5
-rm -f ../../lib/libQt5X11Extras.so.5.4
-mv -f libQt5X11Extras.so ../../lib/ 
-mv -f libQt5X11Extras.so.5 ../../lib/ 
-mv -f libQt5X11Extras.so.5.4 ../../lib/ 
-make[2]: Leaving directory '/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src/x11extras'
-make[1]: Leaving directory '/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src'
-DEBUG: "make VERBOSE=1 -j5" dönüş değeri 0
-[32mKuruluyor...
-[0mSandbox açık inşa...
-Çalışıyor make DESTDIR="/var/pisi/qt5-x11extras-5.4.1-1/install" INSTALL_ROOT="/var/pisi/qt5-x11extras-5.4.1-1/install" INSTALL_ROOT=/var/pisi/qt5-x11extras-5.4.1-1/install install
-cd src/ && ( test -e Makefile || /usr/bin/qmake-qt5 /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src/src.pro -o Makefile ) && make -f Makefile install
-make[1]: Entering directory '/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src'
-cd x11extras/ && ( test -e Makefile || /usr/bin/qmake-qt5 /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src/x11extras/x11extras.pro -o Makefile ) && make -f Makefile install
-make[2]: Entering directory '/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src/x11extras'
-install -m 755 -p "../../lib/libQt5X11Extras.so.5.4.1" "/var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/libQt5X11Extras.so.5.4.1"
-ln -f -s "libQt5X11Extras.so.5.4.1" "/var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/libQt5X11Extras.so"
-ln -f -s "libQt5X11Extras.so.5.4.1" "/var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/libQt5X11Extras.so.5"
-ln -f -s "libQt5X11Extras.so.5.4.1" "/var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/libQt5X11Extras.so.5.4"
-sed -e 's,[^ '\'']*/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/lib,,g' "../../lib/libQt5X11Extras.prl" >"/var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/libQt5X11Extras.prl"
-sed -e 's,[^ '\'']*/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/lib,,g' "../../lib/libQt5X11Extras.la" >"/var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/libQt5X11Extras.la"
-sed -e 's,[^ '\'']*/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/lib,,g' "../../lib/pkgconfig/Qt5X11Extras.pc" >"/var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/pkgconfig/Qt5X11Extras.pc"
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/include/QtX11Extras/QX11Info /var/pisi/qt5-x11extras-5.4.1-1/install/usr/include/qt5/QtX11Extras/
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/include/QtX11Extras/QtX11ExtrasVersion /var/pisi/qt5-x11extras-5.4.1-1/install/usr/include/qt5/QtX11Extras/
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src/x11extras/qtx11extrasglobal.h /var/pisi/qt5-x11extras-5.4.1-1/install/usr/include/qt5/QtX11Extras/
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src/x11extras/qx11info_x11.h /var/pisi/qt5-x11extras-5.4.1-1/install/usr/include/qt5/QtX11Extras/
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/include/QtX11Extras/qtx11extrasversion.h /var/pisi/qt5-x11extras-5.4.1-1/install/usr/include/qt5/QtX11Extras/
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/include/QtX11Extras/QtX11Extras /var/pisi/qt5-x11extras-5.4.1-1/install/usr/include/qt5/QtX11Extras/
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/include/QtX11Extras/QtX11ExtrasDepends /var/pisi/qt5-x11extras-5.4.1-1/install/usr/include/qt5/QtX11Extras/
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/mkspecs/modules-inst/qt_lib_x11extras.pri /var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/qt5/mkspecs/modules/
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/mkspecs/modules-inst/qt_lib_x11extras_private.pri /var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/qt5/mkspecs/modules/
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/lib/cmake/Qt5X11Extras/Qt5X11ExtrasConfig.cmake /var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/cmake/Qt5X11Extras/
-install -m 644 -p /var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/lib/cmake/Qt5X11Extras/Qt5X11ExtrasConfigVersion.cmake /var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/cmake/Qt5X11Extras/
-make[2]: Leaving directory '/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src/x11extras'
-make[1]: Leaving directory '/var/pisi/qt5-x11extras-5.4.1-1/work/qtx11extras-opensource-src-5.4.1/src'
-DEBUG: "make DESTDIR="/var/pisi/qt5-x11extras-5.4.1-1/install" INSTALL_ROOT="/var/pisi/qt5-x11extras-5.4.1-1/install" INSTALL_ROOT=/var/pisi/qt5-x11extras-5.4.1-1/install install" dönüş değeri 0
-DEBUG: Removing special libtool file: /var/pisi/qt5-x11extras-5.4.1-1/install/usr/lib/libQt5X11Extras.la
-DEBUG: /usr/lib/libQt5X11Extras.so.5.4.1 [stripped]
-DEBUG: /usr/lib/pkgconfig yolu birden çok pakete ait.
-[32mPaket inşa ediliyor: qt5-x11extras
-[0mqt5-x11extras-5.4.1-1-p01-x86_64.pisi oluşturuluyor... 
-[32mPaket inşa ediliyor: qt5-x11extras-devel
-[0mqt5-x11extras-devel-5.4.1-1-p01-x86_64.pisi oluşturuluyor... 
-İnşa dizini bırakılıyor
