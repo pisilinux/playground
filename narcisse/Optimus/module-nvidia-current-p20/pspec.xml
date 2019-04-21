@@ -14,7 +14,7 @@
         <Archive sha1sum="05f4a1a52f71e274254669bfd196067f66a2c260" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86/370.23/NVIDIA-Linux-x86-370.23.run</Archive>
         <Archive sha1sum="a250a673baf50d7b494a33a6ef57490beecd1e81" type="binary">ftp://download.nvidia.com/XFree86/Linux-x86_64/370.23/NVIDIA-Linux-x86_64-370.23.run</Archive>
         <BuildDependencies>
-            <Dependency version="4.7.0">kernel-module-headers</Dependency>
+            <Dependency version="4.19.34">kernel-module-headers</Dependency>
             <Dependency>libX11-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -24,7 +24,7 @@
         <IsA>driver</IsA>
         <Summary>Kernel module for current NVIDIA graphics driver releases</Summary>
         <RuntimeDependencies>
-            <Dependency version="4.7.0">kernel</Dependency>
+            <Dependency version="4.19.34">kernel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library" permanent="true">/lib/modules</Path>
