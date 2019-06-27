@@ -1,0 +1,27 @@
+
+Old deprecated do_gettimeofday() got removed in 5.0.
+
+Switch to new Y2038 safe code.
+
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+
+--- ./net/ipv4/netfilter/ipt_IFWLOG.c.old	2019-03-05 22:28:19.599983866 +0200
++++ ./net/ipv4/netfilter/ipt_IFWLOG.c	2019-03-06 12:54:11.069469427 +0200
+@@ -89,7 +89,6 @@ static void ipt_IFWLOG_packet(const stru
+ 	struct udphdr udph;
+ 	struct nl_msg msg;
+ 	struct iphdr _iph, *ih;
+-	struct timeval tv;
+ 
+ 	memset(&msg, 0, sizeof(struct nl_msg));
+ 
+@@ -127,8 +126,7 @@ static void ipt_IFWLOG_packet(const stru
+ 	}
+ 
+ 	/* save timetamp */
+-	do_gettimeofday((struct timeval *)&tv);
+-        msg.timestamp_sec = tv.tv_sec;
++        msg.timestamp_sec = ktime_get_real_seconds();
+ 
+ 	send_packet(&msg);
+ }

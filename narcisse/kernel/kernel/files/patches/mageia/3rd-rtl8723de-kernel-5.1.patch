@@ -1,0 +1,30 @@
+diff -urp linux/3rdparty/rtl8723de.orig/os_dep/osdep_service.c linux/3rdparty/rtl8723de/os_dep/osdep_service.c
+--- linux/3rdparty/rtl8723de.orig/os_dep/osdep_service.c	2019-04-22 01:15:06.068131483 +0300
++++ linux/3rdparty/rtl8723de/os_dep/osdep_service.c	2019-04-22 01:42:02.345962650 +0300
+@@ -2085,7 +2085,7 @@ static int isFileReadable(const char *pa
+ 		ret = PTR_ERR(fp);
+ 	else {
+ 		oldfs = get_fs();
+-		set_fs(get_ds());
++		set_fs(KERNEL_DS);
+ 
+ 		if (1 != readFile(fp, &buf, 1))
+ 			ret = PTR_ERR(fp);
+@@ -2123,7 +2123,7 @@ static int retriveFromFile(const char *p
+ 			RTW_INFO("%s openFile path:%s fp=%p\n", __FUNCTION__, path , fp);
+ 
+ 			oldfs = get_fs();
+-			set_fs(get_ds());
++			set_fs(KERNEL_DS);
+ 			ret = readFile(fp, buf, sz);
+ 			set_fs(oldfs);
+ 			closeFile(fp);
+@@ -2158,7 +2158,7 @@ static int storeToFile(const char *path,
+ 			RTW_INFO("%s openFile path:%s fp=%p\n", __FUNCTION__, path , fp);
+ 
+ 			oldfs = get_fs();
+-			set_fs(get_ds());
++			set_fs(KERNEL_DS);
+ 			ret = writeFile(fp, buf, sz);
+ 			set_fs(oldfs);
+ 			closeFile(fp);

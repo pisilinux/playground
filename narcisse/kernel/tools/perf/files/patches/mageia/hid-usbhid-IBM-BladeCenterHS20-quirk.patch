@@ -1,0 +1,26 @@
+Subject: Add blacklist of usb hid modules
+
+IBM Blade Center HS20 can connect PS2 kerboard and mouse, It is USB emulation.
+This devices need HID_QUIRK_IGNORE option.
+
+This patch is workaround.
+
+[ rediffed for 2.6.28 -- herton ]
+Signed-off-by: Go Taniguchi <go@turbolinux.co.jp>
+[ rebased for 4.17 / tmb ]
+
+---
+ drivers/hid/hid-quirks.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
+--- a/drivers/hid/hid-quirks.c
++++ b/drivers/hid/hid-quirks.c
+@@ -800,6 +800,8 @@ static const struct hid_device_id hid_ig
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_GTCO, USB_DEVICE_ID_GTCO_1005) },
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_GTCO, USB_DEVICE_ID_GTCO_1006) },
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_GTCO, USB_DEVICE_ID_GTCO_1007) },
++	{ HID_USB_DEVICE(USB_VENDOR_ID_IBM, 0x4001) },
++	{ HID_USB_DEVICE(USB_VENDOR_ID_IBM, 0x4002) },
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_IMATION, USB_DEVICE_ID_DISC_STAKKA) },
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_JABRA, USB_DEVICE_ID_JABRA_GN9350E) },
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_KBGEAR, USB_DEVICE_ID_KBGEAR_JAMSTUDIO) },

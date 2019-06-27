@@ -1,0 +1,58 @@
+From e576e769663c7dfa5a40c8eac1f79b7ec2a22482 Mon Sep 17 00:00:00 2001
+From: Aleksandr Loktionov <aleksandr.loktionov@intel.com>
+Date: Fri, 29 Mar 2019 15:08:31 -0700
+Subject: [PATCH] i40e: add new pci id for X710/XXV710 N3000 cards
+
+New device ids are created to support X710/XXV710 N3000 cards.
+
+Signed-off-by: Aleksandr Loktionov <aleksandr.loktionov@intel.com>
+Tested-by: Andrew Bowers <andrewx.bowers@intel.com>
+Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+---
+ drivers/net/ethernet/intel/i40e/i40e_common.c | 2 ++
+ drivers/net/ethernet/intel/i40e/i40e_devids.h | 2 ++
+ drivers/net/ethernet/intel/i40e/i40e_main.c   | 2 ++
+ 3 files changed, 6 insertions(+)
+
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_common.c b/drivers/net/ethernet/intel/i40e/i40e_common.c
+index e7d500f92a90..8de6e007b4a0 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_common.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_common.c
+@@ -32,6 +32,8 @@ static i40e_status i40e_set_mac_type(struct i40e_hw *hw)
+ 		case I40E_DEV_ID_20G_KR2_A:
+ 		case I40E_DEV_ID_25G_B:
+ 		case I40E_DEV_ID_25G_SFP28:
++		case I40E_DEV_ID_X710_N3000:
++		case I40E_DEV_ID_XXV710_N3000:
+ 			hw->mac.type = I40E_MAC_XL710;
+ 			break;
+ 		case I40E_DEV_ID_KX_X722:
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_devids.h b/drivers/net/ethernet/intel/i40e/i40e_devids.h
+index 334b05ff685a..16be4d5286bd 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_devids.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_devids.h
+@@ -5,6 +5,8 @@
+ #define _I40E_DEVIDS_H_
+ 
+ /* Device IDs */
++#define I40E_DEV_ID_X710_N3000		0x0CF8
++#define I40E_DEV_ID_XXV710_N3000	0x0D58
+ #define I40E_DEV_ID_SFP_XL710		0x1572
+ #define I40E_DEV_ID_QEMU		0x1574
+ #define I40E_DEV_ID_KX_B		0x1580
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_main.c b/drivers/net/ethernet/intel/i40e/i40e_main.c
+index fa1b2cfd359e..7d0183c67cff 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_main.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_main.c
+@@ -81,6 +81,8 @@ static const struct pci_device_id i40e_pci_tbl[] = {
+ 	{PCI_VDEVICE(INTEL, I40E_DEV_ID_SFP_I_X722), 0},
+ 	{PCI_VDEVICE(INTEL, I40E_DEV_ID_20G_KR2), 0},
+ 	{PCI_VDEVICE(INTEL, I40E_DEV_ID_20G_KR2_A), 0},
++	{PCI_VDEVICE(INTEL, I40E_DEV_ID_X710_N3000), 0},
++	{PCI_VDEVICE(INTEL, I40E_DEV_ID_XXV710_N3000), 0},
+ 	{PCI_VDEVICE(INTEL, I40E_DEV_ID_25G_B), 0},
+ 	{PCI_VDEVICE(INTEL, I40E_DEV_ID_25G_SFP28), 0},
+ 	/* required last entry */
+-- 
+2.21.0
+

@@ -1,0 +1,33 @@
+From: Cyrus Lien <cyruslien@gmail.com>
+Subject: [PATCH] iwlwifi: trans: fix killer series loadded incorrect firmware
+Date: Mon, 13 May 2019 21:33:35 +0800
+
+Killer series loadded IWL_22000_HR_B_FW_PRE prefixed firmware instead
+IWL_CC_A_FW_PRE prefixed firmware.
+
+Add killer series to the check logic as iwl_ax200_cfg_cc.
+
+Signed-off-by: Cyrus Lien <cyrus.lien@canonical.com>
+---
+ drivers/net/wireless/intel/iwlwifi/pcie/trans.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/net/wireless/intel/iwlwifi/pcie/trans.c b/drivers/net/wireless/intel/iwlwifi/pcie/trans.c
+index 79c1dc05f948..576c2186b6bf 100644
+--- a/drivers/net/wireless/intel/iwlwifi/pcie/trans.c
++++ b/drivers/net/wireless/intel/iwlwifi/pcie/trans.c
+@@ -3565,7 +3565,9 @@ struct iwl_trans *iwl_trans_pcie_alloc(struct pci_dev *pdev,
+ 		}
+ 	} else if (CSR_HW_RF_ID_TYPE_CHIP_ID(trans->hw_rf_id) ==
+ 		   CSR_HW_RF_ID_TYPE_CHIP_ID(CSR_HW_RF_ID_TYPE_HR) &&
+-		   (trans->cfg != &iwl_ax200_cfg_cc ||
++		   ((trans->cfg != &iwl_ax200_cfg_cc &&
++		     trans->cfg != &killer1650x_2ax_cfg &&
++		     trans->cfg != &killer1650w_2ax_cfg) ||
+ 		    trans->hw_rev == CSR_HW_REV_TYPE_QNJ_B0)) {
+ 		u32 hw_status;
+ 
+-- 
+2.17.1
+
+

@@ -1,0 +1,57 @@
+
+Include 3rdparty directory into the main build-system.
+
+Original author is unknown.
+(Was either Juan Quintela or Jeff Garzik)
+
+Signed-off-by: Luiz Fernando N. Capitulino <lcapitulino@mandriva.com.br>
+Signed-off-by: Herton Ronaldo Krzesinski <herton@mandriva.com.br>
+[Simplified for Mageia 7 / kernel 5.1.6 and up / tmb]
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+
+---
+ Makefile           |    2 +-
+ arch/arm/Kconfig   |    2 ++
+ arch/arm64/Kconfig |    2 ++
+ arch/x86/Kconfig   |    2 ++
+ 4 files changed, 7 insertions(+), 1 deletion(-)
+
+diff -Nurp linux-4.20.1/arch/arm/Kconfig linux-4.20.1-3rd/arch/arm/Kconfig
+--- linux-4.20.1/arch/arm/Kconfig	2018-12-24 01:55:59.000000000 +0200
++++ linux-4.20.1-3rd/arch/arm/Kconfig	2019-01-10 16:06:57.674190856 +0200
+@@ -2192,3 +2192,5 @@ source "arch/arm/crypto/Kconfig"
+ endif
+ 
+ source "arch/arm/kvm/Kconfig"
++
++source "3rdparty/Kconfig"
+diff -Nurp linux-4.20.1/arch/arm64/Kconfig linux-4.20.1-3rd/arch/arm64/Kconfig
+--- linux-4.20.1/arch/arm64/Kconfig	2018-12-24 01:55:59.000000000 +0200
++++ linux-4.20.1-3rd/arch/arm64/Kconfig	2019-01-10 16:20:16.830867964 +0200
+@@ -1393,3 +1393,5 @@ source "arch/arm64/kvm/Kconfig"
+ if CRYPTO
+ source "arch/arm64/crypto/Kconfig"
+ endif
++
++source "3rdparty/Kconfig"
+diff -Nurp linux-4.20.1/arch/x86/Kconfig linux-4.20.1-3rd/arch/x86/Kconfig
+--- linux-4.20.1/arch/x86/Kconfig	2018-12-24 01:55:59.000000000 +0200
++++ linux-4.20.1-3rd/arch/x86/Kconfig	2019-01-10 16:06:57.675190876 +0200
+@@ -2927,3 +2927,5 @@ config HAVE_GENERIC_GUP
+ source "drivers/firmware/Kconfig"
+ 
+ source "arch/x86/kvm/Kconfig"
++
++source "3rdparty/Kconfig"
+diff -Nurp linux-4.20.1/Makefile linux-4.20.1-3rd/Makefile
+--- linux-4.20.1/Makefile	2019-01-09 22:04:31.803167152 +0200
++++ linux-4.20.1-3rd/Makefile	2019-01-10 16:06:57.675190876 +0200
+@@ -597,7 +597,7 @@ export KBUILD_MODULES KBUILD_BUILTIN
+ ifeq ($(KBUILD_EXTMOD),)
+ # Objects we will link into vmlinux / subdirs we need to visit
+ init-y		:= init/
+-drivers-y	:= drivers/ sound/
++drivers-y	:= drivers/ sound/ 3rdparty/
+ net-y		:= net/
+ libs-y		:= lib/
+ core-y		:= usr/
