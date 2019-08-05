@@ -3,10 +3,10 @@
  scripts/kconfig/Makefile |    4 ----
  2 files changed, 5 insertions(+), 15 deletions(-)
 
-diff -Nurp linux-5.1-rc5/Makefile linux-5.1-rc5-mrp/Makefile
---- linux-5.1-rc5/Makefile	2019-04-15 15:52:25.430382341 +0300
-+++ linux-5.1-rc5-mrp/Makefile	2019-04-15 16:11:29.901266267 +0300
-@@ -1061,8 +1061,7 @@ include/config/kernel.release: $(srctree
+diff -Nurp linux-5.2.5.orig/Makefile linux-5.2.5/Makefile
+--- linux-5.2.5.orig/Makefile	2019-07-31 21:21:41.188899390 +0300
++++ linux-5.2.5/Makefile	2019-07-31 22:07:27.081789903 +0300
+@@ -1082,8 +1082,7 @@ include/config/kernel.release: FORCE
  # Carefully list dependencies so we do not try to build scripts twice
  # in parallel
  PHONY += scripts
@@ -16,7 +16,7 @@ diff -Nurp linux-5.1-rc5/Makefile linux-5.1-rc5-mrp/Makefile
  
  # Things we need to do before we recursively start building the kernel
  # or the modules are listed in "prepare".
-@@ -1096,7 +1095,7 @@ prepare0: archprepare
+@@ -1119,7 +1118,7 @@ prepare0: archprepare
  	$(Q)$(MAKE) $(build)=.
  
  # All the preparing..
@@ -25,12 +25,12 @@ diff -Nurp linux-5.1-rc5/Makefile linux-5.1-rc5-mrp/Makefile
  
  # Support for using generic headers in asm-generic
  asm-generic := -f $(srctree)/scripts/Makefile.asm-generic obj
-@@ -1336,13 +1335,8 @@ endif # CONFIG_MODULES
- CLEAN_DIRS  += $(MODVERDIR) include/ksym
+@@ -1361,13 +1360,8 @@ CLEAN_DIRS  += $(MODVERDIR) include/ksym
+ CLEAN_FILES += modules.builtin.modinfo
  
  # Directories & files removed with 'make mrproper'
 -MRPROPER_DIRS  += include/config usr/include include/generated          \
--		  arch/*/include/generated .tmp_objdiff
+-		  arch/$(SRCARCH)/include/generated .tmp_objdiff
 -MRPROPER_FILES += .config .config.old .version \
 -		  Module.symvers tags TAGS cscope* GPATH GTAGS GRTAGS GSYMS \
 -		  signing_key.pem signing_key.priv signing_key.x509	\
@@ -41,7 +41,7 @@ diff -Nurp linux-5.1-rc5/Makefile linux-5.1-rc5-mrp/Makefile
  
  # clean - Delete most, but leave enough to build external modules
  #
-@@ -1364,7 +1358,7 @@ clean: archclean vmlinuxclean
+@@ -1389,7 +1383,7 @@ clean: archclean vmlinuxclean
  #
  mrproper: rm-dirs  := $(wildcard $(MRPROPER_DIRS))
  mrproper: rm-files := $(wildcard $(MRPROPER_FILES))
@@ -50,9 +50,9 @@ diff -Nurp linux-5.1-rc5/Makefile linux-5.1-rc5-mrp/Makefile
  
  PHONY += $(mrproper-dirs) mrproper
  $(mrproper-dirs):
-diff -Nurp linux-5.1-rc5/scripts/kconfig/Makefile linux-5.1-rc5-mrp/scripts/kconfig/Makefile
---- linux-5.1-rc5/scripts/kconfig/Makefile	2019-04-15 15:52:26.396402498 +0300
-+++ linux-5.1-rc5-mrp/scripts/kconfig/Makefile	2019-04-15 16:11:29.901266267 +0300
+diff -Nurp linux-5.2.5.orig/scripts/kconfig/Makefile linux-5.2.5/scripts/kconfig/Makefile
+--- linux-5.2.5.orig/scripts/kconfig/Makefile	2019-07-08 01:41:56.000000000 +0300
++++ linux-5.2.5/scripts/kconfig/Makefile	2019-07-31 22:06:39.048791818 +0300
 @@ -20,16 +20,12 @@ endif
  unexport CONFIG_
  

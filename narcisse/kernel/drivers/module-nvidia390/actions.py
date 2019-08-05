@@ -27,10 +27,9 @@ def setup():
     shelltools.move("tmp/*", ".")
     
     
-    if get.buildTYPE() != 'emul32':
-		shelltools.system("patch -p1 < linux-5.1.patch")
+    #if get.buildTYPE() != 'emul32':
+		#shelltools.system("patch -p1 < linux-5.1.patch")
     
-    #shelltools.system("patch -p1 < NVIDIA-Linux-x86_64-390.87-kernel-4.20.patch")
     
     # Our libc is TLS enabled so use TLS library
     #shelltools.unlink("*-tls.so*")

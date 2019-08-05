@@ -11,15 +11,10 @@
         <License>NVIDIA</License>
         <Summary>NVIDIA drivers for GeForce 6xxx and newer GPUs</Summary>
         <Description>NVIDIA graphics drivers provide optimized 2D/3D performance.</Description>
-        <Archive sha1sum="9f58a26a88d9ce400b47566490b089ce2e950e5d" type="binary">http://download.nvidia.com/XFree86/Linux-x86/390.116/NVIDIA-Linux-x86-390.116.run</Archive>
-        <Archive sha1sum="d2beae835642513e1a77e1eef0a60dd21db6c81f" type="binary">http://download.nvidia.com/XFree86/Linux-x86_64/390.116/NVIDIA-Linux-x86_64-390.116.run</Archive>
-        <AdditionalFiles>
-			<AdditionalFile target="linux-5.1.patch">linux-5.1.patch</AdditionalFile>
-            <AdditionalFile target="NVIDIA-Linux-x86_64-390.87-kernel-4.20.patch">NVIDIA-Linux-x86_64-390.87-kernel-4.20.patch</AdditionalFile>
-            <AdditionalFile target="NVIDIA-Linux-x86_64-390.87-kernel-4.19.patch">NVIDIA-Linux-x86_64-390.87-kernel-4.19.patch</AdditionalFile>
-        </AdditionalFiles>
+        <Archive sha1sum="7dd3ba2a731367308fde50b352ceda2a1bfcd993" type="binary">http://us.download.nvidia.com/XFree86/Linux-x86/390.129/NVIDIA-Linux-x86-390.129.run</Archive>
+        <Archive sha1sum="df1a0d92db28158a1aa92b44f5a9c122232282fc" type="binary">http://us.download.nvidia.com/XFree86/Linux-x86_64/390.129/NVIDIA-Linux-x86_64-390.129.run</Archive>
         <BuildDependencies>
-            <Dependency version="5.1.15">kernel-module-headers</Dependency>
+            <Dependency version="5.2.6">kernel-module-headers</Dependency>
             <Dependency>libX11-devel</Dependency>
             <Dependency>gtk2-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
@@ -31,7 +26,7 @@
         <IsA>driver</IsA>
         <Summary>Kernel module for current NVIDIA graphics driver releases</Summary>
         <RuntimeDependencies>
-            <Dependency version="5.1.15">kernel</Dependency>
+            <Dependency version="5.2.6">kernel</Dependency>
 <!--             <Dependency release="current">module-nvidia-current-userspace</Dependency> -->
         </RuntimeDependencies>
         <Files>
@@ -135,6 +130,13 @@
     </Package>
 
     <History>
+		<Update release="3">
+            <Date>2019-08-05</Date>
+            <Version>390.129</Version>
+            <Comment>Rebuild</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update> 
 		<Update release="2">
             <Date>2019-06-28</Date>
             <Version>390.116</Version>

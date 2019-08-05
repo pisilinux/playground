@@ -212,26 +212,6 @@ Signed-off-by Thomas Backlund <tmb@mageia.org>
 +
 +module_init(init);
 +module_exit(fini);
---- a/net/ipv4/netfilter/Kconfig
-+++ b/net/ipv4/netfilter/Kconfig
-@@ -331,6 +331,17 @@ config IP_NF_TARGET_TTL
- 	(e.g. when running oldconfig). It selects
- 	CONFIG_NETFILTER_XT_TARGET_HL.
- 
-+config IP_NF_TARGET_IFWLOG
-+	tristate  'IFWLOG target support'
-+	depends on IP_NF_IPTABLES
-+	help
-+	  This option adds a `IFWLOG' target, which is used by
-+	  Interactive Firewall for sending informations to a userspace
-+	  daemon
-+
-+	  If you want to compile it as a module, say M here and read
-+	  Documentation/modules.txt.  If unsure, say `N'.
-+
- # raw + specific targets
- config IP_NF_RAW
- 	tristate  'raw table support (required for NOTRACK/TRACE)'
 --- /dev/null
 +++ b/include/uapi/linux/netfilter_ipv4/ipt_IFWLOG.h
 @@ -0,0 +1,26 @@
@@ -261,13 +241,33 @@ Signed-off-by Thomas Backlund <tmb@mageia.org>
 +};
 +
 +#endif /* _IPT_IFWLOG_H */
---- linux/net/ipv4/netfilter/Makefile.net-netfilter-IFWLOG.orig	2013-10-13 11:29:08.799136037 +0300
-+++ linux/net/ipv4/netfilter/Makefile	2013-10-13 11:30:28.085842333 +0300
-@@ -44,6 +44,7 @@ obj-$(CONFIG_IP_NF_MATCH_RPFILTER) += ip
+--- linux/net/ipv4/netfilter/Kconfig.orig
++++ linux/net/ipv4/netfilter/Kconfig
+@@ -290,6 +290,17 @@ config IP_NF_TARGET_ECN
+ 
+ 	  To compile it as a module, choose M here.  If unsure, say N.
+ 
++config IP_NF_TARGET_IFWLOG
++	tristate  'IFWLOG target support'
++	depends on IP_NF_IPTABLES
++	help
++	  This option adds a `IFWLOG' target, which is used by
++	  Interactive Firewall for sending informations to a userspace
++	  daemon
++
++	  If you want to compile it as a module, say M here and read
++	  Documentation/modules.txt.  If unsure, say `N'.
++
+ config IP_NF_TARGET_TTL
+ 	tristate '"TTL" target support'
+ 	depends on NETFILTER_ADVANCED && IP_NF_MANGLE
+--- linux/net/ipv4/netfilter/Makefile.orig
++++ linux/net/ipv4/netfilter/Makefile
+@@ -48,6 +48,7 @@ obj-$(CONFIG_IP_NF_MATCH_RPFILTER) += ip
  # targets
  obj-$(CONFIG_IP_NF_TARGET_CLUSTERIP) += ipt_CLUSTERIP.o
  obj-$(CONFIG_IP_NF_TARGET_ECN) += ipt_ECN.o
 +obj-$(CONFIG_IP_NF_TARGET_IFWLOG) += ipt_IFWLOG.o
- obj-$(CONFIG_IP_NF_TARGET_MASQUERADE) += ipt_MASQUERADE.o
  obj-$(CONFIG_IP_NF_TARGET_REJECT) += ipt_REJECT.o
  obj-$(CONFIG_IP_NF_TARGET_SYNPROXY) += ipt_SYNPROXY.o
+ 

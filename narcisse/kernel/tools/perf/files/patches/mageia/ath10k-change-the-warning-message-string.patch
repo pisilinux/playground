@@ -1,0 +1,38 @@
+From 265df32eae5845212ad9f55f5ae6b6dcb68b187b Mon Sep 17 00:00:00 2001
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 9 May 2019 09:15:00 -0300
+Subject: ath10k: Change the warning message string
+
+From: Fabio Estevam <festevam@gmail.com>
+
+commit 265df32eae5845212ad9f55f5ae6b6dcb68b187b upstream.
+
+The "WARNING" string confuses syzbot, which thinks it found
+a crash [1].
+
+Change the string to avoid such problem.
+
+[1] https://lkml.org/lkml/2019/5/9/243
+
+Reported-by: syzbot+c1b25598aa60dcd47e78@syzkaller.appspotmail.com
+Suggested-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/net/wireless/ath/ath10k/usb.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/net/wireless/ath/ath10k/usb.c
++++ b/drivers/net/wireless/ath/ath10k/usb.c
+@@ -1016,7 +1016,7 @@ static int ath10k_usb_probe(struct usb_i
+ 	}
+ 
+ 	/* TODO: remove this once USB support is fully implemented */
+-	ath10k_warn(ar, "WARNING: ath10k USB support is incomplete, don't expect anything to work!\n");
++	ath10k_warn(ar, "Warning: ath10k USB support is incomplete, don't expect anything to work!\n");
+ 
+ 	return 0;
+ 

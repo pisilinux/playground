@@ -1,0 +1,16 @@
+
+ include/uapi/linux/aufs_type.h |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff -Nurp linux-5.2.5-aufs/include/uapi/linux/aufs_type.h linux-5.2.5-aufs-ver/include/uapi/linux/aufs_type.h
+--- linux-5.2.5-aufs/include/uapi/linux/aufs_type.h	2019-08-01 13:49:33.941536014 +0300
++++ linux-5.2.5-aufs-ver/include/uapi/linux/aufs_type.h	2019-08-01 13:59:54.231511281 +0300
+@@ -27,7 +27,7 @@
+ 
+ #include <linux/limits.h>
+ 
+-#define AUFS_VERSION	"4.x-rcN"
++#define AUFS_VERSION	"5.2"
+ 
+ /* todo? move this to linux-2.6.19/include/magic.h */
+ #define AUFS_SUPER_MAGIC	('a' << 24 | 'u' << 16 | 'f' << 8 | 's')

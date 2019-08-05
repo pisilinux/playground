@@ -16,42 +16,42 @@ Signed-off-by: Thomas Backlund <tmb@mageia.org>
  arch/x86/Kconfig   |    2 ++
  4 files changed, 7 insertions(+), 1 deletion(-)
 
-diff -Nurp linux-4.20.1/arch/arm/Kconfig linux-4.20.1-3rd/arch/arm/Kconfig
---- linux-4.20.1/arch/arm/Kconfig	2018-12-24 01:55:59.000000000 +0200
-+++ linux-4.20.1-3rd/arch/arm/Kconfig	2019-01-10 16:06:57.674190856 +0200
-@@ -2192,3 +2192,5 @@ source "arch/arm/crypto/Kconfig"
+diff -Nurp linux-5.2.5/arch/arm/Kconfig linux-5.2.5-3rd/arch/arm/Kconfig
+--- linux-5.2.5/arch/arm/Kconfig	2019-07-08 01:41:56.000000000 +0300
++++ linux-5.2.5-3rd/arch/arm/Kconfig	2019-08-01 13:23:05.147599364 +0300
+@@ -2168,3 +2168,5 @@ source "arch/arm/crypto/Kconfig"
  endif
  
  source "arch/arm/kvm/Kconfig"
 +
 +source "3rdparty/Kconfig"
-diff -Nurp linux-4.20.1/arch/arm64/Kconfig linux-4.20.1-3rd/arch/arm64/Kconfig
---- linux-4.20.1/arch/arm64/Kconfig	2018-12-24 01:55:59.000000000 +0200
-+++ linux-4.20.1-3rd/arch/arm64/Kconfig	2019-01-10 16:20:16.830867964 +0200
-@@ -1393,3 +1393,5 @@ source "arch/arm64/kvm/Kconfig"
+diff -Nurp linux-5.2.5/arch/arm64/Kconfig linux-5.2.5-3rd/arch/arm64/Kconfig
+--- linux-5.2.5/arch/arm64/Kconfig	2019-08-01 13:21:55.321602148 +0300
++++ linux-5.2.5-3rd/arch/arm64/Kconfig	2019-08-01 13:23:05.147599364 +0300
+@@ -1595,3 +1595,5 @@ source "arch/arm64/kvm/Kconfig"
  if CRYPTO
  source "arch/arm64/crypto/Kconfig"
  endif
 +
 +source "3rdparty/Kconfig"
-diff -Nurp linux-4.20.1/arch/x86/Kconfig linux-4.20.1-3rd/arch/x86/Kconfig
---- linux-4.20.1/arch/x86/Kconfig	2018-12-24 01:55:59.000000000 +0200
-+++ linux-4.20.1-3rd/arch/x86/Kconfig	2019-01-10 16:06:57.675190876 +0200
-@@ -2927,3 +2927,5 @@ config HAVE_GENERIC_GUP
+diff -Nurp linux-5.2.5/arch/x86/Kconfig linux-5.2.5-3rd/arch/x86/Kconfig
+--- linux-5.2.5/arch/x86/Kconfig	2019-07-08 01:41:56.000000000 +0300
++++ linux-5.2.5-3rd/arch/x86/Kconfig	2019-08-01 13:23:05.148599364 +0300
+@@ -2879,3 +2879,5 @@ config HAVE_GENERIC_GUP
  source "drivers/firmware/Kconfig"
  
  source "arch/x86/kvm/Kconfig"
 +
 +source "3rdparty/Kconfig"
-diff -Nurp linux-4.20.1/Makefile linux-4.20.1-3rd/Makefile
---- linux-4.20.1/Makefile	2019-01-09 22:04:31.803167152 +0200
-+++ linux-4.20.1-3rd/Makefile	2019-01-10 16:06:57.675190876 +0200
-@@ -597,7 +597,7 @@ export KBUILD_MODULES KBUILD_BUILTIN
+diff -Nurp linux-5.2.5/Makefile linux-5.2.5-3rd/Makefile
+--- linux-5.2.5/Makefile	2019-08-01 13:21:55.321602148 +0300
++++ linux-5.2.5-3rd/Makefile	2019-08-01 13:26:16.751591724 +0300
+@@ -607,7 +607,7 @@ endif
  ifeq ($(KBUILD_EXTMOD),)
  # Objects we will link into vmlinux / subdirs we need to visit
  init-y		:= init/
 -drivers-y	:= drivers/ sound/
 +drivers-y	:= drivers/ sound/ 3rdparty/
+ drivers-$(CONFIG_SAMPLES) += samples/
  net-y		:= net/
  libs-y		:= lib/
- core-y		:= usr/
