@@ -1,0 +1,391 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>module-virtualbox-guest</Name>
+        <Homepage>https://www.virtualbox.org</Homepage>
+        <Packager>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>driver</IsA>
+        <Summary>Kernel modules for VirtualBox guest machines</Summary>
+        <Description>This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
+        <Archive sha1sum="95e44a83478c78ab393b4f35f21d8d910f30ee15" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.0.14.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency version="5.3.9">kernel-module-headers</Dependency>
+        </BuildDependencies>
+        <Patches>
+<!--             <Patch>vboxsf-make.patch</Patch> -->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>module-virtualbox-guest</Name>
+        <RuntimeDependencies>
+            <Dependency version="5.3.9">kernel</Dependency>
+            <Dependency>baselayout</Dependency>
+            <Dependency version="current">module-virtualbox-guest-userspace</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+        </Files>
+        <BuildFlags>
+            <Flag>noDelta</Flag>
+        </BuildFlags>
+		<Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>module-virtualbox-guest-userspace</Name>
+        <Summary>Userspace documentation, tools, udev and modprobe rules for the kernel driver virtualbox-guest</Summary>
+        <Files>
+            <Path fileType="config">/etc/conf.d</Path>
+            <Path fileType="data">/lib/udev/rules.d</Path>
+            <Path fileType="executable">/lib/udev/vbox-guest.sh</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/virtualbox-guest">virtualbox-guest.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/lib/udev/vbox-guest.sh">vbox-guest.sh</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/lib/udev/rules.d/48-vbox-guest.rules">48-vbox-guest.rules</AdditionalFile>
+        </AdditionalFiles>
+        <BuildFlags>
+            <Flag>noDelta</Flag>
+        </BuildFlags>
+    </Package>
+
+    <History>
+		<Update release="47">
+            <Date>2019-11-03</Date>
+            <Version>6.0.14</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+		<Update release="46">
+            <Date>2019-08-05</Date>
+            <Version>6.0.10</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+		<Update release="45">
+            <Date>2019-06-28</Date>
+            <Version>6.0.8</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+		<Update release="44">
+            <Date>2019-06-19</Date>
+            <Version>6.0.8</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+		<Update release="43">
+            <Date>2019-06-09</Date>
+            <Version>6.0.8</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+        <Update release="42">
+            <Date>2019-05-17</Date>
+            <Version>6.0.8</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="41">
+            <Date>2019-05-11</Date>
+            <Version>6.0.6</Version>
+            <Comment>Rebuild drivers</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="40">
+            <Date>2019-04-20</Date>
+            <Version>6.0.6</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="39">
+            <Date>2019-04-06</Date>
+            <Version>6.0.4</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="38">
+            <Date>2019-01-29</Date>
+            <Version>6.0.4</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="37">
+            <Date>2019-01-20</Date>
+            <Version>6.0.2</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="36">
+            <Date>2019-01-16</Date>
+            <Version>6.0.2</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="35">
+            <Date>2018-12-22</Date>
+            <Version>6.0.0</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="34">
+            <Date>2018-11-23</Date>
+            <Version>5.2.22</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="33">
+            <Date>2018-10-05</Date>
+            <Version>5.2.18</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="32">
+            <Date>2018-09-16</Date>
+            <Version>5.2.18</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="31">
+            <Date>2018-08-17</Date>
+            <Version>5.2.16</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="30">
+            <Date>2018-08-06</Date>
+            <Version>5.2.12</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="29">
+            <Date>2018-07-15</Date>
+            <Version>5.2.12</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="28">
+            <Date>2018-07-12</Date>
+            <Version>5.2.12</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="27">
+            <Date>2018-05-10</Date>
+            <Version>5.2.12</Version>
+            <Comment>Version bump</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="26">
+            <Date>2018-04-28</Date>
+            <Version>5.2.10</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="25">
+            <Date>2018-04-18</Date>
+            <Version>5.2.10</Version>
+            <Comment>Rebuild for new kernel</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="24">
+            <Date>2018-03-15</Date>
+            <Version>5.2.8</Version>
+            <Comment>Rebuild for new kernel</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="23">
+            <Date>2018-03-11</Date>
+            <Version>5.2.8</Version>
+            <Comment>Rebuild for new kernel</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="22">
+            <Date>2018-03-03</Date>
+            <Version>5.2.8</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="21">
+            <Date>2018-01-06</Date>
+            <Version>5.2.2</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="20">
+            <Date>2017-12-20</Date>
+            <Version>5.2.2</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="19">
+            <Date>2017-12-04</Date>
+            <Version>5.2.2</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="18">
+            <Date>2017-11-25</Date>
+            <Version>5.2.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="17">
+            <Date>2017-11-19</Date>
+            <Version>5.1.14</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="16">
+            <Date>2017-08-21</Date>
+            <Version>5.1.14</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="15">
+            <Date>2017-07-04</Date>
+            <Version>5.1.14</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="14">
+            <Date>2017-02-01</Date>
+            <Version>5.1.14</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="13">
+            <Date>2017-01-15</Date>
+            <Version>5.1.12</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="12">
+            <Date>2016-12-13</Date>
+            <Version>5.1.10</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ergün Salman</Name>
+            <Email>poyraz76@pisilinux.org</Email>
+        </Update>
+        <Update release="11">
+            <Date>2016-12-10</Date>
+            <Version>5.1.6</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="10">
+            <Date>2016-11-02</Date>
+            <Version>5.1.6</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="9">
+            <Date>2016-09-26</Date>
+            <Version>5.1.6</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ergün Salman</Name>
+            <Email>poyraz76@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2016-08-24</Date>
+            <Version>5.1.4</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="7">
+            <Date>2016-08-17</Date>
+            <Version>5.1.4</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ergün Salman</Name>
+            <Email>poyraz76@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2016-08-06</Date>
+            <Version>5.1.2</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="5">
+            <Date>2016-07-22</Date>
+            <Version>5.1.2</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ergün Salman</Name>
+            <Email>poyraz76@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2016-06-17</Date>
+            <Version>5.1.0</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ergün Salman</Name>
+            <Email>poyraz76@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2016-06-17</Date>
+            <Version>5.1.0b</Version>
+            <Comment>Version Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2016-04-27</Date>
+            <Version>5.0.12</Version>
+            <Comment>Release Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-03-07</Date>
+            <Version>5.0.12</Version>
+            <Comment>First release</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

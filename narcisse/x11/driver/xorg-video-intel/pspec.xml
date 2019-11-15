@@ -1,0 +1,151 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xorg-video-intel</Name>
+        <Homepage>http://www.x.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>driver</IsA>
+        <Summary>X.Org intel video driver</Summary>
+        <Description>xorg-video-intel contains the X.Org driver for Intel video chipsets.</Description>
+        <Archive sha1sum="a1c7bb28746a82b1fbe3b8e55f24f57d45945f58" type="tarxz">http://anduin.linuxfromscratch.org/BLFS/xf86-video-intel/xf86-video-intel-20190723.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>libxcb-devel</Dependency>
+            <Dependency>libXv-devel</Dependency>
+            <Dependency>libdrm-devel</Dependency>
+            <Dependency>pixman-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libXtst-devel</Dependency>
+            <Dependency>libXvMC-devel</Dependency>
+            <Dependency>xcb-util-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>libXfixes-devel</Dependency>
+            <Dependency>libXcursor-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+            <Dependency>libXdamage-devel</Dependency>
+            <Dependency>libXinerama-devel</Dependency>
+            <Dependency>libdrm-intel</Dependency>
+            <Dependency>eudev-devel</Dependency>
+            <Dependency>util-macros</Dependency>
+            <Dependency>libpciaccess-devel</Dependency>
+            <Dependency>xorg-server-devel</Dependency>
+            <Dependency>libxshmfence-devel</Dependency>
+            <Dependency>libXfont-devel</Dependency>
+            <Dependency>libXfont2-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">0001-SNA-fix-PRIME-output-support-since-xserver-1.20.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>xorg-video-intel</Name>
+        <RuntimeDependencies>
+            <Dependency>libX11</Dependency>
+            <Dependency>libxcb</Dependency>
+            <Dependency>libXv</Dependency>
+            <Dependency>libdrm</Dependency>
+            <Dependency>pixman</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>libXtst</Dependency>
+            <Dependency>libXvMC</Dependency>
+            <Dependency>xcb-util</Dependency>
+            <Dependency>libXrandr</Dependency>
+            <Dependency>libXfixes</Dependency>
+            <Dependency>libXcursor</Dependency>
+            <Dependency>libXrender</Dependency>
+            <Dependency>libXdamage</Dependency>
+            <Dependency>libXinerama</Dependency>
+            <Dependency>libdrm-intel</Dependency>
+            <Dependency>libpciaccess</Dependency>
+            <Dependency>eudev</Dependency>
+            <Dependency>libxshmfence</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+		<Update release="9">
+            <Date>2019-11-08</Date>
+            <Version>20190723</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+        <Update release="8">
+            <Date>2019-02-09</Date>
+            <Version>20190208</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="7">
+            <Date>2019-02-09</Date>
+            <Version>20170826</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="6">
+            <Date>2018-11-21</Date>
+            <Version>20170826</Version>
+            <Comment>Rebuild New T. bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="5">
+            <Date>2018-07-31</Date>
+            <Version>20170826</Version>
+            <Comment>Rebuild New T. bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="4">
+            <Date>2017-09-10</Date>
+            <Version>20170826</Version>
+            <Comment>Version bump</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="3">
+            <Date>2017-03-11</Date>
+            <Version>20160902</Version>
+            <Comment>rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2017-02-16</Date>
+            <Version>20160902</Version>
+            <Comment>Version bump</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2016-05-02</Date>
+            <Version>0340718</Version>
+            <Comment>Version bump</Comment>
+            <Name>Burak Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2015-05-10</Date>
+            <Version>2.99.917</Version>
+            <Comment>First release</Comment>
+            <Name>Burak Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

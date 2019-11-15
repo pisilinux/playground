@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xorg-input-acecad</Name>
+        <Homepage>http://www.x.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>driver</IsA>
+        <Summary>X.Org acecad tablet input driver</Summary>
+        <Description>xorg-input-acecad contains the X.Org driver for Linux's generic event devices. It supports all input devices that the kernel knows about.</Description>
+        <Archive sha1sum="410cee68e4435dc95774fb389fcefae1b2ffe3d1" type="tarbz2">mirrors://xorg/individual/driver/xf86-input-acecad-1.5.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xorg-server-devel</Dependency>
+            <Dependency>xorg-proto</Dependency>
+            <Dependency>libmtdev-devel</Dependency>
+            <Dependency>sysfsutils-devel</Dependency>
+            <Dependency>util-macros</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">assign-local-private-after-allocating.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>xorg-input-acecad</Name>
+        <RuntimeDependencies>
+            <Dependency>sysfsutils</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/xorg</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+		<Update release="10">
+            <Date>2019-11-08</Date>
+            <Version>1.5.0</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+        <Update release="9">
+            <Date>2019-10-20</Date>
+            <Version>1.5.0</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="8">
+            <Date>2019-02-09</Date>
+            <Version>1.5.0</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="7">
+            <Date>2019-01-07</Date>
+            <Version>1.5.0</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="6">
+            <Date>2018-11-21</Date>
+            <Version>1.5.0</Version>
+            <Comment>Rebuild New T. bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="5">
+            <Date>2018-07-31</Date>
+            <Version>1.5.0</Version>
+            <Comment>Rebuild New T. bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="4">
+            <Date>2017-03-11</Date>
+            <Version>1.5.0</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="3">
+            <Date>2017-02-16</Date>
+            <Version>1.5.0</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2016-05-02</Date>
+            <Version>1.5.0</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Burak Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2015-05-08</Date>
+            <Version>1.5.0</Version>
+            <Comment>First release</Comment>
+            <Name>Burak Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

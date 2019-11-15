@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xorg-input-evdev</Name>
+        <Homepage>http://www.x.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>driver</IsA>
+        <Summary>X.Org evdev input driver</Summary>
+        <Description>xorg-input-evdev contains the X.Org driver for Linux's generic event devices. It supports all input devices that the kernel knows about.</Description>
+        <Archive sha1sum="660de292d5a40e2b8f385965c6a4e149c981ba59" type="tarbz2">mirrors://xorg/individual/driver/xf86-input-evdev-2.10.6.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>xorg-server-devel</Dependency>
+            <Dependency>libmtdev-devel</Dependency>
+            <Dependency>libevdev</Dependency>
+            <Dependency>util-macros</Dependency>
+            <Dependency>eudev-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>xorg-input-evdev</Name>
+        <RuntimeDependencies>
+            <Dependency>libmtdev</Dependency>
+            <Dependency>libevdev</Dependency>
+            <Dependency>eudev</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/xorg</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/X11/xorg.conf.d/10-evdev.conf</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>xorg-input-evdev-devel</Name>
+        <Summary>Development files for evdev driver</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">xorg-input-evdev</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+		<Update release="10">
+            <Date>2019-11-08</Date>
+            <Version>2.10.6</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+        <Update release="9">
+            <Date>2019-02-09</Date>
+            <Version>2.10.6</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="8">
+            <Date>2018-11-21</Date>
+            <Version>2.10.6</Version>
+            <Comment>Rebuild New T. bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="7">
+            <Date>2018-07-31</Date>
+            <Version>2.10.6</Version>
+            <Comment>Rebuild New T. bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+         <Update release="6">
+            <Date>2018-06-03</Date>
+            <Version>2.10.6</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="5">
+            <Date>2017-03-11</Date>
+            <Version>2.10.5</Version>
+            <Comment>rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="4">
+            <Date>2017-02-16</Date>
+            <Version>2.10.5</Version>
+            <Comment>Version bump</Comment>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2016-11-03</Date>
+            <Version>2.10.4</Version>
+            <Comment>Version bump</Comment>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2016-05-02</Date>
+            <Version>2.10.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>Burak Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2015-05-08</Date>
+            <Version>2.9.2</Version>
+            <Comment>First release</Comment>
+            <Name>Burak Ertürk</Name>
+            <Email>burakerturk@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
