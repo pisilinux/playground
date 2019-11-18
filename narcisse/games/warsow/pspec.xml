@@ -13,11 +13,11 @@
         <IsA>app:gui</IsA>
         <Summary>Multiplayer FPS</Summary>
         <Description>Warsow is a multiplayer FPS based on the QFusion engine (evolved from Quake 2).</Description>
-        <Archive sha1sum="470444d38f4c01df3c2cf978da20b77f2af9d09e" type="targz">http://update.warsow.net/mirror/warsow_1.51_sdk.tar.gz</Archive>
+        <Archive sha1sum="f1e99525dd4a702683e6e2dd03bad71848688cc9" type="targz">https://slice.sh/warsow/warsow_21_sdk.tar.gz</Archive>
+		<Archive sha1sum="e771256a195f09dd659ae29526bcda7ead2f5731" type="targz" target="warsow_21_sdk">https://slice.sh/warsow/warsow_21_unified.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>libsdl-devel</Dependency>
             <Dependency>mesa-devel</Dependency>
-            <Dependency>sdl-sound-devel</Dependency>
             <Dependency>openal-devel</Dependency>
             <Dependency>libvorbis-devel</Dependency>
             <Dependency>freeglut-devel</Dependency>
@@ -29,14 +29,18 @@
             <Dependency>libtheora-devel</Dependency>
             <Dependency>libXrandr-devel</Dependency>
         </BuildDependencies>
+		<Patches>
+			<Patch level="1">qfusion-git-Remove-sound-mixer-asm-for-GNU-C.patch</Patch>
+			<Patch level="1">warsow-2.1-fix-cmake.patch</Patch>
+			<Patch level="1">warsow-2.1-fix-linkings.patch</Patch>
+		</Patches>
     </Source>
 
     <Package>
         <Name>warsow</Name>
         <RuntimeDependencies>
-            <Dependency>libsdl</Dependency>
+            <Dependency>libsdl2</Dependency>
             <Dependency>mesa</Dependency>
-            <Dependency>sdl-sound</Dependency>
             <Dependency>openal</Dependency>
             <Dependency>libvorbis</Dependency>
             <Dependency>freeglut</Dependency>
@@ -46,7 +50,6 @@
             <Dependency>libjpeg-turbo</Dependency>
             <Dependency>imagemagick</Dependency>
             <Dependency>libtheora</Dependency>
-            <Dependency>warsow-data</Dependency>
             <Dependency>libXrandr</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -66,26 +69,12 @@
     </Package>
 
     <History>
-        <Update release="3">
-            <Date>2015-05-08/Date>
-            <Version>1.51</Version>
-            <Comment>Version bump</Comment>
+      <Update release="1">
+            <Date>2019-11-18</Date>
+            <Version>2.1</Version>
+            <Comment>First release</Comment>
             <Name>Idris Kalp</Name>
             <Email>idriskalp@gmail.com</Email>
-        </Update>
-        <Update release="2">
-            <Date>2013-09-29</Date>
-            <Version>1.0.2</Version>
-            <Comment>Version bump</Comment>
-            <Name>Burak Fazıl Ertürk</Name>
-            <Email>burakerturk@pisilinux.org</Email>
-        </Update>
-        <Update release="1">
-            <Date>2011-05-11</Date>
-            <Version>0.6.2</Version>
-            <Comment>First release</Comment>
-            <Name>Pisi Linux Admins</Name>
-            <Email>admins@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

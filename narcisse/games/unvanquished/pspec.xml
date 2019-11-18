@@ -12,83 +12,75 @@
         <IsA>app:gui</IsA>
        <Summary>Sci-fi RTS and FPS game.</Summary>
        <Description>Unvanquished is a fork of Tremulous, powered by the Daemon engine. It is a free, open-source first-person strategy shooter, pitting technologically advanced human soldiers against hordes of highly adaptable aliens.</Description>
-       <Archive sha1sum="db16504b934c406b8c7075c122621403cf7c3d73" type="tarxz">http://www.unvanquished.net/downloads/sources/stripped/unvanquished-0.25.0.tar.xz</Archive>
+       <Archive sha1sum="ef3e8ccb15d6a91af9602f58a86343253b3aa5f0" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/Unvanquished-0.51.1.tar.xz</Archive>
+	   <Archive sha1sum="c6ad7dfd1a01df1dd3255c58f5d6b2a898be8508" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/Unvanquished-0.51.1_data.tar.xz</Archive>
        <BuildDependencies>
-	  <Dependency>curl-devel</Dependency>
-	  <Dependency>freetype-devel</Dependency>
-          <Dependency>libsdl2-devel</Dependency> 
-	  <Dependency>glew-devel</Dependency>
-	  <Dependency>gmp-devel</Dependency> 
-	  <Dependency>libjpeg-turbo-devel</Dependency> 
-	  <Dependency>ncurses-devel</Dependency> 
-	  <Dependency>libogg-devel</Dependency>
-	  <Dependency>openal-devel</Dependency>
-	  <Dependency>libpng-devel</Dependency>
-	  <Dependency>libvorbis-devel</Dependency>
-	  <Dependency>speex-devel</Dependency>
-	  <Dependency>webp-devel</Dependency>
-	  <Dependency>libtheora-devel</Dependency>
-	  <Dependency>mesa-devel</Dependency>
-	  <Dependency>nettle-devel</Dependency>
-	  <Dependency>libopus-devel</Dependency>
-	  <Dependency>libopusfile-devel</Dependency> 
+			<Dependency>curl-devel</Dependency>
+			<Dependency>freetype-devel</Dependency>
+            <Dependency>libsdl2-devel</Dependency> 
+			<Dependency>glew-devel</Dependency>
+			<Dependency>gmp-devel</Dependency> 
+			<Dependency>libjpeg-turbo-devel</Dependency> 
+			<Dependency>ncurses-devel</Dependency> 
+			<Dependency>libogg-devel</Dependency>
+			<Dependency>openal-devel</Dependency>
+			<Dependency>libpng-devel</Dependency>
+			<Dependency>libvorbis-devel</Dependency>
+			<Dependency>speex-devel</Dependency>
+			<Dependency>webp-devel</Dependency>
+			<Dependency>libtheora-devel</Dependency>
+			<Dependency>mesa-devel</Dependency>
+			<Dependency>nettle-devel</Dependency>
+			<Dependency>libopus-devel</Dependency>
+			<Dependency>libopusfile-devel</Dependency>
+			<Dependency>geoip-devel</Dependency>
        </BuildDependencies>
     </Source>
 
     <Package>
         <Name>unvanquished</Name>
         <RuntimeDependencies>
-	  <Dependency version="current">unvanquished-data</Dependency>
-          <Dependency>curl</Dependency>
-	  <Dependency>freetype</Dependency>
-          <Dependency>libsdl2</Dependency> 
-	  <Dependency>glew</Dependency>
-	  <Dependency>gmp</Dependency> 
-	  <Dependency>libjpeg-turbo</Dependency> 
-	  <Dependency>ncurses</Dependency> 
-	  <Dependency>libogg</Dependency>
-	  <Dependency>openal</Dependency>
-	  <Dependency>libpng</Dependency>
-	  <Dependency>libvorbis</Dependency>
-	  <Dependency>speex</Dependency>
-	  <Dependency>webp</Dependency>
-	  <Dependency>libtheora</Dependency>
-	  <Dependency>mesa</Dependency>
-	  <Dependency>nettle</Dependency>
-	  <Dependency>libopus</Dependency>
-	  <Dependency>libopusfile</Dependency> 
+            <Dependency>curl</Dependency>
+			<Dependency>freetype</Dependency>
+            <Dependency>libsdl2</Dependency> 
+			<Dependency>glew</Dependency>
+			<Dependency>gmp</Dependency> 
+			<Dependency>libjpeg-turbo</Dependency> 
+			<Dependency>ncurses</Dependency> 
+			<Dependency>libogg</Dependency>
+			<Dependency>openal</Dependency>
+			<Dependency>libpng</Dependency>
+			<Dependency>libvorbis</Dependency>
+			<Dependency>speex</Dependency>
+			<Dependency>webp</Dependency>
+			<Dependency>libtheora</Dependency>
+			<Dependency>mesa</Dependency>
+			<Dependency>nettle</Dependency>
+			<Dependency>libopus</Dependency>
+			<Dependency>libopusfile</Dependency>
+			<Dependency>geoip</Dependency>
        </RuntimeDependencies>
-        <Files>
+	   <Files>
+		    <Path fileType="config">/etc</Path>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="executable">/usr/lib/Unvanquished/daemon*</Path>	 	    
-	    <Path fileType="library">/usr/lib/Unvanquished/*.so</Path>
-	    <Path fileType="library">/usr/lib/Unvanquished/main/*.so</Path>
-	    <Path fileType="data">/usr/lib/Unvanquished</Path>
-	    <Path fileType="data">/usr/share</Path>
+            <Path fileType="executable">/usr/lib/unvanquished/daemon*</Path>
+			<Path fileType="data">/usr/lib/unvanquished</Path>
+			<Path fileType="data">/usr/share</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
-	<AdditionalFiles>
-	   <AdditionalFile target="/usr/bin/unvanquished" permission="0755" owner="root">unvanquished</AdditionalFile>
-	   <AdditionalFile target="/usr/bin/unvanquished-server" permission="0755" owner="root">unvanquished-server</AdditionalFile>
-	   <AdditionalFile target="/usr/share/applications/unvanquished.desktop" permission="0644" owner="root">unvanquished.desktop</AdditionalFile>
-	   <AdditionalFile target="/usr/share/icons/hicolor/128x128/apps/unvanquished.png" permission="0644" owner="root">unvanquished.png</AdditionalFile>
+		<AdditionalFiles>
+			<AdditionalFile target="/usr/bin/unvanquished" permission="0755" owner="root">unvanquished.sh</AdditionalFile>
+			<AdditionalFile target="/usr/bin/unvanquished-server" permission="0755" owner="root">unvanquished-tty.sh</AdditionalFile>
 	</AdditionalFiles>
     </Package>
     
     <History>
       <Update release="2">
-            <Date>2014-03-02</Date>
-            <Version>0.25.0</Version>
-            <Comment>Version bump</Comment>
-	    <Name>Mathias Freire</Name>   
-            <Email>mathiasfreire45@gmail.com</Email>             
-        </Update>
-	   <Update release="1">
-            <Date>2013-10-28</Date>
-            <Version>0.20.0</Version>
-            <Comment>First Release</Comment>
-	    <Name>Mathias Freire</Name>   
-            <Email>mathiasfreire45@gmail.com</Email>             
+            <Date>2019-11-18</Date>
+            <Version>0.51.1</Version>
+            <Comment>First release</Comment>
+			<Name>Idris Kalp</Name>   
+            <Email>idriskalp@gmail.com</Email>             
         </Update>
     </History>
 </PISI>

@@ -11,30 +11,34 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import cmaketools
 from pisi.actionsapi import shelltools
 
+NoStrip = ["/usr"]
+
 def setup():
-    shelltools.export("CXXFLAGS", get.CXXFLAGS())
-    shelltools.export("CFLAGS", get.CFLAGS())
-    shelltools.export("LDFLAGS", "%s -lopus -lopusfile -logg -lvorbis" % get.LDFLAGS())
-    
-    cmaketools.configure("-DCMAKE_INSTALL_PREFIX=/usr/lib \
-                          -DUSE_CURSES=0 \
-                          -DUSE_GEOIP:BOOL=ON \
-                          -DUSE_CIN_XVID=0 \
-                          -DUSE_CIN_THEORA=1 \
-                          -DHAVE_BZIP2=1 \
-                          -DUSE_INTERNAL_SDL=0 \
-                          -DUSE_INTERNAL_CRYPTO=0 \
-                          -DUSE_INTERNAL_JPEG=0 \
-                          -DUSE_INTERNAL_OPUS=0 \
-                          -DUSE_INTERNAL_SPEEX=0 \
-                          -DUSE_INTERNAL_GLEW=0 \
-                          -DUSE_INTERNAL_WEBP=0 \
-                          -DUSE_INTERNAL_OPUS=0")   
+	shelltools.system("mkdir -p build")
+	shelltools.cd("build")
+	shelltools.system("cmake -DBUILD_CGAME=OFF -DBUILD_SGAME=OFF -DOpenGL_GL_PREFERENCE=LEGACY ..")
 
 def build():
-    cmaketools.make()
+	shelltools.cd("build")
+	cmaketools.make()
 
 def install():
-    cmaketools.install()    
+    pisitools.insinto("/usr/share/pixmaps", "debian/unvanquished.png")
+    pisitools.dodoc("COPYING.txt")
+    
+    shelltools.cd("build")
+    pisitools.insinto("/usr/lib/unvanquished", "daemon")
+    pisitools.insinto("/usr/lib/unvanquished", "daemonded")
+    pisitools.insinto("/usr/lib/unvanquished", "daemon-tty")
+    pisitools.insinto("/usr/lib/unvanquished", "irt_core-x86*.nexe")
+    pisitools.insinto("/usr/lib/unvanquished", "nacl_helper_bootstrap")
+    pisitools.insinto("/usr/lib/unvanquished", "nacl_loader")
+    
+    shelltools.cd("../archlinux")
+    pisitools.insinto("/etc/conf.d", "unvanquished.conf")
+    pisitools.insinto("/etc/unvanquished", "configs/*")
+    pisitools.insinto("/usr/share/applications", "unvanquished.desktop")
+    shelltools.cd("..")
+    pisitools.insinto("/usr/share/unvanquished/pkg", "pkg/*")
 
     pisitools.dodoc("GPL.txt","COPYING.txt", "README.md")
