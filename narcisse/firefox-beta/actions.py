@@ -14,7 +14,7 @@ ObjDir = "build"
 locales = "az bs ca  da  de  el  en-US en-GB  es-AR  es-CL  es-ES  fi  fr  hr  hu  it  lt nl  pl  pt-BR  pt-PT  ro  ru  sr  sv-SE  tr  uk".split()
 xpidir = "%s/xpi" % get.workDIR()
 arch = get.ARCH()
-ver = "73.0b2"
+ver = "%s" % get.srcVERSION().replace('_beta', 'b')
 
 shelltools.export("SHELL", "/bin/sh")
 shelltools.export("MOZBUILD_STATE_PATH", "/mozbuild")
