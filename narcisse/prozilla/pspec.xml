@@ -12,11 +12,18 @@
         <IsA>app:console</IsA>        
         <Summary>Console based download accelerator.</Summary>
         <Description>Prozilla is a console based download accelerator which speeds up download process approximately %200-300.</Description>
-       <Archive sha1sum="328861f1b1491226f46ce2ed7f872c6a267d384c" type="tarbz2">ftp://ftp.mgts.by/pub/FreeBSD/ports/distfiles/prozilla-2.0.4.tar.bz2</Archive>
+       <Archive sha1sum="328861f1b1491226f46ce2ed7f872c6a267d384c" type="tarbz2">http://ftp.disconnected-by-peer.at/prozilla/prozilla-2.0.4.tar.bz2</Archive>
+	   <BuildDependencies>
+		   <Dependency>ncurses-devel</Dependency>
+	   </BuildDependencies>
     </Source>
     
     <Package>
-        <Name>prozilla</Name>        
+        <Name>prozilla</Name>
+		<RuntimeDependencies>
+			<Dependency>ncurses</Dependency>
+			<Dependency>libgcc</Dependency>
+		</RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>           
             <Path fileType="header">/usr/include</Path>
@@ -29,7 +36,7 @@
 
     <History>
         <Update release="1">
-            <Date>2013-07-12</Date>
+            <Date>2020-01-11</Date>
             <Version>2.0.4</Version>
             <Comment>First release.</Comment>
             <Name>Mathias Freire</Name>
