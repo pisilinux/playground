@@ -1,0 +1,30 @@
+
+Add a nomodeset compat option for Mageia nokmsboot option until we
+rework our Drakx & co
+
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+
+ drivers/video/console/vgacon.c |    9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff -Nurp linux-5.0/drivers/video/console/vgacon.c linux-5.0-nokmsboot/drivers/video/console/vgacon.c
+--- linux-5.0/drivers/video/console/vgacon.c	2019-03-04 01:21:29.000000000 +0200
++++ linux-5.0-nokmsboot/drivers/video/console/vgacon.c	2019-03-08 11:46:18.347722882 +0200
+@@ -120,8 +120,17 @@ static int __init text_mode(char *str)
+ 	return 1;
+ }
+ 
++/* Compat stuff for mga nokmsboot option */
++static int __init text_mode_mga(char *str)
++{
++	vgacon_text_mode_force = true;
++
++	return 1;
++}
++
+ /* force text mode - used by kernel modesetting */
+ __setup("nomodeset", text_mode);
++__setup("nokmsboot", text_mode_mga);
+ 
+ static int __init no_scroll(char *str)
+ {
