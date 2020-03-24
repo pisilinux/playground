@@ -15,7 +15,7 @@
         <IsA>app:gui</IsA>
         <Summary>Firefox Web Browser</Summary>
         <Description>It is more secure and faster to browse the web with Firefox web browser. You can personalize your web browser with many specifications that is not enough to explain in two sentences.</Description>
-        <Archive sha1sum="7b5d6ebb9528a9eac0a66e2753b4f0b5de878291" type="tarxz">https://ftp.mozilla.org/pub/firefox/releases/74.0b4/source/firefox-74.0b4.source.tar.xz</Archive>
+        <Archive sha1sum="bcd40ad3d6cb05affdf9bdba7b70274c5dcf3c69" type="tarxz">https://ftp.mozilla.org/pub/firefox/releases/75.0b7/source/firefox-75.0b7.source.tar.xz</Archive>
         <AdditionalFiles>
             <!--Our main configure script. Configure paramters are stored here.-->
             <AdditionalFile target=".mozconfig" permission="0644">mozconfig</AdditionalFile>
@@ -551,6 +551,13 @@
     </Package>
 
     <History>
+		<Update release="4">
+            <Date>2020-03-24</Date>
+            <Version>75.0_beta7</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
 		<Update release="4">
             <Date>2020-02-17</Date>
             <Version>74.0_beta4</Version>
