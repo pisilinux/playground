@@ -125,7 +125,10 @@ def install():
     pisitools.dosym("libnvidia-ml.so.%s" % version, "%s/libnvidia-ml.so.1" % libdir)
 
     pisitools.dolib("libnvidia-cfg.so.%s" % version, libdir)
-    pisitools.dosym("libnvidia-cfg.so.%s" % version, "%s/libnvidia-cfg.so.1" % libdir)
+    pisitools.dosym("libnvidia-cfg.so.%s" % version, "%s/libnvidia-cfg.so.1" % libdir)    
+    
+    pisitools.dolib("libGLdispatch.so.0", libdir)
+    pisitools.dosym("libGLdispatch.so.0" , "%s/libGLdispatch.so" % libdir)
 
     
 
@@ -157,7 +160,7 @@ def install():
     pisitools.dolib("libnvidia-ptxjitcompiler.so.%s" % version, libdir)
     
     # Fat (multiarchitecture) binary loader
-    pisitools.dolib("libnvidia-fatbinaryloader.so.%s" % version, libdir)
+    pisitools.dolib("libnvidia-fatbinaryloader.so.%s" % version, libdir) 
     
     pisitools.insinto("/usr/share/X11/xorg.conf.d", "nvidia-drm-outputclass.conf")
   #  pisitools.insinto("/usr/share/nvidia", "nvidia-application-profiles-367.27-rc")
