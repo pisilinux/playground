@@ -38,9 +38,10 @@ def setup():
         --with-lcms=system \
         --with-zlib=system \
         --with-jvm-features=zgc \
+        --with-boot-jdk=%s \
         --enable-unlimited-crypto \
         --disable-warnings-as-errors \
-        --with-num-cores="%s"' % (update, cflags, cxxflags, ldflags, jobs)
+        --with-num-cores="%s"' % (update, cflags, cxxflags, ldflags, jvm_dir, jobs)
     )
 
 
