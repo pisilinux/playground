@@ -15,6 +15,9 @@ locales = "az bs ca  da  de  el  en-US en-GB  es-AR  es-CL  es-ES  fi  fr  hr  h
 xpidir = "%s/xpi" % get.workDIR()
 arch = get.ARCH()
 ver = "%s" % get.srcVERSION().replace('_beta', 'b')
+version = get.srcVERSION()
+version = version.split('_')[0]
+WorkDir = "firefox-%s" %version
 
 shelltools.export("SHELL", "/bin/sh")
 shelltools.export("MOZBUILD_STATE_PATH", "/mozbuild")
