@@ -14,7 +14,7 @@ shelltools.export("LC_ALL", "C")
 pixmaps = "/usr/share/pixmaps/"
 LoVersion = "%s" % get.srcVERSION()
 OurWorkDir = "%s/libreoffice-%s" % (get.workDIR(), LoVersion)
-OurWorkDir = "%s/libreoffice-6.4.0.0.alpha1" % (get.workDIR())
+OurWorkDir = "%s/libreoffice-7.0.0.0.beta1" % (get.workDIR())
 
 #for support all languages.
 langall="en-US af am ar as ast be bg bn bn-IN bo br brx bs ca ca-valencia cs cy da de dgo dsb dz el en-GB en-ZA eo es et eu fa fi fr fy ga gd gl gu gug he hsb hi hr hu id is it ja ka kab kk km kmr-Latn kn ko kok ks lb lo lt lv mai mk ml mn mni mr my nb ne nl nn nr nso oc om or pa-IN pl pt pt-BR ro ru rw sa-IN sat sd sr-Latn si sid sk sl sq sr ss st sv sw-TZ ta te tg th tn tr ts tt ug uk uz ve vec vi xh zh-CN zh-TW zu"
@@ -100,7 +100,7 @@ def setup():
                         --disable-odk                      \
                         --enable-ext-wiki-publisher        \
                         --enable-ext-nlpsolver             \
-                        --with-jdk-home=/usr/lib/jvm/java-8-openjdk \
+                        --with-jdk-home=/usr/lib/jvm/java-13-openjdk \
                         --with-external-tar=external/tarballs \
                         --with-gdrive-client-id=457862564325.apps.googleusercontent.com \
                         --with-gdrive-client-secret=GYWrDtzyZQZ0_g5YoBCC6F0I \
