@@ -1,0 +1,152 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>brave-browser-nightly</Name>
+        <Homepage>https://brave.com/</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>Mozilla Public License Version 2.0</License>
+        <IsA>app:web</IsA>
+        <Summary>A web browser that stops ads and trackers by default</Summary>
+        <Description>A web browser that stops ads and trackers by default</Description>
+        <Archive sha1sum="88c3f4f66734a8beab055961b49cee4a4d6c5b99" type="binary">https://github.com/brave/brave-browser/releases/download/v1.18.6/brave-browser-nightly_1.18.6_amd64.deb</Archive>
+        <BuildDependencies>
+            <Dependency>dbus</Dependency>
+            <Dependency>nspr</Dependency>
+            <Dependency>expat</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>gperf</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>snappy</Dependency>
+            <Dependency>snappy-devel</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>libxml2-32bit</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>libxslt-32bit</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>ncurses-32bit</Dependency>
+            <Dependency>gperftools</Dependency>
+            <Dependency>snappy-devel</Dependency>
+            <Dependency>python-setuptools</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>brave-browser-nightly</Name>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>nss</Dependency>
+            <Dependency>cups</Dependency>
+            <Dependency>dbus</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>nspr</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>expat</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libdrm</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>libxcb</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>alsa-lib-32bit</Dependency>
+            <Dependency>libXfixes</Dependency>
+            <Dependency>libXrandr</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libXdamage</Dependency>
+            <Dependency>at-spi2-atk</Dependency>
+            <Dependency>at-spi2-core</Dependency>
+            <Dependency>libXcomposite</Dependency>
+            <Dependency>flac-32bit</Dependency>
+            <Dependency>fontconfig-32bit</Dependency>
+            <Dependency>freetype-32bit</Dependency>
+            <Dependency>harfbuzz-32bit</Dependency>
+            <Dependency>icu4c-32bit</Dependency>
+            <Dependency>libjpeg-turbo-32bit</Dependency>
+            <Dependency>libpng-32bit</Dependency>
+            <Dependency>libva-32bit</Dependency>
+            <Dependency>libxml2-32bit</Dependency>
+            <Dependency>libxslt-32bit</Dependency>
+            <Dependency>libopus-32bit</Dependency>
+            <Dependency>noto-fonts</Dependency>
+            <Dependency>noto-fonts-extra</Dependency>
+            <Dependency>noto-fonts-ttf-croscore</Dependency>
+            <Dependency>git</Dependency>
+            <Dependency>gperf</Dependency>
+            <Dependency>gperftools</Dependency>
+            <Dependency>ncurses-32bit</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>python-setuptools</Dependency>
+            <Dependency>kwallet</Dependency>
+            <Dependency>pepperflash</Dependency>
+            <Dependency>ffmpeg</Dependency>
+            <Dependency>flac</Dependency>
+            <Dependency>fontconfig</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>harfbuzz</Dependency>
+            <Dependency>icu4c</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>libva</Dependency>
+            <Dependency>webp</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>minizip</Dependency>
+            <Dependency>libopus</Dependency>
+            <Dependency>re2</Dependency>
+            <Dependency>snappy</Dependency>
+            <Dependency>llvm-clang</Dependency>
+            <Dependency>alsa-lib-devel</Dependency>
+            <Dependency>ffmpeg-devel</Dependency>
+            <Dependency>flac-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>freetype-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>harfbuzz-devel</Dependency>
+            <Dependency>icu4c-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>libpng-devel</Dependency>
+            <Dependency>libva-devel</Dependency>
+            <Dependency>webp-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>minizip-devel</Dependency>
+            <Dependency>nss-devel</Dependency>
+            <Dependency>libopus-devel</Dependency>
+            <Dependency>re2-devel</Dependency>
+            <Dependency>snappy-devel</Dependency>
+            <Dependency>llvm-clang-devel</Dependency>
+            <Dependency>cups-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="opt">/opt/brave.com</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/share/menu</Path>
+            <Path fileType="data">/usr/share/appdata/brave-browser-nightly.appdata.xml</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/gnome-control-center</Path>
+            <Path fileType="data">/etc/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-10-23</Date>
+            <Version>1.18.6</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
