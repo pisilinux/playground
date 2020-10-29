@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gnome-menus</Name>
+        <Homepage>http://www.gnome.org</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:gui</IsA>
+        <Summary>Gnome Menus</Summary>
+        <Description>gnome-menus has got desktop-directories, GNOME menus library and its python bindings.</Description>
+        <Archive sha1sum="59a6af997f99b724eb1a060c6ce41409a83f9f00" type="targz">https://codeload.github.com/GNOME/gnome-menus/tar.gz/3.36.0</Archive>
+        <BuildDependencies>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>pkgconfig</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gnome-menus</Name>
+        <RuntimeDependencies>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>pkgconfig</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="config">/etc/xdg/menus</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/desktop-directories</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>gnome-menus-devel</Name>
+        <Summary>gnome-menus için geliştirme dosyaları</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">gnome-menus</Dependency>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>pkgconfig</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-10-29</Date>
+            <Version>3.36.0</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
