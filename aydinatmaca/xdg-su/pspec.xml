@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xdg-su</Name>
+        <Homepage>https://github.com/tarakbumba/xdg-su</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>app</IsA>
+        <Summary>Run a program as root with the most environment appropriate available graphical authentication agent
+</Summary>
+        <Description>Run a program as root with the most environment appropriate available graphical authentication agent
+</Description>
+        <Archive sha1sum="e92fd399b39f7b38d7bbfc7b834c78e551b2eee5" type="targz">https://codeload.github.com/tarakbumba/xdg-su/tar.gz/xdg-su-1.2.3</Archive>
+    </Source>
+
+    <Package>
+        <Name>xdg-su</Name>
+        <RuntimeDependencies>
+            <Dependency>docbook-xsl</Dependency>
+            <Dependency>lynx</Dependency>
+            <Dependency>xmlto</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            -->
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-10-31</Date>
+            <Version>1.2.3</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
