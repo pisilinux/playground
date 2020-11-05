@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xonotic-data</Name>
+        <Homepage>http://www.xonotic.org</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>xonotic</Icon>
+        <IsA>data</IsA>
+        <Summary>A fast-paced crossplatform first-person shooter</Summary>
+        <Description>xonotic-data provides data files for Xonotic.</Description>
+        <Archive sha1sum="9a1726e3d0d4e5e23c1e799734397c63e5df6ec9" type="zip">https://dl.xonotic.org/xonotic-0.8.2.zip</Archive>
+    </Source>
+
+    <Package>
+        <Name>xonotic-data</Name>
+        <Files>
+            <Path fileType="data">/usr/share/xonotic</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2020-11-05</Date>
+            <Version>0.8.2</Version>
+            <Comment>Rebuild</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+
+        <Update release="2">
+            <Date>2013-08-06</Date>
+            <Version>0.7.0</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-08-06</Date>
+            <Version>0.7.0</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
