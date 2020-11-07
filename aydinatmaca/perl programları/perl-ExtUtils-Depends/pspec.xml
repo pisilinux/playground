@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-ExtUtils-Depends</Name>
+        <Homepage>http://search.cpan.org/~xaoc/ExtUtils-Depends/</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>A library for easily build XS extensions that depend on XS extensions</Summary>
+        <Description>This module tries to make it easy to build Perl extensions that use functions and typemaps provided by other Perl extensions.</Description>
+        <Archive sha1sum="ed10e15aa36c4ae71c95b4222da5014ff6df3dba" type="targz">https://cpan.metacpan.org/authors/id/X/XA/XAOC/ExtUtils-Depends-0.405.tar.gz</Archive>
+	<BuildDependencies>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-ExtUtils-Depends</Name>
+        <RuntimeDependencies>
+            <Dependency>perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2020-11-03</Date>
+            <Version>0.405</Version>
+            <Comment>Rebuild</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-11-09</Date>
+            <Version>0.306</Version>
+            <Comment>Version bump</Comment>
+            <Name>Richard de Bruin</Name>
+            <Email>richdb@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-06-28</Date>
+            <Version>0.304</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

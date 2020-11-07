@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-Pango</Name>
+        <Homepage>http://search.cpan.org/dist/Pango</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>Layout and render international text</Summary>
+        <Description>Pango is a library for laying out and rendering text, with an emphasis on internationalization.</Description>
+        <Archive sha1sum="a6ed65dd5783ef383f406ebbf108dfb3aa61bcf5" type="targz">https://cpan.metacpan.org/authors/id/X/XA/XAOC/Pango-1.227.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>freetype-devel</Dependency>
+            <Dependency>perl-Glib</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>perl-Cairo</Dependency>
+            <Dependency>perl-ExtUtils-Depends</Dependency>
+            <Dependency>perl-ExtUtils-PkgConfig</Dependency>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-Pango</Name>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>perl-Glib</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>perl-Cairo</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>cairo</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>	
+        <Update release="4">
+            <Date>2020-11-03</Date>
+            <Version>1.227</Version>
+            <Comment>Rebuild</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-11-28</Date>
+            <Version>1.223</Version>
+            <Comment>rebuild for perl</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-08-17</Date>
+            <Version>1.223</Version>
+            <Comment>Dep Fixed</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-09-07</Date>
+            <Version>1.223</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

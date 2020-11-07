@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl-Test-Exception</Name>
+        <Homepage>http://search.cpan.org/dist/Test-Exception/</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>Artistic</License>
+        <IsA>library</IsA>
+        <Summary>Module for testing exception based codes</Summary>
+        <Description>This module provides a few convenience methods for testing exception based code. It is built with Test::Builder and plays happily with Test::More and friends.</Description>
+        <Archive sha1sum="6ae83ee5ecd23ec015d511473cb47623d60f8cc5" type="targz">https://www.cpan.org/authors/id/A/AD/ADIE/Test-Exception-0.32.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>perl-Module-Build</Dependency>
+            <Dependency>perl-Sub-Uplevel</Dependency>
+            <Dependency>perl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>perl-Test-Exception</Name>
+        <RuntimeDependencies>
+            <Dependency>perl-Module-Build</Dependency>
+            <Dependency>perl-Sub-Uplevel</Dependency>
+            <Dependency>perl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc/perl-Test-Exception</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2020-11-03</Date>
+            <Version>0.32</Version>
+            <Comment>Rebuild</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+
+        <Update release="2">
+            <Date>2013-11-08</Date>
+            <Version>0.32</Version>
+            <Comment>Version bump</Comment>
+            <Name>Richard de Bruin</Name>
+            <Email>richdb@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-09-06</Date>
+            <Version>0.31</Version>
+            <Comment>First release</Comment>
+            <Name>Osman Erkan</Name>
+            <Email>osman.erkan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
