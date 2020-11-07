@@ -1,0 +1,220 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xbmc</Name>
+        <Homepage>http://xbmc.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>LGPL</License>
+        <IsA>app:gui</IsA>
+        <Summary>A free and open source media-player and entertainment hub</Summary>
+        <Description>XBMC is an award-winning free and open source (GPL) software media player and entertainment hub for digital media</Description>
+        <Archive sha1sum="1c9bca08931578090264080b217d35cac1a33754" type="targz">https://fossies.org/linux/misc/xbmc-18.8-Leia.tar.gz</Archive>
+        <BuildDependencies>
+			<Dependency>jre7-openjdk-headless</Dependency>
+			<Dependency>sqlite-devel</Dependency>
+			<Dependency>mariadb-client</Dependency>
+			<Dependency>dbus-devel</Dependency>
+			<Dependency>libcap-devel</Dependency>
+			<Dependency>cmake</Dependency>
+			<Dependency>fstrcmp-devel</Dependency>
+            <Dependency>flatbuffers-devel</Dependency>
+			<Dependency>swig</Dependency>
+            <Dependency>giflib-devel</Dependency>
+            <Dependency>fmt-devel</Dependency>
+            <Dependency>zip</Dependency>
+            <Dependency>git</Dependency>
+            <Dependency>nasm</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>unrar</Dependency>
+            <Dependency>unzip</Dependency>
+            <Dependency>enca-devel</Dependency>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>avahi-devel</Dependency>
+            <Dependency>fribidi-devel</Dependency>
+            <Dependency>freeglut-devel</Dependency>
+            <Dependency>libplist-devel</Dependency>
+            <Dependency>bluez-libs-devel</Dependency>
+            <Dependency>libmicrohttpd-devel</Dependency>
+            <Dependency>libimobiledevice-devel</Dependency>
+            <Dependency versionFrom="0.90">libcdio-devel</Dependency>
+            <Dependency>libpcre-devel</Dependency>
+            <Dependency>lzo-devel</Dependency>
+            <Dependency>python-pillow</Dependency> 
+            <Dependency>a52dec-devel</Dependency>
+            <Dependency>alsa-lib-devel</Dependency>
+            <Dependency>faac-devel</Dependency>
+            <Dependency>faad2-devel</Dependency>
+            <Dependency>flac-devel</Dependency>
+            <Dependency>glew-devel</Dependency>
+            <Dependency>jasper-devel</Dependency>
+            <Dependency>jbigkit-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+            <Dependency>libass-devel</Dependency>
+            <Dependency>libdca-devel</Dependency>
+            <Dependency>libdvdcss-devel</Dependency>
+            <Dependency>libmad-devel</Dependency>
+            <Dependency>libmms-devel</Dependency>
+            <Dependency>libmodplug-devel</Dependency>
+            <Dependency>libmpeg2-devel</Dependency>
+            <Dependency>libogg-devel</Dependency>
+            <Dependency>libsamplerate-devel</Dependency>
+            <Dependency>libsdl-devel</Dependency>
+            <Dependency>libvorbis-devel</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>sdl-image-devel</Dependency>
+            <Dependency>libdvdread-devel</Dependency>
+			<Dependency>sdl-mixer-devel</Dependency>
+<!--             <Dependency>sdl-sound-devel</Dependency> -->
+            <Dependency>tiff-devel</Dependency>
+            <Dependency>pulseaudio</Dependency>
+            <Dependency>wavpack-devel</Dependency>
+            <Dependency>ffmpeg-devel</Dependency>
+            <Dependency>curl-devel</Dependency>
+            <Dependency>libXinerama-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+            <Dependency>fontconfig-devel</Dependency>
+            <Dependency>libXt-devel</Dependency>
+            <Dependency>libXtst-devel</Dependency>
+            <Dependency>libXmu-devel</Dependency>
+            <Dependency>mesa-devel</Dependency>
+            <Dependency>libssh-devel</Dependency>
+            <Dependency>libva-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>pulseaudio-libs-devel</Dependency>
+            <Dependency>rtmpdump-devel</Dependency>
+            <Dependency>samba-devel</Dependency>
+            <Dependency>libvdpau-devel</Dependency>
+            <Dependency>yajl-devel</Dependency>
+            <Dependency>libbluray-devel</Dependency><!--bluray suppport-->
+            <Dependency>libcrystalhd-devel</Dependency><!--crystalhd suppport-->
+            <Dependency>crystalhd-firmware</Dependency>
+            <Dependency>tinyxml-devel</Dependency>
+            <Dependency>mariadb-lib</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>doxygen</Dependency>
+            <Dependency>lame-devel</Dependency>
+	    <Dependency>gimp-devel</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+	    <Dependency>gmp-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+<!-- 	    <Patch level="1">enable-external-ffmpeg.patch</Patch> -->
+            <Patch level="1">xbmc-system-groovy-hack.patch</Patch>
+<!-- 	    <Patch level="1">xbmc-bootstrap-return-value.patch</Patch> -->
+<!-- 	    <Patch level="1">0001-CEC-bump-libCEC-to-2.2.0.patch</Patch> -->
+<!-- 	    <Patch level="1">0002-CEC-fixed-don-t-try-to-stick-a-value-255-in-a-byte.patch</Patch> -->
+<!-- 	    <Patch level="1">0003-CEC-prevent-bus-rescan-on-a-Pi-since-the-adapter-can.patch</Patch> -->
+<!-- 	    <Patch level="1">0004-CEC-fixed-don-t-return-garbage-from-CEC-related-app-.patch</Patch> -->
+<!-- 	    <Patch level="1">0005-CEC-renamed-the-iDoubleTapTimeoutMs-in-the-new-libCE.patch</Patch> -->
+<!-- 	    <Patch level="1">0006-CEC-fixed-don-t-use-CEC_CLIENT_VERSION_CURRENT-for-t.patch</Patch> -->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>xbmc</Name>
+        <RuntimeDependencies>
+            <Dependency>gmp</Dependency>
+            <Dependency>mesa</Dependency>
+            <Dependency>yajl</Dependency>
+            <Dependency>glew</Dependency>
+            <Dependency>tiff</Dependency>
+            <Dependency>libva</Dependency>
+            <Dependency>samba</Dependency>
+            <Dependency>libssh</Dependency>
+            <Dependency>libsdl</Dependency>
+            <Dependency>ffmpeg</Dependency>
+            <Dependency>gnutls</Dependency>
+            <Dependency>nettle</Dependency>
+            <Dependency>libXmu</Dependency>
+            <Dependency>taglib</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>tinyxml</Dependency>
+            <Dependency>fribidi</Dependency>
+            <Dependency>libxslt</Dependency>
+            <Dependency>mesa-glu</Dependency>
+            <Dependency>libplist</Dependency>
+            <Dependency>alsa-lib</Dependency>
+            <Dependency>libvorbis</Dependency>
+            <Dependency>libXrandr</Dependency>
+            <Dependency>bluez-libs</Dependency>
+            <Dependency>mesa-utils</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+            <Dependency>libsamplerate</Dependency>
+            <Dependency>libmicrohttpd</Dependency>
+            <Dependency>pulseaudio-libs</Dependency>
+            <Dependency versionFrom="0.90">libcdio</Dependency>
+            <Dependency>libbluray</Dependency><!--bluray suppport-->
+            <Dependency>libcrystalhd</Dependency><!--crystalhd suppport-->
+            <Dependency>mariadb-lib</Dependency>
+            <Dependency>pulseaudio</Dependency><!--optional-->
+            <Dependency>unrar</Dependency><!--optional-->
+            <Dependency>avahi</Dependency><!--optional-->
+	    <Dependency>xz</Dependency>
+            <Dependency>lzo</Dependency>
+            <Dependency>dbus</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>expat</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libcap</Dependency>
+            <Dependency>libdrm</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>libpng</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>sqlite</Dependency>
+            <Dependency>libpcre</Dependency>
+            <Dependency>libsdl2</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>freetype</Dependency>
+	        <Dependency>libsdl2</Dependency>
+		    <Dependency>curl</Dependency>
+            <Dependency>eudev</Dependency>
+            <Dependency>openssl</Dependency>
+            <Dependency>giflib</Dependency>
+            <Dependency>libass</Dependency>
+            <Dependency>fstrcmp</Dependency>
+            <Dependency>avahi-libs</Dependency>
+            <Dependency>libutil-linux</Dependency>
+			<Dependency>lcms2</Dependency>
+        </RuntimeDependencies>
+	
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/lib/kodi</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/kodi/</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="manfile">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/xsessions</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+			<Path fileType="lib">/usr/lib</Path>
+        </Files>
+		
+        <Provides>
+            <COMAR script="service.py">System.Service</COMAR>
+            <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
+        </Provides>
+    </Package>
+    <Package>
+        <Name>xbmc-devel</Name>
+        <Files>
+            <Path fileType="headers">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+      <Update release="1">
+            <Date>2020-10-06</Date>
+            <Version>18.8</Version>
+            <Comment>versıon bump</Comment>
+            <Name>alialgul</Name>
+            <Email>aligulle3801@gmail.com</Email>
+        </Update>
+	</History>   
+</PISI>  

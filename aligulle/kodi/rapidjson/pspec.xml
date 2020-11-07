@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>rapidjson</Name>
+        <Homepage>https://github.com/miloyip/rapidjson</Homepage>
+        <Packager>
+            <Name>ali algul</Name>
+            <Email>aligulle3801@gmail.com</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <IsA>app</IsA>
+        <Summary>Rapidjson is an attempt to create the fastest JSON parser and generator</Summary>
+        <Description>Rapidjson is an attempt to create the fastest JSON parser and generator</Description>
+        <Archive sha1sum="a3e0d043ad3c2d7638ffefa3beb30a77c71c869f" type="targz">https://codeload.github.com/Tencent/rapidjson/tar.gz/v1.1.0</Archive>
+  
+        <BuildDependencies>
+            <Dependency>cmake</Dependency>
+        </BuildDependencies>
+        -->
+        <!--
+        <Patches>
+            <Patch>rapidjson.patch</Patch>
+            <Patch level="1">rapidjson.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>rapidjson</Name>
+        <!--
+        <RuntimeDependencies>
+            <Dependency>Dep1</Dependency>
+            <Dependency>Dep2</Dependency>
+            <Dependency>Dep3</Dependency>
+            <Dependency versionFrom="">Dep4</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>           
+        </Files>
+     
+    </Package>
+   
+    <Package>
+        <Name>rapidjson-devel</Name>
+        <Summary>Development files for rapidjson</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">rapidjson</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+   
+    <History>
+        <Update release="1">
+            <Date>2020-11-04</Date>
+            <Version>1.1.0</Version>
+            <Comment>First release</Comment>
+            <Name>ali algul</Name>
+            <Email>aligulle3801@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

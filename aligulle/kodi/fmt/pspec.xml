@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>fmt</Name>
+        <Homepage>https://github.com/fmtlib/fmt/</Homepage>
+        <Packager>
+            <Name>ali algul</Name>
+            <Email>aligulle3801@gmail.com</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app</IsA>
+        <Summary> is an open-source formatting library providing a fast and safe alternative to C stdio and C++ iostreams</Summary>
+        <Description> is an open-source formatting library providing a fast and safe alternative to C stdio and C++ iostreams</Description>
+        <Archive sha1sum="ef7a96fd68f036519a9e4b8d707c27a74ec6b857" type="targz">https://codeload.github.com/fmtlib/fmt/tar.gz/7.1.1</Archive>
+      
+        <BuildDependencies>
+            <Dependency>cmake</Dependency>
+        </BuildDependencies>
+       
+    </Source>
+
+    <Package>
+        <Name>fmt</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+        
+    </Package>
+  
+    <Package>
+        <Name>fmt-devel</Name>
+        <Summary>Development files for fmt</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">fmt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+   
+    <History>
+        <Update release="1">
+            <Date>2020-11-04</Date>
+            <Version>7.1.1</Version>
+            <Comment>First release</Comment>
+            <Name>ali algul</Name>
+            <Email>aligulle3801@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

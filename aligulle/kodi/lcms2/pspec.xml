@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>lcms2</Name>
+        <Homepage>http://www.littlecms.com</Homepage>
+        <Packager>
+            <Name>ali algul</Name>
+            <Email>aligulle3801@gmail.com</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>app</IsA>
+        <Summary>Small-footprint color management engine</Summary>
+        <Description>Small-footprint color management engine</Description>
+        <Archive sha1sum="7413047c74de29e20caa5c9afc1b12bf07bbf7a7" type="targz">https://jztkft.dl.sourceforge.net/project/lcms/lcms/2.11/lcms2-2.11.tar.gz</Archive>
+      
+        <BuildDependencies>
+            <Dependency>tiff-devel</Dependency>
+            <Dependency>libtool</Dependency>
+        </BuildDependencies>
+      
+    </Source>
+
+    <Package>
+        <Name>lcms2</Name>
+       
+        <RuntimeDependencies>
+            <Dependency>tiff</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+        </RuntimeDependencies>
+        
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        
+    </Package>
+    <Package>
+        <Name>lcms2-devel</Name>
+        <Summary>Development files for lcms2</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">lcms2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    
+    <History>
+        <Update release="1">
+            <Date>2020-11-05</Date>
+            <Version>2.11</Version>
+            <Comment>First release</Comment>
+            <Name>ali algul</Name>
+            <Email>aligulle3801@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

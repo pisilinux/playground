@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>shairplay</Name>
+        <Homepage>https://github.com/juhovh/shairplay</Homepage>
+        <Packager>
+            <Name>ali algul</Name>
+            <Email>aligulle3801@gmail.com</Email>
+        </Packager>
+        <License>custom</License>
+        <IsA>app</IsA>
+        <Summary>Apple airplay and raop protocol server</Summary>
+        <Description>Free portable AirPlay server implementation similar to ShairPort.
+
+Currently only AirPort Express emulation is supported.</Description>
+        <Archive sha1sum="494161fee777c554085c8c4c9aed02223426da8f" type="zip">https://codeload.github.com/juhovh/shairplay/zip/master</Archive>
+        
+        <BuildDependencies>
+            <Dependency>avahi-compat-libdns_sd-devel</Dependency>
+			<Dependency>avahi-devel</Dependency>
+			<Dependency>libtool-ltdl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>shairplay</Name>
+        
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+      
+   </Package>
+    <Package>
+        <Name>shairplay-devel</Name>
+        <Summary>Development files for shairplay</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">shairplay</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+    -->
+    
+    <History>
+        <Update release="1">
+            <Date>2020-11-05</Date>
+            <Version>1</Version>
+            <Comment>First release</Comment>
+            <Name>ali algul</Name>
+            <Email>aligulle3801@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
