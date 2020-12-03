@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>electric</Name>
+        <Homepage>https://www.gnu.org/software/electric/</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>electric</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Electric is a sophisticated electrical CAD system for the design of integrated circuits.</Summary>
+        <Description>Electric is a sophisticated electrical CAD system for the design of integrated circuits. It can handle many forms of design, including:
+Custom Integrated-Circuit layout
+Schematics
+Hardware description languages</Description>
+        <Archive sha1sum="c2389af4d269a8e18d25a3281554ed59a5f9281f" type="binary">http://ftp.gnu.org/pub/gnu/electric/electric-9.07.jar</Archive>
+        <BuildDependencies>
+            <Dependency>jdk7-openjdk</Dependency>
+            <Dependency>jdk8-openjdk</Dependency>
+            <Dependency>ant</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>electric</Name>
+        <RuntimeDependencies>
+            <Dependency>jdk7-openjdk</Dependency>
+            <Dependency>jdk8-openjdk</Dependency>
+            <Dependency>ant</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+            <Path fileType="data">/usr/share/electric</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man/man1</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            -->
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/applications/electric.desktop">electric.desktop</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pixmaps/electric.jpg">electric.jpg</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/electric">electric</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-12-01</Date>
+            <Version>9.07</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
