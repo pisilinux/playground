@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ukui-media</Name>
+        <Homepage>https://github.com/ukui/ukui-media</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>library</IsA>
+        <Summary>UKUI media utilities</Summary>
+        <Description>UKUI media utilities</Description>
+        <Archive sha1sum="68f8ede8a3e0b6e5bc96f69069948b9170fd6f12" type="targz">https://codeload.github.com/ukui/ukui-media/tar.gz/v3.0.1</Archive>
+        <BuildDependencies>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>libcanberra-gtk3-devel</Dependency>
+            <Dependency>kwindowsystem-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libmatemixer-devel</Dependency>
+            <Dependency>mate-desktop-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libcanberra-gtk-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>libqtxdg-devel</Dependency>
+            <Dependency>qt5-multimedia-devel</Dependency>
+            <Dependency>qt5-svg-devel</Dependency>
+            <Dependency>autoconf-archive</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>mate-common</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ukui-media</Name>
+        <RuntimeDependencies>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libcanberra-gtk3</Dependency>
+            <Dependency>kwindowsystem</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libmatemixer</Dependency>
+            <Dependency>mate-desktop</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libcanberra-gtk</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>libqtxdg</Dependency>
+            <Dependency>qt5-multimedia</Dependency>
+            <Dependency>qt5-svg</Dependency>
+            <Dependency>autoconf-archive</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>mate-common</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/omf</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/help</Path>
+            <Path fileType="data">/usr/share/ukui</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/sounds</Path>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="data">/usr/share/ukui-2.0</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="data">/usr/share/ukui-media</Path>
+            <Path fileType="data">/usr/share/ukui-panel</Path>
+            <Path fileType="config">/etc/xdg/autostart/</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-11-09</Date>
+            <Version>3.0.1</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gsettings-qt</Name>
+        <Homepage>https://github.com/lirios/qtgsettings</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>LGPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Qml bindings for GSettings</Summary>
+        <Description>Qml bindings for GSettings</Description>
+        <Archive sha1sum="468b02501d98beb3c6076ebc34905bcb00309754" type="targz">https://codeload.github.com/linuxdeepin/gsettings-qt/tar.gz/0.2</Archive>
+        <BuildDependencies>
+            <Dependency>bzr</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gsettings-qt</Name>
+        <RuntimeDependencies>
+            <Dependency>bzr</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib/qt</Path>
+            <Path fileType="data">/usr/share/qt5</Path>
+            -->
+        </Files>
+    </Package>
+    <Package>
+        <Name>gsettings-qt-devel</Name>
+        <Summary>Development files for gsettings-qt</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">gsettings-qt</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-11-11</Date>
+            <Version>0.2</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

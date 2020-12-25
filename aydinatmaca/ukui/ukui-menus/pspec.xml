@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ukui-menus</Name>
+        <Homepage>https://github.com/ukui/ukui-menus</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>data</IsA>
+        <Summary>Implementation of the freedesktop menu specification for UKUI</Summary>
+        <Description>Implementation of the freedesktop menu specification for UKUI</Description>
+        <Archive sha1sum="81f1a5bd5b11c3029e38c586854455593eaeb9e8" type="targz">https://codeload.github.com/ukui/ukui-menus/tar.gz/v1.1.4</Archive>
+        <BuildDependencies>
+            <Dependency>python3-devel</Dependency>
+            <Dependency>mate-common</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ukui-menus</Name>
+        <RuntimeDependencies>
+            <Dependency>python3</Dependency>
+            <Dependency>mate-common</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+        </RuntimeDependencies>
+        <Files>
+          <Path fileType="library">/usr/lib</Path>
+          <Path fileType="doc">/usr/share/doc</Path>
+          <Path fileType="data">/etc/xdg/menus</Path>
+          <Path fileType="data">/usr/share/gir-1.0</Path>
+          <Path fileType="localedata">/usr/share/locale</Path>
+          <Path fileType="data">/usr/share/ukui</Path>
+            -->
+        </Files>
+    </Package>
+    <Package>
+        <Name>ukui-menus-devel</Name>
+        <Summary>Development files for ukui-menus</Summary>
+        <RuntimeDependencies>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency release="current">ukui-menus</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+            
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-11-09</Date>
+            <Version>1.1.4</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

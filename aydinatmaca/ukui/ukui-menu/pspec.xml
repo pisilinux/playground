@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ukui-menu</Name>
+        <Homepage>https://github.com/ukui/ukui-menu</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>GPLv1</License>
+        <IsA>library</IsA>
+        <Summary>Start menu development library and advanced graphical user interface for UKUI</Summary>
+        <Description>Start menu development library and advanced graphical user interface for UKUI</Description>
+        <Archive sha1sum="ee34ca66d63ab62a7a9164cdcb855334c4afe7c9" type="targz">https://codeload.github.com/ukui/ukui-menu/tar.gz/v3.0.1</Archive>
+        <BuildDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency>bamf-devel</Dependency>
+            <Dependency>gsettings-qt-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>libXtst-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>kwindowsystem-devel</Dependency>
+            <Dependency>qt5-svg-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ukui-menu</Name>
+        <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency>bamf</Dependency>
+            <Dependency>gsettings-qt</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>libXrandr</Dependency>
+            <Dependency>libXtst</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>kwindowsystem</Dependency>
+            <Dependency>qt5-svg</Dependency>
+            <Dependency>qt5-x11extras</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc/xdg</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            -->
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-11-11</Date>
+            <Version>3.0.1</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

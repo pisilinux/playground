@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ukui-panel</Name>
+        <Homepage>https://github.com/ukui/ukui-panel</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>library</IsA>
+        <Summary>Launcher and docking facility for UKUI</Summary>
+        <Description>Launcher and docking facility for UKUI</Description>
+        <Archive sha1sum="8746eccf476377db1ab9fd85c725f068488fe15f" type="targz">https://codeload.github.com/ukui/ukui-panel/tar.gz/v3.0.3</Archive>
+        <BuildDependencies>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>libXdamage-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+            <Dependency>gsettings-qt-devel</Dependency>
+            <Dependency>libXcomposite-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
+            <Dependency>dconf-devel</Dependency>
+            <Dependency>kwindowsystem-devel</Dependency>
+            <Dependency>libqtxdg-devel</Dependency>
+            <Dependency>qt5-webkit-devel</Dependency>
+            <Dependency>ukui-biometric-auth</Dependency>
+            <Dependency>ukui-menu</Dependency>
+            <Dependency>ukui-menus</Dependency>
+            <Dependency>cmake</Dependency>
+            <Dependency>ninja</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ukui-panel</Name>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>libXdamage</Dependency>
+            <Dependency>libXrender</Dependency>
+            <Dependency>gsettings-qt</Dependency>
+            <Dependency>libXcomposite</Dependency>
+            <Dependency>qt5-x11extras</Dependency>
+            <Dependency>dconf</Dependency>
+            <Dependency>kwindowsystem</Dependency>
+            <Dependency>libqtxdg</Dependency>
+            <Dependency>qt5-webkit</Dependency>
+            <Dependency>ukui-biometric-auth</Dependency>
+            <Dependency>ukui-menu</Dependency>
+            <Dependency>ukui-menus</Dependency>
+            <Dependency>cmake</Dependency>
+            <Dependency>ninja</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+           <Path fileType="library">/usr/lib</Path>
+            <Path fileType="config">/etc/xdg</Path>
+           <Path fileType="doc">/usr/share/doc</Path>
+           <Path fileType="data">/usr/share/omf</Path>
+           <Path fileType="executable">/usr/bin</Path>
+           <Path fileType="data">/usr/share/man</Path>
+           <Path fileType="data">/usr/share/cmake</Path>
+           <Path fileType="data">/usr/share/ukui</Path>
+           <Path fileType="data">/usr/share/help</Path>
+           <Path fileType="data">/usr/share/icons</Path>
+           <Path fileType="data">/usr/share/dbus-1</Path>
+           <Path fileType="data">/usr/share/gir-1.0</Path>
+           <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="executable">/usr/libexec/</Path>
+           <Path fileType="data">/usr/share/ukui/ukui-panel</Path>
+           <Path fileType="localedata">/usr/share/locale</Path>
+           <Path fileType="data">/usr/share/applications</Path>
+            -->
+        </Files>
+    </Package>
+    <Package>
+        <Name>ukui-panel-devel</Name>
+        <Summary>Development files for ukui-panel</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">ukui-panel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-11-10</Date>
+            <Version>3.0.3</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
