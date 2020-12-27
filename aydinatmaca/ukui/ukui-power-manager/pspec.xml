@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ukui-power-manager</Name>
+        <Homepage>https://github.com/ukui/ukui-power-manager</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>data:</IsA>
+        <Summary>Power management tool for the UKUI desktop</Summary>
+        <Description>Power management tool for the UKUI desktop</Description>
+        <Archive sha1sum="c52ecff571dee177501f22f3b4718505474421fa" type="targz">https://codeload.github.com/ukui/ukui-power-manager/tar.gz/v2.0.2</Archive>
+        <BuildDependencies>
+            <Dependency>dbus-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>mate-common</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>upower-devel</Dependency>
+            <Dependency>upower-devel</Dependency>
+            <Dependency>gnome-keyring</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>dbus-glib-devel</Dependency>
+            <Dependency>libgnome-keyring</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>libcanberra-gtk3-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ukui-power-manager</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>dbus</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>upower</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>upower</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>libXrandr</Dependency>
+            <Dependency>dbus-glib</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>mate-common</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>gnome-keyring</Dependency>
+            <Dependency>libgnome-keyring</Dependency>
+            <Dependency>libcanberra-gtk3</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/omf</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="data">/usr/share/help</Path>
+            <Path fileType="data">/usr/share/ukui*</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/polkit-1</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="config">/etc/xdg/autostart/</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            -->
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-11-11</Date>
+            <Version>2.0.2</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

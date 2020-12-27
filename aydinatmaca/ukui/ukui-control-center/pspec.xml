@@ -1,0 +1,121 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>ukui-control-center</Name>
+        <Homepage>https://github.com/ukui/ukui-control-center</Homepage>
+        <Packager>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Icon>ukui-control-center</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>Utilities to configure the UKUI desktop</Summary>
+        <Description>Utilities to configure the UKUI desktop
+</Description>
+        <Archive sha1sum="d712513644bc66bab5e5850ae223f2386c444846" type="targz">https://codeload.github.com/ukui/ukui-control-center/tar.gz/v3.0.1</Archive>
+        <BuildDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency>kscreen</Dependency>
+            <Dependency>ukui-media</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>ki18n-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>dconf-devel</Dependency>
+            <Dependency>libXi-devel</Dependency>
+            <Dependency>upower-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>kconfig-devel</Dependency>
+            <Dependency>qt5-svg-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>qt5-base-devel</Dependency>
+            <Dependency>ukui-peony-devel</Dependency>
+            <Dependency>ukui-screensaver</Dependency>
+            <Dependency>ukui-menus-devel</Dependency>
+            <Dependency>ukui-panel-devel</Dependency>
+            <Dependency>libkscreen-devel</Dependency>
+            <Dependency>libXcursor-devel</Dependency>
+            <Dependency>libkscreen-devel</Dependency>
+            <Dependency>libmatekbd-devel</Dependency>
+            <Dependency>qt5-quickcontrols</Dependency>
+            <Dependency>libxklavier-devel</Dependency>
+            <Dependency>kcoreaddons-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>gsettings-qt-devel</Dependency>
+            <Dependency>ukui-power-manager</Dependency>
+            <Dependency>mate-desktop-devel</Dependency>
+            <Dependency>libmatemixer-devel</Dependency>
+            <Dependency>qt5-x11extras-devel</Dependency>
+            <Dependency>kconfigwidgets-devel</Dependency>
+            <Dependency>kwidgetsaddons-devel</Dependency>
+            <Dependency>ukui-interface-devel</Dependency>
+            <Dependency>qt5-multimedia-devel</Dependency>
+            <Dependency>qt5-declarative-devel</Dependency>
+            <Dependency>ukui-settings-daemon-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>ukui-control-center</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>ki18n</Dependency>
+            <Dependency>libXi</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>dconf</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>upower</Dependency>
+            <Dependency>kconfig</Dependency>
+            <Dependency>qt5-svg</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>kscreen</Dependency>
+            <Dependency>qt5-base</Dependency>
+            <Dependency>ukui-peony</Dependency>
+            <Dependency>ukui-menus</Dependency>
+            <Dependency>ukui-panel</Dependency>
+            <Dependency>ukui-media</Dependency>
+            <Dependency>libmatekbd</Dependency>
+            <Dependency>libkscreen</Dependency>
+            <Dependency>libXcursor</Dependency>
+            <Dependency>libxklavier</Dependency>
+            <Dependency>kcoreaddons</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>libmatemixer</Dependency>
+            <Dependency>mate-desktop</Dependency>
+            <Dependency>gsettings-qt</Dependency>
+            <Dependency>qt5-x11extras</Dependency>
+            <Dependency>kconfigwidgets</Dependency>
+            <Dependency>qt5-multimedia</Dependency>
+            <Dependency>kwidgetsaddons</Dependency>
+            <Dependency>ukui-interface</Dependency>
+            <Dependency>qt5-declarative</Dependency>
+            <Dependency>ukui-screensaver</Dependency>
+            <Dependency>qt5-quickcontrols</Dependency>
+            <Dependency>ukui-power-manager</Dependency>
+            <Dependency>ukui-settings-daemon</Dependency>
+        </RuntimeDependencies>
+        -->
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            -->
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2020-11-08</Date>
+            <Version>3.0.1</Version>
+            <Comment>First release</Comment>
+            <Name>AYDIN ATMACA</Name>
+            <Email>aydinatmaca@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
