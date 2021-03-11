@@ -3,14 +3,17 @@
 #
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/licenses/gpl.txt
+
+import subprocess
 from pisi.actionsapi import shelltools, pisitools, autotools
 from pisi.actionsapi import get
 from pisi.util import join_path
 
 _, _, _, update = get.srcVERSION().split('.')
-jobs = get.makeJOBS().replace('-j', '')
+#jobs = "-j"+ subprocess.check_output("nproc 2>/dev/null", shell=True).rstrip("\n")
+jobs = subprocess.check_output("nproc 2>/dev/null", shell=True).rstrip("\n")
 
-jvm_dir = '/usr/lib/jvm/java-13-openjdk'
+jvm_dir = '/usr/lib/jvm/java-openjdk'
 img_dir = 'build/linux-%s-server-release/images' % get.ARCH()
 
 cflags = get.CFLAGS()
@@ -29,8 +32,8 @@ def setup():
         --with-version-pre="" \
         --with-version-opt="" \
         --with-stdc++lib=dynamic \
-        --with-extra-cflags="%s" \
-        --with-extra-cxxflags="%s" \
+        --with-extra-cflags="%s -fcommon" \
+        --with-extra-cxxflags="%s -fcommon" \
         --with-extra-ldflags="%s" \
         --with-libjpeg=system \
         --with-giflib=system \
@@ -38,7 +41,7 @@ def setup():
         --with-lcms=system \
         --with-zlib=system \
         --with-jvm-features=zgc \
-        --with-boot-jdk=%s \
+        --with-boot-jdk="%s" \
         --enable-unlimited-crypto \
         --disable-warnings-as-errors \
         --with-num-cores="%s"' % (update, cflags, cxxflags, ldflags, jvm_dir, jobs)
@@ -72,8 +75,8 @@ def install():
     pisitools.insinto(jvm_dir, join_path(img_dir, 'jdk/jmods'))
 
     # Configurations
-    pisitools.insinto('/etc/java-13-openjdk', join_path(img_dir, 'jre/conf/*'))
-    pisitools.dosym('/etc/java-13-openjdk', join_path(jvm_dir, 'conf'))
+    pisitools.insinto('/etc/java-openjdk', join_path(img_dir, 'jre/conf/*'))
+    pisitools.dosym('/etc/java-openjdk', join_path(jvm_dir, 'conf'))
 
     # Man pages
     pisitools.doman(join_path(img_dir, 'jdk/man/man1/*'))
@@ -83,23 +86,25 @@ def install():
         pisitools.domove(
             '/usr/share/man/man1/%s' % man_file,
             '/usr/share/man/man1',
-            '%s-openjdk13.1' % man_file.replace('.1', '')
+            '%s-openjdk15.1' % man_file.replace('.1', '')
         )
 
     # Documentations
-    pisitools.insinto(join_path('/', get.docDIR(), 'java-13-openjdk'), join_path(img_dir, 'docs/*'))
+    pisitools.insinto(join_path('/', get.docDIR(), 'java-openjdk'), join_path(img_dir, 'docs/*'))
 
     # Licenses
-    pisitools.insinto('/usr/share/licenses/java-13-openjdk', join_path(img_dir, 'jre/legal/*'))
-    pisitools.dosym('/usr/share/licenses/java-13-openjdk', join_path(jvm_dir, 'legal'))
+    pisitools.insinto('/usr/share/licenses/java-openjdk', join_path(img_dir, 'jre/legal/*'))
+    pisitools.dosym('/usr/share/licenses/java-openjdk', join_path(jvm_dir, 'legal'))
 
     pisitools.remove("%s/lib/security/cacerts" % jvm_dir)
     pisitools.dosym("/etc/ssl/certs/java/cacerts", "%s/lib/security/cacerts" % jvm_dir)
+    
+    shelltools.system("rm -rf %s/%s/bin/*.debuginfo" %(get.installDIR(), jvm_dir))
 
     # Icons
     for size in [16, 24, 32, 48]:
         pisitools.insinto(
             "/usr/share/icons/hicolor/{size}x{size}/apps/".format(size=size),
             "src/java.desktop/unix/classes/sun/awt/X11/java-icon%s.png" % size,
-            "java-13-openjdk.png"
+            "java-openjdk.png"
         )
