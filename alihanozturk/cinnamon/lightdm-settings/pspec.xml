@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>lightdm-settings</Name>
+        <Homepage>https://github.com/linuxmint/</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop.misc</PartOf>
+        <Summary>A configuration tool for the LightDM display manager.</Summary>
+        <Description>A configuration tool for the LightDM display manager.</Description>
+        <BuildDependencies>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>lightdm-devel</Dependency>
+            <Dependency>lightdm-slick-greeter</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>python3-pygobject3-devel</Dependency>
+            <Dependency>python3-setproctitle</Dependency>
+            <Dependency>python3-xapp</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="15e8e56f92cfbdb34de8e12eb9ef3982ab308fb4">https://github.com/linuxmint/lightdm-settings/archive/refs/tags/1.5.8.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>lightdm-settings</Name>
+        <Summary>A configuration tool for the LightDM display manager.</Summary>
+        <RuntimeDependencies>
+            <Dependency>lightdm</Dependency>
+            <Dependency>lightdm-slick-greeter</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
+            <Dependency>polkit</Dependency>
+            <Dependency>python3-pygobject3</Dependency>
+            <Dependency>python3-setproctitle</Dependency>
+            <Dependency>python3-xapp</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2022-07-15</Date>
+            <Version>1.5.8</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
