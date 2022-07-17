@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="slick-greeter">
+  <schema id="x.dm.slick-greeter" path="/x/dm/slick-greeter/">
+    <key name="background" type="s">
+      <default>'/usr/share/slick-greeter/slick-greeter.png'</default>
+      <summary>Background file to use</summary>
+    </key>
+    <key name="background-color" type="s">
+      <default>'#000000'</default>
+      <summary>Background color (e.g. #772953), set before wallpaper is seen</summary>
+    </key>
+    <key name="stretch-background-across-monitors" type="b">
+      <default>false</default>
+      <summary>Whether to stretch the background across multiple monitors (or to replicate it on each monitor).</summary>
+    </key>
+    <key name="draw-user-backgrounds" type="b">
+      <default>true</default>
+      <summary>Whether to draw user backgrounds</summary>
+    </key>
+    <key name="draw-grid" type="b">
+      <default>false</default>
+      <summary>Whether to draw an overlay grid</summary>
+    </key>
+    <key name="show-hostname" type="b">
+      <default>true</default>
+      <summary>Whether to show the hostname in the menubar</summary>
+    </key>
+    <key name="show-keyboard" type="b">
+      <default>true</default>
+      <summary>Whether to show the keyboard indicator in the menubar</summary>
+    </key>
+    <key name="show-a11y" type="b">
+      <default>true</default>
+      <summary>Whether to show the accessibility menu in the menubar</summary>
+    </key>
+    <key name="show-power" type="b">
+      <default>true</default>
+      <summary>Whether to show the power indicator in the menubar</summary>
+    </key>
+    <key name="show-clock" type="b">
+      <default>true</default>
+      <summary>Whether to show the clock in the menubar</summary>
+    </key>
+    <key name="show-quit" type="b">
+      <default>true</default>
+      <summary>Whether to show the quit menu in the menubar</summary>
+    </key>
+    <key name="logo" type="s">
+      <default>''</default>
+      <summary>Logo file to use</summary>
+    </key>
+    <key name="other-monitors-logo" type="s">
+      <default>''</default>
+      <summary>Logo file to use for other monitors</summary>
+    </key>
+    <key name="theme-name" type="s">
+      <default>'Mint-Y-Aqua'</default>
+      <summary>GTK+ theme to use</summary>
+    </key>
+    <key name="icon-theme-name" type="s">
+      <default>'Mint-Y-Aqua'</default>
+      <summary>Icon theme to use</summary>
+    </key>
+    <key name="font-name" type="s">
+      <default>'Sans 11'</default>
+      <summary>Font to use</summary>
+    </key>
+    <key name="xft-antialias" type="b">
+      <default>true</default>
+      <summary>Whether to antialias Xft fonts</summary>
+    </key>
+    <key name="xft-dpi" type="d">
+      <default>96</default>
+      <summary>Resolution for Xft in dots per inch</summary>
+    </key>
+    <key name="xft-hintstyle" type="s">
+      <choices>
+        <choice value='hintnone'/>
+        <choice value='hintslight'/>
+        <choice value='hintmedium'/>
+        <choice value='hintfull'/>
+      </choices>
+      <default>'hintslight'</default>
+      <summary>What degree of hinting to use</summary>
+    </key>
+    <key name="xft-rgba" type="s">
+      <choices>
+        <choice value='none'/>
+        <choice value='rgb'/>
+        <choice value='bgr'/>
+        <choice value='vrgb'/>
+        <choice value='vbgr'/>
+      </choices>
+      <default>'rgb'</default>
+      <summary>Type of subpixel antialiasing</summary>
+    </key>
+    <key name="onscreen-keyboard" type="b">
+      <default>false</default>
+      <summary>Whether to enable the onscreen keyboard</summary>
+    </key>
+    <key name="high-contrast" type="b">
+      <default>false</default>
+      <summary>Whether to use a high contrast theme</summary>
+    </key>
+    <key name="screen-reader" type="b">
+      <default>false</default>
+      <summary>Whether to enable the screen reader</summary>
+    </key>
+    <key name="play-ready-sound" type="s">
+      <default>''</default>
+      <summary>A sound file to play when the greeter is ready</summary>
+    </key>
+    <key name="hidden-users" type="as">
+      <default>[]</default>
+      <summary>List of usernames that are hidden until a special key combination is hit</summary>
+    </key>
+    <key name="group-filter" type="as">
+      <default>[]</default>
+      <summary>List of groups that users must be part of to be shown (empty list shows all users)</summary>
+    </key>
+    <key name="enable-hidpi" type="s">
+      <choices>
+        <choice value='on'/>
+        <choice value='off'/>
+        <choice value='auto'/>
+      </choices>
+      <default>'auto'</default>
+      <summary>Whether to enable HiDPI support</summary>
+    </key>
+    <key name="activate-numlock" type="b">
+      <default>false</default>
+      <summary>Whether to activate numlock. This features requires the installation of numlockx.</summary>
+    </key>
+    <key name="only-on-monitor" type="s">
+      <default>'auto'</default>
+      <summary>Monitor on which to show the GUI</summary>
+    </key>
+    <key name="clock-format" type="s">
+      <default>'%H:%M'</default>
+      <summary>What clock format to use (e.g., %H:%M or %l:%M %p)</summary>
+    </key>
+  </schema>
+</schemalist>

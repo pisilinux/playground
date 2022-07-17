@@ -1,0 +1,68 @@
+<PISI>
+    <Source>
+        <Name>lightdm-slick-greeter</Name>
+        <Homepage>https://github.com/linuxmint/slick-greeter</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop.misc</PartOf>
+        <Summary>A slick-looking LightDM greeter.</Summary>
+        <Description>A slick-looking LightDM greeter.</Description>
+        <BuildDependencies>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>freetype-devel</Dependency>
+            <Dependency>gnome-common</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>lightdm-devel</Dependency>
+            <Dependency>liblightdm-qt5-devel</Dependency>
+            <Dependency>pixman-devel</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>xorg-server-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="7bb6fc14f84f63de5274e928d9ac0798b995da8d" type="targz">https://github.com/linuxmint/slick-greeter/archive/refs/tags/1.5.9.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>lightdm-slick-greeter</Name>
+        <Summary>A slick-looking LightDM greeter.</Summary>
+        <RuntimeDependencies>
+            <Dependency>atk</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>lightdm</Dependency>
+            <Dependency>liblightdm-qt5</Dependency>
+            <Dependency>pixman</Dependency>
+            <Dependency>xorg-server</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/glib-2.0/schemas/x.dm.slick-greeter.gschema.xml">x.dm.slick-greeter.gschema.xml</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/slick-greeter/slick-greeter.png">slick-greeter.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/lightdm/slick-greeter.conf">slick-greeter.conf</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-07-15</Date>
+            <Version>1.5.9</Version>
+            <Comment>First Release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
