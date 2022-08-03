@@ -1,0 +1,40 @@
+<PISI>
+    <Source>
+        <Name>elementary-icon-theme</Name>
+        <Homepage>https://github.com/elementary/icons</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop.lookandfeel</PartOf>
+        <Summary>Named, vector icons for elementary OS</Summary>
+        <Description>Named, vector icons for elementary OS</Description>
+        <BuildDependencies>
+            <Dependency>xorg-xcursorgen</Dependency>
+            <Dependency>librsvg-devel</Dependency>
+            <Dependency>meson</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="395e538a2bef72746b7e2ebbab5d5bb798c4e395" type="targz">https://github.com/elementary/icons/archive/refs/tags/7.0.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>elementary-icon-theme</Name>
+        <Summary>Named, vector icons for elementary OS</Summary>
+        <RuntimeDependencies>
+            <Dependency>xorg-xcursorgen</Dependency>
+            <Dependency>librsvg</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>7.0.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

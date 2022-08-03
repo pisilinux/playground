@@ -1,0 +1,53 @@
+<PISI>
+    <Source>
+        <Name>wingpanel-indicator-privacy</Name>
+        <Homepage>https://github.com/elementary/wingpanel-indicator-privacy</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Wingpanel Privacy Indicator</Summary>
+        <Description>Wingpanel Privacy Indicator</Description>
+        <BuildDependencies>
+            <Dependency>bamf-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libgtop-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>wingpanel-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="baecae1b1d73b0beae42eed3287070dd569ef9d7" type="zip">https://github.com/elementary/wingpanel-indicator-privacy/archive/refs/heads/master.zip</Archive>
+    </Source>
+    <Package>
+        <Name>wingpanel-indicator-privacy</Name>
+        <Summary>Wingpanel Privacy Indicator</Summary>
+        <RuntimeDependencies>
+            <Dependency>bamf</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libgtop</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>wingpanel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>1.0.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

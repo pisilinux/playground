@@ -1,0 +1,59 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-pantheon-shell</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-pantheon-shell</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Desktop Plug</Summary>
+        <Description>Switchboard Desktop Plug</Description>
+        <BuildDependencies>
+            <Dependency>gnome-desktop-devel</Dependency>
+            <Dependency>gnome-settings-daemon-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>libgexiv2-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>plank-devel</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="6179b2e80c6c0512697f7906adfeedf98085f6ad" type="targz">https://github.com/elementary/switchboard-plug-pantheon-shell/archive/refs/tags/6.2.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-pantheon-shell</Name>
+        <Summary>Switchboard Desktop Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>gnome-desktop</Dependency>
+            <Dependency>gnome-settings-daemon</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>libgexiv2</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>plank</Dependency>
+            <Dependency>switchboard</Dependency>
+            <Dependency>vala</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/contractor/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>6.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

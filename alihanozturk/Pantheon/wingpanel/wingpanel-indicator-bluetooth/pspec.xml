@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>wingpanel-indicator-bluetooth</Name>
+        <Homepage>https://github.com/elementary/wingpanel-indicator-bluetooth</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Wingpanel Bluetooth Indicator</Summary>
+        <Description>Wingpanel Bluetooth Indicator</Description>
+        <BuildDependencies>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>wingpanel-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="54b93a3f15525ad284d83aed1c01401f10256149" type="targz">https://github.com/elementary/wingpanel-indicator-bluetooth/archive/refs/tags/2.1.8.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>wingpanel-indicator-bluetooth</Name>
+        <Summary>Wingpanel Bluetooth Indicator</Summary>
+        <RuntimeDependencies>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>bluez</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>wingpanel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>2.1.8</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

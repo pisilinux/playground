@@ -1,0 +1,55 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-locale</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-locale</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Locale Plug</Summary>
+        <Description>Switchboard Locale Plug</Description>
+        <BuildDependencies>
+            <Dependency>accountsservice-devel</Dependency>
+            <Dependency>gnome-desktop-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>ibus-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="bcdda16866778c8581dcf646cac734bd3dd94ec8">https://github.com/elementary/switchboard-plug-locale/archive/refs/tags/2.5.8.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-locale</Name>
+        <Summary>Switchboard Locale Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>accountsservice</Dependency>
+            <Dependency>gnome-desktop</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>ibus</Dependency>
+            <Dependency>polkit</Dependency>
+            <Dependency>switchboard</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/contractor/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="data">/usr/share/glib-2.0/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="data">/usr/share/polkit-1/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>2.5.8</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

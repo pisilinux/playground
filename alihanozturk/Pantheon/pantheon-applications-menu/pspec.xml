@@ -1,0 +1,68 @@
+<PISI>
+    <Source>
+        <Name>pantheon-applications-menu</Name>
+        <Homepage>https://github.com/elementary/applications-menu</Homepage>
+        <Packager>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Lightweight and stylish app launcher.</Summary>
+        <Description>Lightweight and stylish app launcher.</Description>
+        <BuildDependencies>
+            <Dependency>appstream-devel</Dependency>
+            <Dependency>gnome-menus-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>json-glib-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>libhandy0-devel</Dependency>
+            <Dependency>libsoup-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>pkgconfig</Dependency>
+            <Dependency>plank-devel</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>wingpanel-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="2f6c1dde94cd19ff6c4bb211d49842804a7f6241" type="targz">https://github.com/elementary/applications-menu/archive/refs/tags/2.7.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>pantheon-applications-menu</Name>
+        <Summary>Lightweight and stylish app launcher.</Summary>
+        <RuntimeDependencies>
+            <Dependency>appstream</Dependency>
+            <Dependency>gnome-menus</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>json-glib</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>libhandy0</Dependency>
+            <Dependency>libsoup</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>pkgconfig</Dependency>
+            <Dependency>plank</Dependency>
+            <Dependency>switchboard</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>wingpanel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/etc/*</Path>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="data">/usr/share/glib-2.0/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2021-04-06</Date>
+            <Version>2.7.1</Version>
+            <Comment>First release for Pisi Linux</Comment>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Update>
+    </History>
+</PISI>

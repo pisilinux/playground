@@ -1,0 +1,49 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-security-privacy</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-security-privacy</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Security and Privacy Plug</Summary>
+        <Description>Switchboard Security and Privacy Plug</Description>
+        <BuildDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>zeitgeist-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="68edffe02f515a63c7830bbc83c7bc21d3329a74">https://github.com/elementary/switchboard-plug-security-privacy/archive/refs/tags/2.4.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-security-privacy</Name>
+        <Summary>Switchboard Security and Privacy Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>granite</Dependency>
+            <Dependency>switchboard</Dependency>
+            <Dependency>polkit</Dependency>
+            <Dependency>zeitgeist</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="data">/usr/share/polkit-1/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>2.4.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

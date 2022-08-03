@@ -1,0 +1,46 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-mouse-touchpad</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-applications</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Mouse Touchpad Plug</Summary>
+        <Description>Switchboard Mouse Touchpad Plug</Description>
+        <BuildDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="b0d6f631507c5cb5292f86484ccb71f1fa228c1c" type="targz">https://github.com/elementary/switchboard-plug-mouse-touchpad/archive/refs/tags/7.0.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-mouse-touchpad</Name>
+        <Summary>Switchboard Mouse Touchpad Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>granite</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>switchboard</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>7.0.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

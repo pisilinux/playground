@@ -1,0 +1,48 @@
+<PISI>
+    <Source>
+        <Name>wingpanel-indicator-datetime</Name>
+        <Homepage>https://github.com/elementary/wingpanel-indicator-datetime</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Wingpanel Network Indicator</Summary>
+        <Description>Wingpanel Date Time Indicator</Description>
+        <BuildDependencies>
+            <Dependency>evolution-data-server-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libical-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>wingpanel-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="2edcec685484efc7b84338330180a7986a10b3a0" type="targz">https://github.com/elementary/wingpanel-indicator-datetime/archive/refs/tags/2.4.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>wingpanel-indicator-datetime</Name>
+        <Summary>Wingpanel Date Time Indicator</Summary>
+        <RuntimeDependencies>
+            <Dependency>evolution-data-server</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libical</Dependency>
+            <Dependency>wingpanel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>2.4.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

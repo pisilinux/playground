@@ -1,0 +1,84 @@
+<PISI>
+    <Source>
+        <Name>malcontent</Name>
+        <Homepage>https://gitlab.freedesktop.org/pwithnall/malcontent</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Malcontent implements support for restricting the type of content accessible to non-administrator accounts on a Linux system.</Summary>
+        <Description>Malcontent implements support for restricting the type of content accessible to non-administrator accounts on a Linux system.</Description>
+        <BuildDependencies>
+            <Dependency>accountsservice-devel</Dependency>
+            <Dependency>appstream-devel</Dependency>
+            <Dependency>appstream-glib-devel</Dependency>
+            <Dependency>flatpak-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libglib-testing-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>pam-devel</Dependency>
+            <Dependency>yelp-tools</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>gtk-doc</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="509b8b588b533c674039087906f7793ce3da5c4d">https://gitlab.freedesktop.org/pwithnall/malcontent/-/archive/0.10.5/malcontent-0.10.5.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>malcontent</Name>
+        <Summary>Malcontent implements support for restricting the type of content accessible to non-administrator accounts on a Linux system.</Summary>
+        <RuntimeDependencies>
+            <Dependency>accountsservice</Dependency>
+            <Dependency>appstream</Dependency>
+            <Dependency>appstream-glib</Dependency>
+            <Dependency>flatpak</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>polkit</Dependency>
+            <Dependency>pam</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/libmalcontent*</Path>
+            <Path fileType="library">/usr/lib/security</Path>
+            <Path fileType="data">/usr/share/accountsservice</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/polkit-1</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/help</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>malcontent-devel</Name>
+        <Summary>Malcontent devel Packages</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">malcontent</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="library">/usr/lib/girepository-1.0</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>0.10.5</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

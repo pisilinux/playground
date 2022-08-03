@@ -1,0 +1,56 @@
+<PISI>
+    <Source>
+        <Name>libglib-testing</Name>
+        <Homepage>https://gitlab.gnome.org/pwithnall/libglib-testing</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <PartOf>desktop.gnome</PartOf>
+        <IsA>app</IsA>
+        <Summary>Test harnesses and mock classes for GLib</Summary>
+        <Description>libglib-testing is a test library providing test harnesses and mock classes
+        which complement the classes provided by GLib. It is intended to be used by
+        any project which uses GLib and which wants to write internal unit tests.</Description>
+        <BuildDependencies>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>gtk-doc</Dependency>
+            <Dependency>meson</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="27d8d5a95ae6204ccccd4a193b787ae614cbd092">https://gitlab.gnome.org/pwithnall/libglib-testing/-/archive/0.1.1/libglib-testing-0.1.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>libglib-testing</Name>
+        <Summary>Test harnesses and mock classes for GLib</Summary>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/libglib-testing*</Path>
+            <Path fileType="data">/usr/share/gtk-doc</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>libglib-testing-devel</Name>
+        <Summary>libglib-testing for devel</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libglib-testing</Dependency>
+            <Dependency>glib2-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2022-08-03</Date>
+            <Version>0.1.1</Version>
+            <Comment>First relase</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,47 @@
+<PISI>
+    <Source>
+        <Name>wingpanel-indicator-notifications</Name>
+        <Homepage>https://github.com/elementary/wingpanel-indicator-notifications</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Wingpanel Notifications Indicator</Summary>
+        <Description>Wingpanel Notifications Indicator</Description>
+        <BuildDependencies>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>wingpanel-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="603924e63f8adea54a3d01f30ea5065baefe9820" type="targz">https://github.com/elementary/wingpanel-indicator-notifications/archive/refs/tags/6.0.6.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>wingpanel-indicator-notifications</Name>
+        <Summary>Wingpanel Notifications Indicator</Summary>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>wingpanel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>6.0.6</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

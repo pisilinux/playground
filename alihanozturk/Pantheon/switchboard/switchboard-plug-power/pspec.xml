@@ -1,0 +1,52 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-power</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-power</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Power Plug</Summary>
+        <Description>Switchboard Power Plug</Description>
+        <BuildDependencies>
+            <Dependency>dbus-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="be8e37dd67feb49a5c07ab390df33ac6323a2561">https://github.com/elementary/switchboard-plug-power/archive/refs/tags/2.7.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-power</Name>
+        <Summary>Switchboard Power Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>dbus</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>polkit</Dependency>
+            <Dependency>switchboard</Dependency>
+            <Dependency>vala</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/dbus-1/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="data">/usr/share/polkit-1/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>2.7.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

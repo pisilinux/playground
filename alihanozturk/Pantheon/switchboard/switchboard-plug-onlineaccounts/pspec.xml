@@ -1,0 +1,69 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-onlineaccounts</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-onlineaccounts</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Online Accounts Plug</Summary>
+        <Description>Switchboard Online Accounts Plug</Description>
+        <BuildDependencies>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>json-glib-devel</Dependency>
+            <Dependency>libaccounts-glib-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>librest-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>signon-devel</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>evolution-data-server-devel</Dependency>
+            <Dependency>webkit2gtk-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="a18477c4d630a8afd3ddac7378ce489c07a5ba8c" type="targz">https://github.com/elementary/switchboard-plug-onlineaccounts/archive/refs/tags/6.5.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-onlineaccounts</Name>
+        <Summary>Switchboard Online Accounts Plug
+</Summary>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>json-glib</Dependency>
+            <Dependency>libaccounts-glib</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>librest</Dependency>
+            <Dependency>signon</Dependency>
+            <Dependency>switchboard</Dependency>
+            <Dependency>webkit2gtk</Dependency>
+            <Dependency>evolution-data-server</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/accounts/*</Path>
+            <Path fileType="data">/usr/share/contractor/*</Path>
+            <Path fileType="data">/usr/share/dbus-1/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="data">/usr/share/glib-2.0/*</Path>
+            <Path fileType="data">/usr/share/icons/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="data">/usr/share/polkit-1/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>6.5.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

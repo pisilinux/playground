@@ -1,0 +1,51 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-network</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-network</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Network Plug</Summary>
+        <Description>Switchboard Network Plug</Description>
+        <BuildDependencies>
+            <Dependency>NetworkManager-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libnma-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="056b43f1a4fc7a0c31436e9221b8de24b05d5b7d">https://github.com/elementary/switchboard-plug-network/archive/refs/tags/2.4.3.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-network</Name>
+        <Summary>Switchboard Network Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>NetworkManager</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libnma</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard</Dependency>
+            <Dependency>vala</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/contractor/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>2.4.3</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,52 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-wacom</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-wacom</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Wacom Plug</Summary>
+        <Description>Switchboard Wacom Plug</Description>
+        <BuildDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libwacom-devel</Dependency>
+            <Dependency>libgudev-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
+            <Dependency>libXi-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="88dce1ad0f3c3d2c5a378302500435ca7bc4ceb3">https://github.com/elementary/switchboard-plug-wacom/archive/refs/tags/1.0.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-wacom</Name>
+        <Summary>Switchboard Wacom Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>granite</Dependency>
+            <Dependency>libwacom</Dependency>
+            <Dependency>libgudev</Dependency>
+            <Dependency>libX11</Dependency>
+            <Dependency>libXi</Dependency>
+            <Dependency>switchboard</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>1.0.1</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

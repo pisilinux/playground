@@ -1,0 +1,58 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-keyboard</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-keyboard</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Keyboard Plug</Summary>
+        <Description>Switchboard Keyboard Plug</Description>
+        <BuildDependencies>
+            <Dependency>libgnomekbd-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>ibus-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>libxklavier-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="5bdc3916e64ad8a32ede7e257af108e06edf97ee" type="targz">https://github.com/elementary/switchboard-plug-keyboard/archive/refs/tags/3.0.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-keyboard</Name>
+        <Summary>Switchboard Keyboard Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>libgnomekbd</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>ibus</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>libxklavier</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard</Dependency>
+            <Dependency>vala</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>3.0.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
