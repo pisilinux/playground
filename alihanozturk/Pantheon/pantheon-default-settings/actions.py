@@ -6,13 +6,14 @@
 
 from pisi.actionsapi import mesontools
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
+
+def setup():
+    mesontools.configure("--prefix=/usr")
 
 def build():
-    shelltools.system("meson build --prefix=/usr")
+    mesontools.build()
 
 def install():
     mesontools.install()
 
     pisitools.dodoc("README.md")
-

@@ -19,6 +19,7 @@
             <Dependency>libxklavier-devel</Dependency>
             <Dependency>libxml2-devel</Dependency>
             <Dependency>meson</Dependency>
+            <Dependency>xkeyboard-config</Dependency>
             <Dependency>switchboard-devel</Dependency>
             <Dependency>vala-devel</Dependency>
         </BuildDependencies>
@@ -32,18 +33,17 @@
             <Dependency>granite</Dependency>
             <Dependency>gtk3</Dependency>
             <Dependency>ibus</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>pango</Dependency>
             <Dependency>libhandy</Dependency>
             <Dependency>libxklavier</Dependency>
             <Dependency>libxml2</Dependency>
-            <Dependency>meson</Dependency>
             <Dependency>switchboard</Dependency>
-            <Dependency>vala</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>

@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pantheon-tasks</Name>
+        <Homepage>https://github.com/elementary/tasks</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app</IsA>
+        <Summary>The Pantheon tasks</Summary>
+        <Icon>io.elementary.tasks</Icon>
+        <Description>The Pantheon tasks</Description>
+        <Archive sha1sum="03f0be3b6508dad22dd52cf98d60d63746f9a527" type="targz">https://github.com/elementary/tasks/archive/refs/tags/6.3.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>clutter-devel</Dependency>
+            <Dependency>geoclue-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libical-devel</Dependency>
+            <Dependency>libsoup-devel</Dependency>
+            <Dependency>libgdata-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>clutter-gtk-devel</Dependency>
+            <Dependency>geocode-glib-devel</Dependency>
+            <Dependency>libchamplain-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>evolution-data-server-devel</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>pantheon-tasks.patch</Patch>
+            <Patch level="1">pantheon-tasks.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>pantheon-tasks</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>clutter</Dependency>
+            <Dependency>geoclue</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libical</Dependency>
+            <Dependency>libsoup</Dependency>
+            <Dependency>libgdata</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>clutter-gtk</Dependency>
+            <Dependency>geocode-glib</Dependency>
+            <Dependency>libchamplain</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>evolution-data-server</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/metainfo</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>6.3.0</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

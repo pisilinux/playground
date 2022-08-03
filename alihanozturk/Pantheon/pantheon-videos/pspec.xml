@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pantheon-videos</Name>
+        <Homepage>https://github.com/elementary/videos</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <Icon>pantheon-videos</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>A Video Player.</Summary>
+        <Description>Video player and library app designed for elementary OS</Description>
+        <Archive sha1sum="baa50a44c740a9fc09e9e205dceecaf1c6e57ed8" type="targz">https://github.com/elementary/videos/archive/refs/tags/2.8.4.tar.gz</Archive>
+        <BuildDependency>
+            <Dependency>meson</Dependency>
+            <Dependency>intltool</Dependency>
+            <Dependency>clutter-devel</Dependency>
+            <Dependency>clutter-gst-devel</Dependency>
+            <Dependency>clutter-gtk-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gst-plugins-base-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>glibc-devel</Dependency>
+            <Dependency>gdk-pixbuf2-devel</Dependency>
+        </BuildDependency>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>pantheon-videos</Name>
+        <RuntimeDependencies>
+                <Dependency>clutter-gst</Dependency>
+                <Dependency>clutter-gtk</Dependency>
+                <Dependency>granite</Dependency>
+                <Dependency>gst-plugins-base</Dependency>
+                <Dependency>gstreamer</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="all">/usr/share/</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="manfile">/usr/share/metainfo</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>2.8.4</Version>
+            <Comment>First release</Comment>
+            <Name>Ali Cengiz Kurt</Name>
+            <Email>alicengizkurt@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

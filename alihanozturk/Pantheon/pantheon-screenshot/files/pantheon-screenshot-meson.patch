@@ -1,0 +1,19 @@
+diff -Nuar a/data/meson.build b/data/meson.build
+--- a/data/meson.build	2021-12-14 01:40:26.000000000 +0300
++++ b/data/meson.build	2022-08-04 16:45:38.967035578 +0300
+@@ -20,7 +20,6 @@
+ )
+
+ i18n.merge_file (
+-    'desktop',
+     input: 'screenshot.desktop.in',
+     output: meson.project_name() + '.desktop',
+     install: true,
+@@ -30,7 +29,6 @@
+ )
+
+ i18n.merge_file (
+-    'appdata',
+     input: 'screenshot.appdata.xml.in',
+     output: meson.project_name() + '.appdata.xml',
+     install: true,

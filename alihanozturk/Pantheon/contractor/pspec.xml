@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>contractor</Name>
+        <Homepage>https://github.com/elementary/contractor</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>library</IsA>
+        <Summary>Desktop-wide extension service</Summary>
+        <Icon>contractor</Icon>
+        <Description>Masaüstü çapında genişletme hizmeti</Description>
+        <Archive sha1sum="70b25aba77a8a545ca6695e8976da546df33c7fc" type="targz">https://github.com/elementary/contractor/archive/refs/tags/0.3.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>dbus-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>contractor.patch</Patch>
+            <Patch level="1">contractor.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>contractor</Name>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>0.3.5</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

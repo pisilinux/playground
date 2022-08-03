@@ -3,41 +3,40 @@
         <Name>pantheon-default-settings</Name>
         <Homepage>https://github.com/elementary/default-settings</Homepage>
         <Packager>
-            <Name>Berk Çakar</Name>
-            <Email>berk2238@hotmail.com</Email>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
         </Packager>
         <License>GPLv3</License>
         <PartOf>desktop</PartOf>
         <Summary>Default settings and configuration files for Pantheon DE.</Summary>
         <Description>Default settings and configuration files for Pantheon DE.</Description>
-        <Archive sha1sum="7693959d2005881321af175a7f84b12753018754" type="zip">https://github.com/elementary/default-settings/archive/refs/heads/master.zip</Archive>
+        <Archive sha1sum="a0316ba2d7626333d33b333f5691626e456a6ff8" type="targz">https://github.com/elementary/default-settings/archive/refs/tags/6.0.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
     </Source>
     <Package>
         <Name>pantheon-default-settings</Name>
         <Files>
-            <Path fileType="config">/etc/*</Path>
-            <Path fileType="data">/usr/share/accountsservice/*</Path>
-            <Path fileType="data">/usr/share/applications/*</Path>
-            <Path fileType="data">/usr/share/cups/*</Path>
-            <Path fileType="data">/usr/share/dbus-1/*</Path>
-            <Path fileType="data">/usr/share/default-settings/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="data">/usr/share/glib-2.0/*</Path>
-            <Path fileType="data">/usr/share/polkit-1/*</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
-        <AdditionalFiles>
-            <AdditionalFile permission="0644" owner="root" target="/usr/share/default-settings/settings.ini" group="root">etc/gtk-3.0/settings.ini</AdditionalFile>
-            <AdditionalFile permission="0644" owner="root" target="/usr/share/default-settings/default-settings.gschema.override" group="root">usr/share/glib-2.0/schemas/default-settings.gschema.override</AdditionalFile>
-        </AdditionalFiles>
         <Summary>Default settings and configuration files for Pantheon DE.</Summary>
+        <RuntimeDependencies>
+            <Dependency>accountsservice</Dependency>
+            <Dependency>dbus</Dependency>
+            <Dependency>polkit</Dependency>
+            <Dependency>dconf</Dependency>
+        </RuntimeDependencies>
     </Package>
     <History>
         <Update release="1">
-            <Date>2021-04-06</Date>
-            <Version>5.1.2</Version>
-            <Comment>First release for Pisi Linux</Comment>
-            <Name>Berk Çakar</Name>
-            <Email>berk2238@hotmail.com</Email>
+            <Date>04-08-2022</Date>
+            <Version>6.0.2</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>

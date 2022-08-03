@@ -9,10 +9,16 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    mesontools.configure()
+    mesontools.configure("--prefix=/usr \
+                          -Dfallback-session=gnome \
+                          -Dsystemd=false \
+                          -Dsystemduserunitdir=false \
+                          -Dpatched-ubuntu-autostarts=false")
 
 def build():
     mesontools.build()
 
 def install():
     mesontools.install()
+
+    pisitools.dodoc("README.md")

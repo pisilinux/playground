@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pantheon-calendar</Name>
+        <Homepage>https://github.com/elementary/calendar</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app</IsA>
+        <Summary>The Pantheon Calendar</Summary>
+        <Icon>io.elementary.calendar</Icon>
+        <Description>Panteon Takvimi</Description>
+        <Archive sha1sum="754cd3526d150e33f721eadfcfd672429d0cefe9" type="targz">https://github.com/elementary/calendar/archive/refs/tags/6.1.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>folks-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>clutter-devel</Dependency>
+            <Dependency>geoclue-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libical-devel</Dependency>
+            <Dependency>libsoup-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>clutter-gtk-devel</Dependency>
+            <Dependency>geocode-glib-devel</Dependency>
+            <Dependency>libchamplain-devel</Dependency>
+            <Dependency>evolution-data-server-devel</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>pantheon-calendar.patch</Patch>
+            <Patch level="1">pantheon-calendar.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>pantheon-calendar</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>folks</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>clutter</Dependency>
+            <Dependency>geoclue</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libical</Dependency>
+            <Dependency>libsoup</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>clutter-gtk</Dependency>
+            <Dependency>geocode-glib</Dependency>
+            <Dependency>libchamplain</Dependency>
+            <Dependency>evolution-data-server</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/vala</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="icon">/usr/share/icons</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/metainfo</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/applications/</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>pantheon-calendar-devel</Name>
+        <Summary>Development files for pantheon-calendar</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">pantheon-calendar</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>6.1.1</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
