@@ -1,0 +1,48 @@
+<PISI>
+    <Source>
+        <Name>wingpanel-indicator-network</Name>
+        <Homepage>https://github.com/elementary/wingpanel-indicator-network</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Wingpanel Network Indicator</Summary>
+        <Description>Wingpanel Network Indicator</Description>
+        <BuildDependencies>
+            <Dependency>NetworkManager-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libnma-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>wingpanel-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="2f8832772391b2a61691ea77f6d379fba2fc1db1">https://github.com/elementary/wingpanel-indicator-network/archive/refs/tags/2.3.3.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>wingpanel-indicator-network</Name>
+        <Summary>Wingpanel Network Indicator</Summary>
+        <BuildDependencies>
+            <Dependency>NetworkManager</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libnma</Dependency>
+            <Dependency>wingpanel</Dependency>
+        </BuildDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>2.3.3</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

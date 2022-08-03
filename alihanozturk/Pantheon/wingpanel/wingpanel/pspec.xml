@@ -1,0 +1,70 @@
+<PISI>
+    <Source>
+        <Name>wingpanel</Name>
+        <Homepage>https://github.com/elementary/wingpanel</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>The extensible top panel for Pantheon. </Summary>
+        <Description>The extensible top panel for Pantheon. Wingpanel is an empty container that accepts indicators as extensions, including the applications menu.</Description>
+        <BuildDependencies>
+            <Dependency>gala-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>mutter-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="fd0eba7082e44b25c63354b211ec4f69cf010355" type="targz">https://github.com/elementary/wingpanel/archive/refs/tags/3.0.2.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>wingpanel</Name>
+        <Summary>The extensible top panel for Pantheon. </Summary>
+        <RuntimeDependencies>
+            <Dependency>gala</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>mutter</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/etc/*</Path>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="library">/usr/lib/gala</Path>
+            <Path fileType="library">/usr/lib/libwingpanel*</Path>
+
+            <Path fileType="data">/usr/share/applications/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="data">/usr/share/glib-2.0/*</Path>
+            <Path fileType="data">/usr/share/icons/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="data">/usr/share/vala/*</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>wingpanel-devel</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">wingpanel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/*</Path>
+            <Path fileType="library">/usr/lib/pkgconfig/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>3.0.2</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

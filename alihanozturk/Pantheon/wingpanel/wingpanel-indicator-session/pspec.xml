@@ -1,0 +1,53 @@
+<PISI>
+    <Source>
+        <Name>wingpanel-indicator-session</Name>
+        <Homepage>https://github.com/elementary/wingpanel-indicator-session</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Wingpanel Session Indicator</Summary>
+        <Description>Wingpanel Session Indicator</Description>
+        <BuildDependencies>
+            <Dependency>accountsservice-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>wingpanel-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="2c9f52e1808122a52d3e4dfb0a75372c44578469" type="targz">https://github.com/elementary/wingpanel-indicator-session/archive/refs/tags/2.3.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>wingpanel-indicator-session</Name>
+        <Summary>Wingpanel Session Indicator</Summary>
+        <RuntimeDependencies>
+            <Dependency>accountsservice</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>wingpanel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>2.3.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

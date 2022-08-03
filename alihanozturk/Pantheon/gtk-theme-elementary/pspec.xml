@@ -1,0 +1,35 @@
+<PISI>
+    <Source>
+        <Name>gtk-theme-elementary</Name>
+        <Homepage>https://github.com/elementary/stylesheet</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop.lookandfeel</PartOf>
+        <Summary>elementary GTK theme</Summary>
+        <Description>The GTK Stylesheet for Pantheon DE</Description>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>sassc</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="a71611a14588880e6e2f0b1c8ec9b85e708f5163" type="targz">https://github.com/elementary/stylesheet/archive/refs/tags/7.0.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>gtk-theme-elementary</Name>
+        <Summary>elementary GTK theme</Summary>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>7.0.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

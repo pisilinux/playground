@@ -1,0 +1,58 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-useraccounts</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-useraccounts</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard User Accounts Plug</Summary>
+        <Description>Switchboard User Accounts Plug</Description>
+        <BuildDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>accountsservice-devel</Dependency>
+            <Dependency>gnome-desktop-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>libpwquality-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="cd252bdbd4fdbefa039d3138c1a95d260d43928c">https://github.com/elementary/switchboard-plug-useraccounts/archive/refs/tags/2.4.2.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-useraccounts</Name>
+        <Summary>Switchboard User Accounts Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>accountsservice</Dependency>
+            <Dependency>gnome-desktop</Dependency>
+            <Dependency>polkit</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>libpwquality</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>switchboard</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>2.4.2</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

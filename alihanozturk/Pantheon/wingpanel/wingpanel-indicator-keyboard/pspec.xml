@@ -1,0 +1,49 @@
+<PISI>
+    <Source>
+        <Name>wingpanel-indicator-keyboard</Name>
+        <Homepage>https://github.com/elementary/wingpanel-indicator-keyboard</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Wingpanel Keyboard Indicator</Summary>
+        <Description>Wingpanel Keyboard Indicator</Description>
+        <BuildDependencies>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gobject-introspection-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>wingpanel-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="2a71011db34f567b661628829a503650be8487d4" type="targz">https://github.com/elementary/wingpanel-indicator-keyboard/archive/refs/tags/2.4.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>wingpanel-indicator-keyboard</Name>
+        <Summary>Wingpanel Keyboard Indicator</Summary>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>gobject-introspection</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>wingpanel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>2.4.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

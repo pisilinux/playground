@@ -1,0 +1,46 @@
+<PISI>
+    <Source>
+        <Name>wingpanel-indicator-nightlight</Name>
+        <Homepage>https://github.com/elementary/wingpanel-indicator-nightlight</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Wingpanel Nightlight Indicator</Summary>
+        <Description>Wingpanel Nightlight Indicator</Description>
+        <BuildDependencies>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>wingpanel-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="27369fa59eb5b8bf03ce104b946d4b0fb197a5c5" type="targz">https://github.com/elementary/wingpanel-indicator-nightlight/archive/refs/tags/2.1.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>wingpanel-indicator-nightlight</Name>
+        <Summary>Wingpanel Nightlight Indicator</Summary>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>wingpanel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>2.1.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,106 @@
+<PISI>
+    <Source>
+        <Name>pantheon-session</Name>
+        <Homepage>https://github.com/elementary/session-settings</Homepage>
+        <Packager>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Summary>Files for starting a Pantheon DE session</Summary>
+        <Description>Files for starting a Pantheon DE sessio</Description>
+        <Archive sha1sum="8630167893814d119e7b745dc3e664153d68f1dd">https://github.com/elementary/session-settings/archive/39bd694428603c42cb7e84da8addfc7fa6d57466.zip</Archive>
+        <BuildDependencies>
+            <Dependency>gconf-devel</Dependency>
+            <Dependency>startup-notification-devel</Dependency>
+            <Dependency>libXcomposite-devel</Dependency>
+            <Dependency>libXrandr-devel</Dependency>
+            <Dependency>libXinerama-devel</Dependency>
+            <Dependency>libXcursor-devel</Dependency>
+            <Dependency>libXext-devel</Dependency>
+            <Dependency>libSM-devel</Dependency>
+            <Dependency>libXfixes-devel</Dependency>
+            <Dependency>libXdamage-devel</Dependency>
+            <Dependency>atk-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>libICE-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libXrender-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pantheon-session</Name>
+         <RuntimeDependencies>
+            <Dependency>gconf</Dependency>
+            <Dependency>startup-notification</Dependency>
+            <!--<Dependency>zenity</Dependency>-->
+            <Dependency>libXcomposite</Dependency>
+            <Dependency>libXrandr</Dependency>
+            <Dependency>libXinerama</Dependency>
+            <Dependency>libXcursor</Dependency>
+            <Dependency>libXext</Dependency>
+            <Dependency>libSM</Dependency>
+            <Dependency>libXft</Dependency>
+            <Dependency>libXfixes</Dependency>
+            <Dependency>libXdamage</Dependency>
+            <Dependency>atk</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libICE</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libXrender</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>libcanberra-gtk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/etc/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/themes</Path>
+            <Path fileType="data">/usr/share/pantheon-session</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/vala</Path>
+            <Path fileType="data">/usr/share/xsessions</Path>
+            <Path fileType="data">/usr/share/gnome-session</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/metainfo</Path>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/share/gnome-session/sessions/pantheon.session">pantheon.session</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>pantheon-session-devel</Name>
+        <Summary>Development files for pantheon-session</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">pantheon-session</Dependency>
+            <Dependency>gtk2-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2021-04-10</Date>
+            <Version>5.0.3</Version>
+            <Comment>First release for Pisi Linux</Comment>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,35 @@
+<PISI>
+    <Source>
+        <Name>elementary-wallpapers</Name>
+        <Homepage>https://github.com/elementary/wallpapers</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop.lookandfeel</PartOf>
+        <Summary>Collection of wallpapers for Pantheon DE</Summary>
+        <Description>Collection of wallpapers for Pantheon DE</Description>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>libexif-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="a2eab69e742ea27b167a36c1718bfafe7c107b0e">https://github.com/elementary/wallpapers/archive/refs/tags/6.1.0.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>elementary-wallpapers</Name>
+        <Summary>Collection of wallpapers for Pantheon DE</Summary>
+        <Files>
+            <Path fileType="all">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>6.1.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

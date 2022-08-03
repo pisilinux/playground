@@ -1,0 +1,45 @@
+<PISI>
+    <Source>
+        <Name>cerbere</Name>
+        <Homepage>https://github.com/elementary/cerbere</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>It no longer serves a function in Pantheon.</Summary>
+        <Description>It no longer serves a function in Pantheon.</Description>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="51891312c5b6fb017de2aff5a47963d37f374a8c" type="targz">https://github.com/elementary/cerbere/archive/refs/tags/2.5.1.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>cerbere</Name>
+        <Summary>A window &amp; compositing manager based on libmutter and designed by elementary for use with Pantheon.</Summary>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="executable">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>2.5.1</Version>
+            <Comment>first release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

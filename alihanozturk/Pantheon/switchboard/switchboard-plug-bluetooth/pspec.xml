@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-bluetooth</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-bluetooth</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Bluetooth Plug</Summary>
+        <Description>Switchboard Bluetooth Plug</Description>
+        <BuildDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="97ed2fb044209a47763e8a2edc75ab14d1629511" type="targz">https://github.com/elementary/switchboard-plug-bluetooth/archive/refs/tags/2.3.6.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-bluetooth</Name>
+        <Summary>Switchboard Bluetooth Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard</Dependency>
+            <Dependency>vala</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="library">/usr/libexec/*</Path>
+            <Path fileType="data">/usr/share/contractor/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>2.3.6</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

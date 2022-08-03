@@ -1,0 +1,71 @@
+<PISI>
+    <Source>
+        <Name>pantheon-polkit</Name>
+        <Homepage>https://github.com/elementary/pantheon-agent-polkit</Homepage>
+        <Packager>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Summary>Policy Kit for Pantheon Desktop</Summary>
+        <Description>Policy Kit for Pantheon Desktop</Description>
+        <Archive sha1sum="b434536cbe6426128dcaa50f75caeb4f5ad3cf20">https://github.com/elementary/pantheon-agent-polkit/archive/1.0.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>vala</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pantheon-polkit</Name>
+         <RuntimeDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>vala</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/themes</Path>
+            <Path fileType="data">/usr/share/pantheon-polkit</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/vala</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/metainfo</Path>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>pantheon-polkit-devel</Name>
+        <Summary>Development files for pantheon-polkit</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">pantheon-polkit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2021-04-10</Date>
+            <Version>1.0.2</Version>
+            <Comment>First release for Pisi Linux</Comment>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Update>
+    </History>
+</PISI>

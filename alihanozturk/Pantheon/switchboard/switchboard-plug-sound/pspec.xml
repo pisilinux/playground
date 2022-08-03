@@ -1,0 +1,53 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-sound</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-sound</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Switchboard Sound Plug</Summary>
+        <Description>Switchboard Sound Plug</Description>
+        <BuildDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>libcanberra-gtk3-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>pulseaudio-libs-devel</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="92c67cf04a1c18d8985d4522d912025159a1245e">https://github.com/elementary/switchboard-plug-sound/archive/refs/tags/2.3.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-sound</Name>
+        <Summary>Switchboard Sound Plug</Summary>
+        <RuntimeDependencies>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>libcanberra-gtk3</Dependency>
+            <Dependency>pulseaudio-libs</Dependency>
+            <Dependency>switchboard</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="data">/usr/share/contractor/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>2.3.0</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

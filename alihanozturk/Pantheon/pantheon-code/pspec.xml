@@ -1,0 +1,86 @@
+<PISI>
+    <Source>
+        <Name>pantheon-code</Name>
+        <Homepage>https://github.com/elementary/code</Homepage>
+        <Packager>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Code editor designed for Pantheon DE</Summary>
+        <Description>Code editor designed for Pantheon DE</Description>
+        <BuildDependencies>
+            <Dependency>editorconfig-core-c-devel</Dependency>
+            <Dependency>git</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>gtksourceview3-devel</Dependency>
+            <Dependency>gtkspell3-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>libgit2-devel</Dependency>
+            <Dependency>libpeas-devel</Dependency>
+            <Dependency>libsoup-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>vte-devel</Dependency>
+            <Dependency>webkit2gtk-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="d73b03a826869b11c2d531b879c3650ba6c3450b">https://github.com/elementary/code/archive/refs/tags/3.4.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>pantheon-code</Name>
+        <Summary>Code editor designed for Pantheon DE</Summary>
+        <RuntimeDependencies>
+            <Dependency>editorconfig-core-c</Dependency>
+            <Dependency>git</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>gtksourceview3</Dependency>
+            <Dependency>gtkspell3</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>libgit2</Dependency>
+            <Dependency>libpeas</Dependency>
+            <Dependency>libsoup</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>vte</Dependency>
+            <Dependency>webkit2gtk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="library">/usr/lib/io.elementary.code/*</Path>
+            <Path fileType="library">/usr/lib/libcodecore.so</Path>
+            <Path fileType="library">/usr/lib/libcodecore.so.0</Path>
+            <Path fileType="library">/usr/lib/libcodecore.so.0.0</Path>
+            <Path fileType="data">/usr/share/applications/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="data">/usr/share/glib-2.0/*</Path>
+            <Path fileType="data">/usr/share/icons/*</Path>
+            <Path fileType="data">/usr/share/io.elementary.code/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="data">/usr/share/vala/*</Path>
+        </Files>
+    </Package>
+    <Package>
+        <Name>pantheon-code-devel</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">pantheon-code</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/*</Path>
+            <Path fileType="library">/usr/lib/pkgconfig/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2021-04-07</Date>
+            <Version>3.4.1</Version>
+            <Comment>First release for Pisi Linux</Comment>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Update>
+    </History>
+</PISI>

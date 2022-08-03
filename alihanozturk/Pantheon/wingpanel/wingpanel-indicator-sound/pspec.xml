@@ -1,0 +1,55 @@
+<PISI>
+    <Source>
+        <Name>wingpanel-indicator-sound</Name>
+        <Homepage>https://github.com/elementary/wingpanel-indicator-sound</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Wingpanel Sound Indicator</Summary>
+        <Description>Wingpanel Sound Indicator</Description>
+        <BuildDependencies>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>libcanberra-gtk-devel</Dependency>
+            <Dependency>libcanberra-gtk3-devel</Dependency>
+            <Dependency>libnotify-devel</Dependency>
+            <Dependency>pulseaudio-libs-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>wingpanel-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="b9135be0dd9a17d540ddfcc646d92ea88ee7d443" type="targz">https://github.com/elementary/wingpanel-indicator-sound/archive/refs/tags/6.0.1.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>wingpanel-indicator-sound</Name>
+        <Summary>Wingpanel Sound Indicator</Summary>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libcanberra-gtk</Dependency>
+            <Dependency>libcanberra-gtk3</Dependency>
+            <Dependency>libnotify</Dependency>
+            <Dependency>pulseaudio-libs</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>wingpanel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>03-08-2022</Date>
+            <Version>6.0.1</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,46 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-display</Name>
+        <Homepage>https://github.com/elementary/switchboard-plug-display</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Extension for Switchboard to manage multiple monitor setups.</Summary>
+        <Description>Extension for Switchboard to manage multiple monitor setups.</Description>
+        <BuildDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="a2d1c291811c708fdcba5dd6ebf693e6947ec41a">https://github.com/elementary/switchboard-plug-display/archive/refs/tags/2.3.2.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-display</Name>
+        <Summary>Extension for Switchboard to manage multiple monitor setups.</Summary>
+        <RuntimeDependencies>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>switchboard</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/*</Path>
+            <Path fileType="doc">/usr/share/doc/*</Path>
+            <Path fileType="localedata">/usr/share/locale/*</Path>
+            <Path fileType="info">/usr/share/metainfo/*</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>02-08-2022</Date>
+            <Version>2.3.2</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
