@@ -1,0 +1,44 @@
+<PISI>
+    <Source>
+        <Name>pantheon-agent-polkit</Name>
+        <Homepage>https://github.com/elementary/pantheon-agent-polkit</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Summary>Policy Kit for Pantheon Desktop</Summary>
+        <Description>Policy Kit for Pantheon Desktop</Description>
+        <Archive sha1sum="0be2455c83e3fd61a740c64a5dc5f1a5471117bc">https://github.com/elementary/pantheon-agent-polkit/archive/refs/tags/1.0.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pantheon-agent-polkit</Name>
+         <RuntimeDependencies>
+            <Dependency>granite</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>polkit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc/</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>04-08-2022</Date>
+            <Version>1.0.5</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

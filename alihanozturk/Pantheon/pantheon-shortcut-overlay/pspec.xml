@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pantheon-shortcut-overlay</Name>
+        <Homepage>https://github.com/elementary/shortcut-overlay</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app</IsA>
+        <Summary>A native, OS-wide shortcut overlay</Summary>
+        <Icon>pantheon-shortcut-overlay</Icon>
+        <Description>A native, OS-wide shortcut overlay</Description>
+        <Archive sha1sum="6d3f32a3aa350ad4b2315d1ea9fac0b5435cb0df" type="targz">https://github.com/elementary/shortcut-overlay/archive/refs/tags/1.2.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">pantheon-shortcut-overlay-meson.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>pantheon-shortcut-overlay</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libhandy</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/metainfo</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>1.2.1</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pantheon-camera</Name>
+        <Homepage>https://github.com/elementary/camera</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app</IsA>
+        <Summary>The Pantheon Camera Application</Summary>
+        <Icon>io.elementary.camera</Icon>
+        <Description>Pantheon Kamera Uygulaması</Description>
+        <Archive sha1sum="66d0f134805076f5ae96747c7efd73785207d06e" type="targz">https://github.com/elementary/camera/archive/refs/tags/6.2.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>libcanberra-devel</Dependency>
+            <Dependency>gst-plugins-base-devel</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>pantheon-camera.patch</Patch>
+            <Patch level="1">pantheon-camera.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>pantheon-camera</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>libcanberra</Dependency>
+            <Dependency>gst-plugins-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="icon">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="data">/usr/share/applications/</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/metainfo</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>6.2.0</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

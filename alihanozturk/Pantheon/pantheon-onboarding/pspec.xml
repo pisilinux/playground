@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pantheon-onboarding</Name>
+        <Homepage>https://github.com/elementary/onboarding</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app</IsA>
+        <Summary>Onboarding app for new users</Summary>
+        <Icon>io.elementary.onboarding</Icon>
+        <Description>Yeni kullanıcılar için işe alım uygulaması</Description>
+        <Archive sha1sum="80ef2fd8d875d22a3b207d8ae8aafe17dba290ae" type="targz">https://github.com/elementary/onboarding/archive/refs/tags/6.1.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>libadwaita-devel</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>pantheon-onboarding.patch</Patch>
+            <Patch level="1">pantheon-onboarding.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>pantheon-onboarding</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>libadwaita</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/metainfo</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>6.1.0</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

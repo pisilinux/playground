@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>capnet-assist</Name>
+        <Homepage>https://github.com/elementary/capnet-assist</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>library</IsA>
+        <Summary>Captive Portal Assistant</Summary>
+        <Icon>io.elementary.capnet-assist</Icon>
+        <Description>Captive Portal Assistant</Description>
+        <Archive sha1sum="767e1192ea8b6d0c65b7e833082e1e50ed3832ea" type="targz">https://github.com/elementary/capnet-assist/archive/refs/tags/2.4.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>gcr-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>webkit2gtk-devel</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>capnet-assist.patch</Patch>
+            <Patch level="1">capnet-assist.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>capnet-assist</Name>
+        <RuntimeDependencies>
+            <Dependency>gcr</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>webkit2gtk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="icon">/usr/share/icons</Path>
+            <Path fileType="info">/usr/share/metainfo</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/glib-2.0/schemas</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+       </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>2.4.2</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

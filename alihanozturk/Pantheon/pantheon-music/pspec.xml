@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pantheon-music</Name>
+        <Homepage>https://github.com/elementary/music</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <Icon>pantheon-music</Icon>
+        <IsA>app:gui</IsA>
+        <Summary>The Pantheon Music Player</Summary>
+        <Icon>io.elementary.music</Icon>
+        <Description>Pantheon Müzik Çalar</Description>
+        <Archive sha1sum="6665eaa192b93c4edab8deba38f4adb762e2bdd9" type="targz">https://github.com/elementary/music/archive/refs/tags/5.1.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>libgda-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>taglib-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libgpod-devel</Dependency>
+            <Dependency>libpeas-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>zeitgeist-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>gst-plugins-base-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">pantheon-music-meson.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>pantheon-music</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libgda</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>taglib</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libgpod</Dependency>
+            <Dependency>libpeas</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>zeitgeist</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>gst-plugins-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/vala</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/metainfo</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>pantheon-music-devel</Name>
+        <Summary>Development files for pantheon-music</Summary>
+        <RuntimeDependencies>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libpeas-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>gst-plugins-base-devel</Dependency>
+            <Dependency release="current">pantheon-music</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>5.1.1</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

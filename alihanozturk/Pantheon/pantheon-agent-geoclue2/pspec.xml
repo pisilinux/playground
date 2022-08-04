@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pantheon-agent-geoclue2</Name>
+        <Homepage>https://github.com/elementary/pantheon-agent-geoclue2</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app</IsA>
+        <Summary>Pantheon Geoclue2 Agent</Summary>
+        <Icon>find-location</Icon>
+        <Description>Pantheon Geoclue2 Aracısı</Description>
+        <Archive sha1sum="9676507511ef4aceb3a1f1879776e0c8e6fd2efa" type="targz">https://github.com/elementary/pantheon-agent-geoclue2/archive/refs/tags/1.0.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>geoclue-devel</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>pantheon-agent-geoclue2.patch</Patch>
+            <Patch level="1">pantheon-agent-geoclue2.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>pantheon-agent-geoclue2</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>geoclue</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/metainfo</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>1.0.5</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

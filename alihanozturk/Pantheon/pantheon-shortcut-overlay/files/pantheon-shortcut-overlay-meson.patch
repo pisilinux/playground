@@ -1,0 +1,11 @@
+diff -Nuar a/data/meson.build b/data/meson.build
+--- a/data/meson.build	2021-10-30 02:12:16.000000000 +0300
++++ b/data/meson.build	2022-08-04 18:05:37.088689370 +0300
+@@ -8,7 +8,6 @@
+ )
+ 
+ i18n.merge_file (
+-    'desktop',
+     input: 'shortcut-overlay.desktop.in',
+     output: meson.project_name() + '.desktop',
+     po_dir: join_paths(meson.source_root (), 'po', 'extra'),

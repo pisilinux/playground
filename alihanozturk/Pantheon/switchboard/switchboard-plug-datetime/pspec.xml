@@ -23,15 +23,15 @@
         <Summary>Switchboard Date Time Plug</Summary>
         <RuntimeDependencies>
             <Dependency>granite</Dependency>
-            <Dependency>meson</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
             <Dependency>switchboard</Dependency>
-            <Dependency>vala</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>

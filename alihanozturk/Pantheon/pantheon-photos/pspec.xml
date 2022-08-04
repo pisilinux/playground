@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pantheon-photos</Name>
+        <Homepage>https://github.com/elementary/photos</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app</IsA>
+        <Summary>The Pantheon Photos Manager</Summary>
+        <Icon>io.elementary.photos</Icon>
+        <Description>Pantheon Fotoğraf Yöneticisi</Description>
+        <Archive sha1sum="0c0febd03839b1fadf65220e304aba6afc743c8e" type="targz">https://github.com/elementary/photos/archive/refs/tags/2.7.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+            <Dependency>webp-devel</Dependency>
+            <Dependency>cairo-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>pango-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>libraw-devel</Dependency>
+            <Dependency>sqlite-devel</Dependency>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libexif-devel</Dependency>
+            <Dependency>librest-devel</Dependency>
+            <Dependency>libsoup-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>libgudev-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
+            <Dependency>gstreamer-devel</Dependency>
+            <Dependency>json-glib-devel</Dependency>
+            <Dependency>libgexiv2-devel</Dependency>
+            <Dependency>gdk-pixbuf-devel</Dependency>
+            <Dependency>libgphoto2-devel</Dependency>
+            <Dependency>webkit2gtk-devel</Dependency>
+            <Dependency>geocode-glib-devel</Dependency>
+            <Dependency>gst-plugins-base-devel</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>pantheon-photos.patch</Patch>
+            <Patch level="1">pantheon-photos.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>pantheon-photos</Name>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>vala</Dependency>
+            <Dependency>webp</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>pango</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>libraw</Dependency>
+            <Dependency>sqlite</Dependency>
+            <Dependency>granite</Dependency>
+            <Dependency>libexif</Dependency>
+            <Dependency>librest</Dependency>
+            <Dependency>libsoup</Dependency>
+            <Dependency>libxml2</Dependency>
+            <Dependency>libgudev</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>gstreamer</Dependency>
+            <Dependency>json-glib</Dependency>
+            <Dependency>libgexiv2</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
+            <Dependency>libgphoto2</Dependency>
+            <Dependency>webkit2gtk</Dependency>
+            <Dependency>geocode-glib</Dependency>
+            <Dependency>gst-plugins-base</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/glib-2.0</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/metainfo</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-08-04</Date>
+            <Version>2.7.5</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
