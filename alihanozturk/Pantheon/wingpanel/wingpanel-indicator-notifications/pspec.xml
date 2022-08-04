@@ -15,7 +15,9 @@
             <Dependency>glib2-devel</Dependency>
             <Dependency>granite-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
+            <Dependency>libhandy-devel</Dependency>
             <Dependency>meson</Dependency>
+            <Dependency>cmake</Dependency>
             <Dependency>wingpanel-devel</Dependency>
             <Dependency>vala-devel</Dependency>
         </BuildDependencies>
@@ -25,6 +27,11 @@
         <Name>wingpanel-indicator-notifications</Name>
         <Summary>Wingpanel Notifications Indicator</Summary>
         <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>libhandy</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
             <Dependency>glib2</Dependency>
             <Dependency>granite</Dependency>
             <Dependency>wingpanel</Dependency>

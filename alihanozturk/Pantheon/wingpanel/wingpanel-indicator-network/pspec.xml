@@ -24,13 +24,15 @@
     <Package>
         <Name>wingpanel-indicator-network</Name>
         <Summary>Wingpanel Network Indicator</Summary>
-        <BuildDependencies>
-            <Dependency>NetworkManager</Dependency>
-            <Dependency>gobject-introspection</Dependency>
-            <Dependency>granite</Dependency>
+        <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
             <Dependency>libnma</Dependency>
+            <Dependency>granite</Dependency>
             <Dependency>wingpanel</Dependency>
-        </BuildDependencies>
+            <Dependency>NetworkManager</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="data">/usr/share</Path>
