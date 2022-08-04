@@ -1,0 +1,10 @@
+--- meson.build	2021-07-15 00:56:29.000000000 +0300
++++ meson1.build	2022-08-03 22:48:48.231553923 +0300
+@@ -44,7 +44,6 @@
+ malcontent_dep = dependency('malcontent-0')
+ hdy_dep = dependency('libhandy-1', version: '>= 0.90.0')
+ accountsservice_dep = dependency('accountsservice')
+-systemd_dep = dependency('systemd')
+ posix_dep = meson.get_compiler('vala').find_library('posix')
+ 
+ subdir('data')

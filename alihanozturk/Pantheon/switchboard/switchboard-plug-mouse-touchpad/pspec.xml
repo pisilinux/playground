@@ -13,6 +13,8 @@
         <BuildDependencies>
             <Dependency>granite-devel</Dependency>
             <Dependency>libxml2-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
             <Dependency>meson</Dependency>
             <Dependency>switchboard-devel</Dependency>
             <Dependency>vala-devel</Dependency>
@@ -23,15 +25,16 @@
         <Name>switchboard-plug-mouse-touchpad</Name>
         <Summary>Switchboard Mouse Touchpad Plug</Summary>
         <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libgee</Dependency>
             <Dependency>granite</Dependency>
             <Dependency>libxml2</Dependency>
             <Dependency>switchboard</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>

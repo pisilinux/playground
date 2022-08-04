@@ -13,6 +13,7 @@
         <BuildDependencies>
             <Dependency>granite-devel</Dependency>
             <Dependency>meson</Dependency>
+            <Dependency>glib2-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
             <Dependency>switchboard-devel</Dependency>
             <Dependency>vala-devel</Dependency>
@@ -25,13 +26,13 @@
         <RuntimeDependencies>
             <Dependency>granite</Dependency>
             <Dependency>gtk3</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
             <Dependency>switchboard</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>

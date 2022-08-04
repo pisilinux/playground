@@ -14,6 +14,8 @@
             <Dependency>NetworkManager-devel</Dependency>
             <Dependency>granite-devel</Dependency>
             <Dependency>libnma-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
             <Dependency>meson</Dependency>
             <Dependency>switchboard-devel</Dependency>
             <Dependency>vala-devel</Dependency>
@@ -27,16 +29,14 @@
             <Dependency>NetworkManager</Dependency>
             <Dependency>granite</Dependency>
             <Dependency>libnma</Dependency>
-            <Dependency>meson</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
             <Dependency>switchboard</Dependency>
-            <Dependency>vala</Dependency>
+            <Dependency>gtk3</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="data">/usr/share/contractor/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>

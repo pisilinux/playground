@@ -28,23 +28,19 @@
         <Name>switchboard-plug-pantheon-shell</Name>
         <Summary>Switchboard Desktop Plug</Summary>
         <RuntimeDependencies>
-            <Dependency>gnome-desktop</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
             <Dependency>gnome-settings-daemon</Dependency>
             <Dependency>granite</Dependency>
             <Dependency>gtk3</Dependency>
             <Dependency>libgee</Dependency>
             <Dependency>libgexiv2</Dependency>
-            <Dependency>meson</Dependency>
+            <Dependency>glib2</Dependency>
             <Dependency>plank</Dependency>
             <Dependency>switchboard</Dependency>
-            <Dependency>vala</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="data">/usr/share/contractor/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>

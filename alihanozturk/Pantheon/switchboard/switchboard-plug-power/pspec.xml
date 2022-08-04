@@ -24,20 +24,15 @@
         <Name>switchboard-plug-power</Name>
         <Summary>Switchboard Power Plug</Summary>
         <RuntimeDependencies>
-            <Dependency>dbus</Dependency>
-            <Dependency>granite</Dependency>
-            <Dependency>meson</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>gtk3</Dependency>
             <Dependency>polkit</Dependency>
             <Dependency>switchboard</Dependency>
-            <Dependency>vala</Dependency>
+            <Dependency>libgee</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="data">/usr/share/dbus-1/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
-            <Path fileType="data">/usr/share/polkit-1/*</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>

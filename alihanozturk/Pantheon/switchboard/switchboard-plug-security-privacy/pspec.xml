@@ -11,6 +11,8 @@
         <Summary>Switchboard Security and Privacy Plug</Summary>
         <Description>Switchboard Security and Privacy Plug</Description>
         <BuildDependencies>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
             <Dependency>granite-devel</Dependency>
             <Dependency>polkit-devel</Dependency>
             <Dependency>zeitgeist-devel</Dependency>
@@ -24,17 +26,17 @@
         <Name>switchboard-plug-security-privacy</Name>
         <Summary>Switchboard Security and Privacy Plug</Summary>
         <RuntimeDependencies>
+            <Dependency>gtk3</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
             <Dependency>granite</Dependency>
             <Dependency>switchboard</Dependency>
             <Dependency>polkit</Dependency>
             <Dependency>zeitgeist</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
-            <Path fileType="data">/usr/share/polkit-1/*</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>

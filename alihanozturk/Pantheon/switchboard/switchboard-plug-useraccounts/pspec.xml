@@ -13,6 +13,7 @@
         <BuildDependencies>
             <Dependency>granite-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
             <Dependency>meson</Dependency>
             <Dependency>accountsservice-devel</Dependency>
             <Dependency>gnome-desktop-devel</Dependency>
@@ -33,17 +34,18 @@
             <Dependency>gtk3</Dependency>
             <Dependency>accountsservice</Dependency>
             <Dependency>gnome-desktop</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>cairo</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
             <Dependency>polkit</Dependency>
             <Dependency>libhandy</Dependency>
             <Dependency>libpwquality</Dependency>
-            <Dependency>gobject-introspection</Dependency>
             <Dependency>switchboard</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>

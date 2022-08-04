@@ -5,6 +5,7 @@
 # See the file https://www.gnu.org/licenses/gpl-3.0.txt
 
 from pisi.actionsapi import mesontools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import pisitools
 
 def setup():
@@ -17,6 +18,7 @@ def build():
 
 def install():
     mesontools.install()
+    pisitools.removeDir("/usr/no")
 
     pisitools.dodoc("COPYING", "README.md")
 
