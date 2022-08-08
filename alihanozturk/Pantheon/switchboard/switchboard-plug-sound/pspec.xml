@@ -13,6 +13,7 @@
         <BuildDependencies>
             <Dependency>granite-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
             <Dependency>libcanberra-devel</Dependency>
             <Dependency>libcanberra-gtk3-devel</Dependency>
             <Dependency>meson</Dependency>
@@ -27,6 +28,8 @@
         <Summary>Switchboard Sound Plug</Summary>
         <RuntimeDependencies>
             <Dependency>granite</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>libgee</Dependency>
             <Dependency>gtk3</Dependency>
             <Dependency>libcanberra</Dependency>
             <Dependency>libcanberra-gtk3</Dependency>
@@ -34,11 +37,8 @@
             <Dependency>switchboard</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="data">/usr/share/contractor/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>

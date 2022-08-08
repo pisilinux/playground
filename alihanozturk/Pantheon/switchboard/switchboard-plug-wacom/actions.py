@@ -8,8 +8,7 @@ from pisi.actionsapi import mesontools
 from pisi.actionsapi import pisitools
 
 def setup():
-    mesontools.configure("-Dregenerate_translation=true \
-                          --prefix=/usr \
+    mesontools.configure("--prefix=/usr \
                           --libexecdir=/usr/lib/switchboard-plug-wacom")
 
 def build():

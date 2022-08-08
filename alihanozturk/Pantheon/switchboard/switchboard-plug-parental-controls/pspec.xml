@@ -15,6 +15,8 @@
             <Dependency>dbus-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
             <Dependency>granite-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
             <Dependency>flatpak-devel</Dependency>
             <Dependency>libhandy-devel</Dependency>
             <Dependency>malcontent-devel</Dependency>
@@ -24,27 +26,31 @@
             <Dependency>vala-devel</Dependency>
         </BuildDependencies>
         <Archive type="targz" sha1sum="c29364de7066d214004712ceb8b7f744e28af91a">https://github.com/elementary/switchboard-plug-parental-controls/archive/refs/tags/6.0.0.tar.gz</Archive>
+        <Patches>
+            <Patch level="0">systemd.patch</Patch>
+        </Patches>
     </Source>
     <Package>
         <Name>switchboard-plug-parental-controls</Name>
         <Summary>Switchboard Power Plug</Summary>
         <RuntimeDependencies>
             <Dependency>accountsservice</Dependency>
-            <Dependency>dbus</Dependency>
+            <Dependency>gdk-pixbuf</Dependency>
             <Dependency>glib2</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>libgee</Dependency>
             <Dependency>granite</Dependency>
             <Dependency>libhandy</Dependency>
+            <Dependency>flatpak</Dependency>
             <Dependency>malcontent</Dependency>
             <Dependency>polkit</Dependency>
             <Dependency>switchboard</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/*</Path>
-            <Path fileType="data">/usr/share/dbus-1/*</Path>
-            <Path fileType="doc">/usr/share/doc/*</Path>
-            <Path fileType="localedata">/usr/share/locale/*</Path>
-            <Path fileType="info">/usr/share/metainfo/*</Path>
-            <Path fileType="data">/usr/share/polkit-1/*</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
     <History>
