@@ -16,11 +16,17 @@
             <Dependency>granite-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
             <Dependency>libgee-devel</Dependency>
+            <Dependency>cmake</Dependency>
             <Dependency>meson</Dependency>
             <Dependency>mutter-devel</Dependency>
             <Dependency>vala-devel</Dependency>
         </BuildDependencies>
         <Archive sha1sum="fd0eba7082e44b25c63354b211ec4f69cf010355" type="targz">https://github.com/elementary/wingpanel/archive/refs/tags/3.0.2.tar.gz</Archive>
+        <Patches>
+            <Patch>434.patch</Patch>
+            <Patch>435.patch</Patch>
+            <Patch>453.patch</Patch>
+        </Patches>
     </Source>
     <Package>
         <Name>wingpanel</Name>
@@ -34,8 +40,8 @@
             <Dependency>mutter</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="data">/etc/*</Path>
-            <Path fileType="executable">/usr/bin/*</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib/gala</Path>
             <Path fileType="library">/usr/lib/libwingpanel*</Path>
 
@@ -54,8 +60,8 @@
             <Dependency release="current">wingpanel</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="header">/usr/include/*</Path>
-            <Path fileType="library">/usr/lib/pkgconfig/*</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
         </Files>
     </Package>
     <History>
