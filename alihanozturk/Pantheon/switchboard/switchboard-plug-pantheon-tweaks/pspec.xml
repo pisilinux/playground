@@ -1,0 +1,50 @@
+<PISI>
+    <Source>
+        <Name>switchboard-plug-pantheon-tweaks</Name>
+        <Homepage>https://github.com/pantheon-tweaks/pantheon-tweaks</Homepage>
+        <Packager>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>desktop</PartOf>
+        <Summary>Pantheon Tweaks</Summary>
+        <Description>A system settings panel for the Pantheon Desktop that lets you easily and safely customise your desktop's appearance.</Description>
+        <BuildDependencies>
+            <Dependency>granite-devel</Dependency>
+            <Dependency>libgee-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>gtk3-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>switchboard-devel</Dependency>
+            <Dependency>vala-devel</Dependency>
+        </BuildDependencies>
+        <Archive type="targz" sha1sum="aa6188e73f4f219749e65ca21cdec199d3804975">https://github.com/pantheon-tweaks/pantheon-tweaks/archive/refs/tags/1.0.4.tar.gz</Archive>
+    </Source>
+    <Package>
+        <Name>switchboard-plug-pantheon-tweaks</Name>
+        <Summary>Pantheon Tweaks</Summary>
+        <RuntimeDependencies>
+            <Dependency>granite</Dependency>
+            <Dependency>libgee</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>gtk3</Dependency>
+            <Dependency>switchboard</Dependency>
+            <Dependency>vala</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>10-08-2022</Date>
+            <Version>1.0.4</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -8,7 +8,8 @@ from pisi.actionsapi import mesontools
 from pisi.actionsapi import pisitools
 
 def setup():
-    mesontools.configure("--prefix=/usr")
+    mesontools.configure("--prefix=/usr \
+                          --libexecdir=/usr/lib")
 
 def build():
     mesontools.build()

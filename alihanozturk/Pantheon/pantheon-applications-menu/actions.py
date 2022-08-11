@@ -9,7 +9,6 @@ from pisi.actionsapi import pisitools
 
 def setup():
     mesontools.configure("--prefix=/usr \
-                          -Dwith-unity=false \
                           -Dwith-zeitgeist=false")
 
 def build():

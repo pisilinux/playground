@@ -11,12 +11,15 @@ from pisi.actionsapi import mesontools
 from pisi.actionsapi import get
 
 def setup():
-    mesontools.configure("-Dsystemduserunitdir=no")
+    mesontools.configure("-Dsystemduserunitdir=disable \
+                          --prefix=/usr \
+                          --libexecdir=/usr/lib")
 
 def build():
     mesontools.build()
 
 def install():
     mesontools.install()
+    pisitools.removeDir("/usr/disable")
     
     pisitools.dodoc("LICENSE", "README*")

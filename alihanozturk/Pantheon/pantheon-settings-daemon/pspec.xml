@@ -15,29 +15,25 @@
         <Description>Pantheon için varsayılan ayarlar</Description>
         <Archive sha1sum="ce96b1850ca18bc37d0a6269afff64da75b022f3" type="targz">https://github.com/elementary/settings-daemon/archive/refs/tags/1.2.0.tar.gz</Archive>
         <BuildDependencies>
+            <Dependency>cmake</Dependency>
             <Dependency>meson</Dependency>
             <Dependency>vala-devel</Dependency>
             <Dependency>dbus-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
             <Dependency>granite-devel</Dependency>
             <Dependency>geoclue-devel</Dependency>
             <Dependency>accountsservice-devel</Dependency>
             <Dependency>gobject-introspection-devel</Dependency>
         </BuildDependencies>
-        <!--
-        <Patches>
-            <Patch>pantheon-settings-daemon.patch</Patch>
-            <Patch level="1">pantheon-settings-daemon.patch</Patch>
-        </Patches>
-        -->
     </Source>
 
     <Package>
         <Name>pantheon-settings-daemon</Name>
         <RuntimeDependencies>
-            <Dependency>vala</Dependency>
             <Dependency>dbus</Dependency>
             <Dependency>glib2</Dependency>
+            <Dependency>polkit</Dependency>
             <Dependency>granite</Dependency>
             <Dependency>geoclue</Dependency>
             <Dependency>accountsservice</Dependency>
@@ -45,7 +41,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="library">/usr/lib</Path>
             <Path fileType="config">/etc</Path>
             <Path fileType="data">/usr/share/glib-2.0</Path>
             <Path fileType="data">/usr/share/dbus-1</Path>

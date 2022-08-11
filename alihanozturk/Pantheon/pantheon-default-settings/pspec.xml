@@ -12,8 +12,12 @@
         <Description>Default settings and configuration files for Pantheon DE.</Description>
         <Archive sha1sum="a0316ba2d7626333d33b333f5691626e456a6ff8" type="targz">https://github.com/elementary/default-settings/archive/refs/tags/6.0.2.tar.gz</Archive>
         <BuildDependencies>
+            <Dependency>cmake</Dependency>
             <Dependency>meson</Dependency>
+            <Dependency>dbus-devel</Dependency>
             <Dependency>vala-devel</Dependency>
+            <Dependency>polkit-devel</Dependency>
+            <Dependency>accountsservice-devel</Dependency>
         </BuildDependencies>
     </Source>
     <Package>

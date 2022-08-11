@@ -1,23 +1,20 @@
-#!/usr/bin/env python
-#-*- coding:utf-8 -*-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Licensed under the GNU General Public License, version 3.
+# See the file https://www.gnu.org/licenses/gpl-3.0.txt
 
-from pisi.actionsapi import autotools
+from pisi.actionsapi import mesontools
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
-from pisi.actionsapi import get
 
 def setup():
-    shelltools.makedirs("build")
-    shelltools.cd("build")
-    shelltools.system("meson --prefix=/usr ..")
+    mesontools.configure("--prefix=/usr \
+                          --libexecdir=/usr/lib")
 
 def build():
-    shelltools.cd("build")
-    shelltools.system("ninja")
+    mesontools.build()
 
 def install():
-    shelltools.cd("build")
-    shelltools.system("DESTDIR=%s ninja install" % get.installDIR())
+    mesontools.install()
 
-    shelltools.cd("..")
     pisitools.dodoc("README.md", "COPYING")

@@ -11,7 +11,9 @@ from pisi.actionsapi import mesontools
 from pisi.actionsapi import get
 
 def setup():
-    mesontools.configure("-Dsystemduserunitdir=no")
+    mesontools.configure("-Dsystemduserunitdir=no \
+                          --prefix=/usr \
+                          --libexecdir=/usr/lib")
 
 def build():
     mesontools.build()

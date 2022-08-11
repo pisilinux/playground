@@ -10,10 +10,8 @@ from pisi.actionsapi import get
 
 def setup():
     mesontools.configure("--prefix=/usr \
-                          -Dfallback-session=gnome \
-                          -Dsystemd=false \
-                          -Dsystemduserunitdir=false \
-                          -Dpatched-ubuntu-autostarts=false")
+                          --libexecdir=/usr/lib \
+                          -Dfallback-session=gnome")
 
 def build():
     mesontools.build()
