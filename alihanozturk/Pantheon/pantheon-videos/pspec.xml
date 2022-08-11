@@ -1,5 +1,3 @@
-<?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>pantheon-videos</Name>
@@ -14,25 +12,20 @@
         <Summary>A Video Player.</Summary>
         <Description>Video player and library app designed for elementary OS</Description>
         <Archive sha1sum="baa50a44c740a9fc09e9e205dceecaf1c6e57ed8" type="targz">https://github.com/elementary/videos/archive/refs/tags/2.8.4.tar.gz</Archive>
-        <BuildDependency>
+        <BuildDependencies>
             <Dependency>meson</Dependency>
             <Dependency>intltool</Dependency>
-            <Dependency>clutter-devel</Dependency>
             <Dependency>clutter-gst-devel</Dependency>
             <Dependency>clutter-gtk-devel</Dependency>
             <Dependency>granite-devel</Dependency>
             <Dependency>gst-plugins-base-devel</Dependency>
             <Dependency>gstreamer-devel</Dependency>
             <Dependency>libhandy-devel</Dependency>
-            <Dependency>vala</Dependency>
+            <Dependency>vala-devel</Dependency>
             <Dependency>gtk3-devel</Dependency>
             <Dependency>libgee-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
-            <Dependency>glibc-devel</Dependency>
-            <Dependency>gdk-pixbuf2-devel</Dependency>
-        </BuildDependency>
-        <Patches>
-        </Patches>
+        </BuildDependencies>
     </Source>
 
     <Package>
@@ -42,7 +35,18 @@
                 <Dependency>clutter-gtk</Dependency>
                 <Dependency>granite</Dependency>
                 <Dependency>gst-plugins-base</Dependency>
+                <Dependency>gst-plugins-bad</Dependency>
+                <Dependency>gst-plugins-good</Dependency>
+                <Dependency>gst-plugins-ugly</Dependency>
+                <Dependency>libgee</Dependency>
+                <Dependency>gtk3</Dependency>
+                <Dependency>glib2</Dependency>
+                <Dependency>cairo</Dependency>
+                <Dependency>libX11</Dependency>
+                <Dependency>clutter</Dependency>
+                <Dependency>libhandy</Dependency>
                 <Dependency>gstreamer</Dependency>
+                <Dependency>gdk-pixbuf</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>

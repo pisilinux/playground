@@ -15,6 +15,7 @@
         <Description>Pantheon Dosya Tarayıcısı</Description>
         <Archive sha1sum="bb136a624583c2e1e09e01ab6046370bdd4a2f68" type="targz">https://github.com/elementary/files/archive/refs/tags/6.1.4.tar.gz</Archive>
         <BuildDependencies>
+            <Dependency>cmake</Dependency>
             <Dependency>meson</Dependency>
             <Dependency>gtk3-devel</Dependency>
             <Dependency>vala-devel</Dependency>
@@ -28,6 +29,8 @@
             <Dependency>sqlite-devel</Dependency>
             <Dependency>granite-devel</Dependency>
             <Dependency>libhandy-devel</Dependency>
+            <Dependency>flatpak-builder</Dependency>
+            <Dependency>libnotify-devel</Dependency>
             <Dependency>zeitgeist-devel</Dependency>
             <Dependency>dbus-glib-devel</Dependency>
             <Dependency>gdk-pixbuf-devel</Dependency>
@@ -47,9 +50,7 @@
         <Name>pantheon-files</Name>
         <RuntimeDependencies>
             <Dependency>gtk3</Dependency>
-            <Dependency>vala</Dependency>
             <Dependency>cairo</Dependency>
-            <Dependency>dbus</Dependency>
             <Dependency>glib2</Dependency>
             <Dependency>pango</Dependency>
             <Dependency>plank</Dependency>
@@ -58,7 +59,6 @@
             <Dependency>granite</Dependency>
             <Dependency>libhandy</Dependency>
             <Dependency>zeitgeist</Dependency>
-            <Dependency>dbus-glib</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
             <Dependency>libcanberra</Dependency>
             <Dependency>libgit2-glib</Dependency>
@@ -66,18 +66,10 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="executable">/usr/libexec</Path>
-            <Path fileType="library">/usr/lib</Path>
-            <Path fileType="data">/usr/share/vala</Path>
-            <Path fileType="data">/usr/share/pixmaps</Path>
-            <Path fileType="data">/usr/share/applications</Path>
-            <Path fileType="data">/usr/share/glib-2.0</Path>
-            <Path fileType="data">/usr/share/polkit-1</Path>
-            <Path fileType="data">/usr/share/dbus-1</Path>
-            <Path fileType="localedata">/usr/share/locale</Path>
-            <Path fileType="data">/usr/share/xdg-desktop-portal</Path>
-            <Path fileType="info">/usr/share/metainfo</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="library">/usr/lib/io.elementary.files</Path>
+            <Path fileType="library">/usr/lib/io.elementary.files/*</Path>
+            <Path fileType="library">/usr/lib/libpantheon-files-core.so*</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
 

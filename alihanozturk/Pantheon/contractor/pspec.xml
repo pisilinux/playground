@@ -21,12 +21,6 @@
             <Dependency>glib2-devel</Dependency>
             <Dependency>libgee-devel</Dependency>
         </BuildDependencies>
-        <!--
-        <Patches>
-            <Patch>contractor.patch</Patch>
-            <Patch level="1">contractor.patch</Patch>
-        </Patches>
-        -->
     </Source>
 
     <Package>
@@ -37,8 +31,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="data">/usr/share/dbus-1</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
 

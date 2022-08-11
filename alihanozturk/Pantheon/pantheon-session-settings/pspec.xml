@@ -3,15 +3,19 @@
         <Name>pantheon-session-settings</Name>
         <Homepage>https://github.com/elementary/session-settings</Homepage>
         <Packager>
-            <Name>Berk Çakar</Name>
-            <Email>berk2238@hotmail.com</Email>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
         <Summary>Files for starting a Pantheon DE session</Summary>
         <Description>Files for starting a Pantheon DE sessio</Description>
         <Archive sha1sum="fe9f9a128b14674f828cceb533cd9028a5c5c311">https://github.com/elementary/session-settings/archive/refs/tags/6.0.0.tar.gz</Archive>
         <BuildDependencies>
+            <Dependency>orca</Dependency>
             <Dependency>meson</Dependency>
+            <Dependency>onboard</Dependency>
+            <Dependency>libgnome-keyring</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
             <Dependency>gnome-settings-daemon-devel</Dependency>
         </BuildDependencies>
     </Source>

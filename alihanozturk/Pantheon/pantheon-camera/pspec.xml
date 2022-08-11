@@ -25,19 +25,12 @@
             <Dependency>libcanberra-devel</Dependency>
             <Dependency>gst-plugins-base-devel</Dependency>
         </BuildDependencies>
-        <!--
-        <Patches>
-            <Patch>pantheon-camera.patch</Patch>
-            <Patch level="1">pantheon-camera.patch</Patch>
-        </Patches>
-        -->
     </Source>
 
     <Package>
         <Name>pantheon-camera</Name>
         <RuntimeDependencies>
             <Dependency>gtk3</Dependency>
-            <Dependency>vala</Dependency>
             <Dependency>glib2</Dependency>
             <Dependency>granite</Dependency>
             <Dependency>libhandy</Dependency>
@@ -47,12 +40,7 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="icon">/usr/share/icons</Path>
-            <Path fileType="data">/usr/share/glib-2.0</Path>
-            <Path fileType="data">/usr/share/applications/</Path>
-            <Path fileType="localedata">/usr/share/locale</Path>
-            <Path fileType="info">/usr/share/metainfo</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share</Path>
         </Files>
     </Package>
 

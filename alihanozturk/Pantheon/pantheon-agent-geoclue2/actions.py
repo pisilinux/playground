@@ -11,7 +11,8 @@ from pisi.actionsapi import mesontools
 from pisi.actionsapi import get
 
 def setup():
-    mesontools.configure()
+    mesontools.configure("--prefix=/usr \
+                          --libexecdir=/usr/lib")
 
 def build():
     mesontools.build()

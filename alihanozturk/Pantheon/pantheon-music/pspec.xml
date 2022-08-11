@@ -43,7 +43,6 @@
         <Name>pantheon-music</Name>
         <RuntimeDependencies>
             <Dependency>gtk3</Dependency>
-            <Dependency>vala</Dependency>
             <Dependency>cairo</Dependency>
             <Dependency>glib2</Dependency>
             <Dependency>pango</Dependency>
@@ -55,13 +54,15 @@
             <Dependency>libpeas</Dependency>
             <Dependency>libhandy</Dependency>
             <Dependency>gstreamer</Dependency>
+            <Dependency>libgda-sqlite</Dependency>
             <Dependency>zeitgeist</Dependency>
             <Dependency>gdk-pixbuf</Dependency>
             <Dependency>gst-plugins-base</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib/io.elementary.music/*</Path>
+            <Path fileType="library">/usr/lib/libio.elementary.music-core.*</Path>
             <Path fileType="data">/usr/share/icons</Path>
             <Path fileType="data">/usr/share/vala</Path>
             <Path fileType="data">/usr/share/glib-2.0</Path>

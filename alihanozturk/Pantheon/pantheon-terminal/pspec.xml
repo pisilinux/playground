@@ -14,6 +14,9 @@
             <Dependency>appstream-devel</Dependency>
             <Dependency>granite-devel</Dependency>
             <Dependency>libhandy-devel</Dependency>
+            <Dependency>libpcre2-devel</Dependency>
+            <Dependency>cmake</Dependency>
+            <Dependency>desktop-file-utils</Dependency>
             <Dependency>vala-devel</Dependency>
             <Dependency>vte-devel</Dependency>
             <Dependency>intltool</Dependency>
@@ -25,7 +28,10 @@
         <Name>pantheon-terminal</Name>
         <Summary>A super lightweight, beautiful, and simple terminal. Comes with sane defaults, browser-class tabs, sudo paste protection, smart copy/paste, and little to no configuration.</Summary>
         <RuntimeDependencies>
+            <Dependency>pango</Dependency>
+            <Dependency>libgee</Dependency>
             <Dependency>granite</Dependency>
+            <Dependency>libpcre2</Dependency>
             <Dependency>libhandy</Dependency>
             <Dependency>glib2</Dependency>
             <Dependency>gtk3</Dependency>
